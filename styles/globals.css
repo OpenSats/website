@@ -3,9 +3,27 @@
 @tailwind utilities;
 
 h1 {
-  @apply text-2xl;
+  @apply text-4xl font-bold;
 }
 
-button {
+button,
+button[type="submit"] {
   @apply py-2 px-4 bg-black text-white rounded;
+}
+
+button.secondary {
+  @apply bg-white text-black border border-black;
+}
+
+a {
+  @apply font-bold underline underline-offset-2 hover:no-underline;
+}
+
+input[type="text"],
+input[type="number"] {
+  @apply border border-black p-2 invalid:border-red-500;
+}
+
+input[type="radio"] {
+  @apply mr-2;
 }
