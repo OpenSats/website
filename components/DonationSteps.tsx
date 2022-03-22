@@ -11,12 +11,14 @@ const DonationSteps = () => {
     setDeductable(event.target.value);
   };
 
-  function handleStep1() {
+  function handleStep1(e: React.FormEvent<HTMLInputElement>) {
+    e.preventDefault();
     setStep(2);
   }
 
   // STEP 2
-  function handleStep2() {
+  function handleStep2(e: React.FormEvent<HTMLInputElement>) {
+    e.preventDefault();
     setStep(3);
   }
 
