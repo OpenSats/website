@@ -44,9 +44,13 @@ p a {
   @apply text-primary;
 }
 
+button.selected {
+  @apply bg-primary;
+}
+
 input[type='text'],
 input[type='number'] {
-  @apply border border-black p-2 invalid:border-red-500;
+  @apply border border-lightgray rounded p-2 invalid:border-red-500 focus:border-black;
 }
 
 input[type='radio'] {
@@ -55,4 +59,16 @@ input[type='radio'] {
 
 nav li a {
   @apply text-black no-underline hover:underline;
+}
+
+form h3 {
+  @apply font-sans font-normal;
+}
+
+button.small {
+  @apply p-1 text-sm bg-white text-black border border-black;
+}
+
+button.group {
+  @apply p-2 text-sm bg-white text-black border border-black;
 }

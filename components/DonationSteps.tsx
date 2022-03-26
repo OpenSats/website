@@ -55,9 +55,8 @@ const DonationSteps = () => {
             </div>
             <input
               type="text"
-              placeholder={`Email address (${
-                deductable === "yes" ? "required" : "optional"
-              })`}
+              placeholder={`Email address (${deductable === "yes" ? "required" : "optional"
+                })`}
               required={deductable === "yes"}
             ></input>
             <div className="h-4 w-4" />

@@ -46,7 +46,7 @@ const ProjectCard = () => {
         <div className="flex space-x-4 items-center justify-center pt-4">
           <button className="bg-black basis-1/2">Donate</button>
           <div className="flex items-center justify-center basis-1/2">
-            <Link href="/projects/bitcoiner_guide">
+            <Link href="/projects/bitcoiner_guide" passHref>
               <a>View Details</a>
             </Link>
             <FontAwesomeIcon
