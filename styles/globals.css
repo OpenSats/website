@@ -2,28 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+h1,
+h2 {
+  @apply font-mono font-semibold;
+}
+
 h1 {
-  @apply text-4xl font-bold;
+  @apply text-3xl md:text-4xl;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h4 {
+  @apply text-2xl font-bold;
+}
+
+h5 {
+  @apply text-textgray font-mono uppercase;
 }
 
 button,
-button[type="submit"] {
-  @apply py-2 px-4 bg-black text-white rounded;
+button[type='submit'] {
+  @apply py-2 px-4 bg-primary text-white rounded font-mono hover:shadow-glow;
 }
 
 button.secondary {
-  @apply bg-white text-black border border-black;
+  @apply bg-white text-black border border-primary;
 }
 
 a {
-  @apply font-bold underline underline-offset-2 hover:no-underline;
+  @apply text-textgray underline underline-offset-2 hover:no-underline;
 }
 
-input[type="text"],
-input[type="number"] {
+p {
+  @apply text-textgray;
+}
+
+p a {
+  @apply text-primary;
+}
+
+input[type='text'],
+input[type='number'] {
   @apply border border-black p-2 invalid:border-red-500;
 }
 
-input[type="radio"] {
+input[type='radio'] {
   @apply mr-2;
+}
+
+nav li a {
+  @apply text-black no-underline hover:underline;
 }

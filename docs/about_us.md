@@ -3,10 +3,12 @@
 We&#39;re here to help support and maintain a sustainable ecosystem of funding for free and open source projects and contributors, especially Bitcoin related projects and projects which help Bitcoin flourish.
 
 - For Bitcoin and other free and open source software to thrive, we believe it takes contributors from a variety of backgrounds and industry verticals.
-  - OpenSats will fund software developers, but also designers, reviewers, researchers, educators, and others who support these free and open source tools.
+
+- OpenSats will fund software developers, but also designers, reviewers, researchers, educators, and others who support these free and open source tools.
+
 - Bitcoin relies on many complementary technologies to succeed and reach its fullest potential.
 
-  - OpenSats is committed to funding Bitcoin as well as these technologies on the periphery including scaling technologies, secure communication protocols, self-custody solutions, second-layer tech, educational resources, research and design contributors, etc.
+- OpenSats is committed to funding Bitcoin as well as these technologies on the periphery including scaling technologies, secure communication protocols, self-custody solutions, second-layer tech, educational resources, research and design contributors, etc.
 
 Free and open source Bitcoin projects as well as related free and open source projects which help Bitcoin flourish and reach its fullest potential may apply to be listed on the Open Sats website here (link)
 
@@ -21,4 +23,5 @@ OpenSats will accept bitcoin and fiat donations. All fiat donations will be conv
 No donations will be used by the organization unless the donor SPECIFiCALLY donates to our operational fund, which covers our general operational expenses like legal, accounting, and payment processing fees. So far these operational expenses have been covered by a few generous donors and we hope to continue to find private donors to cover these costs so we can ensure 100% passthrough of platform donations to Bitcoin and free and open source contributors. Literally nobody in the organization makes any money from donor funds which aren&#39;t specifically earmarked for OpenSats&#39; operations... we promise! OpenSats is committed to being transparent about incoming and outgoing project related donations as well as any operational donors as we move forward.
 
 - Projects will be listed on Open Sats website upon a simple (5-4) majority approval by the board. The board will consider donor suggestions for project specific donations, however, the board will retain full control and final authority over where funds are allocated.
+
 - Grants allocated from the general fund will be determined by a simple (5-4) majority approval by the board.
