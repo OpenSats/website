@@ -21,7 +21,7 @@ const Header = () => {
                 <nav>
                     <ul className="flex flex-col sm:flex-row gap-4">
                         <li><Link href="/projects"><a>Projects</a></Link></li>
-                        <li>List Your Project</li>
+                        <li><Link href="/apply"><a>List Your Project</a></Link></li>
                         <li><Link href="/faq"><a>FAQ</a></Link></li>
                         <li><Link href="/about"><a>About Us</a></Link></li>
                     </ul>

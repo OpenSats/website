@@ -1,10 +1,12 @@
 ---
 title: 'Bitcoiner.guide'
-summary: 'Bitcoiner.Guide is a collection of resources by BitcoinQnA to help people feel more comfortable interacting with bitcoin in a sovereign way. '
-coverImage: '/public/waffledog.jpg'
-git:
-  handle: '@BitcoinQ_A'
-  url: 'https://github.com/BitcoinQnA'
+summary: 'Bitcoiner.Guide is a collection of resources by BitcoinQnA to help people feel more comfortable interacting with bitcoin in a sovereign way.'
+nym: 'Bitcoin QnA'
+website: ''
+coverImage: '/img/placeholder.jpg'
+git: 'BitcoinQ_A'
+twitter: BitcoinQ_A
+type: 'Educator'
 ---
 
 ## About this project

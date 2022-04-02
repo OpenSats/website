@@ -3,15 +3,23 @@ import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import markdownStyles from "../../components/markdown-styles.module.css"
-import waffledog from "../../public/waffledog.jpg";
 import Image from "next/image";
 import ProjectList from '../../components/ProjectList'
-import BackToGrants from '../../components/BackToGrants'
+import BackToProjects from '../../components/BackToProjects'
 import { ProjectItem } from '../../utils/types'
+import { NextPage } from 'next/types'
 
-export default function Project({ post }: { post: ProjectItem }) {
+type SingleProjectPageProps = {
+    project: ProjectItem;
+    projects: ProjectItem[];
+}
+
+const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     const router = useRouter()
-    if (!router.isFallback && !post?.slug) {
+
+    const { slug, title, summary, coverImage, git, twitter, content } = project;
+
+    if (!router.isFallback && !slug) {
         return <ErrorPage statusCode={404} />
     }
     return (
@@ -19,8 +27,8 @@ export default function Project({ post }: { post: ProjectItem }) {
             <div className="flex flex-col items-center">
                 <div className="h-[15rem] w-full relative">
                     <Image
-                        alt="waffledog"
-                        src={waffledog}
+                        alt={title}
+                        src={coverImage}
                         layout="fill"
                         objectFit="cover"
                         objectPosition="50% 50%"
@@ -30,34 +38,39 @@ export default function Project({ post }: { post: ProjectItem }) {
                 </div>
 
                 <div className="flex w-full p-4 py-8 md:px-8">
-                    <BackToGrants />
+                    <BackToProjects />
                 </div>
                 <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
                     <aside className="p-4 bg-light rounded-xl flex lg:flex-col gap-4 min-w-[20rem] justify-between mb-8">
                         <div>
 
                             <h5>Raised</h5>
-                            <h4>1.289 BTC</h4>
+                            <h4>??? BTC</h4>
                         </div>
                         <button>Donate</button>
 
                     </aside>
 
                     <div className={markdownStyles['markdown']}>
-                        <h1>{post.title}</h1>
-                        <p>{post.summary}</p>
-                        <p>by <a href={post.git.url}>{post.git.handle}</a></p>
+                        <h1>{title}</h1>
+                        <p>{summary}</p>
+
+                        <p>by <a href={`https://github.com/${git}`}>{`@${git}`}</a></p>
                         <hr />
-                        <div
-                            dangerouslySetInnerHTML={{ __html: post.content }}
-                        />
+                        {content &&
+                            <div
+                                dangerouslySetInnerHTML={{ __html: content }}
+                            />
+                        }
                     </div>
                 </article>
-            </div>
-            <ProjectList header="You might also like..." />
+            </div >
+            <ProjectList projects={projects} header="You might also like..." />
         </>
     )
 }
+
+export default Project
 
 export async function getStaticProps({ params }: { params: any }) {
     const post = getPostBySlug(params.slug, [
@@ -68,25 +81,32 @@ export async function getStaticProps({ params }: { params: any }) {
         'content',
         'coverImage',
     ])
+
+    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+
     const content = await markdownToHtml(post.content || '')
 
     return {
         props: {
-            post: {
+            project: {
                 ...post,
                 content,
             },
+            projects
         },
     }
 }
 
 export async function getStaticPaths() {
-    const posts = getAllPosts(['slug'])
+    const posts = getAllPosts(['slug']);
+
+    console.log(posts);
 
     return {
         paths: posts.map((post) => {
             return {
                 params: {
+                    project: post,
                     slug: post.slug,
                 },
             }

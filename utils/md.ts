@@ -13,7 +13,7 @@ export function getSingleFile(path: string) {
     return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug<Project>(slug: string, fields: string[] = []) {
+export function getPostBySlug(slug: string, fields: string[] = []) {
     const realSlug = slug.replace(/\.md$/, '')
     const fullPath = join(postsDirectory, `${realSlug}.md`)
     const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -42,5 +42,6 @@ export function getAllPosts(fields: string[] = []) {
     const slugs = getPostSlugs()
     const posts = slugs
         .map((slug) => getPostBySlug(slug, fields))
+
     return posts
 }

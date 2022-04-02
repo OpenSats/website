@@ -1,18 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import waffledog from "../public/waffledog.jpg";
 
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-const ProjectCard = () => {
+import { ProjectItem } from "../utils/types";
+
+const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => {
+  console.log("project:", project)
+  const { slug, title, summary, coverImage, git, twitter } = project;
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl">
       <div className="relative h-64">
         <Image
-          alt="waffledog"
-          src={waffledog}
+          alt={title}
+          src={coverImage}
           layout="fill"
           objectFit="cover"
           objectPosition="50% 50%"
@@ -21,32 +24,36 @@ const ProjectCard = () => {
       </div>
 
       <figcaption className="p-4 space-y-4">
-        <h2>Double-spend problem</h2>
-        <p>by <a href="#">@futurepaul</a></p>
+        <h2>{title}</h2>
+        <p>by{" "}
+          <Link href={`https://github.com/${git}`} passHref>
+            <a>@{git}</a>
+          </Link>
+        </p>
         <p className="prose">
-          Bitcoin ipsum dolor sit amet. Digital signature outputs, pizza
-          hashrate money printer go brrrrr full node, timestamp server. Miner,
-          sats Merkle Tree proof-of-work hard fork UTXO wallet halvening.
+          {summary}
         </p>
         <div className="flex justify-end"></div>
         <div className="flex space-x-4">
-          <Link href="#" passHref>
+          <Link href={`https://github.com/${git}`} passHref>
             <FontAwesomeIcon
               icon={faGithub}
               className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
             />
           </Link>
-          <Link href="#" passHref>
-            <FontAwesomeIcon
-              icon={faTwitter}
-              className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
-            />
-          </Link>
+          {twitter &&
+            <Link href={`https://twitter.com/${twitter}`} passHref>
+              <FontAwesomeIcon
+                icon={faTwitter}
+                className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
+              />
+            </Link>
+          }
         </div>
         <div className="flex space-x-4 items-center justify-center pt-4">
           <button className="bg-black basis-1/2">Donate</button>
           <div className="flex items-center justify-center basis-1/2">
-            <Link href="/projects/bitcoiner_guide" passHref>
+            <Link href={`/projects/${slug}`} passHref>
               <a>View Details</a>
             </Link>
             <FontAwesomeIcon
@@ -56,7 +63,7 @@ const ProjectCard = () => {
           </div>
         </div>
       </figcaption>
-    </figure>
+    </figure >
   );
 };
 

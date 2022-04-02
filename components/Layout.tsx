@@ -7,14 +7,14 @@ import Link from 'next/link'
 
 const Layout: React.FC = ({ children }) => {
     return (
-        <>
+        <div className="min-h-screen flex flex-col">
             <Head>
                 <title>OpenSats</title>
                 <meta name="description" content="TKTK" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar />
-            <main>{children}</main>
+            <main className="flex-1 flex flex-col">{children}</main>
             <footer className="flex justify-between p-4 md:p-8 bg-light">
                 <div className="flex flex-col">
                     <strong>© Open Sats Initiative, 2022</strong>
@@ -31,9 +31,8 @@ const Layout: React.FC = ({ children }) => {
                         />
                     </div>
                 </Link>
-
             </footer>
-        </>
+        </div>
     )
 }
 

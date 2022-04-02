@@ -6,15 +6,18 @@ import PaymentModal from "../../components/PaymentModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faC, faClose } from "@fortawesome/free-solid-svg-icons";
 import ProjectCard from "../../components/ProjectCard";
+import { ProjectItem } from "../../utils/types";
+import { getAllPosts } from "../../utils/md";
+import markdownToHtml from "../../utils/markdownToHtml";
 
-const Projects: NextPage = () => {
+const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     const [modalOpen, setModalOpen] = useState(false);
 
     function closeModal() {
         setModalOpen(false);
     }
 
-    const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
+    // const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
 
     return (
         <>
@@ -28,7 +31,7 @@ const Projects: NextPage = () => {
                 <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
                     {projects.map((p, i) => (
                         <li key={i} className="">
-                            <ProjectCard />
+                            <ProjectCard project={p} />
                         </li>
                     ))}
                 </ul>
@@ -38,4 +41,14 @@ const Projects: NextPage = () => {
     );
 };
 
-export default Projects;
+export default AllProjects;
+
+export async function getStaticProps({ params }: { params: any }) {
+    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+
+    return {
+        props: {
+            projects
+        },
+    }
+}

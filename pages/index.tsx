@@ -6,8 +6,10 @@ import PaymentModal from "../components/PaymentModal";
 import Link from "next/link";
 import Image from "next/image";
 import unicorn from "/public/heroes/unicorn.png"
+import { getAllPosts, getPostBySlug } from "../utils/md";
+import markdownToHtml from "../utils/markdownToHtml";
 
-const Home: NextPage = () => {
+const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   function closeModal() {
@@ -32,14 +34,14 @@ const Home: NextPage = () => {
             <button role={"button"} onClick={() => setModalOpen(true)}>
               Donate to Bitcoin
             </button>
-            <p>Are you an open source contributor? <a href="#">Apply for your project to be listed.</a></p>
+            <p>Are you an open source contributor? <Link href="/apply"><a>Apply for your project to be listed.</a></Link></p>
           </div>
           <div className="flex-1 flex justify-center">
 
             <Image width={388} height={388} src={unicorn} alt="Unicorn" />
           </div>
         </section>
-        <ProjectList />
+        <ProjectList projects={projects} />
       </main>
       <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} />
     </>
@@ -47,3 +49,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getStaticProps({ params }: { params: any }) {
+  const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+
+  return {
+    props: {
+      projects
+    },
+  }
+}
+

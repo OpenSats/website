@@ -1,8 +1,10 @@
 export type ProjectItem = {
     slug: string;
-    content: string;
+    content?: string;
     title: string;
     summary: string;
-    git: { url: string; handle: string };
+    coverImage: string;
+    git: string;
+    twitter?: string;
 }
 

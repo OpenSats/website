@@ -1,11 +1,14 @@
-import Image from "next/image";
-import waffledog from "../public/waffledog.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faC, faClose } from "@fortawesome/free-solid-svg-icons";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
-const ProjectList = ({ header = "Explore Projects" }) => {
-  const projects = ["one", "two", "three"];
+import { ProjectItem } from "../utils/types";
+
+type ProjectListProps = {
+  header?: string;
+  projects: ProjectItem[];
+}
+const ProjectList: React.FC<ProjectListProps> = ({ header = "Explore Projects", projects }) => {
   return (
 
     <section className="p-4 md:p-8 bg-light flex flex-col items-center">
@@ -20,14 +23,15 @@ const ProjectList = ({ header = "Explore Projects" }) => {
         </div>
       </div>
       <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-        {projects.map((p, i) => (
+        {projects.slice(0, 3).map((p, i) => (
           <li key={i} className="">
-            <ProjectCard />
+            <ProjectCard project={p} />
           </li>
         ))}
       </ul>
     </section>
   );
 };
+
 
 export default ProjectList;
