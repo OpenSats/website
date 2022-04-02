@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../config";
 import { fetchPostJSONAuthed } from "../../utils/api-helpers";
-import { formatAmountForStripe } from "../../utils/stripe-helpers";
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,9 +17,8 @@ export default async function handler(
       }
       let data = await fetchPostJSONAuthed(
         `${process.env
-          .BTCPAY_URL!}stores/9PMMpizLnpWtBeHV5Y9iKLj14Ei5iuVSWxYeSSntnsDU/invoices`,
+          .BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
-        // TODO validate that we aren't fucking with the amount with floating point stuff
         { amount, currency: CURRENCY }
       );
 

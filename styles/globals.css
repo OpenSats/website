@@ -50,7 +50,7 @@ button.selected {
 
 input[type='text'],
 input[type='number'] {
-  @apply border border-lightgray rounded p-2 invalid:border-red-500 focus:border-black;
+  @apply border border-lightgray rounded p-2 focus:border-black;
 }
 
 input[type='radio'] {

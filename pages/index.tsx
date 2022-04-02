@@ -28,11 +28,11 @@ const Home: NextPage = () => {
               Support contributors to Bitcoin and other free and open source
               projects
             </h1>
-            <p className="text-textgray">We help you find and support <Link href="/projects">open-source bitcoin projects</Link> - helping create a better tomorrow, today.</p>
-            <button onClick={() => setModalOpen(true)}>
-              Explore Grants
+            <p className="text-textgray">We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.</p>
+            <button role={"button"} onClick={() => setModalOpen(true)}>
+              Donate to Bitcoin
             </button>
-            <p>or <a href="#">become a core donor to our General Fund</a></p>
+            <p>Are you an open source contributor? <a href="#">Apply for your project to be listed.</a></p>
           </div>
           <div className="flex-1 flex justify-center">
 

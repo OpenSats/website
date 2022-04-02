@@ -17,7 +17,7 @@ const Layout: React.FC = ({ children }) => {
             <main>{children}</main>
             <footer className="flex justify-between p-4 md:p-8 bg-light">
                 <div className="flex flex-col">
-                    <strong>© OpenSats, 2022</strong>
+                    <strong>© Open Sats Initiative, 2022</strong>
                     <Link href="/terms"><a>Terms</a></Link>
                     <Link href="/privacy"><a>Privacy</a></Link>
                 </div>

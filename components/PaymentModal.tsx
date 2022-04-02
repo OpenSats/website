@@ -1,10 +1,8 @@
-import { useState } from "react";
 import ReactModal from "react-modal";
 import Image from "next/image";
 import waffledog from "../public/waffledog.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faC, faClose } from "@fortawesome/free-solid-svg-icons";
-import DonationSteps from "./DonationSteps";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 import DonationForm from "./DonationForm";
 
 type ModalProps = {
@@ -16,7 +14,7 @@ const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="p-4 bg-white shadow-xl overflow-y-auto max-h-full rounded-xl w-full m-4"
+      className="p-8 bg-white shadow-xl overflow-y-auto max-h-full sm:rounded-xl w-full sm:m-8"
       overlayClassName="inset-0 fixed bg-[rgba(0,_0,_0,_0.75)] flex items-center justify-center"
       appElement={
         typeof window === "undefined"
