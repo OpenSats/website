@@ -3,7 +3,7 @@ import markdownStyles from "../components/markdown-styles.module.css"
 import { getSingleFile } from "../utils/md"
 import BigDumbMarkdown from "../components/BigDumbMarkdown";
 
-export default function About({ content }) {
+export default function About({ content }: { content: string }) {
     return (
         <BigDumbMarkdown content={content} />
     )

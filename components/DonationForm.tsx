@@ -85,8 +85,8 @@ const DonationSteps = () => {
                         <h3>How much would you like to donate?</h3>
                     </div>
                     <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
-                        {["50", "100", "250", "500"].map(value =>
-                            <button className="group" onClick={(e) => handleFiatAmountClick(e, value)}>${value}</button>
+                        {["50", "100", "250", "500"].map((value, index) =>
+                            <button key={index} className="group" onClick={(e) => handleFiatAmountClick(e, value)}>${value}</button>
                         )}
                         <div className="relative flex w-full">
                             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

@@ -1,6 +1,6 @@
 import markdownStyles from "./markdown-styles.module.css"
 
-export default function BigDumbMarkdown({ content }) {
+export default function BigDumbMarkdown({ content }: { content: string }) {
     return (
         <div className="flex flex-col items-center py-8">
             <div className={markdownStyles['markdown']}>

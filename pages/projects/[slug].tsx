@@ -7,8 +7,9 @@ import waffledog from "../../public/waffledog.jpg";
 import Image from "next/image";
 import ProjectList from '../../components/ProjectList'
 import BackToGrants from '../../components/BackToGrants'
+import { ProjectItem } from '../../utils/types'
 
-export default function ({ post }) {
+export default function Project({ post }: { post: ProjectItem }) {
     const router = useRouter()
     if (!router.isFallback && !post?.slug) {
         return <ErrorPage statusCode={404} />
@@ -58,7 +59,7 @@ export default function ({ post }) {
     )
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: { params: any }) {
     const post = getPostBySlug(params.slug, [
         'title',
         'summary',
