@@ -9,12 +9,21 @@ import unicorn from "/public/heroes/unicorn.png"
 import { getAllPosts, getPostBySlug } from "../utils/md";
 import markdownToHtml from "../utils/markdownToHtml";
 import Credits from "../components/Credits";
+import { ProjectItem } from "../utils/types";
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [selectedProject, setSelectedProject] = useState<ProjectItem>();
+
   function closeModal() {
     setModalOpen(false);
+  }
+
+  function openPaymentModal(project: ProjectItem) {
+    console.log("opening index modal...")
+    setSelectedProject(project);
+    setModalOpen(true)
   }
 
   return (
@@ -42,10 +51,10 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             <Image width={388} height={388} src={unicorn} alt="Unicorn" />
           </div>
         </section>
-        <ProjectList projects={projects} />
+        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
         <Credits />
       </main>
-      <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} />
+      <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} project={selectedProject} />
     </>
   );
 };

@@ -1,22 +1,30 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import ProjectList from "../../components/ProjectList";
+import { useEffect, useState } from "react";
 import PaymentModal from "../../components/PaymentModal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faC, faClose } from "@fortawesome/free-solid-svg-icons";
 import ProjectCard from "../../components/ProjectCard";
 import { ProjectItem } from "../../utils/types";
 import { getAllPosts } from "../../utils/md";
-import markdownToHtml from "../../utils/markdownToHtml";
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     const [modalOpen, setModalOpen] = useState(false);
+
+    const [selectedProject, setSelectedProject] = useState<ProjectItem>();
+
+    const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>();
+
+    useEffect(() => {
+        setSortedProjects(projects.sort(() => 0.5 - Math.random()))
+    }, [projects])
 
     function closeModal() {
         setModalOpen(false);
     }
 
+    function openPaymentModal(project: ProjectItem) {
+        setSelectedProject(project);
+        setModalOpen(true)
+    }
     // const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
 
     return (
@@ -29,14 +37,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
                     <h1>Projects</h1>
                 </div>
                 <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-                    {projects.map((p, i) => (
+                    {sortedProjects && sortedProjects.map((p, i) => (
                         <li key={i} className="">
-                            <ProjectCard project={p} />
+                            <ProjectCard project={p} openPaymentModal={openPaymentModal} />
                         </li>
                     ))}
                 </ul>
             </section>
-            <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} />
+            <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} project={selectedProject} />
         </>
     );
 };

@@ -69,15 +69,15 @@ const Credits = () => {
         <section className="bg-black p-4 flex flex-col items-center">
             <h1 className="text-white my-4">Board</h1>
             <div className="container flex flex-wrap items-center justify-center mb-8">
-                {board.map(b =>
-                    <CreditItem image={b.image} link={b.link} nym={b.nym} />
+                {board.map((b, i) =>
+                    <CreditItem key={i} image={b.image} link={b.link} nym={b.nym} />
                 )}
             </div>
 
             <h1 className="text-white my-4">Supporters</h1>
             <div className="container flex flex-wrap items-center justify-center">
-                {supporters.map(b =>
-                    <CreditItem image={b.image} link={b.link} nym={b.nym} />
+                {supporters.map((s, i) =>
+                    <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
                 )}
             </div>
         </section >

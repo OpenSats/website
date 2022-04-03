@@ -1,7 +1,7 @@
 .markdown {
-  @apply leading-relaxed max-w-[60ch] px-4 lg:px-8;
+  @apply leading-relaxed max-w-[60ch] px-4 lg:px-8 prose;
 }
-
+/* 
 .markdown p,
 .markdown ul,
 .markdown ol,
@@ -31,4 +31,4 @@
 
 .markdown blockquote {
   @apply bg-light py-2 px-4 rounded;
-}
+} */

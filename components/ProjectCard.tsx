@@ -6,12 +6,18 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { ProjectItem } from "../utils/types";
+import PaymentModal from "./PaymentModal";
 
-const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => {
-  console.log("project:", project)
+export type ProjectCardProps = {
+  project: ProjectItem;
+  openPaymentModal: (project: ProjectItem) => void;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) => {
   const { slug, title, summary, coverImage, git, twitter } = project;
+
   return (
-    <figure className=" bg-white space-y-4 border border-lightgray rounded-xl">
+    <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
       <div className="relative h-64">
         <Image
           alt={title}
@@ -30,7 +36,7 @@ const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => {
             <a>@{git}</a>
           </Link>
         </p>
-        <p className="prose">
+        <p className="prose line-clamp-3">
           {summary}
         </p>
         <div className="flex justify-end"></div>
@@ -51,7 +57,7 @@ const ProjectCard: React.FC<{ project: ProjectItem }> = ({ project }) => {
           }
         </div>
         <div className="flex space-x-4 items-center justify-center pt-4">
-          <button className="bg-black basis-1/2">Donate</button>
+          <button className="bg-black basis-1/2" onClick={() => openPaymentModal(project)}>Donate</button>
           <div className="flex items-center justify-center basis-1/2">
             <Link href={`/projects/${slug}`} passHref>
               <a>View Details</a>

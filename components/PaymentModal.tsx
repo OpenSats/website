@@ -4,12 +4,19 @@ import waffledog from "../public/waffledog.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import DonationForm from "./DonationForm";
+import { ProjectItem } from "../utils/types";
 
 type ModalProps = {
   isOpen: boolean;
   onRequestClose: () => void;
+  project: ProjectItem | undefined
 };
-const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
+const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, project }) => {
+  if (!project) {
+    // We never see this yeah?
+    return (< div />);
+  }
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -32,14 +39,15 @@ const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose }) => {
       <div className="flex flex-col space-y-4 py-4">
         <div className="flex gap-4 items-center">
           <Image
-            alt="waffledog"
-            src={waffledog}
+            alt={project.title}
+            src={project.coverImage}
             width={96}
             height={96}
+            objectFit="cover"
             className="rounded-xl"
           />
           <div className="flex flex-col">
-            <h2 className="font-sans font-bold">Double-spend problem</h2>
+            <h2 className="font-sans font-bold">{project.title}</h2>
             <h3 className="font-sans text-textgray">Plege your support</h3>
           </div>
         </div>

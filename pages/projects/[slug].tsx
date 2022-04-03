@@ -8,6 +8,8 @@ import ProjectList from '../../components/ProjectList'
 import BackToProjects from '../../components/BackToProjects'
 import { ProjectItem } from '../../utils/types'
 import { NextPage } from 'next/types'
+import { useState } from 'react'
+import PaymentModal from '../../components/PaymentModal'
 
 type SingleProjectPageProps = {
     project: ProjectItem;
@@ -16,6 +18,20 @@ type SingleProjectPageProps = {
 
 const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     const router = useRouter()
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const [selectedProject, setSelectedProject] = useState<ProjectItem>();
+
+    function closeModal() {
+        setModalOpen(false);
+    }
+
+    function openPaymentModal() {
+        console.log("opening single project modal...")
+        setSelectedProject(project);
+        setModalOpen(true)
+    }
 
     const { slug, title, summary, coverImage, git, twitter, content } = project;
 
@@ -47,7 +63,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                             <h5>Raised</h5>
                             <h4>??? BTC</h4>
                         </div>
-                        <button>Donate</button>
+                        <button onClick={openPaymentModal}>Donate</button>
 
                     </aside>
 
@@ -65,7 +81,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                     </div>
                 </article>
             </div >
-            <ProjectList projects={projects} header="You might also like..." />
+            <ProjectList projects={projects} header="You might also like..." openPaymentModal={openPaymentModal} />
+            <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} project={selectedProject} />
         </>
     )
 }
