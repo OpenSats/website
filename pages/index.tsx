@@ -8,6 +8,7 @@ import Image from "next/image";
 import unicorn from "/public/heroes/unicorn.png"
 import { getAllPosts, getPostBySlug } from "../utils/md";
 import markdownToHtml from "../utils/markdownToHtml";
+import Credits from "../components/Credits";
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,6 +43,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </section>
         <ProjectList projects={projects} />
+        <Credits />
       </main>
       <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} />
     </>
