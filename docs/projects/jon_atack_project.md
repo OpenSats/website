@@ -1,10 +1,12 @@
 ---
 title: 'Jon Atack Project'
 summary: 'I began contributing to Bitcoin Core in March 2019, self-funding my first year on the project.'
+nym: 'Jon Atack'
 website: 'https://jonatack.github.io'
 coverImage: '/img/placeholder.jpg'
 git: 'jonatack'
 twitter: 'jonatack'
+type: 'Bitcoin Core'
 ---
 
 ## About this project
