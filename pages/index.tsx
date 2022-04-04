@@ -29,11 +29,14 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   function openGeneralFundModal() {
     const generalFund: ProjectItem = {
       slug: "general_fund",
+      nym: "OpenSats",
+      website: "https://opensats.org",
       title: "OpenSats General Fund",
       summary: "We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.",
       coverImage: "/heroes/gold.png",
       git: "opensats",
-      twitter: "opensats"
+      twitter: "opensats",
+      zaprite: ""
     }
 
     openPaymentModal(generalFund)
