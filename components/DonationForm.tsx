@@ -1,5 +1,10 @@
-import { useState } from "react";
+import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
+import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { fetchPostJSON } from "../utils/api-helpers";
 import Pay from "./Pay";
+import Spinner from "./Spinner";
 
 type DonationStepsProps = {
     projectNamePretty: string;
@@ -15,6 +20,9 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
 
     const [readyToPay, setReadyToPay] = useState(false);
 
+    const [btcPayLoading, setBtcpayLoading] = useState(false);
+    const [fiatLoading, setFiatLoading] = useState(false);
+
     const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDeductable(event.target.value);
     };
@@ -24,12 +32,63 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
         setAmount(value)
     }
 
-    function handleSubmit(e: React.FormEvent<unknown>) {
+    // This should be a react form event but their typescript doesn't include submitter
+    function handleSubmit(e: any) {
         e.preventDefault();
-        console.log(amount)
-        if (amount) {
-            setReadyToPay(true)
+
+        const submitter = e.nativeEvent?.submitter?.name;
+
+        if (submitter === "btcpay") {
+            handleBtcPay()
+        } else {
+            handleFiat()
         }
+    }
+
+    useEffect(() => {
+        console.log()
+        console.log(deductable, amount, email, name)
+        console.log("running effect")
+        if (amount && typeof amount === "number") {
+            console.log("have amount")
+            if (deductable === "no" || (name && email)) {
+                setReadyToPay(true)
+            } else {
+                setReadyToPay(false)
+            }
+        } else {
+            setReadyToPay(false)
+        }
+    }, [deductable, amount, email, name])
+
+    async function handleBtcPay() {
+        setBtcpayLoading(true);
+        try {
+            const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+            if (data.checkoutLink) {
+                window.location.assign(data.checkoutLink)
+            } else {
+                throw new Error("Something went wrong with BtcPay Server checkout.")
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        setBtcpayLoading(false);
+    };
+
+    async function handleFiat() {
+        setFiatLoading(true);
+        try {
+            const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+            if (data.url) {
+                window.location.assign(data.url)
+            } else {
+                throw new Error("Something went wrong with Stripe checkout.")
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        setFiatLoading(false)
     }
 
     return (
@@ -83,7 +142,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
                     <h3>How much would you like to donate?</h3>
                 </div>
                 <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
-                    {["50", "100", "250", "500"].map((value, index) =>
+                    {[50, 100, 250, 500].map((value, index) =>
                         <button key={index} className="group" onClick={(e) => handleFiatAmountClick(e, value)}>${value}</button>
                     )}
                     <div className="relative flex w-full">
@@ -95,7 +154,20 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
                     </div>
                 </div>
             </section>
-            <Pay amount={parseInt(amount)} projectNamePretty={projectNamePretty} projectSlug={projectSlug} readyToPay={readyToPay} />
+            <div className="flex flex-wrap items-center gap-4">
+                <button name="btcpay" type="submit" className="pay" disabled={!readyToPay || btcPayLoading}>
+                    {btcPayLoading ? <Spinner /> : <FontAwesomeIcon icon={faBitcoin} className="text-primary h-8 w-8" />}
+                    <span className="whitespace-nowrap">
+                        Donate with Bitcoin
+                    </span>
+                </button>
+                <button name="stripe" type="submit" className="pay" disabled={!readyToPay || fiatLoading}>
+                    {fiatLoading ? <Spinner /> : <FontAwesomeIcon icon={faCreditCard} className="text-primary h-8 w-8" />}
+                    <span className="whitespace-nowrap">
+                        Donate with fiat
+                    </span>
+                </button>
+            </div>
         </form >
     )
 
