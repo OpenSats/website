@@ -1,45 +1,67 @@
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { useState } from "react";
-import useSWR from "swr";
 import { fetchPostJSON } from "../utils/api-helpers";
+import Spinner from "./Spinner";
 
-const Pay = ({ amount = 100.0 }) => {
-  const { data: stripe, error: stripeError } = useSWR(
-    ["/api/stripe_checkout", { amount }],
-    fetchPostJSON
-  );
+export type PayProps = {
+  amount: number;
+  projectSlug: string;
+  projectNamePretty: string;
+  readyToPay: boolean;
+}
 
-  const { data: btcpay, error: btcpayError } = useSWR(
-    ["/api/btcpay", { amount }],
-    fetchPostJSON
-  );
 
-  console.log(btcpayError);
+const Pay: React.FC<PayProps> = ({ amount, projectSlug, projectNamePretty, readyToPay }) => {
+  const [btcPayLoading, setBtcpayLoading] = useState(false);
+  const [fiatLoading, setFiatLoading] = useState(false);
+
+  async function handleClickBtcPay() {
+    setBtcpayLoading(true);
+    try {
+      const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+      window.open(data.checkoutLink);
+      if (data.checkoutLink) {
+        window.open(data.url);
+      } else {
+        throw new Error("Something went wrong with BtcPay Server checkout.")
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    setBtcpayLoading(false);
+  };
+
+  async function handleClickFiat() {
+    setFiatLoading(true);
+    try {
+      const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+      if (data.url) {
+        window.open(data.url);
+      } else {
+        throw new Error("Something went wrong with Stripe checkout.")
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    setFiatLoading(false)
+  }
 
   return (
-    <div className="flex flex-col space-y-4">
-      {stripe?.url && (
-        <Link href={stripe.url} passHref={true}>
-          <button className="border-2 border-black bg-white p-8 text-xl text-black hover:text-primary rounded-xl flex justify-start gap-4" role="link">
-            <FontAwesomeIcon icon={faCreditCard} className="text-primary h-8 w-8" />
-            Pay with card
-          </button>
-        </Link>
-      )}
-      {stripeError && <mark>{stripeError?.message}</mark>}
-      {/* <mark>Error: {stripeError?.message}</mark> */}
-      {btcpay?.url && (
-        <Link href={btcpay.url} passHref={true}>
-          <button className="border-2 border-black bg-white p-8 text-xl text-black hover:text-primary rounded-xl flex justify-start gap-4" role="link">
-            <FontAwesomeIcon icon={faBitcoin} className="text-primary h-8 w-8" />
-            Pay with Bitcoin
-          </button>
-        </Link>
-      )}
-      {btcpayError && <mark>{btcpayError?.message}</mark>}
+    <div className="flex flex-wrap items-center gap-4">
+      <button onClick={handleClickBtcPay} className="pay" disabled={readyToPay || btcPayLoading}>
+        {btcPayLoading ? <Spinner /> : <FontAwesomeIcon icon={faBitcoin} className="text-primary h-8 w-8" />}
+        <span className="whitespace-nowrap">
+          Donate with Bitcoin
+        </span>
+      </button>
+      <button onClick={handleClickFiat} className="pay" disabled={readyToPay || fiatLoading}>
+        {fiatLoading ? <Spinner /> : <FontAwesomeIcon icon={faCreditCard} className="text-primary h-8 w-8" />}
+        <span className="whitespace-nowrap">
+          Donate with fiat
+        </span>
+      </button>
     </div>
   );
 };

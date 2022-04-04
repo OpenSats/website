@@ -8,3 +8,11 @@ export type ProjectItem = {
     twitter?: string;
 }
 
+export type PayReq = {
+    amount: number;
+    project_slug: string;
+    project_name: string;
+    email?: string;
+    name?: string;
+}
+

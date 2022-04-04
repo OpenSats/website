@@ -49,7 +49,8 @@ button.selected {
 }
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='email'] {
   @apply border border-lightgray rounded p-2 focus:border-black;
 }
 
@@ -71,4 +72,16 @@ button.small {
 
 button.group {
   @apply p-2 text-sm bg-white text-black border border-black;
+}
+
+button.pay {
+  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black hover:text-primary rounded-xl flex justify-start gap-4;
+}
+
+button.pay:disabled {
+  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
+}
+
+.credit a {
+  @apply no-underline hover:underline;
 }

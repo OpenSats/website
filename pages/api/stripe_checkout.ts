@@ -4,6 +4,7 @@ import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../config";
 import { formatAmountForStripe } from "../../utils/stripe-helpers";
 
 import Stripe from "stripe";
+import { PayReq } from "../../utils/types";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: "2020-08-27",
@@ -13,8 +14,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { amount, project_name, project_slug, email, name }: PayReq = req.body;
+  const REDIRECT = "localhost:3000"
   if (req.method === "POST") {
-    const amount: number = req.body.amount;
     try {
       // Validate the amount that was passed from the client.
       if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
@@ -26,7 +28,7 @@ export default async function handler(
         payment_method_types: ["card"],
         line_items: [
           {
-            name: "Custom amount donation",
+            name: `OpenSats donation: ${project_name}`,
             amount: formatAmountForStripe(amount, CURRENCY),
             currency: CURRENCY,
             quantity: 1,

@@ -2,13 +2,15 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from "../../config";
 import { fetchPostJSONAuthed } from "../../utils/api-helpers";
+import { PayReq } from "../../utils/types";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { amount }: { amount: number } = req.body;
+    const { amount, project_name, project_slug, email, name }: PayReq = req.body;
+    const REDIRECT = "localhost:3000"
 
     try {
       // Validate the amount that was passed from the client.
@@ -19,8 +21,10 @@ export default async function handler(
         `${process.env
           .BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
-        { amount, currency: CURRENCY }
+        { amount, currency: CURRENCY, metadata: { orderId: project_slug, project_name, buyerName: name || "anonymous", email: email || "none" }, checkout: { redirectURL: REDIRECT } }
       );
+
+      console.log({ data })
 
       res.status(200).json(data);
     } catch (err) {

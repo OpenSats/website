@@ -1,13 +1,6 @@
-import type { NextPage } from "next";
-import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
-import useSWR from "swr";
-import { fetchPostJSON } from "../utils/api-helpers";
-import logo from "../public/logo3.svg";
+import logo from "../public/logo.svg";
 import Link from "next/link";
-import ProjectList from "../components/ProjectList";
-import PaymentModal from "../components/PaymentModal";
 
 const Header = () => {
     return (
@@ -27,11 +20,6 @@ const Header = () => {
                     </ul>
                 </nav>
             </div>
-
-            {/* <div className="space-x-2">
-                <span>Developers: </span>
-                <button>Register</button>
-            </div> */}
         </header>
     )
 }

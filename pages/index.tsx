@@ -26,6 +26,19 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     setModalOpen(true)
   }
 
+  function openGeneralFundModal() {
+    const generalFund: ProjectItem = {
+      slug: "general_fund",
+      title: "OpenSats General Fund",
+      summary: "We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.",
+      coverImage: "/heroes/gold.png",
+      git: "opensats",
+      twitter: "opensats"
+    }
+
+    openPaymentModal(generalFund)
+  }
+
   return (
     <>
       <Head>
@@ -41,7 +54,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               projects
             </h1>
             <p className="text-textgray">We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.</p>
-            <button role={"button"} onClick={() => setModalOpen(true)}>
+            <button role={"button"} onClick={openGeneralFundModal}>
               Donate to Bitcoin
             </button>
             <p>Are you an open source contributor? <Link href="/apply"><a>Apply for your project to be listed.</a></Link></p>
