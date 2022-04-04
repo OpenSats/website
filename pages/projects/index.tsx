@@ -52,7 +52,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 export default AllProjects;
 
 export async function getStaticProps({ params }: { params: any }) {
-    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter', 'nym', 'zaprite'])
 
     return {
         props: {

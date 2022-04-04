@@ -33,7 +33,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
         setModalOpen(true)
     }
 
-    const { slug, title, summary, coverImage, git, twitter, content } = project;
+    const { slug, title, summary, coverImage, git, twitter, content, nym, zaprite } = project;
 
     if (!router.isFallback && !slug) {
         return <ErrorPage statusCode={404} />
@@ -59,7 +59,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                 <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
                     <aside className="p-4 bg-light rounded-xl flex lg:flex-col gap-4 min-w-[20rem] justify-between mb-8">
                         <div>
-
                             <h5>Raised</h5>
                             <h4>??? BTC</h4>
                         </div>
@@ -97,9 +96,12 @@ export async function getStaticProps({ params }: { params: any }) {
         'git',
         'content',
         'coverImage',
+        'nym',
+        'website',
+        'zaprite'
     ])
 
-    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+    const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter', 'nym', 'zaprite'])
 
     const content = await markdownToHtml(post.content || '')
 

@@ -52,7 +52,7 @@ const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, project })
           </div>
         </div>
       </div>
-      <DonationForm projectNamePretty={project.title} projectSlug={project.slug} />
+      <DonationForm projectNamePretty={project.title} projectSlug={project.slug} zaprite={project.zaprite} />
     </ReactModal>
   );
 };

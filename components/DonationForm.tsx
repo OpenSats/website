@@ -8,8 +8,9 @@ import Spinner from "./Spinner";
 type DonationStepsProps = {
     projectNamePretty: string;
     projectSlug: string;
+    zaprite: string;
 }
-const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projectSlug }) => {
+const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projectSlug, zaprite }) => {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -52,7 +53,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
         }
         setBtcpayLoading(true);
         try {
-            const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+            const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty, zaprite, email, name })
             if (data.checkoutLink) {
                 window.location.assign(data.checkoutLink)
             } else {
@@ -71,7 +72,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
         }
         setFiatLoading(true);
         try {
-            const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty })
+            const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty, zaprite, email, name })
+            console.log({ data })
             if (data.url) {
                 window.location.assign(data.url)
             } else {

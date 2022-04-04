@@ -75,7 +75,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 export default Home;
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter'])
+  const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter', 'nym', 'zaprite'])
 
   return {
     props: {
