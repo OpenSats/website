@@ -19,11 +19,10 @@ const Pay: React.FC<PayProps> = ({ amount, projectSlug, projectNamePretty, ready
 
   async function handleClickBtcPay() {
     setBtcpayLoading(true);
-    let windowReference = window.open();
     try {
       const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty })
-      if (data.checkoutLink && windowReference) {
-        windowReference.location = data.checkoutLink;
+      if (data.checkoutLink) {
+        window.location.assign(data.checkoutLink)
       } else {
         throw new Error("Something went wrong with BtcPay Server checkout.")
       }
@@ -35,12 +34,10 @@ const Pay: React.FC<PayProps> = ({ amount, projectSlug, projectNamePretty, ready
 
   async function handleClickFiat() {
     setFiatLoading(true);
-    let windowReference = window.open();
-
     try {
       const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty })
-      if (data.url && windowReference) {
-        windowReference.location = data.url;
+      if (data.url) {
+        window.location.assign(data.url)
       } else {
         throw new Error("Something went wrong with Stripe checkout.")
       }
