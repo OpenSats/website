@@ -1,9 +1,12 @@
 ---
 title: 'Michael Ford Project'
 summary: "I'm one of the Bitcoin Core maintainers. My work is code review, triaging and ultimately merging changes into Bitcoin Core."
+nym: 'Michael Ford'
+website: 'https://github.com/laanwj'
 coverImage: '/img/placeholder.jpg'
 git: 'fanquake'
 twitter: 'fanquake'
+type: 'Bitcoin Core'
 ---
 
 ## About this project
