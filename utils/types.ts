@@ -8,6 +8,7 @@ export type ProjectItem = {
     git: string;
     twitter?: string;
     zaprite: string;
+    website: string;
 }
 
 export type PayReq = {
