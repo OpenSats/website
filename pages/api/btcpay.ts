@@ -21,7 +21,10 @@ export default async function handler(
         `${process.env
           .BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
-        { amount, currency: CURRENCY, metadata: { orderId: project_slug, project_name, buyerName: name || "anonymous", email: email || "none" }, checkout: { redirectURL: REDIRECT } }
+        {
+          amount, currency: CURRENCY,
+          metadata: { orderId: project_slug, project_name, buyerName: name || "anonymous", buyerEmail: email || "none" }, checkout: { redirectURL: REDIRECT }
+        }
       );
 
       console.log({ data })

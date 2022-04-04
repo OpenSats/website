@@ -1,7 +1,7 @@
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchPostJSON } from "../utils/api-helpers";
 import Spinner from "./Spinner";
 
@@ -22,6 +22,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
     const [btcPayLoading, setBtcpayLoading] = useState(false);
     const [fiatLoading, setFiatLoading] = useState(false);
 
+    const formRef = useRef<HTMLFormElement | null>(null);
+
     const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setDeductable(event.target.value);
     };
@@ -31,22 +33,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
         setAmount(value)
     }
 
-    // This should be a react form event but their typescript doesn't include submitter
-    function handleSubmit(e: any) {
-        e.preventDefault();
-
-        const submitter = e.nativeEvent?.submitter?.name;
-
-        if (submitter === "btcpay") {
-            handleBtcPay()
-        } else {
-            handleFiat()
-        }
-    }
-
     useEffect(() => {
         if (amount && typeof parseInt(amount) === "number") {
-            console.log("have amount")
             if (deductable === "no" || (name && email)) {
                 setReadyToPay(true)
             } else {
@@ -58,6 +46,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
     }, [deductable, amount, email, name])
 
     async function handleBtcPay() {
+        const validity = formRef.current?.checkValidity();
+        if (!validity) {
+            return
+        }
         setBtcpayLoading(true);
         try {
             const data = await fetchPostJSON("/api/btcpay", { amount, project_slug: projectSlug, project_name: projectNamePretty })
@@ -73,6 +65,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
     };
 
     async function handleFiat() {
+        const validity = formRef.current?.checkValidity();
+        if (!validity) {
+            return
+        }
         setFiatLoading(true);
         try {
             const data = await fetchPostJSON("/api/stripe_checkout", { amount, project_slug: projectSlug, project_name: projectNamePretty })
@@ -88,7 +84,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
     }
 
     return (
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        <form ref={formRef} className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
             <section className="flex flex-col gap-1">
                 <h3>Do you want this donation as tax deductable?</h3>
                 <div className="flex space-x-4 pb-4">
@@ -151,20 +147,20 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
                 </div>
             </section>
             <div className="flex flex-wrap items-center gap-4">
-                <button name="btcpay" type="submit" className="pay" disabled={!readyToPay || btcPayLoading}>
+                <button name="btcpay" onClick={handleBtcPay} className="pay" disabled={!readyToPay || btcPayLoading}>
                     {btcPayLoading ? <Spinner /> : <FontAwesomeIcon icon={faBitcoin} className="text-primary h-8 w-8" />}
                     <span className="whitespace-nowrap">
                         Donate with Bitcoin
                     </span>
                 </button>
-                <button name="stripe" type="submit" className="pay" disabled={!readyToPay || fiatLoading}>
+                <button name="stripe" onClick={handleFiat} className="pay" disabled={!readyToPay || fiatLoading}>
                     {fiatLoading ? <Spinner /> : <FontAwesomeIcon icon={faCreditCard} className="text-primary h-8 w-8" />}
                     <span className="whitespace-nowrap">
                         Donate with fiat
                     </span>
                 </button>
             </div>
-        </form >
+        </form>
     )
 
 };
