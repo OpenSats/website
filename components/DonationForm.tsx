@@ -3,7 +3,6 @@ import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { fetchPostJSON } from "../utils/api-helpers";
-import Pay from "./Pay";
 import Spinner from "./Spinner";
 
 type DonationStepsProps = {
@@ -46,10 +45,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
     }
 
     useEffect(() => {
-        console.log()
-        console.log(deductable, amount, email, name)
-        console.log("running effect")
-        if (amount && typeof amount === "number") {
+        if (amount && typeof parseInt(amount) === "number") {
             console.log("have amount")
             if (deductable === "no" || (name && email)) {
                 setReadyToPay(true)
@@ -143,7 +139,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({ projectNamePretty, projec
                 </div>
                 <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
                     {[50, 100, 250, 500].map((value, index) =>
-                        <button key={index} className="group" onClick={(e) => handleFiatAmountClick(e, value)}>${value}</button>
+                        <button key={index} className="group" onClick={(e) => handleFiatAmountClick(e, value.toString())}>${value}</button>
                     )}
                     <div className="relative flex w-full">
                         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
