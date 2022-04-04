@@ -9,7 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { amount, project_name, project_slug, email, name }: PayReq = req.body;
+    const { amount, project_name, project_slug, email, name, zaprite }: PayReq = req.body;
     const REDIRECT = "localhost:3000"
 
     try {
@@ -26,8 +26,6 @@ export default async function handler(
           metadata: { orderId: project_slug, project_name, buyerName: name || "anonymous", buyerEmail: email || "none" }, checkout: { redirectURL: REDIRECT }
         }
       );
-
-      console.log({ data })
 
       res.status(200).json(data);
     } catch (err) {

@@ -14,7 +14,7 @@ export type ProjectCardProps = {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) => {
-  const { slug, title, summary, coverImage, git, twitter } = project;
+  const { slug, title, summary, coverImage, git, twitter, nym, zaprite } = project;
 
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
@@ -32,8 +32,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) 
       <figcaption className="p-4 space-y-4">
         <h2>{title}</h2>
         <p>by{" "}
-          <Link href={`https://github.com/${git}`} passHref>
-            <a>@{git}</a>
+          <Link href={git} passHref>
+            <a>{nym}</a>
           </Link>
         </p>
         <p className="prose line-clamp-3">
@@ -41,7 +41,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) 
         </p>
         <div className="flex justify-end"></div>
         <div className="flex space-x-4">
-          <Link href={`https://github.com/${git}`} passHref>
+          <Link href={git} passHref>
             <FontAwesomeIcon
               icon={faGithub}
               className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
