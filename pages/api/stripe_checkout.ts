@@ -36,6 +36,12 @@ export default async function handler(
         ],
         success_url: `${req.headers.origin}/?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/`,
+        metadata: {
+          donor_email: email || null,
+          donor_name: name || null,
+          recipient_campaign: 'ZAPRITE_CAMPAIGN_UUID',
+          recipient_uuid: 'ZAPRITE_USER_UUID',
+        }
       };
       const checkoutSession: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create(params);
