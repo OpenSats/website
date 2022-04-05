@@ -23,7 +23,7 @@ export default async function handler(
         orderId: project_slug,
         project_name,
         buyerName: name || 'anonymous',
-        buyerEmail: email || 'none',
+        buyerEmail: email || null,
       }
 
       let data = await fetchPostJSONAuthed(
