@@ -32,51 +32,35 @@ export default function Apply() {
       >
         {/* {errors.exampleRequired && <span>This field is required</span>} */}
         <div className="prose">
-          <h1>Application for Project Listing on OpenSats.org</h1>
+          <h1>Application for OpenSats Project Page and/or General Fund Grant</h1>
           <p>
-            Thanks for your interest in listing your project with Open Sats!
+            Thanks for your interest in OpenSats!
           </p>
           <p>
             We&#39;re incredibly grateful to contributors like you working to
             support Bitcoin Core and other free and open source projects.
           </p>
           <p>
-            Because Open Sats is a non-profit charitable organization and
-            intends to qualify for 501(c)(3) status (application currently
-            pending), all projects we list on our website must be vetted by our
+            Because Open Sats is a 501(c)(3) non-profit, all projects we list on our website must be vetted by our
             board of directors to ensure that they help us further our mission
-            of supporting contributors to free and open source projects, like
-            Bitcoin.
+            of supporting contributors to Bitcoin and related free and open source projects.
           </p>
           <p>
-            None of our officers or directors make any money for helping to
-            manage OpenSats and 100% of charitable donations through our
-            platform will be passed onto contributors to free and open source
-            projects. Open Sats will accept bitcoin and fiat donations (credit
-            and debit cards, wires, etc.), however payment processing fees are
-            generously covered by a few organizational sponsors. All donations
-            will be converted to, held, and distributed to grant and donation
-            recipients in bitcoin... although, exceptions may be considered to
-            distribute funds in fiat.{' '}
-          </p>
-          <p>
-            Additionally, Open Sats must support specific PROJECTS which help to
+            Additionally, OpenSats must support specific PROJECTS which help to
             further our charitable mission. As such, if you are an individual
             contributor, please be sure that you list a SPECIFIC PROJECT you are
             working on.{' '}
           </p>
           <p>
             The information collected below will be used in order to vet your
-            project. If accepted and your project fits within the criteria of
-            what we are able to support, Open Sats will create a project page on
-            our website where site-visitors can learn more about your project
+            project. If approved, OpenSats will create a project page on
+            our website (opensats.org/projects) where site-visitors can learn more about your project
             and donate if they choose to. Your project will be listed for one
             year. After one year, you will be prompted to re-send your
             application should you wish to be listed again.{' '}
           </p>
           <p>
-            When our site goes live, there will also be the opportunity to apply
-            for grants.
+            OpenSats also distributes grants from a general fund and you may also choose to apply for a grant below.
           </p>
           <p>Criteria: </p>
           <p>
@@ -88,8 +72,8 @@ export default function Apply() {
             research, code review, design/UX improvements, etc.
           </p>
           <p>
-            Free and Open Source Software: We support free and open-source
-            software and tools that complement the use of Bitcoin. Potential
+            Free and Open Source: OpenSats supports free and open-source
+            software, tools, and contributors which complement Bitcoin and help Bitcoin reach it's fullest potential. Potential
             areas of interest include secure messaging, merchant acceptance
             tools, layer two protocols, etc. Source code and documents resulting
             from funded projects must be made publicly available for access,
@@ -125,7 +109,7 @@ export default function Apply() {
         <label>
           Project Name *
           <small>
-            The name of the project to be listed on the open sats website
+            The name of the project to be listed on the OpenSats website
           </small>
           <input
             type="text"
@@ -157,7 +141,7 @@ export default function Apply() {
           </small>
           <small>
             These could include github username, twitter username, LinkedIn,
-            bitcoinhackers username, other social media handles, emails, phone
+            bitcoinhackers, other social media handles, emails, phone
             numbers, usernames, etc.
           </small>
           <textarea {...register('other_contact')} />
@@ -165,15 +149,15 @@ export default function Apply() {
         <label>
           Short Project Description *
           <small>
-            This will be listed on the project explore page of the Open Sats
-            website. 2-3 sentences, no more than 200 characters.
+            This will be listed on the explore projects page of the OpenSats
+            website. 2-3 sentences.
           </small>
           <textarea {...register('short_description', { required: true })} />
         </label>
         <label>
           Long Project Description
           <small>
-            This will be listed on your personal project page of the Open Sats
+            This will be listed on your personal project page of the OpenSats
             website. It can be longer and go into detail about your project.
           </small>
           <textarea {...register('long_description')} />
