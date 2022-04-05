@@ -16,7 +16,7 @@ const Credits = () => {
 
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
-  const thebitcoincompanyLogo = '/img/supporters/thebitcoincompany.jpg'
+  const thebitcoincompanyLogo = '/img/supporters/tbc.png'
   const bottlepayLogo = '/img/supporters/bottlepay.png'
   const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
   const duxReserveLogoWithCastlenine =
@@ -122,7 +122,7 @@ const Credits = () => {
       nym: 'Voltage'
     },
     {
-      link: 'https://twitter.com/thebtccompany',
+      link: 'https://thebitcoincompany.com',
       image: thebitcoincompanyLogo,
       nym: 'The Bitcoin Company',
     },
