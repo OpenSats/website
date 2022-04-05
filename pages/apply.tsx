@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 export default function Apply() {
-  async function handleClick() {}
+  async function handleClick() { }
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const {
@@ -281,7 +281,7 @@ export default function Apply() {
 
         <p>
           After submitting your application, please send images of your project
-          to <a href="mailto:info@opensats.org">support@opensats.org</a> for
+          to <a href="mailto:support@opensats.org">support@opensats.org</a> for
           inclusion on your project page.
         </p>
       </form>

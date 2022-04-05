@@ -55,12 +55,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className={"h-[15rem] w-full relative"}>
+        <div className={"h-[15rem] w-full relative bg-gradient-to-b from-white to-gray-200"}>
           <Image
             alt={title}
             src={coverImage}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             objectPosition="50% 50%"
           />
         </div>
