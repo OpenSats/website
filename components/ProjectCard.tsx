@@ -23,16 +23,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
-      <div className="relative h-64">
+      <div className="relative h-64 w-full">
         <Link href={`/projects/${slug}`} passHref>
-          <Image
-            alt={title}
-            src={coverImage}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="50% 50%"
-            className="rounded-t-xl border border-lightgray cursor-pointer"
-          />
+          <div className='relative h-64 w-full'>
+            <Image
+              alt={title}
+              src={coverImage}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="50% 50%"
+              className="rounded-t-xl border border-lightgray cursor-pointer"
+            />
+          </div>
         </Link>
       </div>
 
