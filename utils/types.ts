@@ -9,6 +9,7 @@ export type ProjectItem = {
   twitter?: string
   zaprite: string
   website: string
+  personalTwitter: string
 }
 
 export type PayReq = {

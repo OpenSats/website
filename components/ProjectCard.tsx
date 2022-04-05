@@ -17,27 +17,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, nym, zaprite } =
+  const { slug, title, summary, coverImage, git, twitter, personalTwitter, nym, zaprite } =
     project
 
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
       <div className="relative h-64">
-        <Image
-          alt={title}
-          src={coverImage}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="50% 50%"
-          className="rounded-t-xl border border-lightgray"
-        />
+        <Link href={`/projects/${slug}`} passHref>
+          <Image
+            alt={title}
+            src={coverImage}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="50% 50%"
+            className="rounded-t-xl border border-lightgray cursor-pointer"
+          />
+        </Link>
       </div>
 
       <figcaption className="p-4 space-y-4">
         <h2>{title}</h2>
         <p>
           by{' '}
-          <Link href={git} passHref>
+          <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
             <a>{nym}</a>
           </Link>
         </p>
@@ -50,14 +52,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
             />
           </Link>
-          {twitter && (
-            <Link href={`https://twitter.com/${twitter}`} passHref>
+          <Link href={`https://twitter.com/${twitter}`} passHref>
+            <a>
               <FontAwesomeIcon
                 icon={faTwitter}
                 className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
               />
-            </Link>
-          )}
+            </a>
+          </Link>
         </div>
         <div className="flex space-x-4 items-center justify-center pt-4">
           <button

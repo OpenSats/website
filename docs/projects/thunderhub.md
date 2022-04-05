@@ -6,6 +6,7 @@ website: 'https://thunderhub.io/'
 coverImage: '/img/project/thunderhub.png'
 git: https://github.com/apotdevin/thunderhub
 twitter: 'thunderhubio'
+personalTwitter: 'tonyioi'
 type: 'Lightning'
 ---
 

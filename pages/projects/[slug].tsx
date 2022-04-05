@@ -10,6 +10,7 @@ import { ProjectItem } from '../../utils/types'
 import { NextPage } from 'next/types'
 import { useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
+import Link from 'next/link'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -43,6 +44,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     content,
     nym,
     zaprite,
+    personalTwitter
   } = project
 
   if (!router.isFallback && !slug) {
@@ -78,9 +80,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             <h1>{title}</h1>
             <p>{summary}</p>
 
-            <p>
-              by <a href={`https://github.com/${git}`}>{`@${git}`}</a>
-            </p>
+            <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
+              <a>{nym}</a>
+            </Link>
             <hr />
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
           </div>
@@ -103,29 +105,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 export default Project
 
 export async function getStaticProps({ params }: { params: any }) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'summary',
-    'slug',
-    'git',
-    'content',
-    'coverImage',
-    'nym',
-    'website',
-    'zaprite',
-  ])
+  const post = getPostBySlug(params.slug)
 
-  const projects = getAllPosts([
-    'slug',
-    'title',
-    'summary',
-    'website',
-    'coverImage',
-    'git',
-    'twitter',
-    'nym',
-    'zaprite',
-  ])
+  const projects = getAllPosts()
 
   const content = await markdownToHtml(post.content || '')
 
@@ -141,7 +123,7 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = getAllPosts()
 
   console.log(posts)
 

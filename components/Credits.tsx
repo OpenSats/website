@@ -4,9 +4,6 @@ const Credits = () => {
   const macbookSketch = '/img/demo/sketch.png'
 
   // Team
-  const twitterWhite = 'img/logos/twitter-white.svg'
-  const twitterBlack = 'img/logos/twitter-black.svg'
-
   const abitcoinpersonPhoto = '/img/team/abitcoinperson.jpg'
   const dreadPhoto = '/img/team/dread.jpg'
   const elainePhoto = '/img/team/elaine.png'
@@ -33,6 +30,8 @@ const Credits = () => {
   const silvergateBankLogo = '/img/supporters/silvergate-bank.png'
   const swanBitcoinLogo = '/img/supporters/swan.jpg'
   const ten31Logo = '/img/supporters/ten31.jpg'
+  const waffleDog = '/img/supporters/waffledog.jpg'
+  const voltage = '/img/supporters/voltage.png'
 
   const board: CreditItemProps[] = [
     { image: j9RoemPhoto, nym: 'J9Roem', link: 'https://twitter.com/J9Roem' },
@@ -47,7 +46,7 @@ const Credits = () => {
     {
       image: mattOdellPhoto,
       nym: 'Matt Odell',
-      link: 'https://twitter.com/matt_odell',
+      link: 'https://twitter.com/odell',
     },
     {
       image: niftyneiPhoto,
@@ -57,7 +56,7 @@ const Credits = () => {
     { image: udiPhoto, nym: 'Udi', link: 'https://twitter.com/udiwertheimer' },
     {
       image: abitcoinpersonPhoto,
-      nym: 'Abitcoinperson',
+      nym: 'Ben Price',
       link: 'https://twitter.com/abitcoinperson',
     },
   ]
@@ -72,7 +71,7 @@ const Credits = () => {
     {
       link: 'https://twitter.com/castlenine_',
       image: duxReserveLogoWithCastlenine,
-      nym: 'Dux Reserve',
+      nym: 'Castlenine',
     },
     { link: 'https://coinkite.com/', image: coinkiteLogo, nym: 'Coinkite' },
     {
@@ -111,6 +110,16 @@ const Credits = () => {
       link: 'https://www.manningfulton.com/people/attorneys/andrew-w-blair/',
       image: andrewWBlairLogo,
       nym: 'Andrew W. Blair',
+    },
+    {
+      link: 'https://paul.lol',
+      image: waffleDog,
+      nym: 'Paul'
+    },
+    {
+      link: 'https://voltage.cloud/',
+      image: voltage,
+      nym: 'Voltage'
     },
     {
       link: 'https://twitter.com/thebtccompany',
