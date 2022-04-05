@@ -8,6 +8,7 @@ git: 'https://code.samourai.io/ronindojo/RoninDojo/'
 twitter: 'RoninDojoUI'
 personalTwitter: 'BTCxZelko'
 type: 'Privacy'
+zaprite: 'XuBIEZbPTA9vqClJvDZe'
 ---
 
 ## About this project

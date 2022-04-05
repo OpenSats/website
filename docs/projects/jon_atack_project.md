@@ -7,6 +7,7 @@ coverImage: '/img/project/jon_atack.png'
 git: 'https://github.com/jonatack'
 twitter: 'jonatack'
 type: 'Bitcoin Core'
+zaprite: 'CBNTphQ2rT4fNe78d4yO'
 ---
 
 ## About this project

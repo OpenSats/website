@@ -8,6 +8,7 @@ git: 'https://github.com/sparrowwallet/sparrow'
 twitter: 'SparrowWallet'
 personalTwitter: 'craigraw'
 type: 'Wallet'
+zaprite: 'WVaur0QAG3nLmI9y6On7'
 ---
 
 ## About this project
