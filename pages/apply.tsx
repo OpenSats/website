@@ -73,7 +73,7 @@ export default function Apply() {
           </p>
           <p>
             Free and Open Source: OpenSats supports free and open-source
-            software, tools, and contributors which complement Bitcoin and help Bitcoin reach it's fullest potential. Potential
+            software, tools, and contributors which complement Bitcoin and help Bitcoin reach it&apos;s fullest potential. Potential
             areas of interest include secure messaging, merchant acceptance
             tools, layer two protocols, etc. Source code and documents resulting
             from funded projects must be made publicly available for access,
