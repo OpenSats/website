@@ -32,6 +32,7 @@ const Credits = () => {
   const ten31Logo = '/img/supporters/ten31.jpg'
   const waffleDog = '/img/supporters/waffledog.jpg'
   const voltage = '/img/supporters/voltage.png'
+  const zapirte = '/img/supporters/zaprite.png'
 
   const board: CreditItemProps[] = [
     { image: j9RoemPhoto, nym: 'J9Roem', link: 'https://twitter.com/J9Roem' },
@@ -120,6 +121,11 @@ const Credits = () => {
       link: 'https://voltage.cloud/',
       image: voltage,
       nym: 'Voltage'
+    },
+    {
+      link: 'https://zaprite.com',
+      image: zapirte,
+      nym: 'Zaprite'
     },
     {
       link: 'https://thebitcoincompany.com',
