@@ -53,15 +53,16 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   return (
     <>
       <div className="flex flex-col items-center">
-        <div className="h-[15rem] w-full relative">
-          <Image
-            alt={title}
-            src={coverImage}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="50% 50%"
-            className="brightness-[.75]"
-          />
+        <div className={"h-[15rem] w-full relative"}>
+          <div className='w-[10rem]'>
+            <Image
+              alt={title}
+              src={coverImage}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="50% 50%"
+            />
+          </div>
         </div>
 
         <div className="flex w-full p-4 py-8 md:px-8">
@@ -80,9 +81,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             <h1>{title}</h1>
             <p>{summary}</p>
 
-            <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
-              <a>{nym}</a>
-            </Link>
+            <p>
+              by{' '}
+              <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
+                <a>{nym}</a>
+              </Link>
+            </p>
             <hr />
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
           </div>
@@ -124,8 +128,6 @@ export async function getStaticProps({ params }: { params: any }) {
 
 export async function getStaticPaths() {
   const posts = getAllPosts()
-
-  console.log(posts)
 
   return {
     paths: posts.map((post) => {
