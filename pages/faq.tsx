@@ -1,22 +1,19 @@
-import markdownToHtml from "../utils/markdownToHtml";
-import { getSingleFile } from "../utils/md"
-import BigDumbMarkdown from "../components/BigDumbMarkdown";
+import markdownToHtml from '../utils/markdownToHtml'
+import { getSingleFile } from '../utils/md'
+import BigDumbMarkdown from '../components/BigDumbMarkdown'
 
 export default function Faq({ content }: { content: string }) {
-    return (
-        <BigDumbMarkdown content={content} />
-    )
+  return <BigDumbMarkdown content={content} />
 }
 
 export async function getStaticProps() {
+  const md = getSingleFile('docs/faq.md')
 
-    const md = getSingleFile("docs/faq.md");
+  const content = await markdownToHtml(md || '')
 
-    const content = await markdownToHtml(md || '')
-
-    return {
-        props: {
-            content
-        },
-    }
+  return {
+    props: {
+      content,
+    },
+  }
 }

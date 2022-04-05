@@ -50,8 +50,14 @@ button.selected {
 
 input[type='text'],
 input[type='number'],
-input[type='email'] {
+input[type='email'],
+input[type='textarea'],
+textarea {
   @apply border border-lightgray rounded p-2 focus:border-black;
+}
+
+input[type='textarea'] {
+  @apply resize-y;
 }
 
 input[type='radio'] {
@@ -84,4 +90,16 @@ button.pay:disabled {
 
 .credit a {
   @apply no-underline hover:underline;
+}
+
+form.apply label {
+  @apply flex flex-col gap-2;
+}
+
+form.apply label.checkbox {
+  @apply flex flex-row items-center;
+}
+
+input[type='checkbox'] {
+  @apply mr-2;
 }

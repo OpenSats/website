@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import Image from 'next/image'
 
 const Checkout: NextPage = () => {
   async function handleClick() {
-    console.log("yo");
+    console.log('yo')
   }
   return (
     <div>
@@ -23,7 +23,7 @@ const Checkout: NextPage = () => {
 
       <footer>footer</footer>
     </div>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout
