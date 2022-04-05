@@ -37,15 +37,15 @@ export default async function handler(
             orderId: project_slug,
             project_name,
             buyerName: name || 'anonymous',
-            buyerEmail: email || 'none',
+            buyerEmail: email || null,
             posData: metadata,
           },
           checkout: { redirectURL: REDIRECT },
         }
       )
-
       res.status(200).json(data)
     } catch (err) {
+      console.log(err)
       res.status(500).json({ statusCode: 500, message: (err as Error).message })
     }
   } else {

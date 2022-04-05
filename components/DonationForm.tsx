@@ -56,17 +56,29 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     }
     setBtcpayLoading(true)
     try {
-      const data = await fetchPostJSON('/api/btcpay', {
+      const payload = {
         amount,
         project_slug: projectSlug,
         project_name: projectNamePretty,
-        zaprite,
-        email,
-        name,
-      })
+        zaprite
+      }
+
+      if (email) {
+        Object.assign(payload, { email })
+      }
+
+      if (name) {
+        Object.assign(payload, { name })
+      }
+
+      console.log(payload)
+      const data = await fetchPostJSON('/api/btcpay', payload)
       if (data.checkoutLink) {
         window.location.assign(data.checkoutLink)
+      } else if (data.message) {
+        throw new Error(data.message)
       } else {
+        console.log({ data })
         throw new Error('Something went wrong with BtcPay Server checkout.')
       }
     } catch (e) {
