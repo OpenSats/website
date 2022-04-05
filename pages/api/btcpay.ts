@@ -11,7 +11,7 @@ export default async function handler(
   if (req.method === 'POST') {
     const { amount, project_name, project_slug, email, name, zaprite }: PayReq =
       req.body
-    const REDIRECT = 'localhost:3000'
+    const REDIRECT = 'http://opensats.org/thankyou'
 
     try {
       // Validate the amount that was passed from the client.
@@ -27,8 +27,7 @@ export default async function handler(
       }
 
       let data = await fetchPostJSONAuthed(
-        `${process.env.BTCPAY_URL!}stores/${
-          process.env.BTCPAY_STORE_ID
+        `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
         }/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
         {

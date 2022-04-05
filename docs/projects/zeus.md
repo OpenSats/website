@@ -6,6 +6,7 @@ website: 'https://zeusln.app/'
 coverImage: '/img/project/zeus.png'
 git: 'https://github.com/ZeusLN/zeus'
 twitter: 'ZeusLN'
+personalTwitter: 'evankaloudis'
 type: 'Wallet'
 ---
 

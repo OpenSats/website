@@ -11,7 +11,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
-const PAYMENT_SUCCESS_REDIRECT = process.env.PAYMENT_SUCCESS_REDIRECT
 
 export default async function handler(
   req: NextApiRequest,
@@ -49,7 +48,7 @@ export default async function handler(
           recipient_campaign: zaprite,
           recipient_uuid: ZAPRITE_USER_UUID,
         },
-        success_url: `${req.headers.origin}/?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${req.headers.origin}/thankyou`,
         cancel_url: `${req.headers.origin}/`,
         // We need metadata in here for some reason
         payment_intent_data: {

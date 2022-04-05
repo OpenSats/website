@@ -62,7 +62,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               helping create a better tomorrow, today.
             </p>
             <button role={'button'} onClick={openGeneralFundModal}>
-              Donate to Bitcoin
+              Donate to General Fund
             </button>
             <p>
               Are you an open source contributor?{' '}
@@ -90,17 +90,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 export default Home
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts([
-    'slug',
-    'title',
-    'summary',
-    'website',
-    'coverImage',
-    'git',
-    'twitter',
-    'nym',
-    'zaprite',
-  ])
+  const projects = getAllPosts()
 
   return {
     props: {

@@ -6,6 +6,7 @@ website: 'https://sparrowwallet.com'
 coverImage: '/img/project/sparrow.png'
 git: 'https://github.com/sparrowwallet/sparrow'
 twitter: 'SparrowWallet'
+personalTwitter: 'craigraw'
 type: 'Wallet'
 ---
 

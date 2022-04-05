@@ -24,15 +24,22 @@ const Layout: React.FC = ({ children }) => {
           <Link href="/privacy">
             <a>Privacy</a>
           </Link>
-        </div>
-        <Link href="#" passHref>
-          <div className="flex items-center hover:underline cursor-pointer">
-            <strong>Submit a bug</strong>
-            <FontAwesomeIcon
-              icon={faBug}
-              className="ml-2 w-4 h-4 cursor-pointer"
-            />
+          <div>
+            <p>
+              Need help?{' '}<a href="mailto:support@opensats.org">support@opensats.org</a>
+            </p>
           </div>
+        </div>
+        <Link href="https://github.com/opensats/website" passHref>
+          <a>
+            <div className="flex items-center hover:underline cursor-pointer">
+              <strong>Submit a bug</strong>
+              <FontAwesomeIcon
+                icon={faBug}
+                className="ml-2 w-4 h-4 cursor-pointer"
+              />
+            </div>
+          </a>
         </Link>
       </footer>
     </div>

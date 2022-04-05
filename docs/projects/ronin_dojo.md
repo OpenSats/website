@@ -1,11 +1,12 @@
 ---
 title: 'RoninDojo'
 summary: 'We help people have a feature rich bitcoin experience, maintain privacy, and thrive as a sovereign individual.'
-nym: 's2l1'
+nym: 'BTCxZelko'
 website: 'https://ronindojo.io/'
 coverImage: '/img/project/ronin_dojo.png'
 git: 'https://code.samourai.io/ronindojo/RoninDojo/'
 twitter: 'RoninDojoUI'
+personalTwitter: 'BTCxZelko'
 type: 'Privacy'
 ---
 

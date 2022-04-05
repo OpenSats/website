@@ -6,6 +6,7 @@ website: 'https://judica.org'
 coverImage: '/img/project/sapio.jpg'
 git: 'https://github.com/sapio-lang/sapio'
 twitter: 'jeremyrubin'
+personalTwitter: 'JeremyRubin'
 type: 'Smart Contracts'
 ---
 
