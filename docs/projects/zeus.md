@@ -8,6 +8,7 @@ git: 'https://github.com/ZeusLN/zeus'
 twitter: 'ZeusLN'
 personalTwitter: 'evankaloudis'
 type: 'Wallet'
+zaprite: 'WhOWcKFUiFHFMVqaBhLD'
 ---
 
 ## About this project

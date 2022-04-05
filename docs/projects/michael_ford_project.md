@@ -7,6 +7,7 @@ coverImage: '/img/project/michael_ford.png'
 git: 'https://github.com/fanquake'
 twitter: 'fanquake'
 type: 'Bitcoin Core'
+zaprite: 'RqyzktHAgocwdiS6Q0TH'
 ---
 
 ## About this project

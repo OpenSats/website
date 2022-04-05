@@ -8,6 +8,7 @@ git: 'https://github.com/sapio-lang/sapio'
 twitter: 'jeremyrubin'
 personalTwitter: 'JeremyRubin'
 type: 'Smart Contracts'
+zaprite: 'P9j4XyrCOFAgCXkHHV5s'
 ---
 
 ## About this project
