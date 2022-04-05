@@ -56,15 +56,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     <>
       <div className="flex flex-col items-center">
         <div className={"h-[15rem] w-full relative"}>
-          <div className='w-[10rem]'>
-            <Image
-              alt={title}
-              src={coverImage}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="50% 50%"
-            />
-          </div>
+          <Image
+            alt={title}
+            src={coverImage}
+            layout="fill"
+            objectFit="cover"
+            objectPosition="50% 50%"
+          />
         </div>
 
         <div className="flex w-full p-4 py-8 md:px-8">

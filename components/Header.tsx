@@ -8,7 +8,9 @@ const Header = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center">
         <div className="flex items-center w-[200px] py-4 pr-8">
           <Link href="/" passHref>
-            <Image alt="OpenSats logo" src={logo} className="cursor-pointer" />
+            <a>
+              <Image alt="OpenSats logo" src={logo} className="cursor-pointer" />
+            </a>
           </Link>
         </div>
         <nav>
