@@ -14,7 +14,7 @@ const Layout: React.FC = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:card" content="/twitter.png" key="twcard" />
         <meta name="twitter:creator" content="@OpenSats" key="twhandle" />
 
         {/* Open Graph */}
