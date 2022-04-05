@@ -12,6 +12,17 @@ const Layout: React.FC = ({ children }) => {
         <title>OpenSats</title>
         <meta name="description" content="TKTK" />
         <link rel="icon" href="/favicon.ico" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:creator" content="@OpenSats" key="twhandle" />
+
+        {/* Open Graph */}
+        <meta property="og:url" content="https://opensats.org" key="ogurl" />
+        <meta property="og:image" content="/twitter.png" key="ogimage" />
+        <meta property="og:site_name" content="OpenSats" key="ogsitename" />
+        <meta property="og:title" content="OpenSats" key="ogtitle" />
+        <meta property="og:description" content="Support contributors to Bitcoin and other free and open source projects" key="ogdesc" />
       </Head>
       <Navbar />
       <main className="flex-1 flex flex-col">{children}</main>
