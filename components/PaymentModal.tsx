@@ -1,20 +1,24 @@
-import ReactModal from "react-modal";
-import Image from "next/image";
-import waffledog from "../public/waffledog.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-import DonationForm from "./DonationForm";
-import { ProjectItem } from "../utils/types";
+import ReactModal from 'react-modal'
+import Image from 'next/image'
+import waffledog from '../public/waffledog.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClose } from '@fortawesome/free-solid-svg-icons'
+import DonationForm from './DonationForm'
+import { ProjectItem } from '../utils/types'
 
 type ModalProps = {
-  isOpen: boolean;
-  onRequestClose: () => void;
+  isOpen: boolean
+  onRequestClose: () => void
   project: ProjectItem | undefined
-};
-const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, project }) => {
+}
+const PaymentModal: React.FC<ModalProps> = ({
+  isOpen,
+  onRequestClose,
+  project,
+}) => {
   if (!project) {
     // We never see this yeah?
-    return (< div />);
+    return <div />
   }
 
   return (
@@ -24,9 +28,9 @@ const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, project })
       className="p-8 bg-white shadow-xl overflow-y-auto max-h-full sm:rounded-xl w-full sm:m-8"
       overlayClassName="inset-0 fixed bg-[rgba(0,_0,_0,_0.75)] flex items-center justify-center"
       appElement={
-        typeof window === "undefined"
+        typeof window === 'undefined'
           ? undefined
-          : document?.getElementById("root") || undefined
+          : document?.getElementById('root') || undefined
       }
     >
       <div className="flex justify-end relative -mb-12">
@@ -52,9 +56,13 @@ const PaymentModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, project })
           </div>
         </div>
       </div>
-      <DonationForm projectNamePretty={project.title} projectSlug={project.slug} zaprite={project.zaprite} />
+      <DonationForm
+        projectNamePretty={project.title}
+        projectSlug={project.slug}
+        zaprite={project.zaprite}
+      />
     </ReactModal>
-  );
-};
+  )
+}
 
-export default PaymentModal;
+export default PaymentModal

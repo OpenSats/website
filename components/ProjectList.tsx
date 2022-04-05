@@ -1,24 +1,27 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faC, faClose } from "@fortawesome/free-solid-svg-icons";
-import ProjectCard from "./ProjectCard";
-import Link from "next/link";
-import { ProjectItem } from "../utils/types";
-import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight, faC, faClose } from '@fortawesome/free-solid-svg-icons'
+import ProjectCard from './ProjectCard'
+import Link from 'next/link'
+import { ProjectItem } from '../utils/types'
+import { useEffect, useState } from 'react'
 
 type ProjectListProps = {
-  header?: string;
-  projects: ProjectItem[];
-  openPaymentModal: (project: ProjectItem) => void;
+  header?: string
+  projects: ProjectItem[]
+  openPaymentModal: (project: ProjectItem) => void
 }
-const ProjectList: React.FC<ProjectListProps> = ({ header = "Explore Projects", projects, openPaymentModal }) => {
-  const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>();
+const ProjectList: React.FC<ProjectListProps> = ({
+  header = 'Explore Projects',
+  projects,
+  openPaymentModal,
+}) => {
+  const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
     setSortedProjects(projects.sort(() => 0.5 - Math.random()))
   }, [projects])
 
   return (
-
     <section className="p-4 md:p-8 bg-light flex flex-col items-center">
       <div className="flex justify-between items-center pb-8 w-full">
         <h1>{header}</h1>
@@ -31,15 +34,15 @@ const ProjectList: React.FC<ProjectListProps> = ({ header = "Explore Projects", 
         </div>
       </div>
       <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-        {sortedProjects && sortedProjects.slice(0, 3).map((p, i) => (
-          <li key={i} className="">
-            <ProjectCard project={p} openPaymentModal={openPaymentModal} />
-          </li>
-        ))}
+        {sortedProjects &&
+          sortedProjects.slice(0, 3).map((p, i) => (
+            <li key={i} className="">
+              <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+            </li>
+          ))}
       </ul>
     </section>
-  );
-};
+  )
+}
 
-
-export default ProjectList;
+export default ProjectList

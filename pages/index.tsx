@@ -1,42 +1,43 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { useState } from "react";
-import ProjectList from "../components/ProjectList";
-import PaymentModal from "../components/PaymentModal";
-import Link from "next/link";
-import Image from "next/image";
-import unicorn from "/public/heroes/unicorn.png"
-import { getAllPosts, getPostBySlug } from "../utils/md";
-import markdownToHtml from "../utils/markdownToHtml";
-import Credits from "../components/Credits";
-import { ProjectItem } from "../utils/types";
+import type { NextPage } from 'next'
+import Head from 'next/head'
+import { useState } from 'react'
+import ProjectList from '../components/ProjectList'
+import PaymentModal from '../components/PaymentModal'
+import Link from 'next/link'
+import Image from 'next/image'
+import unicorn from '/public/heroes/unicorn.png'
+import { getAllPosts, getPostBySlug } from '../utils/md'
+import markdownToHtml from '../utils/markdownToHtml'
+import Credits from '../components/Credits'
+import { ProjectItem } from '../utils/types'
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false)
 
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>();
+  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
   function closeModal() {
-    setModalOpen(false);
+    setModalOpen(false)
   }
 
   function openPaymentModal(project: ProjectItem) {
-    console.log("opening index modal...")
-    setSelectedProject(project);
+    console.log('opening index modal...')
+    setSelectedProject(project)
     setModalOpen(true)
   }
 
   function openGeneralFundModal() {
     const generalFund: ProjectItem = {
-      slug: "general_fund",
-      nym: "OpenSats",
-      website: "https://opensats.org",
-      title: "OpenSats General Fund",
-      summary: "We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.",
-      coverImage: "/heroes/gold.png",
-      git: "opensats",
-      twitter: "opensats",
-      zaprite: ""
+      slug: 'general_fund',
+      nym: 'OpenSats',
+      website: 'https://opensats.org',
+      title: 'OpenSats General Fund',
+      summary:
+        'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
+      coverImage: '/heroes/gold.png',
+      git: 'opensats',
+      twitter: 'opensats',
+      zaprite: '',
     }
 
     openPaymentModal(generalFund)
@@ -56,34 +57,54 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               Support contributors to Bitcoin and other free and open source
               projects
             </h1>
-            <p className="text-textgray">We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.</p>
-            <button role={"button"} onClick={openGeneralFundModal}>
+            <p className="text-textgray">
+              We help you find and support open-source Bitcoin projects -
+              helping create a better tomorrow, today.
+            </p>
+            <button role={'button'} onClick={openGeneralFundModal}>
               Donate to Bitcoin
             </button>
-            <p>Are you an open source contributor? <Link href="/apply"><a>Apply for your project to be listed.</a></Link></p>
+            <p>
+              Are you an open source contributor?{' '}
+              <Link href="/apply">
+                <a>Apply for your project to be listed.</a>
+              </Link>
+            </p>
           </div>
           <div className="flex-1 flex justify-center">
-
             <Image width={388} height={388} src={unicorn} alt="Unicorn" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
         <Credits />
       </main>
-      <PaymentModal isOpen={modalOpen} onRequestClose={closeModal} project={selectedProject} />
+      <PaymentModal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        project={selectedProject}
+      />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts(['slug', 'title', 'summary', 'website', 'coverImage', 'git', 'twitter', 'nym', 'zaprite'])
+  const projects = getAllPosts([
+    'slug',
+    'title',
+    'summary',
+    'website',
+    'coverImage',
+    'git',
+    'twitter',
+    'nym',
+    'zaprite',
+  ])
 
   return {
     props: {
-      projects
+      projects,
     },
   }
 }
-

@@ -1,20 +1,24 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Image from 'next/image'
 
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { ProjectItem } from "../utils/types";
-import PaymentModal from "./PaymentModal";
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import Link from 'next/link'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { ProjectItem } from '../utils/types'
+import PaymentModal from './PaymentModal'
 
 export type ProjectCardProps = {
-  project: ProjectItem;
-  openPaymentModal: (project: ProjectItem) => void;
+  project: ProjectItem
+  openPaymentModal: (project: ProjectItem) => void
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) => {
-  const { slug, title, summary, coverImage, git, twitter, nym, zaprite } = project;
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  project,
+  openPaymentModal,
+}) => {
+  const { slug, title, summary, coverImage, git, twitter, nym, zaprite } =
+    project
 
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
@@ -31,14 +35,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) 
 
       <figcaption className="p-4 space-y-4">
         <h2>{title}</h2>
-        <p>by{" "}
+        <p>
+          by{' '}
           <Link href={git} passHref>
             <a>{nym}</a>
           </Link>
         </p>
-        <p className="prose line-clamp-3">
-          {summary}
-        </p>
+        <p className="prose line-clamp-3">{summary}</p>
         <div className="flex justify-end"></div>
         <div className="flex space-x-4">
           <Link href={git} passHref>
@@ -47,17 +50,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) 
               className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
             />
           </Link>
-          {twitter &&
+          {twitter && (
             <Link href={`https://twitter.com/${twitter}`} passHref>
               <FontAwesomeIcon
                 icon={faTwitter}
                 className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
               />
             </Link>
-          }
+          )}
         </div>
         <div className="flex space-x-4 items-center justify-center pt-4">
-          <button className="bg-black basis-1/2" onClick={() => openPaymentModal(project)}>Donate</button>
+          <button
+            className="bg-black basis-1/2"
+            onClick={() => openPaymentModal(project)}
+          >
+            Donate
+          </button>
           <div className="flex items-center justify-center basis-1/2">
             <Link href={`/projects/${slug}`} passHref>
               <a>View Details</a>
@@ -69,8 +77,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, openPaymentModal }) 
           </div>
         </div>
       </figcaption>
-    </figure >
-  );
-};
+    </figure>
+  )
+}
 
-export default ProjectCard;
+export default ProjectCard
