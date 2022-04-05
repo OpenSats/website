@@ -4,6 +4,8 @@ import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
 
+const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -21,6 +23,7 @@ export default async function handler(
 
       const metadata = {
         orderId: project_slug,
+        zaprite_campaign: zaprite,
         project_name,
         buyerName: name || 'anonymous',
         buyerEmail: email || null,
@@ -39,6 +42,8 @@ export default async function handler(
             buyerName: name || 'anonymous',
             buyerEmail: email || null,
             posData: metadata,
+            zaprite_campaign: zaprite,
+            recipient_uuid: ZAPRITE_USER_UUID,
           },
           checkout: { redirectURL: REDIRECT },
         }
