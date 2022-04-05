@@ -37,7 +37,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
       coverImage: '/heroes/gold.png',
       git: 'opensats',
       twitter: 'opensats',
-      zaprite: '',
+      zaprite: '32WbND8heqmY5wYYnIpa',
     }
 
     openPaymentModal(generalFund)

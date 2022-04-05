@@ -11,6 +11,7 @@ import { NextPage } from 'next/types'
 import { useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
+import ShareButtons from '../../components/ShareButtons'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -44,6 +45,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     content,
     nym,
     zaprite,
+    website,
     personalTwitter
   } = project
 
@@ -78,7 +80,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
           </aside>
 
           <div className={markdownStyles['markdown']}>
-            <h1>{title}</h1>
+            <Link href={website}>
+              <a className='!no-underline'>
+                <h1>{title}</h1>
+              </a>
+            </Link>
             <p>{summary}</p>
 
             <p>
@@ -87,6 +93,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
                 <a>{nym}</a>
               </Link>
             </p>
+            <ShareButtons project={project} />
             <hr />
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
           </div>
@@ -94,6 +101,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
       </div>
       <ProjectList
         projects={projects}
+        exclude={slug}
         header="You might also like..."
         openPaymentModal={openPaymentModal}
       />

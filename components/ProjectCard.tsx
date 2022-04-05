@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { ProjectItem } from '../utils/types'
 import PaymentModal from './PaymentModal'
+import ShareButtons from './ShareButtons'
 
 export type ProjectCardProps = {
   project: ProjectItem
@@ -45,22 +46,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </p>
         <p className="prose line-clamp-3">{summary}</p>
         <div className="flex justify-end"></div>
-        <div className="flex space-x-4">
-          <Link href={git} passHref>
-            <FontAwesomeIcon
-              icon={faGithub}
-              className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
-            />
-          </Link>
-          <Link href={`https://twitter.com/${twitter}`} passHref>
-            <a>
-              <FontAwesomeIcon
-                icon={faTwitter}
-                className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
-              />
-            </a>
-          </Link>
-        </div>
+
+        <ShareButtons project={project} />
         <div className="flex space-x-4 items-center justify-center pt-4">
           <button
             className="bg-black basis-1/2"

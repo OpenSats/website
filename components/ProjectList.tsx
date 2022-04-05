@@ -7,18 +7,20 @@ import { useEffect, useState } from 'react'
 
 type ProjectListProps = {
   header?: string
+  exclude?: string
   projects: ProjectItem[]
   openPaymentModal: (project: ProjectItem) => void
 }
 const ProjectList: React.FC<ProjectListProps> = ({
   header = 'Explore Projects',
+  exclude,
   projects,
   openPaymentModal,
 }) => {
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.sort(() => 0.5 - Math.random()))
+    setSortedProjects(projects.filter(p => p.slug !== exclude).sort(() => 0.5 - Math.random()))
   }, [projects])
 
   return (
