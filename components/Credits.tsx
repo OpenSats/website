@@ -10,7 +10,7 @@ const Credits = () => {
   const j9RoemPhoto = '/img/team/j9Roem.png'
   const jamesPhoto = '/img/team/james.jpg'
   const k3tanPhoto = '/img/team/k3tan.png'
-  const mattOdellPhoto = '/img/team/matt.jpg'
+  const mattOdellPhoto = 'https://pbs.twimg.com/profile_images/1421584695746338819/Z_7ZfAeP_400x400.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
   const udiPhoto = '/img/team/udi.jpg'
 
