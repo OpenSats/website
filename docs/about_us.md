@@ -10,7 +10,7 @@ We&#39;re here to help support and maintain a sustainable ecosystem of funding f
 
 - OpenSats is committed to funding Bitcoin as well as these technologies on the periphery including scaling technologies, secure communication protocols, self-custody solutions, second-layer tech, educational resources, research and design contributors, etc.
 
-Free and open source Bitcoin projects as well as related free and open source projects which help Bitcoin flourish and reach its fullest potential may apply to be listed on the Open Sats website here [submit an application.](http://opensats.org/apply
+Free and open source Bitcoin projects as well as related free and open source projects which help Bitcoin flourish and reach its fullest potential may apply to be listed on the Open Sats website here [submit an application.](http://opensats.org/apply)
 
 Bitcoin projects and free and open source contributors may also apply for grants from our general fund here [submit an application.](http://opensats.org/apply)
 
