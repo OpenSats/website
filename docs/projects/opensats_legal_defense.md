@@ -1,7 +1,7 @@
 ---
 title: 'OpenSats Legal Defense Fund'
 summary: 'The OpenSats Legal Defense Fund aims to defend open-source Bitcoin contributors from lawsuits regarding their activities in the Bitcoin and FOSS ecosystems by directing donations to fund legal fees related to these contributions.'
-coverImage: '/img/project/opensats_legal.jpeg'
+coverImage: '/img/project/opensats_logo.png'
 nym: 'OpenSats'
 twitter: 'opensats'
 website: 'https://opensats.org/'
