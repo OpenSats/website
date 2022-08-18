@@ -10,6 +10,7 @@ export type ProjectItem = {
   zaprite: string
   website: string
   personalTwitter?: string
+  raised?: string
 }
 
 export type PayReq = {
