@@ -26,7 +26,7 @@ export default async function handler(
   if (req.method === 'POST') {
     try {
       // Validate the amount that was passed from the client.
-      if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
+      if (!(amount >= MIN_AMOUNT)) {
         throw new Error('Invalid amount.')
       }
       // Create Checkout Sessions from body params.
