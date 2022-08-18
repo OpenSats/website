@@ -27,8 +27,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [btcPayLoading, setBtcpayLoading] = useState(false)
   const [fiatLoading, setFiatLoading] = useState(false)
 
-  const [tooMuch, setTooMuch] = useState(false);
-
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,19 +40,11 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   useEffect(() => {
     if (amount && typeof parseInt(amount) === 'number') {
-      if (parseInt(amount) > MAX_AMOUNT && deductable === 'yes') {
-        setTooMuch(true)
-        setReadyToPay(false)
-        return
-      } else {
-        setTooMuch(false)
-      }
       if (deductable === 'no' || (name && email)) {
         setReadyToPay(true)
       } else {
         setReadyToPay(false)
       }
-
     } else {
       setReadyToPay(false)
     }
@@ -215,11 +205,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               placeholder="Or enter custom amount"
             />
           </div>
-
-
-        </div>
-        <div>
-          {tooMuch && <h3>Donations over $5,000 are not tax deductable</h3>}
         </div>
       </section>
       <div className="flex flex-wrap items-center gap-4">

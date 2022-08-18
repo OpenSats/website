@@ -8,7 +8,6 @@ website: 'https://opensats.org/'
 git: 'https://github.com/OpenSats'
 type: 'Legal Defense'
 zaprite: 'ZOYJUVHW6RCJY5HvNvbf'
-raised: '420.69'
 ---
 
 ## About this project
