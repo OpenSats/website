@@ -46,7 +46,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     nym,
     zaprite,
     website,
-    personalTwitter
+    personalTwitter,
+    raised
   } = project
 
   if (!router.isFallback && !slug) {
@@ -70,10 +71,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
         </div>
         <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
           <aside className="p-4 bg-light rounded-xl flex lg:flex-col gap-4 min-w-[20rem] justify-between mb-8">
-            <div>
+            {raised && <div>
               <h5>Raised</h5>
-              <h4>??? BTC</h4>
+              <h4>{raised} BTC</h4>
             </div>
+            }
             <button onClick={openPaymentModal}>Donate</button>
           </aside>
 
