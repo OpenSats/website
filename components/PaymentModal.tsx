@@ -52,7 +52,7 @@ const PaymentModal: React.FC<ModalProps> = ({
           />
           <div className="flex flex-col">
             <h2 className="font-sans font-bold">{project.title}</h2>
-            <h3 className="font-sans text-textgray">Plege your support</h3>
+            <h3 className="font-sans text-textgray">Pledge your support</h3>
           </div>
         </div>
       </div>
