@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { CURRENCY, MIN_AMOUNT } from '../../config'
+import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
 
@@ -17,7 +17,7 @@ export default async function handler(
 
     try {
       // Validate the amount that was passed from the client.
-      if (!(amount >= MIN_AMOUNT)) {
+      if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
         throw new Error('Invalid amount.')
       }
 
