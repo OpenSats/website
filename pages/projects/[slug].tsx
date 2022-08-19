@@ -6,17 +6,20 @@ import markdownStyles from '../../components/markdown-styles.module.css'
 import Image from 'next/image'
 import ProjectList from '../../components/ProjectList'
 import BackToProjects from '../../components/BackToProjects'
-import { ProjectItem } from '../../utils/types'
+import { ProjectItem, Stats } from '../../utils/types'
 import { NextPage } from 'next/types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
+import { fetchPostJSON } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
   project: ProjectItem
   projects: ProjectItem[]
 }
+
+
 
 const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   const router = useRouter()
@@ -47,8 +50,39 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     zaprite,
     website,
     personalTwitter,
-    raised
   } = project
+
+  const [stats, setStats] = useState<Stats>();
+
+  function formatBtc(bitcoin: number) {
+    if (bitcoin > 0.1) {
+      return `₿ ${bitcoin.toFixed(3) || 0.00}`;
+    } else {
+      return `${Math.floor(bitcoin * 100000000).toLocaleString()} sats`
+    }
+  }
+
+  function formatUsd(dollars: number): string {
+    if (dollars == 0) {
+      return ""
+    } else if
+      (dollars / 1000 > 1) {
+      return `+ $${Math.round(dollars / 1000)}k`
+    } else {
+      return `+ $${dollars.toFixed(0)}`
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setStats(undefined);
+      const data = await fetchPostJSON('/api/info', { zaprite })
+      setStats(data);
+    }
+
+    fetchData()
+      .catch(console.error);;
+  }, [zaprite]);
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -70,13 +104,20 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
           <BackToProjects />
         </div>
         <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
-          <aside className="p-4 bg-light rounded-xl flex lg:flex-col gap-4 min-w-[20rem] justify-between mb-8">
-            {raised && <div>
-              <h5>Raised</h5>
-              <h4>{raised} BTC</h4>
+          <aside className="p-4 bg-light rounded-xl flex lg:flex-col lg:items-start gap-4 min-w-[20rem] justify-between items-center mb-8">
+            <button onClick={openPaymentModal}>Donate</button>
+            {stats &&
+              <div>
+                <h5>Raised</h5>
+                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total)}`}</h4>
+              </div>
+            }
+
+            {stats && <div>
+              <h5>Donations</h5>
+              <h4>{stats.btc.donations + stats.usd.donations}</h4>
             </div>
             }
-            <button onClick={openPaymentModal}>Donate</button>
           </aside>
 
           <div className={markdownStyles['markdown']}>
@@ -91,14 +132,14 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               by{' '}
               <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
                 <a>{nym}</a>
-              </Link>
-            </p>
+              </Link >
+            </p >
             <ShareButtons project={project} />
             <hr />
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
-          </div>
-        </article>
-      </div>
+          </div >
+        </article >
+      </div >
       <ProjectList
         projects={projects}
         exclude={slug}
