@@ -15,7 +15,7 @@ We distribute grants to a wide variety of contributor types (developers, designe
 
 ## How much of my donation goes towards individuals and projects supported by Open Sats?
 
-- All donations to the **general fund** and specific, mission-aligned FOSS projects are 100% passed through to Open Sats grant recipients. We try our best to find donor matching partners to ensure that no transaction fees are withheld regardless of payment method (thanks to our generous donors) \&lt;—- link donor page
+- All donations to the **general fund** and specific, mission-aligned FOSS projects are 100% passed through to Open Sats grant recipients. We try our best to find donor matching partners to ensure that no transaction fees are withheld regardless of payment method (thanks to our generous donors)
 
 ## Do you distribute grants in bitcoin or fiat?
 
