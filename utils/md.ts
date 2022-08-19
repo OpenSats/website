@@ -15,7 +15,6 @@ const FIELDS = ['title',
   'zaprite',
   'twitter',
   'personalTwitter',
-  'raised'
 ]
 
 export function getPostSlugs() {
