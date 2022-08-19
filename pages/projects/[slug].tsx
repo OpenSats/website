@@ -75,6 +75,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setStats(undefined);
       const data = await fetchPostJSON('/api/info', { zaprite })
       setStats(data);
     }
