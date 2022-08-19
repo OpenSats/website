@@ -10,7 +10,6 @@ export type ProjectItem = {
   zaprite: string
   website: string
   personalTwitter?: string
-  raised?: string
 }
 
 export type PayReq = {
@@ -20,4 +19,19 @@ export type PayReq = {
   email?: string
   name?: string
   zaprite: string
+}
+
+export type InfoReq = {
+  zaprite: string
+}
+
+export type Stats = {
+  usd: {
+    donations: number
+    total: number
+  }
+  btc: {
+    donations: number
+    total: number
+  }
 }
