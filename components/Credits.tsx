@@ -9,10 +9,8 @@ const Credits = () => {
   const elainePhoto = '/img/team/elaine.png'
   const j9RoemPhoto = '/img/team/j9Roem.png'
   const jamesPhoto = '/img/team/james.jpg'
-  const k3tanPhoto = '/img/team/k3tan.png'
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
-  const udiPhoto = '/img/team/udi.jpg'
 
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
@@ -43,7 +41,6 @@ const Credits = () => {
     },
     { image: elainePhoto, nym: 'Elaine', link: 'https://twitter.com/eiaine' },
     { image: jamesPhoto, nym: 'James', link: 'https://twitter.com/jamesob' },
-    { image: k3tanPhoto, nym: 'K3tan', link: 'https://twitter.com/_k3tan' },
     {
       image: mattOdellPhoto,
       nym: 'Matt Odell',
@@ -54,7 +51,6 @@ const Credits = () => {
       nym: 'Niftynei',
       link: 'https://twitter.com/niftynei',
     },
-    { image: udiPhoto, nym: 'Udi', link: 'https://twitter.com/udiwertheimer' },
     {
       image: abitcoinpersonPhoto,
       nym: 'Ben Price',
