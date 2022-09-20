@@ -22,7 +22,7 @@ OpenSats will accept bitcoin and fiat donations. All fiat donations will be conv
 
 No donations will be used by the organization unless the donor SPECIFICALLY donates to our operational fund, which can be done using this [link](/?donate=ops). These funds will be used to cover our general operational expenses like legal, accounting, and payment processing fees, as well as to pay the salary of our managing director. So far these operational expenses have been covered by a few generous donors and we hope to continue to find donors to cover these costs so we can ensure 100% passthrough of platform donations to Bitcoin and free and open source contributors.
 
-Literally nobody in the organization makes any money from donor funds which aren&#39;t specifically earmarked for OpenSats&#39; operations... we promise! OpenSats is committed to being transparent about incoming and outgoing project related donations as well as any operational donors as we move forward.
+Nobody in the organization makes any money from donor funds which aren&#39;t specifically earmarked for OpenSats&#39; operations. OpenSats is committed to being transparent about incoming and outgoing project related donations as well as any operational donors as we move forward.
 
 - Projects will be listed on Open Sats website upon a simple (5-4) majority approval by the board. The board will consider donor suggestions for project specific donations, however, the board will retain full control and final authority over where funds are allocated.
 
