@@ -1,18 +1,47 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
 import unicorn from '/public/heroes/unicorn.png'
-import { getAllPosts, getPostBySlug } from '../utils/md'
-import markdownToHtml from '../utils/markdownToHtml'
+import { getAllPosts } from '../utils/md'
 import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
+import { useRouter } from 'next/router'
+
+// These shouldn't be swept up in the regular list so we hardcode them
+const generalFund: ProjectItem = {
+  slug: 'general_fund',
+  nym: 'OpenSats',
+  website: 'https://opensats.org',
+  title: 'OpenSats General Fund',
+  summary:
+    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
+  coverImage: '/heroes/gold.png',
+  git: 'opensats',
+  twitter: 'opensats',
+  zaprite: '32WbND8heqmY5wYYnIpa',
+}
+
+const opsFund: ProjectItem = {
+  slug: 'general_fund',
+  nym: 'OpenSats',
+  website: 'https://opensats.org',
+  title: 'OpenSats Operations Budget',
+  summary:
+    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
+  coverImage: '/heroes/gold.png',
+  git: 'opensats',
+  twitter: 'opensats',
+  zaprite: 'lZo1wcsJ0SQb58XfGC4e',
+}
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
+
+  const router = useRouter()
 
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
@@ -21,27 +50,23 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   }
 
   function openPaymentModal(project: ProjectItem) {
-    console.log('opening index modal...')
     setSelectedProject(project)
     setModalOpen(true)
   }
 
   function openGeneralFundModal() {
-    const generalFund: ProjectItem = {
-      slug: 'general_fund',
-      nym: 'OpenSats',
-      website: 'https://opensats.org',
-      title: 'OpenSats General Fund',
-      summary:
-        'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-      coverImage: '/heroes/gold.png',
-      git: 'opensats',
-      twitter: 'opensats',
-      zaprite: '32WbND8heqmY5wYYnIpa',
-    }
-
     openPaymentModal(generalFund)
   }
+
+  useEffect(() => {
+    if (router.isReady) {
+      console.log(router.query);
+      if (router.query.donate === "ops") {
+        openPaymentModal(opsFund)
+      }
+
+    }
+  }, [router.isReady])
 
   return (
     <>
