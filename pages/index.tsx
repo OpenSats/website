@@ -26,7 +26,7 @@ const generalFund: ProjectItem = {
 }
 
 const opsFund: ProjectItem = {
-  slug: 'general_fund',
+  slug: 'operations_budget',
   nym: 'OpenSats',
   website: 'https://opensats.org',
   title: 'OpenSats Operations Budget',
