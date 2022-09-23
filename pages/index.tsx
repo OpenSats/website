@@ -58,6 +58,10 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     openPaymentModal(generalFund)
   }
 
+  function openopsFundModal() {
+    openPaymentModal(opsFund)
+  }
+  
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query);
@@ -90,6 +94,10 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               Donate to General Fund
             </button>
             <p>
+              <button role={'button'} onClick={openopsFundModal}>
+              Donate to Operations Budget
+            </button>
+            <p>  
               Are you an open source contributor?{' '}
               <Link href="/apply">
                 <a>Apply for your project to be listed.</a>
