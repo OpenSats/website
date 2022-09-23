@@ -92,6 +92,9 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             </p>
             <button role={'button'} onClick={openGeneralFundModal}>
               Donate to General Fund
+            </button> {'    '}
+            <button role={'button'} onClick={openopsFundModal}>
+              Donate to Operations Budget
             </button>
             <p>  
               Are you an open source contributor?{' '}
@@ -100,7 +103,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               </Link>
             </p>
             <button role={'button'} onClick={openopsFundModal}>
-              Donate to the OpenSats Operations Budget
+              Donate to Operations Budget
             </button>
           </div>
           <div className="flex-1 flex justify-center">
