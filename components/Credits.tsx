@@ -11,6 +11,7 @@ const Credits = () => {
   const jamesPhoto = '/img/team/james.jpg'
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
+  const h4rprPhoto = '/img/team/h4rpr.png'
 
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
@@ -58,6 +59,13 @@ const Credits = () => {
     },
   ]
 
+  const managing_director: CreditItemProps[] = [
+    { image: h4rprPhoto,
+      nym: 'Harper',
+      link: 'https://twitter.com/harptheflarp',
+    },
+  ]
+  
   const supporters: CreditItemProps[] = [
     { link: 'https://bottlepay.com/', image: bottlepayLogo, nym: 'Bottlepay' },
     {
@@ -139,6 +147,13 @@ const Credits = () => {
         ))}
       </div>
 
+      <h1 className="text-white my-4">Managing Director</h1>
+      <div className="credit container flex flex-wrap items-center justify-center mb-8">
+        {managing_director.map((m, i) => (
+          <CreditItem key={i} image={m.image} link={m.link} nym={m.nym} />
+        ))}
+      </div>
+      
       <h1 className="text-white my-4">Supporters</h1>
       <div className="credit container flex flex-wrap items-center justify-center">
         {supporters.map((s, i) => (
