@@ -93,15 +93,15 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             <button role={'button'} onClick={openGeneralFundModal}>
               Donate to General Fund
             </button>
-            <button role={'button'} onClick={openopsFundModal}>
-              Donate to Operations Budget
-            </button>
             <p>  
               Are you an open source contributor?{' '}
               <Link href="/apply">
                 <a>Apply for your project to be listed.</a>
               </Link>
             </p>
+            <button role={'button'} onClick={openopsFundModal}>
+              Donate to the OpenSats Operations Budget
+            </button>
           </div>
           <div className="flex-1 flex justify-center">
             <Image width={388} height={388} src={unicorn} alt="Unicorn" />
