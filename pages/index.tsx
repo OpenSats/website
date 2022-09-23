@@ -93,7 +93,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             <button role={'button'} onClick={openGeneralFundModal}>
               Donate to General Fund
             </button>
-            <p>
             <button role={'button'} onClick={openopsFundModal}>
               Donate to Operations Budget
             </button>
