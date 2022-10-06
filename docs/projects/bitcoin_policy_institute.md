@@ -20,19 +20,31 @@ BPI was instrumental in responding to the Biden Executive Order on Digital Asset
 As part of BPI’s fundraising collaboration with Swan Bitcoin, they are aiming to raise $100k from the pleb community to help support academic research on Bitcoin.
 
 Campaign Stretch Goals:
+
 $10,000 - Research Grant to Study Proof of Work's Environmental Impact
+
 $20,000 - Research Grant to Study Bitcoin's Long-Term Global Impact
+
 $25,000 - Funding Up to 10 Academic Journal Submissions for BPI Fellows
+
 $45,000 - “Buying Out” a BPI Fellow’s Courseload (i.e. Paying for a BPI Fellow to take the semester off of teaching and focus on bitcoin research full-time)
+
 $55,000 - Research Grant to Study Sustainability in Bitcoin Mining
+
 $75,000 - “Buying Out” a SECOND BPI Fellow’s Courseload
+
 $80,000 - Funding 10 More Academic Journal Submissions for BPI Fellows
+
 $100,000 - “Buying Out” a THIRD BPI Fellow’s Courseload
 
 But academic research is only part of the battle. In order to effect change at scale, BPI needs to go toe to toe with the big players in Washington. Their ultimate fundraising goal for the calendar year is $1,000,000.
 
 Fundraising Goals:
+
 $250,000 - Funds BPI Operations, Research, and Advocacy in DC for 3 Months
+
 $500,000 - Funds BPI Operations, Research, and Advocacy in DC for 6 Months
+
 $750,000 - Funds BPI Operations, Research, and Advocacy in DC for 9 Months
+
 $1,000,000 - Funds BPI Operations, Research, and Advocacy in DC for 12 Months
