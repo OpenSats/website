@@ -127,7 +127,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               name="deductable"
               value="yes"
               onChange={radioHandler}
-              defaultChecked={true}
             />
             Yes
           </label>
@@ -138,6 +137,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductable"
               onChange={radioHandler}
+              defaultChecked={true}
             />
             No
           </label>
