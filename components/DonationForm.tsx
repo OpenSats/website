@@ -9,12 +9,10 @@ import Spinner from './Spinner'
 type DonationStepsProps = {
   projectNamePretty: string
   projectSlug: string
-  zaprite: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   projectSlug,
-  zaprite,
 }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -60,8 +58,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       const payload = {
         amount,
         project_slug: projectSlug,
-        project_name: projectNamePretty,
-        zaprite
+        project_name: projectNamePretty
       }
 
       if (email) {
@@ -99,7 +96,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         amount,
         project_slug: projectSlug,
         project_name: projectNamePretty,
-        zaprite,
         email,
         name,
       })

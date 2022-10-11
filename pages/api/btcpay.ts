@@ -4,14 +4,13 @@ import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
 
-const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_name, project_slug, email, name, zaprite }: PayReq =
+    const { amount, project_name, project_slug, email, name }: PayReq =
       req.body
     const REDIRECT = 'http://opensats.org/thankyou'
 
@@ -23,7 +22,6 @@ export default async function handler(
 
       const metadata = {
         orderId: project_slug,
-        zaprite_campaign: zaprite,
         project_name,
         buyerName: name || 'anonymous',
         buyerEmail: email || null,
@@ -34,16 +32,14 @@ export default async function handler(
         }/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
         {
-          amount,
-          currency: CURRENCY,
+          amount: amount,
+          currency: "USD",
           metadata: {
             orderId: project_slug,
             project_name,
             buyerName: name || 'anonymous',
             buyerEmail: email || null,
             posData: metadata,
-            zaprite_campaign: zaprite,
-            recipient_uuid: ZAPRITE_USER_UUID,
           },
           checkout: { redirectURL: REDIRECT },
         }

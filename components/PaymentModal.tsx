@@ -59,7 +59,6 @@ const PaymentModal: React.FC<ModalProps> = ({
       <DonationForm
         projectNamePretty={project.title}
         projectSlug={project.slug}
-        zaprite={project.zaprite}
       />
     </ReactModal>
   )

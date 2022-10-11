@@ -59,6 +59,29 @@ export async function fetchPostJSONAuthed(
     })
     return await response.json() // parses JSON response into native JavaScript objects
   } catch (err) {
+	  if (err instanceof Error) {
+      throw new Error(err.message)
+    }
+    throw err
+  }
+}
+
+export async function fetchGetJSONAuthed() {
+  try {
+    const url = "https://btcpay.magicgrants.org/api/v1/stores/<STORE_ID_HERE>/invoices"
+    const auth = "token <API_KEY_HERE>"
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: auth,
+      },
+    })
+    const data = await response.json()
+    const total = await data.reduce((subtotal, item) => subtotal + Number(item.amount),0)
+    const donations = await data.reduce((subtotal, item) => subtotal + 1,0)
+    return await {total: total, donations: donations}
+  } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message)
     }

@@ -12,7 +12,6 @@ const FIELDS = ['title',
   'coverImage',
   'nym',
   'website',
-  'zaprite',
   'twitter',
   'personalTwitter',
 ]

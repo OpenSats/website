@@ -22,7 +22,6 @@ const generalFund: ProjectItem = {
   coverImage: '/heroes/gold.png',
   git: 'opensats',
   twitter: 'opensats',
-  zaprite: '32WbND8heqmY5wYYnIpa',
 }
 
 const opsFund: ProjectItem = {
@@ -35,7 +34,6 @@ const opsFund: ProjectItem = {
   coverImage: '/heroes/gold.png',
   git: 'opensats',
   twitter: 'opensats',
-  zaprite: 'lZo1wcsJ0SQb58XfGC4e',
 }
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {

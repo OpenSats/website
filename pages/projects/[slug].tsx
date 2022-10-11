@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
-import { fetchPostJSON } from '../../utils/api-helpers'
+import { fetchPostJSON, fetchGetJSONAuthed } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -47,7 +47,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     twitter,
     content,
     nym,
-    zaprite,
     website,
     personalTwitter,
   } = project
@@ -76,13 +75,14 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
   useEffect(() => {
     const fetchData = async () => {
       setStats(undefined);
-      const data = await fetchPostJSON('/api/info', { zaprite })
+      const data = await fetchGetJSONAuthed()
       setStats(data);
     }
 
     fetchData()
       .catch(console.error);;
-  }, [zaprite]);
+
+  }, []);
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -109,13 +109,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             {stats &&
               <div>
                 <h5>Raised</h5>
-                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total)}`}</h4>
+                <h4>{stats.total}</h4>
               </div>
             }
 
             {stats && <div>
               <h5>Donations</h5>
-              <h4>{stats.btc.donations + stats.usd.donations}</h4>
+              <h4>{stats.donations}</h4>
             </div>
             }
           </aside>

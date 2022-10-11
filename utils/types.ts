@@ -7,7 +7,6 @@ export type ProjectItem = {
   coverImage: string
   git: string
   twitter?: string
-  zaprite: string
   website: string
   personalTwitter?: string
 }
@@ -18,20 +17,9 @@ export type PayReq = {
   project_name: string
   email?: string
   name?: string
-  zaprite: string
-}
-
-export type InfoReq = {
-  zaprite: string
 }
 
 export type Stats = {
-  usd: {
-    donations: number
-    total: number
-  }
-  btc: {
-    donations: number
-    total: number
-  }
+  total: number
+  donations: number
 }
