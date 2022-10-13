@@ -68,8 +68,8 @@ export async function fetchPostJSONAuthed(
 
 export async function fetchGetJSONAuthed() {
   try {
-    const url = "https://btcpay.magicgrants.org/api/v1/stores/<STORE_ID_HERE>/invoices"
-    const auth = "token <API_KEY_HERE>"
+    const url = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`
+    const auth = `token ${process.env.BTCPAY_API_KEY}`    
     const response = await fetch(url, {
       method: 'GET',
       headers: {
