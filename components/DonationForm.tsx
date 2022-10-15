@@ -1,4 +1,4 @@
-import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { faMonero } from '@fortawesome/free-brands-svg-icons'
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
@@ -17,7 +17,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const [deductable, setDeductable] = useState('yes')
+  const [deductible, setDeductible] = useState('no')
   const [amount, setAmount] = useState('')
 
   const [readyToPay, setReadyToPay] = useState(false)
@@ -28,7 +28,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDeductable(event.target.value)
+    setDeductible(event.target.value)
   }
 
   function handleFiatAmountClick(e: React.MouseEvent, value: string) {
@@ -38,7 +38,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   useEffect(() => {
     if (amount && typeof parseInt(amount) === 'number') {
-      if (deductable === 'no' || (name && email)) {
+      if (deductible === 'no' || (name && email)) {
         setReadyToPay(true)
       } else {
         setReadyToPay(false)
@@ -46,7 +46,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     } else {
       setReadyToPay(false)
     }
-  }, [deductable, amount, email, name])
+  }, [deductible, amount, email, name])
 
   async function handleBtcPay() {
     const validity = formRef.current?.checkValidity()
@@ -118,54 +118,54 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
-        <h3>Do you want this donation as tax deductable?</h3>
+        <h3>Do you want this donation to be tax deductible (USA only)?</h3>
         <div className="flex space-x-4 pb-4">
           <label>
             <input
               type="radio"
-              id="yes"
-              name="deductable"
-              value="yes"
-              onChange={radioHandler}
-            />
-            Yes
-          </label>
-          <label>
-            <input
-              type="radio"
               id="no"
+              name="deductible"
               value="no"
-              name="deductable"
               onChange={radioHandler}
               defaultChecked={true}
             />
             No
+          </label>
+          <label>
+            <input
+              type="radio"
+              id="yes"
+              value="yes"
+              name="deductible"
+              onChange={radioHandler}
+            />
+            Yes
           </label>
         </div>
 
         <h3>
           Name{' '}
           <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
+            {deductible === 'yes' ? '(required)' : '(optional)'}
           </span>
         </h3>
         <input
           type="text"
-          placeholder={'Satoshi Nakamoto'}
-          required={deductable === 'yes'}
+          placeholder={'Nicolas van Saberhagen'}
+          required={deductible === 'yes'}
           onChange={(e) => setName(e.target.value)}
           className="mb-4"
         ></input>
         <h3>
           Email{' '}
           <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
+            {deductible === 'yes' ? '(required)' : '(optional)'}
           </span>
         </h3>
         <input
           type="email"
-          placeholder={`satoshin@gmx.com`}
-          required={deductable === 'yes'}
+          placeholder={`nicolas@cryptonote.org`}
+          required={deductible === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
       </section>
@@ -214,11 +214,11 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             <Spinner />
           ) : (
             <FontAwesomeIcon
-              icon={faBitcoin}
+              icon={faMonero}
               className="text-primary h-8 w-8"
             />
           )}
-          <span className="whitespace-nowrap">Donate with Bitcoin</span>
+          <span className="whitespace-nowrap">Donate with Monero or BTC</span>
         </button>
         <button
           name="stripe"

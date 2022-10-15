@@ -1,5 +1,3 @@
-import dotenv from 'dotenv'
-dotenv.config()
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'

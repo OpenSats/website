@@ -20,6 +20,19 @@ export type PayReq = {
 }
 
 export type Stats = {
-  total: number
-  donations: number
+  xmr: {
+    numdonations: number
+    totaldonationsinfiat: number
+    totaldonations: number
+  }
+  btc: {
+    numdonations: number
+    totaldonationsinfiat: number
+    totaldonations: number
+  }
+  usd: {
+    numdonations: number
+    totaldonationsinfiat: number
+    totaldonations: number
+  }
 }

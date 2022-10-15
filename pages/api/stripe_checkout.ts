@@ -5,6 +5,7 @@ import { formatAmountForStripe } from '../../utils/stripe-helpers'
 
 import Stripe from 'stripe'
 import { PayReq } from '../../utils/types'
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: '2020-08-27',
@@ -14,7 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { amount, project_name, project_slug, email, name, zaprite }: PayReq =
+  const { amount, project_name, project_slug, email, name }: PayReq =
     req.body
 
 

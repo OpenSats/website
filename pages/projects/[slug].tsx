@@ -12,16 +12,17 @@ import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
-import { fetchPostJSON, fetchGetJSONAuthed } from '../../utils/api-helpers'
+import { fetchPostJSON, fetchGetJSONAuthed, fetchGetJSONAuthedStripe } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
   project: ProjectItem
   projects: ProjectItem[]
+  stats: Stats
 }
 
 
 
-const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
+const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats }) => {
   const router = useRouter()
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -51,7 +52,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     personalTwitter,
   } = project
 
-  const [stats, setStats] = useState<Stats>();
 
   function formatBtc(bitcoin: number) {
     if (bitcoin > 0.1) {
@@ -72,17 +72,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     }
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setStats(undefined);
-      const data = await fetchGetJSONAuthed()
-      setStats(data);
-    }
-
-    fetchData()
-      .catch(console.error);;
-
-  }, []);
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -109,13 +98,19 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             {stats &&
               <div>
                 <h5>Raised</h5>
-                <h4>{stats.total}</h4>
+                <h4>{`${formatUsd(stats.xmr.totaldonationsinfiat + stats.btc.totaldonationsinfiat + stats.usd.totaldonationsinfiat)}`}</h4>
+                <h6>{stats.xmr.totaldonations} XMR</h6>
+                <h6>{stats.btc.totaldonations} BTC</h6>
+                <h6>{`${formatUsd(stats.usd.totaldonations)}`} Fiat</h6>
               </div>
             }
 
             {stats && <div>
               <h5>Donations</h5>
-              <h4>{stats.donations}</h4>
+              <h4>{stats.xmr.numdonations + stats.btc.numdonations + stats.usd.numdonations}</h4>
+              <h6>{stats.xmr.numdonations} in XMR</h6>
+              <h6>{stats.btc.numdonations} in BTC</h6>
+              <h6>{stats.usd.numdonations} in Fiat</h6>
             </div>
             }
           </aside>
@@ -157,12 +152,18 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
 
 export default Project
 
-export async function getStaticProps({ params }: { params: any }) {
+export async function getServerSideProps({ params }: { params: any }) {
   const post = getPostBySlug(params.slug)
 
   const projects = getAllPosts()
 
   const content = await markdownToHtml(post.content || '')
+
+  const xmr = await fetchGetJSONAuthed()
+  const btc = await fetchGetJSONAuthed()
+  const usd = await fetchGetJSONAuthedStripe()
+
+  const stats = { xmr, btc, usd }
 
   return {
     props: {
@@ -171,22 +172,9 @@ export async function getStaticProps({ params }: { params: any }) {
         content,
       },
       projects,
+      stats,
     },
   }
 }
 
-export async function getStaticPaths() {
-  const posts = getAllPosts()
 
-  return {
-    paths: posts.map((post) => {
-      return {
-        params: {
-          project: post,
-          slug: post.slug,
-        },
-      }
-    }),
-    fallback: false,
-  }
-}

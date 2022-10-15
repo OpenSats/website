@@ -69,7 +69,7 @@ export async function fetchPostJSONAuthed(
 export async function fetchGetJSONAuthed() {
   try {
     const url = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`
-    const auth = `token ${process.env.BTCPAY_API_KEY}`    
+    const auth = `token ${process.env.BTCPAY_API_KEY}`
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -78,9 +78,33 @@ export async function fetchGetJSONAuthed() {
       },
     })
     const data = await response.json()
-    const total = await data.reduce((subtotal, item) => subtotal + Number(item.amount),0)
-    const donations = await data.reduce((subtotal, item) => subtotal + 1,0)
-    return await {total: total, donations: donations}
+    const total = await data.reduce((subtotal: number, item: any) => subtotal + Number(item.amount),0)
+    const donations = await data.reduce((subtotal: number, item: any) => subtotal + 1,0)
+    return await { numdonations: donations, totaldonationsinfiat: total, totaldonations: total }
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(err.message)
+    }
+    throw err
+  }
+}
+
+export async function fetchGetJSONAuthedStripe() {
+  try {
+    const url = "https://api.stripe.com/v1/charges"
+    const auth = `Bearer ${process.env.STRIPE_SECRET_KEY}`
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: auth,
+      },
+    })
+    const data = await response.json()
+    const dataext = data.data
+    const total = await dataext.reduce((subtotal: number, item: any) => subtotal + Number(item.amount)/100,0)
+    const donations = await dataext.reduce((subtotal: number, item: any) => subtotal + 1,0)
+    return await { numdonations: donations, totaldonationsinfiat: total, totaldonations: total }
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message)
