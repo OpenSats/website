@@ -159,8 +159,10 @@ export async function getServerSideProps({ params }: { params: any }) {
 
   const content = await markdownToHtml(post.content || '')
 
-  const xmr = await fetchGetJSONAuthed()
-  const btc = await fetchGetJSONAuthed()
+  const crypto = await fetchGetJSONAuthedBTCPay()
+
+  const xmr = await crypto.xmr
+  const btc = await crypto.btc
   const usd = await fetchGetJSONAuthedStripe()
 
   const stats = { xmr, btc, usd }

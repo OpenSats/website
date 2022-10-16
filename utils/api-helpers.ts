@@ -66,7 +66,7 @@ export async function fetchPostJSONAuthed(
   }
 }
 
-export async function fetchGetJSONAuthed() {
+export async function fetchGetJSONAuthedBTCPay() {
   try {
     const url = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`
     const auth = `token ${process.env.BTCPAY_API_KEY}`
@@ -78,9 +78,47 @@ export async function fetchGetJSONAuthed() {
       },
     })
     const data = await response.json()
-    const total = await data.reduce((subtotal: number, item: any) => subtotal + Number(item.amount),0)
-    const donations = await data.reduce((subtotal: number, item: any) => subtotal + 1,0)
-    return await { numdonations: donations, totaldonationsinfiat: total, totaldonations: total }
+    let numdonationsxmr = 0
+    let numdonationsbtc = 0
+    let totaldonationsxmr = 0
+    let totaldonationsbtc = 0
+    let totaldonationsinfiatxmr = 0
+    let totaldonationsinfiatbtc = 0
+    for(let i=0;i<data.length;i++){
+      const id = data[i].id
+      const urliter = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices/${id}/payment-methods`
+      const authiter = `token ${process.env.BTCPAY_API_KEY}`
+      const responseiter = await fetch(urliter, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authiter,
+        },
+      })
+      const dataiter = await responseiter.json()
+      if (dataiter[0].cryptoCode == 'XMR') {
+        numdonationsxmr += 1
+        totaldonationsxmr += Number(dataiter[0].amount)
+        totaldonationsinfiatxmr += Number(dataiter[0].amount) * Number(dataiter[0].rate)
+      }
+      if (dataiter[0].cryptoCode == 'BTC') {
+        numdonationsbtc += 1
+        totaldonationsbtc += Number(dataiter[0].amount)
+        totaldonationsinfiatbtc += Number(dataiter[0].amount) * Number(dataiter[0].rate)
+      }
+    }
+    return await {
+      xmr: {
+        numdonations: numdonationsxmr,
+        totaldonationsinfiat: totaldonationsinfiatxmr,
+        totaldonations: totaldonationsxmr,
+      },
+      btc: {
+        numdonations: numdonationsbtc,
+        totaldonationsinfiat: totaldonationsinfiatbtc,
+        totaldonations: totaldonationsbtc,
+      }
+     }
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message)
