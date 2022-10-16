@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
-import { fetchPostJSON, fetchGetJSONAuthed, fetchGetJSONAuthedStripe } from '../../utils/api-helpers'
+import { fetchPostJSON, fetchGetJSONAuthedBTCPay, fetchGetJSONAuthedStripe } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
   project: ProjectItem
