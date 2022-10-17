@@ -90,7 +90,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
         </div>
 
         <div className="flex w-full p-4 py-8 md:px-8">
-          <BackToProjects />
         </div>
         <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
           <aside className="p-4 bg-light rounded-xl flex lg:flex-col lg:items-start gap-4 min-w-[20rem] justify-between items-center mb-8">
@@ -135,12 +134,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
           </div >
         </article >
       </div >
-      <ProjectList
-        projects={projects}
-        exclude={slug}
-        header="You might also like..."
-        openPaymentModal={openPaymentModal}
-      />
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}

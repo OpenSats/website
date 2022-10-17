@@ -29,31 +29,7 @@ const Layout: React.FC = ({ children }) => {
       <Navbar />
       <main className="flex-1 flex flex-col">{children}</main>
       <footer className="flex justify-between p-4 md:p-8 bg-light">
-        <div className="flex flex-col">
-          <strong>© Open Sats Initiative, 2022</strong>
-          <Link href="/terms">
-            <a>Terms</a>
-          </Link>
-          <Link href="/privacy">
-            <a>Privacy</a>
-          </Link>
-          <div>
-            <p>
-              Need help?{' '}<a href="mailto:support@opensats.org">support@opensats.org</a>
-            </p>
-          </div>
-        </div>
-        <Link href="https://github.com/opensats/website" passHref>
-          <a>
-            <div className="flex items-center hover:underline cursor-pointer">
-              <strong>Submit a bug</strong>
-              <FontAwesomeIcon
-                icon={faBug}
-                className="ml-2 w-4 h-4 cursor-pointer"
-              />
-            </div>
-          </a>
-        </Link>
+       <strong>© Open Sats Initiative and MAGIC Grants, 2022</strong>
       </footer>
     </div>
   )
