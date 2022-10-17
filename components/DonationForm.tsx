@@ -151,7 +151,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </h3>
         <input
           type="text"
-          placeholder={'Nicolas van Saberhagen'}
+          placeholder={'MAGIC Monero Fund'}
           required={deductible === 'yes'}
           onChange={(e) => setName(e.target.value)}
           className="mb-4"
@@ -164,7 +164,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </h3>
         <input
           type="email"
-          placeholder={`nicolas@cryptonote.org`}
+          placeholder={`MoneroFund@MagicGrants.org`}
           required={deductible === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
