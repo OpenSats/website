@@ -50,8 +50,8 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             </p>
             <p>  
               Want to receive funding for your work?{' '}
-              <Link href="https://github.com/MAGICGrants/Monero-Fund/blob/main/Research-Grant-RFP.md">
-                <a>Apply for your project to be listed.</a>
+              <Link href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=%5BGrant%5D+Title">
+                <a>Apply for a grant or to have your project listed.</a>
               </Link>
             </p>
           </div>
