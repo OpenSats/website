@@ -7,7 +7,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import unicorn from '/public/heroes/unicorn.png'
 import { getAllPosts } from '../utils/md'
-import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
 
@@ -106,7 +105,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-        <Credits />
       </main>
       <PaymentModal
         isOpen={modalOpen}
