@@ -5,36 +5,10 @@ import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import unicorn from '/public/heroes/unicorn.png'
+import statistical from '/public/img/project/Statistical-Monero-Logo.gif'
 import { getAllPosts } from '../utils/md'
-import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
-
-// These shouldn't be swept up in the regular list so we hardcode them
-const generalFund: ProjectItem = {
-  slug: 'general_fund',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats General Fund',
-  summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
-}
-
-const opsFund: ProjectItem = {
-  slug: 'operations_budget',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats Operations Budget',
-  summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
-}
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -52,21 +26,9 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     setModalOpen(true)
   }
 
-  function openGeneralFundModal() {
-    openPaymentModal(generalFund)
-  }
-
-  function openopsFundModal() {
-    openPaymentModal(opsFund)
-  }
-  
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query);
-      if (router.query.donate === "ops") {
-        openPaymentModal(opsFund)
-      }
-
     }
   }, [router.isReady])
 
@@ -81,32 +43,23 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
         <section className="flex py-8 items-center">
           <div className="p-4 md:p-8 space-y-8 basis-2/3 max-w-4xl">
             <h1>
-              Support contributors to Bitcoin and other free and open source
-              projects
+              Support contributors to Monero
             </h1>
             <p className="text-textgray">
-              We help you find and support open-source Bitcoin projects -
-              helping create a better tomorrow, today.
+              Donations are tax-deductible in the USA as MAGIC is a 501(c)(3) charity
             </p>
-            <button role={'button'} onClick={openGeneralFundModal}>
-              Donate to General Fund
-            </button> {'                        '}
-            <button role={'button'} onClick={openopsFundModal}>
-              Donate to Operations Budget
-            </button>
             <p>  
-              Are you an open source contributor?{' '}
-              <Link href="/apply">
-                <a>Apply for your project to be listed.</a>
+              Want to receive funding for your work?{' '}
+              <Link href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=%5BGrant%5D+Title">
+                <a>Apply for a grant or to have your project listed.</a>
               </Link>
             </p>
           </div>
           <div className="flex-1 flex justify-center">
-            <Image width={388} height={388} src={unicorn} alt="Unicorn" />
+            <Image width={388} height={388} src={statistical} alt="Monero Statistical GIF" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-        <Credits />
       </main>
       <PaymentModal
         isOpen={modalOpen}
