@@ -2,4 +2,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 PRs welcome!
 
-Thanks for supporting OpenSats.
+Thanks for supporting Monero Fund.
