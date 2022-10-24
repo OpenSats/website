@@ -24,6 +24,9 @@ module.exports = {
       fontFamily: {
         mono: ['Source Code Pro', ...defaultTheme.fontFamily.sans],
       },
+      height: {
+        '196': '50rem',
+      }
     },
   },
   plugins: [
