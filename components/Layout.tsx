@@ -9,7 +9,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
-        <title>Monero Fund</title>
+        <title>MAGIC Monero Fund</title>
         <meta name="description" content="TKTK" />
         <link rel="icon" href="/favicon.ico" />
 
@@ -20,11 +20,11 @@ const Layout: React.FC = ({ children }) => {
         {/* Open Graph */}
         <meta property="og:url" content="https://monerofund.org/" key="ogurl" />
         <meta property="og:image" content="https://opensats.vercel.app/twitter.png" key="ogimage" />
-        <meta property="og:site_name" content="Monero Fund" key="ogsitename" />
-        <meta property="og:title" content="Monero Fund" key="ogtitle" />
+        <meta property="og:site_name" content="MAGIC Monero Fund" key="ogsitename" />
+        <meta property="og:title" content="MAGIC Monero Fund" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:description" content="Support the Monero Fund and open source research for the Monero Project." key="ogdesc" />
+        <meta property="og:description" content="Support the MAGIC Monero Fund and open source research for the Monero Project." key="ogdesc" />
       </Head>
       <Navbar />
       <main className="flex-1 flex flex-col">{children}</main>
