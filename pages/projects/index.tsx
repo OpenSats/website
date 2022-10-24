@@ -30,7 +30,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   return (
     <>
       <Head>
-        <title>OpenSats | Projects</title>
+        <title>MAGIC Monero Fund | Projects</title>
       </Head>
       <section className="p-4 md:p-8 flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">

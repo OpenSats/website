@@ -27,7 +27,7 @@ export default async function handler(
       const msg = {
         to: TO_ADDRESS, // Change to your recipient
         from: FROM_ADDRESS, // Change to your verified sender
-        subject: `OpenSats Application for ${req.body.project_name}`,
+        subject: `MAGIC Monero Fund Application for ${req.body.project_name}`,
         html: `${body}`,
       }
 
