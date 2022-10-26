@@ -1,7 +1,7 @@
 ---
-title: 'BTCPayServer'
+title: 'BTCPay Server'
 summary: 'Free, open-source & self-hosted bitcoin payment gateway that allows self-sovereign individuals and businesses to accept bitcoin payments online or in person without any fees.'
-nym: 'Nicolas Dorier'
+nym: 'BTCPay Server Foundation'
 website: 'https://btcpayserver.org/'
 coverImage: '/img/project/btcpayserver.png'
 git: 'https://github.com/btcpayserver/btcpayserver'
