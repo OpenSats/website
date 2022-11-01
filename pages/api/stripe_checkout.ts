@@ -32,7 +32,7 @@ export default async function handler(
         payment_method_types: ['card'],
         line_items: [
           {
-            name: `OpenSats donation: ${project_name}`,
+            name: `MAGIC Grants donation: ${project_name}`,
             amount: formatAmountForStripe(amount, CURRENCY),
             currency: CURRENCY,
             quantity: 1,
