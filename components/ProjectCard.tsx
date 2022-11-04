@@ -42,8 +42,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <h2>{title}</h2>
         <p>
           by{' '}
-          <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
-            <a>{nym}</a>
+          <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref legacyBehavior>
+            <a className="projectlist">{nym}</a>
           </Link>
         </p>
         <p className="prose line-clamp-3">{summary}</p>
@@ -58,8 +58,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             Donate
           </button>
           <div className="flex items-center justify-center basis-1/2">
-            <Link href={`/projects/${slug}`} passHref>
-              <a>View Details</a>
+            <Link href={`/projects/${slug}`} passHref legacyBehavior>
+              <a className="projectlist">View Details</a>
             </Link>
             <FontAwesomeIcon
               icon={faArrowRight}

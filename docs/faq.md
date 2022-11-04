@@ -1,66 +1,46 @@
 # FAQ
 
-## What are you doing at OpenSats?
+## What is the mission statement of the Monero Fund?
 
-- We are a 501(c)(3) public charity which aims to fund Bitcoin-related free and open source projects and associated education and research initiatives.
+- We are a 501(c)(3) public charity funding Monero related open source research and associated educational initiatives.
 
-We want to see contributors to Bitcoin Core and FOSS (free and open source) tools supported by a sustainable ecosystem and consistent funding, so we set up a platform to do just that. Donors can come to the OpenSats web platform and either recommend gifts to specific project areas or contribute to our general fund.
-
-We distribute grants to a wide variety of contributor types (developers, designers, researchers, educators, reviewers...), but only to those working on Bitcoin and open-source projects that will improve public access to Bitcoin infrastructure.
 
 ## How are funds distributed?
 
-- Donations to the **general fund** will be distributed quarterly by our board. We evaluate and assess applications to make sure any grants are awarded to high impact projects in the Bitcoin space.
-- We also maintain a list of mission-focused, open-source projects that have been vetted by our board members for continuous funding. Donors may recommend their gifts be directed to these specific projects; Open Sats will consider these recommendations but will retain sole discretion as to how funds are distributed.
+- Donations to the **general fund** are dispersed by our committee as needs arise. For projects listed on our site, we review and approve submissions carefully to ensure donated funds are positively impacting the Monero ecosystem. To hold researchers accountable, payment schedules are aligned with approved project milestones.
 
-## How much of my donation goes towards individuals and projects supported by Open Sats?
 
-- All donations to the **general fund** and specific, mission-aligned FOSS projects are 100% passed through to Open Sats grant recipients. We try our best to find donor matching partners to ensure that no transaction fees are withheld regardless of payment method (thanks to our generous donors)
+## How much of my donation goes towards individuals and projects supported by the Monero Fund?
 
-## Do you distribute grants in bitcoin or fiat?
+- All donations to specific projects are delivered to the recipient in 100% full.
 
-- We only distribute grants in bitcoin.
-- We accept donations in fiat currency, but they are transferred to our exchange partner and used to purchase bitcoin. The bitcoin is then held and eventually distributed to project and grant recipients.
 
-## How do you collect bitcoin donations?
+## Do you distribute grants in Monero, Bitcoin or fiat?
 
-- We use BTCPay Server to collect bitcoin on chain and lightning donations. This ensures that we pay no processing fees and your funds are stretched even farther.
+- We distribute grants in the currency of the researchers choosing. We prefer to pay in XMR but will gladly distribute funds in BTC or USD.
+
+## How do you collect Monero donations?
+
+- We use BTCPay Server to receive all cryptocurrency donations. For fiat donations, we leverage Stripe Payments.
+
 
 ## How can I communicate with you?
 
-- Funding opportunities are announced once per year, depending on funding availability. Projects that align with our mission statement are encouraged to apply. Board members evaluate each application based on technical merit, potential impact, and the team&#39;s ability to execute.
-- All projects should be free and open source and related to Bitcoin or an ancillary technology (like Tor, etc.) which helps Bitcoin use. Your project must align with the mission of our charity to be eligible for donations.
+- You can reach us via [Discord](https://discord.gg/yEuhhdtbHN), Matrix or [email](info@magicgrants.org).
+- Applications are reviewed as submitted. Research approval depends on several factors, including funding availability. Projects that align with our mission statement are encouraged to apply. Committee members evaluate each application based on technical merit, potential impact, and the team&#39;s ability to execute.
+- All projects should be free and open source and related to Monero or an ancillary technology (like Tor, etc.) which helps Monero use. Your project must align with the mission of our charity to be eligible for donations.
 
-## How do I become listed on the site?
 
-- Any project that is free and open source and is aligned with the OpenSats mission are free to [submit an application](http://opensats.org/apply) for their project to be listed on the [OpenSats website](http://opensats.org/projects)
-- All applications which fulfill the criteria will be evaluated by the Board. Upon board approval and collection of necessary supplemental data, approved projects will be listed on the OpenSats project portal. Donors will be able to contribute funds and recommend that the OpenSats&#39; board considers their donations be allocated towards these pre-approved, mission-aligned projects.
-- If you are helping Bitcoin and FOSS, please [submit an application](http://opensats.org/apply) (LINK) to be listed on our site.
+## How can I submit a project for fundraising?
 
-## How did you choose the board?
+- Any project that is free and open source and is aligned with the Monero Fund mission are free to [submit an application](/apply) for their project to be listed on the [Monero Fund](/projects) project page.
+- All applications which fulfill the criteria will be evaluated by the Monero Fund Committee. Upon approval, projects will be listed on the MoneroFund project portal. Donors will be able to contribute funds directly to the these pre-approved, mission-aligned projects.
+- If you are helping Monero and FOSS, please [submit an application](/apply) to be listed on our site.
 
-- We didn&#39;t want any one person or small group to have control of the decision making process of OpenSats, so we created a transparent, public-facing, and accountable nine person board to make all organizational decisions.
-- OpenSats&#39; board members have deep-seated values and will stop at nothing to support and ensure the survival of free and open source technology like Bitcoin.
-- The board is composed of well-known and respected public-facing individuals who will carry the torch and be held accountable for their choices. We encourage community feedback, dialogue, and constructive criticism. We can only promise to do our best to ensure that all funds go to deserving projects which support OpenSats&#39; mission of creating a sustainable and consistent ecosystem of funding for Bitcoin and Bitcoin-related FOSS contributors.
-- We are committed to being 100% passthrough for all donations made on our platform. To this day our operational, legal, and payment processing fees have been graciously and privately funded.
-- Please consider donating to the OpenSats operational fund (LINK) which will help cover our basic operational expenses (which we have kept to a minimum) so we can ensure that all donations intended for Bitcoin and FOSS projects remains 100% passthrough.
-
-## Tell me more about your board. How does it work?
-
-- We have nine board members and we vote by majority. All standard decisions (like which new projects are added to the website or which projects will receive grants allocated from the general fund) are made by simple majority (5-4), while board-related changes will require 6-3 majority. New members to the board will be announced publicly.
-
-## Are you really 100% passthrough?
-
-- Yes, really. No one on the board makes any money. We pay our lawyers and have some basic costs like email services and operational tools, but they aren&#39;t paid from your donations: our costs are covered by generous donors who support our organization&#39;s operations.
-  - John Pfeffer, Greg Foss, Ten31, and The Bitcoin Company have contributed to our legal and operational overhead or contributed technical development resources so OpenSats can stay 100% passthrough for all general fund and project specific donations.
-  - Silvergate bank has provided fee free banking services
-  - NODL Cloud is providing our website hosting
-  - BTCPay Server is a FOSS tool we use to accept bitcoin with no fees.
-  - River provides our bitcoin exchange services with no added fees.
-  - Ledger and The Bitcoin Company both help cover payment processing fees associated with debit and credit card donations as well as some transaction fees related to our on-chain and off-chain movement of funds.
 
 ## Are my donations tax deductible?
 
-- Yes, Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization, All gifts and donations are tax-deductible to the full extent of the law.
-- If you would like to receive a tax deduction, we may need to collect supplementary information like your name and email for required recordkeeping purposes.
-- OpenSats relies on donors like you to help promote and support a sustainable ecosystem of contributors to Bitcoin and related free and open source projects. We greatly appreciate your contributions.
+- Yes, MAGIC Monero Fund is a 501(c)(3) non-profit organization, all gifts and donations are tax-deductible in the USA.
+- If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping.
+
+The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.

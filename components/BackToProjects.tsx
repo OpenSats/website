@@ -9,7 +9,7 @@ const BackToProjects = () => {
         icon={faArrowLeft}
         className="mr-1 w-4 h-4 text-primary"
       />
-      <Link href="/projects">
+      <Link href="/projects" legacyBehavior>
         <a className="text-primary">Back to projects</a>
       </Link>
     </div>

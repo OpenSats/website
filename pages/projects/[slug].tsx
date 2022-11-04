@@ -115,7 +115,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
           </aside>
 
           <div className={markdownStyles['markdown']}>
-            <Link href={website}>
+            <Link href={website} legacyBehavior>
               <a className='!no-underline'>
                 <h1>{title}</h1>
               </a>
@@ -124,7 +124,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
 
             <p>
               by{' '}
-              <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
+              <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref legacyBehavior>
                 <a>{nym}</a>
               </Link >
             </p >

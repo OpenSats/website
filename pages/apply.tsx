@@ -32,84 +32,88 @@ export default function Apply() {
       >
         {/* {errors.exampleRequired && <span>This field is required</span>} */}
         <div className="prose">
-          <h1>Application for OpenSats Project Page and/or General Fund Grant</h1>
+          <h1>Application for Monero Fund Project Listing or General Fund Grant</h1>
           <p>
-            Thanks for your interest in OpenSats!
+            Thanks for your interest in the Monero Fund!
           </p>
           <p>
             We&#39;re incredibly grateful to contributors like you working to
-            support Bitcoin Core and other free and open source projects.
+            support Monero, Bitcoin and other free and open source projects.
           </p>
           <p>
-            Because Open Sats is a 501(c)(3) non-profit, all projects we list on our website must be vetted by our
-            board of directors to ensure that they help us further our mission
-            of supporting contributors to Bitcoin and related free and open source projects.
+            The MAGIC Monero Fund is offering a grant program to support actionable Monero research, 
+            especially research relating to privacy, security, user experience, and efficiency. 
+            Proposals can be related to the Monero protocol directly, or they can be related to other 
+            areas of the Monero ecosystem.
           </p>
           <p>
-            Additionally, OpenSats must support specific PROJECTS which help to
-            further our charitable mission. As such, if you are an individual
-            contributor, please be sure that you list a SPECIFIC PROJECT you are
-            working on.{' '}
+            To complete your submission, please prepare and attach a research plan for your project. 
+            The plan should be 3-5 pages (not counting citations, any images, and biographical sketch) and include the following:
+            {/* <ul>
+              <li>The research question you seek to answer, and how the Monero Project benefits from the research.</li>
+              <li>A literature review of existing work and how your proposal improves upon it. </li>
+              <li>Any preliminary work you have already completed.  </li>
+              <li>Description of the plan to carry out the research. </li>
+              <li>A plan to work with Monero&apos;s developers and/or researchers to integrate the results of the research into Monero&apos;s protocol or ecosystem.  </li>
+              <li>A budget, likely consisting mostly of labor costs for the researcher(s). This should include the desired payment schedule, which should be no more frequent than monthly. Any additional budgetary item such as equipment should be included as well. Specify the desired form of payment, which can be cryptocurrency or fiat currency.  </li>
+              <li><i>OPTIONAL:</i> A biographical sketch such as a resume or CV. Alternatively, a list of contributions to open source projects.</li>
+            </ul> */}
           </p>
+          <h2>Computing Resources Available </h2>
           <p>
-            The information collected below will be used in order to vet your
-            project. If approved, OpenSats will create a project page on
-            our website (opensats.org/projects) where site-visitors can learn more about your project
-            and donate if they choose to. Your project will be listed for one
-            year. After one year, you will be prompted to re-send your
-            application should you wish to be listed again.{' '}
+            Computing and data storage resources can be made available to applicants 
+            depending on research requirements, resource availability, and vetting by a third party. 
+            These resources include a research computing server with a 64-thread Threadripper CPU, 256 GB RAM, 
+            2TB SSD, and 12TB RAID1 HDD.
           </p>
+          <h2>Proposal Evaluation Criteria</h2>
           <p>
-            OpenSats also distributes grants from a general fund and you may also choose to apply for a grant below.
+            Submitted proposals will be evaluated by the committee based on the following criteria:  
+            {/* <ul>
+              <li><b>Impact:</b> The proposal should have a clear impact on the Monero Project.</li>
+              <li><b>Originality:</b> The proposal should be original and not a rehash of existing work.</li>
+              <li><b>Feasibility:</b> The proposal should be feasible to complete within the proposed time frame.</li>
+              <li><b>Quality:</b> The proposal should be well-written and well-organized.</li>
+              <li><b>Relevance:</b> The proposal should be relevant to the Monero Project.</li>        
+            </ul> */}
           </p>
-          <p>Criteria: </p>
+          <h2 id="Eligibility">Eligibility</h2>
           <p>
-            Bitcoin: We prioritize projects that will have a direct impact on
-            the utility or adoption of Bitcoin. We will consider all projects
-            but prefer projects that are not readily funded and which have an
-            obvious benefit to the Bitcoin community and ecosystem. Potential
-            projects include Bitcoin Core contributions, scientific/security
-            research, code review, design/UX improvements, etc.
+            All qualified researchers are eligible to apply, regardless of educational attainment or occupation. 
+            However, as a nonprofit organization registered under U.S. tax laws, MAGIC Grants is required to comply 
+            with certain laws when disbursing funds to grant recipients.  
+            Grant recipients must complete a Due Diligence checklist, 
+            which are the last two pages of <a href="https://magicgrants.org/funds/MAGIC%20Fund%20Grant%20Disbursement%20Process%20and%20Requirements.pdf">this document</a>.  
+            This includes the collection of your ID and tax information. We will conduct sanctions checks.  
           </p>
+          <h2>Vulnerability Research</h2>
           <p>
-            Free and Open Source: OpenSats supports free and open-source
-            software, tools, and contributors which complement Bitcoin and help Bitcoin reach it&apos;s fullest potential. Potential
-            areas of interest include secure messaging, merchant acceptance
-            tools, layer two protocols, etc. Source code and documents resulting
-            from funded projects must be made publicly available for access,
-            edit, and redistribution free of charge and without restrictions.
+            If your proposal seek to uncover weaknesses in the privacy and/or security features of 
+            Monero as it exists today, then the Committee will require that you share any significant 
+            weaknesses with the Committee (and any critical vulnerabilities with <a href="https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md">Monero&apos;s official Vulnerability Response Process</a>  90 days before publishing the research so that action can be taken to mitigate the vulnerabilities.
           </p>
+          <h2>How to Submit a proposal</h2>
           <p>
-            Education and Mentorship: Funded contributors and projects should be
-            prepared to share their experience and expertise with the greater
-            community. We prefer developers who actively engage in mentorship,
-            and help introduce Bitcoin software development to newcomers.
+            To submit a proposal, please complete the form below or create an issue on <a href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=[Grant+Title]">Github</a>.  
+            Applicants are free to use their legal name or a pseudonym at this step, 
+            although note the <a href="#Eligibility"><b>Eligibility</b></a> section. 
           </p>
-          <p>
-            If your project is selected to be listed, we will reach out with any
-            additional information necessary to ensure you are able to receive
-            donation payouts. This may include tax related information depending
-            on your location and/or bitcoin addresses in order to receive
-            donation payouts from Open Sats.
-          </p>
-          <p>Best,</p>
-          <p>The Open Sats Team</p>
           <hr />
         </div>
         <label className="checkbox">
           <input type="checkbox" {...register('general_fund')} />
-          Apply to receive a grant from the OpenSats General Fund
+          Apply to receive a grant from the Magic Monero Fund.
         </label>
 
         <label className="checkbox">
           <input type="checkbox" {...register('explore_page')} />
-          Apply for my project to be listed on the OpenSats Explore Page
+          Apply for project to be listed on the Monero Fund Donation Page.
         </label>
 
         <label>
           Project Name *
           <small>
-            The name of the project to be listed on the OpenSats website
+            The name of the project to be listed for fundraising
           </small>
           <input
             type="text"
@@ -141,7 +145,7 @@ export default function Apply() {
           </small>
           <small>
             These could include github username, twitter username, LinkedIn,
-            bitcoinhackers, other social media handles, emails, phone
+            reddit handle, other social media handles, emails, phone
             numbers, usernames, etc.
           </small>
           <textarea {...register('other_contact')} />
@@ -149,7 +153,7 @@ export default function Apply() {
         <label>
           Short Project Description *
           <small>
-            This will be listed on the explore projects page of the OpenSats
+            This will be listed on the explore projects page of the Monero Fund
             website. 2-3 sentences.
           </small>
           <textarea {...register('short_description', { required: true })} />
@@ -157,7 +161,7 @@ export default function Apply() {
         <label>
           Long Project Description
           <small>
-            This will be listed on your personal project page of the OpenSats
+            This will be listed on your personal project page of the Monero Fund
             website. It can be longer and go into detail about your project.
           </small>
           <textarea {...register('long_description')} />
@@ -181,8 +185,7 @@ export default function Apply() {
         <label>
           Potential Impact *
           <small>
-            Why is this project important to Bitcoin or the broader free and
-            open source community?
+            Why is this project important to the Monero community?
           </small>
           <textarea {...register('potential_impact', { required: true })} />
         </label>
@@ -197,7 +200,7 @@ export default function Apply() {
             project.
           </small>
           <small>
-            [Bitcoin Core, Layer Two Protocol (eg. Lightning Network), Security
+            [Monero, Layer Two Protocol (eg. Lightning Network), Security
             or Protocol Research, Code Review, Design / User Experience, Other
             Free and Open Source Project (eg. Tor), Other]
           </small>
@@ -215,8 +218,7 @@ export default function Apply() {
         </label>
         <label>
           If you&#39;re applying for a grant from the general fund, please
-          submit a proposed budget around how much funding you are requesting
-          and how it will be used
+          submit a proposed budget for the requested amount and how it will be used.
           <input type="text" {...register('proposed_budget')} />
         </label>
         <label>
@@ -225,22 +227,22 @@ export default function Apply() {
         </label>
         <label>
           Please include any social media or common community communication
-          platforms like Twitter, Telegram, Keybase, Discord, etc.
+          platforms like Twitter, Matrix, Telegram, Keybase, Discord, etc.
           <textarea {...register('social_media')} />
         </label>
         <label>
           Applicant Bios
           <small>
-            Please list any contributions to other open source or
-            Bitcoin-related projects.
+            Please list any contributions to Monero or
+            other open source projects.
           </small>
           <textarea {...register('bios')} />
         </label>
         <label>
           References *
           <small>
-            Please list any references from the Bitcoin community or open source
-            space that we could contact for more info on you or your project
+            Please list any references from the Monero or open source
+            community that we could contact for more info on you or your project
           </small>
           <textarea {...register('references', { required: true })} />
         </label>
@@ -264,9 +266,8 @@ export default function Apply() {
         </button>
 
         <p>
-          After submitting your application, please send images of your project
-          to <a href="mailto:support@opensats.org">support@opensats.org</a> for
-          inclusion on your project page.
+          After submitting your application, please allow our team 2 weeks to review your application.
+          Email us at <a href="mailto:monerofund@magicgrants.org">monerofund@magicgrants.org</a> if you have any questions.
         </p>
       </form>
     </div>

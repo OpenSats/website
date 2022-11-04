@@ -36,6 +36,15 @@ a {
   @apply text-textgray underline underline-offset-2 hover:no-underline;
 }
 
+.projectlist {
+  color: rgb(242,95,19);
+  @apply hover:no-underline no-underline;
+}
+
+a:hover {
+  color: black !important;
+}
+
 p {
   @apply text-textgray;
 }
@@ -65,7 +74,7 @@ input[type='radio'] {
 }
 
 nav li a {
-  @apply text-black no-underline hover:underline;
+  @apply text-black no-underline ;
 }
 
 form h3 {
@@ -102,4 +111,16 @@ form.apply label.checkbox {
 
 input[type='checkbox'] {
   @apply mr-2;
+}
+
+.color-nav{
+  background-color: rgb(242,95,19);
+}
+
+.custom-link{
+  @apply no-underline;
+}
+
+.color-me-monero{
+  color: rgb(242,95,19);
 }

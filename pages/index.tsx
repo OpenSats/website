@@ -5,10 +5,24 @@ import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import statistical from '/public/img/project/Statistical-Monero-Logo.gif'
+import magiclogo from '/public/img/crystalball.jpg'
+
 import { getAllPosts } from '../utils/md'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
+
+// These shouldn't be swept up in the regular list so we hardcode them
+const generalFund: ProjectItem = {
+  slug: 'general_fund',
+  nym: 'MagicMonero',
+  website: 'https://monerofund.org',
+  title: 'MAGIC Monero General Fund',
+  summary:
+    'Support contributors to Monero',
+  coverImage: '/img/crystalball.jpg',
+  git: 'magicgrants',
+  twitter: 'magicgrants',
+}
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -26,6 +40,10 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     setModalOpen(true)
   }
 
+  function openGeneralFundModal() {
+    openPaymentModal(generalFund)
+  }
+
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query);
@@ -35,28 +53,32 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   return (
     <>
       <Head>
-        <title>OpenSats</title>
+        <title>Monero Fund</title>
         <meta name="description" content="TKTK" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <section className="flex py-8 items-center">
-          <div className="p-4 md:p-8 space-y-8 basis-2/3 max-w-4xl">
+        {/* <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script> */}
+        <section className="flex flex-col sm:flex-row">
+          <div className="flex-auto p-4 md:p-8 space-y-8 sm:order-first">
             <h1>
-              Support contributors to Monero
+              Support the Monero Fund and open source research for the Monero Project.
             </h1>
             <p className="text-textgray">
               Donations are tax-deductible in the USA as MAGIC is a 501(c)(3) charity
             </p>
+            <button role={'button'} onClick={openGeneralFundModal}>
+              Donate to Monero Committee General Fund
+            </button> 
             <p>  
-              Want to receive funding for your work?{' '}
-              <Link href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=%5BGrant%5D+Title">
-                <a>Apply for a grant or to have your project listed.</a>
+              Want to receive funding for your work? {' '}
+              <Link href="/apply" legacyBehavior >
+                <a className="custom-link">Apply for a Monero Research Grant!</a>
               </Link>
             </p>
           </div>
-          <div className="flex-1 flex justify-center">
-            <Image width={388} height={388} src={statistical} alt="Monero Statistical GIF" />
+          <div className="order-first flex-auto  ">
+            <Image className="img-fluid"src={magiclogo} alt="magiclogo" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
