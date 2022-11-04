@@ -1,29 +1,24 @@
-# About Us
+# MAGIC Monero Fund Request for Research Proposals
 
-We&#39;re here to help support and maintain a sustainable ecosystem of funding for free and open source projects and contributors, especially Bitcoin related projects and projects which help Bitcoin flourish.
+## Mission  
 
-- For Bitcoin and other free and open source software to thrive, we believe it takes contributors from a variety of backgrounds and industry verticals.
+The MAGIC Monero Fund is offering a grant program to support actionable Monero research, especially research relating to privacy, security, user experience, and efficiency. Proposals can be related to the Monero protocol directly, or they can be related to other areas of the Monero ecosystem.  
 
-- OpenSats will fund software developers, but also designers, reviewers, researchers, educators, and others who support these free and open source tools.
+## Target Research Areas
 
-- Bitcoin relies on many complementary technologies to succeed and reach its fullest potential.
+We are interested in Monero's [open research questions](https://github.com/monero-project/research-lab/issues/94), along with the following:
 
-- OpenSats is committed to funding Bitcoin as well as these technologies on the periphery including scaling technologies, secure communication protocols, self-custody solutions, second-layer tech, educational resources, research and design contributors, etc.
+- Security proofs around Monero's existing constructions
+- Arithmetic-circuit-based membership proofs, specifically ones without a trusted setup based on battle-tested cryptographic assumptions
 
-Free and open source Bitcoin projects as well as related free and open source projects which help Bitcoin flourish and reach its fullest potential may apply to be listed on the Open Sats website here [submit an application.](http://opensats.org/apply)
+While the above topics are especially encouraged, the Fund is open to funding other topics as well.
 
-Bitcoin projects and free and open source contributors may also apply for grants from our general fund here [submit an application.](http://opensats.org/apply)
+The proposal's chance to be approved will be increased if it also helps support one or more of the additional mission areas of the MAGIC Monero Fund: Development, Security (including audits); Critical Infrastructure; Community Building and Community Infrastructure; Interoperability; Feature Enhancements; Efficiency Improvements; Educational Materials.  
 
-We think there&#39;s a major free rider problem in the free and open source contributor space and hope that funding those who give back will improve the tech and talent in the space long term. Our platform aims to connect donors to free and open source contributors by enabling anyone to explore our catalog of board reviewed and vetted projects and suggest donations go to the projects of their choice... or to a general fund which will distribute grants on a quarterly basis to qualifying and vetted grant applicants.
+## Funding Amount  
 
-OpenSats is committed to providing a platform with no fees and 100% passthrough of all donations to projects and the general fund made via our platform.
+The MAGIC Monero Fund anticipates funding requests of the equivalent of 5,000 to 20,000 USD at this time.  
 
-OpenSats will accept bitcoin and fiat donations. All fiat donations will be converted to bitcoin and all grants will given to FOSS projects and grant recipients in bitcoin. Our banking, exchange, and donor partners have allowed us to ensure that we give every cent or sat donated to free and open source contributors.
+## Deadline  
 
-No donations will be used by the organization unless the donor SPECIFICALLY donates to our operational fund, which can be done using this [link](/?donate=ops). These funds will be used to cover our general operational expenses like legal, accounting, and payment processing fees, as well as to pay the salary of our managing director. So far these operational expenses have been covered by a few generous donors and we hope to continue to find donors to cover these costs so we can ensure 100% passthrough of platform donations to Bitcoin and free and open source contributors.
-
-Nobody in the organization makes any money from donor funds which aren&#39;t specifically earmarked for OpenSats&#39; operations. OpenSats is committed to being transparent about incoming and outgoing project related donations as well as any operational donors as we move forward.
-
-- Projects will be listed on Open Sats website upon a simple (5-4) majority approval by the board. The board will consider donor suggestions for project specific donations, however, the board will retain full control and final authority over where funds are allocated.
-
-- Grants allocated from the general fund will be determined by a simple (5-4) majority approval by the board.
+The MAGIC Monero Fund accepts applications on a rolling basis. Applications will be notified of the committee's vote on approval within three weeks of submission except in extraordinary circumstances.  
