@@ -28,7 +28,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
       <div className="flex justify-between items-center pb-8 w-full">
         <h1>{header}</h1>
         <div className="flex items-center">
-          <Link href="/projects">View All</Link>
+          <Link href="/projects" className="projectlist">View All</Link>
           <FontAwesomeIcon
             icon={faArrowRight}
             className="ml-1 w-4 h-4 text-textgray cursor-pointer"

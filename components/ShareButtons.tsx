@@ -8,24 +8,24 @@ const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
     const { git, twitter, website } = project;
     return (
         <div className="flex space-x-4">
-            <Link href={git} passHref>
-                <a>
+            <Link href={git} passHref legacyBehavior>
+                <a className="projectlist">
                     <FontAwesomeIcon
                         icon={faGithub}
                         className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
                     />
                 </a>
             </Link>
-            <Link href={`https://twitter.com/${twitter}`} passHref>
-                <a>
+            <Link href={`https://twitter.com/${twitter}`} passHref legacyBehavior>
+                <a className="projectlist"> 
                     <FontAwesomeIcon
                         icon={faTwitter}
                         className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
                     />
                 </a>
             </Link>
-            {website && <Link href={website} passHref>
-                <a>
+            {website && <Link href={website} passHref legacyBehavior>
+                <a className="projectlist">
                     <FontAwesomeIcon
                         icon={faLink}
                         className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"

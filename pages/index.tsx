@@ -5,7 +5,7 @@ import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import unicorn from '/public/heroes/unicorn.png'
+import magiclogo from '/public/img/crystalball.jpg'
 import { getAllPosts } from '../utils/md'
 import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
@@ -14,26 +14,14 @@ import { useRouter } from 'next/router'
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
   slug: 'general_fund',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats General Fund',
+  nym: 'MagicMonero',
+  website: 'https://monerofund.org',
+  title: 'MAGIC Monero General Fund',
   summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
-}
-
-const opsFund: ProjectItem = {
-  slug: 'operations_budget',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats Operations Budget',
-  summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
+    'Support contributors to Monero',
+  coverImage: '/img/crystalball.jpg',
+  git: 'magicgrants',
+  twitter: 'magicgrants',
 }
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
@@ -56,16 +44,16 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     openPaymentModal(generalFund)
   }
 
-  function openopsFundModal() {
-    openPaymentModal(opsFund)
-  }
+  // function openopsFundModal() {
+  //   openPaymentModal(opsFund)
+  // }
   
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query);
-      if (router.query.donate === "ops") {
-        openPaymentModal(opsFund)
-      }
+      // if (router.query.donate === "ops") {
+      //   openPaymentModal(opsFund)
+      // }
 
     }
   }, [router.isReady])
@@ -73,40 +61,36 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   return (
     <>
       <Head>
-        <title>OpenSats</title>
+        <title>Monero Fund</title>
         <meta name="description" content="TKTK" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <section className="flex py-8 items-center">
-          <div className="p-4 md:p-8 space-y-8 basis-2/3 max-w-4xl">
+        {/* <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script> */}
+        <section className="flex flex-col sm:flex-row">
+          <div className="flex-auto p-4 md:p-8 space-y-8 sm:order-first">
             <h1>
-              Support contributors to Bitcoin and other free and open source
-              projects
+              Support the Monero Fund and open source research for the Monero Project.
             </h1>
             <p className="text-textgray">
-              We help you find and support open-source Bitcoin projects -
-              helping create a better tomorrow, today.
+              Donations are tax-deductible in the USA as MAGIC is a 501(c)(3) charity
             </p>
             <button role={'button'} onClick={openGeneralFundModal}>
-              Donate to General Fund
-            </button> {'                        '}
-            <button role={'button'} onClick={openopsFundModal}>
-              Donate to Operations Budget
-            </button>
+              Donate to Monero Committee General Fund
+            </button> 
             <p>  
-              Are you an open source contributor?{' '}
-              <Link href="/apply">
-                <a>Apply for your project to be listed.</a>
+              Want to receive funding for your work? {' '}
+              <Link href="/apply" legacyBehavior >
+                <a className="custom-link">Apply for a Monero Research Grant!</a>
               </Link>
             </p>
           </div>
-          <div className="flex-1 flex justify-center">
-            <Image width={388} height={388} src={unicorn} alt="Unicorn" />
+          <div className="order-first flex-auto  ">
+            <Image className="img-fluid"src={magiclogo} alt="magiclogo" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-        <Credits />
+        {/* <Credits /> */}
       </main>
       <PaymentModal
         isOpen={modalOpen}
