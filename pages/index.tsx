@@ -6,8 +6,8 @@ import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
 import magiclogo from '/public/img/crystalball.jpg'
+
 import { getAllPosts } from '../utils/md'
-import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
 
@@ -44,17 +44,9 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     openPaymentModal(generalFund)
   }
 
-  // function openopsFundModal() {
-  //   openPaymentModal(opsFund)
-  // }
-  
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query);
-      // if (router.query.donate === "ops") {
-      //   openPaymentModal(opsFund)
-      // }
-
     }
   }, [router.isReady])
 
@@ -90,7 +82,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-        {/* <Credits /> */}
       </main>
       <PaymentModal
         isOpen={modalOpen}

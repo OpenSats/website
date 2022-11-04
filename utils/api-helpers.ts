@@ -96,15 +96,15 @@ export async function fetchGetJSONAuthedBTCPay() {
         },
       })
       const dataiter = await responseiter.json()
-      if (dataiter[0].cryptoCode == 'XMR') {
+      if (dataiter[1].cryptoCode == 'XMR' & dataiter[1].totalPaid > 0) {
         numdonationsxmr += 1
-        totaldonationsxmr += Number(dataiter[0].amount)
-        totaldonationsinfiatxmr += Number(dataiter[0].amount) * Number(dataiter[0].rate)
+        totaldonationsxmr += Number(dataiter[1].totalPaid)
+        totaldonationsinfiatxmr += Number(dataiter[1].totalPaid) * Number(dataiter[1].rate)
       }
-      if (dataiter[0].cryptoCode == 'BTC') {
+      if (dataiter[0].cryptoCode == 'BTC' & dataiter[0].totalPaid > 0) {
         numdonationsbtc += 1
-        totaldonationsbtc += Number(dataiter[0].amount)
-        totaldonationsinfiatbtc += Number(dataiter[0].amount) * Number(dataiter[0].rate)
+        totaldonationsbtc += Number(dataiter[0].totalPaid)
+        totaldonationsinfiatbtc += Number(dataiter[0].totalPaid) * Number(dataiter[0].rate)
       }
     }
     return await {
