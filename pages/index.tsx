@@ -77,8 +77,8 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               </Link>
             </p>
           </div>
-          <div className="order-first flex-auto  ">
-            <Image className="img-fluid"src={magiclogo} alt="magiclogo" />
+          <div className="order-first flex-auto my-auto">
+            <Image className="img-fluid" src={magiclogo} alt="magiclogo" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
