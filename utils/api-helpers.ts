@@ -21,12 +21,12 @@ export async function fetchPostJSON(url: string, data?: {}) {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `token ${process.env.BTCPAY_API_KEY}`,
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data || {}), // body data type must match "Content-Type" header
     })
+
     return await response.json() // parses JSON response into native JavaScript objects
   } catch (err) {
     if (err instanceof Error) {
@@ -51,7 +51,6 @@ export async function fetchPostJSONAuthed(
       headers: {
         'Content-Type': 'application/json',
         Authorization: auth,
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *client
@@ -96,12 +95,12 @@ export async function fetchGetJSONAuthedBTCPay() {
         },
       })
       const dataiter = await responseiter.json()
-      if (dataiter[1].cryptoCode == 'XMR' & dataiter[1].totalPaid > 0) {
+      if (dataiter[1].cryptoCode == 'XMR' && dataiter[1].totalPaid > 0) {
         numdonationsxmr += 1
         totaldonationsxmr += Number(dataiter[1].totalPaid)
         totaldonationsinfiatxmr += Number(dataiter[1].totalPaid) * Number(dataiter[1].rate)
       }
-      if (dataiter[0].cryptoCode == 'BTC' & dataiter[0].totalPaid > 0) {
+      if (dataiter[0].cryptoCode == 'BTC' && dataiter[0].totalPaid > 0) {
         numdonationsbtc += 1
         totaldonationsbtc += Number(dataiter[0].totalPaid)
         totaldonationsinfiatbtc += Number(dataiter[0].totalPaid) * Number(dataiter[0].rate)
