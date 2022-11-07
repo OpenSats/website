@@ -64,6 +64,4 @@ const PaymentModal: React.FC<ModalProps> = ({
   )
 }
 
-// ReactModal.setAppElement('#app-base');
-
 export default PaymentModal
