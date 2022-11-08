@@ -1,6 +1,6 @@
 ---
 title: 'C++ Programming for Reduction of Statistical Attack Risk'
-summary: 'Thwarting probabalistic transaction tracing through analysis of the statistical breadcrumbs of Monero\'s ring signatures and fee calculation procedures.'
+summary: "Thwarting probabalistic transaction tracing through analysis of the statistical breadcrumbs of Monero's ring signatures and fee calculation procedures."
 nym: 'mj-xmr'
 website: 'https://github.com/mj-xmr/'
 coverImage: '/img/project/Statistical-Monero-Logo.gif'
