@@ -1,24 +1,28 @@
-# MAGIC Monero Fund Request for Research Proposals
+# About the MAGIC Monero Fund
 
-## Mission  
+MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)(3) U.S. nonprofit that focuses on building strong cryptocurrency communities and networks. [The MAGIC Monero Fund](https://magicgrants.org/funds/monero) is a subentity of MAGIC Grants guided by [a five-member committee](https://magicgrants.org/Monero-Fund-Committee/) elected by [Monero community members](https://magicgrants.org/funds/monero/monero_fund_voters/).
 
-The MAGIC Monero Fund is offering a grant program to support actionable Monero research, especially research relating to privacy, security, user experience, and efficiency. Proposals can be related to the Monero protocol directly, or they can be related to other areas of the Monero ecosystem.  
+### MAGIC Monero Fund Vision and Goals:
 
-## Target Research Areas
+* Improve the Monero ecosystem.
+* Support Monero development and research.
+* Create Monero educational resources.
+* Fund Monero security audits.
+* Run essential services that support the Monero ecosystem.
 
-We are interested in Monero's [open research questions](https://github.com/monero-project/research-lab/issues/94), along with the following:
+### Committee Members
 
-- Security proofs around Monero's existing constructions
-- Arithmetic-circuit-based membership proofs, specifically ones without a trusted setup based on battle-tested cryptographic assumptions
+* [Rucknium](https://github.com/Rucknium) is a Monero Research Lab researcher and economist who has focused on statistical obfuscation on Monero and Bitcoin Cash.
 
-While the above topics are especially encouraged, the Fund is open to funding other topics as well.
+* [kayabaNerve](https://github.com/kayabaNerve) is a Monero-ecosystem developer and security  researcher who was the first to implement Monero atomic swaps with ASMR.
 
-The proposal's chance to be approved will be increased if it also helps support one or more of the additional mission areas of the MAGIC Monero Fund: Development, Security (including audits); Critical Infrastructure; Community Building and Community Infrastructure; Interoperability; Feature Enhancements; Efficiency Improvements; Educational Materials.  
+* [Deverick](https://github.com/hashes4merkle) is an application security developer for Blackbaud, a leading nonprofit cloud services platform. He co-planned the 2021 Monero Party.
 
-## Funding Amount  
+* [Csilla Brimer](https://twitter.com/CryptoTweetie) is a blockchain consultant at Willenrimer and a co-founder of the Open Economy Initiative. She co-planned the 2021 Monero Party.
 
-The MAGIC Monero Fund anticipates funding requests of the equivalent of 5,000 to 20,000 USD at this time.  
+## Submitting grant applications
 
-## Deadline  
+The MAGIC Monero Fund is currently accepting applications for grants involving research. Processes for other types of grants will be established soon. The process for submitting a research grant is described [here](https://github.com/MAGICGrants/Monero-Fund/blob/main/Research-Grant-RFP.md).
 
-The MAGIC Monero Fund accepts applications on a rolling basis. Applications will be notified of the committee's vote on approval within three weeks of submission except in extraordinary circumstances.  
+
+
