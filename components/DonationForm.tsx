@@ -215,7 +215,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           ) : (
             <FontAwesomeIcon
               icon={faMonero}
-              className="text-primary h-8 w-8"
+              className="color-me-monero h-8 w-8"
             />
           )}
           <span className="whitespace-nowrap">Donate with Monero or BTC</span>
@@ -231,7 +231,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           ) : (
             <FontAwesomeIcon
               icon={faCreditCard}
-              className="text-primary h-8 w-8"
+              className="color-me-monero h-8 w-8"
             />
           )}
           <span className="whitespace-nowrap">Donate with fiat</span>

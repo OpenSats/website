@@ -59,7 +59,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
       </Head>
       <main>
         {/* <script src="https://unpkg.com/flowbite@latest/dist/flowbite.js"></script> */}
-        <section className="flex flex-col sm:flex-row">
+        <section id="root" className="flex flex-col sm:flex-row">
           <div className="flex-auto p-4 md:p-8 space-y-8 sm:order-first">
             <h1>
               Support the Monero Fund and open source research for the Monero Project.
