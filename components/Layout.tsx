@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBug } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Head>
@@ -27,7 +27,7 @@ const Layout: React.FC = ({ children }) => {
         <meta property="og:description" content="Support the MAGIC Monero Fund and open source research for the Monero Project." key="ogdesc" />
       </Head>
       <Navbar />
-      <main className="flex-1 flex flex-col">{children}</main>
+      <main className="flex-1 flex flex-col">{ children }</main>
       <footer className="flex justify-between p-4 md:p-8 bg-light">
        <strong>© Open Sats Initiative and MAGIC Grants, 2022</strong>
       </footer>
