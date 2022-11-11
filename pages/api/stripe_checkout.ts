@@ -8,7 +8,7 @@ import { PayReq } from '../../utils/types'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
-  apiVersion: '2020-08-27',
+  apiVersion: "2022-08-01",
 })
 
 export default async function handler(
@@ -32,9 +32,13 @@ export default async function handler(
         payment_method_types: ['card'],
         line_items: [
           {
-            name: `MAGIC Grants donation: ${project_name}`,
-            amount: formatAmountForStripe(amount, CURRENCY),
-            currency: CURRENCY,
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: `MAGIC Grants donation: ${project_name}`,
+              },
+              unit_amount: amount*100,
+            },
             quantity: 1,
           },
         ],
