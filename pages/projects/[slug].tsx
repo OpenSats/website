@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import Link from 'next/link'
 import ShareButtons from '../../components/ShareButtons'
+import Progress from '../../components/Progress'
 import { fetchPostJSON, fetchGetJSONAuthedBTCPay, fetchGetJSONAuthedStripe } from '../../utils/api-helpers'
 
 type SingleProjectPageProps = {
@@ -110,6 +111,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
               <h6>{stats.xmr.numdonations} in XMR</h6>
               <h6>{stats.btc.numdonations} in BTC</h6>
               <h6>{stats.usd.numdonations} in Fiat</h6>
+              <Progress></Progress>
             </div>
             }
           </aside>
