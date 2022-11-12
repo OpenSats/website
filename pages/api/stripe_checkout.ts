@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '../../config'
-import { formatAmountForStripe } from '../../utils/stripe-helpers'
+import { CURRENCY, MIN_AMOUNT } from '../../config'
+// import { formatAmountForStripe } from '../../utils/stripe-helpers'
 
 import Stripe from 'stripe'
 import { PayReq } from '../../utils/types'
@@ -30,6 +30,7 @@ export default async function handler(
         mode: 'payment',
         submit_type: 'donate',
         payment_method_types: ['card'],
+        currency: CURRENCY,
         line_items: [
           {
             price_data: {
