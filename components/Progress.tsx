@@ -1,7 +1,11 @@
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-// function AnimatedExample() {
-const AnimatedExample = ({ text }) => {
+type ProgressProps = {
+    text: number;
+  };
+
+const AnimatedExample = (props: ProgressProps) => {
+    const { text } = props;
     return <ProgressBar animated variant="success" now={text} label={`${text}%`} />;
 }
 
