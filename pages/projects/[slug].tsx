@@ -51,6 +51,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
     nym,
     website,
     personalTwitter,
+    goal,
   } = project
 
 
@@ -111,7 +112,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
               <h6>{stats.xmr.numdonations} in XMR</h6>
               <h6>{stats.btc.numdonations} in BTC</h6>
               <h6>{stats.usd.numdonations} in Fiat</h6>
-              <Progress></Progress>
+              
+              <Progress text={Math.floor((stats.xmr.totaldonationsinfiat + stats.btc.totaldonationsinfiat + stats.usd.totaldonationsinfiat)/goal * 100) } ></Progress>
             </div>
             }
           </aside>
