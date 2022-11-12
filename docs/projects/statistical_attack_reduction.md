@@ -8,6 +8,7 @@ git: 'https://github.com/mj-xmr'
 twitter: 'monero'
 personalTwitter: 'monero'
 type: 'Other Free and Open Source Project'
+goal: 200
 ---
 
 ## C++ Programming for Reduction of Statistical Attack Risk
