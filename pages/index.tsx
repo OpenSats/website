@@ -22,6 +22,7 @@ const generalFund: ProjectItem = {
   coverImage: '/img/crystalball.jpg',
   git: 'magicgrants',
   twitter: 'magicgrants',
+  goal: 100000,
 }
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {

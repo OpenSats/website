@@ -9,6 +9,7 @@ export type ProjectItem = {
   twitter?: string
   website: string
   personalTwitter?: string
+  goal: number
 }
 
 export type PayReq = {
