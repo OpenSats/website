@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  sample:
+    container_name: monerofund-frontend-page
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    labels:
+      traefik.enable: true
+      traefik.http.routers.openpico.rule: Host(`${MONERO_HOST}`)
+      traefik.port: 3000
+    ports:
+        - 3000:3000
