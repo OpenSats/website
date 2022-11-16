@@ -1,42 +1,12 @@
-import Image from 'next/image'
-import samplelogo from '/public/favicon.png'
-import Link from 'next/link'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-
-
-async function handleClick() {
-  try {
-    console.log('element activated')
-    // set the target element that will be collapsed or expanded (eg. navbar menu)
-    const targetEl = document.getElementById('navbarToggleExternalContent');
-
-    // optionally set a trigger element (eg. a button, hamburger icon)
-    const triggerEl = document.getElementById('triggerEl');
-
-    // optional options with default values and callback functions
-    const options = {
-      triggerEl: triggerEl,
-      onCollapse: () => {
-          console.log('element has been collapsed')
-      },
-      onExpand: () => {
-          console.log('element has been expanded')
-      },
-      onToggle: () => {
-          console.log('element has been toggled')
-      }
-    };
-
-
-  } catch (e) {
-    console.error(e)
-  }
-}
+// import NavDropdown from 'react-bootstrap/NavDropdown'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
+// import Image from 'next/image'
+// import Link from 'next/link'
+// import samplelogo from '/public/favicon.png'
 
 const Header = () => {
   return (
