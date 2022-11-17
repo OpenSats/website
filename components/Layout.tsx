@@ -19,7 +19,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
 
         {/* Open Graph */}
         <meta property="og:url" content="https://monerofund.org/" key="ogurl" />
-        <meta property="og:image" content="/public/img/crystalball.jpg" key="ogimage" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/MAGICGrants/opensatswebsite/master/public/img/crystalball.jpg" key="ogimage" />
         <meta property="og:site_name" content="MAGIC Monero Fund" key="ogsitename" />
         <meta property="og:title" content="MAGIC Monero Fund" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
