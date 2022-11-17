@@ -13,7 +13,7 @@ isFunded: false
 ---
 ### Goal: 19,200 USD
 
-Currently, every Monero transactions input is signed by one of 16 ring members that appear on the blockchain. One of the 16 is the truly spent output. The remaining 15 are "decoys" that mislead anyone attempting to trace Monero transactions. Ideally, the probability of guessing the truly spent output from the ring is only 1/16 (6.25%). However, certain statistical techniques can be used to increase the correct guess rate. 
+Every Monero transaction's input is signed by one of 16 ring members that appear on the blockchain. One of the 16 is the truly spent output. The remaining 15 are "decoys" that mislead anyone attempting to trace Monero transactions. Ideally, the probability of guessing the truly spent output from the ring is only 1/16 (6.25%). However, certain statistical techniques can be used to increase the correct guess rate. 
 
 It is believed that blockchain surveillance companies use statistical techniques in their attempts to trace Monero. In [their own words](https://ciphertrace.com/ciphertrace-files-two-monero-cryptocurrency-tracing-patents/), CipherTrace's Monero "tracing" involves:
  
