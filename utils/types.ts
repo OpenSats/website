@@ -30,20 +30,4 @@ export type PayReq = {
   name?: string
 }
 
-export type Stats = {
-  xmr: {
-    numdonations: number
-    totaldonationsinfiat: number
-    totaldonations: number
-  }
-  btc: {
-    numdonations: number
-    totaldonationsinfiat: number
-    totaldonations: number
-  }
-  usd: {
-    numdonations: number
-    totaldonationsinfiat: number
-    totaldonations: number
-  }
-}
+export type Stats = any
