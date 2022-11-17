@@ -9,6 +9,7 @@ twitter: 'monero'
 personalTwitter: 'monero'
 type: 'Other Free and Open Source Project'
 goal: 200
+isFunded: false
 ---
 
 ## C++ Programming for Reduction of Statistical Attack Risk
