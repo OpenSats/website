@@ -20,7 +20,6 @@ fiatnumdonations: 8
 fiattotaldonationsinfiat: 5139
 fiattotaldonations: 5139
 ---
-
 ### Funded Goal: 24,000 USD
 
 The MAGIC Monero Fund raised funds for noot to continue development on ETH-XMR atomic swaps. View [the campaign here](https://www.gofundme.com/f/noot-ethxmr-atomic-swap-development-4-months).
