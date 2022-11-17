@@ -159,7 +159,7 @@ export async function getServerSideProps({ params }: { params: any }) {
 
   const crypto = await fetchGetJSONAuthedBTCPay()
 
-  let stats = {};
+  let stats : any = {};
 
   for(let i=0;i<projects.length;i++){
     let xmr;
