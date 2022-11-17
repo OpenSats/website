@@ -10,6 +10,16 @@ export type ProjectItem = {
   website: string
   personalTwitter?: string
   goal: number
+  isFunded?: boolean
+  numdonationsxmr?: number
+  totaldonationsinfiatxmr?: number
+  totaldonationsxmr?: number
+  numdonationsbtc?: number
+  totaldonationsinfiatbtc?: number
+  totaldonationsbtc?: number
+  fiatnumdonations?: number
+  fiattotaldonationsinfiat?: number
+  fiattotaldonations?: number
 }
 
 export type PayReq = {
