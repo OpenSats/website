@@ -8,12 +8,9 @@ git: 'https://github.com/mj-xmr'
 twitter: 'monero'
 personalTwitter: 'monero'
 type: 'Other Free and Open Source Project'
-goal: 200
+goal: 19200
 isFunded: false
 ---
-
-## C++ Programming for Reduction of Statistical Attack Risk
-
 ### Goal: 19,200 USD
 
 Currently, every Monero transactions input is signed by one of 16 ring members that appear on the blockchain. One of the 16 is the truly spent output. The remaining 15 are "decoys" that mislead anyone attempting to trace Monero transactions. Ideally, the probability of guessing the truly spent output from the ring is only 1/16 (6.25%). However, certain statistical techniques can be used to increase the correct guess rate. 
