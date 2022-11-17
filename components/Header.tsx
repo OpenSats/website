@@ -13,7 +13,7 @@ const Header = () => {
     <header className="pb-10 sm:pb-10">
       <Navbar  collapseOnSelect expand="lg" variant="light" className="color-nav navbar-expand-sm px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0">
         <Container>
-          <Navbar.Brand href="/">Monero Fund</Navbar.Brand>
+          <Navbar.Brand href="/">MAGIC Monero Fund</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">   
