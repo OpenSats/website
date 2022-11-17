@@ -100,21 +100,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
             {stats &&
               <div>
                 <h5>Raised</h5>
-                <h4>{`${formatUsd(stats.xmr.totaldonationsinfiat + stats.btc.totaldonationsinfiat + stats.usd.totaldonationsinfiat)}`}</h4>
-                <h6>{stats.xmr.totaldonations} XMR</h6>
-                <h6>{stats.btc.totaldonations} BTC</h6>
-                <h6>{`${formatUsd(stats.usd.totaldonations)}`} Fiat</h6>
+                <h4>{`${formatUsd(stats[slug].xmr.totaldonationsinfiat + stats[slug].btc.totaldonationsinfiat + stats[slug].usd.totaldonationsinfiat)}`}</h4>
+                <h6>{stats[slug].xmr.totaldonations} XMR</h6>
+                <h6>{stats[slug].btc.totaldonations} BTC</h6>
+                <h6>{`${formatUsd(stats[slug].usd.totaldonations)}`} Fiat</h6>
               </div>
             }
 
             {stats && <div>
               <h5>Donations</h5>
-              <h4>{stats.xmr.numdonations + stats.btc.numdonations + stats.usd.numdonations}</h4>
-              <h6>{stats.xmr.numdonations} in XMR</h6>
-              <h6>{stats.btc.numdonations} in BTC</h6>
-              <h6>{stats.usd.numdonations} in Fiat</h6>
-              
-              <Progress text={Math.floor((stats.xmr.totaldonationsinfiat + stats.btc.totaldonationsinfiat + stats.usd.totaldonationsinfiat)/goal * 100) } ></Progress>
+              <h4>{stats[slug].xmr.numdonations + stats[slug].btc.numdonations + stats[slug].usd.numdonations}</h4>
+              <h6>{stats[slug].xmr.numdonations} in XMR</h6>
+              <h6>{stats[slug].btc.numdonations} in BTC</h6>
+              <h6>{stats[slug].usd.numdonations} in Fiat</h6>
+
+              <Progress text={Math.floor((stats[slug].xmr.totaldonationsinfiat + stats[slug].btc.totaldonationsinfiat + stats[slug].usd.totaldonationsinfiat)/goal * 100) } ></Progress>
             </div>
             }
           </aside>
@@ -159,32 +159,36 @@ export async function getServerSideProps({ params }: { params: any }) {
 
   const crypto = await fetchGetJSONAuthedBTCPay()
 
-  let xmr;
-  let btc;
-  let usd;
+  let stats = {};
 
-  if (projects[0].isFunded) {
-       xmr = {
-        numdonations: projects[0].numdonationsxmr,
-        totaldonationsinfiat: projects[0].totaldonationsinfiatxmr,
-        totaldonations: projects[0].totaldonationsxmr,
-      }
-       btc = {
-        numdonations: projects[0].numdonationsbtc,
-        totaldonationsinfiat: projects[0].totaldonationsinfiatbtc,
-        totaldonations: projects[0].totaldonationsbtc,
-      }
-    usd = {numdonations: projects[0].fiatnumdonations,
-           totaldonationsinfiat: projects[0].fiattotaldonationsinfiat,
-           totaldonations: projects[0].fiattotaldonations,
-    }
-} else {
-   xmr = await crypto.xmr
-   btc = await crypto.btc
-   usd = await fetchGetJSONAuthedStripe()
-}
+  for(let i=0;i<projects.length;i++){
+    let xmr;
+    let btc;
+    let usd;
 
-  const stats = { xmr, btc, usd }
+    if (projects[i].isFunded) {
+         xmr = {
+          numdonations: projects[i].numdonationsxmr,
+          totaldonationsinfiat: projects[i].totaldonationsinfiatxmr,
+          totaldonations: projects[i].totaldonationsxmr,
+        }
+         btc = {
+          numdonations: projects[i].numdonationsbtc,
+          totaldonationsinfiat: projects[i].totaldonationsinfiatbtc,
+          totaldonations: projects[i].totaldonationsbtc,
+        }
+      usd = {numdonations: projects[i].fiatnumdonations,
+             totaldonationsinfiat: projects[i].fiattotaldonationsinfiat,
+             totaldonations: projects[i].fiattotaldonations,
+      }
+  } else {
+     xmr = await crypto.xmr
+     btc = await crypto.btc
+     usd = await fetchGetJSONAuthedStripe()
+  }
+
+    stats[projects[i].slug] = { xmr, btc, usd }
+  }
 
   return {
     props: {
