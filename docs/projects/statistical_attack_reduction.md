@@ -31,4 +31,4 @@ The purpose of this project is to enable research on ways to reduce the risk of 
 
 4) Adaptation of [tsqsim](https://github.com/mj-xmr/tsqsim) time series forecast analyzer software for performance evaluation of alternative decoy selection algorithms. The real spend age distribution is a constantly moving target.
 
-
+Re: 1. mj-xmr has already prepared [the 1st report in November](https://github.com/MAGICGrants/Monero-Fund/issues/21#issuecomment-1315367147), containing a pre-research of the MyMonero fee fingerprinting, alongside other changes.
