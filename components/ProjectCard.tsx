@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, personalTwitter, nym, goal } =
+  const { slug, title, summary, coverImage, git, twitter, personalTwitter, nym, goal, isFunded } =
     project
 
   return (
@@ -51,12 +51,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         <ShareButtons project={project} />
         <div className="flex space-x-4 items-center justify-center pt-4">
-          <button
+          {(isFunded)? `` : <button
             className="bg-black basis-1/2"
             onClick={() => openPaymentModal(project)}
           >
             Donate
-          </button>
+          </button> }
           <div className="flex items-center justify-center basis-1/2">
             <Link href={`/projects/${slug}`} passHref legacyBehavior>
               <a className="projectlist">View Details</a>
