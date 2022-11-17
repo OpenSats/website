@@ -1,46 +1,53 @@
 ---
 title: 'ETH<>XMR Atomic Swap Continued Development'
-summary: "Thwarting probabalistic transaction tracing through analysis of the statistical breadcrumbs of Monero's ring signatures and fee calculation procedures."
-nym: 'mj-xmr'
-website: 'https://github.com/mj-xmr/'
-coverImage: '/img/project/Statistical-Monero-Logo.gif'
-git: 'https://github.com/mj-xmr'
-twitter: 'monero'
-personalTwitter: 'monero'
+summary: "A trustless way to exchange Monero and Ethereum."
+nym: 'noot'
+website: 'https://github.com/AthanorLabs/atomic-swap'
+coverImage: '/img/project/Ethereum_logo.png'
+git: 'https://github.com/noot'
+twitter: 'elizabethereum'
+personalTwitter: 'elizabethereum'
 type: 'Other Free and Open Source Project'
-goal: 200
+goal: 24000
 isFunded: true
-numdonationsxmr: 1
-totaldonationsinfiatxmr: 2
-totaldonationsxmr: 3
-numdonationsbtc: 4
-totaldonationsinfiatbtc: 5
-totaldonationsbtc: 6
-fiatnumdonations: 7
-fiattotaldonationsinfiat: 8
-fiattotaldonations: 9
+numdonationsxmr: 66
+totaldonationsinfiatxmr: 18861
+totaldonationsxmr: 125.74
+numdonationsbtc: 0
+totaldonationsinfiatbtc: 0
+totaldonationsbtc: 0
+fiatnumdonations: 8
+fiattotaldonationsinfiat: 5139
+fiattotaldonations: 5139
 ---
 
-## C++ Programming for Reduction of Statistical Attack Risk
+### Funded Goal: 24,000 USD
 
-### Goal: 19,200 USD
+The MAGIC Monero Fund raised funds for noot to continue development on ETH-XMR atomic swaps. View [the campaign here](https://www.gofundme.com/f/noot-ethxmr-atomic-swap-development-4-months).
 
-Currently, every Monero transactions input is signed by one of 16 ring members that appear on the blockchain. One of the 16 is the truly spent output. The remaining 15 are "decoys" that mislead anyone attempting to trace Monero transactions. Ideally, the probability of guessing the truly spent output from the ring is only 1/16 (6.25%). However, certain statistical techniques can be used to increase the correct guess rate. 
+This proposal covers 4 months of work focused on the following:
 
-It is believed that blockchain surveillance companies use statistical techniques in their attempts to trace Monero. In their own words(https://ciphertrace.com/ciphertrace-files-two-monero-cryptocurrency-tracing-patents/), CipherTrace's Monero "tracing" involves:
- 
-> - Statistical and probabilistic methods for scoring transaction and clustering likely owners.
-> - Monero decoy reduction.
-> - Probabilistic approaches to risk-based Monero money laundering controls.
+### Relayer support
 
-The purpose of this project is to enable research on ways to reduce the risk of statistical attack on the Monero privacy model. The task list is focused on supporting (OSPEAD)[https://ccs.getmonero.org/proposals/Rucknium-OSPEAD-Fortifying-Monero-Against-Statistical-Attack.html] with C++ programming work. Once this project is funded, mj-xmr will:
+The current implementation of the protocol requires the ETH-recipient to have some ETH in their claiming account to pay for the transaction fees to claim the swap ETH. However, this is bad for UX and privacy, as users cannot withdraw to fresh ETH accounts.
 
-1) Develop a method to identify which Monero transactions were created by the MyMonero wallet software, (based on differences in the way that MyMonero calculates transaction fees)[https://github.com/mymonero/mymonero-core-cpp/pull/36]. Isolation of these transactions will help reveal ["anonymity puddles")]https://www.youtube.com/watch?v=XIrqyxU3k5Q) in the blockchain and improve understanding of the ecosystem of decoy selection algorithms.
+To allow for users to claim ETH into a fresh account, integration with a relayer service can be implemented. This will allow users to withdraw to a fresh account by paying a small fee to a relayer to submit the transaction on their behalf.
 
-2) Create a formal specification of the MyMonero decoy selection algorithm as a [probability density function](https://en.wikipedia.org/wiki/Probability_density_function). A [similar analysis](https://github.com/mj-xmr/monero-mrl-mj/tree/decoy/decoy) has already been performed for the `wallet2` C++ code, which most wallet software use to create Monero transactions.
+### Ethereum privacy improvements
 
-3) Program a fast C++ implementation of a statistical procedure that estimates Monero's real spend age distribution. The estimate will be used to set a new decoy selection algorithm so that real spends and decoys are harder to distinguish.
+On the ETH side of the swap, there is no privacy, and which accounts and amounts participating in the swap are visible.
 
-4) Adaptation of [tsqsim](https://github.com/mj-xmr/tsqsim) time series forecast analyzer software for performance evaluation of alternative decoy selection algorithms. The real spend age distribution is a constantly moving target.
+### ERC20 support
+
+To support swaps for ERC20s without hurting liquidity, the swap contract can be integrated with a DEX such as Uniswap to automat-ically swap received ETH for the desired ERC20 token.
+
+### Disk permanence
+
+The current implementation of the swap does not store anything to disk apart from information needed for recovery of swap funds in case of failure. However, there are other components that should be stored to disk and restored upon reload, such as current swap of-fers made, historic swap information, and peer information. This will require a simple key-value database implementation.
+
+### General maintenance and bugfixes
+
+See https://github.com/noot/atomic-swap/issues for open issues on the repo. Issues not covered by the above work are part of this sec-tion. This includes RPC calls and documentation, codebase maintenance, testing, and fixes of any bugs found during testing.
+
 
 
