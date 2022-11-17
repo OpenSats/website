@@ -15,6 +15,16 @@ const FIELDS = ['title',
   'website',
   'twitter',
   'personalTwitter',
+  'isFunded',
+  'numdonationsxmr',
+  'totaldonationsinfiatxmr',
+  'totaldonationsxmr',
+  'numdonationsbtc',
+  'totaldonationsinfiatbtc',
+  'totaldonationsbtc',
+  'fiatnumdonations',
+  'fiattotaldonationsinfiat',
+  'fiattotaldonations',
 ]
 
 export function getPostSlugs() {
