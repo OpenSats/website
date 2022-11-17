@@ -52,6 +52,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
     website,
     personalTwitter,
     goal,
+    isFunded,
   } = project
 
 
@@ -95,7 +96,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
         </div>
         <article className="px-4 md:px-8 pb-8 lg:flex lg:flex-row-reverse lg:items-start">
           <aside className="p-4 bg-light rounded-xl flex lg:flex-col lg:items-start gap-4 min-w-[20rem] justify-between items-center mb-8">
-            <button onClick={openPaymentModal}>Donate</button>
+            {(isFunded)? `` : <button onClick={openPaymentModal}>Donate</button> }
             {stats &&
               <div>
                 <h5>Raised</h5>
@@ -158,9 +159,30 @@ export async function getServerSideProps({ params }: { params: any }) {
 
   const crypto = await fetchGetJSONAuthedBTCPay()
 
-  const xmr = await crypto.xmr
-  const btc = await crypto.btc
-  const usd = await fetchGetJSONAuthedStripe()
+  let xmr;
+  let btc;
+  let usd;
+
+  if (projects[0].isFunded) {
+       xmr = {
+        numdonations: projects[0].numdonationsxmr,
+        totaldonationsinfiat: projects[0].totaldonationsinfiatxmr,
+        totaldonations: projects[0].totaldonationsxmr,
+      }
+       btc = {
+        numdonations: projects[0].numdonationsbtc,
+        totaldonationsinfiat: projects[0].totaldonationsinfiatbtc,
+        totaldonations: projects[0].totaldonationsbtc,
+      }
+    usd = {numdonations: projects[0].fiatnumdonations,
+           totaldonationsinfiat: projects[0].fiattotaldonationsinfiat,
+           totaldonations: projects[0].fiattotaldonations,
+    }
+} else {
+   xmr = await crypto.xmr
+   btc = await crypto.btc
+   usd = await fetchGetJSONAuthedStripe()
+}
 
   const stats = { xmr, btc, usd }
 
