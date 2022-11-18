@@ -44,3 +44,11 @@
 - If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping.
 
 The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.
+
+# Can I join the committee?
+
+- MAGIC Monero Fund committee elections happen annually. Learn more on the [MAGIC Grants website](https://magicgrants.org/funds/monero).
+
+# Can I donate with bank transfer / wire?
+
+- Yes! [Email us](mailto:MoneroFund@magicgrants.org), and we will send you the bank details and manually add your donation. We can accept domestic and international wire transfers. Wires are appreciated for large donations, so that ~3% more of your donation can go to the recipient instead of credit card fees.
