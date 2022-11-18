@@ -16,6 +16,9 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@MagicGrants" />
+        <meta name="twitter:site" content="@MagicGrants" />
+        <meta name="twitter:title" content="MAGIC Monero Fund" />
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/MAGICGrants/opensatswebsite/master/public/img/crystalball.jpg" />
 
         {/* Open Graph */}
         <meta property="og:url" content="https://monerofund.org/" key="ogurl" />
