@@ -11,18 +11,18 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <Head>
         <title>MAGIC Monero Fund</title>
         <meta name="description" content="TKTK" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://monerofund.org/favicon.ico" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@MagicGrants" />
         <meta name="twitter:site" content="@MagicGrants" />
         <meta name="twitter:title" content="MAGIC Monero Fund" />
-        <meta name="twitter:image" content="https://raw.githubusercontent.com/MAGICGrants/opensatswebsite/master/public/img/crystalball.jpg" />
+        <meta name="twitter:image" content="https://monerofund.org/img/crystalball.jpg" />
 
         {/* Open Graph */}
         <meta property="og:url" content="https://monerofund.org/" key="ogurl" />
-        <meta property="og:image" content="https://raw.githubusercontent.com/MAGICGrants/opensatswebsite/master/public/img/crystalball.jpg" key="ogimage" />
+        <meta property="og:image" content="https://monerofund.org/img/crystalball.jpg" key="ogimage" />
         <meta property="og:site_name" content="MAGIC Monero Fund" key="ogsitename" />
         <meta property="og:title" content="MAGIC Monero Fund" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
