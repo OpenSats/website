@@ -158,8 +158,6 @@ export async function getServerSideProps({ params }: { params: any }) {
 
   const content = await markdownToHtml(post.content || '')
 
-  const crypto = await fetchGetJSONAuthedBTCPay()
-
   let stats : any = {};
 
   for(let i=0;i<projects.length;i++){
@@ -183,6 +181,7 @@ export async function getServerSideProps({ params }: { params: any }) {
              totaldonations: projects[i].fiattotaldonations,
       }
   } else {
+     const crypto = await fetchGetJSONAuthedBTCPay(projects[i].slug)
      xmr = await crypto.xmr
      btc = await crypto.btc
      usd = await fetchGetJSONAuthedStripe()
