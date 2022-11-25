@@ -20,5 +20,5 @@ MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)
 
 * [Csilla Brimer](https://twitter.com/CryptoTweetie) is a blockchain consultant at Willenrimer and a co-founder of the Open Economy Initiative. She co-planned the 2021 Monero Party.
 
-
+* [monerobull](https://twitter.com/monerobull) is a distributor of marketing materials for Monero Outreach and moderates various communication channels of the Monero community.
 

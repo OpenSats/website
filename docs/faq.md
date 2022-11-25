@@ -2,7 +2,7 @@
 
 ## What is the mission statement of the Monero Fund?
 
-- We are a 501(c)(3) public charity funding Monero-related open source research and associated educational initiatives.
+- We are a committe of a 501(c)(3) public charity that funds Monero-related open source research and associated educational initiatives.
 
 
 ## How are funds distributed?
@@ -12,7 +12,9 @@
 
 ## How much of my donation goes towards individuals and projects supported by the Monero Fund?
 
-- All donations to specific projects are delivered to the recipient in 100% full.
+- We set up campaigns to closely match the amount needed to pay these individuals and projects. There are some credit card processing fees and other related fees that we try to estimate. Typically, we add a buffer of 3% to the project campaign to account for these.
+- If there are any proceeds are retained by the MAGIC Monero Fund, and will be used on related projects.
+- If a campaign fails to raise the full amount of funds, then the committee will work with the intended recipient to revise the scope of the project, or the raised funds will be used on related projects.
 
 
 ## Do you distribute grants in Monero, Bitcoin or fiat?
@@ -26,9 +28,10 @@
 
 ## How can I communicate with you?
 
-- You can reach us via [Discord](https://discord.gg/yEuhhdtbHN), Matrix or [email](info@magicgrants.org).
+- You can reach the committee via [Discord](https://discord.gg/yEuhhdtbHN), Matrix or [email](mailto:MoneroFund@magicgrants.org).
 - Applications are reviewed as submitted. Research approval depends on several factors, including funding availability. Projects that align with our mission statement are encouraged to apply. Committee members evaluate each application based on technical merit, potential impact, and the team&#39;s ability to execute.
 - All projects should be free and open source and related to Monero or an ancillary technology (like Tor, etc.) which helps Monero use. Your project must align with the mission of our charity to be eligible for donations.
+- To reach MAGIC Grants, please [email us](mailto:info@magicgrants.org).
 
 
 ## How can I submit a project for fundraising?
@@ -40,7 +43,7 @@
 
 ## Are my donations tax deductible?
 
-- Yes. MAGIC Monero Fund is a 501(c)(3) non-profit organization. All gifts and donations are tax-deductible in the USA.
+- Yes. MAGIC Monero Fund is committee under Multidisciplinary Academic Grants in Cryptocurrencies (MAGIC Grants), a 501(c)(3) non-profit organization. All gifts and donations are tax-deductible in the USA.
 - If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping.
 
 The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.
@@ -52,3 +55,4 @@ The Monero Fund relies on donors like you to help promote and support a sustaina
 # Can I donate with bank transfer / wire?
 
 - Yes! [Email us](mailto:MoneroFund@magicgrants.org), and we will send you the bank details and manually add your donation. We can accept domestic and international wire transfers. Wires are appreciated for large donations, so that ~3% more of your donation can go to the recipient instead of credit card fees.
+
