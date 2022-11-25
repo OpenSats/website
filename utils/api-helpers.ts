@@ -65,7 +65,9 @@ export async function fetchPostJSONAuthed(
   }
 }
 
-export async function fetchGetJSONAuthedBTCPay() {
+export async function fetchGetJSONAuthedBTCPay(
+  slug: string
+) {
   try {
     const url = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`
     const auth = `token ${process.env.BTCPAY_API_KEY}`
@@ -84,6 +86,9 @@ export async function fetchGetJSONAuthedBTCPay() {
     let totaldonationsinfiatxmr = 0
     let totaldonationsinfiatbtc = 0
     for(let i=0;i<data.length;i++){
+      if (data[i].metadata.orderId != slug) {
+        continue
+      }
       const id = data[i].id
       const urliter = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices/${id}/payment-methods`
       const authiter = `token ${process.env.BTCPAY_API_KEY}`
