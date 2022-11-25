@@ -7,6 +7,7 @@ coverImage: '/img/project/Statistical-Monero-Logo.gif'
 git: 'https://github.com/mj-xmr'
 twitter: 'monero'
 personalTwitter: 'monero'
+personalWebsite: 'https://github.com/mj-xmr/'
 type: 'Other Free and Open Source Project'
 goal: 19200
 isFunded: false

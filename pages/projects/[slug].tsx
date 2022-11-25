@@ -51,6 +51,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
     nym,
     website,
     personalTwitter,
+    personalWebsite,
     goal,
     isFunded,
   } = project
@@ -129,7 +130,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
 
             <p>
               by{' '}
-              <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref legacyBehavior>
+              <Link href={personalWebsite} passHref legacyBehavior>
                 <a>{nym}</a>
               </Link >
             </p >

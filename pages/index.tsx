@@ -16,6 +16,7 @@ const generalFund: ProjectItem = {
   slug: 'general_fund',
   nym: 'MagicMonero',
   website: 'https://monerofund.org',
+  personalWebsite: 'https://monerofund.org',
   title: 'MAGIC Monero General Fund',
   summary:
     'Support contributors to Monero',

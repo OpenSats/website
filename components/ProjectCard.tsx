@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, personalTwitter, nym, goal, isFunded } =
+  const { slug, title, summary, coverImage, git, twitter, personalTwitter, personalWebsite, nym, goal, isFunded } =
     project
 
   return (
@@ -42,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <h2>{title}</h2>
         <p>
           by{' '}
-          <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref legacyBehavior>
+          <Link href={personalWebsite} passHref legacyBehavior>
             <a className="projectlist">{nym}</a>
           </Link>
         </p>

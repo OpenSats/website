@@ -9,6 +9,7 @@ export type ProjectItem = {
   twitter?: string
   website: string
   personalTwitter?: string
+  personalWebsite: string
   goal: number
   isFunded?: boolean
   numdonationsxmr?: number

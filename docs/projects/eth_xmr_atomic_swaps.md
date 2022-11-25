@@ -7,6 +7,7 @@ coverImage: '/img/project/Ethereum_logo.png'
 git: 'https://github.com/noot'
 twitter: 'elizabethereum'
 personalTwitter: 'elizabethereum'
+personalWebsite: 'https://github.com/noot'
 type: 'Other Free and Open Source Project'
 goal: 24000
 isFunded: true
