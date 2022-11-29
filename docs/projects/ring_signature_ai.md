@@ -5,6 +5,8 @@ nym: 'ACK-J'
 website: 'https://magicgrants.org/Monero-Tracing-Research/'
 coverImage: '/img/project/ring_sig.png'
 git: 'https://github.com/ACK-J'
+twitter: 'G666g1e'
+personalTwitter: 'G666g1e'
 personalWebsite: 'https://github.com/ACK-J'
 type: 'Other Free and Open Source Project'
 goal: 12000
