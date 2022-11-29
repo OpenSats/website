@@ -46,10 +46,10 @@ export default function Apply() {
             Proposals can be related to the Monero protocol directly, or they can be related to other 
             areas of the Monero ecosystem.
           </p>
-          <p>
+          <div>
             To complete your submission, please prepare and attach a research plan for your project. 
             The plan should be 3-5 pages (not counting citations, any images, and biographical sketch) and include the following:
-            {/* <ul>
+            <ul>
               <li>The research question you seek to answer, and how the Monero Project benefits from the research.</li>
               <li>A literature review of existing work and how your proposal improves upon it. </li>
               <li>Any preliminary work you have already completed.  </li>
@@ -57,8 +57,8 @@ export default function Apply() {
               <li>A plan to work with Monero&apos;s developers and/or researchers to integrate the results of the research into Monero&apos;s protocol or ecosystem.  </li>
               <li>A budget, likely consisting mostly of labor costs for the researcher(s). This should include the desired payment schedule, which should be no more frequent than monthly. Any additional budgetary item such as equipment should be included as well. Specify the desired form of payment, which can be cryptocurrency or fiat currency.  </li>
               <li><i>OPTIONAL:</i> A biographical sketch such as a resume or CV. Alternatively, a list of contributions to open source projects.</li>
-            </ul> */}
-          </p>
+            </ul>
+          </div>
           <h2>Computing Resources Available </h2>
           <p>
             Computing and data storage resources can be made available to applicants 
@@ -67,16 +67,16 @@ export default function Apply() {
             2TB SSD, and 12TB RAID1 HDD.
           </p>
           <h2>Proposal Evaluation Criteria</h2>
-          <p>
+          <div>
             Submitted proposals will be evaluated by the committee based on the following criteria:  
-            {/* <ul>
+            <ul>
               <li><b>Impact:</b> The proposal should have a clear impact on the Monero Project.</li>
               <li><b>Originality:</b> The proposal should be original and not a rehash of existing work.</li>
               <li><b>Feasibility:</b> The proposal should be feasible to complete within the proposed time frame.</li>
               <li><b>Quality:</b> The proposal should be well-written and well-organized.</li>
               <li><b>Relevance:</b> The proposal should be relevant to the Monero Project.</li>        
-            </ul> */}
-          </p>
+            </ul>
+          </div>
           <h2 id="Eligibility">Eligibility</h2>
           <p>
             All qualified researchers are eligible to apply, regardless of educational attainment or occupation. 
