@@ -90,7 +90,7 @@ export default function Apply() {
           <p>
             If your proposal seek to uncover weaknesses in the privacy and/or security features of 
             Monero as it exists today, then the Committee will require that you share any significant 
-            weaknesses with the Committee (and any critical vulnerabilities with <a href="https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md">Monero&apos;s official Vulnerability Response Process</a>  90 days before publishing the research so that action can be taken to mitigate the vulnerabilities.
+            weaknesses with the Committee (and any critical vulnerabilities with <a href="https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md">Monero&apos;s official Vulnerability Response Process</a>)  90 days before publishing the research so that action can be taken to mitigate the vulnerabilities.
           </p>
           <h2>How to Submit a proposal</h2>
           <p>
