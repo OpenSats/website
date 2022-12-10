@@ -12,14 +12,24 @@ export default function ApplicationForm() {
         formState: { errors },
     } = useForm()
 
+    const [failureReason, setFailureReason] = useState<string>();
+
     const onSubmit = async (data: any) => {
         setLoading(true)
         console.log(data)
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-            router.push('/submitted')
+        try {
+            const res = await fetchPostJSON('/api/sendgrid', data)
+            if (res.message === 'success') {
+                router.push('/submitted')
+            } else {
+                setFailureReason(res.message)
+            }
+        } catch (e) {
+            if (e instanceof Error) {
+                setFailureReason(e.message)
+            }
         }
-        console.log(res)
+
         setLoading(false)
     }
 
@@ -194,6 +204,8 @@ export default function ApplicationForm() {
             <button type="submit" disabled={loading}>
                 Apply
             </button>
+
+            {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
             <p>
                 After submitting your application, please send images of your project
