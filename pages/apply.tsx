@@ -1,8 +1,4 @@
-import { Widget } from '@typeform/embed-react'
-
-const TypeformEmbed = () => {
-  return <Widget id="LhUJsFMW" className="typeform container flex flex-wrap items-center justify-center mb-8 pr-2 pl-2 h-196" />
-}
+import ApplicationForm from "../components/ApplicationForm"
 
 export default function Apply() {
   return (
@@ -10,7 +6,6 @@ export default function Apply() {
       <div
         className="apply flex flex-col gap-4 p-4 max-w-2xl"
       >
-        {/* {errors.exampleRequired && <span>This field is required</span>} */}
         <div className="prose">
           <h1>Application for OpenSats Project Page and/or General Fund Grant</h1>
           <p>
@@ -77,7 +72,7 @@ export default function Apply() {
           <hr />
         </div>
       </div>
-      <TypeformEmbed/>
+      <ApplicationForm />
     </div>
   )
 }
