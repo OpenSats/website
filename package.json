@@ -17,7 +17,6 @@
     "@sendgrid/mail": "^7.6.2",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.25.0",
-    "@typeform/embed-react": "^2.1.0",
     "gray-matter": "^4.0.3",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",

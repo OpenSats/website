@@ -4,8 +4,9 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECEPIENT
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(SENDGRID_API_KEY)
+import sgMail from '@sendgrid/mail'
+
+sgMail.setApiKey(SENDGRID_API_KEY || "")
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,7 +32,7 @@ export default async function handler(
         html: `${body}`,
       }
 
-      sgMail.send(msg)
+      await sgMail.send(msg)
       res.status(200).json({ message: 'success' })
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: (err as Error).message })
