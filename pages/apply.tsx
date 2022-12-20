@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
+import Link from 'next/link'
 export default function Apply() {
   async function handleClick() { }
   const [loading, setLoading] = useState(false)
@@ -41,30 +42,11 @@ export default function Apply() {
             support Monero, Bitcoin and other free and open source projects.
           </p>
           <p>
-            The MAGIC Monero Fund is offering a grant program to support actionable Monero research, 
-            especially research relating to privacy, security, user experience, and efficiency. 
+            The MAGIC Monero Fund is offering a grant program and fundraising platform to support Monero research and development, 
+            especially relating to privacy, security, user experience, and efficiency. 
             Proposals can be related to the Monero protocol directly, or they can be related to other 
-            areas of the Monero ecosystem.
-          </p>
-          <div>
-            To complete your submission, please prepare and attach a research plan for your project. 
-            The plan should be 3-5 pages (not counting citations, any images, and biographical sketch) and include the following:
-            <ul>
-              <li>The research question you seek to answer, and how the Monero Project benefits from the research.</li>
-              <li>A literature review of existing work and how your proposal improves upon it. </li>
-              <li>Any preliminary work you have already completed.  </li>
-              <li>Description of the plan to carry out the research. </li>
-              <li>A plan to work with Monero&apos;s developers and/or researchers to integrate the results of the research into Monero&apos;s protocol or ecosystem.  </li>
-              <li>A budget, likely consisting mostly of labor costs for the researcher(s). This should include the desired payment schedule, which should be no more frequent than monthly. Any additional budgetary item such as equipment should be included as well. Specify the desired form of payment, which can be cryptocurrency or fiat currency.  </li>
-              <li><i>OPTIONAL:</i> A biographical sketch such as a resume or CV. Alternatively, a list of contributions to open source projects.</li>
-            </ul>
-          </div>
-          <h2>Computing Resources Available </h2>
-          <p>
-            Computing and data storage resources can be made available to applicants 
-            depending on research requirements, resource availability, and vetting by a third party. 
-            These resources include a research computing server with a 64-thread Threadripper CPU, 256 GB RAM, 
-            2TB SSD, and 12TB RAID1 HDD.
+            areas of the Monero ecosystem. For research projects, please refer to special instructions 
+            <Link href="/apply_research"> here</Link>.
           </p>
           <h2>Proposal Evaluation Criteria</h2>
           <div>
@@ -86,19 +68,15 @@ export default function Apply() {
             which are the last two pages of <a href="https://magicgrants.org/funds/MAGIC%20Fund%20Grant%20Disbursement%20Process%20and%20Requirements.pdf">this document</a>.  
             This includes the collection of your ID and tax information. We will conduct sanctions checks.  
           </p>
-          <h2>Vulnerability Research</h2>
-          <p>
-            If your proposal seek to uncover weaknesses in the privacy and/or security features of 
-            Monero as it exists today, then the Committee will require that you share any significant 
-            weaknesses with the Committee (and any critical vulnerabilities with <a href="https://github.com/monero-project/meta/blob/master/VULNERABILITY_RESPONSE_PROCESS.md">Monero&apos;s official Vulnerability Response Process</a>)  90 days before publishing the research so that action can be taken to mitigate the vulnerabilities.
-          </p>
-          <h2>How to Submit a proposal</h2>
+          <h2>How to Submit a Proposal</h2>
           <p>
             To submit a proposal, please complete the form below or create an issue on <a href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=[Grant+Title]">Github</a>.  
             Applicants are free to use their legal name or a pseudonym at this step, 
             although note the <a href="#Eligibility"><b>Eligibility</b></a> section. 
+            You can choose to apply for a direct grant from the MAGIC Monero Fund&#39;s General Fund and/or 
+            request that your project be listed on MoneroFund.org to raise funds from Monero
+            community members.
           </p>
-          <hr />
         </div>
         <label className="checkbox">
           <input type="checkbox" {...register('general_fund')} />
@@ -122,7 +100,7 @@ export default function Apply() {
         </label>
 
         <label>
-          Your Name *
+          Your Name or Pseudonym *
           <input type="text" {...register('your_name', { required: true })} />
         </label>
         <label>
@@ -194,57 +172,16 @@ export default function Apply() {
           <textarea {...register('timelines', { required: true })} />
         </label>
         <label>
-          Project Keywords *
-          <small>
-            These keywords will be used to help website visitors filter to your
-            project.
-          </small>
-          <small>
-            [Monero, Layer Two Protocol (eg. Lightning Network), Security
-            or Protocol Research, Code Review, Design / User Experience, Other
-            Free and Open Source Project (eg. Tor), Other]
-          </small>
-          <input type="text" {...register('keywords', { required: true })} />
-        </label>
-
-        <label className="checkbox">
-          <input type="checkbox" {...register('has_received_funding')} />
-          Has this project received any funding?
-        </label>
-
-        <label>
-          If so, please describe.
-          <input type="text" {...register('what_funding')} />
-        </label>
-        <label>
           If you&#39;re applying for a grant from the general fund, please
           submit a proposed budget for the requested amount and how it will be used.
           <input type="text" {...register('proposed_budget')} />
         </label>
         <label>
-          Other Relevant Project Links
-          <textarea {...register('relevant_links')} />
-        </label>
-        <label>
-          Please include any social media or common community communication
-          platforms like Twitter, Matrix, Telegram, Keybase, Discord, etc.
-          <textarea {...register('social_media')} />
-        </label>
-        <label>
-          Applicant Bios
+          Applicant Bios (Optional)
           <small>
-            Please list any contributions to Monero or
-            other open source projects.
+            List revevant accomplishments.
           </small>
           <textarea {...register('bios')} />
-        </label>
-        <label>
-          References *
-          <small>
-            Please list any references from the Monero or open source
-            community that we could contact for more info on you or your project
-          </small>
-          <textarea {...register('references', { required: true })} />
         </label>
         <div className="prose">
           <small>
