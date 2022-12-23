@@ -4,7 +4,7 @@ summary: 'GrapheneOS is a private and secure mobile operating system with great 
 nym: 'Daniel Micay'
 website: 'https://grapheneos.org/'
 coverImage: '/img/project/graphene.png'
-git: 'https://github.com/BitcoinPolicyInstitute'
+git: 'https://github.com/GrapheneOS'
 twitter: 'GrapheneOS'
 personalTwitter: 'DanielMicay'
 type: 'Other Free and Open Source Project'
