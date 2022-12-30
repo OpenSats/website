@@ -1,11 +1,11 @@
 ---
 title: 'Bitcoin Dev Kit'
 summary: 'The goal of the Bitcoin Dev Kit (BDK) project (originally called Magical Bitcoin 🧙) is to provide libraries and tools that make it 10x easier to build secure, full featured, cross-platform on-chain Bitcoin wallets. All BDK components are designed to be lightweight and modular so that they can be adapted for virtually any use-case: from single-sig mobile wallets to multi-billion-dollar cold storage vaults.'
-nym: 'Steve Myers'
+nym: 'Alekos Filini'
 website: 'https://bitcoindevkit.org/'
 coverImage: '/img/project/bdk.jpeg'
 git: 'https://github.com/bitcoindevkit'
-twitter: 'notmandatory'
+twitter: 'bitcoindevkit'
 type: 'Other Free and Open Source Project'
 zaprite: 'vmwW1gJFaZ2os0AADI48'
 ---
