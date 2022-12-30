@@ -1,7 +1,7 @@
 ---
 title: 'The Tor Project'
 summary: 'The Tor Project advances human rights and defends your privacy online through free software and open networks.'
-nym: 'Tor'
+nym: 'The Tor Project'
 website: 'https://www.torproject.org/'
 coverImage: '/img/project/tor.svg'
 git: 'https://gitweb.torproject.org/'
