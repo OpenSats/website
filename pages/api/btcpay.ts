@@ -2,7 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
-import { PayReq } from '../../utils/types'
+import {PayReq, ProjectItem} from '../../utils/types'
+import {getPostBySlug} from "../../utils/md";
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 
@@ -11,8 +12,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_name, project_slug, email, name, zaprite }: PayReq =
-      req.body
+    const {amount, project_slug, email, name}: PayReq =
+        req.body
     const REDIRECT = 'http://opensats.org/thankyou'
 
     try {
@@ -20,38 +21,48 @@ export default async function handler(
       if (!(amount >= MIN_AMOUNT)) {
         throw new Error('Invalid amount.')
       }
+      if (!project_slug) {
+        throw new Error('Invalid project.')
+      }
 
+      let project: ProjectItem;
+      try {
+        project = getPostBySlug(project_slug);
+      } catch {
+
+        throw new Error('Invalid project.')
+      }
       const metadata = {
         orderId: project_slug,
-        zaprite_campaign: zaprite,
-        project_name,
+        zaprite_campaign: project.zaprite,
+        project_name: project.title,
         buyerName: name || 'anonymous',
         buyerEmail: email || null,
       }
 
       let data = await fetchPostJSONAuthed(
-        `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
-        }/invoices`,
-        `token ${process.env.BTCPAY_API_KEY}`,
-        {
-          amount,
-          currency: CURRENCY,
-          metadata: {
-            orderId: project_slug,
-            project_name,
-            buyerName: name || 'anonymous',
-            buyerEmail: email || null,
-            posData: metadata,
-            zaprite_campaign: zaprite,
-            recipient_uuid: ZAPRITE_USER_UUID,
-          },
-          checkout: { redirectURL: REDIRECT },
-        }
+          `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
+          }/invoices`,
+          `token ${process.env.BTCPAY_API_KEY}`,
+          {
+            amount,
+            currency: CURRENCY,
+            metadata: {
+              orderId: project_slug,
+              project_name: project.title,
+              buyerName: name || 'anonymous',
+              buyerEmail: email || null,
+              posData: metadata,
+              zaprite_campaign: project.zaprite,
+              recipient_uuid: ZAPRITE_USER_UUID,
+            },
+            checkout: {redirectURL: REDIRECT}
+          }
       )
       res.status(200).json(data)
     } catch (err) {
       console.log(err)
-      res.status(500).json({ statusCode: 500, message: (err as Error).message })
+      res.status(500).json({statusCode: 500, message: (err as Error).message})
     }
   } else {
     res.setHeader('Allow', 'POST')
