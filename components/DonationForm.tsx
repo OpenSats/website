@@ -22,7 +22,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [deductable, setDeductable] = useState('yes')
   const [amount, setAmount] = useState('')
 
-  const [readyToPay, setReadyToPay] = useState(false)
+  const [readyToPayFiat, setReadyToPayFiat] = useState(false)
+  const [readyToPayBTC, setReadyToPayBTC] = useState(false)
 
   const [btcPayLoading, setBtcpayLoading] = useState(false)
   const [fiatLoading, setFiatLoading] = useState(false)
@@ -39,15 +40,19 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   useEffect(() => {
+    let fiatValid = false;
+    let btcValid: boolean;
     if (amount && typeof parseInt(amount) === 'number') {
-      if (deductable === 'no' || (name && email)) {
-        setReadyToPay(true)
-      } else {
-        setReadyToPay(false)
-      }
-    } else {
-      setReadyToPay(false)
+      fiatValid = true;
     }
+    if (deductable === 'no' || (name && email)) {
+      btcValid = true;
+    } else {
+      fiatValid = false;
+      btcValid = false;
+    }
+    setReadyToPayFiat(fiatValid)
+    setReadyToPayBTC(btcValid)
   }, [deductable, amount, email, name])
 
   async function handleBtcPay() {
@@ -58,9 +63,12 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     setBtcpayLoading(true)
     try {
       const payload = {
-        amount,
         project_slug: projectSlug,
         zaprite
+      }
+
+      if (amount) {
+        Object.assign(payload, { amount })
       }
 
       if (email) {
@@ -178,13 +186,13 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           <h3>How much would you like to donate?</h3>
         </div>
         <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
-          {[50, 100, 250, 500].map((value, index) => (
+          {[50, 100, 250, 500, null].map((value, index) => (
             <button
               key={index}
               className="group"
-              onClick={(e) => handleFiatAmountClick(e, value.toString())}
+              onClick={(e) => handleFiatAmountClick(e, value?.toString()??"")}
             >
-              ${value}
+              {value?`$${value}`: "Any"}
             </button>
           ))}
           <div className="relative flex w-full">
@@ -193,7 +201,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               <span className="w-5 h-5 font-mono text-xl mb-2">{'$'}</span>
             </div>
             <input
-              required
               type="number"
               id="amount"
               value={amount}
@@ -211,7 +218,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           name="btcpay"
           onClick={handleBtcPay}
           className="pay"
-          disabled={!readyToPay || btcPayLoading}
+          disabled={ !readyToPayBTC ||  btcPayLoading}
         >
           {btcPayLoading ? (
             <Spinner />
@@ -227,7 +234,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           name="stripe"
           onClick={handleFiat}
           className="pay"
-          disabled={!readyToPay || fiatLoading}
+          disabled={!readyToPayFiat || fiatLoading}
         >
           {fiatLoading ? (
             <Spinner />
