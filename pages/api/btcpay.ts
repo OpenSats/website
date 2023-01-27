@@ -18,7 +18,7 @@ export default async function handler(
 
     try {
       // Validate the amount that was passed from the client.
-      if (!(amount >= MIN_AMOUNT)) {
+      if (amount != null && amount < MIN_AMOUNT) {
         throw new Error('Invalid amount.')
       }
       if (!project_slug) {
@@ -32,32 +32,34 @@ export default async function handler(
 
         throw new Error('Invalid project.')
       }
-      const metadata = {
-        orderId: project_slug,
-        zaprite_campaign: project.zaprite,
-        project_name: project.title,
-        buyerName: name || 'anonymous',
-        buyerEmail: email || null,
+      const reqData = {
+        currency: CURRENCY,
+        metadata: {
+          orderId: project_slug,
+          project_name: project.title,
+          buyerName: name || 'anonymous',
+          buyerEmail: email || null,
+          posData: {
+            orderId: project_slug,
+            zaprite_campaign: project.zaprite,
+            project_name: project.title,
+            buyerName: name || 'anonymous',
+            buyerEmail: email || null,
+          },
+          zaprite_campaign: project.zaprite,
+          recipient_uuid: ZAPRITE_USER_UUID,
+        },
+            checkout: { redirectURL: REDIRECT }};
+      
+      if(amount){
+        Object.assign(reqData, { amount })
       }
-
       let data = await fetchPostJSONAuthed(
-          `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
-          }/invoices`,
-          `token ${process.env.BTCPAY_API_KEY}`,
-          {
-            amount,
-            currency: CURRENCY,
-            metadata: {
-              orderId: project_slug,
-              project_name: project.title,
-              buyerName: name || 'anonymous',
-              buyerEmail: email || null,
-              posData: metadata,
-              zaprite_campaign: project.zaprite,
-              recipient_uuid: ZAPRITE_USER_UUID,
-            },
-            checkout: {redirectURL: REDIRECT}
-          }
+        `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
+        }/invoices`,
+        `token ${process.env.BTCPAY_API_KEY}`,
+        reqData
+        
       )
       res.status(200).json(data)
     } catch (err) {
