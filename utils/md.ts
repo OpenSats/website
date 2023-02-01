@@ -2,6 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 
+import { ProjectItem } from '../../utils/types'
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
 const FIELDS = ['title',
@@ -26,7 +27,7 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string) {
+export function getPostBySlug(slug: string) :ProjectItem {
   const fields = FIELDS;
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -52,7 +53,7 @@ export function getPostBySlug(slug: string) {
   return items
 }
 
-export function getAllPosts() {
+export function getAllPosts() :ProjectItem[] {
   const slugs = getPostSlugs()
   const posts = slugs.map((slug) => getPostBySlug(slug))
 
