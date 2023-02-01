@@ -60,7 +60,6 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       const payload = {
         amount,
         project_slug: projectSlug,
-        project_name: projectNamePretty,
         zaprite
       }
 
