@@ -77,6 +77,10 @@ export default function Apply() {
             request that your project be listed on MoneroFund.org to raise funds from Monero
             community members.
           </p>
+          <p>
+            Please note this form is not considered confidential and is effectively equivalent to a public GitHub issue.
+            In order to reach out privately, please send an email to MoneroFund@magicgrants.org.
+          </p>
         </div>
         <label className="checkbox">
           <input type="checkbox" {...register('general_fund')} />
