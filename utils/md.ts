@@ -15,6 +15,7 @@ const FIELDS = ['title',
   'zaprite',
   'twitter',
   'personalTwitter',
+  'hidden'
 ]
 
 export function getPostSlugs() {
@@ -26,8 +27,8 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string) :ProjectItem {
-  const fields = FIELDS;
+export function getPostBySlug(slug: string, includeHidden: boolean = false): ProjectItem | null {
+  const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -48,13 +49,13 @@ export function getPostBySlug(slug: string) :ProjectItem {
       items[field] = data[field]
     }
   })
-
+  if (items.hidden && !includeHidden) {
+    return null;
+  }
   return items
 }
 
-export function getAllPosts() :ProjectItem[] {
+export function getAllPosts() : ProjectItem[] {
   const slugs = getPostSlugs()
-  const posts = slugs.map((slug) => getPostBySlug(slug))
-
-  return posts
+  return slugs.map((slug) => getPostBySlug(slug)).filter(a => a != null) as ProjectItem[]
 }
