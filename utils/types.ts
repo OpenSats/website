@@ -10,6 +10,7 @@ export type ProjectItem = {
   zaprite: string
   website: string
   personalTwitter?: string
+  hidden?: boolean
 }
 
 export type PayReq = {
