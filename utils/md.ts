@@ -1,8 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-
-import { ProjectItem } from '../../utils/types'
+import {ProjectItem} from "./types";
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
 const FIELDS = ['title',
