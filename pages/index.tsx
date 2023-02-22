@@ -6,39 +6,12 @@ import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
 import unicorn from '/public/heroes/unicorn.png'
-import { getAllPosts } from '../utils/md'
+import { getAllPosts, getPostBySlug } from '../utils/md'
 import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
 
-// These shouldn't be swept up in the regular list so we hardcode them
-const generalFund: ProjectItem = {
-  slug: 'general_fund',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats General Fund',
-  summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
-  zaprite: '32WbND8heqmY5wYYnIpa',
-}
-
-const opsFund: ProjectItem = {
-  slug: 'operations_budget',
-  nym: 'OpenSats',
-  website: 'https://opensats.org',
-  title: 'OpenSats Operations Budget',
-  summary:
-    'We help you find and support open-source Bitcoin projects - helping create a better tomorrow, today.',
-  coverImage: '/heroes/gold.png',
-  git: 'opensats',
-  twitter: 'opensats',
-  zaprite: 'lZo1wcsJ0SQb58XfGC4e',
-}
-
-const Home: NextPage<{ projects: any }> = ({ projects }) => {
+const Home: NextPage<{ projects: ProjectItem[], generalFund: ProjectItem, opsFund: ProjectItem }> = ({ projects, generalFund, opsFund }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const router = useRouter()
@@ -124,9 +97,14 @@ export default Home
 export async function getStaticProps({ params }: { params: any }) {
   const projects = getAllPosts()
 
+  const generalFund = getPostBySlug("general_fund", true);
+  const opsFund = getPostBySlug("operations_budget", true);
+
   return {
     props: {
       projects,
+      generalFund,
+      opsFund
     },
   }
 }
