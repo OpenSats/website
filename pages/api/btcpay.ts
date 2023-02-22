@@ -27,7 +27,7 @@ export default async function handler(
 
       let project: ProjectItem;
       try {
-        project = getPostBySlug(project_slug);
+        project = getPostBySlug(project_slug, true);
       } catch {
 
         throw new Error('Invalid project.')
