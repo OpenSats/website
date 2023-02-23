@@ -27,9 +27,8 @@ export default async function handler(
 
       let project: ProjectItem;
       try {
-        project = getPostBySlug(project_slug, true);
+        project = getPostBySlug(project_slug, true)
       } catch {
-
         throw new Error('Invalid project.')
       }
       const reqData = {
