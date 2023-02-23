@@ -27,7 +27,7 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string, includeHidden: boolean = false): ProjectItem | null {
+export function getPostBySlug(slug: string, includeHidden: boolean = false): ProjectItem {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -50,12 +50,19 @@ export function getPostBySlug(slug: string, includeHidden: boolean = false): Pro
     }
   })
   if (items.hidden && !includeHidden) {
-    return null;
+    throw new Error('Hidden project')
   }
   return items
 }
 
 export function getAllPosts() : ProjectItem[] {
   const slugs = getPostSlugs()
-  return slugs.map((slug) => getPostBySlug(slug)).filter(a => a != null) as ProjectItem[]
+  //get all posts & return them but make sure to catch errors from getPostBySlug and filter them out
+  return slugs.map((slug) => {
+    try {
+      return getPostBySlug(slug)
+    } catch {
+      return null
+    }
+  }).filter(a => a != null) as ProjectItem[]
 }
