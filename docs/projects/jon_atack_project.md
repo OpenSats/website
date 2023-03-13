@@ -1,5 +1,5 @@
 ---
-title: 'Bitcoin Core'
+title: 'Jon Atack: Working on Bitcoin Core'
 summary: 'I work on Bitcoin Core development, code review, and testing.'
 nym: 'Jon Atack'
 website: 'https://jonatack.github.io'
