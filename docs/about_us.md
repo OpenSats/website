@@ -16,9 +16,9 @@ MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)
 
 * [kayabaNerve](https://twitter.com/kayabaNerve) is a Monero-ecosystem developer and security  researcher who was the first to implement Monero atomic swaps with ASMR.
 
-* [Deverick](https://twitter.com/deverickapollo) is an application security developer for Blackbaud, a leading nonprofit cloud services platform. He co-planned the 2021 Monero Party.
-
-* [Csilla Brimer](https://twitter.com/CryptoTweetie) is a blockchain consultant at Willenrimer and a co-founder of the Open Economy Initiative. She co-planned the 2021 Monero Party.
-
 * [monerobull](https://twitter.com/monerobull) is a distributor of marketing materials for Monero Outreach and moderates various communication channels of the Monero community.
+
+* [artlimber](https://github.com/artlimber)
+
+* [Majestic Bank](https://github.com/MajesticBank)
 
