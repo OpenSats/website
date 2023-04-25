@@ -12,7 +12,7 @@ const Credits = () => {
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
   const h4rprPhoto = '/img/team/h4rpr.png'
-  const gigiPhoto = '/img/team/gigi.png'
+  const gigiPhoto = '/img/team/gigi.jpg'
 
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
