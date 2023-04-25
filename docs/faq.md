@@ -35,7 +35,7 @@ We distribute grants to a wide variety of contributor types (developers, designe
 
 - Any project that is free and open source and is aligned with the OpenSats mission are free to [submit an application](http://opensats.org/apply) for their project to be listed on the [OpenSats website](http://opensats.org/projects)
 - All applications which fulfill the criteria will be evaluated by the Board. Upon board approval and collection of necessary supplemental data, approved projects will be listed on the OpenSats project portal. Donors will be able to contribute funds and recommend that the OpenSats&#39; board considers their donations be allocated towards these pre-approved, mission-aligned projects.
-- If you are helping Bitcoin and FOSS, please [submit an application](http://opensats.org/apply) (LINK) to be listed on our site.
+- If you are helping Bitcoin and FOSS, please [submit an application](http://opensats.org/apply) to be listed on our site.
 
 ## How did you choose the board?
 
@@ -43,7 +43,7 @@ We distribute grants to a wide variety of contributor types (developers, designe
 - OpenSats&#39; board members have deep-seated values and will stop at nothing to support and ensure the survival of free and open source technology like Bitcoin.
 - The board is composed of well-known and respected public-facing individuals who will carry the torch and be held accountable for their choices. We encourage community feedback, dialogue, and constructive criticism. We can only promise to do our best to ensure that all funds go to deserving projects which support OpenSats&#39; mission of creating a sustainable and consistent ecosystem of funding for Bitcoin and Bitcoin-related FOSS contributors.
 - We are committed to being 100% passthrough for all donations made on our platform. To this day our operational, legal, and payment processing fees have been graciously and privately funded.
-- Please consider donating to the OpenSats operational fund (LINK) which will help cover our basic operational expenses (which we have kept to a minimum) so we can ensure that all donations intended for Bitcoin and FOSS projects remains 100% passthrough.
+- Please consider donating to the OpenSats operational fund which will help cover our basic operational expenses (which we have kept to a minimum) so we can ensure that all donations intended for Bitcoin and FOSS projects remains 100% passthrough.
 
 ## Tell me more about your board. How does it work?
 
