@@ -12,6 +12,7 @@ const Credits = () => {
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
   const h4rprPhoto = '/img/team/h4rpr.png'
+  const gigiPhoto = '/img/team/gigi.png'
 
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
@@ -41,6 +42,7 @@ const Credits = () => {
       link: 'https://twitter.com/PoleVaultDream',
     },
     { image: elainePhoto, nym: 'Elaine', link: 'https://twitter.com/eiaine' },
+    { image: gigiPhoto, nym: 'Gigi', link: 'https://twitter.com/dergigi' },
     { image: jamesPhoto, nym: 'James', link: 'https://twitter.com/jamesob' },
     {
       image: mattOdellPhoto,
