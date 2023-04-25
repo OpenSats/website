@@ -14,7 +14,7 @@ Free and open source Bitcoin projects as well as related free and open source pr
 
 Bitcoin projects and free and open source contributors may also apply for grants from our general fund by [submitting an application](http://opensats.org/apply).
 
-We think there&#39;s a major free rider problem in the free and open source contributor space and hope that funding those who give back will improve the tech and talent in the space long term. Our platform aims to connect donors to free and open source contributors by enabling anyone to explore our catalog of board reviewed and vetted projects and suggest donations go to the projects of their choice... or to a general fund which will distribute grants on a quarterly basis to qualifying and vetted grant applicants.
+We think there&#39;s a major free rider problem in the free and open source contributor space and hope that funding those who give back will improve the tech and talent in the space long term. Our platform aims to connect donors to free and open source contributors by enabling anyone to explore our catalog of board reviewed and vetted projects and suggest donations go to the projects of their choice or to a general fund which will distribute grants on a quarterly basis to qualifying and vetted grant applicants.
 
 OpenSats is committed to providing a platform with no fees and 100% passthrough of all donations to projects and the general fund made via our platform.
 
