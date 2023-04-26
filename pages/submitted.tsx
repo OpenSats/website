@@ -6,7 +6,7 @@ export default function Submitted() {
       <h2>Thank you for your application!</h2>
       <p>
         If you have any questions, please reach out to{' '}
-        <a href="mailto:info@opensats.org">support@opensats.org</a>
+        <a href="mailto:support@opensats.org">support@opensats.org</a>
       </p>
       .
       <p>
