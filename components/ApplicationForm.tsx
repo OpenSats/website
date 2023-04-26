@@ -89,10 +89,10 @@ export default function ApplicationForm() {
                 <textarea {...register('other_contact')} />
             </label>
             <label>
-                Short Project Description *
+                Project Description *
                 <small>
                     This will be listed on the explore projects page of the OpenSats
-                    website. 2-3 sentences.
+                    website. Please write at least 2-3 sentences.
                 </small>
                 <textarea {...register('short_description', { required: true })} />
             </label>
