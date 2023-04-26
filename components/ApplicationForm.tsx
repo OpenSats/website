@@ -106,7 +106,7 @@ export default function ApplicationForm() {
             </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
-                Are you the Project Lead / Lead Contributor
+                Are you the Project Lead / Lead Contributor?
             </label>
             <label>
                 If someone else, please list the project&#39;s Lead Contributor or
