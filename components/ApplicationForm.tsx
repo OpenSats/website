@@ -96,14 +96,6 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('short_description', { required: true })} />
             </label>
-            <label>
-                Long Project Description
-                <small>
-                    This will be listed on your personal project page of the OpenSats
-                    website. It can be longer and go into detail about your project.
-                </small>
-                <textarea {...register('long_description')} />
-            </label>
             {/* <label>
                   Project Images: (attachment)
                   <input type="text" {...register('your_name', { required: true })} />
