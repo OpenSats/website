@@ -132,19 +132,6 @@ export default function ApplicationForm() {
                 Project Timelines and Potential Milestones *
                 <textarea {...register('timelines', { required: true })} />
             </label>
-            <label>
-                Project Keywords *
-                <small>
-                    These keywords will be used to help website visitors filter to your
-                    project.
-                </small>
-                <small>
-                    [Bitcoin Core, Layer Two Protocol (eg. Lightning Network), Security
-                    or Protocol Research, Code Review, Design / User Experience, Other
-                    Free and Open Source Project (eg. Tor), Other]
-                </small>
-                <input type="text" {...register('keywords', { required: true })} />
-            </label>
 
             <label className="checkbox">
                 <input type="checkbox" {...register('has_received_funding')} />
