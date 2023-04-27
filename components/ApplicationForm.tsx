@@ -134,8 +134,11 @@ export default function ApplicationForm() {
             </label>
 
             <label>
-                Please include any social media or common community communication
-                platforms like Twitter, Telegram, Keybase, Discord, etc.
+                Project-specific Social Media
+                <small>
+                    Please include any project-specific social media or common community communication
+                    platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
+                </small>
                 <textarea {...register('social_media')} />
             </label>
 
