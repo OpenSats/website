@@ -176,9 +176,9 @@ export default function ApplicationForm() {
                 <textarea {...register('other_contact')} />
             </label>
             <label>
-                Applicant Bios
+                Prior Contributions
                 <small>
-                    Please list any contributions to other open source or
+                    Please list any prior contributions to other open source or
                     Bitcoin-related projects.
                 </small>
                 <textarea {...register('bios')} />
