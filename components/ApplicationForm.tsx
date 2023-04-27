@@ -49,6 +49,7 @@ export default function ApplicationForm() {
             </label>
 
             <hr/>
+            <h2>Project Details</h2>
 
             <label>
                 Project Name *
@@ -110,6 +111,7 @@ export default function ApplicationForm() {
 
             <hr/>
 
+            <h2>Applicant Details</h2>
             <label>
                 Your Name *
                 <input type="text" {...register('your_name', { required: true })} />
