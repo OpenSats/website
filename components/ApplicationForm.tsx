@@ -162,7 +162,7 @@ export default function ApplicationForm() {
                 Maintainer <input type="text" {...register('other_lead')} />
             </label>
             <label>
-                Personal Github (if applicable)
+                Personal Github (or similar, if applicable)
                 <input type="text" {...register('personal_github')} />
             </label>
             <label>
