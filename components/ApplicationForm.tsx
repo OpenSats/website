@@ -85,13 +85,16 @@ export default function ApplicationForm() {
               </label> */}
 
             <label>
-                Project Github (if applicable)
-                <input type="text" {...register('github')} />
+                Project Timelines and Potential Milestones *
+                <small>
+                    This will help us evaluate overal scope and potential grant duration.
+                </small>
+                <textarea {...register('timelines', { required: true })} />
             </label>
 
             <label>
-                Project Timelines and Potential Milestones *
-                <textarea {...register('timelines', { required: true })} />
+                Project Github (if applicable)
+                <input type="text" {...register('github')} />
             </label>
 
             <label className="checkbox">
