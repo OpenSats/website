@@ -129,11 +129,8 @@ export default function ApplicationForm() {
                 <small>
                     Please list any other relevant contact details you are comfortable
                     sharing in case we need to reach out with questions.
-                </small>
-                <small>
-                    These could include github username, twitter username, LinkedIn,
-                    bitcoinhackers, other social media handles, emails, phone
-                    numbers, usernames, etc.
+                    These could include nostr pubkeys, social media handles, emails, phone
+                    numbers, etc.
                 </small>
                 <textarea {...register('other_contact')} />
             </label>
