@@ -48,6 +48,8 @@ export default function ApplicationForm() {
                 Apply for my project to be listed on the OpenSats Explore Page
             </label>
 
+            <hr/>
+
             <label>
                 Project Name *
                 <small>
@@ -105,6 +107,9 @@ export default function ApplicationForm() {
                 If so, please describe.
                 <input type="text" {...register('what_funding')} />
             </label>
+
+            <hr/>
+
             <label>
                 Your Name *
                 <input type="text" {...register('your_name', { required: true })} />
