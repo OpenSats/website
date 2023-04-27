@@ -60,16 +60,58 @@ export default function ApplicationForm() {
             </label>
 
             <label>
+                Project Description *
+                <small>
+                    This will be listed on the explore projects page of the OpenSats
+                    website. Please write at least 2-3 sentences.
+                </small>
+                <textarea {...register('short_description', { required: true })} />
+            </label>
+
+            <label>
+                Potential Impact *
+                <small>
+                    Why is this project important to Bitcoin or the broader free and
+                    open source community?
+                </small>
+                <textarea {...register('potential_impact', { required: true })} />
+            </label>
+            {/* <label>
+                  Project Images: (attachment)
+                  <input type="text" {...register('your_name', { required: true })} />
+              </label> */}
+
+            <label>
+                Project Github (if applicable)
+                <input type="text" {...register('github')} />
+            </label>
+
+            <label>
+                Project Timelines and Potential Milestones *
+                <textarea {...register('timelines', { required: true })} />
+            </label>
+
+            <label className="checkbox">
+                <input type="checkbox" {...register('free_open_source')} />
+                Is the project free and open source?
+            </label>
+
+            <label className="checkbox">
+                <input type="checkbox" {...register('has_received_funding')} />
+                Has this project received any funding?
+            </label>
+
+            <label>
+                If so, please describe.
+                <input type="text" {...register('what_funding')} />
+            </label>
+            <label>
                 Your Name *
                 <input type="text" {...register('your_name', { required: true })} />
             </label>
             <label>
                 Email *
                 <input type="text" {...register('email', { required: true })} />
-            </label>
-            <label>
-                Project Github (if applicable)
-                <input type="text" {...register('github')} />
             </label>
             <label>
                 Personal Github (if applicable)
@@ -88,22 +130,6 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('other_contact')} />
             </label>
-            <label>
-                Project Description *
-                <small>
-                    This will be listed on the explore projects page of the OpenSats
-                    website. Please write at least 2-3 sentences.
-                </small>
-                <textarea {...register('short_description', { required: true })} />
-            </label>
-            {/* <label>
-                  Project Images: (attachment)
-                  <input type="text" {...register('your_name', { required: true })} />
-              </label> */}
-            <label className="checkbox">
-                <input type="checkbox" {...register('free_open_source')} />
-                Is the project free and open source?
-            </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
                 Are you the Project Lead / Lead Contributor?
@@ -111,28 +137,6 @@ export default function ApplicationForm() {
             <label>
                 If someone else, please list the project&#39;s Lead Contributor or
                 Maintainer <input type="text" {...register('other_lead')} />
-            </label>
-            <label>
-                Potential Impact *
-                <small>
-                    Why is this project important to Bitcoin or the broader free and
-                    open source community?
-                </small>
-                <textarea {...register('potential_impact', { required: true })} />
-            </label>
-            <label>
-                Project Timelines and Potential Milestones *
-                <textarea {...register('timelines', { required: true })} />
-            </label>
-
-            <label className="checkbox">
-                <input type="checkbox" {...register('has_received_funding')} />
-                Has this project received any funding?
-            </label>
-
-            <label>
-                If so, please describe.
-                <input type="text" {...register('what_funding')} />
             </label>
             <label>
                 If you&#39;re applying for a grant from the general fund, please
