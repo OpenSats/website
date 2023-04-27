@@ -143,9 +143,12 @@ export default function ApplicationForm() {
                 Maintainer <input type="text" {...register('other_lead')} />
             </label>
             <label>
-                If you&#39;re applying for a grant from the general fund, please
-                submit a proposed budget around how much funding you are requesting
-                and how it will be used
+                Proposed Budget
+                <small>
+                    If you&#39;re applying for a grant from the general fund, please
+                    submit a proposed budget around how much funding you are requesting
+                    and how it will be used.
+                </small>
                 <input type="text" {...register('proposed_budget')} />
             </label>
             <label>
