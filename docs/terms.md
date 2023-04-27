@@ -26,7 +26,7 @@ You also agree that you will not collect or store personal data about other user
 5. Account. Open Sats may require registration for an account to access the Site and the Services. There will be a registration process for the creation of accounts to complete the registration process. You may be required to provide information about yourself or your company as part of the registration process or your continued use of the Service. You agree that any registration information that you submit to Open Sats will be correct, accurate, and up to date and that you will not impersonate any person or entity, or falsely state or otherwise misrepresent your affiliation with a person or entity.
 6. Account Security. Maintaining account security is very important. You are solely responsible for maintaining the confidentiality of your account password. You agree to notify Open Sats immediately if you become aware of any unauthorized use of your password or of your account.
 7. Account Sharing or Transfers. Accounts are registered to individuals or entities and may not be sold, traded, gifted or otherwise transferred at any time under any circumstances. An account may not be shared. Passwords may not be disclosed to anyone else.
-8. Cancellation by You. You have the right to cancel your account at any time. You may cancel your account by emailing us at info@opensats.org to submit a request to our support team.
+8. Cancellation by You. You have the right to cancel your account at any time. You may cancel your account by emailing us at support@opensats.org to submit a request to our support team.
 9. Termination by Open Sats. Open Sats may at any time terminate your account for any reason or no reason including, without limitation, if:
 
 - Open Sats determines that you are (a) in breach of or otherwise acting inconsistently with the Terms or written agreements (b) engaging in fraudulent or illegal activities or other conduct that may result in liability to Open Sats;
@@ -39,7 +39,7 @@ Content authored by Open Sats is generally made available for public sharing and
 
 Some Content in our Site may be acquired from sources that prohibit further use of their Content without advance permission. Where possible, the Content will display a notice with the applicable license. You agree to abide by such notices. However it may occur that:
 
-1. Some Content expressly indicates that the author does not intend for an open license to apply. You should contact the author or author&#39;s agent for permission to use such Content. Questions on Open Sats authored content can be sent to: info@opensats.org.
+1. Some Content expressly indicates that the author does not intend for an open license to apply. You should contact the author or author&#39;s agent for permission to use such Content. Questions on Open Sats authored content can be sent to: support@opensats.org.
 2. Some Content contains trademarks, trade dress, logos and brand assets of Open Sats and other parties (&quot;Trademarks&quot;). Except for a few limited circumstances, Trademarks cannot be used without advance written permission of the owner of the Trademark.
 3. Software used by our Websites is licensed under the Open Sats Public License or similarly permissive open source licenses.
 4. Content Submissions **.** You may contribute Content when interacting with our Site and Services, including but not limited to commenting on an article, blogging, contributing code, or contributing graphics or written material (each a &quot;Submission&quot;). Unless your Submission is made under a separate agreement with Open Sats, in which case that agreement will govern, then
@@ -92,6 +92,6 @@ Some Content in our Site may be acquired from sources that prohibit further use 
 >
 > Raleigh, NC 27612
 >
-> info@opensats.org
+> support@opensats.org
 >
 > 3566450v1.AWB.31306.G51883
