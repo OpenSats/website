@@ -187,7 +187,7 @@ export default function ApplicationForm() {
                 References *
                 <small>
                     Please list any references from the Bitcoin community or open source
-                    space that we could contact for more info on you or your project
+                    space that we could contact for more information on you or your project.
                 </small>
                 <textarea {...register('references', { required: true })} />
             </label>
