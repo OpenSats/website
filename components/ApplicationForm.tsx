@@ -126,7 +126,10 @@ export default function ApplicationForm() {
 
             <label>
 
-                Other Relevant Project Links
+                Additional Project Links
+                <small>
+                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
+                </small>
                 <textarea {...register('relevant_links')} />
             </label>
 
