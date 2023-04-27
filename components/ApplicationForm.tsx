@@ -153,6 +153,14 @@ export default function ApplicationForm() {
                 Email *
                 <input type="text" {...register('email', { required: true })} />
             </label>
+            <label className="checkbox">
+                <input type="checkbox" {...register('are_you_lead')} />
+                Are you the Project Lead / Lead Contributor?
+            </label>
+            <label>
+                If someone else, please list the project&#39;s Lead Contributor or
+                Maintainer <input type="text" {...register('other_lead')} />
+            </label>
             <label>
                 Personal Github (if applicable)
                 <input type="text" {...register('personal_github')} />
@@ -166,14 +174,6 @@ export default function ApplicationForm() {
                     numbers, etc.
                 </small>
                 <textarea {...register('other_contact')} />
-            </label>
-            <label className="checkbox">
-                <input type="checkbox" {...register('are_you_lead')} />
-                Are you the Project Lead / Lead Contributor?
-            </label>
-            <label>
-                If someone else, please list the project&#39;s Lead Contributor or
-                Maintainer <input type="text" {...register('other_lead')} />
             </label>
             <label>
                 Applicant Bios
