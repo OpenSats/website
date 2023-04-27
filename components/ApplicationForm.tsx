@@ -113,14 +113,14 @@ export default function ApplicationForm() {
 
             <label className="checkbox">
                 <input type="checkbox" {...register('has_received_funding')} />
-                Has this project received any funding?
+                Has this project received any prior funding?
             </label>
 
             <label>
                 If so, please describe.
                 <input type="text" {...register('what_funding')} />
             </label>
-            
+
             <label>
 
                 Other Relevant Project Links
