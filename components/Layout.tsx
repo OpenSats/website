@@ -30,7 +30,7 @@ const Layout: React.FC = ({ children }) => {
       <main className="flex-1 flex flex-col">{children}</main>
       <footer className="flex justify-between p-4 md:p-8 bg-light">
         <div className="flex flex-col">
-          <strong>© Open Sats Initiative, 2022</strong>
+          <strong>© Open Sats Initiative, 2023</strong>
           <Link href="/terms">
             <a>Terms</a>
           </Link>
