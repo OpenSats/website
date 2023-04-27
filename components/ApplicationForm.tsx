@@ -93,7 +93,7 @@ export default function ApplicationForm() {
             </label>
 
             <label>
-                Project Github (if applicable)
+                Project Github (or similar, if applicable)
                 <input type="text" {...register('github')} />
             </label>
 
