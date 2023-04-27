@@ -99,6 +99,18 @@ export default function ApplicationForm() {
                 Is the project free and open source?
             </label>
 
+            <hr/>
+
+            <label>
+                Proposed Budget
+                <small>
+                    If you&#39;re applying for a grant from the general fund, please
+                    submit a proposed budget around how much funding you are requesting
+                    and how it will be used.
+                </small>
+                <input type="text" {...register('proposed_budget')} />
+            </label>
+
             <label className="checkbox">
                 <input type="checkbox" {...register('has_received_funding')} />
                 Has this project received any funding?
@@ -107,6 +119,18 @@ export default function ApplicationForm() {
             <label>
                 If so, please describe.
                 <input type="text" {...register('what_funding')} />
+            </label>
+            
+            <label>
+
+                Other Relevant Project Links
+                <textarea {...register('relevant_links')} />
+            </label>
+
+            <label>
+                Please include any social media or common community communication
+                platforms like Twitter, Telegram, Keybase, Discord, etc.
+                <textarea {...register('social_media')} />
             </label>
 
             <hr/>
@@ -141,24 +165,6 @@ export default function ApplicationForm() {
             <label>
                 If someone else, please list the project&#39;s Lead Contributor or
                 Maintainer <input type="text" {...register('other_lead')} />
-            </label>
-            <label>
-                Proposed Budget
-                <small>
-                    If you&#39;re applying for a grant from the general fund, please
-                    submit a proposed budget around how much funding you are requesting
-                    and how it will be used.
-                </small>
-                <input type="text" {...register('proposed_budget')} />
-            </label>
-            <label>
-                Other Relevant Project Links
-                <textarea {...register('relevant_links')} />
-            </label>
-            <label>
-                Please include any social media or common community communication
-                platforms like Twitter, Telegram, Keybase, Discord, etc.
-                <textarea {...register('social_media')} />
             </label>
             <label>
                 Applicant Bios
