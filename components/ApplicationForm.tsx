@@ -89,20 +89,12 @@ export default function ApplicationForm() {
                 <textarea {...register('other_contact')} />
             </label>
             <label>
-                Short Project Description *
+                Project Description *
                 <small>
                     This will be listed on the explore projects page of the OpenSats
-                    website. 2-3 sentences.
+                    website. Please write at least 2-3 sentences.
                 </small>
                 <textarea {...register('short_description', { required: true })} />
-            </label>
-            <label>
-                Long Project Description
-                <small>
-                    This will be listed on your personal project page of the OpenSats
-                    website. It can be longer and go into detail about your project.
-                </small>
-                <textarea {...register('long_description')} />
             </label>
             {/* <label>
                   Project Images: (attachment)
@@ -114,7 +106,7 @@ export default function ApplicationForm() {
             </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
-                Are you the Project Lead / Lead Contributor
+                Are you the Project Lead / Lead Contributor?
             </label>
             <label>
                 If someone else, please list the project&#39;s Lead Contributor or
@@ -131,19 +123,6 @@ export default function ApplicationForm() {
             <label>
                 Project Timelines and Potential Milestones *
                 <textarea {...register('timelines', { required: true })} />
-            </label>
-            <label>
-                Project Keywords *
-                <small>
-                    These keywords will be used to help website visitors filter to your
-                    project.
-                </small>
-                <small>
-                    [Bitcoin Core, Layer Two Protocol (eg. Lightning Network), Security
-                    or Protocol Research, Code Review, Design / User Experience, Other
-                    Free and Open Source Project (eg. Tor), Other]
-                </small>
-                <input type="text" {...register('keywords', { required: true })} />
             </label>
 
             <label className="checkbox">
