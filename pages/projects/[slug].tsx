@@ -67,7 +67,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     if (dollars == 0) {
       return ""
     } else if
-      (dollars / 1000 > 1) {
+      (dollars / 1000000 >= 1) {
+      return `+ $${Math.round(dollars / 1000000)}M`
+    } else if
+      (dollars / 1000 >= 1) {
       return `+ $${Math.round(dollars / 1000)}k`
     } else {
       return `+ $${dollars.toFixed(0)}`
