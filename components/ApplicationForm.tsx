@@ -52,6 +52,19 @@ export default function ApplicationForm() {
             <h2>Project Details</h2>
 
             <label>
+                Main Focus
+                <small>
+                    In which area will your project have the most impact?
+                </small>
+                <select {...register('main_focus')} >
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="lightning">Lightning</option>
+                    <option value="nostr">nostr</option>
+                    <option value="other">Other</option>
+                </select>
+            </label>
+            
+            <label>
                 Project Name *
                 <small>
                     The name of the project to be listed on the OpenSats website
