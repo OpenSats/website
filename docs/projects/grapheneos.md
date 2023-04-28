@@ -9,6 +9,7 @@ twitter: 'GrapheneOS'
 personalTwitter: 'DanielMicay'
 type: 'Other Free and Open Source Project'
 zaprite: 'F81LWN96IGmFHnvydSli'
+bonusUSD: 1000000
 ---
 
 ## About this project
