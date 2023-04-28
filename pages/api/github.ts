@@ -1,0 +1,58 @@
+import { NextApiRequest, NextApiResponse } from 'next/types'
+
+const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
+const GH_ORG = process.env.GH_ORG
+const GH_APP_REPO = process.env.GH_APP_REPO
+
+import { Octokit } from "@octokit/rest";
+const octokit = new Octokit({ auth: GH_ACCESS_TOKEN });
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+
+  if (req.method === 'POST') {
+    if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
+      throw new Error('Env misconfigured')
+    }
+    console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
+
+    const issueTitle = `${req.body.project_name} by ${req.body.your_name}`
+    const issueBody = `
+### Description
+
+${req.body.short_description}
+
+### Potential Impact
+
+${req.body.potential_impact}
+
+### References
+
+${req.body.references}
+
+---
+
+${req.body.github}
+${req.body.personal_github}
+        `
+      const issueLabels = ['nostr', 'bitcoin']
+    try {
+      await octokit.rest.issues.create({
+        owner: GH_ORG,
+        repo: GH_APP_REPO,
+        title: issueTitle,
+        body: issueBody,
+        labels: issueLabels,
+      });
+
+      res.status(200).json({ message: 'success' })
+    } catch (err) {
+      res.status(500).json({ statusCode: 500, message: (err as Error).message })
+    }
+  } else {
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method Not Allowed')
+  }
+}
