@@ -48,6 +48,9 @@ export default function ApplicationForm() {
                 Apply for my project to be listed on the OpenSats Explore Page
             </label>
 
+            <hr/>
+            <h2>Project Details</h2>
+
             <label>
                 Project Name *
                 <small>
@@ -60,35 +63,6 @@ export default function ApplicationForm() {
             </label>
 
             <label>
-                Your Name *
-                <input type="text" {...register('your_name', { required: true })} />
-            </label>
-            <label>
-                Email *
-                <input type="text" {...register('email', { required: true })} />
-            </label>
-            <label>
-                Project Github (if applicable)
-                <input type="text" {...register('github')} />
-            </label>
-            <label>
-                Personal Github (if applicable)
-                <input type="text" {...register('personal_github')} />
-            </label>
-            <label>
-                Other Contact Details (if applicable)
-                <small>
-                    Please list any other relevant contact details you are comfortable
-                    sharing in case we need to reach out with questions.
-                </small>
-                <small>
-                    These could include github username, twitter username, LinkedIn,
-                    bitcoinhackers, other social media handles, emails, phone
-                    numbers, usernames, etc.
-                </small>
-                <textarea {...register('other_contact')} />
-            </label>
-            <label>
                 Project Description *
                 <small>
                     This will be listed on the explore projects page of the OpenSats
@@ -96,13 +70,88 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('short_description', { required: true })} />
             </label>
+
+            <label>
+                Potential Impact *
+                <small>
+                    Why is this project important to Bitcoin or the broader free and
+                    open source community?
+                </small>
+                <textarea {...register('potential_impact', { required: true })} />
+            </label>
             {/* <label>
                   Project Images: (attachment)
                   <input type="text" {...register('your_name', { required: true })} />
               </label> */}
+
+            <label>
+                Project Timelines and Potential Milestones *
+                <small>
+                    This will help us evaluate overal scope and potential grant duration.
+                </small>
+                <textarea {...register('timelines', { required: true })} />
+            </label>
+
+            <label>
+                Project Github (or similar, if applicable)
+                <input type="text" {...register('github')} />
+            </label>
+
             <label className="checkbox">
                 <input type="checkbox" {...register('free_open_source')} />
                 Is the project free and open source?
+            </label>
+
+            <hr/>
+
+            <label>
+                Proposed Budget
+                <small>
+                    If you&#39;re applying for a grant from the general fund, please
+                    submit a proposed budget around how much funding you are requesting
+                    and how it will be used.
+                </small>
+                <input type="text" {...register('proposed_budget')} />
+            </label>
+
+            <label className="checkbox">
+                <input type="checkbox" {...register('has_received_funding')} />
+                Has this project received any prior funding?
+            </label>
+
+            <label>
+                If so, please describe.
+                <input type="text" {...register('what_funding')} />
+            </label>
+
+            <label>
+
+                Additional Project Links
+                <small>
+                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
+                </small>
+                <textarea {...register('relevant_links')} />
+            </label>
+
+            <label>
+                Project-specific Social Media
+                <small>
+                    Please include any project-specific social media or common community communication
+                    platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
+                </small>
+                <textarea {...register('social_media')} />
+            </label>
+
+            <hr/>
+
+            <h2>Applicant Details</h2>
+            <label>
+                Your Name *
+                <input type="text" {...register('your_name', { required: true })} />
+            </label>
+            <label>
+                Email *
+                <input type="text" {...register('email', { required: true })} />
             </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
@@ -113,46 +162,23 @@ export default function ApplicationForm() {
                 Maintainer <input type="text" {...register('other_lead')} />
             </label>
             <label>
-                Potential Impact *
+                Personal Github (or similar, if applicable)
+                <input type="text" {...register('personal_github')} />
+            </label>
+            <label>
+                Other Contact Details (if applicable)
                 <small>
-                    Why is this project important to Bitcoin or the broader free and
-                    open source community?
+                    Please list any other relevant contact details you are comfortable
+                    sharing in case we need to reach out with questions.
+                    These could include nostr pubkeys, social media handles, emails, phone
+                    numbers, etc.
                 </small>
-                <textarea {...register('potential_impact', { required: true })} />
+                <textarea {...register('other_contact')} />
             </label>
             <label>
-                Project Timelines and Potential Milestones *
-                <textarea {...register('timelines', { required: true })} />
-            </label>
-
-            <label className="checkbox">
-                <input type="checkbox" {...register('has_received_funding')} />
-                Has this project received any funding?
-            </label>
-
-            <label>
-                If so, please describe.
-                <input type="text" {...register('what_funding')} />
-            </label>
-            <label>
-                If you&#39;re applying for a grant from the general fund, please
-                submit a proposed budget around how much funding you are requesting
-                and how it will be used
-                <input type="text" {...register('proposed_budget')} />
-            </label>
-            <label>
-                Other Relevant Project Links
-                <textarea {...register('relevant_links')} />
-            </label>
-            <label>
-                Please include any social media or common community communication
-                platforms like Twitter, Telegram, Keybase, Discord, etc.
-                <textarea {...register('social_media')} />
-            </label>
-            <label>
-                Applicant Bios
+                Prior Contributions
                 <small>
-                    Please list any contributions to other open source or
+                    Please list any prior contributions to other open source or
                     Bitcoin-related projects.
                 </small>
                 <textarea {...register('bios')} />
@@ -161,7 +187,7 @@ export default function ApplicationForm() {
                 References *
                 <small>
                     Please list any references from the Bitcoin community or open source
-                    space that we could contact for more info on you or your project
+                    space that we could contact for more information on you or your project.
                 </small>
                 <textarea {...register('references', { required: true })} />
             </label>
