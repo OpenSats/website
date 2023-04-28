@@ -1,3 +1,4 @@
+import { Octokit } from "@octokit/rest";
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -14,6 +15,13 @@ export default function ApplicationForm() {
 
     const [failureReason, setFailureReason] = useState<string>();
 
+    const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
+    const GH_ORG = process.env.GH_ORG
+    const GH_APP_REPO = process.env.GH_APP_REPO
+    const octokit = new Octokit({ auth: GH_ACCESS_TOKEN });
+
+    console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
+
     const onSubmit = async (data: any) => {
         setLoading(true)
         console.log(data)
@@ -29,6 +37,38 @@ export default function ApplicationForm() {
                 setFailureReason(e.message)
             }
         }
+
+        const issueTitle = `${data.project_name} by ${data.your_name}`
+        const issueBody = `
+### Description
+
+${data.short_description}
+
+### Potential Impact
+
+${data.potential_impact}
+
+### References
+
+${data.references}
+
+---
+
+${data.github}
+${data.personal_github}
+        `
+        const issueLabels = ['nostr', 'bitcoin']
+
+        console.log(issueTitle)
+        console.log(issueBody)
+
+        await octokit.rest.issues.create({
+            owner: GH_ORG,
+            repo: GH_APP_REPO,
+            title: issueTitle,
+            body: issueBody,
+            labels: issueLabels,
+        });
 
         setLoading(false)
     }
