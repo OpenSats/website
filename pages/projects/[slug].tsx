@@ -50,6 +50,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     zaprite,
     website,
     personalTwitter,
+    bonusUSD=0,
   } = project
 
   const [stats, setStats] = useState<Stats>();
