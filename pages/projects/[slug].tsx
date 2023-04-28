@@ -110,7 +110,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             {stats &&
               <div>
                 <h5>Raised</h5>
-                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total)}`}</h4>
+                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total + bonusUSD)}`}</h4>
               </div>
             }
 
