@@ -5,7 +5,7 @@ import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
 import Image from 'next/image'
-import unicorn from '/public/heroes/unicorn.png'
+import phoenix from '/public/heroes/phoenix.png'
 import { getAllPosts, getPostBySlug } from '../utils/md'
 import Credits from '../components/Credits'
 import { ProjectItem } from '../utils/types'
@@ -77,7 +77,7 @@ const Home: NextPage<{ projects: ProjectItem[], generalFund: ProjectItem, opsFun
             </p>
           </div>
           <div className="flex-1 flex justify-center">
-            <Image width={388} height={388} src={unicorn} alt="Unicorn" />
+            <Image width={388} height={388} src={phoenix} alt="Phoenix" />
           </div>
         </section>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
