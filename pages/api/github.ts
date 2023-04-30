@@ -19,6 +19,8 @@ export default async function handler(
     console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
 
     const issueTitle = `${req.body.project_name} by ${req.body.your_name}`
+
+    // Condensed information for screening purposes, no PII
     const issueBody = `
 ### Description
 
@@ -37,7 +39,13 @@ ${req.body.references}
 ${req.body.github}
 ${req.body.personal_github}
         `
-      const issueLabels = ['nostr', 'bitcoin']
+        
+      // Label set according to "main focus"
+      const mainFocus = `${req.body.main_focus}`.toLowerCase()
+      const issueLabels = [ mainFocus ]
+      if (mainFocus === 'lightning') {
+        issueLabels.push('bitcoin')
+      }
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
