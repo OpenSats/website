@@ -39,13 +39,18 @@ ${req.body.references}
 ${req.body.github}
 ${req.body.personal_github}
         `
-        
-      // Label set according to "main focus"
-      const mainFocus = `${req.body.main_focus}`.toLowerCase()
-      const issueLabels = [ mainFocus ]
-      if (mainFocus === 'lightning') {
-        issueLabels.push('bitcoin')
-      }
+
+    // Label set according to "main focus"
+    const mainFocus = `${req.body.main_focus}`.toLowerCase()
+    const issueLabels = [ mainFocus ]
+    if (mainFocus === 'lightning') {
+      issueLabels.push('bitcoin') // LN = subset of Bitcoin
+    }
+
+    // Tag depending on request for grant and/or request for listing
+    req.body.general_fund  && issueLabels.push('grant application')
+    req.body.explore_page  && issueLabels.push('request for listing')
+
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
