@@ -22,7 +22,7 @@ const Header = () => {
             </li>
             <li>
               <Link href="/apply">
-                <a>List Your Project</a>
+                <a>Apply</a>
               </Link>
             </li>
             <li>
