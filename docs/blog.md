@@ -1,12 +1,12 @@
 # Blog
 
-## Second Entry - [787,098](https://mempool.space/block/0000000000000000000281be401f1085e5409a24ad9b2796ef631db0da45b472)
+## Second Entry - [787,098](https://mempool.space/block/787098)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id neque sollicitudin, dictum nisi a, luctus lectus. In consequat lectus lectus, vitae accumsan ligula rutrum id. Nam auctor, quam quis tristique feugiat, tortor massa porttitor ipsum, ac sagittis quam elit at urna. Maecenas fermentum velit eu ante vestibulum gravida. Sed non auctor nulla. Duis vitae tristique diam. Proin aliquam massa in arcu sollicitudin consectetur. Nulla facilisi. Proin vulputate faucibus bibendum. Cras suscipit dictum enim, nec luctus dui bibendum congue.
 
 Morbi ullamcorper suscipit augue. Mauris cursus id felis at auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam dignissim nisi nunc, placerat aliquet sem feugiat vestibulum. Sed id tempor ipsum. Sed sit amet est turpis. Morbi in nulla purus.
 
-## First Entry - [591,121](https://www.blockstream.info/block/000000000000000000141dd0b05d6014f3130ac8879715044139c37fecc91935)
+## First Entry - [591,121](https://www.blockstream.info/block/591121)
 
 Sed egestas eros risus, eu ullamcorper arcu blandit id. Nullam gravida facilisis eros. Donec lacus nisl, elementum molestie purus in, ullamcorper blandit elit. Phasellus tristique tincidunt dui accumsan tempus. In hac habitasse platea dictumst. Sed dignissim velit felis, id pellentesque mi pulvinar ac. Mauris suscipit odio at ultrices consectetur. 
 
