@@ -177,10 +177,8 @@ Only to the extent that Open Sats meets the minimum thresholds as required under
 
 **Contact Us**
 
-If you have any questions about our practices or this Privacy Policy, please contact us at [support@opensats.org](mailto:support@opensats.org), or write to us at: Open Sats Initiative, Attn: Legal Department, 3605 Glenwood Ave., Suite 500, Raleigh, North Carolina, 27612, USA.
+If you have any questions about our practices or this Privacy Policy, please contact us at [support@opensats.org](mailto:support@opensats.org), or write to us at: Open Sats Initiative, Attn: Legal Department, 2028 E Ben White Blvd., Suite 240-6969, Austin, Texas, 78741, USA.
 
 **Changes to the Privacy Policy**
 
 This Policy is current as of the effective date set forth above. If we change our privacy policies and procedures, we will post those changes on this page and/or continue to provide access to a copy of the prior version. If we make any changes to this Privacy Policy that materially change how we treat your personal information, we will endeavor to provide you with reasonable notice of such changes, such as via prominent notice on our Sites or to your email address of record, and where required by law, we will obtain your consent or give you the opportunity to opt out of such changes.
-
-3564707v1.AWB.31306.G51883

@@ -84,14 +84,10 @@ Some Content in our Site may be acquired from sources that prohibit further use 
 23. Miscellaneous. These Terms constitute the entire agreement between you and Open Sats concerning our Site and Services and supersede any prior versions of these Terms. The Site and Services and these Terms are governed by the laws of the state of North Carolina, U.S.A., excluding its conflict of law provisions. All claims and disputes arising out of the Site and Services or these Terms shall be brought exclusively in the courts of Wake County, North Carolina, and you consent to personal jurisdiction in those courts. If any portion of these Terms is held to be invalid or unenforceable, the remaining portions will remain in full force and effect. In the event of a conflict between a translated version of these Terms and the English language version, the English language version shall control. In the event of a conflict between these Terms and relevant additional terms, the additional terms shall control.
 24. Contact Open Sats.
 
-> Open Sats
+> Open Sats Initiative, Inc.
 >
-> Attn: Open Sats – Legal Notices
+> 2028 E Ben White Blvd, #240-6969
 >
-> P.O. Box 20389
->
-> Raleigh, NC 27612
+> Austin, TX 78741
 >
 > support@opensats.org
->
-> 3566450v1.AWB.31306.G51883
