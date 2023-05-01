@@ -34,6 +34,10 @@ ${req.body.potential_impact}
 
 ${req.body.timelines}
 
+### Proposed Budget
+
+${req.body.proposed_budget}
+
 ### References
 
 ${req.body.references}
