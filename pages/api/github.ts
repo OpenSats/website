@@ -30,6 +30,10 @@ ${req.body.short_description}
 
 ${req.body.potential_impact}
 
+### Timeline & Milestones
+
+${req.body.timelines}
+
 ### References
 
 ${req.body.references}
