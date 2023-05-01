@@ -15,6 +15,7 @@ const FIELDS = ['title',
   'zaprite',
   'twitter',
   'personalTwitter',
+  'bonusUSD',
   'hidden'
 ]
 

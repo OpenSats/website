@@ -50,6 +50,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     zaprite,
     website,
     personalTwitter,
+    bonusUSD=0,
   } = project
 
   const [stats, setStats] = useState<Stats>();
@@ -66,7 +67,10 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
     if (dollars == 0) {
       return ""
     } else if
-      (dollars / 1000 > 1) {
+      (dollars / 1000000 >= 1) {
+      return `+ $${Math.round(dollars / 1000000)}M`
+    } else if
+      (dollars / 1000 >= 1) {
       return `+ $${Math.round(dollars / 1000)}k`
     } else {
       return `+ $${dollars.toFixed(0)}`
@@ -109,7 +113,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             {stats &&
               <div>
                 <h5>Raised</h5>
-                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total)}`}</h4>
+                <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(stats.usd.total + bonusUSD)}`}</h4>
               </div>
             }
 
