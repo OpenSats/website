@@ -17,6 +17,22 @@ export default function ApplicationForm() {
     const onSubmit = async (data: any) => {
         setLoading(true)
         console.log(data)
+
+        // GitHub
+        try {
+            const res = await fetchPostJSON('/api/github', data)
+            if (res.message === 'success') {
+                console.info("Application tracked") // Succeed silently
+            } else {
+                // Fail silently
+            }
+        } catch (e) {
+            if (e instanceof Error) {
+                // Fail silently
+            }
+        }
+
+        // Mail
         try {
             const res = await fetchPostJSON('/api/sendgrid', data)
             if (res.message === 'success') {
