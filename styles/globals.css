@@ -52,6 +52,7 @@ button.selected {
   @apply bg-primary;
 }
 
+select,
 input[type='text'],
 input[type='number'],
 input[type='email'],
