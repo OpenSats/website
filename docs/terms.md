@@ -89,5 +89,3 @@ Some Content in our Site may be acquired from sources that prohibit further use 
     Austin, TX 78741  
 
     [support@opensats.org](mailto:support@opensats.org)
-
-    3566450v1.AWB.31306.G51883
