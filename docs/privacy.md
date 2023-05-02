@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last Updated: November 5, 2021**
+**Last Updated: May 2, 2023**
 
 Open Sats Initiative&#39;s core purpose is to foster an ecosystem that supports the collaborative and public development of free and open-source software projects (each, a &quot;Project&quot;). This privacy policy (&quot;Privacy Policy&quot;) describes our policies and procedures about the collection, use, disclosure and sharing, or other processing of your personal information when you use our websites (e.g., opensats.org) or participate in or use our project sites (collectively, the &quot;Sites&quot;), as well as when you interact with or participate in our educations and training programs and events. (collectively, the &quot;Services&quot;). This Privacy Policy applies to activities by Open Sats Initiative and its affiliates, subsidiaries and related entities (collectively &quot;Open Sats&quot; &quot;we&quot; or &quot;us&quot;), including activities that we perform for other entities through third party agreements.
 
