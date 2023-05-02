@@ -18,8 +18,8 @@ export default function ApplicationForm() {
         setLoading(true)
         console.log(data)
 
-        // GitHub
         try {
+            // Track application in GitHub
             const res = await fetchPostJSON('/api/github', data)
             if (res.message === 'success') {
                 console.info("Application tracked") // Succeed silently
@@ -30,23 +30,24 @@ export default function ApplicationForm() {
             if (e instanceof Error) {
                 // Fail silently
             }
+        } finally {
+            // Mail application to us
+            try {
+                const res = await fetchPostJSON('/api/sendgrid', data)
+                if (res.message === 'success') {
+                    router.push('/submitted')
+                } else {
+                    setFailureReason(res.message)
+                }
+            } catch (e) {
+                if (e instanceof Error) {
+                    setFailureReason(e.message)
+                }
+            } finally {
+                setLoading(false)
+            }
         }
 
-        // Mail
-        try {
-            const res = await fetchPostJSON('/api/sendgrid', data)
-            if (res.message === 'success') {
-                router.push('/submitted')
-            } else {
-                setFailureReason(res.message)
-            }
-        } catch (e) {
-            if (e instanceof Error) {
-                setFailureReason(e.message)
-            }
-        }
-
-        setLoading(false)
     }
 
     return (

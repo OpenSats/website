@@ -24,20 +24,44 @@ export default async function handler(
       body += `<h3>${key}</h3><p>${value}</p>`
     }
 
+    let thankYouMessage = `
+Thank you for applying to OpenSats! 
+
+We have received your application and will evaluate it as quickly as we can. 
+
+We will reach out again once we've made a decision. 
+Thank you for your patience.
+    `
+
     try {
-      console.log(process.env.SENDGRID_API_KEY)
+      // Mail 'application received' to applicant
       const msg = {
-        to: TO_ADDRESS, // Change to your recipient
-        cc: CC_ADDRESS, 
-        from: FROM_ADDRESS, // Change to your verified sender
-        subject: `OpenSats Application for ${req.body.project_name}`,
-        html: `${body}`,
+        to: `${req.body.email}`, // Applicant
+        from: FROM_ADDRESS, // Verified sender
+        subject: `Your Application to OpenSats`,
+        html: `${thankYouMessage}`,
       }
 
       await sgMail.send(msg)
-      res.status(200).json({ message: 'success' })
+      console.info("Application receipt sent")
     } catch (err) {
-      res.status(500).json({ statusCode: 500, message: (err as Error).message })
+      console.error(err)
+    } finally {
+      // Mail application content to us
+      try {
+        const msg = {
+          to: TO_ADDRESS, // OpenSats
+          cc: CC_ADDRESS, // Processing & backup
+          from: FROM_ADDRESS, // Verified sender
+          subject: `OpenSats Application for ${req.body.project_name}`,
+          html: `${body}`,
+        }
+
+        await sgMail.send(msg)
+        res.status(200).json({ message: 'success' })
+      } catch (err) {
+        res.status(500).json({ statusCode: 500, message: (err as Error).message })
+      }
     }
   } else {
     res.setHeader('Allow', 'POST')
