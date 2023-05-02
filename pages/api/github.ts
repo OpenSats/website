@@ -60,6 +60,7 @@ ${req.body.personal_github}
     req.body.explore_page  && issueLabels.push('website')
 
     req.body.has_received_funding && issueLabels.push('prior funding')
+    !req.body.free_open_source && issueLabels.push('not FLOSS')
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
