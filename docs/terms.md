@@ -1,6 +1,6 @@
 # Open Sats Initiative terms of use
 
-**Last updated: November 14, 2021**
+**Last updated: May 2, 2023**
 
 Welcome to the Opensats.org website and/or mobile application (individually and collectively, the &quot;Site&quot;). Your access and use of the Site and of features, software, products and services provided by Open Sats Initiative (&quot;Open Sats,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) through the Site, (individually and collectively, the &quot;Service&quot;) is subject to the terms and conditions in this Terms of Use (&quot;Terms of Use&quot; or &quot;Terms&quot;).
 
