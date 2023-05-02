@@ -61,6 +61,8 @@ ${req.body.personal_github}
 
     req.body.has_received_funding && issueLabels.push('prior funding')
     !req.body.free_open_source && issueLabels.push('not FLOSS')
+    !req.body.are_you_lead && issueLabels.push('surrogate')
+
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
