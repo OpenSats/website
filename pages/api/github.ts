@@ -59,6 +59,7 @@ ${req.body.personal_github}
     req.body.general_fund  && issueLabels.push('grant')
     req.body.explore_page  && issueLabels.push('website')
 
+    req.body.has_received_funding && issueLabels.push('prior funding')
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
