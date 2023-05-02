@@ -56,8 +56,8 @@ ${req.body.personal_github}
     }
 
     // Tag depending on request for grant and/or request for listing
-    req.body.general_fund  && issueLabels.push('grant application')
-    req.body.explore_page  && issueLabels.push('request for listing')
+    req.body.general_fund  && issueLabels.push('grant')
+    req.body.explore_page  && issueLabels.push('website')
 
     try {
       await octokit.rest.issues.create({
