@@ -1,5 +1,5 @@
 ---
-title: 'Michael Ford Project'
+title: 'Core Maintenance'
 summary: "I'm one of the Bitcoin Core maintainers. My work is code review, triaging and ultimately merging changes into Bitcoin Core."
 nym: 'Michael Ford'
 website: 'https://github.com/laanwj'
