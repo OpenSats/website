@@ -44,11 +44,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </Head>
       <section className="p-4 md:p-8 flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">
-          <h1>Specific Funds</h1>
+          <h1>Projects</h1>
         </div>
         <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-          {openSatsProjects &&
-            openSatsProjects.map((p, i) => (
+          {sortedProjects &&
+            sortedProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
@@ -57,11 +57,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       <section className="p-4 md:p-8 flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">
-          <h1>Projects</h1>
+          <h1>Specific Funds</h1>
         </div>
         <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
+          {openSatsProjects &&
+            openSatsProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
