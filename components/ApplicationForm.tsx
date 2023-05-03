@@ -117,7 +117,7 @@ export default function ApplicationForm() {
             <label>
                 Project Timelines and Potential Milestones *
                 <small>
-                    This will help us evaluate overal scope and potential grant duration.
+                    This will help us evaluate overall scope and potential grant duration.
                 </small>
                 <textarea {...register('timelines', { required: true })} />
             </label>
