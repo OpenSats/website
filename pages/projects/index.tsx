@@ -57,7 +57,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       <section className="p-4 md:p-8 flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">
-          <h1>Specific Funds</h1>
+          <h1 id="funds">Specific Funds</h1>
         </div>
         <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
           {openSatsProjects &&
