@@ -141,7 +141,7 @@ export default function ApplicationForm() {
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <input type="text" {...register('proposed_budget')} />
+                <textarea {...register('proposed_budget')} />
             </label>
 
             <label className="checkbox">
