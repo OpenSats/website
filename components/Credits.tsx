@@ -16,6 +16,7 @@ const Credits = () => {
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
   const thebitcoincompanyLogo = '/img/supporters/tbc.png'
+  const unchainedLogo = '/img/supporters/unchained.png'
   const bottlepayLogo = '/img/supporters/bottlepay.png'
   const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
   const duxReserveLogoWithCastlenine =
@@ -130,6 +131,11 @@ const Credits = () => {
       link: 'https://zaprite.com',
       image: zapirte,
       nym: 'Zaprite'
+    },
+    {
+      link: 'https://unchained.com',
+      image: unchainedLogo,
+      nym: 'Unchained',
     },
     {
       link: 'https://thebitcoincompany.com',
