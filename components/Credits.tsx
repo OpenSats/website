@@ -107,7 +107,7 @@ const Credits = () => {
       nym: 'Ten31',
     },
     {
-      link: 'https://www.manningfulton.com/people/attorneys/andrew-w-blair/',
+      link: 'https://www.poynerspruill.com/professionals/andy-blair/',
       image: andrewWBlairLogo,
       nym: 'Andrew W. Blair',
     },
