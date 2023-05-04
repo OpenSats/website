@@ -242,11 +242,6 @@ export default function ApplicationForm() {
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
-            <p>
-                After submitting your application, please send images of your project
-                to <a href="mailto:support@opensats.org">support@opensats.org</a> for
-                inclusion on your project page.
-            </p>
         </form >
     )
 }
