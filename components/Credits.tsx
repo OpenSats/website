@@ -140,13 +140,6 @@ const Credits = () => {
 
   return (
     <section className="bg-black p-4 flex flex-col items-center">
-      <h1 className="text-white my-4">Managing Director</h1>
-      <div className="credit container flex flex-wrap items-center justify-center mb-8">
-        {managing_director.map((m, i) => (
-          <CreditItem key={i} image={m.image} link={m.link} nym={m.nym} />
-        ))}
-      </div>
-      
       <h1 className="text-white my-4">Board</h1>
       <div className="credit container flex flex-wrap items-center justify-center mb-8">
         {board.map((b, i) => (
