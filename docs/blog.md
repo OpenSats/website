@@ -1,4 +1,4 @@
-### OpenSats Receives Additional Funding of $10m from #startsmall [#](https://mempool.space/block/788255)
+### OpenSats Receives Additional Funding of $10m from #startsmall [#](https://mempool.space/block/788258)
 
 We are delighted to announce that OpenSats has received a generous donation of
 $10 million from Jack Dorsey's philanthropic initiative, #startsmall, which will
