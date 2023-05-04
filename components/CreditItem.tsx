@@ -4,6 +4,7 @@ export type CreditItemProps = {
   link: string
   image: string
   nym: string
+  person?: boolean
 }
 const CreditItem: React.FC<CreditItemProps> = ({ image, nym, link }) => {
   return (
