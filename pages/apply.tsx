@@ -72,6 +72,7 @@ export default function Apply() {
           <hr />
         </div>
       </div>
+      <h1>Application Form</h1>
       <ApplicationForm />
     </div>
   )

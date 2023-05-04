@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Last Updated: November 5, 2021**
+**Last Updated: May 2, 2023**
 
 Open Sats Initiative&#39;s core purpose is to foster an ecosystem that supports the collaborative and public development of free and open-source software projects (each, a &quot;Project&quot;). This privacy policy (&quot;Privacy Policy&quot;) describes our policies and procedures about the collection, use, disclosure and sharing, or other processing of your personal information when you use our websites (e.g., opensats.org) or participate in or use our project sites (collectively, the &quot;Sites&quot;), as well as when you interact with or participate in our educations and training programs and events. (collectively, the &quot;Services&quot;). This Privacy Policy applies to activities by Open Sats Initiative and its affiliates, subsidiaries and related entities (collectively &quot;Open Sats&quot; &quot;we&quot; or &quot;us&quot;), including activities that we perform for other entities through third party agreements.
 
@@ -16,7 +16,7 @@ _Registration Information._ We collect personal information when you register fo
 
 _Account and Profile Information._ Users may sign up for, request, or order our Services and may register to receive materials on our Sites. Users may also create a login, which is a single sign-on account which is used for common access to many of our Services. Personal information collected on the Sites includes community forum content, profiles, photographs, names, unique identifiers, information about your current and past employment affiliations, contact information (address, telephone number, email address, preferred pronoun, etc.), and transaction information (to the extent you share that information). In order to access certain personalized services on the Sites, you may be asked to also create and store a username and password for an account from Open Sats. In order to improve the functioning of the website and our subsequent communications to users we may also ask users to provide additional optional information regarding your interests, demographics, experience and detailed contact preferences.
 
-_Donations._ To register for and participate in the Open Sats Projects and related Services, users must have an active login ID and account (see above for information collected related to account registration). Open Sats may collect the following information related to financial contributions and :Depending on the Community Bridge Services in which users participate, we may also collect additional information relating to their use of those Services, including:
+_Donations._ To register for and participate in the Open Sats Projects and related Services, users must have an active login ID and account (see above for information collected related to account registration). Open Sats may collect the following information related to financial contributions and :Depending on the Open Sats Services in which users participate, we may also collect additional information relating to their use of those Services, including:
 
 - _Donations_: We collect information about financial contributions made, as well as and funds received through the Sites. Open Sats generally only records the result of the transaction and any references to the transaction record provided by the third-party site. For example, when users make financial contributions to projects, we collect and process the donation amount, allocation to certain projects, and identifiers used to associate that donation with the donor and project in the project&#39;s open and transparent public ledger (unless otherwise agreed to by the donor and Open Sats. We also collect disbursement amount and category, recipient name and email, and identifiers related to disbursements of project funds for projects. Further, we use third-party services including Stripe to facilitate funding and disbursements. If applicable, the third-party site may collect payment information directly to facilitate a transaction.
 
@@ -101,11 +101,11 @@ We and our third-party providers use cookies, pixel tags, JavaScript, log files,
 
 We have implemented commercially reasonable precautions designed to protect the information we collect from loss, misuse, and unauthorized access, disclosure, alteration, and destruction. Please be aware that despite our best efforts, Open Sats provides no guarantee that any security measure will be completely and totally secure.
 
-We are not responsible for any lost, stolen, or compromised passwords or for any activity on your account via unauthorized password activity. We ask you to promptly notify us if you become aware that any information provided by or submitted to our Sites or through our Services is lost, stolen, or used without permission at info@opensats.org.
+We are not responsible for any lost, stolen, or compromised passwords or for any activity on your account via unauthorized password activity. We ask you to promptly notify us if you become aware that any information provided by or submitted to our Sites or through our Services is lost, stolen, or used without permission at support@opensats.org.
 
 **Marketing Choices**
 
-You may opt out of or withdraw your consent to receive direct marketing emails from us by using the unsubscribe or opt out mechanisms included in our marketing emails or by emailing info@opensats.org. You may also unsubscribe from mailing lists via the applicable mailing list&#39;s subscription website or, in some cases, by using the unsubscribe mechanisms included in such emails.
+You may opt out of or withdraw your consent to receive direct marketing emails from us by using the unsubscribe or opt out mechanisms included in our marketing emails or by emailing support@opensats.org. You may also unsubscribe from mailing lists via the applicable mailing list&#39;s subscription website or, in some cases, by using the unsubscribe mechanisms included in such emails.
 
 **Retention of Your Personal Information**
 
@@ -157,7 +157,7 @@ Please see the section below with our contact information on how to reach Open S
 
 **Recourse, Enforcement, Liability**. Open Sats commits to resolve complaints about our processing of your personal data. European Union, United Kingdom, and Swiss users with inquiries or complaints regarding our processing of Personal data should first contact Open Sats as follows:
 
-Email: info@opensats.org
+Email: support@opensats.org
 
 Attention: Information Security
 
@@ -173,14 +173,16 @@ The Sites may contain links to third party sites or online services. Please refe
 
 **California Privacy Rights**
 
-Only to the extent that Open Sats meets the minimum thresholds as required under California law to be subject to the California Privacy Rights Act of 2020, residents of California will be able to request and obtain from us once a year, free of charge, a list of the third parties to whom we have disclosed their personal information (if any) for their direct marketing purposes in the prior calendar year, as well as the types of personal information disclosed to those parties. If you are a California resident and would like to request this information, please submit your request in an email to [info@opensats.org](mailto:info@opensats.org). We reserve the right to ask for verification of your California residence and deny this request if Open Sats believes it is not subject to this requirement.
+Only to the extent that Open Sats meets the minimum thresholds as required under California law to be subject to the California Privacy Rights Act of 2020, residents of California will be able to request and obtain from us once a year, free of charge, a list of the third parties to whom we have disclosed their personal information (if any) for their direct marketing purposes in the prior calendar year, as well as the types of personal information disclosed to those parties. If you are a California resident and would like to request this information, please submit your request in an email to [support@opensats.org](mailto:support@opensats.org). We reserve the right to ask for verification of your California residence and deny this request if Open Sats believes it is not subject to this requirement.
 
 **Contact Us**
 
-If you have any questions about our practices or this Privacy Policy, please contact us at [info@opensats.org](mailto:info@opensats.org), or write to us at: Open Sats Initiative, Attn: Legal Department, 3605 Glenwood Ave., Suite 500, Raleigh, North Carolina, 27612, USA.
+If you have any questions about our practices or this Privacy Policy, please contact us at [support@opensats.org](mailto:support@opensats.org), or write to us at:
+
+    Open Sats Initiative, Inc.  
+    2028 East Ben White Blvd, Suite 240-6969  
+    Austin, TX 78741  
 
 **Changes to the Privacy Policy**
 
 This Policy is current as of the effective date set forth above. If we change our privacy policies and procedures, we will post those changes on this page and/or continue to provide access to a copy of the prior version. If we make any changes to this Privacy Policy that materially change how we treat your personal information, we will endeavor to provide you with reasonable notice of such changes, such as via prominent notice on our Sites or to your email address of record, and where required by law, we will obtain your consent or give you the opportunity to opt out of such changes.
-
-3564707v1.AWB.31306.G51883

@@ -9,6 +9,7 @@ twitter: 'btcpolicyorg'
 personalTwitter: 'grant_mccarty'
 type: 'Other Free and Open Source Project'
 zaprite: 'hNeX1BwyjpTXi6jQ2CQm'
+bonusUSD: 250000
 ---
 
 ## About this project

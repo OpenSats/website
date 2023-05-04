@@ -1,6 +1,6 @@
 # Open Sats Initiative terms of use
 
-**Last updated: November 14, 2021**
+**Last updated: May 2, 2023**
 
 Welcome to the Opensats.org website and/or mobile application (individually and collectively, the &quot;Site&quot;). Your access and use of the Site and of features, software, products and services provided by Open Sats Initiative (&quot;Open Sats,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) through the Site, (individually and collectively, the &quot;Service&quot;) is subject to the terms and conditions in this Terms of Use (&quot;Terms of Use&quot; or &quot;Terms&quot;).
 
@@ -26,7 +26,7 @@ You also agree that you will not collect or store personal data about other user
 5. Account. Open Sats may require registration for an account to access the Site and the Services. There will be a registration process for the creation of accounts to complete the registration process. You may be required to provide information about yourself or your company as part of the registration process or your continued use of the Service. You agree that any registration information that you submit to Open Sats will be correct, accurate, and up to date and that you will not impersonate any person or entity, or falsely state or otherwise misrepresent your affiliation with a person or entity.
 6. Account Security. Maintaining account security is very important. You are solely responsible for maintaining the confidentiality of your account password. You agree to notify Open Sats immediately if you become aware of any unauthorized use of your password or of your account.
 7. Account Sharing or Transfers. Accounts are registered to individuals or entities and may not be sold, traded, gifted or otherwise transferred at any time under any circumstances. An account may not be shared. Passwords may not be disclosed to anyone else.
-8. Cancellation by You. You have the right to cancel your account at any time. You may cancel your account by emailing us at info@opensats.org to submit a request to our support team.
+8. Cancellation by You. You have the right to cancel your account at any time. You may cancel your account by emailing us at support@opensats.org to submit a request to our support team.
 9. Termination by Open Sats. Open Sats may at any time terminate your account for any reason or no reason including, without limitation, if:
 
 - Open Sats determines that you are (a) in breach of or otherwise acting inconsistently with the Terms or written agreements (b) engaging in fraudulent or illegal activities or other conduct that may result in liability to Open Sats;
@@ -39,7 +39,7 @@ Content authored by Open Sats is generally made available for public sharing and
 
 Some Content in our Site may be acquired from sources that prohibit further use of their Content without advance permission. Where possible, the Content will display a notice with the applicable license. You agree to abide by such notices. However it may occur that:
 
-1. Some Content expressly indicates that the author does not intend for an open license to apply. You should contact the author or author&#39;s agent for permission to use such Content. Questions on Open Sats authored content can be sent to: info@opensats.org.
+1. Some Content expressly indicates that the author does not intend for an open license to apply. You should contact the author or author&#39;s agent for permission to use such Content. Questions on Open Sats authored content can be sent to: support@opensats.org.
 2. Some Content contains trademarks, trade dress, logos and brand assets of Open Sats and other parties (&quot;Trademarks&quot;). Except for a few limited circumstances, Trademarks cannot be used without advance written permission of the owner of the Trademark.
 3. Software used by our Websites is licensed under the Open Sats Public License or similarly permissive open source licenses.
 4. Content Submissions **.** You may contribute Content when interacting with our Site and Services, including but not limited to commenting on an article, blogging, contributing code, or contributing graphics or written material (each a &quot;Submission&quot;). Unless your Submission is made under a separate agreement with Open Sats, in which case that agreement will govern, then
@@ -82,16 +82,10 @@ Some Content in our Site may be acquired from sources that prohibit further use 
 21. Disclaimer; Limitation of Liability. THE SITE AND SERVICES ARE PROVIDED &quot;AS IS&quot; WITH ALL FAULTS. TO THE EXTENT PERMITTED BY LAW, OPEN SATS AND THE INDEMNIFIED PARTIES HEREBY DISCLAIM ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES THAT THE CONTENT, SITE, AND SERVICES (AS APPLICABLE) ARE FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE, AND NON-INFRINGING. YOU BEAR THE ENTIRE RISK AS TO USING THE SITE AND SERVICES FOR YOUR PURPOSES AND AS TO THE QUALITY AND PERFORMANCE OF THE SITE AND SERVICES, INCLUDING WITHOUT LIMITATION THE RISK THAT YOUR HARDWARE, SOFTWARE, OR CONTENT IS DELETED OR CORRUPTED, THAT SOMEONE ELSE GAINS UNAUTHORIZED ACCESS TO YOUR INFORMATION, OR THAT ANOTHER USER MISUSES OR MISAPPROPRIATES YOUR SUBMISSION. THIS LIMITATION WILL APPLY NOTWITHSTANDING THE FAILURE OF ESSENTIAL PURPOSE OF ANY REMEDY. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF IMPLIED WARRANTIES, SO THIS DISCLAIMER MAY NOT APPLY TO YOU. EXCEPT AS REQUIRED BY LAW, OPEN SATS AND THE INDEMNIFIED PARTIES WILL NOT BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN ANY WAY RELATING TO THESE TERMS OR THE USE OF OR INABILITY TO USE THE CONTENT, SITE, AND SERVICES, INCLUDING WITHOUT LIMITATION DIRECT AND INDIRECT DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, LOST PROFITS, LOSS OF DATA, AND COMPUTER FAILURE OR MALFUNCTION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES AND REGARDLESS OF THE THEORY (CONTRACT, TORT, OR OTHERWISE) UPON WHICH SUCH CLAIM IS BASED. THE COLLECTIVE LIABILITY OF OPEN SATS AND THE INDEMNIFIED PARTIES UNDER THIS AGREEMENT WILL NOT EXCEED \$500 (FIVE HUNDRED DOLLARS). SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL, CONSEQUENTIAL, OR SPECIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT APPLY TO YOU.
 22. Modifications to these Terms **.** We may update these Terms from time to time to address a new feature of the Site and Services or to clarify a provision. The updated Terms will be posted online. If the changes are substantive, we will announce the update through our usual channels for such announcements such as blog posts, banners, emails, or forums. Your continued use of our Site and Services after the effective date of such changes constitutes your acceptance of such changes. To make your review more convenient, we will post an effective date at the top of this page.
 23. Miscellaneous. These Terms constitute the entire agreement between you and Open Sats concerning our Site and Services and supersede any prior versions of these Terms. The Site and Services and these Terms are governed by the laws of the state of North Carolina, U.S.A., excluding its conflict of law provisions. All claims and disputes arising out of the Site and Services or these Terms shall be brought exclusively in the courts of Wake County, North Carolina, and you consent to personal jurisdiction in those courts. If any portion of these Terms is held to be invalid or unenforceable, the remaining portions will remain in full force and effect. In the event of a conflict between a translated version of these Terms and the English language version, the English language version shall control. In the event of a conflict between these Terms and relevant additional terms, the additional terms shall control.
-24. Contact Open Sats.
+24. Contact Open Sats:
 
-> Open Sats
->
-> Attn: Open Sats – Legal Notices
->
-> P.O. Box 20389
->
-> Raleigh, NC 27612
->
-> info@opensats.org
->
-> 3566450v1.AWB.31306.G51883
+    Open Sats Initiative, Inc.  
+    2028 East Ben White Blvd, Suite 240-6969  
+    Austin, TX 78741  
+
+    [support@opensats.org](mailto:support@opensats.org)
