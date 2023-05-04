@@ -1,39 +1,43 @@
-### A Headline That Will Make A Splash [#](https://mempool.space/block/788235)
+### OpenSats Receives Additional Funding of $10m from #startsmall [#](https://mempool.space/block/788255)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id neque
-sollicitudin, dictum nisi a, luctus lectus. In consequat lectus lectus, vitae
-accumsan ligula rutrum id. Nam auctor, quam quis tristique feugiat, tortor massa
-porttitor ipsum, ac sagittis quam elit at urna. Maecenas fermentum velit eu ante
-vestibulum gravida. Sed non auctor nulla. Duis vitae tristique diam. Proin
-aliquam massa in arcu sollicitudin consectetur. Nulla facilisi. Proin vulputate
-faucibus bibendum. Cras suscipit dictum enim, nec luctus dui bibendum congue.
+We are delighted to announce that OpenSats has received a generous donation of
+$10 million from Jack Dorsey's philanthropic initiative, #startsmall, which will
+be used to support the development of free and open-source software and projects
+focusing on bitcoin, nostr, and related technologies.
 
-Morbi ullamcorper suscipit augue. Mauris cursus id felis at auctor. Pellentesque
-habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-Etiam dignissim nisi nunc, placerat aliquet sem feugiat vestibulum. Sed id
-tempor ipsum. Sed sit amet est turpis. Morbi in nulla purus.
+OpenSats' mission is to help build a sustainable ecosystem and provide
+consistent funding for free and open-source projects and protocols. We believe
+that free software and open protocols are necessary for a free and prosperous
+society. Without software that protects the individual user's rights and
+freedoms, and without digital infrastructure that is open to all, modern society
+risks slipping further into digital totalitarianism.
 
-Sed egestas eros risus, eu ullamcorper arcu blandit id. Nullam gravida facilisis
-eros. Donec lacus nisl, elementum molestie purus in, ullamcorper blandit elit.
-Phasellus tristique tincidunt dui accumsan tempus. In hac habitasse platea
-dictumst. Sed dignissim velit felis, id pellentesque mi pulvinar ac. Mauris
-suscipit odio at ultrices consectetur: [https://opensats.org/apply](https://opensats.org/apply)
+OpenSats will continue to be a 100% pass-through operation, meaning that all
+donated funds will be fully allocated to projects vetted by the OpenSats board
+of directors unless they are specifically provided for operational purposes.
+#startsmall's donation includes funding for OpenSats' operational budget, which
+will allow us to remain 100% pass-through, expand efforts, and streamline
+operations as a 501(c)(3) public charity going forward.
 
-Fusce felis lacus, aliquet nec semper sed, faucibus ut leo. Sed dui elit,
-maximus eu dui eu, sodales suscipit sapien. Integer felis nisi, pulvinar ac
-tristique in, tincidunt vitae mi. Nunc lacinia luctus ligula. Lorem ipsum dolor
-sit amet, consectetur adipiscing elit. Etiam elementum eget purus vitae pretium.
-Sed id orci leo. Pellentesque lobortis feugiat lectus, sagittis consequat ante
-hendrerit aliquam. Mauris cursus ligula id ipsum facilisis, eget tempus nisl
-pretium. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-posuere cubilia curae; Mauris ipsum leo, congue quis purus non, iaculis aliquam
-nisi.
+Half of the donation amount—$5m USD—will be dedicated to advancing the new and
+growing nostr ecosystem. We have set up a committee of nostr developers and
+tinkerers, including fiatjaf and NVK, who will help us to evaluate projects and
+protocol contributions. If you are working on nostr and looking for funding,
+please apply here: [https://opensats.org/apply](https://opensats.org/apply)
 
-Quisque interdum orci nec maximus vestibulum. Nunc viverra nulla lorem, at
-fringilla erat fringilla quis. Sed mollis sagittis nisi. Quisque sit amet
-suscipit lectus, lacinia ullamcorper purus. Sed vitae tortor sed dolor iaculis
-sollicitudin in id leo. In hac habitasse platea dictumst. Ut semper sollicitudin
-felis imperdiet rhoncus. Class aptent taciti sociosqu ad litora torquent per
-conubia nostra, per inceptos himenaeos. Vestibulum quis nulla sed arcu
-sollicitudin ornare quis non lectus. Nunc leo leo, gravida ac laoreet in,
-fringilla id neque. Nam iaculis arcu et elementum consectetur.
+As part of expanding these efforts, NVK and Gigi are joining the OpenSats board
+to help with our organizational and funding decisions. Gigi will be joining in a
+full-time capacity to lead our ongoing operations and strategy.
+
+The structure of OpenSats remains unchanged: we want to create a sustainable,
+independent, and consistent ecosystem of funding for bitcoin, nostr, and other
+open-source projects. Having multiple open-source contributors on our
+board—tenured core devs among them—helps us to better understand what is needed
+to put effective long-term support structures into place.
+
+We are excited to work with contributors, industry, and the wider free and
+open-source community to help ship the freedom tools that are so desperately
+needed. We can't wait to see what you are going to build.
+
+In the words of Cypherpunk founder Eric Hughes:  
+"Let us proceed together apace. Onward."
