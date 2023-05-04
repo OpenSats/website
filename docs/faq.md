@@ -51,7 +51,7 @@ We distribute grants to a wide variety of contributor types (developers, designe
 
 ## Are you really 100% passthrough?
 
-- Yes, really. No one on the board makes any money. We pay our lawyers and have some basic costs like email services and operational tools, but they aren&#39;t paid from your donations: our costs are covered by generous donors who support our organization&#39;s operations.
+- Yes, really. We have an operational budget to cover lawyers, accountants, and basic operational costs, but they aren't paid from your donations to projects. Our operational costs are covered by generous donors who regularly donate to our [operations budget](https://opensats.org/projects/opensats_operations_budget).
   - John Pfeffer, Greg Foss, Ten31, and The Bitcoin Company have contributed to our legal and operational overhead or contributed technical development resources so OpenSats can stay 100% passthrough for all general fund and project specific donations.
   - Silvergate bank has provided fee free banking services
   - BTCPay Server is a FOSS tool we use to accept bitcoin with no fees.
