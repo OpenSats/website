@@ -1,6 +1,6 @@
 # Open Sats Initiative terms of use
 
-**Last updated: November 14, 2021**
+**Last updated: May 2, 2023**
 
 Welcome to the Opensats.org website and/or mobile application (individually and collectively, the &quot;Site&quot;). Your access and use of the Site and of features, software, products and services provided by Open Sats Initiative (&quot;Open Sats,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) through the Site, (individually and collectively, the &quot;Service&quot;) is subject to the terms and conditions in this Terms of Use (&quot;Terms of Use&quot; or &quot;Terms&quot;).
 
@@ -82,16 +82,10 @@ Some Content in our Site may be acquired from sources that prohibit further use 
 21. Disclaimer; Limitation of Liability. THE SITE AND SERVICES ARE PROVIDED &quot;AS IS&quot; WITH ALL FAULTS. TO THE EXTENT PERMITTED BY LAW, OPEN SATS AND THE INDEMNIFIED PARTIES HEREBY DISCLAIM ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION WARRANTIES THAT THE CONTENT, SITE, AND SERVICES (AS APPLICABLE) ARE FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE, AND NON-INFRINGING. YOU BEAR THE ENTIRE RISK AS TO USING THE SITE AND SERVICES FOR YOUR PURPOSES AND AS TO THE QUALITY AND PERFORMANCE OF THE SITE AND SERVICES, INCLUDING WITHOUT LIMITATION THE RISK THAT YOUR HARDWARE, SOFTWARE, OR CONTENT IS DELETED OR CORRUPTED, THAT SOMEONE ELSE GAINS UNAUTHORIZED ACCESS TO YOUR INFORMATION, OR THAT ANOTHER USER MISUSES OR MISAPPROPRIATES YOUR SUBMISSION. THIS LIMITATION WILL APPLY NOTWITHSTANDING THE FAILURE OF ESSENTIAL PURPOSE OF ANY REMEDY. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF IMPLIED WARRANTIES, SO THIS DISCLAIMER MAY NOT APPLY TO YOU. EXCEPT AS REQUIRED BY LAW, OPEN SATS AND THE INDEMNIFIED PARTIES WILL NOT BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN ANY WAY RELATING TO THESE TERMS OR THE USE OF OR INABILITY TO USE THE CONTENT, SITE, AND SERVICES, INCLUDING WITHOUT LIMITATION DIRECT AND INDIRECT DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, LOST PROFITS, LOSS OF DATA, AND COMPUTER FAILURE OR MALFUNCTION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES AND REGARDLESS OF THE THEORY (CONTRACT, TORT, OR OTHERWISE) UPON WHICH SUCH CLAIM IS BASED. THE COLLECTIVE LIABILITY OF OPEN SATS AND THE INDEMNIFIED PARTIES UNDER THIS AGREEMENT WILL NOT EXCEED \$500 (FIVE HUNDRED DOLLARS). SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL, CONSEQUENTIAL, OR SPECIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT APPLY TO YOU.
 22. Modifications to these Terms **.** We may update these Terms from time to time to address a new feature of the Site and Services or to clarify a provision. The updated Terms will be posted online. If the changes are substantive, we will announce the update through our usual channels for such announcements such as blog posts, banners, emails, or forums. Your continued use of our Site and Services after the effective date of such changes constitutes your acceptance of such changes. To make your review more convenient, we will post an effective date at the top of this page.
 23. Miscellaneous. These Terms constitute the entire agreement between you and Open Sats concerning our Site and Services and supersede any prior versions of these Terms. The Site and Services and these Terms are governed by the laws of the state of North Carolina, U.S.A., excluding its conflict of law provisions. All claims and disputes arising out of the Site and Services or these Terms shall be brought exclusively in the courts of Wake County, North Carolina, and you consent to personal jurisdiction in those courts. If any portion of these Terms is held to be invalid or unenforceable, the remaining portions will remain in full force and effect. In the event of a conflict between a translated version of these Terms and the English language version, the English language version shall control. In the event of a conflict between these Terms and relevant additional terms, the additional terms shall control.
-24. Contact Open Sats.
+24. Contact Open Sats:
 
-> Open Sats
->
-> Attn: Open Sats – Legal Notices
->
-> P.O. Box 20389
->
-> Raleigh, NC 27612
->
-> support@opensats.org
->
-> 3566450v1.AWB.31306.G51883
+    Open Sats Initiative, Inc.  
+    2028 East Ben White Blvd, Suite 240-6969  
+    Austin, TX 78741  
+
+    [support@opensats.org](mailto:support@opensats.org)

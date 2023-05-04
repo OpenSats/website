@@ -17,20 +17,37 @@ export default function ApplicationForm() {
     const onSubmit = async (data: any) => {
         setLoading(true)
         console.log(data)
+
         try {
-            const res = await fetchPostJSON('/api/sendgrid', data)
+            // Track application in GitHub
+            const res = await fetchPostJSON('/api/github', data)
             if (res.message === 'success') {
-                router.push('/submitted')
+                console.info("Application tracked") // Succeed silently
             } else {
-                setFailureReason(res.message)
+                // Fail silently
             }
         } catch (e) {
             if (e instanceof Error) {
-                setFailureReason(e.message)
+                // Fail silently
+            }
+        } finally {
+            // Mail application to us
+            try {
+                const res = await fetchPostJSON('/api/sendgrid', data)
+                if (res.message === 'success') {
+                    router.push('/submitted')
+                } else {
+                    setFailureReason(res.message)
+                }
+            } catch (e) {
+                if (e instanceof Error) {
+                    setFailureReason(e.message)
+                }
+            } finally {
+                setLoading(false)
             }
         }
 
-        setLoading(false)
     }
 
     return (
@@ -51,6 +68,19 @@ export default function ApplicationForm() {
             <hr/>
             <h2>Project Details</h2>
 
+            <label>
+                Main Focus
+                <small>
+                    In which area will your project have the most impact?
+                </small>
+                <select {...register('main_focus')} >
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="lightning">Lightning</option>
+                    <option value="nostr">nostr</option>
+                    <option value="other">Other</option>
+                </select>
+            </label>
+            
             <label>
                 Project Name *
                 <small>
@@ -87,7 +117,7 @@ export default function ApplicationForm() {
             <label>
                 Project Timelines and Potential Milestones *
                 <small>
-                    This will help us evaluate overal scope and potential grant duration.
+                    This will help us evaluate overall scope and potential grant duration.
                 </small>
                 <textarea {...register('timelines', { required: true })} />
             </label>
@@ -111,7 +141,7 @@ export default function ApplicationForm() {
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <input type="text" {...register('proposed_budget')} />
+                <textarea {...register('proposed_budget')} />
             </label>
 
             <label className="checkbox">
@@ -147,6 +177,9 @@ export default function ApplicationForm() {
             <h2>Applicant Details</h2>
             <label>
                 Your Name *
+                <small>
+                    Feel free to use your nym.
+                </small>
                 <input type="text" {...register('your_name', { required: true })} />
             </label>
             <label>
@@ -212,11 +245,6 @@ export default function ApplicationForm() {
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
-            <p>
-                After submitting your application, please send images of your project
-                to <a href="mailto:support@opensats.org">support@opensats.org</a> for
-                inclusion on your project page.
-            </p>
         </form >
     )
 }
