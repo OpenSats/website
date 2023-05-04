@@ -12,10 +12,20 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
+  const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.sort(() => 0.5 - Math.random()))
+    setSortedProjects(projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random()))
+    setOpenSatsProjects(projects.filter(isOpenSatsProject))
   }, [projects])
+
+  function isOpenSatsProject(project: ProjectItem): boolean {
+    return project.nym === 'OpenSats'
+  }
+
+  function isNotOpenSatsProject(project: ProjectItem): boolean {
+    return !isOpenSatsProject(project)
+  }
 
   function closeModal() {
     setModalOpen(false)
@@ -39,6 +49,19 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
         <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
+              <li key={i} className="">
+                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              </li>
+            ))}
+        </ul>
+      </section>
+      <section className="p-4 md:p-8 flex flex-col items-center">
+        <div className="flex justify-between items-center pb-8 w-full">
+          <h1 id="funds">Specific Funds</h1>
+        </div>
+        <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
+          {openSatsProjects &&
+            openSatsProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
