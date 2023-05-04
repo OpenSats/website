@@ -27,7 +27,6 @@ const Credits = () => {
   const johnPfefferLogo = '/img/supporters/john-pfeffer.jpg'
   const ledgerLogo = '/img/supporters/ledger.jpg'
   const nodlLogo = '/img/supporters/nodl.jpg'
-  const silvergateBankLogo = '/img/supporters/silvergate-bank.png'
   const swanBitcoinLogo = '/img/supporters/swan.jpg'
   const ten31Logo = '/img/supporters/ten31.jpg'
   const waffleDog = '/img/supporters/waffledog.jpg'
@@ -97,11 +96,6 @@ const Credits = () => {
     },
     { link: 'https://www.ledger.com/', image: ledgerLogo, nym: 'Ledger' },
     { link: 'https://www.nodl.it/', image: nodlLogo, nym: 'nodl' },
-    {
-      link: 'https://silvergate.com/',
-      image: silvergateBankLogo,
-      nym: 'Silvergate Bank',
-    },
     {
       link: 'https://www.swanbitcoin.com/',
       image: swanBitcoinLogo,
