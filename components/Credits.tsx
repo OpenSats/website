@@ -177,7 +177,7 @@ const Credits = () => {
       </div>
 
       <h1 className="text-white my-4">Supporters</h1>
-      <div className="credit container flex flex-wrap items-center justify-center">
+      <div className="credit container flex flex-wrap items-center justify-center mb-8">
         {supporters.filter((s) => (s.person)).map((s, i) => (
           <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
         ))}
