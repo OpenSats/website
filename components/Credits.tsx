@@ -16,6 +16,7 @@ const Credits = () => {
   // Supporters
   const andrewWBlairLogo = '/img/supporters/andrew-w-blair.jpg'
   const thebitcoincompanyLogo = '/img/supporters/tbc.png'
+  const unchainedLogo = '/img/supporters/unchained.png'
   const bottlepayLogo = '/img/supporters/bottlepay.png'
   const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
   const duxReserveLogoWithCastlenine =
@@ -26,8 +27,7 @@ const Credits = () => {
   const johnPfefferLogo = '/img/supporters/john-pfeffer.jpg'
   const ledgerLogo = '/img/supporters/ledger.jpg'
   const nodlLogo = '/img/supporters/nodl.jpg'
-  const silvergateBankLogo = '/img/supporters/silvergate-bank.png'
-  const swanBitcoinLogo = '/img/supporters/swan.jpg'
+  const swanBitcoinLogo = '/img/supporters/swan.png'
   const ten31Logo = '/img/supporters/ten31.jpg'
   const waffleDog = '/img/supporters/waffledog.jpg'
   const voltage = '/img/supporters/voltage.png'
@@ -97,11 +97,6 @@ const Credits = () => {
     { link: 'https://www.ledger.com/', image: ledgerLogo, nym: 'Ledger' },
     { link: 'https://www.nodl.it/', image: nodlLogo, nym: 'nodl' },
     {
-      link: 'https://silvergate.com/',
-      image: silvergateBankLogo,
-      nym: 'Silvergate Bank',
-    },
-    {
       link: 'https://www.swanbitcoin.com/',
       image: swanBitcoinLogo,
       nym: 'Swan Bitcoin',
@@ -112,7 +107,7 @@ const Credits = () => {
       nym: 'Ten31',
     },
     {
-      link: 'https://www.manningfulton.com/people/attorneys/andrew-w-blair/',
+      link: 'https://www.poynerspruill.com/professionals/andy-blair/',
       image: andrewWBlairLogo,
       nym: 'Andrew W. Blair',
     },
@@ -130,6 +125,11 @@ const Credits = () => {
       link: 'https://zaprite.com',
       image: zapirte,
       nym: 'Zaprite'
+    },
+    {
+      link: 'https://unchained.com',
+      image: unchainedLogo,
+      nym: 'Unchained',
     },
     {
       link: 'https://thebitcoincompany.com',
