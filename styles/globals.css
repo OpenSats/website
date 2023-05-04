@@ -15,6 +15,11 @@ h2 {
   @apply text-2xl;
 }
 
+h3 > a {
+  color:lightgray !important;
+  @apply no-underline !important;
+}
+
 h4 {
   @apply text-2xl font-bold;
 }
