@@ -27,7 +27,7 @@ const Credits = () => {
   const johnPfefferLogo = '/img/supporters/john-pfeffer.jpg'
   const ledgerLogo = '/img/supporters/ledger.jpg'
   const nodlLogo = '/img/supporters/nodl.jpg'
-  const swanBitcoinLogo = '/img/supporters/swan.jpg'
+  const swanBitcoinLogo = '/img/supporters/swan.png'
   const ten31Logo = '/img/supporters/ten31.jpg'
   const waffleDog = '/img/supporters/waffledog.jpg'
   const voltage = '/img/supporters/voltage.png'
