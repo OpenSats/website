@@ -118,7 +118,7 @@ const Credits = () => {
     {
       link: 'https://twitter.com/harptheflarp',
       image: h4rprPhoto,
-      nym: 'Harper Singleton',
+      nym: 'Harper',
       person: true,
     },
     { 
