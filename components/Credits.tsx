@@ -115,6 +115,12 @@ const Credits = () => {
       nym: 'John Pfeffer',
       person: true,
     },
+    {
+      link: 'https://twitter.com/harptheflarp',
+      image: h4rprPhoto,
+      nym: 'Harper Singleton',
+      person: true,
+    },
     { 
       link: 'https://www.ledger.com/', 
       image: ledgerLogo, 
