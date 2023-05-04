@@ -24,7 +24,7 @@ const Layout: React.FC = ({ children }) => {
         <meta property="og:title" content="OpenSats" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:description" content="Support contributors to Bitcoin and other free and open source projects" key="ogdesc" />
+        <meta property="og:description" content="Support contributors to Bitcoin and other free and open-source projects" key="ogdesc" />
       </Head>
       <Navbar />
       <main className="flex-1 flex flex-col">{children}</main>

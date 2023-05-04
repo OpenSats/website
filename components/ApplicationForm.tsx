@@ -105,7 +105,7 @@ export default function ApplicationForm() {
                 Potential Impact *
                 <small>
                     Why is this project important to Bitcoin or the broader free and
-                    open source community?
+                    open-source community?
                 </small>
                 <textarea {...register('potential_impact', { required: true })} />
             </label>
@@ -129,7 +129,7 @@ export default function ApplicationForm() {
 
             <label className="checkbox">
                 <input type="checkbox" {...register('free_open_source')} />
-                Is the project free and open source?
+                Is the project free and open-source?
             </label>
 
             <hr/>
@@ -211,7 +211,7 @@ export default function ApplicationForm() {
             <label>
                 Prior Contributions
                 <small>
-                    Please list any prior contributions to other open source or
+                    Please list any prior contributions to other open-source or
                     Bitcoin-related projects.
                 </small>
                 <textarea {...register('bios')} />
@@ -219,7 +219,7 @@ export default function ApplicationForm() {
             <label>
                 References *
                 <small>
-                    Please list any references from the Bitcoin community or open source
+                    Please list any references from the Bitcoin community or open-source
                     space that we could contact for more information on you or your project.
                 </small>
                 <textarea {...register('references', { required: true })} />

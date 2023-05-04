@@ -56,7 +56,7 @@ const Home: NextPage<{ projects: ProjectItem[], generalFund: ProjectItem, opsFun
         <section className="flex py-8 items-center">
           <div className="p-4 md:p-8 space-y-8 basis-2/3 max-w-4xl">
             <h1>
-              Support contributors to Bitcoin and other free and open source
+              Support contributors to Bitcoin and other free and open-source
               projects
             </h1>
             <p className="text-textgray">
@@ -70,7 +70,7 @@ const Home: NextPage<{ projects: ProjectItem[], generalFund: ProjectItem, opsFun
               Donate to Operations Budget
             </button>
             <p>  
-              Are you an open source contributor?{' '}
+              Are you an open-source contributor?{' '}
               <Link href="/apply">
                 <a>Apply for your project to be listed.</a>
               </Link>

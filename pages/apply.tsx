@@ -13,12 +13,12 @@ export default function Apply() {
           </p>
           <p>
             We&#39;re incredibly grateful to contributors like you working to
-            support Bitcoin Core and other free and open source projects.
+            support Bitcoin Core and other free and open-source projects.
           </p>
           <p>
             Because Open Sats is a 501(c)(3) non-profit, all projects we list on our website must be vetted by our
             board of directors to ensure that they help us further our mission
-            of supporting contributors to Bitcoin and related free and open source projects.
+            of supporting contributors to Bitcoin and related free and open-source projects.
           </p>
           <p>
             Additionally, OpenSats must support specific PROJECTS which help to
