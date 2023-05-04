@@ -60,14 +60,19 @@ const Credits = () => {
   ]
 
   const managing_director: CreditItemProps[] = [
-    { image: h4rprPhoto,
+    {
+      image: h4rprPhoto,
       nym: 'Harper',
       link: 'https://twitter.com/harptheflarp',
     },
   ]
-  
+
   const supporters: CreditItemProps[] = [
-    { link: 'https://bottlepay.com/', image: bottlepayLogo, nym: 'Bottlepay' },
+    {
+      link: 'https://bottlepay.com/', 
+      image: bottlepayLogo, 
+      nym: 'Bottlepay',
+    },
     {
       link: 'https://btcpayserver.org/',
       image: btcPayServerLogo,
@@ -78,7 +83,11 @@ const Credits = () => {
       image: duxReserveLogoWithCastlenine,
       nym: 'Castlenine',
     },
-    { link: 'https://coinkite.com/', image: coinkiteLogo, nym: 'Coinkite' },
+    { 
+      link: 'https://coinkite.com/',
+      image: coinkiteLogo,
+      nym: 'Coinkite' 
+    },
     {
       link: 'https://twitter.com/FossGregfoss',
       image: gregFossLogo,
@@ -94,8 +103,15 @@ const Credits = () => {
       image: johnPfefferLogo,
       nym: 'John Pfeffer',
     },
-    { link: 'https://www.ledger.com/', image: ledgerLogo, nym: 'Ledger' },
-    { link: 'https://www.nodl.it/', image: nodlLogo, nym: 'nodl' },
+    { 
+      link: 'https://www.ledger.com/', 
+      image: ledgerLogo, nym: 'Ledger' 
+    },
+    { 
+      link: 'https://www.nodl.it/', 
+      image: nodlLogo, 
+      nym: 'nodl' 
+    },
     {
       link: 'https://www.swanbitcoin.com/',
       image: swanBitcoinLogo,
@@ -146,14 +162,14 @@ const Credits = () => {
           <CreditItem key={i} image={m.image} link={m.link} nym={m.nym} />
         ))}
       </div>
-      
+
       <h1 className="text-white my-4">Board</h1>
       <div className="credit container flex flex-wrap items-center justify-center mb-8">
         {board.map((b, i) => (
           <CreditItem key={i} image={b.image} link={b.link} nym={b.nym} />
         ))}
       </div>
-      
+
       <h1 className="text-white my-4">Supporters</h1>
       <div className="credit container flex flex-wrap items-center justify-center">
         {supporters.map((s, i) => (
