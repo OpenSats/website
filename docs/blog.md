@@ -1,4 +1,4 @@
-### OpenSats Receives Additional Funding of $10m from #startsmall [#](https://mempool.space/block/788255)
+### OpenSats Receives Additional Funding of $10m from #startsmall [#](https://mempool.space/block/788258)
 
 We are delighted to announce that OpenSats has received a generous donation of
 $10 million from Jack Dorsey's philanthropic initiative, #startsmall, which will
@@ -41,3 +41,8 @@ needed. We can't wait to see what you are going to build.
 
 In the words of Cypherpunk founder Eric Hughes:  
 "Let us proceed together apace. Onward."
+
+---
+
+Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization.
+All gifts and donations are tax-deductible to the full extent of the law.
