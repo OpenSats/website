@@ -60,14 +60,19 @@ const Credits = () => {
   ]
 
   const managing_director: CreditItemProps[] = [
-    { image: h4rprPhoto,
+    {
+      image: h4rprPhoto,
       nym: 'Harper',
       link: 'https://twitter.com/harptheflarp',
     },
   ]
-  
+
   const supporters: CreditItemProps[] = [
-    { link: 'https://bottlepay.com/', image: bottlepayLogo, nym: 'Bottlepay' },
+    {
+      link: 'https://bottlepay.com/', 
+      image: bottlepayLogo, 
+      nym: 'Bottlepay',
+    },
     {
       link: 'https://btcpayserver.org/',
       image: btcPayServerLogo,
@@ -77,25 +82,41 @@ const Credits = () => {
       link: 'https://twitter.com/castlenine_',
       image: duxReserveLogoWithCastlenine,
       nym: 'Castlenine',
+      person: true,
     },
-    { link: 'https://coinkite.com/', image: coinkiteLogo, nym: 'Coinkite' },
+    { 
+      link: 'https://coinkite.com/',
+      image: coinkiteLogo,
+      nym: 'Coinkite' 
+    },
     {
       link: 'https://twitter.com/FossGregfoss',
       image: gregFossLogo,
       nym: 'Greg Foss',
+      person: true,
     },
     {
       link: 'https://judica.org/',
       image: jeremyRubinLogo,
       nym: 'Jeremy Rubin',
+      person: true,
     },
     {
       link: 'https://twitter.com/jlppfeffer',
       image: johnPfefferLogo,
       nym: 'John Pfeffer',
+      person: true,
     },
-    { link: 'https://www.ledger.com/', image: ledgerLogo, nym: 'Ledger' },
-    { link: 'https://www.nodl.it/', image: nodlLogo, nym: 'nodl' },
+    { 
+      link: 'https://www.ledger.com/', 
+      image: ledgerLogo, 
+      nym: 'Ledger' 
+    },
+    { 
+      link: 'https://www.nodl.it/', 
+      image: nodlLogo, 
+      nym: 'nodl' 
+    },
     {
       link: 'https://www.swanbitcoin.com/',
       image: swanBitcoinLogo,
@@ -110,11 +131,13 @@ const Credits = () => {
       link: 'https://www.poynerspruill.com/professionals/andy-blair/',
       image: andrewWBlairLogo,
       nym: 'Andrew W. Blair',
+      person: true,
     },
     {
       link: 'https://paul.lol',
       image: waffleDog,
-      nym: 'Paul'
+      nym: 'Paul',
+      person: true,
     },
     {
       link: 'https://voltage.cloud/',
@@ -146,10 +169,13 @@ const Credits = () => {
           <CreditItem key={i} image={b.image} link={b.link} nym={b.nym} />
         ))}
       </div>
-      
+
       <h1 className="text-white my-4">Supporters</h1>
-      <div className="credit container flex flex-wrap items-center justify-center">
-        {supporters.map((s, i) => (
+      <div className="credit container flex flex-wrap items-center justify-center mb-8">
+        {supporters.filter((s) => (s.person)).map((s, i) => (
+          <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
+        ))}
+        {supporters.filter((s) => (!s.person)).map((s, i) => (
           <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
         ))}
       </div>
