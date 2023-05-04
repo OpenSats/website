@@ -2,7 +2,7 @@
 
 ## What are you doing at OpenSats?
 
-- We are a 501(c)(3) public charity which aims to fund Bitcoin-related free and open source projects and associated education and research initiatives.
+- Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) public charity which aims to fund Bitcoin-related free and open source projects and associated education and research initiatives.
 
 We want to see contributors to Bitcoin Core and FOSS (free and open source) tools supported by a sustainable ecosystem and consistent funding, so we set up a platform to do just that. Donors can come to the OpenSats web platform and either recommend gifts to specific project areas or contribute to our general fund.
 
