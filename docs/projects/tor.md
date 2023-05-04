@@ -6,7 +6,7 @@ website: 'https://www.torproject.org/'
 coverImage: '/img/project/tor.svg'
 git: 'https://gitweb.torproject.org/'
 twitter: 'torproject'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'ZM5TmZ025mrJI8E1kFS5'
 ---
 

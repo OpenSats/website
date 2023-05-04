@@ -7,7 +7,7 @@ coverImage: '/img/project/btcpayserver.png'
 git: 'https://github.com/btcpayserver/btcpayserver'
 twitter: 'BtcpayServer'
 personalTwitter: 'NicolasDorier'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'of0LLGHM5cAGu4seVNNN'
 ---
 
