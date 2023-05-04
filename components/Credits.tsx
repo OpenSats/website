@@ -12,6 +12,7 @@ const Credits = () => {
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
   const h4rprPhoto = '/img/team/h4rpr.png'
+  const nvkPhoto = '/img/team/nvk.jpg'
   const gigiPhoto = '/img/team/gigi.jpg'
 
   // Supporters
@@ -59,6 +60,11 @@ const Credits = () => {
       nym: 'Ben Price',
       link: 'https://twitter.com/abitcoinperson',
     },
+    {
+      image: nvkPhoto,
+      nym: 'NVK',
+      link: 'https://twitter.com/nvk',
+    }
   ]
 
   const managing_director: CreditItemProps[] = [
