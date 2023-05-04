@@ -177,6 +177,9 @@ export default function ApplicationForm() {
             <h2>Applicant Details</h2>
             <label>
                 Your Name *
+                <small>
+                    Feel free to use your nym.
+                </small>
                 <input type="text" {...register('your_name', { required: true })} />
             </label>
             <label>
