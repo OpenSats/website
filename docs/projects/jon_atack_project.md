@@ -1,9 +1,9 @@
 ---
-title: 'Jon Atack: Working on Bitcoin Core'
+title: 'Core Review & Testing'
 summary: 'I work on Bitcoin Core development, code review, and testing.'
 nym: 'Jon Atack'
 website: 'https://jonatack.github.io'
-coverImage: '/img/project/jon_atack.png'
+coverImage: '/img/project/bitcoin_core.png'
 git: 'https://github.com/jonatack'
 twitter: 'jonatack'
 type: 'Bitcoin Core'

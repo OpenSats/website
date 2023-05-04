@@ -117,7 +117,7 @@ export default function ApplicationForm() {
             <label>
                 Project Timelines and Potential Milestones *
                 <small>
-                    This will help us evaluate overal scope and potential grant duration.
+                    This will help us evaluate overall scope and potential grant duration.
                 </small>
                 <textarea {...register('timelines', { required: true })} />
             </label>
@@ -141,7 +141,7 @@ export default function ApplicationForm() {
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <input type="text" {...register('proposed_budget')} />
+                <textarea {...register('proposed_budget')} />
             </label>
 
             <label className="checkbox">
@@ -177,6 +177,9 @@ export default function ApplicationForm() {
             <h2>Applicant Details</h2>
             <label>
                 Your Name *
+                <small>
+                    Feel free to use your nym.
+                </small>
                 <input type="text" {...register('your_name', { required: true })} />
             </label>
             <label>
@@ -242,11 +245,6 @@ export default function ApplicationForm() {
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
-            <p>
-                After submitting your application, please send images of your project
-                to <a href="mailto:support@opensats.org">support@opensats.org</a> for
-                inclusion on your project page.
-            </p>
         </form >
     )
 }

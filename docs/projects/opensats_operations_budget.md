@@ -1,5 +1,5 @@
 ---
-title: 'OpenSats Operations Budget'
+title: 'Operations Budget'
 summary: 'Contributions to the OpenSats Operations Budget will be used to cover our operating expenses as we continue to facilitate frictionless, tax-deductible donations from the community to the Bitcoin & FOSS ecosystems at a pass-through rate of 100%.'
 coverImage: '/img/project/opensats_operations.png'
 nym: 'OpenSats'
