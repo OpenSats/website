@@ -117,7 +117,7 @@ export default function ApplicationForm() {
             <label>
                 Project Timelines and Potential Milestones *
                 <small>
-                    This will help us evaluate overal scope and potential grant duration.
+                    This will help us evaluate overall scope and potential grant duration.
                 </small>
                 <textarea {...register('timelines', { required: true })} />
             </label>
@@ -141,7 +141,7 @@ export default function ApplicationForm() {
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <input type="text" {...register('proposed_budget')} />
+                <textarea {...register('proposed_budget')} />
             </label>
 
             <label className="checkbox">
