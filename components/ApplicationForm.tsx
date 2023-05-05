@@ -135,13 +135,14 @@ export default function ApplicationForm() {
             <hr/>
 
             <label>
-                Proposed Budget
+                Costs & Proposed Budget *
                 <small>
+                    Current or estimated costs of the project. 
                     If you&#39;re applying for a grant from the general fund, please
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <textarea {...register('proposed_budget')} />
+                <textarea {...register('proposed_budget', { required: true })} />
             </label>
 
             <label className="checkbox">
