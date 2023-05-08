@@ -53,9 +53,9 @@ We distribute grants to a wide variety of contributor types (developers, designe
 
 - Yes, really. We have an operational budget to cover lawyers, accountants, and basic operational costs, but they aren't paid from your donations to projects. Our operational costs are covered by generous donors who regularly donate to our [operations budget](https://opensats.org/projects/opensats_operations_budget).
   - John Pfeffer, Greg Foss, Ten31, and The Bitcoin Company have contributed to our legal and operational overhead or contributed technical development resources so OpenSats can stay 100% passthrough for all general fund and project specific donations.
-  - Silvergate bank has provided fee free banking services
   - BTCPay Server is a FOSS tool we use to accept bitcoin with no fees.
   - River provides our bitcoin exchange services with no added fees.
+  - Unchained provides our multi-sig custody services with no fees.
   - Ledger and The Bitcoin Company both help cover payment processing fees associated with debit and credit card donations as well as some transaction fees related to our on-chain and off-chain movement of funds.
 
 ## Are my donations tax deductible?
