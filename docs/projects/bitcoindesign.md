@@ -7,7 +7,7 @@ coverImage: '/img/project/bitcoindesign.png'
 git: 'https://github.com/BitcoinDesign'
 twitter: 'bitcoin_design'
 personalTwitter: 'GBKS'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'n5NcVW1WcqvS8oI4UFMI'
 ---
 

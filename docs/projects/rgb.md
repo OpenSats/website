@@ -7,7 +7,7 @@ coverImage: '/img/project/RGB_Logo.png'
 git: 'https://github.com/rgb-WG/'
 twitter: 'lnp_bp'
 personalTwitter: 'lnp_bp'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'eWjJu03VZaAgizLPZJEb'
 ---
 

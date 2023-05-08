@@ -6,7 +6,7 @@ website: 'https://www.summerofbitcoin.org/'
 coverImage: '/img/project/summerofbitcoin.jpeg'
 git: 'https://github.com/adi-shankara'
 twitter: 'summerofbitcoin'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'pIwCyBwAmvtt0di7T8yD'
 ---
 

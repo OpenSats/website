@@ -2,9 +2,9 @@
 
 ## What are you doing at OpenSats?
 
-- Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) public charity which aims to fund Bitcoin-related free and open source projects and associated education and research initiatives.
+- Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) public charity which aims to fund Bitcoin-related free and open-source projects and associated education and research initiatives.
 
-We want to see contributors to Bitcoin Core and FOSS (free and open source) tools supported by a sustainable ecosystem and consistent funding, so we set up a platform to do just that. Donors can come to the OpenSats web platform and either recommend gifts to specific project areas or contribute to our general fund.
+We want to see contributors to Bitcoin Core and FOSS (free and open-source) tools supported by a sustainable ecosystem and consistent funding, so we set up a platform to do just that. Donors can come to the OpenSats web platform and either recommend gifts to specific project areas or contribute to our general fund.
 
 We distribute grants to a wide variety of contributor types (developers, designers, researchers, educators, reviewers...), but only to those working on Bitcoin and open-source projects that will improve public access to Bitcoin infrastructure.
 
@@ -29,18 +29,18 @@ We distribute grants to a wide variety of contributor types (developers, designe
 ## How can I communicate with you?
 
 - Funding opportunities are announced once per year, depending on funding availability. Projects that align with our mission statement are encouraged to apply. Board members evaluate each application based on technical merit, potential impact, and the team&#39;s ability to execute.
-- All projects should be free and open source and related to Bitcoin or an ancillary technology (like Tor, etc.) which helps Bitcoin use. Your project must align with the mission of our charity to be eligible for donations.
+- All projects should be free and open-source and related to Bitcoin or an ancillary technology (like Tor, etc.) which helps Bitcoin use. Your project must align with the mission of our charity to be eligible for donations.
 
 ## How do I become listed on the site?
 
-- Any project that is free and open source and is aligned with the OpenSats mission are free to [submit an application](http://opensats.org/apply) for their project to be listed on the [OpenSats website](http://opensats.org/projects)
+- Any project that is free and open-source and is aligned with the OpenSats mission are free to [submit an application](http://opensats.org/apply) for their project to be listed on the [OpenSats website](http://opensats.org/projects)
 - All applications which fulfill the criteria will be evaluated by the Board. Upon board approval and collection of necessary supplemental data, approved projects will be listed on the OpenSats project portal. Donors will be able to contribute funds and recommend that the OpenSats&#39; board considers their donations be allocated towards these pre-approved, mission-aligned projects.
 - If you are helping Bitcoin and FOSS, please [submit an application](http://opensats.org/apply) to be listed on our site.
 
 ## How did you choose the board?
 
 - We didn&#39;t want any one person or small group to have control of the decision making process of OpenSats, so we created a transparent, public-facing, and accountable nine person board to make all organizational decisions.
-- OpenSats&#39; board members have deep-seated values and will stop at nothing to support and ensure the survival of free and open source technology like Bitcoin.
+- OpenSats&#39; board members have deep-seated values and will stop at nothing to support and ensure the survival of free and open-source technology like Bitcoin.
 - The board is composed of well-known and respected public-facing individuals who will carry the torch and be held accountable for their choices. We encourage community feedback, dialogue, and constructive criticism. We can only promise to do our best to ensure that all funds go to deserving projects which support OpenSats&#39; mission of creating a sustainable and consistent ecosystem of funding for Bitcoin and Bitcoin-related FOSS contributors.
 - We are committed to being 100% passthrough for all donations made on our platform. To this day our operational, legal, and payment processing fees have been graciously and privately funded.
 - Please consider donating to the [OpenSats operational fund](https://opensats.org/projects/opensats_operations_budget) which will help cover our basic operational expenses (which we have kept to a minimum) so we can ensure that all donations intended for Bitcoin and FOSS projects remains 100% passthrough.
@@ -62,4 +62,4 @@ We distribute grants to a wide variety of contributor types (developers, designe
 
 - Yes, Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization, All gifts and donations are tax-deductible to the full extent of the law.
 - If you would like to receive a tax deduction, we may need to collect supplementary information like your name and email for required recordkeeping purposes.
-- OpenSats relies on donors like you to help promote and support a sustainable ecosystem of contributors to Bitcoin and related free and open source projects. We greatly appreciate your contributions.
+- OpenSats relies on donors like you to help promote and support a sustainable ecosystem of contributors to Bitcoin and related free and open-source projects. We greatly appreciate your contributions.
