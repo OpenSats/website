@@ -6,7 +6,7 @@ website: 'https://bitcoindevkit.org/'
 coverImage: '/img/project/bdk.jpeg'
 git: 'https://github.com/bitcoindevkit'
 twitter: 'bitcoindevkit'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'vmwW1gJFaZ2os0AADI48'
 ---
 

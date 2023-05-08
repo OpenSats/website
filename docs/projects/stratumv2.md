@@ -7,7 +7,7 @@ coverImage: '/img/project/stratumv2.jpg'
 git: 'https://github.com/stratum-mining/stratum'
 twitter: 'StratumV2'
 personalTwitter: 'StratumV2'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'G9QKE1Dn6B56uOF8PSYX'
 ---
 

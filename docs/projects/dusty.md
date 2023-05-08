@@ -7,7 +7,7 @@ coverImage: '/img/project/splicing.jpg'
 git: 'https://github.com/lightning/bolts/pull/863'
 twitter: 'dusty_daemon'
 personalTwitter: 'dusty_daemon'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: '2qB3Y3gfSvOnWOv23BZb'
 ---
 

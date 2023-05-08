@@ -7,7 +7,7 @@ coverImage: '/img/project/scriptwizard.jpg'
 git: 'https://github.com/bit-matrix/script-wiz-lib'
 twitter: 'script_wizard'
 personalTwitter: 'brqgoo'
-type: 'Other Free and Open Source Project'
+type: 'Other Free and Open-Source Project'
 zaprite: 'MKa75bHHineMBlqDVwlU'
 ---
 
