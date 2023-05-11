@@ -4,7 +4,17 @@
     "support": "787338757fc25d65cd929394d5e7713cf43638e8d259e8dcf5c73b834eb851f2"
   },
   "relays": {
-    "3c1ba7d42c873c2f89caf1ca79b4ead6513385de53743fa6eb98c3705655695c": ["wss://brb.io"],
-    "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245": ["wss://relay.damus.io"]
+    "787338757fc25d65cd929394d5e7713cf43638e8d259e8dcf5c73b834eb851f2": [
+      "wss://brb.io",
+      "wss://nostr.mutinywallet.com",
+      "wss://nostr.einundzwanzig.space",
+      "wss://relay.damus.io",
+      "wss://relay.nostr.bg",
+      "wss://nos.lol",
+      "wss://nostr-verified.wellorder.net",
+      "wss://nostr.zebedee.cloud",
+      "wss://eden.nostr.land",
+      "wss://nostr.milou.lol"
+    ]
   }
 }

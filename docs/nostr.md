@@ -1,3 +1,5 @@
 # nostr
 
-coming soon
+work in progress
+
+[/blog](https://opensats.org/blog)  👀 👀 👀
