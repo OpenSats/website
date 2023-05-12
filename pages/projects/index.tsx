@@ -16,7 +16,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   useEffect(() => {
     setSortedProjects(projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random()))
-    setOpenSatsProjects(projects.filter(isOpenSatsProject))
+    setOpenSatsProjects(projects.filter(isOpenSatsProject).sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects])
 
   function isOpenSatsProject(project: ProjectItem): boolean {
