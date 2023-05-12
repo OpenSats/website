@@ -7,5 +7,5 @@ coverImage: '/heroes/gold.png'
 git: 'opensats'
 twitter: 'opensats'
 zaprite: '32WbND8heqmY5wYYnIpa'
-hidden: true
+hidden: false
 ---
