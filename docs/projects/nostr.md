@@ -1,6 +1,6 @@
 ---
-title: 'OpenSats Nostr Fund'
-summary: 'TODO'
+title: 'The Nostr Fund'
+summary: 'Funding nostr protocol development and other stuff.'
 nym: 'OpenSats'
 website: 'https://opensats.org'
 coverImage: '/img/project/nostr.png'
