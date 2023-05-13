@@ -7,6 +7,7 @@ coverImage: '/img/project/nostr.png'
 git: 'opensats'
 twitter: 'opensats'
 zaprite: 'OoYtzNjilW1NRtDsxLAj'
+bonusUSD: 5000000
 ---
 
 The OpenSats Nostr Fund is a way for you to support the development and
