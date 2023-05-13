@@ -6,7 +6,7 @@ website: 'https://opensats.org'
 coverImage: '/img/project/nostr.png'
 git: 'opensats'
 twitter: 'opensats'
-zaprite: 'TODO'
+zaprite: 'OoYtzNjilW1NRtDsxLAj'
 ---
 
 The OpenSats Nostr Fund is a way for you to support the development and
