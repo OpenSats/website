@@ -8,6 +8,7 @@ website: 'https://opensats.org/'
 git: 'https://github.com/OpenSats'
 type: 'Internal Operations'
 zaprite: 'lZo1wcsJ0SQb58XfGC4e'
+bonusUSD: 330000
 ---
 
 ## About this project
