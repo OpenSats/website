@@ -8,6 +8,7 @@ git: 'https://github.com/jonatack'
 twitter: 'jonatack'
 type: 'Bitcoin Core'
 zaprite: 'CBNTphQ2rT4fNe78d4yO'
+hidden: true
 ---
 
 ## About this project

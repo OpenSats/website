@@ -8,6 +8,7 @@ git: 'https://github.com/fanquake'
 twitter: 'fanquake'
 type: 'Bitcoin Core'
 zaprite: 'RqyzktHAgocwdiS6Q0TH'
+hidden: true
 ---
 
 ## About this project
