@@ -8,6 +8,7 @@ git: 'opensats'
 twitter: 'opensats'
 zaprite: '32WbND8heqmY5wYYnIpa'
 hidden: false
+bonusUSD: 4670000   
 ---
 
 The OpenSats General Fund is a pool of money that is used to support
