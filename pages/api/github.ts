@@ -47,6 +47,7 @@ ${req.body.references}
 ### Other Relevant Links
 
 ${req.body.relevant_links}
+${req.body.social_media}
 
 ---
 
