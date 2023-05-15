@@ -42,6 +42,10 @@ ${req.body.proposed_budget}
 
 ${req.body.references}
 
+### Other Relevant Links
+
+${req.body.relevant_links}
+
 ---
 
 ${req.body.github}
