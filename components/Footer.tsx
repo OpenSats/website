@@ -22,9 +22,12 @@ export default function Footer() {
           <Link href="/">{siteMetadata.title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
-            Tailwind Nextjs Theme
+          <center>
+          <Link href="https://opensats.org/terms">
+          Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization.<br/>
+          All gifts and donations are tax-deductible to the full extent of the law.
           </Link>
+          </center>
         </div>
       </div>
     </footer>
