@@ -43,6 +43,7 @@ ${req.body.what_funding}
 ### References & Prior Contributions
 
 ${req.body.references}
+
 ${req.body.bios}
 
 ### Other Relevant Links
