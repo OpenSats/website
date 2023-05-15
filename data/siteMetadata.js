@@ -5,7 +5,7 @@ const siteMetadata = {
   title: 'OpenSats Blog',
   author: 'OpenSats',
   headerTitle: 'OpenSats',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: 'Updates from a better tomorrow, today.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
