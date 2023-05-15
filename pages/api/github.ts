@@ -38,9 +38,18 @@ ${req.body.timelines}
 
 ${req.body.proposed_budget}
 
-### References
+${req.body.what_funding}
+
+### References & Prior Contributions
 
 ${req.body.references}
+
+${req.body.bios}
+
+### Other Relevant Links
+
+${req.body.relevant_links}
+${req.body.social_media}
 
 ---
 
