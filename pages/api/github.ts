@@ -40,9 +40,10 @@ ${req.body.proposed_budget}
 
 ${req.body.what_funding}
 
-### References
+### References & Prior Contributions
 
 ${req.body.references}
+${req.body.bios}
 
 ### Other Relevant Links
 
