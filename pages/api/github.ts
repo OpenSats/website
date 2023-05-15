@@ -38,6 +38,8 @@ ${req.body.timelines}
 
 ${req.body.proposed_budget}
 
+${req.body.what_funding}
+
 ### References
 
 ${req.body.references}
