@@ -98,7 +98,7 @@ export default function ApplicationForm() {
                     This will be listed on the explore projects page of the OpenSats
                     website. Please write at least 2-3 sentences.
                 </small>
-                <textarea {...register('short_description', { required: true })} />
+                <textarea className="mt-1 block w-full" {...register('short_description', { required: true })} />
             </label>
 
             <label className="block">
@@ -107,7 +107,7 @@ export default function ApplicationForm() {
                     Why is this project important to Bitcoin or the broader free and
                     open-source community?
                 </small>
-                <textarea {...register('potential_impact', { required: true })} />
+                <textarea className="mt-1 block w-full" {...register('potential_impact', { required: true })} />
             </label>
             {/* <label className="block">
                   Project Images: (attachment)
@@ -119,7 +119,7 @@ export default function ApplicationForm() {
                 <small>
                     This will help us evaluate overall scope and potential grant duration.
                 </small>
-                <textarea {...register('timelines', { required: true })} />
+                <textarea className="mt-1 block w-full" {...register('timelines', { required: true })} />
             </label>
 
             <label className="block">
@@ -142,7 +142,7 @@ export default function ApplicationForm() {
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
-                <textarea {...register('proposed_budget', { required: true })} />
+                <textarea className="mt-1 block w-full" {...register('proposed_budget', { required: true })} />
             </label>
 
             <label className="checkbox">
@@ -161,7 +161,7 @@ export default function ApplicationForm() {
                 <small>
                     Other links that might be relevant, such as website, documentation, links to app stores, etc.
                 </small>
-                <textarea {...register('relevant_links')} />
+                <textarea className="mt-1 block w-full" {...register('relevant_links')} />
             </label>
 
             <label className="block">
@@ -170,7 +170,7 @@ export default function ApplicationForm() {
                     Please include any project-specific social media or common community communication
                     platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
                 </small>
-                <textarea {...register('social_media')} />
+                <textarea className="mt-1 block w-full" {...register('social_media')} />
             </label>
 
             <hr/>
@@ -207,7 +207,7 @@ export default function ApplicationForm() {
                     These could include nostr pubkeys, social media handles, emails, phone
                     numbers, etc.
                 </small>
-                <textarea {...register('other_contact')} />
+                <textarea className="mt-1 block w-full" {...register('other_contact')} />
             </label>
             <label className="block">
                 Prior Contributions
@@ -215,7 +215,7 @@ export default function ApplicationForm() {
                     Please list any prior contributions to other open-source or
                     Bitcoin-related projects.
                 </small>
-                <textarea {...register('bios')} />
+                <textarea className="mt-1 block w-full" {...register('bios')} />
             </label>
             <label className="block">
                 References *
@@ -223,7 +223,7 @@ export default function ApplicationForm() {
                     Please list any references from the Bitcoin community or open-source
                     space that we could contact for more information on you or your project.
                 </small>
-                <textarea {...register('references', { required: true })} />
+                <textarea className="mt-1 block w-full" {...register('references', { required: true })} />
             </label>
             <div className="prose">
                 <small>
