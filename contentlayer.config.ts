@@ -82,6 +82,7 @@ export const Pages = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     summary: { type: 'string' },
+    image: { type: 'string' },
     layout: { type: 'string' },
   },
   computedFields,
