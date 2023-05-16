@@ -1,18 +1,15 @@
 import { ReactNode } from 'react'
 import type { Pages } from 'contentlayer/generated'
-import SocialIcon from '@/components/social-icons'
-import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
 interface Props {
   children: ReactNode
-  // content: Omit<Pages, '_id' | '_raw' | 'body'>
   content: CoreContent<Pages>
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, date, summary, layout } = content
+  const { title, summary, layout } = content
 
   return (
     <>
