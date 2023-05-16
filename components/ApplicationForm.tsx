@@ -69,7 +69,7 @@ export default function ApplicationForm() {
             <h2>Project Details</h2>
 
             <label className="block">
-                Main Focus
+                Main Focus<br/>
                 <small>
                     In which area will your project have the most impact?
                 </small>
@@ -82,7 +82,7 @@ export default function ApplicationForm() {
             </label>
             
             <label className="block">
-                Project Name *
+                Project Name *<br/>
                 <small>
                     The name of the project to be listed on the OpenSats website
                 </small>
@@ -93,7 +93,7 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Description *
+                Project Description *<br/>
                 <small>
                     This will be listed on the explore projects page of the OpenSats
                     website. Please write at least 2-3 sentences.
@@ -102,7 +102,7 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Potential Impact *
+                Potential Impact *<br/>
                 <small>
                     Why is this project important to Bitcoin or the broader free and
                     open-source community?
@@ -115,7 +115,7 @@ export default function ApplicationForm() {
               </label> */}
 
             <label className="block">
-                Project Timelines and Potential Milestones *
+                Project Timelines and Potential Milestones *<br/>
                 <small>
                     This will help us evaluate overall scope and potential grant duration.
                 </small>
@@ -135,7 +135,7 @@ export default function ApplicationForm() {
             <hr/>
 
             <label className="block">
-                Costs & Proposed Budget *
+                Costs & Proposed Budget *<br/>
                 <small>
                     Current or estimated costs of the project. 
                     If you&#39;re applying for a grant from the general fund, please
@@ -157,7 +157,7 @@ export default function ApplicationForm() {
 
             <label className="block">
 
-                Additional Project Links
+                Additional Project Links<br/>
                 <small>
                     Other links that might be relevant, such as website, documentation, links to app stores, etc.
                 </small>
@@ -165,7 +165,7 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project-specific Social Media
+                Project-specific Social Media<br/>
                 <small>
                     Please include any project-specific social media or common community communication
                     platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
@@ -177,15 +177,15 @@ export default function ApplicationForm() {
 
             <h2>Applicant Details</h2>
             <label className="block">
-                Your Name *
+                Your Name *<br/>
                 <small>
                     Feel free to use your nym.
                 </small>
-                <input type="text" className="mt-1 block w-full" {...register('your_name', { required: true })} />
+                <input type="text" className="mt-1 block w-full" placeholder="John Doe" {...register('your_name', { required: true })} />
             </label>
             <label className="block">
                 Email *
-                <input type="text" className="mt-1 block w-full" {...register('email', { required: true })} />
+                <input type="email" className="mt-1 block w-full" placeholder="satoshi.nakamoto@bitcoin.org" {...register('email', { required: true })} />
             </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
@@ -200,7 +200,7 @@ export default function ApplicationForm() {
                 <input type="text" className="mt-1 block w-full" {...register('personal_github')} />
             </label>
             <label className="block">
-                Other Contact Details (if applicable)
+                Other Contact Details (if applicable)<br/>
                 <small>
                     Please list any other relevant contact details you are comfortable
                     sharing in case we need to reach out with questions.
@@ -210,7 +210,7 @@ export default function ApplicationForm() {
                 <textarea className="mt-1 block w-full" {...register('other_contact')} />
             </label>
             <label className="block">
-                Prior Contributions
+                Prior Contributions<br/>
                 <small>
                     Please list any prior contributions to other open-source or
                     Bitcoin-related projects.
@@ -218,7 +218,7 @@ export default function ApplicationForm() {
                 <textarea className="mt-1 block w-full" {...register('bios')} />
             </label>
             <label className="block">
-                References *
+                References *<br/>
                 <small>
                     Please list any references from the Bitcoin community or open-source
                     space that we could contact for more information on you or your project.
