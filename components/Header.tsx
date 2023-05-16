@@ -30,7 +30,9 @@ const Header = () => {
             <Link
               key={link.title}
               href={link.href}
-              className="p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+              className={
+                link.isButton ? "bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded" : "p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+              }
             >
               {link.title}
             </Link>
