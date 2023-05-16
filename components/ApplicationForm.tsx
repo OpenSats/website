@@ -139,7 +139,7 @@ export default function ApplicationForm() {
                 Costs & Proposed Budget *<br/>
                 <small>
                     Current or estimated costs of the project. 
-                    If you&#39;re applying for a grant from the general fund, please
+                    If you're applying for a grant from the general fund, please
                     submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
@@ -193,7 +193,7 @@ export default function ApplicationForm() {
                 <span className="ml-2">Are you the Project Lead / Lead Contributor?</span>
             </label>
             <label className="block">
-                If someone else, please list the project&#39;s Lead Contributor or
+                If someone else, please list the project's Lead Contributor or
                 Maintainer <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('other_lead')} />
             </label>
             <label className="block">
