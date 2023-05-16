@@ -111,7 +111,7 @@ export default function ApplicationForm() {
             </label>
             {/* <label className="block">
                   Project Images: (attachment)
-                  <input type="text" {...register('your_name', { required: true })} />
+                  <input type="text" className="mt-1 block w-full" {...register('your_name', { required: true })} />
               </label> */}
 
             <label className="block">
@@ -124,7 +124,7 @@ export default function ApplicationForm() {
 
             <label className="block">
                 Project Github (or similar, if applicable)
-                <input type="text" {...register('github')} />
+                <input type="text" className="mt-1 block w-full" {...register('github')} />
             </label>
 
             <label className="checkbox">
@@ -152,7 +152,7 @@ export default function ApplicationForm() {
 
             <label className="block">
                 If so, please describe.
-                <input type="text" {...register('what_funding')} />
+                <input type="text" className="mt-1 block w-full" {...register('what_funding')} />
             </label>
 
             <label className="block">
@@ -181,11 +181,11 @@ export default function ApplicationForm() {
                 <small>
                     Feel free to use your nym.
                 </small>
-                <input type="text" {...register('your_name', { required: true })} />
+                <input type="text" className="mt-1 block w-full" {...register('your_name', { required: true })} />
             </label>
             <label className="block">
                 Email *
-                <input type="text" {...register('email', { required: true })} />
+                <input type="text" className="mt-1 block w-full" {...register('email', { required: true })} />
             </label>
             <label className="checkbox">
                 <input type="checkbox" {...register('are_you_lead')} />
@@ -193,11 +193,11 @@ export default function ApplicationForm() {
             </label>
             <label className="block">
                 If someone else, please list the project&#39;s Lead Contributor or
-                Maintainer <input type="text" {...register('other_lead')} />
+                Maintainer <input type="text" className="mt-1 block w-full" {...register('other_lead')} />
             </label>
             <label className="block">
                 Personal Github (or similar, if applicable)
-                <input type="text" {...register('personal_github')} />
+                <input type="text" className="mt-1 block w-full" {...register('personal_github')} />
             </label>
             <label className="block">
                 Other Contact Details (if applicable)
