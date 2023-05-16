@@ -16,6 +16,7 @@ const siteMetadata = {
   email: 'support@opensats.org',
   github: 'https://github.com/OpenSats',
   twitter: 'https://twitter.com/OpenSats',
+  nostr: 'nostr:npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f',
   locale: 'en-US',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
