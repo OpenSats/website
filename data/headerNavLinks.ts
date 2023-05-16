@@ -4,7 +4,7 @@ const headerNavLinks = [
   { href: 'https://opensats.org/projects', title: 'Projects' },
   { href: '/apply', title: 'Apply' },
   { href: 'https://opensats.org/faq', title: 'FAQ' },
-  { href: '/about', title: 'About Us' },
+  { href: '/about', title: 'About' },
 ]
 
 export default headerNavLinks
