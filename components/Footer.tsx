@@ -18,13 +18,15 @@ export default function Footer() {
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{siteMetadata.author}</div>
         </div>
-        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <center>
+        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400 text-center">
           <Link href="https://opensats.org/terms">
           Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization.<br/>
           All gifts and donations are tax-deductible to the full extent of the law.
           </Link>
-          </center>
+        </div>
+        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400 text-center">
+          <Link href="https://opensats.org/terms">Terms</Link> •{' '}
+          <Link href="https://opensats.org/privacy">Privacy</Link>
         </div>
       </div>
     </footer>
