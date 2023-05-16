@@ -68,7 +68,7 @@ export default function ApplicationForm() {
             <hr/>
             <h2>Project Details</h2>
 
-            <label>
+            <label className="block">
                 Main Focus
                 <small>
                     In which area will your project have the most impact?
@@ -81,7 +81,7 @@ export default function ApplicationForm() {
                 </select>
             </label>
             
-            <label>
+            <label className="block">
                 Project Name *
                 <small>
                     The name of the project to be listed on the OpenSats website
@@ -92,7 +92,7 @@ export default function ApplicationForm() {
                 />
             </label>
 
-            <label>
+            <label className="block">
                 Project Description *
                 <small>
                     This will be listed on the explore projects page of the OpenSats
@@ -101,7 +101,7 @@ export default function ApplicationForm() {
                 <textarea {...register('short_description', { required: true })} />
             </label>
 
-            <label>
+            <label className="block">
                 Potential Impact *
                 <small>
                     Why is this project important to Bitcoin or the broader free and
@@ -109,12 +109,12 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('potential_impact', { required: true })} />
             </label>
-            {/* <label>
+            {/* <label className="block">
                   Project Images: (attachment)
                   <input type="text" {...register('your_name', { required: true })} />
               </label> */}
 
-            <label>
+            <label className="block">
                 Project Timelines and Potential Milestones *
                 <small>
                     This will help us evaluate overall scope and potential grant duration.
@@ -122,7 +122,7 @@ export default function ApplicationForm() {
                 <textarea {...register('timelines', { required: true })} />
             </label>
 
-            <label>
+            <label className="block">
                 Project Github (or similar, if applicable)
                 <input type="text" {...register('github')} />
             </label>
@@ -134,7 +134,7 @@ export default function ApplicationForm() {
 
             <hr/>
 
-            <label>
+            <label className="block">
                 Costs & Proposed Budget *
                 <small>
                     Current or estimated costs of the project. 
@@ -150,12 +150,12 @@ export default function ApplicationForm() {
                 Has this project received any prior funding?
             </label>
 
-            <label>
+            <label className="block">
                 If so, please describe.
                 <input type="text" {...register('what_funding')} />
             </label>
 
-            <label>
+            <label className="block">
 
                 Additional Project Links
                 <small>
@@ -164,7 +164,7 @@ export default function ApplicationForm() {
                 <textarea {...register('relevant_links')} />
             </label>
 
-            <label>
+            <label className="block">
                 Project-specific Social Media
                 <small>
                     Please include any project-specific social media or common community communication
@@ -176,14 +176,14 @@ export default function ApplicationForm() {
             <hr/>
 
             <h2>Applicant Details</h2>
-            <label>
+            <label className="block">
                 Your Name *
                 <small>
                     Feel free to use your nym.
                 </small>
                 <input type="text" {...register('your_name', { required: true })} />
             </label>
-            <label>
+            <label className="block">
                 Email *
                 <input type="text" {...register('email', { required: true })} />
             </label>
@@ -191,15 +191,15 @@ export default function ApplicationForm() {
                 <input type="checkbox" {...register('are_you_lead')} />
                 Are you the Project Lead / Lead Contributor?
             </label>
-            <label>
+            <label className="block">
                 If someone else, please list the project&#39;s Lead Contributor or
                 Maintainer <input type="text" {...register('other_lead')} />
             </label>
-            <label>
+            <label className="block">
                 Personal Github (or similar, if applicable)
                 <input type="text" {...register('personal_github')} />
             </label>
-            <label>
+            <label className="block">
                 Other Contact Details (if applicable)
                 <small>
                     Please list any other relevant contact details you are comfortable
@@ -209,7 +209,7 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('other_contact')} />
             </label>
-            <label>
+            <label className="block">
                 Prior Contributions
                 <small>
                     Please list any prior contributions to other open-source or
@@ -217,7 +217,7 @@ export default function ApplicationForm() {
                 </small>
                 <textarea {...register('bios')} />
             </label>
-            <label>
+            <label className="block">
                 References *
                 <small>
                     Please list any references from the Bitcoin community or open-source
