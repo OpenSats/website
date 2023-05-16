@@ -73,7 +73,7 @@ export default function ApplicationForm() {
                 <small>
                     In which area will your project have the most impact?
                 </small>
-                <select {...register('main_focus')} >
+                <select className="mt-1 block w-full" {...register('main_focus')} >
                     <option value="bitcoin">Bitcoin</option>
                     <option value="lightning">Lightning</option>
                     <option value="nostr">nostr</option>
@@ -88,6 +88,7 @@ export default function ApplicationForm() {
                 </small>
                 <input
                     type="text"
+                    className="mt-1 block w-full" 
                     {...register('project_name', { required: true })}
                 />
             </label>
