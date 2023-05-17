@@ -66,12 +66,15 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <section className="flex py-8 items-center">
-        <div className="space-y-8 basis-2/3 max-w-4xl">
-          <h1>
-            Support contributors to Bitcoin and other free and open-source projects
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Support Contributors to Bitcoin
           </h1>
-          <p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            ...and other free and open-source projects.
+          </p>
+          <p className='text-2xl leading-7 text-gray-500 dark:text-gray-400'>
             We help you find and support open-source Bitcoin projects—helping create a better tomorrow, today.
           </p>
           <div className='flex flex-wrap'>
@@ -86,17 +89,16 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
               </button>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
           <p> 
             Are you an open-source contributor?{' '}
             <Link href="/apply" className='underline'>
               Apply for your project to be listed.
             </Link>
           </p>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <Image width={388} height={388} src={phoenix} alt="Phoenix" />
-        </div>
-      </section>
+      </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
