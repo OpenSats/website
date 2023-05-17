@@ -9,8 +9,8 @@ const BackToProjects = () => {
         icon={faArrowLeft}
         className="mr-1 w-4 h-4 text-primary"
       />
-      <Link href="/projects">
-        <a className="text-primary">Back to projects</a>
+      <Link href="/projects" aria-label='Back to projects' className='text-primary'>
+        Back to projects
       </Link>
     </div>
   )

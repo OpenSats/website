@@ -43,7 +43,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <p>
           by{' '}
           <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
-            <a>{nym}</a>
+            {nym}
           </Link>
         </p>
         <p className="prose line-clamp-3">{summary}</p>
@@ -59,7 +59,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </button>
           <div className="flex items-center justify-center basis-1/2">
             <Link href={`/projects/${slug}`} passHref>
-              <a>View Details</a>
+              View Details
             </Link>
             <FontAwesomeIcon
               icon={faArrowRight}
