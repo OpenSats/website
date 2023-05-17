@@ -24,10 +24,10 @@ const ProjectList: React.FC<ProjectListProps> = ({
   }, [projects])
 
   return (
-    <section className="p-4 md:p-8 bg-light flex flex-col items-center">
-      <div className="flex justify-between items-center pb-8 w-full">
+    <section className="bg-light flex flex-col items-left">
+      <div className="flex justify-between items-left pb-8 w-full">
         <h1>{header}</h1>
-        <div className="flex items-center">
+        <div className="flex items-left">
           <Link href="/projects">View All</Link>
           <FontAwesomeIcon
             icon={faArrowRight}
