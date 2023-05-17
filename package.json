@@ -11,6 +11,9 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "@next/bundle-analyzer": "13.1.6",
     "@next/font": "13.1.6",
     "@octokit/rest": "^19.0.8",
@@ -32,6 +35,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
+    "react-modal": "^3.16.1",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "^6.1.0",
     "rehype-citation": "^0.5.0",
