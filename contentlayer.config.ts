@@ -104,6 +104,7 @@ export const Projects = defineDocumentType(() => ({
     zaprite: { type: 'string', required: true },
     btcpay: { type: 'string', required: true },
     bonusUSD: { type: 'number' },
+    hidden: { type: 'boolean' },
   },
   computedFields,
 }))
