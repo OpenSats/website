@@ -89,7 +89,7 @@ export const Pages = defineDocumentType(() => ({
 }))
 
 export const Projects = defineDocumentType(() => ({
-  name: 'Projects',
+  name: 'Project',
   filePathPattern: 'projects/**/*.mdx',
   contentType: 'mdx',
   fields: {
