@@ -70,10 +70,10 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Support Contributors to Bitcoin
+            Support Contributors
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            ...and other free and open-source projects.
+            ...to Bitcoin and other free and open-source projects.
           </p>
           <p className='text-2xl leading-7 text-gray-500 dark:text-gray-400'>
             We help you find and support open-source Bitcoin projects—helping create a better tomorrow, today.
