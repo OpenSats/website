@@ -32,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               layout="fill"
               objectFit="cover"
               objectPosition="50% 50%"
-              className="rounded-t-xl cursor-pointer"
+              className="rounded-t-xl cursor-pointer bg-white dark:bg-black"
             />
           </div>
         </Link>
