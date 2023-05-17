@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     project
 
   return (
-    <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
+    <figure className="bg-stone-100 dark:bg-stone-900 space-y-4 border border-stone-200 dark:border-stone-800 rounded-xl h-full">
       <div className="relative h-64 w-full">
         <Link href={`/projects/${slug}`} passHref>
           <div className='relative h-64 w-full'>
@@ -50,15 +50,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="flex justify-end"></div>
 
         <ShareButtons project={project} />
-        <div className="flex space-x-4 items-center justify-center pt-4">
+        <div className="flex space-x-4 items-center justify-left pt-4">
           <button
-            className="bg-black basis-1/2"
+            className="bg-transparent hover:bg-stone-800 text-stone-800 font-semibold hover:text-stone-100 py-2 px-4 border border-stone-800 hover:border-transparent rounded"
             onClick={() => openPaymentModal(project)}
           >
             Donate
           </button>
-          <div className="flex items-center justify-center basis-1/2">
-            <Link href={`/projects/${slug}`} passHref>
+          <div className="flex items-center justify-right basis-1/2">
+            <Link href={`/projects/${slug}`} passHref className='p-1 text-sm text-stone-800 dark:text-stone-200 sm:p-4'>
               View Details
             </Link>
             <FontAwesomeIcon
