@@ -125,17 +125,15 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
           </aside>
 
           <div className={markdownStyles['markdown']}>
-            <Link href={website}>
-              <a className='!no-underline'>
-                <h1>{title}</h1>
-              </a>
+            <Link href={website} className='no-underline'>
+              <h1>{title}</h1>
             </Link>
             <p>{summary}</p>
 
             <p>
               by{' '}
               <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
-                <a>{nym}</a>
+                {nym}
               </Link >
             </p >
             <ShareButtons project={project} />
