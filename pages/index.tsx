@@ -80,12 +80,12 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
           </p>
           <div className='flex flex-wrap'>
             <div>
-              <button role={'button'} onClick={openGeneralFundModal} className='mr-2 mb-2 block bg-orange-500 text-white hover:bg-orange-500 hover:text-white dark:bg-white dark:text-black dark:hover:bg-orange-500 font-semibold py-2 px-4 hover:border-transparent rounded'>
+              <button role={'button'} onClick={openGeneralFundModal} className='mr-2 mb-2 block bg-orange-500 text-white hover:bg-orange-500 hover:text-black dark:hover:text-white dark:text-black font-semibold py-2 px-4 hover:border-transparent rounded'>
                 Donate to General Fund
               </button>
             </div>
             <div>
-              <button role={'button'} onClick={openopsFundModal} className='block bg-transparent text-orange-500 hover:bg-orange-500 hover:text-white dark:bg-white dark:text-black dark:hover:bg-orange-500 font-semibold py-2 px-4 border border-orange-500 hover:border-transparent rounded'>
+              <button role={'button'} onClick={openopsFundModal} className='block bg-transparent text-orange-500 hover:bg-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 hover:border-transparent rounded'>
                 Donate to Operations Budget
               </button>
             </div>
