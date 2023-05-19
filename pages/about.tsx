@@ -10,7 +10,7 @@ const DEFAULT_LAYOUT = 'AuthorLayout'
 
 export const getStaticProps = async () => {
   const openSats = allAuthors.find((p) => p.slug === 'default')
-  const board = allAuthors.filter((p) => p.board === true)
+  const board = allAuthors.filter((p) => p.board === true).sort(() => Math.random() - 0.5)
   return { props: { openSats, board } }
 }
 
