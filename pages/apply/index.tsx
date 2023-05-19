@@ -25,7 +25,7 @@ export default function FourZeroFour() {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <Link
-            href="/"
+            href="/apply/legacy"
             className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
           >
             Apply to be listed on OpenSats.org
@@ -52,7 +52,7 @@ export default function FourZeroFour() {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <Link
-            href="/"
+            href="/apply/legacy"
             className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
           >
             Apply for an OpenSats Grant
@@ -79,7 +79,7 @@ export default function FourZeroFour() {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <Link
-            href="/"
+            href="/apply/lts"
             className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
           >
             Apply for an OpenSats LTS Grant
