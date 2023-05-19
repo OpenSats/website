@@ -1,77 +1,91 @@
-import ApplicationForm from "../components/ApplicationForm"
+import Link from '@/components/Link'
+import { PageSEO } from '@/components/SEO'
 
-export default function Apply() {
+export default function FourZeroFour() {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-4 py-8">
-      <div
-        className="apply flex flex-col gap-4 p-4 max-w-2xl"
-      >
-        <h1>Application for OpenSats Project Page and/or General Fund Grant</h1>
-        <p>
-          Thanks for your interest in OpenSats!
-        </p>
-        <p>
-          We're incredibly grateful to contributors like you working to
-          support Bitcoin Core and other free and open-source projects.
-        </p>
-        <p>
-          Because Open Sats is a 501(c)(3) non-profit, all projects we list on our website must be vetted by our
-          board of directors to ensure that they help us further our mission
-          of supporting contributors to Bitcoin and related free and open-source projects.
-        </p>
-        <p>
-          Additionally, OpenSats must support specific PROJECTS which help to
-          further our charitable mission. As such, if you are an individual
-          contributor, please be sure that you list a SPECIFIC PROJECT you are
-          working on.{' '}
-        </p>
-        <p>
-          The information collected below will be used in order to vet your
-          project. If approved, OpenSats will create a project page on
-          our website (opensats.org/projects) where site-visitors can learn more about your project
-          and donate if they choose to. Your project will be listed for one
-          year. After one year, you will be prompted to re-send your
-          application should you wish to be listed again.{' '}
-        </p>
-        <p>
-          OpenSats also distributes grants from a general fund and you may also choose to apply for a grant below.
-        </p>
-        <p>Criteria: </p>
-        <p>
-          Bitcoin: We prioritize projects that will have a direct impact on
-          the utility or adoption of Bitcoin. We will consider all projects
-          but prefer projects that are not readily funded and which have an
-          obvious benefit to the Bitcoin community and ecosystem. Potential
-          projects include Bitcoin Core contributions, scientific/security
-          research, code review, design/UX improvements, etc.
-        </p>
-        <p>
-          Free and Open-Source: OpenSats supports free and open-source
-          software, tools, and contributors which complement Bitcoin and help Bitcoin reach it&apos;s fullest potential. Potential
-          areas of interest include secure messaging, merchant acceptance
-          tools, layer two protocols, etc. Source code and documents resulting
-          from funded projects must be made publicly available for access,
-          edit, and redistribution free of charge and without restrictions.
-        </p>
-        <p>
-          Education and Mentorship: Funded contributors and projects should be
-          prepared to share their experience and expertise with the greater
-          community. We prefer developers who actively engage in mentorship,
-          and help introduce Bitcoin software development to newcomers.
-        </p>
-        <p>
-          If your project is selected to be listed, we will reach out with any
-          additional information necessary to ensure you are able to receive
-          donation payouts. This may include tax related information depending
-          on your location and/or bitcoin addresses in order to receive
-          donation payouts from Open Sats.
-        </p>
-        <p>Best,</p>
-        <p>The Open Sats Team</p>
-        <hr />
+    <>
+      <PageSEO title="Apply to one of OpenSats' programs" description="TODO" />
+      <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6">
+        <div className="space-x-2 pt-6 pb-8 md:space-y-5">
+          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
+            OPL
+          </h1>
+        </div>
+        <div className="max-w-md">
+          <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+            OpenSats Project Listing
+          </p>
+          <p className="mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <Link
+            href="/"
+            className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+          >
+            Apply to be listed on OpenSats.org
+          </Link>
+        </div>
       </div>
-      <h1>Application Form</h1>
-      <ApplicationForm />
-    </div>
+      <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6 border">
+        <div className="space-x-2 pt-6 pb-8 md:space-y-5 text-right border">
+          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
+            OSG
+          </h1>
+        </div>
+        <div className="max-w-md border">
+          <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+            OpenSats Project Listing
+          </p>
+          <p className="mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <Link
+            href="/"
+            className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+          >
+            Apply for an OpenSats Grant
+          </Link>
+        </div>
+      </div>
+      <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6">
+        <div className="space-x-2 pt-6 pb-8 md:space-y-5">
+          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
+            LTS
+          </h1>
+        </div>
+        <div className="max-w-md">
+          <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+            OpenSats Long-Term Support
+          </p>
+          <p className="mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <Link
+            href="/"
+            className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+          >
+            Apply for a Long-Term Grant
+          </Link>
+        </div>
+      </div>
+    </>
   )
 }
