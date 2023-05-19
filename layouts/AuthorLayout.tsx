@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function AuthorLayout({ children, content }: Props) {
-  const { name, avatar, occupation, company, email, twitter, linkedin, github } = content
+  const { name, nym, avatar, occupation, company, email, twitter, nostr, github } = content
 
   return (
     <>
@@ -31,13 +31,16 @@ export default function AuthorLayout({ children, content }: Props) {
               height={192}
               className="h-48 w-48 rounded-full"
             />
-            <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">{name}</h3>
+            <h3 className="pt-4 pb-2 text-2xl font-bold leading-8 tracking-tight">
+              { nym && <span className='text-gray-500 dark:text-gray-400 font-mono pr-0.5'>@</span> }
+              <span className=''>{nym ? nym : name}</span>
+            </h3>
             <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
-              <SocialIcon kind="mail" href={`mailto:${email}`} />
+              { email && <SocialIcon kind="mail" href={`mailto:${email}`} /> }
+              { nostr && <SocialIcon kind="nostr" href={`nostr:${nostr}`} /> }
               <SocialIcon kind="github" href={github} />
-              <SocialIcon kind="linkedin" href={linkedin} />
               <SocialIcon kind="twitter" href={twitter} />
             </div>
           </div>
