@@ -1,4 +1,4 @@
-import ApplicationForm from "../components/ApplicationForm"
+import ApplicationForm from "@/components/ApplicationForm"
 
 export default function Apply() {
   return (
