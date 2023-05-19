@@ -80,7 +80,19 @@ export default function ApplicationForm() {
                 Personal Website, GitHub profile, or other Social Media
                 <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
             </label>
+
+
+
+
+
+
             <hr/>
+
+
+
+
+
+
             <h2>What Will You Work On?</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -98,26 +110,6 @@ export default function ApplicationForm() {
                     other Bitcoin-related open-source projects.
                 </small>
                 <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('bios', { required: true })} />
-            </label>
-            <label className="block">
-                References *<br/>
-                <small>
-                    Please list any references from the Bitcoin community or open-source
-                    space that we could contact for more information on you or your project.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
-            </label>
-            <label className="block">
-                Focus Area<br/>
-                <small>
-                    In which area will your work have the most impact?
-                </small>
-                <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('main_focus')} >
-                    <option value="bitcoin">Bitcoin</option>
-                    <option value="lightning">Lightning</option>
-                    <option value="nostr">nostr</option>
-                    <option value="other">Other</option>
-                </select>
             </label>
             
             <label className="block">
@@ -138,7 +130,7 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Timelines and Potential Milestones *<br/>
+                Project Timeline and Milestones *<br/>
                 <small>
                     This will help us evaluate overall scope and potential grant duration.
                 </small>
@@ -152,6 +144,28 @@ export default function ApplicationForm() {
                     and how it will be used.
                 </small>
                 <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('proposed_budget', { required: true })} />
+            </label>
+
+            <label className="block">
+                References *<br/>
+                <small>
+                    Please list any references from the Bitcoin community or open-source
+                    space that we could contact for more information on you or your project.
+                </small>
+                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
+            </label>
+
+            <label className="block">
+                Focus Area<br/>
+                <small>
+                    In which area will your work have the most impact?
+                </small>
+                <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('main_focus')} >
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="lightning">Lightning</option>
+                    <option value="nostr">nostr</option>
+                    <option value="other">Other</option>
+                </select>
             </label>
 
             <label className="inline-flex items-center">
