@@ -55,6 +55,58 @@ export default function ApplicationForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="apply flex flex-col gap-4 p-4 max-w-2xl"
         >
+            <h2>Who Are You?</h2>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <label className="block">
+                Your Name *<br/>
+                <small>
+                    Feel free to use your nym.
+                </small>
+                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" placeholder="John Doe" {...register('your_name', { required: true })} />
+            </label>
+            <label className="block">
+                Email *
+                <input type="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" placeholder="satoshi.nakamoto@bitcoin.org" {...register('email', { required: true })} />
+            </label>
+            <label className="block">
+                Personal Website, GitHub profile, or other Social Media
+                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
+            </label>
+            <hr/>
+            <h2>What Will You Work On?</h2>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <label className="block">
+                Prior Contributions *<br/>
+                <small>
+                    Describe the contributions you've made to Bitcoin Core or
+                    other Bitcoin-related open-source projects.
+                </small>
+                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('bios', { required: true })} />
+            </label>
+            <label className="block">
+                References *<br/>
+                <small>
+                    Please list any references from the Bitcoin community or open-source
+                    space that we could contact for more information on you or your project.
+                </small>
+                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
+            </label>
             <label className="block">
                 Focus Area<br/>
                 <small>
@@ -69,22 +121,9 @@ export default function ApplicationForm() {
             </label>
             
             <label className="block">
-                Project Name *<br/>
-                <small>
-                    The name of the project to be listed on the OpenSats website
-                </small>
-                <input
-                    type="text"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
-                    {...register('project_name', { required: true })}
-                />
-            </label>
-
-            <label className="block">
                 Project Description *<br/>
                 <small>
-                    This will be listed on the explore projects page of the OpenSats
-                    website. Please write at least 2-3 sentences.
+                    What do you intend to work on? Please be as specific as possible.
                 </small>
                 <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('short_description', { required: true })} />
             </label>
@@ -97,10 +136,6 @@ export default function ApplicationForm() {
                 </small>
                 <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('potential_impact', { required: true })} />
             </label>
-            {/* <label className="block">
-                  Project Images: (attachment)
-                  <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('your_name', { required: true })} />
-              </label> */}
 
             <label className="block">
                 Project Timelines and Potential Milestones *<br/>
@@ -111,100 +146,21 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Github (or similar, if applicable)
-                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github')} />
-            </label>
-
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source')} />
-                <span className="ml-2">Is the project free and open-source?</span>
-            </label>
-
-            <hr/>
-
-            <label className="block">
-                Costs & Proposed Budget *<br/>
+                Budget Expectations *<br/>
                 <small>
-                    Current or estimated costs of the project. 
-                    If you're applying for a grant from the general fund, please
-                    submit a proposed budget around how much funding you are requesting
+                    Submit a proposed budget around how much funding you are requesting
                     and how it will be used.
                 </small>
                 <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('proposed_budget', { required: true })} />
             </label>
 
             <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('has_received_funding')} />
-                <span className="ml-2">Has this project received any prior funding?</span>
-            </label>
-
-            <label className="block">
-                If so, please describe.
-                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('what_funding')} />
-            </label>
-
-            <label className="block">
-
-                Additional Project Links<br/>
-                <small>
-                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('relevant_links')} />
-            </label>
-
-            <label className="block">
-                Project-specific Social Media<br/>
-                <small>
-                    Please include any project-specific social media or common community communication
-                    platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('social_media')} />
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source')} />
+                <span className="ml-2">Will your contributions be free and open-source? *</span>
             </label>
 
             <hr/>
 
-            <h2>Applicant Details</h2>
-            <label className="block">
-                Your Name *<br/>
-                <small>
-                    Feel free to use your nym.
-                </small>
-                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" placeholder="John Doe" {...register('your_name', { required: true })} />
-            </label>
-            <label className="block">
-                Email *
-                <input type="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" placeholder="satoshi.nakamoto@bitcoin.org" {...register('email', { required: true })} />
-            </label>
-            <label className="block">
-                Personal Github (or similar, if applicable)
-                <input type="text" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
-            </label>
-            <label className="block">
-                Other Contact Details (if applicable)<br/>
-                <small>
-                    Please list any other relevant contact details you are comfortable
-                    sharing in case we need to reach out with questions.
-                    These could include nostr pubkeys, social media handles, emails, phone
-                    numbers, etc.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('other_contact')} />
-            </label>
-            <label className="block">
-                Prior Contributions<br/>
-                <small>
-                    Please list any prior contributions to other open-source or
-                    Bitcoin-related projects.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('bios')} />
-            </label>
-            <label className="block">
-                References *<br/>
-                <small>
-                    Please list any references from the Bitcoin community or open-source
-                    space that we could contact for more information on you or your project.
-                </small>
-                <textarea className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
-            </label>
             <div className="prose">
                 <small>
                     Open Sats may require each recipient to sign a Grant Agreement
@@ -220,8 +176,8 @@ export default function ApplicationForm() {
                 </small>
             </div>
 
-            <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" type="submit" disabled={loading}>
-                Apply
+            <button className="bg-orange-500 hover:bg-orange-700 text-xl text-white font-bold py-2 px-4 rounded" type="submit" disabled={loading}>
+                Send Application
             </button>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
