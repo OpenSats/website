@@ -1,4 +1,3 @@
-// import { MDXLayoutRenderer } from '@/components/MDXComponents'
 import { InferGetStaticPropsType } from 'next'
 import { allAuthors } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
@@ -35,7 +34,7 @@ export default function About({ openSats, board }: InferGetStaticPropsType<typeo
     {board.map((member, i) => 
       (
         <div className="flex flex-col items-left space-x-2 pt-8">
-          <Link href={`/team/${member.slug}`}>
+          <Link href={`/about/${member.slug}`}>
             <Image
               src={member.avatar}
               alt={member.name}
