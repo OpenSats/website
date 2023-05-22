@@ -1,4 +1,4 @@
-import GrantApplicationForm from "@/components/GrantApplicationForm"
+import WebsiteApplicationForm from "@/components/WebsiteApplicationForm"
 
 export default function Apply() {
   return (
@@ -6,7 +6,7 @@ export default function Apply() {
       <div
         className="apply flex flex-col gap-4 p-4 max-w-2xl"
       >
-        <h1>Application for OpenSats General Fund Grant</h1>
+        <h1>Apply to Be Listed</h1>
         <p>
           Thanks for your interest in OpenSats!
         </p>
@@ -33,25 +33,21 @@ export default function Apply() {
           year. After one year, you will be prompted to re-send your
           application should you wish to be listed again.{' '}
         </p>
-        <p>
-          OpenSats also distributes grants from a general fund and you may also choose to apply for a grant below.
-        </p>
         <p>Criteria: </p>
         <p>
           Bitcoin: We prioritize projects that will have a direct impact on
           the utility or adoption of Bitcoin. We will consider all projects
           but prefer projects that are not readily funded and which have an
-          obvious benefit to the Bitcoin community and ecosystem. Potential
-          projects include Bitcoin Core contributions, scientific/security
-          research, code review, design/UX improvements, etc.
+          obvious benefit to the Bitcoin community and ecosystem.
         </p>
         <p>
-          Free and Open-Source: OpenSats supports free and open-source
-          software, tools, and contributors which complement Bitcoin and help Bitcoin reach it&apos;s fullest potential. Potential
-          areas of interest include secure messaging, merchant acceptance
-          tools, layer two protocols, etc. Source code and documents resulting
-          from funded projects must be made publicly available for access,
-          edit, and redistribution free of charge and without restrictions.
+          Free and Open-Source: OpenSats supports free and open-source software,
+          tools, and contributors which complement Bitcoin and help Bitcoin
+          reach its fullest potential. Potential areas of interest include
+          secure messaging, merchant acceptance tools, layer two protocols, etc.
+          Source code and documents resulting from funded projects must be made
+          publicly available for access, edit, and redistribution free of charge
+          and without restrictions.
         </p>
         <p>
           Education and Mentorship: Funded contributors and projects should be
@@ -64,14 +60,12 @@ export default function Apply() {
           additional information necessary to ensure you are able to receive
           donation payouts. This may include tax related information depending
           on your location and/or bitcoin addresses in order to receive
-          donation payouts from Open Sats.
+          donation payouts from OpenSats.
         </p>
-        <p>Best,</p>
-        <p>The Open Sats Team</p>
         <hr />
       </div>
       <h1>Application Form</h1>
-      <GrantApplicationForm />
+      <WebsiteApplicationForm />
     </div>
   )
 }
