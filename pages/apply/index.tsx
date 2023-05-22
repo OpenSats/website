@@ -44,13 +44,11 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
               Project Listing
             </h2>
             <p className="mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
+              Any FOSS project that is aligned with the OpenSats mission is free
+              to submit an application to be listed on the OpenSats website.
+              Donors may recommend their gifts be directed to specific projects
+              on this list. If you are helping Bitcoin and FOSS, please submit
+              an application to be listed on our site.
             </p>
             <Link
               href="/apply/to-be-listed"
