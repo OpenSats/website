@@ -110,10 +110,6 @@ export default function ApplicationForm() {
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('potential_impact', { required: true })} />
             </label>
-            {/* <label className="block">
-                  Project Images: (attachment)
-                  <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('your_name', { required: true })} />
-              </label> */}
 
             <label className="block">
                 Project Timelines and Potential Milestones *<br/>
