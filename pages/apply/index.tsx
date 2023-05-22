@@ -4,29 +4,43 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
+import Image from '@/components/Image'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'apply')
-  return { props: { page: page } }
+  const apply = allPages.find((p) => p.slug === 'apply')
+  return { props: { apply  } }
 }
 
-export default function Apply({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Apply({ apply }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title="Apply to one of OpenSats' programs" description="TODO" />
       <MDXLayoutRenderer
-        layout={page.layout || DEFAULT_LAYOUT}
-        content={page}
+        layout={DEFAULT_LAYOUT}
+        content={apply}
         MDXComponents={MDXComponents}
       />
-      <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6">
-        <div className="space-x-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
-            OPL
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 pt-6 pb-8 md:space-y-5">
+          <div></div>
+          <h1 className="text-3xl xl:col-span-2 font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Our Programs
           </h1>
         </div>
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+          <div className="flex flex-col items-center space-x-2 pt-8">
+            <Image
+              src='/static/images/avatar.png'
+              alt="avatar"
+              width={210}
+              height={210}
+              className="h-48 w-48"
+            />
+          </div>
+          <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
+      <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6">
         <div className="max-w-md">
           <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
             OpenSats Project Listing
@@ -49,11 +63,6 @@ export default function Apply({ page }: InferGetStaticPropsType<typeof getStatic
         </div>
       </div>
       <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6">
-        <div className="space-x-2 pt-6 pb-8 md:space-y-5 text-right">
-          <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
-            OSG
-          </h1>
-        </div>
         <div className="max-w-md">
           <p className="mb-4 text-xl font-bold leading-normal md:text-2xl">
             OpenSats Grant
@@ -100,6 +109,9 @@ export default function Apply({ page }: InferGetStaticPropsType<typeof getStatic
           >
             Apply for an OpenSats LTS Grant
           </Link>
+        </div>
+      </div>
+          </div>
         </div>
       </div>
     </>
