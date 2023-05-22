@@ -1,4 +1,4 @@
-function Button({ variant, children, ...rest }) {
+function FormButton({ variant, children, ...rest }) {
     const defaultVariant = 'bg-orange-500 hover:bg-orange-700 text-xl text-white font-bold py-2 px-4 rounded'
     const buttonVariants = {
         enabled: defaultVariant,
@@ -12,4 +12,4 @@ function Button({ variant, children, ...rest }) {
     )
 }
 
-export default Button
+export default FormButton

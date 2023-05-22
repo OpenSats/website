@@ -2,7 +2,7 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { fetchPostJSON } from "../utils/api-helpers"
-import Button from "@/components/Button"
+import FormButton from "@/components/FormButton"
 
 export default function ApplicationForm() {
     const [loading, setLoading] = useState(false)
@@ -193,9 +193,9 @@ export default function ApplicationForm() {
                 </small>
             </div>
 
-            <Button variant={ isFLOSS ? 'enabled' : 'disabled' } type="submit" disabled={ loading }>
+            <FormButton variant={ isFLOSS ? 'enabled' : 'disabled' } type="submit" disabled={ loading }>
                 Send Application
-            </Button>
+            </FormButton>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
