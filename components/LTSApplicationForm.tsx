@@ -58,6 +58,9 @@ export default function ApplicationForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="apply flex flex-col gap-4 p-4 max-w-2xl"
         >
+            <input type='hidden' {...register('project_name', { value: 'Long-term Grant' })} />
+            <input type='hidden' {...register('LTS', { value: true })} />
+
             <h2>Who Are You?</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
