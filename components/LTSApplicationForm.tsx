@@ -120,8 +120,8 @@ export default function ApplicationForm() {
             <label className="block">
                 Potential Impact *<br/>
                 <small>
-                    Why is this project important to Bitcoin or the broader free and
-                    open-source community?
+                    Why is your work important to Bitcoin or the broader free
+                    and open-source community?
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('potential_impact', { required: true })} />
             </label>
@@ -180,7 +180,7 @@ export default function ApplicationForm() {
             </div>
 
             <FormButton variant={ isFLOSS ? 'enabled' : 'disabled' } type="submit" disabled={ loading }>
-                Send LTS Application
+                Submit LTS Application
             </FormButton>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}

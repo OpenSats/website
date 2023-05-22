@@ -41,7 +41,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
           </div>
           <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
             <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-              Project Listing
+              Website Listing
             </h2>
             <p className="mb-8">
               Any FOSS project that is aligned with the OpenSats mission is free
