@@ -98,10 +98,19 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
           </p>
         </div>
       </div>
+      <div className="mt-8 mb-4 divide-y divide-gray-200 dark:divide-gray-700">
+        <ProjectList projects={projects} openPaymentModal={openPaymentModal} /> 
+      </div>
+      <p>
+        Want to see your project here? {' '}
+        <Link href="/apply" className='underline'>
+          Apply for your project to be listed.
+        </Link>
+      </p>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        <div className="space-y-2 pt-16 xl:pt-32 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
+            Latest Posts
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {siteMetadata.description}
@@ -170,15 +179,6 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
           </Link>
         </div>
       )}
-      <div className="mt-8 mb-16 divide-y divide-gray-200 dark:divide-gray-700">
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} /> 
-      </div>
-      <p>
-        Interested in receiving donations? {' '}
-        <Link href="/apply" className='underline'>
-          Apply for your project to be listed.
-        </Link>
-      </p>
       {siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
