@@ -55,15 +55,7 @@ export default function ApplicationForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="apply flex flex-col gap-4 p-4 max-w-2xl"
         >
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('general_fund')} />
-                <span className="ml-2">Apply to receive a grant from the OpenSats General Fund</span>
-            </label>
-
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('explore_page')} />
-                <span className="ml-2">Apply for my project to be listed on the OpenSats Explore Page</span>
-            </label>
+            <input type='hidden' {...register('explore_page', { value: true })} />
 
             <hr/>
             <h2>Project Details</h2>
@@ -112,35 +104,11 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Timelines and Potential Milestones *<br/>
-                <small>
-                    This will help us evaluate overall scope and potential grant duration.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('timelines', { required: true })} />
-            </label>
-
-            <label className="block">
                 Project Github (or similar, if applicable)
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github')} />
             </label>
 
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source')} />
-                <span className="ml-2">Is the project free and open-source?</span>
-            </label>
-
             <hr/>
-
-            <label className="block">
-                Costs & Proposed Budget *<br/>
-                <small>
-                    Current or estimated costs of the project. 
-                    If you're applying for a grant from the general fund, please
-                    submit a proposed budget around how much funding you are requesting
-                    and how it will be used.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('proposed_budget', { required: true })} />
-            </label>
 
             <label className="inline-flex items-center">
                 <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('has_received_funding')} />
@@ -149,7 +117,7 @@ export default function ApplicationForm() {
 
             <label className="block">
                 If so, please describe.
-                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('what_funding')} />
+                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('what_funding')} />
             </label>
 
             <label className="block">
@@ -222,6 +190,12 @@ export default function ApplicationForm() {
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
             </label>
+
+            <label className="inline-flex items-center">
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
+                <span className="ml-2">Is the project free and open-source?</span>
+            </label>
+
             <div className="prose">
                 <small>
                     Open Sats may require each recipient to sign a Grant Agreement
@@ -238,7 +212,7 @@ export default function ApplicationForm() {
             </div>
 
             <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" type="submit" disabled={loading}>
-                Apply
+                Apply to be listed
             </button>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
