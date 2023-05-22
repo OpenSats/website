@@ -52,7 +52,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
             </p>
             <Link
               href="/apply/to-be-listed"
-              className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+              className="bg-transparent no-underline text-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 rounded"
             >
               Apply to be listed on OpenSats.org
             </Link>
@@ -67,7 +67,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
             </p>
             <Link
               href="/apply/legacy"
-              className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+              className="bg-transparent no-underline text-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 rounded"
             >
               Apply for an OpenSats General Grant
             </Link>
@@ -82,7 +82,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
             </p>
             <Link
               href="/apply/lts"
-              className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
+              className="bg-transparent no-underline text-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 rounded"
             >
               Apply for an OpenSats LTS Grant
             </Link>
