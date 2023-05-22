@@ -180,14 +180,14 @@ export default function ApplicationForm() {
 
             <div className="prose">
                 <small>
-                    Open Sats may require each recipient to sign a Grant Agreement
+                    OpenSats may require each recipient to sign a Grant Agreement
                     before any funds are disbursed. Using the reports and presentations
-                    required by the Grant Agreement, Open Sats will monitor and evaluate
+                    required by the Grant Agreement, OpenSats will monitor and evaluate
                     the expenditure of funds on a quarterly basis. Any apparent misuse
                     of grant funds will be promptly investigated. If OpenSats discovers
                     that the funds have been misused, the recipient will be required to
                     return the funds immediately, and be barred from further
-                    distributions. Open Sats will maintain the records required by
+                    distributions. OpenSats will maintain the records required by
                     Revenue Ruling 56-304, 1956-2 C.B. 306 regarding distribution of
                     charitable funds to individuals.
                 </small>
