@@ -62,6 +62,7 @@ export default function ApplicationForm() {
             <input type='hidden' {...register('timelines', { value: 'Ongoing work.' })} />
             <input type='hidden' {...register('LTS', { value: true })} />
 
+            <hr/>
             <h2>Who Are You?</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -89,7 +90,6 @@ export default function ApplicationForm() {
             </label>
 
             <hr/>
-
             <h2>What Will You Work On?</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -144,8 +144,20 @@ export default function ApplicationForm() {
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
             </label>
 
+            <hr/>
+            <h2>Anything Else We Should Know?</h2>
+
             <label className="block">
-                Focus Area<br/>
+                <small>
+                    Feel free to share whatever else might be important.
+                </small>
+                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('anything_else')} />
+            </label>
+
+            <hr/>
+            <h2>Final Questions</h2>
+
+            <label className="block">
                 <small>
                     In which area will your work have the most impact?
                 </small>
