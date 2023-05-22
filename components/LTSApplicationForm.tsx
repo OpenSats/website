@@ -172,7 +172,7 @@ export default function ApplicationForm() {
             </label>
 
             <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source')} />
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
                 <span className="ml-2">Will your contributions be free and open-source? *</span>
             </label>
 
