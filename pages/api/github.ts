@@ -39,7 +39,7 @@ ${req.body.timelines}
 
 ${req.body.proposed_budget}
 
-${req.body.what_funding}
+${req.body.what_funding && 'Prior funding: ' + req.body.what_funding}
 
 ### References & Prior Contributions
 
