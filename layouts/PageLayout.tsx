@@ -23,7 +23,7 @@ export default function PageLayout({ children, content }: Props) {
           </h1>
         </div>
         <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="flex flex-col items-center space-x-2 pt-8">
+          <div className="flex flex-col items-center space-x-2 pt-8 hidden xl:block">
             <Image
               src={image}
               alt="avatar"
