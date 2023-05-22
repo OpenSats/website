@@ -93,7 +93,7 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
           <p> 
             Are you an open-source contributor?{' '}
             <Link href="/apply" className='underline'>
-              Apply for your project to be listed.
+              Apply for funding.
             </Link>
           </p>
         </div>
@@ -173,6 +173,12 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
       <div className="mt-8 mb-16 divide-y divide-gray-200 dark:divide-gray-700">
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} /> 
       </div>
+      <p>
+        Interested in receiving donations? {' '}
+        <Link href="/apply" className='underline'>
+          Apply for your project to be listed.
+        </Link>
+      </p>
       {siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
