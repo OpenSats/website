@@ -4,7 +4,7 @@ import PageSection from "@/components/PageSection"
 export default function Apply() {
   return (
     <>
-    <PageSection title='Apply to Be Listed' image='/static/image/avatar.png'>
+    <PageSection title='Apply to Be Listed' image='/static/images/avatar.png'>
         <p>
           The information collected below will be used in order to vet your
           project. If approved, OpenSats will create a project page on our
@@ -17,11 +17,12 @@ export default function Apply() {
           If your project is selected to be listed, we will reach out with any
           additional information necessary to ensure you are able to receive
           donation payouts. This may include tax related information depending
-          on your location and/or bitcoin addresses in order to receive
-          donation payouts from OpenSats.
+          on your location, bitcoin addresses, lightning addresses, or similar
+          payment information in order to receive donation payouts from
+          OpenSats.
         </p>
+      <WebsiteApplicationForm />
     </PageSection>
-    <WebsiteApplicationForm />
     </>
   )
 }
