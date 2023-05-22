@@ -16,10 +16,10 @@ export default function Apply() {
         <p>
           If your project is selected to be listed, we will reach out with any
           additional information necessary to ensure you are able to receive
-          donation payouts. This may include tax related information depending
-          on your location, bitcoin addresses, lightning addresses, or similar
-          payment information in order to receive donation payouts from
-          OpenSats.
+          donation payouts. This may include tax related information
+          depending on your location, bitcoin addresses, lightning addresses, or
+          similar payment information that is required to receive donation
+          payouts from OpenSats.
         </p>
       <WebsiteApplicationForm />
     </PageSection>
