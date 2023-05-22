@@ -55,15 +55,7 @@ export default function ApplicationForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="apply flex flex-col gap-4 p-4 max-w-2xl"
         >
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('general_fund')} />
-                <span className="ml-2">Apply to receive a grant from the OpenSats General Fund</span>
-            </label>
-
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('explore_page')} />
-                <span className="ml-2">Apply for my project to be listed on the OpenSats Explore Page</span>
-            </label>
+            <input type='hidden' {...register('general_fund', { value: true })} />
 
             <hr/>
             <h2>Project Details</h2>

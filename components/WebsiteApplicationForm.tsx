@@ -110,16 +110,6 @@ export default function ApplicationForm() {
 
             <hr/>
 
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('has_received_funding')} />
-                <span className="ml-2">Has this project received any prior funding?</span>
-            </label>
-
-            <label className="block">
-                If so, please describe.
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('what_funding')} />
-            </label>
-
             <label className="block">
 
                 Additional Project Links<br/>
