@@ -6,9 +6,9 @@ export default function Apply() {
     <>
     <PageSection title='Apply for a Grant' image='/static/images/avatar.png'>
         <p>
-          The information collected below will be to vet your grant application.
-          Please provide accurate contact information as we may reach out during
-          our review and due diligence process.
+          The information collected below will be used to vet your grant
+          application. Please provide accurate contact information as we may
+          reach out during our review and due diligence process.
         </p>
         <p>
           If your grant application is approved, we will reach out with any
