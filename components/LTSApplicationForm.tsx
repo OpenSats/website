@@ -84,17 +84,7 @@ export default function ApplicationForm() {
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
             </label>
 
-
-
-
-
-
             <hr/>
-
-
-
-
-
 
             <h2>What Will You Work On?</h2>
             <p>
