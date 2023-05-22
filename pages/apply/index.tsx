@@ -66,7 +66,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
               high impact projects in the Bitcoin space. 
             </p>
             <Link
-              href="/apply/legacy"
+              href="/apply/grant"
               className="bg-transparent no-underline text-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 rounded"
             >
               Apply for an OpenSats General Grant
