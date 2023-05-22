@@ -59,6 +59,7 @@ export default function ApplicationForm() {
             className="apply flex flex-col gap-4 p-4 max-w-2xl"
         >
             <input type='hidden' {...register('project_name', { value: 'Long-term Grant' })} />
+            <input type='hidden' {...register('timelines', { value: 'Ongoing work.' })} />
             <input type='hidden' {...register('LTS', { value: true })} />
 
             <h2>Who Are You?</h2>
@@ -126,14 +127,6 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Timeline and Milestones *<br/>
-                <small>
-                    This will help us evaluate overall scope and potential grant duration.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('timelines', { required: true })} />
-            </label>
-
-            <label className="block">
                 Budget Expectations *<br/>
                 <small>
                     Submit a proposed budget around how much funding you are requesting
@@ -187,7 +180,7 @@ export default function ApplicationForm() {
             </div>
 
             <FormButton variant={ isFLOSS ? 'enabled' : 'disabled' } type="submit" disabled={ loading }>
-                Send Application
+                Send LTS Application
             </FormButton>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
