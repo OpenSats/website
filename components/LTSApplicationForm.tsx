@@ -56,7 +56,7 @@ export default function ApplicationForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="apply flex flex-col gap-4 p-4 max-w-2xl"
+            className="flex flex-col gap-4 max-w-2xl"
         >
             <input type='hidden' {...register('project_name', { value: 'Long-term Grant' })} />
             <input type='hidden' {...register('timelines', { value: 'Ongoing work.' })} />

@@ -53,7 +53,7 @@ export default function ApplicationForm() {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="apply flex flex-col gap-4 p-4 max-w-2xl"
+            className="apply flex flex-col gap-4 max-w-2xl"
         >
             <input type='hidden' {...register('general_fund', { value: true })} />
 
