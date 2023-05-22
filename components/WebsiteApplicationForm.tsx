@@ -103,15 +103,10 @@ export default function ApplicationForm() {
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('potential_impact', { required: true })} />
             </label>
 
-            <label className="block">
-                Project Github (or similar, if applicable)
-                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github')} />
-            </label>
-
             <hr/>
+            <h2>Project Links</h2>
 
             <label className="block">
-
                 Additional Project Links<br/>
                 <small>
                     Other links that might be relevant, such as website, documentation, links to app stores, etc.
@@ -127,6 +122,17 @@ export default function ApplicationForm() {
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('social_media')} />
             </label>
+
+            <label className="block">
+                Project Github (or similar, if applicable)
+                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github')} />
+            </label>
+
+            <label className="inline-flex items-center">
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
+                <span className="ml-2">Is the project free and open-source?</span>
+            </label>
+
 
             <hr/>
 
@@ -165,25 +171,12 @@ export default function ApplicationForm() {
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('other_contact')} />
             </label>
             <label className="block">
-                Prior Contributions<br/>
-                <small>
-                    Please list any prior contributions to other open-source or
-                    Bitcoin-related projects.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('bios')} />
-            </label>
-            <label className="block">
                 References *<br/>
                 <small>
                     Please list any references from the Bitcoin community or open-source
                     space that we could contact for more information on you or your project.
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
-            </label>
-
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
-                <span className="ml-2">Is the project free and open-source?</span>
             </label>
 
             <div className="prose">
