@@ -117,11 +117,12 @@ export default function ApplicationForm() {
             </label>
 
             <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source')} />
-                <span className="ml-2">Is the project free and open-source?</span>
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
+                <span className="ml-2">Is the project free and open-source? *</span>
             </label>
 
             <hr/>
+            <h2>Project Budget</h2>
 
             <label className="block">
                 Costs & Proposed Budget *<br/>
@@ -144,27 +145,9 @@ export default function ApplicationForm() {
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('what_funding')} />
             </label>
 
-            <label className="block">
-
-                Additional Project Links<br/>
-                <small>
-                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('relevant_links')} />
-            </label>
-
-            <label className="block">
-                Project-specific Social Media<br/>
-                <small>
-                    Please include any project-specific social media or common community communication
-                    platforms like Twitter, Telegram, nostr, Keybase, Discord, etc.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('social_media')} />
-            </label>
-
             <hr/>
-
             <h2>Applicant Details</h2>
+
             <label className="block">
                 Your Name *<br/>
                 <small>
