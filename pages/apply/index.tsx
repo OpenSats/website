@@ -41,7 +41,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
           </div>
           <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
             <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-              OpenSats Project Listing
+              Project Listing
             </h2>
             <p className="mb-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -59,7 +59,7 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
               Apply to be listed on OpenSats.org
             </Link>
             <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-              OpenSats Grant
+              General Grant
             </h2>
             <p className="mb-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -74,10 +74,10 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
               href="/apply/legacy"
               className="focus:shadow-outline-orange inline rounded-lg border border-transparent bg-orange-600 px-4 py-2 text-sm font-medium leading-5 text-white shadow transition-colors duration-150 hover:bg-orange-700 focus:outline-none dark:hover:bg-orange-500"
             >
-              Apply for an OpenSats Grant
+              Apply for an OpenSats General Grant
             </Link>
             <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-              OpenSats Long-Term Support
+              Long-Term Support
             </h2>
             <p className="mb-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
