@@ -133,10 +133,9 @@ export default function ApplicationForm() {
                 <span className="ml-2">Is the project free and open-source?</span>
             </label>
 
-
             <hr/>
-
             <h2>Applicant Details</h2>
+
             <label className="block">
                 Your Name *<br/>
                 <small>
@@ -156,6 +155,10 @@ export default function ApplicationForm() {
                 If someone else, please list the project's Lead Contributor or
                 Maintainer <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('other_lead')} />
             </label>
+
+            <hr/>
+            <h2>Applicant Links</h2>
+
             <label className="block">
                 Personal Github (or similar, if applicable)
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
