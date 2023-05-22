@@ -1,10 +1,26 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
+import { InferGetStaticPropsType } from 'next'
+import { allPages } from 'contentlayer/generated'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { MDXComponents } from '@/components/MDXComponents'
 
-export default function FourZeroFour() {
+const DEFAULT_LAYOUT = 'PageLayout'
+
+export const getStaticProps = async () => {
+  const page = allPages.find((p) => p.slug === 'apply')
+  return { props: { page: page } }
+}
+
+export default function Apply({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title="Apply to one of OpenSats' programs" description="TODO" />
+      <MDXLayoutRenderer
+        layout={page.layout || DEFAULT_LAYOUT}
+        content={page}
+        MDXComponents={MDXComponents}
+      />
       <div className="flex flex-col items-start justify-start md:mt-24 md:flex-row md:items-left md:justify-center md:space-x-6">
         <div className="space-x-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-6xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:border-r-2 md:px-6 md:text-8xl md:leading-14">
