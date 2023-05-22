@@ -40,6 +40,17 @@ export default function Apply({ apply }: InferGetStaticPropsType<typeof getStati
             />
           </div>
           <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
+            <p>
+              All our programs are open to applicants worldwide. We are global and nym-friendly.
+            </p>
+            <p>
+              OpenSats does not discriminate in its grant selection process with
+              applicants, whether internal or external, because of race, creed,
+              color, age, national origin, ancestry, religion, gender, sexual
+              orientation, gender identity, disability, genetic information,
+              veteran status, military status, application for military service
+              or any other class per local, state or federal law.
+            </p>
             <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
               Website Listing
             </h2>
