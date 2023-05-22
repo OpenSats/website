@@ -8,8 +8,8 @@ export default function ApplicationForm() {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const {
-        register,
         watch,
+        register,
         handleSubmit,
         formState: { errors },
     } = useForm()

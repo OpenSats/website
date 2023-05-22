@@ -2,16 +2,19 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { fetchPostJSON } from "../utils/api-helpers"
+import FormButton from "@/components/FormButton"
 
 export default function ApplicationForm() {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const {
+        watch,
         register,
         handleSubmit,
         formState: { errors },
     } = useForm()
 
+    const isFLOSS = watch("free_open_source", false);
     const [failureReason, setFailureReason] = useState<string>();
 
     const onSubmit = async (data: any) => {
@@ -212,9 +215,9 @@ export default function ApplicationForm() {
                 </small>
             </div>
 
-            <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" type="submit" disabled={loading}>
-                Submit Grant Application 
-            </button>
+            <FormButton variant={ isFLOSS ? 'enabled' : 'disabled' } type="submit" disabled={ loading }>
+                Submit Grant Application
+            </FormButton>
 
             {!!failureReason && <p className="rounded bg-red-500 p-4 text-white">Something went wrong! {failureReason}</p>}
 
