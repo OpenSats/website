@@ -18,6 +18,10 @@ export default function Apply() {
           similar payment information that is required to receive donation
           payouts from OpenSats.
         </p>
+        <p>
+          If you want your project to be listed on the website, please apply to
+          be listed <a href="/apply/to-be-listed">here</a>.
+        </p>
       <GrantApplicationForm />
     </PageSection>
     </>

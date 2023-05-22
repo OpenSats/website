@@ -6,7 +6,10 @@ export default function Apply() {
     <PageSection title='Long-Term Support' image='/static/images/avatar.png'>
         <p>
         {/* TODO: The following is shamelessly copied from Brink. We probably want to re-word it. */}
-        The grant program is open to developers anywhere in the world. Grant applicants must:
+        The grant program is open to developers anywhere in the world.
+        </p>
+        <p>
+        Grant applicants must:
         </p>
         <ul>
           <li>have a track record of making high-quality, security-first contributions to Bitcoin or related projects.</li>
@@ -16,14 +19,7 @@ export default function Apply() {
           <li>be committed to increasing the impact of their contributions, growing the developer ecosystem and scaling Bitcoin and related projects.</li>
         </ul>
         <p>
-          <small>
-            OpenSats does not discriminate in its
-            grant selection process with applicants, whether internal or external, because of
-            race, creed, color, age, national origin, ancestry, religion, gender,
-            sexual orientation, gender identity, disability, genetic information,
-            veteran status, military status, application for military service or any
-            other class per local, state or federal law.
-          </small>
+          If the above does not apply to you, please consider applying for a <a href="/apply/grant">General Grant</a> instead.
         </p>
       <LTSApplicationForm />
     </PageSection>
