@@ -3,7 +3,7 @@ title: 'ThunderHub'
 summary: 'Monitor and manage your node from any browser and any device.'
 nym: 'Anthony Potdevin'
 website: 'https://thunderhub.io/'
-coverImage: '/img/project/thunderhub.png'
+coverImage: '/static/images/projects/thunderhub.png'
 git: https://github.com/apotdevin/thunderhub
 twitter: 'thunderhubio'
 personalTwitter: 'tonyioi'

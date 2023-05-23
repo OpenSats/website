@@ -1,47 +1,45 @@
-import Image from 'next/image'
-import logo from '../public/logo.svg'
-import Link from 'next/link'
+import siteMetadata from '@/data/siteMetadata'
+import headerNavLinks from '@/data/headerNavLinks'
+import Logo from '@/data/logo.svg'
+import Link from './Link'
+import MobileNav from './MobileNav'
+import ThemeSwitch from './ThemeSwitch'
 
 const Header = () => {
   return (
-    <header className="bg-white p-4 sm:p-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center">
-        <div className="flex items-center w-[200px] py-4 pr-8">
-          <Link href="/" passHref>
-            <a>
-              <Image alt="OpenSats logo" src={logo} className="cursor-pointer" />
-            </a>
-          </Link>
+    <header className="flex items-center justify-between py-10">
+      <div>
+        <Link href="/" aria-label={siteMetadata.headerTitle}>
+          <div className="flex items-center justify-between">
+            <div className="mr-3">
+              <Logo />
+            </div>
+            {typeof siteMetadata.headerTitle === 'string' ? (
+              <div className="hidden h-6 text-2xl font-semibold sm:block">
+                {siteMetadata.headerTitle}
+              </div>
+            ) : (
+              siteMetadata.headerTitle
+            )}
+          </div>
+        </Link>
+      </div>
+      <div className="flex items-center text-base leading-5">
+        <div className="hidden sm:block">
+          {headerNavLinks.map((link) => (
+            <Link
+              key={link.title}
+              href={link.href}
+              className={
+                link.isButton ? "bg-transparent hover:bg-orange-500 text-orange-500 font-semibold hover:text-white py-2 px-4 border border-orange-500 hover:border-transparent rounded" : "p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4"
+              }
+            >
+              {link.title}
+            </Link>
+          ))}
         </div>
-        <nav>
-          <ul className="flex flex-col sm:flex-row gap-4">
-            <li>
-              <Link href="/projects">
-                <a>Projects</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/apply">
-                <a>Apply</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/faq">
-                <a>FAQ</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog">
-                <a>Blog</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about">
-                <a>About Us</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <ThemeSwitch />
+        <MobileNav />
       </div>
     </header>
   )

@@ -1,19 +1,21 @@
-import markdownToHtml from '../utils/markdownToHtml'
-import { getSingleFile } from '../utils/md'
-import BigDumbMarkdown from '../components/BigDumbMarkdown'
+import { InferGetStaticPropsType } from 'next'
+import { allPages } from 'contentlayer/generated'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { MDXComponents } from '@/components/MDXComponents'
 
-export default function Faq({ content }: { content: string }) {
-  return <BigDumbMarkdown content={content} />
+const DEFAULT_LAYOUT = 'PageLayout'
+
+export const getStaticProps = async () => {
+  const page = allPages.find((p) => p.slug === 'faq')
+  return { props: { page: page } }
 }
 
-export async function getStaticProps() {
-  const md = getSingleFile('docs/faq.md')
-
-  const content = await markdownToHtml(md || '')
-
-  return {
-    props: {
-      content,
-    },
-  }
+export default function FAQ({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <MDXLayoutRenderer
+      layout={page.layout || DEFAULT_LAYOUT}
+      content={page}
+      MDXComponents={MDXComponents}
+    />
+  )
 }

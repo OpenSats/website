@@ -35,17 +35,13 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setSelectedProject(project)
     setModalOpen(true)
   }
-  // const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
 
   return (
     <>
       <Head>
         <title>OpenSats | Projects</title>
       </Head>
-      <section className="p-4 md:p-8 flex flex-col items-center">
-        <div className="flex justify-between items-center pb-8 w-full">
-          <h1>Projects</h1>
-        </div>
+      <section className="p-4 md:p-8 flex flex-col">
         <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
