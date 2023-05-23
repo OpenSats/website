@@ -6,11 +6,11 @@ import { MDXComponents } from '@/components/MDXComponents'
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'faq')
+  const page = allPages.find((p) => p.slug === 'submitted')
   return { props: { page: page } }
 }
 
-export default function FAQ({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Mission({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

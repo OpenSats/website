@@ -18,7 +18,8 @@ export default async function handler(
     }
     console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
 
-    const issueTitle = `${req.body.project_name} by ${req.body.your_name}`
+    const byOrFor = req.body.LTS ? "for" : "by"
+    const issueTitle = `${req.body.project_name} ${byOrFor} ${req.body.your_name}`
 
     // Condensed information for screening purposes, no PII
     const issueBody = `
@@ -38,6 +39,8 @@ ${req.body.timelines}
 
 ${req.body.proposed_budget}
 
+**Prior funding:** ${req.body.has_received_funding ? 'Yes' : 'No'}
+
 ${req.body.what_funding}
 
 ### References & Prior Contributions
@@ -45,6 +48,10 @@ ${req.body.what_funding}
 ${req.body.references}
 
 ${req.body.bios}
+
+### Anything Else
+
+${req.body.anything_else}
 
 ### Other Relevant Links
 

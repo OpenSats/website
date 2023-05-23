@@ -25,7 +25,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
   return (
     <section className="bg-light flex flex-col items-left">
-      <div className="flex justify-between items-left pb-8 w-full">
+      <div className="flex justify-between items-left pb-4 w-full">
         <h1>{header}</h1>
         <div className="flex items-left">
           <Link href="/projects">View All</Link>
