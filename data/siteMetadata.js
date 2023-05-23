@@ -2,17 +2,18 @@
 
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'OpenSats Blog',
+  title: 'OpenSats',
   author: 'OpenSats',
   headerTitle: 'OpenSats',
-  description: 'Updates from a better tomorrow, today.',
+  description:
+    'We help you find and support open-source Bitcoin projects. Helping create a better tomorrow, today.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://opensats.org',
   siteRepo: 'https://github.com/OpenSats/website/',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/twitter.png',
   email: 'support@opensats.org',
   github: 'https://github.com/OpenSats',
   twitter: 'https://twitter.com/OpenSats',
