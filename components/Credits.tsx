@@ -36,7 +36,7 @@ const Credits = () => {
   const zapirte = '/img/supporters/zaprite.png'
 
   const board: CreditItemProps[] = [
-    { image: j9Photo, nym: 'j9', link: 'https://twitter.com/j9' },
+    { image: j9Photo, nym: 'J9', link: 'https://twitter.com/J9Roem' },
     {
       image: dreadPhoto,
       nym: 'Dread',
