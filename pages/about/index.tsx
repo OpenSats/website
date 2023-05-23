@@ -29,8 +29,8 @@ export default function About({ openSats, board }: InferGetStaticPropsType<typeo
           Board of Directors
         </h1>
       </div>
-      <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-      <div className="col-start-2 col-span-2 space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 ">
+      <div className="items-start space-y-2 grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+      <div className="col-start-2 col-span-2 space-y-2 grid md:grid-cols-3 md:gap-x-8 sm:grid-cols-2 sm:gap-x-4">
     {board.map((member, i) => 
       (
         <div className="flex flex-col items-left space-x-2 pt-8">
