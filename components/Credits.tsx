@@ -7,7 +7,7 @@ const Credits = () => {
   const abitcoinpersonPhoto = '/img/team/abitcoinperson.jpg'
   const dreadPhoto = '/img/team/dread.jpg'
   const elainePhoto = '/img/team/elaine.png'
-  const j9RoemPhoto = '/img/team/j9Roem.png'
+  const j9Photo = '/img/team/j9.png'
   const jamesPhoto = '/img/team/james.jpg'
   const mattOdellPhoto = '/img/team/matt.jpg'
   const niftyneiPhoto = '/img/team/niftynei.jpg'
@@ -36,7 +36,7 @@ const Credits = () => {
   const zapirte = '/img/supporters/zaprite.png'
 
   const board: CreditItemProps[] = [
-    { image: j9RoemPhoto, nym: 'J9Roem', link: 'https://twitter.com/J9Roem' },
+    { image: j9Photo, nym: 'j9', link: 'https://twitter.com/j9' },
     {
       image: dreadPhoto,
       nym: 'Dread',
