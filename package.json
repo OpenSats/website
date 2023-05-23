@@ -11,9 +11,11 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@next/bundle-analyzer": "13.1.6",
     "@next/font": "13.1.6",
     "@octokit/rest": "^19.0.8",
