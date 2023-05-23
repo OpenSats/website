@@ -8,8 +8,7 @@ const BackToProjects = () => {
         aria-label="Back to projects"
         className="text-primary"
       >
-        &larr;{' '}
-        Back to projects
+        &larr; Back to projects
       </Link>
     </div>
   )
