@@ -110,11 +110,16 @@ export default function ApplicationForm() {
             <h2>Project Links</h2>
 
             <label className="block">
-                Additional Project Links<br/>
+                Project Repository *<br/>
                 <small>
-                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
+                    GitHub, GitLab, Bitbucket, Gitea, or similar
                 </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('relevant_links')} />
+                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github', { required: true })} />
+            </label>
+
+            <label className="inline-flex items-center">
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
+                <span className="ml-2">Is the project free and open-source? *</span>
             </label>
 
             <label className="block">
@@ -127,17 +132,13 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Repository *<br/>
+                Additional Project Links<br/>
                 <small>
-                    GitHub, GitLab, Bitbucket, Gitea, or similar
+                    Other links that might be relevant, such as website, documentation, links to app stores, etc.
                 </small>
-                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github', { required: true })} />
+                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('relevant_links')} />
             </label>
 
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
-                <span className="ml-2">Is the project free and open-source? *</span>
-            </label>
 
             <hr/>
             <h2>Applicant Details</h2>
