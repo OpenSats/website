@@ -127,8 +127,11 @@ export default function ApplicationForm() {
             </label>
 
             <label className="block">
-                Project Github (or similar, if applicable)
-                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github')} />
+                Project Repository *<br/>
+                <small>
+                    GitHub, GitLab, Bitbucket, Gitea, or similar
+                </small>
+                <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github', { required: true })} />
             </label>
 
             <label className="inline-flex items-center">
