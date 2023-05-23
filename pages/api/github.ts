@@ -31,20 +31,17 @@ ${req.body.short_description}
 
 ${req.body.potential_impact}
 
-${req.body.timelines && `### Timeline & Milestones
+### Timeline & Milestones
 
 ${req.body.timelines}
-`}
 
-${req.body.proposed_budget && `### Proposed Budget
+### Proposed Budget
 
 ${req.body.proposed_budget}
-`}
 
-${req.body.what_funding && `
-**Prior funding:** 
+**Prior funding:** ${req.body.has_received_funding ? 'Yes' : 'No'}
 
-${req.body.what_funding}`}
+${req.body.what_funding}
 
 ### References & Prior Contributions
 
