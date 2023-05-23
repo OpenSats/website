@@ -18,31 +18,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, personalTwitter, nym, zaprite } =
-    project
+  const {
+    slug,
+    title,
+    summary,
+    coverImage,
+    git,
+    twitter,
+    personalTwitter,
+    nym,
+    zaprite,
+  } = project
 
   return (
-    <figure className="bg-stone-100 dark:bg-stone-900 space-y-4 border border-stone-200 dark:border-stone-800 rounded-xl h-full">
+    <figure className="h-full space-y-4 rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
       <div className="relative h-64 w-full">
         <Link href={`/projects/${slug}`} passHref>
-          <div className='relative h-64 w-full'>
+          <div className="relative h-64 w-full">
             <Image
               alt={title}
               src={coverImage}
               layout="fill"
               objectFit="cover"
               objectPosition="50% 50%"
-              className="rounded-t-xl cursor-pointer bg-white dark:bg-black"
+              className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
             />
           </div>
         </Link>
       </div>
 
-      <figcaption className="p-4 space-y-1">
-        <h2 className='font-bold'>{title}</h2>
-        <div className='mb-8 text-sm'>
+      <figcaption className="space-y-1 p-4">
+        <h2 className="font-bold">{title}</h2>
+        <div className="mb-8 text-sm">
           by{' '}
-          <Link href={`https://twitter.com/${personalTwitter || twitter}`} passHref>
+          <Link
+            href={`https://twitter.com/${personalTwitter || twitter}`}
+            passHref
+          >
             {nym}
           </Link>
         </div>
@@ -50,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
         <div className="grid grid-cols-2 pt-4">
           <button
-            className="bg-stone-800 text-white hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 font-semibold py-2 px-4 border border-stone-800 hover:border-transparent rounded"
+            className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
             onClick={() => openPaymentModal(project)}
           >
             Donate
@@ -58,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Link
             href={`/projects/${slug}`}
             passHref
-            className="text-center text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 hover:underline pt-2"
+            className="text-secondary-500 hover:text-secondary-600 dark:hover:text-secondary-400 pt-2 text-center hover:underline"
             aria-label="View Details"
           >
             View Details &rarr;

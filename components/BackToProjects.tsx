@@ -7,9 +7,13 @@ const BackToProjects = () => {
     <div className="flex items-center pb-4">
       <FontAwesomeIcon
         icon={faArrowLeft}
-        className="mr-1 w-4 h-4 text-primary"
+        className="text-primary mr-1 h-4 w-4"
       />
-      <Link href="/projects" aria-label='Back to projects' className='text-primary'>
+      <Link
+        href="/projects"
+        aria-label="Back to projects"
+        className="text-primary"
+      >
         Back to projects
       </Link>
     </div>

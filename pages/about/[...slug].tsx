@@ -14,11 +14,13 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params }) => {
   const slug = (params.slug as string[]).join('/')
-  const author = allAuthors.find((p) => p.slug === slug )
+  const author = allAuthors.find((p) => p.slug === slug)
   return { props: { author } }
 }
 
-export default function About({ author }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function About({
+  author,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <MDXLayoutRenderer
       layout={DEFAULT_LAYOUT}

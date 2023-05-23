@@ -7,7 +7,7 @@ const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 
 import sgMail from '@sendgrid/mail'
 
-sgMail.setApiKey(SENDGRID_API_KEY || "")
+sgMail.setApiKey(SENDGRID_API_KEY || '')
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,7 +24,7 @@ export default async function handler(
       body += `<h3>${key}</h3><p>${value}</p>`
     }
 
-    let thankYouMessage = `
+    const thankYouMessage = `
 Thank you for applying to OpenSats! 
 
 We have received your application and will evaluate it as quickly as we can. 
@@ -43,7 +43,7 @@ Thank you for your patience.
       }
 
       await sgMail.send(msg)
-      console.info("Application receipt sent")
+      console.info('Application receipt sent')
     } catch (err) {
       console.error(err)
     } finally {
@@ -60,7 +60,9 @@ Thank you for your patience.
         await sgMail.send(msg)
         res.status(200).json({ message: 'success' })
       } catch (err) {
-        res.status(500).json({ statusCode: 500, message: (err as Error).message })
+        res
+          .status(500)
+          .json({ statusCode: 500, message: (err as Error).message })
       }
     }
   } else {

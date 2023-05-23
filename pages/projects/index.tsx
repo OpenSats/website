@@ -15,8 +15,14 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random()))
-    setOpenSatsProjects(projects.filter(isOpenSatsProject).sort((a, b) => a.title.localeCompare(b.title)))
+    setSortedProjects(
+      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
+    )
+    setOpenSatsProjects(
+      projects
+        .filter(isOpenSatsProject)
+        .sort((a, b) => a.title.localeCompare(b.title))
+    )
   }, [projects])
 
   function isOpenSatsProject(project: ProjectItem): boolean {
@@ -41,8 +47,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>OpenSats | Projects</title>
       </Head>
-      <section className="p-4 md:p-8 flex flex-col">
-        <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
+      <section className="flex flex-col p-4 md:p-8">
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
@@ -51,11 +57,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <section className="p-4 md:p-8 flex flex-col items-center">
-        <div className="flex justify-between items-center pb-8 w-full">
+      <section className="flex flex-col items-center p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Specific Funds</h1>
         </div>
-        <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {openSatsProjects &&
             openSatsProjects.map((p, i) => (
               <li key={i} className="">

@@ -11,7 +11,9 @@ export const getStaticProps = async () => {
   return { props: { page: page } }
 }
 
-export default function Mission({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Mission({
+  page,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

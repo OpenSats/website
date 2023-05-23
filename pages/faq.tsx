@@ -10,7 +10,9 @@ export const getStaticProps = async () => {
   return { props: { page: page } }
 }
 
-export default function FAQ({ page }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function FAQ({
+  page,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}

@@ -4,16 +4,15 @@ import PageHeading from '@/components/PageHeading'
 
 interface Props {
   children: ReactNode
-  title: String,
+  title: string
   image: string
 }
 
 export default function PageSection({ title, image, children }: Props) {
-
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
-        <div className="flex flex-col items-center space-x-2 pt-8 hidden xl:block">
+        <div className="flex hidden flex-col items-center space-x-2 pt-8 xl:block">
           <Image
             src={image}
             alt="avatar"
@@ -22,7 +21,7 @@ export default function PageSection({ title, image, children }: Props) {
             className="h-48 w-48"
           />
         </div>
-        <div className="prose max-w-none pt-8 pb-8 dark:prose-dark xl:col-span-2">
+        <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
           {children}
         </div>
       </PageHeading>

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Head>
         <title>OpenSats</title>
         <meta name="description" content="TKTK" />
@@ -19,16 +19,24 @@ const Layout: React.FC = ({ children }) => {
 
         {/* Open Graph */}
         <meta property="og:url" content="https://opensats.org" key="ogurl" />
-        <meta property="og:image" content="https://opensats.vercel.app/twitter.png" key="ogimage" />
+        <meta
+          property="og:image"
+          content="https://opensats.vercel.app/twitter.png"
+          key="ogimage"
+        />
         <meta property="og:site_name" content="OpenSats" key="ogsitename" />
         <meta property="og:title" content="OpenSats" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:description" content="Support contributors to Bitcoin and other free and open-source projects" key="ogdesc" />
+        <meta
+          property="og:description"
+          content="Support contributors to Bitcoin and other free and open-source projects"
+          key="ogdesc"
+        />
       </Head>
       <Navbar />
-      <main className="flex-1 flex flex-col">{children}</main>
-      <footer className="flex justify-between p-4 md:p-8 bg-light">
+      <main className="flex flex-1 flex-col">{children}</main>
+      <footer className="bg-light flex justify-between p-4 md:p-8">
         <div className="flex flex-col">
           <strong>© 2023 Open Sats Initiative, Inc. (EIN 85-2722249)</strong>
           <Link href="/terms">
@@ -39,17 +47,18 @@ const Layout: React.FC = ({ children }) => {
           </Link>
           <div>
             <p>
-              Need help?{' '}<a href="mailto:support@opensats.org">support@opensats.org</a>
+              Need help?{' '}
+              <a href="mailto:support@opensats.org">support@opensats.org</a>
             </p>
           </div>
         </div>
         <Link href="https://github.com/opensats/website" passHref>
           <a>
-            <div className="flex items-center hover:underline cursor-pointer">
+            <div className="flex cursor-pointer items-center hover:underline">
               <strong>Submit a bug</strong>
               <FontAwesomeIcon
                 icon={faBug}
-                className="ml-2 w-4 h-4 cursor-pointer"
+                className="ml-2 h-4 w-4 cursor-pointer"
               />
             </div>
           </a>

@@ -20,22 +20,24 @@ const ProjectList: React.FC<ProjectListProps> = ({
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.filter(p => p.slug !== exclude).sort(() => 0.5 - Math.random()))
+    setSortedProjects(
+      projects.filter((p) => p.slug !== exclude).sort(() => 0.5 - Math.random())
+    )
   }, [projects])
 
   return (
-    <section className="bg-light flex flex-col items-left">
-      <div className="flex justify-between items-left pb-4 w-full">
+    <section className="bg-light items-left flex flex-col">
+      <div className="items-left flex w-full justify-between pb-4">
         <h1>{header}</h1>
-        <div className="flex items-left">
+        <div className="items-left flex">
           <Link href="/projects">View All</Link>
           <FontAwesomeIcon
             icon={faArrowRight}
-            className="ml-1 w-4 h-4 text-textgray cursor-pointer"
+            className="text-textgray ml-1 h-4 w-4 cursor-pointer"
           />
         </div>
       </div>
-      <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
+      <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
         {sortedProjects &&
           sortedProjects.slice(0, 3).map((p, i) => (
             <li key={i} className="">

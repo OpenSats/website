@@ -15,7 +15,9 @@ export default function PageLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
-      <PageSection title={title} image={image}>{children}</PageSection>
+      <PageSection title={title} image={image}>
+        {children}
+      </PageSection>
     </>
   )
 }

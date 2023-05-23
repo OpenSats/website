@@ -25,13 +25,18 @@ export const getStaticProps = async () => {
 
   const projects = getAllPosts()
 
-  const generalFund = getPostBySlug("general_fund", true);
-  const opsFund = getPostBySlug("opensats_operations_budget", true);
+  const generalFund = getPostBySlug('general_fund', true)
+  const opsFund = getPostBySlug('opensats_operations_budget', true)
 
   return { props: { posts, projects, generalFund, opsFund } }
 }
 
-export default function Home({ posts, projects, generalFund, opsFund }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({
+  posts,
+  projects,
+  generalFund,
+  opsFund,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   const [modalOpen, setModalOpen] = useState(false)
 
   const router = useRouter()
@@ -54,61 +59,72 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
   function openopsFundModal() {
     openPaymentModal(opsFund)
   }
-  
+
   useEffect(() => {
     if (router.isReady) {
-      console.log(router.query);
-      if (router.query.donate === "ops") {
+      console.log(router.query)
+      if (router.query.donate === 'ops') {
         openPaymentModal(opsFund)
       }
-
     }
   }, [router.isReady])
   return (
     <>
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
+      <PageSEO
+        title={siteMetadata.title}
+        description={siteMetadata.description}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Support Contributors
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             ...to Bitcoin and other free and open-source projects.
           </p>
-          <p className='text-2xl leading-7 text-gray-500 dark:text-gray-400'>
-            We help you find and support open-source Bitcoin projects—helping create a better tomorrow, today.
+          <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
+            We help you find and support open-source Bitcoin projects—helping
+            create a better tomorrow, today.
           </p>
-          <div className='flex flex-wrap'>
+          <div className="flex flex-wrap">
             <div>
-              <button role={'button'} onClick={openGeneralFundModal} className='mr-2 mb-2 block bg-orange-500 text-white hover:bg-orange-500 hover:text-black dark:hover:text-white dark:text-black font-semibold py-2 px-4 hover:border-transparent rounded'>
+              <button
+                role={'button'}
+                onClick={openGeneralFundModal}
+                className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
+              >
                 Donate to General Fund
               </button>
             </div>
             <div>
-              <button role={'button'} onClick={openopsFundModal} className='block bg-transparent text-orange-500 hover:bg-orange-500 hover:text-black dark:hover:text-white font-semibold py-2 px-4 border border-orange-500 hover:border-transparent rounded'>
+              <button
+                role={'button'}
+                onClick={openopsFundModal}
+                className="block rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+              >
                 Donate to Operations Budget
               </button>
             </div>
           </div>
-          <p> 
+          <p>
             Are you an open-source contributor?{' '}
-            <Link href="/apply" className='underline'>
+            <Link href="/apply" className="underline">
               Apply for funding.
             </Link>
           </p>
         </div>
       </div>
-      <div className="mt-8 mb-4 divide-y divide-gray-200 dark:divide-gray-700">
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} /> 
+      <div className="mb-4 mt-8 divide-y divide-gray-200 dark:divide-gray-700">
+        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
       </div>
       <p>
-        Want to see your project here? {' '}
-        <Link href="/apply" className='underline'>
+        Want to see your project here?{' '}
+        <Link href="/apply" className="underline">
           Apply for your project to be listed.
         </Link>
       </p>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-16 xl:pt-32 pb-8 md:space-y-5">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-32">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Latest Posts
           </h1>
@@ -127,7 +143,9 @@ export default function Home({ posts, projects, generalFund, opsFund }: InferGet
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                        <time dateTime={date}>
+                          {formatDate(date, siteMetadata.locale)}
+                        </time>
                       </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-3">

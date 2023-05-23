@@ -1,10 +1,10 @@
-import GrantApplicationForm from "@/components/GrantApplicationForm"
-import PageSection from "@/components/PageSection"
+import GrantApplicationForm from '@/components/GrantApplicationForm'
+import PageSection from '@/components/PageSection'
 
 export default function Apply() {
   return (
     <>
-    <PageSection title='Apply for a Grant' image='/static/images/avatar.png'>
+      <PageSection title="Apply for a Grant" image="/static/images/avatar.png">
         <p>
           The information collected below will be used to vet your grant
           application. Please provide accurate contact information as we may
@@ -22,8 +22,8 @@ export default function Apply() {
           If you want your project to be listed on the website, please apply to
           be listed <a href="/apply/to-be-listed">here</a>.
         </p>
-      <GrantApplicationForm />
-    </PageSection>
+        <GrantApplicationForm />
+      </PageSection>
     </>
   )
 }

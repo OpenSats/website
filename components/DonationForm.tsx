@@ -40,16 +40,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   useEffect(() => {
-    let fiatValid = false;
-    let btcValid: boolean;
+    let fiatValid = false
+    let btcValid: boolean
     if (amount && typeof parseInt(amount) === 'number') {
-      fiatValid = true;
+      fiatValid = true
     }
     if (deductable === 'no' || (name && email)) {
-      btcValid = true;
+      btcValid = true
     } else {
-      fiatValid = false;
-      btcValid = false;
+      fiatValid = false
+      btcValid = false
     }
     setReadyToPayFiat(fiatValid)
     setReadyToPayBTC(btcValid)
@@ -64,7 +64,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     try {
       const payload = {
         project_slug: projectSlug,
-        zaprite
+        zaprite,
       }
 
       if (amount) {
@@ -182,23 +182,23 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       </section>
 
       <section>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h3>How much would you like to donate?</h3>
         </div>
-        <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
+        <div className="flex flex-col gap-2 py-2 sm:flex-row" role="group">
           {[50, 100, 250, 500].map((value, index) => (
             <button
               key={index}
               className="group"
-              onClick={(e) => handleFiatAmountClick(e, value?.toString()??"")}
+              onClick={(e) => handleFiatAmountClick(e, value?.toString() ?? '')}
             >
-              {value?`$${value}`: "Any"}
+              {value ? `$${value}` : 'Any'}
             </button>
           ))}
           <div className="relative flex w-full">
-            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               {/* <FontAwesomeIcon icon={faDollarSign} className="w-5 h-5 text-black" /> */}
-              <span className="w-5 h-5 font-mono text-xl mb-2">{'$'}</span>
+              <span className="mb-2 h-5 w-5 font-mono text-xl">{'$'}</span>
             </div>
             <input
               type="number"
@@ -207,7 +207,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
-              className="!pl-10 w-full"
+              className="w-full !pl-10"
               placeholder="Or enter custom amount"
             />
           </div>
@@ -218,7 +218,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           name="btcpay"
           onClick={handleBtcPay}
           className="pay"
-          disabled={ !readyToPayBTC ||  btcPayLoading}
+          disabled={!readyToPayBTC || btcPayLoading}
         >
           {btcPayLoading ? (
             <Spinner />

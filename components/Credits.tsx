@@ -64,7 +64,7 @@ const Credits = () => {
       image: nvkPhoto,
       nym: 'NVK',
       link: 'https://twitter.com/nvk',
-    }
+    },
   ]
 
   const managing_director: CreditItemProps[] = [
@@ -77,8 +77,8 @@ const Credits = () => {
 
   const supporters: CreditItemProps[] = [
     {
-      link: 'https://bottlepay.com/', 
-      image: bottlepayLogo, 
+      link: 'https://bottlepay.com/',
+      image: bottlepayLogo,
       nym: 'Bottlepay',
     },
     {
@@ -92,10 +92,10 @@ const Credits = () => {
       nym: 'Castlenine',
       person: true,
     },
-    { 
+    {
       link: 'https://coinkite.com/',
       image: coinkiteLogo,
-      nym: 'Coinkite' 
+      nym: 'Coinkite',
     },
     {
       link: 'https://twitter.com/FossGregfoss',
@@ -121,15 +121,15 @@ const Credits = () => {
       nym: 'Harper',
       person: true,
     },
-    { 
-      link: 'https://www.ledger.com/', 
-      image: ledgerLogo, 
-      nym: 'Ledger' 
+    {
+      link: 'https://www.ledger.com/',
+      image: ledgerLogo,
+      nym: 'Ledger',
     },
-    { 
-      link: 'https://www.nodl.it/', 
-      image: nodlLogo, 
-      nym: 'nodl' 
+    {
+      link: 'https://www.nodl.it/',
+      image: nodlLogo,
+      nym: 'nodl',
     },
     {
       link: 'https://www.swanbitcoin.com/',
@@ -156,12 +156,12 @@ const Credits = () => {
     {
       link: 'https://voltage.cloud/',
       image: voltage,
-      nym: 'Voltage'
+      nym: 'Voltage',
     },
     {
       link: 'https://zaprite.com',
       image: zapirte,
-      nym: 'Zaprite'
+      nym: 'Zaprite',
     },
     {
       link: 'https://unchained.com',
@@ -176,22 +176,26 @@ const Credits = () => {
   ]
 
   return (
-    <section className="bg-black p-4 flex flex-col items-center">
-      <h1 className="text-white my-4">Board</h1>
-      <div className="credit container flex flex-wrap items-center justify-center mb-8">
+    <section className="flex flex-col items-center bg-black p-4">
+      <h1 className="my-4 text-white">Board</h1>
+      <div className="credit container mb-8 flex flex-wrap items-center justify-center">
         {board.map((b, i) => (
           <CreditItem key={i} image={b.image} link={b.link} nym={b.nym} />
         ))}
       </div>
 
-      <h1 className="text-white my-4">Supporters</h1>
-      <div className="credit container flex flex-wrap items-center justify-center mb-8">
-        {supporters.filter((s) => (s.person)).map((s, i) => (
-          <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
-        ))}
-        {supporters.filter((s) => (!s.person)).map((s, i) => (
-          <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
-        ))}
+      <h1 className="my-4 text-white">Supporters</h1>
+      <div className="credit container mb-8 flex flex-wrap items-center justify-center">
+        {supporters
+          .filter((s) => s.person)
+          .map((s, i) => (
+            <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
+          ))}
+        {supporters
+          .filter((s) => !s.person)
+          .map((s, i) => (
+            <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
+          ))}
       </div>
     </section>
   )
