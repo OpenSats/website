@@ -117,11 +117,6 @@ export default function ApplicationForm() {
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('github', { required: true })} />
             </label>
 
-            <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
-                <span className="ml-2">Is the project free and open-source? *</span>
-            </label>
-
             <label className="block">
                 Project-specific Social Media<br/>
                 <small>
@@ -139,6 +134,10 @@ export default function ApplicationForm() {
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('relevant_links')} />
             </label>
 
+            <label className="inline-flex items-center">
+                <input type="checkbox" className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('free_open_source', { required: true })} />
+                <span className="ml-2">Is the project free and open-source? *</span>
+            </label>
 
             <hr/>
             <h2>Applicant Details</h2>
@@ -171,6 +170,14 @@ export default function ApplicationForm() {
                 <input type="text" className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('personal_github')} />
             </label>
             <label className="block">
+                References *<br/>
+                <small>
+                    Please list any references from the Bitcoin community or open-source
+                    space that we could contact for more information on you or your project.
+                </small>
+                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
+            </label>
+            <label className="block">
                 Other Contact Details (if applicable)<br/>
                 <small>
                     Please list any other relevant contact details you are comfortable
@@ -179,14 +186,6 @@ export default function ApplicationForm() {
                     numbers, etc.
                 </small>
                 <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('other_contact')} />
-            </label>
-            <label className="block">
-                References *<br/>
-                <small>
-                    Please list any references from the Bitcoin community or open-source
-                    space that we could contact for more information on you or your project.
-                </small>
-                <textarea className="text-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50" {...register('references', { required: true })} />
             </label>
 
             <div className="prose">
