@@ -1,10 +1,15 @@
-import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+
+// Font Awesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 type DonationStepsProps = {
   projectNamePretty: string
