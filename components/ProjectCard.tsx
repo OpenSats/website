@@ -1,13 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Link from 'next/link'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { ProjectItem } from '../utils/types'
-import PaymentModal from './PaymentModal'
-import ShareButtons from './ShareButtons'
 
 export type ProjectCardProps = {
   project: ProjectItem
