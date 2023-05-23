@@ -19,9 +19,9 @@ export default function Footer() {
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{siteMetadata.author}</div>
           <div>·</div>
-          <Link href="https://opensats.org/terms">Terms</Link>
+          <Link href="/terms">Terms</Link>
           <div>·</div>
-          <Link href="https://opensats.org/privacy">Privacy</Link>
+          <Link href="/privacy">Privacy</Link>
         </div>
         <div className="text-xs space-x-4 text-gray-500 dark:text-gray-400 text-center">
           Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit organization.<br/>
