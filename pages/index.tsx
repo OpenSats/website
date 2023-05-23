@@ -1,5 +1,4 @@
 import Link from '@/components/Link'
-import Image from '@/components/Image'
 import { useEffect, useState } from 'react'
 import ProjectList from '../components/ProjectList'
 import { PageSEO } from '@/components/SEO'
@@ -89,7 +88,6 @@ export default function Home({
           <div className="flex flex-wrap">
             <div>
               <button
-                role={'button'}
                 onClick={openGeneralFundModal}
                 className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
               >
@@ -98,7 +96,6 @@ export default function Home({
             </div>
             <div>
               <button
-                role={'button'}
                 onClick={openopsFundModal}
                 className="block rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
               >

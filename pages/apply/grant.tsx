@@ -1,5 +1,6 @@
 import GrantApplicationForm from '@/components/GrantApplicationForm'
 import PageSection from '@/components/PageSection'
+import Link from '@/components/Link'
 
 export default function Apply() {
   return (
@@ -20,7 +21,7 @@ export default function Apply() {
         </p>
         <p>
           If you want your project to be listed on the website, please apply to
-          be listed <a href="/apply/to-be-listed">here</a>.
+          be listed <Link href="/apply/to-be-listed">here</Link>.
         </p>
         <GrantApplicationForm />
       </PageSection>

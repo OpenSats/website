@@ -48,7 +48,9 @@ const Layout: React.FC = ({ children }) => {
           <div>
             <p>
               Need help?{' '}
-              <a href="mailto:support@opensats.org">support@opensats.org</a>
+              <Link href="mailto:support@opensats.org">
+                support@opensats.org
+              </Link>
             </p>
           </div>
         </div>

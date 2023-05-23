@@ -37,7 +37,7 @@ export default function About({
         <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
           <div className="col-span-2 col-start-2 grid space-y-2 sm:grid-cols-2 sm:gap-x-4 md:grid-cols-3 md:gap-x-8">
             {board.map((member, i) => (
-              <div className="items-left flex flex-col space-x-2 pt-8">
+              <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
                 <Link href={`/about/${member.slug}`}>
                   <Image
                     src={member.avatar}

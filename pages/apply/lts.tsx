@@ -1,5 +1,6 @@
 import PageSection from '@/components/PageSection'
 import LTSApplicationForm from '@/components/LTSApplicationForm'
+import Link from '@/components/Link'
 
 export default function Apply() {
   return (
@@ -36,7 +37,7 @@ export default function Apply() {
       </ul>
       <p>
         If the above does not apply to you, please consider applying for a{' '}
-        <a href="/apply/grant">General Grant</a> instead.
+        <Link href="/apply/grant">General Grant</Link> instead.
       </p>
       <LTSApplicationForm />
     </PageSection>
