@@ -8,6 +8,7 @@ website: 'https://opensats.org/'
 git: 'https://github.com/OpenSats'
 type: 'Legal Defense'
 zaprite: 'ZOYJUVHW6RCJY5HvNvbf'
+hidden: true
 ---
 
 ## About this project
