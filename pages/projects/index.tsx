@@ -47,23 +47,26 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       <Head>
         <title>OpenSats | Projects</title>
       </Head>
-      <section className="flex flex-col p-4 md:p-8">
+      <section className="flex flex-col items-center p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h1 id="funds">OpenSats Funds</h1>
+        </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
+          {openSatsProjects &&
+            openSatsProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
             ))}
         </ul>
       </section>
-      <section className="flex flex-col items-center p-4 md:p-8">
+      <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Specific Funds</h1>
+          <h1 id="funds">Vetted Projects</h1>
         </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
-          {openSatsProjects &&
-            openSatsProjects.map((p, i) => (
+          {sortedProjects &&
+            sortedProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard project={p} openPaymentModal={openPaymentModal} />
               </li>
