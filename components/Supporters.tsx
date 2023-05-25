@@ -1,3 +1,5 @@
+import Link from './Link'
+import Image from './Image'
 import CreditItem, { CreditItemProps } from './CreditItem'
 
 const Credits = () => {
@@ -176,28 +178,38 @@ const Credits = () => {
   ]
 
   return (
-    <section className="flex flex-col items-center bg-black p-4">
-      <h1 className="my-4 text-white">Board</h1>
-      <div className="credit container mb-8 flex flex-wrap items-center justify-center">
-        {board.map((b, i) => (
-          <CreditItem key={i} image={b.image} link={b.link} nym={b.nym} />
+    <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
+      {supporters
+        .filter((s) => s.person)
+        .map((s, i) => (
+          <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
+            <Link href={s.link}>
+              <Image
+                src={s.image}
+                alt={s.nym}
+                width={120}
+                height={120}
+                className="h-36 w-36 rounded-full"
+              />
+            </Link>
+          </div>
         ))}
-      </div>
-
-      <h1 className="my-4 text-white">Supporters</h1>
-      <div className="credit container mb-8 flex flex-wrap items-center justify-center">
-        {supporters
-          .filter((s) => s.person)
-          .map((s, i) => (
-            <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
-          ))}
-        {supporters
-          .filter((s) => !s.person)
-          .map((s, i) => (
-            <CreditItem key={i} image={s.image} link={s.link} nym={s.nym} />
-          ))}
-      </div>
-    </section>
+      {supporters
+        .filter((s) => !s.person)
+        .map((s, i) => (
+          <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
+            <Link href={s.link}>
+              <Image
+                src={s.image}
+                alt={s.nym}
+                width={120}
+                height={120}
+                className="h-36 w-36 rounded-full"
+              />
+            </Link>
+          </div>
+        ))}
+    </div>
   )
 }
 
