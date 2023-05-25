@@ -37,46 +37,6 @@ const Credits = () => {
   const voltage = '/img/supporters/voltage.png'
   const zapirte = '/img/supporters/zaprite.png'
 
-  const board: CreditItemProps[] = [
-    { image: j9Photo, nym: 'J9', link: 'https://twitter.com/J9Roem' },
-    {
-      image: dreadPhoto,
-      nym: 'Dread',
-      link: 'https://twitter.com/PoleVaultDream',
-    },
-    { image: elainePhoto, nym: 'Elaine', link: 'https://twitter.com/eiaine' },
-    { image: gigiPhoto, nym: 'Gigi', link: 'https://twitter.com/dergigi' },
-    { image: jamesPhoto, nym: 'James', link: 'https://twitter.com/jamesob' },
-    {
-      image: mattOdellPhoto,
-      nym: 'Matt Odell',
-      link: 'https://twitter.com/odell',
-    },
-    {
-      image: niftyneiPhoto,
-      nym: 'Niftynei',
-      link: 'https://twitter.com/niftynei',
-    },
-    {
-      image: abitcoinpersonPhoto,
-      nym: 'Ben Price',
-      link: 'https://twitter.com/abitcoinperson',
-    },
-    {
-      image: nvkPhoto,
-      nym: 'NVK',
-      link: 'https://twitter.com/nvk',
-    },
-  ]
-
-  const managing_director: CreditItemProps[] = [
-    {
-      image: h4rprPhoto,
-      nym: 'Harper',
-      link: 'https://twitter.com/harptheflarp',
-    },
-  ]
-
   const supporters: CreditItemProps[] = [
     {
       link: 'https://bottlepay.com/',
@@ -115,12 +75,6 @@ const Credits = () => {
       link: 'https://twitter.com/jlppfeffer',
       image: johnPfefferLogo,
       nym: 'John Pfeffer',
-      person: true,
-    },
-    {
-      link: 'https://twitter.com/harptheflarp',
-      image: h4rprPhoto,
-      nym: 'Harper',
       person: true,
     },
     {
