@@ -15,6 +15,7 @@ import phoenix from '/public/static/images/phoenix.png'
 import { useRouter } from 'next/router'
 import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
+import { isNotOpenSatsProject } from './projects'
 
 const MAX_DISPLAY = 5
 
@@ -23,6 +24,8 @@ export const getStaticProps = async () => {
   const posts = allCoreContent(sortedPosts)
 
   const projects = getAllPosts()
+    .filter(isNotOpenSatsProject)
+    .sort(() => 0.5 - Math.random())
 
   const generalFund = getPostBySlug('general_fund', true)
   const opsFund = getPostBySlug('opensats_operations_budget', true)
