@@ -25,14 +25,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     )
   }, [projects])
 
-  function isOpenSatsProject(project: ProjectItem): boolean {
-    return project.nym === 'OpenSats'
-  }
-
-  function isNotOpenSatsProject(project: ProjectItem): boolean {
-    return !isOpenSatsProject(project)
-  }
-
   function closeModal() {
     setModalOpen(false)
   }
@@ -92,4 +84,12 @@ export async function getStaticProps({ params }: { params: any }) {
       projects,
     },
   }
+}
+
+export function isOpenSatsProject(project: ProjectItem): boolean {
+  return project.nym === 'OpenSats'
+}
+
+export function isNotOpenSatsProject(project: ProjectItem): boolean {
+  return !isOpenSatsProject(project)
 }
