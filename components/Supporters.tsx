@@ -93,7 +93,7 @@ const Credits = () => {
       nym: 'Swan Bitcoin',
     },
     {
-      link: 'https://www.lowtimepreferencefund.com/',
+      link: 'https://ten31.vc/',
       image: ten31Logo,
       nym: 'Ten31',
     },
