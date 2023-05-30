@@ -144,6 +144,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="yes"
               onChange={radioHandler}
               defaultChecked={true}
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             Yes
           </label>
@@ -154,6 +155,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductable"
               onChange={radioHandler}
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             No
           </label>
@@ -170,7 +172,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           placeholder={'Satoshi Nakamoto'}
           required={deductable === 'yes'}
           onChange={(e) => setName(e.target.value)}
-          className="mb-4"
+          className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
         ></input>
         <h3>
           Email{' '}
@@ -181,6 +183,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <input
           type="email"
           placeholder={`satoshin@gmx.com`}
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           required={deductable === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
@@ -212,7 +215,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
-              className="w-full !pl-10"
+              className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               placeholder="Or enter custom amount"
             />
           </div>
