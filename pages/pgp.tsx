@@ -10,7 +10,7 @@ export const getStaticProps = async () => {
   return { props: { page: page } }
 }
 
-export default function FAQ({
+export default function PGP({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
