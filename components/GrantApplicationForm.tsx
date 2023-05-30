@@ -196,7 +196,7 @@ export default function ApplicationForm() {
         <input
           type="email"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          placeholder="satoshi.nakamoto@bitcoin.org"
+          placeholder="satoshin@gmx.com"
           {...register('email', { required: true })}
         />
       </label>
