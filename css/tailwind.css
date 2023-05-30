@@ -39,3 +39,28 @@ input:-webkit-autofill:focus {
     @apply text-lg;
   }
 }
+
+button.small {
+  @apply p-1 text-sm bg-white text-black border border-black;
+}
+
+button.group {
+  @apply p-2 text-sm bg-white text-black border border-black;
+}
+
+button.pay {
+  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black rounded-xl flex justify-start gap-4;
+}
+
+button.pay:disabled {
+  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
+}
+
+button,
+button[type='submit'] {
+  @apply py-2 px-4 text-white rounded;
+}
+
+button.secondary {
+  @apply bg-white text-black border;
+}
