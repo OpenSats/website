@@ -16,9 +16,10 @@ export default function Apply() {
           contributions to Bitcoin or related projects.
         </li>
         <li>
-          be committed to transparency and accountability. OpenSats is a publicly
-          funded organization, and grantees are expected to publicly commit to
-          project deliverables and give regular public updates on progress.
+          be committed to transparency and accountability. OpenSats is a
+          publicly publicly funded organization, and grantees are expected to
+          publicly commit to project deliverables and give regular public
+          updates on progress.
         </li>
         <li>
           be self-motivated and self-driven. Grantees will provide regular
