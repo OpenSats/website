@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
-import markdownStyles from '../../components/markdown-styles.module.css'
 import Image from 'next/image'
 import ProjectList from '../../components/ProjectList'
 import BackToProjects from '../../components/BackToProjects'
@@ -131,7 +130,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             )}
           </aside>
 
-          <div className={markdownStyles['markdown']}>
+          <div className="prose max-w-[60ch] px-4 leading-relaxed lg:px-8">
             <Link href={website} className="no-underline">
               <h1>{title}</h1>
             </Link>
