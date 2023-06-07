@@ -19,7 +19,7 @@ export default function Footer() {
           <SocialIcon kind="twitter" href={siteMetadata.twitter} size={6} />
           <SocialIcon
             kind="nostr"
-            href={`nostr:${siteMetadata.nostr}`}
+            href={`https://nostr.com/${siteMetadata.nostr}`}
             size={6}
           />
         </div>
