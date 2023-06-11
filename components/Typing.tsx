@@ -10,6 +10,7 @@ export default function Typing() {
         'Bitcoin',
         'Contributors',
         'FOSS',
+        'Freedom Tools',
         'Freedom',
         'Developers',
         'Decentralization',
