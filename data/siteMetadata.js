@@ -29,11 +29,11 @@ const siteMetadata = {
     posthogProjectApiKey: '', // e.g. AhnJK8392ndPOav87as450xd
     googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
   },
-  newsletter: {
-    // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
-    // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
-  },
+  // newsletter: {
+  //   // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
+  //   // Please add your .env file and modify it according to your selection
+  //   provider: 'buttondown',
+  // },
   comments: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

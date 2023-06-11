@@ -195,7 +195,7 @@ export default function Home({
           </Link>
         </div>
       )}
-      {siteMetadata.newsletter.provider && (
+      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
           <NewsletterForm />
         </div>
