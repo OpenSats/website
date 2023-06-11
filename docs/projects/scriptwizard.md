@@ -9,6 +9,7 @@ twitter: 'script_wizard'
 personalTwitter: 'brqgoo'
 type: 'Other Free and Open-Source Project'
 zaprite: 'MKa75bHHineMBlqDVwlU'
+hidden: true
 ---
 
 ## About this project
