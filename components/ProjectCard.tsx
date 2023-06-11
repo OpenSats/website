@@ -52,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {nym}
           </Link>
         </div>
-        <div className="prose line-clamp-3">{summary}</div>
+        <div className="line-clamp-3">{summary}</div>
 
         <div className="grid grid-cols-2 pt-4">
           <button
