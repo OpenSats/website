@@ -5,6 +5,7 @@ import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
+import Link from '@/components/Link'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -54,7 +55,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
       </section>
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Vetted Projects</h1>
+          <h1 id="funds">Listed Projects</h1>
         </div>
         <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {sortedProjects &&
@@ -65,6 +66,12 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
+      <p>
+        Want to see your project here?{' '}
+        <Link href="/apply" className="underline">
+          Apply for your project to be listed.
+        </Link>
+      </p>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
