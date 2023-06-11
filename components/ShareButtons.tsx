@@ -7,7 +7,7 @@ import { ProjectItem } from '../utils/types'
 const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
   const { git, twitter, website } = project
   return (
-    <div className="flex space-x-4">
+    <div className="mb-4 flex space-x-4">
       <Link href={git} passHref>
         <FontAwesomeIcon
           icon={faGithub}

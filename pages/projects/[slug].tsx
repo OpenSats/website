@@ -130,13 +130,17 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
             )}
           </aside>
 
-          <div className="prose max-w-[60ch] px-4 leading-relaxed lg:px-8">
+          <div className="max-w-[60ch] px-4 leading-relaxed text-gray-800 dark:text-gray-300 lg:px-8">
             <Link href={website} className="no-underline">
-              <h1>{title}</h1>
+              <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+                {title}
+              </h1>
             </Link>
-            <p>{summary}</p>
+            <p className="prose max-w-none pb-8 pt-8 dark:prose-dark">
+              {summary}
+            </p>
 
-            <p>
+            <p className="prose max-w-none pb-8 pt-8 dark:prose-dark">
               by{' '}
               <Link
                 href={`https://twitter.com/${personalTwitter || twitter}`}
@@ -146,7 +150,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
               </Link>
             </p>
             <ShareButtons project={project} />
-            <hr />
+            <hr className="mb-8"></hr>
             {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
           </div>
         </article>
