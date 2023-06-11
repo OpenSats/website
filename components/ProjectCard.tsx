@@ -43,17 +43,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
       <figcaption className="space-y-1 p-4">
         <h2 className="font-bold">{title}</h2>
-        <div className="mb-8 text-sm">
-          by{' '}
-          <Link
-            href={`https://twitter.com/${personalTwitter || twitter}`}
-            passHref
-          >
-            {nym}
-          </Link>
-        </div>
+        <div className="mb-8 text-sm">by {nym}</div>
         <div className="line-clamp-3">{summary}</div>
-
         <div className="grid grid-cols-2 pt-4">
           <button
             className="rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
