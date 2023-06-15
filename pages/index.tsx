@@ -74,7 +74,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             <p>  
               Want to receive funding for your work? {' '}
               <Link href="/apply" legacyBehavior >
-                <a className="custom-link">Apply for a Monero Research Grant!</a>
+                <a className="custom-link">Apply for a Monero development or research grant!</a>
               </Link>
             </p>
           </div>
