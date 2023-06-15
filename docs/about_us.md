@@ -18,7 +18,7 @@ MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)
 
 * [monerobull](https://twitter.com/monerobull) is a distributor of marketing materials for Monero Outreach and moderates various communication channels of the Monero community.
 
-* [artlimber](https://github.com/artlimber)
+* [artlimber](https://github.com/artlimber) is a Monero user and community supporter who believes privacy is a human right.
 
-* [Majestic Bank](https://github.com/MajesticBank)
+* [kowalabearhugs](https://twitter.com/kowalabearhugs) is a Monero community member, photographer, artist, seasonal farmer, and offseason wanderer.
 
