@@ -1,16 +1,22 @@
 import PageSection from '@/components/PageSection'
 import LTSApplicationForm from '@/components/LTSApplicationForm'
 import Link from '@/components/Link'
+import CustomLink from '@/components/Link'
 
 export default function Apply() {
   return (
     <PageSection title="Long-Term Support" image="/static/images/avatar.png">
       <p>
-        {/* TODO: The following is shamelessly copied from Brink. We probably want to re-word it. */}
-        The grant program is open to developers anywhere in the world.
+        The OpenSats LTS Grant program is not bound to meatspace. Developers may
+        apply independent of geographical location.
       </p>
-      <p>Grant applicants must:</p>
+      <p>
+        In addition to our general{' '}
+        <CustomLink href="/apply#criteria">application criteria</CustomLink>,
+        LTS Grant applicants must:
+      </p>
       <ul>
+        {/* TODO: The following is shamelessly copied from Brink. We probably want to re-word it. */}
         <li>
           have a track record of making high-quality, security-first
           contributions to Bitcoin or related projects.
