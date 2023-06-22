@@ -156,6 +156,25 @@ export default function ApplicationForm() {
           {...register('anything_else')}
         />
       </label>
+      <label className="inline-flex items-center">
+        <input
+          type="checkbox"
+          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('has_received_funding')}
+        />
+        <span className="ml-2">
+          I plan to receive or am receiving funding outside of OpenSats.
+        </span>
+      </label>
+
+      <label className="block">
+        If you receive any other funding, please describe it here:
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('what_funding')}
+        />
+      </label>
 
       <hr />
       <h2>Final Questions</h2>
