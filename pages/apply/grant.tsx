@@ -1,6 +1,7 @@
 import GrantApplicationForm from '@/components/GrantApplicationForm'
 import PageSection from '@/components/PageSection'
 import Link from '@/components/Link'
+import CustomLink from '@/components/Link'
 
 export default function Apply() {
   return (
@@ -20,8 +21,11 @@ export default function Apply() {
           payouts from OpenSats.
         </p>
         <p>
-          If you want your project to be listed on the website, please apply to
-          be listed <Link href="/apply/to-be-listed">here</Link>.
+          Make sure to read the{' '}
+          <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
+          before sending in an application. If you want your project to be
+          listed on the website, please{' '}
+          <Link href="/apply/to-be-listed">apply to be listed</Link> instead.
         </p>
         <GrantApplicationForm />
       </PageSection>
