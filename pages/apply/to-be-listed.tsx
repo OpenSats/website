@@ -1,5 +1,6 @@
 import WebsiteApplicationForm from '@/components/WebsiteApplicationForm'
 import PageSection from '@/components/PageSection'
+import CustomLink from '@/components/Link'
 
 export default function Apply() {
   return (
@@ -21,6 +22,11 @@ export default function Apply() {
           on your location, bitcoin addresses, lightning addresses, or similar
           payment information that is required to receive donation payouts from
           OpenSats.
+        </p>
+        <p>
+          Make sure to read the{' '}
+          <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
+          before sending in an application.
         </p>
         <WebsiteApplicationForm />
       </PageSection>
