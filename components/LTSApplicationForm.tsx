@@ -108,7 +108,6 @@ export default function ApplicationForm() {
         />
       </label>
 
-      <hr />
       <h2>What Will You Work On?</h2>
 
       <label className="block">
@@ -146,7 +145,6 @@ export default function ApplicationForm() {
         />
       </label>
 
-      <hr />
       <h2>Anything Else We Should Know?</h2>
 
       <label className="block">
@@ -176,7 +174,6 @@ export default function ApplicationForm() {
         />
       </label>
 
-      <hr />
       <h2>Final Questions</h2>
 
       <label className="block">
