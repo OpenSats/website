@@ -38,6 +38,12 @@ export default function Apply({
           status, military status, application for military service or any other
           class per local, state or federal law.
         </p>
+        <p>
+          Applications should be well written, informative, and concise. A great
+          application will fit comfortably on one page while containing all
+          information that is required to assess and judge the project or
+          applicant.
+        </p>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Website Listing
         </h2>
