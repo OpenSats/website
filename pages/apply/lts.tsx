@@ -16,30 +16,28 @@ export default function Apply() {
         LTS Grant applicants must:
       </p>
       <ul>
-        {/* TODO: The following is shamelessly copied from Brink. We probably want to re-word it. */}
         <li>
-          have a track record of making high-quality, security-first
+          have a track record of making high-quality and high-impact open-source
           contributions to Bitcoin or related projects.
         </li>
         <li>
-          be committed to transparency and accountability. OpenSats is a
-          publicly publicly funded organization, and grantees are expected to
-          publicly commit to project deliverables and give regular public
-          updates on progress.
+          be comfortable with{' '}
+          <CustomLink href="https://bitcoin-resources.com/books/working-in-public">
+            working in public
+          </CustomLink>
+          , as well as committed to transparency and accountability. OpenSats is
+          501(c)(3) public charity, and grantees are expected to commit to
+          providing regular updates on progress towards OpenSats and the public
+          at large.
         </li>
         <li>
-          be self-motivated and self-driven. Grantees will provide regular
-          public updates on their projects, but day-to-day will be working
-          independently. To be successful, grantees must thrive in a
-          no-management work environment.
+          be self-motivated, self-driven, and able to work independently.
+          Grantees must thrive in an open-source development environment, which
+          is a little- to no-management environment.
         </li>
         <li>
-          be able to work collaboratively and constructively with other
-          open-source contributors.
-        </li>
-        <li>
-          be committed to increasing the impact of their contributions, growing
-          the developer ecosystem and scaling Bitcoin and related projects.
+          be able to work collaboratively and constructively with potential
+          users and other open-source contributors.
         </li>
       </ul>
       <p>
