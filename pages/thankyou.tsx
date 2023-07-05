@@ -1,17 +1,23 @@
-import Link from 'next/link'
+import { InferGetStaticPropsType } from 'next'
+import { allPages } from 'contentlayer/generated'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { MDXComponents } from '@/components/MDXComponents'
 
-export default function ThankYou() {
+const DEFAULT_LAYOUT = 'PageLayout'
+
+export const getStaticProps = async () => {
+  const page = allPages.find((p) => p.slug === 'thankyou')
+  return { props: { page: page } }
+}
+
+export default function ThankYou({
+  page,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-4 py-8">
-      <h2>Thank you for your donation!</h2>
-      <p>
-        If you have any questions, please reach out to{' '}
-        <Link href="mailto:support@opensats.org">support@opensats.org</Link>
-      </p>
-      .
-      <p>
-        <Link href="/">Return Home</Link>
-      </p>
-    </div>
+    <MDXLayoutRenderer
+      layout={page.layout || DEFAULT_LAYOUT}
+      content={page}
+      MDXComponents={MDXComponents}
+    />
   )
 }
