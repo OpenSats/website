@@ -25,7 +25,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
-        <div className="hidden sm:block">
+        <div className="block">
           {headerNavLinks.map((link) => (
             <Link
               key={link.title}
@@ -33,7 +33,7 @@ const Header = () => {
               className={
                 link.isButton
                   ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
-                  : 'p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4'
+                  : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
               }
             >
               {link.title}
