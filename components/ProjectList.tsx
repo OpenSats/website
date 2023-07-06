@@ -30,7 +30,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
       <div className="items-left flex w-full justify-between pb-4">
         <h1>{header}</h1>
         <div className="items-left flex">
-          <Link href="/projects">View All &rarr;</Link>
+          <Link href="/projects">All Projects &rarr;</Link>
         </div>
       </div>
       <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
