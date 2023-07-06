@@ -155,10 +155,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects }) => {
           </div>
         </article>
       </div>
+      <div className="flex w-full items-center justify-between pb-8">
+        <h1 id="funds">You might also like...</h1>
+      </div>
       <ProjectList
         projects={projects}
         exclude={slug}
-        header="You might also like..."
         openPaymentModal={openPaymentModal}
       />
       <PaymentModal
