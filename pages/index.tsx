@@ -17,6 +17,7 @@ import { ProjectItem } from '../utils/types'
 import PaymentModal from '../components/PaymentModal'
 import { isNotOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
+import CustomLink from '@/components/Link'
 
 const MAX_DISPLAY = 5
 
@@ -78,13 +79,12 @@ export default function Home({
         description={siteMetadata.description}
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+        <div className="space-y-2 pb-2 pt-2 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Support <Typing />
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
-            We help you find and support open-source Bitcoin projects—helping
-            create a better tomorrow, today.
+            {siteMetadata.description}
           </p>
           <div className="flex flex-wrap">
             <div>
@@ -104,30 +104,19 @@ export default function Home({
               </button>
             </div>
           </div>
-          <p>
-            Are you an open-source contributor?{' '}
-            <Link href="/apply" className="underline">
-              Apply for funding.
-            </Link>
-          </p>
         </div>
       </div>
-      <div className="mb-4 mt-8 divide-y divide-gray-200 dark:divide-gray-700">
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-      </div>
-      <p>
-        Want to see your project here?{' '}
-        <Link href="/apply" className="underline">
-          Apply for your project to be listed.
-        </Link>
-      </p>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-32">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest Posts
+            Stay Updated
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            Read the latest posts from the{' '}
+            <CustomLink href="/about" className="underline">
+              OpenSats team
+            </CustomLink>
+            .
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -205,6 +194,38 @@ export default function Home({
         onRequestClose={closeModal}
         project={selectedProject}
       />
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Explore Projects
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Browse through and directly support{' '}
+            <CustomLink href="/projects" className="underline">
+              projects selected by OpenSats
+            </CustomLink>
+            .
+          </p>
+        </div>
+        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-32">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Apply for Funding
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Are you an open-source contributor? Do you align with{' '}
+            <CustomLink href="/mission" className="underline">
+              our mission
+            </CustomLink>
+            ? Are you working on Bitcoin, nostr, or freedom tech in general?{' '}
+            <CustomLink href="/apply" className="underline">
+              Apply for funding!
+            </CustomLink>
+          </p>
+        </div>
+      </div>
     </>
   )
 }

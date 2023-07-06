@@ -27,12 +27,6 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
   return (
     <section className="bg-light items-left flex flex-col">
-      <div className="items-left flex w-full justify-between pb-4">
-        <h1>{header}</h1>
-        <div className="items-left flex">
-          <Link href="/projects">View All &rarr;</Link>
-        </div>
-      </div>
       <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
         {sortedProjects &&
           sortedProjects.slice(0, 3).map((p, i) => (
