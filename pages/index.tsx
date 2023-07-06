@@ -112,7 +112,11 @@ export default function Home({
             Stay Updated
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Read the latest posts from the OpenSats team.
+            Read the latest posts from the{' '}
+            <CustomLink href="/about" className="underline">
+              OpenSats team
+            </CustomLink>
+            .
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
