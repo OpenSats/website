@@ -19,7 +19,10 @@ export default function Apply({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <PageSEO title="Apply to one of OpenSats' programs" description="TODO" />
+      <PageSEO
+        title="Apply to One of Opensats' Grant Programs"
+        description="Global. Nym-friendly. Flexible."
+      />
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
         content={apply}
