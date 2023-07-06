@@ -83,8 +83,7 @@ export default function Home({
             Support <Typing />
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
-            We help you find and support open-source Bitcoin projects—helping
-            create a better tomorrow, today.
+            {siteMetadata.description}
           </p>
           <div className="flex flex-wrap">
             <div>
@@ -127,7 +126,7 @@ export default function Home({
             Latest Posts
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            Updates from the OpenSats team.
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
