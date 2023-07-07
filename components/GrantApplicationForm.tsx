@@ -79,9 +79,7 @@ export default function ApplicationForm() {
 
       <label className="block">
         Project Name *<br />
-        <small>
-          The name of the project to be listed on the OpenSats website
-        </small>
+        <small>The name of the project. Abbreviations are fine too.</small>
         <input
           type="text"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
@@ -92,8 +90,8 @@ export default function ApplicationForm() {
       <label className="block">
         Project Description *<br />
         <small>
-          This will be listed on the explore projects page of the OpenSats
-          website. Please write at least 2-3 sentences.
+          A great description will help us to evaluate your project more
+          quickly.
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
