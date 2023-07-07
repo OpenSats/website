@@ -1,10 +1,15 @@
-import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+
+// Font Awesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 type DonationStepsProps = {
   projectNamePretty: string
@@ -40,16 +45,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   }
 
   useEffect(() => {
-    let fiatValid = false;
-    let btcValid: boolean;
+    let fiatValid = false
+    let btcValid: boolean
     if (amount && typeof parseInt(amount) === 'number') {
-      fiatValid = true;
+      fiatValid = true
     }
     if (deductable === 'no' || (name && email)) {
-      btcValid = true;
+      btcValid = true
     } else {
-      fiatValid = false;
-      btcValid = false;
+      fiatValid = false
+      btcValid = false
     }
     setReadyToPayFiat(fiatValid)
     setReadyToPayBTC(btcValid)
@@ -64,7 +69,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     try {
       const payload = {
         project_slug: projectSlug,
-        zaprite
+        zaprite,
       }
 
       if (amount) {
@@ -139,6 +144,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="yes"
               onChange={radioHandler}
               defaultChecked={true}
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             Yes
           </label>
@@ -149,6 +155,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductable"
               onChange={radioHandler}
+              className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             No
           </label>
@@ -165,7 +172,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           placeholder={'Satoshi Nakamoto'}
           required={deductable === 'yes'}
           onChange={(e) => setName(e.target.value)}
-          className="mb-4"
+          className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
         ></input>
         <h3>
           Email{' '}
@@ -176,29 +183,30 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <input
           type="email"
           placeholder={`satoshin@gmx.com`}
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           required={deductable === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
       </section>
 
       <section>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h3>How much would you like to donate?</h3>
         </div>
-        <div className="sm:flex-row flex flex-col gap-2 py-2" role="group">
+        <div className="flex flex-col gap-2 py-2 sm:flex-row" role="group">
           {[50, 100, 250, 500].map((value, index) => (
             <button
               key={index}
               className="group"
-              onClick={(e) => handleFiatAmountClick(e, value?.toString()??"")}
+              onClick={(e) => handleFiatAmountClick(e, value?.toString() ?? '')}
             >
-              {value?`$${value}`: "Any"}
+              {value ? `$${value}` : 'Any'}
             </button>
           ))}
           <div className="relative flex w-full">
-            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               {/* <FontAwesomeIcon icon={faDollarSign} className="w-5 h-5 text-black" /> */}
-              <span className="w-5 h-5 font-mono text-xl mb-2">{'$'}</span>
+              <span className="mb-2 h-5 w-5 font-mono text-xl">{'$'}</span>
             </div>
             <input
               type="number"
@@ -207,7 +215,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
-              className="!pl-10 w-full"
+              className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
               placeholder="Or enter custom amount"
             />
           </div>
@@ -218,7 +226,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           name="btcpay"
           onClick={handleBtcPay}
           className="pay"
-          disabled={ !readyToPayBTC ||  btcPayLoading}
+          disabled={!readyToPayBTC || btcPayLoading}
         >
           {btcPayLoading ? (
             <Spinner />

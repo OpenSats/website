@@ -5,6 +5,7 @@ import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
+import Link from '@/components/Link'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -15,17 +16,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random()))
-    setOpenSatsProjects(projects.filter(isOpenSatsProject).sort((a, b) => a.title.localeCompare(b.title)))
+    setSortedProjects(
+      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
+    )
+    setOpenSatsProjects(
+      projects
+        .filter(isOpenSatsProject)
+        .sort((a, b) => a.title.localeCompare(b.title))
+    )
   }, [projects])
-
-  function isOpenSatsProject(project: ProjectItem): boolean {
-    return project.nym === 'OpenSats'
-  }
-
-  function isNotOpenSatsProject(project: ProjectItem): boolean {
-    return !isOpenSatsProject(project)
-  }
 
   function closeModal() {
     setModalOpen(false)
@@ -35,31 +34,17 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setSelectedProject(project)
     setModalOpen(true)
   }
-  // const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
 
   return (
     <>
       <Head>
         <title>OpenSats | Projects</title>
       </Head>
-      <section className="p-4 md:p-8 flex flex-col items-center">
-        <div className="flex justify-between items-center pb-8 w-full">
-          <h1>Projects</h1>
+      <section className="flex flex-col items-center p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h1 id="funds">OpenSats Funds</h1>
         </div>
-        <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
-              <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
-              </li>
-            ))}
-        </ul>
-      </section>
-      <section className="p-4 md:p-8 flex flex-col items-center">
-        <div className="flex justify-between items-center pb-8 w-full">
-          <h1 id="funds">Specific Funds</h1>
-        </div>
-        <ul className="grid md:grid-cols-3 gap-4 max-w-5xl">
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
           {openSatsProjects &&
             openSatsProjects.map((p, i) => (
               <li key={i} className="">
@@ -68,6 +53,25 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
+      <section className="flex flex-col p-4 md:p-8">
+        <div className="flex w-full items-center justify-between pb-8">
+          <h1 id="funds">Listed Projects</h1>
+        </div>
+        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
+          {sortedProjects &&
+            sortedProjects.map((p, i) => (
+              <li key={i} className="">
+                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              </li>
+            ))}
+        </ul>
+      </section>
+      <p>
+        Want to see your project here?{' '}
+        <Link href="/apply" className="underline">
+          Apply for your project to be listed.
+        </Link>
+      </p>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -87,4 +91,12 @@ export async function getStaticProps({ params }: { params: any }) {
       projects,
     },
   }
+}
+
+export function isOpenSatsProject(project: ProjectItem): boolean {
+  return project.nym === 'OpenSats'
+}
+
+export function isNotOpenSatsProject(project: ProjectItem): boolean {
+  return !isOpenSatsProject(project)
 }

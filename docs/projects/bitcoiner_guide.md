@@ -3,7 +3,7 @@ title: 'Bitcoiner.guide'
 summary: 'Bitcoiner.Guide is a collection of resources by BitcoinQnA to help people feel more comfortable interacting with bitcoin in a sovereign way.'
 nym: 'Bitcoin QnA'
 website: 'https://bitcoiner.guide/'
-coverImage: '/img/project/bitcoiner_guide.png'
+coverImage: '/static/images/projects/bitcoiner_guide.png'
 git: 'https://github.com/BitcoinQ_A'
 twitter: BitcoinQ_A
 type: 'Educator'
