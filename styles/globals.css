@@ -1,87 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-h1,
-h2 {
-  @apply font-mono font-semibold;
-}
-
-h1 {
-  @apply text-3xl md:text-4xl;
-}
-
-h2 {
-  @apply text-2xl;
-}
-
-h3 > a {
-  color:lightgray !important;
-  @apply no-underline !important;
-}
-
-h4 {
-  @apply text-2xl font-bold;
-}
-
-h5 {
-  @apply text-textgray font-mono uppercase;
-}
-
-hr {
-  margin: 2em 0;
-}
-
-button,
-button[type='submit'] {
-  @apply py-2 px-4 bg-primary text-white rounded font-mono hover:shadow-glow;
-}
-
-button.secondary {
-  @apply bg-white text-black border border-primary;
-}
-
-a {
-  @apply text-textgray underline underline-offset-2 hover:no-underline;
-}
-
-p {
-  @apply text-textgray;
-}
-
-p a {
-  @apply text-primary;
-}
-
-button.selected {
-  @apply bg-primary;
-}
-
-select,
-input[type='text'],
-input[type='number'],
-input[type='email'],
-input[type='textarea'],
-textarea {
-  @apply border border-lightgray rounded p-2 focus:border-black;
-}
-
-input[type='textarea'] {
-  @apply resize-y;
-}
-
-input[type='radio'] {
-  @apply mr-2;
-}
-
-nav li a {
-  @apply text-black no-underline hover:underline;
-}
-
-form h3 {
-  @apply font-sans font-normal;
-}
-
 button.small {
   @apply p-1 text-sm bg-white text-black border border-black;
 }
@@ -91,23 +7,11 @@ button.group {
 }
 
 button.pay {
-  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black hover:text-primary rounded-xl flex justify-start gap-4;
+  @apply rounded border border-orange-500 bg-transparent font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl rounded-xl flex justify-start gap-4;
 }
 
 button.pay:disabled {
   @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
-}
-
-.credit a {
-  @apply no-underline hover:underline;
-}
-
-form.apply label {
-  @apply flex flex-col gap-2;
-}
-
-form.apply label.checkbox {
-  @apply flex flex-row items-center;
 }
 
 input[type='checkbox'] {

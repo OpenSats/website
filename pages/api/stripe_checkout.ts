@@ -7,6 +7,7 @@ import Stripe from 'stripe'
 import { PayReq } from '../../utils/types'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
+  // @ts-ignore stripe-version-202-08-27
   apiVersion: '2020-08-27',
 })
 
@@ -36,6 +37,7 @@ export default async function handler(
         payment_method_types: ['card'],
         line_items: [
           {
+            // @ts-ignore
             name: `OpenSats donation: ${project_name}`,
             amount: formatAmountForStripe(amount, CURRENCY),
             currency: CURRENCY,
