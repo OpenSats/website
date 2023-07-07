@@ -1,0 +1,263 @@
+---
+title: "First Wave of Nostr Grants"
+date: '2023-07-08'
+tags: ['OpenSats', 'grants', 'nostr']
+draft: false
+authors: ['dergigi']
+images: ['/static/images/blog/03-nostr.jpg']
+summary: "OpenSats is funding over a dozen open-source projects in the nostr ecosystem."
+---
+
+The [mission] of OpenSats is to support and maintain a sustainable ecosystem of
+funding for free and open-source projects that help Bitcoin flourish. Nostr is
+such a project, which is why OpenSats introduced The Nostr Fund and [built a
+team around the protocol's originator][startsmall] to help fund the growing nostr
+ecosystem.  As an open, interoperable, and censorship-resistant protocol, nostr
+has the chance of doing social-native networking right.
+
+After weeks of sorting through applications, we are excited to announce the
+first round of grants from [The Nostr Fund][nostr-fund].  OpenSats is proud to
+support over a dozen projects, from clients to relay implementations to adjacent
+tools and design efforts.
+
+In no particular order, here they are:
+
+- NDK by [@pablof7z](https://nostr.com/npub1l2vyh47mk2p0qlsku7hg0vn29faehy9hy34ygaclpn66ukqp3afqutajft)
+- Habla by [@verbiricha](https://nostr.com/npub107jk7htfv243u0x5ynn43scq9wrxtaasmrwwa8lfu2ydwag6cx2quqncxg)
+- Coracle by [@hodlbod](https://nostr.com/npub1jlrs53pkdfjnts29kveljul2sm0actt6n8dxrrzqcersttvcuv3qdjynqn)
+- Iris by [@mmalmi](https://nostr.com/npub1g53mukxnjkcmr94fhryzkqutdz2ukq4ks0gvy5af25rgmwsl4ngq43drvk)
+- Damus by [@jb55](https://nostr.com/npub1xtscya34g58tk0z605fvr788k263gsu6cy9x0mhnm87echrgufzsevkk5s)
+- rust-nostr & nostr-sdk by [@yukibtc](https://nostr.com/npub1drvpzev3syqt0kjrls50050uzf25gehpz9vgdw08hvex7e0vgfeq0eseet)
+- Nostr Relay NestJS by [@CodyTseng](https://nostr.com/npub1syjmjy0dp62dhccq3g97fr87tngvpvzey08llyt6ul58m2zqpzps9wf6wl)
+- Soapbox by [@alexgleason](https://nostr.com/npub108pv4cg5ag52nq082kd5leu9ffrn2gdg6g4xdwatn73y36uzplmq9uyev6)
+- Code Collaboration over Nostr by [@DanConwayDev](https://nostr.com/npub15qydau2hjma6ngxkl2cyar74wzyjshvl65za5k5rl69264ar2exs5cyejr)
+- Satellite by [@lovvtide](https://nostr.com/npub1lunaq893u4hmtpvqxpk8hfmtkqmm7ggutdtnc4hyuux2skr4ttcqr827lj)
+- Amethyst by [@vitorpamplona](https://nostr.com/npub1gcxzte5zlkncx26j68ez60fzkvtkm9e0vrwdcvsjakxf9mu9qewqlfnj5z)
+- Pinstr by [@sepehr-safari](https://nostr.com/npub18c556t7n8xa3df2q82rwxejfglw5przds7sqvefylzjh8tjne28qld0we7)
+- nostr.build by [@nostr.build](https://nostr.com/npub1nxy4qpqnld6kmpphjykvx2lqwvxmuxluddwjamm4nc29ds3elyzsm5avr7)
+- Gossip by [@mikedilger](https://nostr.com/npub1acg6thl5psv62405rljzkj8spesceyfz2c32udakc2ak0dmvfeyse9p35c)
+- Nostr SDK iOS by [@bryanmontz](http://nostr.com/npub1lua3283nqq0jqy3akatp8tgu5rmsyu0yhpp2rramtxp82mdu7svq2y8wt8)
+- Nostr Design by [@karnage](http://nostr.com/npub1r0rs5q2gk0e3dk3nlc7gnu378ec6cnlenqp8a3cjhyzu6f8k5sgs4sq9ac)
+
+The projects above have received grants of various durations and sizes, and we
+have more nostr-related applications in the pipeline. [Donate to The Nostr
+Fund][nostr-fund] if you want to help fund the nostr ecosystem.
+
+Without further ado, let's take a closer look at each project in turn.
+
+---
+
+### NDK
+
+NDK is a nostr development kit that makes the experience of building
+Nostr-related applications—whether they are relays, clients, or anything in
+between—better, more reliable, and overall more enjoyable to work with than
+existing solutions. The core goal of NDK is to improve the decentralization of
+Nostr via intelligent conventions and data discovery features without depending
+on any one central point of coordination, such as large relays or centralized
+search providers.
+
+Repository: [nostr-dev-kit/ndk](https://github.com/nostr-dev-kit/ndk)  
+License: MIT
+
+### Habla
+
+[Habla](https://habla.news/) is a website for reading, writing, curating,
+and monetizing long-form content on nostr. It uses NIP-23 to allow
+markdown-formatted articles and embedded nostr content such as notes, profiles,
+lists, relays, badges, and more. The goal of Habla is to give everyone an
+alternative to centralized publishing platforms such as Medium or Substack,
+which are by their very nature prone to censorship and deplatforming.
+
+Repository: [verbiricha/habla.news](https://github.com/verbiricha/habla.news)  
+License: GNU GPL v3.0
+
+### Coracle
+
+[Coracle](https://coracle.social/) is a nostr web client focusing on user
+experience, performance, and scaling of the nostr network beyond the "twitter
+clone" use-case. The end goal is to build marketplaces, groups, chat, and more
+on top of an emergent web of trust. Coracle is already one of the most mature
+and accessible clients for new users while also providing some novel features
+for more advanced nostriches.
+
+Repository: [coracle-social/coracle](https://github.com/coracle-social/coracle)  
+License: MIT
+
+### Iris
+
+[Iris](https://iris.to/) is a multi-platform nostr client that is available for
+web, mobile, and desktop. Iris' design goals are speed, reliability, and ease of
+use. The client features public as well as private messaging, customizable
+feeds, an offline mode, and speedy account creation.
+
+Repository: [irislib/iris-messenger](https://github.com/irislib/iris-messenger)  
+License: MIT
+
+### Damus
+
+[Damus](https://damus.io/) is a cutting-edge nostr client for iOS. The goal of
+Damus is to integrate bitcoin with social media and to show the power,
+censorship resistance, and scalability of nostr in general. Damus includes
+picture and video uploading, is fully translated into 24 languages, supports
+automatic translation of notes, and includes all of the features you would
+expect from a Twitter-like client.
+
+Repository: [damus-io/damus](https://github.com/damus-io/damus)  
+License: GNU GPL v3.0
+
+### rust-nostr & nostr-sdk
+
+Rust-nostr is a Rust implementation of the nostr protocol. It is a high-level
+client library with the explicit goal to help developers build nostr apps for
+desktop, web, and mobile that are both fast and secure. Rust crates can be
+easily embedded inside other development environments like Swift, Kotlin,
+Python, and JavaScript, making rust-nostr a versatile base to build upon. While
+the project is in the early stages of development, [over 35
+NIPs](https://github.com/rust-nostr/nostr/tree/master/crates/nostr#supported-nips)
+are already supported, with more to come.
+
+Repository: [rust-nostr/nostr](https://github.com/rust-nostr/nostr)  
+License: MIT
+
+### Nostr Relay NestJS
+
+Nostr-relay-nestjs is a Nostr relay with a clear structure that is easy to
+customize to your needs. This relay implementation is based on the NestJS
+framework and focuses on reliability and high test coverage.
+
+Repository: [CodyTseng/nostr-relay-nestjs](https://github.com/CodyTseng/nostr-relay-nestjs)  
+License: MIT
+
+### Soapbox
+
+[Soapbox](https://soapbox.pub/) started out as an alternative to Mastodon but
+has grown to encompass ActivityPub and nostr while being interoperable with
+both. In February 2023, the team launched the "Mostr" bridge, seamlessly
+connecting nostr to the ActivityPub Fediverse and enabling bidirectional
+communication between both protocols. This bridge exposes over 9.4M potential
+users in nostr's target audience to nostr, many of whom have already left the
+Fediverse completely in favor of nostr.
+
+Repository: [gitlab.com/soapbox-pub](https://gitlab.com/soapbox-pub)  
+License: GNU Affero General Public License v3.0
+
+### Code Collaboration over Nostr
+
+This project is a proof-of-concept for a much-needed, often discussed, and
+permissionless, nostr-based GitHub alternative. The goal is to replace the
+traditional interactions using a centralized server or service with a
+nostr-based alternative centered around nostr events. Commits, branches, pull
+requests, and other actions are all modeled as nostr events, with permissions
+managed through groups so that multiple maintainers can manage a repository.
+This model reduces the barriers for clients to support repository collaboration
+and allows for interoperability between repository management tools.
+
+Repository: [DanConwayDev/ngit-cli](https://github.com/DanConwayDev/ngit-cli)  
+License: MIT
+
+### Satellite
+
+[satellite.earth](https://satellite.earth/) is a web client for nostr that has a
+community focus and presents conversations as threaded comments, borrowing from
+the traditional Reddit interface.
+
+Repository: [lovvtide/satellite-web](https://github.com/lovvtide/satellite-web)  
+License: MIT
+
+### Amethyst
+
+Amethyst is one of the most popular nostr clients for Android. Amethyst comes
+with expected features such as account management, feeds, profiles, and direct
+messages. Amethyst also offers native image uploads, public chat groups, link
+previews, one-tap zaps, public and private bookmarks, as well as the ability to
+follow hashtags, and other novel features. You can install
+[releases](https://github.com/vitorpamplona/amethyst/releases/) of Amethyst via
+[F-Droid](https://f-droid.org/packages/com.vitorpamplona.amethyst/) or [Google
+Play](https://play.google.com/store/apps/details?id=com.vitorpamplona.amethyst).
+
+Repository: [vitorpamplona/amethyst](https://github.com/vitorpamplona/amethyst/)  
+License: MIT
+
+### Pinstr
+
+[Pinstr](https://pinstr.app/) allows users to easily organize and discover new
+ideas by creating public boards of pins. Users can star, comment, and zap other
+users' boards. Users can find curated boards of other users and create boards
+themselves. Default boards include users' bookmarked content, among other lists.
+
+Repository: [sepehr-safari/pinstr](https://github.com/sepehr-safari/pinstr)  
+License: MIT
+
+### nostr.build
+
+[Nostr.build](https://nostr.build/) is a free-to-use media hosting service that
+allows users to upload images, gifs, videos, and audio files to share them as
+nostr events. The team recently released their code under an MIT License so that
+anyone might use the software to offer a similar service.
+
+Repository: [nostrbuild/nostr.build](https://github.com/nostrbuild/nostr.build)  
+License: MIT
+
+### Gossip
+
+Gossip is a fast and stable desktop nostr client focused on the Twitter-like
+micro-blogging aspect of nostr. Gossip follows people by downloading their
+events from whichever relays they post to (rather than relays you configure) and
+was the impetus for NIP-65. It does not use complex web technologies such as
+JavaScript or HTML rendering and stores your private key only in an encrypted
+format. Consequently, Gossip is considered more secure than other clients by
+some. The client is packaged and
+[released](https://github.com/mikedilger/gossip/releases) for Linux, Windows,
+and MacOS.
+
+Repository: [mikedilger/gossip](https://github.com/mikedilger/gossip)  
+License: MIT
+
+### Nostr SDK iOS
+
+The nostr SDK for iOS is a native Swift library that will enable developers to
+quickly and easily build nostr-based apps for Apple devices. The library plans
+to implement all approved NIPs and will follow Apple's API patterns, so that iOS
+developers feel comfortable using it from the start. The SDK aims to be simple
+in its public interface, abstracting away as much complexity as possible so that
+developers can focus on what makes their specific application unique.
+
+Repository: [nostr-sdk/nostr-sdk-ios](https://github.com/nostr-sdk/nostr-sdk-ios)  
+License: MIT
+
+### Nostr Design
+
+Nostr Design will be a comprehensive resource for designers and developers to
+build successful nostr products. Nostr introduces several new concepts that most
+people are not familiar with. Given its nature, the protocol presents some
+unique design challenges for developers and users alike. The Nostr Design
+efforts are led by [Karnage](https://karnage.webflow.io/), who has done stellar
+product design work around nostr in the past. We believe that this project has
+the potential to impact the entire nostr space, as it can act as a go-to source
+for developing quality products, addressing user needs, as well as providing
+concrete examples and building blocks for product designers and developers
+alike.
+
+License: Public Domain, Creative Commons
+
+---
+
+We have received hundreds of applications in the last couple of weeks, many
+related to or exclusively focused on nostr. Most projects that applied focus on
+bitcoin and lightning. We will announce another wave of grants for these soon.
+
+To all the nostr projects that applied and didn't make the cut this time around:
+don't be discouraged. Please [apply for funding][apply] again in the future. We
+will announce new grants and funding opportunities quarterly, and there is
+always the possibility of being listed on the OpenSats website to receive
+pass-through donations for your project.  
+
+We are excited to support the projects above in building the tools we bitcoiners
+care so deeply about. The future is bright; we just have a lot of building to
+do.
+
+[apply]: /apply
+[nostr-fund]: /projects/nostr
+[mission]: /mission
+[startsmall]: /blog/opensats-receives-additional-funding-of-dollar10m-from-startsmall

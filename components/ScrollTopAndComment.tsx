@@ -26,7 +26,7 @@ const ScrollTopAndComment = () => {
         show ? 'md:flex' : 'md:hidden'
       }`}
     >
-      {siteMetadata.comments.provider && (
+      {siteMetadata.comments && siteMetadata.comments.provider && (
         <button
           aria-label="Scroll To Comment"
           onClick={handleScrollToComment}
