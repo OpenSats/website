@@ -27,6 +27,7 @@ const Volunteers = () => {
             <Image
               src={v.image}
               alt={v.nym}
+              title={v.nym}
               width={120}
               height={120}
               className="h-36 w-36 rounded-full"
