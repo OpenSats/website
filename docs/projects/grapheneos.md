@@ -1,12 +1,11 @@
 ---
 title: 'GrapheneOS'
 summary: 'GrapheneOS is a private and secure mobile operating system with great functionality and usability. It has near full Android app compatibility via our sandboxed Google Play compatibility layer.'
-nym: 'Daniel Micay'
+nym: 'GrapheneOS Foundation'
 website: 'https://grapheneos.org/'
 coverImage: '/static/images/projects/graphene.png'
 git: 'https://github.com/GrapheneOS'
 twitter: 'GrapheneOS'
-personalTwitter: 'DanielMicay'
 type: 'Other Free and Open-Source Project'
 zaprite: 'F81LWN96IGmFHnvydSli'
 bonusUSD: 1000000
