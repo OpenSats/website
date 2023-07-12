@@ -3,8 +3,8 @@ import Image from './Image'
 import CreditItem, { CreditItemProps } from './CreditItem'
 
 const Volunteers = () => {
-  const lucas = '/img/volunteers/lucas.png'
-  const gabe = '/img/volunteers/gabe.png'
+  const lucas = '/img/volunteers/lucas.jpg'
+  const gabe = '/img/volunteers/gabe.jpg'
 
   const volunteers: CreditItemProps[] = [
     {
