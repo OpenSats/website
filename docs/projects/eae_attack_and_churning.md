@@ -9,6 +9,8 @@ twitter: 'magicgrants'
 personalTwitter: 'magicgrants'
 personalWebsite: 'https://github.com/nborggren'
 type: 'Other Free and Open Source Project'
+date: '2023-06-08'
+staticXMRaddress: '87LZA8XLDvhVKLi974MaxUANcvkWdL6n986R7WNgKLXY16y31t69Z8228EWcg8THQq3tuAWfQ7Np35Tt3AhPrjzcNbm8Jr5'
 goal: 29260
 isFunded: true
 numdonationsxmr: 27
