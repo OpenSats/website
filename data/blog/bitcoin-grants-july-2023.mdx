@@ -1,0 +1,261 @@
+---
+title: "First Wave of Bitcoin Grants"
+date: '2023-07-14'
+tags: ['OpenSats', 'grants', 'bitcoin']
+draft: false
+authors: ['dergigi']
+images: ['/static/images/blog/04-bitcoin.jpg']
+summary: "OpenSats is funding over a dozen projects in the bitcoin & lightning ecosystem."
+---
+
+"The computer can be used as a tool to liberate and protect people, rather than
+to control them," as Hal Finney wrote so presciently 30 years ago.[^fn-hal]
+
+The goal of OpenSats is to help build the tools that Hal alluded to. Tools that
+liberate and protect, rather than systems that control and oppress. Many tools
+still have to be built. Many tools still need to be improved. However, "the
+universe smiles on encryption," as Assange so aptly put it.[^fn-assange]
+
+We believe that freedom tech is what carries this smile forward, which is why we
+are delighted to announce grants for over a dozen projects in the bitcoin &
+lightning ecosystem.
+
+[^fn-hal]: Hal Finney: [_Why remailers..._](https://cypherpunks.venona.com/date/1992/11/msg00108.html) (November 1992)
+
+[^fn-assange]: Julian Assange: [_A Call to Cryptographic Arms_](https://cryptome.org/2012/12/assange-crypto-arms.htm) (October 2012)
+
+The following open-source projects were selected by the OpenSats board for
+funding:
+
+- [Payjoin Dev Kit](#payjoin-dev-kit)
+- [Bolt12 for LND](#bolt12-for-lnd)
+- [Splicing](#splicing)
+- [Raspiblitz](#raspiblitz)
+- [Labelbase](#labelbase)
+- [BTCPay Server](#btcpay-server)
+- [ZeroSync](#zerosync)
+- [Mutiny Wallet](#mutiny-wallet)
+- [next-auth Lightning Provider](#next-auth-lightning-provider)
+- [Cashu](#cashu)
+- [lnproxy](#lnproxy)
+- [Blixt Wallet](#blixt-wallet)
+
+Let's take a closer look at each to understand their goal and how it aligns with
+the [OpenSats mission](/mission).
+
+---
+
+### Payjoin Dev Kit
+
+Payjoin brings privacy to bitcoin without changing the way you're used to using
+it. Payjoin transactions look no different from normal activity on-chain, so
+they boost everyone's privacy, even those who don't payjoin, and foil chain
+surveillance.
+
+Payjoin is easy to integrate and falls back to working defaults where it isn't
+supported, but it can only take off when senders and receivers include standard
+payjoin support in their software. Payjoin Dev Kit makes it easy for wallet
+developers to integrate [BIP 78][bip78] standard payjoins everywhere, having
+working reference integrations for Bitcoin Core, LND, and BDK.
+
+Repository: [github.com/payjoin](https://github.com/payjoin)  
+License: MIT
+
+[bip78]: https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki
+
+### Bolt12 for LND
+
+Bolt12 brings a new invoice format, enabling static invoices (offers) as well as
+recurring payments. It adds support to receive payments in a lightning-native
+way without using a web server. It also uses Blinded Paths to disguise the
+destination of a node both when fetching the invoice and when paying. This
+improves privacy and, therefore, security for the receiver of the payment.
+
+Consequently, [Bolt12](https://bolt12.org/) makes it much easier to receive and
+send payments without any third-party infrastructure in a native-lightning way.
+Static invoices make donations and recurring payments much easier.
+
+Repository: [lightningnetwork/lnd](https://github.com/lightningnetwork/lnd)  
+License: MIT
+
+### Splicing
+
+Splicing is the ability to resize Lightning channels on-the-fly, giving users of
+the Lightning Network many additional benefits that were not intuitively obvious
+at first. [Splicing](https://lightningsplice.com/) scales Lightning by removing
+a fundamental limitation.  Removing this limitation increases fungibility and
+lowers blockspace usage, an important step towards maturing the Lightning
+network and enabling the onboarding of millions, and ultimately billions, of
+people.
+
+Repository:
+[ddustin/splice](https://github.com/ddustin/lightning/tree/ddustin/splice)  
+License: BSD-MIT
+
+### Raspiblitz
+
+Raspiblitz is a do-it-yourself node stack that allows you to run a Lightning
+Node together with a Bitcoin Core full node on your Raspberry Pi. While the
+Raspberry Pi is the most common hardware running this particular software, it
+was developed to support multiple hardware platforms and can run on bare metal
+servers too.
+
+The open-source project was started in 2018 as part of a Lightning hackathon in
+the German Bitcoin space. Since then, it has grown to over 150 contributors and
+2000 stars on GitHub. The software integrates dozens of services and tools via
+its plugin system and sports advanced features like touchscreen support, channel
+autopilot, backup systems, DynDNS, SSH tunneling, and more.
+
+Repository: [raspiblitz/raspiblitz](https://github.com/raspiblitz/raspiblitz)  
+License: MIT
+
+### Labelbase
+
+Labelbase is a label management service for Bitcoin transactions and addresses.
+It provides features for adding labels, importing and exporting labels, and
+offers a public API for integration with wallets and existing workflows.
+
+Labelbase supports
+[BIP-329](https://github.com/bitcoin/bips/blob/master/bip-0329.mediawiki), a
+format for unifying label data. The goal of the project is to offer a convenient
+solution for managing labels associated with Bitcoin transactions and addresses
+across wallets and other tools. By providing a unified label management
+interface, Labelbase enhances the user experience, improves privacy, and
+promotes better organization and understanding of Bitcoin transactions.
+
+Repository: [Labelbase/Labelbase](https://github.com/Labelbase/Labelbase)  
+License: MIT
+
+### BTCPay Server
+
+BTCPay Server is a free, open-source & self-hosted bitcoin payment gateway that
+allows self-sovereign individuals and businesses to accept bitcoin payments
+online or in person without added fees.
+
+At its core, BTCPay Server is an automated invoicing system. Merchants can
+integrate the software with their website or shop, so customers are presented
+with an invoice upon checkout. The status of the invoice will update according
+to settlement, so merchants can fulfill the order at the appropriate time. The
+software also takes care of payment refunding and bitcoin management alongside
+many other features.
+
+Repository:
+[btcpayserver/btcpayserver](https://github.com/btcpayserver/btcpayserver)  
+License: MIT
+
+### ZeroSync
+
+While ZeroSync is still at an early stage, its promise is to allow verification
+of Bitcoin's chain state in an instant. It offers compact cryptographic proofs
+to validate the entire history of transactions and everyone's current balances.
+
+The first application is to "zerosync" Bitcoin Core in pruned mode. The
+long-term vision for ZeroSync is to become a toolbox for custom Bitcoin proofs.
+
+Repository: [zerosync/zerosync](https://github.com/zerosync/zerosync)  
+License: MIT
+
+### Mutiny Wallet
+
+Mutiny Wallet is a web-first wallet capable of running anywhere, providing
+instant onboarding and platform censorship resistance. It is self-custodial,
+privacy-focused, user-friendly, and open-sourced under the MIT license.
+
+The wallet has a strong focus on privacy, scalability, and accessibility. In
+addition to features that you would expect a regular lightning wallet to have,
+the team is working to incorporate Nostr-related features into the wallet, such
+as a feed of friends' Zaps, native Zap sending and receiving, a lightning
+subscription specification for services such as nostr relays, and a P2P DLC
+marketplace. The team's goal is to provide users with a seamless experience,
+combining the power of Bitcoin and Lightning with social media in a way that
+matches the Bitcoin ethos.
+
+Repository: [MutinyWallet](https://github.com/MutinyWallet)  
+License: MIT
+
+### next-auth Lightning Provider
+
+The goal of this project is to implement an authentication provider for
+next-auth, an authentication provider for the popular open-source framework
+NextJS. The next-auth framework has nearly 500k weekly downloads and powers the
+authentication of many modern web, mobile, and desktop apps. Having a
+plug-and-play Provider for Lightning makes integration easier and more
+attractive for developers.
+
+Repository:
+[jowo-io/next-auth-lightning-provider](https://github.com/jowo-io/next-auth-lightning-provider)  
+License: ISC
+
+### Cashu
+
+Cashu is a Chaumian ecash system built for bitcoin that brings near-perfect
+privacy for users of custodial bitcoin applications. A Cashu ecash mint does not
+know who you are, what your balance is, or who you're transacting with. Users of
+a mint can exchange ecash privately, without anyone being able to know who the
+involved parties are.
+
+Payments are executed without anyone able to censor specific users. There are
+multiple implementations of the Cashu protocol. Popular open-source wallets are
+Cashu Nutshell, Cashu.me, and Nutstash.
+
+Repository: [cashubtc/cashu](https://github.com/cashubtc/cashu)  
+License: MIT
+
+### lnproxy
+
+lnproxy is a simple privacy tool that empowers users of custodial Lightning
+wallets with better payment destination privacy and sovereign node runners with
+enhanced receiver privacy. lnproxy works like a "poor man's" rendezvous router,
+providing privacy for users without taking custody of their funds. The project
+encompasses an LNURL-style protocol specification and a collection of
+open-source implementations of lnproxy clients and a relay.
+
+Repository: [lnproxy/lnproxy](https://github.com/lnproxy/lnproxy)  
+License: GPL 3.0 & MIT
+
+### Blixt Wallet
+
+Blixt is a non-custodial wallet for bitcoiners who want to give Lightning a try.
+It runs on Android, iOS, and macOS. It is easy to use and straightforward to set
+up, making it a user-friendly option to get started with Lightning.
+
+Blixt uses LND and Neutrino under the hood, directly on the phone, respecting
+your privacy. The wallet does not use any centralized servers for doing
+transactions. Channels are opened automatically on the user's behalf, making it
+easy to get up and running on Lightning.
+
+Repository: [hsjoberg/blixt-wallet](https://github.com/hsjoberg/blixt-wallet)  
+License: MIT
+
+---
+
+In addition to the software projects listed above, three educational initiatives
+were selected for funding:
+
+- [Bitcoin Education in Nigeria](https://geyser.fund/project/bitcoineducationinnigeriawithapatajohnson) is an initiative started and led by Apata Johnson. Apata's project aims to educate youths on bitcoin and the opportunities it brings for the people living in the rural areas of Nigeria.
+- [21 Ideas](https://www.21ideas.org/) is a project that aims to bring quality Bitcoin education to Russian citizens. Tony and others have been working for many years on translations, original material, and hands-on tutorials for beginners. We believe that education is paramount to proper Bitcoin use, and localization is paramount for everyday citizens to properly grasp the importance as well as the novel concepts of bitcoin.
+- [CoreDev.tech](https://coredev.tech/) is organizing recurring developer events, which are all about bringing devs together so that they can hack on Bitcoin Core and related software.
+
+---
+
+We received hundreds of applications in the last couple of months, which is a
+fantastic signal and something we are delighted about. Some applications are
+still being reviewed by the OpenSats board, as we try our best to assess
+feasibility, alignment, and potential impact of each project. We will announce
+additional grants as applications pass our [grant selection
+process](https://github.com/OpenSats/website/blob/master/docs/grant-selection.md).
+
+Unfortunately, we were unable to fund all of the proposals that were sent to us.
+Please don't hesitate to apply again in case your application was rejected this
+time around. The applicant pool was very competitive, which is a great thing to
+see in and of itself.
+
+Grants for the projects above are funded by contributions to the Bitcoin General
+Fund. Our operations as well as our grant programs are made possible by generous
+donors like you. If you want to help fund the Bitcoin ecosystem, please [donate
+to the Bitcoin General Fund](https://opensats.org/projects/general_fund).
+
+Our team is screening applications constantly, and we will announce new grants
+and funding opportunities as they arise. If you are working on an open-source
+project in and around bitcoin, and you think your work is aligned with the
+OpenSats mission, please [apply for funding](https://opensats.org/apply).
