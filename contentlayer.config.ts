@@ -96,6 +96,28 @@ export const Pages = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const Projects = defineDocumentType(() => ({
+  name: 'Project',
+  filePathPattern: 'projects/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    nym: { type: 'string', required: true },
+    website: { type: 'string' },
+    coverImage: { type: 'string', required: true },
+    git: { type: 'string' },
+    twitter: { type: 'string' },
+    personalTwitter: { type: 'string' },
+    zaprite: { type: 'string', required: true },
+    btcpay: { type: 'string', required: true },
+    dateAdded: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' } },
+    hidden: { type: 'boolean' },
+  },
+  computedFields,
+}))
+
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors, Pages],
