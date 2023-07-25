@@ -113,6 +113,7 @@ export const Projects = defineDocumentType(() => ({
     btcpay: { type: 'string', required: true },
     dateAdded: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' } },
+    bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
   },
   computedFields,
