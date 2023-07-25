@@ -3,7 +3,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 import { InferGetStaticPropsType } from 'next'
 import { allProjects } from 'contentlayer/generated'
 
-const DEFAULT_LAYOUT = 'PageLayout'
+const DEFAULT_LAYOUT = 'ProjectLayout'
 
 export async function getStaticPaths() {
   return {
