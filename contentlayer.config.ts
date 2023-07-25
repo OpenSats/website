@@ -120,7 +120,7 @@ export const Projects = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Pages],
+  documentTypes: [Blog, Authors, Pages, Projects],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
