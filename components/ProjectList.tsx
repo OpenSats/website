@@ -1,7 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faC, faClose } from '@fortawesome/free-solid-svg-icons'
 import ProjectCard from './ProjectCard'
-import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 import { useEffect, useState } from 'react'
 
@@ -12,7 +9,6 @@ type ProjectListProps = {
   openPaymentModal: (project: ProjectItem) => void
 }
 const ProjectList: React.FC<ProjectListProps> = ({
-  header = 'Explore Projects',
   exclude,
   projects,
   openPaymentModal,
