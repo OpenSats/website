@@ -72,6 +72,7 @@ ${req.body.personal_github}
 
     // Tag depending on request for grant and/or request for listing
     req.body.general_fund && issueLabels.push('grant')
+    req.body.LTS && issueLabels.push('grant') // LTS = subset of grant
     req.body.explore_page && issueLabels.push('website')
 
     // Additional tags based on yes/no answers
