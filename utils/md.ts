@@ -4,7 +4,8 @@ import matter from 'gray-matter'
 import { Project } from 'contentlayer/generated'
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
-const FIELDS = ['title',
+const FIELDS = [
+  'title',
   'summary',
   'slug',
   'git',
@@ -16,7 +17,7 @@ const FIELDS = ['title',
   'twitter',
   'personalTwitter',
   'bonusUSD',
-  'hidden'
+  'hidden',
 ]
 
 export function getPostSlugs() {
@@ -28,7 +29,7 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string, includeHidden: boolean = false): Project {
+export function getPostBySlug(slug: string, includeHidden = false): Project {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -56,14 +57,16 @@ export function getPostBySlug(slug: string, includeHidden: boolean = false): Pro
   return items
 }
 
-export function getAllPosts() : Project[] {
+export function getAllPosts(): Project[] {
   const slugs = getPostSlugs()
   //get all posts & return them but make sure to catch errors from getPostBySlug and filter them out
-  return slugs.map((slug) => {
-    try {
-      return getPostBySlug(slug)
-    } catch {
-      return null
-    }
-  }).filter(a => a != null) as Project[]
+  return slugs
+    .map((slug) => {
+      try {
+        return getPostBySlug(slug)
+      } catch {
+        return null
+      }
+    })
+    .filter((a) => a != null) as Project[]
 }
