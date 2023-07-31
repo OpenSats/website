@@ -6,7 +6,6 @@ import ProjectCard from '../../components/ProjectCard'
 import { getAllPosts } from '../../utils/md'
 import Link from '@/components/Link'
 import { Project } from 'contentlayer/generated'
-import { allProjects } from 'contentlayer/generated'
 
 const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
