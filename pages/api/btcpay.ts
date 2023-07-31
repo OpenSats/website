@@ -2,7 +2,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
-import { PayReq, ProjectItem } from '../../utils/types'
+import { PayReq } from '../../utils/types'
+import { Project } from 'contentlayer/generated'
 import { getPostBySlug } from '../../utils/md'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
@@ -24,7 +25,7 @@ export default async function handler(
         throw new Error('Invalid project.')
       }
 
-      let project: ProjectItem
+      let project: Project
       try {
         project = getPostBySlug(project_slug, true)
       } catch {

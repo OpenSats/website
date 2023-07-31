@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
-import {ProjectItem} from "./types";
+import { Project } from 'contentlayer/generated'
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
 const FIELDS = ['title',
@@ -28,7 +28,7 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string, includeHidden: boolean = false): ProjectItem {
+export function getPostBySlug(slug: string, includeHidden: boolean = false): Project {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
@@ -56,7 +56,7 @@ export function getPostBySlug(slug: string, includeHidden: boolean = false): Pro
   return items
 }
 
-export function getAllPosts() : ProjectItem[] {
+export function getAllPosts() : Project[] {
   const slugs = getPostSlugs()
   //get all posts & return them but make sure to catch errors from getPostBySlug and filter them out
   return slugs.map((slug) => {
@@ -65,5 +65,5 @@ export function getAllPosts() : ProjectItem[] {
     } catch {
       return null
     }
-  }).filter(a => a != null) as ProjectItem[]
+  }).filter(a => a != null) as Project[]
 }
