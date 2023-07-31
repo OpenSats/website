@@ -3,17 +3,18 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
-import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
 import Link from '@/components/Link'
+import { Project } from 'contentlayer/generated'
+import { allProjects } from 'contentlayer/generated'
 
-const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
+const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
+  const [selectedProject, setSelectedProject] = useState<Project>()
 
-  const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<ProjectItem[]>()
+  const [sortedProjects, setSortedProjects] = useState<Project[]>()
+  const [openSatsProjects, setOpenSatsProjects] = useState<Project[]>()
 
   useEffect(() => {
     setSortedProjects(
@@ -30,7 +31,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setModalOpen(false)
   }
 
-  function openPaymentModal(project: ProjectItem) {
+  function openPaymentModal(project: Project) {
     setSelectedProject(project)
     setModalOpen(true)
   }
@@ -93,10 +94,10 @@ export async function getStaticProps({ params }: { params: any }) {
   }
 }
 
-export function isOpenSatsProject(project: ProjectItem): boolean {
+export function isOpenSatsProject(project: Project): boolean {
   return project.nym === 'OpenSats'
 }
 
-export function isNotOpenSatsProject(project: ProjectItem): boolean {
+export function isNotOpenSatsProject(project: Project): boolean {
   return !isOpenSatsProject(project)
 }

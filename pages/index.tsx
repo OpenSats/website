@@ -8,11 +8,11 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { NewsletterForm } from 'pliny/ui/NewsletterForm'
-import { allBlogs } from 'contentlayer/generated'
+import { allBlogs, allProjects } from 'contentlayer/generated'
 import { getAllPosts, getPostBySlug } from '../utils/md'
 import type { Blog } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
-import { ProjectItem } from '../utils/types'
+import { Project } from 'contentlayer/generated'
 import PaymentModal from '../components/PaymentModal'
 import { isNotOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const posts = allCoreContent(sortedPosts)
 
-  const projects = getAllPosts()
+  const projects = allProjects
     .filter(isNotOpenSatsProject)
     .sort(() => 0.5 - Math.random())
 
@@ -44,13 +44,13 @@ export default function Home({
 
   const router = useRouter()
 
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
+  const [selectedProject, setSelectedProject] = useState<Project>()
 
   function closeModal() {
     setModalOpen(false)
   }
 
-  function openPaymentModal(project: ProjectItem) {
+  function openPaymentModal(project: Project) {
     setSelectedProject(project)
     setModalOpen(true)
   }
