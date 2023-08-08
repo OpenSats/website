@@ -6,6 +6,7 @@ const Volunteers = () => {
   const lucas = '/img/volunteers/lucas.jpg'
   const gabe = '/img/volunteers/gabe.jpg'
   const arvin = '/img/volunteers/arvin.jpg'
+  const dez = '/img/volunteers/dez.jpg'
 
   const volunteers: CreditItemProps[] = [
     {
@@ -22,6 +23,11 @@ const Volunteers = () => {
       link: 'https://bitcoin.org/bitcoin.pdf',
       image: arvin,
       nym: 'Arvin',
+    },
+    {
+      link: 'https://nostr.com/npub1lwwszsyje89zaww8g8rqyzzjzm25lkzeqv4qsfmhpgazke5xxx5q7p62z6',
+      image: dez,
+      nym: 'Dez',
     },
   ]
 
