@@ -1,0 +1,57 @@
+---
+title: "Long-Term Support For Josi Baker"
+date: '2023-08-16'
+tags: ['OpenSats', 'grants', 'bitcoin', 'LTS']
+draft: false
+authors: ['jamesob']
+images: ['/static/images/blog/05-josi.jpg']
+summary: "OpenSats Welcomes Josiah Baker as an LTS Grantee."
+---
+
+We're delighted to announce [Josi Baker](https://github.com/josibake) as our
+newest LTS grantee.
+
+Josi will receive long-term support from OpenSats for his continued work on
+Bitcoin Core. His work will consist of pull-request reviews,[^fn-reviews]
+supporting major release cycles, and his own contributions.[^fn-prs]
+
+[^fn-reviews]: [PR reviews by @josibake](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Ajosibake)
+[^fn-prs]: [PRs by @josibake](https://github.com/bitcoin/bitcoin/pulls/josibake)
+
+In the next couple of months, Josi plans to work on the [libbitcoinkernel
+project](https://github.com/bitcoin/bitcoin/issues/27587) as a reviewer, tester,
+and contributor. The `libbitcoinkernel` project is an attempt at modularizing
+the Bitcoin codebase and extracting consensus logic into something other
+applications can reuse. This has a number of benefits, namely improved testing
+and code separation of consensus code within Bitcoin Core and enabling
+application-specific programs to be written outside of the Bitcoin Core project
+with increased confidence these applications will be in consensus.
+
+In addition to his work on Bitcoin Core, he will continue to work on [BIP-352:
+Silent Payments](https://github.com/bitcoin/bips/pull/1458), focusing on
+adoption in wallets outside of Bitcoin Core and supporting mobile clients.
+
+Silent Payments are a privacy and UX improvement for Bitcoin wallets that allows
+static, reusable payment codes without address reuse. The key improvements over
+existing reusable payment code solutions are improved privacy for the sender and
+receiver due to eliminating the need for a notification transaction and no
+additional cost for senders. The proposal also separates sending and receiving,
+which enables broader adoption. These improvements are particularly relevant for
+activists wishing to use Bitcoin as a means of raising funds in a private and
+censorship-resistant way.
+
+The mission of OpenSats is to support and maintain a sustainable ecosystem of
+funding for free and open-source projects and contributors, especially
+Bitcoin-related projects and projects that help Bitcoin flourish. Regular
+contributors reviewing and maintaining Bitcoin Core are critical to the
+project's continued success. Sustainable funding allows contributors to build
+expertise over multiple years, which is why we introduced the [OpenSats LTS
+program](https://opensats.org/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors).
+
+You can apply for the program here:
+
+- [opensats.org/apply/lts](https://opensats.org/apply/lts)
+
+Support for Josi's work is sourced from our General Fund and made possible by
+generous donors like you. If you would like to support work like Josi's,
+consider [donating to the fund](https://opensats.org/projects/general_fund).
