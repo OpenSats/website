@@ -1,0 +1,184 @@
+---
+title: "Grants for BDK, LNbits, Nostr, and More!"
+date: '2023-08-17'
+tags: ['OpenSats', 'grants', 'bitcoin', 'nostr']
+draft: false
+authors: ['odell']
+images: ['/static/images/blog/06-august.jpg']
+summary: "OpenSats is providing grants to 8 additional open-source projects in the bitcoin and nostr ecosystem."
+---
+
+After announcing our first wave of grants for bitcoin[^fn-btc] and nostr[^fn-nostr] projects, we are
+pleased to announce an additional wave of grants for open-source projects in the
+space:
+
+[^fn-btc]: [First Wave of Bitcoin Grants](https://opensats.org/blog/bitcoin-grants-july-2023)
+[^fn-nostr]: [First Wave of Nostr Grants](https://opensats.org/blog/nostr-grants-july-2023)
+
+- [BDK](#bdk)
+- [LNbits](#lnbits)
+- [Watchdescriptor](#watchdescriptor)
+- [Stratum V2 Testing \& Benchmarking Tool](#stratum-v2-testing--benchmarking-tool)
+- [Fedimint Modules and Resources](#fedimint-modules-and-resources)
+- [Amber: Nostr Event Signer](#amber-nostr-event-signer)
+- [Nostr UI/UX Development](#nostr-uiux-development)
+- [Nostr Use-Case Exploration \& Education](#nostr-use-case-exploration--education)
+
+The first five grants are sourced from our [General Fund][bitcoin-fund], the
+last three—being nostr projects—from our [Nostr Fund][nostr-fund]. This brings
+the total number of OpenSats grants to 41, adding to the grants we previously
+announced in July.
+
+Once again, let's take a closer look at each of the projects to see how they
+align with the [OpenSats mission][mission].
+
+---
+
+### BDK
+
+Bitcoin Development Kit (BDK) is a set of libraries and tools that allows you to
+seamlessly build cross-platform on-chain bitcoin wallets without having to
+re-implement standard bitcoin data structures, algorithms, and protocols. BDK is
+built on top of the powerful rust-bitcoin and rust-miniscript libraries and adds
+features for managing descriptor-based wallets, syncing wallets to the bitcoin
+blockchain, viewing transaction histories, managing and selecting UTXOs to
+create new transactions, signing, and more. The core BDK components are written
+in Rust, but the team also maintains Kotlin and Swift language bindings for use
+in mobile projects. There are also Python bindings, and React Native and Flutter
+support is being actively developed.
+
+Repository: [bitcoindevkit/bdk](https://github.com/bitcoindevkit/bdk)  
+License: Apache 2.0 / MIT
+
+### LNbits
+
+LNbits is used by a multitude of projects in the bitcoin space, especially as
+part of their lightning payments stack. Being easy to build on through its
+extension framework, LNbits has been pioneering various cutting-edge solutions
+and experiments in the world of bitcoin, lightning, and nostr.
+
+The project has a thriving maker community building various hardware devices
+such as Lightning ATMs, point-of-sale devices, DIY hardware wallets, and nostr
+signing devices. The modular design of LNbits makes it attractive to users and
+tinkerers alike, as its plugin architecture makes it easy to extend and
+understand.
+
+Repository: [lnbits/lnbits](https://github.com/lnbits/lnbits)  
+License: MIT
+
+### Watchdescriptor
+
+`watchdescriptor` is a CLN plugin written in Rust that connects a business's
+treasury wallet to its CLN node. It utilizes
+[`cln-plugin`](https://docs.rs/cln-plugin/latest/cln_plugin/) and the BDK
+library to track coin movements in registered wallets and report this
+information to the `bookkeeper` plugin.
+
+The plugin enables businesses to design a complete treasury using
+[Miniscript](https://bitcoin.sipa.be/miniscript/) and import the resulting
+descriptor into CLN. Since `bookkeeper` already accounts for all coin movements
+internal to CLN, this plugin is the last piece businesses need in order to unify
+all their bitcoin accounting in one place. This enables businesses to account
+for all inflows and outflows from their operations, streamlining tax reporting
+and financial analysis.
+
+The `watchdescriptor` project is part of a broader vision to transform the
+lightning node (particularly CLN) into a financial hub for businesses, enabling
+them to conduct operations without reliance on any third parties.
+
+Repository:
+[chrisguida/watchdescriptor](https://github.com/chrisguida/watchdescriptor)  
+License: MIT
+
+### Stratum V2 Testing & Benchmarking Tool
+
+The Stratum V2 Testing & Benchmarking Tool allows the bitcoin mining industry to
+test and benchmark Stratum V2 performance against Stratum V1. The tool supports
+different mining scenarios to help miners make informed decisions and evaluate
+their profitability. The goal of the project is to motivate miners to upgrade to
+Stratum V2, increasing their individual profits and making the Bitcoin network
+more resilient in the process.
+
+Repository: [stratum-mining/stratum](https://github.com/stratum-mining/stratum)
+[@GitGab19](https://github.com/GitGab19)  
+License: Apache 2.0 / MIT
+
+### Fedimint Modules and Resources
+
+Fedimint is a federated Chaumian e-cash mint backed by sats with deposits and
+withdrawals that can occur on-chain or via lightning. It can be understood as a
+scaling and privacy layer as well as an adoption accelerator for Bitcoin.
+
+The goal of this particular project is to improve the Fedimint UI and develop
+free and open resources for developers and "Guardians" to enable more people to
+run and develop on Fedimint.
+
+Repository: [fedimint/ui](https://github.com/fedimint/ui)
+[@EthnTuttle](https://github.com/EthnTuttle)  
+License: MIT
+
+### Amber: Nostr Event Signer
+
+Amber is a nostr event signer for Android. It allows users to keep their `nsec`
+segregated in a single, dedicated app. The goal of Amber is to have your
+smartphone act as a
+[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) signing
+device without any need for servers or additional hardware. "Private keys should
+be exposed to as few systems as possible as each system adds to the attack
+surface," as the rationale of said NIP states. In addition to native apps, Amber
+aims to support all current nostr web applications without requiring any
+extensions or web servers.
+
+Repository: [greenart7c3/Amber](https://github.com/greenart7c3/Amber)  
+License: MIT
+
+### Nostr UI/UX Development
+
+The goal of this project is to help improve the UI/UX of major nostr clients,
+starting with
+[Gossip](https://www.figma.com/file/JJQwKYImD2lyzWR81fxo7w/Nostr?type=design&node-id=0-1&mode=design)
+and Coracle, emphasizing the onboarding process as well as usability and
+accessibility. One part of onboarding is solving the discoverability problem
+that nostr has in the first place. Solving the problem of jumping in and out of
+the nostr world is what motivated the development of
+[`njump`](https://github.com/fiatjaf/njump), which was redesigned as part of
+these efforts and is now live at
+[nostr.com](https://nostr.com/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f).
+
+In addition to client-specific improvements, generic design modules and
+learnings will be incorporated into the [Nostr
+Design](https://docs.google.com/document/d/1r75wMCSBteQjXKGXELrNdu3wwns5fsgMPwSBIQY1sPU/edit#heading=h.k4vues73209h)
+project for others to use.
+
+Activity: [github.com/dtonon](https://github.com/dtonon)
+[@dtonon](https://nostr.com/npub10000003zmk89narqpczy4ff6rnuht2wu05na7kpnh3mak7z2tqzsv8vwqk)  
+License: MIT
+
+### Nostr Use-Case Exploration & Education
+
+As of today, most nostr clients implement social media applications on top of
+the nostr protocol. However, nostr allows for various use cases, many of which
+go beyond social media. Two examples are [Listr](https://listr.lol/) and
+[Ostrich](https://ostrich.work/), a list management tool and job board,
+respectively.
+
+In addition to use-case exploration, this project will continue to educate users
+and developers alike, be it via [Nostr How](https://nostr.how/) or various video
+series, e.g., explaining how to build upon
+[NDK](https://www.youtube.com/playlist?list=PLWCXpceoxeCKDo73t6VmtbfE_RjSRxs9p).
+
+Activity: [github.com/erskingardner](https://github.com/erskingardner)
+[@jeffg](https://nostr.com/npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc)  
+License: MIT / GPL-3.0 / CC BY-NC-SA 4.0
+
+---
+
+We have more grants in the pipeline and will provide funding for many more
+projects in the future. Note that we can only fund those projects which reach
+out and apply. If you are an open-source developer who is aligned with our
+mission, don't hesitate to [apply for funding][apply].
+
+[apply]: /apply
+[nostr-fund]: /projects/nostr
+[bitcoin-fund]: /projects/general_fund
+[mission]: /mission
