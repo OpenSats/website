@@ -10,7 +10,7 @@ zaprite: 'OoYtzNjilW1NRtDsxLAj'
 bonusUSD: 5000000
 ---
 
-The OpenSats Nostr Fund is a way for you to support the development and
+The Nostr General Fund is a way for you to support the development and
 improvement of the Nostr protocol and related software. The fund is made up of
 donations from individuals and organizations.
 
