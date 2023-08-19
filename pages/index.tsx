@@ -9,9 +9,8 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { NewsletterForm } from 'pliny/ui/NewsletterForm'
 import { allBlogs, allProjects } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
+import type { Blog, Project } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
-import { Project } from 'contentlayer/generated'
 import PaymentModal from '../components/PaymentModal'
 import { isNotOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
@@ -29,7 +28,7 @@ export const getStaticProps = async () => {
 
   const generalFund = allProjects.find((p) => p.slug === 'general_fund')
   const opsFund = allProjects.find(
-    (p) => p.btcpay === 'opensats_operations_budget'
+    (p) => p.slug === 'opensats_operations_budget'
   )
 
   return { props: { posts, projects, generalFund, opsFund } }
