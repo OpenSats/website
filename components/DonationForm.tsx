@@ -13,12 +13,12 @@ config.autoAddCss = false
 
 type DonationStepsProps = {
   projectNamePretty: string
-  projectSlug: string
+  btcpay: string
   zaprite: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
-  projectSlug,
+  btcpay,
   zaprite,
 }) => {
   const [name, setName] = useState('')
@@ -68,7 +68,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     setBtcpayLoading(true)
     try {
       const payload = {
-        project_slug: projectSlug,
+        btcpay,
         zaprite,
       }
 
@@ -109,7 +109,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     try {
       const data = await fetchPostJSON('/api/stripe_checkout', {
         amount,
-        project_slug: projectSlug,
+        btcpay,
         project_name: projectNamePretty,
         zaprite,
         email,

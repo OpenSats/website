@@ -13,7 +13,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_slug, email, name }: PayReq = req.body
+    const { amount, btcpay, email, name }: PayReq = req.body
     const REDIRECT = 'http://opensats.org/thankyou'
 
     try {
@@ -21,13 +21,13 @@ export default async function handler(
       if (amount != null && amount < MIN_AMOUNT) {
         throw new Error('Invalid amount.')
       }
-      if (!project_slug) {
+      if (!btcpay) {
         throw new Error('Invalid project.')
       }
 
       let project: Project
       try {
-        project = allProjects.find((p) => p.slug === project_slug)
+        project = allProjects.find((p) => p.btcpay === btcpay)
       } catch {
         throw new Error('Invalid project.')
       }
