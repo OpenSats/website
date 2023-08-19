@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
-import { getAllPosts } from '../../utils/md'
+import { allProjects } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { Project } from 'contentlayer/generated'
 
@@ -84,7 +84,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
 export default AllProjects
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts()
+  const projects = allProjects
 
   return {
     props: {
