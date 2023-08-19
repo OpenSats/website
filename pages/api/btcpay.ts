@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
-import { Project } from 'contentlayer/generated'
-import { getPostBySlug } from '../../utils/md'
+import type { Project } from 'contentlayer/generated'
+import { allProjects } from 'contentlayer/generated'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 
@@ -27,19 +27,19 @@ export default async function handler(
 
       let project: Project
       try {
-        project = getPostBySlug(project_slug, true)
+        project = allProjects.find((p) => p.slug === project_slug)
       } catch {
         throw new Error('Invalid project.')
       }
       const reqData = {
         currency: CURRENCY,
         metadata: {
-          orderId: project_slug,
+          orderId: project.btcpay,
           project_name: project.title,
           buyerName: name || 'anonymous',
           buyerEmail: email || null,
           posData: {
-            orderId: project_slug,
+            orderId: project.btcpay,
             zaprite_campaign: project.zaprite,
             project_name: project.title,
             buyerName: name || 'anonymous',
