@@ -9,7 +9,6 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { NewsletterForm } from 'pliny/ui/NewsletterForm'
 import { allBlogs, allProjects } from 'contentlayer/generated'
-import { getPostBySlug } from '../utils/md'
 import type { Blog } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import { Project } from 'contentlayer/generated'
@@ -29,7 +28,9 @@ export const getStaticProps = async () => {
     .sort(() => 0.5 - Math.random())
 
   const generalFund = allProjects.find((p) => p.slug === 'general_fund')
-  const opsFund = getPostBySlug('opensats_operations_budget', true)
+  const opsFund = allProjects.find(
+    (p) => p.btcpay === 'opensats_operations_budget'
+  )
 
   return { props: { posts, projects, generalFund, opsFund } }
 }
