@@ -102,6 +102,7 @@ export const Projects = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    dateAdded: { type: 'date', required: true },
     summary: { type: 'string', required: true },
     nym: { type: 'string', required: true },
     website: { type: 'string' },
@@ -111,7 +112,6 @@ export const Projects = defineDocumentType(() => ({
     personalTwitter: { type: 'string' },
     zaprite: { type: 'string', required: true },
     btcpay: { type: 'string', required: true },
-    dateAdded: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
