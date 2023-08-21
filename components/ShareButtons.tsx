@@ -2,9 +2,9 @@ import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { ProjectItem } from '../utils/types'
+import { Project } from 'contentlayer/generated'
 
-const ShareButtons: React.FC<{ project: ProjectItem }> = ({ project }) => {
+const ShareButtons: React.FC<{ project: Project }> = ({ project }) => {
   const { git, twitter, website } = project
   return (
     <div className="mb-4 flex space-x-4">
