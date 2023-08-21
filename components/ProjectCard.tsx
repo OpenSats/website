@@ -1,11 +1,11 @@
 import Image from 'next/image'
 
 import Link from 'next/link'
-import { ProjectItem } from '../utils/types'
+import { Project } from 'contentlayer/generated'
 
 export type ProjectCardProps = {
-  project: ProjectItem
-  openPaymentModal: (project: ProjectItem) => void
+  project: Project
+  openPaymentModal: (project: Project) => void
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({

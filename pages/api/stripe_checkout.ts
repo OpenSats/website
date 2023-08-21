@@ -17,7 +17,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { amount, project_name, project_slug, email, name, zaprite }: PayReq =
+  const { amount, project_name, btcpay, email, name, zaprite }: PayReq =
     req.body
 
   if (!ZAPRITE_USER_UUID) {
