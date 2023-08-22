@@ -2,8 +2,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
-import { PayReq, ProjectItem } from '../../utils/types'
-import { getPostBySlug } from '../../utils/md'
+import { PayReq } from '../../utils/types'
+import type { Project } from 'contentlayer/generated'
+import { allProjects } from 'contentlayer/generated'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 
@@ -12,7 +13,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_slug, email, name }: PayReq = req.body
+    const { amount, btcpay, email, name }: PayReq = req.body
     const REDIRECT = 'http://opensats.org/thankyou'
 
     try {
@@ -20,25 +21,25 @@ export default async function handler(
       if (amount != null && amount < MIN_AMOUNT) {
         throw new Error('Invalid amount.')
       }
-      if (!project_slug) {
+      if (!btcpay) {
         throw new Error('Invalid project.')
       }
 
-      let project: ProjectItem
+      let project: Project
       try {
-        project = getPostBySlug(project_slug, true)
+        project = allProjects.find((p) => p.btcpay === btcpay)
       } catch {
         throw new Error('Invalid project.')
       }
       const reqData = {
         currency: CURRENCY,
         metadata: {
-          orderId: project_slug,
+          orderId: project.btcpay,
           project_name: project.title,
           buyerName: name || 'anonymous',
           buyerEmail: email || null,
           posData: {
-            orderId: project_slug,
+            orderId: project.btcpay,
             zaprite_campaign: project.zaprite,
             project_name: project.title,
             buyerName: name || 'anonymous',

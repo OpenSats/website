@@ -1,23 +1,19 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faC, faClose } from '@fortawesome/free-solid-svg-icons'
 import ProjectCard from './ProjectCard'
-import Link from 'next/link'
-import { ProjectItem } from '../utils/types'
+import { Project } from 'contentlayer/generated'
 import { useEffect, useState } from 'react'
 
 type ProjectListProps = {
   header?: string
   exclude?: string
-  projects: ProjectItem[]
-  openPaymentModal: (project: ProjectItem) => void
+  projects: Project[]
+  openPaymentModal: (project: Project) => void
 }
 const ProjectList: React.FC<ProjectListProps> = ({
-  header = 'Explore Projects',
   exclude,
   projects,
   openPaymentModal,
 }) => {
-  const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
+  const [sortedProjects, setSortedProjects] = useState<Project[]>()
 
   useEffect(() => {
     setSortedProjects(

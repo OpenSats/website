@@ -1,15 +1,14 @@
 import ReactModal from 'react-modal'
 import Image from 'next/image'
-import waffledog from '../public/waffledog.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
-import { ProjectItem } from '../utils/types'
+import { Project } from 'contentlayer/generated'
 
 type ModalProps = {
   isOpen: boolean
   onRequestClose: () => void
-  project: ProjectItem | undefined
+  project: Project | undefined
 }
 const PaymentModal: React.FC<ModalProps> = ({
   isOpen,
@@ -58,7 +57,7 @@ const PaymentModal: React.FC<ModalProps> = ({
       </div>
       <DonationForm
         projectNamePretty={project.title}
-        projectSlug={project.slug}
+        btcpay={project.btcpay}
         zaprite={project.zaprite}
       />
     </ReactModal>
