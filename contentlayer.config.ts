@@ -79,6 +79,7 @@ export const Authors = defineDocumentType(() => ({
     layout: { type: 'string' },
     board: { type: 'boolean' },
     ops: { type: 'boolean' },
+    design: { type: 'boolean' },
   },
   computedFields,
 }))
