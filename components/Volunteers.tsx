@@ -31,7 +31,7 @@ const Volunteers = () => {
       nym: 'Dez',
     },
     {
-      link: 'https://bitcoin.org/bitcoin.pdf',
+      link: 'https://nostr.com/npub1ksfsvwskmmjuhk43a4gs79ew0s6rkenmrany4nw38592ru5k0t2s97dve7',
       image: reza,
       nym: 'Reza',
     },
