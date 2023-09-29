@@ -10,12 +10,12 @@ const Volunteers = () => {
 
   const volunteers: CreditItemProps[] = [
     {
-      link: 'https://nostr.com/npub176mj8c5pa6pxlmm8syv4uhmz0n8934w0pfnfddgawhycqcue69esr3qzt2',
+      link: 'https://njump.me/npub176mj8c5pa6pxlmm8syv4uhmz0n8934w0pfnfddgawhycqcue69esr3qzt2',
       image: lucas,
       nym: 'Lucas Guimaraes',
     },
     {
-      link: 'https://nostr.com/npub1p6tshz5f0vgskx6p8prusfud0ksxl78fwh8tj4s08upcrsq50nfq62ax3q',
+      link: 'https://njump.me/npub1p6tshz5f0vgskx6p8prusfud0ksxl78fwh8tj4s08upcrsq50nfq62ax3q',
       image: gabe,
       nym: 'Gabe',
     },
@@ -25,7 +25,7 @@ const Volunteers = () => {
       nym: 'Arvin',
     },
     {
-      link: 'https://nostr.com/npub1lwwszsyje89zaww8g8rqyzzjzm25lkzeqv4qsfmhpgazke5xxx5q7p62z6',
+      link: 'https://njump.me/npub1lwwszsyje89zaww8g8rqyzzjzm25lkzeqv4qsfmhpgazke5xxx5q7p62z6',
       image: dez,
       nym: 'Dez',
     },
