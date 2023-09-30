@@ -1,3 +1,0 @@
-DAF Direct Widget Script (160 x 273 px):
-
-<script type = "text/javascript">_dafdirect_settings="852722249_1111_68591dca-5075-45f8-a915-02991f4111c8"</script><script type = "text/javascript" src = "https://www.dafdirect.org/ddirect/dafdirect4.js"></script>
