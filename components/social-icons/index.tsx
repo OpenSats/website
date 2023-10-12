@@ -5,8 +5,9 @@ import Youtube from './youtube.svg'
 import Linkedin from './linkedin.svg'
 import Twitter from './twitter.svg'
 import Nostr from './nostr.svg'
+import Web from './globe-solid.svg'
 
-// Icons taken from: https://simpleicons.org/
+// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (globe)
 
 const components = {
   mail: Mail,
@@ -16,6 +17,7 @@ const components = {
   linkedin: Linkedin,
   twitter: Twitter,
   nostr: Nostr,
+  website: Web,
 }
 
 const SocialIcon = ({ kind, href, size = 8 }) => {
