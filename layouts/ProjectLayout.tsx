@@ -12,12 +12,12 @@ interface Props {
 
 export default function PageLayout({ children, content }: Props) {
   const {
-  title,
-  summary,
-  coverImage,
-  website,
-  git,
-  twitter,
+    title,
+    summary,
+    coverImage,
+    website,
+    git,
+    twitter,
   } = content
 
   return (
@@ -27,11 +27,11 @@ export default function PageLayout({ children, content }: Props) {
         {children}
       </PageSection>
 
-<div className="flex space-x-3 pt-6">
-<SocialIcon kind="github" href={git} />
-<SocialIcon kind="twitter" href={`https://twitter.com/${twitter}`} />
-<SocialIcon kind="website" href={website} />
-</div>
+      <div className="flex space-x-3 pt-6">
+        <SocialIcon kind="github" href={git} />
+        <SocialIcon kind="twitter" href={`https://twitter.com/${twitter}`} />
+        <SocialIcon kind="website" href={website} />
+      </div>
       
     </>
   )
