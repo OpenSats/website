@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import type { Project } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
-import SocialIcon from '@/components/social-icons'
 import PageSection from '@/components/PageSection'
 import { CoreContent } from 'pliny/utils/contentlayer'
 
@@ -23,16 +22,11 @@ export default function PageLayout({ children, content }: Props) {
   return (
     <>
       <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
-      <PageSection title={title} image={coverImage}>
+      <PageSection title={title} image={coverImage} website={website} git={git} twitter={twitter}>
         {children}
       </PageSection>
-
-      <div className="flex space-x-3 pt-6">
-        <SocialIcon kind="github" href={git} />
-        <SocialIcon kind="twitter" href={`https://twitter.com/${twitter}`} />
-        <SocialIcon kind="website" href={website} />
-      </div>
       
     </>
   )
 }
+
