@@ -26,6 +26,14 @@
 - We use BTCPay Server to receive all cryptocurrency donations. For fiat donations, we leverage Stripe Payments.
 
 
+## Can you provide the view key to verify the Fund's incoming Monero donations?
+
+- Yes. You can create a view-only Monero wallet with this information:
+- Main address: 4458gM5iAPuJBeVf5u9DwS4Hj82qNPzAcgD7wF9VrRCRb4M635UtmZNPPDonqXkBsb2RmKjUSRLXtJNZCjZgnNFKKW3SxBz
+- Secret view key: 2595ab540844231f66c2266f12b174461f81c09b39010dc42697a6a58a7d680c
+- Restore height: 2724728
+
+
 ## How can I communicate with you?
 
 - You can reach the committee via [Discord](https://discord.gg/yEuhhdtbHN), Matrix or [email](mailto:MoneroFund@magicgrants.org).
