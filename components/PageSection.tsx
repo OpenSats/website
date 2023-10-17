@@ -20,6 +20,10 @@ export default function PageSection({
   twitter,
   children,
 }: Props) {
+  let twitter_url
+  if (twitter) {
+    twitter_url = `https://twitter.com/${twitter}`
+  }
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
       <PageHeading title={title}>
@@ -33,10 +37,7 @@ export default function PageSection({
           />
           <div className="flex space-x-3 pt-6">
             <SocialIcon kind="website" href={website} />
-            <SocialIcon
-              kind="twitter"
-              href={`https://twitter.com/${twitter}`}
-            />
+            <SocialIcon kind="twitter" href={twitter_url} />
             <SocialIcon kind="github" href={git} />
           </div>
         </div>
