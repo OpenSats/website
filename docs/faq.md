@@ -2,7 +2,7 @@
 
 ## What is the mission statement of the Monero Fund?
 
-- We are a committe of a 501(c)(3) public charity that funds Monero-related open source research and associated educational initiatives.
+- We are a committee of a 501(c)(3) public charity that funds Monero-related open source research and associated educational initiatives.
 
 
 ## How are funds distributed?
