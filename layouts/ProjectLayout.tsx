@@ -10,12 +10,18 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, coverImage } = content
+  const { title, summary, coverImage, website, git, twitter } = content
 
   return (
     <>
       <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
-      <PageSection title={title} image={coverImage}>
+      <PageSection
+        title={title}
+        image={coverImage}
+        website={website}
+        git={git}
+        twitter={twitter}
+      >
         {children}
       </PageSection>
     </>
