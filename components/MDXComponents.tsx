@@ -6,7 +6,9 @@ import { Pre } from 'pliny/ui/Pre'
 import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
 
 import Image from './Image'
+import VideoPlayer from './VideoPlayer'
 import CustomLink from './Link'
+import DonateToNostrFundButton from './DonateToNostrFundButton'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -15,9 +17,11 @@ export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
 
 export const MDXComponents: ComponentMap = {
   Image,
+  VideoPlayer,
   TOCInline,
   a: CustomLink,
   pre: Pre,
   wrapper: Wrapper,
   BlogNewsletterForm,
+  DonateToNostrFundButton,
 }
