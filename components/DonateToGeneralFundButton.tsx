@@ -27,7 +27,7 @@ export default function DonateToGeneralFundButton() {
         onClick={openGeneralFundModal}
         className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
       >
-        Donate to the Bitcoin General Fund
+        Donate to the General Fund
       </button>
       <PaymentModal
         isOpen={modalOpen}
