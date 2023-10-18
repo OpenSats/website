@@ -1,0 +1,223 @@
+---
+title: "Third Wave of Nostr Grants"
+date: '2023-10-18'
+tags: ['OpenSats', 'grants', 'nostr']
+draft: false
+authors: ['dergigi']
+images: ['/static/images/blog/11-nostr-oct.jpg']
+summary: "OpenSats is funding another dozen open-source projects in the nostr ecosystem."
+---
+
+You know what the best thing about nostr is? It's not its simple architecture.
+It's not that it has cryptographic proof baked into every action. It's not that
+every note stands on its own. It's not the good vibes, the zaps, or all the
+"other stuff," or the fact that it's officially called [THE
+NOSTR](https://njump.me/note1gt4q3wdd6lfjzmweh9ge594s8vjga5cshuqdqzdhj9d6ahdlgasqpe96fa)
+(yes, in all caps). It's that it works. And that it has worked since inception
+and that it will (~~probably~~ ~~maybe~~ very likely) continue to work in the future.
+
+And while it will continue to work, it will improve continually, as open
+protocols tend to do. It becomes more obvious by the day that nostr is here to
+stay, and we're going to do our best to make it the best, weirdest protocol it
+can be.
+
+We are happy to announce 12 new grants for open-source projects in the nostr
+ecosystem. Adding to the [16 grants announced in
+July](https://opensats.org/blog/nostr-grants-july-2023), plus the [three grants
+announced in
+August](https://opensats.org/blog/bitcoin-and-nostr-grants-august-2023), the
+total number of nostr projects funded by OpenSats as of October is 31. [October
+31](https://web.archive.org/web/20181101115634/http://www.metzdowd.com/pipermail/cryptography/2008-October/014810.html):
+what a lovely coincidence!
+
+Without further ado, here are the projects that we selected for funding:
+
+- Nozzle by
+[@dluvian](https://njump.me/npub1useke4f9maul5nf67dj0m9sq6jcsmnjzzk4ycvldwl4qss35fvgqjdk5ks)
+- Blowater by [Water
+Blower](https://njump.me/npub1dww6jgxykmkt7tqjqx985tg58dxlm7v83sa743578xa4j7zpe3hql6pdnf)
+- Nostur by
+[Fabian](https://njump.me/npub1n0sturny6w9zn2wwexju3m6asu7zh7jnv2jt2kx6tlmfhs7thq0qnflahe)
+- Nostrocket by
+[@gsovereignty](https://njump.me/npub1mygerccwqpzyh9pvp6pv44rskv40zutkfs38t0hqhkvnwlhagp6s3psn5p)
+- snort.social by
+[Kieran](http://npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49)
+- zap.stream by
+[Kieran](http://npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49)
+- algia & other tools by
+[@mattn](https://njump.me/npub1937vv2nf06360qn9y8el6d8sevnndy7tuh5nzre4gj05xc32tnwqauhaj6)
+- nostr.watch by
+[@sandwich](https://njump.me/npub1uac67zc9er54ln0kl6e4qp2y6ta3enfcg7ywnayshvlw9r5w6ehsqq99rx)
+- relay.tools by
+[@cloudfodder](https://njump.me/npub10npj3gydmv40m70ehemmal6vsdyfl7tewgvz043g54p0x23y0s8qzztl5h)
+- Nostree by
+[@gzuuus](https://njump.me/npub1gzuushllat7pet0ccv9yuhygvc8ldeyhrgxuwg744dn5khnpk3gs3ea5ds)
+- ONOSENDAI by
+[@arkin0x](https://njump.me/npub1arkn0xxxll4llgy9qxkrncn3vc4l69s0dz8ef3zadykcwe7ax3dqrrh43w)
+- 0xchat by
+[@water783](https://njump.me/npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl)
+
+As always, let's spend some time to look at these projects in more detail:
+
+---
+
+## Nozzle
+
+[Nozzle](https://github.com/dluvian/Nozzle/releases) is a lightweight Nostr
+client for Android. It aims to make Nostr more decentralized by organically
+discovering relays and requesting content only from those relays that really
+have the posts the user is looking for. This reduces the load on relays, lowers
+your data usage, and promotes the utilization of smaller relays instead of only
+interacting with a few big, centralizing ones.
+
+Repository: https://github.com/dluvian/Nozzle
+
+License: MIT
+
+## Blowater
+
+[Blowater](https://blowater.app/) is a DM client for desktop, web, and mobile.
+It aims to provide the best DM experience on Nostr so far. Its long-term goal is
+to replace the likes of Telegram, Slack, Discord, and similar.
+
+Repository: https://github.com/BlowaterNostr/blowater
+
+License: AGPL-3.0
+
+## Nostur
+
+[Nostur](https://nostur.com/) is a feature-rich nostr client for iOS that aims
+to be simple to use for Mac, iPhone, and iPad users. It supports multiple
+accounts, has nsecBunker support, and imposter detection features. Nostur is
+opinionated in its
+[mission](https://blogstack.io/naddr1qq8xummnw36hyttdd9ehx6t0dcq3gamnwvaz7tmjv4kxz7fwv3sk6atn9e5k7q3qn0sturny6w9zn2wwexju3m6asu7zh7jnv2jt2kx6tlmfhs7thq0qxpqqqp65w8jxczy)
+and uses Apple-native features such as iCloud to onboard as many users to nostr
+as possible. You can find a complete [feature list](https://nostur.com/) as well
+as an installation link on [nostur.com](https://nostur.com/).
+
+Repository: https://github.com/nostur-com/nostur-ios-public
+
+License: GPL-3.0
+
+## Nostrocket
+
+Nostrocket is a new economic tool that uses Bitcoin and Nostr to create
+leaderless, location-independent economies that reward productive solutions to
+shared problems. Technically speaking, a Nostrocket client is a state machine.
+Different parts of the state machine can run in different places, e.g., much of
+the state can be rebuilt directly in the browser, but computationally heavy
+operations like indexing a large number of nostr events or validating the
+Bitcoin blockchain (some parts of the protocol also require knowledge of the
+current state of Bitcoin) are better done closer to the metal.
+
+Repository: https://github.com/nostrocket
+
+License: MPL-2.0
+
+## snort.social
+
+Snort is a web client with the goal of making nostr's features accessible in a
+user-friendly manner while maintaining its censorship-resistant properties.
+Snort's primary focus is to support a wide variety of features that showcase the
+power of the nostr network while remaining a clean and performant client.
+
+Repository: https://git.v0l.io/Kieran/snort
+
+License: MIT
+
+## zap.stream
+
+[Zap.stream](https://zap.stream/) is a live streaming nostr client PWA that
+allows people to interact with externally hosted HLS streams. Users can chat,
+zap, and react to the stream while watching a live stream. The goal of
+[zap.stream](https://zap.stream/) is to create a nostr alternative to
+[twitch.tv](https://www.twitch.tv/) and similar online streaming platforms.
+
+Repository: https://git.v0l.io/Kieran/stream
+
+License: MIT
+
+## algia
+
+Algia is a CLI client that can manipulate nostr operations such as post, like,
+boost, delete, as well as streams. Algia can handle JSON, so you can easily
+create nostr bots with external tools such as `jq`.
+
+Repository: https://github.com/mattn/algia
+
+License: MIT
+
+## nostr.watch
+
+[nostr.watch](https://nostr.watch/) aims to be an authoritative source for nostr
+relay data. It aggregates data on nostr relays (and the network in general) to
+assist users, developers, and relay operators. The application is a
+client-side-first application that can be run locally without any additional
+architecture.
+
+Repository: https://github.com/dskvr/nostr-watch
+
+License: MIT
+
+## relay.tools
+
+[Relay.tools](https://relay.tools/) is a web-based control panel and deployment
+system for nostr relays. Its goal is to enable the entire nostr population to
+create relays and manage them, even those with no prior systems knowledge. The
+web UI provides easy relay creation, moderation capabilities, spam prevention,
+filtering rules, and best practice settings. It does not rely on any cloud
+provider and is 100% free from vendor lock-in.
+
+Repository: https://github.com/relaytools
+
+License: GPL-3.0
+
+## Nostree
+
+[Nostree](https://nostree.me/) is a nostr micro-app to create, manage, share,
+and explore links and reference lists (as well as show notes and other stuff).
+The idea is that it becomes a good presentation card for you and a place to
+discover nostr & the wider internet in a more accessible way.
+
+Repository: https://github.com/gzuuus/linktr-nostr
+
+License: GPL-3.0
+
+## ONOSENDAI - Cyberspace Meta-Protocol
+
+[ONOSENDAI](https://www.onosendai.tech/) is an experimental nostr client that
+maps and visualizes the nostr protocol in a 3D space. The goal of ONOSENDAI is
+to be the reference implementation of a novel [cyberspace
+protocol](https://github.com/arkin0x/cyberspace/), a digital reality that,
+thanks to Bitcoin and nostr, stands on its own. You can play around with an
+early version of the client at [onosendai.tech](https://www.onosendai.tech/).
+
+Repository: https://github.com/arkin0x/cyberspace/
+
+License: CC-BY-SA / CC-BY-NC-ND
+
+## 0xchat
+
+0xchat is a secure chat client for iOS and Android built on top of the nostr
+protocol. It prioritizes privacy and offers encrypted private chats & contacts,
+as well as multiple DM types: normal, sealed, and secret. The client offers
+audio and video calling capabilities between contacts, using Nostr relays as a
+signaling mechanism. The actual audio and video calls are facilitated via ICE
+servers, and users are free to select their own ICE servers if preferred. In the
+future, the client will support multi-person voice and video chats, expanding
+the communication possibilities of nostriches worldwide.
+
+Repository: https://github.com/0xchat-app
+
+License: MIT / LGPL-3.0
+
+---
+
+Nostr is not fucking leaving, and neither are we.
+
+Support for the nostr projects above is made possible by generous donors like
+you. If you would like to contribute to the development of the nostr ecosystem,
+consider making a donation to [The Nostr
+Fund](https://opensats.org/projects/nostr):
+
+[TODO: insert donation button]
