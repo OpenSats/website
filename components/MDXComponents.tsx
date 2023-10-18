@@ -7,6 +7,7 @@ import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
 
 import Image from './Image'
 import CustomLink from './Link'
+import DonateToNostrFundButton from './DonateToNostrFundButton'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -20,4 +21,5 @@ export const MDXComponents: ComponentMap = {
   pre: Pre,
   wrapper: Wrapper,
   BlogNewsletterForm,
+  DonateToNostrFundButton,
 }
