@@ -25,7 +25,7 @@ export default function DonateToNostrFundButton() {
     <>
       <button
         onClick={openNostrFundModal}
-        className="mb-2 mr-2 block rounded bg-purple-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-purple-500 hover:text-black dark:text-black dark:hover:text-white"
+        className="mb-4 mr-2 mt-8 block rounded bg-purple-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-purple-500 hover:text-black dark:text-black dark:hover:text-white"
       >
         Donate to The Nostr Fund
       </button>
