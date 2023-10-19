@@ -10,6 +10,7 @@ import VideoPlayer from './VideoPlayer'
 import CustomLink from './Link'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
+import DesignTeam from './DesignTeam'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -26,4 +27,5 @@ export const MDXComponents: ComponentMap = {
   BlogNewsletterForm,
   DonateToGeneralFundButton,
   DonateToNostrFundButton,
+  DesignTeam,
 }
