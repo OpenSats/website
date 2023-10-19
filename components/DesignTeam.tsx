@@ -9,24 +9,20 @@ export default function DesignTeam() {
   return (
     <>
       {/* List all members of the design team */}
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
-            {designTeam.map((member, i) => (
-              <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
-                <Link href={`/about/${member.slug}`}>
-                  <Image
-                    src={member.avatar}
-                    alt={member.name}
-                    width={120}
-                    height={120}
-                    className="h-36 w-36 rounded-full"
-                  />
-                </Link>
-              </div>
-            ))}
+      <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
+        {designTeam.map((member, i) => (
+          <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
+            <Link href={`/about/${member.slug}`}>
+              <Image
+                src={member.avatar}
+                alt={member.name}
+                width={120}
+                height={120}
+                className="h-36 w-36 rounded-full"
+              />
+            </Link>
           </div>
-        </div>
+        ))}
       </div>
     </>
   )

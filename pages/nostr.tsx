@@ -22,7 +22,6 @@ export default function Nostr({
         content={page}
         MDXComponents={MDXComponents}
       />
-      <DesignTeam />
     </>
   )
 }
