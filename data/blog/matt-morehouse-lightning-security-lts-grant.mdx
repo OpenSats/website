@@ -1,0 +1,55 @@
+---
+title: "Long-Term Support For Matt Morehouse"
+date: '2023-10-21'
+tags: ['OpenSats', 'grants', 'bitcoin', 'lightning', 'LTS']
+draft: false
+authors: ['dergigi']
+images: ['/static/images/blog/13-matt-morehouse.jpg']
+summary: "OpenSats Welcomes Matt Morehouse as an LTS Grantee."
+---
+
+We are excited to announce that Matt Morehouse is receiving long-term support
+from OpenSats. Matt is a security researcher & developer focused on the
+detection and prevention of various bugs and attack vectors that could threaten
+the stability of the Lightning Network.
+
+He is dedicated to enhancing the security and robustness of Lightning
+implementations through extensive fuzz testing, meticulous [auditing of BOLT
+specs](https://github.com/lightning/bolts/pulls?q=is%3Apr+reviewed-by%3Amorehouse+sort%3Aupdated-desc)
+and Lightning implementations, and responsible disclosure of discovered bugs and
+vulnerabilities. His efforts aim to motivate greater investment in the security
+of Lightning, ensuring its reliability and trustworthiness.
+
+His past contributions include:
+
+- Responsible disclosure of the ["fake channel" DoS vector](https://morehouse.github.io/lightning/fake-channel-dos/).
+- Discovery of a [griefing attack](https://github.com/lightning/bolts/pull/851#discussion_r997537630) in the interactive-tx protocol.
+- Helped prevent a [BOLT2 change](https://github.com/lightning/bolts/pull/1083) that would allow the channel reserve to be violated.
+- Overhauled [LND's](https://github.com/lightningnetwork/lnd/issues/7452) and [CLN's fuzzing infrastructure](https://github.com/ElementsProject/lightning/issues/6083).
+- Various bug fixes and fuzz tests for [CLN](https://github.com/ElementsProject/lightning/commits?author=morehouse) and [LND](https://github.com/lightningnetwork/lnd/commits?author=morehouse).
+
+In all likelihood, the Lightning Network will play a crucial role in any future
+that has Bitcoin scaling to 10 billion users. However, since the beginning of
+the network, the development of new features often had priority over the overall
+security and robustness of the network. Adding new features like dual funded
+channels, Taproot channels, splicing, and BOLT 12 is still the main priority for
+most developers and users, but all these features introduce added complexity.
+"Complexity is the worst enemy of security," to quote Bruce Schneier, "and our
+systems are getting more complex all the time." Including Lightning.  Matt's
+research and fuzz testing of Lightning implementations is an effort to
+counteract this trend.
+
+> If we're going to make Lightning even more complex, we also need to ramp up the
+> engineering effort we put towards making the network secure and robust. Because
+> in the end it doesn't matter how feature-rich and easy-to-use the Lightning
+> Network is if it can't keep user funds safe.
+>
+> <cite>—[Matt Morehouse](https://morehouse.github.io/lightning/fake-channel-dos/)</cite>
+
+The OpenSats LTS program is made possible by generous donors like you. If you'd
+like to help make the Bitcoin and Lightning network as robust as it can be,
+consider donating to our General Fund.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
