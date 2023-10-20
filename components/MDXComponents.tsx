@@ -11,7 +11,7 @@ import CustomLink from './Link'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DesignTeam from './DesignTeam'
-import YouTube from 'react-youtube'
+import YouTubeEmbed from './YouTubeEmbed'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -29,5 +29,5 @@ export const MDXComponents: ComponentMap = {
   DonateToGeneralFundButton,
   DonateToNostrFundButton,
   DesignTeam,
-  YouTube,
+  YouTubeEmbed,
 }
