@@ -9,15 +9,11 @@ const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'nostr')
-  const designTeam = allAuthors
-    .filter((p) => p.design === true)
-    .sort(() => Math.random() - 0.5)
-  return { props: { page, designTeam } }
+  return { props: { page } }
 }
 
 export default function Nostr({
   page,
-  designTeam,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -26,7 +22,6 @@ export default function Nostr({
         content={page}
         MDXComponents={MDXComponents}
       />
-      <DesignTeam members={designTeam} />
     </>
   )
 }
