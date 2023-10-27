@@ -2,8 +2,7 @@ import { InferGetStaticPropsType } from 'next'
 import { allAuthors } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
-import Image from '@/components/Image'
-import Link from '@/components/Link'
+import Board from '@/components/Board'
 import Credits from '@/components/Supporters'
 import Volunteers from '@/components/Volunteers'
 
@@ -38,21 +37,7 @@ export default function About({
           </h1>
         </div>
         <div className="grid items-start space-y-2 xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
-            {board.map((member, i) => (
-              <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
-                <Link href={`/about/${member.slug}`}>
-                  <Image
-                    src={member.avatar}
-                    alt={member.name}
-                    width={120}
-                    height={120}
-                    className="h-36 w-36 rounded-full"
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
+          <Board />
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
