@@ -11,6 +11,7 @@ import CustomLink from './Link'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DesignTeam from './DesignTeam'
+import Board from './Board'
 import YouTubeEmbed from './YouTubeEmbed'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
@@ -30,4 +31,5 @@ export const MDXComponents: ComponentMap = {
   DonateToNostrFundButton,
   DesignTeam,
   YouTubeEmbed,
+  Board,
 }
