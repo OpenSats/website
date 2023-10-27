@@ -11,7 +11,7 @@ import CustomLink from './Link'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DesignTeam from './DesignTeam'
-import Board from './BoardMembers'
+import BoardMembers from './BoardMembers'
 import Volunteers from './Volunteers'
 import Credits from './Supporters'
 import YouTubeEmbed from './YouTubeEmbed'
@@ -33,7 +33,7 @@ export const MDXComponents: ComponentMap = {
   DonateToNostrFundButton,
   DesignTeam,
   YouTubeEmbed,
-  Board,
+  BoardMembers,
   Volunteers,
   Credits,
 }
