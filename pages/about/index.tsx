@@ -16,7 +16,6 @@ export const getStaticProps = async () => {
 
 export default function About({
   openSats,
-  board,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
