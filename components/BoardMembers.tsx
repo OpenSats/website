@@ -2,7 +2,7 @@ import { allAuthors } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 
-export default function DesignTeam() {
+export default function BoardMembers() {
   const boardMembers = allAuthors
     .filter((p) => p.board === true)
     .sort(() => Math.random() - 0.5)
