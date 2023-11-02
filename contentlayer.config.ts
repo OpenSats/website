@@ -80,6 +80,7 @@ export const Authors = defineDocumentType(() => ({
     board: { type: 'boolean' },
     ops: { type: 'boolean' },
     design: { type: 'boolean' },
+    volunteer: { type: 'boolean' },
   },
   computedFields,
 }))

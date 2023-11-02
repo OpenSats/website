@@ -24,7 +24,10 @@ export default function AuthorLayout({ children, content }: Props) {
 
   return (
     <>
-      <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
+      <PageSEO
+        title={`About ${name} - OpenSats`}
+        description={`${name} is part of the team at OpenSats.`}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
           <div></div>
