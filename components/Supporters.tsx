@@ -8,7 +8,6 @@ const Credits = () => {
   const thebitcoincompanyLogo = '/img/supporters/tbc.png'
   const unchainedLogo = '/img/supporters/unchained.png'
   const lianaLogo = '/img/supporters/liana.png'
-  const bottlepayLogo = '/img/supporters/bottlepay.png'
   const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
   const duxReserveLogoWithCastlenine =
     '/img/supporters/castlenine-dux-reserve.jpg'
@@ -25,11 +24,6 @@ const Credits = () => {
   const zapirte = '/img/supporters/zaprite.png'
 
   const supporters: CreditItemProps[] = [
-    {
-      link: 'https://bottlepay.com/',
-      image: bottlepayLogo,
-      nym: 'Bottlepay',
-    },
     {
       link: 'https://btcpayserver.org/',
       image: btcPayServerLogo,
