@@ -24,7 +24,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const [deductable, setDeductable] = useState('yes')
+  const [deductible, setDeductible] = useState('yes')
   const [amount, setAmount] = useState('')
 
   const [readyToPayFiat, setReadyToPayFiat] = useState(false)
@@ -36,7 +36,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDeductable(event.target.value)
+    setDeductible(event.target.value)
   }
 
   function handleFiatAmountClick(e: React.MouseEvent, value: string) {
@@ -50,7 +50,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     if (amount && typeof parseInt(amount) === 'number') {
       fiatValid = true
     }
-    if (deductable === 'no' || (name && email)) {
+    if (deductible === 'no' || (name && email)) {
       btcValid = true
     } else {
       fiatValid = false
@@ -58,7 +58,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     }
     setReadyToPayFiat(fiatValid)
     setReadyToPayBTC(btcValid)
-  }, [deductable, amount, email, name])
+  }, [deductible, amount, email, name])
 
   async function handleBtcPay() {
     const validity = formRef.current?.checkValidity()
@@ -134,13 +134,13 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
-        <h3>Do you want this donation as tax deductable?</h3>
+        <h3>Do you want this donation as tax deductible?</h3>
         <div className="flex space-x-4 pb-4">
           <label>
             <input
               type="radio"
               id="yes"
-              name="deductable"
+              name="deductible"
               value="yes"
               onChange={radioHandler}
               defaultChecked={true}
@@ -153,7 +153,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               type="radio"
               id="no"
               value="no"
-              name="deductable"
+              name="deductible"
               onChange={radioHandler}
               className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
@@ -164,27 +164,27 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         <h3>
           Name{' '}
           <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
+            {deductible === 'yes' ? '(required)' : '(optional)'}
           </span>
         </h3>
         <input
           type="text"
           placeholder={'Satoshi Nakamoto'}
-          required={deductable === 'yes'}
+          required={deductible === 'yes'}
           onChange={(e) => setName(e.target.value)}
           className="mb-4 mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
         ></input>
         <h3>
           Email{' '}
           <span className="text-subtle">
-            {deductable === 'yes' ? '(required)' : '(optional)'}
+            {deductible === 'yes' ? '(required)' : '(optional)'}
           </span>
         </h3>
         <input
           type="email"
           placeholder={`satoshin@gmx.com`}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          required={deductable === 'yes'}
+          required={deductible === 'yes'}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
       </section>
