@@ -32,7 +32,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
       <Navbar />
       <main className="flex-1 flex flex-col">{ children }</main>
       <footer className="flex justify-between p-4 md:p-8 bg-light">
-       <strong>© Open Sats Initiative and MAGIC Grants, 2022</strong>
+       <strong>© Open Sats Initiative and MAGIC Grants, 2023</strong>
       </footer>
     </div>
   )
