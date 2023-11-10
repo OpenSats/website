@@ -7,39 +7,6 @@ export type ProjectCardProps = {
   openPaymentModal: (project: Project) => void
 }
 
-const ProtocolLabel = ({ protocol }) => {
-  let color
-  switch (protocol) {
-    case 'Bitcoin':
-      color = 'orange-400'
-      break
-    case 'Lightning':
-      color = 'yellow-300'
-      break
-    case 'Nostr':
-      color = 'purple-500'
-  }
-  return (
-    <span 
-    className={`text-xs inline-block py-1 px-1 rounded text-black bg-${color} last:mr-0 mr-1`}>
-      {protocol}
-    </span>
-  )
-}
-
-const ProtocolLabels = ({ tags }) => {
-  const labels = []
-  const taggedProtocols = ['Bitcoin', 'Lightning', 'Nostr']
-  for (const elem of tags) {
-    if (taggedProtocols.includes(elem)) {
-      labels.push(<ProtocolLabel protocol={elem} />)
-    }
-  }
-  return (
-    <div className='p-1'>{labels}</div>      
-  )
-}
-
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
@@ -57,8 +24,23 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     tags,
   } = project
 
+  let cardStyle;
+  if (tags.includes('Nostr')) {
+    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  }
+  else if (tags.includes('Lightning')) {
+    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  }
+  else if (tags.includes('Bitcoin')) {
+    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  }
+  else {
+    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-stone-100 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  }
+
   return (
-    <figure className="h-full space-y-4 rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+	
+    <figure className={cardStyle}>
       <div className="relative h-64 w-full">
         <Link href={`/projects/${slug}`} passHref>
           <div className="relative h-64 w-full">
@@ -73,8 +55,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </div>
         </Link>
       </div>
-
-      <ProtocolLabels tags={tags} />
 
       <figcaption className="h-44 space-y-1 p-2">
         <h2 className="font-bold">{title}</h2>
