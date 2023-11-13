@@ -46,6 +46,7 @@ export default async function handler(
         metadata: {
           donor_email: email || null,
           donor_name: name || null,
+          project_slug: project_slug || null,
         },
         success_url: `${req.headers.origin}/thankyou`,
         cancel_url: `${req.headers.origin}/`,
@@ -54,6 +55,7 @@ export default async function handler(
           metadata: {
             donor_email: email || null,
             donor_name: name || null,
+            project_slug: project_slug || null,
           },
         },
       }
