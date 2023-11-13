@@ -24,22 +24,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     tags,
   } = project
 
-  let cardStyle;
+  let cardStyle
   if (tags.includes('Nostr')) {
-    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
-  }
-  else if (tags.includes('Lightning')) {
-    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
-  }
-  else if (tags.includes('Bitcoin')) {
-    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
-  }
-  else {
-    cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-stone-100 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+    cardStyle =
+      'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  } else if (tags.includes('Lightning')) {
+    cardStyle =
+      'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  } else if (tags.includes('Bitcoin')) {
+    cardStyle =
+      'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+  } else {
+    cardStyle =
+      'h-full space-y-4 rounded-xl border-b-4 border-stone-100 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
   }
 
   return (
-	
     <figure className={cardStyle}>
       <div className="relative h-64 w-full">
         <Link href={`/projects/${slug}`} passHref>
