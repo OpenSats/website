@@ -20,6 +20,7 @@ export default function ApplicationForm() {
 
   const onSubmit = async (data: any) => {
     setLoading(true)
+    setSubmitted(true)
     console.log(data)
 
     try {
@@ -40,13 +41,14 @@ export default function ApplicationForm() {
         const res = await fetchPostJSON('/api/sendgrid', data)
         if (res.message === 'success') {
           router.push('/submitted')
-          setSubmitted(true)
         } else {
           setFailureReason(res.message)
+          setSubmitted(false)
         }
       } catch (e) {
         if (e instanceof Error) {
           setFailureReason(e.message)
+          setSubmitted(false)
         }
       } finally {
         setLoading(false)
