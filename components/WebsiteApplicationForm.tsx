@@ -6,6 +6,7 @@ import FormButton from '@/components/FormButton'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
   const {
     watch,
@@ -39,6 +40,7 @@ export default function ApplicationForm() {
         const res = await fetchPostJSON('/api/sendgrid', data)
         if (res.message === 'success') {
           router.push('/submitted')
+          setSubmitted(true)
         } else {
           setFailureReason(res.message)
         }
@@ -258,7 +260,7 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS && !submitted ? 'enabled' : 'disabled'}
         type="submit"
         disabled={loading}
       >
