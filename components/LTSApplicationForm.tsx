@@ -12,7 +12,6 @@ export default function ApplicationForm() {
     watch,
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm()
 
