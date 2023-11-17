@@ -11,6 +11,7 @@ export default function ApplicationForm() {
     watch,
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm()
 
@@ -20,7 +21,6 @@ export default function ApplicationForm() {
   const onSubmit = async (data: any) => {
     setLoading(true)
     console.log(data)
-
     try {
       // Track application in GitHub
       const res = await fetchPostJSON('/api/github', data)
@@ -197,6 +197,22 @@ export default function ApplicationForm() {
           placeholder="satoshin@gmx.com"
           {...register('email', { required: true })}
         />
+      </label>
+      <label className="block">
+        Re-enter Email *
+        <input
+          type="email"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          placeholder="satoshin@gmx.com"
+          {...register('email2', {
+            required: true,
+            validate: () =>
+              getValues('email') === getValues('email2') || 'Emails must match',
+          })}
+        />
+        <small className="text-red-500">
+          {errors?.email2 && errors.email2.message.toString()}
+        </small>
       </label>
       <label className="inline-flex items-center">
         <input
