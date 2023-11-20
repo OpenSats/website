@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
+import * as EmailValidator from 'email-validator'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -85,8 +86,16 @@ export default function ApplicationForm() {
           type="email"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           placeholder="satoshin@gmx.com"
-          {...register('email', { required: true })}
+          {...register('email', {
+            required: true,
+            validate: (v) =>
+              EmailValidator.validate(v) ||
+              'Please enter a valid email address',
+          })}
         />
+        <small className="text-red-500">
+          {errors?.email && errors.email.message.toString()}
+        </small>
       </label>
       <label className="block">
         Personal Website, GitHub profile, or other Social Media
