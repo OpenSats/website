@@ -52,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
         </div>
-        <figcaption className="space-y-1 pt-4 pl-2 pr-2 pb-4">
+        <figcaption className="space-y-1 pb-4 pl-2 pr-2 pt-4">
           <h2 className="font-bold">{title}</h2>
           <div className="mb-8 text-sm">by {nym}</div>
           <div className="line-clamp-4">{summary}</div>
