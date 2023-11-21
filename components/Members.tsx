@@ -3,16 +3,20 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 
 export default function Members({ subset }) {
-  let members = allAuthors.sort(() => Math.random() - 0.5)
-  if (subset === 'Board') {
-    members = allAuthors
-    .filter((p) => p.board === true)
-  } else if (subset === 'Ops') {
-    members = allAuthors
-    .filter((p) => p.ops === true)
-  } else if (subset === 'Volunteers') {
-    members = allAuthors
-    .filter((p) => p.volunteer === true)
+  let members = allAuthors//.sort(() => Math.random() - 0.5)
+  switch (subset) {
+    case 'Board':
+      members = allAuthors
+      .filter((p) => p.board === true)
+      break;
+    case 'Ops':
+      members = allAuthors
+      .filter((p) => p.ops === true)
+      break;
+    case 'Volunteers':
+      members = allAuthors
+      .filter((p) => p.volunteer === true)
+      break;
   }
 
   return (
