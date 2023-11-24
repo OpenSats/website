@@ -13,12 +13,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, btcpay, email, name }: PayReq = req.body
+    const { amount, btcpay, email, name, currency = CURRENCY }: PayReq = req.body
     const REDIRECT = 'http://opensats.org/thankyou'
 
     try {
       // Validate the amount that was passed from the client.
-      if (amount != null && amount < MIN_AMOUNT) {
+      // Skip BTC verification done client side
+      if (currency !== "BTC" && amount != null && amount < MIN_AMOUNT) {
         throw new Error('Invalid amount.')
       }
       if (!btcpay) {
@@ -32,7 +33,7 @@ export default async function handler(
         throw new Error('Invalid project.')
       }
       const reqData = {
-        currency: CURRENCY,
+        currency: currency,
         metadata: {
           orderId: project.btcpay,
           project_name: project.title,
@@ -50,7 +51,7 @@ export default async function handler(
         },
         checkout: { redirectURL: REDIRECT },
       }
-
+        
       if (amount) {
         Object.assign(reqData, { amount })
       }

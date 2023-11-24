@@ -1,5 +1,6 @@
 export type PayReq = {
   amount: number
+  currency: string 
   btcpay: string
   project_name: string
   email?: string
