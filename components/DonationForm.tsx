@@ -19,7 +19,6 @@ type DonationStepsProps = {
   zaprite: string
 }
 
-
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   btcpay,
@@ -30,7 +29,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   const [deductible, setDeductible] = useState('yes')
   const [amount, setAmount] = useState('')
-  const [btcAmount, setBtcAmount] = useState("")
+  const [btcAmount, setBtcAmount] = useState('')
 
   const [readyToPayFiat, setReadyToPayFiat] = useState(false)
   const [readyToPayBTC, setReadyToPayBTC] = useState(false)
@@ -38,70 +37,94 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [btcPayLoading, setBtcpayLoading] = useState(false)
   const [fiatLoading, setFiatLoading] = useState(false)
 
-  const [denomination, setDenomination] = useState("USD")
-  const [presetDonationValues, setPresetDonationsValues] = useState(["50", "100", "250", "500"])
-
+  const [denomination, setDenomination] = useState('USD')
+  const [presetDonationValues, setPresetDonationsValues] = useState([
+    '50',
+    '100',
+    '250',
+    '500',
+  ])
 
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDeductible(event.target.value)
   }
-  
+
   // toggles between USD and SATS denomination
   function handleDenomination(e: React.MouseEvent, value: string) {
     e.preventDefault()
-    if (value === "USD") {
-        setDenomination("SATS")
-        setAmount("")
-        setPresetDonationsValues(["100,000", "250,000", "500,000", "1,000,000", "5,000,000"])
+    if (value === 'USD') {
+      setDenomination('SATS')
+      setAmount('')
+      setPresetDonationsValues([
+        '100,000',
+        '250,000',
+        '500,000',
+        '1,000,000',
+        '5,000,000',
+      ])
     } else {
-        setDenomination("USD")
-        setAmount("")
-        setPresetDonationsValues(["50", "100", "250", "500"])
+      setDenomination('USD')
+      setAmount('')
+      setPresetDonationsValues(['50', '100', '250', '500'])
     }
-
   }
 
   // Adds preset amount to input field
   function handleAmountClick(e: React.MouseEvent, value: string) {
     e.preventDefault()
-    if (denomination == "USD") {
-        setAmount(value)
+    if (denomination == 'USD') {
+      setAmount(value)
     } else {
-        setAmount(value.replace(/[,]/g, ""))
-        // Remove commas before converting sat amount to btc
-        // Convert sats to btc before adding to btcpayserver payload 
-        const santizedAmount = value.replace(/[,]/g, "") 
-        const formatSats = convertToBtc(santizedAmount) 
-        setBtcAmount(formatSats)
+      setAmount(value.replace(/[,]/g, ''))
+      // Remove commas before converting sat amount to btc
+      // Convert sats to btc before adding to btcpayserver payload
+      const santizedAmount = value.replace(/[,]/g, '')
+      const formatSats = convertToBtc(santizedAmount)
+      setBtcAmount(formatSats)
     }
-
   }
 
   // Convert SATS to BTC for the onBlur of amount input field
   // Needed in order to pass it to btcpayserver
   function handleSatToBtcConversion(value: string) {
-      const convertedAmount = convertToBtc(value)
-      setBtcAmount(convertedAmount)
+    const convertedAmount = convertToBtc(value)
+    setBtcAmount(convertedAmount)
   }
-  
+
   useEffect(() => {
     let fiatValid = false
     let btcValid: boolean
-    let amountChecks = amount && typeof parseInt(amount) === "number"
+    const amountChecks = amount && typeof parseInt(amount) === 'number'
 
-    if (amountChecks && parseFloat(amount) > 0 && denomination === "USD" && deductible === "yes" && (name && email)) {
-        fiatValid = true
-        btcValid = true  
-    } else if (amountChecks && denomination === "USD" && deductible === "no" && parseFloat(amount) > 0) {
-        fiatValid = true
-        btcValid = true
-    } else if (denomination === "SATS" && deductible === "no" && satsIsGreaterThanZero(btcAmount)) {
-        btcValid = true
+    if (
+      amountChecks &&
+      parseFloat(amount) > 0 &&
+      denomination === 'USD' &&
+      deductible === 'yes' &&
+      name &&
+      email
+    ) {
+      fiatValid = true
+      btcValid = true
+    } else if (
+      amountChecks &&
+      denomination === 'USD' &&
+      deductible === 'no' &&
+      parseFloat(amount) > 0
+    ) {
+      fiatValid = true
+      btcValid = true
+    } else if (
+      denomination === 'SATS' &&
+      deductible === 'no' &&
+      satsIsGreaterThanZero(btcAmount)
+    ) {
+      btcValid = true
     } else {
-        fiatValid = false
-        btcValid = false
+      fiatValid = false
+      btcValid = false
     }
 
     setReadyToPayFiat(fiatValid)
@@ -113,18 +136,18 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     if (!validity) {
       return
     }
-    
+
     setBtcpayLoading(true)
     try {
       const payload = {
         btcpay,
         zaprite,
-        ...(denomination === "USD" ? { amount } : { btcAmount }),
-        ...(denomination === "SATS" ? { currency: "BTC" } : {}),
+        ...(denomination === 'USD' ? { amount } : { btcAmount }),
+        ...(denomination === 'SATS' ? { currency: 'BTC' } : {}),
         ...(email ? { email } : {}),
         ...(name ? { name } : {}),
-      };
-      
+      }
+
       console.log(payload)
 
       const data = await fetchPostJSON('/api/btcpay', payload)
@@ -236,26 +259,28 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           <h3>How much would you like to donate?</h3>
         </div>
         <div className="flex flex-col gap-2 py-2 sm:flex-row" role="group">
-            <button
-                name="denomination"
-                className="group"
-                onClick={(e) => handleDenomination(e, denomination)}
-            >
-                {denomination}
-            </button>
-            {(presetDonationValues.map((value, index) => (
+          <button
+            name="denomination"
+            className="group"
+            onClick={(e) => handleDenomination(e, denomination)}
+          >
+            {denomination}
+          </button>
+          {presetDonationValues.map((value, index) => (
             <button
               key={index}
               className="group"
               onClick={(e) => handleAmountClick(e, value?.toString() ?? '')}
             >
-              {value && denomination === "USD" ? `$${value}` : `${value} sats`}
+              {value && denomination === 'USD' ? `$${value}` : `${value} sats`}
             </button>
-          )))}
+          ))}
           <div className="relative flex w-full">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               {/* <FontAwesomeIcon icon={faDollarSign} className="w-5 h-5 text-black" /> */}
-              <span className="mb-2 h-5 w-5 font-mono text-xl">{denomination === 'USD' ? '$': 'sats'}</span>
+              <span className="mb-2 h-5 w-5 font-mono text-xl">
+                {denomination === 'USD' ? '$' : 'sats'}
+              </span>
             </div>
             <input
               type="number"
@@ -264,9 +289,17 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               onChange={(e) => {
                 setAmount(e.target.value)
               }}
-              onBlur={(e) => { denomination === "SATS" ? handleSatToBtcConversion(e.target.value) : setAmount(e.target.value)}}
+              onBlur={(e) => {
+                denomination === 'SATS'
+                  ? handleSatToBtcConversion(e.target.value)
+                  : setAmount(e.target.value)
+              }}
               className="mt-1 block w-full w-full rounded-md border-gray-300 !pl-10 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-              placeholder= {denomination === "USD" ? "Enter custom amount" : "Enter custom amount in sats"}
+              placeholder={
+                denomination === 'USD'
+                  ? 'Enter custom amount'
+                  : 'Enter custom amount in sats'
+              }
             />
           </div>
         </div>
@@ -292,7 +325,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           name="stripe"
           onClick={handleFiat}
           className="pay"
-          disabled={!readyToPayFiat || fiatLoading || denomination === "SATS"} 
+          disabled={!readyToPayFiat || fiatLoading || denomination === 'SATS'}
         >
           {fiatLoading ? (
             <Spinner />
