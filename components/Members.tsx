@@ -1,8 +1,16 @@
 import { allAuthors } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
+import { useState, useEffect } from 'react'
 
 export default function Members({ subset }) {
+  const [sortedMembers, setSortedMembers] = useState(allAuthors)
+
+  useEffect(() => {
+    setSortedMembers(sortedMembers.sort(() => 0.5 - Math.random()))
+    console.log(sortedMembers)
+  }, [sortedMembers])
+
   let members = allAuthors //.sort(() => Math.random() - 0.5)
   switch (subset) {
     case 'Board':
@@ -15,6 +23,7 @@ export default function Members({ subset }) {
       members = allAuthors.filter((p) => p.volunteer === true)
       break
   }
+  console.log(members)
 
   return (
     <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
