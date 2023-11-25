@@ -6,28 +6,28 @@ import { useState, useEffect } from 'react'
 export default function Members({ subset }) {
 
   //const authors = [...allAuthors]
-  console.log(allAuthors)
+  //console.log(allAuthors)
 
-  const [sortedMembers, setSortedMembers] = useState()
+  const [sortedMembers, setSortedMembers] = useState([...allAuthors])
   //console.log(sortedMembers)
 
   useEffect(() => {
     setSortedMembers(allAuthors.sort(() => 0.5 - Math.random()))
-    console.log('sortedMembers = ')
-    console.log(sortedMembers)
+    //console.log('sortedMembers = ')
+    //console.log(sortedMembers)
     //allAuthors.sort(() => 0.5 - Math.random())
   }, [])
 
   let members //= allAuthors //.sort(() => Math.random() - 0.5)
   switch (subset) {
     case 'Board':
-      members = allAuthors.filter((p) => p.board === true)
+      members = sortedMembers.filter((p) => p.board === true)
       break
     case 'Ops':
-      members = allAuthors.filter((p) => p.ops === true)
+      members = sortedMembers.filter((p) => p.ops === true)
       break
     case 'Volunteers':
-      members = allAuthors.filter((p) => p.volunteer === true)
+      members = sortedMembers.filter((p) => p.volunteer === true)
       break
   }
   //console.log(members)
