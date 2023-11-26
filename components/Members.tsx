@@ -4,21 +4,13 @@ import Image from '@/components/Image'
 import { useState, useEffect } from 'react'
 
 export default function Members({ subset }) {
-
-  //const authors = [...allAuthors]
-  //console.log(allAuthors)
-
   const [sortedMembers, setSortedMembers] = useState([...allAuthors])
-  //console.log(sortedMembers)
 
   useEffect(() => {
     setSortedMembers(allAuthors.sort(() => 0.5 - Math.random()))
-    //console.log('sortedMembers = ')
-    //console.log(sortedMembers)
-    //allAuthors.sort(() => 0.5 - Math.random())
-  }, [])
+  })
 
-  let members //= allAuthors //.sort(() => Math.random() - 0.5)
+  let members
   switch (subset) {
     case 'Board':
       members = sortedMembers.filter((p) => p.board === true)
@@ -30,7 +22,6 @@ export default function Members({ subset }) {
       members = sortedMembers.filter((p) => p.volunteer === true)
       break
   }
-  //console.log(members)
 
   return (
     <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
