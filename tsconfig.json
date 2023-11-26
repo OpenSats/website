@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ES6",
-    "lib": ["dom", "dom.iterable", "esnext", "ESNext.Array", "es2022.array"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
