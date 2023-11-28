@@ -65,12 +65,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     if (value === 'USD') {
       setDenomination('SATS')
       setAmount('')
-      setPresetDonationsValues([
-        '50k',
-        '100k',
-        '250k',
-        '500k',
-      ])
+      setPresetDonationsValues(['50k', '100k', '250k', '500k'])
     } else {
       setDenomination('USD')
       setAmount('')
@@ -86,7 +81,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     } else {
       const satValue = satValues[value] || ''
       setAmount(satValue)
-        
+
       // Convert sats to btc before adding to btcpayserver payload
       const formatSats = convertToBtc(satValue)
       setBtcAmount(formatSats)
@@ -136,7 +131,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
     setReadyToPayFiat(fiatValid)
     setReadyToPayBTC(btcValid)
-  }, [deductible, amount, btcAmount, email, name])
+  }, [denomination, deductible, amount, btcAmount, email, name])
 
   async function handleBtcPay() {
     const validity = formRef.current?.checkValidity()
@@ -283,8 +278,12 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             </button>
           ))}
           <div className="relative flex w-full">
-            <div className={`pointer-events-none absolute inset-y-0 left-0 flex items-center ${denomination === 'USD' ? 'pl-2' : ''}`}>
-              <span className="mb-2 h-5 w-5 text-lg text-black pl-2">
+            <div
+              className={`pointer-events-none absolute inset-y-0 left-0 flex items-center ${
+                denomination === 'USD' ? 'pl-2' : ''
+              }`}
+            >
+              <span className="mb-2 h-5 w-5 pl-2 text-lg text-black">
                 {denomination === 'USD' ? '$' : 'sat'}
               </span>
             </div>
