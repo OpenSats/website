@@ -45,6 +45,14 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     '500',
   ])
 
+  // used to set the value input field if presetValue is chosen
+  const satValues = {
+    '50k': '50000',
+    '100k': '100000',
+    '250k': '250000',
+    '500k': '500000',
+  }
+
   const formRef = useRef<HTMLFormElement | null>(null)
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,11 +66,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       setDenomination('SATS')
       setAmount('')
       setPresetDonationsValues([
-        '100,000',
-        '250,000',
-        '500,000',
-        '1,000,000',
-        '5,000,000',
+        '50k',
+        '100k',
+        '250k',
+        '500k',
       ])
     } else {
       setDenomination('USD')
@@ -77,11 +84,11 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     if (denomination == 'USD') {
       setAmount(value)
     } else {
-      setAmount(value.replace(/[,]/g, ''))
-      // Remove commas before converting sat amount to btc
+      const satValue = satValues[value] || ''
+      setAmount(satValue)
+        
       // Convert sats to btc before adding to btcpayserver payload
-      const santizedAmount = value.replace(/[,]/g, '')
-      const formatSats = convertToBtc(santizedAmount)
+      const formatSats = convertToBtc(satValue)
       setBtcAmount(formatSats)
     }
   }
@@ -272,14 +279,13 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               className="group"
               onClick={(e) => handleAmountClick(e, value?.toString() ?? '')}
             >
-              {value && denomination === 'USD' ? `$${value}` : `${value} sats`}
+              {value && denomination === 'USD' ? `$${value}` : `${value}`}
             </button>
           ))}
           <div className="relative flex w-full">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-              {/* <FontAwesomeIcon icon={faDollarSign} className="w-5 h-5 text-black" /> */}
-              <span className="mb-2 h-5 w-5 font-mono text-xl">
-                {denomination === 'USD' ? '$' : 'sats'}
+            <div className={`pointer-events-none absolute inset-y-0 left-0 flex items-center ${denomination === 'USD' ? 'pl-2' : ''}`}>
+              <span className="mb-2 h-5 w-5 text-lg text-black pl-2">
+                {denomination === 'USD' ? '$' : 'sat'}
               </span>
             </div>
             <input
