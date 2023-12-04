@@ -64,7 +64,7 @@ export default function ApplicationForm() {
       />
       <input
         type="hidden"
-        {...register('timelines', { value: 'Ongoing work.' })}
+        {...register('timelines', { value: 'Ongoing work (LTS Grant).' })}
       />
       <input type="hidden" {...register('LTS', { value: true })} />
 
