@@ -255,7 +255,7 @@ export default function ApplicationForm() {
       <div className="prose">
         <small>
           By submitting a listing request you agree to our{' '}
-          <CustomLink href="/docs/listing-toc.pdf" className="underline">
+          <CustomLink href="/docs/listing-terms.pdf" className="underline">
             Terms and Conditions
           </CustomLink>
           . Open Sats may require each recipient to sign a Grant Agreement
