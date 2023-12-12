@@ -134,7 +134,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
-        <h3>Do you want this donation as tax deductible?</h3>
+        <h3>Do you want this donation to be tax deductible?</h3>
         <div className="flex space-x-4 pb-4">
           <label>
             <input
