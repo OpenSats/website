@@ -18,6 +18,7 @@ const Credits = () => {
   const ledgerLogo = '/img/supporters/ledger.jpg'
   const nodlLogo = '/img/supporters/nodl.jpg'
   const swanBitcoinLogo = '/img/supporters/swan.png'
+  const scarceCity = '/img/supporters/scarce-city.png'
   const ten31Logo = '/img/supporters/ten31.jpg'
   const waffleDog = '/img/supporters/waffledog.jpg'
   const voltage = '/img/supporters/voltage.png'
@@ -67,6 +68,11 @@ const Credits = () => {
       link: 'https://www.nodl.it/',
       image: nodlLogo,
       nym: 'nodl',
+    },
+    {
+      link: 'https://scarce.city',
+      image: scarceCity,
+      nym: 'Scarce.City',
     },
     {
       link: 'https://www.swanbitcoin.com/',
