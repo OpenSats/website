@@ -24,7 +24,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const [deductible, setDeductible] = useState('yes')
+  const [deductible, setDeductible] = useState('no')
   const [amount, setAmount] = useState('')
 
   const [readyToPayFiat, setReadyToPayFiat] = useState(false)
@@ -143,7 +143,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               name="deductible"
               value="yes"
               onChange={radioHandler}
-              defaultChecked={true}
+              defaultChecked={false}
               className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             Yes
@@ -155,6 +155,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductible"
               onChange={radioHandler}
+              defaultChecked={true}
               className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             No
