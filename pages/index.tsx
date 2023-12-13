@@ -106,6 +106,29 @@ export default function Home({
             </div>
           </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We are a 501(c)(3) public charity. All donations are tax deductible.
+          </p>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Why OpenSats?
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We believe that free and open-source software in general, and
+            bitcoin in particular, is essential to the future of the internet
+            and the world.
+          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We don't want any one person to have control over funding decisions,
+            so we created a transparent, public-facing, and accountable{' '}
+            <CustomLink href="/about#board-of-directors" className="underline">
+              nine-person board
+            </CustomLink>{' '}
+            to make all organizational decisions.
+          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             We rely on donations to fund our operations and the projects we
             support. Unlike most charities, we don't take a cut from donations
             to fund ourselves. Consequently, we have to fund our operations
@@ -119,9 +142,6 @@ export default function Home({
             </CustomLink>
             .
           </p>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            We are a 501(c)(3) public charity. All donations are tax deductible.
-          </p>
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -130,18 +150,7 @@ export default function Home({
             Stay Updated
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Read the latest posts from the{' '}
-            <CustomLink href="/about" className="underline">
-              OpenSats team
-            </CustomLink>
-            . You can also find us on{' '}
-            <CustomLink
-              href="https://njump.me/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
-              className="underline"
-            >
-              nostr
-            </CustomLink>
-            .
+            Read the latest news from OpenSats:
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -198,6 +207,16 @@ export default function Home({
           })}
         </ul>
       </div>
+      <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        You can also find us on{' '}
+        <CustomLink
+          href="https://njump.me/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
+          className="underline"
+        >
+          nostr
+        </CustomLink>
+        .
+      </p>
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
