@@ -83,10 +83,12 @@ export default function Home({
             Support <Typing />
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
-            We are a 501(c)(3) public charity that aims to support and maintain
-            a sustainable ecosystem of funding for free and open-source projects
-            and contributors, especially bitcoin-related projects and projects
-            that help bitcoin flourish.
+            OpenSats aims to provide sustainable funding for free and
+            open-source projects and contributors, especially bitcoin-related
+            projects and projects that help bitcoin flourish.
+          </p>
+        </div>
+      </div>
           </p>
           <div className="flex flex-wrap">
             <div>
