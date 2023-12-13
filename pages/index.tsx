@@ -83,9 +83,9 @@ export default function Home({
             Support <Typing />
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
-            OpenSats aims to provide sustainable funding for free and
-            open-source projects and contributors, especially bitcoin-related
-            projects and projects that help bitcoin flourish.
+            Help us to provide sustainable funding for free and open-source
+            projects and contributors, especially bitcoin-related projects and
+            projects that help bitcoin flourish.
           </p>
         </div>
       </div>
@@ -98,16 +98,14 @@ export default function Home({
             We are a non-profit organization that relies on donations to fund
             our operations and the projects we support. Unlike most charities,
             we don't take a cut of donations to projects. This means that our
-            small operations budget is funded separately, by generous donors
-            like you. If you'd like to contribute specifically to the operations
-            budget which helps OpenSats function, please consider donating to
-            our{' '}
+            operations budget is funded separately. If you like what we are
+            doing please consider donating to our{' '}
             <CustomLink
               href="/projects/opensats_operations_budget"
               className="underline"
             >
               Operations Budget
-            </CustomLink>{' '}
+            </CustomLink>
             .
           </p>
           <div className="flex flex-wrap">
