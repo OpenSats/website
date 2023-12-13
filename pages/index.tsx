@@ -233,6 +233,15 @@ export default function Home({
               Apply for funding!
             </CustomLink>
           </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/apply#criteria"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Learn More"
+            >
+              Learn More &rarr;
+            </Link>
+          </div>
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
