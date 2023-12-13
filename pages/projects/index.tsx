@@ -44,7 +44,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">OpenSats Funds</h1>
         </div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
+        <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3">
           {openSatsProjects &&
             openSatsProjects.map((p, i) => (
               <li key={i} className="">
@@ -57,7 +57,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Listed Projects</h1>
         </div>
-        <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
+        <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
