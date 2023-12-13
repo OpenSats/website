@@ -84,8 +84,8 @@ export default function Home({
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
             Help us to provide sustainable funding for free and open-source
-            projects and contributors, especially bitcoin-related projects and
-            projects that help bitcoin flourish.
+            contributors working on freedom tech and projects that help bitcoin
+            flourish.
           </p>
           <div className="flex flex-wrap py-4">
             <div className="w-full md:w-1/2">
