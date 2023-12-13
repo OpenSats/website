@@ -87,27 +87,6 @@ export default function Home({
             projects and contributors, especially bitcoin-related projects and
             projects that help bitcoin flourish.
           </p>
-        </div>
-      </div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Donate to OpenSats
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            We rely on donations to fund our operations and the projects we
-            support. Unlike most charities, we don't take a cut from donations
-            to fund ourselves. Consequently, we have to fund our operations
-            separately. If you like what we are doing please consider donating
-            to our{' '}
-            <CustomLink
-              href="/projects/opensats_operations_budget"
-              className="underline"
-            >
-              Operations Budget
-            </CustomLink>
-            .
-          </p>
           <div className="flex flex-wrap py-4">
             <div className="w-full md:w-1/2">
               <button
@@ -126,6 +105,20 @@ export default function Home({
               </button>
             </div>
           </div>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We rely on donations to fund our operations and the projects we
+            support. Unlike most charities, we don't take a cut from donations
+            to fund ourselves. Consequently, we have to fund our operations
+            separately. If you like what we are doing please consider donating
+            to our{' '}
+            <CustomLink
+              href="/projects/opensats_operations_budget"
+              className="underline"
+            >
+              Operations Budget
+            </CustomLink>
+            .
+          </p>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             We are a 501(c)(3) public charity. All donations are tax deductible.
           </p>
