@@ -258,6 +258,15 @@ export default function Home({
           </p>
         </div>
         <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
+        <div className="flex justify-end pt-8 text-base font-medium leading-6">
+          <Link
+            href="/projects"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="View All Projects"
+          >
+            View All Projects &rarr;
+          </Link>
+        </div>
       </div>
       {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
