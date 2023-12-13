@@ -1,7 +1,7 @@
-import GrantApplicationForm from '@/components/GrantApplicationForm'
 import PageSection from '@/components/PageSection'
 import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
+import ApplicationForms from '@/components/ApplicationForms'
 
 export default function Apply() {
   return (
@@ -27,7 +27,7 @@ export default function Apply() {
           listed on the website, please{' '}
           <Link href="/apply/to-be-listed">apply to be listed</Link> instead.
         </p>
-        <GrantApplicationForm />
+        <ApplicationForms form="Grant" />
       </PageSection>
     </>
   )

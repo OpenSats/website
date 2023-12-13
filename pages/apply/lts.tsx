@@ -1,7 +1,7 @@
 import PageSection from '@/components/PageSection'
-import LTSApplicationForm from '@/components/LTSApplicationForm'
 import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
+import ApplicationForms from '@/components/ApplicationForms'
 
 export default function Apply() {
   return (
@@ -44,7 +44,7 @@ export default function Apply() {
         If the above does not apply to you, please consider applying for a{' '}
         <Link href="/apply/grant">General Grant</Link> instead.
       </p>
-      <LTSApplicationForm />
+      <ApplicationForms form="LTS" />
     </PageSection>
   )
 }

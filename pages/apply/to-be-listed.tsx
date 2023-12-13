@@ -1,6 +1,6 @@
-import WebsiteApplicationForm from '@/components/WebsiteApplicationForm'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
+import ApplicationForms from '@/components/ApplicationForms'
 
 export default function Apply() {
   return (
@@ -28,7 +28,7 @@ export default function Apply() {
           <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
           before sending in an application.
         </p>
-        <WebsiteApplicationForm />
+        <ApplicationForms form="Website" />
       </PageSection>
     </>
   )
