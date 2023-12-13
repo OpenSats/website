@@ -16,7 +16,7 @@ import { isNotOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 2
 
 export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
