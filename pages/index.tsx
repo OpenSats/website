@@ -143,7 +143,14 @@ export default function Home({
             <CustomLink href="/about" className="underline">
               OpenSats team
             </CustomLink>
-            . 
+            . You can also find us on{' '}
+            <CustomLink
+              href="https://njump.me/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
+              className="underline"
+            >
+              nostr
+            </CustomLink>
+            .
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
