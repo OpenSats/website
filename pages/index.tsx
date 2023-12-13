@@ -95,11 +95,11 @@ export default function Home({
             Donate to OpenSats
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            We are a non-profit organization that relies on donations to fund
-            our operations and the projects we support. Unlike most charities,
-            we don't take a cut of donations to projects. This means that our
-            operations budget is funded separately. If you like what we are
-            doing please consider donating to our{' '}
+            We rely on donations to fund our operations and the projects we
+            support. Unlike most charities, we don't take a cut from donations
+            to fund ourselves. Consequently, we have to fund our operations
+            separately. If you like what we are doing please consider donating
+            to our{' '}
             <CustomLink
               href="/projects/opensats_operations_budget"
               className="underline"
