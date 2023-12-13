@@ -23,9 +23,9 @@ const ProjectList: React.FC<ProjectListProps> = ({
 
   return (
     <section className="bg-light items-left flex flex-col">
-      <ul className="grid max-w-5xl gap-4 md:grid-cols-3">
+      <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4">
         {sortedProjects &&
-          sortedProjects.slice(0, 3).map((p, i) => (
+          sortedProjects.slice(0, 4).map((p, i) => (
             <li key={i} className="">
               <ProjectCard project={p} openPaymentModal={openPaymentModal} />
             </li>
