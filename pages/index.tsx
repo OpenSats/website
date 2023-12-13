@@ -254,16 +254,19 @@ export default function Home({
             </CustomLink>{' '}
             selected by OpenSats.
           </p>
-        </div>
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
-        <div className="flex justify-end pt-8 text-base font-medium leading-6">
-          <Link
-            href="/projects"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="View All Projects"
-          >
-            View All Projects &rarr;
-          </Link>
+          <ProjectList
+            projects={projects}
+            openPaymentModal={openPaymentModal}
+          />
+          <div className="flex justify-end pt-8 text-base font-medium leading-6">
+            <Link
+              href="/projects"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="View All Projects"
+            >
+              View All Projects &rarr;
+            </Link>
+          </div>
         </div>
       </div>
       {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
