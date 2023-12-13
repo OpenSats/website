@@ -142,6 +142,15 @@ export default function Home({
             </CustomLink>
             .
           </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/mission"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Our Mission"
+            >
+              Our Mission &rarr;
+            </Link>
+          </div>
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
