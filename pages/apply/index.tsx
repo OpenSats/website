@@ -68,8 +68,8 @@ export default function Apply({
         </h2>
         <p className="mb-8">
           General grants are funded by donations to the OpenSats General Fund
-          and will be distributed quarterly by our board. We evaluate and assess
-          all applications to make sure grants are awarded to high impact
+          and will be distributed periodically by our board. We evaluate and
+          assess all applications to make sure grants are awarded to high impact
           projects in the Bitcoin space.
         </p>
         <Link

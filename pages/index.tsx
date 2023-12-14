@@ -16,7 +16,7 @@ import { isNotOpenSatsProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 2
 
 export const getStaticProps = async () => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
@@ -83,42 +83,75 @@ export default function Home({
             Support <Typing />
           </h1>
           <p className="text-2xl leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
+            Help us to provide sustainable funding for free and open-source
+            contributors working on freedom tech and projects that help bitcoin
+            flourish.
           </p>
-          <div className="flex flex-wrap">
-            <div>
+          <div className="flex flex-wrap py-4">
+            <div className="w-full md:w-1/2">
               <button
                 onClick={openGeneralFundModal}
-                className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
+                className="mb-2 mr-2 w-full rounded bg-orange-500 px-4 text-xl font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white md:max-w-[98%]"
               >
                 Donate to General Fund
               </button>
             </div>
-            <div>
+            <div className="w-full md:w-1/2">
               <button
                 onClick={openopsFundModal}
-                className="block rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
+                className="block w-full rounded border border-orange-500 bg-transparent px-4 text-xl font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
               >
                 Donate to Operations Budget
               </button>
             </div>
           </div>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We are a 501(c)(3) public charity. All donations are tax deductible.
+          </p>
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Explore Projects
+            Why OpenSats?
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Browse through and{' '}
-            <CustomLink href="/projects" className="underline">
-              directly support projects
-            </CustomLink>{' '}
-            selected by OpenSats.
+            We believe that free and open-source software in general, and
+            bitcoin in particular, is essential to the future of the internet
+            and the world.
           </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We don't want any one person to have control over funding decisions,
+            so we created a transparent, public-facing, and accountable{' '}
+            <CustomLink href="/about#board-of-directors" className="underline">
+              nine-person board
+            </CustomLink>{' '}
+            to make all organizational decisions.
+          </p>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            We rely on donations to fund our operations and the projects we
+            support. Unlike most charities, we don't take a cut from donations
+            to fund ourselves. Consequently, we have to fund our operations
+            separately. If you like what we are doing please consider donating
+            to our{' '}
+            <CustomLink
+              href="/projects/opensats_operations_budget"
+              className="underline"
+            >
+              Operations Budget
+            </CustomLink>
+            .
+          </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/mission"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Our Mission"
+            >
+              Our Mission &rarr;
+            </Link>
+          </div>
         </div>
-        <ProjectList projects={projects} openPaymentModal={openPaymentModal} />
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
@@ -126,11 +159,7 @@ export default function Home({
             Stay Updated
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Read the latest posts from the{' '}
-            <CustomLink href="/about" className="underline">
-              OpenSats team
-            </CustomLink>
-            .
+            Read the latest news from OpenSats:
           </p>
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -187,6 +216,16 @@ export default function Home({
           })}
         </ul>
       </div>
+      <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+        You can also find us on{' '}
+        <CustomLink
+          href="https://njump.me/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
+          className="underline"
+        >
+          nostr
+        </CustomLink>
+        .
+      </p>
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
@@ -198,16 +237,6 @@ export default function Home({
           </Link>
         </div>
       )}
-      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-16">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
@@ -223,8 +252,54 @@ export default function Home({
               Apply for funding!
             </CustomLink>
           </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/apply#criteria"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Learn More"
+            >
+              Learn More &rarr;
+            </Link>
+          </div>
         </div>
       </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-24">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+            Explore Projects
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Browse through and{' '}
+            <CustomLink href="/projects" className="underline">
+              directly support projects
+            </CustomLink>{' '}
+            selected by OpenSats.
+          </p>
+          <ProjectList
+            projects={projects}
+            openPaymentModal={openPaymentModal}
+          />
+          <div className="flex justify-end pt-8 text-base font-medium leading-6">
+            <Link
+              href="/projects"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="View All Projects"
+            >
+              View All Projects &rarr;
+            </Link>
+          </div>
+        </div>
+      </div>
+      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
+        <div className="flex items-center justify-center pt-4">
+          <NewsletterForm />
+        </div>
+      )}
+      <PaymentModal
+        isOpen={modalOpen}
+        onRequestClose={closeModal}
+        project={selectedProject}
+      />
     </>
   )
 }
