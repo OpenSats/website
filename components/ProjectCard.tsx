@@ -27,13 +27,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   let cardStyle
   if (tags.includes('Nostr')) {
     cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+      'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-purple-600 dark:bg-stone-900'
   } else if (tags.includes('Lightning')) {
     cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+      'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-yellow-300 dark:bg-stone-900'
   } else if (tags.includes('Bitcoin')) {
     cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
+      'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-orange-400 dark:bg-stone-900'
   } else {
     cardStyle =
       'h-full space-y-4 rounded-xl border-b-4 border-stone-100 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
