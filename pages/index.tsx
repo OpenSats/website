@@ -79,7 +79,7 @@ export default function Home({
       />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="pt-4 md:pb-8">
-          <h1 className="text-3xl py-4 font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Support <Typing />
           </h1>
           <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
@@ -111,7 +111,7 @@ export default function Home({
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-16 pb-8 md:space-y-5 xl:pt-12">
+        <div className="space-y-2 pb-8 pt-16 md:space-y-5 xl:pt-12">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Why OpenSats?
           </h1>
@@ -227,7 +227,7 @@ export default function Home({
         .
       </p>
       {posts.length > MAX_DISPLAY && (
-        <div className="flex pb-8 justify-end text-base font-medium leading-6">
+        <div className="flex justify-end pb-8 text-base font-medium leading-6">
           <Link
             href="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
@@ -238,7 +238,7 @@ export default function Home({
         </div>
       )}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-18">
+        <div className="xl:pt-18 space-y-2 pb-8 pt-8 md:space-y-5 ">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Apply for Funding
           </h1>
@@ -264,11 +264,11 @@ export default function Home({
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-8 md:space-y-5 xl:pt-18">
+        <div className="xl:pt-18 space-y-2 pt-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Explore Projects
           </h1>
-          <p className="text-lg pb-2 leading-7 text-gray-500 dark:text-gray-400">
+          <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             Browse through and{' '}
             <CustomLink href="/projects" className="underline">
               directly support projects
