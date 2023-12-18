@@ -99,9 +99,9 @@ export default function PostLayout({
                         </dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
-                          {author.twitter && (
+                          {author.twitter && author.nostr && (
                             <Link
-                              href={author.twitter}
+                              href={`https://njump.me/${author.nostr}`}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
                               {author.twitter.replace(
