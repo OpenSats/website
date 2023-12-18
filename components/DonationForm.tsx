@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+import * as EmailValidator from 'email-validator'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -186,7 +187,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           placeholder={`satoshin@gmx.com`}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           required={deductible === 'yes'}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            EmailValidator.validate(e.target.value)
+          }}
         ></input>
       </section>
 
