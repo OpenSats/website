@@ -1,0 +1,244 @@
+---
+title: "Third Wave of Bitcoin Grants"
+date: '2023-12-18'
+tags: ['OpenSats', 'grants', 'bitcoin']
+draft: false
+authors: ['dergigi', 'odell']
+images: ['/static/images/blog/17-bitcoin-dec.jpg']
+summary: "OpenSats is funding 10 more open-source projects in the bitcoin space."
+---
+
+One aspect of Bitcoin that is often overlooked is that, no matter how crazy the
+news cycle (or the mempools) might be, Bitcoin marches on, unbothered. Every 10
+minutes, transactions are being settled. Every 10 minutes, the network focuses
+on a new block. Every 10 minutes, the timechain is flourishing. It is the
+constant signal in an increasingly noisy world.
+
+While OpenSats doesn't operate in 10-minute intervals like Bitcoin does, we aim
+to filter the signal from the noise and consistently execute just the same. Our
+[mission](/mission) is to support and maintain a sustainable ecosystem of
+funding for free and open-source projects and contributors, especially
+Bitcoin-related projects and projects that help Bitcoin flourish. In other
+words: we want Bitcoin's open-source contributors to flourish alongside Bitcoin
+and have them unbothered, moisturized, happy, and focused.
+
+We are proud to announce 10 new grants to impactful projects in the Bitcoin
+space. In no particular order, here they are:
+
+- [Clams](#clams)
+- [Fully Noded](#fully-noded)
+- [Validating Lightning Signer](#validating-lightning-signer)
+- [Fedimint Lightning Gateway](#fedimint-lightning-gateway)
+- [Pickhardt Payments plugin for Core-Lightning](#pickhardt-payments-plugin-for-core-lightning)
+- [BitBanana](#bitbanana)
+- [Crack the Orange](#crack-the-orange)
+- [Bitcoin Core App](#bitcoin-core-app)
+- [Krux](#krux)
+- [Vexl](#vexl)
+
+All of the above grants are sourced from our [General Fund][gf], which is funded by
+generous donors like you. If you want to help us support free and open-source
+projects please consider donating to the fund:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+---
+
+This brings the total number of grants given by OpenSats to 69, including the
+eight [long-term support grants](/tags/lts) we announced previously, as well as
+the 31 grants announced for [nostr](/tags/nostr).
+
+As always, let's take a closer look at the projects to understand what they are
+about and how they align with our mission.
+
+---
+
+### Clams
+
+Clams is an interface for CLN nodes that establishes a secure and encrypted
+connection directly through the Lightning Network. After user-defined
+permissions are added, the app can execute various functions on the node like
+sending and receiving payments.
+
+Payment options include Keysend, BOLT11 invoices, LNURL, and BOLT12 offers.
+Other notable features include lightning channel management and a bookkeeping
+dashboard.
+
+The app is a Progressive Web App (PWA) meaning it works on all devices that have
+a browser. It has a mobile experience that is similar to Zeus. The desktop
+version is more advanced, with a UX akin to Ride The Lightning.  Clams is
+privacy-focused, does no logging, has no trackers, and all data stays on the
+user's device.
+
+Repository: [clams-tech](https://github.com/clams-tech/)  
+License: MIT
+
+### Fully Noded
+
+Fully Noded is the first app for iOS and macOS that allows users to connect to
+their node via RPC over Tor for a truly self-sovereign Bitcoin experience. It
+utilizes PSBTs and descriptors to expose all of the excellent wallet
+functionality that Bitcoin Core offers. It supports BIP39 seeds, has easy
+integration with hardware signing devices, and is easy to use when compared to
+managing funds with `bitcoin-cli`.
+
+The Fully Noded stack has the potential to make “one-click” self-sovereign
+Bitcoin usage a thing, as it is non-custodial and private by default.
+
+Repository: [Fonta1n3/FullyNoded](https://github.com/Fonta1n3/FullyNoded)  
+License: MIT
+
+### Validating Lightning Signer
+
+Validating Lightning Signer (VLS) is an open-source project whose goal is to
+improve the security of the Lightning Network. Currently, the user's Lightning
+private keys are stored on the Lightning node itself. This poses a risk: if
+someone manages to hack into a node, they could steal the user's Bitcoin. It's
+like leaving your money in a vault but hanging the key on the vault's door.
+
+VLS brings to Bitcoin Lightning what signing devices brought to Bitcoin:
+improved security via a reduced attack surface. In the future, VLS plans to
+implement multisig support, further improving security for Lightning Network
+users.
+
+Repository: [lightning-signer/validating-lightning-signer](https://gitlab.com/lightning-signer/validating-lightning-signer)  
+License: Apache 2.0
+
+### Fedimint Lightning Gateway
+
+Fedimint is an open-source framework for creating federated applications.
+Fedimints have the ability to custody bitcoin on behalf of clients of the
+federation and issue e-cash in return. Ecash transfers between participants of
+the federation can be done with almost perfect privacy since notes are
+transferred between clients using blind signatures.
+
+Fedimints can also accept and send payments over Lightning using a Lightning
+Gateway. The Lightning Gateway provides a swap service between ecash notes of a
+federation and the broader Lightning network. Lightning Gateways are the glue
+that allows Fedimints to participate in the broader Bitcoin ecosystem. They
+abstract away the details of Fedimints and expose a user experience that feels
+like using a Lightning wallet.
+
+The Lightning Gateway portion of Fedimint is important since it provides the
+connection between federations as well as to the broader Lightning network.
+Without Lightning support, the utility of federations is limited, since
+transactions can only be facilitated among clients of the federation. The
+Lightning support opens up Fedimint to the rest of the Bitcoin ecosystem. A
+client of Fedimint can pay to and receive from anything that "speaks" lightning.
+
+Repository: [fedimint/fedimint](https://github.com/fedimint/fedimint)  
+License: MIT
+
+### Pickhardt Payments plugin for Core-Lightning
+
+Pickhardt Payments is a novel payment routing strategy for the Lightning
+Network, originally developed in 2021 by Rene Pickhardt and Stefan Richter
+([arxiv.org/abs/2107.05322](https://arxiv.org/abs/2107.05322)).
+
+The method is based on a Bayesian description of the liquidity state of
+channels, with the precise allocation of liquidity unknown by the nodes of the
+network. An optimally reliable Multipath Payment (MPP) can be constructed by
+solving a Minimum Cost Flow (MCF) problem, where the cost function weights the
+probability of path failures due to insufficient liquidity.
+
+The implementation of the Pickhardt-Richter method promises to bring a huge leap
+of improvement in the payments layer of the Lightning Network without the need
+to change the protocol's basic rules. From the users' point of view, it'll allow
+for a faster payment experience and fewer chances of payment failures.
+
+Repository: [lagrang3/lightning](https://github.com/lagrang3/lightning)  
+License: BSD-MIT
+
+### BitBanana
+
+BitBanana aims to provide the best User Experience for remote Lightning Node
+Management on Android. Additionally to managing the node, BitBanana allows its
+users to access the wallet functionality of their node in everyday situations.
+The focus of the app is remote management, which makes it a great open-source
+tool for node operators. The app was originally known as "Zap Android" before it
+was forked and rebranded.
+
+Repository: [michaelWuensch/BitBanana](https://github.com/michaelWuensch/BitBanana)  
+License: MIT
+
+### Crack the Orange
+
+Crack the Orange is an educational effort that is building a cohort of Bitcoin
+educators. The current goal is to train a total of 100 educators, community
+builders, and human rights activists per year. It is estimated that each of
+these individuals will onboard another ~10 peers in their communities with the
+knowledge acquired, spreading Bitcoin knowledge organically and peer-to-peer.
+
+Any educational material produced by the project under this grant will be made
+publicly available and published under a permissive license that is appropriate
+for the content, i.e. one of the free licenses listed at
+[gnu.org/licenses/license-list.html](https://www.gnu.org/licenses/license-list.html).
+
+Repository: [anitaposch/cto](https://github.com/anitaposch/cto)  
+License: MIT
+
+### Bitcoin Core App
+
+The Bitcoin Core App is a modern and cross-platform UI designed by the Bitcoin
+Design community. It features new backend models that unravel the technical
+locks that the current Core GUI is plagued with, all without disturbing the need
+to further modularize the different components of Bitcoin Core.
+
+The effort aims to keep Bitcoin Core accessible to run, and the features that
+full-node software can provide are easy and intuitive to use by non-technical
+people. Additionally, by exploring how Core behaves on mobile devices, we can
+reshape how we think about full-node software and further democratize
+enforcement of the network rules to those with mobile devices. With Core running
+as a background process on phones and tablets, apps and services can be built to
+use the local node instead of relying on remote nodes or a centralized server.
+
+Repository: [bitcoin-core/gui-qml](https://github.com/bitcoin-core/gui-qml)  
+License: MIT
+
+### Krux
+
+Krux is a free and open-source firmware that enables anyone to build their own
+Bitcoin signing device via off-the-shelf parts. It runs on Kendryte K210
+Risk-V-based devices such as the M5StickV and Maix Amigo, converting them into
+air-gapped devices that can sign transactions for single and multisig wallets.
+Krux can also sign messages and has easy-to-use tools to help with the creation
+and loading of wallet backups.
+
+Users can choose to buy a ready-to-use device—where all they need is to flash
+the firmware—or make a DIY version themselves. Krux can also run, mainly for
+educational purposes, on PCs and Android devices.
+
+Repository: [selfcustody/krux](https://github.com/selfcustody/krux)  
+License: MIT / Apache 2.0
+
+### Vexl
+
+Vexl is a free and open-source mobile app giving its users a simple, accessible,
+and safe way to trade bitcoin as it was intended: peer-to-peer and without KYC.
+Vexl is a non-profit, takes no fees from the trades that are happening on the
+platform, and doesn't store any user data.
+
+The mission of Vexl is to make peer-to-peer and non-KYC bitcoin accessible to
+anyone without the need to go through a trusted third party.
+
+Repository: [vexl-it/vexl](https://github.com/vexl-it/vexl)  
+License: GPL-3.0
+
+---
+
+We have received a large number of applications over the last months, which is a
+great signal on its own. If you are working on an open-source project that
+aligns with our values, don't hesitate to [apply for funding](/apply). We are
+constantly sorting through applications and we try our best to select the most
+promising and [most impactful][gs] proposals.
+
+Thank you for your continual and generous support. As we don't take a cut from
+donations to open-source projects, we couldn't be doing what we are doing
+without your help. If you want to help us cover our operational expenses, please
+consider donating to our [operations budget][ob].
+
+[gf]: /projects/general_fund
+[gs]: /selection
+[ob]: /projects/opensats_operations_budget
