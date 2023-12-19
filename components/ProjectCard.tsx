@@ -5,11 +5,13 @@ import { Project } from 'contentlayer/generated'
 export type ProjectCardProps = {
   project: Project
   openPaymentModal: (project: Project) => void
+  customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
+  customImageStyles,
 }) => {
   const {
     slug,
@@ -42,20 +44,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <figure className={cardStyle}>
       <Link href={`/projects/${slug}`} passHref>
-        <div className="relative h-64 w-full">
+        <div className="flex h-36 w-full sm:h-52">
           <Image
             alt={title}
             src={coverImage}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="50% 50%"
+            width={1200}
+            height={800}
+            style={{objectFit: "fill", ...customImageStyles}}
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
         </div>
-        <figcaption className="space-y-1 pb-4 pl-2 pr-2 pt-4">
+        <figcaption className="p-2">
           <h2 className="font-bold">{title}</h2>
-          <div className="mb-8 text-sm">by {nym}</div>
-          <div className="line-clamp-4">{summary}</div>
+          <div className="mb-4 text-sm underline">by {nym}</div>
+          <div className="mb-2 line-clamp-3">{summary}</div>
         </figcaption>
       </Link>
     </figure>

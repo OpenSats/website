@@ -48,7 +48,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
           {openSatsProjects &&
             openSatsProjects.map((p, i) => (
               <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+                <ProjectCard project={p} openPaymentModal={openPaymentModal} customImageStyles={{objectFit: "cover"}}/>
               </li>
             ))}
         </ul>
