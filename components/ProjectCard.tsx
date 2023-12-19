@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             src={coverImage}
             width={1200}
             height={800}
-            style={{objectFit: "fill", ...customImageStyles}}
+            style={{ objectFit: 'fill', ...customImageStyles }}
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
         </div>
