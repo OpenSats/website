@@ -29,6 +29,8 @@ export default function Footer() {
           <div>·</div>
           <Link href="/terms">Terms</Link>
           <div>·</div>
+          <Link href="/transparency">Transparency</Link>
+          <div>·</div>
           <Link href="/privacy">Privacy</Link>
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
