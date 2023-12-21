@@ -1,0 +1,169 @@
+---
+title: "Fourth Wave of Nostr Grants"
+date: '2023-12-21'
+tags: ['OpenSats', 'grants', 'nostr']
+draft: false
+authors: ['nvk', 'dergigi']
+images: ['/static/images/blog/18-nostr-dec.jpg']
+summary: "OpenSats is funding seven more open-source projects in the nostr ecosystem."
+---
+
+It’s been a year of notes, a year of zaps, a year of purple-feathered early
+adopters telling each other “good morning” and “good night”; a year of
+experimentation, a year of relaying, and a year of building other stuff.
+
+While still in its infancy, nostr is slowly but surely establishing itself as
+something that stands out from the flock of decentralized social media
+protocols. As more and more people realize its elegant simplicity—and the power
+that direct lightning integration brings—nostr will inevitably grow and mature.
+
+No technology is ever fully formed or perfect, and neither is nostr. However, we
+believe it has the right building blocks and solid architecture, which is what
+will allow it to go beyond what we currently understand and know as the social
+web.
+
+In addition to the 32 nostr grants announced [in the past](/tags/nostr), we are
+giving out 7 more grants to the following nostr projects:
+
+- [Lume](#lume)
+- [Flockstr](#flockstr)
+- [Camelus](#camelus)
+- [noStrudel](#nostrudel)
+- [ZapThreads](#zapthreads)
+- [NIP-44 Cryptography Audit](#nip-44-cryptography-audit)
+- [NIP-90 Data Vending Machine Framework](#nip-90-data-vending-machine-framework)
+
+This brings the total number of nostr grants to 39, providing support for a wide
+range of developers working on clients, relays, libraries, NIPs, cryptography,
+research, education, [design](https://nostrdesign.org/), UX, and ... other stuff.
+
+Our nostr grants are sourced from [The Nostr Fund](/projects/nostr). If you
+would like to help us in supporting the nostr ecosystem, consider making a
+donation to the fund:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+---
+
+As always, let's look at each project in more detail:
+
+### Lume
+
+[Lume](https://lume.nu/) is a cross-platform nostr desktop client focused on
+creating a unique communication and content browsing experience. Lume aims to be
+extendable and customizable, allowing users to easily install extensions and use
+various themes. Its multi-column TweetDeck-style interface is a great way to
+stay on top of multiple feeds and topics at once.
+
+Repository: [luminous-devs/lume](https://github.com/luminous-devs/lume)  
+License: GPL-3.0
+
+### Flockstr
+
+[Flockstr](https://www.flockstr.com/) is a calendar events app on nostr. Users
+are able to create events, post updates, invite other users, issue tickets,
+collect payments, and pretty much everything that is commonplace on centralized
+platforms like Eventbrite and Meetups.com. The goal is to provide a seamless UI
+so users foreign to nostr may be entirely unaware that they are using a
+decentralized ecosystem aside from when signing in or seamlessly paying for paid
+events via lightning.
+
+Repository: [zmeyer44/flockstr](https://github.com/zmeyer44/flockstr)  
+License: MIT
+
+### Camelus
+
+[Camelus](https://camelus.app/) is an Android client that focuses on ease-of-use
+and content delivery. One design choice is to remove addicting features such as
+likes, pull to refresh, and other dark patterns that are designed to keep you
+addicted. The goal is to have users come back to the app because of content
+rather than dark patterns.
+
+While the client is currently focused on short kind:1 notes, support for
+long-form content and communities is to be added in future versions. Camelus is
+built upon [NDK](https://github.com/nostr-dev-kit/) and the
+[NIP-65](https://github.com/nostr-protocol/nips/blob/master/65.md) gossip model,
+allowing the client to focus on higher-level functionality and features.
+
+Repository: [leo-lox/camelus](https://github.com/leo-lox/camelus)  
+License: GPL-3.0
+
+### noStrudel
+
+[noStrudel](https://camelus.app/) is a fast and feature-rich web client that is
+focused on power users and developers. While it is not geared towards complete
+newcomers, it might help curious users learn more about how nostr works under
+the hood.
+
+It supports quite a bit of other stuff, offering e.g. strong support for
+communities with a Reddit-style interface for
+[NIP-72](https://github.com/nostr-protocol/nips/blob/master/72.md) moderated
+content. Alongside regular note, messaging, and profile functionality, noStrudel
+also features streams, channels, lists, badges, and more.
+
+Repository: [hzrd149/nostrudel](https://github.com/hzrd149/nostrudel)  
+License: MIT
+
+### ZapThreads
+
+[ZapThreads](https://zapthreads.dev/) is a standalone component that provides
+threaded comments for nostr clients. It allows a commenting experience on any
+nostr event, including long-form notes. ZapThreads is currently integrated into
+Habla.news, nostr.cooking, 21ideas.org, and other nostr apps.
+
+Commenting on generic URLs is also supported, allowing it to become the
+commenting system of any web page. The focus of ZapThreads is to keep the
+component versatile, fast, lightweight, and extremely easy to integrate.
+
+Repository: [fr4nzap/zapthreads](https://github.com/fr4nzap/zapthreads)  
+License: Unlicense
+
+### NIP-44 Cryptography Audit
+
+While nostr allows for encrypted direct messages to be sent, the current
+[NIP-04](https://github.com/nostr-protocol/nips/blob/master/04.md) standard has
+[significant
+flaws](https://habla.news/u/hodlbod@coracle.social/0gmn3DDizCIesG-PCD-JK) that
+[NIP-44](https://github.com/nostr-protocol/nips/blob/master/44.md) aims to
+address. A new encryption standard would allow us to fix DMs, implement group
+chats, and facilitate other encrypted use cases within nostr. Cryptography is
+hard, however, which is why NIP-44 underwent an independent audit covered by
+this grant.
+
+The result of the audit is [available as a
+PDF](https://cure53.de/audit-report_nip44-implementations.pdf) and the issues
+found will be addressed in the coming weeks.
+
+Repository: [nostr-protocol/nips/44](https://github.com/nostr-protocol/nips/blob/master/44.md)
+& [paulmillr/nip44](https://github.com/paulmillr/nip44)  
+License: Public Domain
+
+### NIP-90 Data Vending Machine Framework
+
+This generic framework provides an easy way to build and run
+[NIP-90](https://github.com/nostr-protocol/nips/blob/master/90.md) DVMs. While
+notes and zaps are fun and all, there is a lot of “other stuff” that can be done
+with nostr. Data Vending Machines (DVMs) are a way to perform a variety of
+automated tasks over nostr, i.e. get something (computationally expensive) done
+in exchange for sats.
+
+Some algorithms might provide content curation or profile recommendations, while
+others might use LLMs to generate or transform content on the fly. Thanks to
+NIP-90, nostr can act as a marketplace for data processing, where users can
+request jobs to be processed without having to care about "who" processes the
+data.
+
+Repository: [believethehype/nostrdvm](https://github.com/believethehype/nostrdvm)  
+License: MIT
+
+---
+
+We can’t wait to see what 2024 has in store for the nostrverse, and we’re proud
+to support some of the ingenious developers that are building toward a better
+future. Join us in our efforts by making a donation to The Nostr Fund:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
