@@ -8,6 +8,7 @@ import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
 import Image from './Image'
 import VideoPlayer from './VideoPlayer'
 import CustomLink from './Link'
+import DonateToGeneralFundForm from './DonateToGeneralFundForm'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DonateToOperationsButton from './DonateToOperationsButton'
@@ -29,6 +30,7 @@ export const MDXComponents: ComponentMap = {
   pre: Pre,
   wrapper: Wrapper,
   BlogNewsletterForm,
+  DonateToGeneralFundForm,
   DonateToGeneralFundButton,
   DonateToNostrFundButton,
   DonateToOperationsButton,
