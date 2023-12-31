@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+import * as EmailValidator from 'email-validator'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,7 +25,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const [deductible, setDeductible] = useState('yes')
+  const [deductible, setDeductible] = useState('no')
   const [amount, setAmount] = useState('')
 
   const [readyToPayFiat, setReadyToPayFiat] = useState(false)
@@ -134,7 +135,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
-        <h3>Do you want this donation as tax deductible?</h3>
+        <h3>Do you want this donation to be tax deductible?</h3>
         <div className="flex space-x-4 pb-4">
           <label>
             <input
@@ -143,7 +144,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               name="deductible"
               value="yes"
               onChange={radioHandler}
-              defaultChecked={true}
+              defaultChecked={false}
               className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             Yes
@@ -155,6 +156,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               value="no"
               name="deductible"
               onChange={radioHandler}
+              defaultChecked={true}
               className="mr-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
             />
             No
@@ -185,7 +187,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           placeholder={`satoshin@gmx.com`}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           required={deductible === 'yes'}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value)
+            EmailValidator.validate(e.target.value)
+          }}
         ></input>
       </section>
 
