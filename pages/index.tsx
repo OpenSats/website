@@ -281,7 +281,7 @@ export default function Home({
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label="View All Projects"
             >
-              View All Projects &rarr;
+              View Projects &rarr;
             </Link>
           </div>
         </div>
