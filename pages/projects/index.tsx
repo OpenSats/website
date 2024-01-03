@@ -55,7 +55,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
       </section>
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Selected Projects</h1>
+          <h1 id="funds">Project Showcase</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {sortedProjects &&
@@ -66,12 +66,6 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <p>
-        Want to see your project here?{' '}
-        <Link href="/apply" className="underline">
-          Apply for your project to be listed.
-        </Link>
-      </p>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
