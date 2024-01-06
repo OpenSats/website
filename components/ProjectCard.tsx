@@ -14,14 +14,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   openPaymentModal,
   customImageStyles,
 }) => {
-  const {
-    slug,
-    title,
-    summary,
-    coverImage,
-    nym,
-    tags,
-  } = project
+  const { slug, title, summary, coverImage, nym, tags } = project
 
   const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
 
@@ -29,13 +22,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     const img = document.createElement('img')
     img.src = coverImage
 
-    // check if image is horizontal - added additional 10% to height to ensure only true 
-    // horizontals get flagged. 
+    // check if image is horizontal - added additional 10% to height to ensure only true
+    // horizontals get flagged.
     img.onload = () => {
       const { naturalWidth, naturalHeight } = img
       const isHorizontal = naturalWidth >= naturalHeight * 1.1
       setIsHorizontal(isHorizontal)
-    };
+    }
   }, [coverImage])
 
   let cardStyle
@@ -62,7 +55,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             src={coverImage}
             width={1200}
             height={1200}
-            style={{ objectFit: isHorizontal ? 'fill' : 'cover', ...customImageStyles }}
+            style={{
+              objectFit: isHorizontal ? 'fill' : 'cover',
+              ...customImageStyles,
+            }}
             priority={true}
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
