@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Project } from 'contentlayer/generated'
+import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
   project: Project
@@ -18,13 +19,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     title,
     summary,
     coverImage,
-    git,
-    twitter,
-    personalTwitter,
     nym,
-    zaprite,
     tags,
   } = project
+
+  const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const img = document.createElement('img')
+    img.src = coverImage
+
+    // check if image is horizontal - added additional 10% to height to ensure only true 
+    // horizontals get flagged. 
+    img.onload = () => {
+      const { naturalWidth, naturalHeight } = img
+      const isHorizontal = naturalWidth >= naturalHeight * 1.1
+      setIsHorizontal(isHorizontal)
+    };
+  }, [coverImage])
 
   let cardStyle
   if (tags.includes('Nostr')) {
@@ -49,8 +61,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             alt={title}
             src={coverImage}
             width={1200}
-            height={800}
-            style={{ objectFit: 'fill', ...customImageStyles }}
+            height={1200}
+            style={{ objectFit: isHorizontal ? 'fill' : 'cover', ...customImageStyles }}
+            priority={true}
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
         </div>
