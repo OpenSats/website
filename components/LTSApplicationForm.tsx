@@ -1,57 +1,37 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
-import * as EmailValidator from 'email-validator'
+import {
+  UseFormHandleSubmit,
+  UseFormRegister,
+  FieldErrors,
+  FieldValues,
+  SubmitHandler,
+} from 'react-hook-form'
+import {
+  ApplicantEmail,
+  ApplicantName,
+  CheckboxQuestion,
+  Footer,
+  PotentialImpact,
+  ProjectDescription,
+  ProjectFocus,
+  Question,
+  References,
+  TextBoxQuestion,
+} from '@/components/FormElements'
 
-export default function ApplicationForm() {
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const {
-    watch,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
+interface Props {
+  handleSubmit: UseFormHandleSubmit<FieldValues>
+  onSubmit: SubmitHandler<FieldValues>
+  register: UseFormRegister<FieldValues>
+  errors: FieldErrors<FieldValues>
+  loading: boolean
+  failureReason: string
+  isFLOSS: boolean
+}
 
-  const isFLOSS = watch('free_open_source', false)
-  const [failureReason, setFailureReason] = useState<string>()
-
-  const onSubmit = async (data: any) => {
-    setLoading(true)
-    console.log(data)
-
-    try {
-      // Track application in GitHub
-      const res = await fetchPostJSON('/api/github', data)
-      if (res.message === 'success') {
-        console.info('Application tracked') // Succeed silently
-      } else {
-        // Fail silently
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        // Fail silently
-      }
-    } finally {
-      // Mail application to us
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-  }
+export default function LTSApplicationForm(props: Props) {
+  const { handleSubmit, onSubmit, register, loading, failureReason, isFLOSS } =
+    props
 
   return (
     <form
@@ -70,173 +50,78 @@ export default function ApplicationForm() {
 
       <hr />
       <h2>Who Are You?</h2>
-      <label className="block">
-        Your Name *<br />
-        <small>Feel free to use your nym.</small>
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          placeholder="John Doe"
-          {...register('your_name', { required: true })}
-        />
-      </label>
-      <label className="block">
-        Email *
-        <input
-          type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          placeholder="satoshin@gmx.com"
-          {...register('email', {
-            required: true,
-            validate: (v) =>
-              EmailValidator.validate(v) ||
-              'Please enter a valid email address',
-          })}
-        />
-        <small className="text-red-500">
-          {errors?.email && errors.email.message.toString()}
-        </small>
-      </label>
-      <label className="block">
-        Personal Website, GitHub profile, or other Social Media
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('personal_github')}
-        />
-      </label>
-      <label className="block">
-        Prior Contributions *<br />
-        <small>
-          Describe the contributions you've made to Bitcoin Core or other
-          Bitcoin-related open-source projects.
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('bios', { required: true })}
-        />
-      </label>
+      <ApplicantName register={register} />
+
+      <ApplicantEmail register={register} />
+
+      <Question
+        register={register}
+        text="Personal Website, GitHub profile, or other Social Media"
+        registerLabel="personal_github"
+      />
+
+      <TextBoxQuestion
+        register={register}
+        text="Prior Contributions"
+        smallText="Describe the contributions you've made to Bitcoin Core or other
+        Bitcoin-related open-source projects."
+        registerLabel="bios"
+        isRequired={true}
+      />
 
       <h2>What Will You Work On?</h2>
+      <ProjectDescription
+        register={register}
+        smallText="What do you intend to work on? Please be as specific as possible."
+      />
 
-      <label className="block">
-        Project Description *<br />
-        <small>
-          What do you intend to work on? Please be as specific as possible.
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('short_description', { required: true })}
-        />
-      </label>
+      <PotentialImpact register={register} />
 
-      <label className="block">
-        Potential Impact *<br />
-        <small>
-          Why is your work important to Bitcoin or the broader free and
-          open-source community?
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('potential_impact', { required: true })}
-        />
-      </label>
-
-      <label className="block">
-        Budget Expectations *<br />
-        <small>
-          Submit a proposed budget around how much funding you are requesting
-          and how it will be used.
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('proposed_budget', { required: true })}
-        />
-      </label>
+      <TextBoxQuestion
+        register={register}
+        text="Budget Expectations"
+        smallText="Submit a proposed budget around how much funding you are requesting
+        and how it will be used."
+        registerLabel="proposed_budget"
+        isRequired={true}
+      />
 
       <h2>Anything Else We Should Know?</h2>
+      <TextBoxQuestion
+        register={register}
+        text="Feel free to share whatever else might be important."
+        registerLabel="anything_else"
+      />
 
-      <label className="block">
-        Feel free to share whatever else might be important.
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('anything_else')}
-        />
-      </label>
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('has_received_funding')}
-        />
-        <span className="ml-2">
-          I plan to receive or am receiving funding outside of OpenSats.
-        </span>
-      </label>
+      <CheckboxQuestion
+        register={register}
+        text="I plan to receive or am receiving funding outside of OpenSats."
+        registerLabel="has_received_funding"
+      />
 
-      <label className="block">
-        If you receive or plan to receive any other funding, please describe it
-        here:
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('what_funding')}
-        />
-      </label>
+      <TextBoxQuestion
+        register={register}
+        text="If you receive or plan to receive any other funding, please describe
+        it here:"
+        registerLabel="what_funding"
+      />
 
       <h2>Final Questions</h2>
+      <ProjectFocus
+        register={register}
+        text="In which area will your project have the most impact?"
+      />
 
-      <label className="block">
-        In which area will your work have the most impact?
-        <select
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('main_focus')}
-        >
-          <option value="bitcoin">Bitcoin</option>
-          <option value="lightning">Lightning</option>
-          <option value="nostr">nostr</option>
-          <option value="other">Other</option>
-        </select>
-      </label>
+      <References register={register} />
 
-      <label className="block">
-        Any References? *<br />
-        <small>
-          Please list any references from the Bitcoin community or open-source
-          space that we could contact for more information on you or your
-          project.
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('references', { required: true })}
-        />
-      </label>
+      <CheckboxQuestion
+        register={register}
+        text="Will your contributions be free and open-source?"
+        registerLabel="free_open_source"
+        isRequired={true}
+      />
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source', { required: true })}
-        />
-        <span className="ml-2">
-          Will your contributions be free and open-source? *
-        </span>
-      </label>
-
-      <div className="prose">
-        <small>
-          OpenSats may require each recipient to sign a Grant Agreement before
-          any funds are disbursed. Using the reports and presentations required
-          by the Grant Agreement, OpenSats will monitor and evaluate the
-          expenditure of funds on a quarterly basis. Any apparent misuse of
-          grant funds will be promptly investigated. If OpenSats discovers that
-          the funds have been misused, the recipient will be required to return
-          the funds immediately, and be barred from further distributions.
-          OpenSats will maintain the records required by Revenue Ruling 56-304,
-          1956-2 C.B. 306 regarding distribution of charitable funds to
-          individuals.
-        </small>
-      </div>
+      <Footer />
 
       <FormButton
         variant={isFLOSS ? 'enabled' : 'disabled'}
