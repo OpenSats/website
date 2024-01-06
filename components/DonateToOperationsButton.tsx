@@ -27,7 +27,7 @@ export default function DonateToOperationsButton() {
     <>
       <button
         onClick={openOperationsBudgetModal}
-        className="mb-2 mr-2 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
+        className="mb-2 mr-2 mt-8 block rounded bg-orange-500 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white"
       >
         Donate to Operations Budget
       </button>

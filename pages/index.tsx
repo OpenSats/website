@@ -268,12 +268,8 @@ export default function Home({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Explore Projects
           </h1>
-          <p className="pb-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Browse through and{' '}
-            <CustomLink href="/projects" className="underline">
-              directly support projects
-            </CustomLink>{' '}
-            selected by OpenSats.
+          <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Browse through a showcase of projects supported by us.
           </p>
           <ProjectList
             projects={projects}
@@ -285,7 +281,7 @@ export default function Home({
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label="View All Projects"
             >
-              View All Projects &rarr;
+              View Projects &rarr;
             </Link>
           </div>
         </div>
