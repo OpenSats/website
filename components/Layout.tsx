@@ -27,7 +27,7 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <meta property="og:title" content="MAGIC Monero Fund" key="ogtitle" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:description" content="Support the MAGIC Monero Fund and open source research for the Monero Project." key="ogdesc" />
+        <meta property="og:description" content="Support the MAGIC Monero Fund and open source software and research for the Monero Project." key="ogdesc" />
       </Head>
       <Navbar />
       <main className="flex-1 flex flex-col">{ children }</main>
