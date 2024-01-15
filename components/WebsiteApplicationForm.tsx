@@ -8,6 +8,7 @@ import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
   const {
     watch,
@@ -21,6 +22,7 @@ export default function ApplicationForm() {
 
   const onSubmit = async (data: any) => {
     setLoading(true)
+    setSubmitted(true)
     console.log(data)
 
     try {
@@ -42,10 +44,12 @@ export default function ApplicationForm() {
         if (res.message === 'success') {
           router.push('/submitted')
         } else {
+          setSubmitted(false)
           setFailureReason(res.message)
         }
       } catch (e) {
         if (e instanceof Error) {
+          setSubmitted(false)
           setFailureReason(e.message)
         }
       } finally {
@@ -272,7 +276,7 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS && !submitted ? 'enabled' : 'disabled'}
         type="submit"
         disabled={loading}
       >

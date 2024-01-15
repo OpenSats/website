@@ -7,6 +7,7 @@ import * as EmailValidator from 'email-validator'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const router = useRouter()
   const {
     watch,
@@ -20,6 +21,7 @@ export default function ApplicationForm() {
 
   const onSubmit = async (data: any) => {
     setLoading(true)
+    setSubmitted(true)
     console.log(data)
 
     try {
@@ -42,10 +44,12 @@ export default function ApplicationForm() {
           router.push('/submitted')
         } else {
           setFailureReason(res.message)
+          setSubmitted(false)
         }
       } catch (e) {
         if (e instanceof Error) {
           setFailureReason(e.message)
+          setSubmitted(false)
         }
       } finally {
         setLoading(false)
@@ -288,7 +292,7 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS && !submitted ? 'enabled' : 'disabled'}
         type="submit"
         disabled={loading}
       >
