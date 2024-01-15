@@ -48,22 +48,6 @@ export default function Apply({
           applicant.
         </p>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-          Website Listing
-        </h2>
-        <p className="mb-8">
-          Any FOSS project that is aligned with the OpenSats mission is free to
-          submit an application to be listed on the OpenSats website. Donors may
-          recommend their gifts be directed to specific projects on this list.
-          If you are helping Bitcoin and FOSS, please submit an application to
-          be listed on our site.
-        </p>
-        <Link
-          href="/apply/to-be-listed"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
-        >
-          Apply to be listed on OpenSats.org
-        </Link>
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
         </h2>
         <p className="mb-8">
