@@ -218,7 +218,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               className="color-me-monero h-8 w-8"
             />
           )}
-          <span className="whitespace-nowrap">Donate with Monero or BTC</span>
+          <span className="whitespace-nowrap">Donate with Monero or Bitcoin</span>
         </button>
         <button
           name="stripe"
