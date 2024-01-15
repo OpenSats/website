@@ -1,28 +1,35 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Project } from 'contentlayer/generated'
+import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
   project: Project
   openPaymentModal: (project: Project) => void
+  customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   openPaymentModal,
+  customImageStyles,
 }) => {
-  const {
-    slug,
-    title,
-    summary,
-    coverImage,
-    git,
-    twitter,
-    personalTwitter,
-    nym,
-    zaprite,
-    tags,
-  } = project
+  const { slug, title, summary, coverImage, nym, tags } = project
+
+  const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const img = document.createElement('img')
+    img.src = coverImage
+
+    // check if image is horizontal - added additional 10% to height to ensure only true
+    // horizontals get flagged.
+    img.onload = () => {
+      const { naturalWidth, naturalHeight } = img
+      const isHorizontal = naturalWidth >= naturalHeight * 1.1
+      setIsHorizontal(isHorizontal)
+    }
+  }, [coverImage])
 
   let cardStyle
   if (tags.includes('Nostr')) {
@@ -42,20 +49,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <figure className={cardStyle}>
       <Link href={`/projects/${slug}`} passHref>
-        <div className="relative h-64 w-full">
+        <div className="flex h-36 w-full sm:h-52">
           <Image
             alt={title}
             src={coverImage}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="50% 50%"
+            width={1200}
+            height={1200}
+            style={{
+              objectFit: isHorizontal ? 'fill' : 'cover',
+              ...customImageStyles,
+            }}
+            priority={true}
             className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
           />
         </div>
-        <figcaption className="space-y-1 pb-4 pl-2 pr-2 pt-4">
+        <figcaption className="p-2">
           <h2 className="font-bold">{title}</h2>
-          <div className="mb-8 text-sm">by {nym}</div>
-          <div className="line-clamp-4">{summary}</div>
+          <div className="mb-4 text-sm underline">by {nym}</div>
+          <div className="mb-2 line-clamp-3">{summary}</div>
         </figcaption>
       </Link>
     </figure>
