@@ -27,7 +27,8 @@ export default async function handler(
     const thankYouMessage = `
 Thank you for applying to OpenSats! 
 
-We have received your application and will evaluate it as quickly as we can. 
+We have received your application and will evaluate it as quickly as we can.
+Evaluation is done on a rolling basis and usually takes 2-4 weeks.
 
 We will reach out again once we've made a decision. 
 Thank you for your patience.
