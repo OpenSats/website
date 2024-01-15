@@ -4,8 +4,8 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
-import Image from '@/components/Image'
 import PageSection from '@/components/PageSection'
+import CustomLink from '@/components/Link'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
@@ -34,7 +34,8 @@ export default function Apply({
           nym-friendly.
         </p>
         <p>
-          OpenSats does not discriminate in its grant selection process with
+          OpenSats does not discriminate in its{' '}
+          <CustomLink href="/selection">grant selection process</CustomLink>{' '}
           applicants, whether internal or external, because of race, creed,
           color, age, national origin, ancestry, religion, gender, sexual
           orientation, gender identity, disability, genetic information, veteran
