@@ -63,7 +63,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
         <section id="root" className="flex flex-col sm:flex-row">
           <div className="flex-auto p-4 md:p-8 space-y-8 sm:order-first">
             <h1>
-              Support the Monero Fund and open source research for the Monero Project.
+              Support the Monero Fund and open source software and research for the Monero Project.
             </h1>
             <p className="text-textgray">
               Donations are tax-deductible in the USA as MAGIC is a 501(c)(3) charity
