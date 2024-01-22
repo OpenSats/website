@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
+import sanitize from 'sanitize-filename'
 import { getPostBySlug, getAllPosts } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
 import markdownStyles from '../../components/markdown-styles.module.css'
@@ -152,7 +153,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, stats })
 export default Project
 
 export async function getServerSideProps({ params }: { params: any }) {
-  const post = getPostBySlug(params.slug)
+  const slug = sanitize(params.slug)
+  const post = getPostBySlug(slug)
 
   const projects = getAllPosts()
 
