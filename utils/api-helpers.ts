@@ -86,7 +86,7 @@ export async function fetchGetJSONAuthedBTCPay(
     let totaldonationsinfiatxmr = 0
     let totaldonationsinfiatbtc = 0
     for(let i=0;i<data.length;i++){
-      if (data[i].metadata.orderId != slug) {
+      if (data[i].metadata.orderId != slug && data[i].metadata.orderId != `${slug}_STATIC`) {
         continue
       }
       const id = data[i].id
