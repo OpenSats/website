@@ -131,7 +131,9 @@ export async function fetchGetJSONAuthedBTCPay(
   }
 }
 
-export async function fetchGetJSONAuthedStripe() {
+export async function fetchGetJSONAuthedStripe(
+    slug: string
+ ) {
   try {
     const url = "https://api.stripe.com/v1/charges"
     const auth = `Bearer ${process.env.STRIPE_SECRET_KEY}`
