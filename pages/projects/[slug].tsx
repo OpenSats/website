@@ -186,7 +186,7 @@ export async function getServerSideProps({ params }: { params: any }) {
      const crypto = await fetchGetJSONAuthedBTCPay(projects[i].slug)
      xmr = await crypto.xmr
      btc = await crypto.btc
-     usd = await fetchGetJSONAuthedStripe()
+     usd = await fetchGetJSONAuthedStripe(projects[i].slug)
   }
 
     stats[projects[i].slug] = { xmr, btc, usd }

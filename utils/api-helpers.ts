@@ -144,8 +144,15 @@ export async function fetchGetJSONAuthedStripe() {
     })
     const data = await response.json()
     const dataext = data.data
-    const total = await dataext.reduce((subtotal: number, item: any) => subtotal + Number(item.amount)/100,0)
-    const donations = await dataext.reduce((subtotal: number, item: any) => subtotal + 1,0)
+    let total = 0
+    let donations = 0
+    for(let i=0;i<dataext.length;i++){
+      if (dataext[i].metadata.project_slug == null || dataext[i].metadata.project_slug != slug) {
+        continue
+      }
+      total += Number(dataext[i].amount) / 100
+      donations += 1
+    }
     return await { numdonations: donations, totaldonationsinfiat: total, totaldonations: total }
   } catch (err) {
     if (err instanceof Error) {
