@@ -23,9 +23,7 @@ export default function Apply() {
         <p>
           Make sure to read the{' '}
           <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
-          before sending in an application. If you want your project to be
-          listed on the website, please{' '}
-          <Link href="/apply/to-be-listed">apply to be listed</Link> instead.
+          before sending in an application.
         </p>
         <GrantApplicationForm />
       </PageSection>
