@@ -21,7 +21,10 @@ fiatnumdonations: 8
 fiattotaldonationsinfiat: 5139
 fiattotaldonations: 5139
 ---
-### Funded Goal: 24,000 USD
+### Funded Goal: 24,000 USD (5,000 USD contributed from the MAGIC Monero Fund general fund)
+### Start: September 2022
+### End: August 2022
+### Result: [Mainnet beta software release](https://reddit.com/r/Monero/comments/1382rva/ethxmr_atomic_swap_beta_release/)
 
 The MAGIC Monero Fund raised funds for noot to continue development on ETH-XMR atomic swaps. View [the campaign here](https://www.gofundme.com/f/noot-ethxmr-atomic-swap-development-4-months).
 

@@ -21,7 +21,10 @@ fiatnumdonations: 0
 fiattotaldonationsinfiat: 0
 fiattotaldonations: 0
 ---
-### Funded Goal: 12,000 USD
+### Funded Goal: 12,000 USD (12,000 USD contributed from MAGIC Monero Fund general fund)
+### Start: March 2022
+### End: August 2022
+### Result: [Research paper](https://raw.githubusercontent.com/ACK-J/Monero-Dataset-Pipeline/main/Lord_of_the_Rings__An_Empirical_Analysis_of_Monero_s_Ring_Signature_Resilience_to_Artificially_Intelligent_Attacks.pdf)
 
 ACK-J created a series of Monero transactions using different spend patterns and applied artificial intelligence models to determine the resiliency of ring signatures against these models, absent external information. The MAGIC Monero Fund approved the research grant from its general fund.
 
