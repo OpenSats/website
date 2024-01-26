@@ -1,18 +1,27 @@
 ---
-title: 'vtnerd Monero and Monero-LWS development work for Q1/Q2 2024'
+title: 'vtnerd Monero and Monero-LWS dev work for Q1/Q2 2024'
 summary: "This development work will improve security, performance, and usability with an end goal of helping to broaden the user base. "
-date: ''
+date: '2024-01-26'
 nym: 'vtnerd (Lee Clagett)'
 website: 'https://github.com/vtnerd'
 coverImage: '/img/project/vtnerd-monero-dev.png'
 git: 'https://github.com/vtnerd'
 twitter: 'vtnerd'
 personalTwitter: 'vtnerd'
-personalWebsite: 'https://github.com/vtnerd'
+personalWebsite: 'https://www.leeclagett.com'
 type: 'Other Free and Open Source Project'
-staticXMRaddress: ''
+staticXMRaddress: '8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT'
 goal: 28800
 isFunded: false
+numdonationsxmr: 0
+totaldonationsinfiatxmr: 0
+totaldonationsxmr: 0
+numdonationsbtc: 0
+totaldonationsinfiatbtc: 0
+totaldonationsbtc: 0
+fiatnumdonations: 0
+fiattotaldonationsinfiat: 0
+fiattotaldonations: 0
 ---
 ### Goal: $28,800 USD
 
@@ -36,6 +45,7 @@ Work targeted towards [`vtnerd/monero-lws`](https://github.com/vtnerd/monero-lws
 * Provide official LWS docker-image 
 * Provide official snap/flatpak/appimge (tbd one or all of those) 
 * Provide pre-built binaries 
-* (Unlikely) - reproducible builds so community members can verify+sign the binary hashes It is unlikely that all features will be implemented, at which point the unfinished features will roll into the next quarter.
+* (Unlikely) - reproducible builds so community members can verify+sign the binary hashes
+* It is unlikely that all features will be implemented, at which point the unfinished features will roll into the next quarter.
 
 Join us in supporting Lee's full-time work on Monero.
