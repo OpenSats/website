@@ -24,6 +24,9 @@ fiattotaldonationsinfiat: 0
 fiattotaldonations: 0
 ---
 ### Funded Goal: 220 XMR (86 XMR contributed from MAGIC Monero Fund general fund)
+### Start: June 2023
+### End: September 2023
+### Result: [Research paper](/pdf/Borggren-Sept-2023-Probing-the-Attacks-on-the-Privacy-of-the-Monero-Blockchain.pdf)
 
 The EAE (Eve-Alice-Eve) attack is a threat to Monero user privacy. When a Monero user sends and/or receives funds repeatedly with an entity (Eve) that aims to trace funds, enough information in the local transaction graph and ring signatures may be available to make a probabalistic guess about the true destination or source of funds. There are different names for this attack and related attacks, which mostly differ in how many colluding entities are involved and how much information they may possess: EABE, poisoned outputs, Overseer, Flashlight, Tainted Dust, and Knacc attacks. One of the videos of the Breaking Monero series [discusses the EAE attack in detail](https://www.monerooutreach.org/breaking-monero/poisoned-outputs.html).
 
