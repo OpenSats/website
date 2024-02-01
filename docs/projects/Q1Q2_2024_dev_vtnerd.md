@@ -41,7 +41,8 @@ Work targeted towards [`vtnerd/monero-lws`](https://github.com/vtnerd/monero-lws
 * Webhooks/ZMQ-PUB support for tx sending (watch for unexpected sends)
 * ZMQ-pub support for incoming transactions and blocks (notifies of any new transaction or block) 
 * Implement "horizontal" scaling of account scanning (transfer account info via zmq to another process for scanning) 
-* Make account creation more "enterprise grade" (currently scanning engine re-starts on every new account creation, and uses non-cacheable memory) * Unit tests for REST-API 
+* Make account creation more "enterprise grade" (currently scanning engine re-starts on every new account creation, and uses non-cacheable memory) * Unit tests for REST-API
+* Create frontend LWS C/C++ library 
 * Provide official LWS docker-image 
 * Provide official snap/flatpak/appimge (tbd one or all of those) 
 * Provide pre-built binaries 
