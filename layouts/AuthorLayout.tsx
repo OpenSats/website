@@ -3,6 +3,7 @@ import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
+import CustomLink from '@/components/Link'
 
 interface Props {
   children: ReactNode
@@ -52,7 +53,13 @@ export default function AuthorLayout({ children, content }: Props) {
               )}
               <span className="">{nym ? nym : name}</span>
             </h3>
-            <div className="text-gray-500 dark:text-gray-400">{occupation}</div>
+            <div className="text-gray-500 dark:text-gray-400">
+              {occupation == 'Volunteer' ? (
+                <CustomLink href="/about#volunteers">Volunteer</CustomLink>
+              ) : (
+                occupation
+              )}
+            </div>
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
               {email && <SocialIcon kind="mail" href={`mailto:${email}`} />}
