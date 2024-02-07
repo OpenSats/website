@@ -27,9 +27,7 @@ fiattotaldonations: 0
 ![qrcode_Q1Q2_2024_dev_vtnerd.png](/img/qr/qrcode_Q1Q2_2024_dev_vtnerd.png)
 ### XMR donation address:
 
-```
-8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT
-```
+`8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT`
 
 ### Goal: $28,800 USD
 
