@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-pre code {
-  @apply break-words whitespace-normal select-all;
+code {
+  @apply break-all whitespace-normal select-all;
 }
 /* When in a code block, let XMR addresses wrap, but a click or tap will select whole address */
 
