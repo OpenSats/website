@@ -58,8 +58,8 @@ export default function Apply({
           projects in the Bitcoin space.
         </p>
         <Link
-          href="/apply/grant"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href="#/apply/grant"
+          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats General Grant
         </Link>
@@ -72,8 +72,8 @@ export default function Apply({
           geared towards developers and maintainers of Bitcoin Core and similar.
         </p>
         <Link
-          href="/apply/lts"
-          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href="#/apply/lts"
+          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats LTS Grant
         </Link>
