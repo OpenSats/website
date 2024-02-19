@@ -23,13 +23,7 @@ fiatnumdonations: 0
 fiattotaldonationsinfiat: 0
 fiattotaldonations: 0
 ---
-### XMR donation QR code:
-![qrcode_Q1Q2_2024_dev_vtnerd.png](/img/qr/qrcode_Q1Q2_2024_dev_vtnerd.png)
-### XMR donation address:
-
-`8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT`
-
-### Goal: $28,800 USD
+### Funded goal: 28,800 USD
 
 The MAGIC Monero Fund is currently seeking to raise $28,800 to fund Lee Clagett's development work during Q1/Q2 2024. Lee is the author of [Monero-LWS](https://github.com/vtnerd/monero-lws), and has been a [contributor to the Monero codebase since 2016](https://github.com/monero-project/monero/pulls?page=7&q=is%3Apr+author%3Avtnerd+created%3A%3E2016-10-01). He is a veteran of four CCS proposals; [[1]](https://ccs.getmonero.org/proposals/vtnerd-tor-tx-broadcasting.html), [[2]](https://ccs.getmonero.org/proposals/vtnerd-2020-q4.html), [[3]](https://ccs.getmonero.org/proposals/vtnerd-2021-q1.html), [[4]](https://ccs.getmonero.org/proposals/vtnerd-2023-q3.html)
 
