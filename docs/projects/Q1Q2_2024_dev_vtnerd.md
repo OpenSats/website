@@ -12,10 +12,10 @@ personalWebsite: 'https://www.leeclagett.com'
 type: 'Other Free and Open Source Project'
 staticXMRaddress: '8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT'
 goal: 28800
-isFunded: false
-numdonationsxmr: 0
-totaldonationsinfiatxmr: 0
-totaldonationsxmr: 0
+isFunded: true
+numdonationsxmr: 43
+totaldonationsinfiatxmr: 28800
+totaldonationsxmr: 226.1
 numdonationsbtc: 0
 totaldonationsinfiatbtc: 0
 totaldonationsbtc: 0
