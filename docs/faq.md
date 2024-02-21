@@ -16,6 +16,9 @@
 - If there are any proceeds are retained by the MAGIC Monero Fund, and will be used on related projects.
 - If a campaign fails to raise the full amount of funds, then the committee will work with the intended recipient to revise the scope of the project, or the raised funds will be used on related projects.
 
+## Can an individual or project be funded by both the Monero Community Crowdfunding System (CCS) and the Monero Fund?
+
+- Yes. There is no expectation of exclusivity, but a proposer cannot raise funds elsewhere for the exact same work that a MAGIC Monero Fund proposal is intended to cover. This allows a proposer to maintain multiple, simultaneous funding options, so long as the scope of work included in the proposal is unique.
 
 ## Do you distribute grants in Monero, Bitcoin or fiat?
 
