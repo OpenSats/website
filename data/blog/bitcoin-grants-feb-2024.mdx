@@ -8,237 +8,116 @@ images: ['/static/images/blog/17-bitcoin-dec.jpg']
 summary: "OpenSats is funding 10 more open-source projects in the bitcoin space."
 ---
 
-One aspect of Bitcoin that is often overlooked is that, no matter how crazy the
-news cycle (or the mempools) might be, Bitcoin marches on, unbothered. Every 10
-minutes, transactions are being settled. Every 10 minutes, the network focuses
-on a new block. Every 10 minutes, the timechain is flourishing. It is the
-constant signal in an increasingly noisy world.
+As Bitcoin is approaching its next halving event, developers all over the world are working tirelessly to bring about a better future promised by sound and permissionless money. We are trying our best to help bring said future about by providing no-strings-attached funding for the most impactful open-source projects in the Bitcoin ecosystem, and we are planning to do this for many [more](https://opensats.org/blog/recurring-donations-from-bitwise-bitcoin-etf-bitb)  [decades](https://opensats.org/blog/bitcoin-infrastructure-this-decade) to come.
 
-While OpenSats doesn't operate in 10-minute intervals like Bitcoin does, we aim
-to filter the signal from the noise and consistently execute just the same. Our
-[mission](/mission) is to support and maintain a sustainable ecosystem of
-funding for free and open-source projects and contributors, especially
-Bitcoin-related projects and projects that help Bitcoin flourish. In other
-words: we want Bitcoin's open-source contributors to flourish alongside Bitcoin
-and have them unbothered, moisturized, happy, and focused.
+Our board has selected nine more projects for funding. In no particular order, here they are:
 
-We are proud to announce 10 new grants to impactful projects in the Bitcoin
-space. In no particular order, here they are:
+- [Splicing in LDK](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.z03co8f3uhtv)
+- [Bitcoin Core Testing Suite](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.pphmn292m5so)
+- [BLAST](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.ykpsb86jc0xq)
+- [Scaling Lightning](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.pignzmkaz8me)
+- [Satsigner](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.um15tnd4flme)
+- [Firebolt](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.j1wz8utv1yqu)
+- [The Bitaxe](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.c5j8eptrjjtf)
+- [The Bitcoin LARP Game](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.rqhd6awjurgz)
+- [Braidpool](https://docs.google.com/document/d/1uNqoDnbf5bJtcB1cqP9xSGgLUtX1QoZn68oW8tzqzuA/edit#heading=h.kssabwpcuiie)
 
-- [Clams](#clams)
-- [Fully Noded](#fully-noded)
-- [Validating Lightning Signer](#validating-lightning-signer)
-- [Fedimint Lightning Gateway](#fedimint-lightning-gateway)
-- [Pickhardt Payments plugin for Core-Lightning](#pickhardt-payments-plugin-for-core-lightning)
-- [BitBanana](#bitbanana)
-- [Crack the Orange](#crack-the-orange)
-- [Bitcoin Core App](#bitcoin-core-app)
-- [Krux](#krux)
-- [Vexl](#vexl)
+All of the above grants are sourced from our [General Fund](https://opensats.org/projects/general_fund), which is funded by generous donors like you. If you want to help us support free and open-source projects please consider donating to the fund:
 
-All of the above grants are sourced from our [General Fund][gf], which is funded by
-generous donors like you. If you want to help us support free and open-source
-projects please consider donating to the fund:
+BIG ORANGE BUTTON
 
-<center>
-    <DonateToGeneralFundButton/>
-</center>
+—
 
----
+This marks the fourth wave of grants given to bitcoin projects, following our announcements in [July](https://opensats.org/blog/bitcoin-grants-july-2023), [August](https://opensats.org/blog/bitcoin-and-nostr-grants-august-2023), and [December](https://opensats.org/blog/bitcoin-grants-december-2023). In case you’re interested in the types of projects and people we support, we encourage you to have a look at our [long-term support grants](https://opensats.org/tags/lts) as well as our [year in review](https://opensats.org/blog/2023-year-in-review).
 
-This brings the total number of grants given by OpenSats to 69, including the
-eight [long-term support grants](/tags/lts) we announced previously, as well as
-the 32 grants announced for [nostr](/tags/nostr).
+As always, let's take a closer look at the projects to understand what they are about and how they align with [our mission](https://opensats.org/mission).
 
-As always, let's take a closer look at the projects to understand what they are
-about and how they align with our mission.
+—
 
----
+### Splicing in LDK
 
-### Clams
+Splicing is a Lightning improvement that brings several practical advantages to users and node operators alike, such as more flexible channel management options with lower fees & no downtime. It also allows for better experiences when it comes to using wallets that combine on-chain and lightning payments. The goal of `ldk-splicing` is to add splicing support to LDK in an interoperable and pragmatic way.
 
-Clams is an interface for CLN nodes that establishes a secure and encrypted
-connection directly through the Lightning Network. After user-defined
-permissions are added, the app can execute various functions on the node like
-sending and receiving payments.
+Repository: [ldksplicing/ldk-splicing](https://github.com/ldksplicing/ldk-splicing)
 
-Payment options include Keysend, BOLT11 invoices, LNURL, and BOLT12 offers.
-Other notable features include lightning channel management and a bookkeeping
-dashboard.
+License: Apache 2.0 / MIT
 
-The app is a Progressive Web App (PWA) meaning it works on all devices that have
-a browser. It has a mobile experience that is similar to Zeus. The desktop
-version is more advanced, with a UX akin to Ride The Lightning.  Clams is
-privacy-focused, does no logging, has no trackers, and all data stays on the
-user's device.
+### Bitcoin Core Testing Suite
 
-Repository: [clams-tech](https://github.com/clams-tech/)  
+The Bitcoin Core Testing Suite aims to increase the coverage and robustness of Bitcoin Core’s testing suite. This will help increase the stability and reliability of the bitcoin-core software and help give developers confidence when working on improvements.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin) ([PRs](https://bitcoinacks.com/?flt0_author_contains=kevkevinpal))
+
 License: MIT
 
-### Fully Noded
+### Open-Source Bitcoin LARP Game
 
-Fully Noded is the first app for iOS and macOS that allows users to connect to
-their node via RPC over Tor for a truly self-sovereign Bitcoin experience. It
-utilizes PSBTs and descriptors to expose all of the excellent wallet
-functionality that Bitcoin Core offers. It supports BIP39 seeds, has easy
-integration with hardware signing devices, and is easy to use when compared to
-managing funds with `bitcoin-cli`.
+The world-famous Bitcoin LARP is a game designed to understand the inner workings of Bitcoin in a fun and interactive way. The goal of this project is to have open-source kits available to anyone that are easy to replicate, use, and set up.
 
-The Fully Noded stack has the potential to make “one-click” self-sovereign
-Bitcoin usage a thing, as it is non-custodial and private by default.
+Beyond just software and optimizing for the ability to make kits easy to build & distribute, all instructions and build kit information will be made available under permissive open-source licenses too.
 
-Repository: [Fonta1n3/FullyNoded](https://github.com/Fonta1n3/FullyNoded)  
+Repository: [niftynei/BASIC](https://github.com/niftynei/BASIC)
+
+License: GPL 3.0
+
+### Satsigner
+
+Satsigner is a mobile wallet that aims to give the user full control and visibility over what is happening to their sats at the protocol level. Most bitcoin wallets in use today use traditional designs and patterns that hide the underlying mechanics of the bitcoin protocol. While this trade-off might be appropriate for new users, failing to equip users with more meaningful and in-depth interfaces can hinder the acquisition of a deeper understanding of bitcoin. By focusing on the user experience problems from a bitcoiner’s perspective, the project hopes to develop native solutions for UTXO, fee, multisig, and key management.
+
+Repository: [satsigner/satsigner](https://github.com/satsigner/satsigner)
+
 License: MIT
 
-### Validating Lightning Signer
+### The Bitaxe
 
-Validating Lightning Signer (VLS) is an open-source project whose goal is to
-improve the security of the Lightning Network. Currently, the user's Lightning
-private keys are stored on the Lightning node itself. This poses a risk: if
-someone manages to hack into a node, they could steal the user's Bitcoin. It's
-like leaving your money in a vault but hanging the key on the vault's door.
+The Bitaxe is the first ASIC bitcoin miner in nearly a decade with fully open-source hardware and firmware. The primary goal is to be a reference design that can be taken as is, scaled up, and/or adapted to solve specific bitcoin mining use cases. The design takes into consideration cost and ease of access to core components while remaining a competitive miner.
 
-VLS brings to Bitcoin Lightning what signing devices brought to Bitcoin:
-improved security via a reduced attack surface. In the future, VLS plans to
-implement multisig support, further improving security for Lightning Network
-users.
+Documentation on how to manufacture the device, program the firmware, and contribute is central to the project.
 
-Repository: [lightning-signer/validating-lightning-signer](https://gitlab.com/lightning-signer/validating-lightning-signer)  
-License: Apache 2.0
+Repository: [skot/bitaxe](https://github.com/skot/bitaxe)
 
-### Fedimint Lightning Gateway
+License: GPL 3.0
 
-Fedimint is an open-source framework for creating federated applications.
-Fedimints have the ability to custody bitcoin on behalf of clients of the
-federation and issue e-cash in return. Ecash transfers between participants of
-the federation can be done with almost perfect privacy since notes are
-transferred between clients using blind signatures.
+### Scaling Lightning
 
-Fedimints can also accept and send payments over Lightning using a Lightning
-Gateway. The Lightning Gateway provides a swap service between ecash notes of a
-federation and the broader Lightning network. Lightning Gateways are the glue
-that allows Fedimints to participate in the broader Bitcoin ecosystem. They
-abstract away the details of Fedimints and expose a user experience that feels
-like using a Lightning wallet.
+Scaling Lightning is a framework for creating and interacting with test lightning networks. The project aims to provide a realistic lightning network environment for developers to build and develop their applications and services. Similar in concept to testnet faucets, `scaling-lightning` is a great tool for experimentation and learning.
 
-The Lightning Gateway portion of Fedimint is important since it provides the
-connection between federations as well as to the broader Lightning network.
-Without Lightning support, the utility of federations is limited, since
-transactions can only be facilitated among clients of the federation. The
-Lightning support opens up Fedimint to the rest of the Bitcoin ecosystem. A
-client of Fedimint can pay to and receive from anything that "speaks" lightning.
+Easy routing allows individuals and companies to experiment and run signet nodes. An optional public API can allow participants to request interaction with a 3rd party's signet node such as to ask it to open a channel for you.
 
-Repository: [fedimint/fedimint](https://github.com/fedimint/fedimint)  
+Repository: [scaling-lightning/scaling-lightning](https://github.com/scaling-lightning/scaling-lightning)
+
 License: MIT
 
-### Pickhardt Payments plugin for Core-Lightning
+### Braidpool
 
-Pickhardt Payments is a novel payment routing strategy for the Lightning
-Network, originally developed in 2021 by Rene Pickhardt and Stefan Richter
-([arxiv.org/abs/2107.05322](https://arxiv.org/abs/2107.05322)).
+Braidpool is a decentralized bitcoin mining pool. Braidpool aims to ship an implementation working on signet with hashrate donated by interested miners. The project will also publish their specifications and engage the mining community for wider adoption of Braidpool.
 
-The method is based on a Bayesian description of the liquidity state of
-channels, with the precise allocation of liquidity unknown by the nodes of the
-network. An optimally reliable Multipath Payment (MPP) can be constructed by
-solving a Minimum Cost Flow (MCF) problem, where the cost function weights the
-probability of path failures due to insufficient liquidity.
+The Braidpool proposal builds upon Schnorr signatures and Taproot, as well as novel peer-to-peer research. Braidpool enables all miners to do their own block construction and miner payouts can not be blocked by a central authority like a pool operator.
 
-The implementation of the Pickhardt-Richter method promises to bring a huge leap
-of improvement in the payments layer of the Lightning Network without the need
-to change the protocol's basic rules. From the users' point of view, it'll allow
-for a faster payment experience and fewer chances of payment failures.
+Repository: [pool2win/braidpool](https://github.com/pool2win/braidpool/)
 
-Repository: [lagrang3/lightning](https://github.com/lagrang3/lightning)  
-License: BSD-MIT
-
-### BitBanana
-
-BitBanana aims to provide the best User Experience for remote Lightning Node
-Management on Android. Additionally to managing the node, BitBanana allows its
-users to access the wallet functionality of their node in everyday situations.
-The focus of the app is remote management, which makes it a great open-source
-tool for node operators. The app was originally known as "Zap Android" before it
-was forked and rebranded.
-
-Repository: [michaelWuensch/BitBanana](https://github.com/michaelWuensch/BitBanana)  
 License: MIT
 
-### Crack the Orange
+### Firebolt
 
-Crack the Orange is an educational effort that is building a cohort of Bitcoin
-educators. The current goal is to train a total of 100 educators, community
-builders, and human rights activists per year. It is estimated that each of
-these individuals will onboard another ~10 peers in their communities with the
-knowledge acquired, spreading Bitcoin knowledge organically and peer-to-peer.
+Firebolt is a wallet that supports both on-chain and lightning transactions. It runs a custom non-routing Lightning node on the user’s mobile device and integrates with your nostr contacts. Firebolt is fully non-custodial, supports CoinJoin and PayJoin transactions, and integrates with peer-to-peer marketplaces such as Bisq, Peach, and RoboSats.
 
-Any educational material produced by the project under this grant will be made
-publicly available and published under a permissive license that is appropriate
-for the content, i.e. one of the free licenses listed at
-[gnu.org/licenses/license-list.html](https://www.gnu.org/licenses/license-list.html).
+The wallet is still in beta and under heavy development. Use with caution.
 
-Repository: [anitaposch/cto](https://github.com/anitaposch/cto)  
+Repository: [AreaLayer/FireBolt](https://github.com/AreaLayer/FireBolt)
+
 License: MIT
 
-### Bitcoin Core App
+### BLAST
 
-The Bitcoin Core App is a modern and cross-platform UI designed by the Bitcoin
-Design community. It features new backend models that unravel the technical
-locks that the current Core GUI is plagued with, all without disturbing the need
-to further modularize the different components of Bitcoin Core.
+The “Big Lightning Automated Simulation Tool” (BLAST) is a modeling and simulation framework specifically designed for the Lightning Network. Acting as both a software library and a standalone tool, BLAST aims to facilitate the creation of accurate tests and simulations that replicate real-world Lightning Network behavior.
 
-The effort aims to keep Bitcoin Core accessible to run, and the features that
-full-node software can provide are easy and intuitive to use by non-technical
-people. Additionally, by exploring how Core behaves on mobile devices, we can
-reshape how we think about full-node software and further democratize
-enforcement of the network rules to those with mobile devices. With Core running
-as a background process on phones and tablets, apps and services can be built to
-use the local node instead of relying on remote nodes or a centralized server.
+The primary objective of this project is to conduct research and development to devise an efficient representation of nodes and channels. This representation will enable the modeling of large networks while offering flexibility to customize necessary assumptions.
 
-Repository: [bitcoin-core/gui-qml](https://github.com/bitcoin-core/gui-qml)  
-License: MIT
+Repository: [bjohnson5/blast](https://github.com/bjohnson5/blast)
 
-### Krux
+License: GPL 3.0
 
-Krux is a free and open-source firmware that enables anyone to build their own
-Bitcoin signing device via off-the-shelf parts. It runs on Kendryte K210
-Risk-V-based devices such as the M5StickV and Maix Amigo, converting them into
-air-gapped devices that can sign transactions for single and multisig wallets.
-Krux can also sign messages and has easy-to-use tools to help with the creation
-and loading of wallet backups.
+We are evaluating applications based on carefully [defined criteria](https://opensats.org/apply#criteria) and we do our best to select only the [most impactful](https://opensats.org/selection) and promising proposals.
 
-Users can choose to buy a ready-to-use device—where all they need is to flash
-the firmware—or make a DIY version themselves. Krux can also run, mainly for
-educational purposes, on PCs and Android devices.
-
-Repository: [selfcustody/krux](https://github.com/selfcustody/krux)  
-License: MIT / Apache 2.0
-
-### Vexl
-
-Vexl is a free and open-source mobile app giving its users a simple, accessible,
-and safe way to trade bitcoin as it was intended: peer-to-peer and without KYC.
-Vexl is a non-profit, takes no fees from the trades that are happening on the
-platform, and doesn't store any user data.
-
-The mission of Vexl is to make peer-to-peer and non-KYC bitcoin accessible to
-anyone without the need to go through a trusted third party.
-
-Repository: [vexl-it/vexl](https://github.com/vexl-it/vexl)  
-License: GPL-3.0
-
----
-
-We have received a large number of applications over the last months, which is a
-great signal on its own. If you are working on an open-source project that
-aligns with our values, don't hesitate to [apply for funding](/apply). We are
-constantly sorting through applications and we try our best to select the most
-promising and [most impactful][gs] proposals.
-
-Thank you for your continual and generous support. As we don't take a cut from
-donations to open-source projects, we couldn't be doing what we are doing
-without your help. If you want to help us cover our operational expenses, please
-consider donating to our [operations budget][ob].
-
-[gf]: /projects/general_fund
-[gs]: /selection
-[ob]: /projects/opensats_operations_budget
+Thank you for your continual and generous support. As we don't take a cut from donations to open-source projects, we couldn't be doing what we are doing without your help. If you want to help us cover our operational expenses, please consider donating to our [operations budget](https://opensats.org/projects/opensats_operations_budget).
