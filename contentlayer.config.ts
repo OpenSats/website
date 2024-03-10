@@ -108,6 +108,7 @@ export const Projects = defineDocumentType(() => ({
     summary: { type: 'string', required: true },
     nym: { type: 'string', required: true },
     website: { type: 'string' },
+    geyser: { type: 'string' },
     coverImage: { type: 'string', required: true },
     git: { type: 'string' },
     twitter: { type: 'string' },
