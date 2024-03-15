@@ -3,26 +3,25 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
-import { allProjects } from 'contentlayer/generated'
-import { Project } from 'contentlayer/generated'
+import { allProjects, allFunds } from 'contentlayer/generated'
+import { Project, Fund } from 'contentlayer/generated'
 
-const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
+const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
+  projects,
+  funds,
+}) => {
   const [modalOpen, setModalOpen] = useState(false)
 
   const [selectedProject, setSelectedProject] = useState<Project>()
 
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<Project[]>()
+  const [openSatsProjects, setOpenSatsProjects] = useState<Fund[]>()
 
   useEffect(() => {
     setSortedProjects(
       projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
     )
-    setOpenSatsProjects(
-      projects
-        .filter(isOpenSatsProject)
-        .sort((a, b) => a.title.localeCompare(b.title))
-    )
+    setOpenSatsProjects(funds.sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects])
 
   function closeModal() {
@@ -82,10 +81,12 @@ export default AllProjects
 
 export async function getStaticProps({ params }: { params: any }) {
   const projects = allProjects
+  const funds = allFunds
 
   return {
     props: {
       projects,
+      funds,
     },
   }
 }
