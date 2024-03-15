@@ -118,6 +118,7 @@ export const Projects = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
+    showcase: { type: 'boolean' },
   },
   computedFields,
 }))

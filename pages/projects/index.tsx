@@ -16,7 +16,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
 
   useEffect(() => {
     setSortedProjects(
-      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
+      projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
     )
     setOpenSatsProjects(
       projects
@@ -96,4 +96,8 @@ export function isOpenSatsProject(project: Project): boolean {
 
 export function isNotOpenSatsProject(project: Project): boolean {
   return !isOpenSatsProject(project)
+}
+
+export function isShowcaseProject(project: Project): boolean {
+  return isNotOpenSatsProject(project) && project.showcase
 }
