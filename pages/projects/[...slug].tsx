@@ -85,15 +85,15 @@ export default function ProjectPage({
         MDXComponents={MDXComponents}
       />
       <aside className="bg-light mb-8 flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start">
-        {project.geyser && (
+        {project.donationLink && (
           <CustomLink
-            href={project.geyser}
+            href={project.donationLink}
             className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
           >
             Donate via Geyser
           </CustomLink>
         )}
-        {!project.geyser && (
+        {!project.donationLink && (
           <button
             onClick={openPaymentModal}
             className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
