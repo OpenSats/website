@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects, allFunds } from 'contentlayer/generated'
 import { Project, Fund } from 'contentlayer/generated'
@@ -12,8 +11,6 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
 }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
-  const [selectedProject, setSelectedProject] = useState<Project>()
-
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
   const [openSatsProjects, setOpenSatsProjects] = useState<Fund[]>()
 
@@ -23,15 +20,6 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
     )
     setOpenSatsProjects(funds.sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects])
-
-  function closeModal() {
-    setModalOpen(false)
-  }
-
-  function openPaymentModal(project: Project) {
-    setSelectedProject(project)
-    setModalOpen(true)
-  }
 
   return (
     <>
@@ -48,7 +36,6 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
               <li key={i} className="">
                 <ProjectCard
                   project={p}
-                  openPaymentModal={openPaymentModal}
                   customImageStyles={{ objectFit: 'cover' }}
                 />
               </li>
@@ -63,16 +50,11 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+                <ProjectCard project={p} />
               </li>
             ))}
         </ul>
       </section>
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
     </>
   )
 }

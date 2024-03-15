@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
   project: Project
-  openPaymentModal: (project: Project) => void
   customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  openPaymentModal,
   customImageStyles,
 }) => {
   const { slug, title, summary, coverImage, nym, tags } = project
