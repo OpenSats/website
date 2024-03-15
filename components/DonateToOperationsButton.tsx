@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { allProjects } from 'contentlayer/generated'
-import type { Project } from 'contentlayer/generated'
+import { allFunds } from 'contentlayer/generated'
+import type { Fund } from 'contentlayer/generated'
 import PaymentModal from './PaymentModal'
 
 export default function DonateToOperationsButton() {
   const [modalOpen, setModalOpen] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<Project>()
-  const operationsBudget = allProjects.find(
+  const [selectedFund, setSelectedFund] = useState<Fund>()
+  const operationsBudget = allFunds.find(
     (p) => p.slug === 'opensats_operations_budget'
   )
 
@@ -14,8 +14,8 @@ export default function DonateToOperationsButton() {
     setModalOpen(false)
   }
 
-  function openPaymentModal(project: Project) {
-    setSelectedProject(project)
+  function openPaymentModal(project: Fund) {
+    setSelectedFund(project)
     setModalOpen(true)
   }
 
@@ -34,7 +34,7 @@ export default function DonateToOperationsButton() {
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
-        project={selectedProject}
+        fund={selectedFund}
       />
     </>
   )

@@ -8,7 +8,7 @@ import { Fund } from 'contentlayer/generated'
 type ModalProps = {
   isOpen: boolean
   onRequestClose: () => void
-  fund: Fund | undefined
+  fund: Fund
 }
 const PaymentModal: React.FC<ModalProps> = ({
   isOpen,
