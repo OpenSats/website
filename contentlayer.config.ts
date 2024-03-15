@@ -113,6 +113,7 @@ export const Projects = defineDocumentType(() => ({
     git: { type: 'string' },
     twitter: { type: 'string' },
     personalTwitter: { type: 'string' },
+    nostr: { type: 'string' },
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
