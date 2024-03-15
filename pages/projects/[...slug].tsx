@@ -7,6 +7,7 @@ import { Stats } from 'utils/types'
 import { fetchPostJSON } from 'utils/api-helpers'
 import { Project } from 'contentlayer/generated'
 import CustomLink from '@/components/Link'
+import { isOpenSatsProject } from '.'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
@@ -87,23 +88,22 @@ export default function ProjectPage({
               ? 'Donate via Geyser'
               : project.donationLink.includes('opencollective')
               ? 'Donate via OpenCollective'
-              : 'Give directly'}
+              : 'Donate directly'}
           </CustomLink>
         )}
-        {stats && (
-          <div>
-            <h5>Raised</h5>
-            <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(
-              stats.usd.total + project.bonusUSD
-            )}`}</h4>
-          </div>
-        )}
-
-        {stats && (
-          <div>
-            <h5>Donations</h5>
-            <h4>{stats.btc.donations + stats.usd.donations}</h4>
-          </div>
+        {stats && isOpenSatsProject(project) && (
+          <>
+            <div>
+              <h5>Raised</h5>
+              <h4>{`${formatBtc(stats.btc.total)} ${formatUsd(
+                stats.usd.total + project.bonusUSD
+              )}`}</h4>
+            </div>
+            <div>
+              <h5>Donations</h5>
+              <h4>{stats.btc.donations + stats.usd.donations}</h4>
+            </div>
+          </>
         )}
       </aside>
     </>
