@@ -9,8 +9,6 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
   projects,
   funds,
 }) => {
-  const [modalOpen, setModalOpen] = useState(false)
-
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
   const [openSatsProjects, setOpenSatsProjects] = useState<Fund[]>()
 
@@ -19,12 +17,12 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
       projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
     )
     setOpenSatsProjects(funds.sort((a, b) => a.title.localeCompare(b.title)))
-  }, [projects])
+  }, [projects, funds])
 
   return (
     <>
       <Head>
-        <title>OpenSats | Projects</title>
+        <title>OpenSats | Funds & Projects</title>
       </Head>
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
@@ -35,7 +33,12 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
             openSatsProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard
-                  project={p}
+                  slug={p.slug}
+                  title={p.title}
+                  summary={p.summary}
+                  coverImage={p.coverImage}
+                  nym={p.nym}
+                  tags={p.tags}
                   customImageStyles={{ objectFit: 'cover' }}
                 />
               </li>
@@ -50,7 +53,14 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
-                <ProjectCard project={p} />
+                <ProjectCard
+                  slug={p.slug}
+                  title={p.title}
+                  summary={p.summary}
+                  coverImage={p.coverImage}
+                  nym={p.nym}
+                  tags={p.tags}
+                />
               </li>
             ))}
         </ul>

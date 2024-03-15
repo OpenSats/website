@@ -4,16 +4,24 @@ import { Project } from 'contentlayer/generated'
 import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
-  project: Project
+  slug
+  title
+  summary
+  coverImage
+  nym
+  tags
   customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
+  slug,
+  title,
+  summary,
+  coverImage,
+  nym,
+  tags,
   customImageStyles,
 }) => {
-  const { slug, title, summary, coverImage, nym, tags } = project
-
   const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
 
   useEffect(() => {
