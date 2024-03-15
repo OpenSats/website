@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects } from 'contentlayer/generated'
-import Link from '@/components/Link'
 import { Project } from 'contentlayer/generated'
 
 const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {

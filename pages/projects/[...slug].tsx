@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { Stats } from 'utils/types'
 import { fetchPostJSON } from 'utils/api-helpers'
 import { Project } from 'contentlayer/generated'
-import PaymentModal from '@/components/PaymentModal'
 import CustomLink from '@/components/Link'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
@@ -62,12 +61,6 @@ export default function ProjectPage({
     setModalOpen(false)
   }
 
-  function openPaymentModal() {
-    console.log('opening single project modal...')
-    setSelectedProject(project)
-    setModalOpen(true)
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       setStats(undefined)
@@ -113,11 +106,6 @@ export default function ProjectPage({
           </div>
         )}
       </aside>
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
     </>
   )
 }
