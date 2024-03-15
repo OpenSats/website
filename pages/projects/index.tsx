@@ -9,14 +9,14 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
   projects,
   funds,
 }) => {
-  const [sortedProjects, setSortedProjects] = useState<Project[]>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<Fund[]>()
+  const [showcaseProjects, setShowcaseProjects] = useState<Project[]>()
+  const [openSatsFunds, setOpenSatsFunds] = useState<Fund[]>()
 
   useEffect(() => {
-    setSortedProjects(
+    setShowcaseProjects(
       projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
     )
-    setOpenSatsProjects(funds.sort((a, b) => a.title.localeCompare(b.title)))
+    setOpenSatsFunds(funds.sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects, funds])
 
   return (
@@ -29,16 +29,16 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
           <h1 id="funds">Our Funds</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3">
-          {openSatsProjects &&
-            openSatsProjects.map((p, i) => (
+          {openSatsFunds &&
+            openSatsFunds.map((f, i) => (
               <li key={i} className="">
                 <ProjectCard
-                  slug={p.slug}
-                  title={p.title}
-                  summary={p.summary}
-                  coverImage={p.coverImage}
-                  nym={p.nym}
-                  tags={p.tags}
+                  slug={f.slug}
+                  title={f.title}
+                  summary={f.summary}
+                  coverImage={f.coverImage}
+                  nym={f.nym}
+                  tags={f.tags}
                   customImageStyles={{ objectFit: 'cover' }}
                 />
               </li>
@@ -50,8 +50,8 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
           <h1 id="funds">Project Showcase</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
+          {showcaseProjects &&
+            showcaseProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard
                   slug={p.slug}
