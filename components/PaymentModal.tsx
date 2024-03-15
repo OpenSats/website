@@ -3,19 +3,19 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
-import { Project } from 'contentlayer/generated'
+import { Fund } from 'contentlayer/generated'
 
 type ModalProps = {
   isOpen: boolean
   onRequestClose: () => void
-  project: Project | undefined
+  fund: Fund | undefined
 }
 const PaymentModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
-  project,
+  fund,
 }) => {
-  if (!project) {
+  if (!fund) {
     // We never see this yeah?
     return <div />
   }
@@ -42,23 +42,23 @@ const PaymentModal: React.FC<ModalProps> = ({
       <div className="flex flex-col space-y-4 py-4">
         <div className="flex items-center gap-4">
           <Image
-            alt={project.title}
-            src={project.coverImage}
+            alt={fund.title}
+            src={fund.coverImage}
             width={96}
             height={96}
             objectFit="cover"
             className="rounded-xl"
           />
           <div className="flex flex-col">
-            <h2 className="font-sans font-bold">{project.title}</h2>
+            <h2 className="font-sans font-bold">{fund.title}</h2>
             <h3 className="text-textgray font-sans">Pledge your support</h3>
           </div>
         </div>
       </div>
       <DonationForm
-        projectNamePretty={project.title}
-        btcpay={project.btcpay}
-        zaprite={project.zaprite}
+        projectNamePretty={fund.title}
+        btcpay={fund.btcpay}
+        zaprite={fund.zaprite}
       />
     </ReactModal>
   )
