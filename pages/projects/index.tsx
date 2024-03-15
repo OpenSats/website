@@ -33,7 +33,7 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
             openSatsFunds.map((f, i) => (
               <li key={i} className="">
                 <ProjectCard
-                  slug={f.slug}
+                  slug={`/funds/${f.slug}`}
                   title={f.title}
                   summary={f.summary}
                   coverImage={f.coverImage}
@@ -54,7 +54,7 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
             showcaseProjects.map((p, i) => (
               <li key={i} className="">
                 <ProjectCard
-                  slug={p.slug}
+                  slug={`/projects/${p.slug}`}
                   title={p.title}
                   summary={p.summary}
                   coverImage={p.coverImage}

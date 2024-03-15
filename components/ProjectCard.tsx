@@ -54,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure className={cardStyle}>
-      <Link href={`/projects/${slug}`} passHref>
+      <Link href={`${slug}`} passHref>
         <div className="flex h-36 w-full sm:h-52">
           <Image
             alt={title}
