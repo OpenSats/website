@@ -4,18 +4,24 @@ import { Project } from 'contentlayer/generated'
 import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
-  project: Project
-  openPaymentModal: (project: Project) => void
+  slug
+  title
+  summary
+  coverImage
+  nym
+  tags
   customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  openPaymentModal,
+  slug,
+  title,
+  summary,
+  coverImage,
+  nym,
+  tags,
   customImageStyles,
 }) => {
-  const { slug, title, summary, coverImage, nym, tags } = project
-
   const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
 
   useEffect(() => {
@@ -48,7 +54,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure className={cardStyle}>
-      <Link href={`/projects/${slug}`} passHref>
+      <Link href={`${slug}`} passHref>
         <div className="flex h-36 w-full sm:h-52">
           <Image
             alt={title}

@@ -8,11 +8,11 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { NewsletterForm } from 'pliny/ui/NewsletterForm'
-import { allBlogs, allProjects } from 'contentlayer/generated'
-import type { Blog, Project } from 'contentlayer/generated'
+import { allBlogs, allProjects, allFunds } from 'contentlayer/generated'
+import type { Blog, Fund } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import PaymentModal from '../components/PaymentModal'
-import { isNotOpenSatsProject } from './projects'
+import { isShowcaseProject } from './projects'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
@@ -23,13 +23,11 @@ export const getStaticProps = async () => {
   const posts = allCoreContent(sortedPosts)
 
   const projects = allProjects
-    .filter(isNotOpenSatsProject)
+    .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
 
-  const generalFund = allProjects.find((p) => p.slug === 'general_fund')
-  const opsFund = allProjects.find(
-    (p) => p.slug === 'opensats_operations_budget'
-  )
+  const generalFund = allFunds.find((f) => f.slug === 'general_fund')
+  const opsFund = allFunds.find((f) => f.slug === 'opensats_operations_budget')
 
   return { props: { posts, projects, generalFund, opsFund } }
 }
@@ -44,14 +42,14 @@ export default function Home({
 
   const router = useRouter()
 
-  const [selectedProject, setSelectedProject] = useState<Project>()
+  const [selectedFund, setSelectedFund] = useState<Fund>()
 
   function closeModal() {
     setModalOpen(false)
   }
 
-  function openPaymentModal(project: Project) {
-    setSelectedProject(project)
+  function openPaymentModal(fund: Fund) {
+    setSelectedFund(fund)
     setModalOpen(true)
   }
 
@@ -271,10 +269,7 @@ export default function Home({
           <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             Browse through a showcase of projects supported by us.
           </p>
-          <ProjectList
-            projects={projects}
-            openPaymentModal={openPaymentModal}
-          />
+          <ProjectList projects={projects} />
           <div className="flex justify-end pt-4 text-base font-medium leading-6">
             <Link
               href="/projects"
@@ -294,7 +289,7 @@ export default function Home({
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
-        project={selectedProject}
+        fund={selectedFund}
       />
     </>
   )

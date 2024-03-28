@@ -108,6 +108,30 @@ export const Projects = defineDocumentType(() => ({
     summary: { type: 'string', required: true },
     nym: { type: 'string', required: true },
     website: { type: 'string' },
+    donationLink: { type: 'string' },
+    coverImage: { type: 'string', required: true },
+    git: { type: 'string' },
+    twitter: { type: 'string' },
+    personalTwitter: { type: 'string' },
+    nostr: { type: 'string' },
+    tags: { type: 'list', of: { type: 'string' } },
+    bonusUSD: { type: 'number', default: 0 },
+    hidden: { type: 'boolean' },
+    showcase: { type: 'boolean' },
+  },
+  computedFields,
+}))
+
+export const Funds = defineDocumentType(() => ({
+  name: 'Fund',
+  filePathPattern: 'funds/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    dateAdded: { type: 'date', required: true },
+    summary: { type: 'string', required: true },
+    nym: { type: 'string', required: true },
+    website: { type: 'string' },
     coverImage: { type: 'string', required: true },
     git: { type: 'string' },
     twitter: { type: 'string' },
@@ -117,13 +141,14 @@ export const Projects = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
+    showcase: { type: 'boolean' },
   },
   computedFields,
 }))
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Pages, Projects],
+  documentTypes: [Blog, Authors, Pages, Projects, Funds],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
