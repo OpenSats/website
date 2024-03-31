@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
-import type { Project } from 'contentlayer/generated'
-import { allProjects } from 'contentlayer/generated'
+import type { Fund } from 'contentlayer/generated'
+import { allFunds } from 'contentlayer/generated'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 
@@ -22,30 +22,30 @@ export default async function handler(
         throw new Error('Invalid amount.')
       }
       if (!btcpay) {
-        throw new Error('Invalid project.')
+        throw new Error('Invalid fund.')
       }
 
-      let project: Project
+      let fund: Fund
       try {
-        project = allProjects.find((p) => p.btcpay === btcpay)
+        fund = allFunds.find((f) => f.btcpay === btcpay)
       } catch {
-        throw new Error('Invalid project.')
+        throw new Error('Invalid fund.')
       }
       const reqData = {
         currency: CURRENCY,
         metadata: {
-          orderId: project.btcpay,
-          project_name: project.title,
+          orderId: fund.btcpay,
+          fund_name: fund.title,
           buyerName: name || 'anonymous',
           buyerEmail: email || null,
           posData: {
-            orderId: project.btcpay,
-            zaprite_campaign: project.zaprite,
-            project_name: project.title,
+            orderId: fund.btcpay,
+            zaprite_campaign: fund.zaprite,
+            fund_name: fund.title,
             buyerName: name || 'anonymous',
             buyerEmail: email || null,
           },
-          zaprite_campaign: project.zaprite,
+          zaprite_campaign: fund.zaprite,
           recipient_uuid: ZAPRITE_USER_UUID,
         },
         checkout: { redirectURL: REDIRECT },

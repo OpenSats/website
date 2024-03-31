@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, coverImage, website, twitter, git } = content
+  const { title, summary, coverImage, website, twitter, git, nostr } = content
   return (
     <>
       <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
@@ -33,6 +33,9 @@ export default function PageLayout({ children, content }: Props) {
                 href={`https://twitter.com/${twitter}`}
               />
               <SocialIcon kind="github" href={git} />
+              {nostr && (
+                <SocialIcon kind="nostr" href={`https://njump.me/${nostr}`} />
+              )}
             </div>
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
