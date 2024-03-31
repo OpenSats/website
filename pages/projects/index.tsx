@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Link from '@/components/Link'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import ProjectCard from '../../components/ProjectCard'
@@ -64,6 +65,15 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
               </li>
             ))}
         </ul>
+        <div className="flex justify-end pt-4 text-base font-medium leading-6">
+          <Link
+            href="/projects/all"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="View All Projects"
+          >
+            All Projects &rarr;
+          </Link>
+        </div>
       </section>
     </>
   )
