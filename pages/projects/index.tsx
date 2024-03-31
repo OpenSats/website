@@ -1,56 +1,45 @@
 import type { NextPage } from 'next'
+import Link from '@/components/Link'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
-import { allProjects } from 'contentlayer/generated'
-import Link from '@/components/Link'
-import { Project } from 'contentlayer/generated'
+import { allProjects, allFunds } from 'contentlayer/generated'
+import { Project, Fund } from 'contentlayer/generated'
 
-const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
-  const [modalOpen, setModalOpen] = useState(false)
-
-  const [selectedProject, setSelectedProject] = useState<Project>()
-
-  const [sortedProjects, setSortedProjects] = useState<Project[]>()
-  const [openSatsProjects, setOpenSatsProjects] = useState<Project[]>()
+const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
+  projects,
+  funds,
+}) => {
+  const [showcaseProjects, setShowcaseProjects] = useState<Project[]>()
+  const [openSatsFunds, setOpenSatsFunds] = useState<Fund[]>()
 
   useEffect(() => {
-    setSortedProjects(
-      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
+    setShowcaseProjects(
+      projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
     )
-    setOpenSatsProjects(
-      projects
-        .filter(isOpenSatsProject)
-        .sort((a, b) => a.title.localeCompare(b.title))
-    )
-  }, [projects])
-
-  function closeModal() {
-    setModalOpen(false)
-  }
-
-  function openPaymentModal(project: Project) {
-    setSelectedProject(project)
-    setModalOpen(true)
-  }
+    setOpenSatsFunds(funds.sort((a, b) => a.title.localeCompare(b.title)))
+  }, [projects, funds])
 
   return (
     <>
       <Head>
-        <title>OpenSats | Projects</title>
+        <title>OpenSats | Funds & Projects</title>
       </Head>
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Our Funds</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3">
-          {openSatsProjects &&
-            openSatsProjects.map((p, i) => (
+          {openSatsFunds &&
+            openSatsFunds.map((f, i) => (
               <li key={i} className="">
                 <ProjectCard
-                  project={p}
-                  openPaymentModal={openPaymentModal}
+                  slug={`/funds/${f.slug}`}
+                  title={f.title}
+                  summary={f.summary}
+                  coverImage={f.coverImage}
+                  nym={f.nym}
+                  tags={f.tags}
                   customImageStyles={{ objectFit: 'cover' }}
                 />
               </li>
@@ -62,19 +51,30 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
           <h1 id="funds">Project Showcase</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-          {sortedProjects &&
-            sortedProjects.map((p, i) => (
+          {showcaseProjects &&
+            showcaseProjects.map((p, i) => (
               <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+                <ProjectCard
+                  slug={`/projects/${p.slug}`}
+                  title={p.title}
+                  summary={p.summary}
+                  coverImage={p.coverImage}
+                  nym={p.nym}
+                  tags={p.tags}
+                />
               </li>
             ))}
         </ul>
+        <div className="flex justify-end pt-4 text-base font-medium leading-6">
+          <Link
+            href="/projects/all"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            aria-label="View All Projects"
+          >
+            All Projects &rarr;
+          </Link>
+        </div>
       </section>
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
     </>
   )
 }
@@ -83,10 +83,12 @@ export default AllProjects
 
 export async function getStaticProps({ params }: { params: any }) {
   const projects = allProjects
+  const funds = allFunds
 
   return {
     props: {
       projects,
+      funds,
     },
   }
 }
@@ -97,4 +99,8 @@ export function isOpenSatsProject(project: Project): boolean {
 
 export function isNotOpenSatsProject(project: Project): boolean {
   return !isOpenSatsProject(project)
+}
+
+export function isShowcaseProject(project: Project): boolean {
+  return isNotOpenSatsProject(project) && project.showcase
 }

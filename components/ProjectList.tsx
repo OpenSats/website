@@ -6,13 +6,8 @@ type ProjectListProps = {
   header?: string
   exclude?: string
   projects: Project[]
-  openPaymentModal: (project: Project) => void
 }
-const ProjectList: React.FC<ProjectListProps> = ({
-  exclude,
-  projects,
-  openPaymentModal,
-}) => {
+const ProjectList: React.FC<ProjectListProps> = ({ exclude, projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
 
   useEffect(() => {
@@ -27,7 +22,14 @@ const ProjectList: React.FC<ProjectListProps> = ({
         {sortedProjects &&
           sortedProjects.slice(0, 4).map((p, i) => (
             <li key={i} className="">
-              <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+              <ProjectCard
+                slug={`/projects/${p.slug}`}
+                title={p.title}
+                summary={p.summary}
+                coverImage={p.coverImage}
+                nym={p.nym}
+                tags={p.tags}
+              />
             </li>
           ))}
       </ul>
