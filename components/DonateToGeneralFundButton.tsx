@@ -6,7 +6,7 @@ import PaymentModal from './PaymentModal'
 export default function DonateToGeneralFundButton() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedFund, setSelectedFund] = useState<Fund>()
-  const generalFund = allFunds.find((p) => p.slug === 'general_fund')
+  const generalFund = allFunds.find((p) => p.slug === 'general')
 
   function closeModal() {
     setModalOpen(false)

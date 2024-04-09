@@ -6,9 +6,7 @@ import PaymentModal from './PaymentModal'
 export default function DonateToOperationsButton() {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedFund, setSelectedFund] = useState<Fund>()
-  const operationsBudget = allFunds.find(
-    (p) => p.slug === 'opensats_operations_budget'
-  )
+  const operationsBudget = allFunds.find((p) => p.slug === 'ops')
 
   function closeModal() {
     setModalOpen(false)

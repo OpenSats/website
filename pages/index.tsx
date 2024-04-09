@@ -26,8 +26,8 @@ export const getStaticProps = async () => {
     .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
 
-  const generalFund = allFunds.find((f) => f.slug === 'general_fund')
-  const opsFund = allFunds.find((f) => f.slug === 'opensats_operations_budget')
+  const generalFund = allFunds.find((f) => f.slug === 'general')
+  const opsFund = allFunds.find((f) => f.slug === 'ops')
 
   return { props: { posts, projects, generalFund, opsFund } }
 }
