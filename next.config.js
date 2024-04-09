@@ -100,6 +100,11 @@ module.exports = () => {
           destination: '/funds/ops',
           permanent: true,
         },
+        {
+          source: '/projects',
+          destination: '/funds',
+          permanent: true,
+        },
       ]
     },
     webpack: (config, options) => {
