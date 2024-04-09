@@ -90,6 +90,16 @@ module.exports = () => {
           destination: '/funds/opensats_operations_budget',
           permanent: true,
         },
+        {
+          source: '/funds/general_fund',
+          destination: '/funds/general',
+          permanent: true,
+        },
+        {
+          source: '/funds/opensats_operations_budget',
+          destination: '/funds/ops',
+          permanent: true,
+        },
       ]
     },
     webpack: (config, options) => {
