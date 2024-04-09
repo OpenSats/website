@@ -67,11 +67,11 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
         </ul>
         <div className="flex justify-end pt-4 text-base font-medium leading-6">
           <Link
-            href="/projects/all"
+            href="/projects/showcase"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="View All Projects"
+            aria-label="View Project Showcase"
           >
-            All Projects &rarr;
+            More Projects &rarr;
           </Link>
         </div>
       </section>
