@@ -80,6 +80,11 @@ module.exports = () => {
           destination: '/funds/nostr',
           permanent: true,
         },
+        {
+          source: '/projects/general_fund',
+          destination: '/funds/general_fund',
+          permanent: true,
+        },
       ]
     },
     webpack: (config, options) => {
