@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects } from 'contentlayer/generated'
 import { Project } from 'contentlayer/generated'
-import { isNotOpenSatsProject } from '.'
+import { isNotOpenSatsProject } from '../funds'
 
 const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()

@@ -12,7 +12,7 @@ import { allBlogs, allProjects, allFunds } from 'contentlayer/generated'
 import type { Blog, Fund } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import PaymentModal from '../components/PaymentModal'
-import { isShowcaseProject } from './projects'
+import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
