@@ -28,10 +28,12 @@ export default function PageLayout({ children, content }: Props) {
             />
             <div className="flex space-x-3 pt-6">
               <SocialIcon kind="website" href={website} />
-              <SocialIcon
-                kind="twitter"
-                href={`https://twitter.com/${twitter}`}
-              />
+              {twitter && (
+                <SocialIcon
+                  kind="twitter"
+                  href={`https://twitter.com/${twitter}`}
+                />
+              )}
               <SocialIcon kind="github" href={git} />
               {nostr && (
                 <SocialIcon kind="nostr" href={`https://njump.me/${nostr}`} />
