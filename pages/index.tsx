@@ -12,7 +12,7 @@ import { allBlogs, allProjects, allFunds } from 'contentlayer/generated'
 import type { Blog, Fund } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
 import PaymentModal from '../components/PaymentModal'
-import { isShowcaseProject } from './projects'
+import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 
@@ -26,8 +26,8 @@ export const getStaticProps = async () => {
     .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
 
-  const generalFund = allFunds.find((f) => f.slug === 'general_fund')
-  const opsFund = allFunds.find((f) => f.slug === 'opensats_operations_budget')
+  const generalFund = allFunds.find((f) => f.slug === 'general')
+  const opsFund = allFunds.find((f) => f.slug === 'ops')
 
   return { props: { posts, projects, generalFund, opsFund } }
 }
