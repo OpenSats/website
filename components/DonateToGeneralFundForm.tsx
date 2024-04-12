@@ -2,7 +2,7 @@ import { allFunds } from 'contentlayer/generated'
 import DonationForm from './DonationForm'
 
 export default function DonateToGeneralFundButton() {
-  const generalFund = allFunds.find((f) => f.slug === 'general_fund')
+  const generalFund = allFunds.find((f) => f.slug === 'general')
 
   return (
     <>

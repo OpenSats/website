@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects } from 'contentlayer/generated'
 import { Project } from 'contentlayer/generated'
-import { isNotOpenSatsProject } from '.'
+import { isNotOpenSatsProject } from '../funds'
 
-const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
+const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
 
   useEffect(() => {
@@ -18,11 +18,11 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
   return (
     <>
       <Head>
-        <title>OpenSats | All Projects</title>
+        <title>OpenSats | Project Showcase</title>
       </Head>
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">All Projects</h1>
+          <h1 id="funds">Project Showcase</h1>
         </div>
         <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {sortedProjects &&
@@ -44,7 +44,7 @@ const AllProjects: NextPage<{ projects: Project[] }> = ({ projects }) => {
   )
 }
 
-export default AllProjects
+export default ProjectShowcase
 
 export async function getStaticProps({ params }: { params: any }) {
   const projects = allProjects
