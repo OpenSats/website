@@ -65,6 +65,18 @@ ${req.body.personal_github ? req.body.personal_github : ''}
       issueLabels.push('bitcoin') // LN = subset of Bitcoin
     }
 
+    // Repo set according to "main focus"
+    let appRepo = GH_APP_REPO
+    if (mainFocus === 'nostr') {
+      appRepo = `${GH_APP_REPO}-nostr`
+    }
+    if (mainFocus === 'lightning') {
+      appRepo = `${GH_APP_REPO}-layer2`
+    }
+    if (mainFocus === 'bitcoin-core') {
+      appRepo = `${GH_APP_REPO}-core`
+    }
+
     // Tag depending on request for grant and/or request for listing
     req.body.general_fund && issueLabels.push('grant')
     req.body.LTS && issueLabels.push('grant') // LTS = subset of grant
@@ -79,7 +91,7 @@ ${req.body.personal_github ? req.body.personal_github : ''}
     try {
       await octokit.rest.issues.create({
         owner: GH_ORG,
-        repo: GH_APP_REPO,
+        repo: appRepo,
         title: issueTitle,
         body: issueBody,
         labels: issueLabels,
