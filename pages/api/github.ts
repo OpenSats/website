@@ -50,11 +50,11 @@ ${req.body.bios}
 
 ### Anything Else
 
-${req.body.anything_else}
+${req.body.anything_else ? req.body.anything_else : 'No.'}
 
 ### Other Relevant Links
 
-${req.body.relevant_links}
+${req.body.relevant_links ? req.body.relevant_links : 'None.'}
 
 ---
 
