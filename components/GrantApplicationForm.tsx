@@ -290,7 +290,7 @@ export default function ApplicationForm() {
       <FormButton
         variant={isFLOSS ? 'enabled' : 'disabled'}
         type="submit"
-        disabled={true || loading}
+        disabled={loading}
       >
         Submit Grant Application
       </FormButton>
