@@ -52,10 +52,6 @@ ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
 
-### Other Relevant Links
-
-${req.body.relevant_links ? req.body.relevant_links : 'None.'}
-
 ---
 
 ${req.body.github}
