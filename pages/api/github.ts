@@ -46,21 +46,16 @@ ${req.body.what_funding}
 
 ${req.body.references}
 
-${req.body.bios}
+${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 ### Anything Else
 
-${req.body.anything_else}
-
-### Other Relevant Links
-
-${req.body.relevant_links}
-${req.body.social_media}
+${req.body.anything_else ? req.body.anything_else : 'No.'}
 
 ---
 
-${req.body.github}
-${req.body.personal_github}
+${req.body.github ? req.body.github : ''}
+${req.body.personal_github ? req.body.personal_github : ''}
         `
 
     // Label set according to "main focus"
