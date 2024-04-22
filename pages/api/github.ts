@@ -46,7 +46,7 @@ ${req.body.what_funding}
 
 ${req.body.references}
 
-${req.body.bios}
+${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 ### Anything Else
 
