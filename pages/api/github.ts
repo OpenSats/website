@@ -54,8 +54,8 @@ ${req.body.anything_else ? req.body.anything_else : 'No.'}
 
 ---
 
-${req.body.github}
-${req.body.personal_github}
+${req.body.github ? req.body.github : ''}
+${req.body.personal_github ? req.body.personal_github : ''}
         `
 
     // Label set according to "main focus"
