@@ -61,8 +61,8 @@ ${req.body.personal_github ? req.body.personal_github : ''}
     // Label set according to "main focus"
     const mainFocus = `${req.body.main_focus}`.toLowerCase()
     const issueLabels = [mainFocus]
-    if (mainFocus === 'lightning') {
-      issueLabels.push('bitcoin') // LN = subset of Bitcoin
+    if (mainFocus === 'layer2') {
+      issueLabels.push('bitcoin') // LN & L2 = subset of Bitcoin
     }
 
     // Repo set according to "main focus"
@@ -70,10 +70,10 @@ ${req.body.personal_github ? req.body.personal_github : ''}
     if (mainFocus === 'nostr') {
       appRepo = `${GH_APP_REPO}-nostr`
     }
-    if (mainFocus === 'lightning') {
+    if (mainFocus === 'layer2') {
       appRepo = `${GH_APP_REPO}-layer2`
     }
-    if (mainFocus === 'bitcoin-core') {
+    if (mainFocus === 'core') {
       appRepo = `${GH_APP_REPO}-core`
     }
 

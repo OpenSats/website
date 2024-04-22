@@ -73,7 +73,7 @@ export default function ApplicationForm() {
         >
           <option value="bitcoin">Bitcoin</option>
           <option value="core">Bitcoin Core</option>
-          <option value="lightning">Lightning / Layer2</option>
+          <option value="layer2">Lightning / Layer2</option>
           <option value="nostr">nostr</option>
           <option value="other">Other</option>
         </select>
