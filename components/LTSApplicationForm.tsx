@@ -145,8 +145,8 @@ export default function ApplicationForm() {
       <label className="block">
         Budget Expectations *<br />
         <small>
-          Submit a proposed budget around how much funding you are requesting
-          and how it will be used.
+          Submit a proposed budget (in USD) around how much funding you are
+          requesting and how it will be used.
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
