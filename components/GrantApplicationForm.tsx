@@ -117,6 +117,9 @@ export default function ApplicationForm() {
         Project Timelines and Potential Milestones *<br />
         <small>
           This will help us evaluate overall scope and potential grant duration.
+          (It's ok to pivot and/or work on something else, just let us know. For
+          now we want to see that you have a rough plan and you know what you're
+          doing.)
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
