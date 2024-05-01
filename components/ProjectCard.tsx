@@ -71,7 +71,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <figcaption className="p-2">
           <h2 className="font-bold">{title}</h2>
-          <div className="mb-4 text-sm underline">by {nym}</div>
+          <div className="mb-4 text-sm">by {nym}</div>
           <div className="mb-2 line-clamp-3">{summary}</div>
         </figcaption>
       </Link>
