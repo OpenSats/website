@@ -106,6 +106,15 @@ export default function Home({
           <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
             We are a 501(c)(3) public charity. All donations are tax deductible.
           </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/donate"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Learn More"
+            >
+              Learn More &rarr;
+            </Link>
+          </div>
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
