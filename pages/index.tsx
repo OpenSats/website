@@ -94,7 +94,7 @@ export default function Home({
                 Donate to General Fund
               </button>
             </div>
-            <div className="w-full md:w-1/2">
+            <div className="hidden w-full md:block md:w-1/2">
               <button
                 onClick={openopsFundModal}
                 className="block w-full rounded border border-orange-500 bg-transparent px-4 text-xl font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-black dark:hover:text-white"
