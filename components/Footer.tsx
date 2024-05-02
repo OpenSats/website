@@ -24,9 +24,6 @@ export default function Footer() {
           />
         </div>
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <div>{`© ${new Date().getFullYear()}`}</div>
-          <div>{siteMetadata.author}</div>
-          <div>·</div>
           <Link href="/terms">Terms</Link>
           <div>·</div>
           <Link href="/transparency">Transparency</Link>
@@ -35,12 +32,13 @@ export default function Footer() {
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
           Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit
-          organization.
-          <br />
-          All gifts and donations are tax-deductible to the full extent of the
-          law.
+          organization. All gifts and donations are tax-deductible to the full
+          extent of the law.
         </div>
         <div className="mb-2 flex space-x-2 text-xs text-gray-500 dark:text-gray-400"></div>
+        <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
+          {`© ${new Date().getFullYear()} ${siteMetadata.author}`}
+        </div>
       </div>
     </footer>
   )
