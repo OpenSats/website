@@ -51,7 +51,19 @@ export default function AuthorLayout({ children, content }: Props) {
                   @
                 </span>
               )}
-              <span className="">{nym ? nym : name}</span>
+              <span className="">
+                {nym ? (
+                  nostr ? (
+                    <CustomLink href={`https://njump.me/${nostr}`}>
+                      {nym}
+                    </CustomLink>
+                  ) : (
+                    nym
+                  )
+                ) : (
+                  name
+                )}
+              </span>
             </h3>
             <div className="text-gray-500 dark:text-gray-400">
               {occupation == 'Volunteer' ? (
