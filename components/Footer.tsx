@@ -29,6 +29,8 @@ export default function Footer() {
           <Link href="/transparency">Transparency</Link>
           <div>·</div>
           <Link href="/privacy">Privacy</Link>
+          <div>·</div>
+          <Link href="/contact">Contact</Link>
         </div>
         <div className="space-x-4 text-center text-xs text-gray-500 dark:text-gray-400">
           Open Sats Initiative, Inc. (EIN 85-2722249) is a 501(c)(3) non-profit
