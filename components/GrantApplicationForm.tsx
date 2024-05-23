@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
+import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -146,6 +147,23 @@ export default function ApplicationForm() {
         <span className="ml-2">Is the project free and open-source? *</span>
       </label>
 
+      <label className="block">
+        Open-Source License *<br />
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('license', { required: true })}
+        />
+        <small>
+          We focus on supporting projects that are free as in freedom and open
+          to all. Your project should have a proper open-source license &
+          educational materials should be available to the public under an{' '}
+          <CustomLink href="https://www.gnu.org/licenses/">
+            open license
+          </CustomLink>
+          .
+        </small>
+      </label>
       <hr />
       <h2>Project Budget</h2>
 
