@@ -12,7 +12,7 @@ services:
     stdin_open: true
     labels:
       traefik.enable: true
-      traefik.http.routers.openpico.rule: Host(`${MONERO_HOST}`)
+      traefik.http.routers.openpico.rule: Host(`monerofund.org`)
       traefik.port: 3000
     ports:
         - 3000:3000
