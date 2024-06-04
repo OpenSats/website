@@ -2,7 +2,6 @@
 FROM node:19
 WORKDIR /opt/app
 
-ENV NODE_ENV production
 RUN chown -R node:node /opt/app
 USER node
 
@@ -15,6 +14,7 @@ RUN npm install
 COPY --chown=node:node . /opt/app
 RUN npm run lint
 
+ENV NODE_ENV production
 RUN npm run build
 CMD [ "npm", "run", "start" ]
 

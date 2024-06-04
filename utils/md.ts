@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import sanitize from 'sanitize-filename'
 
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
@@ -42,7 +43,7 @@ export function getSingleFile(path: string) {
 export function getPostBySlug(slug: string) {
   const fields = FIELDS;
   const realSlug = slug.replace(/\.md$/, '')
-  const fullPath = join(postsDirectory, `${realSlug}.md`)
+  const fullPath = join(postsDirectory, `${sanitize(realSlug)}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 

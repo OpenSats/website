@@ -8,7 +8,7 @@ import { PayReq } from '../../utils/types'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
-  apiVersion: "2022-08-01",
+  apiVersion: "2024-04-10",
 })
 
 export default async function handler(

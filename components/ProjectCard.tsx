@@ -1,12 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Image from 'next/image'
-
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import Link from 'next/link'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import escapeHTML from 'escape-html'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import { ProjectItem } from '../utils/types'
-import PaymentModal from './PaymentModal'
 import ShareButtons from './ShareButtons'
 
 export type ProjectCardProps = {
@@ -24,7 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
       <div className="relative h-64 w-full">
-        <Link href={`/projects/${slug}`} passHref>
+        <Link href={`/projects/${escapeHTML(slug)}`} passHref>
           <div className='relative h-64 w-full'>
             <Image
               alt={title}
@@ -42,7 +40,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <h2>{title}</h2>
         <p>
           by{' '}
-          <Link href={personalWebsite} passHref legacyBehavior>
+          <Link href={escapeHTML(personalWebsite)} passHref legacyBehavior>
             <a className="projectlist">{nym}</a>
           </Link>
         </p>
@@ -58,7 +56,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             Donate
           </button> }
           <div className="flex items-center justify-center basis-1/2">
-            <Link href={`/projects/${slug}`} passHref legacyBehavior>
+            <Link href={`/projects/${escapeHTML(slug)}`} passHref legacyBehavior>
               <a className="projectlist">View Details</a>
             </Link>
             <FontAwesomeIcon
