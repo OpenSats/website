@@ -29,7 +29,6 @@ export default async function handler(
       const params: Stripe.Checkout.SessionCreateParams = {
         mode: 'payment',
         submit_type: 'donate',
-        payment_method_types: ['card'],
         currency: CURRENCY,
         line_items: [
           {
