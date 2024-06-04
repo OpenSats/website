@@ -7,9 +7,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
     environment:
       - CHOKIDAR_USEPOLLING=true
     stdin_open: true
