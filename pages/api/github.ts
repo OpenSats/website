@@ -76,6 +76,9 @@ ${req.body.personal_github ? req.body.personal_github : ''}
     if (mainFocus === 'core') {
       appRepo = `${GH_APP_REPO}-core`
     }
+    if (mainFocus === 'education') {
+      appRepo = `${GH_APP_REPO}-education`
+    }
 
     // Tag depending on request for grant and/or request for listing
     req.body.general_fund && issueLabels.push('grant')
