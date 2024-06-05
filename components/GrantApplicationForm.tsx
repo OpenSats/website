@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
+import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -74,6 +75,7 @@ export default function ApplicationForm() {
           <option value="bitcoin">Bitcoin</option>
           <option value="core">Bitcoin Core</option>
           <option value="layer2">Lightning / Layer2</option>
+          <option value="education">Education</option>
           <option value="nostr">nostr</option>
           <option value="other">Other</option>
         </select>
@@ -140,11 +142,28 @@ export default function ApplicationForm() {
         <input
           type="checkbox"
           className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source', { required: true })}
+          {...register('free_open_source')}
         />
-        <span className="ml-2">Is the project free and open-source? *</span>
+        <span className="ml-2">Is the project free and open-source?</span>
       </label>
 
+      <label className="block">
+        Open-Source License *<br />
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('license', { required: true })}
+        />
+        <small>
+          We focus on supporting projects that are free as in freedom and open
+          to all. Your project should have a proper open-source license &
+          educational materials should be available to the public under a{' '}
+          <CustomLink href="https://www.gnu.org/licenses/license-list.html">
+            free and open license
+          </CustomLink>
+          .
+        </small>
+      </label>
       <hr />
       <h2>Project Budget</h2>
 
