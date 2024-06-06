@@ -1,6 +1,5 @@
 import ReactModal from 'react-modal'
 import Image from 'next/image'
-import waffledog from '../public/waffledog.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
@@ -11,6 +10,7 @@ type ModalProps = {
   onRequestClose: () => void
   project: ProjectItem | undefined
 }
+
 const PaymentModal: React.FC<ModalProps> = ({
   isOpen,
   onRequestClose,
@@ -25,7 +25,7 @@ const PaymentModal: React.FC<ModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="p-16 sm:p-8 bg-white shadow-xl overflow-y-auto max-h-full sm:rounded-xl w-full sm:m-8"
+      className="max-h-full max-w-4xl w-full overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:rounded-xl"
       overlayClassName="inset-0 fixed bg-[rgba(0,_0,_0,_0.75)] flex items-center justify-center"
       appElement={
         typeof window === 'undefined'
@@ -33,15 +33,15 @@ const PaymentModal: React.FC<ModalProps> = ({
           : document?.getElementById('root') || undefined
       }
     >
-      <div className="flex justify-end relative -mb-12">
+      <div className="relative -mb-12 flex justify-end">
         <FontAwesomeIcon
           icon={faClose}
-          className="w-[2rem] h-[2rem] hover:text-primary cursor-pointer"
+          className="hover:text-primary h-[2rem] w-[2rem] cursor-pointer"
           onClick={onRequestClose}
         />
       </div>
       <div className="flex flex-col space-y-4 py-4">
-        <div className="flex gap-4 items-center">
+        <div className="flex items-center gap-4">
           <Image
             alt={project.title}
             src={project.coverImage}
@@ -52,7 +52,7 @@ const PaymentModal: React.FC<ModalProps> = ({
           />
           <div className="flex flex-col">
             <h2 className="font-sans font-bold">{project.title}</h2>
-            <h3 className="font-sans text-textgray">Pledge your support</h3>
+            <h3 className="text-textgray font-sans">Pledge your support</h3>
           </div>
         </div>
       </div>

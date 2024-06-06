@@ -1,41 +1,30 @@
-import Navbar from './Header'
-import React from 'react'
-import Head from 'next/head'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBug } from '@fortawesome/free-solid-svg-icons'
-import Link from 'next/link'
+import { ReactNode } from 'react'
+import { Inter } from 'next/font/google'
 
-const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
+import SectionContainer from './SectionContainer'
+import Footer from './Footer'
+import Header from './Header'
+
+interface Props {
+  children: ReactNode
+}
+
+const inter = Inter({
+  subsets: ['latin'],
+})
+
+const LayoutWrapper = ({ children }: Props) => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>MAGIC Monero Fund</title>
-        <meta name="description" content="TKTK" />
-        <link rel="icon" href="https://monerofund.org/favicon.ico" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@MagicGrants" />
-        <meta name="twitter:site" content="@MagicGrants" />
-        <meta name="twitter:title" content="MAGIC Monero Fund" />
-        <meta name="twitter:image" content="https://monerofund.org/img/crystalball.jpg" />
-
-        {/* Open Graph */}
-        <meta property="og:url" content="https://monerofund.org/" key="ogurl" />
-        <meta property="og:image" content="https://monerofund.org/img/crystalball.jpg" key="ogimage" />
-        <meta property="og:site_name" content="MAGIC Monero Fund" key="ogsitename" />
-        <meta property="og:title" content="MAGIC Monero Fund" key="ogtitle" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:description" content="Support the MAGIC Monero Fund and open source software and research for the Monero Project." key="ogdesc" />
-      </Head>
-      <Navbar />
-      <main className="flex-1 flex flex-col">{ children }</main>
-      <footer className="flex justify-between p-4 md:p-8 bg-light">
-       <strong>© MAGIC Grants. This website builds upon technology by Open Sats.</strong>
-      </footer>
-    </div>
+    <SectionContainer>
+      <div
+        className={`${inter.className} flex h-screen flex-col justify-between font-sans`}
+      >
+        <Header />
+        <main className="mb-auto">{children}</main>
+        <Footer />
+      </div>
+    </SectionContainer>
   )
 }
 
-export default Layout
+export default LayoutWrapper

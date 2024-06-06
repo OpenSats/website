@@ -1,29 +1,41 @@
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-// import NavDropdown from 'react-bootstrap/NavDropdown'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
-// import Image from 'next/image'
-// import Link from 'next/link'
-// import samplelogo from '/public/favicon.png'
+import Link from './CustomLink'
+import MobileNav from './MobileNav'
+import ThemeSwitch from './ThemeSwitch'
+import headerNavLinks from '../data/headerNavLinks'
+import Logo from './Logo'
 
 const Header = () => {
   return (
-    <header className="pb-10 sm:pb-10">
-      <Navbar  collapseOnSelect expand="lg" variant="light" className="color-nav navbar-expand-sm px-2 sm:px-4 py-2.5 fixed w-full z-20 top-0 left-0">
-        <Container>
-          <Navbar.Brand href="/">MAGIC Monero Fund</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">   
-              <Nav.Link href="/apply">Apply</Nav.Link>
-              <Nav.Link href="/faq">FAQs</Nav.Link>
-              <Nav.Link href="/about">About Us</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+    <header className="flex items-center justify-between py-10">
+      <div>
+        <Link
+          href="/"
+          aria-label="Monero Fund"
+          className="flex items-center mr-3 gap-4"
+        >
+          <Logo className="w-12 h-12" />
+          <span className="text-lg font-bold">MAGIC Monero Fund</span>
+        </Link>
+      </div>
+      <div className="flex items-center text-base leading-5">
+        <div className="block">
+          {headerNavLinks.map((link) => (
+            <Link
+              key={link.title}
+              href={link.href}
+              className={
+                link.isButton
+                  ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
+                  : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
+              }
+            >
+              {link.title}
+            </Link>
+          ))}
+        </div>
+        <ThemeSwitch />
+        <MobileNav />
+      </div>
     </header>
   )
 }

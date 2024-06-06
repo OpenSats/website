@@ -40,7 +40,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
           {sortedProjects &&
             sortedProjects.map((p, i) => (
               <li key={i} className="">
-                <ProjectCard project={p} openPaymentModal={openPaymentModal} />
+                <ProjectCard project={p} />
               </li>
             ))}
         </ul>

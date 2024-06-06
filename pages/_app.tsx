@@ -1,22 +1,22 @@
-import '@fontsource/source-code-pro/400.css'
-import '@fontsource/source-code-pro/600.css'
-import '@fontsource/source-code-pro/800.css'
-import '../styles/globals.css'
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import { useEffect } from "react";
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from 'next-themes'
+import '../styles/globals.css'
+import '../styles/tailwind.css'
 
 import Layout from '../components/Layout'
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    require("../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
-  }, []);
 
   return (
+    <ThemeProvider attribute="class" defaultTheme='system'>
+      <Head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+    </ThemeProvider>
   )
 }
 

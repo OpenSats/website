@@ -1,12 +1,20 @@
-import ProgressBar from 'react-bootstrap/ProgressBar';
-
 type ProgressProps = {
-    text: number;
-  };
-
-const AnimatedExample = (props: ProgressProps) => {
-    const { text } = props;
-    return <ProgressBar animated variant="success" now={text} label={`${text}%`} />;
+  percent: number
 }
 
-export default AnimatedExample;
+const Progress = ({ percent }: ProgressProps) => {
+  return (
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full bg-gray-200 rounded-full h-4">
+        <div
+          className="bg-green-500 h-4 rounded-full text-xs"
+          style={{ width: `${percent}%` }}
+        ></div>
+      </div>
+
+      <span className="text-sm font-semibold">{percent}%</span>
+    </div>
+  )
+}
+
+export default Progress

@@ -1,9 +1,15 @@
 import markdownToHtml from '../utils/markdownToHtml'
 import { getSingleFile } from '../utils/md'
 import BigDumbMarkdown from '../components/BigDumbMarkdown'
+import xss from 'xss'
 
 export default function About({ content }: { content: string }) {
-  return <BigDumbMarkdown content={content} />
+  return (
+    <article
+      className="prose max-w-3xl mx-auto pb-8 pt-8 dark:prose-dark xl:col-span-2"
+      dangerouslySetInnerHTML={{ __html: xss(content || '') }}
+    />
+  )
 }
 
 export async function getStaticProps() {

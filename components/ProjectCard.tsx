@@ -1,71 +1,71 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import escapeHTML from 'escape-html'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
 import { ProjectItem } from '../utils/types'
-import ShareButtons from './ShareButtons'
 
 export type ProjectCardProps = {
   project: ProjectItem
-  openPaymentModal: (project: ProjectItem) => void
+  customImageStyles?: React.CSSProperties
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
-  openPaymentModal,
+  customImageStyles,
 }) => {
-  const { slug, title, summary, coverImage, git, twitter, personalTwitter, personalWebsite, nym, goal, isFunded } =
-    project
+  const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const img = document.createElement('img')
+    img.src = project.coverImage
+
+    // check if image is horizontal - added additional 10% to height to ensure only true
+    // horizontals get flagged.
+    img.onload = () => {
+      const { naturalWidth, naturalHeight } = img
+      const isHorizontal = naturalWidth >= naturalHeight * 1.1
+      setIsHorizontal(isHorizontal)
+    }
+  }, [project.coverImage])
+
+  let cardStyle
+  // if (tags.includes('Nostr')) {
+  //   cardStyle =
+  //     'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-purple-600 dark:bg-stone-900'
+  // } else if (tags.includes('Lightning')) {
+  //   cardStyle =
+  //     'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-yellow-300 dark:bg-stone-900'
+  // } else if (tags.includes('Bitcoin')) {
+  //   cardStyle =
+  //     'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-orange-400 dark:bg-stone-900'
+  // } else {
+  cardStyle =
+    'h-full space-y-4 rounded-xl border-b-4 border-orange-500 bg-stone-100 dark:bg-stone-900'
+  // }
 
   return (
-    <figure className=" bg-white space-y-4 border border-lightgray rounded-xl h-full">
-      <div className="relative h-64 w-full">
-        <Link href={`/projects/${escapeHTML(slug)}`} passHref>
-          <div className='relative h-64 w-full'>
-            <Image
-              alt={title}
-              src={coverImage}
-              layout="fill"
-              objectFit="cover"
-              objectPosition="50% 50%"
-              className="rounded-t-xl border border-lightgray cursor-pointer"
-            />
-          </div>
-        </Link>
-      </div>
-
-      <figcaption className="p-4 space-y-4">
-        <h2>{title}</h2>
-        <p>
-          by{' '}
-          <Link href={escapeHTML(personalWebsite)} passHref legacyBehavior>
-            <a className="projectlist">{nym}</a>
-          </Link>
-        </p>
-        <p className="prose line-clamp-3">{summary}</p>
-        <div className="flex justify-end"></div>
-
-        <ShareButtons project={project} />
-        <div className="flex space-x-4 items-center justify-center pt-4">
-          {(isFunded)? `` : <button
-            className="bg-black basis-1/2"
-            onClick={() => openPaymentModal(project)}
-          >
-            Donate
-          </button> }
-          <div className="flex items-center justify-center basis-1/2">
-            <Link href={`/projects/${escapeHTML(slug)}`} passHref legacyBehavior>
-              <a className="projectlist">View Details</a>
-            </Link>
-            <FontAwesomeIcon
-              icon={faArrowRight}
-              className="ml-1 w-4 h-4 text-textgray cursor-pointer"
-            />
-          </div>
+    <figure className={cardStyle}>
+      <Link href={`/projects/${project.slug}`} passHref>
+        <div className="flex h-36 w-full sm:h-52">
+          <Image
+            alt={project.title}
+            src={project.coverImage}
+            width={1200}
+            height={1200}
+            style={{
+              objectFit: 'cover',
+              ...customImageStyles,
+            }}
+            priority={true}
+            className="cursor-pointer rounded-t-xl bg-white"
+          />
         </div>
-      </figcaption>
+        <figcaption className="p-2">
+          <h2 className="font-bold">{project.title}</h2>
+          <div className="mb-4 text-sm">by {project.nym}</div>
+          <div className="mb-2 line-clamp-3">{project.summary}</div>
+        </figcaption>
+      </Link>
     </figure>
   )
 }

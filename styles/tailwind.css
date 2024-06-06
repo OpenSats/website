@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+}
+
+.data-footnote-backref {
+  @apply no-underline;
+}
+
+.csl-entry {
+  @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+}
+
+button.small {
+  @apply p-1 text-sm bg-white text-black border border-black;
+}
+
+button.group {
+  @apply p-2 text-sm bg-white text-black border border-black;
+}
+
+button.pay {
+  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black rounded-xl flex justify-start gap-4;
+}
+
+button.pay:disabled {
+  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
+}
+
+button,
+button[type='submit'] {
+  @apply py-2 px-4 text-white rounded;
+}
+
+button.secondary {
+  @apply bg-white text-black border;
+}
+
+.prose > ul > li > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose small {
+  @apply leading-normal;
+}
+
+form label {
+  @apply text-sm font-semibold leading-normal;
+}
+
+.checkbox {
+  @apply flex items-center;
+}
+
+form input[type='text'],
+form textarea {
+  @apply mt-2;
+}
