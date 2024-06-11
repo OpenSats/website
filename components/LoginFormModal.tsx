@@ -1,84 +1,67 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import {
-  Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from './ui/dialog'
 import { Input } from './ui/input'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from './ui/form'
 import { Button } from './ui/button'
-import { trpc } from '../utils/trpc'
 import { useToast } from './ui/use-toast'
 
-const schema = z
-  .object({
-    email: z.string().email(),
-    password: z.string().min(8),
-    confirmPassword: z.string().min(8),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match.',
-    path: ['confirmPassword'],
-  })
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+})
 
-type RegisterFormInputs = z.infer<typeof schema>
+type LoginFormInputs = z.infer<typeof schema>
 
 type Props = { close: () => void }
 
-function RegisterFormModal({ close }: Props) {
+function LoginFormModal({ close }: Props) {
   const { toast } = useToast()
-  const form = useForm<RegisterFormInputs>({ resolver: zodResolver(schema) })
-  const registerMutation = trpc.auth.register.useMutation()
+  const form = useForm<LoginFormInputs>({ resolver: zodResolver(schema) })
 
-  async function onSubmit(data: RegisterFormInputs) {
-    try {
-      await registerMutation.mutateAsync(data)
+  async function onSubmit(data: LoginFormInputs) {
+    const result = await signIn('credentials', {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    })
 
-      toast({
-        title: 'Please check your email to verify your account.',
-      })
-
-      close()
-    } catch (error) {
-      const errorMessage = (error as any).message
-
-      if (errorMessage === 'EMAIL_TAKEN') {
-        return form.setError(
-          'email',
-          { message: 'Email is already taken.' },
-          { shouldFocus: true }
-        )
-      }
-
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+    if (result?.error === 'INVALID_CREDENTIALS') {
+      return form.setError(
+        'password',
+        { message: 'Invalid email or password.' },
+        { shouldFocus: true }
+      )
     }
+
+    toast({
+      title: 'Successfully logged in!',
+    })
+
+    close()
   }
 
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Register</DialogTitle>
-        <DialogDescription>
-          Start supporting Monero projects today!
-        </DialogDescription>
+        <DialogTitle>Login</DialogTitle>
+        <DialogDescription>Log into your account.</DialogDescription>
       </DialogHeader>
 
       <Form {...form}>
@@ -114,25 +97,11 @@ function RegisterFormModal({ close }: Props) {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm password</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && (
               <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             )}{' '}
-            Register
+            Login
           </Button>
         </form>
       </Form>
@@ -140,4 +109,4 @@ function RegisterFormModal({ close }: Props) {
   )
 }
 
-export default RegisterFormModal
+export default LoginFormModal

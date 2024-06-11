@@ -1,15 +1,14 @@
 import { z } from 'zod'
-import { createId } from '@paralleldrive/cuid2'
+import { TRPCError } from '@trpc/server'
+
 import { publicProcedure, router } from '../trpc'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { keycloak } from '../services'
-import { TRPCError } from '@trpc/server'
 
 export const authRouter = router({
   register: publicProcedure
     .input(z.object({ email: z.string().email(), password: z.string() }))
     .mutation(async ({ input }) => {
-      console.log(input)
       await authenticateKeycloakClient()
 
       try {
