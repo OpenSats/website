@@ -1,10 +1,17 @@
+import { useState } from 'react'
+
 import Link from './CustomLink'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import headerNavLinks from '../data/headerNavLinks'
 import Logo from './Logo'
+import { Dialog, DialogTrigger } from './ui/dialog'
+import { Button } from './ui/button'
+import RegisterFormModal from './RegisterFormModal'
 
 const Header = () => {
+  const [registerIsOpen, setRegisterIsOpen] = useState(false)
+
   return (
     <header className="flex items-center justify-between py-10">
       <div>
@@ -32,6 +39,13 @@ const Header = () => {
               {link.title}
             </Link>
           ))}
+
+          <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
+            <DialogTrigger asChild>
+              <Button>Register</Button>
+            </DialogTrigger>
+            <RegisterFormModal close={() => setRegisterIsOpen(false)} />
+          </Dialog>
         </div>
         <ThemeSwitch />
         <MobileNav />

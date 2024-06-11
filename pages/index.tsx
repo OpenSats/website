@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react'
 import ProjectList from '../components/ProjectList'
 import PaymentModal from '../components/PaymentModal'
 import Link from 'next/link'
-import Image from 'next/image'
-import magiclogo from '/public/img/crystalball.jpg'
 
 import { getAllPosts } from '../utils/md'
 import { ProjectItem } from '../utils/types'
 import { useRouter } from 'next/router'
 import Typing from '../components/Typing'
 import CustomLink from '../components/CustomLink'
+import { Button } from '../components/ui/button'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -73,12 +72,13 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </p>
           <div className="flex flex-wrap py-4">
             <div className="w-full md:w-1/2">
-              <button
+              <Button
                 onClick={openGeneralFundModal}
-                className="mb-2 mr-2 w-full rounded bg-orange-500 px-4 text-xl font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white md:max-w-[98%]"
+                size="lg"
+                className="px-14 text-black font-semibold text-xl"
               >
                 Donate to Monero Comittee General Fund
-              </button>
+              </Button>
             </div>
           </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">

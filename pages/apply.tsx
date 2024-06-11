@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Link from 'next/link'
+import { Button } from '../components/ui/button'
 export default function Apply() {
   async function handleClick() {}
   const [loading, setLoading] = useState(false)
@@ -29,7 +30,7 @@ export default function Apply() {
     <div className="mx-auto flex-1 flex flex-col items-center justify-center gap-4 py-8 prose dark:prose-dark">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="apply flex flex-col gap-4 p-4 max-w-2xl"
+        className="max-w-5xl flex flex-col gap-4 p-4"
       >
         <div>
           <h1>
@@ -296,12 +297,7 @@ export default function Apply() {
           need to identify themselves to MAGIC, in accordance with US law.
         </small>
 
-        <button
-          className="mb-2 mr-2 w-full rounded bg-orange-500 px-4 text-xl font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-black dark:text-black dark:hover:text-white md:max-w-[98%] disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={loading}
-        >
-          Apply
-        </button>
+        <Button disabled={loading}>Apply</Button>
 
         <p>
           After submitting your application, please allow our team up to three

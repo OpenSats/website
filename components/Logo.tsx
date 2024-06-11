@@ -1,6 +1,3 @@
-'use client'
-
-import { useTheme } from 'next-themes'
 import { SVGProps } from 'react'
 
 function Logo(props: SVGProps<SVGSVGElement>) {

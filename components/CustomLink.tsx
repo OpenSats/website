@@ -14,7 +14,7 @@ const CustomLink = ({
 
   if (isInternalLink) {
     // @ts-ignore
-    return <Link href={href} {...rest}  />
+    return <Link href={href} {...rest} />
   }
 
   if (isAnchorLink) {

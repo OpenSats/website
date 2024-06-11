@@ -1,23 +1,25 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
-import '../styles/globals.css'
-import '../styles/tailwind.css'
-
-import Layout from '../components/Layout'
 import Head from 'next/head'
 
-function MyApp({ Component, pageProps }: AppProps) {
+import Layout from '../components/Layout'
+import { trpc } from '../utils/trpc'
 
+import '../styles/globals.css'
+import { Toaster } from '../components/ui/toaster'
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme='system'>
+    <ThemeProvider attribute="class" defaultTheme="system">
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Toaster />
     </ThemeProvider>
   )
 }
 
-export default MyApp
+export default trpc.withTRPC(MyApp)

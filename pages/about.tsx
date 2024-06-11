@@ -1,7 +1,7 @@
+import xss from 'xss'
+
 import markdownToHtml from '../utils/markdownToHtml'
 import { getSingleFile } from '../utils/md'
-import BigDumbMarkdown from '../components/BigDumbMarkdown'
-import xss from 'xss'
 
 export default function About({ content }: { content: string }) {
   return (
