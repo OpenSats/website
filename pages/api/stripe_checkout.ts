@@ -1,23 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import Stripe from 'stripe'
 
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 // import { formatAmountForStripe } from '../../utils/stripe-helpers'
 
-import Stripe from 'stripe'
 import { PayReq } from '../../utils/types'
+import { env } from '../../env.mjs'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration
-  apiVersion: "2024-04-10",
+  apiVersion: '2024-04-10',
 })
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { amount, project_name, project_slug, email, name }: PayReq =
-    req.body
-
+  const { amount, project_name, project_slug, email, name }: PayReq = req.body
 
   if (req.method === 'POST') {
     try {
@@ -37,7 +36,7 @@ export default async function handler(
               product_data: {
                 name: `MAGIC Grants donation: ${project_name}`,
               },
-              unit_amount: amount*100,
+              unit_amount: amount * 100,
             },
             quantity: 1,
           },

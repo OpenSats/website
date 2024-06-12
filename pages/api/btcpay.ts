@@ -3,15 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
-
+import { env } from '../../env.mjs'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { amount, project_name, project_slug, email, name }: PayReq =
-      req.body
+    const { amount, project_name, project_slug, email, name }: PayReq = req.body
     const REDIRECT = 'http://monerofund.org/thankyou'
 
     try {
@@ -28,12 +27,11 @@ export default async function handler(
       }
 
       let data = await fetchPostJSONAuthed(
-        `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID
-        }/invoices`,
-        `token ${process.env.BTCPAY_API_KEY}`,
+        `${env.BTCPAY_URL}stores/${env.BTCPAY_STORE_ID}/invoices`,
+        `token ${env.BTCPAY_API_KEY}`,
         {
           amount: amount,
-          currency: "USD",
+          currency: 'USD',
           metadata: {
             orderId: project_slug,
             project_name,

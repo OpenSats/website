@@ -1,3 +1,5 @@
+import { env } from '../env.mjs'
+
 export async function fetchGetJSON(url: string) {
   try {
     const data = await fetch(url).then((res) => res.json())
@@ -20,7 +22,7 @@ export async function fetchPostJSON(url: string, data?: {}) {
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `token ${process.env.BTCPAY_API_KEY}`,
+        Authorization: `token ${env.BTCPAY_API_KEY}`,
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *client
@@ -58,19 +60,17 @@ export async function fetchPostJSONAuthed(
     })
     return await response.json() // parses JSON response into native JavaScript objects
   } catch (err) {
-	  if (err instanceof Error) {
+    if (err instanceof Error) {
       throw new Error(err.message)
     }
     throw err
   }
 }
 
-export async function fetchGetJSONAuthedBTCPay(
-  slug: string
-) {
+export async function fetchGetJSONAuthedBTCPay(slug: string) {
   try {
-    const url = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices`
-    const auth = `token ${process.env.BTCPAY_API_KEY}`
+    const url = `${env.BTCPAY_URL}stores/${env.BTCPAY_STORE_ID}/invoices`
+    const auth = `token ${env.BTCPAY_API_KEY}`
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -85,13 +85,16 @@ export async function fetchGetJSONAuthedBTCPay(
     let totaldonationsbtc = 0
     let totaldonationsinfiatxmr = 0
     let totaldonationsinfiatbtc = 0
-    for(let i=0;i<data.length;i++){
-      if (data[i].metadata.orderId != slug && data[i].metadata.orderId != `${slug}_STATIC`) {
+    for (let i = 0; i < data.length; i++) {
+      if (
+        data[i].metadata.orderId != slug &&
+        data[i].metadata.orderId != `${slug}_STATIC`
+      ) {
         continue
       }
       const id = data[i].id
-      const urliter = `${process.env.BTCPAY_URL!}stores/${process.env.BTCPAY_STORE_ID}/invoices/${id}/payment-methods`
-      const authiter = `token ${process.env.BTCPAY_API_KEY}`
+      const urliter = `${env.BTCPAY_URL}stores/${env.BTCPAY_STORE_ID}/invoices/${id}/payment-methods`
+      const authiter = `token ${env.BTCPAY_API_KEY}`
       const responseiter = await fetch(urliter, {
         method: 'GET',
         headers: {
@@ -99,16 +102,24 @@ export async function fetchGetJSONAuthedBTCPay(
           Authorization: authiter,
         },
       })
-      const dataiter = await responseiter.json();
-      if (dataiter[1].cryptoCode == 'XMR' && dataiter[1].paymentMethodPaid > 0) {
+      const dataiter = await responseiter.json()
+      if (
+        dataiter[1].cryptoCode == 'XMR' &&
+        dataiter[1].paymentMethodPaid > 0
+      ) {
         numdonationsxmr += dataiter[1].payments.length
         totaldonationsxmr += Number(dataiter[1].paymentMethodPaid)
-        totaldonationsinfiatxmr += Number(dataiter[1].paymentMethodPaid) * Number(dataiter[1].rate)
+        totaldonationsinfiatxmr +=
+          Number(dataiter[1].paymentMethodPaid) * Number(dataiter[1].rate)
       }
-      if (dataiter[0].cryptoCode == 'BTC' && dataiter[0].paymentMethodPaid > 0) {
+      if (
+        dataiter[0].cryptoCode == 'BTC' &&
+        dataiter[0].paymentMethodPaid > 0
+      ) {
         numdonationsbtc += dataiter[0].payments.length
         totaldonationsbtc += Number(dataiter[0].paymentMethodPaid)
-        totaldonationsinfiatbtc += Number(dataiter[0].paymentMethodPaid) * Number(dataiter[0].rate)
+        totaldonationsinfiatbtc +=
+          Number(dataiter[0].paymentMethodPaid) * Number(dataiter[0].rate)
       }
     }
     return await {
@@ -121,8 +132,8 @@ export async function fetchGetJSONAuthedBTCPay(
         numdonations: numdonationsbtc,
         totaldonationsinfiat: totaldonationsinfiatbtc,
         totaldonations: totaldonationsbtc,
-      }
-     }
+      },
+    }
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message)
@@ -131,12 +142,10 @@ export async function fetchGetJSONAuthedBTCPay(
   }
 }
 
-export async function fetchGetJSONAuthedStripe(
-    slug: string
- ) {
+export async function fetchGetJSONAuthedStripe(slug: string) {
   try {
-    const url = "https://api.stripe.com/v1/charges"
-    const auth = `Bearer ${process.env.STRIPE_SECRET_KEY}`
+    const url = 'https://api.stripe.com/v1/charges'
+    const auth = `Bearer ${env.STRIPE_SECRET_KEY}`
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -148,14 +157,21 @@ export async function fetchGetJSONAuthedStripe(
     const dataext = data.data
     let total = 0
     let donations = 0
-    for(let i=0;i<dataext.length;i++){
-      if (dataext[i].metadata.project_slug == null || dataext[i].metadata.project_slug != slug) {
+    for (let i = 0; i < dataext.length; i++) {
+      if (
+        dataext[i].metadata.project_slug == null ||
+        dataext[i].metadata.project_slug != slug
+      ) {
         continue
       }
       total += Number(dataext[i].amount) / 100
       donations += 1
     }
-    return await { numdonations: donations, totaldonationsinfiat: total, totaldonations: total }
+    return await {
+      numdonations: donations,
+      totaldonationsinfiat: total,
+      totaldonations: total,
+    }
   } catch (err) {
     if (err instanceof Error) {
       throw new Error(err.message)

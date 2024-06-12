@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { env } from '../../env.mjs'
 
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
-const TO_ADDRESS = process.env.SENDGRID_RECEPIENT
-const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
+const SENDGRID_API_KEY = env.SENDGRID_API_KEY
+const TO_ADDRESS = env.SENDGRID_RECIPIENT
+const FROM_ADDRESS = env.SENDGRID_VERIFIED_SENDER
 
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(SENDGRID_API_KEY)
@@ -23,7 +24,7 @@ export default async function handler(
     }
 
     try {
-      console.log(process.env.SENDGRID_API_KEY)
+      console.log(env.SENDGRID_API_KEY)
       const msg = {
         to: TO_ADDRESS, // Change to your recipient
         from: FROM_ADDRESS, // Change to your verified sender

@@ -8,7 +8,16 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    OPEN_AI_API_KEY: z.string().min(1),
+    STRIPE_SECRET_KEY: z.string().min(1),
+    KEYCLOAK_CLIENT_ID: z.string().min(1),
+    KEYCLOAK_CLIENT_SECRET: z.string().min(1),
+    KEYCLOAK_REALM_NAME: z.string().min(1),
+    BTCPAY_URL: z.string().min(1),
+    BTCPAY_STORE_ID: z.string().min(1),
+    BTCPAY_API_KEY: z.string().min(1),
+    SENDGRID_RECIPIENT: z.string().min(1),
+    SENDGRID_VERIFIED_SENDER: z.string().min(1),
+    SENDGRID_API_KEY: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -25,9 +34,15 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
-    OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
-    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
+    KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,
+    KEYCLOAK_REALM_NAME: process.env.KEYCLOAK_REALM_NAME,
+    BTCPAY_URL: process.env.BTCPAY_URL,
+    BTCPAY_STORE_ID: process.env.BTCPAY_STORE_ID,
+    BTCPAY_API_KEY: process.env.BTCPAY_API_KEY,
+    SENDGRID_RECIPIENT: process.env.SENDGRID_RECIPIENT,
+    SENDGRID_VERIFIED_SENDER: process.env.SENDGRID_VERIFIED_SENDER,
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
 })
