@@ -11,10 +11,12 @@ import { Dialog, DialogTrigger } from './ui/dialog'
 import { Button } from './ui/button'
 import RegisterFormModal from './RegisterFormModal'
 import LoginFormModal from './LoginFormModal'
+import PasswordResetFormModal from './PasswordResetFormModal'
 
 const Header = () => {
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
   const [loginIsOpen, setLoginIsOpen] = useState(false)
+  const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const session = useSession()
 
   return (
@@ -52,7 +54,10 @@ const Header = () => {
                   Login
                 </Button>
               </DialogTrigger>
-              <LoginFormModal close={() => setLoginIsOpen(false)} />
+              <LoginFormModal
+                close={() => setLoginIsOpen(false)}
+                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
+              />
             </Dialog>
 
             <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
@@ -74,6 +79,10 @@ const Header = () => {
 
         <MobileNav />
       </div>
+
+      <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
+        <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
+      </Dialog>
     </header>
   )
 }

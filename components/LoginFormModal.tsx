@@ -29,9 +29,9 @@ const schema = z.object({
 
 type LoginFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void }
+type Props = { close: () => void; openPasswordResetModal: () => void }
 
-function LoginFormModal({ close }: Props) {
+function LoginFormModal({ close, openPasswordResetModal }: Props) {
   const { toast } = useToast()
   const form = useForm<LoginFormInputs>({ resolver: zodResolver(schema) })
 
@@ -55,6 +55,12 @@ function LoginFormModal({ close }: Props) {
     })
 
     close()
+    form.reset({ email: '', password: '' })
+  }
+
+  function onIForgotMyPassword() {
+    close()
+    openPasswordResetModal()
   }
 
   return (
@@ -83,19 +89,30 @@ function LoginFormModal({ close }: Props) {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input {...field} type="password" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex flex-col">
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input {...field} type="password" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button
+              type="button"
+              onClick={onIForgotMyPassword}
+              variant="link"
+              className="self-end"
+            >
+              I forgot my password
+            </Button>
+          </div>
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting && (

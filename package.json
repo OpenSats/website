@@ -43,6 +43,7 @@
     "exclude": "^1.0.0",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
+    "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.390.0",
     "micro": "^10.0.1",

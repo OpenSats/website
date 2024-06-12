@@ -40,4 +40,29 @@ export const authRouter = router({
         })
       }
     }),
+
+  requestPasswordReset: publicProcedure
+    .input(z.object({ email: z.string().email() }))
+    .mutation(async ({ input }) => {
+      try {
+        await authenticateKeycloakClient()
+
+        const users = await keycloak.users.find({ email: input.email })
+        console.log(users)
+        const userId = users[0]?.id
+
+        if (!userId) return
+
+        await keycloak.users.executeActionsEmail({
+          id: userId,
+          actions: ['UPDATE_PASSWORD'],
+        })
+      } catch (error) {
+        console.error(error)
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'UNKNOWN_ERROR',
+        })
+      }
+    }),
 })

@@ -54,6 +54,7 @@ function RegisterFormModal({ close }: Props) {
       })
 
       close()
+      form.reset({ email: '', password: '', confirmPassword: '' })
     } catch (error) {
       const errorMessage = (error as any).message
 
