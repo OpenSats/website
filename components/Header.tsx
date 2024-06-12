@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ExitIcon } from '@radix-ui/react-icons'
 import { signOut, useSession } from 'next-auth/react'
 
@@ -12,12 +12,20 @@ import { Button } from './ui/button'
 import RegisterFormModal from './RegisterFormModal'
 import LoginFormModal from './LoginFormModal'
 import PasswordResetFormModal from './PasswordResetFormModal'
+import { useRouter } from 'next/router'
 
 const Header = () => {
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
   const [loginIsOpen, setLoginIsOpen] = useState(false)
   const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
+  const router = useRouter()
   const session = useSession()
+
+  useEffect(() => {
+    if (router.query.loginEmail) {
+      setLoginIsOpen(true)
+    }
+  }, [router.query.loginEmail])
 
   return (
     <header className="flex items-center justify-between py-10">

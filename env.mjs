@@ -8,11 +8,17 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
+    APP_URL: z.string().url(),
+    NEXTAUTH_SECRET: z.string().min(32),
+    SMTP_HOST: z.string().min(1),
+    SMTP_PORT: z.string().min(1),
+    SMTP_USER: z.string().min(1),
+    SMTP_PASS: z.string().min(1),
     STRIPE_SECRET_KEY: z.string().min(1),
     KEYCLOAK_CLIENT_ID: z.string().min(1),
     KEYCLOAK_CLIENT_SECRET: z.string().min(1),
     KEYCLOAK_REALM_NAME: z.string().min(1),
-    BTCPAY_URL: z.string().min(1),
+    BTCPAY_URL: z.string().url(),
     BTCPAY_STORE_ID: z.string().min(1),
     BTCPAY_API_KEY: z.string().min(1),
     SENDGRID_RECIPIENT: z.string().min(1),
@@ -34,6 +40,12 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
+    APP_URL: process.env.APP_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    SMTP_HOST: process.env.SMTP_HOST,
+    SMTP_PORT: process.env.SMTP_PORT,
+    SMTP_USER: process.env.SMTP_USER,
+    SMTP_PASS: process.env.SMTP_PASS,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,

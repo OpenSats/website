@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { signIn, useSession } from 'next-auth/react'
@@ -33,7 +35,20 @@ type Props = { close: () => void; openPasswordResetModal: () => void }
 
 function LoginFormModal({ close, openPasswordResetModal }: Props) {
   const { toast } = useToast()
-  const form = useForm<LoginFormInputs>({ resolver: zodResolver(schema) })
+  const router = useRouter()
+  const form = useForm<LoginFormInputs>({
+    resolver: zodResolver(schema),
+    defaultValues: { email: '', password: '' },
+    shouldFocusError: false,
+  })
+
+  useEffect(() => {
+    if (router.query.loginEmail) {
+      form.setValue('email', router.query.loginEmail as string)
+      setTimeout(() => form.setFocus('password'), 100)
+      router.replace('/')
+    }
+  }, [router.query.loginEmail])
 
   async function onSubmit(data: LoginFormInputs) {
     const result = await signIn('credentials', {

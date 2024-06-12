@@ -29,8 +29,6 @@ const generalFund: ProjectItem = {
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
-  const router = useRouter()
-
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
 
   function closeModal() {
@@ -45,12 +43,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   function openGeneralFundModal() {
     openPaymentModal(generalFund)
   }
-
-  useEffect(() => {
-    if (router.isReady) {
-      console.log(router.query)
-    }
-  }, [router.isReady])
 
   return (
     <>
