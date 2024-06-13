@@ -7,7 +7,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import headerNavLinks from '../data/headerNavLinks'
 import Logo from './Logo'
-import { Dialog, DialogTrigger } from './ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 import { Button } from './ui/button'
 import RegisterFormModal from './RegisterFormModal'
 import LoginFormModal from './LoginFormModal'
@@ -62,17 +62,21 @@ const Header = () => {
                   Login
                 </Button>
               </DialogTrigger>
-              <LoginFormModal
-                close={() => setLoginIsOpen(false)}
-                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
-              />
+              <DialogContent>
+                <LoginFormModal
+                  close={() => setLoginIsOpen(false)}
+                  openPasswordResetModal={() => setPasswordResetIsOpen(true)}
+                />
+              </DialogContent>
             </Dialog>
 
             <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
               <DialogTrigger asChild>
                 <Button className="w-24">Register</Button>
               </DialogTrigger>
-              <RegisterFormModal close={() => setRegisterIsOpen(false)} />
+              <DialogContent>
+                <RegisterFormModal close={() => setRegisterIsOpen(false)} />
+              </DialogContent>
             </Dialog>
           </>
         )}
@@ -89,7 +93,9 @@ const Header = () => {
       </div>
 
       <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
-        <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
+        <DialogContent>
+          <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
+        </DialogContent>
       </Dialog>
     </header>
   )

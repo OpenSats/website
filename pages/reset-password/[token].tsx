@@ -1,29 +1,25 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ReloadIcon } from '@radix-ui/react-icons'
 import { useForm } from 'react-hook-form'
+import { ReloadIcon } from '@radix-ui/react-icons'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
+import { jwtDecode } from 'jwt-decode'
 import { z } from 'zod'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from './ui/dialog'
-import { Input } from './ui/input'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form'
-import { Button } from './ui/button'
-import { useToast } from './ui/use-toast'
-import { trpc } from '../utils/trpc'
+} from '../../components/ui/form'
+import { Input } from '../../components/ui/input'
+import { Button } from '../../components/ui/button'
+import { toast } from '../../components/ui/use-toast'
+import { useEffect } from 'react'
+import { trpc } from '../../utils/trpc'
+import { cn } from '../../utils/cn'
 
 const schema = z
   .object({
@@ -36,33 +32,42 @@ const schema = z
     path: ['confirmPassword'],
   })
 
-type RegisterFormInputs = z.infer<typeof schema>
+type ResetPasswordFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void }
+function ResetPassword() {
+  const router = useRouter()
 
-function RegisterFormModal({ close }: Props) {
-  const { toast } = useToast()
-  const form = useForm<RegisterFormInputs>({ resolver: zodResolver(schema) })
-  const registerMutation = trpc.auth.register.useMutation()
+  const form = useForm<ResetPasswordFormInputs>({
+    resolver: zodResolver(schema),
+  })
 
-  async function onSubmit(data: RegisterFormInputs) {
+  const resetPasswordMutation = trpc.auth.resetPassword.useMutation()
+
+  async function onSubmit(data: ResetPasswordFormInputs) {
+    const { token } = router.query
+
+    if (!token) return
+
     try {
-      await registerMutation.mutateAsync(data)
-
-      toast({
-        title: 'Please check your email to verify your account.',
+      await resetPasswordMutation.mutateAsync({
+        token: token as string,
+        password: data.password,
       })
 
-      close()
+      toast({ title: 'Password successfully reset. You may now log in.' })
+      router.push(`/?loginEmail=${data.email}`)
     } catch (error) {
       const errorMessage = (error as any).message
 
-      if (errorMessage === 'EMAIL_TAKEN') {
-        return form.setError(
-          'email',
-          { message: 'Email is already taken.' },
-          { shouldFocus: true }
-        )
+      if (errorMessage === 'INVALID_TOKEN') {
+        toast({
+          title: 'Invalid password reset link.',
+          variant: 'destructive',
+        })
+
+        router.push('/')
+
+        return
       }
 
       toast({
@@ -72,20 +77,35 @@ function RegisterFormModal({ close }: Props) {
     }
   }
 
-  return (
-    <>
-      <DialogHeader>
-        <DialogTitle>Register</DialogTitle>
-        <DialogDescription>
-          Start supporting Monero projects today!
-        </DialogDescription>
-      </DialogHeader>
+  useEffect(() => {
+    const { token } = router.query
 
+    if (token) {
+      const decoded = jwtDecode(token as string) as { email: string }
+
+      if (decoded.email) {
+        form.setValue('email', decoded.email)
+      }
+    }
+  }, [router.query.token])
+
+  return (
+    <div className="w-full max-w-md m-auto">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col space-y-4"
         >
+          <div className="flex flex-col space-y-1.5 text-center sm:text-left">
+            <span className="text-lg font-semibold leading-none tracking-tight">
+              Password Reset
+            </span>
+
+            <span className="text-sm text-muted-foreground">
+              Reset your password
+            </span>
+          </div>
+
           <FormField
             control={form.control}
             name="email"
@@ -93,7 +113,7 @@ function RegisterFormModal({ close }: Props) {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="johndoe@example.com" {...field} />
+                  <Input {...field} disabled />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -132,12 +152,12 @@ function RegisterFormModal({ close }: Props) {
             {form.formState.isSubmitting && (
               <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             )}{' '}
-            Register
+            Reset Password
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }
 
-export default RegisterFormModal
+export default ResetPassword

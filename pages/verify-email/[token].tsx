@@ -13,7 +13,6 @@ function VerifyEmail() {
 
   useEffect(() => {
     ;(async () => {
-      console.log(token)
       if (!token) return
 
       try {

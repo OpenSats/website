@@ -79,7 +79,7 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
   }
 
   return (
-    <DialogContent>
+    <>
       <DialogHeader>
         <DialogTitle>Login</DialogTitle>
         <DialogDescription>Log into your account.</DialogDescription>
@@ -137,7 +137,7 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
           </Button>
         </form>
       </Form>
-    </DialogContent>
+    </>
   )
 }
 

@@ -53,7 +53,7 @@ function PasswordResetFormModal({ close }: Props) {
   }
 
   return (
-    <DialogContent>
+    <>
       <DialogHeader>
         <DialogTitle>Reset Password</DialogTitle>
         <DialogDescription>Recover your account.</DialogDescription>
@@ -86,7 +86,7 @@ function PasswordResetFormModal({ close }: Props) {
           </Button>
         </form>
       </Form>
-    </DialogContent>
+    </>
   )
 }
 
