@@ -22,7 +22,7 @@ export async function fetchPostJSON(url: string, data?: {}) {
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `token ${env.BTCPAY_API_KEY}`,
+        Authorization: `token ${env.NEXT_PUBLIC_BTCPAY_API_KEY}`,
       },
       redirect: 'follow', // manual, *follow, error
       referrerPolicy: 'no-referrer', // no-referrer, *client

@@ -5,6 +5,12 @@ import { useEffect, useRef, useState } from 'react'
 import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
+import { trpc } from '../utils/trpc'
+import { useToast } from './ui/use-toast'
+import { useSession } from 'next-auth/react'
+import { Button } from './ui/button'
+import { RadioGroup, RadioGroupItem } from './ui/radio-group'
+import { Label } from './ui/label'
 
 type DonationStepsProps = {
   projectNamePretty: string
@@ -14,6 +20,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   projectSlug,
 }) => {
+  const { toast } = useToast()
+  const session = useSession()
+  console.log(session.status)
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
@@ -24,6 +34,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   const [btcPayLoading, setBtcpayLoading] = useState(false)
   const [fiatLoading, setFiatLoading] = useState(false)
+
+  const donateWithFiatMutation = trpc.donation.donateWithFiat.useMutation()
 
   const formRef = useRef<HTMLFormElement | null>(null)
 
@@ -87,39 +99,40 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   async function handleFiat() {
     const validity = formRef.current?.checkValidity()
+
     if (!validity) {
       return
     }
-    setFiatLoading(true)
+
     try {
-      const data = await fetchPostJSON('/api/stripe_checkout', {
-        amount,
-        project_slug: projectSlug,
-        project_name: projectNamePretty,
-        email,
-        name,
+      const result = await donateWithFiatMutation.mutateAsync({
+        email: email || undefined,
+        name: name || undefined,
+        amount: parseInt(amount),
+        projectSlug,
+        projectName: projectNamePretty,
       })
-      console.log({ data })
-      if (data.url) {
-        window.location.assign(data.url)
-      } else {
-        throw new Error('Something went wrong with Stripe checkout.')
-      }
+
+      if (!result.url) throw Error()
+
+      window.location.assign(result.url)
     } catch (e) {
-      console.error(e)
+      toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
     }
-    setFiatLoading(false)
   }
 
   return (
     <form
       ref={formRef}
-      className="flex flex-col gap-4"
+      className="mt-4 flex flex-col gap-4"
       onSubmit={(e) => e.preventDefault()}
     >
       <section className="flex flex-col gap-1">
         <h3>Do you want this donation to be tax deductible (USA only)?</h3>
-        <div className="flex space-x-4 pb-4">
+        <div className="flex space-x-4 ">
           <label>
             <input
               type="radio"
@@ -143,31 +156,36 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </label>
         </div>
 
-        <h3>
-          Name{' '}
-          <span className="text-subtle">
-            {deductible === 'yes' ? '(required)' : '(optional)'}
-          </span>
-        </h3>
-        <input
-          type="text"
-          placeholder={'MAGIC Monero Fund'}
-          required={deductible === 'yes'}
-          onChange={(e) => setName(e.target.value)}
-          className="mb-4"
-        ></input>
-        <h3>
-          Email{' '}
-          <span className="text-subtle">
-            {deductible === 'yes' ? '(required)' : '(optional)'}
-          </span>
-        </h3>
-        <input
-          type="email"
-          placeholder={`MoneroFund@MagicGrants.org`}
-          required={deductible === 'yes'}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
+        {session.status !== 'authenticated' && (
+          <>
+            <h3>
+              Name{' '}
+              <span className="text-subtle">
+                {deductible === 'yes' ? '(required)' : '(optional)'}
+              </span>
+            </h3>
+            <input
+              type="text"
+              placeholder={'MAGIC Monero Fund'}
+              required={deductible === 'yes'}
+              onChange={(e) => setName(e.target.value)}
+              className="mb-4"
+            ></input>
+
+            <h3>
+              Email{' '}
+              <span className="text-subtle">
+                {deductible === 'yes' ? '(required)' : '(optional)'}
+              </span>
+            </h3>
+            <input
+              type="email"
+              placeholder={`MoneroFund@MagicGrants.org`}
+              required={deductible === 'yes'}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          </>
+        )}
       </section>
 
       <section>
@@ -203,41 +221,28 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           </div>
         </div>
       </section>
-      <div className="flex flex-wrap items-center gap-4">
-        <button
-          name="btcpay"
-          onClick={handleBtcPay}
-          className="pay"
-          disabled={!readyToPay || btcPayLoading}
-        >
+      <div className="flex flex-wrap items-center gap-2">
+        <Button onClick={handleBtcPay} disabled={!readyToPay || btcPayLoading}>
           {btcPayLoading ? (
             <Spinner />
           ) : (
-            <FontAwesomeIcon
-              icon={faMonero}
-              className="color-me-monero h-8 w-8"
-            />
+            <FontAwesomeIcon icon={faMonero} className="h-5 w-5" />
           )}
-          <span className="whitespace-nowrap">
-            Donate with Monero or Bitcoin
-          </span>
-        </button>
-        <button
-          name="stripe"
+          Donate with Monero
+        </Button>
+
+        <Button
           onClick={handleFiat}
-          className="pay"
-          disabled={!readyToPay || fiatLoading}
+          disabled={!readyToPay || donateWithFiatMutation.isPending}
+          className="bg-indigo-500 hover:bg-indigo-700"
         >
-          {fiatLoading ? (
+          {donateWithFiatMutation.isPending ? (
             <Spinner />
           ) : (
-            <FontAwesomeIcon
-              icon={faCreditCard}
-              className="color-me-monero h-8 w-8"
-            />
+            <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
           )}
-          <span className="whitespace-nowrap">Donate with fiat</span>
-        </button>
+          Donate with fiat
+        </Button>
       </div>
     </form>
   )

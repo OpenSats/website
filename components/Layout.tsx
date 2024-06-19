@@ -20,7 +20,7 @@ const LayoutWrapper = ({ children }: Props) => {
         className={`${inter.className} flex h-screen flex-col justify-between font-sans`}
       >
         <Header />
-        <main>{children}</main>
+        <main className="grow">{children}</main>
         <Footer />
       </div>
     </SectionContainer>

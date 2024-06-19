@@ -31,7 +31,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
-    // NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    NEXT_PUBLIC_BTCPAY_API_KEY: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -56,5 +56,7 @@ export const env = createEnv({
     SENDGRID_RECIPIENT: process.env.SENDGRID_RECIPIENT,
     SENDGRID_VERIFIED_SENDER: process.env.SENDGRID_VERIFIED_SENDER,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+
+    NEXT_PUBLIC_BTCPAY_API_KEY: process.env.NEXT_PUBLIC_BTCPAY_API_KEY,
   },
 })

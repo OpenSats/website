@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import axios from 'axios'
 
 type KeycloakJwtPayload = {
-  sid: string
+  sub: string
   email: string
 }
 
@@ -35,7 +35,10 @@ export const authOptions: AuthOptions = {
             data.access_token
           )
 
-          return { id: keycloakJwtPayload.sid, email: keycloakJwtPayload.email }
+          return {
+            id: keycloakJwtPayload.sub,
+            email: keycloakJwtPayload.email,
+          }
         } catch (error) {
           const errorMessage = (error as any).response.data.error
           if (errorMessage === 'invalid_grant') {

@@ -57,12 +57,19 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
       password: data.password,
     })
 
-    if (result?.error === 'INVALID_CREDENTIALS') {
-      return form.setError(
-        'password',
-        { message: 'Invalid email or password.' },
-        { shouldFocus: true }
-      )
+    if (result?.error) {
+      if (result.error === 'INVALID_CREDENTIALS') {
+        return form.setError(
+          'password',
+          { message: 'Invalid email or password.' },
+          { shouldFocus: true }
+        )
+      }
+
+      return toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
     }
 
     toast({
@@ -70,7 +77,6 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
     })
 
     close()
-    form.reset({ email: '', password: '' })
   }
 
   function onIForgotMyPassword() {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ExitIcon } from '@radix-ui/react-icons'
 import { signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 import Link from './CustomLink'
 import MobileNav from './MobileNav'
@@ -12,7 +12,15 @@ import { Button } from './ui/button'
 import RegisterFormModal from './RegisterFormModal'
 import LoginFormModal from './LoginFormModal'
 import PasswordResetFormModal from './PasswordResetFormModal'
-import { useRouter } from 'next/router'
+import { Avatar, AvatarFallback } from './ui/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
 
 const Header = () => {
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
@@ -54,7 +62,7 @@ const Header = () => {
           </Link>
         ))}
 
-        {session.status === 'unauthenticated' && (
+        {session.status !== 'authenticated' && (
           <>
             <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
               <DialogTrigger asChild>
@@ -84,9 +92,26 @@ const Header = () => {
         <ThemeSwitch />
 
         {session.status === 'authenticated' && (
-          <Button variant="ghost" size="icon" onClick={() => signOut()}>
-            <ExitIcon className="h-6 w-6" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarFallback>
+                  {session.data.user?.email?.slice(0, 2).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link href="/account/my-donations">My Donations</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>Settings</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
 
         <MobileNav />
