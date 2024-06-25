@@ -1,0 +1,16 @@
+services:
+  btcpayserver:
+    image: 'btcpayserver/monero'
+    environment:
+      - BTCPAY_HOST=localhost
+      - BTCPAYGEN_CRYPTO1=xmr
+      - BTCPAY_ENABLE_XMR=true
+      - XMR_RPC_URL=https://xmr-node.cakewallet.com:18081
+      # - XMR_WALLET_RPC_URL=https://xmr-node.cakewallet.com:18083
+      # - XMR_WALLET_RPC_USER=myrpcuser
+      # - XMR_WALLET_RPC_PASSWORD=myrpcpassword
+    ports:
+      - '80:80'
+    # volumes:
+    #   - ./btcpayserver_datadir:/data
+    #   - /var/run/docker.sock:/var/run/docker.sock

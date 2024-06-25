@@ -3,9 +3,10 @@ import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { env } from '../../env.mjs'
-import { keycloak } from '../services'
+import { btcpayApi, keycloak, prisma } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { Donation, DonationMetadata } from '../types'
+import { createInvoice } from '../utils/btcpay'
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration
@@ -16,43 +17,43 @@ export const donationRouter = router({
   donateWithFiat: publicProcedure
     .input(
       z.object({
-        name: z.string().min(1).optional(),
-        email: z.string().email().optional(),
+        name: z.string().min(1).nullable(),
+        email: z.string().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
         amount: z.number().min(MIN_AMOUNT),
       })
     )
     .mutation(async ({ input, ctx }) => {
-      await authenticateKeycloakClient()
-
-      const userSub = ctx.session?.user.sub
-      let email = input.email!
-      let name = input.name!
+      const userId = ctx.session?.user.sub || null
+      let email = input.email
+      let name = input.name
       let stripeCustomerId: string | null = null
 
-      if (userSub) {
-        const user = await keycloak.users.findOne({ id: userSub })!
+      if (userId) {
+        await authenticateKeycloakClient()
+        const user = await keycloak.users.findOne({ id: userId })!
         email = user?.email!
         name = (user?.firstName || '') + ' ' + (user?.lastName || '')
         stripeCustomerId = user?.attributes?.stripeCustomerId?.[0] || null
       }
 
-      if (!stripeCustomerId && userSub) {
+      if (!stripeCustomerId && userId && email && name) {
         const customer = await stripe.customers.create({
-          email: input.email,
-          name: input.name,
+          email,
+          name,
         })
 
         stripeCustomerId = customer.id
 
         await keycloak.users.update(
-          { id: userSub },
+          { id: userId },
           { email: email, attributes: { stripeCustomerId } }
         )
       }
 
       const metadata: DonationMetadata = {
+        userId,
         donorEmail: email,
         donorName: name,
         projectSlug: input.projectSlug,
@@ -88,6 +89,49 @@ export const donationRouter = router({
       return { url: checkoutSession.url }
     }),
 
+  donateWithCrypto: publicProcedure
+    .input(
+      z.object({
+        name: z.string().trim().min(1).nullable(),
+        email: z.string().trim().email().nullable(),
+        projectName: z.string().min(1),
+        projectSlug: z.string().min(1),
+        amount: z.number().min(MIN_AMOUNT),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      let email = input.email
+      let name = input.name
+      const userId = ctx.session?.user.sub || null
+
+      if (userId) {
+        await authenticateKeycloakClient()
+        const user = await keycloak.users.findOne({ id: userId })
+        email = user?.email!
+        name = (user?.firstName || '') + ' ' + (user?.lastName || '')
+      }
+
+      const metadata: DonationMetadata = {
+        userId,
+        donorName: name,
+        donorEmail: email,
+        projectSlug: input.projectSlug,
+        projectName: input.projectName,
+      }
+
+      const response = await btcpayApi.post(
+        `/stores/${env.BTCPAY_STORE_ID}/invoices`,
+        {
+          amount: input.amount,
+          currency: CURRENCY,
+          metadata,
+          checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+        }
+      )
+
+      return { url: response.data.checkoutLink }
+    }),
+
   donationList: protectedProcedure.query(async ({ ctx }) => {
     await authenticateKeycloakClient()
     const user = await keycloak.users.findOne({ id: ctx.session.user.sub })
@@ -100,11 +144,11 @@ export const donationRouter = router({
     }
 
     // TODO: Paginate?
-    const payments = await stripe.paymentIntents.list({
+    const stripePayments = await stripe.paymentIntents.list({
       customer: stripeCustomerId,
     })
 
-    payments.data
+    stripePayments.data
       .filter((payment) => payment.status === 'succeeded')
       .forEach((payment) => {
         donations.push({
@@ -118,6 +162,27 @@ export const donationRouter = router({
         })
       })
 
-    return donations
+    const cryptoDonations = await prisma.cryptoDonation.findMany({
+      where: { userId: ctx.session.user.sub },
+    })
+
+    cryptoDonations.forEach((donation) => {
+      donations.push({
+        projectName: donation.projectName,
+        fundName: donation.fund,
+        type: 'one_time',
+        method: 'crypto',
+        amount: donation.fiatAmount,
+        expiresAt: null,
+        createdAt: donation.createdAt,
+      })
+    })
+
+    const donationsSorted = donations.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+
+    return donationsSorted
   }),
 })

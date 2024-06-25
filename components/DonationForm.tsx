@@ -36,6 +36,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   const [fiatLoading, setFiatLoading] = useState(false)
 
   const donateWithFiatMutation = trpc.donation.donateWithFiat.useMutation()
+  const donateWithCryptoMutation = trpc.donation.donateWithCrypto.useMutation()
 
   const formRef = useRef<HTMLFormElement | null>(null)
 
@@ -65,36 +66,23 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
     if (!validity) {
       return
     }
-    setBtcpayLoading(true)
+
     try {
-      const payload = {
-        amount,
-        project_slug: projectSlug,
-        project_name: projectNamePretty,
-      }
+      const result = await donateWithCryptoMutation.mutateAsync({
+        email: email || null,
+        name: name || null,
+        amount: Number(amount),
+        projectSlug,
+        projectName: projectNamePretty,
+      })
 
-      if (email) {
-        Object.assign(payload, { email })
-      }
-
-      if (name) {
-        Object.assign(payload, { name })
-      }
-
-      console.log(payload)
-      const data = await fetchPostJSON('/api/btcpay', payload)
-      if (data.checkoutLink) {
-        window.location.assign(data.checkoutLink)
-      } else if (data.message) {
-        throw new Error(data.message)
-      } else {
-        console.log({ data })
-        throw new Error('Something went wrong with BtcPay Server checkout.')
-      }
+      window.location.assign(result.url)
     } catch (e) {
-      console.error(e)
+      toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
     }
-    setBtcpayLoading(false)
   }
 
   async function handleFiat() {
@@ -106,8 +94,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
     try {
       const result = await donateWithFiatMutation.mutateAsync({
-        email: email || undefined,
-        name: name || undefined,
+        email: email || null,
+        name: name || null,
         amount: parseInt(amount),
         projectSlug,
         projectName: projectNamePretty,

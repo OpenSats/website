@@ -1,6 +1,7 @@
 export type DonationMetadata = {
-  donorEmail: string
-  donorName: string
+  userId: string | null
+  donorEmail: string | null
+  donorName: string | null
   projectSlug: string
   projectName: string
 }

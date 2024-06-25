@@ -1,10 +1,19 @@
+import { PrismaClient } from '@prisma/client'
 import sendgrid from '@sendgrid/mail'
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client'
 import nodemailer from 'nodemailer'
+import axios from 'axios'
 
 import { env } from '../env.mjs'
 
 sendgrid.setApiKey(env.SENDGRID_API_KEY)
+
+const prisma = new PrismaClient({
+  log:
+    process.env.NODE_ENV === 'production'
+      ? ['error']
+      : ['query', 'info', 'warn', 'error'],
+})
 
 const keycloak = new KeycloakAdminClient({
   baseUrl: 'http://localhost:8080',
@@ -20,4 +29,9 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export { sendgrid, keycloak, transporter }
+const btcpayApi = axios.create({
+  baseURL: `${env.BTCPAY_URL}/api/v1`,
+  headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
+})
+
+export { sendgrid, prisma, keycloak, transporter, btcpayApi }
