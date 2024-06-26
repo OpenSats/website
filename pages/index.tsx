@@ -1,16 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ProjectList from '../components/ProjectList'
-import PaymentModal from '../components/PaymentModal'
-import Link from 'next/link'
 
 import { getAllPosts } from '../utils/md'
 import { ProjectItem } from '../utils/types'
-import { useRouter } from 'next/router'
 import Typing from '../components/Typing'
 import CustomLink from '../components/CustomLink'
 import { Button } from '../components/ui/button'
+import { Dialog, DialogContent } from '../components/ui/dialog'
+import DonationFormModal from '../components/DonationFormModal'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -28,21 +27,6 @@ const generalFund: ProjectItem = {
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
-
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
-
-  function closeModal() {
-    setModalOpen(false)
-  }
-
-  function openPaymentModal(project: ProjectItem) {
-    setSelectedProject(project)
-    setModalOpen(true)
-  }
-
-  function openGeneralFundModal() {
-    openPaymentModal(generalFund)
-  }
 
   return (
     <>
@@ -65,7 +49,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           <div className="flex flex-wrap py-4">
             <div className="w-full md:w-1/2">
               <Button
-                onClick={openGeneralFundModal}
+                onClick={() => setModalOpen(true)}
                 size="lg"
                 className="px-14 text-black font-semibold text-xl"
               >
@@ -97,22 +81,18 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </p>
           <ProjectList projects={projects} />
           <div className="flex justify-end pt-4 text-base font-medium leading-6">
-            <Link
-              href="/projects"
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="View All Projects"
-            >
+            <CustomLink href="/projects" aria-label="View All Projects">
               View Projects &rarr;
-            </Link>
+            </CustomLink>
           </div>
         </div>
       </div>
 
-      <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      />
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogContent>
+          <DonationFormModal project={generalFund} />
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { Stripe } from 'stripe'
 import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
-import { CURRENCY, MIN_AMOUNT } from '../../config'
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../config'
 import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
@@ -21,7 +21,7 @@ export const donationRouter = router({
         email: z.string().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z.number().min(MIN_AMOUNT),
+        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -34,7 +34,7 @@ export const donationRouter = router({
         await authenticateKeycloakClient()
         const user = await keycloak.users.findOne({ id: userId })!
         email = user?.email!
-        name = (user?.firstName || '') + ' ' + (user?.lastName || '')
+        name = user?.attributes?.name?.[0]
         stripeCustomerId = user?.attributes?.stripeCustomerId?.[0] || null
       }
 
@@ -96,7 +96,7 @@ export const donationRouter = router({
         email: z.string().trim().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z.number().min(MIN_AMOUNT),
+        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -108,7 +108,7 @@ export const donationRouter = router({
         await authenticateKeycloakClient()
         const user = await keycloak.users.findOne({ id: userId })
         email = user?.email!
-        name = (user?.firstName || '') + ' ' + (user?.lastName || '')
+        name = user?.attributes?.name?.[0] || null
       }
 
       const metadata: DonationMetadata = {

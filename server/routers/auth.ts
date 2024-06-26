@@ -22,7 +22,13 @@ type PasswordResetJwtPayload = {
 
 export const authRouter = router({
   register: publicProcedure
-    .input(z.object({ email: z.string().email(), password: z.string() }))
+    .input(
+      z.object({
+        name: z.string().trim().min(1),
+        email: z.string().email(),
+        password: z.string(),
+      })
+    )
     .mutation(async ({ input }) => {
       await authenticateKeycloakClient()
 
@@ -36,7 +42,7 @@ export const authRouter = router({
             { type: 'password', value: input.password, temporary: false },
           ],
           requiredActions: ['VERIFY_EMAIL'],
-          attributes: { passwordResetTokenVersion: 1 },
+          attributes: { name: input.name, passwordResetTokenVersion: 1 },
           enabled: true,
         })
       } catch (error) {

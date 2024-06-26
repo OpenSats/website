@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import PaymentModal from '../../components/PaymentModal'
 import ProjectCard from '../../components/ProjectCard'
 import { ProjectItem } from '../../utils/types'
 import { getAllPosts } from '../../utils/md'
@@ -45,11 +44,11 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      <PaymentModal
+      {/* <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         project={selectedProject}
-      />
+      /> */}
     </>
   )
 }

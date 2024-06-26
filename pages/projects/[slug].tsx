@@ -13,7 +13,6 @@ import {
   fetchGetJSONAuthedBTCPay,
   fetchGetJSONAuthedStripe,
 } from '../../utils/api-helpers'
-import PaymentModal from '../../components/PaymentModal'
 import PageHeading from '../../components/PageHeading'
 import SocialIcon from '../../components/social-icons'
 import Progress from '../../components/Progress'
@@ -222,11 +221,11 @@ const Project: NextPage<SingleProjectPageProps> = ({
         </aside>
       </div> */}
 
-      <PaymentModal
+      {/* <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
         project={selectedProject}
-      />
+      /> */}
     </>
   )
 }

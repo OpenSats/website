@@ -104,7 +104,12 @@ const Header = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href="/account/my-donations">My Donations</Link>
+                <Link
+                  href="/account/my-donations"
+                  className="text-foreground hover:text-foreground"
+                >
+                  My Donations
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>

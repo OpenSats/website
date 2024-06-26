@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import Link from 'next/link'
 import { AnchorHTMLAttributes, DetailedHTMLProps } from 'react'
+import { cn } from '../utils/cn'
 
 const CustomLink = ({
   href,
+  className,
   ...rest
 }: DetailedHTMLProps<
   AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -14,14 +16,40 @@ const CustomLink = ({
 
   if (isInternalLink) {
     // @ts-ignore
-    return <Link href={href} {...rest} />
+    return (
+      <Link
+        href={href}
+        className={cn(
+          'text-primary hover:text-primary-DEFAULT_HOVER',
+          className
+        )}
+        {...rest}
+      />
+    )
   }
 
   if (isAnchorLink) {
-    return <a href={href} {...rest} />
+    return (
+      <a
+        href={href}
+        className={cn(
+          'text-primary hover:text-primary-DEFAULT_HOVER',
+          className
+        )}
+        {...rest}
+      />
+    )
   }
 
-  return <a target="_blank" rel="noopener noreferrer" href={href} {...rest} />
+  return (
+    <a
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn('text-primary hover:text-primary-DEFAULT_HOVER', className)}
+      href={href}
+      {...rest}
+    />
+  )
 }
 
 export default CustomLink

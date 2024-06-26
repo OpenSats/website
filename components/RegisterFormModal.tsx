@@ -27,6 +27,7 @@ import { trpc } from '../utils/trpc'
 
 const schema = z
   .object({
+    name: z.string().min(1),
     email: z.string().email(),
     password: z.string().min(8),
     confirmPassword: z.string().min(8),
@@ -86,6 +87,20 @@ function RegisterFormModal({ close }: Props) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col space-y-4"
         >
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="John Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="email"
