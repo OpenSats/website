@@ -85,7 +85,7 @@ const Credits = () => {
       nym: 'Ten31',
     },
     {
-      link: 'https://www.poynerspruill.com/professionals/andy-blair/',
+      link: 'https://adamshowell.com/about/',
       image: andrewWBlairLogo,
       nym: 'Andrew W. Blair',
       person: true,
