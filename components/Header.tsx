@@ -44,7 +44,9 @@ const Header = () => {
           className="flex items-center mr-3 gap-4"
         >
           <Logo className="w-12 h-12" />
-          <span className="text-lg font-bold">MAGIC Monero Fund</span>
+          <span className="text-foreground text-lg font-bold">
+            MAGIC Monero Fund
+          </span>
         </Link>
       </div>
       <div className="flex gap-2 items-center text-base leading-5">

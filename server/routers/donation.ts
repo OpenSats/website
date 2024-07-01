@@ -84,6 +84,32 @@ export const donationRouter = router({
         payment_intent_data: { metadata },
       }
 
+      // Use this for subscriptions
+      // const subscriptionParams: Stripe.Checkout.SessionCreateParams = {
+      //   mode: 'subscription',
+      //   // submit_type: 'donate',
+      //   customer: stripeCustomerId || undefined,
+      //   currency: CURRENCY,
+      //   line_items: [
+      //     {
+      //       price_data: {
+      //         currency: CURRENCY,
+      //         product_data: {
+      //           name: `MAGIC Grants donation: ${input.projectName}`,
+      //         },
+      //         recurring: { interval: 'year' },
+      //         unit_amount: input.amount * 100,
+      //       },
+      //       quantity: 1,
+      //     },
+      //   ],
+      //   metadata,
+      //   success_url: `${env.APP_URL}/thankyou`,
+      //   cancel_url: `${env.APP_URL}/`,
+      //   // We need metadata in here for some reason
+      //   subscription_data: { metadata },
+      // }
+
       const checkoutSession = await stripe.checkout.sessions.create(params)
 
       return { url: checkoutSession.url }
@@ -140,7 +166,7 @@ export const donationRouter = router({
     const donations: Donation[] = []
 
     if (!stripeCustomerId) {
-      return donations
+      return { donations: [], billingPortalUrl: null }
     }
 
     // TODO: Paginate?
@@ -148,32 +174,89 @@ export const donationRouter = router({
       customer: stripeCustomerId,
     })
 
-    stripePayments.data
-      .filter((payment) => payment.status === 'succeeded')
-      .forEach((payment) => {
-        donations.push({
-          projectName: payment.metadata.projectName,
-          fundName: 'Monero Fund',
-          type: 'one_time',
-          method: 'fiat',
-          amount: Number((payment.amount / 100).toFixed(2)),
-          expiresAt: null,
-          createdAt: new Date(payment.created * 1000),
-        })
+    stripePayments.data.forEach((payment) => {
+      // Filter out subscriptions as paymentIntents returns an empty metadata obj
+      if (payment.invoice) return
+
+      // Exclude failed payments that are more than 30 days old
+      if (
+        payment.status !== 'succeeded' &&
+        payment.created * 1000 < Date.now() - 1000 * 60 * 60 * 24 * 30
+      ) {
+        return
+      }
+
+      donations.push({
+        projectName: payment.metadata.projectName,
+        fundName: 'Monero Fund',
+        type: 'one_time',
+        method: 'fiat',
+        invoiceId: payment.id,
+        stripePaymentStatus: payment.status,
+        stripeSubscriptionStatus: null,
+        btcPayStatus: null,
+        amount: Number((payment.amount / 100).toFixed(2)),
+        subscriptionCancelAt: null,
+        createdAt: new Date(payment.created * 1000),
       })
+    })
+
+    const stripeSubscriptions = await stripe.subscriptions.list({
+      customer: stripeCustomerId,
+    })
+
+    stripeSubscriptions.data.forEach((subscription) => {
+      // Exclude failed subscriptions that are more than 30 days old
+      if (
+        subscription.status !== 'incomplete_expired' &&
+        subscription.created * 1000 < Date.now() - 1000 * 60 * 60 * 24 * 30
+      ) {
+        return
+      }
+
+      donations.push({
+        projectName: subscription.metadata.projectName,
+        fundName: 'Monero Fund',
+        type: 'recurring',
+        method: 'fiat',
+        invoiceId: subscription.id,
+        stripePaymentStatus: null,
+        stripeSubscriptionStatus: subscription.status,
+        btcPayStatus: null,
+        amount: Number(
+          (subscription.items.data[0].price.unit_amount! / 100).toFixed(2)
+        ),
+        subscriptionCancelAt: subscription.cancel_at
+          ? new Date(subscription.cancel_at * 1000)
+          : null,
+        createdAt: new Date(subscription.created * 1000),
+      })
+    })
 
     const cryptoDonations = await prisma.cryptoDonation.findMany({
       where: { userId: ctx.session.user.sub },
     })
 
     cryptoDonations.forEach((donation) => {
+      // Exclude failed subscriptions that are more than 30 days old
+      if (
+        donation.status !== 'Expired' &&
+        donation.createdAt.getTime() < Date.now() - 1000 * 60 * 60 * 24 * 30
+      ) {
+        return
+      }
+
       donations.push({
         projectName: donation.projectName,
         fundName: donation.fund,
         type: 'one_time',
         method: 'crypto',
+        invoiceId: donation.invoiceId,
+        stripePaymentStatus: null,
+        stripeSubscriptionStatus: null,
+        btcPayStatus: donation.status,
         amount: donation.fiatAmount,
-        expiresAt: null,
+        subscriptionCancelAt: null,
         createdAt: donation.createdAt,
       })
     })
@@ -183,6 +266,14 @@ export const donationRouter = router({
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
 
-    return donationsSorted
+    const billingPortalSession = await stripe.billingPortal.sessions.create({
+      customer: stripeCustomerId,
+      return_url: `${env.APP_URL}/account/my-donations`,
+    })
+
+    return {
+      donations: donationsSorted,
+      billingPortalUrl: billingPortalSession.url,
+    }
   }),
 })

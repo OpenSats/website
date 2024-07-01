@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "DonationStatus" AS ENUM ('Expired', 'Invalid', 'New', 'Processing', 'Settled');
+
 -- CreateTable
 CREATE TABLE "CryptoDonation" (
     "id" TEXT NOT NULL,
@@ -10,6 +13,7 @@ CREATE TABLE "CryptoDonation" (
     "fund" TEXT NOT NULL,
     "crypto" TEXT NOT NULL,
     "fiatAmount" DOUBLE PRECISION NOT NULL,
+    "status" "DonationStatus" NOT NULL,
 
     CONSTRAINT "CryptoDonation_pkey" PRIMARY KEY ("id")
 );

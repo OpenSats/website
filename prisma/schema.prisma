@@ -25,4 +25,13 @@ model CryptoDonation {
   fund        String
   crypto      String
   fiatAmount  Float
+  status      DonationStatus
+}
+
+enum DonationStatus {
+  Expired
+  Invalid
+  New
+  Processing
+  Settled
 }
