@@ -1,0 +1,267 @@
+---
+title: "Fifth Wave of Bitcoin Grants"
+date: '2024-07-02'
+tags: ['OpenSats', 'grants', 'bitcoin']
+draft: false
+authors: ['btcschellingpt', 'arvin']
+images: ['/static/images/blog/36-bitcoin-jul.jpg']
+summary: "OpenSats is funding 10 more open-source projects in the bitcoin ecosystem."
+---
+
+As we enter the 5th Bitcoin epoch, OpenSats is proud to announce our 5th wave of
+Bitcoin grants. While Bitcoin continues its journey of increasingly embedding
+itself into global institutional finance and public markets, we must not forget
+that behind these notable milestones are hardworking, passionate individuals who
+dedicate their time and energy to writing and maintaining free and open-source
+Bitcoin software.
+
+Our goal is to provide sustainable funding for FOSS contributors, especially
+those who make Bitcoin flourish. Over the last couple of weeks, our board has
+selected ten more projects for funding.
+
+In alphabetical order, they are:
+
+- [Core Lightning Bookkeeper Dashboard](#core-lightning-bookkeeper-dashboard)
+- [Cove](#cove)
+- [Fedimint On-Chain Gateway \& RBF](#fedimint-on-chain-gateway--rbf)
+- [Krux](#krux)
+- [Krux Installer](#krux-installer)
+- [Lightning Network Protocol Test Framework](#lightning-network-protocol-test-framework)
+- [Macadamia](#macadamia)
+- [Tor Support for BDK \& Fedimint](#tor-support-for-bdk--fedimint)
+- [Utreexo](#utreexo)
+- [Validating Lightning Signer](#validating-lightning-signer)
+
+These grants are sourced from our [General Fund](/projects/general_fund), which
+is funded by generous donors like you. If you would like to support free and
+open-source projects that help Bitcoin flourish, consider donating to the fund:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+We are incredibly grateful for all donations—large and small—and are happy to
+have received significant donations from [The Reynolds
+Foundation](/blog/opensats-receives-one-million-from-reynolds-foundation) and
+[#startsmall](/blog/opensats-receives-additional-funding-of-dollar21m-from-startsmall)
+recently, which helped enable these grants.
+
+---
+
+Without further ado, let us take a closer look at the projects to understand
+what they are about and how they align with [our mission](/mission):
+
+### Core Lightning Bookkeeper Dashboard
+
+The _Core Lightning Bookkeeper Dashboard_ provides a Graphical User Interface to
+the Core Lightning (CLN) back-end. Core Lightning is one of the four major
+Lightning implementations alongside [Eclair](https://github.com/ACINQ/eclair),
+Lightning Development Kit ([LDK](https://github.com/lightningdevkit)), and
+Lightning Network Daemon ([LND](https://github.com/lightningnetwork/lnd)).
+
+The dashboard is inspired by [Umbrel’s Lightning
+app](https://github.com/getumbrel/umbrel-lightning), which in turn was built
+upon work done by Casa for their [Lightning
+node](https://github.com/Casa/Casa-Node-API) implementation. This is the power
+of FOSS on full display: being able to build upon previous work to the benefit
+of all.
+
+This grant is to support the addition of three new visual elements to the
+bookkeeper:
+
+- A balance sheet tracker to show the current and historical balance of sats on the node each day.
+- The "sats flow" to show the changes in debits and credits over time
+- A volume chord schematic to show the flow of sats routed between nodes.
+
+In combination, these features will improve accessibility to the underlying data
+CLN already captures.
+
+Repository: [ElementsProject/cln-application](https://github.com/ElementsProject/cln-application)  
+License: [MIT](https://github.com/ElementsProject/cln-application/blob/main/LICENSE)
+
+### Cove
+
+Cove is a new single-sig mobile wallet optimized for use with hardware signing
+devices. Cove leverages BDK with the core of the app built in Rust and an
+interface built with SwiftUI (for iOS) and Jetpack Compose (for Android). The
+design objective is to make this a first choice for new bitcoiners, making it
+easy as they move to hardware signing devices—and subsequently to watch-only
+wallets.
+
+This grant will enable the build of the core wallet along with support for
+Partially Signed Bitcoin Transactions
+([PSBTs](https://bitcoinops.org/en/topics/psbt/)) via Near Field Communications
+([NFC](https://squareup.com/au/en/the-bottom-line/managing-your-finances/nfc)),
+Quick Response codes ([QR](https://en.wikipedia.org/wiki/QR_code)), and virtual
+drives for offline signing. In the future, Cove will support coin control,
+passphrase use, multiple accounts, decoy wallets, and connecting to your own
+node.
+
+Repository: [bitcoinppl/cove](https://github.com/bitcoinppl/cove)  
+License: [MIT](https://github.com/bitcoinppl/cove/blob/master/LICENSE)
+
+### Fedimint On-Chain Gateway & RBF
+
+[Fedimint](https://fedimint.org/) is an open-source federated Chaumian eCash
+mint project used by several eCash projects, including Cashu and Fedi. Chaumian
+eCash provides significant privacy benefits to mint users, and at its core uses
+the work of groundbreaking work of cryptographer David Chaum from 1982.
+Fedimints require no changes to either the Bitcoin base layer or the Lightning
+protocol.
+
+This grant supports work to improve the efficiency of exiting from mints via
+on-chain gateways. Fedimint traditionally uses the Lightning Network as the
+instant settlement and connectivity fabric between mints, but exiting directly
+to Bitcoin's base layer was always part of Fedimint’s design. Work on the
+on-chain gateway will focus on optimizing these base-layer transactions under
+load, using RBF and other techniques.
+
+Repository: [fedimint/fedimint](https://github.com/fedimint/fedimint)  
+License: [MIT](https://github.com/fedimint/fedimint/blob/master/LICENSE)
+
+### Krux
+
+Krux is open-source firmware that enables anyone to build their own Bitcoin
+signing device via off-the-shelf parts. It runs on Kendryte K210 devices such as
+the Maix Amigo or the M5StickV (among others), converting them into air-gapped
+devices that can sign transactions for multisignature and single-signature
+wallets.
+
+This grant supports the effort to expand firmware functionality and the range of
+supported devices, including PCs and Android mobile devices. New features will
+include the introduction of Krux Apps to enable games, additional OpSec
+features, and the ability to use the signing device for Nostr.
+
+Repository: [selfcustody/krux](https://github.com/selfcustody/krux)  
+License: Apache2 & [MIT](https://github.com/selfcustody/krux/blob/main/LICENSE.md)
+
+### Krux Installer
+
+Whilst Krux is an open-source firmware that allows anyone to build their own
+signing device for Bitcoin transactions, `krux-installer` is the desktop
+application that allows anyone to install the Krux firmware in a safe, easy, and
+transparent way.  This makes the use of Krux more accessible and consequently
+helps adoption and use; GrapheneOS’s deployment of a web-based installer for
+their OS onto hardware similarly saw upticks in adoption and use for the same
+reason.
+
+This grant will enable the project to refactor and align the technology between
+`krux` and the `krux-installer`, improving supportability and reducing technical
+footprint. Additionally, this grant will allow developers to focus on macOS
+deployment and implement a "Wipe the device" feature to enhance security.
+
+Repository: [selfcustody/krux-installer](https://github.com/selfcustody/krux-installer)  
+License: [MIT](https://github.com/selfcustody/krux-installer/blob/main/LICENSE)
+
+### Lightning Network Protocol Test Framework
+
+The Lightning Network protocol test framework provides a common and reusable
+framework for easier testing of proposed protocol changes. This framework allows
+developers to test the impact on other implementations as part of the
+verification and validation process. It is part of the aptly named [Lightning
+Network Interoperability
+Initiative](https://lnspec-tools.github.io/ln-interoperability-initiative/index.html),
+which—you guessed it—aims to improve the interoperability between various
+Lightning Network implementations.
+
+This grant will be used to turn the test framework into a library, making re-use
+by each group working on the Lightning Network simpler, and can be used to build
+and expand a base set of tests that are shared. In this way, each group can
+contribute to a common  test pool for the protocol, including those who have
+implementation-specific features (such as Pool or AMP).
+
+Repository: [rustyrussell/lnprototest](https://github.com/rustyrussell/lnprototest)  
+License: [MIT](https://github.com/rustyrussell/lnprototest/blob/master/pyproject.toml)
+
+### Macadamia
+
+[Macadamia](https://macadamia.cash/) is a native iOS wallet written in Swift and
+SwiftUI for the [Cashu](https://cashu.space/) Chaumian eCash protocol. The
+wallet aims to make privacy-preserving eCash use simple, smooth, and stable.
+Macadamia includes the ability to send eCash on [Nostr](https://nostr.com/). It
+is currently in early-stage beta and is available on Testflight.
+
+This grant supports the separation of wallet and Cashu logic, separating the
+latter into a stand-alone Swift library with support for mandatory
+[NUTS](https://nips.nostr.com/), and (initially) NUT-07, NUT-09, and NUT-13.
+
+Additional support for more complex Cashu capabilities and better support for
+mints—including multi-mint multi-path payments—is on the roadmap for future
+releases.
+
+Repository: [zeugmaster/macadamia](https://github.com/zeugmaster/macadamia)  
+License: [MIT](https://github.com/zeugmaster/macadamia/blob/main/LICENSE)
+
+### Tor Support for BDK & Fedimint
+
+The [Bitcoin Development Kit](https://bitcoindevkit.org/) (BDK) provides a
+library of Bitcoin wallet capabilities for developers to build cross-platform
+Bitcoin wallets without needing to worry about Bitcoin internals.
+[Fedimint](https://fedimint.org/) is an open-source Chaumian eCash framework
+project that leverages BDK, and like  BDK  is also written in Rust. Fedimint
+should not be conflated with any commercial efforts building on top of the
+open-source protocol, such as [Fedi](https://www.fedi.xyz/).
+
+This grant effort will focus on delivering Tor support for Fedimint clients and
+adding new gateways and PayJoin support. For BDK, this grant effort is focused
+on Tor support for the
+[`rust-esplora-client`](https://github.com/bitcoindevkit/rust-esplora-client),
+upgrading `rust-bitcoin`, and building support for pruned nodes.
+
+Both  Fedimint and BDK are increasingly being leveraged by other projects in the
+wider Bitcoin ecosystem, such as BitKey, Mutiny Wallet, and LDK. Consequently,
+it is important that these building blocks provide a strong level of privacy and
+security.
+
+Repositories: [bitcoindevkit/bdk](https://github.com/bitcoindevkit/bdk) & [fedimint/fedimint](https://github.com/fedimint)  
+Licenses: [MIT](https://github.com/bitcoindevkit/bdk/blob/master/LICENSE-MIT)/[Apache2](https://github.com/bitcoindevkit/bdk/blob/master/LICENSE-APACHE) & [MIT](https://github.com/fedimint/fedimint/blob/master/LICENSE)
+
+### Utreexo
+
+Utreexo utilizes Merkle trees to provide an alternate structure for access to
+Bitcoin data, enabling compact state nodes, parallelization of the Initial Block
+Download (IBD), and thereby wider distribution of functional Bitcoin nodes. This
+opens the door to browser-based and smaller low-power devices to become Bitcoin
+nodes—including mobile devices!
+
+This grant supports the activities to complete the P2P tx messaging
+implementation, write up the four BIPs required for `utreexo`, and commence
+building the bridge node implementation within Bitcoin Core. Subsequent work on
+optimizing performance for IBD, increasing efficiency in the accumulator
+implementation, and improving library support are to follow.
+
+Repository: [utreexo/utreexo](https://github.com/utreexo/utreexo)  
+License: [MIT](https://github.com/utreexo/utreexo/blob/master/LICENSE.md)
+
+### Validating Lightning Signer
+
+Validating Lightning Signer (VLS) is an open-source project with the explicit
+goal to improve the security of the Lightning Network, by separating "hot"
+bitcoin keys from operational Lightning nodes. VLS works by storing private keys
+in a specialized signing device which adds an additional layer of security.
+Especially for businesses and enterprises this additional security provides
+important safeguards currently not accessible.
+
+This grant supports the work for VLS focused on support for low-resource
+signers, tuning for embedded processors, fine-tuning for latency and memory use,
+and dockerization. Subsequent focus then moves to operation on hardened servers,
+and validated support for high volume lightning use, i.e. thousands of channels
+and millions of payments. Future work extends support to LND beyond the initial
+[Core Lightning](https://github.com/ElementsProject/lightning) and
+[LDK](https://github.com/lightningdevkit)  implementations,  and then to support
+for Splicing and multi-sig lightning key management.
+
+Repository: [lightning-signer/validating-lightning-signer](https://gitlab.com/lightning-signer/validating-lightning-signer)  
+License: [Apache2](https://gitlab.com/lightning-signer/validating-lightning-signer/-/blob/main/LICENSE)
+
+---
+
+This 5th wave of grants to Bitcoin projects follows our earlier announcement in
+[February](/blog/bitcoin-grants-feb-2024) this year, and last year's
+announcements in [December](/blog/bitcoin-grants-december-2023),
+[August](/blog/bitcoin-and-nostr-grants-august-2023), and
+[July](/blog/bitcoin-grants-july-2023). For more details on the types of
+projects and people we support, we encourage you to have a look at our [grants
+and reports](/transparency#grants--reports). If you are a developer working on a
+project that is aligned with our mission, don't hesitate to [apply for
+funding](/apply).
