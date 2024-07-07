@@ -271,6 +271,8 @@ export default function ApplicationForm() {
           {...register('other_contact')}
         />
       </label>
+      <hr />
+      <h2>Prior Contributions & References</h2>
       <label className="block">
         Prior Contributions
         <br />
