@@ -272,19 +272,7 @@ export default function ApplicationForm() {
         />
       </label>
       <hr />
-      <h2>Prior Contributions & References</h2>
-      <label className="block">
-        Prior Contributions
-        <br />
-        <small>
-          Please list any prior contributions to other open-source or
-          Bitcoin-related projects.
-        </small>
-        <textarea
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('bios')}
-        />
-      </label>
+      <h2>References & Prior Contributions</h2>
       <label className="block">
         References *<br />
         <small>
@@ -295,6 +283,18 @@ export default function ApplicationForm() {
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('references', { required: true })}
+        />
+      </label>
+      <label className="block">
+        Prior Contributions
+        <br />
+        <small>
+          Please list any prior contributions to other open-source or
+          Bitcoin-related projects.
+        </small>
+        <textarea
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('bios')}
         />
       </label>
       <hr />
