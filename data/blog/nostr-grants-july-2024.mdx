@@ -1,0 +1,242 @@
+---
+title: "Fifth Wave of Nostr Grants"
+date: '2024-07-15'
+tags: ['OpenSats', 'grants', 'nostr']
+draft: false
+authors: ['arvin', 'jason']
+images: ['/static/images/blog/39-nostr-jul.jpg']
+summary: "OpenSats is funding eleven more open-source projects in the nostr ecosystem."
+---
+
+Announcing our fifth wave of nostr grants, aimed at driving innovation as well
+as consistent and broad support across the nostr ecosystem.
+
+Since [our last wave of grants](/blog/nostr-grants-december-2023), the protocol
+has seen [continual growth](https://stats.nostr.band/) and incredible progress.
+Nostr’s integration with the Lightning Network continues to make
+[zaps](https://zaplife.lol/) (bitcoin-based micro transactions) a breeze. These
+frictionless payments create the perfect environment for economic activity and
+open up new income opportunities for independent journalists, artists, and
+creators in general. As Lightning & eCash mature and continue their path of
+[tightly integrating with nostr][nutsack], and with the emergence of
+nostr-native P2P marketplaces, economic activity across the network is bound to
+grow.
+
+As an open protocol, it's in nostr's DNA to integrate with other open protocols.
+One such effort is the [Mostr bridge](https://mostr.pub/), which connects nostr
+with the wider Fediverse (and vice-versa). Gone are the days of walled gardens.
+May the best open protocol win! Or even better: let a thousand flowers bloom
+(and interop with each other).
+
+It should be obvious  by now that nostr is way more than just a “twitter clone.”
+From self-sovereign identity to decentralized identity system & social graph, to
+web-of-trust and a base for secure communication frameworks, the potential uses
+for nostr are vast and ever-growing.
+
+We hope that our grants will allow developers to build on the existing momentum,
+helping to ensure that nostr stays at the cutting edge of permissionless social
+media, self-sovereign identity, and social payments of _real_ money online.
+
+Without further ado, the 5th wave of nostr grants is going to:
+
+- [nosvelte](#nosvelte)
+- [npub.cash](#npubcash)
+- [nostter](#nostter)
+- [nostr-filter-relay](#nostr-filter-relay)
+- [Mostro](#mostro)
+- [Citrine](#citrine)
+- [DVMDash](#dvmdash)
+- [nostr-php](#nostr-php)
+- [Shopstr](#shopstr)
+- [Nostrmo](#nostrmo)
+- [Captain’s Log](#captains-log)
+
+Including these eleven projects, we have now issued a total of 57 grants to
+various nostr projects. See our [1st](/blog/nostr-grants-july-2023),
+[2nd](/blog/bitcoin-and-nostr-grants-august-2023),
+[3rd](/blog/nostr-grants-october-2023), and [4th
+wave](/blog/nostr-grants-december-2023) blog posts for details. Additionally, we
+are providing long-term support for exceptional nostr developers such as
+[Pablo](/blog/pablofz7-receives-lts-grant),
+[Stuart](/blog/stuart-bowman-receives-lts-grant),
+[hzrd149](/blog/hzrd149-receives-lts-grant),
+[Will](/blog/jb55-receives-lts-grant), and
+[Yuki](/blog/yuki-receives-lts-grant)—and we’ll have more grants to announce
+soon.
+
+If you would like to help us continue supporting the nostr ecosystem, consider
+making a donation to [The Nostr Fund](/funds/nostr):
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+---
+
+### nosvelte
+
+Nosvelte is a Svelte library designed to simplify the development of nostr
+applications. Offering pre-built components and tools, it reduces the complexity
+of creating nostr apps, making it accessible even for beginners. This project
+focuses on improving performance and ease of use, which can significantly boost
+the development of new applications within the nostr ecosystem. Future updates
+aim to enhance caching capabilities and maintain compatibility with the latest
+version of `rx-nostr`, ensuring long-term efficiency and adaptability for
+developers.
+
+Repository: [akiomik/nosvelte](https://github.com/akiomik/nosvelte)  
+License: Apache-2.0
+
+### npub.cash
+
+[npub.cash](https://npub.cash/) offers a privacy-preserving Lightning Address
+without registration by combining Cashu, nostr, and the Lightning Network. It
+leverages nostr identities for authentication, enhancing privacy and reducing
+custodial risks, making it easier for users to receive Zaps securely. Future
+developments will include integrating Cashu-Addresses with various
+environments—such as Umbrel and RaspiBlitz, Cashu wallets, and nostr clients—to
+broaden accessibility and functionality across the ecosystem.
+
+Repository: [cashubtc/npubcash-server](https://github.com/cashubtc/npubcash-server)  
+License: MIT
+
+### nostter
+
+[Nostter](https://nostter.app/) is a social web client for nostr, focusing on
+enhancing the user interface and experience. It supports various NIPs, offers
+tight integration with external apps, and aims to attract more users to the
+nostr network by improving SEO and adding features like embedded YouTube videos
+and local relay settings. Future plans include developing serverless scalable
+relays and implementing features like automatic event backup and enhanced
+privacy measures to further enrich the platform's usability and appeal.
+
+Repository: [SnowCait/nostter](https://github.com/SnowCait/nostter)  
+License: AGPL-3.0
+
+### nostr-filter-relay
+
+The `nostr-filter-relay` project provides a docker image package that filters
+nostr content based on criteria such as language, user type, and content safety.
+It aims to balance freedom of speech with user control over the content they
+see, thereby enhancing the overall user experience. The relay can detect and
+filter out NSFW content, as well as  certain categories of speech based on
+language, sentiment, and more. Future enhancements will include sentiment
+analysis, topic classification, and [NIP-32](https://nostr-nips.com/nip-32)
+labeling compatibility to provide even more refined filtering options.
+
+Repository: [atrifat/nostr-filter-relay](https://github.com/atrifat/nostr-filter-relay)  
+License: MIT
+
+### Mostro
+
+[Mostro](https://mostro.network/) is a peer-to-peer Bitcoin marketplace that is
+currently migrating from Telegram to nostr. As a large-scale update of the
+popular [@lnp2pBot](https://github.com/lnp2pBot) project, Mostro offers a
+non-KYC, censorship-resistant platform for Bitcoin trading, which is crucial for
+users living within authoritarian regions. The project aims to decentralize the
+service further by allowing multiple
+[daemons](https://en.wikipedia.org/wiki/Daemon_(computing)) worldwide, enhancing
+security, and reducing the risk of censorship. Future developments will include
+launching desktop and mobile clients, enabling community features, and
+translating the platform into multiple languages to broaden its global reach.
+
+Repository: [MostroP2P](https://github.com/MostroP2P)  
+License: MIT
+
+### Citrine
+
+Citrine is an Android-based relay and database that enables nostr clients to
+send and receive events. It supports offline access to notes and provides a
+shared database for multiple nostr apps on a single device, improving
+reliability and performance for mobile users. Future updates will introduce
+configurable options and content provider support, further enhancing its
+integration and usability across different applications.
+
+Repository: [greenart7c3/Citrine](https://github.com/greenart7c3/Citrine)  
+License: MIT
+
+### DVMDash
+
+[DVMDash](https://dvmdash.live/) is a monitoring and debugging tool for [Data
+Vending Machines](https://www.data-vending-machines.org/) (DVMs) on nostr. It
+offers insights into DVM activity, such as transaction volumes and response
+times, helping developers and users optimize their interactions with AI tools
+and other computational services within the nostr ecosystem. Future plans
+include developing a graph-based visualization tool for DVM chains, enhancing
+the user interface to provide more detailed metrics, and improving overall
+usability.
+
+Repository: [dtdannen/dvmdash](https://github.com/dtdannen/dvmdash)  
+License: MIT
+
+### nostr-php
+
+[Nostr-php](https://nostr-php.dev/) is a helper library for interacting with
+nostr. It aims to facilitate the integration of nostr functionalities into web
+applications, broadening the ecosystem's reach. This project will also support
+the development of contributed modules, enhancing platform versatility. Future
+efforts will focus on leveraging the helper library to enhance the capabilities
+of platforms like Drupal with nostr integration, promoting interoperability and
+functionality.
+
+Repository: [nostrver-se/nostr-php](https://github.com/nostrver-se/nostr-php)  
+License: MIT
+
+### Shopstr
+
+[Shopstr](https://shopstr.store/) is a decentralized marketplace that enables
+users to buy and sell goods using Bitcoin anonymously. It aims to promote
+Bitcoin and nostr adoption by providing a free, open, and globally accessible
+platform for online commerce, eliminating middlemen, and ensuring privacy.
+Future developments will include features such as a native wallet, a merchant
+metrics dashboard, an escrow system, and custom storefronts to enhance user
+experience and drive long-term project sustainability.
+
+Repository: [shopstr-eng/shopstr](https://github.com/shopstr-eng/shopstr)  
+License: GPL-3.0
+
+### Nostrmo
+
+[Nostromo](https://github.com/haorendashu/nostrmo_faq/blob/main/README.md#nostrmo-faq)
+is a versatile nostr client supporting multiple platforms, including Android,
+iOS, MacOS, Windows, Web, and Linux. It offers features like NIP-07 support and
+a visual editor, ensuring a consistent and enhanced user experience across all
+devices. Future updates will focus on optimizing the Zap function, improving the
+Linux user experience, and refining the overall UI to further elevate the
+platform's usability and functionality.
+
+Repository: [haorendashu/nostrmo](https://github.com/haorendashu/nostrmo)  
+License: GPL-3.0
+
+### Captain’s Log
+
+Captain's Log is a nostr-native desktop note-taking application for MacOS,
+Linux, and Windows. It supports markdown for creating and posting ["kind
+1"](https://github.com/nostr-protocol/nips?tab=readme-ov-file#event-kinds)
+events (short text notes) and kind 30023 events (long-form articles). It also
+provides a familiar, cross-platform tool for content creation, and  integrates
+with [Keystache](https://github.com/Resolvr-io/Keystache) for key management,
+with the aim to drive nostr adoption for creators​. Future updates will focus on
+a website for note sharing and zaps, enhancing the user interface, adding
+customization options, mobile device expansion, and improving the overall user
+experience.
+
+Repository: [nodetec/captains-log](https://github.com/nodetec/captains-log)  
+License: MIT
+
+---
+
+We are proud to support these projects and look forward to their continuous
+contributions to the nostr ecosystem. We have more grants to announce soon and
+will provide funding for many more projects in the future. If you're working on
+a nostr project that is free and open-source, [don't hesitate to apply](/apply).
+
+Our support for nostr is made possible by donors like you. Please consider
+making a donation to [The Nostr Fund](/funds/nostr) to help
+us fund the ingenious developers building toward a better future:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+[nutsack]: https://njump.me/nevent1qqsqpzvlvmfyq9y8dp36x2xvgmad5486c4ct4ecdkmdxgtr9dxl5r2qzyrafsj7hmweg9ur7zmn6apajdg48hxuskujx53rhrux0ttjcqx84y20a3aa
