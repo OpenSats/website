@@ -57,6 +57,11 @@ ${req.body.anything_else ? req.body.anything_else : 'No.'}
 ${req.body.license ? `License: ${req.body.license}` : ''}
 ${req.body.github ? req.body.github : ''}
 ${req.body.personal_github ? req.body.personal_github : ''}
+${
+  req.body.other_contact
+    ? `Other contact details: ${req.body.other_contact}`
+    : ''
+}
         `
 
     // Label set according to "main focus"
