@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
+import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -223,6 +224,16 @@ export default function ApplicationForm() {
           Will your contributions be free and open-source? *
         </span>
       </label>
+      <small>
+        We focus on supporting projects that are free as in freedom and open to
+        all. Your project should have a proper open-source license and any
+        additional materials (such as documentation, educational materials,
+        etc.) should be available to the public under a{' '}
+        <CustomLink href="https://www.gnu.org/licenses/license-list.html">
+          free and open license
+        </CustomLink>
+        .
+      </small>
 
       <div className="prose">
         <small>
