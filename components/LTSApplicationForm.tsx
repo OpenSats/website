@@ -237,9 +237,9 @@ export default function ApplicationForm() {
 
       <div className="prose">
         <small>
-          OpenSats may require each recipient to sign a Grant Agreement before
-          any funds are disbursed. Using the reports and presentations required
-          by the Grant Agreement, OpenSats will monitor and evaluate the
+          OpenSats requires each recipient to sign a Grant Agreement before any
+          funds are disbursed. Using the reports and presentations required by
+          the Grant Agreement, OpenSats will monitor and evaluate the
           expenditure of funds on a quarterly basis. Any apparent misuse of
           grant funds will be promptly investigated. If OpenSats discovers that
           the funds have been misused, the recipient will be required to return
