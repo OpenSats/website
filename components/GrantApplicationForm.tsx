@@ -263,8 +263,7 @@ export default function ApplicationForm() {
         <small>
           Please list any other relevant contact details you are comfortable
           sharing in case we need to reach out with questions. These could
-          include nostr pubkeys, social media handles, emails, phone numbers,
-          etc.
+          include nostr pubkeys, social media handles, email, etc.
         </small>
         <textarea
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
