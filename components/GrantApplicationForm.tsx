@@ -130,6 +130,17 @@ export default function ApplicationForm() {
       </label>
 
       <label className="block">
+        Project Website (if applicable)
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('website')}
+        />
+      </label>
+
+      <hr />
+
+      <label className="block">
         Project Github (or similar, if applicable)
         <input
           type="text"
