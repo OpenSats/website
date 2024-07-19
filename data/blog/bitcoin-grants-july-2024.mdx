@@ -23,7 +23,7 @@ In alphabetical order, they are:
 
 - [Core Lightning Bookkeeper Dashboard](#core-lightning-bookkeeper-dashboard)
 - [Cove](#cove)
-- [Fedimint On-Chain Gateway \& RBF](#fedimint-on-chain-gateway--rbf)
+- [Fedimint On-Chain Wallet](#fedimint-on-chain-wallet)
 - [Krux](#krux)
 - [Krux Installer](#krux-installer)
 - [Lightning Network Protocol Test Framework](#lightning-network-protocol-test-framework)
@@ -100,21 +100,21 @@ node.
 Repository: [bitcoinppl/cove](https://github.com/bitcoinppl/cove)  
 License: [MIT](https://github.com/bitcoinppl/cove/blob/master/LICENSE)
 
-### Fedimint On-Chain Gateway & RBF
+### Fedimint On-Chain Wallet
 
 [Fedimint](https://fedimint.org/) is an open-source federated Chaumian eCash
-mint project used by several eCash projects, including Cashu and Fedi. Chaumian
-eCash provides significant privacy benefits to mint users, and at its core uses
-the work of groundbreaking work of cryptographer David Chaum from 1982.
+mint project used by several eCash projects, including Fedi and Mutiny Wallet.
+Chaumian eCash provides significant privacy benefits to mint users, and at its
+core uses the groundbreaking work of cryptographer David Chaum from 1982.
 Fedimints require no changes to either the Bitcoin base layer or the Lightning
 protocol.
 
-This grant supports work to improve the efficiency of exiting from mints via
-on-chain gateways. Fedimint traditionally uses the Lightning Network as the
-instant settlement and connectivity fabric between mints, but exiting directly
-to Bitcoin's base layer was always part of Fedimint’s design. Work on the
-on-chain gateway will focus on optimizing these base-layer transactions under
-load, using RBF and other techniques.
+This grant supports work to improve the liquidity and efficiency of exiting from
+mints via the on-chain wallet. Fedimint traditionally uses the Lightning Network
+as the instant settlement and connectivity fabric between mints, but exiting
+directly to Bitcoin's base layer was always part of Fedimint's design. Work on
+the on-chain wallet will focus on optimizing these base-layer transactions under
+load.
 
 Repository: [fedimint/fedimint](https://github.com/fedimint/fedimint)  
 License: [MIT](https://github.com/fedimint/fedimint/blob/master/LICENSE)

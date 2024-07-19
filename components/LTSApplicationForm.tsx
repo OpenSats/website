@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
+import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -223,12 +224,22 @@ export default function ApplicationForm() {
           Will your contributions be free and open-source? *
         </span>
       </label>
+      <small>
+        We focus on supporting projects that are free as in freedom and open to
+        all. Your project should have a proper open-source license and any
+        additional materials (such as documentation, educational materials,
+        etc.) should be available to the public under a{' '}
+        <CustomLink href="https://www.gnu.org/licenses/license-list.html">
+          free and open license
+        </CustomLink>
+        .
+      </small>
 
       <div className="prose">
         <small>
-          OpenSats may require each recipient to sign a Grant Agreement before
-          any funds are disbursed. Using the reports and presentations required
-          by the Grant Agreement, OpenSats will monitor and evaluate the
+          OpenSats requires each recipient to sign a Grant Agreement before any
+          funds are disbursed. Using the reports and presentations required by
+          the Grant Agreement, OpenSats will monitor and evaluate the
           expenditure of funds on a quarterly basis. Any apparent misuse of
           grant funds will be promptly investigated. If OpenSats discovers that
           the funds have been misused, the recipient will be required to return
