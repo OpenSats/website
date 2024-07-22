@@ -1,0 +1,191 @@
+---
+title: "Sixth Wave of Bitcoin Grants"
+date: '2024-07-22'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+draft: false
+authors: ['arvin', 'btcschellingpt']
+images: ['/static/images/blog/41-bitcoin-6th-wave.jpg']
+summary: "OpenSats is funding 7 more open-source projects in the bitcoin ecosystem."
+---
+
+We are excited to announce the sixth wave of Bitcoin grants, reaffirming our
+commitment to supporting freedom tech and projects that help Bitcoin flourish.
+An important part of our mission is to provide essential funding to developers
+and projects that advance the open-source ecosystem that Bitcoin relies upon.
+
+In this latest round, we are proud to support seven projects that align with our
+mission. In no particular order, these projects are:
+
+- [Peer Storage Backups for Lightning Channels](#peer-storage-backups-for-lightning-channels)
+- [secp256k1.swift](#secp256k1swift)
+- [Blitz Wallet](#blitz-wallet)
+- [NLightning](#nlightning)
+- [eNuts](#enuts)
+- [Gonuts](#gonuts)
+- [Bitcoin Fees](#bitcoin-fees)
+
+Made possible by the generosity of our donors, these grants enable the various
+contributors to continue and expand their important work. If you would like to
+support [our mission](/mission), then please consider donating to our [General
+Fund](/funds/general):
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+To learn more about the types of projects and contributors we support, have a
+look at our [long-term support grants](/tags/lts) as well as [our 2023 year in
+review](/blog/2023-year-in-review).
+
+Let's dive in and take a closer look at these projects to understand what they
+are and how these grants will help.
+
+---
+
+### Peer Storage Backups for Lightning Channels
+
+Lightning's [`peer_storage`](https://github.com/lightning/bolts/pull/1110)
+specification allows for automated backups via a node's peers on the Lightning
+Network, enabling fund recovery in case of data loss. The project aims to
+enhance the reliability of the Lightning Network by developing a seamless
+recovery process for users to retrieve funds from corrupted databases using only
+their initial passphrase.
+
+The grant will support automating peer storage backup detection, creating
+mechanisms for nodes to advertise backup support, and preparing a Lightning-spec
+proposal for peer storage backups. These efforts will make backups automatic and
+universally compatible across different implementations. The project will also
+research methods to resume channel operations post-recovery and explore
+additional use cases for peer storage.
+
+Repositories: [bolts](https://github.com/lightning/bolts) / [rust-lightning](https://github.com/lightningdevkit/rust-lightning) / [lightning](https://github.com/ElementsProject/lightning) / [lnd](https://github.com/lightningnetwork/lnd)  
+Licenses: Various (CC-BY 4.0 / MIT / Apache / BSD-MIT)
+
+### secp256k1.swift
+
+Secp256k1.swift is a public key cryptography library written in Swift. It
+simplifies the development of Bitcoin applications by offering common
+cryptographic operations as well as APIs for features like ECDSA and Schnorr
+signatures. By utilizing C bindings from
+[libsecp256k1](https://github.com/bitcoin-core/secp256k1), it enhances the
+efficiency of Bitcoin app development, fostering innovation and supporting the
+creation of non-custodial, decentralized apps.
+
+The grant will support launching a project website, developing Swift APIs for
+MuSig2 and native UInt256 type, adding an XCFramework artifact for cross
+platform integration, and establishing the [21.dev](https://21.dev/)
+organization to support future projects. These initiatives aim to expand the
+project's capabilities and promote broader adoption and innovation within the
+community.
+
+Repository: [21-DOT-DEV/swift-secp256k1](https://github.com/21-DOT-DEV/swift-secp256k1)  
+License: MIT
+
+### Blitz Wallet
+
+[Blitz Wallet](https://blitz-wallet.com/) is a self-custodial Bitcoin Lightning
+wallet leveraging Breez SDK and Blockstream Greenlight for its infrastructure.
+It integrates features like automatic channel rebalancing, smart channel
+openings via Boltz, a built-in store for spending sats on applications like
+ChatGPT, and enhanced contact features for mass payments and payment requests.
+
+The grant will support integrating a Liquid wallet, improving user experience
+with the built-in store and contact features, and launching iOS and Android apps
+(both currently in Beta). The project aims to create an all-encompassing
+Lightning wallet experience, addressing inbound liquidity issues and providing
+users with practical ways to spend bitcoin and simplify transactions.
+
+Repository: [BlakeKaufman/BlitzWallet](https://github.com/BlakeKaufman/BlitzWallet)  
+License: Apache v2.0
+
+### NLightning
+
+[NLightning](https://nlightning.ipms.io/) is an implementation of the Lightning
+Network protocol developed in C#, aimed at enhancing Bitcoin scalability and
+adoption in enterprise systems. The project provides a robust, secure, and
+easy-to-integrate solution for bringing Lightning into traditional financial
+environments. It follows a modular design, making it easy to extend and
+customize.
+
+The grant will support completing the implementation of [BOLT
+specifications](https://nlightning.ipms.io/docs/features.html), launching
+comprehensive documentation and tutorials, developing additional tools for
+monitoring and managing Lightning Network transactions for enterprise use, and
+piloting NLightning with financial institutions.
+
+Repository: [ipms-io/nlightning](https://github.com/ipms-io/nlightning)  
+License: MIT
+
+### eNuts
+
+[eNuts](https://www.enuts.cash/) is a free and open-source mobile
+[Cashu](https://docs.cashu.space/) wallet available for Android and iOS,
+designed with Lightning support and the ability to connect to multiple mints. It
+integrates [nostr](https://nostr.com/) for seamless eCash transactions between
+users and their contacts. The wallet aims to enhance user experience by making
+eCash payments easier and safer, providing features like detailed transaction
+history, various mint settings, quick share options, and enhanced privacy
+settings​.
+
+The grant will support the release of APK and Testflight versions, enhance its
+nostr integration, add proper UI testing, and improve the maintainability of the
+codebase. This funding will also facilitate the addition of features like seed
+backup, auto mint-swap, and an improved user experience.
+
+Repository: [cashubtc/eNuts](https://github.com/cashubtc/eNuts)  
+License: GNU GPLv3
+
+### Gonuts
+
+Gonuts is a Cashu wallet and mint written in [Go](https://go.dev/), serving as a
+library for developers to integrate Cashu functionality into their Go
+applications. This project aims to simplify the implementation of
+privacy-preserving eCash transactions within the Bitcoin and Lightning Network
+ecosystems, making it easier for developers to incorporate these features into
+their own applications.
+
+The grant will support several key developments for Gonuts by implementing new
+protocol additions such as Spending Conditions and Pay-to-Public-Key (as
+outlined in NUTs [10](https://github.com/cashubtc/nuts/blob/main/10.md) and
+[11](https://github.com/cashubtc/nuts/blob/main/11.md)), enabling "Multinut"
+payments to allow users to pay a Lightning invoice from multiple mints, and
+improving mint reliability by adding support for
+[SQLite](https://www.sqlite.org/).
+
+Additionally, the grant will facilitate the creation of a [Docker
+container](https://www.docker.com/resources/what-container/) for easier mint
+deployment and extend support to other Lightning backends beyond LND. These
+enhancements will make Gonuts more robust, versatile, and user-friendly,
+fostering broader adoption and innovation within the Cashu ecosystem.
+
+Repository: [elnosh/gonuts](https://github.com/elnosh/gonuts)  
+License: MIT
+
+### Bitcoin Fees
+
+Bitcoin Fees aims to create a cross-platform, open-source app that tracks
+on-chain fees and notifies users of specified fee changes. The app helps users
+understand UTXOs and provides a fee calculator to educate users about Bitcoin
+transaction fees.
+
+The grant will support developing a proof-of-concept beta version of the app,
+focusing on tracking fees and educating users on managing Bitcoin transaction
+costs.
+
+Repository: [tallyforge/bitcoinfees](https://github.com/tallyforge/bitcoinfees)  
+License: MIT
+
+---
+
+With this 6th wave of grants, much like our prior waves, we evaluated
+applications based on carefully defined [criteria](/apply#criteria) and did our
+best to select the most impactful and promising proposals for the Bitcoin
+ecosystem. If you are a developer working on a project that is aligned with [our
+mission](/mission), don't hesitate to [apply for funding](/apply).
+
+Please [consider donating](/donate) if you want to support open-source projects
+and developers in the Bitcoin ecosystem:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
