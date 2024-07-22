@@ -135,6 +135,7 @@ export const Funds = defineDocumentType(() => ({
     coverImage: { type: 'string', required: true },
     git: { type: 'string' },
     twitter: { type: 'string' },
+    nostr: { type: 'string' },
     personalTwitter: { type: 'string' },
     zaprite: { type: 'string', required: true },
     btcpay: { type: 'string', required: true },
