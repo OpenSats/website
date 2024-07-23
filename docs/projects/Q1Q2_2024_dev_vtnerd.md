@@ -25,6 +25,8 @@ fiattotaldonations: 0
 ---
 ### Funded goal: 28,800 USD
 ### Start: February 2024
+### End: July 2024
+### Result:  Development Milestones [1](https://github.com/MAGICGrants/Monero-Fund/issues/27), [2](https://github.com/MAGICGrants/Monero-Fund/issues/29), and [3](https://github.com/MAGICGrants/Monero-Fund/issues/31)
 
 vtnerd (Lee Clagett) is the author of [Monero-LWS](https://github.com/vtnerd/monero-lws), and has been a [contributor to the Monero codebase since 2016](https://github.com/monero-project/monero/pulls?page=7&q=is%3Apr+author%3Avtnerd+created%3A%3E2016-10-01). He is a veteran of four CCS proposals; [[1]](https://ccs.getmonero.org/proposals/vtnerd-tor-tx-broadcasting.html), [[2]](https://ccs.getmonero.org/proposals/vtnerd-2020-q4.html), [[3]](https://ccs.getmonero.org/proposals/vtnerd-2021-q1.html), [[4]](https://ccs.getmonero.org/proposals/vtnerd-2023-q3.html)
 
