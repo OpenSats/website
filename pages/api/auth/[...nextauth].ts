@@ -2,6 +2,7 @@ import NextAuth, { AuthOptions } from 'next-auth'
 import { jwtDecode } from 'jwt-decode'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import axios from 'axios'
+import { env } from '../../../env.mjs'
 
 type KeycloakJwtPayload = {
   sub: string
@@ -23,8 +24,8 @@ export const authOptions: AuthOptions = {
             `http://localhost:8080/realms/monerofund/protocol/openid-connect/token`,
             new URLSearchParams({
               grant_type: 'password',
-              client_id: 'app',
-              client_secret: '7JryN6EVIYtCwN4iHheacjp986Rfy5FJ',
+              client_id: env.KEYCLOAK_CLIENT_ID,
+              client_secret: env.KEYCLOAK_CLIENT_SECRET,
               username: credentials?.email || '',
               password: credentials?.password || '',
             }),
