@@ -66,13 +66,14 @@ export default async function handler(
 
     await prisma.cryptoDonation.create({
       data: {
-        userId: invoiceMetadata.userId,
+        userId: invoiceMetadata.userId as string,
         invoiceId: body.invoiceId,
         crypto: 'XMR',
         projectName: invoiceMetadata.projectName,
         projectSlug: invoiceMetadata.projectSlug,
         fund: 'Monero Fund',
         fiatAmount: parseFloat(invoice.amount),
+        status: 'Settled',
       },
     })
   }

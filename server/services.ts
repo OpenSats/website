@@ -8,12 +8,18 @@ import { env } from '../env.mjs'
 
 sendgrid.setApiKey(env.SENDGRID_API_KEY)
 
-const prisma = new PrismaClient({
-  log:
-    process.env.NODE_ENV === 'production'
-      ? ['error']
-      : ['query', 'info', 'warn', 'error'],
-})
+const globalForPrisma = global as unknown as { prisma: PrismaClient }
+
+const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === 'production'
+        ? ['error']
+        : ['query', 'info', 'warn', 'error'],
+  })
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 const keycloak = new KeycloakAdminClient({
   baseUrl: 'http://localhost:8080',

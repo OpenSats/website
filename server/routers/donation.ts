@@ -165,16 +165,18 @@ export const donationRouter = router({
 
     const donations: Donation[] = []
 
-    if (!stripeCustomerId) {
-      return { donations: [], billingPortalUrl: null }
+    // TODO: Paginate?
+    let stripePayments: Stripe.PaymentIntent[] = []
+
+    if (stripeCustomerId) {
+      stripePayments = (
+        await stripe.paymentIntents.list({
+          customer: stripeCustomerId,
+        })
+      ).data
     }
 
-    // TODO: Paginate?
-    const stripePayments = await stripe.paymentIntents.list({
-      customer: stripeCustomerId,
-    })
-
-    stripePayments.data.forEach((payment) => {
+    stripePayments.forEach((payment) => {
       // Filter out subscriptions as paymentIntents returns an empty metadata obj
       if (payment.invoice) return
 
@@ -266,14 +268,20 @@ export const donationRouter = router({
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     )
 
-    const billingPortalSession = await stripe.billingPortal.sessions.create({
-      customer: stripeCustomerId,
-      return_url: `${env.APP_URL}/account/my-donations`,
-    })
+    let billingPortalUrl: string | null = null
+
+    if (stripeCustomerId) {
+      const billingPortalSession = await stripe.billingPortal.sessions.create({
+        customer: stripeCustomerId,
+        return_url: `${env.APP_URL}/account/my-donations`,
+      })
+
+      billingPortalUrl = billingPortalSession.url
+    }
 
     return {
       donations: donationsSorted,
-      billingPortalUrl: billingPortalSession.url,
+      billingPortalUrl,
     }
   }),
 })
