@@ -1,12 +1,19 @@
 import { Stripe } from 'stripe'
 import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../config'
+import {
+  CURRENCY,
+  MAX_AMOUNT,
+  MEMBERSHIP_PRICE,
+  MIN_AMOUNT,
+} from '../../config'
 import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { Donation, DonationMetadata } from '../types'
 import { createInvoice } from '../utils/btcpay'
+import dayjs from 'dayjs'
+import { TRPCError } from '@trpc/server'
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration
@@ -58,6 +65,7 @@ export const donationRouter = router({
         donorName: name,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        membershipExpiresAt: null,
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -143,6 +151,7 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        membershipExpiresAt: null,
       }
 
       const response = await btcpayApi.post(
@@ -154,6 +163,85 @@ export const donationRouter = router({
           checkout: { redirectURL: `${env.APP_URL}/thankyou` },
         }
       )
+
+      await prisma.cryptoDonation.create({
+        data: {
+          userId: metadata.userId as string,
+          invoiceId: response.data.id,
+          crypto: 'XMR',
+          projectName: metadata.projectName,
+          projectSlug: metadata.projectSlug,
+          fund: 'Monero Fund',
+          fiatAmount: input.amount,
+          status: 'New',
+        },
+      })
+
+      return { url: response.data.checkoutLink }
+    }),
+
+  payMembershipWithCrypto: protectedProcedure
+    .input(
+      z.object({
+        projectName: z.string().min(1),
+        projectSlug: z.string().min(1),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      const userHasMembership = await prisma.cryptoDonation.findFirst({
+        where: {
+          projectSlug: input.projectSlug,
+          status: 'Settled',
+          membershipExpiresAt: { gt: new Date() },
+        },
+      })
+
+      if (userHasMembership) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'USER_HAS_ACTIVE_MEMBERSHIP',
+        })
+      }
+
+      await authenticateKeycloakClient()
+      const user = await keycloak.users.findOne({ id: userId })
+      const email = user?.email!
+      const name = user?.attributes?.name?.[0]!
+
+      const metadata: DonationMetadata = {
+        userId,
+        donorName: name,
+        donorEmail: email,
+        projectSlug: input.projectSlug,
+        projectName: input.projectName,
+        membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
+      }
+
+      const response = await btcpayApi.post(
+        `/stores/${env.BTCPAY_STORE_ID}/invoices`,
+        {
+          amount: MEMBERSHIP_PRICE,
+          currency: CURRENCY,
+          metadata,
+          checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+        }
+      )
+
+      await prisma.cryptoDonation.create({
+        data: {
+          userId,
+          invoiceId: response.data.id,
+          crypto: 'XMR',
+          projectName: metadata.projectName,
+          projectSlug: metadata.projectSlug,
+          fund: 'Monero Fund',
+          fiatAmount: 100,
+          membershipExpiresAt: metadata.membershipExpiresAt,
+          status: 'New',
+        },
+      })
 
       return { url: response.data.checkoutLink }
     }),

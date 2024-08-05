@@ -10,6 +10,7 @@ import CustomLink from '../components/CustomLink'
 import { Button } from '../components/ui/button'
 import { Dialog, DialogContent } from '../components/ui/dialog'
 import DonationFormModal from '../components/DonationFormModal'
+import MembershipModal from '../components/MembershipModal'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -26,7 +27,8 @@ const generalFund: ProjectItem = {
 }
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [donateModalOpen, setDonateModalOpen] = useState(false)
+  const [memberModalOpen, setMemberModalOpen] = useState(false)
 
   return (
     <>
@@ -46,24 +48,35 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             contributors working on freedom tech and projects that help Monero
             flourish.
           </p>
-          <div className="flex flex-wrap py-4">
-            <div className="w-full md:w-1/2">
-              <Button
-                onClick={() => setModalOpen(true)}
-                size="lg"
-                className="px-14 text-black font-semibold text-xl"
-              >
-                Donate to Monero Comittee General Fund
-              </Button>
-            </div>
+
+          <div className="flex flex-wrap space-x-4 py-4">
+            <Button
+              onClick={() => setDonateModalOpen(true)}
+              size="lg"
+              className="px-14 text-black font-semibold text-lg"
+            >
+              Donate to Monero Comittee General Fund
+            </Button>
+
+            <Button
+              onClick={() => setMemberModalOpen(true)}
+              variant="outline"
+              size="lg"
+              className="px-14 font-semibold text-lg"
+            >
+              Become a Member
+            </Button>
           </div>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Want to receive funding for your work?
-            <CustomLink href="/apply" className="text-orange-500">
-              {' '}
-              Apply for a Monero development or research grant!
-            </CustomLink>
-          </p>
+
+          <div className="flex flex-row flex-wrap">
+            <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+              Want to receive funding for your work?
+              <CustomLink href="/apply" className="text-orange-500">
+                {' '}
+                Apply for a Monero development or research grant!
+              </CustomLink>
+            </p>
+          </div>
 
           <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
             We are a 501(c)(3) public charity. All donations are tax deductible.
@@ -88,9 +101,15 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
         </div>
       </div>
 
-      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+      <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
         <DialogContent>
           <DonationFormModal project={generalFund} />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
+        <DialogContent>
+          <MembershipModal project={generalFund} />
         </DialogContent>
       </Dialog>
     </>

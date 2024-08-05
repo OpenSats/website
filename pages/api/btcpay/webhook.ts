@@ -55,26 +55,24 @@ export default async function handler(
     return
   }
 
-  console.log(body)
-
   if (body.type === 'InvoiceSettled') {
-    const { data: invoice } = await btcpayApi.get(
-      `/stores/${env.BTCPAY_STORE_ID}/invoices/${body.invoiceId}`
-    )
+    await prisma.cryptoDonation.update({
+      where: { id: body.invoiceId },
+      data: { status: 'Settled' },
+    })
+  }
 
-    const invoiceMetadata = invoice.metadata as DonationMetadata
+  if (body.type === 'InvoiceExpired') {
+    await prisma.cryptoDonation.update({
+      where: { id: body.invoiceId },
+      data: { status: 'Expired' },
+    })
+  }
 
-    await prisma.cryptoDonation.create({
-      data: {
-        userId: invoiceMetadata.userId as string,
-        invoiceId: body.invoiceId,
-        crypto: 'XMR',
-        projectName: invoiceMetadata.projectName,
-        projectSlug: invoiceMetadata.projectSlug,
-        fund: 'Monero Fund',
-        fiatAmount: parseFloat(invoice.amount),
-        status: 'Settled',
-      },
+  if (body.type === 'InvoiceInvalid') {
+    await prisma.cryptoDonation.update({
+      where: { id: body.invoiceId },
+      data: { status: 'Invalid' },
     })
   }
 

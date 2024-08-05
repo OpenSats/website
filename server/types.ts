@@ -6,6 +6,7 @@ export type DonationMetadata = {
   donorName: string | null
   projectSlug: string
   projectName: string
+  membershipExpiresAt: string | null
 }
 
 export type Donation = {

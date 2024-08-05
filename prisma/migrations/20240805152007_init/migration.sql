@@ -13,6 +13,7 @@ CREATE TABLE "CryptoDonation" (
     "fund" TEXT NOT NULL,
     "crypto" TEXT NOT NULL,
     "fiatAmount" DOUBLE PRECISION NOT NULL,
+    "membershipExpiresAt" TIMESTAMP(3),
     "status" "DonationStatus" NOT NULL,
 
     CONSTRAINT "CryptoDonation_pkey" PRIMARY KEY ("id")
