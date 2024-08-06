@@ -1,13 +1,14 @@
 -- CreateEnum
-CREATE TYPE "DonationStatus" AS ENUM ('Expired', 'Invalid', 'New', 'Processing', 'Settled');
+CREATE TYPE "DonationStatus" AS ENUM ('Waiting', 'Expired', 'Invalid', 'Complete');
 
 -- CreateTable
-CREATE TABLE "CryptoDonation" (
+CREATE TABLE "Donation" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
-    "invoiceId" TEXT NOT NULL,
+    "btcPayinvoiceId" TEXT,
+    "stripeInvoiceId" TEXT,
     "projectSlug" TEXT NOT NULL,
     "projectName" TEXT NOT NULL,
     "fund" TEXT NOT NULL,
@@ -16,5 +17,11 @@ CREATE TABLE "CryptoDonation" (
     "membershipExpiresAt" TIMESTAMP(3),
     "status" "DonationStatus" NOT NULL,
 
-    CONSTRAINT "CryptoDonation_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Donation_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE INDEX "Donation_userId_idx" ON "Donation"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Donation_btcPayinvoiceId_stripeInvoiceId_key" ON "Donation"("btcPayinvoiceId", "stripeInvoiceId");

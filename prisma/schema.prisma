@@ -13,13 +13,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model CryptoDonation {
+model Donation {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   userId              String
-  invoiceId           String
+  btcPayinvoiceId     String?
+  stripeInvoiceId     String?
   projectSlug         String
   projectName         String
   fund                String
@@ -27,12 +28,14 @@ model CryptoDonation {
   fiatAmount          Float
   membershipExpiresAt DateTime?
   status              DonationStatus
+
+  @@unique([btcPayinvoiceId, stripeInvoiceId])
+  @@index([userId])
 }
 
 enum DonationStatus {
+  Waiting
   Expired
   Invalid
-  New
-  Processing
-  Settled
+  Complete
 }

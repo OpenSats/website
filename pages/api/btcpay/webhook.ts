@@ -56,21 +56,21 @@ export default async function handler(
   }
 
   if (body.type === 'InvoiceSettled') {
-    await prisma.cryptoDonation.update({
+    await prisma.donation.update({
       where: { id: body.invoiceId },
       data: { status: 'Settled' },
     })
   }
 
   if (body.type === 'InvoiceExpired') {
-    await prisma.cryptoDonation.update({
+    await prisma.donation.update({
       where: { id: body.invoiceId },
       data: { status: 'Expired' },
     })
   }
 
   if (body.type === 'InvoiceInvalid') {
-    await prisma.cryptoDonation.update({
+    await prisma.donation.update({
       where: { id: body.invoiceId },
       data: { status: 'Invalid' },
     })

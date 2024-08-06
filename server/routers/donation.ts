@@ -1,5 +1,8 @@
 import { Stripe } from 'stripe'
+import { TRPCError } from '@trpc/server'
 import { z } from 'zod'
+import dayjs from 'dayjs'
+
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import {
   CURRENCY,
@@ -10,10 +13,8 @@ import {
 import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
-import { Donation, DonationMetadata } from '../types'
-import { createInvoice } from '../utils/btcpay'
-import dayjs from 'dayjs'
-import { TRPCError } from '@trpc/server'
+import { DonationMetadata } from '../types'
+import { Donation } from '@prisma/client'
 
 const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
   // https://github.com/stripe/stripe-node#configuration
@@ -92,32 +93,6 @@ export const donationRouter = router({
         payment_intent_data: { metadata },
       }
 
-      // Use this for subscriptions
-      // const subscriptionParams: Stripe.Checkout.SessionCreateParams = {
-      //   mode: 'subscription',
-      //   // submit_type: 'donate',
-      //   customer: stripeCustomerId || undefined,
-      //   currency: CURRENCY,
-      //   line_items: [
-      //     {
-      //       price_data: {
-      //         currency: CURRENCY,
-      //         product_data: {
-      //           name: `MAGIC Grants donation: ${input.projectName}`,
-      //         },
-      //         recurring: { interval: 'year' },
-      //         unit_amount: input.amount * 100,
-      //       },
-      //       quantity: 1,
-      //     },
-      //   ],
-      //   metadata,
-      //   success_url: `${env.APP_URL}/thankyou`,
-      //   cancel_url: `${env.APP_URL}/`,
-      //   // We need metadata in here for some reason
-      //   subscription_data: { metadata },
-      // }
-
       const checkoutSession = await stripe.checkout.sessions.create(params)
 
       return { url: checkoutSession.url }
@@ -164,20 +139,110 @@ export const donationRouter = router({
         }
       )
 
-      await prisma.cryptoDonation.create({
+      await prisma.donation.create({
         data: {
           userId: metadata.userId as string,
-          invoiceId: response.data.id,
+          btcPayinvoiceId: response.data.id,
           crypto: 'XMR',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
           fiatAmount: input.amount,
-          status: 'New',
+          status: 'Waiting',
         },
       })
 
       return { url: response.data.checkoutLink }
+    }),
+
+  payMembershipWithFiat: protectedProcedure
+    .input(
+      z.object({
+        projectName: z.string().min(1),
+        projectSlug: z.string().min(1),
+        recurring: z.boolean(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      await authenticateKeycloakClient()
+      const user = await keycloak.users.findOne({ id: userId })
+      const email = user?.email!
+      const name = user?.attributes?.name?.[0]!
+      let stripeCustomerId = user?.attributes?.stripeCustomerId?.[0] || null
+
+      if (!stripeCustomerId) {
+        const customer = await stripe.customers.create({ email, name })
+
+        stripeCustomerId = customer.id
+
+        await keycloak.users.update(
+          { id: userId },
+          { email: email, attributes: { stripeCustomerId } }
+        )
+      }
+
+      const metadata: DonationMetadata = {
+        userId,
+        donorName: name,
+        donorEmail: email,
+        projectSlug: input.projectSlug,
+        projectName: input.projectName,
+        membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
+      }
+
+      const purchaseParams: Stripe.Checkout.SessionCreateParams = {
+        mode: 'payment',
+        submit_type: 'donate',
+        customer: stripeCustomerId || undefined,
+        currency: CURRENCY,
+        line_items: [
+          {
+            price_data: {
+              currency: CURRENCY,
+              product_data: {
+                name: `MAGIC Grants donation: ${input.projectName}`,
+              },
+              unit_amount: MEMBERSHIP_PRICE * 100,
+            },
+            quantity: 1,
+          },
+        ],
+        metadata,
+        success_url: `${env.APP_URL}/thankyou`,
+        cancel_url: `${env.APP_URL}/`,
+        payment_intent_data: { metadata },
+      }
+
+      const subscriptionParams: Stripe.Checkout.SessionCreateParams = {
+        mode: 'subscription',
+        customer: stripeCustomerId || undefined,
+        currency: CURRENCY,
+        line_items: [
+          {
+            price_data: {
+              currency: CURRENCY,
+              product_data: {
+                name: `MAGIC Grants donation: ${input.projectName}`,
+              },
+              recurring: { interval: 'year' },
+              unit_amount: MEMBERSHIP_PRICE * 100,
+            },
+            quantity: 1,
+          },
+        ],
+        metadata,
+        success_url: `${env.APP_URL}/thankyou`,
+        cancel_url: `${env.APP_URL}/`,
+        subscription_data: { metadata },
+      }
+
+      const checkoutSession = await stripe.checkout.sessions.create(
+        input.recurring ? subscriptionParams : purchaseParams
+      )
+
+      return { url: checkoutSession.url }
     }),
 
   payMembershipWithCrypto: protectedProcedure
@@ -190,10 +255,10 @@ export const donationRouter = router({
     .mutation(async ({ input, ctx }) => {
       const userId = ctx.session.user.sub
 
-      const userHasMembership = await prisma.cryptoDonation.findFirst({
+      const userHasMembership = await prisma.donation.findFirst({
         where: {
+          userId,
           projectSlug: input.projectSlug,
-          status: 'Settled',
           membershipExpiresAt: { gt: new Date() },
         },
       })
@@ -229,17 +294,17 @@ export const donationRouter = router({
         }
       )
 
-      await prisma.cryptoDonation.create({
+      await prisma.donation.create({
         data: {
           userId,
-          invoiceId: response.data.id,
+          btcPayinvoiceId: response.data.id,
           crypto: 'XMR',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
-          fiatAmount: 100,
+          fiatAmount: MEMBERSHIP_PRICE,
           membershipExpiresAt: metadata.membershipExpiresAt,
-          status: 'New',
+          status: 'Waiting',
         },
       })
 
@@ -248,128 +313,23 @@ export const donationRouter = router({
 
   donationList: protectedProcedure.query(async ({ ctx }) => {
     await authenticateKeycloakClient()
-    const user = await keycloak.users.findOne({ id: ctx.session.user.sub })
-    let stripeCustomerId = user?.attributes?.stripeCustomerId?.[0]
+    const userId = ctx.session.user.sub
+    const user = await keycloak.users.findOne({ id: userId })
 
-    const donations: Donation[] = []
-
-    // TODO: Paginate?
-    let stripePayments: Stripe.PaymentIntent[] = []
-
-    if (stripeCustomerId) {
-      stripePayments = (
-        await stripe.paymentIntents.list({
-          customer: stripeCustomerId,
-        })
-      ).data
-    }
-
-    stripePayments.forEach((payment) => {
-      // Filter out subscriptions as paymentIntents returns an empty metadata obj
-      if (payment.invoice) return
-
-      // Exclude failed payments that are more than 30 days old
-      if (
-        payment.status !== 'succeeded' &&
-        payment.created * 1000 < Date.now() - 1000 * 60 * 60 * 24 * 30
-      ) {
-        return
-      }
-
-      donations.push({
-        projectName: payment.metadata.projectName,
-        fundName: 'Monero Fund',
-        type: 'one_time',
-        method: 'fiat',
-        invoiceId: payment.id,
-        stripePaymentStatus: payment.status,
-        stripeSubscriptionStatus: null,
-        btcPayStatus: null,
-        amount: Number((payment.amount / 100).toFixed(2)),
-        subscriptionCancelAt: null,
-        createdAt: new Date(payment.created * 1000),
-      })
+    // Get all user's donations that are not expired OR are expired AND are less than 1 month old
+    const donations = await prisma.donation.findMany({
+      where: {
+        userId,
+        OR: [
+          { status: { not: 'Expired' } },
+          {
+            status: 'Expired',
+            createdAt: { gt: dayjs().subtract(1, 'month').toDate() },
+          },
+        ],
+      },
     })
 
-    const stripeSubscriptions = await stripe.subscriptions.list({
-      customer: stripeCustomerId,
-    })
-
-    stripeSubscriptions.data.forEach((subscription) => {
-      // Exclude failed subscriptions that are more than 30 days old
-      if (
-        subscription.status !== 'incomplete_expired' &&
-        subscription.created * 1000 < Date.now() - 1000 * 60 * 60 * 24 * 30
-      ) {
-        return
-      }
-
-      donations.push({
-        projectName: subscription.metadata.projectName,
-        fundName: 'Monero Fund',
-        type: 'recurring',
-        method: 'fiat',
-        invoiceId: subscription.id,
-        stripePaymentStatus: null,
-        stripeSubscriptionStatus: subscription.status,
-        btcPayStatus: null,
-        amount: Number(
-          (subscription.items.data[0].price.unit_amount! / 100).toFixed(2)
-        ),
-        subscriptionCancelAt: subscription.cancel_at
-          ? new Date(subscription.cancel_at * 1000)
-          : null,
-        createdAt: new Date(subscription.created * 1000),
-      })
-    })
-
-    const cryptoDonations = await prisma.cryptoDonation.findMany({
-      where: { userId: ctx.session.user.sub },
-    })
-
-    cryptoDonations.forEach((donation) => {
-      // Exclude failed subscriptions that are more than 30 days old
-      if (
-        donation.status !== 'Expired' &&
-        donation.createdAt.getTime() < Date.now() - 1000 * 60 * 60 * 24 * 30
-      ) {
-        return
-      }
-
-      donations.push({
-        projectName: donation.projectName,
-        fundName: donation.fund,
-        type: 'one_time',
-        method: 'crypto',
-        invoiceId: donation.invoiceId,
-        stripePaymentStatus: null,
-        stripeSubscriptionStatus: null,
-        btcPayStatus: donation.status,
-        amount: donation.fiatAmount,
-        subscriptionCancelAt: null,
-        createdAt: donation.createdAt,
-      })
-    })
-
-    const donationsSorted = donations.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    )
-
-    let billingPortalUrl: string | null = null
-
-    if (stripeCustomerId) {
-      const billingPortalSession = await stripe.billingPortal.sessions.create({
-        customer: stripeCustomerId,
-        return_url: `${env.APP_URL}/account/my-donations`,
-      })
-
-      billingPortalUrl = billingPortalSession.url
-    }
-
-    return {
-      donations: donationsSorted,
-      billingPortalUrl,
-    }
+    return donations
   }),
 })
