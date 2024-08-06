@@ -1,0 +1,61 @@
+---
+title: Canary
+summary: "If the canary died, it was time to get out of the mine."
+image: /static/images/avatar.png
+layout: PageLayout
+---
+
+
+```
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+OpenSats has never been pressured to give up non-public information on grantees
+and forced to keep quiet about it. OpenSats has never been pressured by outside
+entities to stop funding certain people or projects.
+
+This canary is linked at [0] and will be re-signed on the following dates:
+
+* February 1
+* May 1
+* August 1
+* November 1
+
+We will include a link to a recent news article [1] in each update to establish
+that the signature was not pre-generated.
+
+[0] https://opensats.org/transparency
+[1] https://www.nobsbitcoin.com/mutiny-wallet-to-shut-down-at-the-end-of-the-year/
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEgZihhTClIqCVYSQ5icSiXmml3n8FAmayEN0ACgkQicSiXmml
+3n/2FQ//bjFGhHSxEN7lur8fQG+mudd0pNfxmWnS5jbWNTugKrquBZyJIAKEYlR7
+Zx/F2Ev8z1aeOrRiot2tc2PqLYLMNUVyRSXocgG2uKY6mk0akoE5IxJLmBQwDP+R
+qM8qOvljeWyvfRPilyaG+sILWj0b+cQyQZsml2ZjWADOQtcKhvsGCXqU4rZB7j8r
+Ho/vR21YFF2k5pGj3kX8qeaWX00CauVqPZ9ElWO1BmwvXYC5OFIdNrr79sGarPON
+pk9/yinXuzrKR8k3EfNxarBXeyTs6DxdCKrOPFV+JCgKlsIwZvXyA87oVbol46qz
+0zkxxA7YTAPhZrDv+85iodby1KcrV3BmzuAhsKUbBdgnmAx/6TFV5scIPWEYTuvm
+cc5uhBROJzzecanCelneUiVbwBkP7lxaKzYTI+FWK64XUYblBHt2bpJzXCoC9aA+
+bp5EMoYqQ2OqjERf0rYgMEbYksl5Zb5Nch3W5wkuCPbrkFHRu56Gcnn4T2Xgtu+y
+0GL0QVJ7NEynDtiKBaWxiOiSYIzlRjRfoy/9SPWyeeJ5i9JwNrU+X4eeTZ+dFkZQ
+N9fYKt+DAS839PT5h1Dwh7/14u+ujg4cNpvqZNvP2Up23h1NzhDrtiiXMTxtps46
+cxTuIaBrGxbWfLgNEIgjkT3IMWqe2ZKRhcbNblyOj7fJQ3qswDc=
+=S4fG
+-----END PGP SIGNATURE-----
+```
+
+---
+
+# Don't trust, verify
+
+1. Import the [PGP key](/about/dergigi) of our executive director
+2. Download the [signed canary statement][scs]
+3. Run `gpg --auto-key-retrieve --verify canary.txt.asc`
+4. You should get an output that is similar to the following (note the date that the canary was signed):
+```
+gpg: Signature made Tue  6 Aug 13:02:37 2024 WEST
+gpg:                using RSA key 8198A18530A522A09561243989C4A25E69A5DE7F
+gpg: Good signature from "Gigi D. <gigi@opensats.org>" [ultimate]
+```
+
+[scs]: /docs/canary.txt.asc
