@@ -51,15 +51,20 @@ cxTuIaBrGxbWfLgNEIgjkT3IMWqe2ZKRhcbNblyOj7fJQ3qswDc=
 
 1. Import Gigi's [PGP key](/about/dergigi#pgp-key):
 
-```
+```bash
 curl https://opensats.org/docs/dergigi.pub.asc | gpg --import
 ```
 
 2. Download the [signed canary statement][scs]
-3. Run `gpg --auto-key-retrieve --verify canary.txt.asc`
+3. Verify the signature: 
+
+```bash
+gpg --auto-key-retrieve --verify canary.txt.asc
+```
+
 4. You should get an output that is similar to the following (note the date that the canary was signed):
 
-```
+```bash
 gpg: Signature made Tue  6 Aug 13:02:37 2024 WEST
 gpg:                using RSA key 8198A18530A522A09561243989C4A25E69A5DE7F
 gpg: Good signature from "Gigi D. <gigi@opensats.org>" [ultimate]
