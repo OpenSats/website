@@ -64,7 +64,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               size="lg"
               className="px-14 font-semibold text-lg"
             >
-              Become a Member
+              Get Annual Membership
             </Button>
           </div>
 

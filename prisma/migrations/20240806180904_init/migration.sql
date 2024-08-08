@@ -7,7 +7,7 @@ CREATE TABLE "Donation" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" TEXT NOT NULL,
-    "btcPayinvoiceId" TEXT,
+    "btcPayInvoiceId" TEXT,
     "stripeInvoiceId" TEXT,
     "projectSlug" TEXT NOT NULL,
     "projectName" TEXT NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE "Donation" (
 );
 
 -- CreateIndex
-CREATE INDEX "Donation_userId_idx" ON "Donation"("userId");
+CREATE INDEX "Donation_btcPayInvoiceId_stripeInvoiceId_idx" ON "Donation"("btcPayInvoiceId", "stripeInvoiceId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Donation_btcPayinvoiceId_stripeInvoiceId_key" ON "Donation"("btcPayinvoiceId", "stripeInvoiceId");
+CREATE INDEX "Donation_userId_idx" ON "Donation"("userId");

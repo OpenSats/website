@@ -56,26 +56,25 @@ export default async function handler(
   }
 
   if (body.type === 'InvoiceSettled') {
-    await prisma.donation.update({
-      where: { id: body.invoiceId },
-      data: { status: 'Settled' },
+    await prisma.donation.updateMany({
+      where: { btcPayInvoiceId: body.invoiceId },
+      data: { status: 'Complete' },
     })
   }
 
   if (body.type === 'InvoiceExpired') {
-    await prisma.donation.update({
-      where: { id: body.invoiceId },
+    await prisma.donation.updateMany({
+      where: { btcPayInvoiceId: body.invoiceId },
       data: { status: 'Expired' },
     })
   }
 
   if (body.type === 'InvoiceInvalid') {
-    await prisma.donation.update({
-      where: { id: body.invoiceId },
+    await prisma.donation.updateMany({
+      where: { btcPayInvoiceId: body.invoiceId },
       data: { status: 'Invalid' },
     })
   }
 
-  // console.log(req.body)
   res.status(200).json({ success: true })
 }

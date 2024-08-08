@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer'
 import axios from 'axios'
 
 import { env } from '../env.mjs'
+import Stripe from 'stripe'
 
 sendgrid.setApiKey(env.SENDGRID_API_KEY)
 
@@ -40,4 +41,9 @@ const btcpayApi = axios.create({
   headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
 })
 
-export { sendgrid, prisma, keycloak, transporter, btcpayApi }
+const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+  // https://github.com/stripe/stripe-node#configuration
+  apiVersion: '2024-04-10',
+})
+
+export { sendgrid, prisma, keycloak, transporter, btcpayApi, stripe }

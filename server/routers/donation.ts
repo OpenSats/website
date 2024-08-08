@@ -4,22 +4,11 @@ import { z } from 'zod'
 import dayjs from 'dayjs'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
-import {
-  CURRENCY,
-  MAX_AMOUNT,
-  MEMBERSHIP_PRICE,
-  MIN_AMOUNT,
-} from '../../config'
+import { CURRENCY, MAX_AMOUNT, MEMBERSHIP_PRICE, MIN_AMOUNT } from '../../config'
 import { env } from '../../env.mjs'
-import { btcpayApi, keycloak, prisma } from '../services'
+import { btcpayApi, keycloak, prisma, stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { DonationMetadata } from '../types'
-import { Donation } from '@prisma/client'
-
-const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-  // https://github.com/stripe/stripe-node#configuration
-  apiVersion: '2024-04-10',
-})
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -129,20 +118,17 @@ export const donationRouter = router({
         membershipExpiresAt: null,
       }
 
-      const response = await btcpayApi.post(
-        `/stores/${env.BTCPAY_STORE_ID}/invoices`,
-        {
-          amount: input.amount,
-          currency: CURRENCY,
-          metadata,
-          checkout: { redirectURL: `${env.APP_URL}/thankyou` },
-        }
-      )
+      const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
+        amount: input.amount,
+        currency: CURRENCY,
+        metadata,
+        checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+      })
 
       await prisma.donation.create({
         data: {
           userId: metadata.userId as string,
-          btcPayinvoiceId: response.data.id,
+          btcPayInvoiceId: response.data.id,
           crypto: 'XMR',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
@@ -202,7 +188,7 @@ export const donationRouter = router({
             price_data: {
               currency: CURRENCY,
               product_data: {
-                name: `MAGIC Grants donation: ${input.projectName}`,
+                name: `MAGIC Grants Annual Membership: ${input.projectName}`,
               },
               unit_amount: MEMBERSHIP_PRICE * 100,
             },
@@ -224,7 +210,7 @@ export const donationRouter = router({
             price_data: {
               currency: CURRENCY,
               product_data: {
-                name: `MAGIC Grants donation: ${input.projectName}`,
+                name: `MAGIC Grants Annual Membership: ${input.projectName}`,
               },
               recurring: { interval: 'year' },
               unit_amount: MEMBERSHIP_PRICE * 100,
@@ -284,20 +270,17 @@ export const donationRouter = router({
         membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
       }
 
-      const response = await btcpayApi.post(
-        `/stores/${env.BTCPAY_STORE_ID}/invoices`,
-        {
-          amount: MEMBERSHIP_PRICE,
-          currency: CURRENCY,
-          metadata,
-          checkout: { redirectURL: `${env.APP_URL}/thankyou` },
-        }
-      )
+      const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
+        amount: MEMBERSHIP_PRICE,
+        currency: CURRENCY,
+        metadata,
+        checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+      })
 
       await prisma.donation.create({
         data: {
           userId,
-          btcPayinvoiceId: response.data.id,
+          btcPayInvoiceId: response.data.id,
           crypto: 'XMR',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,

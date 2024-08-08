@@ -19,7 +19,7 @@ model Donation {
   updatedAt DateTime @updatedAt
 
   userId              String
-  btcPayinvoiceId     String?
+  btcPayInvoiceId     String?
   stripeInvoiceId     String?
   projectSlug         String
   projectName         String
@@ -29,7 +29,8 @@ model Donation {
   membershipExpiresAt DateTime?
   status              DonationStatus
 
-  @@unique([btcPayinvoiceId, stripeInvoiceId])
+  @@index([btcPayInvoiceId])
+  @@index([stripeInvoiceId])
   @@index([userId])
 }
 

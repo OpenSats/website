@@ -13,14 +13,7 @@ import { Button } from './ui/button'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 import { Label } from './ui/label'
 import { z } from 'zod'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { DollarSign } from 'lucide-react'
 import { ProjectItem } from '../utils/types'
@@ -40,23 +33,16 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
       email: z.string().email().optional(),
       amount: z.coerce.number().min(1).max(MAX_AMOUNT),
       taxDeductible: z.enum(['yes', 'no']),
+      recurring: z.enum(['yes', 'no']),
     })
-    .refine(
-      (data) =>
-        !isAuthed && data.taxDeductible === 'yes' ? !!data.name : true,
-      {
-        message: 'Name is required when the donation is tax deductible.',
-        path: ['name'],
-      }
-    )
-    .refine(
-      (data) =>
-        !isAuthed && data.taxDeductible === 'yes' ? !!data.email : true,
-      {
-        message: 'Email is required when the donation is tax deductible.',
-        path: ['email'],
-      }
-    )
+    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
+      message: 'Name is required when the donation is tax deductible.',
+      path: ['name'],
+    })
+    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.email : true), {
+      message: 'Email is required when the donation is tax deductible.',
+      path: ['email'],
+    })
 
   type FormInputs = z.infer<typeof schema>
 
@@ -68,15 +54,16 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
       name: '',
       amount: 100, // a trick to get trigger to work when amount is empty
       taxDeductible: 'no',
+      recurring: 'no',
     },
     mode: 'all',
   })
 
   const taxDeductible = form.watch('taxDeductible')
+  const recurring = form.watch('recurring')
 
-  const donateWithFiatMutation = trpc.donation.donateWithFiat.useMutation()
-  const payMembershipWithCryptoMutation =
-    trpc.donation.payMembershipWithCrypto.useMutation()
+  const payMembershipWithFiatMutation = trpc.donation.payMembershipWithFiat.useMutation()
+  const payMembershipWithCryptoMutation = trpc.donation.payMembershipWithCrypto.useMutation()
 
   async function handleBtcPay(data: FormInputs) {
     if (!project) return
@@ -99,24 +86,22 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
   async function handleFiat(data: FormInputs) {
     if (!project) return
 
-    // try {
-    //   const result = await donateWithFiatMutation.mutateAsync({
-    //     email: data.email || null,
-    //     name: data.name || null,
-    //     amount: data.amount,
-    //     projectSlug: project.slug,
-    //     projectName: project.title,
-    //   })
+    try {
+      const result = await payMembershipWithFiatMutation.mutateAsync({
+        projectSlug: project.slug,
+        projectName: project.title,
+        recurring: data.recurring === 'yes',
+      })
 
-    //   if (!result.url) throw Error()
+      if (!result.url) throw Error()
 
-    //   window.location.assign(result.url)
-    // } catch (e) {
-    //   toast({
-    //     title: 'Sorry, something went wrong.',
-    //     variant: 'destructive',
-    //   })
-    // }
+      window.location.assign(result.url)
+    } catch (e) {
+      toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
+    }
   }
 
   if (!project) return <></>
@@ -135,7 +120,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
           />
           <div className="flex flex-col">
             <h2 className="font-sans font-bold">{project.title}</h2>
-            <h3 className="text-textgray font-sans">Become a member!</h3>
+            <h3 className="text-textgray font-sans">Annual membership</h3>
           </div>
         </div>
       </div>
@@ -149,9 +134,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Name {taxDeductible === 'no' && '(optional)'}
-                    </FormLabel>
+                    <FormLabel>Name {taxDeductible === 'no' && '(optional)'}</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -165,9 +148,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Email {taxDeductible === 'no' && '(optional)'}
-                    </FormLabel>
+                    <FormLabel>Email {taxDeductible === 'no' && '(optional)'}</FormLabel>
                     <FormControl>
                       <Input placeholder="johndoe@example.com" {...field} />
                     </FormControl>
@@ -191,8 +172,39 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
             name="taxDeductible"
             render={({ field }) => (
               <FormItem className="space-y-3">
+                <FormLabel>Do you want your membership to be tax deductible? (US only)</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row space-x-4"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal">No</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal">Yes</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="recurring"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
                 <FormLabel>
-                  Do you want your membership to be tax deductible? (US only)
+                  Do you want your membership payment to be recurring? (Fiat only)
                 </FormLabel>
                 <FormControl>
                   <RadioGroup
@@ -223,7 +235,9 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
             <Button
               type="button"
               onClick={form.handleSubmit(handleBtcPay)}
-              disabled={!form.formState.isValid || form.formState.isSubmitting}
+              disabled={
+                !form.formState.isValid || form.formState.isSubmitting || recurring === 'yes'
+              }
               className="grow basis-0"
             >
               {payMembershipWithCryptoMutation.isPending ? (
@@ -240,7 +254,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
               disabled={!form.formState.isValid || form.formState.isSubmitting}
               className="grow basis-0 bg-indigo-500 hover:bg-indigo-700"
             >
-              {donateWithFiatMutation.isPending ? (
+              {payMembershipWithFiatMutation.isPending ? (
                 <Spinner />
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
