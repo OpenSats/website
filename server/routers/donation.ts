@@ -129,7 +129,7 @@ export const donationRouter = router({
         data: {
           userId: metadata.userId as string,
           btcPayInvoiceId: response.data.id,
-          crypto: 'XMR',
+          currency: 'USD',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
@@ -270,6 +270,8 @@ export const donationRouter = router({
         membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
       }
 
+      console.log(1)
+
       const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
         amount: MEMBERSHIP_PRICE,
         currency: CURRENCY,
@@ -277,11 +279,13 @@ export const donationRouter = router({
         checkout: { redirectURL: `${env.APP_URL}/thankyou` },
       })
 
+      console.log(2)
+
       await prisma.donation.create({
         data: {
           userId,
           btcPayInvoiceId: response.data.id,
-          crypto: 'XMR',
+          currency: 'USD',
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
@@ -295,9 +299,7 @@ export const donationRouter = router({
     }),
 
   donationList: protectedProcedure.query(async ({ ctx }) => {
-    await authenticateKeycloakClient()
     const userId = ctx.session.user.sub
-    const user = await keycloak.users.findOne({ id: userId })
 
     // Get all user's donations that are not expired OR are expired AND are less than 1 month old
     const donations = await prisma.donation.findMany({
@@ -314,5 +316,31 @@ export const donationRouter = router({
     })
 
     return donations
+  }),
+
+  membershipList: protectedProcedure.query(async ({ ctx }) => {
+    await authenticateKeycloakClient()
+    const userId = ctx.session.user.sub
+    const user = await keycloak.users.findOne({ id: userId })
+    const stripeCustomerId = user?.attributes?.stripeCustomerId?.[0]
+    let billingPortalUrl: string | null = null
+
+    if (stripeCustomerId) {
+      const billingPortalSession = await stripe.billingPortal.sessions.create({
+        customer: stripeCustomerId,
+        return_url: `${env.APP_URL}/account/my-memberships`,
+      })
+
+      billingPortalUrl = billingPortalSession.url
+    }
+
+    const memberships = await prisma.donation.findMany({
+      where: {
+        userId,
+        membershipExpiresAt: { not: null },
+      },
+    })
+
+    return { memberships, billingPortalUrl }
   }),
 })

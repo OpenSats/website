@@ -3,6 +3,7 @@ import getRawBody from 'raw-body'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { env } from '../../../env.mjs'
 import { prisma, stripe } from '../../../server/services'
+import { DonationMetadata } from '../../../server/types'
 
 export const config = {
   api: {
@@ -57,6 +58,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await prisma.donation.updateMany({
       where: { stripeInvoiceId: paymentIntent.id },
       data: { status: 'Invalid' },
+    })
+  }
+
+  // Create subscription when subscription is created
+  if (event.type === 'customer.subscription.created') {
+    const subscription = event.data.object
+    const metadata = subscription.metadata as DonationMetadata
+
+    await prisma.donation.create({
+      data: {
+        userId: metadata.userId as string,
+        stripeInvoiceId: subscription.id,
+        projectName: metadata.projectName,
+        projectSlug: metadata.projectSlug,
+        fund: 'Monero Fund',
+        currency: 'USD',
+        fiatAmount: 100,
+        status: 'Complete',
+        membershipExpiresAt: new Date(subscription.current_period_end * 1000),
+      },
+    })
+  }
+
+  // Update subscription expiration date when subscription is updated
+  if (event.type === 'customer.subscription.updated') {
+    const subscription = event.data.object
+
+    await prisma.donation.updateMany({
+      where: { stripeInvoiceId: subscription.id },
+      data: { membershipExpiresAt: new Date(subscription.current_period_end * 1000) },
     })
   }
 

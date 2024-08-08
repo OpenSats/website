@@ -24,7 +24,7 @@ model Donation {
   projectSlug         String
   projectName         String
   fund                String
-  crypto              String
+  currency            String
   fiatAmount          Float
   membershipExpiresAt DateTime?
   status              DonationStatus
