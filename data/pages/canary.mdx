@@ -5,6 +5,7 @@ image: /static/images/avatar.png
 layout: PageLayout
 ---
 
+Code is speech. No privacy, no freedom.
 
 ```
 -----BEGIN PGP SIGNED MESSAGE-----
@@ -14,12 +15,13 @@ OpenSats has never been pressured to give up non-public information on grantees
 and forced to keep quiet about it. OpenSats has never been pressured by outside
 entities to stop funding certain people or projects.
 
-This canary is linked at [0] and will be re-signed on the following dates:
+This canary is linked at [0] and will be re-signed at the beginning of the
+following months:
 
-* February 1
-* May 1
-* August 1
-* November 1
+* February
+* May
+* August
+* November
 
 We will include a link to a recent news article [1] in each update to establish
 that the signature was not pre-generated.
@@ -48,14 +50,35 @@ cxTuIaBrGxbWfLgNEIgjkT3IMWqe2ZKRhcbNblyOj7fJQ3qswDc=
 
 # Don't trust, verify
 
-1. Import the [PGP key](/about/dergigi) of our executive director
-2. Download the [signed canary statement][scs]
-3. Run `gpg --auto-key-retrieve --verify canary.txt.asc`
-4. You should get an output that is similar to the following (note the date that the canary was signed):
+1. Import Gigi's [PGP key](/about/dergigi#pgp-key):
+
+```bash
+curl https://opensats.org/docs/dergigi.pub.asc | gpg --import
 ```
-gpg: Signature made Tue  6 Aug 13:02:37 2024 WEST
+
+2. Download the [signed canary statement][scs]
+3. Verify the signature: 
+
+```bash
+gpg --auto-key-retrieve --verify canary.txt.asc
+```
+
+4. You should get an output that is similar to the following (make sure to check
+the date that the canary was signed):
+
+```bash
+gpg: Signature made Wed  7 Aug 23:30:46 2024 WEST
 gpg:                using RSA key 8198A18530A522A09561243989C4A25E69A5DE7F
 gpg: Good signature from "Gigi D. <gigi@opensats.org>" [ultimate]
 ```
+Unless you've taken steps to build a trust path to Gigi's key, you will see a similar warning as below. However, it can be disregarded if you've gotten "Good signature".
+
+```bash
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 8198 A185 30A5 22A0 9561  2439 89C4 A25E 69A5 DE7F
+```
+
+Stay safe everyone, and keep building.
 
 [scs]: /docs/canary.txt.asc
