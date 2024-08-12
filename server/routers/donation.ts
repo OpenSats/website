@@ -9,6 +9,7 @@ import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma, stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { DonationMetadata } from '../types'
+import { Donation } from '@prisma/client'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -18,7 +19,10 @@ export const donationRouter = router({
         email: z.string().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
+        amount: z
+          .number()
+          .min(MIN_AMOUNT / 100)
+          .max(MAX_AMOUNT / 100),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -55,7 +59,8 @@ export const donationRouter = router({
         donorName: name,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
-        membershipExpiresAt: null,
+        isMembership: 'false',
+        isSubscription: 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -94,7 +99,10 @@ export const donationRouter = router({
         email: z.string().trim().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
+        amount: z
+          .number()
+          .min(MIN_AMOUNT / 100)
+          .max(MAX_AMOUNT / 100),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -115,7 +123,8 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
-        membershipExpiresAt: null,
+        isMembership: 'false',
+        isSubscription: 'false',
       }
 
       const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
@@ -123,19 +132,6 @@ export const donationRouter = router({
         currency: CURRENCY,
         metadata,
         checkout: { redirectURL: `${env.APP_URL}/thankyou` },
-      })
-
-      await prisma.donation.create({
-        data: {
-          userId: metadata.userId as string,
-          btcPayInvoiceId: response.data.id,
-          currency: 'USD',
-          projectName: metadata.projectName,
-          projectSlug: metadata.projectSlug,
-          fund: 'Monero Fund',
-          fiatAmount: input.amount,
-          status: 'Waiting',
-        },
       })
 
       return { url: response.data.checkoutLink }
@@ -151,6 +147,21 @@ export const donationRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const userId = ctx.session.user.sub
+
+      const userHasMembership = await prisma.donation.findFirst({
+        where: {
+          userId,
+          projectSlug: input.projectSlug,
+          membershipExpiresAt: { gt: new Date() },
+        },
+      })
+
+      if (userHasMembership) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'USER_HAS_ACTIVE_MEMBERSHIP',
+        })
+      }
 
       await authenticateKeycloakClient()
       const user = await keycloak.users.findOne({ id: userId })
@@ -175,7 +186,8 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
-        membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
+        isMembership: 'true',
+        isSubscription: input.recurring ? 'true' : 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -213,7 +225,7 @@ export const donationRouter = router({
                 name: `MAGIC Grants Annual Membership: ${input.projectName}`,
               },
               recurring: { interval: 'year' },
-              unit_amount: MEMBERSHIP_PRICE * 100,
+              unit_amount: MEMBERSHIP_PRICE,
             },
             quantity: 1,
           },
@@ -267,32 +279,15 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
-        membershipExpiresAt: dayjs().add(1, 'year').toISOString(),
+        isMembership: 'true',
+        isSubscription: 'false',
       }
 
-      console.log(1)
-
       const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
-        amount: MEMBERSHIP_PRICE,
+        amount: MEMBERSHIP_PRICE / 100,
         currency: CURRENCY,
         metadata,
         checkout: { redirectURL: `${env.APP_URL}/thankyou` },
-      })
-
-      console.log(2)
-
-      await prisma.donation.create({
-        data: {
-          userId,
-          btcPayInvoiceId: response.data.id,
-          currency: 'USD',
-          projectName: metadata.projectName,
-          projectSlug: metadata.projectSlug,
-          fund: 'Monero Fund',
-          fiatAmount: MEMBERSHIP_PRICE,
-          membershipExpiresAt: metadata.membershipExpiresAt,
-          status: 'Waiting',
-        },
       })
 
       return { url: response.data.checkoutLink }
@@ -305,14 +300,9 @@ export const donationRouter = router({
     const donations = await prisma.donation.findMany({
       where: {
         userId,
-        OR: [
-          { status: { not: 'Expired' } },
-          {
-            status: 'Expired',
-            createdAt: { gt: dayjs().subtract(1, 'month').toDate() },
-          },
-        ],
+        stripeSubscriptionId: null,
       },
+      orderBy: { createdAt: 'desc' },
     })
 
     return donations
@@ -339,8 +329,26 @@ export const donationRouter = router({
         userId,
         membershipExpiresAt: { not: null },
       },
+      orderBy: { createdAt: 'desc' },
     })
 
-    return { memberships, billingPortalUrl }
+    const subscriptionIds = new Set<string>()
+    const membershipsUniqueSubsId: Donation[] = []
+
+    memberships.forEach((membership) => {
+      if (!membership.stripeSubscriptionId) {
+        membershipsUniqueSubsId.push(membership)
+        return
+      }
+
+      if (subscriptionIds.has(membership.stripeSubscriptionId)) {
+        return
+      }
+
+      membershipsUniqueSubsId.push(membership)
+      subscriptionIds.add(membership.stripeSubscriptionId)
+    })
+
+    return { memberships: membershipsUniqueSubsId, billingPortalUrl }
   }),
 })

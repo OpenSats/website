@@ -10,7 +10,7 @@ import CustomLink from '../components/CustomLink'
 import { Button } from '../components/ui/button'
 import { Dialog, DialogContent } from '../components/ui/dialog'
 import DonationFormModal from '../components/DonationFormModal'
-import MembershipModal from '../components/MembershipModal'
+import MembershipFormModal from '../components/MembershipFormModal'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -44,9 +44,8 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             Support <Typing />
           </h1>
           <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
-            Help us to provide sustainable funding for free and open-source
-            contributors working on freedom tech and projects that help Monero
-            flourish.
+            Help us to provide sustainable funding for free and open-source contributors working on
+            freedom tech and projects that help Monero flourish.
           </p>
 
           <div className="flex flex-wrap space-x-4 py-4">
@@ -109,7 +108,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 
       <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
         <DialogContent>
-          <MembershipModal project={generalFund} />
+          <MembershipFormModal project={generalFund} />
         </DialogContent>
       </Dialog>
     </>

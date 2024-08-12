@@ -32,7 +32,7 @@ function MyMemberships() {
               href={membershipListQuery.data?.billingPortalUrl}
               aria-label="Manage Fiat Subscriptions"
             >
-              Manage Fiat Subscriptions
+              Manage Recurring Memberships
             </CustomLink>
           )}
         </div>
@@ -43,8 +43,7 @@ function MyMemberships() {
               <TableHead>Project</TableHead>
               <TableHead>Fund</TableHead>
               <TableHead>Method</TableHead>
-              <TableHead>Invoice ID</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Recurring</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Period End</TableHead>
             </TableRow>
@@ -52,11 +51,10 @@ function MyMemberships() {
           <TableBody>
             {membershipListQuery.data?.memberships.map((membership) => (
               <TableRow key={membership.createdAt.toISOString()}>
-                <TableCell className="font-medium">{membership.projectName}</TableCell>
+                <TableCell>{membership.projectName}</TableCell>
                 <TableCell>{membership.fund}</TableCell>
-                <TableCell>{membership.stripeInvoiceId ? 'Fiat' : 'Monero'}</TableCell>
-                <TableCell>{membership.stripeInvoiceId || membership.btcPayInvoiceId}</TableCell>
-                <TableCell>{membership.status}</TableCell>
+                <TableCell>{membership.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
+                <TableCell>{membership.stripeSubscriptionId ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{dayjs(membership.createdAt).format('lll')}</TableCell>
                 <TableCell>{dayjs(membership.membershipExpiresAt).format('lll')}</TableCell>
               </TableRow>

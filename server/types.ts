@@ -4,5 +4,6 @@ export type DonationMetadata = {
   donorName: string | null
   projectSlug: string
   projectName: string
-  membershipExpiresAt: string | null
+  isMembership: 'true' | 'false'
+  isSubscription: 'true' | 'false'
 }

@@ -13,14 +13,7 @@ import { Button } from './ui/button'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 import { Label } from './ui/label'
 import { z } from 'zod'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 import { DollarSign } from 'lucide-react'
 import { ProjectItem } from '../utils/types'
@@ -39,25 +32,20 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
     .object({
       name: z.string().optional(),
       email: z.string().email().optional(),
-      amount: z.coerce.number().min(1).max(MAX_AMOUNT),
+      amount: z.coerce
+        .number()
+        .min(1)
+        .max(MAX_AMOUNT / 100),
       taxDeductible: z.enum(['yes', 'no']),
     })
-    .refine(
-      (data) =>
-        !isAuthed && data.taxDeductible === 'yes' ? !!data.name : true,
-      {
-        message: 'Name is required when the donation is tax deductible.',
-        path: ['name'],
-      }
-    )
-    .refine(
-      (data) =>
-        !isAuthed && data.taxDeductible === 'yes' ? !!data.email : true,
-      {
-        message: 'Email is required when the donation is tax deductible.',
-        path: ['email'],
-      }
-    )
+    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
+      message: 'Name is required when the donation is tax deductible.',
+      path: ['name'],
+    })
+    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.email : true), {
+      message: 'Email is required when the donation is tax deductible.',
+      path: ['email'],
+    })
 
   type FormInputs = z.infer<typeof schema>
 
@@ -159,9 +147,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Name {taxDeductible === 'no' && '(optional)'}
-                    </FormLabel>
+                    <FormLabel>Name {taxDeductible === 'no' && '(optional)'}</FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -175,9 +161,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>
-                      Email {taxDeductible === 'no' && '(optional)'}
-                    </FormLabel>
+                    <FormLabel>Email {taxDeductible === 'no' && '(optional)'}</FormLabel>
                     <FormControl>
                       <Input placeholder="johndoe@example.com" {...field} />
                     </FormControl>
@@ -231,9 +215,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
             name="taxDeductible"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel>
-                  Do you want this donation to be tax deductible? (US only)
-                </FormLabel>
+                <FormLabel>Do you want this donation to be tax deductible? (US only)</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -271,7 +253,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
               ) : (
                 <FontAwesomeIcon icon={faMonero} className="h-5 w-5" />
               )}
-              Donate with Monero
+              Donate with Crypto
             </Button>
 
             <Button
@@ -285,7 +267,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
-              Donate with fiat
+              Donate with Fiat
             </Button>
           </div>
         </form>

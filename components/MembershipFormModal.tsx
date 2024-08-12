@@ -23,7 +23,7 @@ type Props = {
   project: ProjectItem | undefined
 }
 
-const MembershipModal: React.FC<Props> = ({ project }) => {
+const MembershipFormModal: React.FC<Props> = ({ project }) => {
   const session = useSession()
   const isAuthed = session.status === 'authenticated'
 
@@ -31,7 +31,10 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
     .object({
       name: z.string().optional(),
       email: z.string().email().optional(),
-      amount: z.coerce.number().min(1).max(MAX_AMOUNT),
+      amount: z.coerce
+        .number()
+        .min(1)
+        .max(MAX_AMOUNT / 100),
       taxDeductible: z.enum(['yes', 'no']),
       recurring: z.enum(['yes', 'no']),
     })
@@ -245,7 +248,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
               ) : (
                 <FontAwesomeIcon icon={faMonero} className="h-5 w-5" />
               )}
-              Pay with Monero
+              Pay with Crypto
             </Button>
 
             <Button
@@ -259,7 +262,7 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
-              Pay with fiat
+              Pay with Fiat
             </Button>
           </div>
         </form>
@@ -280,4 +283,4 @@ const MembershipModal: React.FC<Props> = ({ project }) => {
   )
 }
 
-export default MembershipModal
+export default MembershipFormModal

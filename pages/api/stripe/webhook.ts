@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { env } from '../../../env.mjs'
 import { prisma, stripe } from '../../../server/services'
 import { DonationMetadata } from '../../../server/types'
+import dayjs from 'dayjs'
 
 export const config = {
   api: {
@@ -31,64 +32,54 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   console.log(event.type)
 
-  // Marks donation as complete when payment intent is succeeded
+  // Store donation data when payment intent is valid
+  // Subscriptions are handled on the invoice.paid event instead
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object
+    const metadata = paymentIntent.metadata as DonationMetadata
 
-    await prisma.donation.updateMany({
-      where: { stripeInvoiceId: paymentIntent.id },
-      data: { status: 'Complete' },
-    })
+    // Skip this event if intent is still not fully paid
+    if (paymentIntent.amount_received !== paymentIntent.amount) return
+
+    // Payment intents for subscriptions will not have metadata
+    if (metadata.isSubscription === 'false')
+      await prisma.donation.create({
+        data: {
+          userId: metadata.userId,
+          stripePaymentIntentId: paymentIntent.id,
+          projectName: metadata.projectName,
+          projectSlug: metadata.projectSlug,
+          fund: 'Monero Fund',
+          fiatAmount: paymentIntent.amount_received,
+          membershipExpiresAt:
+            metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+        },
+      })
   }
 
-  // Marks donation as invalid when payment intent is canceled
-  if (event.type === 'payment_intent.canceled') {
-    const paymentIntent = event.data.object
+  // Store subscription data when subscription invoice is paid
+  if (event.type === 'invoice.paid') {
+    const invoice = event.data.object
 
-    await prisma.donation.updateMany({
-      where: { stripeInvoiceId: paymentIntent.id },
-      data: { status: 'Invalid' },
-    })
-  }
+    if (invoice.subscription) {
+      const metadata = event.data.object.subscription_details?.metadata as DonationMetadata
+      const invoiceLine = invoice.lines.data.find((line) => line.invoice === invoice.id)
 
-  // Marks donation as invalid when payment intent is failed
-  if (event.type === 'payment_intent.payment_failed') {
-    const paymentIntent = event.data.object
+      if (!invoiceLine) return
 
-    await prisma.donation.updateMany({
-      where: { stripeInvoiceId: paymentIntent.id },
-      data: { status: 'Invalid' },
-    })
-  }
-
-  // Create subscription when subscription is created
-  if (event.type === 'customer.subscription.created') {
-    const subscription = event.data.object
-    const metadata = subscription.metadata as DonationMetadata
-
-    await prisma.donation.create({
-      data: {
-        userId: metadata.userId as string,
-        stripeInvoiceId: subscription.id,
-        projectName: metadata.projectName,
-        projectSlug: metadata.projectSlug,
-        fund: 'Monero Fund',
-        currency: 'USD',
-        fiatAmount: 100,
-        status: 'Complete',
-        membershipExpiresAt: new Date(subscription.current_period_end * 1000),
-      },
-    })
-  }
-
-  // Update subscription expiration date when subscription is updated
-  if (event.type === 'customer.subscription.updated') {
-    const subscription = event.data.object
-
-    await prisma.donation.updateMany({
-      where: { stripeInvoiceId: subscription.id },
-      data: { membershipExpiresAt: new Date(subscription.current_period_end * 1000) },
-    })
+      await prisma.donation.create({
+        data: {
+          userId: metadata.userId as string,
+          stripeInvoiceId: invoice.id,
+          stripeSubscriptionId: invoice.subscription.toString(),
+          projectName: metadata.projectName,
+          projectSlug: metadata.projectSlug,
+          fund: 'Monero Fund',
+          fiatAmount: invoice.total,
+          membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
+        },
+      })
+    }
   }
 
   // Return a 200 response to acknowledge receipt of the event

@@ -5,6 +5,7 @@ import getRawBody from 'raw-body'
 import { env } from '../../../env.mjs'
 import { btcpayApi, prisma } from '../../../server/services'
 import { DonationMetadata } from '../../../server/types'
+import dayjs from 'dayjs'
 
 type Body = {
   deliveryId: string
@@ -15,8 +16,14 @@ type Body = {
   timestamp: number
   storeId: string
   invoiceId: string
-  metadata: Record<string, any> | null
+  metadata: DonationMetadata
 }
+
+type PaymentMethodsResponse = {
+  rate: string
+  amount: string
+  cryptoCode: string
+}[]
 
 export const config = {
   api: {
@@ -24,10 +31,7 @@ export const config = {
   },
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST'])
     res.status(405).end(`Method ${req.method} Not Allowed`)
@@ -56,23 +60,26 @@ export default async function handler(
   }
 
   if (body.type === 'InvoiceSettled') {
-    await prisma.donation.updateMany({
-      where: { btcPayInvoiceId: body.invoiceId },
-      data: { status: 'Complete' },
-    })
-  }
+    const { data: paymentMethods } = await btcpayApi.get<PaymentMethodsResponse>(
+      `stores/${env.BTCPAY_STORE_ID}/invoices/${body.invoiceId}/payment-methods`
+    )
 
-  if (body.type === 'InvoiceExpired') {
-    await prisma.donation.updateMany({
-      where: { btcPayInvoiceId: body.invoiceId },
-      data: { status: 'Expired' },
-    })
-  }
+    const fiatAmount = Math.round(
+      Number(paymentMethods[0].amount) * Number(paymentMethods[0].rate) * 100
+    )
 
-  if (body.type === 'InvoiceInvalid') {
-    await prisma.donation.updateMany({
-      where: { btcPayInvoiceId: body.invoiceId },
-      data: { status: 'Invalid' },
+    await prisma.donation.create({
+      data: {
+        userId: body.metadata.userId,
+        btcPayInvoiceId: body.invoiceId,
+        projectName: body.metadata.projectName,
+        projectSlug: body.metadata.projectSlug,
+        fund: 'Monero Fund',
+        cryptoCode: paymentMethods[0].cryptoCode,
+        fiatAmount,
+        membershipExpiresAt:
+          body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+      },
     })
   }
 

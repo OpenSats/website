@@ -18,25 +18,19 @@ model Donation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId              String
-  btcPayInvoiceId     String?
-  stripeInvoiceId     String?
-  projectSlug         String
-  projectName         String
-  fund                String
-  currency            String
-  fiatAmount          Float
-  membershipExpiresAt DateTime?
-  status              DonationStatus
+  userId                String?
+  btcPayInvoiceId       String?   @unique
+  stripePaymentIntentId String? // For donations and non-recurring memberships
+  stripeInvoiceId       String?   @unique // For recurring memberships
+  stripeSubscriptionId  String? // For recurring memberships
+  projectSlug           String
+  projectName           String
+  fund                  String
+  fiatAmount            Int
+  cryptoCode            String?
+  membershipExpiresAt   DateTime?
 
-  @@index([btcPayInvoiceId])
-  @@index([stripeInvoiceId])
+  @@index([stripePaymentIntentId])
+  @@index([stripeSubscriptionId])
   @@index([userId])
-}
-
-enum DonationStatus {
-  Waiting
-  Expired
-  Invalid
-  Complete
 }
