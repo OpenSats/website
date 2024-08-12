@@ -5,7 +5,8 @@ import sanitize from 'sanitize-filename'
 
 const postsDirectory = join(process.cwd(), 'docs/projects')
 
-const FIELDS = ['title',
+const FIELDS = [
+  'title',
   'summary',
   'slug',
   'git',
@@ -40,8 +41,8 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getPostBySlug(slug: string) {
-  const fields = FIELDS;
+export function getProjectBySlug(slug: string) {
+  const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${sanitize(realSlug)}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -68,7 +69,7 @@ export function getPostBySlug(slug: string) {
 
 export function getAllPosts() {
   const slugs = getPostSlugs()
-  const posts = slugs.map((slug) => getPostBySlug(slug))
+  const posts = slugs.map((slug) => getProjectBySlug(slug))
 
   return posts
 }

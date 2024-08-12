@@ -48,7 +48,7 @@ function MyDonations() {
                 <TableCell>{donation.projectName}</TableCell>
                 <TableCell>{donation.fund}</TableCell>
                 <TableCell>{donation.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
-                <TableCell>${donation.fiatAmount / 100}</TableCell>
+                <TableCell>${donation.fiatAmount}</TableCell>
                 <TableCell>{dayjs(donation.createdAt).format('lll')}</TableCell>
               </TableRow>
             ))}

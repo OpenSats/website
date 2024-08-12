@@ -19,10 +19,7 @@ export const donationRouter = router({
         email: z.string().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z
-          .number()
-          .min(MIN_AMOUNT / 100)
-          .max(MAX_AMOUNT / 100),
+        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -99,10 +96,7 @@ export const donationRouter = router({
         email: z.string().trim().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
-        amount: z
-          .number()
-          .min(MIN_AMOUNT / 100)
-          .max(MAX_AMOUNT / 100),
+        amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -284,7 +278,7 @@ export const donationRouter = router({
       }
 
       const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
-        amount: MEMBERSHIP_PRICE / 100,
+        amount: MEMBERSHIP_PRICE,
         currency: CURRENCY,
         metadata,
         checkout: { redirectURL: `${env.APP_URL}/thankyou` },

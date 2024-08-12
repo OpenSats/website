@@ -11,8 +11,9 @@ CREATE TABLE "Donation" (
     "projectSlug" TEXT NOT NULL,
     "projectName" TEXT NOT NULL,
     "fund" TEXT NOT NULL,
-    "fiatAmount" INTEGER NOT NULL,
     "cryptoCode" TEXT,
+    "fiatAmount" DOUBLE PRECISION NOT NULL,
+    "cryptoAmount" DOUBLE PRECISION,
     "membershipExpiresAt" TIMESTAMP(3),
 
     CONSTRAINT "Donation_pkey" PRIMARY KEY ("id")

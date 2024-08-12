@@ -64,9 +64,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `stores/${env.BTCPAY_STORE_ID}/invoices/${body.invoiceId}/payment-methods`
     )
 
-    const fiatAmount = Math.round(
-      Number(paymentMethods[0].amount) * Number(paymentMethods[0].rate) * 100
-    )
+    const cryptoAmount = Number(paymentMethods[0].amount)
+    const fiatAmount = Number(paymentMethods[0].amount) * Number(paymentMethods[0].rate)
 
     await prisma.donation.create({
       data: {
@@ -76,6 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         projectSlug: body.metadata.projectSlug,
         fund: 'Monero Fund',
         cryptoCode: paymentMethods[0].cryptoCode,
+        cryptoAmount,
         fiatAmount,
         membershipExpiresAt:
           body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,

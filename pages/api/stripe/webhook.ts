@@ -30,8 +30,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   }
 
-  console.log(event.type)
-
   // Store donation data when payment intent is valid
   // Subscriptions are handled on the invoice.paid event instead
   if (event.type === 'payment_intent.succeeded') {
@@ -50,7 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
-          fiatAmount: paymentIntent.amount_received,
+          fiatAmount: paymentIntent.amount_received / 100,
           membershipExpiresAt:
             metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
         },
@@ -75,7 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           projectName: metadata.projectName,
           projectSlug: metadata.projectSlug,
           fund: 'Monero Fund',
-          fiatAmount: invoice.total,
+          fiatAmount: invoice.total / 100,
           membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
         },
       })

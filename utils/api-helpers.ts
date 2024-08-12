@@ -38,11 +38,7 @@ export async function fetchPostJSON(url: string, data?: {}) {
   }
 }
 
-export async function fetchPostJSONAuthed(
-  url: string,
-  auth: string,
-  data?: {}
-) {
+export async function fetchPostJSONAuthed(url: string, auth: string, data?: {}) {
   try {
     // Default options are marked with *
     const response = await fetch(url, {
@@ -86,10 +82,7 @@ export async function fetchGetJSONAuthedBTCPay(slug: string) {
     let totaldonationsinfiatxmr = 0
     let totaldonationsinfiatbtc = 0
     for (let i = 0; i < data.length; i++) {
-      if (
-        data[i].metadata.orderId != slug &&
-        data[i].metadata.orderId != `${slug}_STATIC`
-      ) {
+      if (data[i].metadata.orderId != slug && data[i].metadata.orderId != `${slug}_STATIC`) {
         continue
       }
       const id = data[i].id
@@ -103,23 +96,15 @@ export async function fetchGetJSONAuthedBTCPay(slug: string) {
         },
       })
       const dataiter = await responseiter.json()
-      if (
-        dataiter[1].cryptoCode == 'XMR' &&
-        dataiter[1].paymentMethodPaid > 0
-      ) {
+      if (dataiter[1].cryptoCode == 'XMR' && dataiter[1].paymentMethodPaid > 0) {
         numdonationsxmr += dataiter[1].payments.length
         totaldonationsxmr += Number(dataiter[1].paymentMethodPaid)
-        totaldonationsinfiatxmr +=
-          Number(dataiter[1].paymentMethodPaid) * Number(dataiter[1].rate)
+        totaldonationsinfiatxmr += Number(dataiter[1].paymentMethodPaid) * Number(dataiter[1].rate)
       }
-      if (
-        dataiter[0].cryptoCode == 'BTC' &&
-        dataiter[0].paymentMethodPaid > 0
-      ) {
+      if (dataiter[0].cryptoCode == 'BTC' && dataiter[0].paymentMethodPaid > 0) {
         numdonationsbtc += dataiter[0].payments.length
         totaldonationsbtc += Number(dataiter[0].paymentMethodPaid)
-        totaldonationsinfiatbtc +=
-          Number(dataiter[0].paymentMethodPaid) * Number(dataiter[0].rate)
+        totaldonationsinfiatbtc += Number(dataiter[0].paymentMethodPaid) * Number(dataiter[0].rate)
       }
     }
     return await {
@@ -158,10 +143,7 @@ export async function fetchGetJSONAuthedStripe(slug: string) {
     let total = 0
     let donations = 0
     for (let i = 0; i < dataext.length; i++) {
-      if (
-        dataext[i].metadata.project_slug == null ||
-        dataext[i].metadata.project_slug != slug
-      ) {
+      if (dataext[i].metadata.project_slug == null || dataext[i].metadata.project_slug != slug) {
         continue
       }
       total += Number(dataext[i].amount) / 100

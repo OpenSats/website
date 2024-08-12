@@ -33,4 +33,20 @@ export type PayReq = {
   name?: string
 }
 
-export type Stats = any
+export type ProjectDonationStats = {
+  xmr: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+  btc: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+  usd: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+}

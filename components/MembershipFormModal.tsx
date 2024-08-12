@@ -31,10 +31,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
     .object({
       name: z.string().optional(),
       email: z.string().email().optional(),
-      amount: z.coerce
-        .number()
-        .min(1)
-        .max(MAX_AMOUNT / 100),
+      amount: z.coerce.number().min(1).max(MAX_AMOUNT),
       taxDeductible: z.enum(['yes', 'no']),
       recurring: z.enum(['yes', 'no']),
     })

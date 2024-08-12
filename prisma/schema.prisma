@@ -26,8 +26,9 @@ model Donation {
   projectSlug           String
   projectName           String
   fund                  String
-  fiatAmount            Int
   cryptoCode            String?
+  fiatAmount            Float
+  cryptoAmount          Float?
   membershipExpiresAt   DateTime?
 
   @@index([stripePaymentIntentId])
