@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
@@ -15,6 +15,7 @@ import ProjectList from '../components/ProjectList'
 import LoginFormModal from '../components/LoginFormModal'
 import RegisterFormModal from '../components/RegisterFormModal'
 import PasswordResetFormModal from '../components/PasswordResetFormModal'
+import { trpc } from '../utils/trpc'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -37,6 +38,18 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [loginIsOpen, setLoginIsOpen] = useState(false)
   const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const session = useSession()
+
+  const userHasMembershipQuery = trpc.donation.userHasMembership.useQuery(
+    { projectSlug: generalFund.slug },
+    { enabled: false }
+  )
+
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      console.log('refetching')
+      userHasMembershipQuery.refetch()
+    }
+  }, [session.status])
 
   return (
     <>
@@ -65,18 +78,32 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               Donate to Monero Comittee General Fund
             </Button>
 
-            <Button
-              onClick={() =>
-                session.status === 'authenticated'
-                  ? setMemberModalOpen(true)
-                  : setRegisterIsOpen(true)
-              }
-              variant="outline"
-              size="lg"
-              className="px-14 font-semibold text-lg"
-            >
-              Get Annual Membership
-            </Button>
+            {!userHasMembershipQuery.data && (
+              <Button
+                onClick={() =>
+                  session.status === 'authenticated'
+                    ? setMemberModalOpen(true)
+                    : setRegisterIsOpen(true)
+                }
+                variant="outline"
+                size="lg"
+                className="px-14 font-semibold text-lg"
+              >
+                Get Annual Membership
+              </Button>
+            )}
+
+            {!!userHasMembershipQuery.data && (
+              <CustomLink href="/account/my-memberships">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-14 font-semibold text-lg text-white"
+                >
+                  My Memberships
+                </Button>{' '}
+              </CustomLink>
+            )}
           </div>
 
           <div className="flex flex-row flex-wrap">

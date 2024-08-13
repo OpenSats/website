@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
@@ -20,6 +20,8 @@ import MembershipFormModal from '../../components/MembershipFormModal'
 import LoginFormModal from '../../components/LoginFormModal'
 import RegisterFormModal from '../../components/RegisterFormModal'
 import PasswordResetFormModal from '../../components/PasswordResetFormModal'
+import CustomLink from '../../components/CustomLink'
+import { trpc } from '../../utils/trpc'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -27,7 +29,7 @@ type SingleProjectPageProps = {
   donationStats: ProjectDonationStats
 }
 
-const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donationStats }) => {
+const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) => {
   const router = useRouter()
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [memberModalOpen, setMemberModalOpen] = useState(false)
@@ -35,6 +37,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
   const [loginIsOpen, setLoginIsOpen] = useState(false)
   const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const session = useSession()
+
+  const userHasMembershipQuery = trpc.donation.userHasMembership.useQuery(
+    { projectSlug: project.slug },
+    { enabled: false }
+  )
 
   const {
     slug,
@@ -70,6 +77,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
     }
   }
 
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      console.log('refetching')
+      userHasMembershipQuery.refetch()
+    }
+  }, [session.status])
+
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
@@ -95,16 +109,28 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
               {!project.isFunded && (
                 <div className="flex flex-col space-y-2">
                   <Button onClick={() => setDonateModalOpen(true)}>Donate</Button>
-                  <Button
-                    onClick={() =>
-                      session.status === 'authenticated'
-                        ? setMemberModalOpen(true)
-                        : setRegisterIsOpen(true)
-                    }
-                    variant="outline"
-                  >
-                    Get Annual Membership
-                  </Button>
+
+                  {!userHasMembershipQuery.data && (
+                    <Button
+                      onClick={() =>
+                        session.status === 'authenticated'
+                          ? setMemberModalOpen(true)
+                          : setRegisterIsOpen(true)
+                      }
+                      variant="outline"
+                      className="text-white"
+                    >
+                      Get Annual Membership
+                    </Button>
+                  )}
+
+                  {!!userHasMembershipQuery.data && (
+                    <CustomLink href="/account/my-memberships">
+                      <Button variant="outline" className="text-white">
+                        My Memberships
+                      </Button>{' '}
+                    </CustomLink>
+                  )}
                 </div>
               )}
 

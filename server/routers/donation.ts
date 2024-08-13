@@ -219,7 +219,7 @@ export const donationRouter = router({
                 name: `MAGIC Grants Annual Membership: ${input.projectName}`,
               },
               recurring: { interval: 'year' },
-              unit_amount: MEMBERSHIP_PRICE,
+              unit_amount: MEMBERSHIP_PRICE * 100,
             },
             quantity: 1,
           },
@@ -345,4 +345,16 @@ export const donationRouter = router({
 
     return { memberships: membershipsUniqueSubsId, billingPortalUrl }
   }),
+
+  userHasMembership: protectedProcedure
+    .input(z.object({ projectSlug: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      const membership = await prisma.donation.findFirst({
+        where: { projectSlug: input.projectSlug, membershipExpiresAt: { gt: new Date() } },
+      })
+
+      return !!membership
+    }),
 })
