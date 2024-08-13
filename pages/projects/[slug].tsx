@@ -1,27 +1,25 @@
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
+import Head from 'next/head'
 import ErrorPage from 'next/error'
 import Image from 'next/image'
 import xss from 'xss'
 
 import { ProjectDonationStats, ProjectItem } from '../../utils/types'
-import { getProjectBySlug, getAllPosts } from '../../utils/md'
+import { getProjectBySlug } from '../../utils/md'
 import markdownToHtml from '../../utils/markdownToHtml'
-import {
-  fetchPostJSON,
-  fetchGetJSONAuthedBTCPay,
-  fetchGetJSONAuthedStripe,
-} from '../../utils/api-helpers'
 import PageHeading from '../../components/PageHeading'
-import SocialIcon from '../../components/social-icons'
 import Progress from '../../components/Progress'
 import { prisma } from '../../server/services'
 import { Button } from '../../components/ui/button'
 import { Dialog, DialogContent } from '../../components/ui/dialog'
 import DonationFormModal from '../../components/DonationFormModal'
 import MembershipFormModal from '../../components/MembershipFormModal'
-import Head from 'next/head'
+import LoginFormModal from '../../components/LoginFormModal'
+import RegisterFormModal from '../../components/RegisterFormModal'
+import PasswordResetFormModal from '../../components/PasswordResetFormModal'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -31,9 +29,12 @@ type SingleProjectPageProps = {
 
 const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donationStats }) => {
   const router = useRouter()
-
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [memberModalOpen, setMemberModalOpen] = useState(false)
+  const [registerIsOpen, setRegisterIsOpen] = useState(false)
+  const [loginIsOpen, setLoginIsOpen] = useState(false)
+  const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
+  const session = useSession()
 
   const {
     slug,
@@ -53,7 +54,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
 
   function formatBtc(bitcoin: number) {
     if (bitcoin > 0.1) {
-      return `₿ ${bitcoin.toFixed(3) || 0.0}`
+      return `${bitcoin.toFixed(3) || 0.0} BTC`
     } else {
       return `${Math.floor(bitcoin * 100000000).toLocaleString()} sats`
     }
@@ -94,7 +95,14 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
               {!project.isFunded && (
                 <div className="flex flex-col space-y-2">
                   <Button onClick={() => setDonateModalOpen(true)}>Donate</Button>
-                  <Button onClick={() => setMemberModalOpen(true)} variant="outline">
+                  <Button
+                    onClick={() =>
+                      session.status === 'authenticated'
+                        ? setMemberModalOpen(true)
+                        : setRegisterIsOpen(true)
+                    }
+                    variant="outline"
+                  >
                     Get Annual Membership
                   </Button>
                 </div>
@@ -127,7 +135,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
                   </span>
                 </li>
                 <li>
-                  {donationStats.btc.amount} BTC{' '}
+                  {formatBtc(donationStats.btc.amount)}{' '}
                   <span className="font-normal text-sm text-gray">
                     in {donationStats.btc.count} donations
                   </span>
@@ -160,6 +168,35 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, projects, donation
           <MembershipFormModal project={project} />
         </DialogContent>
       </Dialog>
+
+      {session.status !== 'authenticated' && (
+        <>
+          <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
+            <DialogContent>
+              <LoginFormModal
+                close={() => setLoginIsOpen(false)}
+                openRegisterModal={() => setRegisterIsOpen(true)}
+                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
+            <DialogContent>
+              <RegisterFormModal
+                openLoginModal={() => setLoginIsOpen(true)}
+                close={() => setRegisterIsOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
+            <DialogContent>
+              <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
     </>
   )
 }

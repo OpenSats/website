@@ -1,16 +1,20 @@
+import { useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
-import ProjectList from '../components/ProjectList'
+import { useSession } from 'next-auth/react'
 
 import { getAllPosts } from '../utils/md'
 import { ProjectItem } from '../utils/types'
 import Typing from '../components/Typing'
 import CustomLink from '../components/CustomLink'
 import { Button } from '../components/ui/button'
-import { Dialog, DialogContent } from '../components/ui/dialog'
+import { Dialog, DialogContent, DialogTrigger } from '../components/ui/dialog'
 import DonationFormModal from '../components/DonationFormModal'
 import MembershipFormModal from '../components/MembershipFormModal'
+import ProjectList from '../components/ProjectList'
+import LoginFormModal from '../components/LoginFormModal'
+import RegisterFormModal from '../components/RegisterFormModal'
+import PasswordResetFormModal from '../components/PasswordResetFormModal'
 
 // These shouldn't be swept up in the regular list so we hardcode them
 const generalFund: ProjectItem = {
@@ -29,6 +33,10 @@ const generalFund: ProjectItem = {
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
   const [donateModalOpen, setDonateModalOpen] = useState(false)
   const [memberModalOpen, setMemberModalOpen] = useState(false)
+  const [registerIsOpen, setRegisterIsOpen] = useState(false)
+  const [loginIsOpen, setLoginIsOpen] = useState(false)
+  const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
+  const session = useSession()
 
   return (
     <>
@@ -58,7 +66,11 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             </Button>
 
             <Button
-              onClick={() => setMemberModalOpen(true)}
+              onClick={() =>
+                session.status === 'authenticated'
+                  ? setMemberModalOpen(true)
+                  : setRegisterIsOpen(true)
+              }
               variant="outline"
               size="lg"
               className="px-14 font-semibold text-lg"
@@ -111,6 +123,35 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           <MembershipFormModal project={generalFund} />
         </DialogContent>
       </Dialog>
+
+      {session.status !== 'authenticated' && (
+        <>
+          <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
+            <DialogContent>
+              <LoginFormModal
+                close={() => setLoginIsOpen(false)}
+                openRegisterModal={() => setRegisterIsOpen(true)}
+                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
+            <DialogContent>
+              <RegisterFormModal
+                openLoginModal={() => setLoginIsOpen(true)}
+                close={() => setRegisterIsOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
+            <DialogContent>
+              <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
     </>
   )
 }

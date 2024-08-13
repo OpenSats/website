@@ -6,21 +6,9 @@ import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog'
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { Input } from './ui/input'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 
@@ -31,9 +19,13 @@ const schema = z.object({
 
 type LoginFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void; openPasswordResetModal: () => void }
+type Props = {
+  close: () => void
+  openPasswordResetModal: () => void
+  openRegisterModal: () => void
+}
 
-function LoginFormModal({ close, openPasswordResetModal }: Props) {
+function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Props) {
   const { toast } = useToast()
   const router = useRouter()
   const form = useForm<LoginFormInputs>({
@@ -79,11 +71,6 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
     close()
   }
 
-  function onIForgotMyPassword() {
-    close()
-    openPasswordResetModal()
-  }
-
   return (
     <>
       <DialogHeader>
@@ -92,10 +79,7 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
       </DialogHeader>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <FormField
             control={form.control}
             name="email"
@@ -127,7 +111,7 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
 
             <Button
               type="button"
-              onClick={onIForgotMyPassword}
+              onClick={() => (openPasswordResetModal(), close())}
               variant="link"
               className="self-end"
             >
@@ -135,12 +119,21 @@ function LoginFormModal({ close, openPasswordResetModal }: Props) {
             </Button>
           </div>
 
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && (
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            )}{' '}
-            Login
-          </Button>
+          <div className="flex flex-row space-x-2">
+            <Button
+              className="grow basis-0"
+              variant="outline"
+              type="button"
+              onClick={() => (openRegisterModal(), close())}
+            >
+              Register
+            </Button>
+
+            <Button className="grow basis-0" type="submit" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
+              Login
+            </Button>
+          </div>
         </form>
       </Form>
     </>

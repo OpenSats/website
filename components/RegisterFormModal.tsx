@@ -39,9 +39,9 @@ const schema = z
 
 type RegisterFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void }
+type Props = { close: () => void; openLoginModal: () => void }
 
-function RegisterFormModal({ close }: Props) {
+function RegisterFormModal({ close, openLoginModal }: Props) {
   const { toast } = useToast()
   const form = useForm<RegisterFormInputs>({ resolver: zodResolver(schema) })
   const registerMutation = trpc.auth.register.useMutation()
@@ -59,11 +59,7 @@ function RegisterFormModal({ close }: Props) {
       const errorMessage = (error as any).message
 
       if (errorMessage === 'EMAIL_TAKEN') {
-        return form.setError(
-          'email',
-          { message: 'Email is already taken.' },
-          { shouldFocus: true }
-        )
+        return form.setError('email', { message: 'Email is already taken.' }, { shouldFocus: true })
       }
 
       toast({
@@ -77,16 +73,11 @@ function RegisterFormModal({ close }: Props) {
     <>
       <DialogHeader>
         <DialogTitle>Register</DialogTitle>
-        <DialogDescription>
-          Start supporting Monero projects today!
-        </DialogDescription>
+        <DialogDescription>Start supporting Monero projects today!</DialogDescription>
       </DialogHeader>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <FormField
             control={form.control}
             name="name"
@@ -143,16 +134,26 @@ function RegisterFormModal({ close }: Props) {
             )}
           />
 
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && (
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            )}{' '}
-            Register
-          </Button>
+          <div className="flex flex-row space-x-2">
+            <Button
+              type="button"
+              variant="link"
+              className="grow basis-0"
+              onClick={() => (openLoginModal(), close())}
+            >
+              I already have an account
+            </Button>
+
+            <Button type="submit" disabled={form.formState.isSubmitting} className="grow basis-0">
+              {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
+              Register
+            </Button>
+          </div>
         </form>
       </Form>
     </>
   )
 }
+1
 
 export default RegisterFormModal

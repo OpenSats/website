@@ -69,6 +69,7 @@ const Header = () => {
               <DialogContent>
                 <LoginFormModal
                   close={() => setLoginIsOpen(false)}
+                  openRegisterModal={() => setRegisterIsOpen(true)}
                   openPasswordResetModal={() => setPasswordResetIsOpen(true)}
                 />
               </DialogContent>
@@ -79,7 +80,10 @@ const Header = () => {
                 <Button className="w-24">Register</Button>
               </DialogTrigger>
               <DialogContent>
-                <RegisterFormModal close={() => setRegisterIsOpen(false)} />
+                <RegisterFormModal
+                  close={() => setRegisterIsOpen(false)}
+                  openLoginModal={() => setLoginIsOpen(true)}
+                />
               </DialogContent>
             </Dialog>
           </>
