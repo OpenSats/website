@@ -21,6 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
+import { useFundSlug } from '../utils/use-fund-slug'
 
 const Header = () => {
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
@@ -28,6 +29,7 @@ const Header = () => {
   const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const router = useRouter()
   const session = useSession()
+  const fundSlug = useFundSlug()
 
   useEffect(() => {
     if (router.query.loginEmail) {
@@ -47,7 +49,7 @@ const Header = () => {
         {headerNavLinks.map((link) => (
           <Link
             key={link.title}
-            href={link.href}
+            href={`/${fundSlug}/${link.href}`}
             className={
               link.isButton
                 ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
@@ -105,7 +107,7 @@ const Header = () => {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link
-                  href="/account/my-donations"
+                  href={`/${fundSlug}/account/my-donations`}
                   className="text-foreground hover:text-foreground"
                 >
                   My Donations
@@ -113,7 +115,7 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href="/account/my-memberships"
+                  href={`/${fundSlug}/account/my-memberships`}
                   className="text-foreground hover:text-foreground"
                 >
                   My Memberships

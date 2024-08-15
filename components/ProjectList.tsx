@@ -4,6 +4,7 @@ import ProjectCard from './ProjectCard'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 import { useEffect, useState } from 'react'
+import { FundSlug } from '../utils/funds'
 
 type ProjectListProps = {
   header?: string
@@ -19,9 +20,7 @@ const ProjectList: React.FC<ProjectListProps> = ({
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
 
   useEffect(() => {
-    setSortedProjects(
-      projects.filter((p) => p.slug !== exclude).sort(() => 0.5 - Math.random())
-    )
+    setSortedProjects(projects.filter((p) => p.slug !== exclude).sort(() => 0.5 - Math.random()))
   }, [projects])
 
   return (

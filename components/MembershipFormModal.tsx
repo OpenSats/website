@@ -1,29 +1,30 @@
-import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { faMonero } from '@fortawesome/free-brands-svg-icons'
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { DollarSign } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { z } from 'zod'
+import Image from 'next/image'
+
 import { MAX_AMOUNT } from '../config'
 import Spinner from './Spinner'
 import { trpc } from '../utils/trpc'
 import { useToast } from './ui/use-toast'
-import { useSession } from 'next-auth/react'
 import { Button } from './ui/button'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-import { Label } from './ui/label'
-import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Input } from './ui/input'
-import { DollarSign } from 'lucide-react'
 import { ProjectItem } from '../utils/types'
-import Image from 'next/image'
+import { useFundSlug } from '../utils/use-fund-slug'
 
 type Props = {
   project: ProjectItem | undefined
 }
 
 const MembershipFormModal: React.FC<Props> = ({ project }) => {
+  const fundSlug = useFundSlug()
   const session = useSession()
   const isAuthed = session.status === 'authenticated'
 
@@ -67,11 +68,13 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
 
   async function handleBtcPay(data: FormInputs) {
     if (!project) return
+    if (!fundSlug) return
 
     try {
       const result = await payMembershipWithCryptoMutation.mutateAsync({
         projectSlug: project.slug,
         projectName: project.title,
+        fundSlug,
       })
 
       window.location.assign(result.url)
@@ -85,11 +88,13 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
 
   async function handleFiat(data: FormInputs) {
     if (!project) return
+    if (!fundSlug) return
 
     try {
       const result = await payMembershipWithFiatMutation.mutateAsync({
         projectSlug: project.slug,
         projectName: project.title,
+        fundSlug,
         recurring: data.recurring === 'yes',
       })
 

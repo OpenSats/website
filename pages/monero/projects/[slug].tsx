@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { NextPage } from 'next/types'
+import { GetServerSidePropsContext, NextPage } from 'next/types'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
 import Image from 'next/image'
 import xss from 'xss'
 
-import { ProjectDonationStats, ProjectItem } from '../../utils/types'
-import { getProjectBySlug } from '../../utils/md'
-import markdownToHtml from '../../utils/markdownToHtml'
-import PageHeading from '../../components/PageHeading'
-import Progress from '../../components/Progress'
-import { prisma } from '../../server/services'
-import { Button } from '../../components/ui/button'
-import { Dialog, DialogContent } from '../../components/ui/dialog'
-import DonationFormModal from '../../components/DonationFormModal'
-import MembershipFormModal from '../../components/MembershipFormModal'
-import LoginFormModal from '../../components/LoginFormModal'
-import RegisterFormModal from '../../components/RegisterFormModal'
-import PasswordResetFormModal from '../../components/PasswordResetFormModal'
-import CustomLink from '../../components/CustomLink'
-import { trpc } from '../../utils/trpc'
+import { ProjectDonationStats, ProjectItem } from '../../../utils/types'
+import { getProjectBySlug } from '../../../utils/md'
+import markdownToHtml from '../../../utils/markdownToHtml'
+import PageHeading from '../../../components/PageHeading'
+import Progress from '../../../components/Progress'
+import { prisma } from '../../../server/services'
+import { Button } from '../../../components/ui/button'
+import { Dialog, DialogContent } from '../../../components/ui/dialog'
+import DonationFormModal from '../../../components/DonationFormModal'
+import MembershipFormModal from '../../../components/MembershipFormModal'
+import LoginFormModal from '../../../components/LoginFormModal'
+import RegisterFormModal from '../../../components/RegisterFormModal'
+import PasswordResetFormModal from '../../../components/PasswordResetFormModal'
+import CustomLink from '../../../components/CustomLink'
+import { trpc } from '../../../utils/trpc'
+import { getFundSlugFromUrlPath } from '../../../utils/funds'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -229,8 +230,13 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
 
 export default Project
 
-export async function getServerSideProps({ params }: { params: any }) {
-  const project = getProjectBySlug(params.slug)
+export async function getServerSideProps({ params, resolvedUrl }: GetServerSidePropsContext) {
+  const fundSlug = getFundSlugFromUrlPath(resolvedUrl)
+
+  if (!params?.slug) return {}
+  if (!fundSlug) return {}
+
+  const project = getProjectBySlug(params.slug as string, fundSlug)
   const content = await markdownToHtml(project.content || '')
 
   const donationStats = {
@@ -252,7 +258,9 @@ export async function getServerSideProps({ params }: { params: any }) {
   }
 
   if (!project.isFunded) {
-    const donations = await prisma.donation.findMany({ where: { projectSlug: params.slug } })
+    const donations = await prisma.donation.findMany({
+      where: { projectSlug: params.slug as string, fundSlug },
+    })
 
     donations.forEach((donation) => {
       if (donation.cryptoCode === 'XMR') {

@@ -3,7 +3,14 @@ import { join } from 'path'
 import matter from 'gray-matter'
 import sanitize from 'sanitize-filename'
 
-const postsDirectory = join(process.cwd(), 'docs/projects')
+import { FundSlug } from './funds'
+
+const directories: Record<FundSlug, string> = {
+  monero: join(process.cwd(), 'docs/monero/projects'),
+  firo: join(process.cwd(), 'docs/firo/projects'),
+  privacy_guides: join(process.cwd(), 'docs/privacy-guides/projects'),
+  general: join(process.cwd(), 'docs/general/projects'),
+}
 
 const FIELDS = [
   'title',
@@ -32,8 +39,8 @@ const FIELDS = [
   'fiattotaldonations',
 ]
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory)
+export function getProjectSlugs(fund: FundSlug) {
+  return fs.readdirSync(directories[fund])
 }
 
 export function getSingleFile(path: string) {
@@ -41,10 +48,10 @@ export function getSingleFile(path: string) {
   return fs.readFileSync(fullPath, 'utf8')
 }
 
-export function getProjectBySlug(slug: string) {
+export function getProjectBySlug(slug: string, fund: FundSlug) {
   const fields = FIELDS
   const realSlug = slug.replace(/\.md$/, '')
-  const fullPath = join(postsDirectory, `${sanitize(realSlug)}.md`)
+  const fullPath = join(directories[fund], `${sanitize(realSlug)}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
@@ -67,9 +74,9 @@ export function getProjectBySlug(slug: string) {
   return items
 }
 
-export function getAllPosts() {
-  const slugs = getPostSlugs()
-  const posts = slugs.map((slug) => getProjectBySlug(slug))
+export function getProjects(fund: FundSlug) {
+  const slugs = getProjectSlugs(fund)
+  const posts = slugs.map((slug) => getProjectBySlug(slug, fund))
 
   return posts
 }

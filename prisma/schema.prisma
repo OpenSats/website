@@ -25,7 +25,7 @@ model Donation {
   stripeSubscriptionId  String? // For recurring memberships
   projectSlug           String
   projectName           String
-  fund                  String
+  fundSlug              FundSlug
   cryptoCode            String?
   fiatAmount            Float
   cryptoAmount          Float?
@@ -34,4 +34,11 @@ model Donation {
   @@index([stripePaymentIntentId])
   @@index([stripeSubscriptionId])
   @@index([userId])
+}
+
+enum FundSlug {
+  monero
+  firo
+  privacy_guides
+  general
 }

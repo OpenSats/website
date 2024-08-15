@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,13 +14,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../components/ui/form'
-import { Input } from '../../components/ui/input'
-import { Button } from '../../components/ui/button'
-import { toast } from '../../components/ui/use-toast'
-import { useEffect } from 'react'
-import { trpc } from '../../utils/trpc'
-import { cn } from '../../utils/cn'
+} from '../../../components/ui/form'
+import { Input } from '../../../components/ui/input'
+import { Button } from '../../../components/ui/button'
+import { toast } from '../../../components/ui/use-toast'
+import { trpc } from '../../../utils/trpc'
+import { useFundSlug } from '../../../utils/use-fund-slug'
 
 const schema = z
   .object({
@@ -36,6 +36,7 @@ type ResetPasswordFormInputs = z.infer<typeof schema>
 
 function ResetPassword() {
   const router = useRouter()
+  const fundSlug = useFundSlug()
 
   const form = useForm<ResetPasswordFormInputs>({
     resolver: zodResolver(schema),
@@ -55,7 +56,7 @@ function ResetPassword() {
       })
 
       toast({ title: 'Password successfully reset. You may now log in.' })
-      router.push(`/?loginEmail=${data.email}`)
+      router.push(`/${fundSlug}/?loginEmail=${data.email}`)
     } catch (error) {
       const errorMessage = (error as any).message
 
@@ -92,18 +93,13 @@ function ResetPassword() {
   return (
     <div className="w-full max-w-md m-auto">
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <div className="flex flex-col space-y-1.5 text-center sm:text-left">
             <span className="text-lg font-semibold leading-none tracking-tight">
               Password Reset
             </span>
 
-            <span className="text-sm text-muted-foreground">
-              Reset your password
-            </span>
+            <span className="text-sm text-muted-foreground">Reset your password</span>
           </div>
 
           <FormField
@@ -149,9 +145,7 @@ function ResetPassword() {
           />
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && (
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            )}{' '}
+            {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
             Reset Password
           </Button>
         </form>

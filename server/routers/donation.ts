@@ -1,15 +1,15 @@
 import { Stripe } from 'stripe'
 import { TRPCError } from '@trpc/server'
+import { Donation } from '@prisma/client'
 import { z } from 'zod'
-import dayjs from 'dayjs'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { CURRENCY, MAX_AMOUNT, MEMBERSHIP_PRICE, MIN_AMOUNT } from '../../config'
 import { env } from '../../env.mjs'
-import { btcpayApi, keycloak, prisma, stripe } from '../services'
+import { btcpayApi as _btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { DonationMetadata } from '../types'
-import { Donation } from '@prisma/client'
+import { btcpayFundSlugToStoreId, fundSlugs } from '../../utils/funds'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -19,6 +19,7 @@ export const donationRouter = router({
         email: z.string().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
+        fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
@@ -33,8 +34,10 @@ export const donationRouter = router({
         const user = await keycloak.users.findOne({ id: userId })!
         email = user?.email!
         name = user?.attributes?.name?.[0]
-        stripeCustomerId = user?.attributes?.stripeCustomerId?.[0] || null
+        stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0] || null
       }
+
+      const stripe = _stripe[input.fundSlug]
 
       if (!stripeCustomerId && userId && email && name) {
         const customer = await stripe.customers.create({
@@ -56,6 +59,7 @@ export const donationRouter = router({
         donorName: name,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        fundSlug: input.fundSlug,
         isMembership: 'false',
         isSubscription: 'false',
       }
@@ -96,6 +100,7 @@ export const donationRouter = router({
         email: z.string().trim().email().nullable(),
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
+        fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
       })
     )
@@ -117,11 +122,14 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        fundSlug: input.fundSlug,
         isMembership: 'false',
         isSubscription: 'false',
       }
 
-      const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
+      const btcpayApi = _btcpayApi[input.fundSlug]
+
+      const response = await btcpayApi.post(`/invoices`, {
         amount: input.amount,
         currency: CURRENCY,
         metadata,
@@ -136,10 +144,12 @@ export const donationRouter = router({
       z.object({
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
+        fundSlug: z.enum(fundSlugs),
         recurring: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
+      const stripe = _stripe[input.fundSlug]
       const userId = ctx.session.user.sub
 
       const userHasMembership = await prisma.donation.findFirst({
@@ -161,7 +171,7 @@ export const donationRouter = router({
       const user = await keycloak.users.findOne({ id: userId })
       const email = user?.email!
       const name = user?.attributes?.name?.[0]!
-      let stripeCustomerId = user?.attributes?.stripeCustomerId?.[0] || null
+      let stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0] || null
 
       if (!stripeCustomerId) {
         const customer = await stripe.customers.create({ email, name })
@@ -180,6 +190,7 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: input.recurring ? 'true' : 'false',
       }
@@ -242,6 +253,7 @@ export const donationRouter = router({
       z.object({
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
+        fundSlug: z.enum(fundSlugs),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -273,11 +285,14 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: 'false',
       }
 
-      const response = await btcpayApi.post(`/stores/${env.BTCPAY_STORE_ID}/invoices`, {
+      const btcpayApi = _btcpayApi[input.fundSlug]
+
+      const response = await btcpayApi.post(`/invoices`, {
         amount: MEMBERSHIP_PRICE,
         currency: CURRENCY,
         metadata,
@@ -287,64 +302,69 @@ export const donationRouter = router({
       return { url: response.data.checkoutLink }
     }),
 
-  donationList: protectedProcedure.query(async ({ ctx }) => {
-    const userId = ctx.session.user.sub
+  donationList: protectedProcedure
+    .input(z.object({ fundSlug: z.enum(fundSlugs) }))
+    .query(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
 
-    // Get all user's donations that are not expired OR are expired AND are less than 1 month old
-    const donations = await prisma.donation.findMany({
-      where: {
-        userId,
-        stripeSubscriptionId: null,
-      },
-      orderBy: { createdAt: 'desc' },
-    })
-
-    return donations
-  }),
-
-  membershipList: protectedProcedure.query(async ({ ctx }) => {
-    await authenticateKeycloakClient()
-    const userId = ctx.session.user.sub
-    const user = await keycloak.users.findOne({ id: userId })
-    const stripeCustomerId = user?.attributes?.stripeCustomerId?.[0]
-    let billingPortalUrl: string | null = null
-
-    if (stripeCustomerId) {
-      const billingPortalSession = await stripe.billingPortal.sessions.create({
-        customer: stripeCustomerId,
-        return_url: `${env.APP_URL}/account/my-memberships`,
+      const donations = await prisma.donation.findMany({
+        where: {
+          userId,
+          stripeSubscriptionId: null,
+          fundSlug: input.fundSlug,
+        },
+        orderBy: { createdAt: 'desc' },
       })
 
-      billingPortalUrl = billingPortalSession.url
-    }
+      return donations
+    }),
 
-    const memberships = await prisma.donation.findMany({
-      where: {
-        userId,
-        membershipExpiresAt: { not: null },
-      },
-      orderBy: { createdAt: 'desc' },
-    })
+  membershipList: protectedProcedure
+    .input(z.object({ fundSlug: z.enum(fundSlugs) }))
+    .query(async ({ input, ctx }) => {
+      const stripe = _stripe[input.fundSlug]
+      await authenticateKeycloakClient()
+      const userId = ctx.session.user.sub
+      const user = await keycloak.users.findOne({ id: userId })
+      const stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0]
+      let billingPortalUrl: string | null = null
 
-    const subscriptionIds = new Set<string>()
-    const membershipsUniqueSubsId: Donation[] = []
+      if (stripeCustomerId) {
+        const billingPortalSession = await stripe.billingPortal.sessions.create({
+          customer: stripeCustomerId,
+          return_url: `${env.APP_URL}/${input.fundSlug}/account/my-memberships`,
+        })
 
-    memberships.forEach((membership) => {
-      if (!membership.stripeSubscriptionId) {
+        billingPortalUrl = billingPortalSession.url
+      }
+
+      const memberships = await prisma.donation.findMany({
+        where: {
+          userId,
+          membershipExpiresAt: { not: null },
+        },
+        orderBy: { createdAt: 'desc' },
+      })
+
+      const subscriptionIds = new Set<string>()
+      const membershipsUniqueSubsId: Donation[] = []
+
+      memberships.forEach((membership) => {
+        if (!membership.stripeSubscriptionId) {
+          membershipsUniqueSubsId.push(membership)
+          return
+        }
+
+        if (subscriptionIds.has(membership.stripeSubscriptionId)) {
+          return
+        }
+
         membershipsUniqueSubsId.push(membership)
-        return
-      }
+        subscriptionIds.add(membership.stripeSubscriptionId)
+      })
 
-      if (subscriptionIds.has(membership.stripeSubscriptionId)) {
-        return
-      }
-
-      membershipsUniqueSubsId.push(membership)
-      subscriptionIds.add(membership.stripeSubscriptionId)
-    })
-
-    return { memberships: membershipsUniqueSubsId, billingPortalUrl }
-  }),
+      return { memberships: membershipsUniqueSubsId, billingPortalUrl }
+    }),
 
   userHasMembership: protectedProcedure
     .input(z.object({ projectSlug: z.string() }))

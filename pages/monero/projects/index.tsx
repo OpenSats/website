@@ -1,16 +1,16 @@
+import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import ProjectCard from '../../components/ProjectCard'
-import { ProjectItem } from '../../utils/types'
-import { getAllPosts } from '../../utils/md'
+import ProjectCard from '../../../components/ProjectCard'
+import { ProjectItem } from '../../../utils/types'
+import { getProjects } from '../../../utils/md'
+import { useFundSlug } from '../../../utils/use-fund-slug'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
-
   const [selectedProject, setSelectedProject] = useState<ProjectItem>()
-
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
+  const fundSlug = useFundSlug()
 
   useEffect(() => {
     setSortedProjects(projects.sort(() => 0.5 - Math.random()))
@@ -24,7 +24,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
     setSelectedProject(project)
     setModalOpen(true)
   }
-  // const projects = ["one", "two", "three", "one", "two", "three", "one", "two", "three"];
+
+  if (!fundSlug) return <></>
 
   return (
     <>
@@ -44,11 +45,6 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
-      {/* <PaymentModal
-        isOpen={modalOpen}
-        onRequestClose={closeModal}
-        project={selectedProject}
-      /> */}
     </>
   )
 }
@@ -56,7 +52,7 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 export default AllProjects
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getAllPosts()
+  const projects = getProjects('monero')
 
   return {
     props: {

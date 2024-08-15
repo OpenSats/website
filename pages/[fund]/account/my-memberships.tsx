@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import Head from 'next/head'
 
 import {
   Table,
@@ -8,15 +9,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../../components/ui/table'
-import { trpc } from '../../utils/trpc'
-import Head from 'next/head'
-import CustomLink from '../../components/CustomLink'
+} from '../../../components/ui/table'
+import { trpc } from '../../../utils/trpc'
+import CustomLink from '../../../components/CustomLink'
+import { useFundSlug } from '../../../utils/use-fund-slug'
 
 dayjs.extend(localizedFormat)
 
 function MyMemberships() {
-  const membershipListQuery = trpc.donation.membershipList.useQuery()
+  const fundSlug = useFundSlug()
+
+  // Conditionally render hooks should be ok in this case
+  if (!fundSlug) return <></>
+
+  const membershipListQuery = trpc.donation.membershipList.useQuery({ fundSlug })
 
   return (
     <>
@@ -52,7 +58,7 @@ function MyMemberships() {
             {membershipListQuery.data?.memberships.map((membership) => (
               <TableRow key={membership.createdAt.toISOString()}>
                 <TableCell>{membership.projectName}</TableCell>
-                <TableCell>{membership.fund}</TableCell>
+                <TableCell>{membership.fundSlug}</TableCell>
                 <TableCell>{membership.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
                 <TableCell>{membership.stripeSubscriptionId ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{dayjs(membership.createdAt).format('lll')}</TableCell>

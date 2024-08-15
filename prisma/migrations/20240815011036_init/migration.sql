@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "FundSlug" AS ENUM ('monero', 'firo', 'privacy_guides', 'general');
+
 -- CreateTable
 CREATE TABLE "Donation" (
     "id" TEXT NOT NULL,
@@ -10,7 +13,7 @@ CREATE TABLE "Donation" (
     "stripeSubscriptionId" TEXT,
     "projectSlug" TEXT NOT NULL,
     "projectName" TEXT NOT NULL,
-    "fund" TEXT NOT NULL,
+    "fundSlug" "FundSlug" NOT NULL,
     "cryptoCode" TEXT,
     "fiatAmount" DOUBLE PRECISION NOT NULL,
     "cryptoAmount" DOUBLE PRECISION,

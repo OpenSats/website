@@ -3,17 +3,16 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
 import { ProjectItem } from '../utils/types'
+import { useFundSlug } from '../utils/use-fund-slug'
 
 export type ProjectCardProps = {
   project: ProjectItem
   customImageStyles?: React.CSSProperties
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({
-  project,
-  customImageStyles,
-}) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, customImageStyles }) => {
   const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
+  const fundSlug = useFundSlug()
 
   useEffect(() => {
     const img = document.createElement('img')
@@ -45,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <figure className={cardStyle}>
-      <Link href={`/projects/${project.slug}`} passHref>
+      <Link href={`/${fundSlug}/projects/${project.slug}`} passHref>
         <div className="flex h-36 w-full sm:h-52">
           <Image
             alt={project.title}

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import Head from 'next/head'
 
 import {
   Table,
@@ -8,10 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../../components/ui/table'
-import { trpc } from '../../utils/trpc'
-import Head from 'next/head'
-import CustomLink from '../../components/CustomLink'
+} from '../../../components/ui/table'
+import { trpc } from '../../../utils/trpc'
+import { useFundSlug } from '../../../utils/use-fund-slug'
 
 dayjs.extend(localizedFormat)
 
@@ -21,7 +21,12 @@ const donationTypePretty = {
 }
 
 function MyDonations() {
-  const donationListQuery = trpc.donation.donationList.useQuery()
+  const fundSlug = useFundSlug()
+
+  // Conditionally render hooks should be ok in this case
+  if (!fundSlug) return <></>
+
+  const donationListQuery = trpc.donation.donationList.useQuery({ fundSlug })
 
   return (
     <>
@@ -46,7 +51,7 @@ function MyDonations() {
             {donationListQuery.data?.map((donation) => (
               <TableRow key={donation.createdAt.toISOString()}>
                 <TableCell>{donation.projectName}</TableCell>
-                <TableCell>{donation.fund}</TableCell>
+                <TableCell>{donation.fundSlug}</TableCell>
                 <TableCell>{donation.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
                 <TableCell>${donation.fiatAmount}</TableCell>
                 <TableCell>{dayjs(donation.createdAt).format('lll')}</TableCell>
