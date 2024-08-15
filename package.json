@@ -37,7 +37,7 @@
     "@trpc/react-query": "^11.0.0-rc.390",
     "@trpc/server": "^11.0.0-rc.390",
     "@types/escape-html": "^1.0.4",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "base-64": "^1.0.0",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
