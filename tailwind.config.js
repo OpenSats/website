@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -19,13 +18,12 @@ module.exports = {
     extend: {
       colors: {
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          DEFAULT_HOVER: 'hsl(var(--primary) / 0.7)',
+          hover: 'hsl(var(--primary-hover))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -73,7 +71,7 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       typography: (theme) => ({
-        DEFAULT: {
+        assds: {
           css: {
             color: theme('colors.gray.700'),
             a: {
@@ -141,7 +139,7 @@ module.exports = {
             },
           },
         },
-        dark: {
+        boo: {
           css: {
             color: theme('colors.gray.300'),
             a: {

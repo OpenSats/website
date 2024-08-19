@@ -27,11 +27,7 @@ type Props = {
 }
 
 const SocialIcon = ({ kind, href, size = 5 }: Props) => {
-  if (
-    !href ||
-    (kind === 'mail' &&
-      !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href))
-  )
+  if (!href || (kind === 'mail' && !/^mailto:\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(href)))
     return <></>
 
   const SocialSvg = components[kind]
@@ -44,9 +40,7 @@ const SocialIcon = ({ kind, href, size = 5 }: Props) => {
       href={href}
     >
       <span className="sr-only">{kind}</span>
-      <SocialSvg
-        className={`fill-current text-gray-700 hover:text-orange-500 dark:text-gray-200 dark:hover:text-orange-500 h-${size} w-${size}`}
-      />
+      <SocialSvg className={`fill-current text-gray-700 hover:text-primary h-${size} w-${size}`} />
     </a>
   )
 }

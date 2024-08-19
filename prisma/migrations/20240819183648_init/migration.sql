@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "FundSlug" AS ENUM ('monero', 'firo', 'privacy_guides', 'general');
+CREATE TYPE "FundSlug" AS ENUM ('monero', 'firo', 'privacyguides', 'general');
 
 -- CreateTable
 CREATE TABLE "Donation" (

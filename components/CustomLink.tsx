@@ -7,10 +7,7 @@ const CustomLink = ({
   href,
   className,
   ...rest
-}: DetailedHTMLProps<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  HTMLAnchorElement
->) => {
+}: DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => {
   const isInternalLink = href && href.startsWith('/')
   const isAnchorLink = href && href.startsWith('#')
 
@@ -19,10 +16,7 @@ const CustomLink = ({
     return (
       <Link
         href={href}
-        className={cn(
-          'text-primary hover:text-primary-DEFAULT_HOVER',
-          className
-        )}
+        className={cn('text-primary hover:text-primary-hover', className)}
         {...rest}
       />
     )
@@ -30,14 +24,7 @@ const CustomLink = ({
 
   if (isAnchorLink) {
     return (
-      <a
-        href={href}
-        className={cn(
-          'text-primary hover:text-primary-DEFAULT_HOVER',
-          className
-        )}
-        {...rest}
-      />
+      <a href={href} className={cn('text-primary hover:text-primary-hover', className)} {...rest} />
     )
   }
 
@@ -45,7 +32,7 @@ const CustomLink = ({
     <a
       target="_blank"
       rel="noopener noreferrer"
-      className={cn('text-primary hover:text-primary-DEFAULT_HOVER', className)}
+      className={cn('text-primary hover:text-primary-hover', className)}
       href={href}
       {...rest}
     />

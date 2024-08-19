@@ -8,4 +8,4 @@ export const config = {
   },
 }
 
-export default getBtcpayWebhookHandler(env.BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET)
+export default getBtcpayWebhookHandler(env.BTCPAY_MONERO_WEBHOOK_SECRET)

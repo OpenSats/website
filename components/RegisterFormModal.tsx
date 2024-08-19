@@ -24,6 +24,7 @@ import {
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { trpc } from '../utils/trpc'
+import { useFundSlug } from '../utils/use-fund-slug'
 
 const schema = z
   .object({
@@ -44,11 +45,14 @@ type Props = { close: () => void; openLoginModal: () => void }
 function RegisterFormModal({ close, openLoginModal }: Props) {
   const { toast } = useToast()
   const form = useForm<RegisterFormInputs>({ resolver: zodResolver(schema) })
+  const fundSlug = useFundSlug()
   const registerMutation = trpc.auth.register.useMutation()
 
   async function onSubmit(data: RegisterFormInputs) {
+    if (!fundSlug) return
+
     try {
-      await registerMutation.mutateAsync(data)
+      await registerMutation.mutateAsync({ ...data, fundSlug })
 
       toast({
         title: 'Please check your email to verify your account.',

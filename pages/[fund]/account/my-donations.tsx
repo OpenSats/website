@@ -41,7 +41,6 @@ function MyDonations() {
           <TableHeader>
             <TableRow>
               <TableHead>Project</TableHead>
-              <TableHead>Fund</TableHead>
               <TableHead>Method</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Date</TableHead>
@@ -51,7 +50,6 @@ function MyDonations() {
             {donationListQuery.data?.map((donation) => (
               <TableRow key={donation.createdAt.toISOString()}>
                 <TableCell>{donation.projectName}</TableCell>
-                <TableCell>{donation.fundSlug}</TableCell>
                 <TableCell>{donation.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
                 <TableCell>${donation.fiatAmount}</TableCell>
                 <TableCell>{dayjs(donation.createdAt).format('lll')}</TableCell>

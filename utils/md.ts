@@ -2,13 +2,12 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 import sanitize from 'sanitize-filename'
-
-import { FundSlug } from './funds'
+import { FundSlug } from '@prisma/client'
 
 const directories: Record<FundSlug, string> = {
   monero: join(process.cwd(), 'docs/monero/projects'),
   firo: join(process.cwd(), 'docs/firo/projects'),
-  privacy_guides: join(process.cwd(), 'docs/privacy-guides/projects'),
+  privacyguides: join(process.cwd(), 'docs/privacyguides/projects'),
   general: join(process.cwd(), 'docs/general/projects'),
 }
 

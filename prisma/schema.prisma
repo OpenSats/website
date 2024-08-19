@@ -39,6 +39,6 @@ model Donation {
 enum FundSlug {
   monero
   firo
-  privacy_guides
+  privacyguides
   general
 }

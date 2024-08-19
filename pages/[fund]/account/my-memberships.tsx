@@ -47,7 +47,6 @@ function MyMemberships() {
           <TableHeader>
             <TableRow>
               <TableHead>Project</TableHead>
-              <TableHead>Fund</TableHead>
               <TableHead>Method</TableHead>
               <TableHead>Recurring</TableHead>
               <TableHead>Date</TableHead>
@@ -58,7 +57,6 @@ function MyMemberships() {
             {membershipListQuery.data?.memberships.map((membership) => (
               <TableRow key={membership.createdAt.toISOString()}>
                 <TableCell>{membership.projectName}</TableCell>
-                <TableCell>{membership.fundSlug}</TableCell>
                 <TableCell>{membership.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
                 <TableCell>{membership.stripeSubscriptionId ? 'Yes' : 'No'}</TableCell>
                 <TableCell>{dayjs(membership.createdAt).format('lll')}</TableCell>

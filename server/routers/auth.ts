@@ -6,6 +6,7 @@ import { publicProcedure, router } from '../trpc'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { keycloak, transporter } from '../services'
 import { env } from '../../env.mjs'
+import { fundSlugs } from '../../utils/funds'
 
 type EmailVerifyJwtPayload = {
   action: 'email_verify'
@@ -27,6 +28,7 @@ export const authRouter = router({
         name: z.string().trim().min(1),
         email: z.string().email(),
         password: z.string(),
+        fundSlug: z.enum(fundSlugs),
       })
     )
     .mutation(async ({ input }) => {
@@ -36,20 +38,15 @@ export const authRouter = router({
 
       try {
         user = await keycloak.users.create({
-          realm: 'monerofund',
+          realm: env.KEYCLOAK_REALM_NAME,
           email: input.email,
-          credentials: [
-            { type: 'password', value: input.password, temporary: false },
-          ],
+          credentials: [{ type: 'password', value: input.password, temporary: false }],
           requiredActions: ['VERIFY_EMAIL'],
           attributes: { name: input.name, passwordResetTokenVersion: 1 },
           enabled: true,
         })
       } catch (error) {
-        if (
-          (error as any).responseData.errorMessage ===
-          'User exists with same email'
-        ) {
+        if ((error as any).responseData.errorMessage === 'User exists with same email') {
           throw new TRPCError({ code: 'BAD_REQUEST', message: 'EMAIL_TAKEN' })
         }
 
@@ -71,7 +68,7 @@ export const authRouter = router({
         from: env.SENDGRID_VERIFIED_SENDER,
         to: input.email,
         subject: 'Verify your email',
-        html: `<a href="${env.APP_URL}/verify-email/${emailVerifyToken}" target="_blank">Verify email</a>`,
+        html: `<a href="${env.APP_URL}/${input.fundSlug}/verify-email/${emailVerifyToken}" target="_blank">Verify email</a>`,
       })
     }),
 
@@ -81,10 +78,7 @@ export const authRouter = router({
       let decoded: EmailVerifyJwtPayload
 
       try {
-        decoded = jwt.verify(
-          input.token,
-          env.NEXTAUTH_SECRET
-        ) as EmailVerifyJwtPayload
+        decoded = jwt.verify(input.token, env.NEXTAUTH_SECRET) as EmailVerifyJwtPayload
       } catch (error) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -126,9 +120,7 @@ export const authRouter = router({
         parseInt(user.attributes.passwordResetTokenVersion?.[0]) || null
 
       if (!passwordResetTokenVersion) {
-        console.error(
-          `User ${user.id} has no passwordResetTokenVersion attribute`
-        )
+        console.error(`User ${user.id} has no passwordResetTokenVersion attribute`)
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -161,10 +153,7 @@ export const authRouter = router({
       let decoded: PasswordResetJwtPayload
 
       try {
-        decoded = jwt.verify(
-          input.token,
-          env.NEXTAUTH_SECRET
-        ) as PasswordResetJwtPayload
+        decoded = jwt.verify(input.token, env.NEXTAUTH_SECRET) as PasswordResetJwtPayload
       } catch (error) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -192,9 +181,7 @@ export const authRouter = router({
         parseInt(user.attributes.passwordResetTokenVersion?.[0]) || null
 
       if (!passwordResetTokenVersion) {
-        console.error(
-          `User ${user.id} has no passwordResetTokenVersion attribute`
-        )
+        console.error(`User ${user.id} has no passwordResetTokenVersion attribute`)
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -211,13 +198,9 @@ export const authRouter = router({
         { id: decoded.userId },
         {
           email: decoded.email,
-          credentials: [
-            { type: 'password', value: input.password, temporary: false },
-          ],
+          credentials: [{ type: 'password', value: input.password, temporary: false }],
           attributes: {
-            passwordResetTokenVersion: (
-              passwordResetTokenVersion + 1
-            ).toString(),
+            passwordResetTokenVersion: (passwordResetTokenVersion + 1).toString(),
           },
         }
       )

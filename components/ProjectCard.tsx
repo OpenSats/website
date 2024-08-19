@@ -38,8 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, customImageStyles })
   //   cardStyle =
   //     'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-orange-400 dark:bg-stone-900'
   // } else {
-  cardStyle =
-    'h-full space-y-4 rounded-xl border-b-4 border-orange-500 bg-stone-100 dark:bg-stone-900'
+  cardStyle = 'h-full space-y-4 rounded-xl border-b-4 border-primary bg-primary/5'
   // }
 
   return (

@@ -4,7 +4,6 @@ import ProjectCard from './ProjectCard'
 import Link from 'next/link'
 import { ProjectItem } from '../utils/types'
 import { useEffect, useState } from 'react'
-import { FundSlug } from '../utils/funds'
 
 type ProjectListProps = {
   header?: string

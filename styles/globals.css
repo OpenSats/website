@@ -1,11 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* #3a76f0 (Signal blue) as the default accent color
+#F1F5FF as the default background color
+#ff6600 (monero orange) as the accent color for the MAGIC Monero Fund
+#9b1c2e (firo red) as the accent color for the MAGIC Firo Fund
+#f7f0f1 (firo off-white background) as the background color for the MAGIC Firo Fund
+#FFD06F (privacy guides yellow) as the accent color for the MAGIC Privacy Guides Fund */
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+  .monero {
+    --background: 223, 100%, 97%;
+    --foreground: 223, 84%, 5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -13,56 +18,98 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 25 95% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 24 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 24 100% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 0 0% 92;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 214.3 31.8% 87%;
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
   }
 
-  .dark {
-    --background: 0, 0%, 9%;
-    --foreground: 210 40% 98%;
+  .firo {
+    --background: 351 30% 95%;
+    --foreground: 223 84% 5%;
 
-    --card: 25 95% 53%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0 0% 10;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 25 95% 53%;
+    --primary: 351 69% 36%;
     --primary-foreground: 0 0% 100%;
+    --primary-hover: 351 69% 26%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 0 0% 20;
-    --muted-foreground: 0 0% 60%;
-
-    --accent: 0 0% 20;
-    --accent-foreground: 210 40% 98%;
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: var(--primary);
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .privacyguides {
+    --background: 223, 100%, 97%;
+    --foreground: 223, 84%, 5%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 40 100% 72%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 40 100% 62%;
+
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .general {
+    --background: 223, 100%, 97%;
+    --foreground: 223, 84%, 5%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 220 86% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 86% 48%;
+
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
   }
 }
 
@@ -85,7 +132,7 @@ body {
 }
 
 .footnotes {
-  @apply mt-12 border-t border-gray-200 pt-8 dark:border-gray-700;
+  @apply mt-12 border-t border-gray-200 pt-8;
 }
 
 .data-footnote-backref {

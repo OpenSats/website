@@ -11,6 +11,7 @@ import { Input } from './ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
+import { useFundSlug } from '../utils/use-fund-slug'
 
 const schema = z.object({
   email: z.string().email(),
@@ -28,6 +29,7 @@ type Props = {
 function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Props) {
   const { toast } = useToast()
   const router = useRouter()
+  const fundSlug = useFundSlug()
   const form = useForm<LoginFormInputs>({
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' },
@@ -35,10 +37,11 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
   })
 
   useEffect(() => {
+    if (!fundSlug) return
     if (router.query.loginEmail) {
       form.setValue('email', router.query.loginEmail as string)
       setTimeout(() => form.setFocus('password'), 100)
-      router.replace('/')
+      router.replace(`/${fundSlug}`)
     }
   }, [router.query.loginEmail])
 

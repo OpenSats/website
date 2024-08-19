@@ -134,8 +134,8 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
             className="rounded-xl"
           />
           <div className="flex flex-col">
-            <h2 className="font-sans font-bold">{project.title}</h2>
-            <h3 className="text-textgray font-sans">Pledge your support</h3>
+            <h2 className="font-semibold">{project.title}</h2>
+            <h3 className="text-gray-500">Pledge your support</h3>
           </div>
         </div>
       </div>
@@ -193,7 +193,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
                     {[50, 100, 250, 500].map((value, index) => (
                       <Button
                         key={`amount-button-${index}`}
-                        variant="outline"
+                        variant="light"
                         size="sm"
                         type="button"
                         onClick={() =>

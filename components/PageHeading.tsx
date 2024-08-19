@@ -13,7 +13,7 @@ interface Props {
 
 export default function PageHeading({ project, children }: Props) {
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+    <div className="divide-y divide-gray-200">
       <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
         <Image
           src={project.coverImage}
@@ -23,7 +23,7 @@ export default function PageHeading({ project, children }: Props) {
           className="h-60 w-60 mx-auto my-auto object-contain row-span-3 hidden xl:block"
         />
 
-        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
+        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
           {project.title}
         </h1>
 
@@ -33,18 +33,12 @@ export default function PageHeading({ project, children }: Props) {
 
         <div className="flex space-x-3 items-center">
           <p>
-            by{' '}
-            <a className="text-orange-500" href={project.personalWebsite}>
-              {project.nym}
-            </a>
+            by <CustomLink href={project.personalWebsite}>{project.nym}</CustomLink>
           </p>
 
           <SocialIcon kind="website" href={project.website} />
           {project.twitter && (
-            <SocialIcon
-              kind="twitter"
-              href={`https://twitter.com/${project.twitter}`}
-            />
+            <SocialIcon kind="twitter" href={`https://twitter.com/${project.twitter}`} />
           )}
           <SocialIcon kind="github" href={project.git} />
           {/* {nostr && (

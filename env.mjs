@@ -25,6 +25,7 @@ export const env = createEnv({
     STRIPE_GENERAL_SECRET_KEY: z.string().min(1),
     STRIPE_GENERAL_WEBHOOK_SECRET: z.string().min(1),
 
+    KEYCLOAK_URL: z.string().url(),
     KEYCLOAK_CLIENT_ID: z.string().min(1),
     KEYCLOAK_CLIENT_SECRET: z.string().min(1),
     KEYCLOAK_REALM_NAME: z.string().min(1),
@@ -74,6 +75,7 @@ export const env = createEnv({
     STRIPE_GENERAL_SECRET_KEY: process.env.STRIPE_GENERAL_SECRET_KEY,
     STRIPE_GENERAL_WEBHOOK_SECRET: process.env.STRIPE_GENERAL_WEBHOOK_SECRET,
 
+    KEYCLOAK_URL: process.env.KEYCLOAK_URL,
     KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,
     KEYCLOAK_REALM_NAME: process.env.KEYCLOAK_REALM_NAME,

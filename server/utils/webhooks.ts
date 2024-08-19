@@ -6,7 +6,7 @@ import crypto from 'crypto'
 
 import { btcpayApi as _btcpayApi, prisma, stripe } from '../../server/services'
 import { DonationMetadata } from '../../server/types'
-import { btcpayStoreIdToFundSlug } from '../../utils/funds'
+import { btcpayStoreIdToFundSlug } from '../../server/utils/funds'
 
 export function getStripeWebhookHandler(secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -112,6 +112,7 @@ export function getBtcpayWebhookHandler(secret: string) {
     const rawBody = await getRawBody(req)
     const body: BtcpayBody = JSON.parse(Buffer.from(rawBody).toString('utf8'))
     const fundSlug = btcpayStoreIdToFundSlug[body.storeId]
+    console.log(fundSlug)
 
     const expectedSigHash = crypto.createHmac('sha256', secret).update(rawBody).digest('hex')
     const incomingSigHash = (req.headers['btcpay-sig'] as string).split('=')[1]

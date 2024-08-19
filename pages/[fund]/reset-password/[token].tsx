@@ -66,7 +66,7 @@ function ResetPassword() {
           variant: 'destructive',
         })
 
-        router.push('/')
+        router.push(`/${fundSlug}/`)
 
         return
       }

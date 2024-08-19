@@ -21,7 +21,7 @@ export const authOptions: AuthOptions = {
       authorize: async (credentials) => {
         try {
           const { data } = await axios.post(
-            `http://localhost:8080/realms/monerofund/protocol/openid-connect/token`,
+            `${env.KEYCLOAK_URL}/realms/${env.KEYCLOAK_REALM_NAME}/protocol/openid-connect/token`,
             new URLSearchParams({
               grant_type: 'password',
               client_id: env.KEYCLOAK_CLIENT_ID,
@@ -32,15 +32,14 @@ export const authOptions: AuthOptions = {
             { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
           )
 
-          const keycloakJwtPayload: KeycloakJwtPayload = jwtDecode(
-            data.access_token
-          )
+          const keycloakJwtPayload: KeycloakJwtPayload = jwtDecode(data.access_token)
 
           return {
             id: keycloakJwtPayload.sub,
             email: keycloakJwtPayload.email,
           }
         } catch (error) {
+          console.log(error)
           const errorMessage = (error as any).response.data.error
           if (errorMessage === 'invalid_grant') {
             throw new Error('INVALID_CREDENTIALS')

@@ -9,7 +9,8 @@ import { env } from '../../env.mjs'
 import { btcpayApi as _btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { DonationMetadata } from '../types'
-import { btcpayFundSlugToStoreId, fundSlugs } from '../../utils/funds'
+import { fundSlugs } from '../../utils/funds'
+import { fundSlugToCustomerIdAttr } from '../utils/funds'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -34,7 +35,7 @@ export const donationRouter = router({
         const user = await keycloak.users.findOne({ id: userId })!
         email = user?.email!
         name = user?.attributes?.name?.[0]
-        stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0] || null
+        stripeCustomerId = user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0] || null
       }
 
       const stripe = _stripe[input.fundSlug]
@@ -82,7 +83,7 @@ export const donationRouter = router({
           },
         ],
         metadata,
-        success_url: `${env.APP_URL}/thankyou`,
+        success_url: `${env.APP_URL}/${input.fundSlug}/thankyou`,
         cancel_url: `${env.APP_URL}/`,
         // We need metadata in here for some reason
         payment_intent_data: { metadata },
@@ -133,7 +134,7 @@ export const donationRouter = router({
         amount: input.amount,
         currency: CURRENCY,
         metadata,
-        checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+        checkout: { redirectURL: `${env.APP_URL}/${input.fundSlug}/thankyou` },
       })
 
       return { url: response.data.checkoutLink }
@@ -171,7 +172,8 @@ export const donationRouter = router({
       const user = await keycloak.users.findOne({ id: userId })
       const email = user?.email!
       const name = user?.attributes?.name?.[0]!
-      let stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0] || null
+      let stripeCustomerId =
+        user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0] || null
 
       if (!stripeCustomerId) {
         const customer = await stripe.customers.create({ email, name })
@@ -213,7 +215,7 @@ export const donationRouter = router({
           },
         ],
         metadata,
-        success_url: `${env.APP_URL}/thankyou`,
+        success_url: `${env.APP_URL}/${input.fundSlug}/thankyou`,
         cancel_url: `${env.APP_URL}/`,
         payment_intent_data: { metadata },
       }
@@ -236,7 +238,7 @@ export const donationRouter = router({
           },
         ],
         metadata,
-        success_url: `${env.APP_URL}/thankyou`,
+        success_url: `${env.APP_URL}/${input.fundSlug}/thankyou`,
         cancel_url: `${env.APP_URL}/`,
         subscription_data: { metadata },
       }
@@ -296,7 +298,7 @@ export const donationRouter = router({
         amount: MEMBERSHIP_PRICE,
         currency: CURRENCY,
         metadata,
-        checkout: { redirectURL: `${env.APP_URL}/thankyou` },
+        checkout: { redirectURL: `${env.APP_URL}/${input.fundSlug}/thankyou` },
       })
 
       return { url: response.data.checkoutLink }
@@ -326,7 +328,7 @@ export const donationRouter = router({
       await authenticateKeycloakClient()
       const userId = ctx.session.user.sub
       const user = await keycloak.users.findOne({ id: userId })
-      const stripeCustomerId = user?.attributes?.fundSlugToCustomerIdAttr[input.fundSlug]?.[0]
+      const stripeCustomerId = user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0]
       let billingPortalUrl: string | null = null
 
       if (stripeCustomerId) {
@@ -342,6 +344,7 @@ export const donationRouter = router({
         where: {
           userId,
           membershipExpiresAt: { not: null },
+          fundSlug: input.fundSlug,
         },
         orderBy: { createdAt: 'desc' },
       })

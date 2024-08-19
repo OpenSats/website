@@ -1,4 +1,4 @@
-import { FundSlug } from '../utils/funds'
+import { FundSlug } from '@prisma/client'
 
 export type DonationMetadata = {
   userId: string | null

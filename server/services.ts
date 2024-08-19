@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { FundSlug, PrismaClient } from '@prisma/client'
 import Stripe from 'stripe'
 import sendgrid from '@sendgrid/mail'
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client'
@@ -6,7 +6,6 @@ import nodemailer from 'nodemailer'
 import axios, { AxiosInstance } from 'axios'
 
 import { env } from '../env.mjs'
-import { FundSlug } from '../utils/funds'
 
 sendgrid.setApiKey(env.SENDGRID_API_KEY)
 
@@ -21,7 +20,7 @@ const prisma =
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 const keycloak = new KeycloakAdminClient({
-  baseUrl: 'http://localhost:8080',
+  baseUrl: env.KEYCLOAK_URL,
   realmName: env.KEYCLOAK_REALM_NAME,
 })
 
@@ -43,7 +42,7 @@ const btcpayApi: Record<FundSlug, AxiosInstance> = {
     baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_FIRO_STORE_ID}`,
     headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
   }),
-  privacy_guides: axios.create({
+  privacyguides: axios.create({
     baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_PRIVACY_GUIDES_STORE_ID}`,
     headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
   }),
@@ -56,7 +55,7 @@ const btcpayApi: Record<FundSlug, AxiosInstance> = {
 const stripe: Record<FundSlug, Stripe> = {
   monero: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
   firo: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
-  privacy_guides: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
+  privacyguides: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
   general: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
 }
 

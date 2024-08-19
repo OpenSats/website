@@ -1,46 +1,61 @@
-import { env } from '../env.mjs'
+import { FundSlug } from '@prisma/client'
+import { ProjectItem } from './types'
 
-type FundSlugs = ['monero', 'firo', 'privacy_guides', 'general']
-export type FundSlug = FundSlugs[number]
-
-export const funds: Record<FundSlug, Record<string, any>> = {
-  monero: {},
-  firo: {},
-  privacy_guides: {},
-  general: {},
+export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
+  monero: {
+    slug: 'monero',
+    nym: 'MagicMonero',
+    website: 'https://monerofund.org',
+    personalWebsite: 'https://monerofund.org',
+    title: 'MAGIC Monero Fund',
+    summary: 'Support contributors to Monero',
+    coverImage: '/img/crystalball.jpg',
+    git: 'magicgrants',
+    twitter: 'magicgrants',
+    goal: 100000,
+  },
+  firo: {
+    slug: 'firo',
+    nym: 'MagicFiro',
+    website: 'https://monerofund.org',
+    personalWebsite: 'https://monerofund.org',
+    title: 'MAGIC Firo Fund',
+    summary: 'Support contributors to Firo',
+    coverImage: '/img/crystalball.jpg',
+    git: 'magicgrants',
+    twitter: 'magicgrants',
+    goal: 100000,
+  },
+  privacyguides: {
+    slug: 'privacyguides',
+    nym: 'MagicPrivacyGuides',
+    website: 'https://monerofund.org',
+    personalWebsite: 'https://monerofund.org',
+    title: 'MAGIC Privacy Guides Fund',
+    summary: 'Support contributors to Privacy Guides',
+    coverImage: '/img/crystalball.jpg',
+    git: 'magicgrants',
+    twitter: 'magicgrants',
+    goal: 100000,
+  },
+  general: {
+    slug: 'general',
+    nym: 'MagicGeneral',
+    website: 'https://monerofund.org',
+    personalWebsite: 'https://monerofund.org',
+    title: 'MAGIC General Fund',
+    summary: 'Support contributors to MAGIC',
+    coverImage: '/img/crystalball.jpg',
+    git: 'magicgrants',
+    twitter: 'magicgrants',
+    goal: 100000,
+  },
 }
 
-export const fundSlugs = Object.keys(funds) as FundSlugs
-
-export const btcpayFundSlugToStoreId: Record<FundSlug, string> = {
-  monero: env.BTCPAY_MONERO_STORE_ID,
-  firo: env.BTCPAY_FIRO_STORE_ID,
-  privacy_guides: env.BTCPAY_PRIVACY_GUIDES_STORE_ID,
-  general: env.BTCPAY_GENERAL_STORE_ID,
-}
-
-export const btcpayFundSlugToWebhookSecret: Record<FundSlug, string> = {
-  monero: env.BTCPAY_MONERO_WEBHOOK_SECRET,
-  firo: env.BTCPAY_FIRO_WEBHOOK_SECRET,
-  privacy_guides: env.BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET,
-  general: env.BTCPAY_GENERAL_WEBHOOK_SECRET,
-}
-
-export const btcpayStoreIdToFundSlug: Record<string, FundSlug> = {}
-
-Object.entries(btcpayFundSlugToStoreId).forEach(
-  ([fundSlug, storeId]) => (btcpayStoreIdToFundSlug[storeId] = fundSlug as FundSlug)
-)
-
-export const fundSlugToCustomerIdAttr: Record<FundSlug, string> = {
-  monero: 'stripeMoneroCustomerId',
-  firo: 'stripeFiroCustomerId',
-  privacy_guides: 'stripePgCustomerId',
-  general: 'stripeGeneralCustomerId',
-}
+export const fundSlugs = Object.keys(funds) as ['monero', 'firo', 'privacyguides', 'general']
 
 export function getFundSlugFromUrlPath(urlPath: string) {
-  const fundSlug = urlPath.split('/')[1]
+  const fundSlug = urlPath.replace(/(\?.*)$/, '').split('/')[1]
 
   return fundSlugs.includes(fundSlug as any) ? (fundSlug as FundSlug) : null
 }

@@ -9,7 +9,7 @@ export default Root
 export function getServerSideProps() {
   return {
     redirect: {
-      destination: '/monero',
+      destination: '/general',
       permanent: true,
     },
   }

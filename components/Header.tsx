@@ -22,6 +22,8 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import { useFundSlug } from '../utils/use-fund-slug'
+import CustomLink from './CustomLink'
+import { funds } from '../utils/funds'
 
 const Header = () => {
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
@@ -37,27 +39,35 @@ const Header = () => {
     }
   }, [router.query.loginEmail])
 
+  if (!fundSlug) return <></>
+
+  const fund = funds[fundSlug]
+
   return (
     <header className="flex items-center justify-between py-10">
       <div>
-        <Link href="/" aria-label="Monero Fund" className="flex items-center mr-3 gap-4">
+        <Link
+          href={`/${fundSlug}`}
+          aria-label={fund.title}
+          className="flex items-center mr-3 gap-4"
+        >
           <Logo className="w-12 h-12" />
-          <span className="text-foreground text-lg font-bold">MAGIC Monero Fund</span>
+          <span className="text-foreground text-lg font-bold">{fund.title}</span>
         </Link>
       </div>
       <div className="flex gap-2 items-center text-base leading-5">
         {headerNavLinks.map((link) => (
-          <Link
+          <CustomLink
             key={link.title}
             href={`/${fundSlug}/${link.href}`}
             className={
               link.isButton
-                ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
-                : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
+                ? 'rounded border border-primary bg-transparent px-4 py-2 font-semibold text-primary hover:border-transparent hover:bg-primary hover:text-white'
+                : 'hidden p-1 font-medium text-gray-900 sm:p-4 md:inline-block'
             }
           >
             {link.title}
-          </Link>
+          </CustomLink>
         ))}
 
         {session.status !== 'authenticated' && (
@@ -91,7 +101,7 @@ const Header = () => {
           </>
         )}
 
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
 
         {session.status === 'authenticated' && (
           <DropdownMenu>
@@ -105,24 +115,14 @@ const Header = () => {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link
-                  href={`/${fundSlug}/account/my-donations`}
-                  className="text-foreground hover:text-foreground"
-                >
-                  My Donations
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href={`/${fundSlug}/account/my-memberships`}
-                  className="text-foreground hover:text-foreground"
-                >
-                  My Memberships
-                </Link>
-              </DropdownMenuItem>
+              <CustomLink href={`/${fundSlug}/account/my-donations`} className="text-foreground">
+                <DropdownMenuItem>My Donations</DropdownMenuItem>
+              </CustomLink>
+              <CustomLink href={`/${fundSlug}/account/my-memberships`} className="text-foreground">
+                <DropdownMenuItem>My Memberships</DropdownMenuItem>
+              </CustomLink>
               <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+              <DropdownMenuItem onClick={() => signOut({ callbackUrl: `/${fundSlug}` })}>
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
