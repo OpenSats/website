@@ -139,13 +139,12 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
               <h1 className="mb-4 font-bold">Raised</h1>
 
               <Progress
-                percent={Math.floor(
-                  ((donationStats.xmr.fiatAmount +
-                    donationStats.btc.fiatAmount +
-                    donationStats.usd.fiatAmount) /
-                    goal) *
-                    100
-                )}
+                current={
+                  donationStats.xmr.fiatAmount +
+                  donationStats.btc.fiatAmount +
+                  donationStats.usd.fiatAmount
+                }
+                goal={goal}
               />
 
               <ul className="font-semibold space-y-1">
@@ -266,13 +265,13 @@ export async function getServerSideProps({ params, resolvedUrl }: GetServerSideP
     donations.forEach((donation) => {
       if (donation.cryptoCode === 'XMR') {
         donationStats.xmr.count += 1
-        donationStats.xmr.amount += donation.cryptoAmount
+        donationStats.xmr.amount += donation.cryptoAmount || 0
         donationStats.xmr.fiatAmount += donation.fiatAmount
       }
 
       if (donation.cryptoCode === 'BTC') {
         donationStats.btc.count += 1
-        donationStats.btc.amount += donation.cryptoAmount
+        donationStats.btc.amount += donation.cryptoAmount || 0
         donationStats.btc.fiatAmount += donation.fiatAmount
       }
 

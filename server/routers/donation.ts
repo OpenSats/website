@@ -312,7 +312,7 @@ export const donationRouter = router({
       const donations = await prisma.donation.findMany({
         where: {
           userId,
-          stripeSubscriptionId: null,
+          membershipExpiresAt: null,
           fundSlug: input.fundSlug,
         },
         orderBy: { createdAt: 'desc' },

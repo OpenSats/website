@@ -1,5 +1,8 @@
+import { FundSlug } from '@prisma/client'
+
 export type ProjectItem = {
   slug: string
+  fund: FundSlug
   nym: string
   content?: string
   title: string
@@ -14,15 +17,15 @@ export type ProjectItem = {
   staticXMRaddress?: string
   goal: number
   isFunded?: boolean
-  numdonationsxmr?: number
-  totaldonationsinfiatxmr?: number
-  totaldonationsxmr?: number
-  numdonationsbtc?: number
-  totaldonationsinfiatbtc?: number
-  totaldonationsbtc?: number
-  fiatnumdonations?: number
-  fiattotaldonationsinfiat?: number
-  fiattotaldonations?: number
+  numdonationsxmr: number
+  totaldonationsinfiatxmr: number
+  totaldonationsxmr: number
+  numdonationsbtc: number
+  totaldonationsinfiatbtc: number
+  totaldonationsbtc: number
+  fiatnumdonations: number
+  fiattotaldonationsinfiat: number
+  fiattotaldonations: number
 }
 
 export type PayReq = {

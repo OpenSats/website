@@ -8,6 +8,13 @@
 #f7f0f1 (firo off-white background) as the background color for the MAGIC Firo Fund
 #FFD06F (privacy guides yellow) as the accent color for the MAGIC Privacy Guides Fund */
 @layer base {
+  :root {
+    --monero: 24 100% 50%;
+    --firo: 351 69% 36%;
+    --privacyguides: 40 100% 50%;
+    --general: 220 86% 58%;
+  }
+
   .monero {
     --background: 223, 100%, 97%;
     --foreground: 223, 84%, 5%;
@@ -18,7 +25,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 24 100% 50%;
+    --primary: var(--monero);
     --primary-foreground: 0 0% 100%;
     --primary-hover: 24 100% 45%;
 
@@ -44,7 +51,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 351 69% 36%;
+    --primary: var(--firo);
     --primary-foreground: 0 0% 100%;
     --primary-hover: 351 69% 26%;
 
@@ -70,7 +77,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 40 100% 72%;
+    --primary: var(--privacyguides);
     --primary-foreground: 0 0% 100%;
     --primary-hover: 40 100% 62%;
 
@@ -96,7 +103,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 220 86% 58%;
+    --primary: var(--general);
     --primary-foreground: 0 0% 100%;
     --primary-hover: 220 86% 48%;
 

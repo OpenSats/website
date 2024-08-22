@@ -1,4 +1,5 @@
 ---
+fund: monero
 title: 'vtnerd Monero and Monero-LWS dev work for Q1/Q2 2024'
 summary: 'This development work will improve security, performance, and usability with an end goal of helping to broaden the user base. '
 date: '2024-01-26'
@@ -12,7 +13,7 @@ personalWebsite: 'https://www.leeclagett.com'
 type: 'Other Free and Open Source Project'
 staticXMRaddress: '8454MvGDuZPFP1WKSMcgbRJqV1sXHz7Z3KyURMpkoLXR3CJUZiebjymjQGc6YvTWqhFZEtJwELbcgFHZ9qGPwPsF7fWLWPT'
 goal: 28800
-isFunded: false
+isFunded: true
 numdonationsxmr: 43
 totaldonationsinfiatxmr: 28800
 totaldonationsxmr: 226.1

@@ -54,11 +54,12 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 export default AllProjects
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getProjects('monero')
+  const projects = await getProjects('monero')
 
   return {
     props: {
       projects,
     },
+    revalidate: 120,
   }
 }

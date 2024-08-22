@@ -1,7 +1,8 @@
+import { FundSlug } from '@prisma/client'
 import markdownToHtml from '../../utils/markdownToHtml'
 import { getSingleFile } from '../../utils/md'
 import BigDumbMarkdown from '../../components/BigDumbMarkdown'
-import { FundSlug, fundSlugs } from '../../server/utils/funds'
+import { fundSlugs } from '../../utils/funds'
 
 export default function About({ content }: { content: string }) {
   return <BigDumbMarkdown content={content} />

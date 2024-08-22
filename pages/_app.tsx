@@ -12,10 +12,16 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const fundSlug = useFundSlug()
+  console.log(fundSlug || 'general')
 
   return (
     <SessionProvider session={pageProps.session}>
-      <ThemeProvider attribute="class" forcedTheme={fundSlug as string} enableSystem={false}>
+      <ThemeProvider
+        attribute="class"
+        forcedTheme={fundSlug || 'general'}
+        themes={['monero', 'general', 'firo', 'priacyguides']}
+        enableSystem={false}
+      >
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
         </Head>

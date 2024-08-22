@@ -166,11 +166,12 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 export default Home
 
 export async function getStaticProps({ params }: { params: any }) {
-  const projects = getProjects(fund.slug)
+  const projects = await getProjects(fund.slug)
 
   return {
     props: {
       projects,
     },
+    revalidate: 120,
   }
 }

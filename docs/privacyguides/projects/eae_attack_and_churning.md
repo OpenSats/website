@@ -1,4 +1,5 @@
 ---
+fund: privacyguides
 title: 'PG Example Campaign'
 summary: "The EAE attack is one of Monero's privacy weak points. Churning may be a solution."
 nym: 'Dr. Nathan Borggren'

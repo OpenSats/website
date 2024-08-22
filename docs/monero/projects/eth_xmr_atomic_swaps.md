@@ -1,6 +1,7 @@
 ---
+fund: monero
 title: 'ETH<>XMR Atomic Swap Continued Development'
-summary: "A trustless way to exchange Monero and Ethereum."
+summary: 'A trustless way to exchange Monero and Ethereum.'
 nym: 'noot'
 website: 'https://github.com/AthanorLabs/atomic-swap'
 coverImage: '/img/project/Ethereum_logo.png'
@@ -21,9 +22,13 @@ fiatnumdonations: 8
 fiattotaldonationsinfiat: 5139
 fiattotaldonations: 5139
 ---
+
 ### Funded Goal: 24,000 USD (5,000 USD contributed from the MAGIC Monero Fund general fund)
+
 ### Start: September 2022
+
 ### End: August 2022
+
 ### Result: [Mainnet beta software release](https://reddit.com/r/Monero/comments/1382rva/ethxmr_atomic_swap_beta_release/)
 
 The MAGIC Monero Fund raised funds for noot to continue development on ETH-XMR atomic swaps. View [the campaign here](https://www.gofundme.com/f/noot-ethxmr-atomic-swap-development-4-months).
@@ -51,6 +56,3 @@ The current implementation of the swap does not store anything to disk apart fro
 ### General maintenance and bugfixes
 
 See https://github.com/noot/atomic-swap/issues for open issues on the repo. Issues not covered by the above work are part of this sec-tion. This includes RPC calls and documentation, codebase maintenance, testing, and fixes of any bugs found during testing.
-
-
-

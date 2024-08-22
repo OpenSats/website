@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-function Logo(props: SVGProps<SVGSVGElement>) {
+function MagicLogo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="1000"
@@ -115,4 +115,4 @@ function Logo(props: SVGProps<SVGSVGElement>) {
   )
 }
 
-export default Logo
+export default MagicLogo

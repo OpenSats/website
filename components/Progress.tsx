@@ -1,18 +1,22 @@
-type ProgressProps = {
-  percent: number
-}
+type ProgressProps = { current: number; goal: number }
 
-const Progress = ({ percent }: ProgressProps) => {
+const Progress = ({ current, goal }: ProgressProps) => {
+  const percent = Math.floor((current / goal) * 100)
+
   return (
-    <div className="w-full flex flex-col items-center space-y-2">
+    <div className="w-full flex flex-col items-center space-y-1">
+      {/* <div className="w-full flex flex-row justify-between font-semibold">
+        <span>0</span> <span>${numberFormat.format(goal)}</span>
+      </div> */}
+
       <div className="w-full bg-primary/15 rounded-full h-4">
         <div
           className="bg-green-500 h-4 rounded-full text-xs"
-          style={{ width: `${percent}%` }}
-        ></div>
+          style={{ width: `${percent < 100 ? percent : 100}%` }}
+        />
       </div>
 
-      <span className="text-sm font-semibold">{percent}%</span>
+      <span className="text-sm font-semibold">{percent < 100 ? percent : 100}%</span>
     </div>
   )
 }
