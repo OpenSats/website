@@ -94,7 +94,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
   return (
     <>
       <Head>
-        <title>Monero Fund - {project.title}</title>
+        <title>Monero Fund | {project.title}</title>
       </Head>
 
       <div className="divide-y divide-gray-200">

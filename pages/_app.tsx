@@ -9,10 +9,10 @@ import { trpc } from '../utils/trpc'
 import { useFundSlug } from '../utils/use-fund-slug'
 
 import '../styles/globals.css'
+import { funds } from '../utils/funds'
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   const fundSlug = useFundSlug()
-  console.log(fundSlug || 'general')
 
   return (
     <SessionProvider session={pageProps.session}>
@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       >
         <Head>
           <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <title>{fundSlug ? funds[fundSlug].title : 'MAGIC Grants Campaigns'}</title>
         </Head>
         <Layout>
           <Component {...pageProps} />

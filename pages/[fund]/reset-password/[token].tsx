@@ -1,11 +1,9 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { ReloadIcon } from '@radix-ui/react-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { jwtDecode } from 'jwt-decode'
 import { z } from 'zod'
-import * as DialogPrimitive from '@radix-ui/react-dialog'
 
 import {
   Form,
@@ -20,6 +18,7 @@ import { Button } from '../../../components/ui/button'
 import { toast } from '../../../components/ui/use-toast'
 import { trpc } from '../../../utils/trpc'
 import { useFundSlug } from '../../../utils/use-fund-slug'
+import Spinner from '../../../components/Spinner'
 
 const schema = z
   .object({
@@ -145,8 +144,7 @@ function ResetPassword() {
           />
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
-            Reset Password
+            {form.formState.isSubmitting && <Spinner />} Reset Password
           </Button>
         </form>
       </Form>

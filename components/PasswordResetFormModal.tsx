@@ -1,27 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ReloadIcon } from '@radix-ui/react-icons'
-import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog'
+import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { Input } from './ui/input'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from './ui/form'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { trpc } from '../utils/trpc'
+import Spinner from './Spinner'
 
 const schema = z.object({
   email: z.string().email(),
@@ -38,8 +25,7 @@ function PasswordResetFormModal({ close }: Props) {
     resolver: zodResolver(schema),
   })
 
-  const requestPasswordResetMutation =
-    trpc.auth.requestPasswordReset.useMutation()
+  const requestPasswordResetMutation = trpc.auth.requestPasswordReset.useMutation()
 
   async function onSubmit(data: PasswordResetFormInputs) {
     await requestPasswordResetMutation.mutateAsync(data)
@@ -60,10 +46,7 @@ function PasswordResetFormModal({ close }: Props) {
       </DialogHeader>
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
           <FormField
             control={form.control}
             name="email"
@@ -79,10 +62,7 @@ function PasswordResetFormModal({ close }: Props) {
           />
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting && (
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            )}{' '}
-            Reset Password
+            {form.formState.isSubmitting && <Spinner />} Reset Password
           </Button>
         </form>
       </Form>

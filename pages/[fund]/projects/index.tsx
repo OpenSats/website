@@ -5,6 +5,7 @@ import ProjectCard from '../../../components/ProjectCard'
 import { ProjectItem } from '../../../utils/types'
 import { getProjects } from '../../../utils/md'
 import { useFundSlug } from '../../../utils/use-fund-slug'
+import { funds, fundSlugs } from '../../../utils/funds'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -29,10 +30,8 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
   return (
     <>
-      <Head>
-        <title>MAGIC Monero Fund | Projects</title>
-      </Head>
-      <section className="p-4 md:p-8 flex flex-col items-center">
+      <Head>{fundSlug && <title>{funds[fundSlug].title} | Projects</title>}</Head>
+      <section className="flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">
           <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Projects
@@ -53,8 +52,15 @@ const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
 
 export default AllProjects
 
-export async function getStaticProps({ params }: { params: any }) {
-  const projects = await getProjects('monero')
+export function getStaticPaths() {
+  return {
+    paths: fundSlugs.map((fundSlug) => `/${fundSlug}/projects`),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({ params, ...asd }: { params: any }) {
+  const projects = await getProjects(params.fund)
 
   return {
     props: {

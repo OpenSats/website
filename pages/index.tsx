@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { funds } from '../utils/funds'
 import { Button } from '../components/ui/button'
 import SocialIcon from '../components/social-icons'
@@ -9,9 +10,8 @@ import ProjectList from '../components/ProjectList'
 import { getProjects } from '../utils/md'
 import { cn } from '../utils/cn'
 import { ProjectItem } from '../utils/types'
-import Link from 'next/link'
 
-function Root({ projects }: { projects: ProjectItem[] }) {
+function Home({ projects }: { projects: ProjectItem[] }) {
   return (
     <div className="flex flex-col items-start space-y-10">
       <div className="w-full space-y-4">
@@ -19,34 +19,36 @@ function Root({ projects }: { projects: ProjectItem[] }) {
           Funds
         </h1>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {Object.values(funds).map((fund, fundIndex) => (
             <div
               key={fund.slug}
-              className="w-full min-h-72 p-6 space-y-4 flex flex-col rounded-lg bg-white"
+              className="w-full min-h-72 p-6 space-y-4 flex flex-col justify-between rounded-lg bg-white"
             >
-              <div className="flex items-center gap-3">
-                {fund.slug === 'monero' && <MoneroLogo className="h-10 w-10" />}
-                {fund.slug === 'firo' && <FiroLogo className="w-10 h-10" />}
-                {fund.slug === 'privacyguides' && <PrivacyGuidesLogo className="w-10 h-10" />}
-                {fund.slug === 'general' && <MagicLogo className="w-10 h-10" />}
+              <div className="w-full space-y-4">
+                <div className="flex items-center space-x-3">
+                  {fund.slug === 'monero' && <MoneroLogo className="h-10 w-10" />}
+                  {fund.slug === 'firo' && <FiroLogo className="w-10 h-10" />}
+                  {fund.slug === 'privacyguides' && <PrivacyGuidesLogo className="w-10 h-10" />}
+                  {fund.slug === 'general' && <MagicLogo className="w-10 h-10" />}
 
-                <h1 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  {fund.title}
-                </h1>
-              </div>
+                  <h1 className="text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    {fund.title}
+                  </h1>
+                </div>
 
-              <span className="w-full text-muted-foreground">{fund.summary}</span>
+                <span className="w-full text-muted-foreground block">{fund.summary}</span>
 
-              <div className="flex flex-row space-x-2">
-                {!!fund.website && <SocialIcon kind="website" href={fund.website} />}
-                {!!fund.git && <SocialIcon kind="github" href={fund.git} />}
-                {!!fund.twitter && <SocialIcon kind="twitter" href={fund.twitter} />}
+                <div className="flex flex-row space-x-2">
+                  {!!fund.website && <SocialIcon kind="website" href={fund.website} />}
+                  {!!fund.git && <SocialIcon kind="github" href={fund.git} />}
+                  {!!fund.twitter && <SocialIcon kind="twitter" href={fund.twitter} />}
+                </div>
               </div>
 
               <Button
                 className={cn(
-                  'self-end',
+                  'hidden self-end sm:block',
                   fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
                   fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
                   fund.slug === 'privacyguides' &&
@@ -55,9 +57,26 @@ function Root({ projects }: { projects: ProjectItem[] }) {
                 )}
                 size="lg"
                 variant="light"
-                style={{ marginTop: 'auto' }}
               >
-                <Link href={`/${fund.slug}`}>View Campaigns</Link>
+                <Link href={`/${fund.slug}`} target="_blank">
+                  View Campaigns
+                </Link>
+              </Button>
+
+              <Button
+                className={cn(
+                  'self-end sm:hidden',
+                  fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
+                  fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
+                  fund.slug === 'privacyguides' &&
+                    'text-privacyguides bg-privacyguides/10 hover:bg-privacyguides',
+                  fund.slug === 'general' && 'text-general bg-general/10 hover:bg-general'
+                )}
+                variant="light"
+              >
+                <Link href={`/${fund.slug}`} target="_blank">
+                  View Campaigns
+                </Link>
               </Button>
             </div>
           ))}
@@ -73,7 +92,7 @@ function Root({ projects }: { projects: ProjectItem[] }) {
   )
 }
 
-export default Root
+export default Home
 
 export async function getStaticProps({ params }: { params: any }) {
   const projects = await getProjects()

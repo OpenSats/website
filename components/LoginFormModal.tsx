@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ReloadIcon } from '@radix-ui/react-icons'
 import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -12,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { useFundSlug } from '../utils/use-fund-slug'
+import Spinner from './Spinner'
 
 const schema = z.object({
   email: z.string().email(),
@@ -133,8 +133,7 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
             </Button>
 
             <Button className="grow basis-0" type="submit" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
-              Login
+              {form.formState.isSubmitting && <Spinner />} Login
             </Button>
           </div>
         </form>

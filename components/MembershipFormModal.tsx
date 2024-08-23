@@ -113,19 +113,19 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col space-y-8 py-4">
-        <div className="flex items-center space-x-4">
+      <div className="py-4 flex flex-col space-y-8">
+        <div className="flex flex-col items-center sm:space-x-4 sm:flex-row">
           <Image
             alt={project.title}
             src={project.coverImage}
-            width={96}
+            width={200}
             height={96}
             objectFit="cover"
-            className="rounded-xl"
+            className="w-36 rounded-xl"
           />
-          <div className="flex flex-col">
-            <h2 className="font-sans font-bold">{project.title}</h2>
-            <h3 className="text-textgray font-sans">Annual membership</h3>
+          <div className="flex flex-col justify-center">
+            <h2 className="text-center sm:text-left font-semibold">{project.title}</h2>
+            <h3 className="text-gray-500">Pledge your support</h3>
           </div>
         </div>
       </div>
@@ -167,7 +167,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
           <div className="flex flex-col space-y-3">
             <FormLabel>Amount</FormLabel>
             <span className="flex flex-row">
-              <DollarSign />
+              <DollarSign className="text-primary" />
               100.00
             </span>
           </div>
@@ -236,13 +236,11 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
             )}
           />
 
-          <div className="mt-4 flex flex-wrap space-x-2">
+          <div className="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
             <Button
               type="button"
               onClick={form.handleSubmit(handleBtcPay)}
-              disabled={
-                !form.formState.isValid || form.formState.isSubmitting || recurring === 'yes'
-              }
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
               className="grow basis-0"
             >
               {payMembershipWithCryptoMutation.isPending ? (

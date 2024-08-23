@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ReloadIcon } from '@radix-ui/react-icons'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -25,6 +24,7 @@ import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { trpc } from '../utils/trpc'
 import { useFundSlug } from '../utils/use-fund-slug'
+import Spinner from './Spinner'
 
 const schema = z
   .object({
@@ -149,8 +149,7 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
             </Button>
 
             <Button type="submit" disabled={form.formState.isSubmitting} className="grow basis-0">
-              {form.formState.isSubmitting && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}{' '}
-              Register
+              {form.formState.isSubmitting && <Spinner />} Register
             </Button>
           </div>
         </form>

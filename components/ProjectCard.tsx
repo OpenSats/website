@@ -31,7 +31,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, customImageStyles })
   }, [project.coverImage])
 
   return (
-    <Link href={`/${project.fund}/projects/${project.slug}`} passHref>
+    <Link href={`/${project.fund}/projects/${project.slug}`} passHref target="_blank">
       <figure
         className={cn(
           'max-w-sm min-h-[460px] h-full space-y-2 flex flex-col rounded-xl border-b-4 bg-white',

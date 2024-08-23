@@ -53,13 +53,17 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Support <Typing />
           </h1>
-          <p className="text-xl leading-7 text-gray-500">
+          <p className="max-w-3xl text-lg leading-7 text-gray-500">
             Help us to provide sustainable funding for free and open-source contributors working on
             freedom tech and projects that help Monero flourish.
           </p>
 
-          <div className="flex flex-wrap py-4 space-x-4">
-            <Button onClick={() => setDonateModalOpen(true)} size="lg">
+          <div className="flex flex-col md:flex-row my-4 gap-2">
+            <Button
+              className="text-sm md:text-base"
+              onClick={() => setDonateModalOpen(true)}
+              size="lg"
+            >
               Donate to Monero Comittee General Fund
             </Button>
 

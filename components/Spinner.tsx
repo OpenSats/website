@@ -2,9 +2,9 @@ const Spinner = () => {
   return (
     <svg
       role="status"
-      className="mr-2 w-8 h-8 text-black animate-spin fill-primary"
+      className="mr-2 w-6 h-6 animate-spin fill-primary"
       viewBox="0 0 100 101"
-      fill="none"
+      fill="inherit"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
