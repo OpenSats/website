@@ -95,4 +95,9 @@ export const env = createEnv({
     SENDGRID_VERIFIED_SENDER: process.env.SENDGRID_VERIFIED_SENDER,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
+  /**
+   * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
+   * useful for Docker builds.
+   */
+  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 })
