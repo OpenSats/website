@@ -7,6 +7,7 @@ import { FundSlug } from '@prisma/client'
 import { fundSlugs } from './funds'
 import { ProjectItem } from './types'
 import { prisma } from '../server/services'
+import { env } from '../env.mjs'
 
 const directories: Record<FundSlug, string> = {
   monero: join(process.cwd(), 'docs/monero/projects'),
@@ -121,9 +122,11 @@ export async function getProjects(fundSlug?: FundSlug) {
     projects.map(async (project) => {
       if (project.isFunded) return
 
-      const donations = await prisma.donation.findMany({
-        where: { projectSlug: project.slug, fundSlug: project.fund },
-      })
+      const donations = !env.BUILD_MODE
+        ? await prisma.donation.findMany({
+            where: { projectSlug: project.slug, fundSlug: project.fund },
+          })
+        : []
 
       donations.forEach((donation) => {
         if (donation.cryptoCode === 'XMR') {

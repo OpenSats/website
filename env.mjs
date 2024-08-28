@@ -8,6 +8,7 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
+    BUILD_MODE: z.boolean(),
     APP_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string().min(32),
 
@@ -58,6 +59,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
+    BUILD_MODE: !!process.env.BUILD_MODE,
     APP_URL: process.env.APP_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
 
@@ -99,5 +101,5 @@ export const env = createEnv({
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
    */
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+  skipValidation: !!process.env.BUILD_MODE,
 })

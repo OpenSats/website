@@ -29,7 +29,7 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV SKIP_ENV_VALIDATION 1
+ENV BUILD_MODE 1
 ENV PRISMA_BINARY_TARGETS='["native", "rhel-openssl-1.0.x"]'
 RUN npx prisma generate
 
@@ -47,7 +47,7 @@ WORKDIR /app
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV SKIP_ENV_VALIDATION 1
+ENV BUILD_MODE 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
