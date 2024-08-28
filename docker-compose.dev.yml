@@ -23,16 +23,11 @@ services:
       BTCPAY_XMR_DAEMON_URI: http://xmr-node.cakewallet.com:18081
       BTCPAY_XMR_WALLET_DAEMON_URI: http://monerod_wallet:18082
       BTCPAY_XMR_WALLET_DAEMON_WALLETDIR: /root/xmr_wallet
-    #      HIDDENSERVICE_NAME: BTCPayServer
-    #      HIDDENSERVICE_REVERSEPROXY: nginx
-    #      BTCPAY_TORRCFILE: /usr/local/etc/tor/torrc-2
-    #      BTCPAY_SOCKSENDPOINT: tor:9050
     labels:
       traefik.enable: 'true'
       traefik.http.routers.btcpayserver.rule: Host(`${BTCPAY_HOST}`)
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-
     links:
       - postgres
     volumes:
@@ -44,15 +39,6 @@ services:
       - 'tor_torrcdir:/usr/local/etc/tor/'
     ports:
       - '${NOREVERSEPROXY_HTTP_PORT:-80}:49392'
-  #  monerod:
-  #    restart: unless-stopped
-  #    container_name: btcpayserver_monerod
-  #    image: btcpayserver/monero:0.18.3.3
-  #    entrypoint: monerod --rpc-bind-ip=0.0.0.0 --confirm-external-bind --rpc-bind-port=18081 --non-interactive --block-notify="/bin/sh ./scripts/notifier.sh -X GET http://btcpayserver:49392/monerolikedaemoncallback/block?cryptoCode=xmr&hash=%s" --hide-my-port --prune-blockchain --enable-dns-blocklist
-  #    expose:
-  #    - "18081"
-  #    volumes:
-  #    - "xmr_data:/home/monero/.bitmonero"
   monerod_wallet:
     restart: unless-stopped
     container_name: btcpayserver_monero_wallet
@@ -64,35 +50,6 @@ services:
       - 18082:18082
     volumes:
       - 'xmr_wallet:/wallet'
-  #    depends_on:
-  #    - monerod
-  #  tor:
-  #    restart: unless-stopped
-  #    image: btcpayserver/tor:0.4.8.10
-  #    container_name: tor
-  #    environment:
-  #      TOR_PASSWORD: btcpayserver
-  #      TOR_ADDITIONAL_CONFIG: /usr/local/etc/tor/torrc-2
-  #      TOR_EXTRA_ARGS: |
-  #        CookieAuthentication 1
-  #    expose:
-  #    - "9050"
-  #    - "9051"
-  #    volumes:
-  #    - "tor_datadir:/home/tor/.tor"
-  #    - "tor_torrcdir:/usr/local/etc/tor"
-  #    - "tor_servicesdir:/var/lib/tor/hidden_services"
-  #  tor-gen:
-  #    restart: unless-stopped
-  #    image: btcpayserver/docker-gen:0.10.7
-  #    container_name: tor-gen
-  #    volumes:
-  #    - "/var/run/docker.sock:/tmp/docker.sock:ro"
-  #    - "./torrc.tmpl:/etc/docker-gen/templates/torrc.tmpl:ro"
-  #    - "tor_torrcdir:/usr/local/etc/tor"
-  #    entrypoint: /usr/local/bin/docker-gen -notify-sighup tor -watch -wait 5s:30s /etc/docker-gen/templates/torrc.tmpl /usr/local/etc/tor/torrc-2
-  #    links:
-  #    - tor
   nbxplorer:
     restart: unless-stopped
     container_name: generated_nbxplorer_1
