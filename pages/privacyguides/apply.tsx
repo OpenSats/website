@@ -4,28 +4,31 @@ import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 
 import { Button } from '../../components/ui/button'
+import { trpc } from '../../utils/trpc'
+import { useFundSlug } from '../../utils/use-fund-slug'
+import { useToast } from '../../components/ui/use-toast'
+import { fundSlugToRecipientEmail } from '../../utils/funds'
 
 export default function Apply() {
-  const [loading, setLoading] = useState(false)
+  const fundSlug = useFundSlug()
   const router = useRouter()
+  const { toast } = useToast()
+  const applyMutation = trpc.application.submitApplication.useMutation()
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
-  const onSubmit = async (data: any) => {
-    setLoading(true)
-    console.log(data)
-    // TODO: fix dis
-    // const res = await fetchPostJSON('/api/sendgrid', data)
-    // if (res.message === 'success') {
-    //   router.push('/submitted')
-    // }
-    // console.log(res)
-    setLoading(false)
+  async function onSubmit(data: Record<string, string>) {
+    if (!fundSlug) return
+    await applyMutation.mutateAsync({ fundSlug, formData: data })
+    toast({ title: 'Success', description: 'Application successfully submitted!' })
+    router.push(`/${fundSlug}/`)
   }
+
+  if (!fundSlug) return <></>
 
   return (
     <div className="mx-auto flex-1 flex flex-col items-center justify-center gap-4 py-8 prose">
@@ -276,13 +279,15 @@ export default function Apply() {
           need to identify themselves to MAGIC, in accordance with US law.
         </small>
 
-        <Button disabled={loading}>Apply</Button>
+        <Button disabled={applyMutation.isPending}>Apply</Button>
 
         <p>
           After submitting your application, please allow our team up to three weeks to review your
           application. Email us at{' '}
-          <a href="mailto:monerofund@magicgrants.org">monerofund@magicgrants.org</a> if you have any
-          questions.
+          <a href={`mailto:${fundSlugToRecipientEmail[fundSlug]}`}>
+            {fundSlugToRecipientEmail[fundSlug]}
+          </a>{' '}
+          if you have any questions.
         </p>
       </form>
     </div>

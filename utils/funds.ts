@@ -1,5 +1,6 @@
 import { FundSlug } from '@prisma/client'
 import { ProjectItem } from './types'
+import { env } from '../env.mjs'
 
 export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
   monero: {
@@ -95,6 +96,13 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     totaldonationsinfiatxmr: 0,
     totaldonationsxmr: 0,
   },
+}
+
+export const fundSlugToRecipientEmail: Record<FundSlug, string> = {
+  monero: env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
+  firo: env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
+  privacyguides: env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
+  general: env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
 }
 
 export const fundSlugs = Object.keys(funds) as ['monero', 'firo', 'privacyguides', 'general']

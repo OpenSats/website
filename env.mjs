@@ -42,16 +42,19 @@ export const env = createEnv({
     BTCPAY_GENERAL_STORE_ID: z.string().min(1),
     BTCPAY_GENERAL_WEBHOOK_SECRET: z.string().min(1),
 
-    SENDGRID_RECIPIENT: z.string().min(1),
-    SENDGRID_VERIFIED_SENDER: z.string().min(1),
-    SENDGRID_API_KEY: z.string().min(1),
+    SES_VERIFIED_SENDER: z.string().email(),
   },
   /*
    * Environment variables available on the client (and server).
    *
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: z.string().email(),
+    NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: z.string().email(),
+    NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
+    NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: z.string().email(),
+  },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
    * we need to manually destructure them to make sure all are included in bundle.
@@ -67,6 +70,7 @@ export const env = createEnv({
     SMTP_PORT: process.env.SMTP_PORT,
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASS: process.env.SMTP_PASS,
+    SES_VERIFIED_SENDER: process.env.SES_VERIFIED_SENDER,
 
     STRIPE_MONERO_SECRET_KEY: process.env.STRIPE_MONERO_SECRET_KEY,
     STRIPE_MONERO_WEBHOOK_SECRET: process.env.STRIPE_MONERO_WEBHOOK_SECRET,
@@ -93,9 +97,12 @@ export const env = createEnv({
     BTCPAY_GENERAL_STORE_ID: process.env.BTCPAY_GENERAL_STORE_ID,
     BTCPAY_GENERAL_WEBHOOK_SECRET: process.env.BTCPAY_GENERAL_WEBHOOK_SECRET,
 
-    SENDGRID_RECIPIENT: process.env.SENDGRID_RECIPIENT,
-    SENDGRID_VERIFIED_SENDER: process.env.SENDGRID_VERIFIED_SENDER,
-    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+    NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
+    NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT,
+    NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT:
+      process.env.NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT,
+    NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT:
+      process.env.NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

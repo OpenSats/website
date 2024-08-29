@@ -1,13 +1,10 @@
 import { FundSlug, PrismaClient } from '@prisma/client'
 import Stripe from 'stripe'
-import sendgrid from '@sendgrid/mail'
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client'
 import nodemailer from 'nodemailer'
 import axios, { AxiosInstance } from 'axios'
 
 import { env } from '../env.mjs'
-
-sendgrid.setApiKey(env.SENDGRID_API_KEY)
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
@@ -59,4 +56,4 @@ const stripe: Record<FundSlug, Stripe> = {
   general: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
 }
 
-export { sendgrid, prisma, keycloak, transporter, btcpayApi, stripe }
+export { prisma, keycloak, transporter, btcpayApi, stripe }

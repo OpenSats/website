@@ -65,7 +65,7 @@ export const authRouter = router({
 
       // no await here as we don't want to block the response
       transporter.sendMail({
-        from: env.SENDGRID_VERIFIED_SENDER,
+        from: env.SES_VERIFIED_SENDER,
         to: input.email,
         subject: 'Verify your email',
         html: `<a href="${env.APP_URL}/${input.fundSlug}/verify-email/${emailVerifyToken}" target="_blank">Verify email</a>`,
@@ -140,7 +140,7 @@ export const authRouter = router({
 
       // no await here as we don't want to block the response
       transporter.sendMail({
-        from: env.SENDGRID_VERIFIED_SENDER,
+        from: env.SES_VERIFIED_SENDER,
         to: input.email,
         subject: 'Reset your password',
         html: `<a href="${env.APP_URL}/reset-password/${passwordResetToken}" target="_blank">Reset password</a>`,
