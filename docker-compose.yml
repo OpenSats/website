@@ -26,7 +26,7 @@ services:
     container_name: app
     restart: unless-stopped
     environment:
-      APP_URL: http://localhost:3000
+      APP_URL: https://donate.magicgrants.org
       DATABASE_URL: ${DATABASE_URL}
 
       NEXTAUTH_URL: http://localhost:3000
