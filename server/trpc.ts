@@ -29,6 +29,8 @@ const t = initTRPC.context<typeof createContext>().create({
    */
   transformer: superjson,
   errorFormatter: ({ error, shape }) => {
+    console.log(error)
+
     if (error.code === 'INTERNAL_SERVER_ERROR') {
       if (shape.data.stack) console.error(error)
 
