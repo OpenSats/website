@@ -3,9 +3,10 @@ import { z } from 'zod'
 import escapeHTML from 'escape-html'
 
 import { publicProcedure, router } from '../trpc'
-import { funds, fundSlugs, fundSlugToRecipientEmail } from '../../utils/funds'
+import { funds, fundSlugs } from '../../utils/funds'
 import { transporter } from '../services'
 import { env } from '../../env.mjs'
+import { fundSlugToRecipientEmail } from '../utils/funds'
 
 export const applicationRouter = router({
   submitApplication: publicProcedure
