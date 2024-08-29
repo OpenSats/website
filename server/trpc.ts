@@ -2,6 +2,7 @@ import { TRPCError, initTRPC } from '@trpc/server'
 import { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import { getServerSession } from 'next-auth/next'
 import superjson from 'superjson'
+import util from 'util'
 
 export const createContext = async (opts: CreateNextContextOptions) => {
   const session = await getServerSession(opts.req, opts.res, {
@@ -30,7 +31,7 @@ const t = initTRPC.context<typeof createContext>().create({
   transformer: superjson,
   errorFormatter: ({ error, shape }) => {
     if (error.code === 'INTERNAL_SERVER_ERROR') {
-      console.error(JSON.stringify(error, null, 2))
+      console.log(util.inspect(error, { showHidden: false, depth: null, colors: true }))
 
       return {
         message: 'Internal server error',
