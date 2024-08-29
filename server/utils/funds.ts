@@ -27,3 +27,10 @@ export const fundSlugToCustomerIdAttr: Record<FundSlug, string> = {
   privacyguides: 'stripePgCustomerId',
   general: 'stripeGeneralCustomerId',
 }
+
+export const fundSlugToRecipientEmail: Record<FundSlug, string> = {
+  monero: env.MONERO_APPLICATION_RECIPIENT,
+  firo: env.MONERO_APPLICATION_RECIPIENT,
+  privacyguides: env.MONERO_APPLICATION_RECIPIENT,
+  general: env.MONERO_APPLICATION_RECIPIENT,
+}

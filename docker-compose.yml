@@ -29,7 +29,7 @@ services:
       APP_URL: https://donate.magicgrants.org
       DATABASE_URL: ${DATABASE_URL}
 
-      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_URL: https://donate.magicgrants.org
       NEXTAUTH_URL_INTERNAL: http://localhost:3000
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
 
@@ -63,6 +63,11 @@ services:
       BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET: ${BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET}
       BTCPAY_GENERAL_STORE_ID: ${BTCPAY_GENERAL_STORE_ID}
       BTCPAY_GENERAL_WEBHOOK_SECRET: ${BTCPAY_GENERAL_WEBHOOK_SECRET}
+
+      MONERO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      FIRO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      PRIVACY_GUIDES_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      GENERAL_APPLICATION_RECIPIENT: monerofund@magicgrants.org
 
       NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
       NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: monerofund@magicgrants.org

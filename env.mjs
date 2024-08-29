@@ -16,6 +16,7 @@ export const env = createEnv({
     SMTP_PORT: z.string().min(1),
     SMTP_USER: z.string().min(1),
     SMTP_PASS: z.string().min(1),
+    SES_VERIFIED_SENDER: z.string().email(),
 
     STRIPE_MONERO_SECRET_KEY: z.string().min(1),
     STRIPE_MONERO_WEBHOOK_SECRET: z.string().min(1),
@@ -42,7 +43,10 @@ export const env = createEnv({
     BTCPAY_GENERAL_STORE_ID: z.string().min(1),
     BTCPAY_GENERAL_WEBHOOK_SECRET: z.string().min(1),
 
-    SES_VERIFIED_SENDER: z.string().email(),
+    MONERO_APPLICATION_RECIPIENT: z.string().email(),
+    FIRO_APPLICATION_RECIPIENT: z.string().email(),
+    PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
+    GENERAL_APPLICATION_RECIPIENT: z.string().email(),
   },
   /*
    * Environment variables available on the client (and server).
@@ -96,6 +100,11 @@ export const env = createEnv({
     BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET: process.env.BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET,
     BTCPAY_GENERAL_STORE_ID: process.env.BTCPAY_GENERAL_STORE_ID,
     BTCPAY_GENERAL_WEBHOOK_SECRET: process.env.BTCPAY_GENERAL_WEBHOOK_SECRET,
+
+    MONERO_APPLICATION_RECIPIENT: process.env.MONERO_APPLICATION_RECIPIENT,
+    FIRO_APPLICATION_RECIPIENT: process.env.FIRO_APPLICATION_RECIPIENT,
+    PRIVACY_GUIDES_APPLICATION_RECIPIENT: process.env.PRIVACY_GUIDES_APPLICATION_RECIPIENT,
+    GENERAL_APPLICATION_RECIPIENT: process.env.GENERAL_APPLICATION_RECIPIENT,
 
     NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT,
