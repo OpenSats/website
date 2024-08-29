@@ -16,9 +16,9 @@ export default function ThankYou() {
       <br />
 
       <p>
-        <Button>
-          <Link href={`/${fundSlug}`}>Return Home</Link>
-        </Button>
+        <Link href={`/${fundSlug}`}>
+          <Button>Return Home</Button>
+        </Link>
       </p>
     </div>
   )

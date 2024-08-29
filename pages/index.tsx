@@ -46,38 +46,36 @@ function Home({ projects }: { projects: ProjectItem[] }) {
                 </div>
               </div>
 
-              <Button
-                className={cn(
-                  'hidden self-end sm:block',
-                  fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
-                  fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
-                  fund.slug === 'privacyguides' &&
-                    'text-privacyguides bg-privacyguides/10 hover:bg-privacyguides',
-                  fund.slug === 'general' && 'text-general bg-general/10 hover:bg-general'
-                )}
-                size="lg"
-                variant="light"
-              >
-                <Link href={`/${fund.slug}`} target="_blank">
+              <Link href={`/${fund.slug}`} target="_blank" className="hidden self-end sm:block">
+                <Button
+                  className={cn(
+                    fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
+                    fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
+                    fund.slug === 'privacyguides' &&
+                      'text-privacyguides bg-privacyguides/10 hover:bg-privacyguides',
+                    fund.slug === 'general' && 'text-general bg-general/10 hover:bg-general'
+                  )}
+                  size="lg"
+                  variant="light"
+                >
                   View Campaigns
-                </Link>
-              </Button>
+                </Button>
+              </Link>
 
-              <Button
-                className={cn(
-                  'self-end sm:hidden',
-                  fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
-                  fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
-                  fund.slug === 'privacyguides' &&
-                    'text-privacyguides bg-privacyguides/10 hover:bg-privacyguides',
-                  fund.slug === 'general' && 'text-general bg-general/10 hover:bg-general'
-                )}
-                variant="light"
-              >
-                <Link href={`/${fund.slug}`} target="_blank">
+              <Link href={`/${fund.slug}`} target="_blank" className="self-end sm:hidden">
+                <Button
+                  className={cn(
+                    fund.slug === 'monero' && 'text-monero bg-monero/10 hover:bg-monero',
+                    fund.slug === 'firo' && 'text-firo bg-firo/10 hover:bg-firo',
+                    fund.slug === 'privacyguides' &&
+                      'text-privacyguides bg-privacyguides/10 hover:bg-privacyguides',
+                    fund.slug === 'general' && 'text-general bg-general/10 hover:bg-general'
+                  )}
+                  variant="light"
+                >
                   View Campaigns
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           ))}
         </div>
