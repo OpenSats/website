@@ -1,0 +1,184 @@
+---
+title: "Caring For Core"
+date: '2024-08-14'
+tags: ['OpenSats', 'grants', 'bitcoin', 'core', 'wave']
+draft: false
+authors: ['arvin', 'dergigi', 'jamesob']
+images: ['/static/images/blog/48-caring-for-bitcoin-core.jpg']
+summary: "OpenSats announces a new round of grants focused on Bitcoin Core development."
+---
+
+In keeping with our commitment to supporting the Bitcoin ecosystem, OpenSats is
+pleased to announce a new round of grants focused on Bitcoin Core development.
+In addition to supporting multiple core developers for the long term, we are
+excited to provide grants for three up-and-coming developers working on
+Bitcoin's reference implementation.
+
+Listed in no particular order, they are:
+
+- [@tdb3](#tdb3)
+- [@davidgumberg (David Gumberg)](#davidgumberg-david-gumberg)
+- [@hodlinator](#hodlinator)
+
+In addition to the above, we are supporting the development of the [Bitcoin Core
+App](#bitcoin-core-app), a modernized user interface for Bitcoin Core, and the
+[Bitcoin Core Testing
+Suite](/blog/bitcoin-grants-feb-2024#bitcoin-core-testing-suite), as announced
+earlier this year.
+
+We are dedicated to nurturing both established and emerging talent in the
+Bitcoin developer community, ensuring that Bitcoin Core remains a strong and
+resilient foundation for the entire network.
+
+These grants are sourced from our [General Fund](/funds/general), which is
+supported by generous donors like you. If you would like to support free and
+open-source projects that help Bitcoin flourish, consider donating to the fund:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Now let's explore their contributions in more detail to understand their purpose
+and how the grants will support their efforts.
+
+---
+
+### @tdb3
+
+[tdb3](https://github.com/tdb3) focuses on improving stability, security, and
+performance by actively engaging in the review and authoring of [pull requests
+for Bitcoin Core](http://bitcoinacks.com/). With over 300 open PRs at the time
+of this writing, there is a significant need for quality technical contributions
+and reviews to maintain this essential software.
+
+His initial efforts will concentrate on maintenance, bug-fixing, and feature
+enhancement. Efforts will then focus on key areas for improvement, such as
+making the interface easier for other developers to understand and use. Best
+practices from mission-critical software development will be incorporated to
+further stabilize and secure the network. These activities aim to help
+developers ensure the continued reliability and resilience of Bitcoin Core,
+contributing to the overall robustness of the Bitcoin network.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PRs: [created](https://bitcoinacks.com/?flt1_author_contains=tdb3), [reviewed](https://bitcoinacks.com/?flt1_reviewer_contains=tdb3)  
+License: MIT
+
+### @davidgumberg (David Gumberg)
+
+[David](https://github.com/davidgumberg) focuses on optimizing the [Initial
+Block Download
+(IBD)](https://developer.bitcoin.org/devguide/p2p_network.html#initial-block-download)
+process for Bitcoin Core nodes. IBD involves downloading and verifying the
+entire Bitcoin blockchain, a process that can be resource-intensive in terms of
+time, bandwidth, and storage. The project aims to reduce these challenges,
+making it easier for users with limited resources to run full nodes. Primary
+initiatives include developing infrastructure to benchmark IBD performance
+across different hardware and network setups, monitoring for performance
+regressions in Bitcoin Core's development branches, and evaluating proposals
+that aim to enhance IBD efficiency.
+
+This grant will fund efforts to thoroughly analyze and improve the IBD process.
+Initial efforts will involve understanding the current IBD mechanisms and
+assessing existing proposals that aim to optimize efficiency, such as those that
+minimize data downloads or streamline index-building. The project will also
+create a benchmarking tool to evaluate IBD under various conditions. Later
+stages will focus on identifying new opportunities for performance enhancements
+using profiling tools and considering theoretical improvements. The overarching
+goal is to lower the barriers to running a full Bitcoin Core node, thereby
+promoting greater decentralization and resilience within the Bitcoin network.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PRs: [created](https://bitcoinacks.com/?flt1_author_contains=davidgumberg), [reviewed](https://bitcoinacks.com/?flt1_reviewer_contains=davidgumberg)  
+License: MIT
+
+### @hodlinator
+
+[Hodlinator](https://github.com/hodlinator) is focused on enhancing the [Bitcoin
+Core](https://bitcoincore.org/) codebase through detailed code reviews and
+addressing minor yet impactful concerns. Key activities include investigating
+performance inefficiencies, improving logging and debugging practices,
+developing tools to identify regressions, and refining the behavior of
+functional tests. Using their strong background in
+[C++](https://en.wikipedia.org/wiki/C%2B%2B) development, Hodlinator aims to
+bring a meticulous and thorough approach to Bitcoin Core.
+
+This grant will support efforts in reviewing pull requests from other
+contributors, diagnosing and addressing the slowness of some extended functional tests,
+enhancing build information logs for better troubleshooting, and creating a tool
+to identify regressions by analyzing the impact of different commits on test
+outcomes. Additionally, the project will modify test timeout behaviors to
+provide more detailed feedback on tests that approach timeout thresholds. These
+activities aim to enhance the robustness and reliability of Bitcoin Core by
+improving the efficiency and accuracy of the review process and addressing
+critical elements within the codebase.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PRs: [created](https://bitcoinacks.com/?flt1_author_contains=hodlinator), [reviewed](https://bitcoinacks.com/?flt1_reviewer_contains=hodlinator)  
+License: MIT
+
+### Bitcoin Core App
+
+The [Bitcoin Core App](https://bitcoincore.app/) is an attempt to modernize
+Bitcoin Core's user interface by transitioning from the slightly outdated [Qt
+Widgets](https://doc.qt.io/qt-5/qtwidgets-index.html) framework to the more
+modern [Qt-QML](https://doc.qt.io/qt-5/qtqml-index.html) framework. The redesign
+will incorporate user experience enhancements developed in collaboration with
+leaders from the [Bitcoin Design Community](https://bitcoin.design/).
+
+The project aims to lower technical barriers, promote self-custody, enhance
+privacy, and strengthen the Bitcoin network by increasing participation in node
+operation. A significant feature under development is to provide compatibility
+with mobile devices, particularly targeting Android platforms. The aim is to
+make running a full Bitcoin node more accessible and convenient, allowing users
+to participate in the Bitcoin network directly from their mobile phones.
+
+Repository: [bitcoin-core/gui-qml](https://github.com/bitcoin-core/gui-qml?tab=MIT-1-ov-file)  
+License: MIT
+
+---
+
+OpenSats remains committed to fostering a vibrant and resilient Bitcoin
+ecosystem. The above grants supplement our long-term support program for Bitcoin
+Core developers, which currently supports [Marco
+Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors),
+[Josi Baker](/blog/josi-baker-receives-opensats-lts-grant), [Sjors
+Provoost](/blog/sjors-provoost-receives-opensats-lts-grant), [Vasil
+Dimov](/blog/vasil-dimov-receives-lts-grant), [Will
+Clark](/blog/will-clark-receives-lts-grant-for-bitcoin-core),
+[0xB10C](/blog/0xB10C-receives-lts-grant), and [Bruno
+Garcia](/blog/bruno-garcia-receives-lts-grant). We are determined to provide
+stable long-term funding for seasoned veterans, and we want to do what we can to
+help foster new talent within the Bitcoin Core developer community.
+
+Working on and maintaining Bitcoin Core is a strenuous and often thankless
+effort, and we applaud everyone who is going down that path, as well as everyone
+who is trying to bring more talent into this particular ecosystem.
+
+If you're looking for somewhere to start contributing, check out the [good first
+issue](https://github.com/bitcoin/bitcoin/issues?q=sort%3Aupdated-desc+is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+list or changes that are [up for
+grabs](https://github.com/bitcoin/bitcoin/issues?utf8=%E2%9C%93&q=sort%3Aupdated-desc+label%3A%22Up+for+grabs%22).
+If you're new to Bitcoin Core development, the "[Contributing to Bitcoin
+Core](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md)" readme
+might be a good entry point. You can also join one of the [PR Review
+Club](https://bitcoincore.reviews/) sessions to review pull-requests with other
+developers, or apply for [Summer of Bitcoin](/projects/summerofbitcoin) or a
+[Chaincode Program](https://learning.chaincode.com/) to get started.
+
+We are grateful to our donors who make our grant initiatives possible and invite
+others to [join us in supporting the future of Bitcoin](/donate). By empowering
+the next generation of developers and advancing the development and maintenance
+of critical infrastructure, we can help ensure the sustainability and
+decentralization of the Bitcoin network. [Together][brink], we can build a stronger
+ecosystem that upholds the values of open-source development and [financial
+freedom][hrf].
+
+We invite aspiring and seasoned Bitcoin Core developers alike to [apply for
+funding](/apply), and we invite everyone else to donate to our cause:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+[brink]: https://brink.dev
+[hrf]: https://hrf.org/devfund
