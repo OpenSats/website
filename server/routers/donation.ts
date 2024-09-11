@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { CURRENCY, MAX_AMOUNT, MEMBERSHIP_PRICE, MIN_AMOUNT } from '../../config'
 import { env } from '../../env.mjs'
-import { btcpayApi as _btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
+import { btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { DonationMetadata } from '../types'
 import { fundSlugs } from '../../utils/funds'
@@ -127,8 +127,6 @@ export const donationRouter = router({
         isMembership: 'false',
         isSubscription: 'false',
       }
-
-      const btcpayApi = _btcpayApi[input.fundSlug]
 
       const response = await btcpayApi.post(`/invoices`, {
         amount: input.amount,
@@ -291,8 +289,6 @@ export const donationRouter = router({
         isMembership: 'true',
         isSubscription: 'false',
       }
-
-      const btcpayApi = _btcpayApi[input.fundSlug]
 
       const response = await btcpayApi.post(`/invoices`, {
         amount: MEMBERSHIP_PRICE,

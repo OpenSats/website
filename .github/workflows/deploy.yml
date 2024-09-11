@@ -18,6 +18,7 @@ jobs:
       - name: Deploy
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
+            export HISTFILE=/dev/null
             cd campaign-site
             git checkout v2
             echo "Pulling changes..."
@@ -42,13 +43,7 @@ jobs:
             KEYCLOAK_CLIENT_SECRET=${{ secrets.KEYCLOAK_CLIENT_SECRET }} \
             BTCPAY_URL=${{ secrets.BTCPAY_URL }} \
             BTCPAY_API_KEY=${{ secrets.BTCPAY_API_KEY }} \
-            BTCPAY_MONERO_STORE_ID=${{ secrets.BTCPAY_MONERO_STORE_ID }} \
-            BTCPAY_MONERO_WEBHOOK_SECRET=${{ secrets.BTCPAY_MONERO_WEBHOOK_SECRET }} \
-            BTCPAY_FIRO_STORE_ID=${{ secrets.BTCPAY_FIRO_STORE_ID }} \
-            BTCPAY_FIRO_WEBHOOK_SECRET=${{ secrets.BTCPAY_FIRO_WEBHOOK_SECRET }} \
-            BTCPAY_PRIVACY_GUIDES_STORE_ID=${{ secrets.BTCPAY_PRIVACY_GUIDES_STORE_ID }} \
-            BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET=${{ secrets.BTCPAY_PRIVACY_GUIDES_WEBHOOK_SECRET }} \
-            BTCPAY_GENERAL_STORE_ID=${{ secrets.BTCPAY_GENERAL_STORE_ID }} \
-            BTCPAY_GENERAL_WEBHOOK_SECRET=${{ secrets.BTCPAY_GENERAL_WEBHOOK_SECRET }} \
+            BTCPAY_STORE_ID=${{ secrets.BTCPAY_STORE_ID }} \
+            BTCPAY_WEBHOOK_SECRET=${{ secrets.BTCPAY_WEBHOOK_SECRET }} \
             docker compose up -d --build
           EOF

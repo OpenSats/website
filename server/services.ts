@@ -2,7 +2,7 @@ import { FundSlug, PrismaClient } from '@prisma/client'
 import Stripe from 'stripe'
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client'
 import nodemailer from 'nodemailer'
-import axios, { AxiosInstance } from 'axios'
+import axios from 'axios'
 
 import { env } from '../env.mjs'
 
@@ -30,24 +30,10 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-const btcpayApi: Record<FundSlug, AxiosInstance> = {
-  monero: axios.create({
-    baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_MONERO_STORE_ID}`,
-    headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
-  }),
-  firo: axios.create({
-    baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_FIRO_STORE_ID}`,
-    headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
-  }),
-  privacyguides: axios.create({
-    baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_PRIVACY_GUIDES_STORE_ID}`,
-    headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
-  }),
-  general: axios.create({
-    baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_GENERAL_STORE_ID}`,
-    headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
-  }),
-}
+const btcpayApi = axios.create({
+  baseURL: `${env.BTCPAY_URL}/api/v1/stores/${env.BTCPAY_STORE_ID}`,
+  headers: { Authorization: `token ${env.BTCPAY_API_KEY}` },
+})
 
 const stripe: Record<FundSlug, Stripe> = {
   monero: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
