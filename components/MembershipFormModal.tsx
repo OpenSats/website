@@ -75,6 +75,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
         projectSlug: project.slug,
         projectName: project.title,
         fundSlug,
+        taxDeductible: data.taxDeductible === 'yes',
       })
 
       window.location.assign(result.url)
@@ -96,6 +97,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
         projectName: project.title,
         fundSlug,
         recurring: data.recurring === 'yes',
+        taxDeductible: data.taxDeductible === 'yes',
       })
 
       if (!result.url) throw Error()

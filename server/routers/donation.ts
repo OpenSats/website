@@ -22,6 +22,7 @@ export const donationRouter = router({
         projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
+        taxDeductible: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -63,6 +64,7 @@ export const donationRouter = router({
         fundSlug: input.fundSlug,
         isMembership: 'false',
         isSubscription: 'false',
+        isTaxDeductible: input.taxDeductible ? 'true' : 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -103,6 +105,7 @@ export const donationRouter = router({
         projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
+        taxDeductible: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -126,6 +129,7 @@ export const donationRouter = router({
         fundSlug: input.fundSlug,
         isMembership: 'false',
         isSubscription: 'false',
+        isTaxDeductible: input.taxDeductible ? 'true' : 'false',
       }
 
       const response = await btcpayApi.post(`/invoices`, {
@@ -145,6 +149,7 @@ export const donationRouter = router({
         projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         recurring: z.boolean(),
+        taxDeductible: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -193,6 +198,7 @@ export const donationRouter = router({
         fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: input.recurring ? 'true' : 'false',
+        isTaxDeductible: input.taxDeductible ? 'true' : 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -254,6 +260,7 @@ export const donationRouter = router({
         projectName: z.string().min(1),
         projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
+        taxDeductible: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -288,6 +295,7 @@ export const donationRouter = router({
         fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: 'false',
+        isTaxDeductible: input.taxDeductible ? 'true' : 'false',
       }
 
       const response = await btcpayApi.post(`/invoices`, {

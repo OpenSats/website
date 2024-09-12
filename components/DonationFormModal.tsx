@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { faMonero } from '@fortawesome/free-brands-svg-icons'
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DollarSign } from 'lucide-react'
+import { DollarSign, Info } from 'lucide-react'
 import { z } from 'zod'
 import Image from 'next/image'
 
@@ -19,6 +19,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from './ui/input'
 import { ProjectItem } from '../utils/types'
 import { useFundSlug } from '../utils/use-fund-slug'
+import { Alert, AlertDescription, AlertTitle } from './ui/alert'
+import CustomLink from './CustomLink'
 
 type Props = {
   project: ProjectItem | undefined
@@ -59,8 +61,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
     mode: 'all',
   })
 
-  console.log(form.getValues())
-
+  const amount = form.watch('amount')
   const taxDeductible = form.watch('taxDeductible')
 
   const donateWithFiatMutation = trpc.donation.donateWithFiat.useMutation()
@@ -78,6 +79,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
         projectSlug: project.slug,
         projectName: project.title,
         fundSlug,
+        taxDeductible: data.taxDeductible === 'yes',
       })
 
       window.location.assign(result.url)
@@ -101,6 +103,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
         projectSlug: project.slug,
         projectName: project.title,
         fundSlug,
+        taxDeductible: data.taxDeductible === 'yes',
       })
 
       if (!result.url) throw Error()
@@ -243,7 +246,23 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
             )}
           />
 
-          <div className="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
+          {amount > 500 && taxDeductible === 'yes' && (
+            <Alert>
+              <Info className="h-4 w-4 text-primary" />
+              <AlertTitle>Heads up!</AlertTitle>
+              <AlertDescription>
+                When donating over $500 with crypto, you MUST complete{' '}
+                <CustomLink target="_blank" href="https://www.irs.gov/pub/irs-pdf/f8283.pdf">
+                  Form 8283
+                </CustomLink>{' '}
+                and send the completed form to{' '}
+                <CustomLink href={`mailto:info@magicgrants.org`}>info@magicgrants.org</CustomLink>{' '}
+                to deduct your donation.
+              </AlertDescription>
+            </Alert>
+          )}
+
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
             <Button
               type="button"
               onClick={form.handleSubmit(handleBtcPay)}
@@ -278,7 +297,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
       {!isAuthed && <div className="w-full h-px bg-border" />}
 
       {!isAuthed && (
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center">
           <p>Want to support more projects from now on?</p>
 
           <Button type="button" size="lg" variant="link">

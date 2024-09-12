@@ -9,4 +9,5 @@ export type DonationMetadata = {
   fundSlug: FundSlug
   isMembership: 'true' | 'false'
   isSubscription: 'true' | 'false'
+  isTaxDeductible: 'true' | 'false'
 }
