@@ -1,10 +1,15 @@
 import { useState } from 'react'
 
 import CustomLink from './CustomLink'
-import headerNavLinks from '../data/headerNavLinks'
+import { fundHeaderNavLinks, homeHeaderNavLinks } from '../data/headerNavLinks'
+import { useFundSlug } from '../utils/use-fund-slug'
+import { funds } from '../utils/funds'
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false)
+  const fundSlug = useFundSlug()
+
+  const fund = fundSlug ? funds[fundSlug] : null
 
   const onToggleNav = () => {
     setNavShow((status) => {
@@ -64,17 +69,31 @@ const MobileNav = () => {
           </button>
         </div>
         <nav className="fixed mt-8 h-full">
-          {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
-              <CustomLink
-                href={link.href}
-                className="text-2xl font-bold tracking-tight text-gray-900"
-                onClick={onToggleNav}
-              >
-                {link.title}
-              </CustomLink>
-            </div>
-          ))}
+          {!fund &&
+            homeHeaderNavLinks.map((link) => (
+              <div key={link.title} className="px-12 py-4">
+                <CustomLink
+                  href={`/${link.href}`}
+                  className="text-2xl font-bold tracking-tight text-gray-900"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </CustomLink>
+              </div>
+            ))}
+
+          {!!fund &&
+            fundHeaderNavLinks.map((link) => (
+              <div key={link.title} className="px-12 py-4">
+                <CustomLink
+                  href={`/${fundSlug}/${link.href}`}
+                  className="text-2xl font-bold tracking-tight text-gray-900"
+                  onClick={onToggleNav}
+                >
+                  {link.title}
+                </CustomLink>
+              </div>
+            ))}
         </nav>
       </div>
     </div>
