@@ -13,6 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum FundSlug {
+  monero
+  firo
+  privacyguides
+  general
+}
+
 model Donation {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -36,9 +43,14 @@ model Donation {
   @@index([userId])
 }
 
-enum FundSlug {
-  monero
-  firo
-  privacyguides
-  general
+model ProjectAddresses {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectSlug     String   @unique
+  fundSlug        FundSlug
+  btcPayInvoiceId String
+  bitcoinAddress  String
+  moneroAddress   String
 }

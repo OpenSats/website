@@ -10,4 +10,5 @@ export type DonationMetadata = {
   isMembership: 'true' | 'false'
   isSubscription: 'true' | 'false'
   isTaxDeductible: 'true' | 'false'
+  staticGeneratedForApi: 'true' | 'false'
 }

@@ -65,6 +65,7 @@ export const donationRouter = router({
         isMembership: 'false',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -130,6 +131,7 @@ export const donationRouter = router({
         isMembership: 'false',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const response = await btcpayApi.post(`/invoices`, {
@@ -199,6 +201,7 @@ export const donationRouter = router({
         isMembership: 'true',
         isSubscription: input.recurring ? 'true' : 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -296,6 +299,7 @@ export const donationRouter = router({
         isMembership: 'true',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const response = await btcpayApi.post(`/invoices`, {
