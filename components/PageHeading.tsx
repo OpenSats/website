@@ -1,10 +1,10 @@
+import { networkFor, SocialIcon } from 'react-social-icons'
 import { ReactNode } from 'react'
-import Link from 'next/link'
+import Image from 'next/image'
 
 import { ProjectItem } from '../utils/types'
 import CustomLink from './CustomLink'
-import Image from 'next/image'
-import SocialIcon from './social-icons'
+import WebIcon from './WebIcon'
 
 interface Props {
   project: ProjectItem
@@ -24,7 +24,15 @@ export default function PageHeading({ project, children }: Props) {
         />
 
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 xl:col-span-2">
-          {project.title}
+          {!!project.website && (
+            <CustomLink
+              className="text-inherit hover:text-inherit hover:underline"
+              href={project.website}
+            >
+              {project.title}
+            </CustomLink>
+          )}
+          {!project.website && project.title}
         </h1>
 
         <p>{project.summary}</p>
@@ -33,17 +41,31 @@ export default function PageHeading({ project, children }: Props) {
 
         <div className="flex space-x-3 items-center">
           <p>
-            by <CustomLink href={project.personalWebsite}>{project.nym}</CustomLink>
+            by <CustomLink href={project.socialLinks[0]}>{project.nym}</CustomLink>
           </p>
 
-          <SocialIcon kind="website" href={project.website} />
-          {project.twitter && (
-            <SocialIcon kind="twitter" href={`https://twitter.com/${project.twitter}`} />
-          )}
-          <SocialIcon kind="github" href={project.git} />
-          {/* {nostr && (
-                <SocialIcon kind="nostr" href={`https://njump.me/${nostr}`} />
-              )} */}
+          <div className="flex">
+            {project.socialLinks.map((link) =>
+              networkFor(link) !== 'sharethis' ? (
+                <SocialIcon
+                  key={`social-icon-${link}`}
+                  url={link}
+                  className="text-gray-700 hover:text-primary transition-colors"
+                  style={{ width: 40, height: 40 }}
+                  fgColor="currentColor"
+                  bgColor="transparent"
+                />
+              ) : (
+                <CustomLink
+                  key={`social-icon-${link}`}
+                  href={link}
+                  className="text-gray-700 hover:text-primary"
+                >
+                  <WebIcon style={{ width: 40, height: 40, padding: 8 }} />
+                </CustomLink>
+              )
+            )}
+          </div>
         </div>
       </div>
 

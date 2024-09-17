@@ -3,17 +3,16 @@ fund: general
 title: 'General Example Campaign'
 summary: "The EAE attack is one of Monero's privacy weak points. Churning may be a solution."
 nym: 'Dr. Nathan Borggren'
-website: 'https://github.com/nborggren'
 coverImage: '/img/project/EAE_diagram.png'
-git: 'https://github.com/nborggren'
-twitter: 'magicgrants'
-personalTwitter: 'magicgrants'
+website: 'https://github.com/nborggren'
 personalWebsite: 'https://github.com/nborggren'
+socialLinks:
+  - 'https://github.com/nborggren'
 type: 'Other Free and Open Source Project'
 date: '2023-06-08'
 staticXMRaddress: '87LZA8XLDvhVKLi974MaxUANcvkWdL6n986R7WNgKLXY16y31t69Z8228EWcg8THQq3tuAWfQ7Np35Tt3AhPrjzcNbm8Jr5'
 goal: 29260
-isFunded: false
+isFunded: true
 numdonationsxmr: 27
 totaldonationsinfiatxmr: 29260
 totaldonationsxmr: 220

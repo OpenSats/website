@@ -1,7 +1,7 @@
 import Link from 'next/link'
+
 import { funds } from '../utils/funds'
 import { Button } from '../components/ui/button'
-import SocialIcon from '../components/social-icons'
 import FiroLogo from '../components/FiroLogo'
 import PrivacyGuidesLogo from '../components/PrivacyGuidesLogo'
 import MagicLogo from '../components/MagicLogo'
@@ -10,6 +10,9 @@ import ProjectList from '../components/ProjectList'
 import { getProjects } from '../utils/md'
 import { cn } from '../utils/cn'
 import { ProjectItem } from '../utils/types'
+import { networkFor, SocialIcon } from 'react-social-icons'
+import WebIcon from '../components/WebIcon'
+import CustomLink from '../components/CustomLink'
 
 function Home({ projects }: { projects: ProjectItem[] }) {
   return (
@@ -39,10 +42,39 @@ function Home({ projects }: { projects: ProjectItem[] }) {
 
                 <span className="w-full text-muted-foreground block">{fund.summary}</span>
 
-                <div className="flex flex-row space-x-2">
-                  {!!fund.website && <SocialIcon kind="website" href={fund.website} />}
-                  {!!fund.git && <SocialIcon kind="github" href={fund.git} />}
-                  {!!fund.twitter && <SocialIcon kind="twitter" href={fund.twitter} />}
+                <div className="flex flex-row">
+                  {fund.socialLinks.map((link) =>
+                    networkFor(link) !== 'sharethis' ? (
+                      <SocialIcon
+                        key={`social-icon-${link}`}
+                        url={link}
+                        className={cn(
+                          'text-gray-700 transition-colors',
+                          fund.slug === 'monero' && 'hover:text-monero',
+                          fund.slug === 'firo' && 'hover:text-firo',
+                          fund.slug === 'privacyguides' && 'hover:text-privacyguides',
+                          fund.slug === 'general' && 'hover:text-general'
+                        )}
+                        style={{ width: 40, height: 40 }}
+                        fgColor="currentColor"
+                        bgColor="transparent"
+                      />
+                    ) : (
+                      <CustomLink
+                        key={`social-icon-${link}`}
+                        href={link}
+                        className={cn(
+                          'text-gray-700',
+                          fund.slug === 'monero' && 'hover:text-monero',
+                          fund.slug === 'firo' && 'hover:text-firo',
+                          fund.slug === 'privacyguides' && 'hover:text-privacyguides',
+                          fund.slug === 'general' && 'hover:text-general'
+                        )}
+                      >
+                        <WebIcon style={{ width: 40, height: 40, padding: 8 }} />
+                      </CustomLink>
+                    )
+                  )}
                 </div>
               </div>
 

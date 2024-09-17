@@ -46,21 +46,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
     { enabled: false }
   )
 
-  const {
-    slug,
-    title,
-    summary,
-    coverImage,
-    git,
-    twitter,
-    content,
-    nym,
-    website,
-    personalTwitter,
-    personalWebsite,
-    goal,
-    isFunded,
-  } = project
+  const { slug, title, summary, coverImage, content, nym, website, goal, isFunded } = project
 
   function formatBtc(bitcoin: number) {
     if (bitcoin > 0.1) {
@@ -82,7 +68,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      console.log('refetching')
       userHasMembershipQuery.refetch()
     }
   }, [session.status])
@@ -279,7 +264,6 @@ export async function getServerSideProps({ params, resolvedUrl }: GetServerSideP
         donationStats.usd.count += 1
         donationStats.usd.amount += donation.fiatAmount
         donationStats.usd.fiatAmount += donation.fiatAmount
-        console.log(donation)
       }
     })
   }

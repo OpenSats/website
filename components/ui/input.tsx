@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { LucideIcon } from 'lucide-react'
+import { LucideIcon, WebcamIcon } from 'lucide-react'
 
 import { cn } from '../../utils/cn'
 

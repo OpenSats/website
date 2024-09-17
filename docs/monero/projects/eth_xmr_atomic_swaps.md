@@ -3,12 +3,12 @@ fund: monero
 title: 'ETH<>XMR Atomic Swap Continued Development'
 summary: 'A trustless way to exchange Monero and Ethereum.'
 nym: 'noot'
-website: 'https://github.com/AthanorLabs/atomic-swap'
 coverImage: '/img/project/Ethereum_logo.png'
-git: 'https://github.com/noot'
-twitter: 'elizabethereum'
-personalTwitter: 'elizabethereum'
+website: 'https://github.com/AthanorLabs/atomic-swap'
 personalWebsite: 'https://github.com/noot'
+socialLinks:
+  - 'https://x.com/elizabethereum'
+  - 'https://github.com/noot'
 type: 'Other Free and Open Source Project'
 goal: 24000
 isFunded: true

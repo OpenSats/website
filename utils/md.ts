@@ -21,16 +21,13 @@ const FIELDS = [
   'title',
   'summary',
   'slug',
-  'git',
   'content',
   'coverImage',
   'nym',
   'date',
   'goal',
   'website',
-  'twitter',
-  'personalTwitter',
-  'personalWebsite',
+  'socialLinks',
   'staticXMRaddress',
   'isFunded',
   'numdonationsxmr',
@@ -63,23 +60,24 @@ export function getProjectBySlug(slug: string, fundSlug: FundSlug) {
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
 
-  const items: any = {}
+  const items: any = {
+    numdonationsxmr: 0,
+    totaldonationsinfiatxmr: 0,
+    totaldonationsxmr: 0,
+    numdonationsbtc: 0,
+    totaldonationsinfiatbtc: 0,
+    totaldonationsbtc: 0,
+    fiatnumdonations: 0,
+    fiattotaldonationsinfiat: 0,
+    fiattotaldonations: 0,
+  }
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
-    items.numdonationsxmr = 0
-    items.totaldonationsinfiatxmr = 0
-    items.totaldonationsxmr = 0
-    items.numdonationsbtc = 0
-    items.totaldonationsinfiatbtc = 0
-    items.totaldonationsbtc = 0
-    items.fiatnumdonations = 0
-    items.fiattotaldonationsinfiat = 0
-    items.fiattotaldonations = 0
-
     if (field === 'slug') {
       items[field] = realSlug
     }
+
     if (field === 'content') {
       items[field] = content
     }

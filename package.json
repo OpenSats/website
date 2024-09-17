@@ -61,6 +61,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
     "react-modal": "^3.16.1",
+    "react-social-icons": "^6.18.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
     "sanitize-filename": "^1.6.3",

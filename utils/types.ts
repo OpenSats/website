@@ -8,11 +8,8 @@ export type ProjectItem = {
   title: string
   summary: string
   coverImage: string
-  git: string
-  twitter?: string
   website: string
-  personalTwitter?: string
-  personalWebsite: string
+  socialLinks: string[]
   date?: string
   staticXMRaddress?: string
   goal: number
