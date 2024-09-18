@@ -97,23 +97,30 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
       `/invoices/${body.invoiceId}/payment-methods`
     )
 
-    const cryptoAmount = Number(paymentMethods[0].amount)
-    const fiatAmount = Number(paymentMethods[0].amount) * Number(paymentMethods[0].rate)
+    await Promise.all(
+      paymentMethods.map(async (paymentMethod) => {
+        const cryptoAmount = Number(paymentMethod.amount)
 
-    await prisma.donation.create({
-      data: {
-        userId: body.metadata.userId,
-        btcPayInvoiceId: body.invoiceId,
-        projectName: body.metadata.projectName,
-        projectSlug: body.metadata.projectSlug,
-        fundSlug: body.metadata.fundSlug,
-        cryptoCode: paymentMethods[0].cryptoCode,
-        cryptoAmount,
-        fiatAmount: Number(fiatAmount.toFixed(2)),
-        membershipExpiresAt:
-          body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
-      },
-    })
+        if (!cryptoAmount) return
+
+        const fiatAmount = Number(paymentMethod.amount) * Number(paymentMethod.rate)
+
+        await prisma.donation.create({
+          data: {
+            userId: body.metadata.userId,
+            btcPayInvoiceId: body.invoiceId,
+            projectName: body.metadata.projectName,
+            projectSlug: body.metadata.projectSlug,
+            fundSlug: body.metadata.fundSlug,
+            cryptoCode: paymentMethod.cryptoCode,
+            cryptoAmount,
+            fiatAmount: Number(fiatAmount.toFixed(2)),
+            membershipExpiresAt:
+              body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+          },
+        })
+      })
+    )
   }
 
   res.status(200).json({ success: true })
