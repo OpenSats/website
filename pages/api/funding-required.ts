@@ -8,7 +8,13 @@ import { getProjects } from '../../utils/md'
 import { env } from '../../env.mjs'
 import { btcpayApi, prisma } from '../../server/services'
 import { CURRENCY } from '../../config'
-import { DonationMetadata } from '../../server/types'
+import {
+  BtcPayCreateInvoiceBody,
+  BtcPayCreateInvoiceRes,
+  BtcPayGetPaymentMethodsRes,
+  BtcPayGetRatesRes,
+  DonationMetadata,
+} from '../../server/types'
 
 type ResponseBody = {
   title: string
@@ -32,26 +38,22 @@ async function handle(req: NextApiRequest, res: NextApiResponse<ResponseBody>) {
     return res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 
-  const query = querySchema.parse(req.query)
+  const query = await querySchema.parseAsync(req.query)
 
   const projects = await getProjects()
   const notFundedProjects = projects.filter((project) => !project.isFunded)
 
   let cryptoRate: number | null = null
 
+  // Get exchange rate if target asset is not USD
   if (query.target_amount_asset !== 'USD') {
-    const pair = query.target_amount_asset === 'BTC' ? 'XBTUSD' : 'XMRUSD'
+    const asset = query.target_amount_asset
 
-    // Get rate from Kraken
-    const response = await axios.get(`https://api.kraken.com/0/public/Ticker?pair=${pair}`)
-    const closePrice = (Object.values(response.data.result || {})[0] as any)?.c?.[0]
+    const { data: rates } = await btcpayApi.get<BtcPayGetRatesRes>(
+      `/rates?currencyPair=${asset}_USD`
+    )
 
-    if (!closePrice) {
-      console.error('[/api/funding-required]', 'Kraken close price unavailable for pair', pair)
-      return []
-    }
-
-    cryptoRate = Number(closePrice)
+    cryptoRate = Number(rates[0].rate)
   }
 
   const responseBody: ResponseBody = await Promise.all(
@@ -78,14 +80,16 @@ async function handle(req: NextApiRequest, res: NextApiResponse<ResponseBody>) {
           staticGeneratedForApi: 'true',
         }
 
-        const invoiceCreateResponse = await btcpayApi.post('/invoices', {
+        const invoiceCreateResponse = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
           currency: CURRENCY,
           metadata,
         })
 
         const invoiceId = invoiceCreateResponse.data.id
 
-        const paymentMethodsResponse = await btcpayApi.get(`/invoices/${invoiceId}/payment-methods`)
+        const paymentMethodsResponse = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
+          `/invoices/${invoiceId}/payment-methods`
+        )
 
         paymentMethodsResponse.data.forEach((paymentMethod: any) => {
           if (paymentMethod.paymentMethod === 'BTC-OnChain') {
@@ -96,6 +100,11 @@ async function handle(req: NextApiRequest, res: NextApiResponse<ResponseBody>) {
             moneroAddress = paymentMethod.destination
           }
         })
+      }
+
+      if (existingAddresses) {
+        bitcoinAddress = existingAddresses.bitcoinAddress
+        moneroAddress = existingAddresses.moneroAddress
       }
 
       return {

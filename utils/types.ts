@@ -10,7 +10,7 @@ export type ProjectItem = {
   coverImage: string
   website: string
   socialLinks: string[]
-  date?: string
+  date: string
   staticXMRaddress?: string
   goal: number
   isFunded?: boolean

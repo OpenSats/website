@@ -3,7 +3,11 @@ import getRawBody from 'raw-body'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
 
-import { DonationMetadata } from '../../../server/types'
+import {
+  BtcPayGetRatesRes,
+  BtcPayGetPaymentMethodsRes,
+  DonationMetadata,
+} from '../../../server/types'
 import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
 import { env } from '../../../env.mjs'
 import axios from 'axios'
@@ -25,12 +29,6 @@ type BtcpayBody = Record<string, any> & {
   invoiceId: string
   metadata: DonationMetadata
 }
-
-type BtcpayPaymentMethodsResponse = {
-  rate: string
-  amount: string
-  cryptoCode: string
-}[]
 
 async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -68,11 +66,11 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
 
     const cryptoCode = body.paymentMethod === 'BTC-OnChain' ? 'BTC' : 'XMR'
 
-    // Get rate from Kraken
-    const pair = cryptoCode === 'BTC' ? 'XBTUSD' : 'XMRUSD'
-    const response = await axios.get(`https://api.kraken.com/0/public/Ticker?pair=${pair}`)
-    const closePrice = Number((Object.values(response.data.result || {})[0] as any)?.c?.[0])
+    const { data: rates } = await btcpayApi.get<BtcPayGetRatesRes>(
+      `/rates?currencyPair=${cryptoCode}_USD`
+    )
 
+    const cryptoRate = Number(rates[0].rate)
     const cryptoAmount = Number(body.payment.value)
 
     await prisma.donation.create({
@@ -84,9 +82,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         fundSlug: body.metadata.fundSlug,
         cryptoCode,
         cryptoAmount,
-        fiatAmount: Number((cryptoAmount * closePrice).toFixed(2)),
-        membershipExpiresAt:
-          body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+        fiatAmount: Number((cryptoAmount * cryptoRate).toFixed(2)),
       },
     })
   }
@@ -97,7 +93,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json({ success: true })
     }
 
-    const { data: paymentMethods } = await btcpayApi.get<BtcpayPaymentMethodsResponse>(
+    const { data: paymentMethods } = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
       `/invoices/${body.invoiceId}/payment-methods`
     )
 

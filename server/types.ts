@@ -12,3 +12,42 @@ export type DonationMetadata = {
   isTaxDeductible: 'true' | 'false'
   staticGeneratedForApi: 'true' | 'false'
 }
+
+export type BtcPayGetRatesRes = [
+  {
+    currencyPair: string
+    errors: string[]
+    rate: string
+  },
+]
+
+export type BtcPayGetPaymentMethodsRes = {
+  rate: string
+  amount: string
+  cryptoCode: string
+}[]
+
+export type BtcPayCreateInvoiceBody = {
+  amount?: number
+  currency?: string
+  metadata: DonationMetadata
+}
+
+export type BtcPayCreateInvoiceRes = {
+  metadata: DonationMetadata
+  checkout: any
+  receipt: any
+  id: string
+  storeId: string
+  amount: string
+  currency: string
+  type: string
+  checkoutLink: string
+  createdTime: number
+  expirationTime: number
+  monitoringExpiration: number
+  status: 'Expired' | 'Invalid' | 'New' | 'Processing' | 'Settled'
+  additionalStatus: string
+  availableStatusesForManualMarking: any
+  archived: boolean
+}

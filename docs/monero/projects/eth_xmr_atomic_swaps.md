@@ -3,6 +3,7 @@ fund: monero
 title: 'ETH<>XMR Atomic Swap Continued Development'
 summary: 'A trustless way to exchange Monero and Ethereum.'
 nym: 'noot'
+date: '2022-09-01'
 coverImage: '/img/project/Ethereum_logo.png'
 website: 'https://github.com/AthanorLabs/atomic-swap'
 personalWebsite: 'https://github.com/noot'
