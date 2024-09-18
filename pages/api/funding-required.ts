@@ -14,6 +14,7 @@ import {
   DonationMetadata,
 } from '../../server/types'
 import { funds, fundSlugs } from '../../utils/funds'
+import dayjs from 'dayjs'
 
 const ASSETS = ['BTC', 'XMR', 'USD'] as const
 
@@ -49,19 +50,35 @@ type ResponseBodySpecificAsset = {
   address: string | null
 }[]
 
+// The cache key should be: fund-asset-project_status
+const cachedResponses: Record<
+  string,
+  { data: ResponseBody | ResponseBodySpecificAsset; expiresAt: Date } | undefined
+> = {}
+
 const querySchema = z.object({
   fund: z.enum(fundSlugs).optional(),
   asset: z.enum(ASSETS).optional(),
   project_status: z.enum(['FUNDED', 'NOT_FUNDED', 'ANY']).default('NOT_FUNDED'),
 })
 
-async function handle(req: NextApiRequest, res: NextApiResponse) {
+async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseBody | ResponseBodySpecificAsset>
+) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET'])
     return res.status(405).end(`Method ${req.method} Not Allowed`)
   }
 
   const query = await querySchema.parseAsync(req.query)
+
+  // Get response from cache
+  const cacheKey = `${query.fund}-${query.asset}-${query.project_status}`
+  const cachedResponse = cachedResponses[cacheKey]
+  if (cachedResponse && cachedResponse.expiresAt > new Date()) {
+    return res.send(cachedResponse.data)
+  }
 
   const projects = (await getProjects(query.fund)).filter((project) =>
     query.project_status === 'ANY' || query.project_status === 'FUNDED'
@@ -83,7 +100,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
     })
   }
 
-  const responseBody: ResponseBody = await Promise.all(
+  let responseBody: ResponseBody | ResponseBodySpecificAsset = await Promise.all(
     projects.map(async (project): Promise<ResponseBody[0]> => {
       let bitcoinAddress: string | null = null
       let moneroAddress: string | null = null
@@ -159,7 +176,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
   )
 
   if (query.asset) {
-    const responseBodySpecificAsset: ResponseBodySpecificAsset = responseBody.map((project) => {
+    responseBody = responseBody.map<ResponseBodySpecificAsset[0]>((project) => {
       const amounts: Record<Asset, number> = {
         BTC: project.target_amount_btc,
         XMR: project.target_amount_xmr,
@@ -186,8 +203,12 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
         asset: query.asset!,
       }
     })
+  }
 
-    return responseBodySpecificAsset
+  // Store response in cache
+  cachedResponses[cacheKey] = {
+    data: responseBody,
+    expiresAt: dayjs().add(10, 'minutes').toDate(),
   }
 
   return res.send(responseBody)
