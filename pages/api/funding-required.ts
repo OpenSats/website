@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { FundSlug } from '@prisma/client'
 import { z } from 'zod'
+import dayjs from 'dayjs'
 import path from 'path'
 
 import { getProjects } from '../../utils/md'
@@ -14,7 +15,6 @@ import {
   DonationMetadata,
 } from '../../server/types'
 import { funds, fundSlugs } from '../../utils/funds'
-import dayjs from 'dayjs'
 
 const ASSETS = ['BTC', 'XMR', 'USD'] as const
 
@@ -26,7 +26,7 @@ type ResponseBody = {
   date: string
   author: string
   url: string
-  isFunded: boolean
+  is_funded: boolean
   raised_amount_percent: number
   contributions: number
   target_amount_btc: number
@@ -42,7 +42,7 @@ type ResponseBodySpecificAsset = {
   date: string
   author: string
   url: string
-  isFunded: boolean
+  is_funded: boolean
   raised_amount_percent: number
   contributions: number
   asset: Asset
@@ -91,8 +91,9 @@ async function handle(
   // Get exchange rates if target asset is not USD (or if there is no target asset)
   if (query.asset !== 'USD') {
     const assetsWithoutUsd = ASSETS.filter((asset) => asset !== 'USD')
-    const params = assetsWithoutUsd.map((asset) => `currencyPair=${asset}`).join('&')
+    const params = assetsWithoutUsd.map((asset) => `currencyPair=${asset}_USD`).join('&')
     const { data: _rates } = await btcpayApi.get<BtcPayGetRatesRes>(`/rates?${params}`)
+    console.log(params)
 
     _rates.forEach((rate) => {
       const asset = rate.currencyPair.split('_')[0] as string
@@ -159,17 +160,18 @@ async function handle(
         date: project.date,
         author: project.nym,
         url: path.join(env.APP_URL, project.fund, project.slug),
-        isFunded: !!project.isFunded,
+        is_funded: !!project.isFunded,
         target_amount_btc: rates.BTC ? project.goal / rates.BTC : 0,
         target_amount_xmr: rates.XMR ? project.goal / rates.XMR : 0,
         target_amount_usd: project.goal,
         address_btc: bitcoinAddress,
         address_xmr: moneroAddress,
         raised_amount_percent:
-          (project.totaldonationsinfiatxmr +
+          ((project.totaldonationsinfiatxmr +
             project.totaldonationsinfiatbtc +
             project.fiattotaldonationsinfiat) /
-          project.goal,
+            project.goal) *
+          100,
         contributions: project.numdonationsbtc + project.numdonationsxmr + project.fiatnumdonations,
       }
     })
@@ -195,7 +197,7 @@ async function handle(
         date: project.date,
         author: project.author,
         url: project.url,
-        isFunded: project.isFunded,
+        is_funded: project.is_funded,
         target_amount: amounts[query.asset!],
         address: addresses[query.asset!],
         raised_amount_percent: project.raised_amount_percent,
