@@ -24,13 +24,14 @@ type ResponseBody = {
   date: string
   author: string
   url: string
+  isFunded: boolean
   raised_amount_percent: number
   contributions: number
   target_amount_btc: number
   target_amount_xmr: number
   target_amount_usd: number
-  address_btc: string
-  address_xmr: string
+  address_btc: string | null
+  address_xmr: string | null
 }[]
 
 type ResponseBodySpecificAsset = {
@@ -39,6 +40,7 @@ type ResponseBodySpecificAsset = {
   date: string
   author: string
   url: string
+  isFunded: boolean
   raised_amount_percent: number
   contributions: number
   asset: Asset
@@ -46,7 +48,10 @@ type ResponseBodySpecificAsset = {
   address: string | null
 }[]
 
-const querySchema = z.object({ asset: z.enum(ASSETS).optional() })
+const querySchema = z.object({
+  asset: z.enum(ASSETS).optional(),
+  project_status: z.enum(['FUNDED', 'NOT_FUNDED', 'ANY']).default('NOT_FUNDED'),
+})
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -56,8 +61,11 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
 
   const query = await querySchema.parseAsync(req.query)
 
-  const projects = await getProjects()
-  const notFundedProjects = projects.filter((project) => !project.isFunded)
+  const projects = (await getProjects()).filter((project) =>
+    query.project_status === 'ANY' || query.project_status === 'FUNDED'
+      ? project.isFunded
+      : !project.isFunded
+  )
 
   const rates: Record<string, number | undefined> = {}
 
@@ -74,54 +82,56 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const responseBody: ResponseBody = await Promise.all(
-    notFundedProjects.map(async (project): Promise<ResponseBody[0]> => {
-      const existingAddresses = await prisma.projectAddresses.findFirst({
-        where: { projectSlug: project.slug, fundSlug: project.fund },
-      })
+    projects.map(async (project): Promise<ResponseBody[0]> => {
+      let bitcoinAddress: string | null = null
+      let moneroAddress: string | null = null
 
-      let bitcoinAddress = ''
-      let moneroAddress = ''
+      if (!project.isFunded) {
+        const existingAddresses = await prisma.projectAddresses.findFirst({
+          where: { projectSlug: project.slug, fundSlug: project.fund },
+        })
 
-      // Create invoice if there's no existing address
-      if (!existingAddresses) {
-        const metadata: DonationMetadata = {
-          userId: null,
-          donorName: null,
-          donorEmail: null,
-          projectSlug: project.slug,
-          projectName: project.title,
-          fundSlug: project.slug as FundSlug,
-          isMembership: 'false',
-          isSubscription: 'false',
-          isTaxDeductible: 'false',
-          staticGeneratedForApi: 'true',
+        // Create invoice if there's no existing address
+        if (!existingAddresses) {
+          const metadata: DonationMetadata = {
+            userId: null,
+            donorName: null,
+            donorEmail: null,
+            projectSlug: project.slug,
+            projectName: project.title,
+            fundSlug: project.slug as FundSlug,
+            isMembership: 'false',
+            isSubscription: 'false',
+            isTaxDeductible: 'false',
+            staticGeneratedForApi: 'true',
+          }
+
+          const invoiceCreateResponse = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
+            currency: CURRENCY,
+            metadata,
+          })
+
+          const invoiceId = invoiceCreateResponse.data.id
+
+          const paymentMethodsResponse = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
+            `/invoices/${invoiceId}/payment-methods`
+          )
+
+          paymentMethodsResponse.data.forEach((paymentMethod: any) => {
+            if (paymentMethod.paymentMethod === 'BTC-OnChain') {
+              bitcoinAddress = paymentMethod.destination
+            }
+
+            if (paymentMethod.paymentMethod === 'XMR') {
+              moneroAddress = paymentMethod.destination
+            }
+          })
         }
 
-        const invoiceCreateResponse = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
-          currency: CURRENCY,
-          metadata,
-        })
-
-        const invoiceId = invoiceCreateResponse.data.id
-
-        const paymentMethodsResponse = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
-          `/invoices/${invoiceId}/payment-methods`
-        )
-
-        paymentMethodsResponse.data.forEach((paymentMethod: any) => {
-          if (paymentMethod.paymentMethod === 'BTC-OnChain') {
-            bitcoinAddress = paymentMethod.destination
-          }
-
-          if (paymentMethod.paymentMethod === 'XMR') {
-            moneroAddress = paymentMethod.destination
-          }
-        })
-      }
-
-      if (existingAddresses) {
-        bitcoinAddress = existingAddresses.bitcoinAddress
-        moneroAddress = existingAddresses.moneroAddress
+        if (existingAddresses) {
+          bitcoinAddress = existingAddresses.bitcoinAddress
+          moneroAddress = existingAddresses.moneroAddress
+        }
       }
 
       return {
@@ -130,6 +140,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
         date: project.date,
         author: project.nym,
         url: path.join(env.APP_URL, project.fund, project.slug),
+        isFunded: !!project.isFunded,
         target_amount_btc: rates.BTC ? project.goal / rates.BTC : 0,
         target_amount_xmr: rates.XMR ? project.goal / rates.XMR : 0,
         target_amount_usd: project.goal,
@@ -165,6 +176,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
         date: project.date,
         author: project.author,
         url: project.url,
+        isFunded: project.isFunded,
         target_amount: amounts[query.asset!],
         address: addresses[query.asset!],
         raised_amount_percent: project.raised_amount_percent,
