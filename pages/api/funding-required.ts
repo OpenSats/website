@@ -13,6 +13,7 @@ import {
   BtcPayGetRatesRes,
   DonationMetadata,
 } from '../../server/types'
+import { funds, fundSlugs } from '../../utils/funds'
 
 const ASSETS = ['BTC', 'XMR', 'USD'] as const
 
@@ -49,6 +50,7 @@ type ResponseBodySpecificAsset = {
 }[]
 
 const querySchema = z.object({
+  fund: z.enum(fundSlugs).optional(),
   asset: z.enum(ASSETS).optional(),
   project_status: z.enum(['FUNDED', 'NOT_FUNDED', 'ANY']).default('NOT_FUNDED'),
 })
@@ -61,7 +63,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
 
   const query = await querySchema.parseAsync(req.query)
 
-  const projects = (await getProjects()).filter((project) =>
+  const projects = (await getProjects(query.fund)).filter((project) =>
     query.project_status === 'ANY' || query.project_status === 'FUNDED'
       ? project.isFunded
       : !project.isFunded

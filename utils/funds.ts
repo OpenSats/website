@@ -18,6 +18,7 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
       'Help us to provide sustainable funding for free and open-source contributors working on freedom tech and projects that help Monero flourish.',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
+    date: '',
     goal: 100000,
     fund: 'monero',
     fiatnumdonations: 0,
@@ -44,6 +45,7 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     summary: 'Support contributors to Firo',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
+    date: '',
     goal: 100000,
     fund: 'firo',
     fiatnumdonations: 0,
@@ -70,6 +72,7 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     summary: 'Support contributors to Privacy Guides',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
+    date: '',
     goal: 100000,
     fund: 'privacyguides',
     fiatnumdonations: 0,
@@ -96,6 +99,7 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     summary: 'Support contributors to MAGIC',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
+    date: '',
     goal: 100000,
     fund: 'general',
     fiatnumdonations: 0,
