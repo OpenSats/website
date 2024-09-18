@@ -26,7 +26,7 @@ model Donation {
   updatedAt DateTime @updatedAt
 
   userId                String?
-  btcPayInvoiceId       String?   @unique
+  btcPayInvoiceId       String?
   stripePaymentIntentId String? // For donations and non-recurring memberships
   stripeInvoiceId       String?   @unique // For recurring memberships
   stripeSubscriptionId  String? // For recurring memberships
@@ -38,6 +38,7 @@ model Donation {
   cryptoAmount          Float?
   membershipExpiresAt   DateTime?
 
+  @@index([btcPayInvoiceId])
   @@index([stripePaymentIntentId])
   @@index([stripeSubscriptionId])
   @@index([userId])
