@@ -1,0 +1,145 @@
+---
+title: "Seventh Wave of Nostr Grants"
+date: '2024-09-19'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+draft: false
+authors: ['arvin', 'dergigi']
+images: ['/static/images/blog/54-nostr-7th-wave.jpg']
+summary: "OpenSats is funding five more open-source projects in the nostr ecosystem."
+---
+
+We are pleased to announce our seventh round of nostr grants, supporting a new
+group of projects that contribute to the growth and innovation happening in this
+ecosystem. Nostr is evolving, with projects expanding their focus from pure
+social networking to secure messaging and payments, IoT integrations, trusted
+software distribution, and more.
+
+The five projects of this funding wave are:
+
+- [Nostr Arduino](#nostr-arduino)
+- [White Noise](#white-noise)
+- [futr](#futr)
+- [Notedeck](#notedeck)
+- [Keystache](#keystache)
+
+With the continued support of the nostr community, we anticipate that these
+projects will play a significant role in creating a more connected, open, and
+resilient digital landscape.
+
+Our goal is to contribute to the development of a more open and decentralized
+internet that promotes creativity and collaboration. We remain committed to
+supporting the developers behind these initiatives.
+
+Our support for nostr is made possible by the generosity of our donors. If you
+would like to help us continue supporting the nostr ecosystem, consider making a
+donation to [The Nostr Fund](/funds/nostr):
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+Let's dive in and take a closer look at each project and how they align with [our
+mission](/mission).
+
+---
+
+### Nostr Arduino
+
+Nostr Arduino is an open-source library that integrates the nostr protocol with
+[Arduino](https://www.arduino.cc/en/Guide/Introduction) microcontrollers,
+enabling embedded devices to send and receive nostr events. Led by [Black
+Coffee](https://github.com/blackcoffeexbt/), the project aims to provide
+Internet of Things (IoT) devices with a permissionless, distributed network
+without relying on centralized services or exposing them to spyware. Plans
+include refactoring the library for better memory stability, increasing test
+coverage, enhancing documentation, creating example projects, and promoting the
+library through media content. The team also intends to collaborate on IoT NIP
+use cases, make the hardware [NIP-46] remote signer production-ready, add NIP-46
+support to web clients, enable remote device configuration via nostr, and
+explore eCash integration.
+
+Repository: [arduino-nostr](https://github.com/blackcoffeexbt/arduino-nostr),
+[hardware-nostr-connect-device](https://github.com/blackcoffeexbt/hardware-nostr-connect-device)  
+License: MIT
+
+[NIP-46]: https://github.com/nostr-protocol/nips/blob/master/46.md
+
+### White Noise
+
+JeffG is developing [White Noise](https://github.com/erskingardner/whitenoise),
+a nostr-based messaging client focused on secure communication. It implements
+double ratchet encryption for direct messages, supports group messaging, and
+synchronizes conversations across multiple devices. Built on nostr's
+censorship-resistant backbone, White Noise aims to deliver a seamless user
+experience similar to Signal, but with the added benefits of open protocols and
+decentralized infrastructure, ensuring privacy and accessibility for users in
+the freedom tech space.
+
+Repository:
+[erskingardner/whitenoise](https://github.com/erskingardner/whitenoise)  
+License: MIT  
+
+### futr
+
+Futr is a decentralized nostr client written in Haskell, focusing on public and
+private groups ([NIP-29]) and private direct messages ([NIP-17]). The project
+positions itself more like Telegram than Twitter. It's a native app that doesn't
+rely on a browser engine and is designed to cross-compile to Linux, Windows,
+macOS, Android, and iOS. Plans include refactoring for better performance,
+improving the user interface (possibly switching to Qt), implementing group and
+private messaging, and integrating features like voice/video calls and Lightning
+Network zaps with the aim of improving security and further decentralizing communications.
+
+Repository: [futrnostr/futr](https://github.com/futrnostr/futr)  
+License: MIT
+
+[NIP-29]: https://github.com/nostr-protocol/nips/blob/master/29.md
+[NIP-17]: https://github.com/nostr-protocol/nips/blob/master/17.md
+
+### Notedeck
+
+Notedeck is a multi-platform nostr client for Android and desktop, inspired by
+TweetDeck. It offers a fully modular dashboard with customizable columns,
+enabling users to manage multiple accounts simultaneously. Users can view
+different timelines, notifications, direct messages, and bookmarks from a
+unified interface, rearranging columns as desired. The mobile version provides a
+similar experience optimized for single-column viewing. Future development
+includes account management, improved UI navigation, modular column support,
+posting capabilities, and profile viewing.
+
+Repository: [damus-io/notedeck](https://github.com/damus-io/notedeck)  
+License: MIT  
+
+### Keystache
+
+Keystache is a desktop-native nostr signing application that offers a seamless
+single-sign-on experience and key management for desktop users. Similar to the
+Alby Chrome Extension but tailored for desktop environments, it provides a base
+layer for nostr desktop apps, eliminating the need for individual apps to manage
+private keys. 
+Currently in alpha for [Apple
+Silicon](https://en.wikipedia.org/wiki/Apple_silicon) and supporting [NIP-55]
+for key management, Keystache aims to reach beta soon and version 1.0 by year's
+end. Plans include evolving into a portal for nostr with features like an app
+marketplace, Fedimint wallet integration, signing permissions, and local relay
+support, simplifying key management, and fostering nostr desktop application
+development.
+
+Repository: [nodetec/keystache](https://github.com/nodetec/keystache)  
+License: MIT
+
+[NIP-55]: https://github.com/nostr-protocol/nips/blob/master/55.md
+
+---
+
+We are proud to support these projects and look forward to their continuous
+contributions to the nostr ecosystem.  If you're working on a nostr project that
+is free and open-source, [don't hesitate to apply](/apply).
+
+Our support for nostr is made possible by donors like you. Please consider
+donating to _The Nostr Fund_ to help us fund the ingenious
+developers building toward a better future:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
