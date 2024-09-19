@@ -106,16 +106,18 @@ export async function getProjects(fundSlug?: FundSlug) {
       .flat()
   }
 
+  // Sort projects
   projects = projects
     .sort(() => 0.5 - Math.random())
     .sort((a, b) => {
-      // Make active campaigns always come first
+      // Make active projects always come first
       if (!a.isFunded && b.isFunded) return -1
       if (a.isFunded && !b.isFunded) return 1
       return 0
     })
     .slice(0, 6)
 
+  // Get donation stats for active projects
   await Promise.all(
     projects.map(async (project) => {
       if (project.isFunded) return
@@ -145,6 +147,18 @@ export async function getProjects(fundSlug?: FundSlug) {
           project.fiattotaldonationsinfiat += donation.fiatAmount
         }
       })
+
+      // Make isFunded true if goal has been reached
+      const donationsSum =
+        ((project.totaldonationsinfiatxmr +
+          project.totaldonationsinfiatbtc +
+          project.fiattotaldonationsinfiat) /
+          project.goal) *
+        100
+
+      if (donationsSum >= project.goal) {
+        project.isFunded = true
+      }
     })
   )
 

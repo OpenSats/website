@@ -32,6 +32,9 @@ type ResponseBody = {
   target_amount_btc: number
   target_amount_xmr: number
   target_amount_usd: number
+  remaining_amount_btc: number
+  remaining_amount_xmr: number
+  remaining_amount_usd: number
   address_btc: string | null
   address_xmr: string | null
 }[]
@@ -47,6 +50,7 @@ type ResponseBodySpecificAsset = {
   contributions: number
   asset: Asset
   target_amount: number
+  remaining_amount: number
   address: string | null
 }[]
 
@@ -93,7 +97,6 @@ async function handle(
     const assetsWithoutUsd = ASSETS.filter((asset) => asset !== 'USD')
     const params = assetsWithoutUsd.map((asset) => `currencyPair=${asset}_USD`).join('&')
     const { data: _rates } = await btcpayApi.get<BtcPayGetRatesRes>(`/rates?${params}`)
-    console.log(params)
 
     _rates.forEach((rate) => {
       const asset = rate.currencyPair.split('_')[0] as string
@@ -119,22 +122,20 @@ async function handle(
             donorEmail: null,
             projectSlug: project.slug,
             projectName: project.title,
-            fundSlug: project.slug as FundSlug,
+            fundSlug: project.fund as FundSlug,
             isMembership: 'false',
             isSubscription: 'false',
             isTaxDeductible: 'false',
             staticGeneratedForApi: 'true',
           }
 
-          const invoiceCreateResponse = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
+          const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
             currency: CURRENCY,
             metadata,
           })
 
-          const invoiceId = invoiceCreateResponse.data.id
-
           const paymentMethodsResponse = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
-            `/invoices/${invoiceId}/payment-methods`
+            `/invoices/${invoice.id}/payment-methods`
           )
 
           paymentMethodsResponse.data.forEach((paymentMethod: any) => {
@@ -146,6 +147,26 @@ async function handle(
               moneroAddress = paymentMethod.destination
             }
           })
+
+          if (!bitcoinAddress && process.env.NODE_ENV !== 'development')
+            throw new Error(
+              '[/api/funding-required] Could not get bitcoin address from payment methods.'
+            )
+
+          if (!moneroAddress)
+            throw new Error(
+              '[/api/funding-required] Could not get monero address from payment methods.'
+            )
+
+          await prisma.projectAddresses.create({
+            data: {
+              projectSlug: project.slug,
+              fundSlug: project.fund,
+              btcPayInvoiceId: invoice.id,
+              bitcoinAddress: bitcoinAddress || '',
+              moneroAddress: moneroAddress,
+            },
+          })
         }
 
         if (existingAddresses) {
@@ -154,6 +175,19 @@ async function handle(
         }
       }
 
+      const targetAmountBtc = project.goal / (rates.BTC || 0)
+      const targetAmountXmr = project.goal / (rates.XMR || 0)
+      const targetAmountUsd = project.goal
+
+      const allDonationsSumUsd =
+        project.totaldonationsinfiatbtc +
+        project.totaldonationsinfiatxmr +
+        project.fiattotaldonationsinfiat
+
+      const remainingAmountBtc = (project.goal - allDonationsSumUsd) / (rates.BTC || 0)
+      const remainingAmountXmr = (project.goal - allDonationsSumUsd) / (rates.XMR || 0)
+      const remainingAmountUsd = project.goal - allDonationsSumUsd
+
       return {
         title: project.title,
         fund: project.fund,
@@ -161,9 +195,12 @@ async function handle(
         author: project.nym,
         url: path.join(env.APP_URL, project.fund, project.slug),
         is_funded: !!project.isFunded,
-        target_amount_btc: rates.BTC ? project.goal / rates.BTC : 0,
-        target_amount_xmr: rates.XMR ? project.goal / rates.XMR : 0,
-        target_amount_usd: project.goal,
+        target_amount_btc: Number(targetAmountBtc.toFixed(8)),
+        target_amount_xmr: Number(targetAmountXmr.toFixed(12)),
+        target_amount_usd: Number(targetAmountUsd.toFixed(2)),
+        remaining_amount_btc: Number((remainingAmountBtc > 0 ? remainingAmountBtc : 0).toFixed(8)),
+        remaining_amount_xmr: Number((remainingAmountXmr > 0 ? remainingAmountXmr : 0).toFixed(12)),
+        remaining_amount_usd: Number((remainingAmountUsd > 0 ? remainingAmountUsd : 0).toFixed(2)),
         address_btc: bitcoinAddress,
         address_xmr: moneroAddress,
         raised_amount_percent:
@@ -179,10 +216,16 @@ async function handle(
 
   if (query.asset) {
     responseBody = responseBody.map<ResponseBodySpecificAsset[0]>((project) => {
-      const amounts: Record<Asset, number> = {
+      const targetAmounts: Record<Asset, number> = {
         BTC: project.target_amount_btc,
         XMR: project.target_amount_xmr,
         USD: project.target_amount_usd,
+      }
+
+      const remainingAmounts: Record<Asset, number> = {
+        BTC: project.remaining_amount_btc,
+        XMR: project.remaining_amount_xmr,
+        USD: project.remaining_amount_usd,
       }
 
       const addresses: Record<Asset, string | null> = {
@@ -198,7 +241,8 @@ async function handle(
         author: project.author,
         url: project.url,
         is_funded: project.is_funded,
-        target_amount: amounts[query.asset!],
+        target_amount: targetAmounts[query.asset!],
+        remaining_amount: remainingAmounts[query.asset!],
         address: addresses[query.asset!],
         raised_amount_percent: project.raised_amount_percent,
         contributions: project.contributions,
