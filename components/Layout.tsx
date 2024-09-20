@@ -9,14 +9,10 @@ interface Props {
   children: ReactNode
 }
 
-const inter = Inter({
-  subsets: ['latin'],
-})
-
 const LayoutWrapper = ({ children }: Props) => {
   return (
     <SectionContainer>
-      <div className={`${inter.className} flex h-screen flex-col justify-between`}>
+      <div className="flex h-screen flex-col justify-between">
         <Header />
         <main className="grow">{children}</main>
         <Footer />

@@ -10,7 +10,6 @@ import {
 } from '../../../server/types'
 import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
 import { env } from '../../../env.mjs'
-import axios from 'axios'
 
 export const config = {
   api: {
@@ -72,6 +71,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
 
     const cryptoRate = Number(rates[0].rate)
     const cryptoAmount = Number(body.payment.value)
+    const fiatAmount = Number((cryptoAmount * cryptoRate).toFixed(2))
 
     await prisma.donation.create({
       data: {
@@ -81,8 +81,10 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         projectSlug: body.metadata.projectSlug,
         fundSlug: body.metadata.fundSlug,
         cryptoCode,
-        cryptoAmount,
-        fiatAmount: Number((cryptoAmount * cryptoRate).toFixed(2)),
+        grossCryptoAmount: cryptoAmount,
+        grossFiatAmount: fiatAmount,
+        netCryptoAmount: cryptoAmount,
+        netFiatAmount: fiatAmount,
       },
     })
   }
@@ -97,15 +99,25 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
       `/invoices/${body.invoiceId}/payment-methods`
     )
 
+    // Create one donation and one point history for each invoice payment method
     await Promise.all(
       paymentMethods.map(async (paymentMethod) => {
-        const cryptoAmount = Number(paymentMethod.amount)
+        const shouldGivePointsBack = body.metadata.givePointsBack === 'true'
+        const cryptoRate = Number(paymentMethod.rate)
+        const grossCryptoAmount = Number(paymentMethod.amount)
+        const grossFiatAmount = grossCryptoAmount * cryptoRate
+        // Deduct 10% of amount if donator wants points
+        const netCryptoAmount = shouldGivePointsBack ? grossCryptoAmount * 0.9 : grossCryptoAmount
+        const netFiatAmount = netCryptoAmount * cryptoRate
 
-        if (!cryptoAmount) return
+        // Move on if amound paid with current method is 0
+        if (!grossCryptoAmount) return
 
-        const fiatAmount = Number(paymentMethod.amount) * Number(paymentMethod.rate)
+        const pointsAdded = shouldGivePointsBack
+          ? parseInt(String(Number(grossFiatAmount.toFixed(2)) * 100))
+          : 0
 
-        await prisma.donation.create({
+        const donation = await prisma.donation.create({
           data: {
             userId: body.metadata.userId,
             btcPayInvoiceId: body.invoiceId,
@@ -113,12 +125,42 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             projectSlug: body.metadata.projectSlug,
             fundSlug: body.metadata.fundSlug,
             cryptoCode: paymentMethod.cryptoCode,
-            cryptoAmount,
-            fiatAmount: Number(fiatAmount.toFixed(2)),
+            grossCryptoAmount: Number(grossCryptoAmount.toFixed(2)),
+            grossFiatAmount: Number(grossFiatAmount.toFixed(2)),
+            netCryptoAmount: Number(netCryptoAmount.toFixed(2)),
+            netFiatAmount: Number(netFiatAmount.toFixed(2)),
+            pointsAdded,
             membershipExpiresAt:
               body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
           },
         })
+
+        // Add points
+        if (shouldGivePointsBack && body.metadata.userId) {
+          // Get balance for project/fund by finding user's last point history
+          const lastPointHistory = await prisma.pointHistory.findFirst({
+            where: {
+              userId: body.metadata.userId,
+              fundSlug: body.metadata.fundSlug,
+              projectSlug: body.metadata.projectSlug,
+              pointsAdded: { gt: 0 },
+            },
+            orderBy: { createdAt: 'desc' },
+          })
+
+          const currentBalance = lastPointHistory ? lastPointHistory.pointsBalance : 0
+
+          await prisma.pointHistory.create({
+            data: {
+              donationId: donation.id,
+              userId: body.metadata.userId,
+              fundSlug: body.metadata.fundSlug,
+              projectSlug: body.metadata.projectSlug,
+              pointsAdded,
+              pointsBalance: currentBalance + pointsAdded,
+            },
+          })
+        }
       })
     )
   }

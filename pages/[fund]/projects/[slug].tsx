@@ -250,20 +250,20 @@ export async function getServerSideProps({ params, resolvedUrl }: GetServerSideP
     donations.forEach((donation) => {
       if (donation.cryptoCode === 'XMR') {
         donationStats.xmr.count += 1
-        donationStats.xmr.amount += donation.cryptoAmount || 0
-        donationStats.xmr.fiatAmount += donation.fiatAmount
+        donationStats.xmr.amount += donation.netCryptoAmount || 0
+        donationStats.xmr.fiatAmount += donation.netFiatAmount
       }
 
       if (donation.cryptoCode === 'BTC') {
         donationStats.btc.count += 1
-        donationStats.btc.amount += donation.cryptoAmount || 0
-        donationStats.btc.fiatAmount += donation.fiatAmount
+        donationStats.btc.amount += donation.netCryptoAmount || 0
+        donationStats.btc.fiatAmount += donation.netFiatAmount
       }
 
       if (donation.cryptoCode === null) {
         donationStats.usd.count += 1
-        donationStats.usd.amount += donation.fiatAmount
-        donationStats.usd.fiatAmount += donation.fiatAmount
+        donationStats.usd.amount += donation.netFiatAmount
+        donationStats.usd.fiatAmount += donation.netFiatAmount
       }
     })
   }

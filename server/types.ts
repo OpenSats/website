@@ -11,6 +11,7 @@ export type DonationMetadata = {
   isSubscription: 'true' | 'false'
   isTaxDeductible: 'true' | 'false'
   staticGeneratedForApi: 'true' | 'false'
+  givePointsBack: 'true' | 'false'
 }
 
 export type BtcPayGetRatesRes = [

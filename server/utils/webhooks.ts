@@ -31,6 +31,13 @@ export function getStripeWebhookHandler(secret: string) {
       // Skip this event if intent is still not fully paid
       if (paymentIntent.amount_received !== paymentIntent.amount) return
 
+      const shouldGivePointsBack = metadata.givePointsBack === 'true'
+      const grossFiatAmount = paymentIntent.amount_received / 100
+      const netFiatAmount = shouldGivePointsBack
+        ? Number((grossFiatAmount * 0.9).toFixed(2))
+        : grossFiatAmount
+      const pointsAdded = parseInt(String(grossFiatAmount * 100))
+
       // Payment intents for subscriptions will not have metadata
       if (metadata.isSubscription === 'false')
         await prisma.donation.create({
@@ -40,7 +47,9 @@ export function getStripeWebhookHandler(secret: string) {
             projectName: metadata.projectName,
             projectSlug: metadata.projectSlug,
             fundSlug: metadata.fundSlug,
-            fiatAmount: paymentIntent.amount_received / 100,
+            grossFiatAmount,
+            netFiatAmount,
+            pointsAdded,
             membershipExpiresAt:
               metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
           },
@@ -55,9 +64,21 @@ export function getStripeWebhookHandler(secret: string) {
         const metadata = event.data.object.subscription_details?.metadata as DonationMetadata
         const invoiceLine = invoice.lines.data.find((line) => line.invoice === invoice.id)
 
-        if (!invoiceLine) return
+        if (!invoiceLine) {
+          console.error(
+            `[/api/stripe/${metadata.fundSlug}-webhook] Line not fund for invoice ${invoice.id}`
+          )
+          return res.status(200).end()
+        }
 
-        await prisma.donation.create({
+        const shouldGivePointsBack = metadata.givePointsBack === 'true'
+        const grossFiatAmount = invoice.total / 100
+        const netFiatAmount = shouldGivePointsBack
+          ? Number((grossFiatAmount * 0.9).toFixed(2))
+          : grossFiatAmount
+        const pointsAdded = shouldGivePointsBack ? parseInt(String(grossFiatAmount * 100)) : 0
+
+        const donation = await prisma.donation.create({
           data: {
             userId: metadata.userId as string,
             stripeInvoiceId: invoice.id,
@@ -65,10 +86,39 @@ export function getStripeWebhookHandler(secret: string) {
             projectName: metadata.projectName,
             projectSlug: metadata.projectSlug,
             fundSlug: metadata.fundSlug,
-            fiatAmount: invoice.total / 100,
+            grossFiatAmount,
+            netFiatAmount,
+            pointsAdded,
             membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
           },
         })
+
+        // Add points
+        if (shouldGivePointsBack && metadata.userId) {
+          // Get balance for project/fund by finding user's last point history
+          const lastPointHistory = await prisma.pointHistory.findFirst({
+            where: {
+              userId: metadata.userId,
+              fundSlug: metadata.fundSlug,
+              projectSlug: metadata.projectSlug,
+              pointsAdded: { gt: 0 },
+            },
+            orderBy: { createdAt: 'desc' },
+          })
+
+          const currentBalance = lastPointHistory ? lastPointHistory.pointsBalance : 0
+
+          await prisma.pointHistory.create({
+            data: {
+              donationId: donation.id,
+              userId: metadata.userId,
+              fundSlug: metadata.fundSlug,
+              projectSlug: metadata.projectSlug,
+              pointsAdded,
+              pointsBalance: currentBalance + pointsAdded,
+            },
+          })
+        }
       }
     }
 
