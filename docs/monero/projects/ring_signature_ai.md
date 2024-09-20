@@ -3,6 +3,7 @@ fund: monero
 title: 'Ring Signature Resiliency to AI Analysis'
 summary: "A test of machine learning attacks on Monero's untraceability."
 nym: 'ACK-J'
+date: '2022-03-01'
 coverImage: '/img/project/ring_sig.png'
 website: 'https://magicgrants.org/Monero-Tracing-Research/'
 personalWebsite: 'https://github.com/ACK-J'

@@ -3,9 +3,14 @@ import getRawBody from 'raw-body'
 import crypto from 'crypto'
 import dayjs from 'dayjs'
 
-import { DonationMetadata } from '../../../server/types'
+import {
+  BtcPayGetRatesRes,
+  BtcPayGetPaymentMethodsRes,
+  DonationMetadata,
+} from '../../../server/types'
 import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
 import { env } from '../../../env.mjs'
+import axios from 'axios'
 
 export const config = {
   api: {
@@ -13,7 +18,7 @@ export const config = {
   },
 }
 
-type BtcpayBody = {
+type BtcpayBody = Record<string, any> & {
   deliveryId: string
   webhookId: string
   originalDeliveryId: string
@@ -24,12 +29,6 @@ type BtcpayBody = {
   invoiceId: string
   metadata: DonationMetadata
 }
-
-type BtcpayPaymentMethodsResponse = {
-  rate: string
-  amount: string
-  cryptoCode: string
-}[]
 
 async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -59,28 +58,69 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
     return
   }
 
-  if (body.type === 'InvoiceSettled') {
-    const { data: paymentMethods } = await btcpayApi.get<BtcpayPaymentMethodsResponse>(
-      `/invoices/${body.invoiceId}/payment-methods`
+  if (body.type === 'InvoicePaymentSettled') {
+    // Handle payments to funding required API invoices ONLY
+    if (body.metadata.staticGeneratedForApi === 'false') {
+      return res.status(200).json({ success: true })
+    }
+
+    const cryptoCode = body.paymentMethod === 'BTC-OnChain' ? 'BTC' : 'XMR'
+
+    const { data: rates } = await btcpayApi.get<BtcPayGetRatesRes>(
+      `/rates?currencyPair=${cryptoCode}_USD`
     )
 
-    const cryptoAmount = Number(paymentMethods[0].amount)
-    const fiatAmount = Number(paymentMethods[0].amount) * Number(paymentMethods[0].rate)
+    const cryptoRate = Number(rates[0].rate)
+    const cryptoAmount = Number(body.payment.value)
 
     await prisma.donation.create({
       data: {
-        userId: body.metadata.userId,
+        userId: null,
         btcPayInvoiceId: body.invoiceId,
         projectName: body.metadata.projectName,
         projectSlug: body.metadata.projectSlug,
         fundSlug: body.metadata.fundSlug,
-        cryptoCode: paymentMethods[0].cryptoCode,
+        cryptoCode,
         cryptoAmount,
-        fiatAmount: Number(fiatAmount.toFixed(2)),
-        membershipExpiresAt:
-          body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+        fiatAmount: Number((cryptoAmount * cryptoRate).toFixed(2)),
       },
     })
+  }
+
+  if (body.type === 'InvoiceSettled') {
+    // If this is a funding required API invoice, let InvoiceReceivedPayment handle it instead
+    if (body.metadata.staticGeneratedForApi === 'true') {
+      return res.status(200).json({ success: true })
+    }
+
+    const { data: paymentMethods } = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
+      `/invoices/${body.invoiceId}/payment-methods`
+    )
+
+    await Promise.all(
+      paymentMethods.map(async (paymentMethod) => {
+        const cryptoAmount = Number(paymentMethod.amount)
+
+        if (!cryptoAmount) return
+
+        const fiatAmount = Number(paymentMethod.amount) * Number(paymentMethod.rate)
+
+        await prisma.donation.create({
+          data: {
+            userId: body.metadata.userId,
+            btcPayInvoiceId: body.invoiceId,
+            projectName: body.metadata.projectName,
+            projectSlug: body.metadata.projectSlug,
+            fundSlug: body.metadata.fundSlug,
+            cryptoCode: paymentMethod.cryptoCode,
+            cryptoAmount,
+            fiatAmount: Number(fiatAmount.toFixed(2)),
+            membershipExpiresAt:
+              body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+          },
+        })
+      })
+    )
   }
 
   res.status(200).json({ success: true })

@@ -13,13 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum FundSlug {
+  monero
+  firo
+  privacyguides
+  general
+}
+
 model Donation {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   userId                String?
-  btcPayInvoiceId       String?   @unique
+  btcPayInvoiceId       String?
   stripePaymentIntentId String? // For donations and non-recurring memberships
   stripeInvoiceId       String?   @unique // For recurring memberships
   stripeSubscriptionId  String? // For recurring memberships
@@ -31,14 +38,20 @@ model Donation {
   cryptoAmount          Float?
   membershipExpiresAt   DateTime?
 
+  @@index([btcPayInvoiceId])
   @@index([stripePaymentIntentId])
   @@index([stripeSubscriptionId])
   @@index([userId])
 }
 
-enum FundSlug {
-  monero
-  firo
-  privacyguides
-  general
+model ProjectAddresses {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectSlug     String   @unique
+  fundSlug        FundSlug
+  btcPayInvoiceId String
+  bitcoinAddress  String
+  moneroAddress   String
 }

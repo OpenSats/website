@@ -8,7 +8,7 @@ import { CURRENCY, MAX_AMOUNT, MEMBERSHIP_PRICE, MIN_AMOUNT } from '../../config
 import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
-import { DonationMetadata } from '../types'
+import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
 import { fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
 
@@ -65,6 +65,7 @@ export const donationRouter = router({
         isMembership: 'false',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -130,16 +131,17 @@ export const donationRouter = router({
         isMembership: 'false',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
-      const response = await btcpayApi.post(`/invoices`, {
+      const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {
         amount: input.amount,
         currency: CURRENCY,
         metadata,
         checkout: { redirectURL: `${env.APP_URL}/${input.fundSlug}/thankyou` },
       })
 
-      return { url: response.data.checkoutLink }
+      return { url: invoice.checkoutLink }
     }),
 
   payMembershipWithFiat: protectedProcedure
@@ -199,6 +201,7 @@ export const donationRouter = router({
         isMembership: 'true',
         isSubscription: input.recurring ? 'true' : 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -296,16 +299,17 @@ export const donationRouter = router({
         isMembership: 'true',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
+        staticGeneratedForApi: 'false',
       }
 
-      const response = await btcpayApi.post(`/invoices`, {
+      const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {
         amount: MEMBERSHIP_PRICE,
         currency: CURRENCY,
         metadata,
         checkout: { redirectURL: `${env.APP_URL}/${input.fundSlug}/thankyou` },
       })
 
-      return { url: response.data.checkoutLink }
+      return { url: invoice.checkoutLink }
     }),
 
   donationList: protectedProcedure
