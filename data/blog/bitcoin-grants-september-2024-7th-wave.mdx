@@ -1,0 +1,212 @@
+---
+title: "Seventh Wave of Bitcoin Grants"
+date: '2024-09-24'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+draft: false
+authors: ['arvin', 'dergigi', 'bayer']
+images: ['/static/images/blog/55-seventh-wave-bitcoin-grants.jpg']
+summary: "OpenSats is funding 8 more open-source projects in the bitcoin ecosystem."
+---
+
+We are excited to announce our seventh wave of grants from our General Fund,
+furthering our commitment to supporting open-source projects that advance the
+Bitcoin ecosystem. We remain committed to empowering developers from around the
+world who are building innovative tools, improving user experience, and
+strengthening the overall security and privacy of Bitcoin.
+
+This wave gives grants to eight more projects, each playing a pivotal role in
+enhancing various aspects of the Bitcoin ecosystem. In no particular order,
+these projects are:
+
+- [Kyoto](#kyoto)
+- [Minibits](#minibits)
+- [DLC Dev Kit](#dlc-dev-kit)
+- [Cove](#cove)
+- [Nutmix](#nutmix)
+- [ASmap](#asmap)
+- [Floresta](#floresta)
+- [AssumeUTXO in BCA](#assumeutxo-in-bca)
+
+Thanks to the generosity of our donors, we are able to fund projects that push
+the boundaries of what's possible while addressing key priorities in Bitcoin's
+development. If you want to join us in supporting projects like the above,
+consider donating to our [General Fund](/funds/general):
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's take a closer look at these projects to discover their purpose and impact,
+and see what they bring to the Bitcoin ecosystem.
+
+---
+
+### Kyoto
+
+[Kyoto](https://github.com/rustaceanrob/kyoto/blob/master/doc/DETAILS.md) is a
+Rust-based light client that implements block filters
+([BIP-157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki)/[BIP-158](https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki))
+and is aiming to be a simple, memory-conservative, and private Bitcoin client
+for developers to build wallet applications. The goal for Kyoto is to run on
+mobile devices with a low-enough memory footprint to allow users to interact
+with Lightning Network applications; it is also aspiring to be a client that is
+easy to maintain.
+
+The main [developer of Kyoto](https://github.com/rustaceanrob) is also
+contributing to
+[BDK](https://github.com/bitcoindevkit/bdk/blob/master/README.md), helping to
+push it towards its [1.0.0
+milestone](https://github.com/orgs/bitcoindevkit/projects/14). This work
+includes improving coin selection strategies, assisting in the development of a
+Swift-based iOS wallet, and contributing code examples and documentation to make
+integrating with Bitcoin easier for developers. He also works on maintaining and
+expanding
+[BIP-324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki), a
+bitcoin improvement proposal that enables encrypted peer-to-peer messaging
+between Bitcoin clients. This proposal strengthens privacy and censorship
+resistance by protecting P2P messages from network observers and ISP-level
+censorship, with ongoing integration into Rust clients like
+[Floresta](https://github.com/vinteumorg/Floresta/blob/master/README.md).
+
+Repository: [rustaceanrob/kyoto](https://github.com/rustaceanrob/kyoto),
+[bitcoindevkit/bdk](https://github.com/bitcoindevkit/bdk),
+[rust-bitcoin/bip324](https://github.com/rust-bitcoin/bip324)  
+License: Apache-2.0, MIT
+
+### Minibits
+
+[Minibits](https://www.minibits.cash/) is a mobile Cashu wallet that integrates
+Bitcoin and the Lightning Network, offering a seamless payment experience
+through ecash, Lightning addresses, zaps, and Nostr identities. Key features
+include seed-based recovery, Tor network support, LNURL pay and withdraw, and
+encrypted push notifications. The next development phase focuses on iOS support,
+enhanced security, and improved interoperability with the latest ecash and
+Lightning technologies. As a fully open-source wallet, Minibits plays an
+important role in advancing the [Cashu](https://cashu.space/) protocol by
+providing a fast cross-platform mobile wallet which will put Cashu's scalability
+and privacy claims to the test in real-world scenarios.
+
+Repository:
+[minibits-cash/minibits_wallet](https://github.com/minibits-cash/minibits_wallet)  
+License: MIT
+
+### DLC Dev Kit
+
+[DLC Dev Kit](https://www.dlcdevkit.com/) is a comprehensive development kit
+that simplifies the integration of Discreet Log Contracts (DLCs) into Bitcoin
+applications, allowing developers to create financial contracts like futures and
+peer-to-peer bets without having to deal with the complexities of DLC logic
+directly. By providing libraries for wallet operations, DLC communication, data
+storage, and integration of oracles, `dlcdevkit` enables seamless application
+development. Future work includes launching a platform-agnostic DLC marketplace,
+implementing WASM and mobile bindings for broader accessibility, and integrating
+covenant support to improve the efficiency of DLCs. These enhancements aim to
+foster a more cohesive and interoperable DLC ecosystem, driving broader adoption
+and enabling developers to build innovative Bitcoin applications with minimal
+friction.
+
+Repository: [bennyhodl/dlcdevkit](https://github.com/bennyhodl/dlcdevkit)  
+License: MIT
+
+### Cove
+
+Cove is a mobile wallet built with [BDK](https://github.com/bitcoindevkit/bdk/blob/master/README.md). Designed for simplicity and
+accessibility, it provides strong support for and integrates seamlessly with
+hardware signing devices, making it suitable for beginners and experienced users
+alike. The wallet includes features such as PSBT support via NFC, QR codes, and
+virtual drives for secure offline signing while offering advanced options like
+coin control and watch-only wallets. Future development will focus on expanding
+to iOS and Android platforms, and refining the user experience through
+real-world user feedback. By providing intuitive access to advanced security
+features, Cove seeks to empower users to adopt safer bitcoin practices,
+especially when it comes to holding and using bitcoin in a self-sovereign way.
+
+Repository: [bitcoinppl/cove](https://github.com/bitcoinppl/cove)  
+License: MIT
+
+### Nutmix
+
+[Nutmix](https://cashumints.space/cashu-mint/nutmix/) is a Cashu mint
+implementation focused on ease of use and feature completeness, making it the
+second most advanced mint after Nutshell. Like all proper Chaumian mint
+implementations, Nutmix allows custodians to hold funds securely and privately,
+without knowing how users choose to spend their money. By helping to diversify
+mint implementations, Nutmix offers mint operators more options, reducing
+systemic risk and thus bringing us closer to an ecash-based free banking system.
+
+Upcoming development plans include an admin dashboard for easy configuration,
+multi-path payments, CLN support, as well as liquidity management features.
+Additional milestones on the roadmap include deterministic secrets
+([NUT-13](https://github.com/cashubtc/nuts/blob/main/13.md)), HTLCs
+([NUT-14](https://github.com/cashubtc/nuts/blob/main/14.md)), a streamlined
+setup process, Tor-only mode, as well as a nostr-only mode.
+
+Repository: [lescuer97/nutmix](https://github.com/lescuer97/nutmix)  
+License: MIT
+
+### ASmap
+
+[ASmap](https://asmap.org/) is a project focused on mapping IP address blocks to
+their Autonomous Systems (AS) to enhance Bitcoin Core's defense against [eclipse
+attacks](https://bitcoinops.org/en/topics/eclipse-attacks/) by preventing nodes
+from being overly connected to peers controlled by a single entity. By improving
+the accuracy and performance of ASmap generation, ASmap helps Bitcoin Core better manage
+peer distribution at the AS level, reducing the risk of network attacks. [Future
+efforts](https://github.com/fjahr/kartograf/issues/11) include optimizing the
+[Kartograf](https://github.com/fjahr/kartograf) ("IP to ASN mapping for everyone") tool, improving data sources,
+and making ASmap generation faster and more accessible. This work strengthens
+Bitcoin Core's security while offering a valuable tool for other Bitcoin implementations or distributed
+systems projects.
+
+Repository: [fjahr/kartograf](https://github.com/fjahr/kartograf)  
+License: MIT
+
+### Floresta
+
+[Floresta](https://docs.getfloresta.sh/floresta/) is a modular Bitcoin node
+implementation written in Rust. It utilizes Utreexo and PoW Fraud Proofs to
+enable a more trustless and decentralized network. By offering fast
+synchronization, Floresta aims to make Bitcoin nodes more accessible globally,
+reducing reliance on trusted third parties. Its modular design allows for the
+development of new applications, and with the integration of the Bitcoin Core consensus
+engine via Rust bindings, it mitigates risks of consensus disparity. Upcoming
+work includes completing comprehensive documentation and making significant
+contributions to improve the node's design, testing, and performance. Floresta's
+development promises to enhance the trustless nature of Bitcoin applications and
+further decentralize the network.
+
+Repository: [vinteumorg/floresta](https://github.com/vinteumorg/floresta)  
+License: MIT
+
+### AssumeUTXO in BCA
+
+[AssumeUTXO](https://bitcoinops.org/en/topics/assumeutxo/) is a feature
+introduced in Bitcoin Core 26 that allows for faster node bootstrapping using
+UTXO snapshots. This project aims to integrate `AssumeUTXO` functionality into
+the [Bitcoin Core App](https://bitcoincore.app/) (BCA), simplifying the process
+of deploying Bitcoin nodes on mobile devices, particularly Android. By enabling
+users to run fully validating nodes via UTXO snapshots, this integration will
+improve the security and decentralization of the Bitcoin network while making it
+more accessible. Over the next 6 to 12 months, the project plans to deliver a
+proof-of-concept, integrate `AssumeUTXO` into BCA, and provide UX improvements
+and documentation updates.
+
+Repository:
+[D33r-Gee/gui-qml](https://github.com/D33r-Gee/gui-qml/tree/sjors-au-sig-custom?tab=License-1-ov-file)  
+License: MIT
+
+---
+
+With this seventh wave of grants, as with [previous waves](/tags/wave), we
+evaluated applications based on carefully [defined criteria](/apply#criteria)
+and put forth our best efforts to select the most impactful and promising
+proposals for the Bitcoin ecosystem. If you are a developer working on a project
+aligned with [our mission](/mission), we encourage you to [apply for
+funding](/apply).
+
+Please [consider donating](/donate) to support open-source projects and
+developers in the Bitcoin ecosystem:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
