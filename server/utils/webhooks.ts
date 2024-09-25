@@ -6,6 +6,7 @@ import crypto from 'crypto'
 
 import { btcpayApi as _btcpayApi, prisma, stripe } from '../../server/services'
 import { DonationMetadata } from '../../server/types'
+import { getUserPointBalance } from './perks'
 
 export function getStripeWebhookHandler(secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -96,17 +97,11 @@ export function getStripeWebhookHandler(secret: string) {
         // Add points
         if (shouldGivePointsBack && metadata.userId) {
           // Get balance for project/fund by finding user's last point history
-          const lastPointHistory = await prisma.pointHistory.findFirst({
-            where: {
-              userId: metadata.userId,
-              fundSlug: metadata.fundSlug,
-              projectSlug: metadata.projectSlug,
-              pointsAdded: { gt: 0 },
-            },
-            orderBy: { createdAt: 'desc' },
-          })
-
-          const currentBalance = lastPointHistory ? lastPointHistory.pointsBalance : 0
+          const currentBalance = await getUserPointBalance(
+            metadata.userId,
+            metadata.fundSlug,
+            metadata.projectSlug
+          )
 
           await prisma.pointHistory.create({
             data: {

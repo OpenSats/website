@@ -49,6 +49,8 @@ CREATE TABLE "PointHistory" (
     "pointsAdded" INTEGER NOT NULL DEFAULT 0,
     "pointsDeducted" INTEGER NOT NULL DEFAULT 0,
     "pointsBalance" INTEGER NOT NULL,
+    "purchasePerkId" TEXT,
+    "purchasePerkName" TEXT,
     "userId" TEXT NOT NULL,
     "donationId" TEXT,
 

@@ -7,8 +7,8 @@ services:
     expose:
       - '49392'
     environment:
-      BTCPAY_POSTGRES: User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;Database=btcpayserver${NBITCOIN_NETWORK:-mainnet}
-      BTCPAY_EXPLORERPOSTGRES: User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;MaxPoolSize=80;Database=nbxplorer${NBITCOIN_NETWORK:-mainnet}
+      BTCPAY_POSTGRES: User ID=postgres;Host=btcpay-postgres;Port=5432;Application Name=btcpayserver;Database=btcpayserver${NBITCOIN_NETWORK:-mainnet}
+      BTCPAY_EXPLORERPOSTGRES: User ID=postgres;Host=btcpay-postgres;Port=5432;Application Name=btcpayserver;MaxPoolSize=80;Database=nbxplorer${NBITCOIN_NETWORK:-mainnet}
       BTCPAY_NETWORK: ${NBITCOIN_NETWORK:-mainnet}
       BTCPAY_BIND: 0.0.0.0:49392
       BTCPAY_ROOTPATH: ${BTCPAY_ROOTPATH:-/}
@@ -29,7 +29,7 @@ services:
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     links:
-      - postgres
+      - btcpay-postgres
     volumes:
       - 'btcpay_datadir:/datadir'
       - 'nbxplorer_datadir:/root/.nbxplorer'
@@ -38,7 +38,7 @@ services:
       - 'tor_servicesdir:/var/lib/tor/hidden_services'
       - 'tor_torrcdir:/usr/local/etc/tor/'
     ports:
-      - '${NOREVERSEPROXY_HTTP_PORT:-80}:49392'
+      - '49392:49392'
   monerod_wallet:
     restart: unless-stopped
     container_name: btcpayserver_monero_wallet
@@ -50,6 +50,7 @@ services:
       - 18082:18082
     volumes:
       - 'xmr_wallet:/wallet'
+
   nbxplorer:
     restart: unless-stopped
     container_name: generated_nbxplorer_1
@@ -61,15 +62,16 @@ services:
       NBXPLORER_BIND: 0.0.0.0:32838
       NBXPLORER_TRIMEVENTS: 10000
       NBXPLORER_SIGNALFILESDIR: /datadir
-      NBXPLORER_POSTGRES: User ID=postgres;Host=postgres;Port=5432;Application Name=nbxplorer;MaxPoolSize=20;Database=nbxplorer${NBITCOIN_NETWORK:-mainnet}
+      NBXPLORER_POSTGRES: User ID=postgres;Host=btcpay-postgres;Port=5432;Application Name=nbxplorer;MaxPoolSize=20;Database=nbxplorer${NBITCOIN_NETWORK:-mainnet}
       NBXPLORER_AUTOMIGRATE: 1
       NBXPLORER_NOMIGRATEEVTS: 1
       NBXPLORER_DELETEAFTERMIGRATION: 1
     links:
-      - postgres
+      - btcpay-postgres
     volumes:
       - 'nbxplorer_datadir:/datadir'
-  postgres:
+
+  btcpay-postgres:
     restart: unless-stopped
     container_name: generated_postgres_1
     shm_size: 256mb
@@ -78,7 +80,43 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - 'postgres_datadir:/var/lib/postgresql/data'
+      - 'btcpay_postgres_datadir:/var/lib/postgresql/data'
+
+  magic-postgres:
+    image: postgres:16-alpine
+    container_name: magic-postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: magic
+      POSTGRES_DB: magic
+      POSTGRES_PASSWORD: magic
+    volumes:
+      - 'magic_postgres_data:/var/lib/postgresql/data'
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.6
+    container_name: magic-keycloak
+    restart: unless-stopped
+    command: start-dev
+    ports:
+      - 8080:8080
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+  campaign-site:
+    image: node:20-alpine
+    container_name: magic-campaign-site
+    restart: unless-stopped
+    working_dir: /app
+    command: npm run dev
+    ports:
+      - 3000:3000
+    volumes:
+      - '.:/app'
+
 volumes:
   btcpay_datadir:
   btcpay_pluginsdir:
@@ -88,5 +126,5 @@ volumes:
   tor_torrcdir:
   tor_servicesdir:
   nbxplorer_datadir:
-  postgres_datadir:
-networks: {}
+  btcpay_postgres_datadir:
+  magic_postgres_data:

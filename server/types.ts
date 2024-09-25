@@ -52,3 +52,50 @@ export type BtcPayCreateInvoiceRes = {
   availableStatusesForManualMarking: any
   archived: boolean
 }
+
+export type StrapiPerk = {
+  id: number
+  documentId: string
+  name: string
+  description: string
+  price: number
+  fundSlugWhitelist: string | null
+  needsShippingAddress: boolean
+  images: {
+    formats: {
+      large: { url: string }
+      medium: { url: string }
+      small: { url: string }
+      thumbnail: { url: string }
+    }
+  }[]
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export type StrapiGetPerksRes = {
+  data: StrapiPerk[]
+
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
+}
+
+export type StrapiGetPerkRes = {
+  data: StrapiPerk
+
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
+}

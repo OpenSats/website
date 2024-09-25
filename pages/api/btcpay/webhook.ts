@@ -10,6 +10,7 @@ import {
 } from '../../../server/types'
 import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
 import { env } from '../../../env.mjs'
+import { getUserPointBalance } from '../../../server/utils/perks'
 
 export const config = {
   api: {
@@ -138,17 +139,11 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         // Add points
         if (shouldGivePointsBack && body.metadata.userId) {
           // Get balance for project/fund by finding user's last point history
-          const lastPointHistory = await prisma.pointHistory.findFirst({
-            where: {
-              userId: body.metadata.userId,
-              fundSlug: body.metadata.fundSlug,
-              projectSlug: body.metadata.projectSlug,
-              pointsAdded: { gt: 0 },
-            },
-            orderBy: { createdAt: 'desc' },
-          })
-
-          const currentBalance = lastPointHistory ? lastPointHistory.pointsBalance : 0
+          const currentBalance = await getUserPointBalance(
+            body.metadata.userId,
+            body.metadata.fundSlug,
+            body.metadata.projectSlug
+          )
 
           await prisma.pointHistory.create({
             data: {

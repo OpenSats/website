@@ -12,6 +12,9 @@ export const env = createEnv({
     APP_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string().min(32),
 
+    STRAPI_API_URL: z.string().url(),
+    STRAPI_API_TOKEN: z.string().length(256),
+
     SMTP_HOST: z.string().min(1),
     SMTP_PORT: z.string().min(1),
     SMTP_USER: z.string().min(1),
@@ -48,6 +51,7 @@ export const env = createEnv({
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
+    NEXT_PUBLIC_STRAPI_URL: z.string().url(),
     NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
@@ -63,6 +67,10 @@ export const env = createEnv({
     BUILD_MODE: !!process.env.BUILD_MODE,
     APP_URL: process.env.APP_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+
+    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
+    STRAPI_API_URL: process.env.STRAPI_API_URL,
+    STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
 
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,
