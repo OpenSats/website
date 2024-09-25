@@ -27,4 +27,8 @@ If you start the website (either in development or production mode), you can acc
 
 PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request on [github.com/OpenSats/website/pulls](github.com/OpenSats/website/pulls).
 
- Thanks for supporting OpenSats!
+Thanks for supporting OpenSats!
+
+---
+
+[![opensats.org](https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22))](https://opensats.org)
