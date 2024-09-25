@@ -4,31 +4,25 @@ This is the codebase behind [OpenSats.org](https://opensats.org).
 
 ## Getting started
 
-The website is a simple [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). To run it locally you'll need Node.js 14.6.0 or newer. After cloning repository try following 3 commands in terminal:
+This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://github.com/timlrx/tailwind-nextjs-starter-blog). 
 
-  - `npm run dev` for running a development instance with hot-reloading, file watching and task re-running
-  - `npm run build` for compiling the project.
-  - `npm start` for starting your app in production mode
+To run a development environment locally, run:
 
-If you start the website (either in development or production mode), you can access it on http://localhost:3000
+  - `yarn` to install dependencies
+  - `yarn dev` to run the local development version
 
-## Codebase organization
-
-  - `docs/projects` hosts Markdown files for all the projects listed on the OpenSats website
-  - `utils` folder contains utility functions; `md.ts` is used for rending markdown content into pages using `/pages/projects/[slug].tsx`
-    - `[slug].tsx` works by leveraging [getStaticPaths](https://nextjs.org/docs/basic-features/data-fetching/get-static-paths) and [getStaticProps](https://nextjs.org/docs/basic-features/data-fetching/get-static-props) functions
-  - the rest of the folders are standard for Next.js
-    - `pages` contains files that correspond to individual pages on the website 
-    - `components` has common UI components used across the project
-  - all calls that work with secrets (talking to BTCPay and Stripe) are isolated in server side APIs
-    - take a look at `pages/api/btcpay.ts` as an example
+Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
 
 ## Contributing to the project
 
-PRs are welcome! Fork the repository on your GitHub account, push changes to new feature branch and then open a new pull request on [github.com/OpenSats/website/pulls](github.com/OpenSats/website/pulls).
+PRs are welcome! Fork the repository on your GitHub account, push changes to a new feature branch and then [open a new pull request](https://github.com/OpenSats/website/pulls). Feel free to look at [existing pull requests](https://github.com/OpenSats/website/pulls) if you want to help review upcoming announcements, or create new PRs in case you've spotted a typo or similar in our [past announcements](https://opensats.org/blog).
 
-Thanks for supporting OpenSats!
+Please [contact us](https://opensats.org/contact) if you have any questions. 
+
+Thank you for [supporting OpenSats](https://opensats.org/donate)!
 
 ---
 
-[![opensats.org](https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22))](https://opensats.org)
+We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31)!
+
+[![opensats.org](https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22))](https://opensats.org) 
