@@ -1,18 +1,8 @@
-import { FundSlug } from '@prisma/client'
 import { prisma } from '../services'
 
-export async function getUserPointBalance(
-  userId: string,
-  fundSlug: FundSlug,
-  projectSlug: string | null = null
-): Promise<number> {
+export async function getUserPointBalance(userId: string): Promise<number> {
   const lastPointHistory = await prisma.pointHistory.findFirst({
-    where: {
-      userId,
-      fundSlug,
-      projectSlug,
-      pointsAdded: { gt: 0 },
-    },
+    where: { userId },
     orderBy: { createdAt: 'desc' },
   })
 

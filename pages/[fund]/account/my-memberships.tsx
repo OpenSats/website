@@ -13,6 +13,7 @@ import {
 import { trpc } from '../../../utils/trpc'
 import CustomLink from '../../../components/CustomLink'
 import { useFundSlug } from '../../../utils/use-fund-slug'
+import { funds } from '../../../utils/funds'
 
 dayjs.extend(localizedFormat)
 
@@ -27,7 +28,7 @@ function MyMemberships() {
   return (
     <>
       <Head>
-        <title>Monero Fund - My Memberships</title>
+        <title>{funds[fundSlug].title} - My Memberships</title>
       </Head>
 
       <div className="w-full max-w-5xl mx-auto flex flex-col">

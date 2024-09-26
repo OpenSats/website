@@ -139,6 +139,9 @@ const Header = () => {
               <CustomLink href={`/${fundSlug}/account/my-memberships`} className="text-foreground">
                 <DropdownMenuItem>My Memberships</DropdownMenuItem>
               </CustomLink>
+              <CustomLink href={`/${fundSlug}/account/point-history`} className="text-foreground">
+                <DropdownMenuItem>Point History</DropdownMenuItem>
+              </CustomLink>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem onClick={() => signOut({ callbackUrl: `/${fundSlug}` })}>
                 Logout

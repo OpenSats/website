@@ -139,18 +139,12 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         // Add points
         if (shouldGivePointsBack && body.metadata.userId) {
           // Get balance for project/fund by finding user's last point history
-          const currentBalance = await getUserPointBalance(
-            body.metadata.userId,
-            body.metadata.fundSlug,
-            body.metadata.projectSlug
-          )
+          const currentBalance = await getUserPointBalance(body.metadata.userId)
 
           await prisma.pointHistory.create({
             data: {
               donationId: donation.id,
               userId: body.metadata.userId,
-              fundSlug: body.metadata.fundSlug,
-              projectSlug: body.metadata.projectSlug,
               pointsAdded,
               pointsBalance: currentBalance + pointsAdded,
             },

@@ -131,20 +131,20 @@ export async function getProjects(fundSlug?: FundSlug) {
       donations.forEach((donation) => {
         if (donation.cryptoCode === 'XMR') {
           project.numdonationsxmr += 1
-          project.totaldonationsxmr += donation.cryptoAmount || 0
-          project.totaldonationsinfiatxmr += donation.fiatAmount
+          project.totaldonationsxmr += donation.netCryptoAmount || 0
+          project.totaldonationsinfiatxmr += donation.netFiatAmount
         }
 
         if (donation.cryptoCode === 'BTC') {
           project.numdonationsbtc += 1
-          project.totaldonationsbtc += donation.cryptoAmount || 0
-          project.totaldonationsinfiatbtc += donation.fiatAmount
+          project.totaldonationsbtc += donation.netCryptoAmount || 0
+          project.totaldonationsinfiatbtc += donation.netFiatAmount
         }
 
         if (donation.cryptoCode === null) {
           project.fiatnumdonations += 1
-          project.fiattotaldonations += donation.fiatAmount
-          project.fiattotaldonationsinfiat += donation.fiatAmount
+          project.fiattotaldonations += donation.netFiatAmount
+          project.fiattotaldonationsinfiat += donation.netFiatAmount
         }
       })
 

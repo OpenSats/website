@@ -97,18 +97,12 @@ export function getStripeWebhookHandler(secret: string) {
         // Add points
         if (shouldGivePointsBack && metadata.userId) {
           // Get balance for project/fund by finding user's last point history
-          const currentBalance = await getUserPointBalance(
-            metadata.userId,
-            metadata.fundSlug,
-            metadata.projectSlug
-          )
+          const currentBalance = await getUserPointBalance(metadata.userId)
 
           await prisma.pointHistory.create({
             data: {
               donationId: donation.id,
               userId: metadata.userId,
-              fundSlug: metadata.fundSlug,
-              projectSlug: metadata.projectSlug,
               pointsAdded,
               pointsBalance: currentBalance + pointsAdded,
             },

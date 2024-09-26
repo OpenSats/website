@@ -74,6 +74,24 @@ export type StrapiPerk = {
   publishedAt: string
 }
 
+type StrapiOrder = {
+  id: number
+  documentId: string
+  userId: string
+  userEmail: string
+  shippingAddressLine1: string
+  shippingAddressLine2: string
+  shippingCity: string
+  shippingState: string
+  shippingCountry: string
+  shippingZip: string
+  shippingPhone: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  locale: null
+}
+
 export type StrapiGetPerksRes = {
   data: StrapiPerk[]
 
@@ -88,14 +106,12 @@ export type StrapiGetPerksRes = {
 }
 
 export type StrapiGetPerkRes = {
-  data: StrapiPerk
+  data: StrapiPerk | null
 
-  meta: {
-    pagination: {
-      page: number
-      pageSize: number
-      pageCount: number
-      total: number
-    }
-  }
+  meta: {}
+}
+
+export type StrapiCreateOrderRes = {
+  data: StrapiOrder
+  meta: {}
 }

@@ -11,7 +11,7 @@ import { cn } from '../utils/cn'
 import { Dialog, DialogContent } from './ui/dialog'
 import PerkPurchaseFormModal from './PerkPurchaseFormModal'
 
-const numberFormat = Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short' })
+const priceFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
 
 export type Props = { perk: StrapiPerk; balance: number }
 
@@ -51,7 +51,7 @@ const PerkCard: React.FC<Props> = ({ perk, balance }) => {
             <span className="line-clamp-3 text-gray-400">{perk.description}</span>
 
             <span className="font-bold">
-              <span className="text-green-500">{perk.price} points</span>
+              <span className="text-green-500">{priceFormat.format(perk.price)} points</span>
             </span>
           </div>
         </figcaption>

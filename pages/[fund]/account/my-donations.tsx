@@ -12,13 +12,9 @@ import {
 } from '../../../components/ui/table'
 import { trpc } from '../../../utils/trpc'
 import { useFundSlug } from '../../../utils/use-fund-slug'
+import { funds } from '../../../utils/funds'
 
 dayjs.extend(localizedFormat)
-
-const donationTypePretty = {
-  one_time: 'One-time',
-  recurring: 'Recurring',
-}
 
 function MyDonations() {
   const fundSlug = useFundSlug()
@@ -31,7 +27,7 @@ function MyDonations() {
   return (
     <>
       <Head>
-        <title>Monero Fund - My Donations</title>
+        <title>{funds[fundSlug].title} - My Donations</title>
       </Head>
 
       <div className="w-full max-w-5xl mx-auto flex flex-col">

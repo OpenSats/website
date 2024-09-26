@@ -1,11 +1,10 @@
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
 
 import { ProjectItem } from '../utils/types'
-import { useFundSlug } from '../utils/use-fund-slug'
-import Progress from './Progress'
 import { cn } from '../utils/cn'
+import Progress from './Progress'
 
 const numberFormat = Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short' })
 
@@ -47,10 +46,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, customImageStyles })
             src={project.coverImage}
             width={1200}
             height={1200}
-            style={{
-              objectFit: 'contain',
-              ...customImageStyles,
-            }}
+            style={{ objectFit: 'contain', ...customImageStyles }}
             priority={true}
             className="cursor-pointer rounded-t-xl bg-white"
           />

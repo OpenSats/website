@@ -12,7 +12,7 @@ import { useFundSlug } from '../utils/use-fund-slug'
 import '../styles/globals.css'
 import { funds } from '../utils/funds'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], display: 'swap', adjustFontFallback: false })
 
 function MyApp({ Component, pageProps }: AppProps) {
   const fundSlug = useFundSlug()

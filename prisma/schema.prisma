@@ -41,7 +41,7 @@ model Donation {
   netFiatAmount         Float
   pointsAdded           Int            @default(0)
   membershipExpiresAt   DateTime?
-  PointHistory          PointHistory[]
+  pointHistory          PointHistory[]
 
   @@index([btcPayInvoiceId])
   @@index([stripePaymentIntentId])
@@ -66,13 +66,12 @@ model PointHistory {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fundSlug         FundSlug
-  projectSlug      String?
-  pointsAdded      Int      @default(0)
-  pointsDeducted   Int      @default(0)
+  pointsAdded      Int     @default(0)
+  pointsDeducted   Int     @default(0)
   pointsBalance    Int
   purchasePerkId   String?
   purchasePerkName String?
+  purchaseOrderId  String?
   userId           String
   donationId       String?
 

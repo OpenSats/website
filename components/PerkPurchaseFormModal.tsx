@@ -13,29 +13,35 @@ import { useFundSlug } from '../utils/use-fund-slug'
 import { trpc } from '../utils/trpc'
 import Spinner from './Spinner'
 import { ShoppingBagIcon } from 'lucide-react'
+import { cn } from '../utils/cn'
+import { Label } from './ui/label'
+import { useRouter } from 'next/router'
 
 type Props = { perk: StrapiPerk; balance: number; close: () => void }
 
+const pointFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
+
 const schema = z.object({
-  shippingAddressLine1: z.string(),
-  shippingAddressLine2: z.string().optional(),
-  shippingCity: z.string(),
-  shippingState: z.string(),
-  shippingCountry: z.string(),
-  shippingZip: z.string(),
-  shippingPhone: z.string(),
+  shippingAddressLine1: z.string().min(1),
+  shippingAddressLine2: z.string(),
+  shippingCity: z.string().min(1),
+  shippingState: z.string().min(1),
+  shippingCountry: z.string().min(1),
+  shippingZip: z.string().min(1),
+  shippingPhone: z.string().min(1),
 })
 
 type PerkPurchaseInputs = z.infer<typeof schema>
 
 function PerkPurchaseFormModal({ perk, balance, close }: Props) {
+  const router = useRouter()
   const fundSlug = useFundSlug()
   const purchasePerkMutation = trpc.perk.purchasePerk.useMutation()
 
   const hasEnoughBalance = balance - perk.price > 0
 
   const form = useForm<PerkPurchaseInputs>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(perk.needsShippingAddress ? schema : z.object({})),
     defaultValues: {
       shippingAddressLine1: '',
       shippingAddressLine2: '',
@@ -53,9 +59,8 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
 
     try {
       await purchasePerkMutation.mutateAsync({ perkId: perk.documentId, fundSlug, ...data })
-
       toast({ title: 'Perk successfully purchased!' })
-
+      router.push(`/${fundSlug}/account/point-history`)
       close()
     } catch (error) {
       toast({
@@ -85,122 +90,136 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
         </div>
 
         <div className="flex flex-col">
-          <p className="text-lg text-green-500">{perk.price} points</p>
-          {!hasEnoughBalance && (
-            <p className="text-sm text-red-500">You don&apos;t have enough points.</p>
-          )}
+          <Label>Price</Label>
+
+          <p className="mt-1 text-lg text-green-500">
+            <strong className="font-semibold">{pointFormat.format(perk.price)}</strong> points
+          </p>
+
+          <span
+            className={cn('text-xs', hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500')}
+          >
+            You have {pointFormat.format(balance)} points
+          </span>
         </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-            <FormField
-              control={form.control}
-              name="shippingAddressLine1"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping address line 1</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {perk.needsShippingAddress && hasEnoughBalance && (
+              <>
+                <FormField
+                  control={form.control}
+                  name="shippingAddressLine1"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Address line 1 *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingAddressLine2"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping address line 2</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingAddressLine2"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Address line 2</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingCountry"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping country</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingCountry"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Country *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingState"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping state</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingState"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>State *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingCity"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping city</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingCity"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>City *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingZip"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Shipping postal code</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingZip"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Postal code *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="shippingPhone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone number</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="shippingPhone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone number *</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </>
+            )}
 
-            <Button type="button" size="lg" disabled={!hasEnoughBalance} className="w-full">
+            <Button
+              type="submit"
+              size="lg"
+              disabled={
+                !(form.formState.isValid && hasEnoughBalance && !purchasePerkMutation.isPending)
+              }
+              className="w-full"
+            >
               {purchasePerkMutation.isPending ? <Spinner /> : <ShoppingBagIcon />}
               Purchase
             </Button>
           </form>
         </Form>
-
-        <form></form>
-
-        <span className="text-muted-foreground">You have {balance} points</span>
       </div>
     </div>
   )
