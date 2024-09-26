@@ -110,6 +110,11 @@ module.exports = () => {
           destination: '/projects/showcase',
           permanent: true,
         },
+        {
+          source: '/faq/grantees',
+          destination: '/faq/grantee',
+          permanent: true,
+        },
       ]
     },
     webpack: (config, options) => {
