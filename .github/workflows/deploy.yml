@@ -1,0 +1,50 @@
+name: Deploy app to donate.magicgrants.org
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: master
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
+            export HISTFILE=/dev/null
+            cd campaign-site
+            git checkout v2
+            echo "Pulling changes..."
+            git pull
+            echo "Building and starting..."
+
+            CLOUDFLARE_TUNNEL_TOKEN=${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }} \
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
+            USER_SETTINGS_JWT_SECRET=${{ secrets.USER_SETTINGS_JWT_SECRET }} \
+            SMTP_USER=${{ secrets.SMTP_USER }} \
+            SMTP_PASS=${{ secrets.SMTP_PASS }} \
+            STRIPE_MONERO_SECRET_KEY=${{ secrets.STRIPE_MONERO_SECRET_KEY }} \
+            STRIPE_MONERO_WEBHOOK_SECRET=${{ secrets.STRIPE_MONERO_WEBHOOK_SECRET }} \
+            STRIPE_FIRO_SECRET_KEY=${{ secrets.STRIPE_FIRO_SECRET_KEY }} \
+            STRIPE_FIRO_WEBHOOK_SECRET=${{ secrets.STRIPE_FIRO_WEBHOOK_SECRET }} \
+            STRIPE_PRIVACY_GUIDES_SECRET_KEY=${{ secrets.STRIPE_PRIVACY_GUIDES_SECRET_KEY }} \
+            STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET=${{ secrets.STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET }} \
+            STRIPE_GENERAL_SECRET_KEY=${{ secrets.STRIPE_GENERAL_SECRET_KEY }} \
+            STRIPE_GENERAL_WEBHOOK_SECRET=${{ secrets.STRIPE_GENERAL_WEBHOOK_SECRET }} \
+            KEYCLOAK_URL=${{ secrets.KEYCLOAK_URL }} \
+            KEYCLOAK_CLIENT_SECRET=${{ secrets.KEYCLOAK_CLIENT_SECRET }} \
+            BTCPAY_URL=${{ secrets.BTCPAY_URL }} \
+            BTCPAY_API_KEY=${{ secrets.BTCPAY_API_KEY }} \
+            BTCPAY_STORE_ID=${{ secrets.BTCPAY_STORE_ID }} \
+            BTCPAY_WEBHOOK_SECRET=${{ secrets.BTCPAY_WEBHOOK_SECRET }} \
+            docker compose -f docker-compose.prod.yml up -d --build
+          EOF

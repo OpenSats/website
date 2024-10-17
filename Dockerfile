@@ -6,6 +6,9 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+COPY prisma prisma
+ENV PRISMA_BINARY_TARGETS='["native", "rhel-openssl-1.0.x"]'
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -26,6 +29,13 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
+ENV BUILD_MODE 1
+ENV PRISMA_BINARY_TARGETS='["native", "rhel-openssl-1.0.x"]'
+ENV NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT='monerofund@magicgrants.org'
+ENV NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT='firofund@magicgrants.org'
+ENV NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT='privacyguidesfund@magicgrants.org'
+ENV NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT='info@magicgrants.org'
+RUN npx prisma generate
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -38,6 +48,8 @@ RUN \
 FROM base AS runner
 WORKDIR /app
 
+ARG BUILD_MODE=1
+
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -45,6 +57,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/public ./public
 
 # Set the correct permission for prerender cache
@@ -63,7 +76,16 @@ WORKDIR /app
 EXPOSE 3000
 
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+
+# Install Prisma CLI
+RUN mkdir /home/nextjs/.npm-global
+ENV PATH=/home/nextjs/.npm-global/bin:$PATH
+ENV NPM_CONFIG_PREFIX=/home/nextjs/.npm-global
+ENV PRISMA_BINARY_TARGETS='["native", "rhel-openssl-1.0.x"]'
+RUN npm install --quiet --no-progress -g prisma
+RUN npm cache clean --force
 
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["/bin/sh", "-c", "prisma migrate deploy && node server.js"]

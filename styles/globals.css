@@ -2,130 +2,187 @@
 @tailwind components;
 @tailwind utilities;
 
-code {
-  @apply break-all whitespace-normal select-all;
-}
-/* When in a code block, let XMR addresses wrap, but a click or tap will select whole address */
+@layer base {
+  :root {
+    --monero: 24 100% 50%;
+    --firo: 351 69% 36%;
+    --privacyguides: 40 100% 50%;
+    --general: 220 86% 58%;
+  }
 
-h1,
-h2 {
-  @apply font-mono font-semibold;
-}
+  .monero {
+    --background: 24 100% 95%;
+    --foreground: 223 84% 5%;
 
-h1 {
-  @apply text-3xl md:text-4xl;
-}
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-h2 {
-  @apply text-2xl;
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-h4 {
-  @apply text-2xl font-bold;
-}
+    --primary: var(--monero);
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 24 100% 45%;
 
-h5 {
-  @apply text-textgray font-mono uppercase;
-}
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
 
-button,
-button[type='submit'] {
-  @apply py-2 px-4 bg-primary text-white rounded font-mono hover:shadow-glow;
-}
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-button.secondary {
-  @apply bg-white text-black border border-primary;
-}
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
 
-a {
-  @apply text-textgray underline underline-offset-2 hover:no-underline;
-}
+    --radius: 0.5rem;
+  }
 
-.projectlist {
-  color: rgb(242,95,19);
-  @apply hover:no-underline no-underline;
-}
+  .firo {
+    --background: 351 30% 95%;
+    --foreground: 223 84% 5%;
 
-a:hover {
-  color: black !important;
-}
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-p {
-  @apply text-textgray;
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-p a {
-  @apply text-primary;
-}
+    --primary: var(--firo);
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 351 69% 26%;
 
-button.selected {
-  @apply bg-primary;
-}
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
 
-input[type='text'],
-input[type='number'],
-input[type='email'],
-input[type='textarea'],
-textarea {
-  @apply border border-lightgray rounded p-2 focus:border-black;
-}
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-input[type='textarea'] {
-  @apply resize-y;
-}
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
 
-input[type='radio'] {
-  @apply mr-2;
-}
+    --radius: 0.5rem;
+  }
 
-nav li a {
-  @apply text-black no-underline ;
-}
+  .privacyguides {
+    --background: 40 100% 95;
+    --foreground: 223 84% 5%;
 
-form h3 {
-  @apply font-sans font-normal;
-}
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-button.small {
-  @apply p-1 text-sm bg-white text-black border border-black;
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-button.group {
-  @apply p-2 text-sm bg-white text-black border border-black;
-}
+    --primary: var(--privacyguides);
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 40 100% 62%;
 
-button.pay {
-  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black hover:text-primary rounded-xl flex justify-start gap-4;
-}
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
 
-button.pay:disabled {
-  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
-}
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-.credit a {
-  @apply no-underline hover:underline;
-}
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
 
-form.apply label {
-  @apply flex flex-col gap-2;
-}
+    --radius: 0.5rem;
+  }
 
-form.apply label.checkbox {
-  @apply flex flex-row items-center;
-}
+  .general {
+    --background: 220 100% 95%;
+    --foreground: 223 84% 5%;
 
-input[type='checkbox'] {
-  @apply mr-2;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: var(--general);
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 220 86% 48%;
+
+    --muted: 214.3 31.8% 87%;
+    --muted-foreground: 218 11% 65%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 87%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
 }
 
-.color-nav{
-  background-color: rgb(242,95,19);
+@layer base {
+  * {
+    @apply border-border;
+  }
 }
 
-.custom-link{
+body {
+  background-color: hsl(var(--background));
+}
+
+.task-list-item::before {
+  @apply hidden;
+}
+
+.task-list-item {
+  @apply list-none;
+}
+
+.footnotes {
+  @apply mt-12 border-t border-gray-200 pt-8;
+}
+
+.data-footnote-backref {
   @apply no-underline;
 }
 
-.color-me-monero{
-  color: rgb(242,95,19);
+.csl-entry {
+  @apply my-5;
+}
+
+/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition:
+    background-color 600000s 0s,
+    color 600000s 0s;
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+}
+
+.prose > ul > li > p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose small {
+  @apply leading-normal;
+}
+
+form label {
+  @apply text-sm font-semibold leading-normal;
+}
+
+.checkbox {
+  @apply flex items-center;
+}
+
+form input[type='text'],
+form textarea {
+  @apply mt-2;
 }

@@ -1,0 +1,89 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+      REAL_IP_HEADER: Cf-Connecting-Ip
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:1
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    environment:
+      APP_URL: https://donate.magicgrants.org
+      DATABASE_URL: ${DATABASE_URL}
+
+      NEXTAUTH_URL: https://donate.magicgrants.org
+      NEXTAUTH_URL_INTERNAL: http://localhost:3000
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      USER_SETTINGS_JWT_SECRET: ${USER_SETTINGS_JWT_SECRET}
+
+      SMTP_HOST: email-smtp.us-east-2.amazonaws.com
+      SMTP_PORT: 587
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SES_VERIFIED_SENDER: info@magicgrants.org
+
+      STRIPE_MONERO_SECRET_KEY: ${STRIPE_MONERO_SECRET_KEY}
+      STRIPE_MONERO_WEBHOOK_SECRET: ${STRIPE_MONERO_WEBHOOK_SECRET}
+      STRIPE_FIRO_SECRET_KEY: ${STRIPE_FIRO_SECRET_KEY}
+      STRIPE_FIRO_WEBHOOK_SECRET: ${STRIPE_FIRO_WEBHOOK_SECRET}
+      STRIPE_PRIVACY_GUIDES_SECRET_KEY: ${STRIPE_PRIVACY_GUIDES_SECRET_KEY}
+      STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET: ${STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET}
+      STRIPE_GENERAL_SECRET_KEY: ${STRIPE_GENERAL_SECRET_KEY}
+      STRIPE_GENERAL_WEBHOOK_SECRET: ${STRIPE_GENERAL_WEBHOOK_SECRET}
+
+      KEYCLOAK_URL: ${KEYCLOAK_URL}
+      KEYCLOAK_CLIENT_ID: app
+      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CLIENT_SECRET}
+      KEYCLOAK_REALM_NAME: magic
+
+      BTCPAY_URL: ${BTCPAY_URL}
+      BTCPAY_EXTERNAL_URL: https://btcpay.magicgrants.org
+      BTCPAY_API_KEY: ${BTCPAY_API_KEY}
+      BTCPAY_STORE_ID: ${BTCPAY_STORE_ID}
+      BTCPAY_WEBHOOK_SECRET: ${BTCPAY_WEBHOOK_SECRET}
+
+      MONERO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      FIRO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      PRIVACY_GUIDES_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      GENERAL_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+
+      NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+      NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: monerofund@magicgrants.org
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: magic
+      POSTGRES_DB: magic
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - 'postgres_data:/var/lib/postgresql/data'
+
+volumes:
+  postgres_data:

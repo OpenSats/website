@@ -1,23 +1,38 @@
-import '@fontsource/source-code-pro/400.css'
-import '@fontsource/source-code-pro/600.css'
-import '@fontsource/source-code-pro/800.css'
-import '../styles/globals.css'
-import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import { useEffect } from "react";
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from 'next-themes'
+import { SessionProvider } from 'next-auth/react'
+import Head from 'next/head'
 
 import Layout from '../components/Layout'
+import { Toaster } from '../components/ui/toaster'
+import { trpc } from '../utils/trpc'
+import { useFundSlug } from '../utils/use-fund-slug'
+import { funds } from '../utils/funds'
+
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    require("../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
-  }, []);
+  const fundSlug = useFundSlug()
 
   return (
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider
+        attribute="class"
+        forcedTheme={fundSlug || 'general'}
+        themes={['monero', 'general', 'firo', 'priacyguides']}
+        enableSystem={false}
+      >
+        <Head>
+          <meta content="width=device-width, initial-scale=1" name="viewport" />
+          <title>{fundSlug ? funds[fundSlug].title : 'MAGIC Grants Campaigns'}</title>
+        </Head>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        <Toaster />
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
 
-export default MyApp
+export default trpc.withTRPC(MyApp)

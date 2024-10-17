@@ -1,28 +1,27 @@
+import { FundSlug } from '@prisma/client'
+
 export type ProjectItem = {
   slug: string
+  fund: FundSlug
   nym: string
   content?: string
   title: string
   summary: string
   coverImage: string
-  git: string
-  twitter?: string
   website: string
-  personalTwitter?: string
-  personalWebsite: string
-  date?: string
-  staticXMRaddress?: string
+  socialLinks: string[]
+  date: string
+  staticXMRaddress?: string | null
   goal: number
   isFunded?: boolean
-  numdonationsxmr?: number
-  totaldonationsinfiatxmr?: number
-  totaldonationsxmr?: number
-  numdonationsbtc?: number
-  totaldonationsinfiatbtc?: number
-  totaldonationsbtc?: number
-  fiatnumdonations?: number
-  fiattotaldonationsinfiat?: number
-  fiattotaldonations?: number
+  numDonationsBTC: number
+  numDonationsXMR: number
+  numDonationsFiat: number
+  totalDonationsBTC: number
+  totalDonationsXMR: number
+  totalDonationsFiat: number
+  totalDonationsBTCInFiat: number
+  totalDonationsXMRInFiat: number
 }
 
 export type PayReq = {
@@ -33,4 +32,20 @@ export type PayReq = {
   name?: string
 }
 
-export type Stats = any
+export type ProjectDonationStats = {
+  xmr: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+  btc: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+  usd: {
+    count: number
+    amount: number
+    fiatAmount: number
+  }
+}
