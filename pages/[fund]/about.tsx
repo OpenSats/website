@@ -30,7 +30,7 @@ export async function getStaticProps({ params }: { params: { fund: FundSlug } })
 export function getStaticPaths() {
   return {
     paths: fundSlugs
-      .filter((fundSlug) => fileExists(`docs/${sanitize(fundSlug)}/about.md`))
+      .filter((fundSlug) => fileExists(`docs/${sanitize(fundSlug)}/about_us.md`))
       .map((fundSlug) => `/${fundSlug}/about`),
     fallback: true,
   }

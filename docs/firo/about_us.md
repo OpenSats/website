@@ -1,4 +1,4 @@
-# About the MAGIC Monero Fund
+# About the MAGIC Firo Fund
 
 The MAGIC Firo Fund was established in December 2022. It is currently administered by the MAGIC Board. It does not have a committee.
 
