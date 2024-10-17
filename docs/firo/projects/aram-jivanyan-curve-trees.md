@@ -19,8 +19,8 @@ totalDonationsXMR: 0
 numDonationsBTC: 0
 totalDonationsBTCInFiat: 0
 totalDonationsBTC: 0
-numDonationsFiat: 40000
-totalDonationsFiat: 1
+numDonationsFiat: 1
+totalDonationsFiat: 40000
 
 ---
 
