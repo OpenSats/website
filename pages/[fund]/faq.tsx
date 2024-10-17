@@ -1,5 +1,6 @@
-import xss from 'xss'
 import { FundSlug } from '@prisma/client'
+import sanitize from 'sanitize-filename'
+import xss from 'xss'
 
 import markdownToHtml from '../../utils/markdownToHtml'
 import { fileExists, getSingleFile } from '../../utils/md'
@@ -15,7 +16,7 @@ export default function Faq({ content }: { content: string }) {
 }
 
 export async function getStaticProps({ params }: { params: { fund: FundSlug } }) {
-  const md = getSingleFile(`docs/${params.fund}/faq.md`)
+  const md = getSingleFile(`docs/${sanitize(params.fund)}/faq.md`)
 
   const content = await markdownToHtml(md || '')
 
@@ -29,7 +30,7 @@ export async function getStaticProps({ params }: { params: { fund: FundSlug } })
 export function getStaticPaths() {
   return {
     paths: fundSlugs
-      .filter((fundSlug) => fileExists(`docs/${fundSlug}/faq.md`))
+      .filter((fundSlug) => fileExists(`docs/${sanitize(fundSlug)}/faq.md`))
       .map((fundSlug) => `/${fundSlug}/faq`),
     fallback: true,
   }
