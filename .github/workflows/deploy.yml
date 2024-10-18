@@ -3,7 +3,7 @@ name: Deploy app to donate.magicgrants.org
 on:
   push:
     branches:
-      - v2
+      - master
 
 jobs:
   deploy:
@@ -20,7 +20,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
             export HISTFILE=/dev/null
             cd campaign-site
-            git checkout v2
+            git checkout master
             echo "Pulling changes..."
             git pull
             echo "Building and starting..."
@@ -29,6 +29,7 @@ jobs:
             POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
             DATABASE_URL=${{ secrets.DATABASE_URL }} \
             NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
+            USER_SETTINGS_JWT_SECRET=${{ secrets.USER_SETTINGS_JWT_SECRET }} \
             SMTP_USER=${{ secrets.SMTP_USER }} \
             SMTP_PASS=${{ secrets.SMTP_PASS }} \
             STRIPE_MONERO_SECRET_KEY=${{ secrets.STRIPE_MONERO_SECRET_KEY }} \
@@ -45,5 +46,5 @@ jobs:
             BTCPAY_API_KEY=${{ secrets.BTCPAY_API_KEY }} \
             BTCPAY_STORE_ID=${{ secrets.BTCPAY_STORE_ID }} \
             BTCPAY_WEBHOOK_SECRET=${{ secrets.BTCPAY_WEBHOOK_SECRET }} \
-            docker compose up -d --build
+            docker compose -f docker-compose.prod.yml up -d --build
           EOF

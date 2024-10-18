@@ -132,7 +132,11 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
               Register
             </Button>
 
-            <Button className="grow basis-0" type="submit" disabled={form.formState.isSubmitting}>
+            <Button
+              className="grow basis-0"
+              type="submit"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+            >
               {form.formState.isSubmitting && <Spinner />} Login
             </Button>
           </div>

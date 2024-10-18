@@ -7,4 +7,4 @@ export const config = {
   },
 }
 
-export default getStripeWebhookHandler(env.STRIPE_MONERO_WEBHOOK_SECRET)
+export default getStripeWebhookHandler('monero', env.STRIPE_MONERO_WEBHOOK_SECRET)

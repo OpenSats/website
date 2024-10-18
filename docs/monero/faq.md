@@ -28,7 +28,6 @@
 
 - We use BTCPay Server to receive all cryptocurrency donations. For fiat donations, we leverage Stripe Payments.
 
-
 ## Can you provide the view key to verify the Fund's incoming Monero donations?
 
 - Yes. You can create a view-only Monero wallet with this information:
@@ -60,7 +59,7 @@
 
 ## Are my donations tax deductible?
 
-- Yes. MAGIC Monero Fund is committee under Multidisciplinary Academic Grants in Cryptocurrencies (MAGIC Grants), a 501(c)(3) non-profit organization. All gifts and donations are tax-deductible in the USA.
+- Yes, your donation may be tax deductible. MAGIC Monero Fund is committee under MAGIC Grants, a 501(c)(3) non-profit organization. All gifts and donations are tax-deductible in the USA.
 - If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping. If you donate over $500 with cryptocurrencies, you will need to fill out [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and email that form to [info@maigcgrants.org](mailto:info@magicgrants.org) for us to sign Part V.
 
 The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.
@@ -72,4 +71,3 @@ The Monero Fund relies on donors like you to help promote and support a sustaina
 # Can I donate with bank transfer / wire?
 
 - Yes! [Email us](mailto:MoneroFund@magicgrants.org), and we will send you the bank details and manually add your donation. We can accept domestic and international wire transfers. Wires are appreciated for large donations, so that ~3% more of your donation can go to the recipient instead of credit card fees.
-

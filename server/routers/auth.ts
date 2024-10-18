@@ -2,24 +2,12 @@ import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import jwt from 'jsonwebtoken'
 
-import { publicProcedure, router } from '../trpc'
+import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { keycloak, transporter } from '../services'
 import { env } from '../../env.mjs'
 import { fundSlugs } from '../../utils/funds'
-
-type EmailVerifyJwtPayload = {
-  action: 'email_verify'
-  userId: string
-  email: string
-}
-
-type PasswordResetJwtPayload = {
-  action: 'password-reset'
-  userId: string
-  email: string
-  tokenVersion: number
-}
+import { UserSettingsJwtPayload } from '../types'
 
 export const authRouter = router({
   register: publicProcedure
@@ -42,7 +30,11 @@ export const authRouter = router({
           email: input.email,
           credentials: [{ type: 'password', value: input.password, temporary: false }],
           requiredActions: ['VERIFY_EMAIL'],
-          attributes: { name: input.name, passwordResetTokenVersion: 1 },
+          attributes: {
+            name: input.name,
+            passwordResetTokenVersion: 1,
+            emailVerifyTokenVersion: 1,
+          },
           enabled: true,
         })
       } catch (error) {
@@ -53,15 +45,14 @@ export const authRouter = router({
         throw error
       }
 
-      const payload: EmailVerifyJwtPayload = {
+      const payload: UserSettingsJwtPayload = {
         action: 'email_verify',
+        tokenVersion: 1,
         userId: user.id,
         email: input.email,
       }
 
-      const emailVerifyToken = jwt.sign(payload, env.NEXTAUTH_SECRET, {
-        expiresIn: '1d',
-      })
+      const emailVerifyToken = jwt.sign(payload, env.USER_SETTINGS_JWT_SECRET, { expiresIn: '1d' })
 
       // no await here as we don't want to block the response
       transporter.sendMail({
@@ -75,10 +66,10 @@ export const authRouter = router({
   verifyEmail: publicProcedure
     .input(z.object({ token: z.string() }))
     .mutation(async ({ input }) => {
-      let decoded: EmailVerifyJwtPayload
+      let decoded: UserSettingsJwtPayload
 
       try {
-        decoded = jwt.verify(input.token, env.NEXTAUTH_SECRET) as EmailVerifyJwtPayload
+        decoded = jwt.verify(input.token, env.USER_SETTINGS_JWT_SECRET) as UserSettingsJwtPayload
       } catch (error) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -95,10 +86,37 @@ export const authRouter = router({
 
       await authenticateKeycloakClient()
 
+      const user = await keycloak.users.findOne({ id: decoded.userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      const emailVerifyTokenVersion =
+        parseInt(user.attributes?.emailVerifyTokenVersion?.[0]) || null
+
+      if (emailVerifyTokenVersion !== decoded.tokenVersion) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'INVALID_TOKEN_VERSION',
+        })
+      }
+
       await keycloak.users.update(
         { id: decoded.userId },
-        { emailVerified: true, requiredActions: [] }
+        {
+          email: decoded.email,
+          emailVerified: true,
+          requiredActions: [],
+          attributes: {
+            emailVerifyTokenVersion: (emailVerifyTokenVersion + 1).toString(),
+          },
+        }
       )
+
+      await keycloak.users.logout({ id: decoded.userId })
 
       return { email: decoded.email }
     }),
@@ -110,31 +128,32 @@ export const authRouter = router({
       const users = await keycloak.users.find({ email: input.email })
       const user = users[0]
 
-      if (!user || !user.id || !user.attributes)
+      if (!user || !user.id)
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: 'USER_NOT_FOUND',
         })
 
-      const passwordResetTokenVersion =
-        parseInt(user.attributes.passwordResetTokenVersion?.[0]) || null
+      let passwordResetTokenVersion =
+        parseInt(user.attributes?.passwordResetTokenVersion?.[0]) || null
 
       if (!passwordResetTokenVersion) {
-        console.error(`User ${user.id} has no passwordResetTokenVersion attribute`)
+        await keycloak.users.update(
+          { id: user.id },
+          { email: input.email, attributes: { passwordResetTokenVersion: 1 } }
+        )
 
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-        })
+        passwordResetTokenVersion = 1
       }
 
-      const payload: PasswordResetJwtPayload = {
+      const payload: UserSettingsJwtPayload = {
         action: 'password-reset',
         userId: user.id,
         email: input.email,
         tokenVersion: passwordResetTokenVersion,
       }
 
-      const passwordResetToken = jwt.sign(payload, env.NEXTAUTH_SECRET, {
+      const passwordResetToken = jwt.sign(payload, env.USER_SETTINGS_JWT_SECRET, {
         expiresIn: '30m',
       })
 
@@ -150,10 +169,10 @@ export const authRouter = router({
   resetPassword: publicProcedure
     .input(z.object({ token: z.string(), password: z.string().min(8) }))
     .mutation(async ({ input }) => {
-      let decoded: PasswordResetJwtPayload
+      let decoded: UserSettingsJwtPayload
 
       try {
-        decoded = jwt.verify(input.token, env.NEXTAUTH_SECRET) as PasswordResetJwtPayload
+        decoded = jwt.verify(input.token, env.USER_SETTINGS_JWT_SECRET) as UserSettingsJwtPayload
       } catch (error) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -171,21 +190,22 @@ export const authRouter = router({
       await authenticateKeycloakClient()
       const user = await keycloak.users.findOne({ id: decoded.userId })
 
-      if (!user || !user.attributes)
+      if (!user || !user.id || !user.email)
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: 'USER_NOT_FOUND',
         })
 
-      const passwordResetTokenVersion =
-        parseInt(user.attributes.passwordResetTokenVersion?.[0]) || null
+      let passwordResetTokenVersion =
+        parseInt(user.attributes?.passwordResetTokenVersion?.[0]) || null
 
       if (!passwordResetTokenVersion) {
-        console.error(`User ${user.id} has no passwordResetTokenVersion attribute`)
+        await keycloak.users.update(
+          { id: user.id },
+          { email: user.email, attributes: { passwordResetTokenVersion: 1 } }
+        )
 
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-        })
+        passwordResetTokenVersion = 1
       }
 
       if (decoded.tokenVersion !== passwordResetTokenVersion)
@@ -204,6 +224,8 @@ export const authRouter = router({
           },
         }
       )
+
+      await keycloak.users.logout({ id: decoded.userId })
 
       return { email: decoded.email }
     }),

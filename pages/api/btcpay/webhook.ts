@@ -11,6 +11,7 @@ import {
 import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
 import { env } from '../../../env.mjs'
 import { getUserPointBalance } from '../../../server/utils/perks'
+import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
 
 export const config = {
   api: {
@@ -27,7 +28,8 @@ type BtcpayBody = Record<string, any> & {
   timestamp: number
   storeId: string
   invoiceId: string
-  metadata: DonationMetadata
+  metadata?: DonationMetadata
+  paymentMethod: string
 }
 
 async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
@@ -58,13 +60,20 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
     return
   }
 
+  if (!body.metadata) {
+    return res.status(200).json({ success: true })
+  }
+
   if (body.type === 'InvoicePaymentSettled') {
     // Handle payments to funding required API invoices ONLY
     if (body.metadata.staticGeneratedForApi === 'false') {
       return res.status(200).json({ success: true })
     }
 
-    const cryptoCode = body.paymentMethod === 'BTC-OnChain' ? 'BTC' : 'XMR'
+    // Handle payment methods like "BTC-LightningNetwork" if added in the future
+    const cryptoCode = body.paymentMethod.includes('-')
+      ? body.paymentMethod.split('-')[0]
+      : body.paymentMethod
 
     const { data: rates } = await btcpayApi.get<BtcPayGetRatesRes>(
       `/rates?currencyPair=${cryptoCode}_USD`
@@ -103,6 +112,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
     // Create one donation and one point history for each invoice payment method
     await Promise.all(
       paymentMethods.map(async (paymentMethod) => {
+        if (!body.metadata) return
         const shouldGivePointsBack = body.metadata.givePointsBack === 'true'
         const cryptoRate = Number(paymentMethod.rate)
         const grossCryptoAmount = Number(paymentMethod.amount)
@@ -148,6 +158,20 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
               pointsAdded,
               pointsBalance: currentBalance + pointsAdded,
             },
+          })
+        }
+
+        if (body.metadata.donorEmail && body.metadata.donorName) {
+          sendDonationConfirmationEmail({
+            to: body.metadata.donorEmail,
+            donorName: body.metadata.donorName,
+            fundSlug: body.metadata.fundSlug,
+            projectName: body.metadata.projectName,
+            isMembership: body.metadata.isMembership === 'true',
+            isSubscription: false,
+            pointsReceived: pointsAdded,
+            btcpayAsset: paymentMethod.cryptoCode as 'BTC' | 'XMR',
+            btcpayCryptoAmount: grossCryptoAmount,
           })
         }
       })

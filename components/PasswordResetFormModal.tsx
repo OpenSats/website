@@ -21,21 +21,20 @@ type Props = { close: () => void }
 function PasswordResetFormModal({ close }: Props) {
   const { toast } = useToast()
 
-  const form = useForm<PasswordResetFormInputs>({
-    resolver: zodResolver(schema),
-  })
+  const form = useForm<PasswordResetFormInputs>({ resolver: zodResolver(schema) })
 
   const requestPasswordResetMutation = trpc.auth.requestPasswordReset.useMutation()
 
   async function onSubmit(data: PasswordResetFormInputs) {
-    await requestPasswordResetMutation.mutateAsync(data)
+    try {
+      await requestPasswordResetMutation.mutateAsync(data)
 
-    toast({
-      title: 'A password reset link has been sent to your email.',
-    })
-
-    close()
-    form.reset({ email: '' })
+      toast({ title: 'A password reset link has been sent to your email.' })
+      close()
+      form.reset({ email: '' })
+    } catch (error) {
+      toast({ title: 'Sorry, something went wrong.', variant: 'destructive' })
+    }
   }
 
   return (
@@ -61,7 +60,7 @@ function PasswordResetFormModal({ close }: Props) {
             )}
           />
 
-          <Button type="submit" disabled={form.formState.isSubmitting}>
+          <Button type="submit" disabled={!form.formState.isValid || form.formState.isSubmitting}>
             {form.formState.isSubmitting && <Spinner />} Reset Password
           </Button>
         </form>

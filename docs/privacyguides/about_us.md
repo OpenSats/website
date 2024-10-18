@@ -1,24 +1,7 @@
-# About the MAGIC Monero Fund
+# About the MAGIC Privacy Guides Fund
 
-MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)(3) U.S. nonprofit that focuses on building strong cryptocurrency communities and networks. [The MAGIC Monero Fund](https://magicgrants.org/funds/monero) is a subentity of MAGIC Grants guided by a five-member committee elected by [Monero community members](https://magicgrants.org/funds/monero/monero_fund_voters/).
+Privacy Guides is a socially motivated website that provides information for protecting your data security and privacy. We are a non-profit project with a mission to inform the public about the value of digital privacy, and about global government initiatives which aim to monitor your online activity. Our website is free of advertisements and not affiliated with any of the listed providers.
 
-### MAGIC Monero Fund Vision and Goals:
+Privacy Guides is fiscally hosted by MAGIC Grants, a 501(c)(3) public charity.
 
-* Improve the Monero ecosystem.
-* Support Monero development and research.
-* Create Monero educational resources.
-* Fund Monero security audits.
-* Run essential services that support the Monero ecosystem.
-
-### Committee Members
-
-* [Rucknium](https://github.com/Rucknium) is a Monero Research Lab researcher and economist who has focused on statistical obfuscation on Monero and Bitcoin Cash.
-
-* [kayabaNerve](https://twitter.com/kayabaNerve) is a Monero-ecosystem developer and security  researcher who was the first to implement Monero atomic swaps with ASMR.
-
-* [monerobull](https://twitter.com/monerobull) is a distributor of marketing materials for Monero Outreach and moderates various communication channels of the Monero community.
-
-* [artlimber](https://github.com/artlimber) is a Monero user and community supporter who believes privacy is a human right.
-
-* [kowalabearhugs](https://twitter.com/kowalabearhugs) is a Monero community member, photographer, artist, seasonal farmer, and offseason wanderer.
-
+More information: [https://www.privacyguides.org/en/about/](https://www.privacyguides.org/en/about/)

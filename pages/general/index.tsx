@@ -2,11 +2,8 @@ import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
-import { useTheme } from 'next-themes'
 
 import { getProjects } from '../../utils/md'
-import { ProjectItem } from '../../utils/types'
-import Typing from '../../components/Typing'
 import CustomLink from '../../components/CustomLink'
 import { Button } from '../../components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '../../components/ui/dialog'
@@ -51,11 +48,12 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
       <div className="divide-y divide-gray-200">
         <div className="pt-4 md:pb-8">
           <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Support <Typing />
+            Support MAGIC Grants
           </h1>
           <p className="max-w-3xl text-xl leading-7 text-gray-500">
-            Help us to provide sustainable funding for free and open-source contributors working on
-            freedom tech and projects that help Monero flourish.
+            MAGIC Grants is a public charity that provides undergraduate scholarships for students
+            interested in cryptocurrencies and privacy, supports public cryptocurrency
+            infrastructure, and supports privacy.
           </p>
 
           <div className="flex flex-col md:flex-row my-4 gap-2">
@@ -64,7 +62,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
               onClick={() => setDonateModalOpen(true)}
               size="lg"
             >
-              Donate to Monero Comittee General Fund
+              Donate to MAGIC Grants
             </Button>
 
             {!userHasMembershipQuery.data && (
@@ -90,18 +88,8 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             )}
           </div>
 
-          <div className="flex flex-row flex-wrap">
-            <p className="text-md leading-7 text-gray-500">
-              Want to receive funding for your work?
-              <CustomLink href={`/${fund.slug}/apply`}>
-                {' '}
-                Apply for a Monero development or research grant!
-              </CustomLink>
-            </p>
-          </div>
-
           <p className="text-sm leading-7 text-gray-400">
-            We are a 501(c)(3) public charity. All donations are tax deductible.
+            We are a 501(c)(3) public charity. Your donation may qualify for a tax deduction.
           </p>
         </div>
       </div>
@@ -125,13 +113,21 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 
       <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
         <DialogContent>
-          <DonationFormModal project={fund} />
+          <DonationFormModal
+            project={fund}
+            close={() => setDonateModalOpen(false)}
+            openRegisterModal={() => setRegisterIsOpen(true)}
+          />
         </DialogContent>
       </Dialog>
 
       <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
         <DialogContent>
-          <MembershipFormModal project={fund} />
+          <MembershipFormModal
+            project={fund}
+            close={() => setMemberModalOpen(false)}
+            openRegisterModal={() => setRegisterIsOpen(true)}
+          />
         </DialogContent>
       </Dialog>
 

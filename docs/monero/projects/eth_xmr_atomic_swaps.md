@@ -13,15 +13,15 @@ socialLinks:
 type: 'Other Free and Open Source Project'
 goal: 24000
 isFunded: true
-numdonationsxmr: 66
-totaldonationsinfiatxmr: 18861
-totaldonationsxmr: 125.74
-numdonationsbtc: 0
-totaldonationsinfiatbtc: 0
-totaldonationsbtc: 0
-fiatnumdonations: 8
-fiattotaldonationsinfiat: 5139
-fiattotaldonations: 5139
+numDonationsXMR: 66
+totalDonationsXMRInFiat: 18861
+totalDonationsXMR: 125.74
+numDonationsBTC: 0
+totalDonationsBTCInFiat: 0
+totalDonationsBTC: 0
+numDonationsFiat: 8
+totalDonationsFiat: 5139
+
 ---
 
 ### Funded Goal: 24,000 USD (5,000 USD contributed from the MAGIC Monero Fund general fund)

@@ -32,9 +32,9 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ENV BUILD_MODE 1
 ENV PRISMA_BINARY_TARGETS='["native", "rhel-openssl-1.0.x"]'
 ENV NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT='monerofund@magicgrants.org'
-ENV NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT='monerofund@magicgrants.org'
-ENV NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT='monerofund@magicgrants.org'
-ENV NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT='monerofund@magicgrants.org'
+ENV NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT='firofund@magicgrants.org'
+ENV NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT='privacyguidesfund@magicgrants.org'
+ENV NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT='info@magicgrants.org'
 RUN npx prisma generate
 
 RUN \
@@ -47,6 +47,8 @@ RUN \
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
+
+ARG BUILD_MODE=1
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.

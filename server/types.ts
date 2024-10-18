@@ -1,5 +1,17 @@
 import { FundSlug } from '@prisma/client'
 
+export type KeycloakJwtPayload = {
+  sub: string
+  email: string
+}
+
+export type UserSettingsJwtPayload = {
+  action: 'email_verify' | 'password-reset'
+  tokenVersion: number
+  userId: string
+  email: string
+}
+
 export type DonationMetadata = {
   userId: string | null
   donorEmail: string | null
@@ -7,6 +19,7 @@ export type DonationMetadata = {
   projectSlug: string
   projectName: string
   fundSlug: FundSlug
+  itemDesc?: string
   isMembership: 'true' | 'false'
   isSubscription: 'true' | 'false'
   isTaxDeductible: 'true' | 'false'
@@ -26,6 +39,9 @@ export type BtcPayGetPaymentMethodsRes = {
   rate: string
   amount: string
   cryptoCode: string
+  paymentMethod: string
+  paymentMethodPaid: string
+  destination: string
 }[]
 
 export type BtcPayCreateInvoiceBody = {

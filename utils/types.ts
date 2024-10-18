@@ -11,18 +11,17 @@ export type ProjectItem = {
   website: string
   socialLinks: string[]
   date: string
-  staticXMRaddress?: string
+  staticXMRaddress?: string | null
   goal: number
   isFunded?: boolean
-  numdonationsxmr: number
-  totaldonationsinfiatxmr: number
-  totaldonationsxmr: number
-  numdonationsbtc: number
-  totaldonationsinfiatbtc: number
-  totaldonationsbtc: number
-  fiatnumdonations: number
-  fiattotaldonationsinfiat: number
-  fiattotaldonations: number
+  numDonationsBTC: number
+  numDonationsXMR: number
+  numDonationsFiat: number
+  totalDonationsBTC: number
+  totalDonationsXMR: number
+  totalDonationsFiat: number
+  totalDonationsBTCInFiat: number
+  totalDonationsXMRInFiat: number
 }
 
 export type PayReq = {

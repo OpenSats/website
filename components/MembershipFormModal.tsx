@@ -21,9 +21,11 @@ import { useFundSlug } from '../utils/use-fund-slug'
 
 type Props = {
   project: ProjectItem | undefined
+  close: () => void
+  openRegisterModal: () => void
 }
 
-const MembershipFormModal: React.FC<Props> = ({ project }) => {
+const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModal }) => {
   const fundSlug = useFundSlug()
   const session = useSession()
   const isAuthed = session.status === 'authenticated'
@@ -135,7 +137,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
       </div>
 
       <Form {...form}>
-        <form className="flex flex-col gap-6">
+        <form className="flex flex-col gap-4">
           {!isAuthed && (
             <>
               <FormField
@@ -170,7 +172,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
 
           <div className="flex flex-col space-y-3">
             <FormLabel>Amount</FormLabel>
-            <span className="flex flex-row font-medium text-gray-700">
+            <span className="flex flex-row">
               <DollarSign className="text-primary" />
               100.00
             </span>
@@ -192,13 +194,13 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal text-gray-700">No</FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal text-gray-700">Yes</FormLabel>
+                      <FormLabel className="font-normal">Yes</FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -225,7 +227,7 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
                       <FormControl>
                         <RadioGroupItem value="no" />
                       </FormControl>
-                      <FormLabel className="font-normal text-gray-700">No</FormLabel>
+                      <FormLabel className="font-normal">No</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
@@ -322,7 +324,12 @@ const MembershipFormModal: React.FC<Props> = ({ project }) => {
         <div className="flex flex-col items-center ">
           <p>Want to support more projects from now on?</p>
 
-          <Button type="button" size="lg" variant="link">
+          <Button
+            type="button"
+            size="lg"
+            variant="link"
+            onClick={() => (openRegisterModal(), close())}
+          >
             Create an account
           </Button>
         </div>

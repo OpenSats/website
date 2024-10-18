@@ -24,9 +24,11 @@ import CustomLink from './CustomLink'
 
 type Props = {
   project: ProjectItem | undefined
+  close: () => void
+  openRegisterModal: () => void
 }
 
-const DonationFormModal: React.FC<Props> = ({ project }) => {
+const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close }) => {
   const fundSlug = useFundSlug()
   const session = useSession()
   const isAuthed = session.status === 'authenticated'
@@ -147,7 +149,7 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
       </div>
 
       <Form {...form}>
-        <form className="flex flex-col gap-6">
+        <form className="flex flex-col gap-4">
           {!isAuthed && (
             <>
               <FormField
@@ -347,7 +349,12 @@ const DonationFormModal: React.FC<Props> = ({ project }) => {
         <div className="flex flex-col items-center">
           <p>Want to support more projects from now on?</p>
 
-          <Button type="button" size="lg" variant="link">
+          <Button
+            type="button"
+            size="lg"
+            variant="link"
+            onClick={() => (openRegisterModal(), close())}
+          >
             Create an account
           </Button>
         </div>

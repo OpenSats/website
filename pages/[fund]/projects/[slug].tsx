@@ -84,81 +84,86 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
 
       <div className="divide-y divide-gray-200">
         <PageHeading project={project}>
-          <div className="flex flex-col items-center space-x-2 pt-8 xl:block">
+          <div className="w-full mt-8 flex flex-col md:flex-row items-center md:space-x-8 xl:space-x-0 space-y-10 md:space-y-0 xl:block">
             <Image
               src={coverImage}
               alt="avatar"
-              width={300}
-              height={300}
-              className="h-72 w-72 mx-auto object-contain xl:hidden"
+              width={700}
+              height={700}
+              className="w-full max-w-[700px] mx-auto object-contain xl:hidden"
             />
 
-            <div className="space-y-4">
-              {!project.isFunded && (
-                <div className="flex flex-col space-y-2">
-                  <Button onClick={() => setDonateModalOpen(true)}>Donate</Button>
+            <div className="w-full max-w-96 space-y-8 p-6 bg-white rounded-xl">
+              <div className="w-full">
+                {!project.isFunded && (
+                  <div className="flex flex-col space-y-2">
+                    <Button onClick={() => setDonateModalOpen(true)}>Donate</Button>
 
-                  {!userHasMembershipQuery.data && (
-                    <Button
-                      onClick={() =>
-                        session.status === 'authenticated'
-                          ? setMemberModalOpen(true)
-                          : setRegisterIsOpen(true)
-                      }
-                      variant="outline"
-                    >
-                      Get Annual Membership
-                    </Button>
-                  )}
+                    {!userHasMembershipQuery.data && (
+                      <Button
+                        onClick={() =>
+                          session.status === 'authenticated'
+                            ? setMemberModalOpen(true)
+                            : setRegisterIsOpen(true)
+                        }
+                        variant="outline"
+                      >
+                        Get Annual Membership
+                      </Button>
+                    )}
 
-                  {!!userHasMembershipQuery.data && (
-                    <Button variant="outline">
-                      <CustomLink href={`${fundSlug}/account/my-memberships`}>
-                        My Memberships
-                      </CustomLink>
-                    </Button>
-                  )}
-                </div>
-              )}
+                    {!!userHasMembershipQuery.data && (
+                      <Button variant="outline">
+                        <CustomLink href={`${fundSlug}/account/my-memberships`}>
+                          My Memberships
+                        </CustomLink>
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
 
-              <h1 className="mb-4 font-bold">Raised</h1>
+              <div className="w-full">
+                <h1 className="mb-4 font-bold">Raised</h1>
 
-              <Progress
-                current={
-                  donationStats.xmr.fiatAmount +
-                  donationStats.btc.fiatAmount +
-                  donationStats.usd.fiatAmount
-                }
-                goal={goal}
-              />
+                <Progress
+                  current={
+                    donationStats.xmr.fiatAmount +
+                    donationStats.btc.fiatAmount +
+                    donationStats.usd.fiatAmount
+                  }
+                  goal={goal}
+                />
 
-              <ul className="font-semibold space-y-1">
-                <li className="flex items-center space-x-1">
-                  <span className="text-green-500 text-xl">{`${formatUsd(donationStats.xmr.fiatAmount + donationStats.btc.fiatAmount + donationStats.usd.fiatAmount)}`}</span>{' '}
-                  <span className="font-normal text-sm text-gray">
-                    in {donationStats.xmr.count + donationStats.btc.count + donationStats.usd.count}{' '}
-                    donations total
-                  </span>
-                </li>
-                <li>
-                  {donationStats.xmr.amount} XMR{' '}
-                  <span className="font-normal text-sm text-gray">
-                    in {donationStats.xmr.count} donations
-                  </span>
-                </li>
-                <li>
-                  {formatBtc(donationStats.btc.amount)}{' '}
-                  <span className="font-normal text-sm text-gray">
-                    in {donationStats.btc.count} donations
-                  </span>
-                </li>
-                <li>
-                  {`${formatUsd(donationStats.usd.amount)}`} Fiat{' '}
-                  <span className="font-normal text-sm text-gray">
-                    in {donationStats.usd.count} donations
-                  </span>
-                </li>
-              </ul>
+                <ul className="font-semibold space-y-1">
+                  <li className="flex items-center space-x-1">
+                    <span className="text-green-500 text-xl">{`${formatUsd(donationStats.xmr.fiatAmount + donationStats.btc.fiatAmount + donationStats.usd.fiatAmount)}`}</span>{' '}
+                    <span className="font-normal text-sm text-gray">
+                      in{' '}
+                      {donationStats.xmr.count + donationStats.btc.count + donationStats.usd.count}{' '}
+                      donations total
+                    </span>
+                  </li>
+                  <li>
+                    {donationStats.xmr.amount} XMR{' '}
+                    <span className="font-normal text-sm text-gray">
+                      in {donationStats.xmr.count} donations
+                    </span>
+                  </li>
+                  <li>
+                    {formatBtc(donationStats.btc.amount)}{' '}
+                    <span className="font-normal text-sm text-gray">
+                      in {donationStats.btc.count} donations
+                    </span>
+                  </li>
+                  <li>
+                    {`${formatUsd(donationStats.usd.amount)}`} Fiat{' '}
+                    <span className="font-normal text-sm text-gray">
+                      in {donationStats.usd.count} donations
+                    </span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -171,13 +176,21 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
 
       <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
         <DialogContent>
-          <DonationFormModal project={project} />
+          <DonationFormModal
+            project={project}
+            close={() => setDonateModalOpen(false)}
+            openRegisterModal={() => setRegisterIsOpen(true)}
+          />
         </DialogContent>
       </Dialog>
 
       <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
         <DialogContent>
-          <MembershipFormModal project={project} />
+          <MembershipFormModal
+            project={project}
+            close={() => setMemberModalOpen(false)}
+            openRegisterModal={() => setRegisterIsOpen(true)}
+          />
         </DialogContent>
       </Dialog>
 
@@ -226,19 +239,19 @@ export async function getServerSideProps({ params, resolvedUrl }: GetServerSideP
 
   const donationStats = {
     xmr: {
-      count: project.isFunded ? project.numdonationsxmr : 0,
-      amount: project.isFunded ? project.totaldonationsxmr : 0,
-      fiatAmount: project.isFunded ? project.totaldonationsinfiatxmr : 0,
+      count: project.isFunded ? project.numDonationsXMR : 0,
+      amount: project.isFunded ? project.totalDonationsXMR : 0,
+      fiatAmount: project.isFunded ? project.totalDonationsXMRInFiat : 0,
     },
     btc: {
-      count: project.isFunded ? project.numdonationsbtc : 0,
-      amount: project.isFunded ? project.totaldonationsbtc : 0,
-      fiatAmount: project.isFunded ? project.totaldonationsinfiatbtc : 0,
+      count: project.isFunded ? project.numDonationsBTC : 0,
+      amount: project.isFunded ? project.totalDonationsBTC : 0,
+      fiatAmount: project.isFunded ? project.totalDonationsBTCInFiat : 0,
     },
     usd: {
-      count: project.isFunded ? project.fiatnumdonations : 0,
-      amount: project.isFunded ? project.fiattotaldonations : 0,
-      fiatAmount: project.isFunded ? project.fiattotaldonationsinfiat : 0,
+      count: project.isFunded ? project.numDonationsFiat : 0,
+      amount: project.isFunded ? project.totalDonationsFiat : 0,
+      fiatAmount: project.isFunded ? project.totalDonationsFiat : 0,
     },
   }
 

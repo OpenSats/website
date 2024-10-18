@@ -77,7 +77,7 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
     <>
       <DialogHeader>
         <DialogTitle>Register</DialogTitle>
-        <DialogDescription>Start supporting Monero projects today!</DialogDescription>
+        <DialogDescription>Start supporting projects today!</DialogDescription>
       </DialogHeader>
 
       <Form {...form}>
@@ -148,7 +148,11 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
               I already have an account
             </Button>
 
-            <Button type="submit" disabled={form.formState.isSubmitting} className="grow basis-0">
+            <Button
+              type="submit"
+              disabled={!form.formState.isValid || form.formState.isSubmitting}
+              className="grow basis-0"
+            >
               {form.formState.isSubmitting && <Spinner />} Register
             </Button>
           </div>

@@ -13,15 +13,15 @@ date: '2023-06-08'
 staticXMRaddress: '87LZA8XLDvhVKLi974MaxUANcvkWdL6n986R7WNgKLXY16y31t69Z8228EWcg8THQq3tuAWfQ7Np35Tt3AhPrjzcNbm8Jr5'
 goal: 29260
 isFunded: true
-numdonationsxmr: 27
-totaldonationsinfiatxmr: 29260
-totaldonationsxmr: 220
-numdonationsbtc: 0
-totaldonationsinfiatbtc: 0
-totaldonationsbtc: 0
-fiatnumdonations: 0
-fiattotaldonationsinfiat: 0
-fiattotaldonations: 0
+numDonationsXMR: 27
+totalDonationsXMRInFiat: 29260
+totalDonationsXMR: 220
+numDonationsBTC: 0
+totalDonationsBTCInFiat: 0
+totalDonationsBTC: 0
+numDonationsFiat: 0
+totalDonationsFiat: 0
+
 ---
 
 ### Funded Goal: 220 XMR (86 XMR contributed from MAGIC Monero Fund general fund)

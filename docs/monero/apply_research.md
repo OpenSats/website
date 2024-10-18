@@ -25,7 +25,7 @@ The MAGIC Monero Fund accepts applications on a rolling basis. Applications will
 
 ## Proposal Format  
 
-Applicants must submit their applications on the web form [here](/apply). Alternatively, applicants can submit a PDF file by email to MoneroFund@magicgrants.org . Applicants are free to use their legal name or a pseudonym at this step, although note the "Eligibility" section below.  
+Applicants must submit their applications on the web form [here](/monero/apply). Alternatively, applicants can submit a PDF file by email to MoneroFund@magicgrants.org . Applicants are free to use their legal name or a pseudonym at this step, although note the "Eligibility" section below.  
 
 The research plan should be 3-5 pages (not counting citations, any images, and biographical sketch) and include the following:  
 
@@ -73,7 +73,7 @@ If your proposal seek to uncover weaknesses in the privacy and/or security featu
 
 ## How to Submit an Application
 
-Applicants must submit their applications on the web form [here](/apply). Alternatively, applicants can submit a PDF file by email to MoneroFund@magicgrants.org
+Applicants must submit their applications on the web form [here](/monero/apply). Alternatively, applicants can submit a PDF file by email to MoneroFund@magicgrants.org
 
 ## Contact  
 

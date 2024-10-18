@@ -55,7 +55,7 @@ function ResetPassword() {
       })
 
       toast({ title: 'Password successfully reset. You may now log in.' })
-      router.push(`/${fundSlug}/?loginEmail=${data.email}`)
+      router.push(`/${fundSlug}/?loginEmail=${encodeURIComponent(data.email)}`)
     } catch (error) {
       const errorMessage = (error as any).message
 

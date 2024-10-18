@@ -9,7 +9,7 @@ import { env } from '../../env.mjs'
 import { btcpayApi, keycloak, prisma, stripe as _stripe } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
-import { fundSlugs } from '../../utils/funds'
+import { funds, fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
 
 export const donationRouter = router({
@@ -131,6 +131,7 @@ export const donationRouter = router({
         projectSlug: input.projectSlug,
         projectName: input.projectName,
         fundSlug: input.fundSlug,
+        itemDesc: `MAGIC ${funds[input.fundSlug].title}`,
         isMembership: 'false',
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
@@ -145,7 +146,9 @@ export const donationRouter = router({
         checkout: { redirectURL: `${env.APP_URL}/${input.fundSlug}/thankyou` },
       })
 
-      return { url: invoice.checkoutLink }
+      const url = invoice.checkoutLink.replace(/^(https?:\/\/)([^\/]+)/, env.BTCPAY_EXTERNAL_URL)
+
+      return { url }
     }),
 
   payMembershipWithFiat: protectedProcedure
@@ -182,6 +185,7 @@ export const donationRouter = router({
       const user = await keycloak.users.findOne({ id: userId })
       const email = user?.email!
       const name = user?.attributes?.name?.[0]!
+
       let stripeCustomerId =
         user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0] || null
 
@@ -190,10 +194,7 @@ export const donationRouter = router({
 
         stripeCustomerId = customer.id
 
-        await keycloak.users.update(
-          { id: userId },
-          { email: email, attributes: { stripeCustomerId } }
-        )
+        await keycloak.users.update({ id: userId }, { email, attributes: { stripeCustomerId } })
       }
 
       const metadata: DonationMetadata = {
@@ -302,6 +303,7 @@ export const donationRouter = router({
         donorEmail: email,
         projectSlug: input.projectSlug,
         projectName: input.projectName,
+        itemDesc: `MAGIC ${funds[input.fundSlug].title}`,
         fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: 'false',

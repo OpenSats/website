@@ -3,20 +3,10 @@ import { CreateNextContextOptions } from '@trpc/server/adapters/next'
 import { getServerSession } from 'next-auth/next'
 import superjson from 'superjson'
 import util from 'util'
+import { authOptions } from '../pages/api/auth/[...nextauth]'
 
 export const createContext = async (opts: CreateNextContextOptions) => {
-  const session = await getServerSession(opts.req, opts.res, {
-    callbacks: {
-      session({ session, token }) {
-        if (token.sub) {
-          session.user.sub = token.sub
-        }
-
-        return session
-      },
-    },
-  })
-
+  const session = await getServerSession(opts.req, opts.res, authOptions)
   return { session }
 }
 
@@ -56,7 +46,7 @@ export const publicProcedure = t.procedure.use((opts) => {
 })
 
 export const protectedProcedure = t.procedure.use((opts) => {
-  if (!opts.ctx.session?.user) {
+  if (!opts.ctx.session?.user || opts.ctx.session.error) {
     throw new TRPCError({ code: 'UNAUTHORIZED' })
   }
 
@@ -66,7 +56,7 @@ export const protectedProcedure = t.procedure.use((opts) => {
       ...opts.ctx,
       session: {
         ...opts.ctx.session,
-        user: opts.ctx.session?.user!,
+        user: opts.ctx.session.user,
       },
     },
   })

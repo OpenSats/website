@@ -42,9 +42,9 @@ const strapiApi = axios.create({
 
 const stripe: Record<FundSlug, Stripe> = {
   monero: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
-  firo: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
-  privacyguides: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
-  general: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
+  firo: new Stripe(env.STRIPE_FIRO_SECRET_KEY, { apiVersion: '2024-04-10' }),
+  privacyguides: new Stripe(env.STRIPE_PRIVACY_GUIDES_SECRET_KEY, { apiVersion: '2024-04-10' }),
+  general: new Stripe(env.STRIPE_GENERAL_SECRET_KEY, { apiVersion: '2024-04-10' }),
 }
 
 export { prisma, keycloak, transporter, btcpayApi, strapiApi, stripe }

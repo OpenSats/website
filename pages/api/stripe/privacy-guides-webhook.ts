@@ -7,4 +7,4 @@ export const config = {
   },
 }
 
-export default getStripeWebhookHandler(env.STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET)
+export default getStripeWebhookHandler('privacyguides', env.STRIPE_PRIVACY_GUIDES_WEBHOOK_SECRET)

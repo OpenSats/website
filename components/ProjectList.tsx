@@ -17,8 +17,8 @@ const ProjectList: React.FC<ProjectListProps> = ({
   projects,
 }) => {
   return (
-    <section className="bg-light items-left flex flex-col">
-      <ul className="mx-auto grid max-w-5xl grid-cols-1 sm:mx-0 sm:grid-cols-2  lg:grid-cols-3 gap-4">
+    <section className="flex flex-col">
+      <ul className="mx-auto grid max-w-5xl grid-cols-1 sm:mx-0 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {projects &&
           projects.slice(0, 6).map((p, i) => (
             <li key={i} className="">

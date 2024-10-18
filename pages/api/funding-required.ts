@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { FundSlug } from '@prisma/client'
 import { z } from 'zod'
 import dayjs from 'dayjs'
-import path from 'path'
 
 import { getProjects } from '../../utils/md'
 import { env } from '../../env.mjs'
@@ -14,7 +13,7 @@ import {
   BtcPayGetRatesRes,
   DonationMetadata,
 } from '../../server/types'
-import { funds, fundSlugs } from '../../utils/funds'
+import { fundSlugs } from '../../utils/funds'
 
 const ASSETS = ['BTC', 'XMR', 'USD'] as const
 
@@ -85,9 +84,11 @@ async function handle(
   }
 
   const projects = (await getProjects(query.fund)).filter((project) =>
-    query.project_status === 'ANY' || query.project_status === 'FUNDED'
+    query.project_status === 'FUNDED'
       ? project.isFunded
-      : !project.isFunded
+      : query.project_status === 'ANY'
+        ? true
+        : !project.isFunded
   )
 
   const rates: Record<string, number | undefined> = {}
@@ -110,8 +111,8 @@ async function handle(
       let moneroAddress: string | null = null
 
       if (!project.isFunded) {
-        const existingAddresses = await prisma.projectAddresses.findFirst({
-          where: { projectSlug: project.slug, fundSlug: project.fund },
+        const existingAddresses = await prisma.projectAddresses.findUnique({
+          where: { projectSlug_fundSlug: { projectSlug: project.slug, fundSlug: project.fund } },
         })
 
         // Create invoice if there's no existing address
@@ -131,16 +132,17 @@ async function handle(
           }
 
           const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {
+            checkout: { monitoringMinutes: 9999999 },
             currency: CURRENCY,
             metadata,
           })
 
-          const paymentMethodsResponse = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
+          const { data: paymentMethods } = await btcpayApi.get<BtcPayGetPaymentMethodsRes>(
             `/invoices/${invoice.id}/payment-methods`
           )
 
-          paymentMethodsResponse.data.forEach((paymentMethod: any) => {
-            if (paymentMethod.paymentMethod === 'BTC-OnChain') {
+          paymentMethods.forEach((paymentMethod) => {
+            if (paymentMethod.paymentMethod === 'BTC') {
               bitcoinAddress = paymentMethod.destination
             }
 
@@ -181,9 +183,9 @@ async function handle(
       const targetAmountUsd = project.goal
 
       const allDonationsSumUsd =
-        project.totaldonationsinfiatbtc +
-        project.totaldonationsinfiatxmr +
-        project.fiattotaldonationsinfiat
+        project.totalDonationsBTCInFiat +
+        project.totalDonationsXMRInFiat +
+        project.totalDonationsFiat
 
       const remainingAmountBtc = (project.goal - allDonationsSumUsd) / (rates.BTC || 0)
       const remainingAmountXmr = (project.goal - allDonationsSumUsd) / (rates.XMR || 0)
@@ -194,7 +196,7 @@ async function handle(
         fund: project.fund,
         date: project.date,
         author: project.nym,
-        url: path.join(env.APP_URL, project.fund, project.slug),
+        url: `${env.APP_URL}/${project.fund}/${project.slug}`,
         is_funded: !!project.isFunded,
         target_amount_btc: Number(targetAmountBtc.toFixed(8)),
         target_amount_xmr: Number(targetAmountXmr.toFixed(12)),
@@ -204,13 +206,14 @@ async function handle(
         remaining_amount_usd: Number((remainingAmountUsd > 0 ? remainingAmountUsd : 0).toFixed(2)),
         address_btc: bitcoinAddress,
         address_xmr: moneroAddress,
-        raised_amount_percent:
-          ((project.totaldonationsinfiatxmr +
-            project.totaldonationsinfiatbtc +
-            project.fiattotaldonationsinfiat) /
+        raised_amount_percent: Math.floor(
+          ((project.totalDonationsBTCInFiat +
+            project.totalDonationsXMRInFiat +
+            project.totalDonationsFiat) /
             project.goal) *
-          100,
-        contributions: project.numdonationsbtc + project.numdonationsxmr + project.fiatnumdonations,
+            100
+        ),
+        contributions: project.numDonationsBTC + project.numDonationsXMR + project.numDonationsFiat,
       }
     })
   )

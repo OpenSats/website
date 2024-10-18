@@ -11,6 +11,7 @@ export const env = createEnv({
     BUILD_MODE: z.boolean(),
     APP_URL: z.string().url(),
     NEXTAUTH_SECRET: z.string().min(32),
+    USER_SETTINGS_JWT_SECRET: z.string().min(32),
 
     STRAPI_API_URL: z.string().url(),
     STRAPI_API_TOKEN: z.string().length(256),
@@ -36,6 +37,7 @@ export const env = createEnv({
     KEYCLOAK_REALM_NAME: z.string().min(1),
 
     BTCPAY_URL: z.string().url(),
+    BTCPAY_EXTERNAL_URL: z.string().url(),
     BTCPAY_API_KEY: z.string().min(1),
     BTCPAY_STORE_ID: z.string().min(1),
     BTCPAY_WEBHOOK_SECRET: z.string().min(1),
@@ -67,6 +69,7 @@ export const env = createEnv({
     BUILD_MODE: !!process.env.BUILD_MODE,
     APP_URL: process.env.APP_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    USER_SETTINGS_JWT_SECRET: process.env.USER_SETTINGS_JWT_SECRET,
 
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     STRAPI_API_URL: process.env.STRAPI_API_URL,
@@ -88,6 +91,7 @@ export const env = createEnv({
     STRIPE_GENERAL_WEBHOOK_SECRET: process.env.STRIPE_GENERAL_WEBHOOK_SECRET,
 
     KEYCLOAK_URL: process.env.KEYCLOAK_URL,
+    BTCPAY_EXTERNAL_URL: process.env.BTCPAY_EXTERNAL_URL,
     KEYCLOAK_CLIENT_ID: process.env.KEYCLOAK_CLIENT_ID,
     KEYCLOAK_CLIENT_SECRET: process.env.KEYCLOAK_CLIENT_SECRET,
     KEYCLOAK_REALM_NAME: process.env.KEYCLOAK_REALM_NAME,

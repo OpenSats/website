@@ -113,11 +113,13 @@ function Home({ projects }: { projects: ProjectItem[] }) {
         </div>
       </div>
 
-      <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-        Campaigns
-      </h1>
+      <div className="w-full space-y-4">
+        <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          Campaigns
+        </h1>
 
-      <ProjectList projects={projects} />
+        <ProjectList projects={projects} />
+      </div>
     </div>
   )
 }

@@ -59,6 +59,8 @@ model ProjectAddresses {
   btcPayInvoiceId String
   bitcoinAddress  String
   moneroAddress   String
+
+  @@unique([projectSlug, fundSlug])
 }
 
 model PointHistory {

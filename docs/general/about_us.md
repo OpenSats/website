@@ -1,24 +1,19 @@
-# About the MAGIC Monero Fund
+# About MAGIC Grants
 
-MAGIC (Multidisciplinary Academic Grants in Cryptocurrencies) Grants is a 501(c)(3) U.S. nonprofit that focuses on building strong cryptocurrency communities and networks. [The MAGIC Monero Fund](https://magicgrants.org/funds/monero) is a subentity of MAGIC Grants guided by a five-member committee elected by [Monero community members](https://magicgrants.org/funds/monero/monero_fund_voters/).
+MAGIC Grants is a public charity that provides undergraduate scholarships for students interested in cryptocurrencies and privacy, supports public cryptocurrency infrastructure, and supports privacy.
 
-### MAGIC Monero Fund Vision and Goals:
+## Scholarships
 
-* Improve the Monero ecosystem.
-* Support Monero development and research.
-* Create Monero educational resources.
-* Fund Monero security audits.
-* Run essential services that support the Monero ecosystem.
+MAGIC Grants offers undergraduate scholarships to students who are interested in cryptocurrencies.
 
-### Committee Members
+## Infrastructure Grants
 
-* [Rucknium](https://github.com/Rucknium) is a Monero Research Lab researcher and economist who has focused on statistical obfuscation on Monero and Bitcoin Cash.
+MAGIC Grants offers infrastructure grants to cryptocurrency ecosystems. These grants can help with security audits, research and development, or community-building.
 
-* [kayabaNerve](https://twitter.com/kayabaNerve) is a Monero-ecosystem developer and security  researcher who was the first to implement Monero atomic swaps with ASMR.
+## Education Grants
 
-* [monerobull](https://twitter.com/monerobull) is a distributor of marketing materials for Monero Outreach and moderates various communication channels of the Monero community.
+MAGIC Grants supports leading educational resources for cryptocurrencies and privacy.
 
-* [artlimber](https://github.com/artlimber) is a Monero user and community supporter who believes privacy is a human right.
+## MAGIC Funds
 
-* [kowalabearhugs](https://twitter.com/kowalabearhugs) is a Monero community member, photographer, artist, seasonal farmer, and offseason wanderer.
-
+Semi-autonomous committees raise funds and issue qualifying grants to empower their communities.

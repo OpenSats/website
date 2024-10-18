@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { FundSlug } from '@prisma/client'
 import Stripe from 'stripe'
 import getRawBody from 'raw-body'
 import dayjs from 'dayjs'
-import crypto from 'crypto'
 
-import { btcpayApi as _btcpayApi, prisma, stripe } from '../../server/services'
+import { btcpayApi as _btcpayApi, prisma, stripe as _stripe } from '../../server/services'
 import { DonationMetadata } from '../../server/types'
+import { sendDonationConfirmationEmail } from './mailing'
 import { getUserPointBalance } from './perks'
 
-export function getStripeWebhookHandler(secret: string) {
+export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     let event: Stripe.Event
 
@@ -16,7 +17,8 @@ export function getStripeWebhookHandler(secret: string) {
     const signature = req.headers['stripe-signature']
 
     try {
-      event = stripe.monero.webhooks.constructEvent(await getRawBody(req), signature!, secret)
+      const stripe = _stripe[fundSlug]
+      event = stripe.webhooks.constructEvent(await getRawBody(req), signature!, secret)
     } catch (err) {
       console.log(`⚠️  Webhook signature verification failed.`, (err as any).message)
       res.status(400).end()
@@ -55,6 +57,19 @@ export function getStripeWebhookHandler(secret: string) {
               metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
           },
         })
+
+      if (metadata.donorEmail && metadata.donorName) {
+        sendDonationConfirmationEmail({
+          to: metadata.donorEmail,
+          donorName: metadata.donorName,
+          fundSlug: metadata.fundSlug,
+          projectName: metadata.projectName,
+          isMembership: metadata.isMembership === 'true',
+          isSubscription: metadata.isSubscription === 'true',
+          stripeUsdAmount: paymentIntent.amount_received / 100,
+          pointsReceived: pointsAdded,
+        })
+      }
     }
 
     // Store subscription data when subscription invoice is paid
@@ -107,11 +122,24 @@ export function getStripeWebhookHandler(secret: string) {
               pointsBalance: currentBalance + pointsAdded,
             },
           })
+
+          if (metadata.donorEmail && metadata.donorName) {
+            sendDonationConfirmationEmail({
+              to: metadata.donorEmail,
+              donorName: metadata.donorName,
+              fundSlug: metadata.fundSlug,
+              projectName: metadata.projectName,
+              isMembership: metadata.isMembership === 'true',
+              isSubscription: metadata.isSubscription === 'true',
+              stripeUsdAmount: invoice.total / 100,
+              pointsReceived: pointsAdded,
+            })
+          }
         }
       }
-    }
 
-    // Return a 200 response to acknowledge receipt of the event
-    res.status(200).end()
+      // Return a 200 response to acknowledge receipt of the event
+      res.status(200).end()
+    }
   }
 }

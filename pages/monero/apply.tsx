@@ -45,8 +45,7 @@ export default function Apply() {
             Monero research and development, especially relating to privacy, security, user
             experience, and efficiency. Proposals can be related to the Monero protocol directly, or
             they can be related to other areas of the Monero ecosystem. For research projects,
-            please refer to special instructions
-            <Link href="/apply_research"> here</Link>.
+            please refer to special instructions <Link href="/monero/apply_research">here</Link>.
           </p>
           <h2>Proposal Evaluation Criteria</h2>
           <div>
@@ -88,7 +87,7 @@ export default function Apply() {
           <p>
             To submit a proposal, please complete the form below or create an issue on{' '}
             <a href="https://github.com/MAGICGrants/Monero-Fund/issues/new?assignees=&labels=&template=grant-application.md&title=[Grant+Title]">
-              Github
+              GitHub
             </a>
             . Applicants are free to use their legal name or a pseudonym at this step, although note
             the{' '}
@@ -108,12 +107,12 @@ export default function Apply() {
 
         <label className="checkbox">
           <input type="checkbox" {...register('general_fund')} />
-          Apply to receive a grant from the Magic Monero Fund.
+          Apply to receive a grant from the MAGIC Monero Fund.
         </label>
 
         <label className="checkbox">
           <input type="checkbox" {...register('explore_page')} />
-          Apply for project to be listed on the Monero Fund Donation Page.
+          Apply for project to be listed on the Monero Fund donation page.
         </label>
 
         <div className="w-full flex flex-col">
@@ -170,7 +169,7 @@ export default function Apply() {
           <label htmlFor="other_contact">Other Contact Details (if applicable)</label>
           <small>
             Please list any other relevant contact details you are comfortable sharing in case we
-            need to reach out with questions. These could include github username, twitter username,
+            need to reach out with questions. These could include GitHub username, Twitter username,
             LinkedIn, Reddit handle, other social media handles, emails, phone numbers, usernames,
             etc.
           </small>
@@ -276,7 +275,7 @@ export default function Apply() {
           The MAGIC Monero Fund may require each recipient to sign a Grant Agreement before any
           funds are disbursed. This agreement will set milestones and funds will only be released
           upon completion of milestones. In order to comply with US regulations, recipients will
-          need to identify themselves to MAGIC, in accordance with US law.
+          need to identify themselves to MAGIC Grants, in accordance with US law.
         </small>
 
         <Button disabled={applyMutation.isPending}>Apply</Button>

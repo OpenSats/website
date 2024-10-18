@@ -4,7 +4,7 @@ import markdownToHtml from '../utils/markdownToHtml'
 import { getSingleFile } from '../utils/md'
 import BigDumbMarkdown from '../components/BigDumbMarkdown'
 
-export default function Terms({ content }: { content: string }) {
+export default function Privacy({ content }: { content: string }) {
   return <BigDumbMarkdown content={content} />
 }
 

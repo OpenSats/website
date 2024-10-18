@@ -1,12 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* #3a76f0 (Signal blue) as the default accent color
-#F1F5FF as the default background color
-#ff6600 (monero orange) as the accent color for the MAGIC Monero Fund
-#9b1c2e (firo red) as the accent color for the MAGIC Firo Fund
-#f7f0f1 (firo off-white background) as the background color for the MAGIC Firo Fund
-#FFD06F (privacy guides yellow) as the accent color for the MAGIC Privacy Guides Fund */
+
 @layer base {
   :root {
     --monero: 24 100% 50%;
@@ -16,8 +11,8 @@
   }
 
   .monero {
-    --background: 223, 100%, 97%;
-    --foreground: 223, 84%, 5%;
+    --background: 24 100% 95%;
+    --foreground: 223 84% 5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -68,8 +63,8 @@
   }
 
   .privacyguides {
-    --background: 223, 100%, 97%;
-    --foreground: 223, 84%, 5%;
+    --background: 40 100% 95;
+    --foreground: 223 84% 5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -94,8 +89,8 @@
   }
 
   .general {
-    --background: 223, 100%, 97%;
-    --foreground: 223, 84%, 5%;
+    --background: 220 100% 95%;
+    --foreground: 223 84% 5%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;

@@ -7,4 +7,4 @@ export const config = {
   },
 }
 
-export default getStripeWebhookHandler(env.STRIPE_FIRO_WEBHOOK_SECRET)
+export default getStripeWebhookHandler('firo', env.STRIPE_FIRO_WEBHOOK_SECRET)
