@@ -266,7 +266,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
-              Pay with Fiat
+              Pay with Card
             </Button>
           </div>
         </form>

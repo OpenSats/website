@@ -290,7 +290,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
-              Donate with Fiat
+              Donate with Card
             </Button>
           </div>
         </form>
