@@ -69,14 +69,22 @@ export type BtcPayCreateInvoiceRes = {
   archived: boolean
 }
 
+// Strapi Perk
+
 export type StrapiPerk = {
   id: number
   documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
   name: string
   description: string
   price: number
   fundSlugWhitelist: string | null
   needsShippingAddress: boolean
+}
+
+export type StrapiPerkPopulated = StrapiPerk & {
   images: {
     formats: {
       large: { url: string }
@@ -85,31 +93,10 @@ export type StrapiPerk = {
       thumbnail: { url: string }
     }
   }[]
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
 }
 
-type StrapiOrder = {
-  id: number
-  documentId: string
-  userId: string
-  userEmail: string
-  shippingAddressLine1: string
-  shippingAddressLine2: string
-  shippingCity: string
-  shippingState: string
-  shippingCountry: string
-  shippingZip: string
-  shippingPhone: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  locale: null
-}
-
-export type StrapiGetPerksRes = {
-  data: StrapiPerk[]
+export type StrapiGetPerksPopulatedRes = {
+  data: StrapiPerkPopulated[]
 
   meta: {
     pagination: {
@@ -127,7 +114,89 @@ export type StrapiGetPerkRes = {
   meta: {}
 }
 
+// Strapi Order
+
+type StrapiOrder = {
+  id: number
+  documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+
+  userId: string
+  userEmail: string
+  shippingAddressLine1?: string
+  shippingAddressLine2?: string
+  shippingCity?: string
+  shippingState?: string
+  shippingCountry?: string
+  shippingZip?: string
+  shippingPhone?: string
+}
+
+export type StrapiCreateOrderBody = {
+  data: Omit<StrapiOrder, 'id' | 'documentId' | 'createdAt' | 'updatedAt' | 'publishedAt'> & {
+    perk: string
+  }
+}
+
 export type StrapiCreateOrderRes = {
   data: StrapiOrder
   meta: {}
+}
+
+// Strapi Point
+
+export type StrapiPoint = {
+  id: number
+  documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+
+  balanceChange: string
+  balance: string
+  userId: string
+  donationId?: string
+  donationProjectSlug?: string
+  donationProjectName?: string
+  donationFundSlug?: FundSlug
+}
+
+export type StrapiPointPopulated = StrapiPoint & {
+  perk?: StrapiPerk
+  order?: StrapiOrder
+}
+
+export type StrapiCreatePointBody = {
+  data: Omit<StrapiPoint, 'id' | 'documentId' | 'createdAt' | 'updatedAt' | 'publishedAt'> & {
+    perk?: string
+    order?: string
+  }
+}
+
+export type StrapiGetPointPopulatedRes = {
+  data: StrapiPointPopulated | null
+
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
+}
+
+export type StrapiGetPointsPopulatedRes = {
+  data: StrapiPointPopulated[]
+
+  meta: {
+    pagination: {
+      page: number
+      pageSize: number
+      pageCount: number
+      total: number
+    }
+  }
 }

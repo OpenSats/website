@@ -1,9 +1,9 @@
-import { StrapiPerk } from '../server/types'
+import { StrapiPerk, StrapiPerkPopulated } from '../server/types'
 import PerkCard from './PerkCard'
 import { trpc } from '../utils/trpc'
 
 type Props = {
-  perks: StrapiPerk[]
+  perks: StrapiPerkPopulated[]
 }
 
 const PerkList: React.FC<Props> = ({ perks }) => {

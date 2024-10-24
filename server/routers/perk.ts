@@ -2,7 +2,15 @@ import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { fundSlugs } from '../../utils/funds'
 import { prisma, strapiApi } from '../services'
-import { StrapiCreateOrderRes, StrapiGetPerkRes, StrapiGetPerksRes, StrapiPerk } from '../types'
+import {
+  StrapiCreateOrderBody,
+  StrapiCreateOrderRes,
+  StrapiCreatePointBody,
+  StrapiGetPerkRes,
+  StrapiGetPerksPopulatedRes,
+  StrapiGetPointsPopulatedRes,
+  StrapiPerk,
+} from '../types'
 import { TRPCError } from '@trpc/server'
 import { getUserPointBalance } from '../utils/perks'
 
@@ -16,13 +24,11 @@ export const perkRouter = router({
   getHistory: protectedProcedure.query(async ({ ctx }) => {
     const userId = ctx.session.user.sub
 
-    const pointHistory = await prisma.pointHistory.findMany({
-      where: { userId },
-      orderBy: { createdAt: 'desc' },
-      include: { donation: true },
-    })
+    const { data: pointHistory } = await strapiApi.get<StrapiGetPointsPopulatedRes>(
+      `/points?filters[userId][$eq]=${userId}&sort=createdAt:desc&populate=*`
+    )
 
-    return pointHistory
+    return pointHistory.data
   }),
 
   getFundPerks: publicProcedure
@@ -30,10 +36,10 @@ export const perkRouter = router({
     .query(async ({ input }) => {
       const {
         data: { data: perks },
-      } = await strapiApi.get<StrapiGetPerksRes>('/perks?populate[images][fields]=formats')
+      } = await strapiApi.get<StrapiGetPerksPopulatedRes>('/perks?populate[images][fields]=formats')
 
       // Filter out whitelisted perks
-      const perksFiltered: StrapiPerk[] = perks.filter((perk) =>
+      const perksFiltered = perks.filter((perk) =>
         perk.fundSlugWhitelist ? perk.fundSlugWhitelist.split(',').includes(input.fundSlug) : true
       )
 
@@ -64,7 +70,6 @@ export const perkRouter = router({
       if (!perk) throw new TRPCError({ code: 'BAD_REQUEST', message: 'Perk not found.' })
 
       // Check if shipping data is present if required
-      console.log(perk.needsShippingAddress)
       if (perk.needsShippingAddress) {
         const shippingDataIsMissing =
           [
@@ -97,7 +102,7 @@ export const perkRouter = router({
       // Place order
       const {
         data: { data: order },
-      } = await strapiApi.post<StrapiCreateOrderRes>('/orders', {
+      } = await strapiApi.post<StrapiCreateOrderRes, any, StrapiCreateOrderBody>('/orders', {
         data: {
           perk: perk.documentId,
           userId,
@@ -114,14 +119,13 @@ export const perkRouter = router({
 
       try {
         // Deduct points
-        await prisma.pointHistory.create({
+        await strapiApi.post<any, any, StrapiCreatePointBody>('/points', {
           data: {
+            balanceChange: (-perk.price).toString(),
+            balance: balanceAfterPurchase.toString(),
             userId,
-            purchaseOrderId: order.documentId,
-            pointsDeducted: perk.price,
-            pointsBalance: balanceAfterPurchase,
-            purchasePerkId: perk.documentId,
-            purchasePerkName: perk.name,
+            perk: perk.documentId,
+            order: order.documentId,
           },
         })
       } catch (error) {

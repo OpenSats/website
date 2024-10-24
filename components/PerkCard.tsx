@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { ProjectItem } from '../utils/types'
 import { useFundSlug } from '../utils/use-fund-slug'
 import Progress from './Progress'
-import { StrapiPerk } from '../server/types'
+import { StrapiPerk, StrapiPerkPopulated } from '../server/types'
 import { env } from '../env.mjs'
 import { cn } from '../utils/cn'
 import { Dialog, DialogContent } from './ui/dialog'
@@ -13,7 +13,7 @@ import PerkPurchaseFormModal from './PerkPurchaseFormModal'
 
 const priceFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
 
-export type Props = { perk: StrapiPerk; balance: number }
+export type Props = { perk: StrapiPerkPopulated; balance: number }
 
 const PerkCard: React.FC<Props> = ({ perk, balance }) => {
   const fundSlug = useFundSlug()

@@ -15,7 +15,6 @@ import RegisterFormModal from '../../components/RegisterFormModal'
 import PasswordResetFormModal from '../../components/PasswordResetFormModal'
 import { trpc } from '../../utils/trpc'
 import { funds } from '../../utils/funds'
-import PerkList from '../../components/PerkList'
 
 const fund = funds['monero']
 
@@ -31,8 +30,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     { projectSlug: fund.slug },
     { enabled: false }
   )
-
-  const getFundPerksQuery = trpc.perk.getFundPerks.useQuery({ fundSlug: fund.slug })
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -122,23 +119,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </div>
       </div>
-
-      {getFundPerksQuery.data && (
-        <div className="divide-y divide-gray-200">
-          <div className="xl:pt-18 space-y-2 pt-8 md:space-y-5">
-            <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-              Explore Perks
-            </h1>
-            <p className="pt-2 text-lg leading-7 text-gray-500">Exchange your points for perks</p>
-            <PerkList perks={getFundPerksQuery.data} />
-            <div className="flex justify-end pt-4 text-base font-medium leading-6">
-              <CustomLink href={`/${fund.slug}/projects`} aria-label="View All Projects">
-                View Perks &rarr;
-              </CustomLink>
-            </div>
-          </div>
-        </div>
-      )}
 
       <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
         <DialogContent>

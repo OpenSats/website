@@ -7,8 +7,9 @@ import {
   BtcPayGetRatesRes,
   BtcPayGetPaymentMethodsRes,
   DonationMetadata,
+  StrapiCreatePointBody,
 } from '../../../server/types'
-import { btcpayApi as _btcpayApi, btcpayApi, prisma } from '../../../server/services'
+import { btcpayApi as _btcpayApi, btcpayApi, prisma, strapiApi } from '../../../server/services'
 import { env } from '../../../env.mjs'
 import { getUserPointBalance } from '../../../server/utils/perks'
 import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
@@ -151,14 +152,22 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
           // Get balance for project/fund by finding user's last point history
           const currentBalance = await getUserPointBalance(body.metadata.userId)
 
-          await prisma.pointHistory.create({
-            data: {
-              donationId: donation.id,
-              userId: body.metadata.userId,
-              pointsAdded,
-              pointsBalance: currentBalance + pointsAdded,
-            },
-          })
+          try {
+            await strapiApi.post<any, any, StrapiCreatePointBody>('/points', {
+              data: {
+                balanceChange: pointsAdded.toString(),
+                balance: (currentBalance + pointsAdded).toString(),
+                userId: body.metadata.userId,
+                donationId: donation.id,
+                donationProjectName: donation.projectName,
+                donationProjectSlug: donation.projectSlug,
+                donationFundSlug: donation.fundSlug,
+              },
+            })
+          } catch (error) {
+            console.log((error as any).data.error)
+            throw error
+          }
         }
 
         if (body.metadata.donorEmail && body.metadata.donorName) {

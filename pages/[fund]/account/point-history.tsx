@@ -45,24 +45,16 @@ function PointHistory() {
           </TableHeader>
           <TableBody>
             {getHistoryQuery.data?.map((pointHistory) => (
-              <TableRow key={pointHistory.createdAt.toISOString()}>
-                {!!pointHistory.pointsAdded && (
-                  <TableCell className="text-green-500">+{pointHistory.pointsAdded}</TableCell>
+              <TableRow key={pointHistory.createdAt}>
+                {Number(pointHistory.balanceChange) > 0 ? (
+                  <TableCell className="text-green-500">+{pointHistory.balanceChange}</TableCell>
+                ) : (
+                  <TableCell className="text-red-500">{pointHistory.balanceChange}</TableCell>
                 )}
 
-                {!!pointHistory.pointsDeducted && (
-                  <TableCell className="text-red-500">-{pointHistory.pointsDeducted}</TableCell>
-                )}
-
-                <TableCell>{pointHistory.pointsBalance}</TableCell>
-
-                <TableCell>
-                  {pointHistory.donation?.projectName || pointHistory.donation?.fundSlug
-                    ? funds[pointHistory.donation?.fundSlug].title
-                    : '-'}
-                </TableCell>
-
-                <TableCell>{pointHistory.purchasePerkName || '-'}</TableCell>
+                <TableCell>{pointHistory.balance}</TableCell>
+                <TableCell>{pointHistory.donationProjectName || '-'}</TableCell>
+                <TableCell>{pointHistory.perk?.name || '-'}</TableCell>
                 <TableCell>{dayjs(pointHistory.createdAt).format('lll')}</TableCell>
               </TableRow>
             ))}

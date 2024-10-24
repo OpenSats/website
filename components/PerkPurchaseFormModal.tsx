@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import { StrapiPerk } from '../server/types'
+import { StrapiPerk, StrapiPerkPopulated } from '../server/types'
 import { env } from '../env.mjs'
 import { Button } from './ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
@@ -17,7 +17,7 @@ import { cn } from '../utils/cn'
 import { Label } from './ui/label'
 import { useRouter } from 'next/router'
 
-type Props = { perk: StrapiPerk; balance: number; close: () => void }
+type Props = { perk: StrapiPerkPopulated; balance: number; close: () => void }
 
 const pointFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
 

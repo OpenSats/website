@@ -4,7 +4,12 @@ import Stripe from 'stripe'
 import getRawBody from 'raw-body'
 import dayjs from 'dayjs'
 
-import { btcpayApi as _btcpayApi, prisma, stripe as _stripe } from '../../server/services'
+import {
+  btcpayApi as _btcpayApi,
+  prisma,
+  stripe as _stripe,
+  strapiApi,
+} from '../../server/services'
 import { DonationMetadata } from '../../server/types'
 import { sendDonationConfirmationEmail } from './mailing'
 import { getUserPointBalance } from './perks'
@@ -114,12 +119,15 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           // Get balance for project/fund by finding user's last point history
           const currentBalance = await getUserPointBalance(metadata.userId)
 
-          await prisma.pointHistory.create({
+          await strapiApi.post('/points', {
             data: {
-              donationId: donation.id,
-              userId: metadata.userId,
-              pointsAdded,
+              balanceChange: pointsAdded,
               pointsBalance: currentBalance + pointsAdded,
+              userId: metadata.userId,
+              donationId: donation.id,
+              donationProjectName: donation.projectName,
+              donationProjectSlug: donation.projectSlug,
+              donationFundSlug: donation.fundSlug,
             },
           })
 
