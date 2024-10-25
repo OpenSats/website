@@ -18,8 +18,9 @@ function Footer() {
       </div>
 
       <div className="space-x-4 text-center text-xs text-gray-500">
-        MAGIC Grants is a 501(c)(3) non-profit organization. All gifts and donations are
-        tax-deductible to the full extent of the law.
+        MAGIC Grants is a 501(c)(3) public charity. Your donation may qualify for a tax
+        deduction. Cryptocurrency donations over $500 require additional paperwork to claim a
+        deduction.
       </div>
 
       <div className="space-x-4 text-center text-xs text-gray-500">
