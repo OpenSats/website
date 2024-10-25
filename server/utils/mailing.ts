@@ -58,7 +58,7 @@ export async function sendDonationConfirmationEmail({
 
   Please see the full details on your donation receipt below:
 
-  Multidisciplinary Academic Grants in Cryptocurrencies (MAGIC Grants) is a 501(c)(3) exempt public charity. This serves as your donation receipt. Donations to MAGIC Grants are tax deductible to the extent allowable by law.
+  MAGIC Grants is a 501(c)(3) public charity. This serves as your donation receipt. Donations to MAGIC Grants are tax deductible to the extent allowable by law.
 
   Donation Date: ${dateStr}
 
@@ -76,9 +76,9 @@ export async function sendDonationConfirmationEmail({
   - [${!pointsReceived ? 'x' : ' '}] No goods or services were received in exchange for your generous donation.
   - [${pointsReceived ? 'x' : ' '}] In connection with your generous donation, you received ${pointsFormat.format(pointsReceived)} points, valued at approximately $${(pointsReceived * POINTS_REDEEM_PRICE_USD).toFixed(2)}.
 
-  ${btcpayCryptoAmount ? 'If you wish to receive a tax deduction for a cryptocurrency donation over $500, you MUST complete [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and send the completed form to [info@magicgrants.org](mailto:info@magicgrants.org) to deduct your donation.' : ''}
+  ${btcpayCryptoAmount ? 'If you wish to receive a tax deduction for a cryptocurrency donation over $500, you MUST complete [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and send the completed form to [info@magicgrants.org](mailto:info@magicgrants.org) to qualify for a deduction.' : ''}
 
-  Multidisciplinary Academic Grants in Cryptocurrencies
+  MAGIC Grants
   1942 Broadway St., STE 314C
   Boulder, CO 80302
   EIN: 82-5183590
