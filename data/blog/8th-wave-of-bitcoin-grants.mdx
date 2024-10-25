@@ -1,0 +1,139 @@
+---
+title: "Eighth Wave of Bitcoin Grants"
+date: '2024-10-25'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+draft: false
+authors: ['arvin', 'dergigi']
+images: ['/static/images/blog/59-bitcoin-8th-wave.jpg']
+summary: "OpenSats is funding 4 more open-source projects in the Bitcoin ecosystem."
+---
+
+OpenSats is proud to announce its eighth wave of Bitcoin grants, dedicated to
+supporting innovative open-source projects that enhance the growth and
+resilience of the Bitcoin ecosystem.
+
+We remain committed to empowering developers worldwide who are building
+groundbreaking tools, improving user experience, and strengthening the overall
+security of Bitcoin and its users.
+
+This wave awards grants to four outstanding projects, each playing a vital role
+in advancing various aspects of the Bitcoin network. In no particular order, the
+recipients are:
+
+- [Citadel-Tech](#citadel-tech)
+- [Lampo](#lampo)
+- [Cashu Nutshell](#cashu-nutshell)
+- [PickhardtPayments Plugin](#pickhardtpayments-plugin)
+
+These grants are sourced from our General Fund, which directly supports
+open-source projects. Sustained by donors who share our vision for a thriving,
+decentralized future, 100% of General Fund donations go to Bitcoin-related
+projects, not operational costs. To support these projects and help Bitcoin
+flourish, please consider donating to the General Fund:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's take a closer look at these projects to discover their purpose, impact,
+and the value they bring to the Bitcoin ecosystem.
+
+---
+
+### Citadel-Tech
+
+Citadel-Tech is dedicated to advancing privacy within the Bitcoin ecosystem
+through the development of an atomic swap protocol first proposed by Greg
+Maxwell in 2013. By implementing the
+[Maxwell-Belcher](https://gist.github.com/chris-belcher/9144bd57a91c194e332fb5ca371d0964)
+protocol, the project enables truly private ownership transfers of
+Bitcoin UTXOs between participants. With a focus on providing "passive privacy,"
+even for non-users, this project ensures that swaps are indistinguishable from
+standard Taproot transactions today.
+
+Repository: [citadel-tech](https://github.com/citadel-tech/coinswap)  
+License: Apache-2.0 & MIT
+
+### Lampo
+
+Lampo is an open-source project that aims to build a modular and customizable
+Lightning node implementation for the Bitcoin ecosystem. Designed to integrate
+with the Lightning Development Kit (LDK) and the LNprototest test suite, Lampo
+offers flexibility and innovation through features like a swappable API, wallet,
+on-chain data source, and a plugin system similar to Core Lightning. Lampo is
+positioned as a fully open-source alternative to company-driven Lightning
+implementations, promoting greater interoperability, customization, and
+experimentation within the Bitcoin and Lightning communities.
+
+With the support of this grant, Lampo will focus on developing key features,
+including a proof of concept (PoC) for the VLS signer, integration of LDK with
+LNprototest, and the eventual implementation of BOLT12. The project will
+prioritize bug fixes, improve Lampo's documentation, and introduce new tutorials
+to foster greater accessibility and collaboration. By creating a truly
+open-source Lightning node, Lampo supports the decentralization of financial
+infrastructure and drives innovation in Lightning technology.
+
+Repository: [vincenzopalazzo/lampo.rs](https://github.com/vincenzopalazzo/lampo.rs)  
+License: BSD-3-Clause
+
+### Cashu Nutshell
+
+Cashu Nutshell is an open-source Chaumian ecash system focused on enhancing
+privacy for users of custodial Bitcoin applications. The system enables users to
+make anonymous transactions without revealing their identity, balance, or
+transaction history. Leveraging Cashu mints allows for private ecash exchanges,
+preventing censorship and blocking of specific users. The project also
+integrates with decentralized platforms like nostr, introducing features such as
+private ecash receipts and [Proof of Liabilities
+schemes](https://gist.github.com/callebtc/ed5228d1d8cbaade0104db5d1cf63939),
+which allow users to confirm transactions and monitor mint operations without
+compromising privacy.
+
+With the support of this grant, Cashu Nutshell will implement [synthetic USD
+e-cash](https://github.com/cashubtc/nutshell/pull/608) backed by LNMarkets,
+providing a privacy-focused alternative to Tether for users in regions with
+unstable fiat currencies. Key milestones include the development of [Discreet
+Log Contracts](https://github.com/cashubtc/nutshell/pull/576) for ecash, and the
+introduction of [private ecash
+receipts](https://github.com/cashubtc/nuts/pull/155) using nostr.
+
+Repository: [cashubtc/nutshell](https://github.com/cashubtc/nutshell)  
+License: MIT
+
+### PickhardtPayments Plugin
+
+PickhardtPayments, originally developed by [Rene
+Pickhardt](https://opensats.org/blog/rene-pickhardt-receives-lts-grant) and
+Stefan Richter, is a payment routing strategy aimed at improving the reliability
+and efficiency of payments on the Lightning Network. This plugin project
+focuses on implementing the Pickhardt-Richter model into Core Lightning via the
+`renepay` plugin. The model uses advanced Bayesian analysis and ([Minimum Cost
+Flow](https://github.com/Lagrang3/mcf-algorithms)) algorithms to calculate
+optimal Multi-Path Payments, reducing payment failures due to liquidity
+shortages, particularly for smaller and less connected nodes in the network.
+
+With the support of this grant, the project will further develop and split the
+payment process into two plugins—`askrene` for route computation and `renepay`
+for payment management—improving modularity and flexibility. Future milestones
+include adding support for BOLT12 invoices and solving non-linear cost problems
+in payment routing. This ongoing work will enhance the Lightning Network's
+payment layer, offering faster and more reliable payment experiences for users.
+
+Repository: [Lagrang3/lightning](https://github.com/Lagrang3/lightning)  
+License: BSD-MIT
+
+---
+
+With this eighth wave of grants, as with [previous waves](/tags/wave), we
+evaluated applications based on carefully [defined criteria](/apply#criteria)
+and put forth our best efforts to select the most impactful and promising
+proposals for the Bitcoin ecosystem. If you are a developer working on a project
+aligned with [our mission](/mission), we encourage you to [apply for
+funding](/apply).
+
+Please [consider donating](/donate) to support open-source projects and
+developers in the Bitcoin ecosystem:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
