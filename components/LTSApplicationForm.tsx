@@ -196,8 +196,9 @@ export default function ApplicationForm() {
           {...register('main_focus', { required: true })}
         >
           <option value="">(Choose One)</option>
-          <option value="layer1">Bitcoin / Layer1</option>
-          <option value="layer2">Lightning / Layer2</option>
+          <option value="layer1">Layer1 / Bitcoin</option>
+          <option value="layer2">Layer2 / Lightning</option>
+          <option value="eCash">Layer3 / eCash</option>
           <option value="core">Bitcoin Core</option>
           <option value="nostr">nostr</option>
           <option value="other">Other</option>
