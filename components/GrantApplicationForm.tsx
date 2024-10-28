@@ -65,16 +65,17 @@ export default function ApplicationForm() {
       <h2>Project Details</h2>
 
       <label className="block">
-        Main Focus
+        Main Focus *
         <br />
         <small>In which area will your project have the most impact?</small>
         <select
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('main_focus')}
+          {...register('main_focus', { required: true })}
         >
-          <option value="bitcoin">Bitcoin</option>
-          <option value="core">Bitcoin Core</option>
+          <option value="">(Choose One)</option>
+          <option value="layer1">Bitcoin / Layer1</option>
           <option value="layer2">Lightning / Layer2</option>
+          <option value="core">Bitcoin Core</option>
           <option value="education">Education</option>
           <option value="nostr">nostr</option>
           <option value="other">Other</option>
