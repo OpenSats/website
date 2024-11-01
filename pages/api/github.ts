@@ -68,14 +68,17 @@ ${
     // Label set according to "main focus"
     const mainFocus = `${req.body.main_focus}`.toLowerCase()
     const issueLabels = [mainFocus]
-    if (mainFocus === 'layer2') {
-      issueLabels.push('bitcoin') // LN & L2 = subset of Bitcoin
+    if (mainFocus === 'layer1' || mainFocus === 'layer2') {
+      issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
     }
 
     // Repo set according to "main focus"
     let appRepo = GH_APP_REPO
     if (mainFocus === 'nostr') {
       appRepo = `${GH_APP_REPO}-nostr`
+    }
+    if (mainFocus === 'layer1') {
+      appRepo = `${GH_APP_REPO}-layer1`
     }
     if (mainFocus === 'layer2') {
       appRepo = `${GH_APP_REPO}-layer2`
