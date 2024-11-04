@@ -10,7 +10,11 @@ following months:
 * August
 * November
 
-We will include a link to a recent news article [1] in each update to establish that the signature was not pre-generated.
+We include the latest Bitcoin block hash in each update to establish that the
+signature was not pre-generated:
+
+* Height: `868383`
+* Block hash: `000000000000000000020553c832f80e471dd5905850fa79ef13dc7934b390a4`
 
 [0] https://opensats.org/transparency
-[1] https://www.nobsbitcoin.com/mutiny-wallet-to-shut-down-at-the-end-of-the-year/
+
