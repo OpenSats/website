@@ -1,11 +1,8 @@
+import { useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
 
-import { ProjectItem } from '../utils/types'
 import { useFundSlug } from '../utils/use-fund-slug'
-import Progress from './Progress'
-import { StrapiPerk, StrapiPerkPopulated } from '../server/types'
+import { StrapiPerkPopulated } from '../server/types'
 import { env } from '../env.mjs'
 import { cn } from '../utils/cn'
 import { Dialog, DialogContent } from './ui/dialog'

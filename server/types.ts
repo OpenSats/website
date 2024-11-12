@@ -82,6 +82,7 @@ export type StrapiPerk = {
   price: number
   fundSlugWhitelist: string | null
   needsShippingAddress: boolean
+  printfulProductId: string | null
 }
 
 export type StrapiPerkPopulated = StrapiPerk & {
@@ -198,5 +199,113 @@ export type StrapiGetPointsPopulatedRes = {
       pageCount: number
       total: number
     }
+  }
+}
+
+// Printful Product
+
+export type PrintfulGetProductRes = {
+  code: number
+  result: {
+    sync_product: {
+      id: number
+      external_id: string
+      name: string
+      variants: number
+      synced: number
+      thumbnail_url: string
+      is_ignored: boolean
+    }
+    sync_variants: [
+      {
+        id: number
+        external_id: string
+        sync_product_id: number
+        name: string
+        synced: boolean
+        variant_id: number
+        retail_price: string
+        currency: string
+        is_ignored: boolean
+        sku: string
+        main_category_id: boolean
+        warehouse_product_id: boolean
+        warehouse_product_variant_id: boolean
+        size: string
+        color: string
+        availability_status: 'active' | 'discontinued' | 'out_of_stock' | 'temporary_out_of_stock'
+      },
+    ]
+  }
+}
+
+// Printful estimate order
+
+export type PrintfulEstimateOrderReq = {
+  recipient: {
+    address1: string
+    address2: string
+    city: string
+    state_code: string
+    country_code: string
+    zip: string
+    name: string
+    phone: string
+    email: string
+    tax_number?: string
+  }
+  items: [{ sync_variant_id: number; quantity: 1 }]
+}
+
+export type PrintfulEstimateOrderRes = {
+  code: number
+  result: {
+    costs: {
+      currency: 'USD'
+      subtotal: number
+      discount: number
+      shipping: number
+      digitization: number
+      additional_fee: number
+      fulfillment_fee: number
+      retail_delivery_fee: number
+      tax: number
+      vat: number
+      total: number
+    }
+  }
+}
+
+// Printful create order
+
+export type PrintfulCreateOrderReq = {
+  recipient: {
+    name: string
+    address1: string
+    address2: string
+    city: string
+    state_code: string
+    country_code: string
+    zip: string
+    phone: string
+    email: string
+    tax_number?: string
+  }
+  items: [{ sync_variant_id: number; quantity: 1 }]
+}
+
+export type PrintfulCreateOrderRes = {
+  costs: {
+    currency: 'USD'
+    subtotal: string
+    discount: string
+    shipping: string
+    digitization: string
+    additional_fee: string
+    fulfillment_fee: string
+    retail_delivery_fee: string
+    tax: string
+    vat: string
+    total: string
   }
 }

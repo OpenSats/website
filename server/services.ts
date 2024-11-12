@@ -40,6 +40,11 @@ const strapiApi = axios.create({
   headers: { Authorization: `Bearer ${env.STRAPI_API_TOKEN}` },
 })
 
+const printfulApi = axios.create({
+  baseURL: 'https://api.printful.com',
+  headers: { Authorization: `Bearer ${env.PRINTFUL_API_KEY}` },
+})
+
 const stripe: Record<FundSlug, Stripe> = {
   monero: new Stripe(env.STRIPE_MONERO_SECRET_KEY, { apiVersion: '2024-04-10' }),
   firo: new Stripe(env.STRIPE_FIRO_SECRET_KEY, { apiVersion: '2024-04-10' }),
@@ -47,4 +52,4 @@ const stripe: Record<FundSlug, Stripe> = {
   general: new Stripe(env.STRIPE_GENERAL_SECRET_KEY, { apiVersion: '2024-04-10' }),
 }
 
-export { prisma, keycloak, transporter, btcpayApi, strapiApi, stripe }
+export { prisma, keycloak, transporter, btcpayApi, strapiApi, printfulApi, stripe }

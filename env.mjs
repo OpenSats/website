@@ -46,6 +46,8 @@ export const env = createEnv({
     FIRO_APPLICATION_RECIPIENT: z.string().email(),
     PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     GENERAL_APPLICATION_RECIPIENT: z.string().email(),
+
+    PRINTFUL_API_KEY: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -112,6 +114,8 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT,
     NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT:
       process.env.NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT,
+
+    PRINTFUL_API_KEY: process.env.PRINTFUL_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
