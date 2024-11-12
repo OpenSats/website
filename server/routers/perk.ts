@@ -21,6 +21,7 @@ import { estimatePrintfulOrderCost, getUserPointBalance } from '../utils/perks'
 import { AxiosResponse } from 'axios'
 import { POINTS_REDEEM_PRICE_USD } from '../../config'
 import { authenticateKeycloakClient } from '../utils/keycloak'
+import { perkPurchaseQueue } from '../queues'
 
 export const perkRouter = router({
   getBalance: protectedProcedure.query(async ({ ctx }) => {
@@ -171,8 +172,6 @@ export const perkRouter = router({
       // Check if user has enough balance
       let deductionAmount = 0
 
-      console.log(perk.printfulProductId, input.perkPrintfulSyncVariantId)
-
       if (perk.printfulProductId && input.perkPrintfulSyncVariantId) {
         const printfulCostEstimate = await estimatePrintfulOrderCost({
           address1: input.shippingAddressLine1!,
@@ -200,64 +199,20 @@ export const perkRouter = router({
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Insufficient balance.' })
       }
 
-      // Create printful order (if applicable)
-      if (perk.printfulProductId && input.perkPrintfulSyncVariantId) {
-        const result = await printfulApi.post<
-          {},
-          AxiosResponse<PrintfulCreateOrderRes>,
-          PrintfulCreateOrderReq
-        >(`/orders`, {
-          recipient: {
-            address1: input.shippingAddressLine1!,
-            address2: input.shippingAddressLine2 || '',
-            city: input.shippingCity!,
-            state_code: input.shippingState!,
-            country_code: input.shippingCountry!,
-            zip: input.shippingZip!,
-            name: user.attributes?.name?.[0],
-            phone: input.shippingPhone!,
-            email: user.email,
-            tax_number: input.shippingTaxNumber,
-          },
-          items: [{ quantity: 1, sync_variant_id: input.perkPrintfulSyncVariantId }],
-        })
-
-        console.log(result.data)
-      }
-
-      // Create strapi order
-      const {
-        data: { data: order },
-      } = await strapiApi.post<StrapiCreateOrderRes, any, StrapiCreateOrderBody>('/orders', {
-        data: {
-          perk: perk.documentId,
-          userId,
-          userEmail: ctx.session.user.email,
-          shippingAddressLine1: input.shippingAddressLine1,
-          shippingAddressLine2: input.shippingAddressLine2,
-          shippingCity: input.shippingCity,
-          shippingState: input.shippingState,
-          shippingCountry: input.shippingCountry,
-          shippingZip: input.shippingZip,
-          shippingPhone: input.shippingPhone,
-        },
+      await perkPurchaseQueue.add('purchase', {
+        perk,
+        perkPrintfulSyncVariantId: input.perkPrintfulSyncVariantId,
+        shippingAddressLine1: input.shippingAddressLine1,
+        shippingAddressLine2: input.shippingAddressLine2,
+        shippingCountry: input.shippingCountry,
+        shippingState: input.shippingState,
+        shippingCity: input.shippingCity,
+        shippingZip: input.shippingZip,
+        shippingPhone: input.shippingPhone,
+        shippingTaxNumber: input.shippingTaxNumber,
+        userId: user.id,
+        userEmail: user.email,
+        userFullname: user?.attributes?.name?.[0],
       })
-
-      try {
-        // Deduct points
-        await strapiApi.post<any, any, StrapiCreatePointBody>('/points', {
-          data: {
-            balanceChange: (-deductionAmount).toString(),
-            balance: balanceAfterPurchase.toString(),
-            userId,
-            perk: perk.documentId,
-            order: order.documentId,
-          },
-        })
-      } catch (error) {
-        // If it fails, delete order
-        await strapiApi.delete(`/orders/${order.documentId}`)
-        throw error
-      }
     }),
 })
