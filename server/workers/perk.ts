@@ -1,4 +1,7 @@
 import { Worker } from 'bullmq'
+import { AxiosResponse } from 'axios'
+import { TRPCError } from '@trpc/server'
+
 import { redisConnection } from '../../config/redis'
 import { estimatePrintfulOrderCost, getUserPointBalance } from '../utils/perks'
 import { POINTS_REDEEM_PRICE_USD } from '../../config'
@@ -10,9 +13,8 @@ import {
   StrapiCreatePointBody,
   StrapiPerk,
 } from '../types'
-import { TRPCError } from '@trpc/server'
 import { printfulApi, strapiApi } from '../services'
-import { AxiosResponse } from 'axios'
+import { sendPerkPurchaseConfirmationEmail } from '../utils/mailing'
 
 export type PerkPurchaseWorkerData = {
   perk: StrapiPerk
@@ -30,96 +32,119 @@ export type PerkPurchaseWorkerData = {
   userFullname: string
 }
 
-export const perkPurchaseWorker = new Worker<PerkPurchaseWorkerData>(
-  'PerkPurchase',
-  async (job) => {
-    // Check if user has enough balance
-    let deductionAmount = 0
+const globalForWorker = global as unknown as { hasInitializedWorkers: boolean }
 
-    if (job.data.perk.printfulProductId && job.data.perkPrintfulSyncVariantId) {
-      const printfulCostEstimate = await estimatePrintfulOrderCost({
-        address1: job.data.shippingAddressLine1!,
-        address2: job.data.shippingAddressLine2 || '',
-        city: job.data.shippingCity!,
-        stateCode: job.data.shippingState!,
-        countryCode: job.data.shippingCountry!,
-        zip: job.data.shippingZip!,
-        phone: job.data.shippingPhone!,
-        name: job.data.userFullname,
-        email: job.data.userEmail,
-        tax_number: job.data.shippingTaxNumber,
-        printfulSyncVariantId: job.data.perkPrintfulSyncVariantId,
-      })
+if (!globalForWorker.hasInitializedWorkers) console.log('hey')
 
-      deductionAmount = Math.ceil(printfulCostEstimate.costs.total / POINTS_REDEEM_PRICE_USD)
-    } else {
-      deductionAmount = job.data.perk.price
-    }
+if (!globalForWorker.hasInitializedWorkers)
+  new Worker<PerkPurchaseWorkerData>(
+    'PerkPurchase',
+    async (job) => {
+      // Check if user has enough balance
+      let deductionAmount = 0
 
-    const currentBalance = await getUserPointBalance(job.data.userId)
-    const balanceAfterPurchase = currentBalance - deductionAmount
-
-    if (balanceAfterPurchase < 0) {
-      throw new TRPCError({ code: 'BAD_REQUEST', message: 'Insufficient balance.' })
-    }
-
-    // Create printful order (if applicable)
-    if (job.data.perk.printfulProductId && job.data.perkPrintfulSyncVariantId) {
-      const result = await printfulApi.post<
-        {},
-        AxiosResponse<PrintfulCreateOrderRes>,
-        PrintfulCreateOrderReq
-      >(`/orders`, {
-        recipient: {
+      if (job.data.perk.printfulProductId && job.data.perkPrintfulSyncVariantId) {
+        const printfulCostEstimate = await estimatePrintfulOrderCost({
           address1: job.data.shippingAddressLine1!,
           address2: job.data.shippingAddressLine2 || '',
           city: job.data.shippingCity!,
-          state_code: job.data.shippingState!,
-          country_code: job.data.shippingCountry!,
+          stateCode: job.data.shippingState!,
+          countryCode: job.data.shippingCountry!,
           zip: job.data.shippingZip!,
           phone: job.data.shippingPhone!,
           name: job.data.userFullname,
           email: job.data.userEmail,
           tax_number: job.data.shippingTaxNumber,
-        },
-        items: [{ quantity: 1, sync_variant_id: job.data.perkPrintfulSyncVariantId }],
-      })
-    }
+          printfulSyncVariantId: job.data.perkPrintfulSyncVariantId,
+        })
 
-    // Create strapi order
-    const {
-      data: { data: order },
-    } = await strapiApi.post<StrapiCreateOrderRes, any, StrapiCreateOrderBody>('/orders', {
-      data: {
-        perk: job.data.perk.documentId,
-        userId: job.data.userId,
-        userEmail: job.data.userEmail,
-        shippingAddressLine1: job.data.shippingAddressLine1,
-        shippingAddressLine2: job.data.shippingAddressLine2,
-        shippingCity: job.data.shippingCity,
-        shippingState: job.data.shippingState,
-        shippingCountry: job.data.shippingCountry,
-        shippingZip: job.data.shippingZip,
-        shippingPhone: job.data.shippingPhone,
-      },
-    })
+        deductionAmount = Math.ceil(printfulCostEstimate.costs.total / POINTS_REDEEM_PRICE_USD)
+      } else {
+        deductionAmount = job.data.perk.price
+      }
 
-    try {
-      // Deduct points
-      await strapiApi.post<any, any, StrapiCreatePointBody>('/points', {
+      const currentBalance = await getUserPointBalance(job.data.userId)
+      const balanceAfterPurchase = currentBalance - deductionAmount
+
+      if (balanceAfterPurchase < 0) {
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'Insufficient balance.' })
+      }
+
+      // Create printful order (if applicable)
+      if (job.data.perk.printfulProductId && job.data.perkPrintfulSyncVariantId) {
+        const result = await printfulApi.post<
+          {},
+          AxiosResponse<PrintfulCreateOrderRes>,
+          PrintfulCreateOrderReq
+        >(`/orders`, {
+          recipient: {
+            address1: job.data.shippingAddressLine1!,
+            address2: job.data.shippingAddressLine2 || '',
+            city: job.data.shippingCity!,
+            state_code: job.data.shippingState!,
+            country_code: job.data.shippingCountry!,
+            zip: job.data.shippingZip!,
+            phone: job.data.shippingPhone!,
+            name: job.data.userFullname,
+            email: job.data.userEmail,
+            tax_number: job.data.shippingTaxNumber,
+          },
+          items: [{ quantity: 1, sync_variant_id: job.data.perkPrintfulSyncVariantId }],
+        })
+      }
+
+      // Create strapi order
+      const {
+        data: { data: order },
+      } = await strapiApi.post<StrapiCreateOrderRes, any, StrapiCreateOrderBody>('/orders', {
         data: {
-          balanceChange: (-deductionAmount).toString(),
-          balance: balanceAfterPurchase.toString(),
-          userId: job.data.userId,
           perk: job.data.perk.documentId,
-          order: order.documentId,
+          userId: job.data.userId,
+          userEmail: job.data.userEmail,
+          shippingAddressLine1: job.data.shippingAddressLine1,
+          shippingAddressLine2: job.data.shippingAddressLine2,
+          shippingCity: job.data.shippingCity,
+          shippingState: job.data.shippingState,
+          shippingCountry: job.data.shippingCountry,
+          shippingZip: job.data.shippingZip,
+          shippingPhone: job.data.shippingPhone,
         },
       })
-    } catch (error) {
-      // If it fails, delete order
-      await strapiApi.delete(`/orders/${order.documentId}`)
-      throw error
-    }
-  },
-  { connection: redisConnection, concurrency: 1 }
-)
+
+      try {
+        // Deduct points
+        await strapiApi.post<any, any, StrapiCreatePointBody>('/points', {
+          data: {
+            balanceChange: (-deductionAmount).toString(),
+            balance: balanceAfterPurchase.toString(),
+            userId: job.data.userId,
+            perk: job.data.perk.documentId,
+            order: order.documentId,
+          },
+        })
+      } catch (error) {
+        // If it fails, delete order
+        await strapiApi.delete(`/orders/${order.documentId}`)
+        throw error
+      }
+
+      sendPerkPurchaseConfirmationEmail({
+        to: job.data.userEmail,
+        perkName: job.data.perk.name,
+        pointsRedeemed: deductionAmount,
+        address: job.data.shippingAddressLine1
+          ? {
+              address1: job.data.shippingAddressLine1,
+              address2: job.data.shippingAddressLine2,
+              state: job.data.shippingState,
+              city: job.data.shippingCity!,
+              country: job.data.shippingCountry!,
+              zip: job.data.shippingZip!,
+            }
+          : undefined,
+      })
+    },
+    { connection: redisConnection, concurrency: 1 }
+  )
+
+if (process.env.NODE_ENV !== 'production') globalForWorker.hasInitializedWorkers = true

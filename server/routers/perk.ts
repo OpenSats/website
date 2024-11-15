@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
+import { QueueEvents } from 'bullmq'
 import { fundSlugs } from '../../utils/funds'
 import { keycloak, printfulApi, prisma, strapiApi } from '../services'
 import {
@@ -22,6 +23,7 @@ import { AxiosResponse } from 'axios'
 import { POINTS_REDEEM_PRICE_USD } from '../../config'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { perkPurchaseQueue } from '../queues'
+import { redisConnection } from '../../config/redis'
 
 export const perkRouter = router({
   getBalance: protectedProcedure.query(async ({ ctx }) => {
@@ -199,7 +201,7 @@ export const perkRouter = router({
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Insufficient balance.' })
       }
 
-      await perkPurchaseQueue.add('purchase', {
+      const purchaseJob = await perkPurchaseQueue.add('purchase', {
         perk,
         perkPrintfulSyncVariantId: input.perkPrintfulSyncVariantId,
         shippingAddressLine1: input.shippingAddressLine1,
@@ -214,5 +216,9 @@ export const perkRouter = router({
         userEmail: user.email,
         userFullname: user?.attributes?.name?.[0],
       })
+
+      await purchaseJob.waitUntilFinished(
+        new QueueEvents('PerkPurchase', { connection: redisConnection })
+      )
     }),
 })
