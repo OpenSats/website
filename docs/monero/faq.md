@@ -59,8 +59,9 @@
 
 ## Are my donations tax deductible?
 
-- Yes, your donation may be tax deductible. MAGIC Monero Fund is committee under MAGIC Grants, a 501(c)(3) non-profit organization. All gifts and donations are tax-deductible in the USA.
-- If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping. If you donate over $500 with cryptocurrencies, you will need to fill out [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and email that form to [info@maigcgrants.org](mailto:info@magicgrants.org) for us to sign Part V.
+- Yes, your donation may be tax deductible. MAGIC Monero Fund is committee under MAGIC Grants, a 501(c)(3) public charity.
+- If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping.
+- To claim a deduction for cryptocurrency donations and if you donate over $500, you will need to fill out [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and email that form to [info@magicgrants.org](mailto:info@magicgrants.org) for us to sign Part V. If you donate over $5000, you need to obtain a qualified appraisal.
 
 The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.
 
