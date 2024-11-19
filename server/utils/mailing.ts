@@ -110,6 +110,7 @@ ${htmlFromMarkdown}`
   return transporter.sendMail({
     from: env.SES_VERIFIED_SENDER,
     to,
+    subject: 'Donation confirmation',
     html,
   })
 }
@@ -179,6 +180,61 @@ export async function sendPerkPurchaseConfirmationEmail({
   return transporter.sendMail({
     from: env.SES_VERIFIED_SENDER,
     to,
+    subject: 'Perk purchase confirmation',
+    html,
+  })
+}
+
+type SendPackageTrackingInfoParams = {
+  to: string
+  perkName: string
+  carrier: string
+  trackingUrl: string
+  trackingNumber: string
+}
+
+export async function sendPackageTrackingInfo({
+  to,
+  perkName,
+  carrier,
+  trackingUrl,
+  trackingNumber,
+}: SendPackageTrackingInfoParams) {
+  const markdown = `### Your package has been shipped!
+
+  Redeemed item: ${perkName}  
+  Carrier: ${carrier}  
+  Tracking number: ${trackingNumber}  
+  [Track my order](${trackingUrl})  
+
+  Please contact [info@magicgrants.org](info@magicgrants.org) if you have any questions.`
+
+  const htmlFromMarkdown = await markdownToHtml(markdown)
+
+  const html = `<style>
+    html {
+      display: flex;
+    }
+
+    body {
+      max-width: 700px;
+      padding: 20px;
+      margin: 0 auto;
+      font-family: sans-serif;
+      background-color: #F1F5FF;
+    }
+
+    a {
+      color: #3a76f0;
+    }
+  </style>
+
+  ${htmlFromMarkdown}`
+
+  return transporter.sendMail({
+    from: env.SES_VERIFIED_SENDER,
+    to,
+    subject: 'Your package has been shipped!',
     html,
   })
 }

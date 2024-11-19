@@ -42,6 +42,8 @@ export const env = createEnv({
     BTCPAY_STORE_ID: z.string().min(1),
     BTCPAY_WEBHOOK_SECRET: z.string().min(1),
 
+    PRINTFUL_WEBHOOK_SECRET: z.string().min(32),
+
     MONERO_APPLICATION_RECIPIENT: z.string().email(),
     FIRO_APPLICATION_RECIPIENT: z.string().email(),
     PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
@@ -102,6 +104,8 @@ export const env = createEnv({
     BTCPAY_API_KEY: process.env.BTCPAY_API_KEY,
     BTCPAY_STORE_ID: process.env.BTCPAY_STORE_ID,
     BTCPAY_WEBHOOK_SECRET: process.env.BTCPAY_WEBHOOK_SECRET,
+
+    PRINTFUL_WEBHOOK_SECRET: process.env.PRINTFUL_WEBHOOK_SECRET,
 
     MONERO_APPLICATION_RECIPIENT: process.env.MONERO_APPLICATION_RECIPIENT,
     FIRO_APPLICATION_RECIPIENT: process.env.FIRO_APPLICATION_RECIPIENT,

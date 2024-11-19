@@ -133,6 +133,17 @@ type StrapiOrder = {
   shippingCountry?: string
   shippingZip?: string
   shippingPhone?: string
+  printfulCarrier?: string
+  printfulTrackingUrl?: string
+  printfulTrackingNumber?: string
+}
+
+type StrapiOrderPopulated = StrapiOrder & { perk: StrapiPerk }
+
+export type StrapiGetOrdersPopulatedRes = {
+  data: StrapiOrderPopulated[] | null
+
+  meta: {}
 }
 
 export type StrapiCreateOrderBody = {
@@ -142,6 +153,19 @@ export type StrapiCreateOrderBody = {
 }
 
 export type StrapiCreateOrderRes = {
+  data: StrapiOrder
+  meta: {}
+}
+
+export type StrapiUpdateOrderBody = {
+  data: Partial<
+    Omit<StrapiOrder, 'id' | 'documentId' | 'createdAt' | 'updatedAt' | 'publishedAt'> & {
+      perk: string
+    }
+  >
+}
+
+export type StrapiUpdateOrderRes = {
   data: StrapiOrder
   meta: {}
 }
