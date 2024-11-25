@@ -1,5 +1,6 @@
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
-import { BoxIcon, ShoppingBagIcon, TruckIcon } from 'lucide-react'
+import { BoxIcon, Check, ChevronsUpDown, ShoppingBagIcon, TruckIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -17,31 +18,80 @@ import Spinner from './Spinner'
 import { cn } from '../utils/cn'
 import { Label } from './ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
-import { useState } from 'react'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from './ui/command'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 
 type Props = { perk: StrapiPerkPopulated; balance: number; close: () => void }
 
 const pointFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
 
-const schema = z.object({
-  shippingAddressLine1: z.string().min(1),
-  shippingAddressLine2: z.string(),
-  shippingCity: z.string().min(1),
-  shippingState: z.string().min(1),
-  shippingCountry: z.string().min(1),
-  shippingZip: z.string().min(1),
-  shippingPhone: z.string().min(1),
-  shippingTaxNumber: z.string(),
-  printfulSyncVariantId: z.string().optional(),
-})
+const schema = z
+  .object({
+    _shippingStateOptionsLength: z.number(),
+    shippingAddressLine1: z.string().min(1),
+    shippingAddressLine2: z.string(),
+    shippingCity: z.string().min(1),
+    shippingState: z.string(),
+    shippingCountry: z.string().min(1),
+    shippingZip: z.string().min(1),
+    shippingPhone: z
+      .string()
+      .min(1)
+      .regex(/^\+?\d{6,15}$/, 'Invalid phone number.'),
+    shippingTaxNumber: z.string(),
+    printfulSyncVariantId: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    const cpfRegex =
+      /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+
+    if (data.shippingCountry === 'BR') {
+      if (data.shippingTaxNumber.length < 1) {
+        ctx.addIssue({
+          path: ['shippingTaxNumber'],
+          code: 'custom',
+          message: 'CPF is required.',
+        })
+        return
+      }
+
+      if (!cpfRegex.test(data.shippingTaxNumber)) {
+        ctx.addIssue({
+          path: ['shippingTaxNumber'],
+          code: 'custom',
+          message: 'Invalid CPF.',
+        })
+        return
+      }
+    }
+  })
+  .superRefine((data, ctx) => {
+    if (!data.shippingState && data._shippingStateOptionsLength) {
+      ctx.addIssue({
+        path: ['shippingState'],
+        code: 'custom',
+        message: 'State is required.',
+      })
+      return
+    }
+  })
 
 type PerkPurchaseInputs = z.infer<typeof schema>
 
-type CostEstimate = { shipping: number; tax: number; total: number }
+type CostEstimate = { product: number; shipping: number; tax: number; total: number }
 
 function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   const router = useRouter()
   const fundSlug = useFundSlug()
+  const getCountriesQuery = trpc.perk.getCountries.useQuery()
   const purchasePerkMutation = trpc.perk.purchasePerk.useMutation()
   const estimatePrintfulOrderCosts = trpc.perk.estimatePrintfulOrderCosts.useMutation()
 
@@ -50,11 +100,11 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
     { enabled: !!perk.printfulProductId }
   )
 
-  const hasEnoughBalance = balance - perk.price > 0
-
   const form = useForm<PerkPurchaseInputs>({
     resolver: zodResolver(perk.needsShippingAddress ? schema : z.object({})),
+    mode: 'all',
     defaultValues: {
+      _shippingStateOptionsLength: 0,
       shippingAddressLine1: '',
       shippingAddressLine2: '',
       shippingCity: '',
@@ -68,6 +118,39 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   })
 
   const [costEstimate, setCostEstimate] = useState<CostEstimate | null>(null)
+
+  const hasEnoughBalance = balance - (costEstimate?.total || perk.price) > 0
+
+  const shippingCountryOptions = (getCountriesQuery.data || []).map((country) => ({
+    label: country.name,
+    value: country.code,
+  }))
+
+  const shippingCountry = form.watch('shippingCountry')
+  const shippingState = form.watch('shippingState')
+
+  const shippingStateOptions = useMemo(() => {
+    const selectedCountry = (getCountriesQuery.data || []).find(
+      (country) => country.code === shippingCountry
+    )
+
+    const stateOptions =
+      selectedCountry?.states?.map((state) => ({
+        label: state.name,
+        value: state.code,
+      })) || []
+
+    return stateOptions
+  }, [shippingCountry])
+
+  useEffect(() => {
+    form.setValue('shippingState', '')
+    form.setValue('shippingTaxNumber', '')
+  }, [shippingCountry])
+
+  useEffect(() => {
+    form.setValue('_shippingStateOptionsLength', shippingStateOptions.length)
+  }, [shippingStateOptions])
 
   async function onSubmit(data: PerkPurchaseInputs) {
     if (!fundSlug) return
@@ -133,31 +216,36 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
             <p className="text-muted-foreground">{perk.description}</p>
           </div>
 
-          <div className="flex flex-col">
-            <Label>Price</Label>
+          {!costEstimate && (
+            <div className="flex flex-col">
+              <Label>Price</Label>
 
-            <p className="mt-1 text-lg text-green-500">
-              <strong className="font-semibold">{pointFormat.format(perk.price)}</strong> points
-            </p>
+              <p className="mt-1 text-lg text-green-500">
+                <strong className="font-semibold">{pointFormat.format(perk.price)}</strong> points
+              </p>
 
-            <span
-              className={cn('text-xs', hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500')}
-            >
-              You have {pointFormat.format(balance)} points
-            </span>
-          </div>
+              <span
+                className={cn(
+                  'text-xs',
+                  hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500'
+                )}
+              >
+                You have {pointFormat.format(balance)} points
+              </span>
+            </div>
+          )}
 
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-4 grow">
             {perk.needsShippingAddress && hasEnoughBalance && !costEstimate && (
               <>
-                {!!getPrintfulProductVariantsQuery.data && (
+                {perk.needsShippingAddress && !!getPrintfulProductVariantsQuery.data && (
                   <div className="flex flex-col">
                     <FormField
                       control={form.control}
                       name="printfulSyncVariantId"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Options</FormLabel>
+                          <FormLabel>Options *</FormLabel>
                           <Select onValueChange={field.onChange}>
                             <FormControl>
                               <SelectTrigger>
@@ -179,6 +267,8 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     />
                   </div>
                 )}
+
+                {perk.needsShippingAddress && !getPrintfulProductVariantsQuery.data && <Spinner />}
 
                 <FormField
                   control={form.control}
@@ -212,29 +302,117 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                   control={form.control}
                   name="shippingCountry"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex flex-col">
                       <FormLabel>Country *</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
+                      <Popover modal>
+                        <PopoverTrigger>
+                          <FormControl>
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue
+                                  placeholder={
+                                    (getCountriesQuery.data || []).find(
+                                      (country) => country.code === shippingCountry
+                                    )?.name || ''
+                                  }
+                                />
+                              </SelectTrigger>
+                            </Select>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="p-0">
+                          <Command>
+                            <CommandInput placeholder="Search country..." />
+                            <CommandList>
+                              <CommandEmpty>No country found.</CommandEmpty>
+                              <CommandGroup>
+                                {shippingCountryOptions.map((country) => (
+                                  <CommandItem
+                                    value={country.label}
+                                    key={country.value}
+                                    onSelect={() =>
+                                      form.setValue('shippingCountry', country.value, {
+                                        shouldValidate: true,
+                                      })
+                                    }
+                                  >
+                                    {country.label}
+                                    <Check
+                                      className={cn(
+                                        'ml-auto',
+                                        country.value === field.value ? 'opacity-100' : 'opacity-0'
+                                      )}
+                                    />
+                                  </CommandItem>
+                                ))}
+                              </CommandGroup>
+                            </CommandList>
+                          </Command>
+                        </PopoverContent>
+                      </Popover>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name="shippingState"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>State *</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {!!shippingStateOptions.length && (
+                  <FormField
+                    control={form.control}
+                    name="shippingState"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>State *</FormLabel>
+                        <Popover modal>
+                          <PopoverTrigger>
+                            <FormControl>
+                              <Select>
+                                <SelectTrigger>
+                                  <SelectValue
+                                    placeholder={
+                                      shippingStateOptions.find(
+                                        (state) => state.value === shippingState
+                                      )?.label
+                                    }
+                                  />
+                                </SelectTrigger>
+                              </Select>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="p-0">
+                            <Command>
+                              <CommandInput placeholder="Search state..." />
+                              <CommandList>
+                                <CommandEmpty>No state found.</CommandEmpty>
+                                <CommandGroup>
+                                  {shippingStateOptions.map((state) => (
+                                    <CommandItem
+                                      value={state.label}
+                                      key={state.value}
+                                      onSelect={() =>
+                                        form.setValue('shippingState', state.value, {
+                                          shouldValidate: true,
+                                        })
+                                      }
+                                    >
+                                      {state.label}
+                                      <Check
+                                        className={cn(
+                                          'ml-auto',
+                                          state.value === field.value ? 'opacity-100' : 'opacity-0'
+                                        )}
+                                      />
+                                    </CommandItem>
+                                  ))}
+                                </CommandGroup>
+                              </CommandList>
+                            </Command>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
 
                 <FormField
                   control={form.control}
@@ -278,6 +456,22 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                   )}
                 />
 
+                {shippingCountry === 'BR' && (
+                  <FormField
+                    control={form.control}
+                    name="shippingTaxNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tax number (CPF) *</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
                 <Button
                   type="submit"
                   size="lg"
@@ -297,16 +491,46 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
             )}
 
             {!!costEstimate && (
-              <div className="flex flex-col">
-                <Label>Costs</Label>
+              <div className="flex flex-col mb-auto">
+                <Table className="w-fit">
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">Item</TableCell>
+                      <TableCell>{pointFormat.format(costEstimate.product)} points</TableCell>
+                    </TableRow>
 
-                <p className="mt-1">Shipping: {pointFormat.format(costEstimate.shipping)} points</p>
-                <p className="mt-1">Tax: {pointFormat.format(costEstimate.tax)} points</p>
-                <p className="mt-1">Total: {pointFormat.format(costEstimate.total)} points</p>
+                    <TableRow>
+                      <TableCell className="font-medium">Shipping</TableCell>
+                      <TableCell>{pointFormat.format(costEstimate.shipping)} points</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">Tax</TableCell>
+                      <TableCell>{pointFormat.format(costEstimate.tax)} points</TableCell>
+                    </TableRow>
+                    <TableRow className="text-lg">
+                      <TableCell className="font-semibold">Total</TableCell>
+                      <TableCell className="text-green-500">
+                        <strong className="font-semibold">
+                          {pointFormat.format(costEstimate.total)}
+                        </strong>{' '}
+                        points
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+
+                <span
+                  className={cn(
+                    'text-xs',
+                    hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500'
+                  )}
+                >
+                  You have {pointFormat.format(balance)} points
+                </span>
               </div>
             )}
 
-            {!!costEstimate && (
+            {((perk.needsShippingAddress && !!costEstimate) || !perk.needsShippingAddress) && (
               <Button
                 type="submit"
                 size="lg"

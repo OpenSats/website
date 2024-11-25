@@ -263,6 +263,20 @@ export type PrintfulGetProductRes = {
   }
 }
 
+// Printful country/state code
+
+export type PrintfulGetCountriesRes = {
+  code: number
+  result: [
+    {
+      code: string
+      name: string
+      states: { code: string; name: string }[] | null
+      region: string
+    },
+  ]
+}
+
 // Printful estimate order
 
 export type PrintfulEstimateOrderReq = {

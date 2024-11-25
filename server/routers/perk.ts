@@ -8,6 +8,7 @@ import {
   PrintfulCreateOrderRes,
   PrintfulEstimateOrderReq,
   PrintfulEstimateOrderRes,
+  PrintfulGetCountriesRes,
   PrintfulGetProductRes,
   StrapiCreateOrderBody,
   StrapiCreateOrderRes,
@@ -67,18 +68,26 @@ export const perkRouter = router({
       return printfulProduct.sync_variants
     }),
 
+  getCountries: protectedProcedure.query(async () => {
+    const {
+      data: { result: countries },
+    } = await printfulApi.get<PrintfulGetCountriesRes>('/countries')
+
+    return countries
+  }),
+
   estimatePrintfulOrderCosts: protectedProcedure
     .input(
       z.object({
         printfulSyncVariantId: z.number(),
         shippingAddressLine1: z.string().min(1),
-        shippingAddressLine2: z.string().optional(),
+        shippingAddressLine2: z.string(),
         shippingCity: z.string().min(1),
-        shippingState: z.string().min(1),
+        shippingState: z.string(),
         shippingCountry: z.string().min(1),
         shippingZip: z.string().min(1),
         shippingPhone: z.string().min(1),
-        shippingTaxNumber: z.string().optional(),
+        shippingTaxNumber: z.string(),
       })
     )
     .mutation(async ({ input, ctx }) => {
