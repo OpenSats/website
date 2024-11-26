@@ -1,5 +1,34 @@
 # MAGIC Grants Campaign Site
 
+## Creating a New Donation Campaign
+
+The core of a donation campaign lives in `/docs/<fund>/projects`.
+
+Create a new `.md` file in the `project` folder for the Fund that you are interested in. The name of the `.md` file will be the end part of the public YRL.
+
+You will need to make a new branch to propose a change in a pull request.
+
+In the new `.md` file, please the following at the top:
+
+```
+fund: fund_name (required, eg: firo, monero, general)
+title: 'String' (required)
+summary: 'String' (required)
+nym: 'String' (required, the author)
+coverImage: '' (optional but recommended)
+website: 'String' (optional, link for the title text)
+socialLinks:
+  - 'string' (optional, add more list items for multiple)
+date: 'YYYY-MM_DD' (required)
+goal: Number (required, in USD)
+```
+
+When merged, this will open a new donation campaign that is set to require funding.
+
+### Adding a Cover Image
+
+The cover image (`coverImage`) should be placed in `/public/img/project/`. For the `coverImage` value, use `/img/project/<image file name>`, eg `/img/project/firo-curve-trees.png`.
+
 ## Development
 
 ### Requirements
@@ -56,7 +85,7 @@ Create a `.env `file as a copy of `.env.example` and set the values for the empt
 
 4. Go to **Developers** -> **Webhooks**, and add a new webhook endpoint. Add `<Your app public address>/api/stripe/monero-webhook` to the URL field replacing `<Your app public address>` with your app's public address, then add the secret to the `STRIPE_MONERO_WEBHOOK_SECRET` environment variable in your `.env` file. To expose the app to the internet so Stripe can reach the webhook endpoint, you can use tunneling services like Visual Studio Code's built-in [port-forwarding feature](https://code.visualstudio.com/docs/editor/port-forwarding) or [Ngrok](https://ngrok.io).
 
-This makes you able to test Stripe donations in the Monero fund, which should be enough for development. You can add random values to the other Stripe enviroment variables to bypass validation.
+This makes you able to test Stripe donations in the Monero fund, which should be enough for development. You can add random values to the other Stripe environment variables to bypass validation.
 
 You are now all set up to start developing!
 
@@ -117,11 +146,29 @@ Response body (`asset` parameter specified)
 ]
 ```
 
-# Contributing
+## Infrastructure
 
-Pull requests welcome!
-Thanks for supporting MAGIC Grants.
+This repository consists of several relayed deployments:
 
-# License
+* The campaign website, donate.magicgrants.org
+* BTCPay Server, btcpay.magicgrants.org
+  * Monero daemon
+  * View-only Monero wallet
+  * Bitcoin daemon
+  * View-only Bitcoin wallet
+* Keycloak, keycloak.magicgrants.org
+
+Separate repositories are used for:
+
+* Auto-forwarding Bitcoin and Monero to Kraken, then auto-converting to USD: https://github.com/MAGICGrants/autoforward-autoconvert
+* Perks management/administration: https://github.com/MAGICGrants/strapi
+
+## Contributing
+
+Pull requests welcome! Thanks for supporting MAGIC Grants.
+
+## License
+
+Thanks to Open Sats for their initial version of this website, which has been modified significantly. Thanks to BTCPay Server for Bitcoin and Monero payment processing.
 
 [MIT](LICENSE)

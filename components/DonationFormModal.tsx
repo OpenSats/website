@@ -306,7 +306,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
                 </CustomLink>{' '}
                 and send the completed form to{' '}
                 <CustomLink href={`mailto:info@magicgrants.org`}>info@magicgrants.org</CustomLink>{' '}
-                to deduct your donation.
+                to qualify for a deduction.
               </AlertDescription>
             </Alert>
           )}
@@ -337,7 +337,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
-              Donate with Fiat
+              Donate with Card
             </Button>
           </div>
         </form>

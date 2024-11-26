@@ -13,7 +13,16 @@ export const authRouter = router({
   register: publicProcedure
     .input(
       z.object({
-        name: z.string().trim().min(1),
+        firstName: z
+          .string()
+          .trim()
+          .min(1)
+          .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
+        lastName: z
+          .string()
+          .trim()
+          .min(1)
+          .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
         email: z.string().email(),
         password: z.string(),
         fundSlug: z.enum(fundSlugs),
@@ -31,7 +40,7 @@ export const authRouter = router({
           credentials: [{ type: 'password', value: input.password, temporary: false }],
           requiredActions: ['VERIFY_EMAIL'],
           attributes: {
-            name: input.name,
+            name: `${input.firstName} ${input.lastName}`,
             passwordResetTokenVersion: 1,
             emailVerifyTokenVersion: 1,
           },
@@ -107,10 +116,12 @@ export const authRouter = router({
       await keycloak.users.update(
         { id: decoded.userId },
         {
+          ...user,
           email: decoded.email,
           emailVerified: true,
           requiredActions: [],
           attributes: {
+            ...user.attributes,
             emailVerifyTokenVersion: (emailVerifyTokenVersion + 1).toString(),
           },
         }
@@ -140,7 +151,11 @@ export const authRouter = router({
       if (!passwordResetTokenVersion) {
         await keycloak.users.update(
           { id: user.id },
-          { email: input.email, attributes: { passwordResetTokenVersion: 1 } }
+          {
+            ...user,
+            email: input.email,
+            attributes: { ...user.attributes, passwordResetTokenVersion: 1 },
+          }
         )
 
         passwordResetTokenVersion = 1
@@ -202,7 +217,7 @@ export const authRouter = router({
       if (!passwordResetTokenVersion) {
         await keycloak.users.update(
           { id: user.id },
-          { email: user.email, attributes: { passwordResetTokenVersion: 1 } }
+          { ...user, attributes: { ...user.attributes, passwordResetTokenVersion: 1 } }
         )
 
         passwordResetTokenVersion = 1
@@ -217,9 +232,11 @@ export const authRouter = router({
       await keycloak.users.update(
         { id: decoded.userId },
         {
+          ...user,
           email: decoded.email,
           credentials: [{ type: 'password', value: input.password, temporary: false }],
           attributes: {
+            ...user.attributes,
             passwordResetTokenVersion: (passwordResetTokenVersion + 1).toString(),
           },
         }
