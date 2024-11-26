@@ -2,6 +2,7 @@ import { Stripe } from 'stripe'
 import { TRPCError } from '@trpc/server'
 import { Donation } from '@prisma/client'
 import { z } from 'zod'
+import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { CURRENCY, MAX_AMOUNT, MEMBERSHIP_PRICE, MIN_AMOUNT } from '../../config'
@@ -30,10 +31,11 @@ export const donationRouter = router({
       let email = input.email
       let name = input.name
       let stripeCustomerId: string | null = null
+      let user: UserRepresentation | null = null
 
       if (userId) {
         await authenticateKeycloakClient()
-        const user = await keycloak.users.findOne({ id: userId })!
+        user = (await keycloak.users.findOne({ id: userId })!) || null
         email = user?.email!
         name = user?.attributes?.name?.[0]
         stripeCustomerId = user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0] || null
@@ -41,7 +43,7 @@ export const donationRouter = router({
 
       const stripe = _stripe[input.fundSlug]
 
-      if (!stripeCustomerId && userId && email && name) {
+      if (!stripeCustomerId && userId && user && email && name) {
         const customer = await stripe.customers.create({
           email,
           name,
@@ -51,7 +53,7 @@ export const donationRouter = router({
 
         await keycloak.users.update(
           { id: userId },
-          { email: email, attributes: { stripeCustomerId } }
+          { ...user, attributes: { ...user.attributes, stripeCustomerId } }
         )
       }
 
@@ -181,6 +183,12 @@ export const donationRouter = router({
       const email = user?.email!
       const name = user?.attributes?.name?.[0]!
 
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
       let stripeCustomerId =
         user?.attributes?.[fundSlugToCustomerIdAttr[input.fundSlug]]?.[0] || null
 
@@ -189,7 +197,10 @@ export const donationRouter = router({
 
         stripeCustomerId = customer.id
 
-        await keycloak.users.update({ id: userId }, { email, attributes: { stripeCustomerId } })
+        await keycloak.users.update(
+          { id: userId },
+          { ...user, attributes: { ...user.attributes, stripeCustomerId } }
+        )
       }
 
       const metadata: DonationMetadata = {

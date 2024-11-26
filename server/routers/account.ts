@@ -51,9 +51,18 @@ export const accountRouter = router({
 
       await authenticateKeycloakClient()
 
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
       await keycloak.users.update(
         { id: userId },
         {
+          ...user,
           email,
           credentials: [{ type: 'password', value: input.newPassword, temporary: false }],
         }
@@ -88,7 +97,7 @@ export const accountRouter = router({
       if (!emailVerifyTokenVersion) {
         await keycloak.users.update(
           { id: userId },
-          { email: user.email, attributes: { emailVerifyTokenVersion: 1 } }
+          { ...user, attributes: { ...user.attributes, emailVerifyTokenVersion: 1 } }
         )
         emailVerifyTokenVersion = 1
       }
