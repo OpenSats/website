@@ -308,7 +308,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
               className="grow basis-0 bg-indigo-500 hover:bg-indigo-700"
             >
               {payMembershipWithFiatMutation.isPending ? (
-                <Spinner />
+                <Spinner className="fill-indigo-500" />
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}

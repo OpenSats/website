@@ -333,7 +333,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
               className="grow basis-0 bg-indigo-500 hover:bg-indigo-700"
             >
               {donateWithFiatMutation.isPending ? (
-                <Spinner />
+                <Spinner className="fill-indigo-500" />
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}
