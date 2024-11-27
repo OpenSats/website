@@ -28,7 +28,7 @@ const PerkCard: React.FC<Props> = ({ perk, balance }) => {
           fundSlug === 'general' && 'border-primary'
         )}
       >
-        <div className="flex h-36 w-full sm:h-52">
+        <div className="flex h-52 w-full">
           <Image
             alt={perk.name}
             src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}

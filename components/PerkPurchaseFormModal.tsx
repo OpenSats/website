@@ -117,6 +117,8 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
     shouldFocusError: false,
   })
 
+  const [countrySelectOpen, setCountrySelectOpen] = useState(false)
+  const [stateSelectOpen, setStateSelectOpen] = useState(false)
   const [costEstimate, setCostEstimate] = useState<CostEstimate | null>(null)
 
   const hasEnoughBalance = balance - (costEstimate?.total || perk.price) > 0
@@ -128,6 +130,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
 
   const shippingCountry = form.watch('shippingCountry')
   const shippingState = form.watch('shippingState')
+  const printfulSyncVariantId = form.watch('printfulSyncVariantId')
 
   const shippingStateOptions = useMemo(() => {
     const selectedCountry = (getCountriesQuery.data || []).find(
@@ -197,43 +200,64 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   }
 
   return (
-    <div className="flex flex-row gap-8">
-      <div className="flex w-96 h-96">
-        <Image
-          alt={perk.name}
-          src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
-          width={600}
-          height={600}
-          style={{ objectFit: 'contain' }}
-          className="cursor-pointer rounded-t-xl"
-        />
-      </div>
+    <div className="min-w-0 flex flex-col md:flex-row gap-8">
+      <Image
+        alt={perk.name}
+        src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
+        width={600}
+        height={600}
+        style={{ objectFit: 'contain' }}
+        className="md:w-96 md:h-96 hidden md:block"
+      />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8 grow">
-          <div className="flex flex-col">
-            <h1 className="font-semibold">{perk.name}</h1>
-            <p className="text-muted-foreground">{perk.description}</p>
-          </div>
+          <div className="flex flex-row flex-wrap justify-center md:justify-normal items-center">
+            <Image
+              alt={perk.name}
+              src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
+              width={200}
+              height={200}
+              style={{ objectFit: 'contain' }}
+              className="w-48 h-48 md:hidden"
+            />
 
-          {!costEstimate && (
-            <div className="flex flex-col">
-              <Label>Price</Label>
-
-              <p className="mt-1 text-lg text-green-500">
-                <strong className="font-semibold">{pointFormat.format(perk.price)}</strong> points
-              </p>
-
-              <span
-                className={cn(
-                  'text-xs',
-                  hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500'
+            <div className="flex flex-col space-y-6">
+              <div className="flex flex-col">
+                <h1 className="font-semibold">{perk.name}</h1>
+                {!costEstimate && <p className="text-muted-foreground">{perk.description}</p>}
+                {!!costEstimate && printfulSyncVariantId && (
+                  <p className="text-muted-foreground">
+                    {
+                      getPrintfulProductVariantsQuery.data?.find(
+                        (variant) => variant.id === Number(printfulSyncVariantId)
+                      )?.name
+                    }
+                  </p>
                 )}
-              >
-                You have {pointFormat.format(balance)} points
-              </span>
+              </div>
+
+              {!costEstimate && (
+                <div className="flex flex-col">
+                  <Label>Price</Label>
+
+                  <p className="mt-1 text-lg text-green-500">
+                    <strong className="font-semibold">{pointFormat.format(perk.price)}</strong>{' '}
+                    points
+                  </p>
+
+                  <span
+                    className={cn(
+                      'text-xs',
+                      hasEnoughBalance ? 'text-muted-foreground' : 'text-red-500'
+                    )}
+                  >
+                    You have {pointFormat.format(balance)} points
+                  </span>
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
           <div className="flex flex-col space-y-4 grow">
             {perk.needsShippingAddress && hasEnoughBalance && !costEstimate && (
@@ -304,10 +328,17 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                   render={({ field }) => (
                     <FormItem className="flex flex-col">
                       <FormLabel>Country *</FormLabel>
-                      <Popover modal>
+                      <Popover
+                        modal
+                        open={countrySelectOpen}
+                        onOpenChange={(open) => setCountrySelectOpen(open)}
+                      >
                         <PopoverTrigger>
                           <FormControl>
-                            <Select>
+                            <Select
+                              open={countrySelectOpen}
+                              onValueChange={() => setCountrySelectOpen(false)}
+                            >
                               <SelectTrigger>
                                 <SelectValue
                                   placeholder={
@@ -330,11 +361,12 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                                   <CommandItem
                                     value={country.label}
                                     key={country.value}
-                                    onSelect={() =>
+                                    onSelect={() => (
                                       form.setValue('shippingCountry', country.value, {
                                         shouldValidate: true,
-                                      })
-                                    }
+                                      }),
+                                      setCountrySelectOpen(false)
+                                    )}
                                   >
                                     {country.label}
                                     <Check
@@ -362,7 +394,11 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
                         <FormLabel>State *</FormLabel>
-                        <Popover modal>
+                        <Popover
+                          modal
+                          open={stateSelectOpen}
+                          onOpenChange={(open) => setStateSelectOpen(open)}
+                        >
                           <PopoverTrigger>
                             <FormControl>
                               <Select>
@@ -388,11 +424,12 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                                     <CommandItem
                                       value={state.label}
                                       key={state.value}
-                                      onSelect={() =>
+                                      onSelect={() => (
                                         form.setValue('shippingState', state.value, {
                                           shouldValidate: true,
-                                        })
-                                      }
+                                        }),
+                                        setStateSelectOpen(false)
+                                      )}
                                     >
                                       {state.label}
                                       <Check
@@ -472,6 +509,10 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                   />
                 )}
 
+                <span className="text-xs text-muted-foreground">
+                  Price subject to change depending on your region.
+                </span>
+
                 <Button
                   type="submit"
                   size="lg"
@@ -537,7 +578,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                 disabled={
                   !(form.formState.isValid && hasEnoughBalance && !purchasePerkMutation.isPending)
                 }
-                className="w-full"
+                className="w-full max-w-96 mx-auto md:mx-0"
               >
                 {purchasePerkMutation.isPending ? <Spinner /> : <ShoppingBagIcon />}
                 Purchase
