@@ -76,7 +76,7 @@ if (!globalForWorker.hasInitializedWorkers)
           {},
           AxiosResponse<PrintfulCreateOrderRes>,
           PrintfulCreateOrderReq
-        >(`/orders`, {
+        >(process.env.NODE_ENV === 'production' ? '/orders?confirm=true' : '/orders', {
           recipient: {
             address1: job.data.shippingAddressLine1!,
             address2: job.data.shippingAddressLine2 || '',
