@@ -15,6 +15,10 @@ export const env = createEnv({
 
     STRAPI_API_URL: z.string().url(),
     STRAPI_API_TOKEN: z.string().length(256),
+    STRAPI_CDN_PROTOCOL: z.string().min(1),
+    STRAPI_CDN_HOST: z.string().min(1),
+    STRAPI_CDN_PORT: z.string().min(1),
+    STRAPI_CDN_PATHNAME: z.string().min(1),
 
     SMTP_HOST: z.string().min(1),
     SMTP_PORT: z.string().min(1),
@@ -57,7 +61,8 @@ export const env = createEnv({
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
   client: {
-    NEXT_PUBLIC_STRAPI_URL: z.string().url(),
+    NEXT_PUBLIC_STRAPI_URL:
+      process.env.NODE_ENV === 'production' ? z.string().url().optional() : z.string().url(),
     NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
@@ -78,6 +83,10 @@ export const env = createEnv({
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     STRAPI_API_URL: process.env.STRAPI_API_URL,
     STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
+    STRAPI_CDN_PROTOCOL: process.env.STRAPI_CDN_PROTOCOL,
+    STRAPI_CDN_HOST: process.env.STRAPI_CDN_HOST,
+    STRAPI_CDN_PORT: process.env.STRAPI_CDN_PORT,
+    STRAPI_CDN_PATHNAME: process.env.STRAPI_CDN_PATHNAME,
 
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,
@@ -112,6 +121,8 @@ export const env = createEnv({
     PRIVACY_GUIDES_APPLICATION_RECIPIENT: process.env.PRIVACY_GUIDES_APPLICATION_RECIPIENT,
     GENERAL_APPLICATION_RECIPIENT: process.env.GENERAL_APPLICATION_RECIPIENT,
 
+    PRINTFUL_API_KEY: process.env.PRINTFUL_API_KEY,
+
     NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT,
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT:
@@ -119,7 +130,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT:
       process.env.NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT,
 
-    PRINTFUL_API_KEY: process.env.PRINTFUL_API_KEY,
+    NEXT_PUBLIC_STRAPI_CDN_URL: process.env.NEXT_PUBLIC_STRAPI_CDN_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
