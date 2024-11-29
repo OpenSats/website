@@ -21,6 +21,11 @@ services:
     depends_on:
       - app
 
+  redis:
+    container_name: redis
+    image: redis:7-alpine
+    restart: unless-stopped
+
   app:
     build:
       context: .
