@@ -28,6 +28,13 @@ import {
 } from './ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from './ui/carousel'
 
 type Props = { perk: StrapiPerkPopulated; balance: number; close: () => void }
 
@@ -200,27 +207,62 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   }
 
   return (
-    <div className="min-w-0 flex flex-col md:flex-row gap-8">
-      <Image
-        alt={perk.name}
-        src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
-        width={600}
-        height={600}
-        style={{ objectFit: 'contain' }}
-        className="md:w-96 md:h-96 hidden md:block"
-      />
+    <div className="min-w-0 flex flex-col md:flex-row gap-8 items-start">
+      <div className="p-10 hidden md:block">
+        <Carousel className="w-80 h-80">
+          <CarouselContent>
+            {perk.images.map((image) => (
+              <CarouselItem key={image.formats.medium.url}>
+                <Image
+                  alt={perk.name}
+                  src={
+                    process.env.NODE_ENV !== 'production'
+                      ? env.NEXT_PUBLIC_STRAPI_URL + image.formats.medium.url
+                      : image.formats.medium.url
+                  }
+                  width={600}
+                  height={600}
+                  style={{ objectFit: 'contain' }}
+                  className="w-80 h-80"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8 grow">
-          <div className="flex flex-row flex-wrap justify-center md:justify-normal items-center">
-            <Image
-              alt={perk.name}
-              src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
-              width={200}
-              height={200}
-              style={{ objectFit: 'contain' }}
-              className="w-48 h-48 md:hidden"
-            />
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-full md:max-w-md flex flex-col space-y-8"
+        >
+          <div className="flex flex-col justify-start">
+            <div className="mx-auto p-10 md:hidden justify-center items-center">
+              <Carousel className="w-40 sm:w-56 h-40 sm:h-56">
+                <CarouselContent>
+                  {perk.images.map((image) => (
+                    <CarouselItem key={image.formats.medium.url}>
+                      <Image
+                        alt={perk.name}
+                        src={
+                          process.env.NODE_ENV !== 'production'
+                            ? env.NEXT_PUBLIC_STRAPI_URL + image.formats.medium.url
+                            : image.formats.medium.url
+                        }
+                        width={200}
+                        height={200}
+                        style={{ objectFit: 'contain' }}
+                        className="w-40 sm:w-56 h-40 sm:h-56"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
+            </div>
 
             <div className="flex flex-col space-y-6">
               <div className="flex flex-col">
