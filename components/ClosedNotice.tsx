@@ -19,10 +19,10 @@ const ClosedNotice = () => {
         <div>
           <p className="font-bold">Applications are currently closed!</p>
           <p className="text-sm">
-            Grant applications are temporarily closed for some much-needed
-            spring cleaning. Read{' '}
-            <Link href="/blog/2023-year-in-review">our last report</Link> to see
-            what kind of projects we support.
+            Grant applications are currently closed as we prepare our
+            end-of-year and other <Link href="/transparency">reports</Link>.
+            Read <Link href="/blog/2023-year-in-review">our last report</Link>{' '}
+            to see what kind of projects we support.
           </p>
           <p className="text-sm">
             If you want to prepare a submission, please get familiar with our{' '}
@@ -30,7 +30,8 @@ const ClosedNotice = () => {
             our <Link href="/selection">grant selection process</Link>.
           </p>
           <p className="text-sm">
-            We will re-open applications as soon as we can. Two weeks&trade;
+            We will re-open applications as soon as we can. Two weeks&trade;.
+            Okay, maybe four.
           </p>
         </div>
       </div>
