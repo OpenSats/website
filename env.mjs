@@ -83,10 +83,6 @@ export const env = createEnv({
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     STRAPI_API_URL: process.env.STRAPI_API_URL,
     STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
-    STRAPI_CDN_PROTOCOL: process.env.STRAPI_CDN_PROTOCOL,
-    STRAPI_CDN_HOST: process.env.STRAPI_CDN_HOST,
-    STRAPI_CDN_PORT: process.env.STRAPI_CDN_PORT,
-    STRAPI_CDN_PATHNAME: process.env.STRAPI_CDN_PATHNAME,
 
     SMTP_HOST: process.env.SMTP_HOST,
     SMTP_PORT: process.env.SMTP_PORT,

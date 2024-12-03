@@ -5,10 +5,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: process.env.STRAPI_CDN_PROTOCOL,
-        hostname: process.env.STRAPI_CDN_HOST,
-        port: process.env.STRAPI_CDN_PORT,
-        pathname: process.env.STRAPI_CDN_PATHNAME,
+        protocol: 'https',
+        hostname: 'magic-strapi.nbg1.your-objectstorage.com',
       },
     ],
   },

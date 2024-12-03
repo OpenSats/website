@@ -44,10 +44,6 @@ services:
 
       STRAPI_API_URL: ${STRAPI_API_URL}
       STRAPI_API_TOKEN: ${STRAPI_API_TOKEN}
-      STRAPI_CDN_PROTOCOL: https
-      STRAPI_CDN_HOST: ${STRAPI_CDN_HOST}
-      STRAPI_CDN_PORT: 443
-      STRAPI_CDN_PATHNAME: /
 
       SMTP_HOST: email-smtp.us-east-2.amazonaws.com
       SMTP_PORT: 587

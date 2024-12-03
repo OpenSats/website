@@ -32,7 +32,6 @@ jobs:
             USER_SETTINGS_JWT_SECRET=${{ secrets.USER_SETTINGS_JWT_SECRET }} \
             STRAPI_API_URL=${{ secrets.STRAPI_API_URL }} \
             STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }} \
-            STRAPI_CDN_HOST=${{ secrets.STRAPI_CDN_HOST }} \
             SMTP_USER=${{ secrets.SMTP_USER }} \
             SMTP_PASS=${{ secrets.SMTP_PASS }} \
             STRIPE_MONERO_SECRET_KEY=${{ secrets.STRIPE_MONERO_SECRET_KEY }} \
