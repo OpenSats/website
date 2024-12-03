@@ -31,7 +31,11 @@ const PerkCard: React.FC<Props> = ({ perk, balance }) => {
         <div className="flex h-52 w-full">
           <Image
             alt={perk.name}
-            src={env.NEXT_PUBLIC_STRAPI_URL + perk.images[0]!.formats.medium.url}
+            src={
+              process.env.NODE_ENV !== 'production'
+                ? env.NEXT_PUBLIC_STRAPI_URL + perk.images[0].formats.medium.url
+                : perk.images[0].formats.medium.url
+            }
             width={400}
             height={400}
             style={{ objectFit: 'contain' }}
