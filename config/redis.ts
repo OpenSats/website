@@ -1,3 +1,6 @@
 import { ConnectionOptions } from 'bullmq'
 
-export const redisConnection: ConnectionOptions = { host: 'redis', port: 6379, url: 'redis:6379' }
+export const redisConnection: ConnectionOptions = {
+  host: 'magic-redis',
+  port: 6379,
+}

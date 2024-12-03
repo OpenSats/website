@@ -1,36 +1,35 @@
 services:
-  cloudflared:
+  magic-cloudflared:
     image: cloudflare/cloudflared:latest
-    container_name: cloudflared
+    container_name: magic-cloudflared
     restart: unless-stopped
     command: tunnel --no-autoupdate run
     environment:
       TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
       REAL_IP_HEADER: Cf-Connecting-Ip
+    networks:
+      - strapi-shared-network
     depends_on:
-      - nginx
+      - magic-nginx
 
-  nginx:
+  magic-nginx:
     image: nginx:1
-    container_name: nginx
+    container_name: magic-nginx
     restart: unless-stopped
     ports:
       - 80:80
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - strapi-shared-network
     depends_on:
-      - app
+      - magic-app
 
-  redis:
-    container_name: redis
-    image: redis:7-alpine
-    restart: unless-stopped
-
-  app:
+  magic-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
+    container_name: magic-app
     restart: unless-stopped
     environment:
       NODE_ENV: production
@@ -81,13 +80,20 @@ services:
       NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: monerofund@magicgrants.org
       NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: monerofund@magicgrants.org
     depends_on:
-      - postgres
+      - magic-postgres
     networks:
       - strapi-shared-network
 
-  postgres:
+  magic-redis:
+    container_name: magic-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - strapi-shared-network
+
+  magic-postgres:
     image: postgres:16-alpine
-    container_name: postgres
+    container_name: magic-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: magic
@@ -95,6 +101,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - 'postgres_data:/var/lib/postgresql/data'
+    networks:
+      - strapi-shared-network
 
 volumes:
   postgres_data:
