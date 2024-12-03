@@ -82,6 +82,8 @@ services:
       NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: monerofund@magicgrants.org
     depends_on:
       - postgres
+    networks:
+      - strapi-shared-network
 
   postgres:
     image: postgres:16-alpine
@@ -96,3 +98,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  strapi-shared-network:
+    external: true
