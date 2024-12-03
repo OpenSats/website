@@ -1,12 +1,12 @@
 services:
-  redis:
+  magic-redis:
     container_name: magic-redis
     image: redis:7-alpine
     restart: unless-stopped
 
-  btcpayserver:
+  magic-btcpayserver:
     restart: unless-stopped
-    container_name: generated_btcpayserver_1
+    container_name: magic-btcpayserver
     image: ${BTCPAY_IMAGE:-btcpayserver/btcpayserver:1.13.3-altcoins}
     expose:
       - '49392'
@@ -43,9 +43,9 @@ services:
       - 'tor_torrcdir:/usr/local/etc/tor/'
     ports:
       - '49392:49392'
-  monerod_wallet:
+  magic-monerod-wallet:
     restart: unless-stopped
-    container_name: btcpayserver_monero_wallet
+    container_name: magic-monerod-wallet
     image: btcpayserver/monero:0.18.3.3
     entrypoint: monero-wallet-rpc --rpc-bind-ip=0.0.0.0 --disable-rpc-login --confirm-external-bind --rpc-bind-port=18082 --non-interactive --trusted-daemon  --daemon-address=xmr-node.cakewallet.com:18081 --wallet-file=/wallet/wallet --password-file /wallet/password --tx-notify="/bin/sh ./scripts/notifier.sh  -X GET http://btcpayserver:49392/monerolikedaemoncallback/tx?cryptoCode=xmr&hash=%s"
     expose:
@@ -55,9 +55,9 @@ services:
     volumes:
       - 'xmr_wallet:/wallet'
 
-  nbxplorer:
+  magic-nbxplorer:
     restart: unless-stopped
-    container_name: generated_nbxplorer_1
+    container_name: magic-nbxplorer
     image: nicolasdorier/nbxplorer:2.5.2
     expose:
       - '32838'
@@ -75,9 +75,9 @@ services:
     volumes:
       - 'nbxplorer_datadir:/datadir'
 
-  btcpay-postgres:
+  magic-btcpay-postgres:
     restart: unless-stopped
-    container_name: generated_postgres_1
+    container_name: magic-btcpay-postgres
     shm_size: 256mb
     image: btcpayserver/postgres:13.13
     command: ['-c', 'random_page_cost=1.0', '-c', 'shared_preload_libraries=pg_stat_statements']
@@ -99,7 +99,7 @@ services:
     volumes:
       - 'magic_postgres_data:/var/lib/postgresql/data'
 
-  keycloak:
+  magic-keycloak:
     image: quay.io/keycloak/keycloak:25.0.6
     container_name: magic-keycloak
     restart: unless-stopped
@@ -110,9 +110,9 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
 
-  campaign-site:
+  magic-app:
     image: node:20-alpine
-    container_name: magic-campaign-site
+    container_name: magic-app
     restart: unless-stopped
     working_dir: /app
     command: npm run dev
