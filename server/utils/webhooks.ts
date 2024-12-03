@@ -4,9 +4,15 @@ import Stripe from 'stripe'
 import getRawBody from 'raw-body'
 import dayjs from 'dayjs'
 
-import { btcpayApi as _btcpayApi, prisma, stripe as _stripe } from '../../server/services'
+import {
+  btcpayApi as _btcpayApi,
+  prisma,
+  stripe as _stripe,
+  strapiApi,
+} from '../../server/services'
 import { DonationMetadata } from '../../server/types'
 import { sendDonationConfirmationEmail } from './mailing'
+import { getUserPointBalance } from './perks'
 
 export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -33,6 +39,13 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       // Skip this event if intent is still not fully paid
       if (paymentIntent.amount_received !== paymentIntent.amount) return
 
+      const shouldGivePointsBack = metadata.givePointsBack === 'true'
+      const grossFiatAmount = paymentIntent.amount_received / 100
+      const netFiatAmount = shouldGivePointsBack
+        ? Number((grossFiatAmount * 0.9).toFixed(2))
+        : grossFiatAmount
+      const pointsAdded = parseInt(String(grossFiatAmount * 100))
+
       // Payment intents for subscriptions will not have metadata
       if (metadata.isSubscription === 'false')
         await prisma.donation.create({
@@ -42,8 +55,9 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
             projectName: metadata.projectName,
             projectSlug: metadata.projectSlug,
             fundSlug: metadata.fundSlug,
-            netFiatAmount: paymentIntent.amount_received / 100,
-            grossFiatAmount: paymentIntent.amount_received / 100,
+            grossFiatAmount,
+            netFiatAmount,
+            pointsAdded,
             membershipExpiresAt:
               metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
           },
@@ -58,7 +72,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           isMembership: metadata.isMembership === 'true',
           isSubscription: metadata.isSubscription === 'true',
           stripeUsdAmount: paymentIntent.amount_received / 100,
-          pointsReceived: 0,
+          pointsReceived: pointsAdded,
         })
       }
     }
@@ -71,9 +85,21 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
         const metadata = event.data.object.subscription_details?.metadata as DonationMetadata
         const invoiceLine = invoice.lines.data.find((line) => line.invoice === invoice.id)
 
-        if (!invoiceLine) return
+        if (!invoiceLine) {
+          console.error(
+            `[/api/stripe/${metadata.fundSlug}-webhook] Line not fund for invoice ${invoice.id}`
+          )
+          return res.status(200).end()
+        }
 
-        await prisma.donation.create({
+        const shouldGivePointsBack = metadata.givePointsBack === 'true'
+        const grossFiatAmount = invoice.total / 100
+        const netFiatAmount = shouldGivePointsBack
+          ? Number((grossFiatAmount * 0.9).toFixed(2))
+          : grossFiatAmount
+        const pointsAdded = shouldGivePointsBack ? parseInt(String(grossFiatAmount * 100)) : 0
+
+        const donation = await prisma.donation.create({
           data: {
             userId: metadata.userId as string,
             stripeInvoiceId: invoice.id,
@@ -81,28 +107,47 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
             projectName: metadata.projectName,
             projectSlug: metadata.projectSlug,
             fundSlug: metadata.fundSlug,
-            netFiatAmount: invoice.total / 100,
-            grossFiatAmount: invoice.total / 100,
+            grossFiatAmount,
+            netFiatAmount,
+            pointsAdded,
             membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
           },
         })
 
-        if (metadata.donorEmail && metadata.donorName) {
-          sendDonationConfirmationEmail({
-            to: metadata.donorEmail,
-            donorName: metadata.donorName,
-            fundSlug: metadata.fundSlug,
-            projectName: metadata.projectName,
-            isMembership: metadata.isMembership === 'true',
-            isSubscription: metadata.isSubscription === 'true',
-            stripeUsdAmount: invoice.total / 100,
-            pointsReceived: 0,
+        // Add points
+        if (shouldGivePointsBack && metadata.userId) {
+          // Get balance for project/fund by finding user's last point history
+          const currentBalance = await getUserPointBalance(metadata.userId)
+
+          await strapiApi.post('/points', {
+            data: {
+              balanceChange: pointsAdded,
+              pointsBalance: currentBalance + pointsAdded,
+              userId: metadata.userId,
+              donationId: donation.id,
+              donationProjectName: donation.projectName,
+              donationProjectSlug: donation.projectSlug,
+              donationFundSlug: donation.fundSlug,
+            },
           })
+
+          if (metadata.donorEmail && metadata.donorName) {
+            sendDonationConfirmationEmail({
+              to: metadata.donorEmail,
+              donorName: metadata.donorName,
+              fundSlug: metadata.fundSlug,
+              projectName: metadata.projectName,
+              isMembership: metadata.isMembership === 'true',
+              isSubscription: metadata.isSubscription === 'true',
+              stripeUsdAmount: invoice.total / 100,
+              pointsReceived: pointsAdded,
+            })
+          }
         }
       }
-    }
 
-    // Return a 200 response to acknowledge receipt of the event
-    res.status(200).end()
+      // Return a 200 response to acknowledge receipt of the event
+      res.status(200).end()
+    }
   }
 }

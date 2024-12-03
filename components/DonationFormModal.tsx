@@ -39,6 +39,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
       email: z.string().email().optional(),
       amount: z.coerce.number().min(1).max(MAX_AMOUNT),
       taxDeductible: z.enum(['yes', 'no']),
+      givePointsBack: z.enum(['yes', 'no']),
     })
     .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
       message: 'Name is required when the donation is tax deductible.',
@@ -82,6 +83,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
         projectName: project.title,
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
+        givePointsBack: data.givePointsBack === 'yes',
       })
 
       window.location.assign(result.url)
@@ -106,6 +108,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
         projectName: project.title,
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
+        givePointsBack: data.givePointsBack === 'yes',
       })
 
       if (!result.url) throw Error()
@@ -231,15 +234,59 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
-                        <RadioGroupItem value="no" />
+                        <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">No</FormLabel>
+                      <FormLabel className="font-normal text-gray-700">Yes</FormLabel>
                     </FormItem>
                     <FormItem className="flex items-center space-x-3 space-y-0">
                       <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-gray-700">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="givePointsBack"
+            render={({ field }) => (
+              <FormItem className="space-y-3 leading-5">
+                <FormLabel>
+                  Would you like to receive MAGIC Grants points back for your donation? The points
+                  can be redeemed for various donation perks as a thank you for supporting our
+                  mission.
+                </FormLabel>
+
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col"
+                  >
+                    <FormItem className="flex items-start space-x-3 space-y-0">
+                      <FormControl className="flex-shrink-0">
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
+
+                      <FormLabel className="font-normal text-gray-700">
+                        Yes, give me perks! This will reduce the donation amount by 10%, the
+                        approximate value of the points when redeemed for goods/services.
+                      </FormLabel>
+                    </FormItem>
+
+                    <FormItem className="flex items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+
+                      <FormLabel className="font-normal text-gray-700">
+                        No, use my full contribution toward your mission.
+                      </FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -264,7 +311,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
             </Alert>
           )}
 
-          <div className="flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
+          <div className="mt-4 flex flex-col sm:flex-row space-y-2 sm:space-x-2 sm:space-y-0">
             <Button
               type="button"
               onClick={form.handleSubmit(handleBtcPay)}
@@ -286,7 +333,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
               className="grow basis-0 bg-indigo-500 hover:bg-indigo-700"
             >
               {donateWithFiatMutation.isPending ? (
-                <Spinner />
+                <Spinner className="fill-indigo-500" />
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}

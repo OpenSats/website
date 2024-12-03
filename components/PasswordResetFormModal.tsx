@@ -31,6 +31,7 @@ function PasswordResetFormModal({ close }: Props) {
 
       toast({ title: 'A password reset link has been sent to your email.' })
       close()
+      form.reset({ email: '' })
     } catch (error) {
       toast({ title: 'Sorry, something went wrong.', variant: 'destructive' })
     }

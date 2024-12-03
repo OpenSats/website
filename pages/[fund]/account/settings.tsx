@@ -37,6 +37,7 @@ type ChangePasswordFormInputs = z.infer<typeof changePasswordFormSchema>
 type ChangeEmailFormInputs = z.infer<typeof changeEmailFormSchema>
 
 function Settings() {
+  const router = useRouter()
   const fundSlug = useFundSlug()
   const session = useSession()
   const changePasswordMutation = trpc.account.changePassword.useMutation()
@@ -68,7 +69,8 @@ function Settings() {
       changePasswordForm.reset()
 
       toast({ title: 'Password successfully changed! Please log in again.' })
-      await signOut({ callbackUrl: `/${fundSlug}/?loginEmail=${session.data?.user.email}` })
+      await signOut({ redirect: false })
+      router.push(`/${fundSlug}/?loginEmail=${session.data?.user.email}`)
     } catch (error) {
       const errorMessage = (error as any).message
 

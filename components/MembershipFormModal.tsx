@@ -37,6 +37,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
       amount: z.coerce.number().min(1).max(MAX_AMOUNT),
       taxDeductible: z.enum(['yes', 'no']),
       recurring: z.enum(['yes', 'no']),
+      givePointsBack: z.enum(['yes', 'no']),
     })
     .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
       message: 'Name is required when the donation is tax deductible.',
@@ -63,7 +64,6 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
   })
 
   const taxDeductible = form.watch('taxDeductible')
-  const recurring = form.watch('recurring')
 
   const payMembershipWithFiatMutation = trpc.donation.payMembershipWithFiat.useMutation()
   const payMembershipWithCryptoMutation = trpc.donation.payMembershipWithCrypto.useMutation()
@@ -78,6 +78,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
         projectName: project.title,
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
+        givePointsBack: data.givePointsBack === 'yes',
       })
 
       window.location.assign(result.url)
@@ -100,9 +101,10 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
         fundSlug,
         recurring: data.recurring === 'yes',
         taxDeductible: data.taxDeductible === 'yes',
+        givePointsBack: data.givePointsBack === 'yes',
       })
 
-      if (!result.url) throw Error()
+      if (!result.url) throw new Error()
 
       window.location.assign(result.url)
     } catch (e) {
@@ -231,7 +233,51 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
                       <FormControl>
                         <RadioGroupItem value="yes" />
                       </FormControl>
-                      <FormLabel className="font-normal">Yes</FormLabel>
+                      <FormLabel className="font-normal text-gray-700">Yes</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="givePointsBack"
+            render={({ field }) => (
+              <FormItem className="space-y-3 leading-5">
+                <FormLabel>
+                  Would you like to receive MAGIC Grants points back for your donation? The points
+                  can be redeemed for various donation perks as a thank you for supporting our
+                  mission.
+                </FormLabel>
+
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col"
+                  >
+                    <FormItem className="flex items-start space-x-3 space-y-0">
+                      <FormControl className="flex-shrink-0">
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+
+                      <FormLabel className="font-normal text-gray-700">
+                        Yes, give me perks! This will reduce the donation amount by 10%, the
+                        approximate value of the points when redeemed for goods/services.
+                      </FormLabel>
+                    </FormItem>
+
+                    <FormItem className="flex items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+
+                      <FormLabel className="font-normal text-gray-700">
+                        No, use my full contribution toward your mission.
+                      </FormLabel>
                     </FormItem>
                   </RadioGroup>
                 </FormControl>
@@ -262,7 +308,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
               className="grow basis-0 bg-indigo-500 hover:bg-indigo-700"
             >
               {payMembershipWithFiatMutation.isPending ? (
-                <Spinner />
+                <Spinner className="fill-indigo-500" />
               ) : (
                 <FontAwesomeIcon icon={faCreditCard} className="h-5 w-5" />
               )}

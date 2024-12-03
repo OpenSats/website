@@ -110,6 +110,131 @@ ${htmlFromMarkdown}`
   return transporter.sendMail({
     from: env.SES_VERIFIED_SENDER,
     to,
+    subject: 'Donation confirmation',
+    html,
+  })
+}
+
+type SendPerkPurchaseConfirmationEmailParams = {
+  to: string
+  perkName: string
+  address?: {
+    address1: string
+    address2?: string
+    city: string
+    state?: string
+    country: string
+    zip: string
+  }
+  pointsRedeemed: number
+}
+
+export async function sendPerkPurchaseConfirmationEmail({
+  to,
+  perkName,
+  address,
+  pointsRedeemed,
+}: SendPerkPurchaseConfirmationEmailParams) {
+  const markdown = `You redeemed points from MAGIC Grants!
+
+    Redeemed item: ${perkName}
+    Number of points redeemed: ${pointsFormat.format(pointsRedeemed)}
+
+    ${
+      address
+        ? `Mailing address
+
+          Address line 1: ${address.address1}
+          Address line 2: ${address.address2 ? address.address2 : '-'}
+          City: ${address.city}
+          State: ${address.state}
+          Country: ${address.country}
+          Zip: ${address.zip}`
+        : ''
+    }
+
+  If you did not make this redemption, please contact [info@magicgrants.org](info@magicgrants.org) immediately, since your account may be compromised. Points are not refundable once redeemed. If you have an issue with your order, please contact us.`
+
+  const htmlFromMarkdown = await markdownToHtml(markdown)
+
+  const html = `<style>
+    html {
+      display: flex;
+    }
+
+    body {
+      max-width: 700px;
+      padding: 20px;
+      margin: 0 auto;
+      font-family: sans-serif;
+      background-color: #F1F5FF;
+    }
+
+    a {
+      color: #3a76f0;
+    }
+  </style>
+
+  ${htmlFromMarkdown}`
+
+  return transporter.sendMail({
+    from: env.SES_VERIFIED_SENDER,
+    to,
+    subject: 'Perk purchase confirmation',
+    html,
+  })
+}
+
+type SendPackageTrackingInfoParams = {
+  to: string
+  perkName: string
+  carrier: string
+  trackingUrl: string
+  trackingNumber: string
+}
+
+export async function sendPackageTrackingInfo({
+  to,
+  perkName,
+  carrier,
+  trackingUrl,
+  trackingNumber,
+}: SendPackageTrackingInfoParams) {
+  const markdown = `### Your package has been shipped!
+
+  Redeemed item: ${perkName}  
+  Carrier: ${carrier}  
+  Tracking number: ${trackingNumber}  
+  [Track my order](${trackingUrl})  
+
+  Please contact [info@magicgrants.org](info@magicgrants.org) if you have any questions.`
+
+  const htmlFromMarkdown = await markdownToHtml(markdown)
+
+  const html = `<style>
+    html {
+      display: flex;
+    }
+
+    body {
+      max-width: 700px;
+      padding: 20px;
+      margin: 0 auto;
+      font-family: sans-serif;
+      background-color: #F1F5FF;
+    }
+
+    a {
+      color: #3a76f0;
+    }
+  </style>
+
+  ${htmlFromMarkdown}`
+
+  return transporter.sendMail({
+    from: env.SES_VERIFIED_SENDER,
+    to,
+    subject: 'Your package has been shipped!',
     html,
   })
 }

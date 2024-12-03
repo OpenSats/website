@@ -1,8 +1,12 @@
-const Spinner = () => {
+import { cn } from '../utils/cn'
+
+type Props = { className?: string }
+
+const Spinner = ({ className }: Props) => {
   return (
     <svg
       role="status"
-      className="mr-2 w-6 h-6 animate-spin fill-primary"
+      className={cn('mr-2 w-6 h-6 animate-spin fill-primary', className)}
       viewBox="0 0 100 101"
       fill="inherit"
       xmlns="http://www.w3.org/2000/svg"

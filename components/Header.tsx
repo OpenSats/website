@@ -140,6 +140,12 @@ const Header = () => {
               <CustomLink href={`/${fundSlug}/account/my-memberships`} className="text-foreground">
                 <DropdownMenuItem>My Memberships</DropdownMenuItem>
               </CustomLink>
+              <CustomLink href={`/${fundSlug}/account/point-history`} className="text-foreground">
+                <DropdownMenuItem>Point History</DropdownMenuItem>
+              </CustomLink>
+              <CustomLink href={`/${fundSlug}/perks`} className="text-foreground">
+                <DropdownMenuItem>Perks</DropdownMenuItem>
+              </CustomLink>
               <CustomLink href={`/${fundSlug}/account/settings`} className="text-foreground">
                 <DropdownMenuItem>Settings</DropdownMenuItem>
               </CustomLink>

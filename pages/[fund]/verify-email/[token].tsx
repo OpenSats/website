@@ -21,7 +21,8 @@ function VerifyEmail() {
       try {
         const result = await verifyEmailMutation.mutateAsync({ token: token as string })
         toast({ title: 'Email verified! You may now log in.' })
-        await signOut({ callbackUrl: `/${fundSlug}/?loginEmail=${result.email}` })
+        await signOut({ redirect: false })
+        router.push(`/${fundSlug}/?loginEmail=${result.email}`)
       } catch (error) {
         toast({ title: 'Invalid verification link.', variant: 'destructive' })
         router.push(`/${fundSlug}`)

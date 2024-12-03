@@ -5,8 +5,8 @@ export default function Submitted() {
     <div className="flex-1 flex flex-col items-center justify-center gap-4 py-8">
       <h2>Thank you for your application!</h2>
       <p>
-        If you have any questions, please reach out to{' '}
-        <a href="mailto:monerofund@magicgrants.org">monerofund@magicgrants.org</a>
+        If you have any questions or need a donation receipt, please reach out to{' '}
+        <a href="mailto:info@magicgrants.org">info@magicgrants.org</a>
       </p>
       .
       <p>

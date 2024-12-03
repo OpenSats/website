@@ -128,6 +128,7 @@ async function handle(
             isSubscription: 'false',
             isTaxDeductible: 'false',
             staticGeneratedForApi: 'true',
+            givePointsBack: 'false',
           }
 
           const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {

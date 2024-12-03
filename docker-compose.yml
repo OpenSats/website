@@ -1,4 +1,9 @@
 services:
+  redis:
+    container_name: magic-redis
+    image: redis:7-alpine
+    restart: unless-stopped
+
   btcpayserver:
     restart: unless-stopped
     container_name: generated_btcpayserver_1

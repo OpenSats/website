@@ -24,6 +24,7 @@ export const donationRouter = router({
         fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
         taxDeductible: z.boolean(),
+        givePointsBack: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -68,6 +69,7 @@ export const donationRouter = router({
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
+        givePointsBack: input.givePointsBack ? 'true' : 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -109,6 +111,7 @@ export const donationRouter = router({
         fundSlug: z.enum(fundSlugs),
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
         taxDeductible: z.boolean(),
+        givePointsBack: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -135,6 +138,7 @@ export const donationRouter = router({
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
+        givePointsBack: input.givePointsBack ? 'true' : 'false',
       }
 
       const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {
@@ -157,6 +161,7 @@ export const donationRouter = router({
         fundSlug: z.enum(fundSlugs),
         recurring: z.boolean(),
         taxDeductible: z.boolean(),
+        givePointsBack: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -214,6 +219,7 @@ export const donationRouter = router({
         isSubscription: input.recurring ? 'true' : 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
+        givePointsBack: input.givePointsBack ? 'true' : 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -276,6 +282,7 @@ export const donationRouter = router({
         projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         taxDeductible: z.boolean(),
+        givePointsBack: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -313,6 +320,7 @@ export const donationRouter = router({
         isSubscription: 'false',
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
+        givePointsBack: input.givePointsBack ? 'true' : 'false',
       }
 
       const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {

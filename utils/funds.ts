@@ -8,10 +8,7 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     slug: 'monero',
     nym: 'MagicMonero',
     website: 'https://monerofund.org',
-    socialLinks: [
-      'https://monerofund.org',
-      'https://github.com/magicgrants/Monero-Fund',
-    ],
+    socialLinks: ['https://monerofund.org', 'https://github.com/magicgrants/Monero-Fund'],
     title: 'Monero Fund',
     summary:
       'Help us to provide sustainable funding for free and open-source contributors working on freedom tech and projects that help Monero flourish.',
@@ -33,11 +30,10 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
     slug: 'firo',
     nym: 'MagicFiro',
     website: 'https://magicgrants.org/funds/firo/',
-    socialLinks: [
-      'https://magicgrants.org/funds/firo/',
-    ],
+    socialLinks: ['https://magicgrants.org/funds/firo/'],
     title: 'Firo Fund',
-    summary: 'Help us support security audits, essential infrastructure, and research for the Firo ecosystem.',
+    summary:
+      'Help us support security audits, essential infrastructure, and research for the Firo ecosystem.',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
     date: '',
@@ -63,7 +59,8 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
       'https://github.com/privacyguides/',
     ],
     title: 'Privacy Guides Fund',
-    summary: 'Privacy Guides is a not-for-profit, volunteer-run project that hosts online communities and publishes news and recommendations surrounding privacy and security tools, services, and knowledge.',
+    summary:
+      'Privacy Guides is a not-for-profit, volunteer-run project that hosts online communities and publishes news and recommendations surrounding privacy and security tools, services, and knowledge.',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
     date: '',
@@ -88,7 +85,8 @@ export const funds: Record<FundSlug, ProjectItem & { slug: FundSlug }> = {
       'https://github.com/magicgrants',
     ],
     title: 'General Fund',
-    summary: 'MAGIC Grants is a public charity that provides undergraduate scholarships for students interested in cryptocurrencies and privacy, supports public cryptocurrency infrastructure, and supports privacy.',
+    summary:
+      'MAGIC Grants is a public charity that provides undergraduate scholarships for students interested in cryptocurrencies and privacy, supports public cryptocurrency infrastructure, and supports privacy.',
     coverImage: '/img/crystalball.jpg',
     // The attributes below can be ignored
     date: '',
