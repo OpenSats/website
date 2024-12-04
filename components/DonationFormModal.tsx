@@ -350,7 +350,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
 
       {!isAuthed && (
         <div className="flex flex-col items-center">
-          <p>Want to support more projects from now on?</p>
+          <p>Want to support more projects and receive optional perks?</p>
 
           <Button
             type="button"
