@@ -35,6 +35,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel'
+import CustomLink from './CustomLink'
 
 type Props = { perk: StrapiPerkPopulated; balance: number; close: () => void }
 
@@ -268,6 +269,11 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
               <div className="flex flex-col">
                 <h1 className="font-semibold">{perk.name}</h1>
                 {!costEstimate && <p className="text-muted-foreground">{perk.description}</p>}
+                {!costEstimate && perk.productDetailsUrl && (
+                  <CustomLink className="text-xs" href={perk.productDetailsUrl}>
+                    View product details
+                  </CustomLink>
+                )}
                 {!!costEstimate && printfulSyncVariantId && (
                   <p className="text-muted-foreground">
                     {

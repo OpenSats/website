@@ -83,6 +83,7 @@ export type StrapiPerk = {
   fundSlugWhitelist: string | null
   needsShippingAddress: boolean
   printfulProductId: string | null
+  productDetailsUrl: string | null
 }
 
 export type StrapiPerkPopulated = StrapiPerk & {

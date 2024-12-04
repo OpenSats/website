@@ -60,6 +60,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
       name: '',
       amount: '' as unknown as number, // a trick to get trigger to work when amount is empty
       taxDeductible: 'no',
+      givePointsBack: 'no',
     },
     mode: 'all',
   })
@@ -251,49 +252,51 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="givePointsBack"
-            render={({ field }) => (
-              <FormItem className="space-y-3 leading-5">
-                <FormLabel>
-                  Would you like to receive MAGIC Grants points back for your donation? The points
-                  can be redeemed for various donation perks as a thank you for supporting our
-                  mission.
-                </FormLabel>
+          {isAuthed && (
+            <FormField
+              control={form.control}
+              name="givePointsBack"
+              render={({ field }) => (
+                <FormItem className="space-y-3 leading-5">
+                  <FormLabel>
+                    Would you like to receive MAGIC Grants points back for your donation? The points
+                    can be redeemed for various donation perks as a thank you for supporting our
+                    mission.
+                  </FormLabel>
 
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex flex-col"
-                  >
-                    <FormItem className="flex items-start space-x-3 space-y-0">
-                      <FormControl className="flex-shrink-0">
-                        <RadioGroupItem value="yes" />
-                      </FormControl>
+                  <FormControl>
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex flex-col"
+                    >
+                      <FormItem className="flex items-start space-x-3 space-y-0">
+                        <FormControl className="flex-shrink-0">
+                          <RadioGroupItem value="yes" />
+                        </FormControl>
 
-                      <FormLabel className="font-normal text-gray-700">
-                        Yes, give me perks! This will reduce the donation amount by 10%, the
-                        approximate value of the points when redeemed for goods/services.
-                      </FormLabel>
-                    </FormItem>
+                        <FormLabel className="font-normal text-gray-700">
+                          Yes, give me perks! This will reduce the donation amount by 10%, the
+                          approximate value of the points when redeemed for goods/services.
+                        </FormLabel>
+                      </FormItem>
 
-                    <FormItem className="flex items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="no" />
-                      </FormControl>
+                      <FormItem className="flex items-start space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="no" />
+                        </FormControl>
 
-                      <FormLabel className="font-normal text-gray-700">
-                        No, use my full contribution toward your mission.
-                      </FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                        <FormLabel className="font-normal text-gray-700">
+                          No, use my full contribution toward your mission.
+                        </FormLabel>
+                      </FormItem>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
           {amount > 500 && taxDeductible === 'yes' && (
             <Alert>

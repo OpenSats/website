@@ -4,10 +4,7 @@ const nextConfig = {
   output: 'standalone',
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'magic-strapi.nbg1.your-objectstorage.com',
-      },
+      { hostname: process.env.STRAPI_CDN_HOST || 'magic-strapi.nbg1.your-objectstorage.com' },
     ],
   },
   webpack: (config, options) => {
