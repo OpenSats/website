@@ -12,6 +12,36 @@ import { authenticateKeycloakClient } from '../utils/keycloak'
 import { fundSlugs } from '../../utils/funds'
 
 export const accountRouter = router({
+  changeProfile: protectedProcedure
+    .input(
+      z.object({
+        company: z.string(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      await authenticateKeycloakClient()
+
+      const userId = ctx.session.user.sub
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      await keycloak.users.update(
+        { id: userId },
+        {
+          ...user,
+          attributes: {
+            ...user.attributes,
+            company: input.company,
+          },
+        }
+      )
+    }),
+
   changePassword: protectedProcedure
     .input(z.object({ currentPassword: z.string().min(1), newPassword: z.string().min(1) }))
     .mutation(async ({ input, ctx }) => {
@@ -119,4 +149,67 @@ export const accountRouter = router({
         html: `<a href="${env.APP_URL}/${input.fundSlug}/verify-email/${token}" target="_blank">Verify email</a>`,
       })
     }),
+
+  changeMailingAddress: protectedProcedure
+    .input(
+      z.object({
+        addressLine1: z.string().min(1),
+        addressLine2: z.string(),
+        city: z.string().min(1),
+        state: z.string(),
+        country: z.string().min(1),
+        zip: z.string().min(1),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      await authenticateKeycloakClient()
+
+      const userId = ctx.session.user.sub
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      await keycloak.users.update(
+        { id: userId },
+        {
+          ...user,
+          attributes: {
+            ...user.attributes,
+            addressLine1: input.addressLine1,
+            addressLine2: input.addressLine2,
+            addressZip: input.zip,
+            addressCity: input.city,
+            addressState: input.state,
+            addressCountry: input.country,
+          },
+        }
+      )
+    }),
+
+  getUserAttributes: protectedProcedure.query(async ({ ctx }) => {
+    await authenticateKeycloakClient()
+
+    const userId = ctx.session.user.sub
+    const user = await keycloak.users.findOne({ id: userId })
+
+    if (!user || !user.id)
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'USER_NOT_FOUND',
+      })
+
+    return {
+      company: (user.attributes?.company?.[0] as string) || '',
+      addressLine1: (user.attributes?.addressLine1?.[0] as string) || '',
+      addressLine2: (user.attributes?.addressLine2?.[0] as string) || '',
+      addressZip: (user.attributes?.addressZip?.[0] as string) || '',
+      addressCity: (user.attributes?.addressCity?.[0] as string) || '',
+      addressState: (user.attributes?.addressState?.[0] as string) || '',
+      addressCountry: (user.attributes?.addressCountry?.[0] as string) || '',
+    }
+  }),
 })

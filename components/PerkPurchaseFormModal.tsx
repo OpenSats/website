@@ -9,7 +9,15 @@ import { z } from 'zod'
 import { StrapiPerkPopulated } from '../server/types'
 import { env } from '../env.mjs'
 import { Button } from './ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
 import { Input } from './ui/input'
 import { toast } from './ui/use-toast'
 import { useFundSlug } from '../utils/use-fund-slug'
@@ -36,6 +44,7 @@ import {
   CarouselPrevious,
 } from './ui/carousel'
 import CustomLink from './CustomLink'
+import { Checkbox } from './ui/checkbox'
 
 type Props = { perk: StrapiPerkPopulated; balance: number; close: () => void }
 
@@ -43,7 +52,6 @@ const pointFormat = Intl.NumberFormat('en', { notation: 'standard', compactDispl
 
 const schema = z
   .object({
-    _shippingStateOptionsLength: z.number(),
     shippingAddressLine1: z.string().min(1),
     shippingAddressLine2: z.string(),
     shippingCity: z.string().min(1),
@@ -56,6 +64,8 @@ const schema = z
       .regex(/^\+?\d{6,15}$/, 'Invalid phone number.'),
     shippingTaxNumber: z.string(),
     printfulSyncVariantId: z.string().optional(),
+    _shippingStateOptionsLength: z.number(),
+    _useAccountMailingAddress: z.boolean(),
   })
   .superRefine((data, ctx) => {
     const cpfRegex =
@@ -100,6 +110,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   const router = useRouter()
   const fundSlug = useFundSlug()
   const getCountriesQuery = trpc.perk.getCountries.useQuery()
+  const getUserAttributesQuery = trpc.account.getUserAttributes.useQuery()
   const purchasePerkMutation = trpc.perk.purchasePerk.useMutation()
   const estimatePrintfulOrderCosts = trpc.perk.estimatePrintfulOrderCosts.useMutation()
 
@@ -139,6 +150,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   const shippingCountry = form.watch('shippingCountry')
   const shippingState = form.watch('shippingState')
   const printfulSyncVariantId = form.watch('printfulSyncVariantId')
+  const useAccountMailingAddress = form.watch('_useAccountMailingAddress')
 
   const shippingStateOptions = useMemo(() => {
     const selectedCountry = (getCountriesQuery.data || []).find(
@@ -162,6 +174,26 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
   useEffect(() => {
     form.setValue('_shippingStateOptionsLength', shippingStateOptions.length)
   }, [shippingStateOptions])
+
+  useEffect(() => {
+    if (!getUserAttributesQuery.data) return
+
+    if (useAccountMailingAddress) {
+      form.setValue('shippingAddressLine1', getUserAttributesQuery.data.addressLine1)
+      form.setValue('shippingAddressLine2', getUserAttributesQuery.data.addressLine2)
+      form.setValue('shippingCountry', getUserAttributesQuery.data.addressCountry)
+      form.setValue('shippingCity', getUserAttributesQuery.data.addressCity)
+      form.setValue('shippingZip', getUserAttributesQuery.data.addressZip)
+      setTimeout(() => form.setValue('shippingState', getUserAttributesQuery.data.addressState), 20)
+    } else {
+      form.setValue('shippingAddressLine1', '')
+      form.setValue('shippingAddressLine2', '')
+      form.setValue('shippingCountry', '')
+      form.setValue('shippingState', '')
+      form.setValue('shippingCity', '')
+      form.setValue('shippingZip', '')
+    }
+  }, [useAccountMailingAddress])
 
   async function onSubmit(data: PerkPurchaseInputs) {
     if (!fundSlug) return
@@ -342,6 +374,23 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
 
                 {perk.needsShippingAddress && !getPrintfulProductVariantsQuery.data && <Spinner />}
 
+                {getUserAttributesQuery.data?.addressLine1 && (
+                  <FormField
+                    control={form.control}
+                    name="_useAccountMailingAddress"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                        <FormControl>
+                          <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                        </FormControl>
+                        <div className="space-y-1 flex flex-col items-start leading-none">
+                          <FormLabel>Use saved mailing address</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                )}
+
                 <FormField
                   control={form.control}
                   name="shippingAddressLine1"
@@ -349,7 +398,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     <FormItem>
                       <FormLabel>Address line 1 *</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} disabled={useAccountMailingAddress} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -363,7 +412,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     <FormItem>
                       <FormLabel>Address line 2</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} disabled={useAccountMailingAddress} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -381,23 +430,26 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                         open={countrySelectOpen}
                         onOpenChange={(open) => setCountrySelectOpen(open)}
                       >
-                        <PopoverTrigger>
-                          <FormControl>
-                            <Select
-                              open={countrySelectOpen}
-                              onValueChange={() => setCountrySelectOpen(false)}
-                            >
-                              <SelectTrigger>
-                                <SelectValue
-                                  placeholder={
-                                    (getCountriesQuery.data || []).find(
-                                      (country) => country.code === shippingCountry
-                                    )?.name || ''
-                                  }
-                                />
-                              </SelectTrigger>
-                            </Select>
-                          </FormControl>
+                        <PopoverTrigger asChild>
+                          <div>
+                            <FormControl>
+                              <Select
+                                open={countrySelectOpen}
+                                onValueChange={() => setCountrySelectOpen(false)}
+                                disabled={useAccountMailingAddress}
+                              >
+                                <SelectTrigger>
+                                  <SelectValue
+                                    placeholder={
+                                      (getCountriesQuery.data || []).find(
+                                        (country) => country.code === shippingCountry
+                                      )?.name || ''
+                                    }
+                                  />
+                                </SelectTrigger>
+                              </Select>
+                            </FormControl>
+                          </div>
                         </PopoverTrigger>
                         <PopoverContent className="p-0">
                           <Command>
@@ -447,20 +499,22 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                           open={stateSelectOpen}
                           onOpenChange={(open) => setStateSelectOpen(open)}
                         >
-                          <PopoverTrigger>
-                            <FormControl>
-                              <Select>
-                                <SelectTrigger>
-                                  <SelectValue
-                                    placeholder={
-                                      shippingStateOptions.find(
-                                        (state) => state.value === shippingState
-                                      )?.label
-                                    }
-                                  />
-                                </SelectTrigger>
-                              </Select>
-                            </FormControl>
+                          <PopoverTrigger asChild>
+                            <div>
+                              <FormControl>
+                                <Select disabled={useAccountMailingAddress}>
+                                  <SelectTrigger>
+                                    <SelectValue
+                                      placeholder={
+                                        shippingStateOptions.find(
+                                          (state) => state.value === shippingState
+                                        )?.label
+                                      }
+                                    />
+                                  </SelectTrigger>
+                                </Select>
+                              </FormControl>
+                            </div>
                           </PopoverTrigger>
                           <PopoverContent className="p-0">
                             <Command>
@@ -506,7 +560,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     <FormItem>
                       <FormLabel>City *</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} disabled={useAccountMailingAddress} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -520,7 +574,7 @@ function PerkPurchaseFormModal({ perk, balance, close }: Props) {
                     <FormItem>
                       <FormLabel>Postal code *</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input {...field} disabled={useAccountMailingAddress} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
