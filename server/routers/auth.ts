@@ -12,21 +12,83 @@ import { UserSettingsJwtPayload } from '../types'
 export const authRouter = router({
   register: publicProcedure
     .input(
-      z.object({
-        firstName: z
-          .string()
-          .trim()
-          .min(1)
-          .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
-        lastName: z
-          .string()
-          .trim()
-          .min(1)
-          .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
-        email: z.string().email(),
-        password: z.string(),
-        fundSlug: z.enum(fundSlugs),
-      })
+      z
+        .object({
+          firstName: z
+            .string()
+            .trim()
+            .min(1)
+            .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
+          lastName: z
+            .string()
+            .trim()
+            .min(1)
+            .regex(/^[A-Za-záéíóúÁÉÍÓÚñÑçÇ]+$/, 'Use alphabetic characters only.'),
+          company: z.string(),
+          email: z.string().email(),
+          password: z.string().min(8),
+          confirmPassword: z.string().min(8),
+          fundSlug: z.enum(fundSlugs),
+          _addMailingAddress: z.boolean(),
+          address: z
+            .object({
+              addressLine1: z.string(),
+              addressLine2: z.string(),
+              city: z.string(),
+              state: z.string(),
+              country: z.string(),
+              zip: z.string(),
+              _addressStateOptionsLength: z.number(),
+            })
+            .superRefine((data, ctx) => {
+              if (!data.state && data._addressStateOptionsLength) {
+                ctx.addIssue({
+                  path: ['shippingState'],
+                  code: 'custom',
+                  message: 'State is required.',
+                })
+              }
+            }),
+        })
+        .refine((data) => data.password === data.confirmPassword, {
+          message: 'Passwords do not match.',
+          path: ['confirmPassword'],
+        })
+        .superRefine((data, ctx) => {
+          if (data._addMailingAddress) {
+            if (!data.address.addressLine1) {
+              ctx.addIssue({
+                path: ['shipping.addressLine1'],
+                code: 'custom',
+                message: 'Address line 1 is required.',
+              })
+            }
+
+            if (!data.address.country) {
+              ctx.addIssue({
+                path: ['shipping.country'],
+                code: 'custom',
+                message: 'Country is required.',
+              })
+            }
+
+            if (!data.address.city) {
+              ctx.addIssue({
+                path: ['shipping.city'],
+                code: 'custom',
+                message: 'City is required.',
+              })
+            }
+
+            if (!data.address.zip) {
+              ctx.addIssue({
+                path: ['shipping.zip'],
+                code: 'custom',
+                message: 'Postal code is required.',
+              })
+            }
+          }
+        })
     )
     .mutation(async ({ input }) => {
       await authenticateKeycloakClient()
@@ -43,6 +105,13 @@ export const authRouter = router({
             name: `${input.firstName} ${input.lastName}`,
             passwordResetTokenVersion: 1,
             emailVerifyTokenVersion: 1,
+            company: input.company,
+            addressLine1: input._addMailingAddress ? input.address.addressLine1 : '',
+            addressLine2: input._addMailingAddress ? input.address.addressLine2 : '',
+            addressCountry: input._addMailingAddress ? input.address.country : '',
+            addressState: input._addMailingAddress ? input.address.state : '',
+            addressCity: input._addMailingAddress ? input.address.city : '',
+            addressZip: input._addMailingAddress ? input.address.zip : '',
           },
           enabled: true,
         })

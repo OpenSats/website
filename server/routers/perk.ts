@@ -4,23 +4,14 @@ import { QueueEvents } from 'bullmq'
 import { fundSlugs } from '../../utils/funds'
 import { keycloak, printfulApi, prisma, strapiApi } from '../services'
 import {
-  PrintfulCreateOrderReq,
-  PrintfulCreateOrderRes,
-  PrintfulEstimateOrderReq,
-  PrintfulEstimateOrderRes,
   PrintfulGetCountriesRes,
   PrintfulGetProductRes,
-  StrapiCreateOrderBody,
-  StrapiCreateOrderRes,
-  StrapiCreatePointBody,
   StrapiGetPerkRes,
   StrapiGetPerksPopulatedRes,
   StrapiGetPointsPopulatedRes,
-  StrapiPerk,
 } from '../types'
 import { TRPCError } from '@trpc/server'
 import { estimatePrintfulOrderCost, getUserPointBalance } from '../utils/perks'
-import { AxiosResponse } from 'axios'
 import { POINTS_REDEEM_PRICE_USD } from '../../config'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { perkPurchaseQueue } from '../queues'
@@ -68,7 +59,7 @@ export const perkRouter = router({
       return printfulProduct.sync_variants
     }),
 
-  getCountries: protectedProcedure.query(async () => {
+  getCountries: publicProcedure.query(async () => {
     const {
       data: { result: countries },
     } = await printfulApi.get<PrintfulGetCountriesRes>('/countries')
