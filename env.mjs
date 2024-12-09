@@ -13,6 +13,8 @@ export const env = createEnv({
     NEXTAUTH_SECRET: z.string().min(32),
     USER_SETTINGS_JWT_SECRET: z.string().min(32),
 
+    TURNSTILE_SECRET: z.string().min(1),
+
     STRAPI_API_URL: z.string().url(),
     STRAPI_API_TOKEN: z.string().length(256),
     STRAPI_CDN_HOST: z.string().min(1).optional(),
@@ -64,6 +66,7 @@ export const env = createEnv({
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: z.string().email(),
+    NEXT_PUBLIC_TURNSTILE_SITEKEY: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -76,6 +79,8 @@ export const env = createEnv({
     APP_URL: process.env.APP_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     USER_SETTINGS_JWT_SECRET: process.env.USER_SETTINGS_JWT_SECRET,
+
+    TURNSTILE_SECRET: process.env.TURNSTILE_SECRET,
 
     NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
     STRAPI_API_URL: process.env.STRAPI_API_URL,
@@ -116,6 +121,8 @@ export const env = createEnv({
     GENERAL_APPLICATION_RECIPIENT: process.env.GENERAL_APPLICATION_RECIPIENT,
 
     PRINTFUL_API_KEY: process.env.PRINTFUL_API_KEY,
+
+    NEXT_PUBLIC_TURNSTILE_SITEKEY: process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY,
 
     NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
     NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT: process.env.NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT,

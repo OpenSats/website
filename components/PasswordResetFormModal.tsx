@@ -1,16 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
+import { DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
 import { Input } from './ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { trpc } from '../utils/trpc'
 import Spinner from './Spinner'
+import { env } from '../env.mjs'
 
 const schema = z.object({
+  turnstileToken: z.string().min(1),
   email: z.string().email(),
 })
 
@@ -58,6 +61,13 @@ function PasswordResetFormModal({ close }: Props) {
                 <FormMessage />
               </FormItem>
             )}
+          />
+
+          <Turnstile
+            siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
+            onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onSuccess={(token) => form.setValue('turnstileToken', token, { shouldValidate: true })}
           />
 
           <Button type="submit" disabled={!form.formState.isValid || form.formState.isSubmitting}>

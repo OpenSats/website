@@ -6,6 +6,7 @@ import axios from 'axios'
 import { env } from '../../../env.mjs'
 import { KeycloakJwtPayload } from '../../../server/types'
 import { refreshToken } from '../../../server/utils/auth'
+import { isTurnstileValid } from '../../../server/utils/turnstile'
 
 export const authOptions: AuthOptions = {
   callbacks: {
@@ -47,8 +48,13 @@ export const authOptions: AuthOptions = {
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
+        turnstileToken: { label: 'Turnstile token', type: 'password' },
       },
       authorize: async (credentials) => {
+        if (await isTurnstileValid(credentials?.turnstileToken || '')) {
+          throw new Error('INVALID_TURNSTILE_TOKEN')
+        }
+
         try {
           const { data: keycloakToken } = await axios.post(
             `${env.KEYCLOAK_URL}/realms/${env.KEYCLOAK_REALM_NAME}/protocol/openid-connect/token`,
