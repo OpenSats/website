@@ -30,6 +30,7 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }} \
             NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
             USER_SETTINGS_JWT_SECRET=${{ secrets.USER_SETTINGS_JWT_SECRET }} \
+            TURNSTILE_SECRET=${{ secrets.TURNSTILE_SECRET }} \
             STRAPI_API_URL=${{ secrets.STRAPI_API_URL }} \
             STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }} \
             SMTP_USER=${{ secrets.SMTP_USER }} \
