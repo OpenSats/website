@@ -23,13 +23,15 @@ export async function refreshToken(token: JWT): Promise<JWT> {
     )
 
     if (!response.ok) {
+      console.log(response)
+      console.log(await response.json())
       throw new Error(`Error: ${response.statusText}`)
     }
 
     const newToken = await response.json()
 
     const jwtPayload: KeycloakJwtPayload = jwtDecode(newToken.access_token)
-
+    console.log(newToken)
     return {
       sub: jwtPayload.sub,
       email: jwtPayload.email,
@@ -38,6 +40,7 @@ export async function refreshToken(token: JWT): Promise<JWT> {
       refreshToken: newToken.refresh_token,
     }
   } catch (error) {
+    console.log('not refreshing access token, error', error)
     return { ...token, error: 'RefreshAccessTokenError' }
   }
 }
