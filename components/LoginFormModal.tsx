@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { z } from 'zod'
 
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
@@ -12,10 +13,12 @@ import { Button } from './ui/button'
 import { useToast } from './ui/use-toast'
 import { useFundSlug } from '../utils/use-fund-slug'
 import Spinner from './Spinner'
+import { env } from '../env.mjs'
 
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
+  turnstileToken: z.string().min(1),
 })
 
 type LoginFormInputs = z.infer<typeof schema>
@@ -50,6 +53,7 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
       redirect: false,
       email: data.email,
       password: data.password,
+      turnstileToken: data.turnstileToken,
     })
 
     if (result?.error) {
@@ -121,6 +125,13 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
               I forgot my password
             </Button>
           </div>
+
+          <Turnstile
+            siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
+            onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onSuccess={(token) => form.setValue('turnstileToken', token, { shouldValidate: true })}
+          />
 
           <div className="flex flex-row space-x-2">
             <Button

@@ -39,9 +39,12 @@ import {
 } from './ui/command'
 import { cn } from '../utils/cn'
 import { Checkbox } from './ui/checkbox'
+import { Turnstile } from '@marsidev/react-turnstile'
+import { env } from '../env.mjs'
 
 const schema = z
   .object({
+    turnstileToken: z.string().min(1),
     firstName: z
       .string()
       .trim()
@@ -524,6 +527,13 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
               />
             </>
           )}
+
+          <Turnstile
+            siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
+            onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
+            onSuccess={(token) => form.setValue('turnstileToken', token, { shouldValidate: true })}
+          />
 
           <div className="flex flex-row space-x-2">
             <Button

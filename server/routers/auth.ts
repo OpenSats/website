@@ -8,12 +8,14 @@ import { keycloak, transporter } from '../services'
 import { env } from '../../env.mjs'
 import { fundSlugs } from '../../utils/funds'
 import { UserSettingsJwtPayload } from '../types'
+import { isTurnstileValid } from '../utils/turnstile'
 
 export const authRouter = router({
   register: publicProcedure
     .input(
       z
         .object({
+          turnstileToken: z.string().min(1),
           firstName: z
             .string()
             .trim()
@@ -91,6 +93,10 @@ export const authRouter = router({
         })
     )
     .mutation(async ({ input }) => {
+      if (await isTurnstileValid(input.turnstileToken)) {
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'INVALID_TURNSTILE_TOKEN' })
+      }
+
       await authenticateKeycloakClient()
 
       let user: { id: string }
@@ -202,8 +208,12 @@ export const authRouter = router({
     }),
 
   requestPasswordReset: publicProcedure
-    .input(z.object({ email: z.string().email() }))
+    .input(z.object({ turnstileToken: z.string().min(1), email: z.string().email() }))
     .mutation(async ({ input }) => {
+      if (await isTurnstileValid(input.turnstileToken)) {
+        throw new TRPCError({ code: 'BAD_REQUEST', message: 'INVALID_TURNSTILE_TOKEN' })
+      }
+
       await authenticateKeycloakClient()
       const users = await keycloak.users.find({ email: input.email })
       const user = users[0]
