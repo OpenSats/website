@@ -51,7 +51,7 @@ export const authOptions: AuthOptions = {
         turnstileToken: { label: 'Turnstile token', type: 'password' },
       },
       authorize: async (credentials) => {
-        if (await isTurnstileValid(credentials?.turnstileToken || '')) {
+        if (!(await isTurnstileValid(credentials?.turnstileToken || ''))) {
           throw new Error('INVALID_TURNSTILE_TOKEN')
         }
 

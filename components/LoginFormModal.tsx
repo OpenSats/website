@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn, useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { z } from 'zod'
 
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
@@ -33,6 +33,8 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
   const { toast } = useToast()
   const router = useRouter()
   const fundSlug = useFundSlug()
+  const turnstileRef = useRef<TurnstileInstance | null>()
+
   const form = useForm<LoginFormInputs>({
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' },
@@ -55,6 +57,8 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
       password: data.password,
       turnstileToken: data.turnstileToken,
     })
+
+    turnstileRef.current?.reset()
 
     if (result?.error) {
       if (result.error === 'INVALID_CREDENTIALS') {
@@ -127,6 +131,7 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
           </div>
 
           <Turnstile
+            ref={turnstileRef}
             siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
             onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
             onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
