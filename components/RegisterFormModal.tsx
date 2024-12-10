@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Check } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { z } from 'zod'
 
 import {
@@ -39,7 +40,6 @@ import {
 } from './ui/command'
 import { cn } from '../utils/cn'
 import { Checkbox } from './ui/checkbox'
-import { Turnstile } from '@marsidev/react-turnstile'
 import { env } from '../env.mjs'
 
 const schema = z
@@ -127,6 +127,7 @@ type Props = { close: () => void; openLoginModal: () => void }
 function RegisterFormModal({ close, openLoginModal }: Props) {
   const { toast } = useToast()
   const fundSlug = useFundSlug()
+  const turnstileRef = useRef<TurnstileInstance | null>()
   const getCountriesQuery = trpc.perk.getCountries.useQuery()
   const registerMutation = trpc.auth.register.useMutation()
 
@@ -220,6 +221,8 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
         variant: 'destructive',
       })
     }
+
+    turnstileRef.current?.reset()
   }
 
   return (
@@ -529,6 +532,7 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
           )}
 
           <Turnstile
+            ref={turnstileRef}
             siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
             onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
             onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}

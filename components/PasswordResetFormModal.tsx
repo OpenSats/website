@@ -1,5 +1,6 @@
+import { useRef } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Turnstile } from '@marsidev/react-turnstile'
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -23,6 +24,7 @@ type Props = { close: () => void }
 
 function PasswordResetFormModal({ close }: Props) {
   const { toast } = useToast()
+  const turnstileRef = useRef<TurnstileInstance | null>()
 
   const form = useForm<PasswordResetFormInputs>({ resolver: zodResolver(schema) })
 
@@ -38,6 +40,8 @@ function PasswordResetFormModal({ close }: Props) {
     } catch (error) {
       toast({ title: 'Sorry, something went wrong.', variant: 'destructive' })
     }
+
+    turnstileRef.current?.reset()
   }
 
   return (
@@ -64,6 +68,7 @@ function PasswordResetFormModal({ close }: Props) {
           />
 
           <Turnstile
+            ref={turnstileRef}
             siteKey={env.NEXT_PUBLIC_TURNSTILE_SITEKEY}
             onError={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
             onExpire={() => form.setValue('turnstileToken', '', { shouldValidate: true })}
