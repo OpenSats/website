@@ -1,6 +1,6 @@
 # MAGIC Grants Terms of Use
 
-**Last updated: November 22, 2024**
+**Last updated: December 9, 2024**
 
 Welcome to the donate.magicgrants.org website and/or mobile application (individually and collectively, the **Site**). Your access and use of the Site and of features, software, products and services provided by MAGIC Grants (**MAGIC Grants**, **we**, **us**, or **our**) through the Site, (individually and collectively, the **Service**) is subject to the terms and conditions in this Terms of Use (**Terms of Use** or **Terms**).
 
@@ -23,7 +23,9 @@ You also agree that you will not collect or store personal data about other user
 
 MAGIC Grants makes no representation as to whether all or any portion of your donations to us are tax deductible or eligible for tax credits. MAGIC Grants will have no liability for any claim by any federal, state, local or any other tax authority with respect to the characterization on any applicable tax return of any donation by you. You should consult your tax advisor as to the amount of your donation that is tax deductible or eligible for tax recognition, if any.
 
-Please [contact](mailto:info@magicgrants.org) MAGIC Grants if you need assistance with Form 8283.
+Please [contact](mailto:info@magicgrants.org) MAGIC Grants if you need assistance with Form 8283 (for non-cash donations).
+
+If you donate anonymously and do not provide MAGIC Grants with the information necessary for us to provide a donation receipt with the required attributes, or if you do not request for MAGIC Grants to sign Form 8283 when required (for non-cash donations), then your donation may not be tax deductible.
 
 ## No Exchange Services
 
@@ -39,7 +41,9 @@ When you choose to receive points for your donation, you reduce the amount of yo
 
 Your decision to receive or not to receive points for your donation is final. MAGIC Grants cannot adjust your donation to include or exclude points after you have selected an option.
 
-Points can be redeemed for a variety of perks, which may include merchandise, goods, and/or services. MAGIC Grants makes no guarantees whatsoever that points can be redeemed for any particular product or service. Products and services are subject to availability. MAGIC Grants does not issue refunds or exchanges for perk products or services. MAGIC Grants makes no representations on the products and services offered. There may be no products or services available at a given time.
+Taxes, fees, and shipping costs may apply when attempting to redeem points for perks, and this may increase the number of points that it takes to purchase a perk. If you are charged import taxes/duties when receiving an item, it is your obligation to separately pay these duties. Please contact the relevant third-party merchant if you are charged import duties; they might reimburse the costs that you need to pay. In no cases whatsoever will MAGIC Grants reimburse these expenses.
+
+Points can be redeemed for a variety of perks, which may include merchandise, goods, and/or services. MAGIC Grants makes no guarantees whatsoever that points can be redeemed for any particular product or service. Products and services are subject to availability. MAGIC Grants does not issue refunds or exchanges for perk products or services. You may be able to work out a return with the third-party merchant in accordance with their policies. MAGIC Grants makes no representations on the products and services offered. You are responsible for verifying the full details, specifications, terms and conditions, and privacy policy of the merchant that you purchase from. There may be no products or services available at a given time.
 
 If you have an issue with the product or service that you received, please first contact the merchant for assistance. MAGIC Grants will work with you and the merchant to resolve the issue.
 
