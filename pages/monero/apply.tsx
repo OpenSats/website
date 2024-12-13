@@ -72,7 +72,7 @@ export default function Apply() {
           </div>
           <h2 id="Eligibility">Eligibility</h2>
           <p>
-            All qualified researchers are eligible to apply, regardless of educational attainment or
+            All developers and researchers are eligible to apply, regardless of educational attainment or
             occupation. However, as a nonprofit organization registered under U.S. tax laws, MAGIC
             Grants is required to comply with certain laws when disbursing funds to grant
             recipients. Grant recipients must complete a Due Diligence checklist, which are the last
