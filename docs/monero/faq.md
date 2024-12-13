@@ -4,11 +4,9 @@
 
 - We are a committee of a 501(c)(3) public charity that funds Monero-related open source software, research and associated educational initiatives.
 
-
 ## How are funds distributed?
 
 - Donations to the **general fund** are disbursed by our committee as needs arise. For projects listed on our site, we review and approve submissions carefully to ensure donated funds are positively impacting the Monero ecosystem. To hold researchers and developers accountable, payment schedules are aligned with approved project milestones.
-
 
 ## How much of my donation goes towards individuals and projects supported by the Monero Fund?
 
@@ -26,21 +24,21 @@
 
 ## How do you collect Monero donations?
 
-- We use BTCPay Server to receive all cryptocurrency donations. For fiat donations, we leverage Stripe Payments.
+- We use BTCPay Server to receive Monero and Bitcoin donations. For fiat donations, we leverage Stripe Payments.
 
 ## Can you provide the view key to verify the Fund's incoming Monero donations?
 
 - Yes. You can create a view-only Monero wallet with this information:
+- Do **not** donate to this Monero address directly instead of using the form on this website, because it is **shared** with other MAGIC funds, and therefore may not be properly attributed to the Monero Fund.
 - Main address:
   ```
-  4458gM5iAPuJBeVf5u9DwS4Hj82qNPzAcgD7wF9VrRCRb4M635UtmZNPPDonqXkBsb2RmKjUSRLXtJNZCjZgnNFKKW3SxBz
+  4BE3G7JCwcphuZYGw56AcpDEsDsZ7kCDjZwkxQSf3cSrJxbq4Mgqu1tNZeQny1QUZG9aeNWaHEiK82fvzsCcuySJSFccM5u
   ```
 - Secret view key:
   ```
-  2595ab540844231f66c2266f12b174461f81c09b39010dc42697a6a58a7d680c
+  9a7202066d71e2b72d5fe61baf2f77a91258387b2abdf2516797f3ce30400802
   ```
-- Restore height: 2724728
-
+- Restore height: 3245346
 
 ## How can I communicate with you?
 
@@ -59,9 +57,9 @@
 
 ## Are my donations tax deductible?
 
-- Yes, your donation may be tax deductible. MAGIC Monero Fund is committee under MAGIC Grants, a 501(c)(3) public charity.
-- If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping.
-- To claim a deduction for cryptocurrency donations and if you donate over $500, you will need to fill out [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and email that form to [info@magicgrants.org](mailto:info@magicgrants.org) for us to sign Part V. If you donate over $5000, you need to obtain a qualified appraisal.
+- Yes, your donation may qualify for a tax deduction. MAGIC Monero Fund is committee under MAGIC Grants, a 501(c)(3) public charity.
+- If you would like to receive a tax deduction, we may need to collect supplementary information such as your name and email for required record keeping. If you donate over $500 with cryptocurrencies, you will need to fill out [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and email that form to [info@magicgrants.org](mailto:info@magicgrants.org) for us to sign Part V. If you donate over $5000, you need to obtain a qualified appraisal.
+- MAGIC Grants does not provide legal or tax advice. Please consult a tax professional to determine if your donation is eligible for a tax deduction.
 
 The Monero Fund relies on donors like you to help promote and support a sustainable ecosystem of contributors to the Monero ecosystem. We greatly appreciate your contributions.
 

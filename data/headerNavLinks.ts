@@ -10,7 +10,10 @@ export const fundHeaderNavLinks: Record<
     { title: 'About', href: 'about', isButton: false },
   ],
   firo: [{ title: 'About', href: 'about', isButton: false }],
-  privacyguides: [{ title: 'About', href: 'about', isButton: false }],
+  privacyguides: [
+    { title: 'FAQ', href: 'faq', isButton: false },
+    { title: 'About', href: 'about', isButton: false },
+  ],
   general: [
     { title: 'FAQs', href: 'faq', isButton: false },
     { title: 'About', href: 'about', isButton: false },

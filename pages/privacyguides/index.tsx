@@ -88,6 +88,19 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
             )}
           </div>
 
+          <div className="flex flex-row flex-wrap">
+            <p className="text-md leading-7 text-gray-500">
+            Donate to 
+            <CustomLink href={`https://www.privacyguides.org/en/`}>
+              {' '}
+              Privacy Guides
+            </CustomLink> and support our mission to defend digital rights and
+            spread the word about mass surveillance programs and other daily privacy invasions.
+            You can help Privacy Guides researchers, activists, and maintainers create informative content,
+            host private digital services, and protect privacy rights at a time when the world needs it most.
+            </p>
+          </div>
+
           <p className="text-sm leading-7 text-gray-400">
             We are a 501(c)(3) public charity. Your donation may qualify for a tax deduction.
           </p>
