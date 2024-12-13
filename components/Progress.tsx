@@ -5,11 +5,7 @@ const Progress = ({ current, goal }: ProgressProps) => {
 
   return (
     <div className="w-full flex flex-col items-center space-y-1">
-      {/* <div className="w-full flex flex-row justify-between font-semibold">
-        <span>0</span> <span>${numberFormat.format(goal)}</span>
-      </div> */}
-
-      <div className="w-full bg-primary/15 rounded-full h-4">
+      <div className="w-full h-4 bg-primary/15 rounded-full overflow-hidden">
         <div
           className="bg-green-500 h-4 rounded-full text-xs"
           style={{ width: `${percent < 100 ? percent : 100}%` }}

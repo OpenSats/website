@@ -60,6 +60,8 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
             pointsAdded,
             membershipExpiresAt:
               metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+            showDonorNameOnLeaderboard: metadata.showDonorNameOnLeaderboard === 'true',
+            donorName: metadata.donorName,
           },
         })
 
@@ -111,6 +113,8 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
             netFiatAmount,
             pointsAdded,
             membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
+            showDonorNameOnLeaderboard: metadata.showDonorNameOnLeaderboard === 'true',
+            donorName: metadata.donorName,
           },
         })
 

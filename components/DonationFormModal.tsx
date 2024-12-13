@@ -40,7 +40,15 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
       amount: z.coerce.number().min(1).max(MAX_AMOUNT),
       taxDeductible: z.enum(['yes', 'no']),
       givePointsBack: z.enum(['yes', 'no']),
+      showDonorNameOnLeaderboard: z.enum(['yes', 'no']),
     })
+    .refine(
+      (data) => (!isAuthed && data.showDonorNameOnLeaderboard === 'yes' ? !!data.name : true),
+      {
+        message: 'Name is required when you want it to be on the leaderboard.',
+        path: ['name'],
+      }
+    )
     .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
       message: 'Name is required when the donation is tax deductible.',
       path: ['name'],
@@ -61,12 +69,14 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
       amount: '' as unknown as number, // a trick to get trigger to work when amount is empty
       taxDeductible: 'no',
       givePointsBack: 'no',
+      showDonorNameOnLeaderboard: 'no',
     },
-    mode: 'all',
+    mode: 'onChange',
   })
 
   const amount = form.watch('amount')
   const taxDeductible = form.watch('taxDeductible')
+  const showDonorNameOnLeaderboard = form.watch('showDonorNameOnLeaderboard')
 
   const donateWithFiatMutation = trpc.donation.donateWithFiat.useMutation()
   const donateWithCryptoMutation = trpc.donation.donateWithCrypto.useMutation()
@@ -85,6 +95,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
+        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       window.location.assign(result.url)
@@ -110,6 +121,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
+        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       if (!result.url) throw Error()
@@ -126,7 +138,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
   useEffect(() => {
     form.trigger('email', { shouldFocus: true })
     form.trigger('name', { shouldFocus: true })
-  }, [taxDeductible])
+  }, [taxDeductible, showDonorNameOnLeaderboard])
 
   if (!project) return <></>
 
@@ -158,7 +170,12 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name {taxDeductible === 'no' && '(optional)'}</FormLabel>
+                    <FormLabel>
+                      Name{' '}
+                      {taxDeductible === 'no' &&
+                        showDonorNameOnLeaderboard === 'no' &&
+                        '(optional)'}
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="John Doe" {...field} />
                     </FormControl>
@@ -227,6 +244,37 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
             render={({ field }) => (
               <FormItem className="space-y-3">
                 <FormLabel>Do you want this donation to be tax deductible? (US only)</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row space-x-4"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-gray-700">Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-gray-700">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="showDonorNameOnLeaderboard"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Do you want your name to be displayed on the leaderboard?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -350,7 +398,7 @@ const DonationFormModal: React.FC<Props> = ({ project, openRegisterModal, close 
 
       {!isAuthed && (
         <div className="flex flex-col items-center">
-          <p>Want to support more projects and receive optional perks?</p>
+          <p className="text-sm">Want to support more projects and receive optional perks?</p>
 
           <Button
             type="button"

@@ -38,6 +38,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
       taxDeductible: z.enum(['yes', 'no']),
       recurring: z.enum(['yes', 'no']),
       givePointsBack: z.enum(['yes', 'no']),
+      showDonorNameOnLeaderboard: z.enum(['yes', 'no']),
     })
     .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
       message: 'Name is required when the donation is tax deductible.',
@@ -55,10 +56,13 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
   const form = useForm<FormInputs>({
     resolver: zodResolver(schema),
     defaultValues: {
+      email: '',
       name: '',
       amount: 100, // a trick to get trigger to work when amount is empty
       taxDeductible: 'no',
       recurring: 'no',
+      givePointsBack: 'no',
+      showDonorNameOnLeaderboard: 'no',
     },
     mode: 'all',
   })
@@ -79,6 +83,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
+        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       window.location.assign(result.url)
@@ -102,6 +107,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
         recurring: data.recurring === 'yes',
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
+        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       if (!result.url) throw new Error()
@@ -244,6 +250,37 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
 
           <FormField
             control={form.control}
+            name="showDonorNameOnLeaderboard"
+            render={({ field }) => (
+              <FormItem className="space-y-3">
+                <FormLabel>Do you want your name to be displayed on the leaderboard?</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-row space-x-4"
+                  >
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="yes" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-gray-700">Yes</FormLabel>
+                    </FormItem>
+                    <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <RadioGroupItem value="no" />
+                      </FormControl>
+                      <FormLabel className="font-normal text-gray-700">No</FormLabel>
+                    </FormItem>
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="givePointsBack"
             render={({ field }) => (
               <FormItem className="space-y-3 leading-5">
@@ -322,7 +359,7 @@ const MembershipFormModal: React.FC<Props> = ({ project, close, openRegisterModa
 
       {!isAuthed && (
         <div className="flex flex-col items-center ">
-          <p>Want to support more projects and receive optional perks?</p>
+          <p className="text-sm">Want to support more projects and receive optional perks?</p>
 
           <Button
             type="button"

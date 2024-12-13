@@ -129,6 +129,7 @@ async function handle(
             isTaxDeductible: 'false',
             staticGeneratedForApi: 'true',
             givePointsBack: 'false',
+            showDonorNameOnLeaderboard: 'false',
           }
 
           const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>('/invoices', {

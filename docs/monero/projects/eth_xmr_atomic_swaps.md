@@ -12,7 +12,7 @@ socialLinks:
   - 'https://github.com/noot'
 type: 'Other Free and Open Source Project'
 goal: 24000
-isFunded: true
+isFunded: false
 numDonationsXMR: 66
 totalDonationsXMRInFiat: 18861
 totalDonationsXMR: 125.74

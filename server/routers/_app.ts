@@ -4,6 +4,7 @@ import { authRouter } from './auth'
 import { donationRouter } from './donation'
 import { perkRouter } from './perk'
 import { accountRouter } from './account'
+import { leaderboardRouter } from './leaderboard'
 
 export const appRouter = router({
   auth: authRouter,
@@ -11,6 +12,7 @@ export const appRouter = router({
   application: applicationRouter,
   perk: perkRouter,
   account: accountRouter,
+  leaderboard: leaderboardRouter,
 })
 
 export type AppRouter = typeof appRouter
