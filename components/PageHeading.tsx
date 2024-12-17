@@ -69,7 +69,7 @@ export default function PageHeading({ project, children }: Props) {
         </div>
       </div>
 
-      <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+      <div className="pt-4 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-4 xl:space-y-0">
         {children}
       </div>
     </div>

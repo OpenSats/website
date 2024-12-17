@@ -41,6 +41,12 @@ const Header = () => {
     }
   }, [router.query.loginEmail])
 
+  useEffect(() => {
+    if (router.query.registerEmail) {
+      setRegisterIsOpen(true)
+    }
+  }, [router.query.registerEmail])
+
   const fund = fundSlug ? funds[fundSlug] : null
 
   return (

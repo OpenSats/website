@@ -98,6 +98,10 @@ export type StrapiPerkPopulated = StrapiPerk & {
   }[]
 }
 
+export type StrapiGetPerkPopulatedRes = {
+  data: StrapiPerkPopulated | null
+}
+
 export type StrapiGetPerksPopulatedRes = {
   data: StrapiPerkPopulated[]
 
