@@ -413,7 +413,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
           <div className="flex flex-col items-center">
             <p className="text-sm">Want to support more projects and receive optional perks?</p>
 
-            <Link href={`/${fundSlug}/?registerEmail=1`}>
+            <Link href={`/${encodeURIComponent(fundSlug)}/?registerEmail=1`}>
               <Button type="button" size="lg" variant="link">
                 Create an account
               </Button>
