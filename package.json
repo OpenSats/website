@@ -109,7 +109,7 @@
     "prettier": "^3.3.3",
     "prisma": "^5.15.1",
     "tailwindcss": "^3.4.3",
-    "typescript": "5.1.6"
+    "typescript": "^5.7.2"
   },
   "watch": {
     "build": {
