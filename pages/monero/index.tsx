@@ -55,7 +55,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </p>
 
           <div className="flex flex-col md:flex-row my-4 gap-2">
-            <Link href="/monero/donate/monero">
+            <Link href={`/${fund.slug}/donate/${fund.slug}`}>
               <Button className="text-sm md:text-base" size="lg">
                 Donate to Monero Fund
               </Button>
@@ -68,7 +68,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
                     Get Annual Membership
                   </Button>
                 ) : (
-                  <Link href="/monero/membership/monero">
+                  <Link href={`/${fund.slug}/membership/${fund.slug}`}>
                     <Button variant="light" size="lg">
                       Get Annual Membership
                     </Button>
