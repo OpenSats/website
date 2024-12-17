@@ -25,10 +25,33 @@ export const donationRouter = router({
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
+        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const userId = ctx.session?.user.sub || null
+
+      if (!userId && input.showDonorNameOnLeaderboard && !input.name) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Name is required when you want it to be on the leaderboard.',
+        })
+      }
+
+      if (!userId && input.taxDeductible && !input.name) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Name is required when the donation is tax deductible.',
+        })
+      }
+
+      if (!userId && input.taxDeductible && !input.email) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'Email is required when the donation is tax deductible.',
+        })
+      }
+
       let email = input.email
       let name = input.name
       let stripeCustomerId: string | null = null
@@ -70,6 +93,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
+        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
       }
 
       const params: Stripe.Checkout.SessionCreateParams = {
@@ -112,6 +136,7 @@ export const donationRouter = router({
         amount: z.number().min(MIN_AMOUNT).max(MAX_AMOUNT),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
+        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -139,6 +164,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
+        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
       }
 
       const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {
@@ -162,6 +188,7 @@ export const donationRouter = router({
         recurring: z.boolean(),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
+        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -220,6 +247,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
+        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -283,6 +311,7 @@ export const donationRouter = router({
         fundSlug: z.enum(fundSlugs),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
+        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -321,6 +350,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
+        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
       }
 
       const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {

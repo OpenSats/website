@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 
 import { getProjects } from '../../utils/md'
 import CustomLink from '../../components/CustomLink'
 import { Button } from '../../components/ui/button'
 import { Dialog, DialogContent } from '../../components/ui/dialog'
-import DonationFormModal from '../../components/DonationFormModal'
-import MembershipFormModal from '../../components/MembershipFormModal'
 import ProjectList from '../../components/ProjectList'
 import LoginFormModal from '../../components/LoginFormModal'
 import RegisterFormModal from '../../components/RegisterFormModal'
@@ -57,26 +56,26 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </p>
 
           <div className="flex flex-col md:flex-row my-4 gap-2">
-            <Button
-              className="text-sm md:text-base"
-              onClick={() => setDonateModalOpen(true)}
-              size="lg"
-            >
-              Donate to Privacy Guides
-            </Button>
+            <Link href="/monero/donate/monero">
+              <Button className="text-sm md:text-base" size="lg">
+                Donate to Privacy Guides
+              </Button>
+            </Link>
 
             {!userHasMembershipQuery.data && (
-              <Button
-                onClick={() =>
-                  session.status === 'authenticated'
-                    ? setMemberModalOpen(true)
-                    : setRegisterIsOpen(true)
-                }
-                variant="light"
-                size="lg"
-              >
-                Get Annual Membership
-              </Button>
+              <>
+                {session.status !== 'authenticated' ? (
+                  <Button onClick={() => setRegisterIsOpen(true)} variant="light" size="lg">
+                    Get Annual Membership
+                  </Button>
+                ) : (
+                  <Link href="/privacyguides/membership/privacyguides">
+                    <Button variant="light" size="lg">
+                      Get Annual Membership
+                    </Button>
+                  </Link>
+                )}
+              </>
             )}
 
             {!!userHasMembershipQuery.data && (
@@ -123,26 +122,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </div>
       </div>
-
-      <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
-        <DialogContent>
-          <DonationFormModal
-            project={fund}
-            close={() => setDonateModalOpen(false)}
-            openRegisterModal={() => setRegisterIsOpen(true)}
-          />
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
-        <DialogContent>
-          <MembershipFormModal
-            project={fund}
-            close={() => setMemberModalOpen(false)}
-            openRegisterModal={() => setRegisterIsOpen(true)}
-          />
-        </DialogContent>
-      </Dialog>
 
       {session.status !== 'authenticated' && (
         <>

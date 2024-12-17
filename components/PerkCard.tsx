@@ -1,25 +1,21 @@
-import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useFundSlug } from '../utils/use-fund-slug'
 import { StrapiPerkPopulated } from '../server/types'
 import { env } from '../env.mjs'
 import { cn } from '../utils/cn'
-import { Dialog, DialogContent } from './ui/dialog'
-import PerkPurchaseFormModal from './PerkPurchaseFormModal'
 
 const priceFormat = Intl.NumberFormat('en', { notation: 'standard', compactDisplay: 'long' })
 
-export type Props = { perk: StrapiPerkPopulated; balance: number }
+export type Props = { perk: StrapiPerkPopulated }
 
-const PerkCard: React.FC<Props> = ({ perk, balance }) => {
+const PerkCard: React.FC<Props> = ({ perk }) => {
   const fundSlug = useFundSlug()
-  const [purchaseIsOpen, setPurchaseIsOpen] = useState(false)
 
   return (
-    <>
+    <Link href={`/${fundSlug}/perks/${perk.documentId}`}>
       <figure
-        onClick={() => setPurchaseIsOpen(true)}
         className={cn(
           'max-w-sm min-h-[360px] h-full space-y-2 flex flex-col rounded-xl border-b-4 bg-white cursor-pointer',
           fundSlug === 'monero' && 'border-monero',
@@ -57,17 +53,7 @@ const PerkCard: React.FC<Props> = ({ perk, balance }) => {
           </div>
         </figcaption>
       </figure>
-
-      <Dialog open={purchaseIsOpen} onOpenChange={setPurchaseIsOpen}>
-        <DialogContent className="sm:max-w-[900px]">
-          <PerkPurchaseFormModal
-            perk={perk}
-            balance={balance}
-            close={() => setPurchaseIsOpen(false)}
-          />
-        </DialogContent>
-      </Dialog>
-    </>
+    </Link>
   )
 }
 

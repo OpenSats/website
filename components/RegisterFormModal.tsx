@@ -41,6 +41,7 @@ import {
 import { cn } from '../utils/cn'
 import { Checkbox } from './ui/checkbox'
 import { env } from '../env.mjs'
+import { useRouter } from 'next/router'
 
 const schema = z
   .object({
@@ -125,6 +126,7 @@ type RegisterFormInputs = z.infer<typeof schema>
 type Props = { close: () => void; openLoginModal: () => void }
 
 function RegisterFormModal({ close, openLoginModal }: Props) {
+  const router = useRouter()
   const { toast } = useToast()
   const fundSlug = useFundSlug()
   const turnstileRef = useRef<TurnstileInstance | null>()
@@ -176,6 +178,17 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
 
     return stateOptions
   }, [addressCountry])
+
+  useEffect(() => {
+    if (!fundSlug) return
+    if (router.query.registerEmail) {
+      if (router.query.registerEmail !== '1') {
+        form.setValue('email', router.query.registerEmail as string)
+        setTimeout(() => form.setFocus('password'), 100)
+      }
+      router.replace(`/${fundSlug}`)
+    }
+  }, [router.query.registerEmail])
 
   useEffect(() => {
     form.setValue('address.state', '')

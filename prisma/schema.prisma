@@ -26,21 +26,23 @@ model Donation {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId                String?
-  btcPayInvoiceId       String?
-  stripePaymentIntentId String? // For donations and non-recurring memberships
-  stripeInvoiceId       String?   @unique // For recurring memberships
-  stripeSubscriptionId  String? // For recurring memberships
-  projectSlug           String
-  projectName           String
-  fundSlug              FundSlug
-  cryptoCode            String?
-  grossCryptoAmount     Float?
-  netCryptoAmount       Float?
-  grossFiatAmount       Float
-  netFiatAmount         Float
-  pointsAdded           Int       @default(0)
-  membershipExpiresAt   DateTime?
+  userId                     String?
+  donorName                  String?
+  btcPayInvoiceId            String?
+  stripePaymentIntentId      String? // For donations and non-recurring memberships
+  stripeInvoiceId            String?   @unique // For recurring memberships
+  stripeSubscriptionId       String? // For recurring memberships
+  projectSlug                String
+  projectName                String
+  fundSlug                   FundSlug
+  cryptoCode                 String?
+  grossCryptoAmount          Float?
+  netCryptoAmount            Float?
+  grossFiatAmount            Float
+  netFiatAmount              Float
+  pointsAdded                Int       @default(0)
+  membershipExpiresAt        DateTime?
+  showDonorNameOnLeaderboard Boolean?  @default(false)
 
   @@index([btcPayInvoiceId])
   @@index([stripePaymentIntentId])

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { GetServerSidePropsContext, NextPage } from 'next/types'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
+import Link from 'next/link'
 import Image from 'next/image'
 import xss from 'xss'
 
@@ -15,8 +16,6 @@ import Progress from '../../../components/Progress'
 import { prisma } from '../../../server/services'
 import { Button } from '../../../components/ui/button'
 import { Dialog, DialogContent } from '../../../components/ui/dialog'
-import DonationFormModal from '../../../components/DonationFormModal'
-import MembershipFormModal from '../../../components/MembershipFormModal'
 import LoginFormModal from '../../../components/LoginFormModal'
 import RegisterFormModal from '../../../components/RegisterFormModal'
 import PasswordResetFormModal from '../../../components/PasswordResetFormModal'
@@ -24,6 +23,15 @@ import CustomLink from '../../../components/CustomLink'
 import { trpc } from '../../../utils/trpc'
 import { getFundSlugFromUrlPath } from '../../../utils/funds'
 import { useFundSlug } from '../../../utils/use-fund-slug'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '../../../components/ui/table'
+import { cn } from '../../../utils/cn'
 
 type SingleProjectPageProps = {
   project: ProjectItem
@@ -33,8 +41,6 @@ type SingleProjectPageProps = {
 
 const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) => {
   const router = useRouter()
-  const [donateModalOpen, setDonateModalOpen] = useState(false)
-  const [memberModalOpen, setMemberModalOpen] = useState(false)
   const [registerIsOpen, setRegisterIsOpen] = useState(false)
   const [loginIsOpen, setLoginIsOpen] = useState(false)
   const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
@@ -76,6 +82,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
     return <ErrorPage statusCode={404} />
   }
 
+  const leaderboardQuery = trpc.leaderboard.getLeaderboard.useQuery({
+    fundSlug: fundSlug || 'general',
+    projectSlug: project.slug,
+  })
+
   return (
     <>
       <Head>
@@ -84,7 +95,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
 
       <div className="divide-y divide-gray-200">
         <PageHeading project={project}>
-          <div className="w-full mt-8 flex flex-col md:flex-row items-center md:space-x-8 xl:space-x-0 space-y-10 md:space-y-0 xl:block">
+          <div className="w-full flex flex-col items-center gap-4 xl:flex">
             <Image
               src={coverImage}
               alt="avatar"
@@ -94,22 +105,26 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
             />
 
             <div className="w-full max-w-96 space-y-8 p-6 bg-white rounded-xl">
-              <div className="w-full">
-                {!project.isFunded && (
+              {!project.isFunded && (
+                <div className="w-full">
                   <div className="flex flex-col space-y-2">
-                    <Button onClick={() => setDonateModalOpen(true)}>Donate</Button>
-
+                    <Link href={`/${fundSlug}/donate/${project.slug}`}>
+                      <Button className="w-full">Donate</Button>
+                    </Link>
                     {!userHasMembershipQuery.data && (
-                      <Button
-                        onClick={() =>
-                          session.status === 'authenticated'
-                            ? setMemberModalOpen(true)
-                            : setRegisterIsOpen(true)
-                        }
-                        variant="outline"
-                      >
-                        Get Annual Membership
-                      </Button>
+                      <>
+                        {session.status !== 'authenticated' ? (
+                          <Button onClick={() => setRegisterIsOpen(true)} variant="outline">
+                            Get Annual Membership
+                          </Button>
+                        ) : (
+                          <Link href={`/${fundSlug}/membership/${project.slug}`}>
+                            <Button variant="outline" className="w-full">
+                              Get Annual Membership
+                            </Button>
+                          </Link>
+                        )}
+                      </>
                     )}
 
                     {!!userHasMembershipQuery.data && (
@@ -120,8 +135,8 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
                       </Button>
                     )}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
 
               <div className="w-full">
                 <h1 className="mb-4 font-bold">Raised</h1>
@@ -165,34 +180,47 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
                 </ul>
               </div>
             </div>
+
+            <div className="w-full max-w-96 min-h-72 space-y-4 p-6 bg-white rounded-xl">
+              <h1 className="font-bold">Leaderboard</h1>
+
+              {leaderboardQuery.data?.length ? (
+                <Table>
+                  <TableBody>
+                    {leaderboardQuery.data.map((leaderboardItem, index) => (
+                      <TableRow
+                        key={`leaderboard-item-${leaderboardItem.name}-${leaderboardItem.amount}`}
+                      >
+                        <TableCell>
+                          <div
+                            className={cn(
+                              'w-8 h-8 flex font-bold text-primary rounded-full',
+                              1 ? 'bg-primary/15' : ''
+                            )}
+                          >
+                            <span className="m-auto">{index + 1}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="w-full font-medium">{leaderboardItem.name}</TableCell>
+                        <TableCell className="font-bold text-green-500">
+                          {formatUsd(leaderboardItem.amount)}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <span className="text-muted-foreground">No donations</span>
+              )}
+            </div>
           </div>
 
           <article
-            className="prose max-w-none pb-8 pt-8 xl:col-span-2"
+            className="prose max-w-none mt-4 p-6 xl:col-span-2 bg-white rounded-xl"
             dangerouslySetInnerHTML={{ __html: xss(content || '') }}
           />
         </PageHeading>
       </div>
-
-      <Dialog open={donateModalOpen} onOpenChange={setDonateModalOpen}>
-        <DialogContent>
-          <DonationFormModal
-            project={project}
-            close={() => setDonateModalOpen(false)}
-            openRegisterModal={() => setRegisterIsOpen(true)}
-          />
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={memberModalOpen} onOpenChange={setMemberModalOpen}>
-        <DialogContent>
-          <MembershipFormModal
-            project={project}
-            close={() => setMemberModalOpen(false)}
-            openRegisterModal={() => setRegisterIsOpen(true)}
-          />
-        </DialogContent>
-      </Dialog>
 
       {session.status !== 'authenticated' && (
         <>

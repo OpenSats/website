@@ -25,6 +25,7 @@ export type DonationMetadata = {
   isTaxDeductible: 'true' | 'false'
   staticGeneratedForApi: 'true' | 'false'
   givePointsBack: 'true' | 'false'
+  showDonorNameOnLeaderboard: 'true' | 'false'
 }
 
 export type BtcPayGetRatesRes = [
@@ -95,6 +96,10 @@ export type StrapiPerkPopulated = StrapiPerk & {
       thumbnail: { url: string }
     }
   }[]
+}
+
+export type StrapiGetPerkPopulatedRes = {
+  data: StrapiPerkPopulated | null
 }
 
 export type StrapiGetPerksPopulatedRes = {

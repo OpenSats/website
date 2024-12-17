@@ -96,6 +96,8 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         grossFiatAmount: fiatAmount,
         netCryptoAmount: cryptoAmount,
         netFiatAmount: fiatAmount,
+        showDonorNameOnLeaderboard: body.metadata.showDonorNameOnLeaderboard === 'true',
+        donorName: body.metadata.donorName,
       },
     })
   }
@@ -144,6 +146,8 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             pointsAdded,
             membershipExpiresAt:
               body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+            showDonorNameOnLeaderboard: body.metadata.showDonorNameOnLeaderboard === 'true',
+            donorName: body.metadata.donorName,
           },
         })
 

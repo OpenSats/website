@@ -523,13 +523,12 @@ function Settings() {
                                   <CommandItem
                                     value={state.label}
                                     key={state.value}
-                                    onSelect={() => {
-                                      console.log('asdasd')
+                                    onSelect={() => (
                                       changeMailingAddressForm.setValue('state', state.value, {
                                         shouldValidate: true,
-                                      })
+                                      }),
                                       setStateSelectOpen(false)
-                                    }}
+                                    )}
                                   >
                                     {state.label}
                                     <Check

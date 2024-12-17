@@ -34,8 +34,6 @@ export type PerkPurchaseWorkerData = {
 
 const globalForWorker = global as unknown as { hasInitializedWorkers: boolean }
 
-if (!globalForWorker.hasInitializedWorkers) console.log('hey')
-
 if (!globalForWorker.hasInitializedWorkers)
   new Worker<PerkPurchaseWorkerData>(
     'PerkPurchase',
