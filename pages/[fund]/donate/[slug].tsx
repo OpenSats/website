@@ -256,7 +256,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
               name="taxDeductible"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Do you want this donation to be tax deductible? (US only)</FormLabel>
+                  <FormLabel>Do you want this donation to potentially qualify for a tax deduction? (US only)</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
