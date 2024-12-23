@@ -47,7 +47,7 @@ async function handlePrintfulWebhook(req: NextApiRequest, res: NextApiResponse) 
   const body: Body = req.body
 
   if (body.type !== 'package_shipped') {
-    return res.end()
+    return res.status(200).end()
   }
 
   const {
@@ -82,6 +82,8 @@ async function handlePrintfulWebhook(req: NextApiRequest, res: NextApiResponse) 
     trackingUrl: body.data.shipment.tracking_url,
     trackingNumber: body.data.shipment.tracking_number,
   })
+
+  res.status(200).end()
 }
 
 export default handlePrintfulWebhook
