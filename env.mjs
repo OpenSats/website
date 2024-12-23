@@ -46,13 +46,12 @@ export const env = createEnv({
     BTCPAY_WEBHOOK_SECRET: z.string().min(1),
 
     PRINTFUL_WEBHOOK_SECRET: z.string().min(32),
+    PRINTFUL_API_KEY: z.string().min(1),
 
     MONERO_APPLICATION_RECIPIENT: z.string().email(),
     FIRO_APPLICATION_RECIPIENT: z.string().email(),
     PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     GENERAL_APPLICATION_RECIPIENT: z.string().email(),
-
-    PRINTFUL_API_KEY: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
