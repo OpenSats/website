@@ -37,7 +37,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       const metadata = paymentIntent.metadata as DonationMetadata
 
       // Skip this event if intent is still not fully paid
-      if (paymentIntent.amount_received !== paymentIntent.amount) return
+      if (paymentIntent.amount_received !== paymentIntent.amount) return res.status(200).end()
 
       const shouldGivePointsBack = metadata.givePointsBack === 'true'
       const grossFiatAmount = paymentIntent.amount_received / 100
@@ -149,9 +149,9 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           }
         }
       }
-
-      // Return a 200 response to acknowledge receipt of the event
-      res.status(200).end()
     }
+
+    // Return a 200 response to acknowledge receipt of the event
+    res.status(200).end()
   }
 }
