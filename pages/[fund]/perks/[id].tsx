@@ -91,8 +91,7 @@ const schema = z
     _useAccountMailingAddress: z.boolean(),
   })
   .superRefine((data, ctx) => {
-    const cpfRegex =
-      /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+    const cpfRegex = /(^\d{3}\.\d{3}\.\d{3}\-\d{2}$)|(^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$)/
 
     if (data.shippingCountry === 'BR') {
       if (data.shippingTaxNumber.length < 1) {
@@ -139,7 +138,7 @@ function Perk({ perk, balance }: Props) {
 
   const getPrintfulProductVariantsQuery = trpc.perk.getPrintfulProductVariants.useQuery(
     { printfulProductId: perk.printfulProductId || '' },
-    { enabled: !!perk.printfulProductId }
+    { enabled: !!perk.printfulProductId && !!balance, refetchOnWindowFocus: false }
   )
 
   const form = useForm<PerkPurchaseInputs>({
@@ -147,6 +146,7 @@ function Perk({ perk, balance }: Props) {
     mode: 'all',
     defaultValues: {
       _shippingStateOptionsLength: 0,
+      _useAccountMailingAddress: false,
       shippingAddressLine1: '',
       shippingAddressLine2: '',
       shippingCity: '',
@@ -634,8 +634,9 @@ function Perk({ perk, balance }: Props) {
                       control={form.control}
                       name="shippingTaxNumber"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Tax number (CPF) *</FormLabel>
+                        <FormItem className="space-y-0">
+                          <FormLabel>Tax number (Brazilian CPF/CNPJ) *</FormLabel>
+                          <FormDescription>Please include dots, slash and dash.</FormDescription>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
