@@ -17,14 +17,14 @@ export const leaderboardRouter = router({
 
       const withUserDonationSums = await prisma.donation.groupBy({
         by: ['userId', 'showDonorNameOnLeaderboard', 'donorName'],
-        where: { userId: { not: null } },
+        where: { userId: { not: null }, fundSlug: input.fundSlug, projectSlug: input.projectSlug },
         _sum: { grossFiatAmount: true },
         orderBy: { _sum: { grossFiatAmount: 'desc' } },
         take: leaderboardLimit,
       })
 
       const noUserDonations = await prisma.donation.findMany({
-        where: { userId: null },
+        where: { userId: null, fundSlug: input.fundSlug, projectSlug: input.projectSlug },
         orderBy: { grossFiatAmount: 'desc' },
         take: leaderboardLimit,
       })
