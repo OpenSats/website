@@ -42,12 +42,9 @@ export async function sendDonationConfirmationEmail({
 
   const markdown = `Thank you for your donation to MAGIC Grants! Your donation supports our charitable mission.
 
-  ${
-    !isMembership
-      ? `You donated to: ${fundName}
-  ${projectName ? `You supported this campaign: ${projectName}` : ''}`
-      : ''
-  }
+  ${!isMembership ? `You donated to: ${fundName}` : ''}
+
+  ${projectName ? `You supported this campaign: ${projectName}` : ''}
 
   ${
     isMembership
@@ -67,7 +64,7 @@ export async function sendDonationConfirmationEmail({
 
   MAGIC Grants acknowledges and expresses appreciation for the following contribution:
   - [${stripeUsdAmount ? 'x' : ' '}] Cash or bank transfer donation amount: ${stripeUsdAmount ? stripeUsdAmount.toFixed(2) : 'N/A'}
-  - [${btcpayCryptoAmount ? 'x' : ' '}] In-kind (non-fiat) donation description: ${btcpayCryptoAmount} ${btcpayAsset}
+  - [${btcpayCryptoAmount ? 'x' : ' '}] In-kind (non-fiat) donation description: ${btcpayCryptoAmount && btcpayAsset ? `${btcpayCryptoAmount} ${btcpayAsset}` : '-'}
 
   Description and/or restrictions: ${fundSlug === 'general' ? 'None' : `Donation to the ${fundName}`}
 

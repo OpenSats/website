@@ -13,6 +13,7 @@ import { btcpayApi as _btcpayApi, btcpayApi, prisma, strapiApi } from '../../../
 import { env } from '../../../env.mjs'
 import { getUserPointBalance } from '../../../server/utils/perks'
 import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
+import { POINTS_PER_USD } from '../../../config'
 
 export const config = {
   api: {
@@ -118,7 +119,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         if (!body.metadata) return
         const shouldGivePointsBack = body.metadata.givePointsBack === 'true'
         const cryptoRate = Number(paymentMethod.rate)
-        const grossCryptoAmount = Number(paymentMethod.amount)
+        const grossCryptoAmount = Number(paymentMethod.paymentMethodPaid)
         const grossFiatAmount = grossCryptoAmount * cryptoRate
         // Deduct 10% of amount if donator wants points
         const netCryptoAmount = shouldGivePointsBack ? grossCryptoAmount * 0.9 : grossCryptoAmount
@@ -127,9 +128,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         // Move on if amound paid with current method is 0
         if (!grossCryptoAmount) return
 
-        const pointsAdded = shouldGivePointsBack
-          ? parseInt(String(Number(grossFiatAmount.toFixed(2)) * 100))
-          : 0
+        const pointsAdded = shouldGivePointsBack ? Math.floor(grossFiatAmount / POINTS_PER_USD) : 0
 
         const donation = await prisma.donation.create({
           data: {
