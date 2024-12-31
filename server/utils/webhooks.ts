@@ -9,11 +9,15 @@ import {
   prisma,
   stripe as _stripe,
   strapiApi,
+  keycloak,
+  privacyGuidesDiscourseApi,
 } from '../../server/services'
 import { DonationMetadata, StrapiCreatePointBody } from '../../server/types'
 import { sendDonationConfirmationEmail } from './mailing'
 import { getUserPointBalance } from './perks'
 import { POINTS_PER_USD } from '../../config'
+import { authenticateKeycloakClient } from './keycloak'
+import { env } from '../../env.mjs'
 
 export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -51,6 +55,33 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
         ? Number((grossFiatAmount * 0.9).toFixed(2))
         : grossFiatAmount
       const pointsAdded = shouldGivePointsBack ? Math.floor(grossFiatAmount / POINTS_PER_USD) : 0
+
+      // Add PG forum user to membership group
+      if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
+        await authenticateKeycloakClient()
+
+        const user = await keycloak.users.findOne({ id: metadata.userId })
+
+        if (!user || !user.id) {
+          console.error(
+            `[/api/stripe/${metadata.fundSlug}-webhook] User ${metadata.userId} not found for payment ${paymentIntent.id}`
+          )
+          return res.status(400).end()
+        }
+
+        const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
+          | string
+          | undefined
+
+        if (discourseUsername) {
+          await privacyGuidesDiscourseApi.put(
+            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+            {
+              usernames: discourseUsername,
+            }
+          )
+        }
+      }
 
       const donation = await prisma.donation.create({
         data: {
@@ -124,6 +155,33 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
         : grossFiatAmount
       const pointsAdded = shouldGivePointsBack ? parseInt(String(grossFiatAmount * 100)) : 0
 
+      // Add PG forum user to membership group
+      if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
+        await authenticateKeycloakClient()
+
+        const user = await keycloak.users.findOne({ id: metadata.userId })
+
+        if (!user || !user.id) {
+          console.error(
+            `[/api/stripe/${metadata.fundSlug}-webhook] User ${metadata.userId} not found for invoice ${invoice.id}`
+          )
+          return res.status(400).end()
+        }
+
+        const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
+          | string
+          | undefined
+
+        if (discourseUsername) {
+          await privacyGuidesDiscourseApi.put(
+            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+            {
+              usernames: discourseUsername,
+            }
+          )
+        }
+      }
+
       const donation = await prisma.donation.create({
         data: {
           userId: metadata.userId as string,
@@ -171,6 +229,11 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           pointsReceived: pointsAdded,
         })
       }
+    }
+
+    // Handle subscription end
+    if (event.type === 'customer.subscription.deleted') {
+      console.log(event.data.object)
     }
 
     // Return a 200 response to acknowledge receipt of the event

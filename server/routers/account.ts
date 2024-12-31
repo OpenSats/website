@@ -3,11 +3,12 @@ import { jwtDecode } from 'jwt-decode'
 import { TRPCError } from '@trpc/server'
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
+import crypto from 'crypto'
 
 import { protectedProcedure, router } from '../trpc'
 import { env } from '../../env.mjs'
 import { KeycloakJwtPayload, UserSettingsJwtPayload } from '../types'
-import { keycloak, transporter } from '../services'
+import { keycloak, privacyGuidesDiscourseApi, transporter } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { fundSlugs } from '../../utils/funds'
 
@@ -210,6 +211,98 @@ export const accountRouter = router({
       addressCity: (user.attributes?.addressCity?.[0] as string) || '',
       addressState: (user.attributes?.addressState?.[0] as string) || '',
       addressCountry: (user.attributes?.addressCountry?.[0] as string) || '',
+      privacyGuidesDiscourseUsername:
+        (user.attributes?.privacyGuidesDiscourseUsername?.[0] as string) || '',
     }
+  }),
+
+  linkPrivacyGuidesAccount: protectedProcedure.mutation(async ({ ctx }) => {
+    await authenticateKeycloakClient()
+
+    const userId = ctx.session.user.sub
+    const user = await keycloak.users.findOne({ id: userId })
+
+    if (!user || !user.id)
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'USER_NOT_FOUND',
+      })
+
+    if (user.attributes?.privacyGuidesDiscourseUsername)
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'Account already linked.',
+      })
+
+    const nonce = crypto.randomBytes(32).toString('hex')
+
+    const payload = {
+      nonce,
+      return_sso_url: `${env.APP_URL}/privacyguides/account/link-community-account`,
+    }
+
+    const payloadStr = Object.entries(payload)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')
+
+    const payloadBase64 = btoa(payloadStr)
+    const payloadBase64UrlEncoded = encodeURIComponent(payloadBase64)
+
+    const signatureHex = crypto
+      .createHmac('sha256', env.PRIVACYGUIDES_DISCOURSE_CONNECT_SECRET)
+      .update(payloadBase64)
+      .digest('hex')
+
+    await keycloak.users.update(
+      { id: userId },
+      {
+        ...user,
+        attributes: {
+          ...user.attributes,
+          privacyGuidesDiscourseLinkNonce: nonce,
+        },
+      }
+    )
+
+    return {
+      url: `${env.PRIVACYGUIDES_DISCOURSE_URL}/session/sso_provider?sso=${payloadBase64UrlEncoded}&sig=${signatureHex}`,
+    }
+  }),
+
+  unlinkPrivacyGuidesAccount: protectedProcedure.mutation(async ({ ctx }) => {
+    await authenticateKeycloakClient()
+
+    const userId = ctx.session.user.sub
+    const user = await keycloak.users.findOne({ id: userId })
+
+    if (!user || !user.id)
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'USER_NOT_FOUND',
+      })
+
+    const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
+      | string
+      | undefined
+
+    if (!discourseUsername) return
+
+    await privacyGuidesDiscourseApi.delete(
+      `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+      {
+        data: { usernames: discourseUsername },
+      }
+    )
+
+    await keycloak.users.update(
+      { id: userId },
+      {
+        ...user,
+        attributes: {
+          ...user.attributes,
+          privacyGuidesDiscourseUsername: null,
+        },
+      }
+    )
   }),
 })
