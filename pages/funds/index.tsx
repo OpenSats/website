@@ -50,7 +50,7 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Project Showcase</h1>
         </div>
-        <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+        <ul className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {showcaseProjects &&
             showcaseProjects.map((p, i) => (
               <li key={i} className="">
