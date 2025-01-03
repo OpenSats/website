@@ -58,27 +58,17 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
-        await authenticateKeycloakClient()
+        const accountConnection = await prisma.accountConnection.findFirst({
+          where: { type: 'privacyGuidesForum', userId: metadata.userId },
+        })
 
-        const user = await keycloak.users.findOne({ id: metadata.userId })
-
-        if (!user || !user.id) {
-          console.error(
-            `[/api/stripe/${metadata.fundSlug}-webhook] User ${metadata.userId} not found for payment ${paymentIntent.id}`
-          )
-          return res.status(400).end()
-        }
-
-        const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
-          | string
-          | undefined
-
-        if (discourseUsername) {
+        if (
+          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
+          accountConnection?.externalId
+        ) {
           await privacyGuidesDiscourseApi.put(
             `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-            {
-              usernames: discourseUsername,
-            }
+            { usernames: accountConnection.externalId }
           )
         }
       }
@@ -157,27 +147,17 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
-        await authenticateKeycloakClient()
+        const accountConnection = await prisma.accountConnection.findFirst({
+          where: { type: 'privacyGuidesForum', userId: metadata.userId },
+        })
 
-        const user = await keycloak.users.findOne({ id: metadata.userId })
-
-        if (!user || !user.id) {
-          console.error(
-            `[/api/stripe/${metadata.fundSlug}-webhook] User ${metadata.userId} not found for invoice ${invoice.id}`
-          )
-          return res.status(400).end()
-        }
-
-        const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
-          | string
-          | undefined
-
-        if (discourseUsername) {
+        if (
+          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
+          accountConnection?.externalId
+        ) {
           await privacyGuidesDiscourseApi.put(
             `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-            {
-              usernames: discourseUsername,
-            }
+            { usernames: accountConnection.externalId }
           )
         }
       }

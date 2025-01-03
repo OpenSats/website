@@ -8,7 +8,7 @@ import crypto from 'crypto'
 import { protectedProcedure, router } from '../trpc'
 import { env } from '../../env.mjs'
 import { KeycloakJwtPayload, UserSettingsJwtPayload } from '../types'
-import { keycloak, privacyGuidesDiscourseApi, transporter } from '../services'
+import { keycloak, prisma, privacyGuidesDiscourseApi, transporter } from '../services'
 import { authenticateKeycloakClient } from '../utils/keycloak'
 import { fundSlugs } from '../../utils/funds'
 
@@ -203,6 +203,10 @@ export const accountRouter = router({
         message: 'USER_NOT_FOUND',
       })
 
+    const pgAccountConnection = await prisma.accountConnection.findFirst({
+      where: { type: 'privacyGuidesForum', userId },
+    })
+
     return {
       company: (user.attributes?.company?.[0] as string) || '',
       addressLine1: (user.attributes?.addressLine1?.[0] as string) || '',
@@ -211,8 +215,7 @@ export const accountRouter = router({
       addressCity: (user.attributes?.addressCity?.[0] as string) || '',
       addressState: (user.attributes?.addressState?.[0] as string) || '',
       addressCountry: (user.attributes?.addressCountry?.[0] as string) || '',
-      privacyGuidesDiscourseUsername:
-        (user.attributes?.privacyGuidesDiscourseUsername?.[0] as string) || '',
+      privacyGuidesDiscourseUsername: pgAccountConnection?.externalId,
     }
   }),
 
@@ -228,7 +231,11 @@ export const accountRouter = router({
         message: 'USER_NOT_FOUND',
       })
 
-    if (user.attributes?.privacyGuidesDiscourseUsername)
+    const existingAccountConnection = await prisma.accountConnection.findFirst({
+      where: { type: 'privacyGuidesForum', userId },
+    })
+
+    if (existingAccountConnection)
       throw new TRPCError({
         code: 'BAD_REQUEST',
         message: 'Account already linked.',
@@ -270,39 +277,23 @@ export const accountRouter = router({
   }),
 
   unlinkPrivacyGuidesAccount: protectedProcedure.mutation(async ({ ctx }) => {
-    await authenticateKeycloakClient()
-
     const userId = ctx.session.user.sub
-    const user = await keycloak.users.findOne({ id: userId })
 
-    if (!user || !user.id)
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-        message: 'USER_NOT_FOUND',
-      })
+    const accountConnection = await prisma.accountConnection.findFirst({
+      where: { type: 'privacyGuidesForum', userId },
+    })
 
-    const discourseUsername = user.attributes?.privacyGuidesDiscourseUsername[0] as
-      | string
-      | undefined
+    if (!accountConnection) return
 
-    if (!discourseUsername) return
+    if (accountConnection.privacyGuidesAccountIsInMemberGroup) {
+      await privacyGuidesDiscourseApi.delete(
+        `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+        {
+          data: { usernames: accountConnection.externalId },
+        }
+      )
+    }
 
-    await privacyGuidesDiscourseApi.delete(
-      `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-      {
-        data: { usernames: discourseUsername },
-      }
-    )
-
-    await keycloak.users.update(
-      { id: userId },
-      {
-        ...user,
-        attributes: {
-          ...user.attributes,
-          privacyGuidesDiscourseUsername: null,
-        },
-      }
-    )
+    await prisma.accountConnection.delete({ where: { id: accountConnection.id } })
   }),
 })

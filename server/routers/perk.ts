@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { protectedProcedure, publicProcedure, router } from '../trpc'
 import { QueueEvents } from 'bullmq'
 import { fundSlugs } from '../../utils/funds'
-import { keycloak, printfulApi, prisma, strapiApi } from '../services'
+import { keycloak, printfulApi, strapiApi } from '../services'
 import {
   PrintfulGetCountriesRes,
   PrintfulGetProductRes,

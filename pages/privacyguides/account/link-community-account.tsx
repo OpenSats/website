@@ -45,28 +45,44 @@ export async function getServerSideProps({ query, req, res }: GetServerSideProps
   // Decode base64 SSO payload
   const ssoPayloadStr = atob(sso as string)
   const ssoPayload = new URLSearchParams(ssoPayloadStr)
-  const nonce = ssoPayload.get('nonce')
-  const discourseUsername = ssoPayload.get('username')
+  const nonce = ssoPayload.get('nonce')!
+  const discourseUsername = ssoPayload.get('username')!
 
   // Check if nonce is valid
   if (expectedNonce !== nonce) {
     return { props: { success: false } }
   }
 
+  // Check if username is in use
+  const accountConnectionWithUsername = await prisma.accountConnection.findFirst({
+    where: { type: 'privacyGuidesForum', externalId: discourseUsername },
+  })
+
+  if (accountConnectionWithUsername) {
+    return { props: { success: false } }
+  }
+
   // Check if user has an active PG membership
   const membership = await prisma.donation.findFirst({
-    where: { userId, membershipExpiresAt: { gt: new Date() } },
+    where: { userId, fundSlug: 'privacyguides', membershipExpiresAt: { gt: new Date() } },
   })
 
   // Add PG forum user to membership group
   if (membership) {
     await privacyGuidesDiscourseApi.put(
       `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-      {
-        usernames: discourseUsername,
-      }
+      { usernames: discourseUsername }
     )
   }
+
+  await prisma.accountConnection.create({
+    data: {
+      type: 'privacyGuidesForum',
+      userId,
+      externalId: discourseUsername,
+      privacyGuidesAccountIsInMemberGroup: !!membership,
+    },
+  })
 
   await keycloak.users.update(
     { id: userId },
@@ -75,7 +91,6 @@ export async function getServerSideProps({ query, req, res }: GetServerSideProps
       attributes: {
         ...user.attributes,
         privacyGuidesDiscourseLinkNonce: null,
-        privacyGuidesDiscourseUsername: discourseUsername,
       },
     }
   )
