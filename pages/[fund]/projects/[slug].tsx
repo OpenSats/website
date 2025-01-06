@@ -47,11 +47,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
   const session = useSession()
   const fundSlug = useFundSlug()
 
-  const userHasMembershipQuery = trpc.donation.userHasMembership.useQuery(
-    { projectSlug: project.slug },
-    { enabled: false }
-  )
-
   const { slug, title, summary, coverImage, content, nym, website, goal, isFunded } = project
 
   function formatBtc(bitcoin: number) {
@@ -71,12 +66,6 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
       return `$${dollars.toFixed(0)}`
     }
   }
-
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      userHasMembershipQuery.refetch()
-    }
-  }, [session.status])
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -107,34 +96,9 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
             <div className="w-full max-w-96 space-y-8 p-6 bg-white rounded-xl">
               {!project.isFunded && (
                 <div className="w-full">
-                  <div className="flex flex-col space-y-2">
-                    <Link href={`/${fundSlug}/donate/${project.slug}`}>
-                      <Button className="w-full">Donate</Button>
-                    </Link>
-                    {!userHasMembershipQuery.data && (
-                      <>
-                        {session.status !== 'authenticated' ? (
-                          <Button onClick={() => setRegisterIsOpen(true)} variant="outline">
-                            Get Annual Membership
-                          </Button>
-                        ) : (
-                          <Link href={`/${fundSlug}/membership/${project.slug}`}>
-                            <Button variant="outline" className="w-full">
-                              Get Annual Membership
-                            </Button>
-                          </Link>
-                        )}
-                      </>
-                    )}
-
-                    {!!userHasMembershipQuery.data && (
-                      <Button variant="outline">
-                        <CustomLink href={`${fundSlug}/account/my-memberships`}>
-                          My Memberships
-                        </CustomLink>
-                      </Button>
-                    )}
-                  </div>
+                  <Link href={`/${fundSlug}/donate/${project.slug}`}>
+                    <Button className="w-full">Donate</Button>
+                  </Link>
                 </div>
               )}
 
