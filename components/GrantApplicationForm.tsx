@@ -132,6 +132,45 @@ export default function ApplicationForm() {
       </label>
 
       <hr />
+      <h2>Source Code</h2>
+
+      <label className="block">
+        Repository (GitHub or similar, if applicable)
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('github')}
+        />
+      </label>
+
+      <label className="inline-flex items-center">
+        <input
+          type="checkbox"
+          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('free_open_source')}
+        />
+        <span className="ml-2">Is the project free and open-source?</span>
+      </label>
+
+      <label className="block">
+        Open-Source License *<br />
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('license', { required: true })}
+        />
+        <small>
+          We focus on supporting projects that are free as in freedom and open
+          to all. Your project should have a proper open-source license &
+          educational materials should be available to the public under a{' '}
+          <CustomLink href="https://www.gnu.org/licenses/license-list.html">
+            free and open license
+          </CustomLink>
+          .
+        </small>
+      </label>
+
+      <hr />
       <h2>Project Timeline</h2>
 
       <label className="block">
@@ -176,45 +215,6 @@ export default function ApplicationForm() {
           <option value="50">50% - Part Time</option>
           <option value="25">25% - Side Project</option>
         </select>
-      </label>
-
-      <hr />
-      <h2>Source Code</h2>
-
-      <label className="block">
-        Repository (GitHub or similar, if applicable)
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('github')}
-        />
-      </label>
-
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source')}
-        />
-        <span className="ml-2">Is the project free and open-source?</span>
-      </label>
-
-      <label className="block">
-        Open-Source License *<br />
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('license', { required: true })}
-        />
-        <small>
-          We focus on supporting projects that are free as in freedom and open
-          to all. Your project should have a proper open-source license &
-          educational materials should be available to the public under a{' '}
-          <CustomLink href="https://www.gnu.org/licenses/license-list.html">
-            free and open license
-          </CustomLink>
-          .
-        </small>
       </label>
 
       <hr />
