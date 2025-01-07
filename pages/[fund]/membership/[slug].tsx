@@ -85,8 +85,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
 
     try {
       const result = await payMembershipWithCryptoMutation.mutateAsync({
-        projectSlug: project.slug,
-        projectName: project.title,
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
@@ -108,8 +106,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
 
     try {
       const result = await payMembershipWithFiatMutation.mutateAsync({
-        projectSlug: project.slug,
-        projectName: project.title,
         fundSlug,
         recurring: data.recurring === 'yes',
         taxDeductible: data.taxDeductible === 'yes',

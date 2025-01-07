@@ -182,7 +182,6 @@ export const donationRouter = router({
   payMembershipWithFiat: protectedProcedure
     .input(
       z.object({
-        projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         recurring: z.boolean(),
         taxDeductible: z.boolean(),
@@ -191,14 +190,13 @@ export const donationRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const projectName = input.fundSlug
       const stripe = _stripe[input.fundSlug]
       const userId = ctx.session.user.sub
 
       const userHasMembership = await prisma.donation.findFirst({
         where: {
           userId,
-          projectSlug: input.projectSlug,
+          projectSlug: input.fundSlug,
           membershipExpiresAt: { gt: new Date() },
         },
       })
@@ -239,8 +237,8 @@ export const donationRouter = router({
         userId,
         donorName: name,
         donorEmail: email,
-        projectSlug: input.projectSlug,
-        projectName: projectName,
+        projectSlug: input.fundSlug,
+        projectName: funds[input.fundSlug].title,
         fundSlug: input.fundSlug,
         isMembership: 'true',
         isSubscription: input.recurring ? 'true' : 'false',
@@ -260,7 +258,7 @@ export const donationRouter = router({
             price_data: {
               currency: CURRENCY,
               product_data: {
-                name: `MAGIC Grants Annual Membership: ${projectName}`,
+                name: `MAGIC Grants Annual Membership: ${funds[input.fundSlug].title}`,
               },
               unit_amount: MEMBERSHIP_PRICE * 100,
             },
@@ -282,7 +280,7 @@ export const donationRouter = router({
             price_data: {
               currency: CURRENCY,
               product_data: {
-                name: `MAGIC Grants Annual Membership: ${projectName}`,
+                name: `MAGIC Grants Annual Membership: ${funds[input.fundSlug].title}`,
               },
               recurring: { interval: 'year' },
               unit_amount: MEMBERSHIP_PRICE * 100,
@@ -306,7 +304,6 @@ export const donationRouter = router({
   payMembershipWithCrypto: protectedProcedure
     .input(
       z.object({
-        projectSlug: z.string().min(1),
         fundSlug: z.enum(fundSlugs),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
@@ -314,13 +311,12 @@ export const donationRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const projectName = input.fundSlug
       const userId = ctx.session.user.sub
 
       const userHasMembership = await prisma.donation.findFirst({
         where: {
           userId,
-          projectSlug: input.projectSlug,
+          projectSlug: input.fundSlug,
           membershipExpiresAt: { gt: new Date() },
         },
       })
@@ -341,8 +337,8 @@ export const donationRouter = router({
         userId,
         donorName: name,
         donorEmail: email,
-        projectSlug: input.projectSlug,
-        projectName: projectName,
+        projectSlug: input.fundSlug,
+        projectName: funds[input.fundSlug].title,
         itemDesc: `MAGIC ${funds[input.fundSlug].title}`,
         fundSlug: input.fundSlug,
         isMembership: 'true',
