@@ -171,4 +171,6 @@ export async function getServerSideProps({ params, req, res }: GetServerSideProp
   if (session) {
     return { redirect: { destination: `/${params?.fund!}` } }
   }
+
+  return { props: {} }
 }
