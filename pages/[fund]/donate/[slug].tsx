@@ -109,10 +109,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
 
       window.location.assign(result.url)
     } catch (e) {
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
   }
 
@@ -137,10 +134,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
 
       window.location.assign(result.url)
     } catch (e) {
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
   }
 
@@ -156,7 +150,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
       <Head>
         <title>Donate to {project.title}</title>
       </Head>
-      <div className="max-w-[540px] mx-auto p-6 space-y-6 rounded-xl bg-white">
+      <div className="max-w-[540px] mx-auto p-6 space-y-6 rounded-lg bg-white">
         <div className="py-4 flex flex-col space-y-6">
           <div className="flex flex-col items-center sm:space-x-4 sm:flex-row">
             <Image
@@ -165,7 +159,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
               width={200}
               height={96}
               objectFit="cover"
-              className="w-36 rounded-xl"
+              className="w-36 rounded-lg"
             />
             <div className="flex flex-col justify-center">
               <h2 className="text-center sm:text-left font-semibold">Donate to {project.title}</h2>
@@ -256,7 +250,9 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
               name="taxDeductible"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Do you want this donation to potentially qualify for a tax deduction? (US only)</FormLabel>
+                  <FormLabel>
+                    Do you want this donation to potentially qualify for a tax deduction? (US only)
+                  </FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -413,7 +409,7 @@ function DonationPage({ fund: fundSlug, slug, project }: Props) {
           <div className="flex flex-col items-center">
             <p className="text-sm">Want to support more projects and receive optional perks?</p>
 
-            <Link href={`/${encodeURIComponent(fundSlug)}/?registerEmail=1`}>
+            <Link href={`/${encodeURIComponent(fundSlug)}/register`}>
               <Button type="button" size="lg" variant="link">
                 Create an account
               </Button>

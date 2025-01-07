@@ -33,7 +33,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, customImageStyles })
     <Link href={`/${project.fund}/projects/${project.slug}`} passHref target="_blank">
       <figure
         className={cn(
-          'max-w-sm min-h-[460px] h-full space-y-2 flex flex-col rounded-xl border-b-4 bg-white',
+          'max-w-sm min-h-[460px] h-full space-y-2 flex flex-col rounded-lg border-b-4 bg-white',
           project.fund === 'monero' && 'border-monero',
           project.fund === 'firo' && 'border-firo',
           project.fund === 'privacyguides' && 'border-privacyguides',

@@ -6,11 +6,7 @@ import Link from './CustomLink'
 import MobileNav from './MobileNav'
 import { fundHeaderNavLinks } from '../data/headerNavLinks'
 import MagicLogo from './MagicLogo'
-import { Dialog, DialogContent, DialogTrigger } from './ui/dialog'
 import { Button } from './ui/button'
-import RegisterFormModal from './RegisterFormModal'
-import LoginFormModal from './LoginFormModal'
-import PasswordResetFormModal from './PasswordResetFormModal'
 import { Avatar, AvatarFallback } from './ui/avatar'
 import {
   DropdownMenu,
@@ -28,24 +24,9 @@ import FiroLogo from './FiroLogo'
 import PrivacyGuidesLogo from './PrivacyGuidesLogo'
 
 const Header = () => {
-  const [registerIsOpen, setRegisterIsOpen] = useState(false)
-  const [loginIsOpen, setLoginIsOpen] = useState(false)
-  const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const router = useRouter()
   const session = useSession()
   const fundSlug = useFundSlug()
-
-  useEffect(() => {
-    if (router.query.loginEmail) {
-      setLoginIsOpen(true)
-    }
-  }, [router.query.loginEmail])
-
-  useEffect(() => {
-    if (router.query.registerEmail) {
-      setRegisterIsOpen(true)
-    }
-  }, [router.query.registerEmail])
 
   const fund = fundSlug ? funds[fundSlug] : null
 
@@ -87,42 +68,23 @@ const Header = () => {
 
         {!!fund && session.status !== 'authenticated' && (
           <>
-            <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="w-18 block sm:hidden" size="sm">
-                  Login
-                </Button>
-              </DialogTrigger>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="w-24 hidden sm:block">
-                  Login
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <LoginFormModal
-                  close={() => setLoginIsOpen(false)}
-                  openRegisterModal={() => setRegisterIsOpen(true)}
-                  openPasswordResetModal={() => setPasswordResetIsOpen(true)}
-                />
-              </DialogContent>
-            </Dialog>
+            <Link href={`/${fund.slug}/login`}>
+              <Button variant="outline" className="w-18 block sm:hidden" size="sm">
+                Login
+              </Button>
 
-            <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
-              <DialogTrigger asChild>
-                <Button className="w-18 block sm:hidden" size="sm">
-                  Register
-                </Button>
-              </DialogTrigger>
-              <DialogTrigger asChild>
-                <Button className="w-24 hidden sm:block">Register</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <RegisterFormModal
-                  close={() => setRegisterIsOpen(false)}
-                  openLoginModal={() => setLoginIsOpen(true)}
-                />
-              </DialogContent>
-            </Dialog>
+              <Button variant="outline" className="w-24 hidden sm:block">
+                Login
+              </Button>
+            </Link>
+
+            <Link href={`/${fund.slug}/register`}>
+              <Button className="w-18 block sm:hidden" size="sm">
+                Register
+              </Button>
+
+              <Button className="w-24 hidden sm:block">Register</Button>
+            </Link>
           </>
         )}
 
@@ -164,12 +126,6 @@ const Header = () => {
 
         {!!fundSlug && <MobileNav />}
       </div>
-
-      <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
-        <DialogContent>
-          <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
-        </DialogContent>
-      </Dialog>
     </header>
   )
 }

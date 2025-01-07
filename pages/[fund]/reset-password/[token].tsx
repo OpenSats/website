@@ -54,14 +54,22 @@ function ResetPassword() {
         password: data.password,
       })
 
-      toast({ title: 'Password successfully reset. You may now log in.' })
-      router.push(`/${fundSlug}/?loginEmail=${encodeURIComponent(data.email)}`)
+      toast({ title: 'Success', description: 'Password successfully reset. You may now log in.' })
+
+      if (router.query.nextAction === 'membership') {
+        router.push(
+          `/${fundSlug}/login?email=${encodeURIComponent(data.email)}&nextAction=membership`
+        )
+      } else {
+        router.push(`/${fundSlug}/login?email=${encodeURIComponent(data.email)}`)
+      }
     } catch (error) {
       const errorMessage = (error as any).message
 
       if (errorMessage === 'INVALID_TOKEN') {
         toast({
-          title: 'Invalid password reset link.',
+          title: 'Error',
+          description: 'Invalid password reset link.',
           variant: 'destructive',
         })
 
@@ -70,10 +78,7 @@ function ResetPassword() {
         return
       }
 
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
   }
 

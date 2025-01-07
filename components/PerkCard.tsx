@@ -17,7 +17,7 @@ const PerkCard: React.FC<Props> = ({ perk }) => {
     <Link href={`/${fundSlug}/perks/${perk.documentId}`}>
       <figure
         className={cn(
-          'max-w-sm min-h-[360px] h-full space-y-2 flex flex-col rounded-xl border-b-4 bg-white cursor-pointer',
+          'max-w-sm min-h-[360px] h-full space-y-2 flex flex-col rounded-lg border-b-4 bg-white cursor-pointer',
           fundSlug === 'monero' && 'border-monero',
           fundSlug === 'firo' && 'border-firo',
           fundSlug === 'privacyguides' && 'border-privacyguides',

@@ -2,16 +2,25 @@ import { useRef } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { useForm } from 'react-hook-form'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth'
 import { z } from 'zod'
 
-import { DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
-import { Input } from './ui/input'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-import { Button } from './ui/button'
-import { useToast } from './ui/use-toast'
-import { trpc } from '../utils/trpc'
-import Spinner from './Spinner'
-import { env } from '../env.mjs'
+import { Input } from '../../components/ui/input'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../../components/ui/form'
+import { Button } from '../../components/ui/button'
+import { useToast } from '../../components/ui/use-toast'
+import { trpc } from '../../utils/trpc'
+import Spinner from '../../components/Spinner'
+import { env } from '../../env.mjs'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const schema = z.object({
   turnstileToken: z.string().min(1),
@@ -20,9 +29,7 @@ const schema = z.object({
 
 type PasswordResetFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void }
-
-function PasswordResetFormModal({ close }: Props) {
+function ForgotPassword() {
   const { toast } = useToast()
   const turnstileRef = useRef<TurnstileInstance | null>()
 
@@ -34,22 +41,18 @@ function PasswordResetFormModal({ close }: Props) {
     try {
       await requestPasswordResetMutation.mutateAsync(data)
 
-      toast({ title: 'A password reset link has been sent to your email.' })
-      close()
+      toast({ title: 'Success', description: 'A password reset link has been sent to your email.' })
       form.reset({ email: '' })
     } catch (error) {
-      toast({ title: 'Sorry, something went wrong.', variant: 'destructive' })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
 
     turnstileRef.current?.reset()
   }
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle>Reset Password</DialogTitle>
-        <DialogDescription>Recover your account.</DialogDescription>
-      </DialogHeader>
+    <div className="w-full max-w-xl m-auto p-6 flex flex-col space-y-4 bg-white rounded-lg">
+      <h1 className="font-bold">Request password reset</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
@@ -80,8 +83,16 @@ function PasswordResetFormModal({ close }: Props) {
           </Button>
         </form>
       </Form>
-    </>
+    </div>
   )
 }
 
-export default PasswordResetFormModal
+export default ForgotPassword
+
+export async function getServerSideProps({ params, req, res }: GetServerSidePropsContext) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session) {
+    return { redirect: { destination: `/${params?.fund!}` } }
+  }
+}

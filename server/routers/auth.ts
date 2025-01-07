@@ -31,6 +31,7 @@ export const authRouter = router({
           password: z.string().min(8),
           confirmPassword: z.string().min(8),
           fundSlug: z.enum(fundSlugs),
+          nextAction: z.enum(['membership']).optional(),
           _addMailingAddress: z.boolean(),
           address: z
             .object({
@@ -143,7 +144,7 @@ export const authRouter = router({
         from: env.SES_VERIFIED_SENDER,
         to: input.email,
         subject: 'Verify your email',
-        html: `<a href="${env.APP_URL}/${input.fundSlug}/verify-email/${emailVerifyToken}" target="_blank">Verify email</a>`,
+        html: `<a href="${env.APP_URL}/${input.fundSlug}/verify-email/${emailVerifyToken}${input.nextAction === 'membership' ? `?nextAction=membership` : ''}" target="_blank">Verify email</a>`,
       })
     }),
 

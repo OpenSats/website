@@ -6,16 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { DollarSign } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { FundSlug } from '@prisma/client'
-import { GetStaticPropsContext } from 'next'
+import { GetServerSidePropsContext, GetStaticPropsContext } from 'next'
 import Image from 'next/image'
+import Head from 'next/head'
 import { z } from 'zod'
 
-import { MAX_AMOUNT } from '../../../config'
-import Spinner from '../../../components/Spinner'
-import { trpc } from '../../../utils/trpc'
-import { useToast } from '../../../components/ui/use-toast'
-import { Button } from '../../../components/ui/button'
-import { RadioGroup, RadioGroupItem } from '../../../components/ui/radio-group'
+import { MAX_AMOUNT } from '../../config'
+import Spinner from '../../components/Spinner'
+import { trpc } from '../../utils/trpc'
+import { useToast } from '../../components/ui/use-toast'
+import { Button } from '../../components/ui/button'
+import { RadioGroup, RadioGroupItem } from '../../components/ui/radio-group'
 import {
   Form,
   FormControl,
@@ -23,18 +24,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../../../components/ui/form'
-import { Input } from '../../../components/ui/input'
-import { ProjectItem } from '../../../utils/types'
-import { getProjectBySlug, getProjects } from '../../../utils/md'
-import { funds, fundSlugs } from '../../../utils/funds'
-import Head from 'next/head'
+} from '../../components/ui/form'
+import { Input } from '../../components/ui/input'
+import { ProjectItem } from '../../utils/types'
+import { funds, fundSlugs } from '../../utils/funds'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../api/auth/[...nextauth]'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 type QueryParams = { fund: FundSlug; slug: string }
 type Props = { project: ProjectItem } & QueryParams
 
 function MembershipPage({ fund: fundSlug, project }: Props) {
   const session = useSession()
+  const router = useRouter()
   const isAuthed = session.status === 'authenticated'
 
   const schema = z
@@ -93,10 +97,7 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
 
       window.location.assign(result.url)
     } catch (e) {
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
   }
 
@@ -117,21 +118,24 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
 
       window.location.assign(result.url)
     } catch (e) {
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
   }
 
-  if (!project) return <></>
+  useEffect(() => {
+    if (session.status === 'unauthenticated') {
+      router.push(`/${fundSlug}/login?nextAction=membership`)
+    }
+  }, [session])
+
+  if (!project || session.status === 'loading') return <></>
 
   return (
     <>
       <Head>
         <title>Membership to {project.title}</title>
       </Head>
-      <div className="max-w-[540px] mx-auto p-6 space-y-6 rounded-xl bg-white">
+      <div className="max-w-[540px] mx-auto p-6 space-y-6 rounded-lg bg-white">
         <div className="py-4 flex flex-col space-y-6">
           <div className="flex flex-col items-center sm:space-x-4 sm:flex-row">
             <Image
@@ -140,7 +144,7 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
               width={200}
               height={96}
               objectFit="cover"
-              className="w-36 rounded-xl"
+              className="w-36 rounded-lg"
             />
             <div className="flex flex-col justify-center">
               <h2 className="text-center sm:text-left font-semibold">
@@ -271,15 +275,15 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="yes" />
-                        </FormControl>
-                        <FormLabel className="font-normal">Yes</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
                           <RadioGroupItem value="no" />
                         </FormControl>
                         <FormLabel className="font-normal">No</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="yes" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Yes</FormLabel>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
@@ -371,23 +375,12 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
 export default MembershipPage
 
 export async function getStaticPaths() {
-  const projects = await getProjects()
-
   return {
-    paths: [
-      ...fundSlugs.map((fund) => `/${fund}/membership/${fund}`),
-      ...projects.map((project) => `/${project.fund}/membership/${project.slug}`),
-    ],
+    paths: fundSlugs.map((fund) => `/${fund}/membership`),
     fallback: true,
   }
 }
 
 export function getStaticProps({ params }: GetStaticPropsContext<QueryParams>) {
-  if (params?.fund === params?.slug && params?.fund) {
-    return { props: { ...params, project: funds[params.fund] } }
-  }
-
-  const project = getProjectBySlug(params?.slug!, params?.fund!)
-
-  return { props: { ...params, project } }
+  return { props: { ...params, project: funds[params?.fund!] } }
 }
