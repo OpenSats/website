@@ -208,7 +208,7 @@ export default function ApplicationForm() {
         <small>How much time are you going to commit to the project?</small>
         <select
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('time_commitment', { required: true })}
+          {...register('commitment', { required: true })}
         >
           <option value="100%">100% - Full Time</option>
           <option value="75%">75% - Part Time</option>
