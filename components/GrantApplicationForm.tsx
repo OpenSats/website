@@ -118,6 +118,21 @@ export default function ApplicationForm() {
       </label>
 
       <label className="block">
+        Time Commitment
+        <br />
+        <small>How much time are you going to commit to the project?</small>
+        <select
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('time_commitment', { required: true })}
+        >
+          <option value="100">100% - Full Time</option>
+          <option value="75">75% - Part Time</option>
+          <option value="50">50% - Part Time</option>
+          <option value="25">25% - Side Project</option>
+        </select>
+      </label>
+
+      <label className="block">
         Project Timelines and Potential Milestones *<br />
         <small>
           This will help us evaluate overall scope and potential grant duration.
