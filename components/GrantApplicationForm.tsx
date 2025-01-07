@@ -179,12 +179,12 @@ export default function ApplicationForm() {
         <small>What's the grant duration you are applying for?</small>
         <select
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('time_commitment', { required: true })}
+          {...register('duration', { required: true })}
         >
-          <option value="100">12 months</option>
-          <option value="75">6 months</option>
-          <option value="50">3 months</option>
-          <option value="25">Other (please elaborate below)</option>
+          <option value="12 months">12 months</option>
+          <option value="6 months">6 months</option>
+          <option value="3 months">3 months</option>
+          <option value="Other">Other (please elaborate below)</option>
         </select>
       </label>
 
@@ -210,10 +210,10 @@ export default function ApplicationForm() {
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('time_commitment', { required: true })}
         >
-          <option value="100">100% - Full Time</option>
-          <option value="75">75% - Part Time</option>
-          <option value="50">50% - Part Time</option>
-          <option value="25">25% - Side Project</option>
+          <option value="100%">100% - Full Time</option>
+          <option value="75%">75% - Part Time</option>
+          <option value="50%">50% - Part Time</option>
+          <option value="25%">25% - Side Project</option>
         </select>
       </label>
 
