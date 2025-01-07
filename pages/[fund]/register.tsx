@@ -4,16 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
 import { z } from 'zod'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth'
+import { useRouter } from 'next/router'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from './ui/dialog'
-import { Input } from './ui/input'
+import { Input } from '../../components/ui/input'
 import {
   Form,
   FormControl,
@@ -22,14 +17,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form'
-import { Button } from './ui/button'
-import { useToast } from './ui/use-toast'
-import { trpc } from '../utils/trpc'
-import { useFundSlug } from '../utils/use-fund-slug'
-import Spinner from './Spinner'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Select, SelectTrigger, SelectValue } from './ui/select'
+} from '../../components/ui/form'
+import { Button } from '../../components/ui/button'
+import { useToast } from '../../components/ui/use-toast'
+import { trpc } from '../../utils/trpc'
+import { useFundSlug } from '../../utils/use-fund-slug'
+import Spinner from '../../components/Spinner'
+import { Popover, PopoverContent, PopoverTrigger } from '../../components/ui/popover'
+import { Select, SelectTrigger, SelectValue } from '../../components/ui/select'
 import {
   Command,
   CommandEmpty,
@@ -37,11 +32,11 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from './ui/command'
-import { cn } from '../utils/cn'
-import { Checkbox } from './ui/checkbox'
-import { env } from '../env.mjs'
-import { useRouter } from 'next/router'
+} from '../../components/ui/command'
+import { cn } from '../../utils/cn'
+import { Checkbox } from '../../components/ui/checkbox'
+import { env } from '../../env.mjs'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const schema = z
   .object({
@@ -123,9 +118,7 @@ const schema = z
 
 type RegisterFormInputs = z.infer<typeof schema>
 
-type Props = { close: () => void; openLoginModal: () => void }
-
-function RegisterFormModal({ close, openLoginModal }: Props) {
+function RegisterFormModal() {
   const router = useRouter()
   const { toast } = useToast()
   const fundSlug = useFundSlug()
@@ -180,17 +173,6 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
   }, [addressCountry])
 
   useEffect(() => {
-    if (!fundSlug) return
-    if (router.query.registerEmail) {
-      if (router.query.registerEmail !== '1') {
-        form.setValue('email', router.query.registerEmail as string)
-        setTimeout(() => form.setFocus('password'), 100)
-      }
-      router.replace(`/${fundSlug}`)
-    }
-  }, [router.query.registerEmail])
-
-  useEffect(() => {
     form.setValue('address.state', '')
   }, [addressCountry])
 
@@ -215,13 +197,18 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
     if (!fundSlug) return
 
     try {
-      await registerMutation.mutateAsync({ ...data, fundSlug })
-
-      toast({
-        title: 'Please check your email to verify your account.',
+      await registerMutation.mutateAsync({
+        ...data,
+        fundSlug,
+        nextAction: router.query.nextAction === 'membership' ? 'membership' : undefined,
       })
 
-      close()
+      toast({
+        title: 'Success',
+        description: 'Please check your email to verify your account.',
+      })
+
+      router.push(`/${fundSlug}`)
     } catch (error) {
       const errorMessage = (error as any).message
 
@@ -229,21 +216,15 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
         return form.setError('email', { message: 'Email is already taken.' }, { shouldFocus: true })
       }
 
-      toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
 
     turnstileRef.current?.reset()
   }
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle>Register</DialogTitle>
-        <DialogDescription>Start supporting projects today!</DialogDescription>
-      </DialogHeader>
+    <div className="w-full max-w-xl m-auto p-6 flex flex-col space-y-4 bg-white rounded-lg">
+      <h1 className="font-bold">Register</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
@@ -557,7 +538,7 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
               type="button"
               variant="link"
               className="grow basis-0"
-              onClick={() => (openLoginModal(), close())}
+              onClick={() => router.push(`/${fundSlug}/login`)}
             >
               I already have an account
             </Button>
@@ -572,9 +553,16 @@ function RegisterFormModal({ close, openLoginModal }: Props) {
           </div>
         </form>
       </Form>
-    </>
+    </div>
   )
 }
-1
 
 export default RegisterFormModal
+
+export async function getServerSideProps({ params, req, res }: GetServerSidePropsContext) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session) {
+    return { redirect: { destination: `/${params?.fund!}` } }
+  }
+}

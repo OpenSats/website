@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
-import { BoxIcon, Check, ChevronsUpDown, ShoppingBagIcon, TruckIcon } from 'lucide-react'
+import { Check, ChevronsUpDown, ShoppingBagIcon, TruckIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -67,7 +68,6 @@ import { GetServerSidePropsContext } from 'next'
 import { getUserPointBalance } from '../../../server/utils/perks'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../api/auth/[...nextauth]'
-import Head from 'next/head'
 
 type Props = { perk: StrapiPerkPopulated; balance: number }
 
@@ -233,7 +233,8 @@ function Perk({ perk, balance }: Props) {
         setCostEstimate(_costEstimate)
       } catch {
         toast({
-          title: 'Sorry, something went wrong.',
+          title: 'Error',
+          description: 'Sorry, something went wrong.',
           variant: 'destructive',
         })
       }
@@ -250,12 +251,12 @@ function Perk({ perk, balance }: Props) {
           perkPrintfulSyncVariantId: Number(data.printfulSyncVariantId) || undefined,
           ...data,
         })
-        toast({ title: 'Perk successfully purchased!' })
+        toast({ title: 'Success', description: 'Perk successfully purchased!' })
         router.push(`/${fundSlug}/account/point-history`)
-        close()
       } catch (error) {
         toast({
-          title: 'Sorry, something went wrong.',
+          title: 'Error',
+          description: 'Sorry, something went wrong.',
           variant: 'destructive',
         })
       }
@@ -297,7 +298,7 @@ function Perk({ perk, balance }: Props) {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full md:max-w-md p-6 flex flex-col space-y-6 bg-white rounded-xl"
+            className="w-full md:max-w-md p-6 flex flex-col space-y-6 bg-white rounded-lg"
           >
             <div className="flex flex-col justify-start">
               <div className="mx-auto p-10 md:hidden justify-center items-center">

@@ -7,22 +7,13 @@ import { useSession } from 'next-auth/react'
 import { getProjects } from '../../utils/md'
 import CustomLink from '../../components/CustomLink'
 import { Button } from '../../components/ui/button'
-import { Dialog, DialogContent } from '../../components/ui/dialog'
 import ProjectList from '../../components/ProjectList'
-import LoginFormModal from '../../components/LoginFormModal'
-import RegisterFormModal from '../../components/RegisterFormModal'
-import PasswordResetFormModal from '../../components/PasswordResetFormModal'
 import { trpc } from '../../utils/trpc'
 import { funds } from '../../utils/funds'
 
 const fund = funds['monero']
 
 const Home: NextPage<{ projects: any }> = ({ projects }) => {
-  const [donateModalOpen, setDonateModalOpen] = useState(false)
-  const [memberModalOpen, setMemberModalOpen] = useState(false)
-  const [registerIsOpen, setRegisterIsOpen] = useState(false)
-  const [loginIsOpen, setLoginIsOpen] = useState(false)
-  const [passwordResetIsOpen, setPasswordResetIsOpen] = useState(false)
   const session = useSession()
 
   const userHasMembershipQuery = trpc.donation.userHasMembership.useQuery(
@@ -63,12 +54,14 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
 
             {!userHasMembershipQuery.data && (
               <>
-                {session.status !== 'authenticated' ? (
-                  <Button onClick={() => setRegisterIsOpen(true)} variant="light" size="lg">
-                    Get Annual Membership
-                  </Button>
+                {session.status === 'authenticated' ? (
+                  <Link href={`/${fund.slug}/membership`}>
+                    <Button variant="light" size="lg">
+                      Get Annual Membership
+                    </Button>
+                  </Link>
                 ) : (
-                  <Link href={`/${fund.slug}/membership/${fund.slug}`}>
+                  <Link href={`/${fund.slug}/register?nextAction=membership`}>
                     <Button variant="light" size="lg">
                       Get Annual Membership
                     </Button>
@@ -118,35 +111,6 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
           </div>
         </div>
       </div>
-
-      {session.status !== 'authenticated' && (
-        <>
-          <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
-            <DialogContent>
-              <LoginFormModal
-                close={() => setLoginIsOpen(false)}
-                openRegisterModal={() => setRegisterIsOpen(true)}
-                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
-            <DialogContent>
-              <RegisterFormModal
-                openLoginModal={() => setLoginIsOpen(true)}
-                close={() => setRegisterIsOpen(false)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
-            <DialogContent>
-              <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
-            </DialogContent>
-          </Dialog>
-        </>
-      )}
     </>
   )
 }

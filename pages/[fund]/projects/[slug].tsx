@@ -16,21 +16,13 @@ import Progress from '../../../components/Progress'
 import { prisma } from '../../../server/services'
 import { Button } from '../../../components/ui/button'
 import { Dialog, DialogContent } from '../../../components/ui/dialog'
-import LoginFormModal from '../../../components/LoginFormModal'
 import RegisterFormModal from '../../../components/RegisterFormModal'
 import PasswordResetFormModal from '../../../components/PasswordResetFormModal'
 import CustomLink from '../../../components/CustomLink'
 import { trpc } from '../../../utils/trpc'
 import { getFundSlugFromUrlPath } from '../../../utils/funds'
 import { useFundSlug } from '../../../utils/use-fund-slug'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '../../../components/ui/table'
+import { Table, TableBody, TableCell, TableRow } from '../../../components/ui/table'
 import { cn } from '../../../utils/cn'
 
 type SingleProjectPageProps = {
@@ -104,7 +96,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
               className="w-full max-w-[700px] mx-auto object-contain xl:hidden"
             />
 
-            <div className="w-full max-w-96 space-y-8 p-6 bg-white rounded-xl">
+            <div className="w-full max-w-96 space-y-8 p-6 bg-white rounded-lg">
               {!project.isFunded && (
                 <div className="w-full">
                   <div className="flex flex-col space-y-2">
@@ -181,7 +173,7 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
               </div>
             </div>
 
-            <div className="w-full max-w-96 min-h-72 space-y-4 p-6 bg-white rounded-xl">
+            <div className="w-full max-w-96 min-h-72 space-y-4 p-6 bg-white rounded-lg">
               <h1 className="font-bold">Leaderboard</h1>
 
               {leaderboardQuery.data?.length ? (
@@ -216,40 +208,11 @@ const Project: NextPage<SingleProjectPageProps> = ({ project, donationStats }) =
           </div>
 
           <article
-            className="prose max-w-none mt-4 p-6 xl:col-span-2 bg-white rounded-xl"
+            className="prose max-w-none mt-4 p-6 xl:col-span-2 bg-white rounded-lg"
             dangerouslySetInnerHTML={{ __html: xss(content || '') }}
           />
         </PageHeading>
       </div>
-
-      {session.status !== 'authenticated' && (
-        <>
-          <Dialog open={loginIsOpen} onOpenChange={setLoginIsOpen}>
-            <DialogContent>
-              <LoginFormModal
-                close={() => setLoginIsOpen(false)}
-                openRegisterModal={() => setRegisterIsOpen(true)}
-                openPasswordResetModal={() => setPasswordResetIsOpen(true)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={registerIsOpen} onOpenChange={setRegisterIsOpen}>
-            <DialogContent>
-              <RegisterFormModal
-                openLoginModal={() => setLoginIsOpen(true)}
-                close={() => setRegisterIsOpen(false)}
-              />
-            </DialogContent>
-          </Dialog>
-
-          <Dialog open={passwordResetIsOpen} onOpenChange={setPasswordResetIsOpen}>
-            <DialogContent>
-              <PasswordResetFormModal close={() => setPasswordResetIsOpen(false)} />
-            </DialogContent>
-          </Dialog>
-        </>
-      )}
     </>
   )
 }
