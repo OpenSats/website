@@ -117,6 +117,20 @@ export default function ApplicationForm() {
         />
       </label>
 
+      <label className="block">
+        Project Website
+        <br />
+        <small>
+          If you have a website or a project page, please provide the URL.
+        </small>
+        <input
+          type="text"
+          placeholder="https://"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('website')}
+        />
+      </label>
+
       <hr />
       <h2>Project Timeline</h2>
 
@@ -164,19 +178,11 @@ export default function ApplicationForm() {
         </select>
       </label>
 
-      <label className="block">
-        Project Website (if applicable)
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('website')}
-        />
-      </label>
-
       <hr />
+      <h2>Source Code</h2>
 
       <label className="block">
-        Project Github (or similar, if applicable)
+        Repository (GitHub or similar, if applicable)
         <input
           type="text"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
@@ -210,6 +216,7 @@ export default function ApplicationForm() {
           .
         </small>
       </label>
+
       <hr />
       <h2>Project Budget</h2>
 
