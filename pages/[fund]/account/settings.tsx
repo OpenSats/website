@@ -171,10 +171,11 @@ function Settings() {
   async function onChangeProfileSubmit(data: ChangeProfileFormInputs) {
     try {
       await changeProfileMutation.mutateAsync(data)
-      toast({ title: 'Your profile has successfully been changed!' })
+      toast({ title: 'Success', description: 'Your profile has successfully been changed!' })
     } catch (error) {
       return toast({
-        title: 'Sorry, something went wrong.',
+        title: 'Error',
+        description: 'Sorry, something went wrong.',
         variant: 'destructive',
       })
     }
@@ -186,7 +187,7 @@ function Settings() {
     try {
       await requestEmailChangeMutation.mutateAsync({ fundSlug, newEmail: data.newEmail })
       changeEmailForm.reset()
-      toast({ title: 'A verification link has been sent to your email.' })
+      toast({ title: 'Success', description: 'A verification link has been sent to your email.' })
     } catch (error) {
       const errorMessage = (error as any).message
 
@@ -199,7 +200,8 @@ function Settings() {
       }
 
       return toast({
-        title: 'Sorry, something went wrong.',
+        title: 'Error',
+        description: 'Sorry, something went wrong.',
         variant: 'destructive',
       })
     }
@@ -214,9 +216,12 @@ function Settings() {
 
       changePasswordForm.reset()
 
-      toast({ title: 'Your password has successfully been changed! Please log in again.' })
+      toast({
+        title: 'Success',
+        description: 'Your password has successfully been changed! Please log in again.',
+      })
       await signOut({ redirect: false })
-      router.push(`/${fundSlug}/?loginEmail=${session.data?.user.email}`)
+      router.push(`/${fundSlug}/login?email=${encodeURIComponent(session.data?.user.email!)}`)
     } catch (error) {
       const errorMessage = (error as any).message
 
@@ -229,7 +234,8 @@ function Settings() {
       }
 
       return toast({
-        title: 'Sorry, something went wrong.',
+        title: 'Error',
+        description: 'Sorry, something went wrong.',
         variant: 'destructive',
       })
     }
@@ -238,10 +244,14 @@ function Settings() {
   async function onChangeMailingAddressSubmit(data: ChangeMailingAddressFormInputs) {
     try {
       await changeMailingAddressMutation.mutateAsync(data)
-      toast({ title: 'Your mailing address has successfully been changed!' })
+      toast({
+        title: 'Success',
+        description: 'Your mailing address has successfully been changed!',
+      })
     } catch (error) {
       return toast({
-        title: 'Sorry, something went wrong.',
+        title: 'Error',
+        description: 'Sorry, something went wrong.',
         variant: 'destructive',
       })
     }
