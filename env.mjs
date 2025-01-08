@@ -52,6 +52,8 @@ export const env = createEnv({
     FIRO_APPLICATION_RECIPIENT: z.string().email(),
     PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     GENERAL_APPLICATION_RECIPIENT: z.string().email(),
+
+    ATTESTATION_PRIVATE_KEY_HEX: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -66,6 +68,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_TURNSTILE_SITEKEY: z.string().min(1),
+    NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -131,6 +134,9 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT,
 
     NEXT_PUBLIC_STRAPI_CDN_URL: process.env.NEXT_PUBLIC_STRAPI_CDN_URL,
+
+    ATTESTATION_PRIVATE_KEY_HEX: process.env.ATTESTATION_PRIVATE_KEY_HEX,
+    NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX: process.env.NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

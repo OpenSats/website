@@ -51,5 +51,6 @@ jobs:
             BTCPAY_API_KEY=${{ secrets.BTCPAY_API_KEY }} \
             BTCPAY_STORE_ID=${{ secrets.BTCPAY_STORE_ID }} \
             BTCPAY_WEBHOOK_SECRET=${{ secrets.BTCPAY_WEBHOOK_SECRET }} \
+            ATTESTATION_PRIVATE_KEY_HEX=${{ secrets.ATTESTATION_PRIVATE_KEY_HEX }} \
             docker compose -f docker-compose.prod.yml up -d --build
           EOF

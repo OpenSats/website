@@ -2,6 +2,8 @@ import { Stripe } from 'stripe'
 import { TRPCError } from '@trpc/server'
 import { Donation } from '@prisma/client'
 import { z } from 'zod'
+import crypto from 'crypto'
+import * as ed from '@noble/ed25519'
 import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
@@ -430,9 +432,51 @@ export const donationRouter = router({
       const userId = ctx.session.user.sub
 
       const membership = await prisma.donation.findFirst({
-        where: { projectSlug: input.projectSlug, membershipExpiresAt: { gt: new Date() } },
+        where: { userId, projectSlug: input.projectSlug, membershipExpiresAt: { gt: new Date() } },
       })
 
       return !!membership
+    }),
+
+  getAttestation: protectedProcedure
+    .input(z.object({ donationId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const donation = await prisma.donation.findFirst({
+        where: { id: input.donationId, userId: ctx.session.user.sub },
+      })
+
+      if (!donation) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Donation not found.' })
+      }
+
+      await authenticateKeycloakClient()
+
+      const userId = ctx.session.user.sub
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      const message = `MAGIC Grants Donation Attestation
+
+Name: ${user.attributes?.name}
+Email: ${ctx.session.user.email}
+Donation ID: ${donation.id}
+Donation value: $${donation.grossFiatAmount.toFixed(2)}
+Date: ${new Date()}
+
+Verify this attestation at donate.magicgrants.org/verify-donation`
+
+      const signature = await ed.signAsync(
+        Buffer.from(message, 'utf-8').toString('hex'),
+        env.ATTESTATION_PRIVATE_KEY_HEX
+      )
+
+      const signatureHex = Buffer.from(signature).toString('hex')
+
+      return { message, signature: signatureHex }
     }),
 })
