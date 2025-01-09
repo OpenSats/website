@@ -46,7 +46,7 @@ function VerifyDonation() {
 
   return (
     <div className="w-full max-w-xl m-auto p-6 flex flex-col space-y-4 bg-white rounded-lg">
-      <h1 className="font-bold">Verify Donation</h1>
+      <h1 className="font-bold">Verify Attestation</h1>
 
       <Form {...form}>
         <form className="flex flex-col space-y-4">

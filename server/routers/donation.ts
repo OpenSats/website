@@ -14,6 +14,7 @@ import { authenticateKeycloakClient } from '../utils/keycloak'
 import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
 import { funds, fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
+import dayjs from 'dayjs'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -438,11 +439,13 @@ export const donationRouter = router({
       return !!membership
     }),
 
-  getAttestation: protectedProcedure
+  getDonationAttestation: protectedProcedure
     .input(z.object({ donationId: z.string() }))
     .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
       const donation = await prisma.donation.findFirst({
-        where: { id: input.donationId, userId: ctx.session.user.sub },
+        where: { id: input.donationId, membershipExpiresAt: null, userId },
       })
 
       if (!donation) {
@@ -451,7 +454,6 @@ export const donationRouter = router({
 
       await authenticateKeycloakClient()
 
-      const userId = ctx.session.user.sub
       const user = await keycloak.users.findOne({ id: userId })
 
       if (!user || !user.id)
@@ -465,10 +467,73 @@ export const donationRouter = router({
 Name: ${user.attributes?.name}
 Email: ${ctx.session.user.email}
 Donation ID: ${donation.id}
-Donation value: $${donation.grossFiatAmount.toFixed(2)}
-Date: ${new Date()}
+Amount: $${donation.grossFiatAmount.toFixed(2)}
+Method: ${donation.cryptoCode ? donation.cryptoCode : 'Fiat'}
+Fund: ${funds[donation.fundSlug].title}
+Project: ${donation.projectName}
+Date: ${dayjs(donation.createdAt).format('lll')}
 
-Verify this attestation at donate.magicgrants.org/verify-donation`
+Verify this attestation at donate.magicgrants.org/${donation.fundSlug}/verify-attestation`
+
+      const signature = await ed.signAsync(
+        Buffer.from(message, 'utf-8').toString('hex'),
+        env.ATTESTATION_PRIVATE_KEY_HEX
+      )
+
+      const signatureHex = Buffer.from(signature).toString('hex')
+
+      return { message, signature: signatureHex }
+    }),
+
+  getMembershipAttestation: protectedProcedure
+    .input(z.object({ donationId: z.string().optional(), subscriptionId: z.string().optional() }))
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      const donations = await prisma.donation.findMany({
+        where: input.subscriptionId
+          ? {
+              stripeSubscriptionId: input.subscriptionId,
+              membershipExpiresAt: { not: null },
+              userId,
+            }
+          : { id: input.donationId, membershipExpiresAt: { not: null }, userId },
+        orderBy: { membershipExpiresAt: 'desc' },
+      })
+
+      if (!donations.length) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Membership not found.' })
+      }
+
+      await authenticateKeycloakClient()
+
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      const membershipStart = donations.slice(-1)[0].createdAt
+      const membershipEnd = donations[0].membershipExpiresAt
+
+      const membershipValue = donations.reduce(
+        (total, donation) => total + donation.grossFiatAmount,
+        0
+      )
+
+      const message = `MAGIC Grants Membership Attestation
+
+Name: ${user.attributes?.name}
+Email: ${ctx.session.user.email}
+Total amount: $${membershipValue.toFixed(2)}
+Method: ${donations[0].cryptoCode ? donations[0].cryptoCode : 'Fiat'}
+Fund: ${funds[donations[0].fundSlug].title}
+Period start: ${dayjs(membershipStart).format('lll')}
+Period end: ${dayjs(membershipEnd).format('lll')}
+
+Verify this attestation at donate.magicgrants.org/${donations[0].fundSlug}/verify-attestation`
 
       const signature = await ed.signAsync(
         Buffer.from(message, 'utf-8').toString('hex'),
