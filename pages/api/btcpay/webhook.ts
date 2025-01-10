@@ -194,7 +194,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             })
 
             attestationMessage = attestation.message
-            attestationSignature = attestationSignature
+            attestationSignature = attestation.signature
           }
 
           if (body.metadata.isMembership === 'false') {
@@ -211,7 +211,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             })
 
             attestationMessage = attestation.message
-            attestationSignature = attestationSignature
+            attestationSignature = attestation.signature
           }
 
           sendDonationConfirmationEmail({

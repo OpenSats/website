@@ -1,13 +1,13 @@
+import { useEffect, useMemo, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { CheckIcon, XIcon } from 'lucide-react'
 import { z } from 'zod'
 import * as ed from '@noble/ed25519'
 
-import { Form, FormControl, FormField, FormItem, FormLabel } from '../components/ui/form'
-import { Textarea } from '../components/ui/textarea'
-import { useEffect, useMemo, useState } from 'react'
-import { env } from '../env.mjs'
-import { CheckIcon, XIcon } from 'lucide-react'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '../../components/ui/form'
+import { Textarea } from '../../components/ui/textarea'
+import { env } from '../../env.mjs'
 
 const schema = z.object({ message: z.string(), signature: z.string() })
 

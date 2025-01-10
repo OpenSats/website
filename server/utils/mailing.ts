@@ -44,7 +44,9 @@ export async function sendDonationConfirmationEmail({
   const dateStr = dayjs().format('YYYY-M-D')
   const fundName = funds[fundSlug].title
 
-  const markdown = `Thank you for your donation to MAGIC Grants! Your donation supports our charitable mission.
+  const markdown = `# Donation receipt
+  
+  Thank you for your donation to MAGIC Grants! Your donation supports our charitable mission.
 
   ${!isMembership ? `You donated to: ${fundName}` : ''}
 
@@ -82,10 +84,19 @@ export async function sendDonationConfirmationEmail({
   ### Signed attestation
 
   Message
-  \`\`\`${attestationMessage}\`\`\`
+  \`\`\`
+  ${attestationMessage}
+  \`\`\`
 
-  Signature (ED25519)
-  \`\`\`${attestationSignature}\`\`\`
+  Signature
+  \`\`\`
+  ${attestationSignature}
+  \`\`\`
+
+  Public key (ED25519)
+  \`\`\`
+  ${env.NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX}
+  \`\`\`
 
   This attestation can be verified at [donate.magicgrants.org/${fundSlug}/verify-attestation](https://donate.magicgrants.org/${fundSlug}/verify-attestation).
 
@@ -113,6 +124,11 @@ export async function sendDonationConfirmationEmail({
 
   a {
     color: #3a76f0;
+  }
+
+  pre {
+    word-break: break-all;
+    white-space: pre-wrap;
   }
 </style>
 

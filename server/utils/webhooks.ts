@@ -107,7 +107,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           })
 
           attestationMessage = attestation.message
-          attestationSignature = attestationSignature
+          attestationSignature = attestation.signature
         }
 
         if (metadata.isMembership === 'false') {
@@ -124,7 +124,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           })
 
           attestationMessage = attestation.message
-          attestationSignature = attestationSignature
+          attestationSignature = attestation.signature
         }
 
         sendDonationConfirmationEmail({
