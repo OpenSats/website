@@ -15,6 +15,7 @@ import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
 import { funds, fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
 import dayjs from 'dayjs'
+import { getDonationAttestation, getMembershipAttestation } from '../utils/attestation'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -462,27 +463,19 @@ export const donationRouter = router({
           message: 'USER_NOT_FOUND',
         })
 
-      const message = `MAGIC Grants Donation Attestation
+      const { message, signature } = await getDonationAttestation({
+        donorName: user.attributes?.name,
+        donorEmail: ctx.session.user.email,
+        amount: donation.grossFiatAmount,
+        method: donation.cryptoCode ? donation.cryptoCode : 'Fiat',
+        fundSlug: donation.fundSlug,
+        fundName: funds[donation.fundSlug].title,
+        projectName: donation.projectName,
+        date: donation.createdAt,
+        donationId: donation.id,
+      })
 
-Name: ${user.attributes?.name}
-Email: ${ctx.session.user.email}
-Donation ID: ${donation.id}
-Amount: $${donation.grossFiatAmount.toFixed(2)}
-Method: ${donation.cryptoCode ? donation.cryptoCode : 'Fiat'}
-Fund: ${funds[donation.fundSlug].title}
-Project: ${donation.projectName}
-Date: ${dayjs(donation.createdAt).format('lll')}
-
-Verify this attestation at donate.magicgrants.org/${donation.fundSlug}/verify-attestation`
-
-      const signature = await ed.signAsync(
-        Buffer.from(message, 'utf-8').toString('hex'),
-        env.ATTESTATION_PRIVATE_KEY_HEX
-      )
-
-      const signatureHex = Buffer.from(signature).toString('hex')
-
-      return { message, signature: signatureHex }
+      return { message, signature }
     }),
 
   getMembershipAttestation: protectedProcedure
@@ -516,32 +509,24 @@ Verify this attestation at donate.magicgrants.org/${donation.fundSlug}/verify-at
         })
 
       const membershipStart = donations.slice(-1)[0].createdAt
-      const membershipEnd = donations[0].membershipExpiresAt
+      const membershipEnd = donations[0].membershipExpiresAt!
 
       const membershipValue = donations.reduce(
         (total, donation) => total + donation.grossFiatAmount,
         0
       )
 
-      const message = `MAGIC Grants Membership Attestation
+      const { message, signature } = await getMembershipAttestation({
+        donorName: user.attributes?.name,
+        donorEmail: ctx.session.user.email,
+        amount: membershipValue,
+        method: donations[0].cryptoCode ? donations[0].cryptoCode : 'Fiat',
+        fundSlug: donations[0].fundSlug,
+        fundName: funds[donations[0].fundSlug].title,
+        periodStart: membershipStart,
+        periodEnd: membershipEnd,
+      })
 
-Name: ${user.attributes?.name}
-Email: ${ctx.session.user.email}
-Total amount: $${membershipValue.toFixed(2)}
-Method: ${donations[0].cryptoCode ? donations[0].cryptoCode : 'Fiat'}
-Fund: ${funds[donations[0].fundSlug].title}
-Period start: ${dayjs(membershipStart).format('lll')}
-Period end: ${dayjs(membershipEnd).format('lll')}
-
-Verify this attestation at donate.magicgrants.org/${donations[0].fundSlug}/verify-attestation`
-
-      const signature = await ed.signAsync(
-        Buffer.from(message, 'utf-8').toString('hex'),
-        env.ATTESTATION_PRIVATE_KEY_HEX
-      )
-
-      const signatureHex = Buffer.from(signature).toString('hex')
-
-      return { message, signature: signatureHex }
+      return { message, signature }
     }),
 })

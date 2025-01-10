@@ -14,6 +14,8 @@ import { env } from '../../../env.mjs'
 import { getUserPointBalance } from '../../../server/utils/perks'
 import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
 import { POINTS_PER_USD } from '../../../config'
+import { getDonationAttestation, getMembershipAttestation } from '../../../server/utils/attestation'
+import { funds } from '../../../utils/funds'
 
 export const config = {
   api: {
@@ -113,6 +115,9 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
       `/invoices/${body.invoiceId}/payment-methods`
     )
 
+    const membershipExpiresAt =
+      body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null
+
     // Create one donation and one point history for each invoice payment method
     await Promise.all(
       paymentMethods.map(async (paymentMethod) => {
@@ -143,8 +148,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             netCryptoAmount: Number(netCryptoAmount.toFixed(2)),
             netFiatAmount: Number(netFiatAmount.toFixed(2)),
             pointsAdded,
-            membershipExpiresAt:
-              body.metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+            membershipExpiresAt,
             showDonorNameOnLeaderboard: body.metadata.showDonorNameOnLeaderboard === 'true',
             donorName: body.metadata.donorName,
           },
@@ -174,6 +178,42 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         }
 
         if (body.metadata.donorEmail && body.metadata.donorName) {
+          let attestationMessage = ''
+          let attestationSignature = ''
+
+          if (body.metadata.isMembership === 'true') {
+            const attestation = await getMembershipAttestation({
+              donorName: body.metadata.donorName,
+              donorEmail: body.metadata.donorEmail,
+              amount: Number(grossFiatAmount.toFixed(2)),
+              method: paymentMethod.cryptoCode as 'BTC' | 'XMR',
+              fundName: funds[body.metadata.fundSlug].title,
+              fundSlug: body.metadata.fundSlug,
+              periodStart: new Date(),
+              periodEnd: membershipExpiresAt!,
+            })
+
+            attestationMessage = attestation.message
+            attestationSignature = attestationSignature
+          }
+
+          if (body.metadata.isMembership === 'false') {
+            const attestation = await getDonationAttestation({
+              donorName: body.metadata.donorName,
+              donorEmail: body.metadata.donorEmail,
+              amount: Number(grossFiatAmount.toFixed(2)),
+              method: paymentMethod.cryptoCode as 'BTC' | 'XMR',
+              fundName: funds[body.metadata.fundSlug].title,
+              fundSlug: body.metadata.fundSlug,
+              projectName: body.metadata.projectName,
+              date: new Date(),
+              donationId: donation.id,
+            })
+
+            attestationMessage = attestation.message
+            attestationSignature = attestationSignature
+          }
+
           sendDonationConfirmationEmail({
             to: body.metadata.donorEmail,
             donorName: body.metadata.donorName,
@@ -184,6 +224,8 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
             pointsReceived: pointsAdded,
             btcpayAsset: paymentMethod.cryptoCode as 'BTC' | 'XMR',
             btcpayCryptoAmount: grossCryptoAmount,
+            attestationMessage,
+            attestationSignature,
           })
         }
       })
