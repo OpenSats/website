@@ -72,16 +72,16 @@ export async function getMembershipAttestation({
   periodEnd,
 }: GetMembershipAttestation) {
   const message = `MAGIC Grants Membership Attestation
-  
-  Name: ${donorName}
-  Email: ${donorEmail}
-  Total amount: $${amount.toFixed(2)}
-  Method: ${method}
-  Fund: ${fundName}
-  Period start: ${dayjs(periodStart).format('YYYY-M-D')}
-  Period end: ${dayjs(periodEnd).format('YYYY-M-D')}
-  
-  Verify this attestation at donate.magicgrants.org/${fundSlug}/verify-attestation`
+
+Name: ${donorName}
+Email: ${donorEmail}
+Total amount to date: $${amount.toFixed(2)}
+Method: ${method}
+Fund: ${fundName}
+Period start: ${dayjs(periodStart).format('YYYY-M-D')}
+Period end: ${dayjs(periodEnd).format('YYYY-M-D')}
+
+Verify this attestation at donate.magicgrants.org/${fundSlug}/verify-attestation`
 
   const signature = await ed.signAsync(
     Buffer.from(message, 'utf-8').toString('hex'),

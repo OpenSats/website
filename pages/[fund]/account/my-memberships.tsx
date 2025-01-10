@@ -17,6 +17,8 @@ import { useFundSlug } from '../../../utils/use-fund-slug'
 import { funds } from '../../../utils/funds'
 import { Button } from '../../../components/ui/button'
 import Spinner from '../../../components/Spinner'
+import { Dialog } from '../../../components/ui/dialog'
+import AttestationModalContent from '../../../components/AttestationModalContent'
 
 dayjs.extend(localizedFormat)
 
@@ -100,6 +102,14 @@ function MyMemberships() {
           </Table>
         </div>
       </div>
+
+      <Dialog open={attestationModalIsOpen} onOpenChange={setAttestationModalIsOpen}>
+        <AttestationModalContent
+          message={attestation?.message}
+          signature={attestation?.signature}
+          closeModal={() => setAttestationModalIsOpen(false)}
+        />
+      </Dialog>
     </>
   )
 }
