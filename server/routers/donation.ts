@@ -2,6 +2,8 @@ import { Stripe } from 'stripe'
 import { TRPCError } from '@trpc/server'
 import { Donation } from '@prisma/client'
 import { z } from 'zod'
+import crypto from 'crypto'
+import * as ed from '@noble/ed25519'
 import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
@@ -12,6 +14,8 @@ import { authenticateKeycloakClient } from '../utils/keycloak'
 import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
 import { funds, fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
+import dayjs from 'dayjs'
+import { getDonationAttestation, getMembershipAttestation } from '../utils/attestation'
 
 export const donationRouter = router({
   donateWithFiat: publicProcedure
@@ -430,9 +434,99 @@ export const donationRouter = router({
       const userId = ctx.session.user.sub
 
       const membership = await prisma.donation.findFirst({
-        where: { projectSlug: input.projectSlug, membershipExpiresAt: { gt: new Date() } },
+        where: { userId, projectSlug: input.projectSlug, membershipExpiresAt: { gt: new Date() } },
       })
 
       return !!membership
+    }),
+
+  getDonationAttestation: protectedProcedure
+    .input(z.object({ donationId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      const donation = await prisma.donation.findFirst({
+        where: { id: input.donationId, membershipExpiresAt: null, userId },
+      })
+
+      if (!donation) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Donation not found.' })
+      }
+
+      await authenticateKeycloakClient()
+
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      const { message, signature } = await getDonationAttestation({
+        donorName: user.attributes?.name,
+        donorEmail: ctx.session.user.email,
+        amount: donation.grossFiatAmount,
+        method: donation.cryptoCode ? donation.cryptoCode : 'Fiat',
+        fundSlug: donation.fundSlug,
+        fundName: funds[donation.fundSlug].title,
+        projectName: donation.projectName,
+        date: donation.createdAt,
+        donationId: donation.id,
+      })
+
+      return { message, signature }
+    }),
+
+  getMembershipAttestation: protectedProcedure
+    .input(z.object({ donationId: z.string().optional(), subscriptionId: z.string().optional() }))
+    .mutation(async ({ input, ctx }) => {
+      const userId = ctx.session.user.sub
+
+      const donations = await prisma.donation.findMany({
+        where: input.subscriptionId
+          ? {
+              stripeSubscriptionId: input.subscriptionId,
+              membershipExpiresAt: { not: null },
+              userId,
+            }
+          : { id: input.donationId, membershipExpiresAt: { not: null }, userId },
+        orderBy: { membershipExpiresAt: 'desc' },
+      })
+
+      if (!donations.length) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'Membership not found.' })
+      }
+
+      await authenticateKeycloakClient()
+
+      const user = await keycloak.users.findOne({ id: userId })
+
+      if (!user || !user.id)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'USER_NOT_FOUND',
+        })
+
+      const membershipStart = donations.slice(-1)[0].createdAt
+      const membershipEnd = donations[0].membershipExpiresAt!
+
+      const membershipValue = donations.reduce(
+        (total, donation) => total + donation.grossFiatAmount,
+        0
+      )
+
+      const { message, signature } = await getMembershipAttestation({
+        donorName: user.attributes?.name,
+        donorEmail: ctx.session.user.email,
+        amount: membershipValue,
+        method: donations[0].cryptoCode ? donations[0].cryptoCode : 'Fiat',
+        fundSlug: donations[0].fundSlug,
+        fundName: funds[donations[0].fundSlug].title,
+        periodStart: membershipStart,
+        periodEnd: membershipEnd,
+      })
+
+      return { message, signature }
     }),
 })

@@ -23,6 +23,8 @@ type SendDonationConfirmationEmailParams = {
   btcpayCryptoAmount?: number
   btcpayAsset?: 'BTC' | 'XMR'
   pointsReceived: number
+  attestationMessage: string
+  attestationSignature: string
 }
 
 export async function sendDonationConfirmationEmail({
@@ -36,11 +38,15 @@ export async function sendDonationConfirmationEmail({
   btcpayCryptoAmount,
   btcpayAsset,
   pointsReceived,
+  attestationMessage,
+  attestationSignature,
 }: SendDonationConfirmationEmailParams) {
   const dateStr = dayjs().format('YYYY-M-D')
   const fundName = funds[fundSlug].title
 
-  const markdown = `Thank you for your donation to MAGIC Grants! Your donation supports our charitable mission.
+  const markdown = `# Donation receipt
+  
+  Thank you for your donation to MAGIC Grants! Your donation supports our charitable mission.
 
   ${!isMembership ? `You donated to: ${fundName}` : ''}
 
@@ -75,6 +81,25 @@ export async function sendDonationConfirmationEmail({
 
   ${btcpayCryptoAmount ? 'If you wish to receive a tax deduction for a cryptocurrency donation over $500, you MUST complete [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and send the completed form to [info@magicgrants.org](mailto:info@magicgrants.org) to qualify for a deduction.' : ''}
 
+  ### Signed attestation
+
+  Message
+  \`\`\`
+  ${attestationMessage}
+  \`\`\`
+
+  Signature
+  \`\`\`
+  ${attestationSignature}
+  \`\`\`
+
+  Public key (ED25519)
+  \`\`\`
+  ${env.NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX}
+  \`\`\`
+
+  This attestation can be verified at [donate.magicgrants.org/${fundSlug}/verify-attestation](https://donate.magicgrants.org/${fundSlug}/verify-attestation).
+
   MAGIC Grants
   1942 Broadway St., STE 314C
   Boulder, CO 80302
@@ -99,6 +124,11 @@ export async function sendDonationConfirmationEmail({
 
   a {
     color: #3a76f0;
+  }
+
+  pre {
+    word-break: break-all;
+    white-space: pre-wrap;
   }
 </style>
 

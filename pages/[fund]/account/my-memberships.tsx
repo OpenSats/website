@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import Head from 'next/head'
@@ -14,16 +15,32 @@ import { trpc } from '../../../utils/trpc'
 import CustomLink from '../../../components/CustomLink'
 import { useFundSlug } from '../../../utils/use-fund-slug'
 import { funds } from '../../../utils/funds'
+import { Button } from '../../../components/ui/button'
+import Spinner from '../../../components/Spinner'
+import { Dialog } from '../../../components/ui/dialog'
+import AttestationModalContent from '../../../components/AttestationModalContent'
 
 dayjs.extend(localizedFormat)
 
 function MyMemberships() {
   const fundSlug = useFundSlug()
+  const [attestationModalIsOpen, setAttestationModalIsOpen] = useState(false)
+  const [attestation, setAttestation] = useState<{ message: string; signature: string } | null>()
 
   // Conditionally render hooks should be ok in this case
   if (!fundSlug) return <></>
 
   const membershipListQuery = trpc.donation.membershipList.useQuery({ fundSlug })
+  const getMembershipAttestationMutation = trpc.donation.getMembershipAttestation.useMutation()
+
+  async function getAttestation(donationId?: string, subscriptionId?: string) {
+    const _attestation = await getMembershipAttestationMutation.mutateAsync({
+      donationId,
+      subscriptionId,
+    })
+    setAttestation(_attestation)
+    setAttestationModalIsOpen(true)
+  }
 
   return (
     <>
@@ -51,8 +68,9 @@ function MyMemberships() {
                 <TableHead>Project</TableHead>
                 <TableHead>Method</TableHead>
                 <TableHead>Recurring</TableHead>
-                <TableHead>Date</TableHead>
+                <TableHead>Period Start</TableHead>
                 <TableHead>Period End</TableHead>
+                <TableHead></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -63,12 +81,35 @@ function MyMemberships() {
                   <TableCell>{membership.stripeSubscriptionId ? 'Yes' : 'No'}</TableCell>
                   <TableCell>{dayjs(membership.createdAt).format('lll')}</TableCell>
                   <TableCell>{dayjs(membership.membershipExpiresAt).format('lll')}</TableCell>
+                  <TableCell>
+                    <Button
+                      size="sm"
+                      disabled={getMembershipAttestationMutation.isPending}
+                      onClick={() =>
+                        getAttestation(
+                          membership.stripeSubscriptionId ? undefined : membership.id,
+                          membership.stripeSubscriptionId || undefined
+                        )
+                      }
+                    >
+                      {getMembershipAttestationMutation.isPending && <Spinner />}
+                      Get Attestation
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
       </div>
+
+      <Dialog open={attestationModalIsOpen} onOpenChange={setAttestationModalIsOpen}>
+        <AttestationModalContent
+          message={attestation?.message}
+          signature={attestation?.signature}
+          closeModal={() => setAttestationModalIsOpen(false)}
+        />
+      </Dialog>
     </>
   )
 }
