@@ -41,24 +41,12 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
   const router = useRouter()
   const isAuthed = session.status === 'authenticated'
 
-  const schema = z
-    .object({
-      name: z.string().optional(),
-      email: z.string().email().optional(),
-      amount: z.coerce.number().min(1).max(MAX_AMOUNT),
-      taxDeductible: z.enum(['yes', 'no']),
-      recurring: z.enum(['yes', 'no']),
-      givePointsBack: z.enum(['yes', 'no']),
-      showDonorNameOnLeaderboard: z.enum(['yes', 'no']),
-    })
-    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.name : true), {
-      message: 'Name is required when the donation is tax deductible.',
-      path: ['name'],
-    })
-    .refine((data) => (!isAuthed && data.taxDeductible === 'yes' ? !!data.email : true), {
-      message: 'Email is required when the donation is tax deductible.',
-      path: ['email'],
-    })
+  const schema = z.object({
+    taxDeductible: z.enum(['yes', 'no']),
+    recurring: z.enum(['yes', 'no']),
+    givePointsBack: z.enum(['yes', 'no']),
+    showDonorNameOnLeaderboard: z.enum(['yes', 'no']),
+  })
 
   type FormInputs = z.infer<typeof schema>
 
@@ -67,9 +55,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
   const form = useForm<FormInputs>({
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      name: '',
-      amount: 100, // a trick to get trigger to work when amount is empty
       taxDeductible: 'no',
       recurring: 'no',
       givePointsBack: 'no',
@@ -164,38 +149,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
                 100.00
               </span>
             </div>
-
-            {!isAuthed && (
-              <>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name {taxDeductible === 'no' && '(optional)'}</FormLabel>
-                      <FormControl>
-                        <Input placeholder="John Doe" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email {taxDeductible === 'no' && '(optional)'}</FormLabel>
-                      <FormControl>
-                        <Input placeholder="johndoe@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </>
-            )}
 
             <FormField
               control={form.control}
