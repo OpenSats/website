@@ -5,6 +5,7 @@ import { formatAmountForStripe } from '../../utils/stripe-helpers'
 
 import Stripe from 'stripe'
 import { PayReq } from '../../utils/types'
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   // @ts-ignore stripe-version-202-08-27
