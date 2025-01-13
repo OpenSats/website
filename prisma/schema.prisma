@@ -21,6 +21,10 @@ enum FundSlug {
   general
 }
 
+enum AccountConnectionType {
+  privacyGuidesForum
+}
+
 model Donation {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -62,4 +66,18 @@ model ProjectAddresses {
   moneroAddress   String
 
   @@unique([projectSlug, fundSlug])
+}
+
+model AccountConnection {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type                                AccountConnectionType
+  userId                              String
+  externalId                          String
+  privacyGuidesAccountIsInMemberGroup Boolean?
+
+  @@index([userId])
+  @@index([externalId])
 }

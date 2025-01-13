@@ -9,11 +9,13 @@ import {
   prisma,
   stripe as _stripe,
   strapiApi,
+  privacyGuidesDiscourseApi,
 } from '../../server/services'
 import { DonationMetadata, StrapiCreatePointBody } from '../../server/types'
 import { sendDonationConfirmationEmail } from './mailing'
 import { getUserPointBalance } from './perks'
 import { POINTS_PER_USD } from '../../config'
+import { env } from '../../env.mjs'
 import { getDonationAttestation, getMembershipAttestation } from './attestation'
 import { funds } from '../../utils/funds'
 
@@ -55,6 +57,23 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       const pointsAdded = shouldGivePointsBack ? Math.floor(grossFiatAmount / POINTS_PER_USD) : 0
       const membershipExpiresAt =
         metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null
+
+      // Add PG forum user to membership group
+      if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
+        const accountConnection = await prisma.accountConnection.findFirst({
+          where: { type: 'privacyGuidesForum', userId: metadata.userId },
+        })
+
+        if (
+          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
+          accountConnection?.externalId
+        ) {
+          await privacyGuidesDiscourseApi.put(
+            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+            { usernames: accountConnection.externalId }
+          )
+        }
+      }
 
       const donation = await prisma.donation.create({
         data: {
@@ -166,6 +185,23 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       const pointsAdded = shouldGivePointsBack ? parseInt(String(grossFiatAmount * 100)) : 0
       const membershipExpiresAt = new Date(invoiceLine.period.end * 1000)
 
+      // Add PG forum user to membership group
+      if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
+        const accountConnection = await prisma.accountConnection.findFirst({
+          where: { type: 'privacyGuidesForum', userId: metadata.userId },
+        })
+
+        if (
+          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
+          accountConnection?.externalId
+        ) {
+          await privacyGuidesDiscourseApi.put(
+            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+            { usernames: accountConnection.externalId }
+          )
+        }
+      }
+
       const donation = await prisma.donation.create({
         data: {
           userId: metadata.userId as string,
@@ -241,6 +277,11 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           attestationSignature: attestation.signature,
         })
       }
+    }
+
+    // Handle subscription end
+    if (event.type === 'customer.subscription.deleted') {
+      console.log(event.data.object)
     }
 
     // Return a 200 response to acknowledge receipt of the event

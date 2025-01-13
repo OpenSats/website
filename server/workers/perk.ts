@@ -2,7 +2,7 @@ import { Worker } from 'bullmq'
 import { AxiosResponse } from 'axios'
 import { TRPCError } from '@trpc/server'
 
-import { redisConnection } from '../../config/redis'
+import { redisConnection as connection } from '../../config/redis'
 import { estimatePrintfulOrderCost, getUserPointBalance } from '../utils/perks'
 import { POINTS_REDEEM_PRICE_USD } from '../../config'
 import {
@@ -142,7 +142,7 @@ if (!globalForWorker.hasInitializedWorkers)
           : undefined,
       })
     },
-    { connection: redisConnection, concurrency: 1 }
+    { connection, concurrency: 1 }
   )
 
 if (process.env.NODE_ENV !== 'production') globalForWorker.hasInitializedWorkers = true

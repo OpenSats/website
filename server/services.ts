@@ -52,4 +52,21 @@ const stripe: Record<FundSlug, Stripe> = {
   general: new Stripe(env.STRIPE_GENERAL_SECRET_KEY, { apiVersion: '2024-04-10' }),
 }
 
-export { prisma, keycloak, transporter, btcpayApi, strapiApi, printfulApi, stripe }
+const privacyGuidesDiscourseApi = axios.create({
+  baseURL: `${env.PRIVACYGUIDES_DISCOURSE_URL}`,
+  headers: {
+    'api-key': env.PRIVACYGUIDES_DISCOURSE_API_KEY,
+    'api-username': env.PRIVACYGUIDES_DISCOURSE_API_USERNAME,
+  },
+})
+
+export {
+  prisma,
+  keycloak,
+  transporter,
+  btcpayApi,
+  strapiApi,
+  printfulApi,
+  stripe,
+  privacyGuidesDiscourseApi,
+}

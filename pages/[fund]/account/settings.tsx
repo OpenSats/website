@@ -32,6 +32,7 @@ import {
   CommandList,
 } from '../../../components/ui/command'
 import { cn } from '../../../utils/cn'
+import { Label } from '../../../components/ui/label'
 
 const changeProfileFormSchema = z.object({ company: z.string() })
 
@@ -84,6 +85,8 @@ function Settings() {
   const requestEmailChangeMutation = trpc.account.requestEmailChange.useMutation()
   const changePasswordMutation = trpc.account.changePassword.useMutation()
   const changeMailingAddressMutation = trpc.account.changeMailingAddress.useMutation()
+  const linkPrivacyGuidesAccountMutation = trpc.account.linkPrivacyGuidesAccount.useMutation()
+  const unlinkPrivacyGuidesAccountMutation = trpc.account.unlinkPrivacyGuidesAccount.useMutation()
 
   const changeProfileForm = useForm<ChangeProfileFormInputs>({
     resolver: zodResolver(changeProfileFormSchema),
@@ -257,14 +260,39 @@ function Settings() {
     }
   }
 
+  async function onLinkPrivacyGuidesAccount() {
+    try {
+      const { url } = await linkPrivacyGuidesAccountMutation.mutateAsync()
+      router.push(url)
+    } catch (error) {
+      return toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
+    }
+  }
+
+  async function onUnlinkPrivacyGuidesAccount() {
+    try {
+      await unlinkPrivacyGuidesAccountMutation.mutateAsync()
+      await getUserAttributesQuery.refetch()
+      toast({ title: 'Success', description: 'Account successfully unlinked!' })
+    } catch (error) {
+      return toast({
+        title: 'Sorry, something went wrong.',
+        variant: 'destructive',
+      })
+    }
+  }
+
   return (
     <>
       <Head>
         <title>MAGIC Grants - Settings</title>
       </Head>
 
-      <div className="w-full max-w-lg mx-auto flex flex-col space-y-12">
-        <div className="w-full flex flex-col space-y-6">
+      <div className="w-full max-w-lg mx-auto flex flex-col space-y-4 ">
+        <div className="w-full p-6 flex flex-col space-y-6 bg-white rounded-xl">
           <h1 className="font-bold">Change Profile</h1>
 
           <Form {...changeEmailForm}>
@@ -297,7 +325,7 @@ function Settings() {
           </Form>
         </div>
 
-        <div className="w-full flex flex-col space-y-6">
+        <div className="w-full p-6 flex flex-col space-y-6 bg-white rounded-xl">
           <h1 className="font-bold">Change Email</h1>
 
           <Form {...changeEmailForm}>
@@ -330,7 +358,7 @@ function Settings() {
           </Form>
         </div>
 
-        <div className="w-full flex flex-col space-y-6">
+        <div className="w-full p-6 flex flex-col space-y-6 bg-white rounded-xl">
           <h1 className="font-bold">Change Password</h1>
 
           <Form {...changePasswordForm}>
@@ -391,7 +419,7 @@ function Settings() {
           </Form>
         </div>
 
-        <div className="w-full flex flex-col space-y-6">
+        <div className="w-full p-6 flex flex-col space-y-6 bg-white rounded-xl">
           <h1 className="font-bold">Change Mailing Address</h1>
 
           <Form {...changeEmailForm}>
@@ -600,6 +628,50 @@ function Settings() {
             </form>
           </Form>
         </div>
+
+        {fundSlug === 'privacyguides' && (
+          <div className="w-full p-6 flex flex-col space-y-6 bg-white rounded-xl">
+            <h1 className="font-bold">Connections</h1>
+
+            <div className="flex flex-row space-x-12">
+              <div className="flex flex-col space-y-2">
+                <Label>Privacy Guides Community</Label>
+
+                {!getUserAttributesQuery.data?.privacyGuidesDiscourseUsername && (
+                  <span className="text-sm text-red-500">No account linked</span>
+                )}
+
+                {!!getUserAttributesQuery.data?.privacyGuidesDiscourseUsername && (
+                  <span className="text-sm text-muted-foreground">keeqler</span>
+                )}
+              </div>
+
+              {!getUserAttributesQuery.data?.privacyGuidesDiscourseUsername && (
+                <Button
+                  size="sm"
+                  className="self-center"
+                  disabled={linkPrivacyGuidesAccountMutation.isPending}
+                  onClick={onLinkPrivacyGuidesAccount}
+                >
+                  {linkPrivacyGuidesAccountMutation.isPending && <Spinner />}
+                  Link Account
+                </Button>
+              )}
+
+              {!!getUserAttributesQuery.data?.privacyGuidesDiscourseUsername && (
+                <Button
+                  size="sm"
+                  className="self-center"
+                  disabled={unlinkPrivacyGuidesAccountMutation.isPending}
+                  onClick={onUnlinkPrivacyGuidesAccount}
+                >
+                  {unlinkPrivacyGuidesAccountMutation.isPending && <Spinner />}
+                  Unlink Account
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   )

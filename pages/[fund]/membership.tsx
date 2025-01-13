@@ -39,7 +39,6 @@ type Props = { project: ProjectItem } & QueryParams
 function MembershipPage({ fund: fundSlug, project }: Props) {
   const session = useSession()
   const router = useRouter()
-  const isAuthed = session.status === 'authenticated'
 
   const schema = z.object({
     taxDeductible: z.enum(['yes', 'no']),
@@ -62,8 +61,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
     },
     mode: 'all',
   })
-
-  const taxDeductible = form.watch('taxDeductible')
 
   const payMembershipWithFiatMutation = trpc.donation.payMembershipWithFiat.useMutation()
   const payMembershipWithCryptoMutation = trpc.donation.payMembershipWithCrypto.useMutation()
