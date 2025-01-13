@@ -14,7 +14,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ exclude, projects }) => {
     setSortedProjects(
       projects.filter((p) => p.slug !== exclude).sort(() => 0.5 - Math.random())
     )
-  }, [projects])
+  }, [exclude, projects])
 
   return (
     <section className="bg-light items-left flex flex-col">
