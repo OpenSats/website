@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { CURRENCY, MIN_AMOUNT, MAX_AMOUNT } from '../../config'
+import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { formatAmountForStripe } from '../../utils/stripe-helpers'
 
 import Stripe from 'stripe'
@@ -17,8 +17,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { amount, project_name, btcpay, email, name, zaprite }: PayReq =
-    req.body
+  const { amount, project_name, email, name, zaprite }: PayReq = req.body
 
   if (!ZAPRITE_USER_UUID) {
     throw new Error('Something went wrong with Stripe setup')
