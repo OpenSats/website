@@ -2,8 +2,6 @@ import { Stripe } from 'stripe'
 import { TRPCError } from '@trpc/server'
 import { Donation } from '@prisma/client'
 import { z } from 'zod'
-import crypto from 'crypto'
-import * as ed from '@noble/ed25519'
 import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation'
 
 import { protectedProcedure, publicProcedure, router } from '../trpc'
@@ -14,7 +12,6 @@ import { authenticateKeycloakClient } from '../utils/keycloak'
 import { BtcPayCreateInvoiceRes, DonationMetadata } from '../types'
 import { funds, fundSlugs } from '../../utils/funds'
 import { fundSlugToCustomerIdAttr } from '../utils/funds'
-import dayjs from 'dayjs'
 import { getDonationAttestation, getMembershipAttestation } from '../utils/attestation'
 
 export const donationRouter = router({
@@ -190,7 +187,6 @@ export const donationRouter = router({
         recurring: z.boolean(),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
-        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -249,7 +245,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
-        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
+        showDonorNameOnLeaderboard: 'false',
       }
 
       const purchaseParams: Stripe.Checkout.SessionCreateParams = {
@@ -311,7 +307,6 @@ export const donationRouter = router({
         fundSlug: z.enum(fundSlugs),
         taxDeductible: z.boolean(),
         givePointsBack: z.boolean(),
-        showDonorNameOnLeaderboard: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -350,7 +345,7 @@ export const donationRouter = router({
         isTaxDeductible: input.taxDeductible ? 'true' : 'false',
         staticGeneratedForApi: 'false',
         givePointsBack: input.givePointsBack ? 'true' : 'false',
-        showDonorNameOnLeaderboard: input.showDonorNameOnLeaderboard ? 'true' : 'false',
+        showDonorNameOnLeaderboard: 'false',
       }
 
       const { data: invoice } = await btcpayApi.post<BtcPayCreateInvoiceRes>(`/invoices`, {

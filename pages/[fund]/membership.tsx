@@ -44,7 +44,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
     taxDeductible: z.enum(['yes', 'no']),
     recurring: z.enum(['yes', 'no']),
     givePointsBack: z.enum(['yes', 'no']),
-    showDonorNameOnLeaderboard: z.enum(['yes', 'no']),
   })
 
   type FormInputs = z.infer<typeof schema>
@@ -57,7 +56,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
       taxDeductible: 'no',
       recurring: 'no',
       givePointsBack: 'no',
-      showDonorNameOnLeaderboard: 'no',
     },
     mode: 'all',
   })
@@ -74,7 +72,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
         fundSlug,
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
-        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       window.location.assign(result.url)
@@ -93,7 +90,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
         recurring: data.recurring === 'yes',
         taxDeductible: data.taxDeductible === 'yes',
         givePointsBack: data.givePointsBack === 'yes',
-        showDonorNameOnLeaderboard: data.showDonorNameOnLeaderboard === 'yes',
       })
 
       if (!result.url) throw new Error()
@@ -186,37 +182,6 @@ function MembershipPage({ fund: fundSlug, project }: Props) {
                   <FormLabel>
                     Do you want your membership payment to be recurring? (Fiat only)
                   </FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex flex-row space-x-4 text-gray-700"
-                    >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="no" />
-                        </FormControl>
-                        <FormLabel className="font-normal">No</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="yes" />
-                        </FormControl>
-                        <FormLabel className="font-normal">Yes</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="showDonorNameOnLeaderboard"
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormLabel>Do you want your name to be displayed on the leaderboard?</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
