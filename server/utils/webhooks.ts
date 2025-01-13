@@ -9,15 +9,15 @@ import {
   prisma,
   stripe as _stripe,
   strapiApi,
-  keycloak,
   privacyGuidesDiscourseApi,
 } from '../../server/services'
 import { DonationMetadata, StrapiCreatePointBody } from '../../server/types'
 import { sendDonationConfirmationEmail } from './mailing'
 import { getUserPointBalance } from './perks'
 import { POINTS_PER_USD } from '../../config'
-import { authenticateKeycloakClient } from './keycloak'
 import { env } from '../../env.mjs'
+import { getDonationAttestation, getMembershipAttestation } from './attestation'
+import { funds } from '../../utils/funds'
 
 export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -55,6 +55,8 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
         ? Number((grossFiatAmount * 0.9).toFixed(2))
         : grossFiatAmount
       const pointsAdded = shouldGivePointsBack ? Math.floor(grossFiatAmount / POINTS_PER_USD) : 0
+      const membershipExpiresAt =
+        metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
@@ -83,8 +85,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           grossFiatAmount,
           netFiatAmount,
           pointsAdded,
-          membershipExpiresAt:
-            metadata.isMembership === 'true' ? dayjs().add(1, 'year').toDate() : null,
+          membershipExpiresAt,
           showDonorNameOnLeaderboard: metadata.showDonorNameOnLeaderboard === 'true',
           donorName: metadata.donorName,
         },
@@ -109,6 +110,42 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       }
 
       if (metadata.donorEmail && metadata.donorName) {
+        let attestationMessage = ''
+        let attestationSignature = ''
+
+        if (metadata.isMembership === 'true') {
+          const attestation = await getMembershipAttestation({
+            donorName: metadata.donorName,
+            donorEmail: metadata.donorEmail,
+            amount: Number(grossFiatAmount.toFixed(2)),
+            method: 'Fiat',
+            fundName: funds[metadata.fundSlug].title,
+            fundSlug: metadata.fundSlug,
+            periodStart: new Date(),
+            periodEnd: membershipExpiresAt!,
+          })
+
+          attestationMessage = attestation.message
+          attestationSignature = attestation.signature
+        }
+
+        if (metadata.isMembership === 'false') {
+          const attestation = await getDonationAttestation({
+            donorName: metadata.donorName,
+            donorEmail: metadata.donorEmail,
+            amount: grossFiatAmount,
+            method: 'Fiat',
+            fundName: funds[metadata.fundSlug].title,
+            fundSlug: metadata.fundSlug,
+            projectName: metadata.projectName,
+            date: new Date(),
+            donationId: donation.id,
+          })
+
+          attestationMessage = attestation.message
+          attestationSignature = attestation.signature
+        }
+
         sendDonationConfirmationEmail({
           to: metadata.donorEmail,
           donorName: metadata.donorName,
@@ -118,6 +155,8 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           isSubscription: false,
           stripeUsdAmount: paymentIntent.amount_received / 100,
           pointsReceived: pointsAdded,
+          attestationMessage,
+          attestationSignature,
         })
       }
     }
@@ -144,6 +183,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
         ? Number((grossFiatAmount * 0.9).toFixed(2))
         : grossFiatAmount
       const pointsAdded = shouldGivePointsBack ? parseInt(String(grossFiatAmount * 100)) : 0
+      const membershipExpiresAt = new Date(invoiceLine.period.end * 1000)
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
@@ -173,7 +213,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           grossFiatAmount,
           netFiatAmount,
           pointsAdded,
-          membershipExpiresAt: new Date(invoiceLine.period.end * 1000),
+          membershipExpiresAt,
           showDonorNameOnLeaderboard: metadata.showDonorNameOnLeaderboard === 'true',
           donorName: metadata.donorName,
         },
@@ -198,6 +238,32 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
       }
 
       if (metadata.donorEmail && metadata.donorName) {
+        const donations = await prisma.donation.findMany({
+          where: {
+            stripeSubscriptionId: invoice.subscription.toString(),
+            membershipExpiresAt: { not: null },
+          },
+          orderBy: { membershipExpiresAt: 'desc' },
+        })
+
+        const membershipStart = donations.slice(-1)[0].createdAt
+
+        const membershipValue = donations.reduce(
+          (total, donation) => total + donation.grossFiatAmount,
+          0
+        )
+
+        const attestation = await getMembershipAttestation({
+          donorName: metadata.donorName,
+          donorEmail: metadata.donorEmail,
+          amount: membershipValue,
+          method: 'Fiat',
+          fundName: funds[metadata.fundSlug].title,
+          fundSlug: metadata.fundSlug,
+          periodStart: membershipStart,
+          periodEnd: membershipExpiresAt,
+        })
+
         sendDonationConfirmationEmail({
           to: metadata.donorEmail,
           donorName: metadata.donorName,
@@ -207,6 +273,8 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
           isSubscription: metadata.isSubscription === 'true',
           stripeUsdAmount: invoice.total / 100,
           pointsReceived: pointsAdded,
+          attestationMessage: attestation.message,
+          attestationSignature: attestation.signature,
         })
       }
     }

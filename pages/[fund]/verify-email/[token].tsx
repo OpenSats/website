@@ -20,11 +20,18 @@ function VerifyEmail() {
 
       try {
         const result = await verifyEmailMutation.mutateAsync({ token: token as string })
-        toast({ title: 'Email verified! You may now log in.' })
+        toast({ title: 'Success', description: 'Email verified! You may now log in.' })
         await signOut({ redirect: false })
-        router.push(`/${fundSlug}/?loginEmail=${result.email}`)
+
+        if (router.query.nextAction === 'membership') {
+          router.push(
+            `/${fundSlug}/login?email=${encodeURIComponent(result.email)}&nextAction=membership`
+          )
+        } else {
+          router.push(`/${fundSlug}/login?email=${encodeURIComponent(result.email)}`)
+        }
       } catch (error) {
-        toast({ title: 'Invalid verification link.', variant: 'destructive' })
+        toast({ title: 'Error', description: 'Invalid verification link.', variant: 'destructive' })
         router.push(`/${fundSlug}`)
       }
     })()

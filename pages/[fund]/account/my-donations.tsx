@@ -1,7 +1,15 @@
+import { useState } from 'react'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import Head from 'next/head'
 
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogFooter,
+  DialogHeader,
+} from '../../../components/ui/dialog'
 import {
   Table,
   TableBody,
@@ -13,16 +21,28 @@ import {
 import { trpc } from '../../../utils/trpc'
 import { useFundSlug } from '../../../utils/use-fund-slug'
 import { funds } from '../../../utils/funds'
+import { Button } from '../../../components/ui/button'
+import Spinner from '../../../components/Spinner'
+import AttestationModalContent from '../../../components/AttestationModalContent'
 
 dayjs.extend(localizedFormat)
 
 function MyDonations() {
   const fundSlug = useFundSlug()
+  const [attestationModalIsOpen, setAttestationModalIsOpen] = useState(false)
+  const [attestation, setAttestation] = useState<{ message: string; signature: string } | null>()
 
   // Conditionally render hooks should be ok in this case
   if (!fundSlug) return <></>
 
   const donationListQuery = trpc.donation.donationList.useQuery({ fundSlug })
+  const getDonationAttestationMutation = trpc.donation.getDonationAttestation.useMutation()
+
+  async function getAttestation(donationId: string) {
+    const _attestation = await getDonationAttestationMutation.mutateAsync({ donationId })
+    setAttestation(_attestation)
+    setAttestationModalIsOpen(true)
+  }
 
   return (
     <>
@@ -41,6 +61,7 @@ function MyDonations() {
                 <TableHead>Method</TableHead>
                 <TableHead>Amount</TableHead>
                 <TableHead>Date</TableHead>
+                <TableHead></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -50,12 +71,30 @@ function MyDonations() {
                   <TableCell>{donation.btcPayInvoiceId ? 'Crypto' : 'Fiat'}</TableCell>
                   <TableCell>${donation.grossFiatAmount}</TableCell>
                   <TableCell>{dayjs(donation.createdAt).format('lll')}</TableCell>
+                  <TableCell>
+                    <Button
+                      size="sm"
+                      disabled={getDonationAttestationMutation.isPending}
+                      onClick={() => getAttestation(donation.id)}
+                    >
+                      {getDonationAttestationMutation.isPending && <Spinner />}
+                      Get Attestation
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </div>
       </div>
+
+      <Dialog open={attestationModalIsOpen} onOpenChange={setAttestationModalIsOpen}>
+        <AttestationModalContent
+          message={attestation?.message}
+          signature={attestation?.signature}
+          closeModal={() => setAttestationModalIsOpen(false)}
+        />
+      </Dialog>
     </>
   )
 }

@@ -20,7 +20,9 @@ const LayoutWrapper = ({ children }: Props) => {
   useEffect(() => {
     if (session?.error === 'RefreshAccessTokenError') {
       if (fundSlug) {
-        signOut({ callbackUrl: `/${fundSlug}/?loginEmail=${session?.user.email}` })
+        signOut({
+          callbackUrl: `/${fundSlug}/login?email=${encodeURIComponent(session?.user.email)}`,
+        })
       } else {
         signOut({ callbackUrl: '/' })
       }
@@ -38,7 +40,7 @@ const LayoutWrapper = ({ children }: Props) => {
       <SectionContainer>
         <div className="flex h-screen flex-col justify-between">
           <Header />
-          <main className="grow">{children}</main>
+          <main className="flex flex-col items-start grow">{children}</main>
           <Footer />
         </div>
       </SectionContainer>

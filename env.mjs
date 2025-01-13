@@ -58,6 +58,7 @@ export const env = createEnv({
     PRIVACYGUIDES_DISCOURSE_API_KEY: z.string(),
     PRIVACYGUIDES_DISCOURSE_API_USERNAME: z.string(),
     PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID: z.string(),
+    ATTESTATION_PRIVATE_KEY_HEX: z.string().min(1),
   },
   /*
    * Environment variables available on the client (and server).
@@ -72,6 +73,7 @@ export const env = createEnv({
     NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT: z.string().email(),
     NEXT_PUBLIC_TURNSTILE_SITEKEY: z.string().min(1),
+    NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX: z.string().min(1),
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
@@ -144,6 +146,8 @@ export const env = createEnv({
     PRIVACYGUIDES_DISCOURSE_API_USERNAME: process.env.PRIVACYGUIDES_DISCOURSE_API_USERNAME,
     PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID:
       process.env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID,
+    ATTESTATION_PRIVATE_KEY_HEX: process.env.ATTESTATION_PRIVATE_KEY_HEX,
+    NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX: process.env.NEXT_PUBLIC_ATTESTATION_PUBLIC_KEY_HEX,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

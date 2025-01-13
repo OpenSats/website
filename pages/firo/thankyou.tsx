@@ -5,8 +5,9 @@ import { Button } from '../../components/ui/button'
 
 export default function ThankYou() {
   const fundSlug = useFundSlug()
+
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-4 py-8">
+    <div className="m-auto flex-1 flex flex-col items-center justify-center gap-4 py-8">
       <h2 className="font-bold">Thank you for your donation!</h2>
       <p>
         If you have any questions or need a donation receipt, please reach out to{' '}

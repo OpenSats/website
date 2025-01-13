@@ -1,19 +1,28 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile'
+import { getServerSession } from 'next-auth'
+import { GetServerSidePropsContext } from 'next'
 import { z } from 'zod'
 
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
-import { Input } from './ui/input'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-import { Button } from './ui/button'
-import { useToast } from './ui/use-toast'
-import { useFundSlug } from '../utils/use-fund-slug'
-import Spinner from './Spinner'
-import { env } from '../env.mjs'
+import { Input } from '../../components/ui/input'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../../components/ui/form'
+import { Button } from '../../components/ui/button'
+import { useToast } from '../../components/ui/use-toast'
+import { useFundSlug } from '../../utils/use-fund-slug'
+import Spinner from '../../components/Spinner'
+import { env } from '../../env.mjs'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const schema = z.object({
   email: z.string().email(),
@@ -23,13 +32,7 @@ const schema = z.object({
 
 type LoginFormInputs = z.infer<typeof schema>
 
-type Props = {
-  close: () => void
-  openPasswordResetModal: () => void
-  openRegisterModal: () => void
-}
-
-function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Props) {
+function Login() {
   const { toast } = useToast()
   const router = useRouter()
   const fundSlug = useFundSlug()
@@ -43,12 +46,11 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
 
   useEffect(() => {
     if (!fundSlug) return
-    if (router.query.loginEmail) {
-      form.setValue('email', router.query.loginEmail as string)
+    if (router.query.email) {
+      form.setValue('email', router.query.email as string)
       setTimeout(() => form.setFocus('password'), 100)
-      router.replace(`/${fundSlug}`)
     }
-  }, [router.query.loginEmail])
+  }, [router.query.email])
 
   async function onSubmit(data: LoginFormInputs) {
     const result = await signIn('credentials', {
@@ -69,25 +71,24 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
         )
       }
 
-      return toast({
-        title: 'Sorry, something went wrong.',
-        variant: 'destructive',
-      })
+      toast({ title: 'Error', description: 'Sorry, something went wrong.', variant: 'destructive' })
     }
 
     toast({
-      title: 'Successfully logged in!',
+      title: 'Success',
+      description: 'Successfully logged in!',
     })
 
-    close()
+    if (router.query.nextAction === 'membership') {
+      router.push(`/${fundSlug}/membership`)
+    } else {
+      router.push(`/${fundSlug}`)
+    }
   }
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle>Login</DialogTitle>
-        <DialogDescription>Log into your account.</DialogDescription>
-      </DialogHeader>
+    <div className="w-full max-w-xl m-auto p-6 flex flex-col space-y-4 bg-white rounded-lg">
+      <h1 className="font-bold">Login</h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
@@ -122,7 +123,7 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
 
             <Button
               type="button"
-              onClick={() => (openPasswordResetModal(), close())}
+              onClick={() => router.push(`/${fundSlug}/forgot-password`)}
               variant="link"
               className="self-end"
             >
@@ -143,7 +144,7 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
               className="grow basis-0"
               variant="outline"
               type="button"
-              onClick={() => (openRegisterModal(), close())}
+              onClick={() => router.push(`/${fundSlug}/register`)}
             >
               Register
             </Button>
@@ -158,8 +159,18 @@ function LoginFormModal({ close, openPasswordResetModal, openRegisterModal }: Pr
           </div>
         </form>
       </Form>
-    </>
+    </div>
   )
 }
 
-export default LoginFormModal
+export default Login
+
+export async function getServerSideProps({ params, req, res }: GetServerSidePropsContext) {
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session) {
+    return { redirect: { destination: `/${params?.fund!}` } }
+  }
+
+  return { props: {} }
+}
