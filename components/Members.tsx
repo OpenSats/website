@@ -8,7 +8,7 @@ export default function Members({ subset }) {
 
   useEffect(() => {
     setSortedMembers(allAuthors.sort(() => 0.5 - Math.random()))
-  })
+  }, [])
 
   let members
   switch (subset) {

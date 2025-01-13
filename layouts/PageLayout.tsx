@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, image, layout } = content
+  const { title, summary, image } = content
 
   return (
     <>

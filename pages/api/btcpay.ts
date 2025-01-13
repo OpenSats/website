@@ -55,6 +55,7 @@ export default async function handler(
         Object.assign(reqData, { amount })
       }
       const data = await fetchPostJSONAuthed(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         `${process.env.BTCPAY_URL!}stores/${
           process.env.BTCPAY_STORE_ID
         }/invoices`,
