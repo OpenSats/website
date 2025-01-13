@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { MAX_AMOUNT } from '../config'
 import { fetchPostJSON } from '../utils/api-helpers'
 import Spinner from './Spinner'
 import * as EmailValidator from 'email-validator'
