@@ -1,73 +1,94 @@
+import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { fetchPostJSON } from '../utils/api-helpers'
-import FormButton from '@/components/FormButton'
-import * as EmailValidator from 'email-validator'
 import CustomLink from './Link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 
-export default function ApplicationForm() {
-  const [loading, setLoading] = useState(false)
-  const [formLoadedAt] = useState(() => Date.now())
+interface GrantApplicationFormProps {
+  formToken: {
+    timestamp: number
+    signature: string
+  }
+  savedData: Record<string, any> | null
+  errorMessage: string | null
+}
+
+export default function GrantApplicationForm({
+  formToken,
+  savedData,
+  errorMessage,
+}: GrantApplicationFormProps) {
   const router = useRouter()
-  const {
-    watch,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{ [key: string]: unknown }>({
-    defaultValues: {
-      duration: '6 months',
-    },
-  })
+  const [loading, setLoading] = useState(false)
+  const [failureReason, setFailureReason] = useState<string | null>(
+    errorMessage
+  )
+  const [mainFocus, setMainFocus] = useState(savedData?.main_focus || '')
+  const [isFLOSS, setIsFLOSS] = useState(savedData?.free_open_source || false)
 
-  const isFLOSS = watch('free_open_source', false)
-  const [failureReason, setFailureReason] = useState<string>()
+  // Progressive enhancement: handle form submission with JS
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // Check if JS should enhance the form
+    const form = e.currentTarget
+    const formData = new FormData(form)
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
+    // Add JS indicator
+    formData.append('_jsEnabled', 'true')
+
+    e.preventDefault()
     setLoading(true)
-    const submissionData = { ...data, formLoadedAt }
+    setFailureReason(null)
 
     try {
-      // Track application in GitHub
-      const res = await fetchPostJSON('/api/github', submissionData)
-      if (res.message === 'success') {
-        console.info('Application tracked') // Succeed silently
+      const response = await fetch('/api/apply-grant', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(Object.fromEntries(formData)),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.message === 'success') {
+        router.push('/submitted')
       } else {
-        // Fail silently
-      }
-    } catch (e) {
-      if (e instanceof Error) {
-        // Fail silently
-      }
-    } finally {
-      // Mail application to us
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', submissionData)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
+        setFailureReason(
+          data.error || 'Something went wrong. Please try again.'
+        )
         setLoading(false)
       }
+    } catch (error) {
+      setFailureReason(
+        'Network error. Please check your connection and try again.'
+      )
+      setLoading(false)
     }
   }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      action="/api/apply-grant"
+      method="POST"
+      onSubmit={handleSubmit}
       className="apply flex max-w-2xl flex-col gap-4"
     >
-      <input type="hidden" {...register('general_fund', { value: true })} />
+      {/* Hidden fields for spam protection */}
+      <input type="hidden" name="general_fund" value="true" />
+      <input type="hidden" name="formTimestamp" value={formToken.timestamp} />
+      <input type="hidden" name="formSignature" value={formToken.signature} />
+
+      {/* Error message display */}
+      {failureReason && (
+        <div
+          className="rounded border-l-4 border-red-500 bg-red-100 p-4 text-red-900"
+          role="alert"
+        >
+          <p className="font-bold">Error</p>
+          <p>{failureReason}</p>
+        </div>
+      )}
 
       <hr />
       <h2>Project Details</h2>
@@ -78,7 +99,10 @@ export default function ApplicationForm() {
         <small>In which area will your project have the most impact?</small>
         <select
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('main_focus', { required: true })}
+          name="main_focus"
+          required
+          defaultValue={savedData?.main_focus || mainFocus}
+          onChange={(e) => setMainFocus(e.target.value)}
         >
           <option value="">(Choose One)</option>
           <option value="core">Bitcoin Core</option>
@@ -90,7 +114,8 @@ export default function ApplicationForm() {
           <option value="other">Other</option>
         </select>
       </label>
-      {watch('main_focus') === 'education' && (
+
+      {mainFocus === 'education' && (
         <div
           className="not-prose mt-2 rounded-b border-t-4 border-blue-500 bg-blue-100 px-4 py-3 text-blue-900 shadow-md"
           role="alert"
@@ -141,7 +166,6 @@ export default function ApplicationForm() {
               </ul>
               <hr className="mb-3 mt-6 border-blue-200" />
               <p className="mb-0 mt-2 text-xs">
-                {' '}
                 (¹) For example:{' '}
                 <a
                   className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
@@ -180,7 +204,6 @@ export default function ApplicationForm() {
                 </a>
               </p>
               <p className="mb-0 mt-1 text-xs">
-                {' '}
                 (²) No paywalls, no signups, no invite-only systems
               </p>
             </div>
@@ -193,8 +216,10 @@ export default function ApplicationForm() {
         <small>The name of the project. Abbreviations are fine too.</small>
         <input
           type="text"
+          name="project_name"
+          required
+          defaultValue={savedData?.project_name}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('project_name', { required: true })}
         />
       </label>
 
@@ -205,8 +230,10 @@ export default function ApplicationForm() {
           quickly.
         </small>
         <textarea
+          name="short_description"
+          required
+          defaultValue={savedData?.short_description}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('short_description', { required: true })}
         />
       </label>
 
@@ -217,8 +244,10 @@ export default function ApplicationForm() {
           open-source community?
         </small>
         <textarea
+          name="potential_impact"
+          required
+          defaultValue={savedData?.potential_impact}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('potential_impact', { required: true })}
         />
       </label>
 
@@ -230,9 +259,10 @@ export default function ApplicationForm() {
         </small>
         <input
           type="text"
+          name="website"
           placeholder="https://"
+          defaultValue={savedData?.website}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('website')}
         />
       </label>
 
@@ -243,16 +273,21 @@ export default function ApplicationForm() {
         Repository (GitHub or similar, if applicable)
         <input
           type="text"
+          name="github"
+          defaultValue={savedData?.github}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('github')}
         />
       </label>
 
       <label className="inline-flex items-center">
         <input
           type="checkbox"
+          name="free_open_source"
+          value="true"
+          required
+          defaultChecked={savedData?.free_open_source || false}
+          onChange={(e) => setIsFLOSS(e.target.checked)}
           className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source', { required: true })}
         />
         <span className="ml-2">Is the project free and open-source? *</span>
       </label>
@@ -261,8 +296,10 @@ export default function ApplicationForm() {
         Open-Source License *<br />
         <input
           type="text"
+          name="license"
+          required
+          defaultValue={savedData?.license}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('license', { required: true })}
         />
         <small>
           We only support projects that are free as in freedom and open to all.
@@ -283,8 +320,10 @@ export default function ApplicationForm() {
         <br />
         <small>Duration of grant you are applying for</small>
         <select
+          name="duration"
+          required
+          defaultValue={savedData?.duration || '6 months'}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('duration', { required: true })}
         >
           <option value="12 months">12 months</option>
           <option value="9 months">9 months</option>
@@ -303,8 +342,10 @@ export default function ApplicationForm() {
           doing.)
         </small>
         <textarea
+          name="timelines"
+          required
+          defaultValue={savedData?.timelines}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('timelines', { required: true })}
         />
       </label>
 
@@ -313,8 +354,10 @@ export default function ApplicationForm() {
         <br />
         <small>How much time are you going to commit to the project?</small>
         <select
+          name="commitment"
+          required
+          defaultValue={savedData?.commitment}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('commitment', { required: true })}
         >
           <option value="100%">100% - Full Time</option>
           <option value="75%">75% - Part Time</option>
@@ -335,16 +378,19 @@ export default function ApplicationForm() {
           Please include the grand total (in USD) to avoid any confusion.
         </small>
         <textarea
+          name="proposed_budget"
+          required
+          defaultValue={savedData?.proposed_budget}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('proposed_budget', { required: true })}
         />
       </label>
 
       <label className="inline-flex items-center">
         <input
           type="checkbox"
+          name="has_received_funding"
+          defaultChecked={savedData?.has_received_funding}
           className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('has_received_funding')}
         />
         <span className="ml-2">
           Has this project received any prior funding?
@@ -355,8 +401,9 @@ export default function ApplicationForm() {
         If so, please describe.
         <input
           type="text"
+          name="what_funding"
+          defaultValue={savedData?.what_funding}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('what_funding')}
         />
       </label>
 
@@ -368,65 +415,71 @@ export default function ApplicationForm() {
         <small>Feel free to use your nym.</small>
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          name="your_name"
+          required
           placeholder="John Doe"
-          {...register('your_name', { required: true })}
+          defaultValue={savedData?.your_name}
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
         />
       </label>
+
       <label className="block">
         Email *
         <input
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          name="email"
+          required
           placeholder="satoshin@gmx.com"
-          {...register('email', {
-            required: true,
-            validate: (v: string) =>
-              EmailValidator.validate(v) ||
-              'Please enter a valid email address',
-          })}
+          defaultValue={savedData?.email}
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
         />
-        <small className="text-red-500">
-          {errors?.email && errors.email.message.toString()}
-        </small>
       </label>
+
       <label className="inline-flex items-center">
         <input
           type="checkbox"
+          name="are_you_lead"
+          defaultChecked={savedData?.are_you_lead}
           className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('are_you_lead')}
         />
         <span className="ml-2">
           Are you the Project Lead / Lead Contributor?
         </span>
       </label>
+
       <label className="block">
         If someone else, please list the project's Lead Contributor or
-        Maintainer{' '}
+        Maintainer
         <input
           type="text"
+          name="other_lead"
+          defaultValue={savedData?.other_lead}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('other_lead')}
         />
       </label>
+
       <label className="block">
         Personal Github (or similar, if applicable)
         <input
           type="text"
+          name="personal_github"
+          defaultValue={savedData?.personal_github}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('personal_github')}
         />
       </label>
+
+      {/* Honeypot field - accessible but hidden */}
       <label className="offscreen-field block">
-        Organization Website
+        Leave this field blank (spam protection)
         <input
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('organization_website')}
+          name="organization_website"
           tabIndex={-1}
           autoComplete="off"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm"
         />
       </label>
+
       <label className="block">
         Other Contact Details (if applicable)
         <br />
@@ -436,12 +489,15 @@ export default function ApplicationForm() {
           include nostr pubkeys, social media handles, etc.
         </small>
         <textarea
+          name="other_contact"
+          defaultValue={savedData?.other_contact}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('other_contact')}
         />
       </label>
+
       <hr />
       <h2>References & Prior Contributions</h2>
+
       <label className="block">
         References *<br />
         <small>
@@ -450,10 +506,13 @@ export default function ApplicationForm() {
           project.
         </small>
         <textarea
+          name="references"
+          required
+          defaultValue={savedData?.references}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('references', { required: true })}
         />
       </label>
+
       <label className="block">
         Prior Contributions
         <br />
@@ -462,27 +521,34 @@ export default function ApplicationForm() {
           Bitcoin-related projects.
         </small>
         <textarea
+          name="bios"
+          defaultValue={savedData?.bios}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('bios')}
         />
       </label>
+
       <label className="block">
         Years of Developer Experience
         <input
           type="text"
+          name="years_experience"
+          defaultValue={savedData?.years_experience}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('years_experience')}
         />
       </label>
+
       <hr />
       <h2>Anything Else We Should Know?</h2>
+
       <label className="block">
         Feel free to share whatever else might be important.
         <textarea
+          name="anything_else"
+          defaultValue={savedData?.anything_else}
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('anything_else')}
         />
       </label>
+
       <div className="prose">
         <small>
           OpenSats requires each recipient to sign a Grant Agreement before any
@@ -498,17 +564,23 @@ export default function ApplicationForm() {
         </small>
       </div>
 
-      <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+      <button
         type="submit"
         disabled={loading}
+        className={`rounded-lg px-6 py-3 font-semibold transition-colors ${
+          loading
+            ? 'cursor-not-allowed bg-gray-300 text-gray-600'
+            : isFLOSS
+            ? 'bg-orange-500 text-white hover:bg-orange-600'
+            : 'bg-gray-300 text-gray-600 hover:bg-gray-400'
+        }`}
       >
-        Submit Grant Application
-      </FormButton>
+        {loading ? 'Submitting...' : 'Submit Grant Application'}
+      </button>
 
-      {!!failureReason && (
-        <p className="rounded bg-red-500 p-4 text-white">
-          Something went wrong! {failureReason}
+      {!isFLOSS && (
+        <p className="text-sm text-gray-600">
+          Please confirm that your project is free and open-source to submit.
         </p>
       )}
     </form>

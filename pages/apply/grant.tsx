@@ -1,13 +1,51 @@
-import dynamic from 'next/dynamic'
+import { GetServerSideProps } from 'next'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
+import GrantApplicationForm from '@/components/GrantApplicationForm'
+import { generateFormToken } from '@/utils/form-security'
+import { getFormDataFromCookie } from '@/utils/form-cookies'
 
-const GrantApplicationForm = dynamic(
-  () => import('@/components/GrantApplicationForm'),
-  { ssr: false }
-)
+interface ApplyPageProps {
+  formToken: {
+    timestamp: number
+    signature: string
+  }
+  savedData: Record<string, any> | null
+  errorMessage: string | null
+}
 
-export default function Apply() {
+export const getServerSideProps: GetServerSideProps<ApplyPageProps> = async (
+  context
+) => {
+  // Generate form token for spam protection
+  const formToken = generateFormToken()
+
+  // Check for saved form data from previous submission error
+  const savedData = getFormDataFromCookie(context.req.headers.cookie)
+
+  // Check for error message in query params
+  const errorMessage =
+    context.query.error === 'validation'
+      ? (context.query.message as string) ||
+        'Please fill in all required fields'
+      : context.query.error === 'server'
+      ? 'Server error. Please try again.'
+      : null
+
+  return {
+    props: {
+      formToken,
+      savedData: savedData || null,
+      errorMessage: errorMessage || null,
+    },
+  }
+}
+
+export default function Apply({
+  formToken,
+  savedData,
+  errorMessage,
+}: ApplyPageProps) {
   return (
     <>
       <PageSection title="Apply for a Grant" image="/static/images/avatar.png">
@@ -31,7 +69,11 @@ export default function Apply() {
           <CustomLink href="/faq/application">Application FAQ</CustomLink>{' '}
           before sending in an application.
         </p>
-        <GrantApplicationForm />
+        <GrantApplicationForm
+          formToken={formToken}
+          savedData={savedData}
+          errorMessage={errorMessage}
+        />
       </PageSection>
     </>
   )

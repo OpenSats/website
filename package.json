@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "start": "next dev",
-    "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "npx contentlayer build && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
+    "dev": "npm run build:css && cross-env INIT_CWD=$PWD next dev",
+    "build": "npm run build:css && npx contentlayer build && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
-    "test": "jest"
+    "test": "jest",
+    "build:css": "tailwindcss -i ./css/tailwind.css -o ./public/css/static-styles.css --minify"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -28,6 +29,7 @@
     "autoprefixer": "^10.4.13",
     "babel-plugin-macros": "^3.1.0",
     "contentlayer": "^0.3.4",
+    "cookie": "^0.6.0",
     "email-validator": "^2.0.4",
     "esbuild": "0.17.5",
     "github-slugger": "^1.4.0",
