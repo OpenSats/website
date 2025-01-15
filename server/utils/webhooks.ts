@@ -18,6 +18,7 @@ import { POINTS_PER_USD } from '../../config'
 import { env } from '../../env.mjs'
 import { getDonationAttestation, getMembershipAttestation } from './attestation'
 import { funds } from '../../utils/funds'
+import { addUserToPgMembersGroup } from '../../utils/pg-forum-connection'
 
 export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -60,19 +61,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
-        const accountConnection = await prisma.accountConnection.findFirst({
-          where: { type: 'privacyGuidesForum', userId: metadata.userId },
-        })
-
-        if (
-          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
-          accountConnection?.externalId
-        ) {
-          await privacyGuidesDiscourseApi.put(
-            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-            { usernames: accountConnection.externalId }
-          )
-        }
+        await addUserToPgMembersGroup(metadata.userId)
       }
 
       const donation = await prisma.donation.create({
@@ -187,19 +176,7 @@ export function getStripeWebhookHandler(fundSlug: FundSlug, secret: string) {
 
       // Add PG forum user to membership group
       if (metadata.isMembership && metadata.fundSlug === 'privacyguides' && metadata.userId) {
-        const accountConnection = await prisma.accountConnection.findFirst({
-          where: { type: 'privacyGuidesForum', userId: metadata.userId },
-        })
-
-        if (
-          !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
-          accountConnection?.externalId
-        ) {
-          await privacyGuidesDiscourseApi.put(
-            `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-            { usernames: accountConnection.externalId }
-          )
-        }
+        await addUserToPgMembersGroup(metadata.userId)
       }
 
       const donation = await prisma.donation.create({
