@@ -15,11 +15,7 @@ export default function Apply() {
   const { toast } = useToast()
   const applyMutation = trpc.application.submitApplication.useMutation()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
+  const { register, handleSubmit } = useForm()
 
   async function onSubmit(data: Record<string, string>) {
     if (!fundSlug) return
@@ -72,11 +68,11 @@ export default function Apply() {
           </div>
           <h2 id="Eligibility">Eligibility</h2>
           <p>
-            All developers and researchers are eligible to apply, regardless of educational attainment or
-            occupation. However, as a nonprofit organization registered under U.S. tax laws, MAGIC
-            Grants is required to comply with certain laws when disbursing funds to grant
-            recipients. Grant recipients must complete a Due Diligence checklist, which are the last
-            two pages of{' '}
+            All developers and researchers are eligible to apply, regardless of educational
+            attainment or occupation. However, as a nonprofit organization registered under U.S. tax
+            laws, MAGIC Grants is required to comply with certain laws when disbursing funds to
+            grant recipients. Grant recipients must complete a Due Diligence checklist, which are
+            the last two pages of{' '}
             <a href="https://magicgrants.org/funds/MAGIC%20Fund%20Grant%20Disbursement%20Process%20and%20Requirements.pdf">
               this document
             </a>
@@ -283,8 +279,8 @@ export default function Apply() {
         <p>
           After submitting your application, please allow our team up to three weeks to review your
           application. Email us at{' '}
-          <a href={`mailto:${fundSlugToRecipientEmail[fundSlug]}`}>
-            {fundSlugToRecipientEmail[fundSlug]}
+          <a href={`mailto:${fundSlugToRecipientEmail[fundSlug!]}`}>
+            {fundSlugToRecipientEmail[fundSlug!]}
           </a>{' '}
           if you have any questions.
         </p>
