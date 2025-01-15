@@ -7,10 +7,9 @@ import PerkList from '../../components/PerkList'
 function Perks() {
   const fundSlug = useFundSlug()
 
-  // Conditionally render hooks should be ok in this case
-  if (!fundSlug) return <></>
+  const getFundPerksQuery = trpc.perk.getFundPerks.useQuery({ fundSlug: fundSlug! })
 
-  const getFundPerksQuery = trpc.perk.getFundPerks.useQuery({ fundSlug: fundSlug })
+  if (!fundSlug) return <></>
 
   return (
     <>

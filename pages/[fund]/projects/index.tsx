@@ -8,29 +8,20 @@ import { useFundSlug } from '../../../utils/use-fund-slug'
 import { funds, fundSlugs } from '../../../utils/funds'
 
 const AllProjects: NextPage<{ projects: ProjectItem[] }> = ({ projects }) => {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [selectedProject, setSelectedProject] = useState<ProjectItem>()
   const [sortedProjects, setSortedProjects] = useState<ProjectItem[]>()
   const fundSlug = useFundSlug()
 
   useEffect(() => {
     setSortedProjects(projects.sort(() => 0.5 - Math.random()))
   }, [projects])
-
-  function closeModal() {
-    setModalOpen(false)
-  }
-
-  function openPaymentModal(project: ProjectItem) {
-    setSelectedProject(project)
-    setModalOpen(true)
-  }
-
   if (!fundSlug) return <></>
 
   return (
     <>
-      <Head>{fundSlug && <title>{funds[fundSlug].title} | Projects</title>}</Head>
+      <Head>
+        <title>{funds[fundSlug].title} - Projects</title>
+      </Head>
+
       <section className="flex flex-col items-center">
         <div className="flex justify-between items-center pb-8 w-full">
           <h1 className="py-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">

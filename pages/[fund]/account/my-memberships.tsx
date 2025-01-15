@@ -27,10 +27,11 @@ function MyMemberships() {
   const [attestationModalIsOpen, setAttestationModalIsOpen] = useState(false)
   const [attestation, setAttestation] = useState<{ message: string; signature: string } | null>()
 
-  // Conditionally render hooks should be ok in this case
-  if (!fundSlug) return <></>
+  const membershipListQuery = trpc.donation.membershipList.useQuery(
+    { fundSlug: fundSlug! },
+    { enabled: !!fundSlug }
+  )
 
-  const membershipListQuery = trpc.donation.membershipList.useQuery({ fundSlug })
   const getMembershipAttestationMutation = trpc.donation.getMembershipAttestation.useMutation()
 
   async function getAttestation(donationId?: string, subscriptionId?: string) {
@@ -41,6 +42,8 @@ function MyMemberships() {
     setAttestation(_attestation)
     setAttestationModalIsOpen(true)
   }
+
+  if (!fundSlug) return <></>
 
   return (
     <>

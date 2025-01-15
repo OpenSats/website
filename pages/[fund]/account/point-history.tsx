@@ -19,15 +19,14 @@ dayjs.extend(localizedFormat)
 function PointHistory() {
   const fundSlug = useFundSlug()
 
-  // Conditionally render hooks should be ok in this case
-  if (!fundSlug) return <></>
-
   const getHistoryQuery = trpc.perk.getHistory.useQuery()
+
+  if (!fundSlug) return <></>
 
   return (
     <>
       <Head>
-        <title>{funds[fundSlug].title} - Point History</title>
+        <title>{funds[fundSlug!].title} - Point History</title>
       </Head>
 
       <div className="w-full max-w-5xl mx-auto flex flex-col">

@@ -3,13 +3,7 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import Head from 'next/head'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogFooter,
-  DialogHeader,
-} from '../../../components/ui/dialog'
+import { Dialog } from '../../../components/ui/dialog'
 import {
   Table,
   TableBody,
@@ -31,11 +25,11 @@ function MyDonations() {
   const fundSlug = useFundSlug()
   const [attestationModalIsOpen, setAttestationModalIsOpen] = useState(false)
   const [attestation, setAttestation] = useState<{ message: string; signature: string } | null>()
+  const donationListQuery = trpc.donation.donationList.useQuery(
+    { fundSlug: fundSlug! },
+    { enabled: !!fundSlug }
+  )
 
-  // Conditionally render hooks should be ok in this case
-  if (!fundSlug) return <></>
-
-  const donationListQuery = trpc.donation.donationList.useQuery({ fundSlug })
   const getDonationAttestationMutation = trpc.donation.getDonationAttestation.useMutation()
 
   async function getAttestation(donationId: string) {
@@ -43,6 +37,8 @@ function MyDonations() {
     setAttestation(_attestation)
     setAttestationModalIsOpen(true)
   }
+
+  if (!fundSlug) return <></>
 
   return (
     <>
