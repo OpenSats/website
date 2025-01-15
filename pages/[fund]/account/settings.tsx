@@ -642,7 +642,9 @@ function Settings() {
                 )}
 
                 {!!getUserAttributesQuery.data?.privacyGuidesDiscourseUsername && (
-                  <span className="text-sm text-muted-foreground">keeqler</span>
+                  <span className="text-sm text-muted-foreground">
+                    {getUserAttributesQuery.data?.privacyGuidesDiscourseUsername}
+                  </span>
                 )}
               </div>
 
