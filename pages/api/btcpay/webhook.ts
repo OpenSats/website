@@ -22,6 +22,7 @@ import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
 import { POINTS_PER_USD } from '../../../config'
 import { getDonationAttestation, getMembershipAttestation } from '../../../server/utils/attestation'
 import { funds } from '../../../utils/funds'
+import { addUserToPgMembersGroup } from '../../../utils/pg-forum-connection'
 
 export const config = {
   api: {
@@ -147,19 +148,7 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
           body.metadata.fundSlug === 'privacyguides' &&
           body.metadata.userId
         ) {
-          const accountConnection = await prisma.accountConnection.findFirst({
-            where: { type: 'privacyGuidesForum', userId: body.metadata.userId },
-          })
-
-          if (
-            !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
-            accountConnection?.externalId
-          ) {
-            await privacyGuidesDiscourseApi.put(
-              `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
-              { usernames: accountConnection.externalId }
-            )
-          }
+          await addUserToPgMembersGroup(body.metadata.userId)
         }
 
         const donation = await prisma.donation.create({
