@@ -39,8 +39,7 @@ export type BtcPayGetRatesRes = [
 export type BtcPayGetPaymentMethodsRes = {
   rate: string
   amount: string
-  cryptoCode: string
-  paymentMethod: string
+  currency: 'BTC' | 'XMR'
   paymentMethodPaid: string
   destination: string
 }[]

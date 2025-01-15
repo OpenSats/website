@@ -143,11 +143,11 @@ async function handle(
           )
 
           paymentMethods.forEach((paymentMethod) => {
-            if (paymentMethod.paymentMethod === 'BTC-CHAIN') {
+            if (paymentMethod.currency === 'BTC') {
               bitcoinAddress = paymentMethod.destination
             }
 
-            if (paymentMethod.paymentMethod === 'XMR-CHAIN') {
+            if (paymentMethod.currency === 'XMR') {
               moneroAddress = paymentMethod.destination
             }
           })
