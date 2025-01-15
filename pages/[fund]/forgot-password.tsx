@@ -21,6 +21,7 @@ import { trpc } from '../../utils/trpc'
 import Spinner from '../../components/Spinner'
 import { env } from '../../env.mjs'
 import { authOptions } from '../api/auth/[...nextauth]'
+import { useFundSlug } from '../../utils/use-fund-slug'
 
 const schema = z.object({
   turnstileToken: z.string().min(1),
@@ -31,6 +32,7 @@ type PasswordResetFormInputs = z.infer<typeof schema>
 
 function ForgotPassword() {
   const { toast } = useToast()
+  const fundSlug = useFundSlug()
   const turnstileRef = useRef<TurnstileInstance | null>()
 
   const form = useForm<PasswordResetFormInputs>({ resolver: zodResolver(schema) })
@@ -38,8 +40,10 @@ function ForgotPassword() {
   const requestPasswordResetMutation = trpc.auth.requestPasswordReset.useMutation()
 
   async function onSubmit(data: PasswordResetFormInputs) {
+    if (!fundSlug) return
+
     try {
-      await requestPasswordResetMutation.mutateAsync(data)
+      await requestPasswordResetMutation.mutateAsync({ ...data, fundSlug })
 
       toast({ title: 'Success', description: 'A password reset link has been sent to your email.' })
       form.reset({ email: '' })

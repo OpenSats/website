@@ -209,7 +209,13 @@ export const authRouter = router({
     }),
 
   requestPasswordReset: publicProcedure
-    .input(z.object({ turnstileToken: z.string().min(1), email: z.string().email() }))
+    .input(
+      z.object({
+        turnstileToken: z.string().min(1),
+        email: z.string().email(),
+        fundSlug: z.enum(fundSlugs),
+      })
+    )
     .mutation(async ({ input }) => {
       if (!(await isTurnstileValid(input.turnstileToken))) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'INVALID_TURNSTILE_TOKEN' })
@@ -257,7 +263,7 @@ export const authRouter = router({
         from: env.SES_VERIFIED_SENDER,
         to: input.email,
         subject: 'Reset your password',
-        html: `<a href="${env.APP_URL}/reset-password/${passwordResetToken}" target="_blank">Reset password</a>`,
+        html: `<a href="${env.APP_URL}/${input.fundSlug}/reset-password/${passwordResetToken}" target="_blank">Reset password</a>`,
       })
     }),
 
