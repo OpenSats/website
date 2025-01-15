@@ -9,8 +9,8 @@ export const fundSlugToCustomerIdAttr: Record<FundSlug, string> = {
 }
 
 export const fundSlugToRecipientEmail: Record<FundSlug, string> = {
-  monero: env.MONERO_APPLICATION_RECIPIENT,
-  firo: env.MONERO_APPLICATION_RECIPIENT,
-  privacyguides: env.MONERO_APPLICATION_RECIPIENT,
-  general: env.MONERO_APPLICATION_RECIPIENT,
+  monero: env.NEXT_PUBLIC_MONERO_APPLICATION_RECIPIENT,
+  firo: env.NEXT_PUBLIC_FIRO_APPLICATION_RECIPIENT,
+  privacyguides: env.NEXT_PUBLIC_PRIVACY_GUIDES_APPLICATION_RECIPIENT,
+  general: env.NEXT_PUBLIC_GENERAL_APPLICATION_RECIPIENT,
 }
