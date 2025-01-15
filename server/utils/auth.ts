@@ -38,7 +38,6 @@ export async function refreshToken(token: JWT): Promise<JWT> {
       refreshToken: newToken.refresh_token,
     }
   } catch (error) {
-    console.log('not refreshing access token, error', error)
     return { ...token, error: 'RefreshAccessTokenError' }
   }
 }
