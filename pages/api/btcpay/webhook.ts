@@ -9,7 +9,13 @@ import {
   DonationMetadata,
   StrapiCreatePointBody,
 } from '../../../server/types'
-import { btcpayApi as _btcpayApi, btcpayApi, prisma, strapiApi } from '../../../server/services'
+import {
+  btcpayApi as _btcpayApi,
+  btcpayApi,
+  prisma,
+  privacyGuidesDiscourseApi,
+  strapiApi,
+} from '../../../server/services'
 import { env } from '../../../env.mjs'
 import { getUserPointBalance } from '../../../server/utils/perks'
 import { sendDonationConfirmationEmail } from '../../../server/utils/mailing'
@@ -134,6 +140,27 @@ async function handleBtcpayWebhook(req: NextApiRequest, res: NextApiResponse) {
         if (!grossCryptoAmount) return
 
         const pointsAdded = shouldGivePointsBack ? Math.floor(grossFiatAmount / POINTS_PER_USD) : 0
+
+        // Add PG forum user to membership group
+        if (
+          body.metadata.isMembership &&
+          body.metadata.fundSlug === 'privacyguides' &&
+          body.metadata.userId
+        ) {
+          const accountConnection = await prisma.accountConnection.findFirst({
+            where: { type: 'privacyGuidesForum', userId: body.metadata.userId },
+          })
+
+          if (
+            !accountConnection?.privacyGuidesAccountIsInMemberGroup &&
+            accountConnection?.externalId
+          ) {
+            await privacyGuidesDiscourseApi.put(
+              `/groups/${env.PRIVACYGUIDES_DISCOURSE_MEMBERSHIP_GROUP_ID}/members.json`,
+              { usernames: accountConnection.externalId }
+            )
+          }
+        }
 
         const donation = await prisma.donation.create({
           data: {

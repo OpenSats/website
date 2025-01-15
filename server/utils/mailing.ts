@@ -69,15 +69,15 @@ export async function sendDonationConfirmationEmail({
   ${donorName}
 
   MAGIC Grants acknowledges and expresses appreciation for the following contribution:
-  - [${stripeUsdAmount ? 'x' : ' '}] Cash or bank transfer donation amount: ${stripeUsdAmount ? stripeUsdAmount.toFixed(2) : 'N/A'}
-  - [${btcpayCryptoAmount ? 'x' : ' '}] In-kind (non-fiat) donation description: ${btcpayCryptoAmount && btcpayAsset ? `${btcpayCryptoAmount} ${btcpayAsset}` : '-'}
+  - [${stripeUsdAmount ? '☑️' : '⬜'}] Cash or bank transfer donation amount: ${stripeUsdAmount ? stripeUsdAmount.toFixed(2) : 'N/A'}
+  - [${btcpayCryptoAmount ? '☑️' : '⬜'}] In-kind (non-fiat) donation description: ${btcpayCryptoAmount && btcpayAsset ? `${btcpayCryptoAmount} ${btcpayAsset}` : '-'}
 
   Description and/or restrictions: ${fundSlug === 'general' ? 'None' : `Donation to the ${fundName}`}
 
   The following describes the context of your donation:
 
-  - [${!pointsReceived ? 'x' : ' '}] No goods or services were received in exchange for your generous donation.
-  - [${pointsReceived ? 'x' : ' '}] In connection with your generous donation, you received ${pointsFormat.format(pointsReceived)} points, valued at approximately $${(pointsReceived * POINTS_REDEEM_PRICE_USD).toFixed(2)}.
+  - [${!pointsReceived ? '☑️' : '⬜'}] No goods or services were received in exchange for your generous donation.
+  - [${pointsReceived ? '☑️' : '⬜'}] In connection with your generous donation, you received ${pointsFormat.format(pointsReceived)} points, valued at approximately $${(pointsReceived * POINTS_REDEEM_PRICE_USD).toFixed(2)}.
 
   ${btcpayCryptoAmount ? 'If you wish to receive a tax deduction for a cryptocurrency donation over $500, you MUST complete [Form 8283](https://www.irs.gov/pub/irs-pdf/f8283.pdf) and send the completed form to [info@magicgrants.org](mailto:info@magicgrants.org) to qualify for a deduction.' : ''}
 

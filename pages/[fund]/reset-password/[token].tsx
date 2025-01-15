@@ -95,17 +95,11 @@ function ResetPassword() {
   }, [router.query.token])
 
   return (
-    <div className="w-full max-w-md m-auto">
+    <div className="w-full max-w-xl m-auto p-6 flex flex-col space-y-4 bg-white rounded-lg">
+      <h1 className="font-bold">Password reset</h1>
+
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-          <div className="flex flex-col space-y-1.5 text-center sm:text-left">
-            <span className="text-lg font-semibold leading-none tracking-tight">
-              Password Reset
-            </span>
-
-            <span className="text-sm text-muted-foreground">Reset your password</span>
-          </div>
-
           <FormField
             control={form.control}
             name="email"

@@ -16,8 +16,6 @@ if (!globalForWorker.hasInitializedWorkers)
 
       const userIds = pgAccountConnections.map((connection) => connection.userId)
 
-      console.log('querying...')
-
       const usersActiveMembershipDonations = await prisma.donation.groupBy({
         by: ['userId'],
         where: {
