@@ -21,6 +21,8 @@ const t = initTRPC.context<typeof createContext>().create({
   transformer: superjson,
   errorFormatter: ({ error, shape }) => {
     if (error.code === 'INTERNAL_SERVER_ERROR') {
+      console.error(error)
+
       return {
         message: 'Internal server error',
         code: shape.code,
