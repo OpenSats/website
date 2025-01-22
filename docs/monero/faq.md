@@ -50,9 +50,9 @@
 
 ## How can I submit a project for fundraising?
 
-- Any project that is free and open source and is aligned with the Monero Fund mission are free to [submit an application](/apply) for their project to be listed on the [Monero Fund](/projects) project page.
+- Any project that is free and open source and is aligned with the Monero Fund mission are free to [submit an application](/monero/apply) for their project to be listed on the [Monero Fund](/monero/projects) project page.
 - All applications which fulfill the criteria will be evaluated by the Monero Fund Committee. Upon approval, projects will be listed on the MoneroFund project portal. Donors will be able to contribute funds directly to the these pre-approved, mission-aligned projects.
-- If you are helping Monero and Free and Open Source Software (FOSS), please [submit an application](/apply) to be listed on our site.
+- If you are helping Monero and Free and Open Source Software (FOSS), please [submit an application](/monero/apply) to be listed on our site.
 
 
 ## Are my donations tax deductible?
