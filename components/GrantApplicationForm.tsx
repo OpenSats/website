@@ -161,8 +161,8 @@ export default function ApplicationForm() {
         />
         <small>
           We focus on supporting projects that are free as in freedom and open
-          to all. Your project should have a proper open-source license &
-          educational materials should be available to the public under a{' '}
+          to all. Your project must have a proper open-source license &
+          educational materials must be available to the public under a{' '}
           <CustomLink href="https://www.gnu.org/licenses/license-list.html">
             free and open license
           </CustomLink>
