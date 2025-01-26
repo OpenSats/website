@@ -147,9 +147,9 @@ export default function ApplicationForm() {
         <input
           type="checkbox"
           className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source')}
+          {...register('free_open_source', { required: true })}
         />
-        <span className="ml-2">Is the project free and open-source?</span>
+        <span className="ml-2">Is the project free and open-source? *</span>
       </label>
 
       <label className="block">
@@ -160,9 +160,9 @@ export default function ApplicationForm() {
           {...register('license', { required: true })}
         />
         <small>
-          We focus on supporting projects that are free as in freedom and open
-          to all. Your project should have a proper open-source license &
-          educational materials should be available to the public under a{' '}
+          We only support projects that are free as in freedom and open to all.
+          Your project must have a proper open-source license & educational
+          materials must be available to the public under a{' '}
           <CustomLink href="https://www.gnu.org/licenses/license-list.html">
             free and open license
           </CustomLink>
