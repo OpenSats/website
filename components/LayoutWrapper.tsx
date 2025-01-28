@@ -1,4 +1,4 @@
-import { Inter } from '@next/font/google'
+import { Open_Sans } from '@next/font/google'
 import SectionContainer from './SectionContainer'
 import Footer from './Footer'
 import { ReactNode } from 'react'
@@ -8,15 +8,18 @@ interface Props {
   children: ReactNode
 }
 
-const inter = Inter({
+const openSans = Open_Sans({
   subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-open-sans',
+  fallback: ['system-ui', 'sans-serif'],
 })
 
 const LayoutWrapper = ({ children }: Props) => {
   return (
     <SectionContainer>
       <div
-        className={`${inter.className} flex h-screen flex-col justify-between font-sans`}
+        className={`${openSans.className} flex h-screen flex-col justify-between font-sans`}
       >
         <Header />
         <main className="mb-auto">{children}</main>
