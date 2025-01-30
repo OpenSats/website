@@ -23,7 +23,6 @@ export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   return <Layout content={content} {...rest} />
 }
 
-
 export const MDXComponents: ComponentMap = {
   Image,
   VideoPlayer,
