@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Project } from 'contentlayer/generated'
 import { useState, useEffect } from 'react'
 
 export type ProjectCardProps = {
