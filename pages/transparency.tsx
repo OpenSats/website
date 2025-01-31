@@ -14,10 +14,12 @@ export default function Transparency({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <MDXLayoutRenderer
-      layout={page.layout || DEFAULT_LAYOUT}
-      content={page}
-      MDXComponents={MDXComponents}
-    />
+    <>
+      <MDXLayoutRenderer
+        layout={page.layout || DEFAULT_LAYOUT}
+        content={page}
+        MDXComponents={MDXComponents}
+      />
+    </>
   )
 }
