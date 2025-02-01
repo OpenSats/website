@@ -8,8 +8,8 @@ This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://gith
 
 To run a development environment locally, run:
 
-  - `yarn` to install dependencies
-  - `yarn dev` to run the local development version
+  - `npm install` to install dependencies
+  - `npm run dev` to run the local development version
 
 Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
 
