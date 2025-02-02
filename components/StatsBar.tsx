@@ -4,6 +4,19 @@ import { GoogleSpreadsheet } from 'google-spreadsheet'
 const GOOGLE_DOC_ID = process.env.NEXT_PUBLIC_GOOGLE_DOC_ID
 const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 
+function formatNumber(num: number): string {
+  const abbreviations = ['k', 'M', 'B', 'T']
+  let i = 0
+  while (num > 1e3 && i < abbreviations.length) {
+    num /= 1e3
+    if (num < 1e3) {
+      return `${num.toFixed(1)} ${abbreviations[i]}`
+    }
+    i += 1
+  }
+  return num.toString()
+}
+
 export default function StatsBar() {
   const [statistics, setStatistics] = useState([null, null, null])
   useEffect(() => {
@@ -17,22 +30,16 @@ export default function StatsBar() {
         await sheet.loadCells('A1:D20')
         const stats = [null, null, null]
         const b1 = sheet.getCell(0, 1).value
-        if (typeof b1 == 'number') {
-          if (Number(b1) > 0) {
-            stats[0] = new Intl.NumberFormat().format(b1)
-          }
+        if (typeof b1 == 'number' && Number(b1) > 0) {
+          stats[0] = formatNumber(b1)
         }
         const b2 = sheet.getCell(1, 1).value
-        if (typeof b2 == 'number') {
-          if (Number(b2) > 0) {
-            stats[1] = '$' + new Intl.NumberFormat().format(Math.round(b2))
-          }
+        if (typeof b2 == 'number' && Number(b2) > 0) {
+          stats[1] = `$${formatNumber(b2)}`
         }
         const b3 = sheet.getCell(2, 1).value
-        if (typeof b3 == 'number') {
-          if (Number(b3) > 0) {
-            stats[2] = new Intl.NumberFormat().format(b3)
-          }
+        if (typeof b3 == 'number' && Number(b3) > 0) {
+          stats[2] = formatNumber(b3)
         }
         setStatistics(stats)
       } catch (e) {
