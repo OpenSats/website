@@ -70,7 +70,6 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 
 export default function ListLayout({
   posts,
-  title,
   initialDisplayPosts = [],
   pagination,
 }: ListLayoutProps) {

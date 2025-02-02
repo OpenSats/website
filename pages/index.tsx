@@ -68,7 +68,7 @@ export default function Home({
         openPaymentModal(opsFund)
       }
     }
-  }, [router.isReady])
+  }, [opsFund, router.isReady, router.query])
   return (
     <>
       <PageSEO

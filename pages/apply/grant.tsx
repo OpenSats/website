@@ -1,6 +1,5 @@
 import GrantApplicationForm from '@/components/GrantApplicationForm'
 import PageSection from '@/components/PageSection'
-import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
 
 export default function Apply() {

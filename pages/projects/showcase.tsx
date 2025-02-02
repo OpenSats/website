@@ -56,7 +56,7 @@ const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
 
 export default ProjectShowcase
 
-export async function getStaticProps({ params }: { params: any }) {
+export async function getStaticProps() {
   const projects = allProjects
 
   return {

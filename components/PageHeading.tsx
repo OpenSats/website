@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import Image from '@/components/Image'
 
 interface Props {
   children: ReactNode

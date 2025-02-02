@@ -81,7 +81,7 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
 
 export default AllProjects
 
-export async function getStaticProps({ params }: { params: any }) {
+export async function getStaticProps() {
   const projects = allProjects
   const funds = allFunds
 
