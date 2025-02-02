@@ -12,7 +12,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/master/data/${path}`
-const discussUrl = (path) =>
+const discussUrl = () =>
   `https://habla.news/p/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f`
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
@@ -119,7 +119,7 @@ export default function PostLayout({
                 {children}
               </div>
               <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(path)} rel="nofollow">
+                <Link href={discussUrl()} rel="nofollow">
                   Discuss on nostr
                 </Link>
                 {` • `}
