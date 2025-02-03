@@ -19,7 +19,7 @@ Reach out the the MAGIC Fund that you would like to apply for a grant from. If y
 
 ## How can I contribute to MAGIC Grants?
 
-Your donation is much appreciated! You can contribute a MAGIC Fund or MAGIC Grants at [donate.maigcgrants.org](https://donatemagicgrants.org).
+Your donation is much appreciated! You can contribute a MAGIC Fund or MAGIC Grants at [donate.magicgrants.org](https://donate.magicgrants.org).
 
 ## How can I propose a new MAGIC Fund?
 

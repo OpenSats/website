@@ -271,7 +271,9 @@ export default function Apply() {
           The MAGIC Monero Fund may require each recipient to sign a Grant Agreement before any
           funds are disbursed. This agreement will set milestones and funds will only be released
           upon completion of milestones. In order to comply with US regulations, recipients will
-          need to identify themselves to MAGIC Grants, in accordance with US law.
+          need to identify themselves to MAGIC Grants, in accordance with US law. The approval
+          of your grant by the MAGIC Monero Fund does not entitle the applicant to a payout;
+          payouts may require MAGIC Grants board approval and a signed agreement.
         </small>
 
         <Button disabled={applyMutation.isPending}>Apply</Button>
