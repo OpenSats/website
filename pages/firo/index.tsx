@@ -31,7 +31,7 @@ const Home: NextPage<{ projects: any }> = ({ projects }) => {
     <>
       <Head>
         <title>{fund.title}</title>
-        <meta name="description" content="TKTK" />
+        <meta name="description" content="Donate to the MAGIC Firo Fund" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
