@@ -184,7 +184,9 @@ export default function ApplicationForm() {
         >
           <option value="12 months">12 months</option>
           <option value="9 months">9 months</option>
-          <option value="6 months">6 months</option>
+          <option value="6 months" selected>
+            6 months
+          </option>
           <option value="3 months">3 months</option>
           <option value="Other">Other (please elaborate below)</option>
         </select>
