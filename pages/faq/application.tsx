@@ -6,7 +6,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'faq-applicant')
+  const page = allPages.find((p) => p.slug === 'faq-application')
   return { props: { page: page } }
 }
 
