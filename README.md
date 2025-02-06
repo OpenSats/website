@@ -21,8 +21,14 @@ Please [contact us](https://opensats.org/contact) if you have any questions.
 
 Thank you for [supporting OpenSats](https://opensats.org/donate)!
 
+## Contributors
+
+<a align="center" href="https://github.com/OpenSats/website/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=OpenSats/website" />
+</a>
+
 ---
 
-We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31)!
+We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31) too!
 
 [![opensats.org](https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22))](https://opensats.org) 
