@@ -18,6 +18,10 @@ input[type='checkbox'] {
   @apply mr-2;
 }
 
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
 .video-container {
   position: relative;
   width: 100%;
