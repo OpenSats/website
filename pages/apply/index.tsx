@@ -46,7 +46,9 @@ export default function Apply({
           Applications should be well written, informative, and concise. A great
           application will fit comfortably on one page while containing all
           information that is required to assess and judge the project or
-          applicant.
+          applicant. Refer to our{' '}
+          <CustomLink href="/faq/application">Application FAQ</CustomLink> to
+          find answers to common questions.
         </p>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
