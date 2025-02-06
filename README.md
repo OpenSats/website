@@ -27,6 +27,8 @@ Thank you for [supporting OpenSats](https://opensats.org/donate)!
   <img src="https://contrib.rocks/image?repo=OpenSats/website" />
 </a>
 
+Want to lend a helping hand? [Join our group of volunteers!](https://opensats.org/about#volunteers)
+
 ---
 
 We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31) too!
