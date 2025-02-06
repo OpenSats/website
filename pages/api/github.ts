@@ -32,6 +32,9 @@ ${req.body.potential_impact}
 
 ### Timeline & Milestones
 
+${req.body.duration ? `Grant duration: ${req.body.duration}` : ''}
+${req.body.commitment ? `Time commitment: ${req.body.commitment}` : ''}
+
 ${req.body.timelines}
 
 ### Proposed Budget

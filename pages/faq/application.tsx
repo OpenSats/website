@@ -6,20 +6,18 @@ import { MDXComponents } from '@/components/MDXComponents'
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'nostr')
-  return { props: { page } }
+  const page = allPages.find((p) => p.slug === 'faq-application')
+  return { props: { page: page } }
 }
 
-export default function Nostr({
+export default function ApplicationFAQ({
   page,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <>
-      <MDXLayoutRenderer
-        layout={page.layout || DEFAULT_LAYOUT}
-        content={page}
-        MDXComponents={MDXComponents}
-      />
-    </>
+    <MDXLayoutRenderer
+      layout={page.layout || DEFAULT_LAYOUT}
+      content={page}
+      MDXComponents={MDXComponents}
+    />
   )
 }

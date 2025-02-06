@@ -19,6 +19,7 @@ export default function ApplicationForm() {
   const isFLOSS = watch('free_open_source', false)
   const [failureReason, setFailureReason] = useState<string>()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setLoading(true)
     console.log(data)
@@ -118,7 +119,81 @@ export default function ApplicationForm() {
       </label>
 
       <label className="block">
-        Project Timelines and Potential Milestones *<br />
+        Project Website
+        <br />
+        <small>
+          If you have a website or a project page, please provide the URL.
+        </small>
+        <input
+          type="text"
+          placeholder="https://"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('website')}
+        />
+      </label>
+
+      <hr />
+      <h2>Source Code</h2>
+
+      <label className="block">
+        Repository (GitHub or similar, if applicable)
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('github')}
+        />
+      </label>
+
+      <label className="inline-flex items-center">
+        <input
+          type="checkbox"
+          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('free_open_source', { required: true })}
+        />
+        <span className="ml-2">Is the project free and open-source? *</span>
+      </label>
+
+      <label className="block">
+        Open-Source License *<br />
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('license', { required: true })}
+        />
+        <small>
+          We only support projects that are free as in freedom and open to all.
+          Your project must have a proper open-source license & educational
+          materials must be available to the public under a{' '}
+          <CustomLink href="https://www.gnu.org/licenses/license-list.html">
+            free and open license
+          </CustomLink>
+          .
+        </small>
+      </label>
+
+      <hr />
+      <h2>Project Timeline</h2>
+
+      <label className="block">
+        Duration
+        <br />
+        <small>Duration of grant you are applying for</small>
+        <select
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('duration', { required: true })}
+        >
+          <option value="12 months">12 months</option>
+          <option value="9 months">9 months</option>
+          <option value="6 months" selected>
+            6 months
+          </option>
+          <option value="3 months">3 months</option>
+          <option value="Other">Other (please elaborate below)</option>
+        </select>
+      </label>
+
+      <label className="block">
+        Project Timeline and Potential Milestones *<br />
         <small>
           This will help us evaluate overall scope and potential grant duration.
           (It's ok to pivot and/or work on something else, just let us know. For
@@ -132,51 +207,20 @@ export default function ApplicationForm() {
       </label>
 
       <label className="block">
-        Project Website (if applicable)
-        <input
-          type="text"
+        Time Commitment
+        <br />
+        <small>How much time are you going to commit to the project?</small>
+        <select
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('website')}
-        />
+          {...register('commitment', { required: true })}
+        >
+          <option value="100%">100% - Full Time</option>
+          <option value="75%">75% - Part Time</option>
+          <option value="50%">50% - Part Time</option>
+          <option value="25%">25% - Side Project</option>
+        </select>
       </label>
 
-      <hr />
-
-      <label className="block">
-        Project Github (or similar, if applicable)
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('github')}
-        />
-      </label>
-
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source')}
-        />
-        <span className="ml-2">Is the project free and open-source?</span>
-      </label>
-
-      <label className="block">
-        Open-Source License *<br />
-        <input
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('license', { required: true })}
-        />
-        <small>
-          We focus on supporting projects that are free as in freedom and open
-          to all. Your project should have a proper open-source license &
-          educational materials should be available to the public under a{' '}
-          <CustomLink href="https://www.gnu.org/licenses/license-list.html">
-            free and open license
-          </CustomLink>
-          .
-        </small>
-      </label>
       <hr />
       <h2>Project Budget</h2>
 
@@ -337,7 +381,7 @@ export default function ApplicationForm() {
       <FormButton
         variant={isFLOSS ? 'enabled' : 'disabled'}
         type="submit"
-        disabled={true || loading}
+        disabled={loading}
       >
         Submit Grant Application
       </FormButton>

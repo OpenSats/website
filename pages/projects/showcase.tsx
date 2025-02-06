@@ -5,6 +5,7 @@ import ProjectCard from '../../components/ProjectCard'
 import { allProjects } from 'contentlayer/generated'
 import { Project } from 'contentlayer/generated'
 import { isNotOpenSatsProject } from '../funds'
+import Link from '@/components/Link'
 
 const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
@@ -40,13 +41,22 @@ const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
             ))}
         </ul>
       </section>
+      <div className="flex justify-end pt-4 text-base font-medium leading-6">
+        <Link
+          href="/tags/grants"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="All Grants"
+        >
+          All Grants &rarr;
+        </Link>
+      </div>
     </>
   )
 }
 
 export default ProjectShowcase
 
-export async function getStaticProps({ params }: { params: any }) {
+export async function getStaticProps() {
   const projects = allProjects
 
   return {

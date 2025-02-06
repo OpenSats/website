@@ -19,6 +19,7 @@ export default function ApplicationForm() {
   const isFLOSS = watch('free_open_source', false)
   const [failureReason, setFailureReason] = useState<string>()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setLoading(true)
     console.log(data)
@@ -257,7 +258,7 @@ export default function ApplicationForm() {
       <FormButton
         variant={isFLOSS ? 'enabled' : 'disabled'}
         type="submit"
-        disabled={true || loading}
+        disabled={loading}
       >
         Submit LTS Application
       </FormButton>

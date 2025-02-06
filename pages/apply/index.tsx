@@ -6,7 +6,6 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
-import ClosedNotice from '@/components/ClosedNotice'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
@@ -47,9 +46,10 @@ export default function Apply({
           Applications should be well written, informative, and concise. A great
           application will fit comfortably on one page while containing all
           information that is required to assess and judge the project or
-          applicant.
+          applicant. Refer to our{' '}
+          <CustomLink href="/faq/application">Application FAQ</CustomLink> to
+          find answers to common questions.
         </p>
-        <ClosedNotice />
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
         </h2>
@@ -60,8 +60,8 @@ export default function Apply({
           projects in the Bitcoin space.
         </p>
         <Link
-          href="#/apply/grant"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href="/apply/grant"
+          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats General Grant
         </Link>
@@ -74,8 +74,8 @@ export default function Apply({
           geared towards developers and maintainers of Bitcoin Core and similar.
         </p>
         <Link
-          href="#/apply/lts"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href="/apply/lts"
+          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
         >
           Apply for an OpenSats LTS Grant
         </Link>
