@@ -7,7 +7,8 @@ import { GoogleSpreadsheet } from 'google-spreadsheet'
 import StatsBar from '@/components/StatsBar'
 
 const DEFAULT_LAYOUT = 'PageLayout'
-const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ?? ''
+const GOOGLE_SERVICE_ACCOUNT_EMAIL =
+  process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ?? ''
 const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY ?? ''
 const SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets',
