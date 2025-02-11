@@ -5,6 +5,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 import { JWT } from 'google-auth-library'
 import { GoogleSpreadsheet } from 'google-spreadsheet'
 import StatsBar from '@/components/StatsBar'
+import { formatNumber } from '@/components/StatsBar'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 const GOOGLE_SERVICE_ACCOUNT_EMAIL =
@@ -21,19 +22,6 @@ const jwtFromEnv = new JWT({
   key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
   scopes: SCOPES,
 })
-
-function formatNumber(num: number): string {
-  const abbreviations = ['k', 'M', 'B', 'T']
-  let i = 0
-  while (num > 1e3 && i < abbreviations.length) {
-    num /= 1e3
-    if (num < 1e3) {
-      return `${num.toFixed(1)} ${abbreviations[i]}`
-    }
-    i += 1
-  }
-  return num.toString()
-}
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'transparency')

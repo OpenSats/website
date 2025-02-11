@@ -1,3 +1,16 @@
+export function formatNumber(num: number): string {
+  const abbreviations = ['k', 'M', 'B', 'T']
+  let i = 0
+  while (num > 1e3 && i < abbreviations.length) {
+    num /= 1e3
+    if (num < 1e3) {
+      return `${num.toFixed(1)} ${abbreviations[i]}`
+    }
+    i += 1
+  }
+  return num.toString()
+}
+
 export default function StatsBar({ stats }) {
   const statistics = [
     { id: 1, name: stats.names[0], value: stats.values[0] },
