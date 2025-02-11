@@ -23,8 +23,7 @@ const jwtFromEnv = new JWT({
   scopes: SCOPES,
 })
 
-export const getStaticProps = async () => {
-  const page = allPages.find((p) => p.slug === 'transparency')
+async function fetchGoogleData() {
   const statValues = ['', '', '']
   const statNames = ['', '', '']
   try {
@@ -61,12 +60,23 @@ export const getStaticProps = async () => {
     console.log('Error fetching data from Google sheets: ', e)
   }
   return {
+    values: statValues,
+    names: statNames,
+  }
+}
+
+export const getStaticProps = async () => {
+  const page = allPages.find((p) => p.slug === 'transparency')
+  let data = {}
+  try {
+    data = await fetchGoogleData()
+  } catch (e) {
+    console.log('Error fetching Google data: ', e)
+  }
+  return {
     props: {
       page: page,
-      stats: {
-        values: statValues,
-        names: statNames,
-      },
+      stats: data,
     },
   }
 }
