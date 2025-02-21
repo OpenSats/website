@@ -8,6 +8,7 @@ import StatsBar from '@/components/StatsBar'
 import { formatNumber } from '@/components/StatsBar'
 
 const DEFAULT_LAYOUT = 'PageLayout'
+const GOOGLE_DOC_ID = process.env.GOOGLE_DOC_ID ?? ''
 const GOOGLE_SERVICE_ACCOUNT_EMAIL =
   process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ?? ''
 const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY ?? ''
@@ -26,10 +27,7 @@ const jwtFromEnv = new JWT({
 async function fetchGoogleData() {
   const statValues = ['', '', '']
   const statNames = ['', '', '']
-  const doc = new GoogleSpreadsheet(
-    '1zSno0B3PntjRO0DVrDdkBHJOzGGtfJItzk37bzIzR7U',
-    jwtFromEnv
-  )
+  const doc = new GoogleSpreadsheet(GOOGLE_DOC_ID, jwtFromEnv)
   await doc.loadInfo()
   const sheet = doc.sheetsByIndex[0]
   await sheet.loadCells('A1:D20')
