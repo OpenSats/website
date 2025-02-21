@@ -26,38 +26,34 @@ const jwtFromEnv = new JWT({
 async function fetchGoogleData() {
   const statValues = ['', '', '']
   const statNames = ['', '', '']
-  try {
-    const doc = new GoogleSpreadsheet(
-      '1zSno0B3PntjRO0DVrDdkBHJOzGGtfJItzk37bzIzR7U',
-      jwtFromEnv
-    )
-    await doc.loadInfo()
-    const sheet = doc.sheetsByIndex[0]
-    await sheet.loadCells('A1:D20')
-    const b = [
-      sheet.getCell(0, 1).value,
-      sheet.getCell(1, 1).value,
-      sheet.getCell(2, 1).value,
-    ]
-    const a = [
-      sheet.getCell(0, 0).value,
-      sheet.getCell(1, 0).value,
-      sheet.getCell(2, 0).value,
-    ]
-    if (typeof b[0] == 'number' && Number(b[0]) > 0) {
-      statValues[0] = formatNumber(b[0])
-      if (typeof a[0] == 'string') statNames[0] = a[0].replace(':', '')
-    }
-    if (typeof b[1] == 'number' && Number(b[1]) > 0) {
-      statValues[1] = `$${formatNumber(b[1])}`
-      if (typeof a[1] == 'string') statNames[1] = a[1].replace(':', '')
-    }
-    if (typeof b[2] == 'number' && Number(b[2]) > 0) {
-      statValues[2] = formatNumber(b[2])
-      if (typeof a[2] == 'string') statNames[2] = a[2].replace(':', '')
-    }
-  } catch (e) {
-    console.log('Error fetching data from Google sheets: ', e)
+  const doc = new GoogleSpreadsheet(
+    '1zSno0B3PntjRO0DVrDdkBHJOzGGtfJItzk37bzIzR7U',
+    jwtFromEnv
+  )
+  await doc.loadInfo()
+  const sheet = doc.sheetsByIndex[0]
+  await sheet.loadCells('A1:D20')
+  const b = [
+    sheet.getCell(0, 1).value,
+    sheet.getCell(1, 1).value,
+    sheet.getCell(2, 1).value,
+  ]
+  const a = [
+    sheet.getCell(0, 0).value,
+    sheet.getCell(1, 0).value,
+    sheet.getCell(2, 0).value,
+  ]
+  if (typeof b[0] == 'number' && Number(b[0]) > 0) {
+    statValues[0] = formatNumber(b[0])
+    if (typeof a[0] == 'string') statNames[0] = a[0].replace(':', '')
+  }
+  if (typeof b[1] == 'number' && Number(b[1]) > 0) {
+    statValues[1] = `$${formatNumber(b[1])}`
+    if (typeof a[1] == 'string') statNames[1] = a[1].replace(':', '')
+  }
+  if (typeof b[2] == 'number' && Number(b[2]) > 0) {
+    statValues[2] = formatNumber(b[2])
+    if (typeof a[2] == 'string') statNames[2] = a[2].replace(':', '')
   }
   return {
     values: statValues,
