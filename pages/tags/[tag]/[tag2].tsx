@@ -18,13 +18,15 @@ export async function getStaticPaths() {
       tag2: tag 
     },
   }))
-  //oneTagPaths.push( {params: {tag: 'new'}})*/
+//oneTagPaths.push( {params: {tag: 'new'}})*/
   return {
     paths: [
-      { params: {
-        tag: 'opensats',
-        tag2: 'funding'
-      }}
+      {
+        params: {
+          tag: 'opensats',
+          tag2: 'funding',
+        },
+      },
     ],
     fallback: false,
   }
@@ -32,14 +34,15 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (context) => {
   const tag = context.params.tag as string
-  // adjust filtered posts for tag1 && tag2
+  const tag2 = context.params.tag2 as string
   const filteredPosts = allCoreContent(
     allBlogs.filter(
       (post) =>
-        post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(tag)
+        post.draft !== true &&
+        post.tags.map((t) => kebabCase(t)).includes(tag) &&
+        post.tags.map((t) => kebabCase(t)).includes(tag2)
     )
   )
-
   return { props: { posts: filteredPosts, tag } }
 }
 

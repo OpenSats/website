@@ -17,8 +17,8 @@ export async function getStaticPaths() {
       tag,
     },
   }))
-  oneTagPaths.push( {params: {tag: 'new'}})
-  
+  oneTagPaths.push({ params: { tag: 'new' } })
+
   return {
     paths: oneTagPaths,
     fallback: false,
