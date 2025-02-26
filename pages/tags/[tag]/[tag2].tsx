@@ -9,16 +9,8 @@ import { usePathname } from 'next/navigation'
 
 export async function getStaticPaths() {
   const tags = await getAllTags(allBlogs)
-  //generate all paths
-  // create params that include:
-  // { params: {tag: 'tag1'} }                ./tags/tag1
-  // { params: {tag: 'tag1', 'tag2'} }        ./tags/tag1/tag2
-  /*const oneTagPaths = Object.keys(tags).map((tag) => ({
-    params: {
-      tag2: tag 
-    },
-  }))
-//oneTagPaths.push( {params: {tag: 'new'}})*/
+  // complete remainingpaths
+  //****be sure to account for double tag selection e.g. opensats/opensats***
   return {
     paths: [
       {
@@ -53,16 +45,14 @@ export default function Tag({
   // Capitalize first letter and convert space to dash
   // adjust title to account for multiple tags
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
-  const x = usePathname()
-  console.log(x)
-  const y = x.split('/')
+  const path = usePathname().split('/')
   return (
     <>
       <TagSEO
         title={`${tag} - ${siteMetadata.title}`}
         description={`${tag} tags - ${siteMetadata.author}`}
       />
-      Tags: {`${y.at(-1)}`}
+      Tags: {`${path.at(-2)}, ${path.at(-1)}`}
       <ListLayout posts={posts} title={title} />
     </>
   )
