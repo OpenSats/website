@@ -9,17 +9,22 @@ import { usePathname } from 'next/navigation'
 
 export async function getStaticPaths() {
   const tags = await getAllTags(allBlogs)
-  // complete remainingpaths
-  //****be sure to account for double tag selection e.g. opensats/opensats***
+  const myPaths = []
+  for (const tagX in tags) {
+    for (const tagY in tags) {
+      if (tagX != tagY) {
+        // /tags/opensats/opensats gives 404 error
+        myPaths.push({
+          params: {
+            tag: tagX,
+            tag2: tagY,
+          },
+        })
+      }
+    }
+  }
   return {
-    paths: [
-      {
-        params: {
-          tag: 'opensats',
-          tag2: 'funding',
-        },
-      },
-    ],
+    paths: myPaths,
     fallback: false,
   }
 }
