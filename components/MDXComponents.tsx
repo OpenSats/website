@@ -12,6 +12,7 @@ import DonateToGeneralFundForm from './DonateToGeneralFundForm'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DonateToOperationsButton from './DonateToOperationsButton'
+import DonateRecurringButton from './DonateRecurringButton'
 import DesignTeam from './DesignTeam'
 import Credits from './Supporters'
 import YouTubeEmbed from './YouTubeEmbed'
@@ -34,6 +35,7 @@ export const MDXComponents: ComponentMap = {
   DonateToGeneralFundButton,
   DonateToNostrFundButton,
   DonateToOperationsButton,
+  DonateRecurringButton,
   DesignTeam,
   YouTubeEmbed,
   Credits,
