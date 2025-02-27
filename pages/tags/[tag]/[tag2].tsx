@@ -5,7 +5,6 @@ import { kebabCase } from 'pliny/utils/kebabCase'
 import { getAllTags, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
-import { usePathname } from 'next/navigation'
 
 export async function getStaticPaths() {
   const tags = await getAllTags(allBlogs)
@@ -50,14 +49,12 @@ export default function Tag({
   // Capitalize first letter and convert space to dash
   // adjust title to account for multiple tags
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
-  const path = usePathname().split('/')
   return (
     <>
       <TagSEO
         title={`${tag} - ${siteMetadata.title}`}
         description={`${tag} tags - ${siteMetadata.author}`}
       />
-      Tags: {`${path.at(-2)}, ${path.at(-1)}`}
       <ListLayout posts={posts} title={title} />
     </>
   )
