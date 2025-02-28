@@ -1,0 +1,225 @@
+---
+title: "Advancements in On-Chain Privacy"
+date: '2025-02-28'
+tags: ['OpenSats', 'bitcoin', 'impact', 'privacy']
+authors: ['default', 'arvin', 'julian']
+images: ['/static/images/blog/70-developing-advancements-in-onchain-privacy.jpg']
+draft: false
+summary: "An impact report from the front-lines of bitcoin development."
+---
+
+Bitcoin was founded on the promise of permissionless electronic cash, but its
+transparent ledger means on-chain privacy remains an ongoing challenge. From
+transaction heuristics to metadata leaks, those looking to surveil financial
+activity have multiple avenues to track unsuspecting users. Greg Maxwell, a
+pioneer in Bitcoin's open-source development, captured these privacy concerns
+succinctly in 2013:
+
+>Traditional banking provides a fair amount of privacy by default. Your inlaws
+>don't see that you're buying birth control that deprives them of grandchildren,
+>your employer doesn't learn about the non-profits you support with money from
+>your paycheck, and thieves don't see your latest purchases or how wealthy you
+>are to help them target and scam you. Poor privacy in Bitcoin can be a major
+>practical disadvantage for both individuals and businesses.
+
+Ensuring that bitcoin use remains private and secure requires ongoing
+development, and OpenSats grantees are at the forefront of this effort. As part
+of our mission to foster open-source Bitcoin development, OpenSats is dedicating
+the next few months to highlighting the innovative work of our grantees. Today,
+we highlight three privacy-focused initiatives supported by our General Fund, as
+announced in [July](/blog/bitcoin-grants-july-2023#payjoin-dev-kit) 2023,
+[August](/blog/josi-baker-receives-opensats-lts-grant) 2023, and
+[October](/blog/8th-wave-of-bitcoin-grants#citadel-tech) 2024, respectively:
+
+- [Async Payjoin](#async-payjoin)
+- [Coinswap](#coinswap)
+- [Silent Payments](#silent-payments)
+
+The developers working on these projects are making meaningful impacts, with
+real-world implementations in place and ongoing improvements ahead. Let's take a
+closer look at how these projects are advancing and reinforcing Bitcoin's
+privacy and thus end-user security.
+
+---
+
+### Async Payjoin
+
+One of the most powerful tools for on-chain privacy is breaking the assumptions
+used by blockchain surveillance, which are based on various heuristics and
+transaction patterns.
+
+One such assumption is the common input ownership heuristic
+([CIOH](https://en.bitcoin.it/wiki/Common-input-ownership_heuristic)), which
+suggests that all inputs in a transaction belong to the same entity. The CIOH is
+one of the most common methods to track payments and link addresses, effectively
+degrading the privacy—and thus security—of all users. Payjoin disrupts this
+heuristic, which in turn improves the privacy characteristics of the whole
+network. Even if only a small percentage of users use Payjoin as their default
+payment mechanism, the common input ownership heuristic can't be trusted
+anymore, making it a useless heuristic for transaction deanonymization. *"The
+main problem is that,"* as Francis Pouliot, CEO of [Bull
+Bitcoin](https://www.bullbitcoin.com/) pointed out, *"to make it happen, a lot of
+open-source software infrastructure was missing."*
+
+Version 1 of Payjoin ([Pay-to-EndPoint](https://en.bitcoin.it/wiki/PayJoin))
+disrupted the CIOH assumption by modifying how transactions are constructed.
+Instead of a straightforward sender-to-recipient payment, the recipient also
+contributes one of their inputs to the transaction. This process reduces the
+effectiveness of common tracking and surveillance methods in use today. However,
+the challenge with this version was that it required real-time, synchronous coordination,
+meaning both sender and receiver had to be online at the same time, which is not
+practical at scale.
+
+Thanks in part to [OpenSats
+funding](/blog/bitcoin-grants-july-2023#payjoin-dev-kit), Payjoin V2 ([BIP
+77](https://github.com/bitcoin/bips/pull/1483)) launched in 2024, implementing a
+major improvement called Async Payjoin. Because of this, Payjoin V2 no
+longer requires both sender and receiver to be online simultaneously, making
+private and secure transactions seamless for users. This enhancement makes it
+easier for mobile wallets and exchanges to integrate Payjoin by default without disrupting
+their existing user workflows, making privacy and security protections more
+accessible to a wider user base.
+
+In December 2024, Bull Bitcoin Mobile became the first mobile wallet to enable
+sending and receiving Async Payjoin. This
+[milestone](https://www.bullbitcoin.com/blog/bull-bitcoin-wallet-payjoin) marks
+a significant shift. Not only does Payjoin preserve privacy and security, but it
+also allows businesses to batch multiple transactions—reducing on-chain
+activity, and saving fees—while maintaining a streamlined user experience.
+Francis Pouliot, CEO of Bull Bitcoin goes on to say:
+
+>Without the OpenSats grant awarded to [Payjoin Dev
+>Kit](https://github.com/payjoin), Payjoin V2 may never have come to exist and
+>would have remained an idea in the mind of cypherpunks. Now that Payjoin Dev
+>Kit has proven that an app like Bull Bitcoin can integrate Payjoin easily, many
+>other apps are sure to follow. [...] Not only does this benefit users by
+>offering them opportunistic UTXO consolidation without compromising on privacy,
+>but it benefits the entire Bitcoin network by challenging the heuristics used
+>by nefarious blockchain observers.
+
+Indeed, multiple Payjoin V2 integrations are already live or in progress with
+BitMask, Bitcoin Core, Galoy's Bria payment processor, and Boltz following Bull
+Bitcoin's lead. By making Payjoin transactions indistinguishable from other
+batch transactions, Payjoin Dev Kit reduces blockchain fingerprinting and
+strengthens privacy and security for all.
+
+### Coinswap
+
+With financial surveillance becoming more prevalent and intrusive, tools that
+protect privacy have become increasingly important for preserving financial
+sovereignty. [Coinswap] has been actively developing a solution to address this
+challenge—a decentralized atomic swap protocol that enables users to swap
+bitcoin UTXOs, breaking direct ownership links on-chain and disrupting
+chain-analysis heuristics.
+
+Originally proposed by [Greg
+Maxwell](https://bitcointalk.org/index.php?topic=321228.0) in 2013 and later
+developed into a proof-of-concept by [Chris Belcher], the protocol is now
+actively advancing through independent contributors, including developers from
+[Citadel-Tech](https://github.com/citadel-tech), with funding from OpenSats.
+
+Using a maker-taker model, swap service providers (makers) facilitate swaps,
+while swap users (takers) rely on applications to automatically coordinate
+multi-hop transactions for enhanced privacy. By passing bitcoin through multiple
+addresses, these transactions add uncertainty for trackers by obscuring the true
+sender and recipient. This blending of privacy-enhanced transactions with
+standard bitcoin transactions makes it significantly harder for nefarious actors
+to exploit financial surveillance, construct misleading transaction narratives,
+or leverage data for unjust financial profiling.
+
+Since receiving a grant from OpenSats in October last year, development has
+focused on refining the smart-client (taker's application), dumb-server (maker's
+server) model, and integrating [fidelity
+bonds](https://jamdocs.org/glossary/#fidelity-bond) to resist [Sybil
+attacks](https://en.wikipedia.org/wiki/Sybil_attack). Despite the protocol's
+complexity, Coinswap prioritizes user-friendly workflows to make financial
+privacy accessible.
+
+The recent beta release of
+[v0.1.0](https://github.com/citadel-tech/coinswap/milestone/1) marks a major
+milestone towards making Coinswap use more prevalent. This testnet release aims
+to demonstrate how swaps can function in real-world conditions without revealing
+which participants exchanged UTXOs.
+
+Looking ahead, the project plans to implement Taproot outputs, MuSig2 signatures
+for smaller and more private transactions, and decentralized DNS discovery to
+enable permissionless access to swap servers. The project is also exploring
+cross-chain swaps with UTXO-based sidechains like Liquid.
+
+By evolving alongside Bitcoin's broader ecosystem, Coinswap ensures that
+financial privacy remains practical and widely available, empowering individuals
+and businesses to transact freely without fear of surveillance.
+
+### Silent Payments
+
+Developed by OpenSats
+[LTS](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors)
+grantee [Josie Baker](/blog/josi-baker-receives-opensats-lts-grant), Silent
+Payments ([BIP
+352](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki)) is an
+improvement proposal that enables users to receive bitcoin without revealing
+their on-chain addresses. Without Silent Payments, users have to manually manage
+new addresses, a task that quickly becomes cumbersome. History has shown that
+address reuse continues to be widespread because many users prioritize
+convenience over security, while others remain unaware that reusing addresses
+compromises their privacy. By automatically generating a unique address for each
+transaction, Silent Payments eliminates manual address management while ensuring
+greater privacy and security by default.
+
+Silent Payments has been under active development throughout 2024, focusing on
+integration into Bitcoin Core, [third-party
+wallets](https://silentpayments.xyz/docs/wallets/), and developer libraries.
+Multiple [pull requests](https://github.com/bitcoin/bitcoin/issues/28536) have
+been opened to implement essential features like address generation and
+transaction handling, alongside ongoing work on the [`libsecp256k1`][libsecp] module to
+optimize cryptographic operations.
+
+Beyond Bitcoin Core, Silent Payments is being integrated into the [`rust-bitcoin`][rust]
+library to streamline adoption in Rust-based applications. Developers have also
+introduced [SilentPay], a TypeScript library designed to facilitate easy
+cross-platform implementation, ensuring broader access to the protocol.
+
+Frequent Bitcoin users look forward to Silent Payments for its potential to
+simplify and strengthen on-chain privacy. Although still in active development,
+its integration across multiple platforms marks a significant step forward for
+Bitcoin, reinforcing privacy, security, and financial sovereignty for
+individuals and businesses alike.
+
+### Looking Ahead
+
+The advancements achieved by OpenSats grantees in [Payjoin][PJ], [Coinswap][CS], and [Silent
+Payments][SP] mark significant progress with on-chain privacy, disrupting transaction
+surveillance, while promoting greater financial sovereignty.
+
+These scalable innovations are making robust, user-friendly privacy solutions a
+reality for individuals and businesses, ensuring that Bitcoin remains a truly
+permissionless and resilient digital cash system. And while these projects
+represent major steps forward, they are just one part of a broader effort to
+make Bitcoin even more efficient and secure. Across the ecosystem, developers are
+continuously working on new solutions, many of which are supported by OpenSats.
+
+Bitcoin's advancement depends on active, collaborative development, with
+open-source software as the core driver of Bitcoin as a neutral monetary
+network. OpenSats remains committed to funding open-source developers and
+projects that push Bitcoin's technology forward.
+
+If you believe in building and maintaining a more private and secure Bitcoin
+ecosystem, consider supporting OpenSats. Every donation directly fuels the
+development of open-source projects that empower users and secure our financial
+future.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+If you are a developer working on open-source software that makes Bitcoin even
+better than it is today, don't hesitate to [apply for funding](/apply).
+
+[Coinswap]: https://github.com/citadel-tech/Coinswap-Protocol-Specification/blob/main/v1/0_introduction.md#introduction
+[Chris Belcher]: https://gist.github.com/chris-belcher/9144bd57a91c194e332fb5ca371d0964
+[libsecp]: https://github.com/bitcoin-core/secp256k1?tab=readme-ov-file#libsecp256k1
+[rust]: https://github.com/rust-bitcoin/rust-bitcoin?tab=readme-ov-file#rust-bitcoin
+[SilentPay]: https://github.com/Bitshala-Incubator/silent-pay?tab=readme-ov-file#silentpay---a-wallet-library-for-silent-payments
+[PJ]: https://bitcoinops.org/en/topics/payjoin/
+[CS]: https://bitcoinops.org/en/topics/coinswap/
+[SP]: https://bitcoinops.org/en/topics/silent-payments/
