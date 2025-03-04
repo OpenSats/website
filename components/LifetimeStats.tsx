@@ -27,18 +27,21 @@ const LifetimeStats = () => {
   }, [])
 
   return (
-    <div className="bg-gray-100 p-6">
-      <div className="container mx-auto">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="py-4">
+      <div className="mx-auto">
+        <dl className="grid grid-cols-1 gap-x-2 gap-y-4 md:grid-cols-3">
           {items.map((item, index) => (
-            <div key={index} className="rounded-lg bg-white p-4 shadow-md">
-              <h2 className="text-2xl font-bold text-orange-600">
-                ~{formatNumber(item.value)}
-              </h2>
-              <p className="text-l">{item.label}</p>
+            <div key={index} className="mx-auto grid grid-cols-1">
+              <dt className="text-center text-base/7 text-gray-600 dark:text-gray-300">
+                {item.label}
+              </dt>
+              <dt className="order-first text-center text-4xl font-semibold tracking-tight text-orange-600">
+                {index == 1 ? '~' : ''}
+                {formatNumber(item.value)}
+              </dt>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </div>
   )
