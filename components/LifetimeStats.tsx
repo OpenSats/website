@@ -14,12 +14,17 @@ const LifetimeStats = () => {
   }, [])
 
   return (
-    <div>
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>{JSON.stringify(item)}</li>
-        ))}
-      </ul>
+    <div className="bg-gray-100 p-6">
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((item, index) => (
+            <div key={index} className="rounded-lg bg-white p-4 shadow-md">
+              <h2 className="text-xl font-bold">{item.label}</h2>
+              <p className="text-2xl text-blue-600">{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
