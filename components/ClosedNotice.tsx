@@ -19,11 +19,13 @@ const ClosedNotice = () => {
         <div>
           <p className="font-bold">Applications are currently closed!</p>
           <p className="text-sm">
-            Grant applications are currently closed as we prepare our
-            end-of-year and other <Link href="/transparency">reports</Link>.
-            Have a look at{' '}
+            Grant applications are currently closed as per our{' '}
+            <Link href="/faq#when-is-the-best-time-to-apply">
+              quarterly schedule
+            </Link>
+            . Please have a look at{' '}
             <Link href="/blog/2024-year-in-review">last year's report</Link> to
-            see what to expect and what kind of projects we support.
+            see what kind of projects we support.
           </p>
           <p className="text-sm">
             If you want to prepare a submission, please get familiar with our{' '}
