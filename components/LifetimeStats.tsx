@@ -36,7 +36,8 @@ const LifetimeStats = () => {
                 {item.label}
               </dt>
               <dt className="order-first text-center text-4xl font-semibold tracking-tight text-orange-600">
-                {index == 1 ? '~' : ''}
+                {index == 1 ? '$ ' : ''}
+                {index == 2 ? '~' : ''}
                 {formatNumber(item.value)}
               </dt>
             </div>
