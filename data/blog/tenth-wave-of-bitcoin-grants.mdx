@@ -1,0 +1,140 @@
+---
+title: "Tenth Wave of Bitcoin Grants"
+date: '2025-03-14'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+draft: false
+authors: ['default', 'arvin', 'julian']
+images: ['/static/images/blog/71-tenth-wave-of-bitcoin-grants.jpg']
+summary: "OpenSats is funding six more open-source projects advancing the Bitcoin ecosystem."
+---
+
+OpenSats is pleased to announce a new wave of grants supporting six projects
+advancing the Bitcoin ecosystem.
+
+This round includes three first-time project grants—each showcasing promising
+developments in self-custody, Lightning-based financial tools, and developer
+sustainability. Additionally, we're renewing our commitment to three existing
+project grants that continue to push the boundaries of decentralized
+infrastructure and secure bitcoin usage.
+
+The three first-time project grants in this wave are:
+
+- [Bitcoin Safe](#bitcoin-safe)
+- [Stable Channels](#stable-channels)
+- [Waye](#waye)
+
+In addition to the above, OpenSats has renewed project grants for:
+
+- [Floresta](/blog/bitcoin-grants-september-2024-7th-wave#floresta)
+- [Krux](/blog/bitcoin-grants-july-2024#krux)
+- [Krux-Installer](/blog/bitcoin-grants-july-2024#krux-installer)
+
+Thanks to the generosity of our donors, OpenSats can actively support the
+open-source developers and projects that are building key infrastructure
+and helping bitcoin flourish.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's explore these projects in more detail to understand their goals,
+contributions, and their role in strengthening the Bitcoin ecosystem.
+
+---
+
+### Bitcoin Safe
+
+[Bitcoin Safe](https://bitcoin-safe.org/en/) is an open-source, self-sovereign
+bitcoin wallet designed for secure and intuitive self-custody. By integrating
+[BDK](https://bitcoindevkit.org/), [nostr], and Compact Block Filters ([BIP 158]),
+it enhances privacy and reliability while reducing reliance on centralized
+servers. Currently in beta, Bitcoin Safe streamlines self-custody by simplifying
+single- and multi-signature storage, drawing inspiration from Electrum, Sparrow,
+and mempool.space.
+
+One of Bitcoin Safe's standout features is "Sync & Chat", a nostr-based
+messaging system that leverages relays to route encrypted messages and
+metadata between users and devices. Whenever a Bitcoin Safe wallet sends a
+[PBST](https://bitcoinops.org/en/topics/psbt/) to another Bitcoin Safe wallet,
+the transaction labels are synced between devices, and when multi-sig users
+message each other concerning the status of their transaction, all of this
+encrypted communication is securely relayed over nostr.
+
+Next steps for Bitcoin Safe include refining the "Sync & Chat" feature by
+improving nostr relay reliability, transitioning to [`bdk_wallet v1.1.0`] for
+improved performance and privacy, and implementing deterministic builds for
+Windows and Linux.
+
+Repository: [andreasgriffin/bitcoin-safe](https://github.com/andreasgriffin/bitcoin-safe)  
+License: GPL-3.0
+
+### Stable Channels
+
+[Stable Channels](https://stablechannels.com/) is an open-source project
+introducing bitcoin-backed dollar balances to the Lightning Network, enabling
+decentralized, self-custodial stable value transactions without relying on
+centralized stablecoins. By matching users seeking stable USD exposure with
+those desiring leveraged bitcoin positions, Stable Channels facilitates
+synthetic dollar balances through frequent, price-adjusted settlements over
+Lightning payment channels. This approach maintains dollar-pegged stability for
+one party while providing leveraged bitcoin exposure for the counterparty. The
+project has also collaborated with [Cashu](https://docs.cashu.space/protocol) to
+integrate its stability mechanism into eCash mints, allowing users to mint USD
+and EUR tokens backed by bitcoin.
+
+Looking ahead, Stable Channels will continue developing its Rust-based reference
+implementation using [LDK](https://lightningdevkit.org/) and
+[BDK](https://bitcoindevkit.org/), ensuring compatibility across server,
+desktop, and mobile platforms. Key milestones include deploying an iOS app for
+interacting with custom LSPs, launching an alpha version in early 2025, and
+refining the software based on user feedback. The project also plans to release
+a stable version across all platforms and develop a decentralized marketplace
+using [Liquidity Ads], further enhancing Bitcoin's Lightning Network with
+self-custodial, stable financial tools.
+
+Repository: [toneloc/stable-channels](https://github.com/toneloc/stable-channels)  
+License: GPL-3.0
+
+### Waye
+
+[Waye](https://www.waye.dev/) is an initiative dedicated to supporting the
+well-being of developers building open-source technologies, aiming to reduce
+burnout and improve the long-term sustainability of their work. Recognizing the
+unique challenges faced by grant-funded, unaffiliated open-source developers—who
+often juggle engineering, project management, and community roles—Waye has
+launched pilot programs to address these issues. These
+[initiatives](https://www.waye.dev/initiatives) include academic research, group
+coaching, and the development of scalable, openly shared frameworks.
+
+At the heart of their mission is [OS
+Reboot](https://www.waye.dev/initiatives/os-reboot#bitcoin), Waye's cornerstone program,
+with monthly expert-led discussions, structured group work, and reflection
+periods to provide sustained, practical support for open-source developers. The
+outcomes of Waye initiatives will be open-sourced, providing the broader
+community with methodologies and frameworks to better support FOSS contributors.
+By fostering a more resilient and diverse developer community, Waye aims to
+strengthen the human infrastructure essential for advancing decentralized
+technologies. If you are an open-source developer looking for support, sign up for a program or [reach out to Waye directly](mailto:waye.dev@gmail.com).
+
+Repository: [waye-dev/waye](https://github.com/waye-dev/waye)  
+Licenses: MIT & CC BY-SA 4.0
+
+---
+
+Bitcoin's strength lies in its open, permissionless nature—sustaining that
+requires continued support for free and open-source development. Thanks to the
+generosity of our donors, OpenSats can fund builders like those featured here,
+working to make Bitcoin more secure, decentralized, and accessible.
+
+If you'd like to support open-source development, consider making a donation.
+Every contribution helps sustain the people and projects shaping Bitcoin's
+future.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+[nostr]: https://github.com/nostr-protocol/nostr?tab=readme-ov-file#nostr---notes-and-other-stuff-transmitted-by-relays
+[Liquidity Ads]: https://bitcoinops.org/en/topics/liquidity-advertisements
+[BIP 158]: https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki
+[`bdk_wallet v1.1.0`]: https://github.com/bitcoindevkit/bdk/releases/tag/wallet-1.1.0
