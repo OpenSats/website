@@ -188,7 +188,12 @@ export default function Home({
                           {formatDate(date, siteMetadata.locale)}
                         </time>
                       </dd>
-                      <Image src={images[0]} width={220} height={110} alt="blog image" />
+                      <Image
+                        src={images[0]}
+                        width={220}
+                        height={110}
+                        alt="blog image"
+                      />
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
                       <div className="space-y-6">
