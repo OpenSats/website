@@ -15,6 +15,7 @@ import PaymentModal from '../components/PaymentModal'
 import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
+import Image from 'next/image'
 
 const MAX_DISPLAY = 2
 
@@ -175,11 +176,11 @@ export default function Home({
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post
+            const { slug, date, title, summary, tags, images } = post
             return (
               <li key={slug} className="py-12">
                 <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  <div className="x-6 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
@@ -187,6 +188,7 @@ export default function Home({
                           {formatDate(date, siteMetadata.locale)}
                         </time>
                       </dd>
+                      <Image src={images[0]} width={220} height={110} alt="blog image" />
                     </dl>
                     <div className="space-y-5 xl:col-span-3">
                       <div className="space-y-6">
