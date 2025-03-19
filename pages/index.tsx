@@ -183,7 +183,7 @@ export default function Home({
                     <div className="relative">
                       <h1 className="sr-only">Published on</h1>
                       <img src={images[0]} alt="blog post" />
-                      <h2 className="absolute left-6 top-3 text-base font-semibold text-white xl:left-2 xl:top-1">
+                      <h2 className="absolute left-5 top-3 text-base font-semibold text-white xl:left-2.5 xl:top-1">
                         <time dateTime={date}>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
