@@ -15,7 +15,6 @@ import PaymentModal from '../components/PaymentModal'
 import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
-import Image from 'next/image'
 
 const MAX_DISPLAY = 2
 
@@ -180,23 +179,17 @@ export default function Home({
             return (
               <li key={slug} className="py-12">
                 <article>
-                  <div className="x-6 space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
+                    <div className="relative">
+                      <img src={images[0]} alt="blog post" />
+                      <h1 className="absolute left-1 top-0 text-base font-semibold text-white">
                         <time dateTime={date}>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
-                      </dd>
-                      <Image
-                        src={images[0]}
-                        width={220}
-                        height={110}
-                        alt="blog image"
-                      />
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
+                      </h1>
+                    </div>
+                    <div className="space-y-2 xl:col-span-2">
+                      <div className="space-y-4">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
                             <Link
