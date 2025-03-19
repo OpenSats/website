@@ -181,12 +181,13 @@ export default function Home({
                 <article>
                   <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
                     <div className="relative">
+                      <h1 className="sr-only">Published on</h1>
                       <img src={images[0]} alt="blog post" />
-                      <h1 className="absolute left-1 top-0 text-base font-semibold text-white">
+                      <h2 className="absolute left-6 top-3 text-base font-semibold text-white xl:left-3 xl:top-1">
                         <time dateTime={date}>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
-                      </h1>
+                      </h2>
                     </div>
                     <div className="space-y-2 xl:col-span-2">
                       <div className="space-y-4">
