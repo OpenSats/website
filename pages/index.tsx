@@ -175,21 +175,24 @@ export default function Home({
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post
+            const { slug, date, title, summary, tags, images } = post
             return (
               <li key={slug} className="py-12">
                 <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
+                    <div className="relative">
+                      <h1 className="sr-only">Published on</h1>
+                      <Link href={`/blog/${slug}`}>
+                        <img src={images[0]} alt="blog post" />
+                      </Link>
+                      <h2 className="absolute left-5 top-3 text-base font-semibold text-white xl:left-2.5 xl:top-1">
                         <time dateTime={date}>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
+                      </h2>
+                    </div>
+                    <div className="space-y-2 xl:col-span-2">
+                      <div className="space-y-4">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
                             <Link
