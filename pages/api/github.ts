@@ -51,6 +51,8 @@ ${req.body.references}
 
 ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
+${req.body.years_experience ? `${req.body.years_experience} years experience` : 'No experience.'}
+
 ### Anything Else
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
