@@ -20,6 +20,7 @@ interface SubmitReportRequest extends NextApiRequest {
 interface SubmitReportResponse {
   message: string
   comment_url?: string
+  preview_mode?: boolean
 }
 
 function formatReport(data: SubmitReportRequest['body']): string {
@@ -164,8 +165,8 @@ async function handler(
     }
   }
 
-  // Production mode or real GitHub test: Check GitHub configuration
-  if (!process.env.GH_BOT_TOKEN) {
+  // Production mode: Check GitHub configuration
+  if (process.env.NODE_ENV === 'production' && !process.env.GH_BOT_TOKEN) {
     return res.status(500).json({ message: 'Bot token missing. Reports must be submitted by the bot.' })
   }
 
@@ -173,10 +174,10 @@ async function handler(
     return res.status(500).json({ message: 'GitHub configuration missing' })
   }
 
-  // Use only the bot token
-  const githubToken = process.env.GH_BOT_TOKEN
+  // Use bot token if available, or a placeholder in development/preview
+  const githubToken = process.env.GH_BOT_TOKEN || (process.env.NODE_ENV !== 'production' ? 'preview-mode-token' : '')
   
-  // Server-side console log only - not visible to users in browser
+  // Log which token is being used (development only)
   if (process.env.NODE_ENV === 'development') {
     console.log('Server-side log: Using bot token for GitHub API')
   }
@@ -199,7 +200,31 @@ async function handler(
     const reportContent = formatReport(data)
 
     try {
-      // Create the comment on GitHub
+      // In preview environment, simulate a successful submission
+      if (process.env.VERCEL_ENV === 'preview' || (process.env.NODE_ENV !== 'production' && !process.env.GH_BOT_TOKEN)) {
+        console.log('Preview mode: Simulating successful report submission');
+        
+        // Simulate a comment URL for preview environments
+        const previewCommentUrl = `https://github.com/${process.env.GH_ORG || 'OpenSats'}/${process.env.GH_REPORTS_REPO || 'reports'}/issues/${data.issue_number}#preview-comment`;
+        
+        // Send email with the report (if email is configured)
+        if (process.env.EMAIL_HOST && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+          await sendReportEmail(req.session.email, data, reportContent, previewCommentUrl);
+        } else {
+          console.log('Preview mode: Email not sent (email not configured)');
+        }
+        
+        // Clear the session after successful simulation
+        req.session.destroy();
+        
+        return res.status(200).json({ 
+          message: 'success',
+          comment_url: previewCommentUrl,
+          preview_mode: true
+        });
+      }
+      
+      // For production or development with token, create the actual comment
       const comment = await octokit.rest.issues.createComment({
         owner: process.env.GH_ORG,
         repo: process.env.GH_REPORTS_REPO,
