@@ -52,11 +52,7 @@ ${req.body.references}
 ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 **Years of dev experience:**
-${
-  req.body.years_experience
-    ? `${req.body.years_experience}`
-    : '0'
-}
+${req.body.years_experience ? `${req.body.years_experience}` : '0'}
 
 ### Anything Else
 
