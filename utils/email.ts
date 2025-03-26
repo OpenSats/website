@@ -323,7 +323,6 @@ The OpenSats Team
 </html>
 `;
 
-  // Only include cc if REPORT_CC_EMAIL is set in the environment
   const options: EmailOptions = {
     to,
     subject,
@@ -331,11 +330,6 @@ The OpenSats Team
     html,
     forceDev
   };
-  
-  // Add cc only if the environment variable is set
-  if (process.env.REPORT_CC_EMAIL) {
-    options.cc = process.env.REPORT_CC_EMAIL;
-  }
 
   // Use retry logic in production, but not in development unless forced
   if (process.env.NODE_ENV === 'production' || process.env.FORCE_REAL_EMAILS === 'true') {

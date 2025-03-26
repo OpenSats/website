@@ -44,7 +44,6 @@ Configure the following environment variables:
 |----------|-------------|---------|----------|
 | `SENDGRID_API_KEY` | Your SendGrid API key | `SG.xxxxxxxxxxxxxxxxxxxxxxx` | Yes |
 | `EMAIL_FROM` | The sender email address | `support@opensats.org` | Yes |
-| `REPORT_CC_EMAIL` | Email address to CC on all report submissions | `reports@opensats.org` | No |
 | `FORCE_REAL_EMAILS` | Force sending real emails in development mode | `true` | No |
 
 ## Email Templates
