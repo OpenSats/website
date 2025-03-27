@@ -33,9 +33,11 @@ npm-debug.log*
 
 # local env files
 .env.local
+.env.local.rtf
 .env.development.local
 .env.test.local
 .env.production.local
+cookies.txt
 
 # Contentlayer
 .contentlayer
