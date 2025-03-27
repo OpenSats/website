@@ -254,7 +254,7 @@ async function handler(
         console.error('Error submitting report in development mode:', error)
         return res.status(500).json({ 
           message: 'Error submitting report',
-          error: process.env.NODE_ENV !== 'production' ? error.message : undefined
+          error: process.env.NODE_ENV === 'development' ? error.message : undefined
         })
       }
     }
@@ -323,21 +323,21 @@ async function handler(
         console.error('Error posting with bot:', error)
         return res.status(500).json({ 
           message: 'Error submitting report with bot account. Please ensure the bot has access to the repository.',
-          error: process.env.NODE_ENV !== 'production' ? error.message : undefined
+          error: process.env.NODE_ENV === 'development' ? error.message : undefined
         })
       }
     } catch (error) {
       console.error('Error submitting report:', error)
       return res.status(500).json({ 
         message: 'Error submitting report',
-        error: process.env.NODE_ENV !== 'production' ? error.message : undefined
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
       })
     }
   } catch (error) {
     console.error('Unhandled error in submit-report API:', error);
     return res.status(500).json({
       message: 'An unexpected error occurred while processing your report submission. Please try again or contact support.',
-      error: process.env.NODE_ENV !== 'production' ? error.message : undefined
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
   }
 }
