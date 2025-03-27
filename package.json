@@ -26,6 +26,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
     "babel-plugin-macros": "^3.1.0",
+    "clsx": "^2.1.1",
     "contentlayer": "0.3.0",
     "crypto-js": "^4.2.0",
     "email-validator": "^2.0.4",
