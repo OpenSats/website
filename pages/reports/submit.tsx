@@ -38,17 +38,22 @@ const ReportSubmissionPage: NextPage = () => {
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             {!grantDetails
-              ? "To get started, please enter your grant ID and the email associated with your grant application."
-              : "Please fill out all required fields in the form below."}
+              ? 'To get started, please enter your grant ID and the email associated with your grant application.'
+              : 'Please fill out all required fields in the form below.'}
           </p>
         </div>
 
         <div className="container py-12">
           <div className="lg:col-span-2 lg:mx-auto lg:w-full lg:max-w-2xl">
             {!grantDetails ? (
-              <GrantValidationForm onValidationSuccess={handleValidationSuccess} />
+              <GrantValidationForm
+                onValidationSuccess={handleValidationSuccess}
+              />
             ) : (
-              <GrantReportForm grantDetails={grantDetails} email_hash={validatedEmailHash} />
+              <GrantReportForm
+                grantDetails={grantDetails}
+                email_hash={validatedEmailHash}
+              />
             )}
           </div>
         </div>

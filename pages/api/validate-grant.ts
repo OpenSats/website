@@ -19,7 +19,10 @@ interface ValidateGrantResponse {
   email_hash?: string
 }
 
-async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateGrantResponse>) {
+async function handler(
+  req: ValidateGrantRequest,
+  res: NextApiResponse<ValidateGrantResponse>
+) {
   if (req.method !== 'POST') {
     return res.status(405).json({ valid: false, message: 'Method not allowed' })
   }
@@ -27,7 +30,9 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
   const { grant_id, email } = req.body
 
   if (!grant_id) {
-    return res.status(400).json({ valid: false, message: 'Grant ID is required' })
+    return res
+      .status(400)
+      .json({ valid: false, message: 'Grant ID is required' })
   }
 
   if (!email) {
@@ -50,10 +55,10 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
         valid: true,
         project_name: 'Nostr Game Engine',
         issue_number: 231, // The actual issue number in the reports repo
-        email_hash
+        email_hash,
       })
     }
-    
+
     // Regular test IDs
     if (grant_id === '123456' || grant_id === '234567') {
       // Store the email in the session
@@ -64,14 +69,20 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
         valid: true,
         project_name: 'Test Project',
         issue_number: 123,
-        email_hash
+        email_hash,
       })
     }
   }
 
   // Check GitHub configuration
-  if (!process.env.GH_ACCESS_TOKEN || !process.env.GH_ORG || !process.env.GH_REPORTS_REPO) {
-    return res.status(500).json({ valid: false, message: 'GitHub configuration missing' })
+  if (
+    !process.env.GH_ACCESS_TOKEN ||
+    !process.env.GH_ORG ||
+    !process.env.GH_REPORTS_REPO
+  ) {
+    return res
+      .status(500)
+      .json({ valid: false, message: 'GitHub configuration missing' })
   }
 
   try {
@@ -90,7 +101,7 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
         valid: true,
         project_name: 'Nostr Game Engine',
         issue_number: 231,
-        email_hash
+        email_hash,
       })
     }
 
@@ -102,25 +113,29 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
 
     if (searchResult.data.total_count === 0) {
       // If not found with the exact format, try a more general search
-      const fallbackSearchResult = await octokit.rest.search.issuesAndPullRequests({
-        q: `repo:${process.env.GH_ORG}/${process.env.GH_REPORTS_REPO} is:issue ${grant_id}`,
-      })
+      const fallbackSearchResult =
+        await octokit.rest.search.issuesAndPullRequests({
+          q: `repo:${process.env.GH_ORG}/${process.env.GH_REPORTS_REPO} is:issue ${grant_id}`,
+        })
 
       if (fallbackSearchResult.data.total_count === 0) {
-        return res.status(404).json({ valid: false, message: 'Grant not found, contact support for assistance' })
+        return res.status(404).json({
+          valid: false,
+          message: 'Grant not found, contact support for assistance',
+        })
       }
 
       // Get the first matching issue
       const issue = fallbackSearchResult.data.items[0]
-      
+
       // Extract the project name from the issue title
       // Format: "Project Name by Author Name"
       let projectName = issue.title || 'Unknown Project'
-      
+
       // Extract the part before "by" if it exists
-      const byIndex = projectName.indexOf(' by ');
+      const byIndex = projectName.indexOf(' by ')
       if (byIndex !== -1) {
-        projectName = projectName.substring(0, byIndex).trim();
+        projectName = projectName.substring(0, byIndex).trim()
       }
 
       // Store the email in the session
@@ -131,21 +146,21 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
         valid: true,
         project_name: projectName,
         issue_number: issue.number,
-        email_hash
+        email_hash,
       })
     }
 
     // Get the first matching issue
     const issue = searchResult.data.items[0]
-    
+
     // Extract the project name from the issue title
     // Format: "Project Name by Author Name"
     let projectName = issue.title || 'Unknown Project'
-    
+
     // Extract the part before "by" if it exists
-    const byIndex = projectName.indexOf(' by ');
+    const byIndex = projectName.indexOf(' by ')
     if (byIndex !== -1) {
-      projectName = projectName.substring(0, byIndex).trim();
+      projectName = projectName.substring(0, byIndex).trim()
     }
 
     // Store the email in the session
@@ -156,11 +171,13 @@ async function handler(req: ValidateGrantRequest, res: NextApiResponse<ValidateG
       valid: true,
       project_name: projectName,
       issue_number: issue.number,
-      email_hash
+      email_hash,
     })
   } catch (error) {
     console.error('Error validating grant:', error)
-    return res.status(500).json({ valid: false, message: 'Error validating grant' })
+    return res
+      .status(500)
+      .json({ valid: false, message: 'Error validating grant' })
   }
 }
 

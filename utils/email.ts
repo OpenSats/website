@@ -1,18 +1,18 @@
-import sgMail from '@sendgrid/mail';
+import sgMail from '@sendgrid/mail'
 
 // Initialize SendGrid with API key
 if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 }
 
 interface EmailOptions {
-  to: string;
-  subject: string;
-  text: string;
-  html: string;
-  cc?: string;
-  from?: string;
-  forceDev?: boolean;
+  to: string
+  subject: string
+  text: string
+  html: string
+  cc?: string
+  from?: string
+  forceDev?: boolean
 }
 
 /**
@@ -27,56 +27,69 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       to: !!options.to,
       subject: !!options.subject,
       text: !!options.text,
-      html: !!options.html
-    });
-    return false;
+      html: !!options.html,
+    })
+    return false
   }
 
   // Simulate email sending in development mode unless FORCE_REAL_EMAILS is set
-  if (process.env.NODE_ENV !== 'production' && process.env.FORCE_REAL_EMAILS !== 'true') {
-    const { to, subject, text } = options;
-    console.log(' [DEV MODE] Simulating email send:');
-    console.log(`To: ${to}`);
-    console.log(`Subject: ${subject}`);
-    console.log(`From: ${options.from || process.env.EMAIL_FROM || 'support@opensats.org'}`);
-    console.log('Content:', text.substring(0, 150) + (text.length > 150 ? '...' : ''));
-    console.log('[SIMULATED] Email sent successfully!');
-    return true;
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    process.env.FORCE_REAL_EMAILS !== 'true'
+  ) {
+    const { to, subject, text } = options
+    console.log(' [DEV MODE] Simulating email send:')
+    console.log(`To: ${to}`)
+    console.log(`Subject: ${subject}`)
+    console.log(
+      `From: ${
+        options.from || process.env.EMAIL_FROM || 'support@opensats.org'
+      }`
+    )
+    console.log(
+      'Content:',
+      text.substring(0, 150) + (text.length > 150 ? '...' : '')
+    )
+    console.log('[SIMULATED] Email sent successfully!')
+    return true
   }
 
   if (!process.env.SENDGRID_API_KEY) {
-    console.warn('SendGrid API key not configured. Email not sent.');
-    return false;
+    console.warn('SendGrid API key not configured. Email not sent.')
+    return false
   }
 
-  const { to, subject, text, html, cc, from } = options;
-  
+  const { to, subject, text, html, cc, from } = options
+
   try {
     // Re-initialize SendGrid with API key every time to ensure it's using the latest key
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
     const msg = {
       to,
       from: from || process.env.EMAIL_FROM || 'support@opensats.org',
       subject,
       text,
       html,
-      ...(cc ? { cc } : {})
-    };
-    
-    const startTime = Date.now();
-    await sgMail.send(msg);
-    const duration = Date.now() - startTime;
-    
-    console.log(`Email sent successfully to ${to} in ${duration}ms`);
-    return true;
-  } catch (error: any) {
-    console.error('Error sending email:', error);
-    if (error.response) {
-      console.error('  Status code:', error.code);
-      console.error('  Response body:', JSON.stringify(error.response.body, null, 2));
+      ...(cc ? { cc } : {}),
     }
-    
+
+    const startTime = Date.now()
+    await sgMail.send(msg)
+    const duration = Date.now() - startTime
+
+    console.log(`Email sent successfully to ${to} in ${duration}ms`)
+    return true
+  } catch (error: any) {
+    console.error('Error sending email:', error)
+    if (error.response) {
+      console.error('  Status code:', error.code)
+      console.error(
+        '  Response body:',
+        JSON.stringify(error.response.body, null, 2)
+      )
+    }
+
     // Log additional details for troubleshooting
     console.error('Email details:', {
       to,
@@ -84,10 +97,10 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       subject,
       textLength: text?.length || 0,
       htmlLength: html?.length || 0,
-      hasCc: !!cc
-    });
-    
-    return false;
+      hasCc: !!cc,
+    })
+
+    return false
   }
 }
 
@@ -103,35 +116,40 @@ export async function sendEmailWithRetry(
   maxRetries: number = 3,
   retryDelay: number = 1000
 ): Promise<boolean> {
-  let attempts = 0;
-  
+  let attempts = 0
+
   while (attempts < maxRetries) {
     try {
-      const result = await sendEmail(options);
-      if (result) return true;
-      
+      const result = await sendEmail(options)
+      if (result) return true
+
       // If sendEmail returned false but didn't throw, we still need to retry
-      attempts++;
+      attempts++
       if (attempts < maxRetries) {
-        const delay = retryDelay * attempts;
-        console.log(`Email sending attempt ${attempts} failed, retrying in ${delay}ms...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        const delay = retryDelay * attempts
+        console.log(
+          `Email sending attempt ${attempts} failed, retrying in ${delay}ms...`
+        )
+        await new Promise((resolve) => setTimeout(resolve, delay))
       }
     } catch (error) {
-      attempts++;
+      attempts++
       if (attempts < maxRetries) {
-        const delay = retryDelay * attempts;
-        console.error(`Email sending attempt ${attempts} failed with error, retrying in ${delay}ms:`, error);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        const delay = retryDelay * attempts
+        console.error(
+          `Email sending attempt ${attempts} failed with error, retrying in ${delay}ms:`,
+          error
+        )
+        await new Promise((resolve) => setTimeout(resolve, delay))
       } else {
-        console.error(`All ${maxRetries} email sending attempts failed:`, error);
-        return false;
+        console.error(`All ${maxRetries} email sending attempts failed:`, error)
+        return false
       }
     }
   }
-  
-  console.error(`Failed to send email after ${maxRetries} attempts`);
-  return false;
+
+  console.error(`Failed to send email after ${maxRetries} attempts`)
+  return false
 }
 
 /**
@@ -152,14 +170,16 @@ export async function sendReportConfirmationEmail(
   reportContent?: string,
   forceDev?: boolean
 ): Promise<boolean> {
-  const subject = `OpenSats Progress Report #${reportNumber} Submitted: ${projectName}`;
-  
+  const subject = `OpenSats Progress Report #${reportNumber} Submitted: ${projectName}`
+
   // Include report content in the plain text version if available
-  const reportSection = reportContent ? `
+  const reportSection = reportContent
+    ? `
 Your Report Content:
 ${reportContent}
 
-` : '';
+`
+    : ''
 
   const text = `
 Thank you for submitting your progress report for ${projectName}!
@@ -170,10 +190,12 @@ ${reportSection}If you have any questions or need assistance, please reply to th
 
 Best Regards,
 The OpenSats Team
-`;
+`
 
   // Convert Markdown to GitHub-style HTML for the report content
-  const formattedReportContent = reportContent ? convertMarkdownToHtml(reportContent) : '';
+  const formattedReportContent = reportContent
+    ? convertMarkdownToHtml(reportContent)
+    : ''
 
   const html = `
 <!DOCTYPE html>
@@ -305,12 +327,16 @@ The OpenSats Team
     
     <p>Your Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and may reach out if they have any questions.</p>
     
-    ${formattedReportContent ? `
+    ${
+      formattedReportContent
+        ? `
     <h3>Your Report Content:</h3>
     <div class="markdown-body">
       ${formattedReportContent}
     </div>
-    ` : ''}
+    `
+        : ''
+    }
     
     <p>If you have any questions or need assistance, please reply to this email or contact <a href="mailto:support@opensats.org">support@opensats.org</a>.</p>
     
@@ -321,21 +347,24 @@ The OpenSats Team
   </div>
 </body>
 </html>
-`;
+`
 
   const options: EmailOptions = {
     to,
     subject,
     text,
     html,
-    forceDev
-  };
+    forceDev,
+  }
 
   // Use retry logic in production, but not in development unless forced
-  if (process.env.NODE_ENV === 'production' || process.env.FORCE_REAL_EMAILS === 'true') {
-    return sendEmailWithRetry(options);
+  if (
+    process.env.NODE_ENV === 'production' ||
+    process.env.FORCE_REAL_EMAILS === 'true'
+  ) {
+    return sendEmailWithRetry(options)
   } else {
-    return sendEmail(options);
+    return sendEmail(options)
   }
 }
 
@@ -346,49 +375,53 @@ The OpenSats Team
  */
 function convertMarkdownToHtml(markdown: string): string {
   if (!markdown) {
-    return '';
+    return ''
   }
 
   try {
     // Simple Markdown to HTML conversion
-    return markdown
-      // Headers
-      .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-      // Bold
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Italic
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // Links
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-      // Lists - improved to handle nested lists better
-      .replace(/^\s*[\*\-] (.*$)/gm, '<li>$1</li>')
-      .replace(/^(\d+)\. (.*$)/gm, '<li>$2</li>')
-      // Code
-      .replace(/`(.*?)`/g, '<code>$1</code>')
-      // Code blocks
-      .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-      // Paragraphs (must be last)
-      .replace(/^(?!<[hl]|<li|<pre)(.+)$/gm, '<p>$1</p>')
-      // Fix multiple line breaks
-      .replace(/\n\n+/g, '\n\n')
-      // Fix lists - wrap in ul/ol tags
-      .replace(/(<li>.*?<\/li>\n*)+/g, '<ul>$&</ul>')
-      // Fix nested lists
-      .replace(/<\/ul>\s*<ul>/g, '')
-      // Escape HTML in code blocks
-      .replace(/<code>([\s\S]*?)<\/code>/g, (match, p1) => 
-        `<code>${p1.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`
-      );
+    return (
+      markdown
+        // Headers
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        // Bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Links
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+        // Lists - improved to handle nested lists better
+        .replace(/^\s*[\*\-] (.*$)/gm, '<li>$1</li>')
+        .replace(/^(\d+)\. (.*$)/gm, '<li>$2</li>')
+        // Code
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        // Code blocks
+        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+        // Paragraphs (must be last)
+        .replace(/^(?!<[hl]|<li|<pre)(.+)$/gm, '<p>$1</p>')
+        // Fix multiple line breaks
+        .replace(/\n\n+/g, '\n\n')
+        // Fix lists - wrap in ul/ol tags
+        .replace(/(<li>.*?<\/li>\n*)+/g, '<ul>$&</ul>')
+        // Fix nested lists
+        .replace(/<\/ul>\s*<ul>/g, '')
+        // Escape HTML in code blocks
+        .replace(
+          /<code>([\s\S]*?)<\/code>/g,
+          (match, p1) =>
+            `<code>${p1.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`
+        )
+    )
   } catch (error) {
-    console.error('Error converting Markdown to HTML:', error);
+    console.error('Error converting Markdown to HTML:', error)
     // Return sanitized plain text as fallback
     return markdown
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .split('\n')
-      .map(line => `<p>${line}</p>`)
-      .join('');
+      .map((line) => `<p>${line}</p>`)
+      .join('')
   }
 }
