@@ -27,6 +27,7 @@
     "autoprefixer": "^10.4.13",
     "babel-plugin-macros": "^3.1.0",
     "contentlayer": "0.3.0",
+    "crypto-js": "^4.2.0",
     "email-validator": "^2.0.4",
     "esbuild": "0.17.5",
     "github-slugger": "^1.4.0",
