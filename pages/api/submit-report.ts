@@ -9,6 +9,7 @@ import {
 } from '../../utils/sanitize'
 
 interface SubmitReportRequest extends NextApiRequest {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   session: any
   body: {
     project_name: string

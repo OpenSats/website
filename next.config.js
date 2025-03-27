@@ -62,20 +62,8 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    typescript: {
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has type errors.
-      // !! WARN !!
-      ignoreBuildErrors: true,
-    },
     eslint: {
       dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
-      // !! WARN !!
-      // Dangerously allow production builds to successfully complete even if
-      // your project has ESLint errors.
-      // !! WARN !!
-      ignoreDuringBuilds: true,
     },
     async headers() {
       return [

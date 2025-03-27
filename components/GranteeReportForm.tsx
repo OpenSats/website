@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
-import CustomLink from './Link'
 
 export default function GranteeReportForm() {
   const [loading, setLoading] = useState(false)
@@ -17,7 +16,18 @@ export default function GranteeReportForm() {
 
   const [failureReason, setFailureReason] = useState<string>()
 
-  const onSubmit = async (data: any) => {
+  interface FormData {
+    grant_id: string
+    email: string
+    period: string
+    progress: string
+    challenges: string
+    next_steps: string
+    comments: string
+    type: string
+  }
+
+  const onSubmit = async (data: FormData) => {
     setLoading(true)
     console.log(data)
 

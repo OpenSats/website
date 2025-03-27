@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 button.small {
   @apply p-1 text-sm bg-white text-black border border-black;
 }

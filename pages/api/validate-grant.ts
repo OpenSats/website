@@ -4,6 +4,7 @@ import { withSessionRoute } from '@/lib/session'
 import crypto from 'crypto'
 
 interface ValidateGrantRequest extends NextApiRequest {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   session: any
   body: {
     grant_id: string

@@ -4,6 +4,7 @@ import { withSessionRoute } from '@/lib/session'
 import { sendReportConfirmationEmail } from '../../utils/email'
 
 interface ReportBotRequest extends NextApiRequest {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   session: any
   body: {
     grant_id?: string

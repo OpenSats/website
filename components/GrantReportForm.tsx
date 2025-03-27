@@ -163,7 +163,13 @@ export default function GrantReportForm({
         console.error('Error saving form data:', e)
       }
     }
-  }, [watchAllFields, grantDetails.issue_number, isDirty, getValues])
+  }, [
+    watchAllFields,
+    grantDetails.issue_number,
+    isDirty,
+    getValues,
+    watchAllFields.report_number,
+  ])
 
   const onSubmit = async (data: GrantReportFormData) => {
     setLoading(true)

@@ -21,6 +21,7 @@ interface GrantValidationFormData {
   email: string
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface GrantValidationFormErrors {
   grant_id?: {
     type: 'required' | 'pattern'
