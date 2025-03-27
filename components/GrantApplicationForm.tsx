@@ -379,7 +379,7 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS ? 'primary' : 'disabled'}
         type="submit"
         disabled={true || loading}
       >
