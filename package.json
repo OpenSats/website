@@ -34,6 +34,7 @@
     "github-slugger": "^1.4.0",
     "gray-matter": "^4.0.2",
     "image-size": "1.0.0",
+    "iron-session": "^8.0.4",
     "mdx-bundler": "^9.0.0",
     "next": "^13.5.8",
     "next-contentlayer": "0.3.0",
