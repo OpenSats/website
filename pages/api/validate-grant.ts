@@ -8,6 +8,7 @@ interface ValidateGrantRequest extends NextApiRequest {
     grantId?: string
     issueNumber?: number
     projectName?: string
+    save: () => Promise<void>
   }
   body: {
     grant_id: string
