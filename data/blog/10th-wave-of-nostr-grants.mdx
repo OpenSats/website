@@ -1,0 +1,166 @@
+---
+title: "Tenth Wave of Nostr Grants"
+date: '2025-03-27'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+draft: false
+authors: ['default', 'arvin', 'julian']
+images: ['/static/images/blog/73-tenth-wave-of-nostr-grants.jpg']
+summary: "OpenSats is funding seven more open-source projects advancing the nostr ecosystem."
+---
+
+We're excited to introduce our latest wave of grants, supporting seven
+innovative projects that showcase the growing versatility of the nostr
+ecosystem.
+
+This round features four first-time grant recipients working on
+censorship-resistant group communication, a decentralized app store,
+interoperability tools, and hypermedia infrastructure—each expanding the
+boundaries of what's possible on nostr. It also includes renewed support for
+three projects advancing private group messaging, Lightning payments via nostr,
+and modular client experiences.
+
+The four first-time project grants in this wave are:
+
+- [Chachi](#chachi)
+- [Zapstore](#zapstore)
+- [HyperNote](#hypernote)
+- [Nostr Epoxy](#nostr-epoxy)
+
+In addition, OpenSats has renewed project grants for:
+
+- [futr](/blog/7th-wave-of-nostr-grants#futr)
+- [Npub.cash](/blog/nostr-grants-july-2024#npubcash)
+- [Notedeck](/blog/7th-wave-of-nostr-grants#notedeck)
+
+Our ability to support these projects is made possible by the generosity of our
+donors. If you would like to help us continue funding important advancements
+within the nostr ecosystem, please consider making a donation to The Nostr Fund.
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+Let's dive in and learn about how each project is contributing to the future of
+nostr.
+
+---
+
+### Chachi
+​[Chachi](https://chachi.chat/) is a relay-based group client implementing
+[NIP-29](https://github.com/nostr-protocol/nips/blob/master/29.md), designed to
+facilitate mobile-friendly communication across various content types. By
+leveraging open standards like nostr for communications and Blossom for file
+hosting, chachi empowers communities—such as open-source projects, meetups,
+and topic-based groups—to choose where to store their messages and files,
+ensuring interoperability and freeing users from client or server lock-in. The
+platform supports diverse content, including text notes, long-form content,
+polls, highlights, and custom emojis, with plans to incorporate video, audio,
+wikis, and calendar events.​
+
+With the support of this grant, chachi aims to enhance its feature set by
+implementing synchronized unread state across clients, introducing a
+comprehensive notifications section, and enabling
+[NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) direct
+messages with unread state synchronization. Additional planned developments
+include refined group administration tools, enriched user profiles, Progressive
+Web App (PWA) capabilities for mobile installation, multiple login methods
+([NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md),
+[NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md), and
+read-only with
+[NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md)), improved
+onboarding, and bitcoin integration features such as sending
+[Zaps](https://github.com/nostr-protocol/nips/blob/master/57.md) and displaying
+Zaps in posts and chats. These advancements are set to further chachi's mission
+of providing decentralized, user-centric communication solutions.
+
+Repository: [purrgrammer/chachi](https://github.com/purrgrammer/chachi)  
+License: MIT
+
+### Zapstore
+[Zapstore](https://zapstore.dev/) is a decentralized, permissionless app store
+built on nostr to give developers and users greater
+control over their software experience. By allowing developers to
+cryptographically sign their releases and publish them via nostr events and
+relays, Zapstore ensures censorship-resistant distribution. Users can verify
+binaries before installation and engage with the social discovery
+layer—recommending apps, following trusted developers, and zapping
+value-for-value bitcoin payments directly. Zapstore supports Tor usage,
+account-less operation, and local-first architecture, making it fast, private,
+and usable even offline or with poor connectivity. A command-line tool
+(`zapstore-cli`) enables developers to publish apps and act as a package manager
+across platforms like Mac and Linux.
+
+With the support of this grant, efforts will focus on enhancing user-friendly
+app and relay management tools, supporting a wider variety of DVMs, and
+fostering a more diverse ecosystem of relays. On the social side, features like
+ratings, comments, and curated app packs will improve discovery and engagement.
+The project also plans to extend support to MacOS, Linux, and potentially PWAs,
+while continuing to develop UX improvements for developers, including
+self-signing workflows and bunker support. Further goals include integrating
+with package ecosystems like Homebrew via proxy relays and advancing the open
+app NIP spec to encourage third-party participation. Through these initiatives,
+Zapstore hopes to reduce developer dependence on big tech and foster a thriving,
+open-source app economy.
+
+Repository: [zapstore/zapstore](https://github.com/zapstore/zapstore)  
+License: MIT
+
+### HyperNote
+[HyperNote](https://www.hypernote.club) is a protocol for applications to
+interpret [hypermedia](https://hypermedia.systems/hypermedia-a-reintroduction/)
+on nostr. Embracing the "dumb relay, smart client" design philosophy, HyperNote
+stores HTML-like content and interactions as events on relays, while state is
+maintained, reconstructed, and interpreted by clients. Much like how hypermedia
+builds expressiveness on top of the web's stable foundations, HyperNote adds
+rich interactivity to nostr without requiring changes to the underlying
+protocol.
+
+With the support of this grant, the project aims to lower the barrier to entry
+for developers building applications on the HyperNote framework. HyperNote plans
+to create a reference implementation using the Raylib library and the Zig
+programming language, and a webview integration to make it easy for existing
+nostr clients to integrate Hypernote. In addition, they aim to rebuild existing
+applications including Guestbook, DVM Chess, and Slideshow, as well as launch a
+new "Instagram Stories" application. Through these efforts, HyperNote seeks to
+catalyze nostr's own Geocities/MySpace moment—reviving the open, expressive
+ethos of the early web.
+
+Repository: [futurepaul/hypernote](https://github.com/futurepaul/hypernote)  
+License: MIT
+
+### Nostr Epoxy
+Nostr Epoxy is a nostr-based paid WebSocket proxy that allows users to connect
+to relays and other WebSocket services, such as [Cashu
+mints](https://docs.cashu.space/mints). Whether hampered by network
+restrictions, censorship, or infrastructure limitations, Nostr Epoxy enables
+connectivity by acting as a bridge between different networks, including Tor,
+I2P, and Hyper. By integrating in-band Cashu payments, it also incentivizes
+proxy operators to maintain reliable infrastructure, fostering a more resilient
+and decentralized ecosystem.
+
+With the support of this grant, Nostr Epoxy aims to further develop its
+capabilities by implementing features such as random message delays to mitigate
+timing attacks, deploying globally distributed proxies in regions like North
+America, South America, Europe, and Asia, and encrypting all messages to ensure
+end-to-end security. These advancements will enhance user privacy, improve
+network scalability, and reduce reliance on traditional DNS and SSL protocols,
+contributing to a more open and censorship-resistant internet.
+
+Repository:
+[nostr-epoxy](https://github.com/Origami74/nostr-epoxy-reverse-proxy)  
+License: GPL v3
+
+---
+
+As nostr continues to evolve beyond a simple relay-based protocol into a
+foundational layer for decentralized identity, communication, and financial
+transactions, the importance of supporting innovative projects that push the
+boundaries of possibility becomes clearer than ever.
+
+Our ability to foster these advancements depends on the generosity of
+donors—if you'd like to help drive Nostr's growth, consider making a donation
+to The Nostr Fund.
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
