@@ -1,3 +1,4 @@
+// This file implements session management using iron-session
 import { getIronSession } from 'iron-session'
 import {
   NextApiHandler,
@@ -8,25 +9,18 @@ import {
 } from 'next'
 import { ServerResponse } from 'http'
 
-// Extend the NextApiRequest type to include session
-declare module 'next' {
-  interface NextApiRequest {
-    session: {
-      email?: string
-      destroy: () => Promise<void>
-      save: () => Promise<void>
+// This is where we specify the typings of req.session.*
+declare module 'iron-session' {
+  interface IronSessionData {
+    email?: string
+    user?: {
+      id: number
+      admin?: boolean
     }
-  }
-}
-
-// Extend the IncomingMessage type for GetServerSideProps
-declare module 'http' {
-  interface IncomingMessage {
-    session?: {
-      email?: string
-      destroy: () => Promise<void>
-      save: () => Promise<void>
-    }
+    grant_id?: string
+    issue_number?: number
+    project_name?: string
+    report_number?: string
   }
 }
 
@@ -42,38 +36,31 @@ export const sessionOptions = {
   },
 }
 
-// Wrapper for API routes
 export function withSessionRoute(handler: NextApiHandler) {
-  return async function newHandler(
+  return async function withSessionRouteWrapper(
     req: NextApiRequest,
     res: NextApiResponse
-  ): Promise<unknown> {
-    req.session = await getIronSession(req, res, sessionOptions)
+  ) {
+    const session = await getIronSession(req, res, sessionOptions)
+    // @ts-ignore - Type compatibility issues between iron-session versions
+    req.session = session
     return handler(req, res)
   }
 }
 
-// Wrapper for SSR pages
-export function withSessionSsr<P extends Record<string, unknown>>(
-  handler: (
-    context: GetServerSidePropsContext
-  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
-) {
+export function withSessionSsr<
+  P extends { [key: string]: unknown } = { [key: string]: unknown },
+>(handler: (context: GetServerSidePropsContext) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>) {
   return async function newHandler(
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> {
-    context.req.session = await getIronSession(
+    const session = await getIronSession(
       context.req,
       context.res as ServerResponse,
       sessionOptions
     )
+    // @ts-ignore - Type compatibility issues between iron-session versions
+    context.req.session = session
     return handler(context)
-  }
-}
-
-// Type for the session data
-declare module 'iron-session' {
-  interface IronSessionData {
-    email?: string
   }
 }
