@@ -49,8 +49,12 @@ export function withSessionRoute(handler: NextApiHandler) {
 }
 
 export function withSessionSsr<
-  P extends { [key: string]: unknown } = { [key: string]: unknown },
->(handler: (context: GetServerSidePropsContext) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>) {
+  P extends { [key: string]: unknown } = { [key: string]: unknown }
+>(
+  handler: (
+    context: GetServerSidePropsContext
+  ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
+) {
   return async function newHandler(
     context: GetServerSidePropsContext
   ): Promise<GetServerSidePropsResult<P>> {
