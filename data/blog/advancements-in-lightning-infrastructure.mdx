@@ -257,14 +257,11 @@ provides a modular, community-driven alternative, built on the Lightning
 Development Kit (LDK).
 
 With [support](/blog/8th-wave-of-bitcoin-grants#lampo) from OpenSats, the
-project has achieved a significant milestone by integrating with `lnprototest`,
+project has achieved a significant milestone by contributing to the integration of LDK with `lnprototest`,
 a test suite designed to rigorously validate Lightning protocol behavior. This
-work enhances Lampo's reliability, ensures adherence to Lightning standards, and
-strengthens LDK's overall robustness, giving developers greater confidence when
-testing their implementations. By enabling automated, standardized testing
-through `lnprototest`, Lampo helps reduce the risks of protocol inconsistencies
-and implementation errors—challenges that can significantly impact Lightning's
-reliability.
+work enhances LDK's reliability, ensures adherence to Lightning standards, and
+strengthens its overall robustness, giving developers greater confidence when
+testing their implementations. A key part of this effort was the launch of the [`ldk-lnprototest`](https://pypi.org/project/ldk-lnprototest/) package on PyPI. This package provides a runner that facilitates the integration of LDK with `lnprototest`, enabling automated and standardized testing. By reducing the risks of protocol inconsistencies and implementation errors—challenges that can significantly impact Lightning's reliability—this tool ensures a more robust and predictable development process for LDK-based implementations like Lampo.
 
 >Building reliable Lightning infrastructure requires both rigorous testing and
 >continuous improvements. The LDK-Lnprototest integration and enhancements to
