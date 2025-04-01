@@ -1,4 +1,5 @@
 import sgMail from '@sendgrid/mail'
+import { marked } from 'marked'
 
 // Initialize SendGrid with API key
 if (process.env.SENDGRID_API_KEY) {
@@ -163,208 +164,103 @@ export async function sendEmailWithRetry(
  * @returns Promise that resolves when email is sent
  */
 export async function sendReportConfirmationEmail(
-  to: string,
+  email: string,
   projectName: string,
   reportNumber: string,
   reportUrl: string,
-  reportContent?: string,
-  forceDev?: boolean
+  reportContent: string
 ): Promise<boolean> {
-  const subject = `OpenSats Progress Report #${reportNumber} Submitted: ${projectName}`
+  // Convert markdown to HTML
+  const htmlContent = marked(reportContent, {
+    gfm: true,
+    breaks: true,
+  })
 
-  // Include report content in the plain text version if available
-  const reportSection = reportContent
-    ? `
-Your Report Content:
-${reportContent}
-
-`
-    : ''
-
-  const text = `
-Thank you for submitting your progress report for ${projectName}!
-
-Your Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and may reach out if they have any questions.
-
-${reportSection}If you have any questions or need assistance, please reply to this email or contact support@opensats.org.
-
-Best Regards,
-The OpenSats Team
-`
-
-  // Convert Markdown to GitHub-style HTML for the report content
-  const formattedReportContent = reportContent
-    ? convertMarkdownToHtml(reportContent)
-    : ''
-
-  const html = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #24292e;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .header {
-      background-color: #f97316;
-      padding: 20px;
-      text-align: center;
-      color: white;
-      border-radius: 5px 5px 0 0;
-    }
-    .content {
-      padding: 20px;
-      border: 1px solid #e1e4e8;
-      border-top: none;
-      border-radius: 0 0 5px 5px;
-    }
-    .button {
-      display: inline-block;
-      background-color: #f97316;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin: 20px 0;
-    }
-    .footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #6a737d;
-      text-align: center;
-    }
-    /* GitHub Markdown Styles */
-    .markdown-body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-      word-wrap: break-word;
-      background-color: #f6f8fa;
-      border: 1px solid #e1e4e8;
-      border-radius: 6px;
-      padding: 16px;
-      margin: 20px 0;
-    }
-    .markdown-body h1 {
-      padding-bottom: 0.3em;
-      font-size: 2em;
-      border-bottom: 1px solid #eaecef;
-      margin-top: 24px;
-      margin-bottom: 16px;
-      font-weight: 600;
-      line-height: 1.25;
-    }
-    .markdown-body h2 {
-      padding-bottom: 0.3em;
-      font-size: 1.5em;
-      border-bottom: 1px solid #eaecef;
-      margin-top: 24px;
-      margin-bottom: 16px;
-      font-weight: 600;
-      line-height: 1.25;
-    }
-    .markdown-body h3 {
-      font-size: 1.25em;
-      margin-top: 24px;
-      margin-bottom: 16px;
-      font-weight: 600;
-      line-height: 1.25;
-    }
-    .markdown-body p {
-      margin-top: 0;
-      margin-bottom: 16px;
-    }
-    .markdown-body ul, .markdown-body ol {
-      padding-left: 2em;
-      margin-top: 0;
-      margin-bottom: 16px;
-    }
-    .markdown-body li {
-      margin-top: 0.25em;
-    }
-    .markdown-body a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-    .markdown-body a:hover {
-      text-decoration: underline;
-    }
-    .markdown-body code {
-      padding: 0.2em 0.4em;
-      margin: 0;
-      font-size: 85%;
-      background-color: rgba(27,31,35,0.05);
-      border-radius: 3px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    }
-    .markdown-body pre {
-      word-wrap: normal;
-      padding: 16px;
-      overflow: auto;
-      font-size: 85%;
-      line-height: 1.45;
-      background-color: #f6f8fa;
-      border-radius: 3px;
-      margin-top: 0;
-      margin-bottom: 16px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <h2>Progress Report Submitted</h2>
-  </div>
-  <div class="content">
-    <p>Thank you for submitting your progress report for <strong>${projectName}</strong>!</p>
-    
-    <p>Your Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and may reach out if they have any questions.</p>
-    
-    ${
-      formattedReportContent
-        ? `
-    <h3>Your Report Content:</h3>
-    <div class="markdown-body">
-      ${formattedReportContent}
-    </div>
-    `
-        : ''
-    }
-    
-    <p>If you have any questions or need assistance, please reply to this email or contact <a href="mailto:support@opensats.org">support@opensats.org</a>.</p>
-    
-    <p>Best Regards,<br>The OpenSats Team</p>
-  </div>
-  <div class="footer">
-    <p>&copy; ${new Date().getFullYear()} OpenSats. All rights reserved.</p>
-  </div>
-</body>
-</html>
-`
-
-  const options: EmailOptions = {
-    to,
-    subject,
-    text,
-    html,
-    forceDev,
+  const msg = {
+    to: email,
+    from: 'support@opensats.org',
+    subject: `OpenSats Progress Report #${reportNumber} Submitted: ${projectName}`,
+    text: `Thank you for submitting your progress report for ${projectName}!\n\nYour Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.\n\nReport Content:\n${reportContent}\n\nIf you have any questions or need assistance, please reply to this email or contact support@opensats.org.\n\nBest Regards,\nThe OpenSats Team`,
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .header {
+            background-color: #f97316;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            border-radius: 5px 5px 0 0;
+          }
+          .content {
+            padding: 20px;
+            border: 1px solid #e1e4e8;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+          }
+          .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #6a737d;
+            text-align: center;
+          }
+          .report-content {
+            background-color: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 20px 0;
+          }
+          .report-content h2 {
+            margin-top: 0;
+            color: #444;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <h2>Progress Report Submitted</h2>
+        </div>
+        <div class="content">
+          <p>Thank you for submitting your progress report for <strong>${projectName}</strong>!</p>
+          
+          <p>Your Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.</p>
+          
+          <div class="report-content">
+            <h2>Your Report Content:</h2>
+            ${htmlContent}
+          </div>
+          
+          <p>If you have any questions or need assistance, please reply to this email or contact <a href="mailto:support@opensats.org">support@opensats.org</a>.</p>
+          
+          <p>Best Regards,<br>The OpenSats Team</p>
+        </div>
+        <div class="footer">
+          <p>&copy; ${new Date().getFullYear()} OpenSats. All rights reserved.</p>
+        </div>
+      </body>
+      </html>
+    `,
   }
 
-  // Use retry logic in production, but not in development unless forced
-  if (
-    process.env.NODE_ENV === 'production' ||
-    process.env.FORCE_REAL_EMAILS === 'true'
-  ) {
-    return sendEmailWithRetry(options)
-  } else {
-    return sendEmail(options)
+  try {
+    await sgMail.send(msg)
+    console.log('Email sent successfully to', email)
+    return true
+  } catch (error) {
+    console.error('Error sending email:', error)
+    return false
   }
 }
 

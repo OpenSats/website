@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
+import dynamic from 'next/dynamic'
 import * as EmailValidator from 'email-validator'
+
+// Dynamically import the component with SSR disabled
+const DynamicFormButton = dynamic(() => Promise.resolve(FormButton), {
+  ssr: false,
+})
 
 interface ValidationResult {
   grant_details: {
@@ -137,15 +143,14 @@ export default function GrantValidationForm({
         )}
       </div>
 
-      <div className="flex justify-center">
-        <FormButton
-          type="submit"
+      <div className="mt-8 flex justify-center">
+        <DynamicFormButton
           loading={loading}
           variant={loading ? 'disabled' : 'primary'}
-          className="px-8"
+          className="text-base shadow-sm"
         >
           Start Report
-        </FormButton>
+        </DynamicFormButton>
       </div>
 
       {error && (

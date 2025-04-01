@@ -40,7 +40,8 @@ export default async function handler(
       email,
       'Test Project',
       '1',
-      'https://github.com/OpenSats/reports/issues/123#issuecomment-123456789'
+      'https://github.com/OpenSats/reports/issues/123#issuecomment-123456789',
+      '## Test Report Content\n\nThis is a test report.'
     )
 
     if (result) {

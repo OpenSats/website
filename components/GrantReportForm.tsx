@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
-import FormButton from '@/components/FormButton'
 import CustomLink from '@/components/Link'
 import { useRouter } from 'next/router'
 import ReportPreview from '@/components/ReportPreview'
@@ -35,7 +34,6 @@ export default function GrantReportForm({
   email_hash,
 }: GrantReportFormProps) {
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string>()
   const [showPreview, setShowPreview] = useState(false)
@@ -130,7 +128,7 @@ export default function GrantReportForm({
       console.error('Error loading saved form data:', e)
       // If there's an error, we just continue with empty form
     }
-  }, [grantDetails.issue_number, setValue])
+  }, [grantDetails.issue_number, setValue, watchAllFields.report_number])
 
   // Save form data to localStorage whenever it changes
   useEffect(() => {
@@ -172,11 +170,10 @@ export default function GrantReportForm({
   ])
 
   const onSubmit = async (data: GrantReportFormData) => {
-    setLoading(true)
     setError(undefined)
 
     try {
-      const response = await fetchPostJSON('/api/submit-report', {
+      const response = await fetchPostJSON('/api/report-bot', {
         ...data,
         issue_number: grantDetails.issue_number,
         email_hash,
@@ -184,7 +181,6 @@ export default function GrantReportForm({
 
       if (response.error) {
         setError(response.error)
-        setLoading(false)
         return
       }
 
@@ -192,13 +188,11 @@ export default function GrantReportForm({
       clearSavedData()
 
       setSubmitted(true)
-      setLoading(false)
       router.push('/reports/success')
     } catch (e) {
       setError(
         'Error submitting report. Your data has been saved locally. Please try again later.'
       )
-      setLoading(false)
     }
   }
 
@@ -479,9 +473,13 @@ export default function GrantReportForm({
 
       {!showPreview ? (
         <div className="flex justify-end">
-          <FormButton type="button" onClick={() => setShowPreview(true)}>
+          <button
+            type="button"
+            onClick={() => setShowPreview(true)}
+            className="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+          >
             Preview Report
-          </FormButton>
+          </button>
         </div>
       ) : (
         <>
@@ -498,13 +496,7 @@ export default function GrantReportForm({
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z"
                 />
               </svg>
               Report Preview
@@ -545,9 +537,12 @@ export default function GrantReportForm({
                 </svg>
                 Back to Edit
               </button>
-              <FormButton type="submit" loading={loading}>
+              <button
+                type="submit"
+                className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-600 dark:hover:bg-orange-700"
+              >
                 Submit Report
-              </FormButton>
+              </button>
             </div>
           </div>
         </>
@@ -634,4 +629,29 @@ export default function GrantReportForm({
       </div>
     </form>
   )
+
+  if (recoveredData) {
+    return (
+      <div className="mt-4 flex justify-end space-x-2">
+        <button
+          type="button"
+          onClick={() => {
+            clearSavedData()
+            reset({
+              project_name: grantDetails.project_name,
+              report_number: '',
+              time_spent: '',
+              next_quarter: '',
+              money_usage: '',
+              help_needed: '',
+            })
+            setRecoveredData(false)
+          }}
+          className="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+        >
+          Clear Data
+        </button>
+      </div>
+    )
+  }
 }
