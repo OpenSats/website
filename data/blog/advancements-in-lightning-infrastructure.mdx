@@ -147,26 +147,24 @@ has [made important
 advancements](https://gitlab.com/lightning-signer/validating-lightning-signer/-/commits/main?ref_type=HEADS)
 for both individual users and enterprise deployments. The
 [release](https://gitlab.com/lightning-signer/validating-lightning-signer/-/releases)
-of Beta 3 introduced multi-signer functionality, ensuring that Lightning node
-operators could enforce additional security policies by requiring multiple
-validation checks before authorizing transactions. The update also optimized
-performance, refined monitoring capabilities, and introduced a Dockerized
-deployment model, streamlining integration for developers and businesses seeking
-dependable Lightning security.
+of Beta 3 introduced tag-team signing functionality, allowing multiple signers 
+to authorize transactions. The update also optimized performance, refined monitoring 
+capabilities, and introduced a Dockerized deployment model, streamlining integration 
+for developers and businesses seeking dependable Lightning security.
 
 VLS has also expanded its footprint within the broader Lightning ecosystem
-through various integrations. Notably, the project revived
+through various integrations. Notably, the project created
 [lnrod](https://gitlab.com/lightning-signer/lnrod), a reference implementation
 that facilitates VLS compatibility with LDK-based nodes, broadening its
-usability for developers building on the Lightning Development Kit. VLS also
-powers secure transaction signing for [Breez](https://breez.technology/),
-[Relai](https://relai.app/), and several other Lightning businesses. Another
-major step forward was VLS's integration with
-[Greenlight](https://blockstream.com/lightning/greenlight/), a hosted Lightning
-node service run by Blockstream. By resolving key security issues in
-Greenlight's implementation, VLS has helped strengthen the security model of
-remote node hosting, an area of growing interest for enterprises and custodial
-service providers. As Christian Decker, Core Engineer at Blockstream put it:
+usability for developers building on the Lightning Development Kit. Another 
+major step forward was VLS's integration with 
+[Greenlight](https://blockstream.com/lightning/greenlight/), a hosted Lightning 
+node service run by Blockstream, which powers secure transaction signing for 
+[Breez](https://breez.technology/), [Relai](https://relai.app/), and several 
+other Lightning businesses. By providing enterprise-grade security for Greenlight's 
+implementation, VLS has helped strengthen the security model of remote node 
+hosting, an area of growing interest for enterprises and custodial service providers. 
+As Christian Decker, Core Engineer at Blockstream put it:
 
 >VLS allowed Greenlight to be developed at breakneck speed, without the risk.
 >It is the fundamental building block, and central to the non-custodial nature
@@ -174,14 +172,12 @@ service providers. As Christian Decker, Core Engineer at Blockstream put it:
 
 Looking ahead, VLS aims for full mainnet readiness within a year, with plans 
 to add support for new Lightning features like splicing and dual funding. 
-The team is focusing on enabling enterprises to confidently manage millions 
-in channel funds. Work is already underway to bring support for LND through the
-[lndsigner](https://github.com/NYDIG/lndsigner) project, a step toward making
-VLS accessible to a broader range of Lightning implementations. Additionally,
-planned developments include security features such as Verifiable Secret Sharing
-(VSS), Bolt 12 enhancements, and L402 protocol integration. This year, the
-project aims to introduce multi-sig capabilities for Lightning transactions,
-further strengthening security for high-value and institutional use cases.
+The team is also focusing on enabling enterprises to confidently manage millions 
+in channel funds. Additionally, planned developments include security features 
+such as Versioned Storage Service (VSS), Bolt 12 enhancements, and L402 protocol 
+integration. In the future, the project aims to introduce multi-sig capabilities 
+for Lightning transactions, further strengthening security for high-value and 
+institutional use cases.
 
 Through these advancements, VLS pushes the boundaries of what's possible in
 Lightning Network security, ensuring that Bitcoin's most widely used and
