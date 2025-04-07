@@ -101,15 +101,9 @@ a mechanism that allows two participants to collaboratively open channels.
 Because Splicing and Dual Funding share underlying transaction logic, progress
 on one directly benefits the other.
 
-This work has required frequent releases to keep pace with LDK's rapid evolution
-and ensure compatibility with the latest protocol updates. In parallel, Splicing
-messages (including `splice_locked`) have been implemented, along with support
-for `Pay-After-Splice` and `Splice-After-Pay`—features that allow channels to
-be resized dynamically without interrupting active transactions.
-
 As part of the ongoing effort to integrate Splicing into LDK, project developer
 [Optout](https://github.com/optout21) has been conducting end-to-end testing in
-`ldk-node`, `ldk-sample`, and `ldk-node-sample`, assessing stability and
+`ldk-sample`, and `ldk-node-sample`, assessing stability and
 readiness for integration. Although several foundational pull requests have been
 merged, further work is needed to finalize integration into LDK and
 ensure interoperability before Splicing is fully production-ready within LDK. Once complete, it
