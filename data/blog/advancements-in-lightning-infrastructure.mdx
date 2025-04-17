@@ -1,0 +1,363 @@
+---
+title: "Advancements in Lightning Infrastructure"
+date: '2025-04-17'
+tags: ['OpenSats', 'bitcoin', 'impact', 'lightning']
+authors: ['default', 'arvin', 'julian']
+images: ['/static/images/blog/74-advancements-in-lightning-infrastructure.jpg']
+draft: false
+summary: "An impact report from the front-lines of Lightning development."
+---
+
+Unlocking Bitcoin's full potential as a global, peer-to-peer currency means
+building beyond the base layer. The Lightning Network is leading that
+charge—and thanks to dedicated open-source contributors, it's becoming faster,
+more secure, and easier to use every day. While the base layer ensures
+decentralization and security, higher layers with different trade-off
+characteristics are required to facilitate high-velocity micro-transactions,
+streaming payments, and everyday commerce. That’s where Lightning comes in.
+
+OpenSats grantees are at the forefront of building this foundational
+infrastructure to enhance the Lightning Network's liquidity, interoperability,
+testing, and security. These advancements are critical to ensuring Bitcoin can
+function as a fast, reliable, and scalable payment system. We're highlighting
+the following projects supported by our General Fund, with funding rounds
+announced in [December 2023](/blog/bitcoin-grants-december-2023), [February
+2024](/blog/bitcoin-grants-feb-2024), and [October
+2024](/blog/8th-wave-of-bitcoin-grants) respectively:
+
+- [Splicing](#splicing)
+- [Validating Lightning Signer](#validating-lightning-signer-vls)
+- [BLAST](#blast)
+- [Lampo](#lampo)
+- [Lnprototest](#lnprototest)
+
+Let's explore the progress these projects made and the impact they're having on
+the Lightning Network.
+
+---
+
+### Splicing
+
+[Splicing](https://lightningsplice.com/splicing_explained.html) has long been
+recognized as a crucial upgrade for the Lightning Network, allowing users to
+dynamically adjust channel capacity without downtime. By removing the need to
+close and reopen channels, Splicing not only reduces friction and costs but also
+streamlines liquidity management.
+
+Dusty Daemon, a Splicing pioneer and an OpenSats [Long-Term Support
+recipient](/blog/dusty-daemon-receives-lts-grant), highlights Splicing's impact
+on the Lightning Network:
+
+>For the typical user, this means a near doubling of the capacity to move
+>liquidity through the network. The increased liquidity flows improve all
+>aspects of Lightning including payment speed, payment fees, and payment
+>reliability.
+
+Since receiving his grant, Dusty has advanced Splicing
+[interoperability](https://github.com/ElementsProject/lightning/pull/8031)
+across multiple implementations, successfully testing it between Core Lightning
+(CLN) and Eclair. By resolving protocol-level inconsistencies, his work marks a
+major step toward universal Splicing adoption across the Lightning ecosystem.
+
+Beyond direct interoperability, Dusty has introduced [Splice
+Script](https://github.com/ElementsProject/lightning/pull/6980), a structured
+scripting language that allows users to automate and optimize liquidity
+management tasks—such as batching on-chain movements or scheduling
+transactions based on fee conditions. The integration of its parser, compiler,
+and validator into CLN has transformed Splice Script into a practical tool for
+both node operators and application developers. Additionally, the Splice Solver
+component helps streamline transaction construction, reducing errors, and making
+complex Splicing operations more accessible.
+
+The impact of these enhancements goes beyond just payment channels. By making
+on-chain transaction logic more efficient, Splicing and Splice Script pave the
+way for improved privacy in Bitcoin transactions, including
+[Coinjoins](https://bitcoinops.org/en/topics/coinjoin/) and
+[Payjoins](/blog/developing-advancements-in-onchain-privacy#async-payjoin). As
+Dusty explains:
+
+>The dream of higher-privacy decentralized on-chain coin sharing is brought
+>ever so closer to reality with these improvements. These privacy projects have
+>always been separate from Lightning but Splicing makes it possible to merge them
+>together, creating a larger base from which to derive anonymity.
+
+As regulatory pressures mount, building resilient, decentralized infrastructure
+is more important than ever. These enhancements reinforce self-custody and
+censorship resistance to ensure Bitcoin remains a tool for financial freedom.
+
+In addition to supporting Dusty's work on Splicing, OpenSats has also funded an
+initiative to integrate [Splicing into
+LDK](/blog/bitcoin-grants-feb-2024#splicing-in-ldk). Over the past several
+months, efforts to integrate Splicing into LDK have yielded meaningful strides
+that led to a key breakthrough: the integration of [Interactive Transaction
+Construction](https://github.com/lightningdevkit/rust-lightning/pull/2419). This
+feature closely ties in with [Dual
+Funding](https://github.com/lightningdevkit/rust-lightning/issues/1621#issue-1308076236),
+a mechanism that allows two participants to collaboratively open channels.
+Because Splicing and Dual Funding share underlying transaction logic, progress
+on one directly benefits the other.
+
+As part of the ongoing effort to integrate Splicing into LDK, project developer
+[Optout](https://github.com/optout21) has been conducting end-to-end testing in
+`ldk-sample`, and `ldk-node-sample`, assessing stability and
+readiness for integration. Although several foundational pull requests have been
+merged, further work is needed to finalize integration into LDK and
+ensure interoperability before Splicing is fully production-ready within LDK. Once complete, it
+will bring a substantial improvement to how wallets and applications manage
+Lightning liquidity, reducing on-chain costs and making user experiences more
+efficient.
+
+With Splicing integration in LDK progressing steadily, Optout's work and Dusty
+Daemon's expanded tooling are converging to shape the future of Lightning
+liquidity management. LDK's next milestones include finalizing message handling
+and broader interoperability tests, while Dusty is pushing forward with
+Transaction Intention Language (TIL)—a feature that further automates
+collaborative transactions and channel rebalancing.
+
+With Splicing adoption continuing to grow and Splice Script steadily maturing,
+these projects are continually making the Lightning Network more efficient,
+private, and accessible for all users.
+
+### Validating Lightning Signer (VLS)
+
+Securing private keys is one of the most critical issues in Lightning node
+operations. Traditionally, Lightning Network implementations store private keys
+directly on the node for transaction signing, exposing them to potential
+compromise in the event of a security breach. [Validating Lightning
+Signer](https://vls.tech/) (VLS) addresses this vulnerability by shifting key
+storage and transaction validation to an external signer, ensuring that even if
+a Lightning node is compromised, an attacker cannot access or misuse private
+keys to steal funds. This separation significantly improves security without
+diminishing the flexibility or performance required for effective Lightning
+Network operations and management.
+
+Since receiving OpenSats
+[funding](/blog/bitcoin-grants-december-2023#validating-lightning-signer), VLS
+has [made important
+advancements](https://gitlab.com/lightning-signer/validating-lightning-signer/-/releases)
+for both individual users and enterprise deployments. The
+[release](https://gitlab.com/lightning-signer/validating-lightning-signer/-/releases)
+of Beta 3 introduced tag-team signing functionality, allowing multiple signers 
+to authorize transactions. The update also optimized performance, refined monitoring 
+capabilities, and introduced a Dockerized deployment model, streamlining integration 
+for developers and businesses seeking dependable Lightning security.
+
+VLS has also expanded its footprint within the broader Lightning ecosystem
+through various integrations. Notably, the project created
+[lnrod](https://gitlab.com/lightning-signer/lnrod), a reference implementation
+that facilitates VLS compatibility with LDK-based nodes, broadening its
+usability for developers building on the Lightning Development Kit. Another 
+major step forward was VLS's integration with 
+[Greenlight](https://blockstream.com/lightning/greenlight/), a hosted Lightning 
+node service run by Blockstream, which powers secure transaction signing for 
+[Breez](https://breez.technology/), [Relai](https://relai.app/), and several 
+other Lightning businesses. By providing enterprise-grade security for Greenlight's 
+implementation, VLS has helped strengthen the security model of remote node 
+hosting, an area of growing interest for enterprises and custodial service providers. 
+As Christian Decker, Core Engineer at Blockstream put it:
+
+>VLS allowed Greenlight to be developed at breakneck speed, without the risk.
+>It is the fundamental building block, and central to the non-custodial nature
+>of Greenlight.
+
+Looking ahead, VLS aims for full mainnet readiness within a year, with plans 
+to add support for new Lightning features like splicing and dual funding. 
+The team is also focusing on helping enterprises to confidently manage millions 
+in channel funds. Additionally, planned developments include improved support 
+for routing and security features such as VLS running on secure enclaves. 
+In the future, the project aims to introduce multi-sig capabilities for Lightning 
+transactions, further strengthening security for high-value and institutional use cases.
+
+Through these advancements, VLS pushes the boundaries of what's possible in
+Lightning Network security, ensuring that Bitcoin's most widely used and
+developed Layer2 scaling solution remains secure.
+
+### BLAST
+
+Lightning Network interoperability has been an ongoing concern, with each
+implementation—[CLN](https://lightning.network/),
+[LND](https://lightning.engineering/), and
+[LDK](https://lightningdevkit.org/)—introducing variations in channel
+policies, default settings, and routing strategies. This has led to
+inconsistencies, creating friction for users and developers alike, ultimately
+making seamless payments across the network more difficult than they should be.
+Addressing this requires more than just improvements to individual
+implementations; it demands independent testing tools capable of evaluating
+interoperability across the entire Lightning protocol.
+[BLAST](https://github.com/bjohnson5/blast) (Big Lightning Automated Simulation
+Tool) is designed to provide a stable modeling and simulation framework for the
+Lightning Network, giving researchers, developers, and node operators a
+large-scale testing environment that more accurately reflects real-world network
+conditions.
+
+With OpenSats [support](/blog/bitcoin-grants-feb-2024#blast), BLAST has achieved
+the ability to support all three major Lightning node implementations—CLN,
+LND, and LDK—making it one of the only interoperability-focused testing tools
+to do so. Unlike traditional test environments that require running multiple
+separate node processes, BLAST introduces a new approach where all nodes operate
+within a single process. This reduces computational overhead and enables
+efficient, large-scale simulations without the usual resource constraints. LND
+nodes, for example, are now run as
+[goroutines](https://go.dev/tour/concurrency/1) within a single process,
+allowing for a lightweight yet comprehensive testing setup. By eliminating
+unnecessary complexity, BLAST improves protocol testing, helping developers
+identify weaknesses, optimize routing strategies, and refine implementation
+behaviors with greater accuracy.
+
+This advancement also enables more rigorous testing of interoperability at
+scale. Using BLAST, developers can now simulate real-world Lightning Network
+environments to analyze how different implementations interact under various
+conditions. Routing node operators can leverage these simulations to optimize
+liquidity allocation, fee structures, and channel management strategies. Project
+lead Blake Johnson emphasizes the importance of interoperability testing:
+
+>Interoperability between different Lightning Node implementations continues to
+>be a major pain point of the Lightning technology. Different channel policies,
+>default settings, and routing strategies create friction when attempting to
+>make payments. This is why it is so important to have independent developers
+>building testing tools and researching the health of the protocol as a whole.
+
+Looking ahead, BLAST is preparing for the next development phase, focusing on
+creating lightweight models for different LN implementations, followed by
+automation features that support reproducible network states. Incremental
+improvements will continue rolling out, ensuring that BLAST remains a meaningful
+tool for interoperability research. As Lightning adoption grows, the need for
+independent, large-scale testing frameworks will only become more critical, and
+BLAST is helping to lay the groundwork for a more well-structured Lightning
+Network.
+
+### Lampo
+
+As the Lightning Network evolves, the need for modular, open-source node
+implementations has become increasingly clear. Existing implementations often
+come with trade-offs that limit flexibility for developers seeking highly
+customizable solutions. Addressing this gap, [Lampo](https://lampo.devcrew.cc/)
+provides a modular, community-driven alternative, built on the Lightning
+Development Kit (LDK).
+
+With [support](/blog/8th-wave-of-bitcoin-grants#lampo) from OpenSats, the
+project has achieved a significant milestone by contributing to the integration
+of LDK with `lnprototest`, a test suite designed to rigorously validate
+Lightning protocol behavior. This work enhances LDK's reliability, ensures
+adherence to Lightning standards, and strengthens its overall robustness, giving
+developers greater confidence when testing their implementations. A key part of
+this effort was the launch of the
+[`ldk-lnprototest`](https://pypi.org/project/ldk-lnprototest/) package on PyPI.
+This package provides a runner that facilitates the integration of LDK with
+`lnprototest`, enabling automated and standardized testing. By reducing the
+risks of protocol inconsistencies and implementation errors—challenges that can
+significantly impact Lightning's reliability—this tool ensures a more robust and
+predictable development process for LDK-based implementations like Lampo.
+
+>Building reliable Lightning infrastructure requires both rigorous testing and
+>continuous improvements. The LDK-Lnprototest integration and enhancements to
+>Lampo aim to make the network more robust and developer-friendly. Excited to
+>push this forward!
+>
+><cite>—Prakhar Saxena, Lampo Project Lead</cite>
+
+In addition to improving the Lightning testing environment, Lampo has also
+[introduced
+improvements](https://github.com/vincenzopalazzo/lampo.rs/pull/295/commits) to
+wallet security and usability. Previously, users had to manually enter their
+[BIP39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) seed words in the
+command line every time they restored a wallet, posing privacy risks and
+reducing usability. Now, Lampo securely stores and manages wallet restoration
+data in a binary file (`wallet.dat`), eliminating the need for repeated manual
+entry and improving the user experience without compromising security.
+
+Together, these improvements make Lampo both a reliable development tool and a
+more secure node implementation.
+
+Looking ahead, Lampo plans to continue its evolution by implementing a
+proof-of-concept for Validating Lightning Signer (VLS), a move that will further
+improve security by enabling external validation of Lightning signatures. Future
+updates will also introduce a PoC of a plugin system, and expand documentation to encourage broader
+adoption. By fostering a truly open-source, modular approach to running a
+Lightning node, Lampo is carving out a space for greater experimentation and
+innovation in the Lightning ecosystem.
+
+### Lnprototest
+
+The Lightning Network's success depends, in part, on seamless interoperability
+between different implementations such as CLN, LND, and LDK. However, ensuring
+that protocol changes don't break compatibility across implementations is a
+constant challenge. Without a standardized and rigorous testing framework, even
+small discrepancies in how nodes interact can lead to fragmentation, payment
+failures, and reliability issues.
+
+To solve this, [lnprototest](https://pypi.org/project/lnprototest/) provides a
+Python-based testing library that helps developers validate protocol adherence
+across different implementations, ensuring cross-compatibility and preventing
+regressions before they impact real-world users.
+
+Initially launched in 2019 as a monolithic application, lnprototest has since
+undergone a significant transformation into a modular library, making it more
+accessible and adaptable for a wider range of Lightning developers. With its
+availability on PyPI, the project now allows for custom testing setups tailored
+to specific implementations, reinforcing its role as a vital infrastructure
+component for the Lightning Network.
+
+With OpenSats
+[support](/blog/bitcoin-grants-july-2024#lightning-network-protocol-test-framework),
+one important advancement made has been the introduction of out-of-tree testing,
+which allows tests to reside within an implementation's codebase rather than
+being confined to the lnprototest repository. This not only reduces clutter but
+also improves scalability, enabling projects to maintain their test suites while
+still leveraging the standardized framework. Additionally, the development of
+custom runners—such as LampoRunner—demonstrates how implementations can
+tailor the testing process to their specific needs, further improving
+flexibility and usability. These refinements make lnprototest a more powerful
+tool for ensuring protocol compliance and catching issues before they impact
+users.
+
+By providing a stable and modular testing environment, lnprototest plays a
+crucial role in safeguarding the reliability of the Lightning Network. Without a
+rigorous testing framework, protocol changes risk breaking interoperability
+between implementations, leading to fragmentation.
+This library mitigates that risk by offering developers a consistent way to
+validate protocol adherence, helping prevent subtle bugs that could undermine
+network performance. As the project lead describes it, "lnprototest allows
+another kind of testing that I define as vertical testing of the Lightning
+Network implementation," underscoring the project's focus on deep, structured
+validation at the protocol level.
+
+Looking ahead, the project is focused on expanding its capabilities to support
+an even broader range of test scenarios and implementations. Collaboration with
+key contributors will be essential in refining the framework and ensuring its
+adoption across all major Lightning Network implementations. With continuous
+improvements, lnprototest aims to strengthen the protocol's foundation,
+reinforcing interoperability and resilience as the Lightning Network continues
+to scale.
+
+---
+
+The projects highlighted above represent just a small sample of the 250+ [grants
+OpenSats has given](/transparency)—several of which have made significant
+advancements in Lightning infrastructure. These contributions have enabled
+developers to create new wallet and node implementations that leverage the
+latest Lightning features—ultimately improving the user experience for
+Lightning payments.
+
+Our grantees have already proven the power of interoperability by integrating
+their technologies into each other's projects—demonstrating how these
+innovations work as modular building blocks of the Lightning Network.
+
+The future of Lightning as a scalable, permissionless payment system depends on
+continued open-source innovation and collaboration. OpenSats remains committed
+to funding the builders pushing Bitcoin's second-layer technology forward,
+ensuring a more decentralized, scalable, and secure Lightning ecosystem.
+
+If you believe in making Bitcoin a truly global, secure, and
+censorship-resistant financial system—fueled by second-layer solutions like
+the Lightning Network—we invite you to support OpenSats. Every donation—no
+matter the size—directly fuels open-source development, empowering people
+worldwide to transact freely and securely. Together, we can build a future where
+Bitcoin remains open, accessible, and unstoppable.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+If you are a developer working on open-source software that makes Lightning even
+better than it is today, don't hesitate to [apply for funding](/apply).
