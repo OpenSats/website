@@ -56,17 +56,17 @@ export default async function handler(
   res: NextApiResponse<ReportBotResponse>
 ) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ 
-      success: false, 
-      error: 'Method not allowed' 
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed',
     })
   }
 
   if (!GH_BOT_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
     console.error('Missing GitHub configuration')
-    return res.status(500).json({ 
-      success: false, 
-      error: 'Server configuration error' 
+    return res.status(500).json({
+      success: false,
+      error: 'Server configuration error',
     })
   }
 
@@ -83,10 +83,18 @@ export default async function handler(
     } = req.body
 
     // Input validation
-    if (!project_name || !report_number || !time_spent || !next_quarter || !money_usage || !issue_number || !email) {
-      return res.status(400).json({ 
-        success: false, 
-        error: 'Missing required fields' 
+    if (
+      !project_name ||
+      !report_number ||
+      !time_spent ||
+      !next_quarter ||
+      !money_usage ||
+      !issue_number ||
+      !email
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: 'Missing required fields',
       })
     }
 
@@ -122,16 +130,19 @@ ${help_needed ? `## Help Needed\n${help_needed}` : ''}`
       report_content: reportContent,
     })
 
-    return res.status(200).json({ 
-      success: true, 
-      report: response.data 
+    return res.status(200).json({
+      success: true,
+      report: response.data,
     })
   } catch (error) {
-    console.error('Error creating report:', error instanceof Error ? error.message : error)
-    return res.status(500).json({ 
-      success: false, 
+    console.error(
+      'Error creating report:',
+      error instanceof Error ? error.message : error
+    )
+    return res.status(500).json({
+      success: false,
       error: 'Error creating report',
-      details: process.env.NODE_ENV === 'development' ? error : undefined 
+      details: process.env.NODE_ENV === 'development' ? error : undefined,
     })
   }
 }
