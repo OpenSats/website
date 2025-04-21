@@ -5,3 +5,7 @@ export const STORAGE_KEYS = {
   REPORT_ID: 'opensats_report_id',
   REPORT_CONTENT: 'opensats_report_content',
 } as const
+
+export const ERROR_MESSAGES = {
+  GRANT_NOT_FOUND: 'Grant not found, contact support for assistance',
+}

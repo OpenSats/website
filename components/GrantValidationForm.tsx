@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import * as EmailValidator from 'email-validator'
+import { ERROR_MESSAGES } from '../utils/constants'
 
 interface ValidationResult {
   grant_details: {
@@ -71,7 +72,7 @@ export default function GrantValidationForm({
 
       setLoading(false)
     } catch (e) {
-      setError('Grant not found, contact support for assistance')
+      setError(ERROR_MESSAGES.GRANT_NOT_FOUND)
       setLoading(false)
     }
   }

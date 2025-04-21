@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
+import { ERROR_MESSAGES } from '../../utils/constants'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -56,7 +57,7 @@ export default async function handler(
     if (searchResult.data.total_count === 0) {
       return res.status(404).json({
         valid: false,
-        error: 'Grant not found, contact support for assistance',
+        error: ERROR_MESSAGES.GRANT_NOT_FOUND,
       })
     }
 
