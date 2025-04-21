@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
-import CryptoJS from 'crypto-js'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -10,7 +9,6 @@ interface ValidationResponse {
   valid: boolean
   project_name?: string
   issue_number?: number
-  email_hash?: string
   email?: string
   error?: string
 }
@@ -44,7 +42,6 @@ export default async function handler(
       valid: true,
       project_name: 'Test Grant',
       issue_number: 123,
-      email_hash: CryptoJS.MD5(email).toString(),
     })
   }
 
@@ -66,9 +63,6 @@ export default async function handler(
     // Get the first matching issue
     const issue = searchResult.data.items[0]
 
-    // Generate email hash for verification
-    const email_hash = CryptoJS.MD5(email.toLowerCase()).toString()
-
     // Extract project name from issue title
     const project_name = issue.title.replace(/^Grant #\d+:\s*/, '') // Remove grant number prefix
 
@@ -76,7 +70,6 @@ export default async function handler(
       valid: true,
       project_name,
       issue_number: issue.number,
-      email_hash,
       email,
     })
   } catch (error) {
