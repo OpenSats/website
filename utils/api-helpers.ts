@@ -71,7 +71,6 @@ export async function fetchPostJSONAuthed(
 /**
  * Generates the markdown content for a grant report
  * @param reportData Object containing report data (project_name, time_spent, next_quarter, money_usage, help_needed)
- * @param reportNumber Optional report number to include in the title
  * @returns Formatted markdown string for the report
  */
 export function generateReportContent(
@@ -81,17 +80,11 @@ export function generateReportContent(
     next_quarter: string
     money_usage: string
     help_needed?: string
-  },
-  reportNumber?: string
+  }
 ): string {
   const { project_name, time_spent, next_quarter, money_usage, help_needed } = reportData
-  
-  // If report number is provided, use it in the title
-  const title = reportNumber 
-    ? `# Progress Report ${reportNumber}`
-    : `# ${project_name} - Progress Report`
 
-  return `${title}
+  return `# ${project_name} - Progress Report
 
 ## Time Spent
 ${time_spent}

@@ -102,16 +102,13 @@ export default async function handler(
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
     // Create report content in markdown format using the shared function
-    const reportContent = generateReportContent(
-      {
-        project_name,
-        time_spent,
-        next_quarter,
-        money_usage,
-        help_needed,
-      },
-      report_number
-    )
+    const reportContent = generateReportContent({
+      project_name,
+      time_spent,
+      next_quarter,
+      money_usage,
+      help_needed,
+    })
 
     // Add the report as a comment to the existing issue
     const response = await octokit.rest.issues.createComment({
