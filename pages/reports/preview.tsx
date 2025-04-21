@@ -22,7 +22,6 @@ export default function Preview() {
           return
         }
 
-        const parsedGrantDetails = JSON.parse(grantDetails)
         const parsedReportData = JSON.parse(reportData)
 
         const preview = getReportPreview(parsedReportData)

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { fetchPostJSON } from '../utils/api-helpers'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../utils/constants'
 
