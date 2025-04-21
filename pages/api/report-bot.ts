@@ -126,7 +126,6 @@ ${formatHelpNeededSection(help_needed)}`
     await sendReportConfirmationEmail(
       email,
       project_name,
-      report_number,
       response.data.html_url,
       reportContent
     )
