@@ -46,9 +46,12 @@ export default function Preview() {
       const grantDetails = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}'
       )
+      const reportData = JSON.parse(
+        localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT) || '{}'
+      )
       const response = await fetchPostJSON('/api/report-bot', {
         ...grantDetails,
-        report_content: reportContent,
+        ...reportData,
       })
 
       if (response.error) {
