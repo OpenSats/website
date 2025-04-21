@@ -289,7 +289,7 @@ export default function GrantReportForm({
               Required for legal and compliance reasons. If using for living
               expenses, simply stating 'living expenses' is sufficient. For
               project-related expenses, please provide categories (e.g., office
-              expenses, travel, server costs, etc.).
+              expenses, travel, server costs, etc.). We strongly encourage you to keep records. Receipts, invoices, bank statements, etc. If OpenSats is ever audited, you must be able to send supporting information on how you used your grant proceeds.
             </small>
             <textarea
               {...register('money_usage', {
@@ -301,11 +301,6 @@ export default function GrantReportForm({
             {errors.money_usage && (
               <small className="text-red-500">{errors.money_usage.message}</small>
             )}
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-              We strongly encourage you to keep records. Receipts, invoices, bank
-              statements, etc. If OpenSats is ever audited, you must be able to send
-              supporting information on how you used your grant proceeds.
-            </p>
           </label>
 
           {/* Support needed */}
@@ -313,7 +308,7 @@ export default function GrantReportForm({
             Is there anything we could help with?
             <br />
             <small>
-              Optional. We're here to help! Let us know if you need any technical
+              We're here to help! Let us know if you need any technical
               assistance, introductions, or have other questions.
             </small>
             <textarea
@@ -536,7 +531,7 @@ export default function GrantReportForm({
           Required for legal and compliance reasons. If using for living
           expenses, simply stating 'living expenses' is sufficient. For
           project-related expenses, please provide categories (e.g., office
-          expenses, travel, server costs, etc.).
+          expenses, travel, server costs, etc.). We strongly encourage you to keep records. Receipts, invoices, bank statements, etc. If OpenSats is ever audited, you must be able to send supporting information on how you used your grant proceeds.
         </small>
         <textarea
           {...register('money_usage', {
@@ -548,11 +543,6 @@ export default function GrantReportForm({
         {errors.money_usage && (
           <small className="text-red-500">{errors.money_usage.message}</small>
         )}
-        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-          We strongly encourage you to keep records. Receipts, invoices, bank
-          statements, etc. If OpenSats is ever audited, you must be able to send
-          supporting information on how you used your grant proceeds.
-        </p>
       </label>
 
       {/* Support needed */}
