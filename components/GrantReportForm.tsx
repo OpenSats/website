@@ -11,7 +11,6 @@ interface GrantReportFormProps {
     issue_number: number
     email: string
   }
-  email_hash: string
 }
 
 interface GrantReportFormData {
@@ -30,7 +29,6 @@ const STORAGE_EXPIRATION = 30 * 24 * 60 * 60 * 1000
 
 export default function GrantReportForm({
   grantDetails,
-  email_hash,
 }: GrantReportFormProps) {
   const router = useRouter()
   const [submitted, setSubmitted] = useState(false)
