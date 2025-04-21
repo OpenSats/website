@@ -68,24 +68,45 @@ export async function fetchPostJSONAuthed(
   }
 }
 
-export function getReportPreview(grantDetails: any, reportData: any): string {
-  const { project_name, time_spent, next_quarter, money_usage, help_needed } =
-    reportData
+/**
+ * Generates the markdown content for a grant report
+ * @param reportData Object containing report data (project_name, time_spent, next_quarter, money_usage, help_needed)
+ * @param reportNumber Optional report number to include in the title
+ * @returns Formatted markdown string for the report
+ */
+export function generateReportContent(
+  reportData: {
+    project_name: string
+    time_spent: string
+    next_quarter: string
+    money_usage: string
+    help_needed?: string
+  },
+  reportNumber?: string
+): string {
+  const { project_name, time_spent, next_quarter, money_usage, help_needed } = reportData
+  
+  // If report number is provided, use it in the title
+  const title = reportNumber 
+    ? `# Progress Report ${reportNumber}`
+    : `# ${project_name} - Progress Report`
 
-  return `
-# ${project_name} - Progress Report
+  return `${title}
 
 ## Time Spent
 ${time_spent}
 
-## Plans for Next Quarter
-${next_quarter}
-
 ## Use of Funds
 ${money_usage}
 
-${formatHelpNeededSection(help_needed)}
-`
+## Next Quarter Plans
+${next_quarter}
+
+${formatHelpNeededSection(help_needed)}`
+}
+
+export function getReportPreview(grantDetails: any, reportData: any): string {
+  return generateReportContent(reportData)
 }
 
 export async function getGrantById(grantId: string) {

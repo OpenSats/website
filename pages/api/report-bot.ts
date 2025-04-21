@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from '../../utils/email'
 import { formatHelpNeededSection } from '../../utils/format-helpers'
+import { generateReportContent } from '../../utils/api-helpers'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -100,19 +101,17 @@ export default async function handler(
 
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
-    // Create report content in markdown format
-    const reportContent = `# Progress Report ${report_number}
-
-## Time Spent
-${time_spent}
-
-## Use of Funds
-${money_usage}
-
-## Next Quarter Plans
-${next_quarter}
-
-${formatHelpNeededSection(help_needed)}`
+    // Create report content in markdown format using the shared function
+    const reportContent = generateReportContent(
+      {
+        project_name,
+        time_spent,
+        next_quarter,
+        money_usage,
+        help_needed,
+      },
+      report_number
+    )
 
     // Add the report as a comment to the existing issue
     const response = await octokit.rest.issues.createComment({
