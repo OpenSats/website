@@ -176,17 +176,15 @@ export default function GrantReportForm({
     }
 
     try {
-      // Save current form state
-      const storageKey = `${STORAGE_KEYS.REPORT_DRAFT}_${grantDetails.issue_number}`
-      const dataToStore = {
-        formData: data,
-        timestamp: Date.now(),
-      }
-      localStorage.setItem(storageKey, JSON.stringify(dataToStore))
-
       // Store grant ID and report data for preview
       localStorage.setItem(STORAGE_KEYS.GRANT_DETAILS, JSON.stringify(grantDetails))
-      localStorage.setItem(STORAGE_KEYS.REPORT_DRAFT, JSON.stringify(data))
+      localStorage.setItem(STORAGE_KEYS.REPORT_DRAFT, JSON.stringify({
+        project_name: data.project_name,
+        time_spent: data.time_spent,
+        next_quarter: data.next_quarter,
+        money_usage: data.money_usage,
+        help_needed: data.help_needed || ''
+      }))
 
       // Navigate to preview page
       await router.push('/reports/preview')
