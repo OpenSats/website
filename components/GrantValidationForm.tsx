@@ -82,8 +82,6 @@ export default function GrantValidationForm({
       className="apply flex max-w-2xl flex-col gap-4"
     >
       <hr />
-      <h2>Grant Validation</h2>
-
       <label className="block">
         Grant ID *
         <br />

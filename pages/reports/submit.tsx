@@ -38,10 +38,7 @@ const ReportSubmissionPage: NextPage = () => {
         description="Submit your OpenSats grant progress report"
       />
 
-      <PageSection
-        title="Submit Progress Report"
-        image="/static/images/avatar.png"
-      >
+      <PageSection title="Report Submission" image="/static/images/avatar.png">
         <p>
           To get started, please enter your grant ID and the email associated
           with your grant application. This information will be used to validate
