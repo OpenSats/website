@@ -34,6 +34,7 @@ export default function GrantReportForm({
   const [error, setError] = useState<string>()
   const [showPreview, setShowPreview] = useState(false)
   const [recoveredData, setRecoveredData] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const {
     register,
@@ -152,6 +153,7 @@ export default function GrantReportForm({
 
   const onSubmit = async (data: GrantReportFormData) => {
     setError(undefined)
+    setLoading(true)
 
     try {
       const response = await fetchPostJSON('/api/report-bot', {
@@ -162,6 +164,7 @@ export default function GrantReportForm({
 
       if (response.error) {
         setError(response.error)
+        setLoading(false)
         return
       }
 
@@ -170,6 +173,8 @@ export default function GrantReportForm({
       router.push('/reports/success')
     } catch (e) {
       setError('Failed to submit report. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -199,7 +204,10 @@ export default function GrantReportForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="apply flex max-w-2xl flex-col gap-4"
+    >
       {/* Instructions */}
       <div className="rounded-lg border-l-4 border-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 p-5 shadow-sm dark:from-gray-800 dark:to-gray-700">
         <div className="flex items-center space-x-3">
@@ -288,37 +296,34 @@ export default function GrantReportForm({
         </div>
       )}
 
+      <hr />
+      <h2>Report Details</h2>
+
       {/* Project Name */}
-      <div>
-        <label
-          htmlFor="project_name"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Project Name
-        </label>
+      <label className="block">
+        Project Name *
+        <br />
+        <small>The name of your project as specified in your grant.</small>
         <input
           {...register('project_name', {
             required: 'Project name is required',
           })}
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           disabled
         />
         {errors.project_name && (
-          <span className="text-sm text-red-600">
-            {errors.project_name.message}
-          </span>
+          <small className="text-red-500">{errors.project_name.message}</small>
         )}
-      </div>
+      </label>
 
       {/* Progress Report # */}
-      <div>
-        <label
-          htmlFor="report_number"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Progress Report #
-        </label>
+      <label className="block">
+        Progress Report # *
+        <br />
+        <small>
+          The sequential number of this progress report (1, 2, 3, etc).
+        </small>
         <input
           {...register('report_number', {
             required: 'Report number is required',
@@ -328,105 +333,95 @@ export default function GrantReportForm({
             },
           })}
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
-          placeholder="1, 2, 3, etc"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          placeholder="1"
         />
         {errors.report_number && (
-          <span className="text-sm text-red-600">
-            {errors.report_number.message}
-          </span>
+          <small className="text-red-500">{errors.report_number.message}</small>
         )}
-      </div>
+      </label>
 
       {/* Project Updates */}
-      <div>
-        <label
-          htmlFor="time_spent"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Project Updates
-        </label>
+      <label className="block">
+        Project Updates *
+        <br />
+        <small>
+          Describe your progress and accomplishments since the last report.
+          Include links to pull requests, commits, and other work.
+        </small>
         <textarea
           {...register('time_spent', {
             required: 'Project updates are required',
           })}
           rows={8}
-          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
-          placeholder="Describe your progress and accomplishments since the last report. Include links to pull requests, commits, and other work."
+          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
         />
         {errors.time_spent && (
-          <span className="text-sm text-red-600">
-            {errors.time_spent.message}
-          </span>
+          <small className="text-red-500">{errors.time_spent.message}</small>
         )}
-      </div>
+      </label>
 
       {/* Plans for Next Quarter */}
-      <div>
-        <label
-          htmlFor="next_quarter"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Plans for Next Quarter
-        </label>
+      <label className="block">
+        Plans for Next Quarter *
+        <br />
+        <small>
+          Outline your goals and plans for the next quarter. Be specific about
+          what you aim to accomplish.
+        </small>
         <textarea
           {...register('next_quarter', {
             required: 'Plans for Next Quarter are required',
           })}
           rows={6}
-          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
-          placeholder="Outline your goals and plans for the next quarter. Be specific about what you aim to accomplish."
+          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
         />
         {errors.next_quarter && (
-          <span className="text-sm text-red-600">
-            {errors.next_quarter.message}
-          </span>
+          <small className="text-red-500">{errors.next_quarter.message}</small>
         )}
-      </div>
+      </label>
 
       {/* Use of Funds */}
-      <div>
-        <label
-          htmlFor="money_usage"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Use of Funds
-        </label>
+      <label className="block">
+        Use of Funds *
+        <br />
+        <small>
+          Required for legal and compliance reasons. If using for living
+          expenses, simply stating 'living expenses' is sufficient. For
+          project-related expenses, please provide categories (e.g., office
+          expenses, travel, server costs, etc.).
+        </small>
         <textarea
           {...register('money_usage', {
             required: 'Use of funds information is required',
           })}
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
-          placeholder="Required for legal and compliance reasons. If using for living expenses, simply stating 'living expenses' is sufficient. For project-related expenses, please provide categories (e.g., office expenses, travel, server costs, etc.)."
+          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
         />
         {errors.money_usage && (
-          <span className="text-sm text-red-600">
-            {errors.money_usage.message}
-          </span>
+          <small className="text-red-500">{errors.money_usage.message}</small>
         )}
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           We strongly encourage you to keep records. Receipts, invoices, bank
           statements, etc. If OpenSats is ever audited, you must be able to send
           supporting information on how you used your grant proceeds.
         </p>
-      </div>
+      </label>
 
       {/* Support needed */}
-      <div>
-        <label
-          htmlFor="help_needed"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Is there anything we could help with?
-        </label>
+      <label className="block">
+        Is there anything we could help with?
+        <br />
+        <small>
+          Optional. We're here to help! Let us know if you need any technical
+          assistance, introductions, or have other questions.
+        </small>
         <textarea
           {...register('help_needed')}
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
-          placeholder="Optional. We're here to help! Let us know if you need any technical assistance, introductions, or have other questions."
+          className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
         />
-      </div>
+      </label>
 
       {error && (
         <div className="rounded-md border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900">
@@ -456,7 +451,7 @@ export default function GrantReportForm({
       )}
 
       {!showPreview ? (
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-4">
           <button
             type="button"
             onClick={() => setShowPreview(true)}
@@ -523,9 +518,14 @@ export default function GrantReportForm({
               </button>
               <button
                 type="submit"
-                className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:bg-orange-600 dark:hover:bg-orange-700"
+                disabled={loading}
+                className={`rounded px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 ${
+                  loading
+                    ? 'cursor-not-allowed bg-gray-400'
+                    : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
+                }`}
               >
-                Submit Report
+                {loading ? 'Submitting...' : 'Submit Report'}
               </button>
             </div>
           </div>
