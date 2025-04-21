@@ -89,15 +89,19 @@ export default function GrantValidationForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
-      {/* Grant ID */}
-      <div>
-        <label
-          htmlFor="grant_id"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Grant ID
-        </label>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="apply flex max-w-2xl flex-col gap-4"
+    >
+      <hr />
+      <h2>Grant Validation</h2>
+
+      <label className="block">
+        Grant ID *
+        <br />
+        <small>
+          The ID number of your grant from the original application.
+        </small>
         <input
           {...register('grant_id', {
             required: 'Grant ID is required',
@@ -107,24 +111,18 @@ export default function GrantValidationForm({
             },
           })}
           type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           placeholder="123456"
         />
         {errors.grant_id && (
-          <span className="text-sm text-red-600">
-            {errors.grant_id.message}
-          </span>
+          <small className="text-red-500">{errors.grant_id.message}</small>
         )}
-      </div>
+      </label>
 
-      {/* Email */}
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-200"
-        >
-          Email
-        </label>
+      <label className="block">
+        Email *
+        <br />
+        <small>The email address associated with your grant application.</small>
         <input
           {...register('email', {
             required: 'Email is required',
@@ -132,15 +130,15 @@ export default function GrantValidationForm({
               EmailValidator.validate(value) || 'Invalid email address',
           })}
           type="email"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-800"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           placeholder="you@example.com"
         />
         {errors.email && (
-          <span className="text-sm text-red-600">{errors.email.message}</span>
+          <small className="text-red-500">{errors.email.message}</small>
         )}
-      </div>
+      </label>
 
-      <div className="mt-8 flex justify-center">
+      <div className="mt-8">
         <button
           type="submit"
           disabled={loading}
@@ -155,7 +153,7 @@ export default function GrantValidationForm({
       </div>
 
       {error && (
-        <div className="rounded-md bg-red-50 p-4 dark:bg-red-900">
+        <div className="mt-4 rounded-md bg-red-50 p-4 dark:bg-red-900">
           <div className="flex">
             <div className="flex-shrink-0">
               <svg
