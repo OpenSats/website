@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../utils/constants'
-import ReportingGuidelines from '@/components/ReportingGuidelines'
 
 interface GrantReportFormProps {
   grantDetails: {
@@ -204,8 +203,6 @@ export default function GrantReportForm({
   if (recoveredData) {
     return (
       <div>
-        <ReportingGuidelines />
-
         <form
           onSubmit={handlePreview}
           className="apply flex max-w-2xl flex-col gap-4"
@@ -361,8 +358,6 @@ export default function GrantReportForm({
 
   return (
     <div>
-      <ReportingGuidelines />
-
       <form
         onSubmit={handlePreview}
         className="apply flex max-w-2xl flex-col gap-4"
