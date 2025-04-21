@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { NextPage } from 'next'
 import { PageSEO } from '@/components/SEO'
 import dynamic from 'next/dynamic'
@@ -47,12 +46,6 @@ const ReportSubmissionPage: NextPage = () => {
           To get started, please enter your grant ID and the email associated
           with your grant application. This information will be used to validate
           your grant and ensure you have access to submit a report.
-        </p>
-        <p>
-          Once validated, you'll be able to submit your progress report
-          detailing your work and achievements since your last update. Make sure
-          to include specific details about your progress, challenges overcome,
-          and plans for the next period.
         </p>
         <GrantValidationForm onValidationSuccess={handleValidationSuccess} />
       </PageSection>

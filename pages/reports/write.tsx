@@ -54,4 +54,4 @@ const WritePage: NextPage = () => {
   )
 }
 
-export default WritePage 
+export default WritePage

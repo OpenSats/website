@@ -136,7 +136,27 @@ export default function GrantValidationForm({
               : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
           }`}
         >
-          {loading ? 'Validating...' : 'Next'}
+          {loading ? (
+            'Validating...'
+          ) : (
+            <span className="flex items-center justify-center">
+              Next Step
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="ml-2 h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </span>
+          )}
         </button>
       </div>
 
