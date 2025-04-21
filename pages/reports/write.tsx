@@ -50,8 +50,19 @@ export default function WritePage() {
           >
             Grantee FAQ
           </CustomLink>{' '}
-          for help building a quality progress report. Format your report in
-          markdown.
+          for answers to common questions about progress report. In particular:
+          <ul>
+            <li>
+              <CustomLink href="/faq/grantee#what-does-an-ideal-progress-report-look-like">
+                What does an ideal progress report look like?
+              </CustomLink>
+            </li>
+            <li>
+              <CustomLink href="/faq/grantee#what-does-a-poor-progress-report-look-like">
+                What does a poor progress report look like?
+              </CustomLink>
+            </li>
+          </ul>
         </p>
 
         <GrantReportForm grantDetails={grantDetails} />
