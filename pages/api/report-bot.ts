@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from '../../utils/email'
-import CryptoJS from 'crypto-js'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
