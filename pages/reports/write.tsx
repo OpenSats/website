@@ -4,6 +4,7 @@ import GrantReportForm from '../../components/GrantReportForm'
 import { STORAGE_KEYS } from '../../utils/constants'
 import { PageSEO } from '../../components/SEO'
 import PageSection from '../../components/PageSection'
+import CustomLink from '@/components/Link'
 
 export default function WritePage() {
   const router = useRouter()
@@ -40,6 +41,19 @@ export default function WritePage() {
           structure your content. Take your time to provide detailed information
           about your progress, challenges, and future plans.
         </p>
+        {/* Instructions */}
+        <p className="text-base text-gray-800 dark:text-gray-200">
+          Refer to our{' '}
+          <CustomLink
+            href="https://opensats.org/faq/grantee"
+            className="font-bold"
+          >
+            Grantee FAQ
+          </CustomLink>{' '}
+          for help building a quality progress report. Format your report in
+          markdown.
+        </p>
+
         <GrantReportForm grantDetails={grantDetails} />
       </PageSection>
     </>

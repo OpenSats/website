@@ -157,16 +157,13 @@ export async function sendEmailWithRetry(
  * Send a confirmation email for a submitted report with retry logic
  * @param to Recipient email address
  * @param projectName Name of the project
- * @param reportNumber Report number
  * @param reportUrl URL to the submitted report
  * @param reportContent The markdown content of the report
- * @param forceDev Optional parameter to force development mode simulation
  * @returns Promise that resolves when email is sent
  */
 export async function sendReportConfirmationEmail(
   email: string,
   projectName: string,
-  reportNumber: string,
   reportUrl: string,
   reportContent: string
 ): Promise<boolean> {
@@ -179,8 +176,8 @@ export async function sendReportConfirmationEmail(
   const msg = {
     to: email,
     from: 'support@opensats.org',
-    subject: `OpenSats Progress Report #${reportNumber} Submitted: ${projectName}`,
-    text: `Thank you for submitting your progress report for ${projectName}!\n\nYour Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.\n\nReport Content:\n${reportContent}\n\nIf you have any questions or need assistance, please reply to this email or contact support@opensats.org.\n\nBest Regards,\nThe OpenSats Team`,
+    subject: `OpenSats Progress Report Submitted for ${projectName}`,
+    text: `Thank you for submitting your progress report for ${projectName}!\n\nYour progress report has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.\n\nReport Content:\n${reportContent}\n\nIf you have any questions or need assistance, please reply to this email or contact support@opensats.org.\n\nBest Regards,\nThe OpenSats Team`,
     html: `
       <!DOCTYPE html>
       <html>
@@ -235,7 +232,7 @@ export async function sendReportConfirmationEmail(
         <div class="content">
           <p>Thank you for submitting your progress report for <strong>${projectName}</strong>!</p>
           
-          <p>Your Progress Report #${reportNumber} has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.</p>
+          <p>Your progress report has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.</p>
           
           <div class="report-content">
             <h2>Your Report Content:</h2>
