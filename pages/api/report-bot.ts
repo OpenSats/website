@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from '../../utils/email'
+import { formatHelpNeededSection } from '../../utils/format-helpers'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -111,7 +112,7 @@ ${money_usage}
 ## Next Quarter Plans
 ${next_quarter}
 
-${help_needed ? `## Help Needed\n${help_needed}` : ''}`
+${formatHelpNeededSection(help_needed)}`
 
     // Add the report as a comment to the existing issue
     const response = await octokit.rest.issues.createComment({

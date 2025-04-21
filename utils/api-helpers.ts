@@ -1,3 +1,5 @@
+import { formatHelpNeededSection } from './format-helpers'
+
 export async function fetchGetJSON(url: string) {
   try {
     const data = await fetch(url).then((res) => res.json())
@@ -82,7 +84,7 @@ ${next_quarter}
 ## Use of Funds
 ${money_usage}
 
-${help_needed ? `## Help Needed\n${help_needed}` : ''}
+${formatHelpNeededSection(help_needed)}
 `
 }
 
