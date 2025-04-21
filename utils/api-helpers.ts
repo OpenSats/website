@@ -67,13 +67,8 @@ export async function fetchPostJSONAuthed(
 }
 
 export function getReportPreview(grantDetails: any, reportData: any): string {
-  const {
-    project_name,
-    time_spent,
-    next_quarter,
-    money_usage,
-    help_needed
-  } = reportData
+  const { project_name, time_spent, next_quarter, money_usage, help_needed } =
+    reportData
 
   return `
 # ${project_name} - Progress Report

@@ -65,7 +65,9 @@ export default function GrantReportForm({
         const key = localStorage.key(i)
         if (
           key &&
-          key.startsWith(`${STORAGE_KEYS.REPORT_DRAFT}_${grantDetails.issue_number}`)
+          key.startsWith(
+            `${STORAGE_KEYS.REPORT_DRAFT}_${grantDetails.issue_number}`
+          )
         ) {
           keysToRemove.push(key)
         }
@@ -177,14 +179,20 @@ export default function GrantReportForm({
 
     try {
       // Store grant ID and report data for preview
-      localStorage.setItem(STORAGE_KEYS.GRANT_DETAILS, JSON.stringify(grantDetails))
-      localStorage.setItem(STORAGE_KEYS.REPORT_DRAFT, JSON.stringify({
-        project_name: data.project_name,
-        time_spent: data.time_spent,
-        next_quarter: data.next_quarter,
-        money_usage: data.money_usage,
-        help_needed: data.help_needed || ''
-      }))
+      localStorage.setItem(
+        STORAGE_KEYS.GRANT_DETAILS,
+        JSON.stringify(grantDetails)
+      )
+      localStorage.setItem(
+        STORAGE_KEYS.REPORT_DRAFT,
+        JSON.stringify({
+          project_name: data.project_name,
+          time_spent: data.time_spent,
+          next_quarter: data.next_quarter,
+          money_usage: data.money_usage,
+          help_needed: data.help_needed || '',
+        })
+      )
 
       // Navigate to preview page
       await router.push('/reports/preview')
@@ -217,7 +225,8 @@ export default function GrantReportForm({
             >
               guidelines below
             </a>{' '}
-            for help building a quality progress report. Format your report in markdown.
+            for help building a quality progress report. Format your report in
+            markdown.
           </p>
 
           <hr />
@@ -237,7 +246,9 @@ export default function GrantReportForm({
               disabled
             />
             {errors.project_name && (
-              <small className="text-red-500">{errors.project_name.message}</small>
+              <small className="text-red-500">
+                {errors.project_name.message}
+              </small>
             )}
           </label>
 
@@ -257,7 +268,9 @@ export default function GrantReportForm({
               className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
             {errors.time_spent && (
-              <small className="text-red-500">{errors.time_spent.message}</small>
+              <small className="text-red-500">
+                {errors.time_spent.message}
+              </small>
             )}
           </label>
 
@@ -266,8 +279,8 @@ export default function GrantReportForm({
             Plans for Next Quarter *
             <br />
             <small>
-              Outline your goals and plans for the next quarter. Be specific about
-              what you aim to accomplish.
+              Outline your goals and plans for the next quarter. Be specific
+              about what you aim to accomplish.
             </small>
             <textarea
               {...register('next_quarter', {
@@ -277,7 +290,9 @@ export default function GrantReportForm({
               className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
             {errors.next_quarter && (
-              <small className="text-red-500">{errors.next_quarter.message}</small>
+              <small className="text-red-500">
+                {errors.next_quarter.message}
+              </small>
             )}
           </label>
 
@@ -289,7 +304,10 @@ export default function GrantReportForm({
               Required for legal and compliance reasons. If using for living
               expenses, simply stating 'living expenses' is sufficient. For
               project-related expenses, please provide categories (e.g., office
-              expenses, travel, server costs, etc.). We strongly encourage you to keep records. Receipts, invoices, bank statements, etc. If OpenSats is ever audited, you must be able to send supporting information on how you used your grant proceeds.
+              expenses, travel, server costs, etc.). We strongly encourage you
+              to keep records. Receipts, invoices, bank statements, etc. If
+              OpenSats is ever audited, you must be able to send supporting
+              information on how you used your grant proceeds.
             </small>
             <textarea
               {...register('money_usage', {
@@ -299,7 +317,9 @@ export default function GrantReportForm({
               className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
             {errors.money_usage && (
-              <small className="text-red-500">{errors.money_usage.message}</small>
+              <small className="text-red-500">
+                {errors.money_usage.message}
+              </small>
             )}
           </label>
 
@@ -391,22 +411,22 @@ export default function GrantReportForm({
                     <li>Tells us if you are on track</li>
                     <li>Describes challenges, and how you overcame them</li>
                     <li>
-                      Includes if you are pleased or displeased with the progress
-                      you made
+                      Includes if you are pleased or displeased with the
+                      progress you made
                     </li>
                   </ul>
 
                   <p className="mt-4 text-gray-700 dark:text-gray-300">
-                    Every progress report should show clearly the connection between
-                    what was planned in the application or previous report(s) and
-                    the work done since.
+                    Every progress report should show clearly the connection
+                    between what was planned in the application or previous
+                    report(s) and the work done since.
                   </p>
 
                   <p className="mt-4 text-gray-700 dark:text-gray-300">
-                    We encourage you to openly discuss any obstacles that may have
-                    prevented you from reaching previously established milestones,
-                    and/or why your previously outlined plans changed. Remember that
-                    we're here to help, not to judge.
+                    We encourage you to openly discuss any obstacles that may
+                    have prevented you from reaching previously established
+                    milestones, and/or why your previously outlined plans
+                    changed. Remember that we're here to help, not to judge.
                   </p>
                 </div>
 
@@ -424,8 +444,8 @@ export default function GrantReportForm({
                     <li>Not showing any of the actual work done</li>
                     <li>Missing links to pull requests and commits</li>
                     <li>
-                      Missing context, summaries, and explanations, i.e. is only a
-                      long list of links to pull requests and commits without
+                      Missing context, summaries, and explanations, i.e. is only
+                      a long list of links to pull requests and commits without
                       anything else
                     </li>
                   </ul>
@@ -459,7 +479,8 @@ export default function GrantReportForm({
         >
           guidelines below
         </a>{' '}
-        for help building a quality progress report. Format your report in markdown.
+        for help building a quality progress report. Format your report in
+        markdown.
       </p>
 
       <hr />
@@ -530,8 +551,11 @@ export default function GrantReportForm({
         <small>
           Required for legal and compliance reasons. If using for living
           expenses, simply stating 'living expenses' is sufficient. For
-          project-related expenses, please provide categories (e.g., office
-          expenses, travel, server costs, etc.). We strongly encourage you to keep records. Receipts, invoices, bank statements, etc. If OpenSats is ever audited, you must be able to send supporting information on how you used your grant proceeds.
+          project-related expenses, please provide rough categories (e.g.,
+          office expenses, travel, server costs, etc.). We strongly encourage
+          you to keep records. Receipts, invoices, bank statements, etc. If
+          OpenSats is ever audited, you must be able to send supporting
+          information on how you used your grant proceeds.
         </small>
         <textarea
           {...register('money_usage', {
