@@ -88,14 +88,16 @@ export default function GrantValidationForm({
         Grant ID *
         <br />
         <small>
-          The ID number of your grant from the original application.
+          The number that your grant got assigned. You can find it on the first
+          page of your signed Grant Agreement.
         </small>
         <input
           {...register('grant_id', {
             required: 'Grant ID is required',
             pattern: {
               value: /^\d{6,7}$/,
-              message: 'Grant ID must be a 6-7 digit number',
+              message:
+                'A valid Grant ID is required to start the submission process',
             },
           })}
           type="text"
@@ -119,7 +121,7 @@ export default function GrantValidationForm({
           })}
           type="email"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-          placeholder="you@example.com"
+          placeholder="satoshin@gmx.com"
         />
         {errors.email && (
           <small className="text-red-500">{errors.email.message}</small>
