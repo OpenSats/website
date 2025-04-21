@@ -202,42 +202,23 @@ export default function GrantReportForm({
           className="apply flex max-w-2xl flex-col gap-4"
         >
           {/* Instructions */}
-          <div className="rounded-lg border-l-4 border-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 p-5 shadow-sm dark:from-gray-800 dark:to-gray-700">
-            <div className="flex items-center space-x-3">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-orange-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <p className="text-base font-medium text-gray-800 dark:text-gray-200">
-                Refer to our{' '}
-                <CustomLink
-                  href="https://opensats.org/faq/grantee"
-                  className="font-bold"
-                >
-                  Grantee FAQ
-                </CustomLink>{' '}
-                or{' '}
-                <a
-                  href="#guidelines"
-                  className="font-bold text-orange-500 hover:text-orange-600"
-                >
-                  guidelines below
-                </a>{' '}
-                for help building a quality progress report. Format your report in
-                markdown.
-              </p>
-            </div>
-          </div>
+          <p className="text-base text-gray-800 dark:text-gray-200">
+            Refer to our{' '}
+            <CustomLink
+              href="https://opensats.org/faq/grantee"
+              className="font-bold"
+            >
+              Grantee FAQ
+            </CustomLink>{' '}
+            or{' '}
+            <a
+              href="#guidelines"
+              className="font-bold text-orange-500 hover:text-orange-600"
+            >
+              guidelines below
+            </a>{' '}
+            for help building a quality progress report. Format your report in markdown.
+          </p>
 
           <hr />
           <h2>Report Details</h2>
@@ -468,42 +449,23 @@ export default function GrantReportForm({
       className="apply flex max-w-2xl flex-col gap-4"
     >
       {/* Instructions */}
-      <div className="rounded-lg border-l-4 border-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 p-5 shadow-sm dark:from-gray-800 dark:to-gray-700">
-        <div className="flex items-center space-x-3">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-orange-500"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <p className="text-base font-medium text-gray-800 dark:text-gray-200">
-            Refer to our{' '}
-            <CustomLink
-              href="https://opensats.org/faq/grantee"
-              className="font-bold"
-            >
-              Grantee FAQ
-            </CustomLink>{' '}
-            or{' '}
-            <a
-              href="#guidelines"
-              className="font-bold text-orange-500 hover:text-orange-600"
-            >
-              guidelines below
-            </a>{' '}
-            for help building a quality progress report. Format your report in
-            markdown.
-          </p>
-        </div>
-      </div>
+      <p className="text-base text-gray-800 dark:text-gray-200">
+        Refer to our{' '}
+        <CustomLink
+          href="https://opensats.org/faq/grantee"
+          className="font-bold"
+        >
+          Grantee FAQ
+        </CustomLink>{' '}
+        or{' '}
+        <a
+          href="#guidelines"
+          className="font-bold text-orange-500 hover:text-orange-600"
+        >
+          guidelines below
+        </a>{' '}
+        for help building a quality progress report. Format your report in markdown.
+      </p>
 
       <hr />
       <h2>Report Details</h2>
