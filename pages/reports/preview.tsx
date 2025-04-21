@@ -7,10 +7,6 @@ import { PageSEO } from '../../components/SEO'
 import PageSection from '../../components/PageSection'
 import { fetchPostJSON } from '../../utils/api-helpers'
 
-interface ReportPreviewProps {
-  reportContent: string
-}
-
 export default function Preview() {
   const router = useRouter()
   const [reportContent, setReportContent] = useState<string>('')
@@ -29,7 +25,7 @@ export default function Preview() {
         const parsedGrantDetails = JSON.parse(grantDetails)
         const parsedReportData = JSON.parse(reportData)
 
-        const preview = getReportPreview(parsedGrantDetails, parsedReportData)
+        const preview = getReportPreview(parsedReportData)
         setReportContent(preview)
       } catch (error) {
         console.error('Error loading preview:', error)

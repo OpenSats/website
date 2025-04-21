@@ -28,9 +28,7 @@ export default function GrantReportForm({
 }: GrantReportFormProps) {
   const router = useRouter()
   const [error, setError] = useState<string>()
-  const [showPreview, setShowPreview] = useState(false)
   const [recoveredData, setRecoveredData] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const {
     register,
@@ -39,7 +37,6 @@ export default function GrantReportForm({
     watch,
     setValue,
     getValues,
-    reset,
   } = useForm<GrantReportFormData>({
     defaultValues: {
       project_name: grantDetails.project_name,
@@ -53,33 +50,6 @@ export default function GrantReportForm({
 
   // Watch all form fields for preview
   const watchAllFields = watch()
-
-  // Clear all saved report data for this grant
-  const clearSavedData = () => {
-    try {
-      // Find all keys in localStorage that match the pattern for this grant
-      const keysToRemove = []
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        if (
-          key &&
-          key.startsWith(
-            `${STORAGE_KEYS.REPORT_DRAFT}_${grantDetails.issue_number}`
-          )
-        ) {
-          keysToRemove.push(key)
-        }
-      }
-
-      // Remove all matching keys
-      keysToRemove.forEach((key) => localStorage.removeItem(key))
-
-      return keysToRemove.length > 0
-    } catch (e) {
-      console.error('Error clearing saved form data:', e)
-      return false
-    }
-  }
 
   // Load saved form data from localStorage on initial render
   useEffect(() => {
@@ -133,33 +103,6 @@ export default function GrantReportForm({
       }
     }
   }, [watchAllFields, grantDetails.issue_number, isDirty, getValues])
-
-  const onSubmit = async (data: GrantReportFormData) => {
-    setError(undefined)
-    setLoading(true)
-
-    try {
-      const response = await fetchPostJSON('/api/report-bot', {
-        ...data,
-        issue_number: grantDetails.issue_number,
-        email: grantDetails.email,
-      })
-
-      if (response.error) {
-        setError(response.error)
-        setLoading(false)
-        return
-      }
-
-      // Clear saved data
-      localStorage.removeItem('report_draft')
-      router.push('/reports/success')
-    } catch (e) {
-      setError('Failed to submit report. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   const handlePreview = handleSubmit(async (data) => {
     setError(undefined)

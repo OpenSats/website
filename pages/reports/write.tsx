@@ -6,9 +6,15 @@ import { PageSEO } from '../../components/SEO'
 import PageSection from '../../components/PageSection'
 import CustomLink from '@/components/Link'
 
+interface GrantDetails {
+  project_name: string
+  issue_number: number
+  email: string
+}
+
 export default function WritePage() {
   const router = useRouter()
-  const [grantDetails, setGrantDetails] = useState<any>(null)
+  const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
