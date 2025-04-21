@@ -280,30 +280,3 @@ export async function sendReportConfirmationEmail(
     return false
   }
 }
-
-/**
- * Convert Markdown to GitHub-style HTML
- * @param markdown Markdown content to convert
- * @returns HTML content
- */
-function convertMarkdownToHtml(markdown: string): string {
-  if (!markdown) {
-    return ''
-  }
-
-  try {
-    // Use marked to convert markdown to HTML
-    // Configure marked to use synchronous mode
-    marked.setOptions({ async: false })
-    return marked(markdown) as string
-  } catch (error) {
-    console.error('Error converting Markdown to HTML:', error)
-    // Return sanitized plain text as fallback
-    return markdown
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .split('\n')
-      .map((line) => `<p>${line}</p>`)
-      .join('')
-  }
-}
