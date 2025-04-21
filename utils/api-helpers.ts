@@ -65,3 +65,45 @@ export async function fetchPostJSONAuthed(
     throw err
   }
 }
+
+export function getReportPreview(grantDetails: any, reportData: any): string {
+  const {
+    projectName,
+    reportNumber,
+    timeSpent,
+    plansForNextQuarter,
+    useOfFunds,
+    helpNeeded,
+  } = reportData
+
+  return `
+# ${projectName} - Report ${reportNumber}
+
+## Time Spent
+${timeSpent}
+
+## Plans for Next Quarter
+${plansForNextQuarter}
+
+## Use of Funds
+${useOfFunds}
+
+${helpNeeded ? `## Help Needed\n${helpNeeded}` : ''}
+`
+}
+
+export async function getGrantById(grantId: string) {
+  const response = await fetch(`/api/grants/${grantId}`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch grant details')
+  }
+  return response.json()
+}
+
+export async function getReportById(reportId: string) {
+  const response = await fetch(`/api/reports/${reportId}`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch report details')
+  }
+  return response.json()
+}

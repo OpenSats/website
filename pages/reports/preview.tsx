@@ -1,104 +1,75 @@
-import { useState, useEffect } from 'react'
-import { NextPage } from 'next'
-import { PageSEO } from '@/components/SEO'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import PageSection from '@/components/PageSection'
-import ReportPreview from '@/components/ReportPreview'
+import { STORAGE_KEYS } from '../../utils/constants'
+import { getReportPreview } from '../../utils/api-helpers'
+import ReportPreview from '../../components/ReportPreview'
+import { PageSEO } from '../../components/SEO'
+import PageSection from '../../components/PageSection'
 import { fetchPostJSON } from '../../utils/api-helpers'
 
-const REPORT_STORAGE_KEY = 'opensats_report_draft'
-const GRANT_STORAGE_KEY = 'opensats_grant_details'
-
-interface ReportData {
-  project_name: string
-  report_number: string
-  time_spent: string
-  next_quarter: string
-  money_usage: string
-  help_needed?: string
+interface ReportPreviewProps {
+  reportContent: string
 }
 
-interface GrantDetails {
-  project_name: string
-  issue_number: number
-  email: string
-}
-
-const PreviewPage: NextPage = () => {
+export default function Preview() {
   const router = useRouter()
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string>()
-  const [reportData, setReportData] = useState<ReportData | null>(null)
-  const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
+  const [reportContent, setReportContent] = useState<string>('')
 
   useEffect(() => {
-    // Load grant details
-    const savedGrantDetails = localStorage.getItem(GRANT_STORAGE_KEY)
-    if (!savedGrantDetails) {
-      router.push('/reports/submit')
-      return
+    const loadPreview = async () => {
+      try {
+        const grantDetails = localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS)
+        const reportData = localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT)
+        
+        if (!grantDetails || !reportData) {
+          router.push('/reports/submit')
+          return
+        }
+
+        const parsedGrantDetails = JSON.parse(grantDetails)
+        const parsedReportData = JSON.parse(reportData)
+
+        const preview = getReportPreview(parsedGrantDetails, parsedReportData)
+        setReportContent(preview)
+      } catch (error) {
+        console.error('Error loading preview:', error)
+        router.push('/reports/submit')
+      }
     }
 
-    try {
-      const parsedGrantDetails = JSON.parse(savedGrantDetails)
-      setGrantDetails(parsedGrantDetails)
-
-      // Load report data using the grant's issue number
-      const storageKey = `${REPORT_STORAGE_KEY}_${parsedGrantDetails.issue_number}`
-      const savedData = localStorage.getItem(storageKey)
-      if (!savedData) {
-        router.push('/reports/write')
-        return
-      }
-
-      const parsedData = JSON.parse(savedData)
-      if (parsedData.formData) {
-        setReportData(parsedData.formData)
-      } else {
-        router.push('/reports/write')
-      }
-    } catch (e) {
-      console.error('Error loading data:', e)
-      router.push('/reports/write')
-    }
+    loadPreview()
   }, [router])
 
-  const handleSubmit = async () => {
-    if (!reportData || !grantDetails) return
+  if (!reportContent) {
+    return <div>Loading preview...</div>
+  }
 
-    setError(undefined)
-    setLoading(true)
+  const handleSubmit = async () => {
+    if (!reportContent) return
 
     try {
+      const grantDetails = JSON.parse(localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}')
       const response = await fetchPostJSON('/api/report-bot', {
-        ...reportData,
-        issue_number: grantDetails.issue_number,
-        email: grantDetails.email,
+        ...grantDetails,
+        report_content: reportContent,
       })
 
       if (response.error) {
-        setError(response.error)
-        setLoading(false)
+        console.error('Error submitting report:', response.error)
         return
       }
 
       // Clear saved data
-      const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}`
-      localStorage.removeItem(storageKey)
+      localStorage.removeItem(STORAGE_KEYS.REPORT_DRAFT)
+      localStorage.removeItem(STORAGE_KEYS.GRANT_DETAILS)
       router.push('/reports/success')
     } catch (e) {
-      setError('Failed to submit report. Please try again.')
-    } finally {
-      setLoading(false)
+      console.error('Failed to submit report. Please try again.', e)
     }
   }
 
   const handleBack = () => {
     router.push('/reports/write')
-  }
-
-  if (!reportData || !grantDetails) {
-    return null // Loading state handled by useEffect redirects
   }
 
   return (
@@ -134,35 +105,8 @@ const PreviewPage: NextPage = () => {
           </div>
 
           <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
-            <ReportPreview {...reportData} />
+            <ReportPreview reportContent={reportContent} />
           </div>
-
-          {error && (
-            <div className="rounded-md border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900">
-              <div className="flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-red-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
-                    Error
-                  </h3>
-                  <div className="mt-2 text-sm text-red-700 dark:text-red-300">
-                    <p>{error}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
 
           <div className="mt-6 flex justify-between space-x-4">
             <button
@@ -188,20 +132,13 @@ const PreviewPage: NextPage = () => {
             </button>
             <button
               onClick={handleSubmit}
-              disabled={loading}
-              className={`rounded px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 ${
-                loading
-                  ? 'cursor-not-allowed bg-gray-400'
-                  : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
-              }`}
+              className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
-              {loading ? 'Submitting...' : 'Submit Report'}
+              Submit Report
             </button>
           </div>
         </div>
       </PageSection>
     </>
   )
-}
-
-export default PreviewPage 
+} 

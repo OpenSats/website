@@ -1,39 +1,31 @@
 import { useEffect, useState } from 'react'
-import { NextPage } from 'next'
-import { PageSEO } from '@/components/SEO'
 import { useRouter } from 'next/router'
-import PageSection from '@/components/PageSection'
-import GrantReportForm from '@/components/GrantReportForm'
+import GrantReportForm from '../../components/GrantReportForm'
+import { STORAGE_KEYS } from '../../utils/constants'
+import { PageSEO } from '../../components/SEO'
+import PageSection from '../../components/PageSection'
 
-const GRANT_STORAGE_KEY = 'opensats_grant_details'
-
-interface GrantDetails {
-  project_name: string
-  issue_number: number
-  email: string
-}
-
-const WritePage: NextPage = () => {
+export default function WritePage() {
   const router = useRouter()
-  const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
+  const [grantDetails, setGrantDetails] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const savedGrantDetails = localStorage.getItem(GRANT_STORAGE_KEY)
-    if (!savedGrantDetails) {
-      router.push('/reports/submit')
+    const storedDetails = localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS)
+    if (!storedDetails) {
+      router.replace('/reports/submit')
       return
     }
     try {
-      setGrantDetails(JSON.parse(savedGrantDetails))
+      setGrantDetails(JSON.parse(storedDetails))
     } catch (e) {
-      console.error('Error parsing grant details:', e)
-      router.push('/reports/submit')
+      setError('Invalid grant details')
+      router.replace('/reports/submit')
     }
   }, [router])
 
-  if (!grantDetails) {
-    return null // Loading state handled by useEffect redirect
-  }
+  if (error) return <div className="text-red-500">{error}</div>
+  if (!grantDetails) return <div>Loading...</div>
 
   return (
     <>
@@ -53,5 +45,3 @@ const WritePage: NextPage = () => {
     </>
   )
 }
-
-export default WritePage
