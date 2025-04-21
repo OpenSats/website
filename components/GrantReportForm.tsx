@@ -8,6 +8,7 @@ interface GrantReportFormProps {
     project_name: string
     issue_number: number
     email: string
+    grant_id?: string
   }
 }
 
@@ -153,24 +154,27 @@ export default function GrantReportForm({
           <h2>Report Details</h2>
 
           {/* Project Name */}
-          <label className="block">
-            Project Name *
-            <br />
-            <small>The name of your project as specified in your grant.</small>
-            <input
-              {...register('project_name', {
-                required: 'Project name is required',
-              })}
-              type="text"
-              className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-              disabled
-            />
+          <div className="block">
+            <div className="relative mt-1">
+              <input
+                {...register('project_name', {
+                  required: 'Project name is required',
+                })}
+                type="text"
+                className="block w-full rounded-md border-gray-300 bg-gray-100 text-gray-700 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
+                disabled
+                value={grantDetails.project_name}
+              />
+              <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">
+                Pre-filled
+              </div>
+            </div>
             {errors.project_name && (
               <small className="text-red-500">
                 {errors.project_name.message}
               </small>
             )}
-          </label>
+          </div>
 
           {/* Project Updates */}
           <label className="block">
@@ -285,7 +289,7 @@ export default function GrantReportForm({
             </div>
           )}
 
-          <div className="flex justify-end space-x-4">
+          <div className="flex justify-between space-x-4">
             <button
               type="button"
               onClick={() => router.push('/reports/submit')}
@@ -329,24 +333,27 @@ export default function GrantReportForm({
         <h2>Report Details</h2>
 
         {/* Project Name */}
-        <label className="block">
-          Project Name *
-          <br />
-          <small>The name of your project as specified in your grant.</small>
-          <input
-            {...register('project_name', {
-              required: 'Project name is required',
-            })}
-            type="text"
-            className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-            disabled
-          />
+        <div className="block">
+          <div className="relative mt-1">
+            <input
+              {...register('project_name', {
+                required: 'Project name is required',
+              })}
+              type="text"
+              className="block w-full rounded-md border-gray-300 bg-gray-100 text-gray-700 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
+              disabled
+              value={grantDetails.project_name}
+            />
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">
+              Pre-filled
+            </div>
+          </div>
           {errors.project_name && (
             <small className="text-red-500">
               {errors.project_name.message}
             </small>
           )}
-        </label>
+        </div>
 
         {/* Project Updates */}
         <label className="block">
@@ -457,7 +464,7 @@ export default function GrantReportForm({
           </div>
         )}
 
-        <div className="flex justify-end space-x-4">
+        <div className="flex justify-between space-x-4">
           <button
             type="button"
             onClick={() => router.push('/reports/submit')}
