@@ -20,7 +20,7 @@ export default function Preview() {
       try {
         const grantDetails = localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS)
         const reportData = localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT)
-        
+
         if (!grantDetails || !reportData) {
           router.push('/reports/submit')
           return
@@ -48,7 +48,9 @@ export default function Preview() {
     if (!reportContent) return
 
     try {
-      const grantDetails = JSON.parse(localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}')
+      const grantDetails = JSON.parse(
+        localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}'
+      )
       const response = await fetchPostJSON('/api/report-bot', {
         ...grantDetails,
         report_content: reportContent,
@@ -98,8 +100,8 @@ export default function Preview() {
                 />
               </svg>
               <p className="text-base font-medium text-gray-800 dark:text-gray-200">
-                Please review your report carefully before submitting.
-                Once submitted, it cannot be edited.
+                Please review your report carefully before submitting. Once
+                submitted, it cannot be edited.
               </p>
             </div>
           </div>
@@ -141,4 +143,4 @@ export default function Preview() {
       </PageSection>
     </>
   )
-} 
+}
