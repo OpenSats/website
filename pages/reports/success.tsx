@@ -2,12 +2,13 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
+import Link from 'next/link'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
 export const getStaticProps = async () => {
   const page = allPages.find((p) => p.slug === 'report-success')
-  return { props: { page: page } }
+  return { props: { page: page || null } }
 }
 
 export default function ReportSuccess({
@@ -20,4 +21,4 @@ export default function ReportSuccess({
       MDXComponents={MDXComponents}
     />
   )
-} 
+}
