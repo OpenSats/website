@@ -3,7 +3,7 @@ import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from '../../utils/email'
 import CryptoJS from 'crypto-js'
 
-const GH_BOT_TOKEN = process.env.GH_BOT_TOKEN
+const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
 const GH_REPORTS_REPO = process.env.GH_REPORTS_REPO
 
@@ -62,7 +62,7 @@ export default async function handler(
     })
   }
 
-  if (!GH_BOT_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
+  if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
     console.error('Missing GitHub configuration')
     return res.status(500).json({
       success: false,
@@ -98,7 +98,7 @@ export default async function handler(
       })
     }
 
-    const octokit = new Octokit({ auth: GH_BOT_TOKEN })
+    const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
     // Create report content in markdown format
     const reportContent = `# Progress Report ${report_number}
