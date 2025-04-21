@@ -82,18 +82,20 @@ export function generateReportContent(reportData: {
     reportData
 
   // Format the help needed section if it exists
-  const helpNeededSection = help_needed ? `## Help Needed\n${help_needed}` : ''
+  const helpNeededSection = help_needed
+    ? `## Anything OpenSats could help with? \n${help_needed}`
+    : ''
 
   return `# ${project_name} - Progress Report
 
 ## Time Spent
 ${time_spent}
 
+## Plans for Next Quarter
+${next_quarter}
+
 ## Use of Funds
 ${money_usage}
-
-## Next Quarter Plans
-${next_quarter}
 
 ${helpNeededSection}`
 }
