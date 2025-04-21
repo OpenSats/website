@@ -1,12 +1,3 @@
-/**
- * Format the help needed section for a report
- * @param helpNeeded The help needed text
- * @returns Formatted help needed section or empty string if no help needed
- */
-function formatHelpNeededSection(helpNeeded?: string): string {
-  return helpNeeded ? `## Help Needed\n${helpNeeded}` : ''
-}
-
 export async function fetchGetJSON(url: string) {
   try {
     const data = await fetch(url).then((res) => res.json())
@@ -80,16 +71,15 @@ export async function fetchPostJSONAuthed(
  * @param reportData Object containing report data (project_name, time_spent, next_quarter, money_usage, help_needed)
  * @returns Formatted markdown string for the report
  */
-export function generateReportContent(
-  reportData: {
-    project_name: string
-    time_spent: string
-    next_quarter: string
-    money_usage: string
-    help_needed?: string
-  }
-): string {
-  const { project_name, time_spent, next_quarter, money_usage, help_needed } = reportData
+export function generateReportContent(reportData: {
+  project_name: string
+  time_spent: string
+  next_quarter: string
+  money_usage: string
+  help_needed?: string
+}): string {
+  const { project_name, time_spent, next_quarter, money_usage, help_needed } =
+    reportData
 
   // Format the help needed section if it exists
   const helpNeededSection = help_needed ? `## Help Needed\n${help_needed}` : ''
@@ -108,7 +98,7 @@ ${next_quarter}
 ${helpNeededSection}`
 }
 
-export function getReportPreview(grantDetails: any, reportData: any): string {
+export function getReportPreview(reportData: any): string {
   return generateReportContent(reportData)
 }
 
