@@ -1,0 +1,176 @@
+---
+title: "Eleventh Wave of Nostr Grants"
+date: '2025-04-16'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+authors: ['default', 'arvin', 'julian']
+images: ['/static/images/blog/76-eleventh-wave-of-nostr-grants.jpg']
+draft: false
+summary: "OpenSats is funding five more open-source projects advancing the nostr ecosystem."
+---
+
+We're pleased to announce our eleventh wave of nostr grants. This round includes
+support for projects focused on decentralized live streaming, off-grid
+connectivity, web-of-trust infrastructure, private messaging, and open tools for
+game development. These efforts represent a growing ecosystem of builders
+working to expand nostr's capabilities while strengthening censorship resistance
+and permissionless access.
+
+The five projects receiving support in this wave are:
+
+- [Swae](#swae)
+- [HAMSTR](#hamstr)
+- [Vertex](#vertex)
+- [Nostr Double Ratchet](#nostr-double-ratchet)
+- [Nostr Game Engine](#nostr-game-engine)
+
+Our support for nostr is made possible by the generosity of our donors. Their
+contributions help us support innovative, mission-aligned projects like these.
+If you'd like to help sustain this work, consider donating to The Nostr Fund:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+Let's look at these projects and how they align with our mission.
+
+---
+
+### Swae
+
+Swae is a mobile-first live streaming application built on the nostr protocol,
+supporting decentralized video broadcasts directly from smartphones. Designed to
+operate in a permissionless environment, Swae allows creators to host and watch
+streams with integrated Lightning-powered micropayments through Zaps. The
+current prototype—available on TestFlight—supports nostr account creation,
+live stream viewing, and stream initiation via
+[RTMP](https://rtmp.veriskope.com/docs/overview/) URLs.
+
+This grant will fund the deployment of a dedicated streaming server, integration
+of real-time nostr chat, and expanded Lightning payment support. Additional
+roadmap priorities include Cashu protocol support, a TikTok-style clip discovery
+feature, and tools for stream analytics. Development will continue to focus on
+core streaming reliability, improved payment flows, and scalable content
+management.
+
+Repository: [suhailsaqan/swae](https://github.com/suhailsaqan/swae)  
+License: GPL v3.0
+
+### HAMSTR
+
+HAMSTR enables nostr communication over ham radio, offering offline access to
+the network in regions without internet, under censorship, or during
+infrastructure outages. By bridging off-grid clients with internet-connected
+relay gateways through packet radio, HAMSTR delivers resilient messaging
+optimized for extremely low-bandwidth transmission. The current implementation
+supports full [`kind:1`](https://github.com/nostr-protocol/nips/blob/master/10.md)
+note exchange with compression, error correction, and local key storage—all
+accessible via a web-based client.
+
+Grant funding will support development across six milestones: allowing for
+off-grid Zaps and ecash via
+[NWC](https://github.com/getAlby/nostr-wallet-connect#) and
+[Cashu](https://cashu.space/); offline bitcoin transaction support with a nostr
+relay bot; GUI server tools for global operators;
+[FLDIGI](https://sourceforge.net/p/fldigi/fldigi/ci/master/tree/README)
+integration for long-range communications;
+[Reticulum-based](https://reticulum.network/) encryption and routing; and a
+flagship radio installation in Arizona to serve as a global access point. HAMSTR
+aims to ensure decentralized communication and payments remain viable—even
+when the internet is not.
+
+Repository: [LibertyFarmer/hamstr](https://github.com/LibertyFarmer/hamstr)  
+License: GPL v3.0
+
+### Vertex
+
+Vertex provides Web of Trust infrastructure for nostr, helping client developers
+filter spam, personalize content, and preserve decentralization. The service
+continuously crawls nostr relays to map [the social
+graph](https://pippellia.com/pippellia/Social+Graph/Navigating+the+social+graph)
+and applies [PageRank-style](https://en.wikipedia.org/wiki/PageRank) algorithms
+to return relevance-ranked results through
+[DVM](https://github.com/nostr-protocol/nips/blob/master/90.md) requests. The
+project has shipped core tooling—including
+[crawler](https://github.com/vertex-lab/crawler) and
+[relay](https://github.com/vertex-lab/relay) software—and integrated its
+[VerifyReputation](https://vertexlab.io/docs/nips/verify-reputation-dvm/) DVM
+into live apps.
+
+This grant will support the development of a Web of Trust-based search DVM for
+discovering trusted profiles, a fast public key viewer with impersonator
+detection, and algorithmic improvements using mutes and reports. Future updates
+will focus on client-side verification of DVM responses and personalization
+enhancements based on user interests and metadata—all while minimizing
+infrastructure requirements for clients.
+
+Repositories: [vertex-lab](https://github.com/vertex-lab)  
+License: MIT
+
+### Nostr Double Ratchet
+
+Nostr Double Ratchet brings end-to-end encrypted private messaging to nostr
+clients by offering a library that implements the [Double Ratchet][DR] algorithm. By
+protecting message metadata and securing histories even if a user's nostr key is
+compromised, this approach significantly enhances privacy across the network.
+The protocol is currently available as a TypeScript library and integrated into
+clients such as [Iris](https://iris.to/) and [Damus](https://damus.io/).
+Complementary work includes a high-performance
+[Rust/LMDB](https://crates.io/crates/nostr-lmdb) server for notifications and
+webhook subscriptions.
+
+Upcoming milestones include group messaging support, multi-device session
+management [modeled on Signal](https://signal.org/docs/specifications/sesame/),
+and the public release of Double Ratchet in Damus. The team also plans to
+finalize and standardize the protocol through
+[NIP-117](https://github.com/mmalmi/nips/blob/double-ratchet/117.md) and
+[NIP-118](https://github.com/mmalmi/nips/blob/double-ratchet/118.md), expanding
+integration across both web and native clients. This work aims to make secure,
+decentralized messaging a native capability across the nostr ecosystem.
+
+Repository:
+[mmalmi/nostr-double-ratchet](https://github.com/mmalmi/nostr-double-ratchet)  
+License: MIT
+
+[DR]: https://en.wikipedia.org/wiki/Double_Ratchet_Algorithm
+
+### Nostr Game Engine
+
+[Nostr Game Engine](https://ngengine.org/) is building a free, open-source,
+royalty-free engine for game developers—powered by nostr. Built using
+[jMonkeyEngine](https://github.com/jMonkeyEngine/jmonkeyengine?tab=readme-ov-file#jmonkeyengine),
+the project replaces traditional centralized systems with nostr-native modules
+while preserving compatibility. The initial release consists of modular
+extensions, with plans to evolve into a dedicated engine with improved
+architecture.
+
+This grant will support development across several areas: interoperable player
+authorization via
+[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) signers,
+WebRTC signaling over nostr, in-game advertising via nostr-DAN, matchmaking,
+social profiles via
+[NIP-58](https://github.com/nostr-protocol/nips/blob/master/58.md), social
+features ([NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) and
+[NIP-28](https://github.com/nostr-protocol/nips/blob/master/28.md)), DRM/release
+tools, and micropayments via NWC, Cashu, and Lightning. The goal is to offer a
+full-featured, cross-platform engine for browsers, desktops, and mobile that
+requires only a nostr relay as the backend—significantly reducing
+infrastructure burdens for independent creators.
+
+Repository: [NostrGameEngine/ngengine](https://github.com/NostrGameEngine/ngengine)  
+License: BSD-3-Clause
+
+---
+
+We're proud to support these projects and look forward to their continued
+contributions to the nostr ecosystem. OpenSats will continue funding free and
+open-source work that strengthens decentralization, privacy, and resilience. If
+you're building something aligned with [our mission](/mission), we encourage you
+to [apply for funding](/apply).
+
+Our support for nostr is made possible by the generosity of our donors. To
+support the developers building open tools for the nostr ecosystem, consider
+contributing to [The Nostr Fund](/funds/nostr).
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
