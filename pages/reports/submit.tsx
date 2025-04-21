@@ -3,8 +3,13 @@ import { NextPage } from 'next'
 import { PageSEO } from '@/components/SEO'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import siteMetadata from '@/data/siteMetadata'
-import GrantValidationForm from '@/components/GrantValidationForm'
+import dynamic from 'next/dynamic'
 import GrantReportForm from '@/components/GrantReportForm'
+
+const GrantValidationForm = dynamic(
+  () => import('@/components/GrantValidationForm'),
+  { ssr: false }
+)
 
 interface GrantDetails {
   project_name: string
