@@ -1,61 +1,52 @@
+import { useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import { PageSEO } from '@/components/SEO'
-import siteMetadata from '@/data/siteMetadata'
-import GrantReportForm from '@/components/GrantReportForm'
-import PageSection from '@/components/PageSection'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import PageSection from '@/components/PageSection'
+import GrantReportForm from '@/components/GrantReportForm'
 
-const STORAGE_KEY = 'opensats_grant_details'
+const GRANT_STORAGE_KEY = 'opensats_grant_details'
 
-const WriteReportPage: NextPage = () => {
+interface GrantDetails {
+  project_name: string
+  issue_number: number
+  email: string
+}
+
+const WritePage: NextPage = () => {
   const router = useRouter()
-  const [grantDetails, setGrantDetails] = useState(null)
+  const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
 
   useEffect(() => {
-    // Try to get grant details from URL first (for initial navigation)
-    const urlGrantDetails = router.query.grantDetails
-    if (urlGrantDetails) {
-      const parsedDetails = JSON.parse(
-        typeof urlGrantDetails === 'string' ? urlGrantDetails : '{}'
-      )
-      // Store in localStorage for persistence
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(parsedDetails))
-      setGrantDetails(parsedDetails)
+    const savedGrantDetails = localStorage.getItem(GRANT_STORAGE_KEY)
+    if (!savedGrantDetails) {
+      router.push('/reports/submit')
       return
     }
-
-    // If not in URL, try to get from localStorage (for page refreshes)
-    const storedDetails = localStorage.getItem(STORAGE_KEY)
-    if (storedDetails) {
-      setGrantDetails(JSON.parse(storedDetails))
-      return
+    try {
+      setGrantDetails(JSON.parse(savedGrantDetails))
+    } catch (e) {
+      console.error('Error parsing grant details:', e)
+      router.push('/reports/submit')
     }
+  }, [router])
 
-    // If no grant details found anywhere, redirect back to submit
-    router.push('/reports/submit')
-  }, [router, router.query.grantDetails])
-
-  // Don't render anything while we're checking the grant details
   if (!grantDetails) {
-    return null
+    return null // Loading state handled by useEffect redirect
   }
 
   return (
     <>
       <PageSEO
-        title="Write Progress Report"
+        title="Write Report"
         description="Write your OpenSats grant progress report"
       />
 
-      <PageSection
-        title="Write Progress Report"
-        image="/static/images/avatar.png"
-      >
-        <p>
-          Please fill out all required fields in the form below. Make sure to
-          include specific details about your progress, challenges overcome and
-          plans for the next period.
+      <PageSection title="Write Report" image="/static/images/avatar.png">
+        <p className="mb-6">
+          Write your progress report below. You can use markdown formatting to
+          structure your content. Take your time to provide detailed information
+          about your progress, challenges, and future plans.
         </p>
         <GrantReportForm grantDetails={grantDetails} />
       </PageSection>
@@ -63,4 +54,4 @@ const WriteReportPage: NextPage = () => {
   )
 }
 
-export default WriteReportPage 
+export default WritePage 

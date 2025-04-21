@@ -20,18 +20,6 @@ interface GrantValidationFormData {
   email: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface GrantValidationFormErrors {
-  grant_id?: {
-    type: 'required' | 'pattern'
-    message: string
-  }
-  email?: {
-    type: 'required' | 'validate'
-    message: string
-  }
-}
-
 export default function GrantValidationForm({
   onValidationSuccess,
 }: GrantValidationFormProps) {

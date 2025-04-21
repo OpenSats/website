@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import { NextPage } from 'next'
 import { PageSEO } from '@/components/SEO'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import siteMetadata from '@/data/siteMetadata'
 import dynamic from 'next/dynamic'
-import GrantReportForm from '@/components/GrantReportForm'
 import PageSection from '@/components/PageSection'
 import { useRouter } from 'next/router'
 

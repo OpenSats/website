@@ -23,7 +23,7 @@ interface GrantReportFormData {
 }
 
 // Storage key for local storage
-const STORAGE_KEY = 'opensats_report_draft'
+const REPORT_STORAGE_KEY = 'opensats_report_draft'
 // Set expiration time for saved data (30 days in milliseconds)
 const STORAGE_EXPIRATION = 30 * 24 * 60 * 60 * 1000
 
@@ -53,6 +53,7 @@ export default function GrantReportForm({
       money_usage: '',
       help_needed: '',
     },
+    mode: 'onBlur',
   })
 
   // Watch all form fields for preview
@@ -67,7 +68,7 @@ export default function GrantReportForm({
         const key = localStorage.key(i)
         if (
           key &&
-          key.startsWith(`${STORAGE_KEY}_${grantDetails.issue_number}`)
+          key.startsWith(`${REPORT_STORAGE_KEY}_${grantDetails.issue_number}`)
         ) {
           keysToRemove.push(key)
         }
@@ -86,7 +87,7 @@ export default function GrantReportForm({
   // Load saved form data from localStorage on initial render
   useEffect(() => {
     try {
-      const storageKey = `${STORAGE_KEY}_${grantDetails.issue_number}_${
+      const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_${
         watchAllFields.report_number || 'draft'
       }`
       const savedData = localStorage.getItem(storageKey)
@@ -123,7 +124,7 @@ export default function GrantReportForm({
     if (isDirty && watchAllFields.report_number) {
       try {
         const formData = getValues()
-        const storageKey = `${STORAGE_KEY}_${grantDetails.issue_number}_${watchAllFields.report_number}`
+        const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_${watchAllFields.report_number}`
 
         // Store data with timestamp for expiration checking
         const dataToStore = {
@@ -136,7 +137,7 @@ export default function GrantReportForm({
         // Remove draft data if we have a report number
         if (watchAllFields.report_number) {
           localStorage.removeItem(
-            `${STORAGE_KEY}_${grantDetails.issue_number}_draft`
+            `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_draft`
           )
         }
       } catch (e) {
@@ -178,6 +179,36 @@ export default function GrantReportForm({
     }
   }
 
+  const handlePreview = handleSubmit((data) => {
+    // Validate required fields
+    if (
+      !data.project_name ||
+      !data.report_number ||
+      !data.time_spent ||
+      !data.next_quarter ||
+      !data.money_usage
+    ) {
+      setError('Please fill in all required fields before previewing')
+      return
+    }
+
+    try {
+      // Save current form state
+      const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}`
+      const dataToStore = {
+        formData: data,
+        timestamp: Date.now(),
+      }
+      localStorage.setItem(storageKey, JSON.stringify(dataToStore))
+
+      // Navigate to preview page
+      router.push('/reports/preview')
+    } catch (e) {
+      console.error('Error saving form data:', e)
+      setError('Failed to save form data. Please try again.')
+    }
+  })
+
   if (recoveredData) {
     return (
       <div className="mt-4 flex justify-end space-x-2">
@@ -205,7 +236,7 @@ export default function GrantReportForm({
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handlePreview}
       className="apply flex max-w-2xl flex-col gap-4"
     >
       {/* Instructions */}
@@ -450,87 +481,14 @@ export default function GrantReportForm({
         </div>
       )}
 
-      {!showPreview ? (
-        <div className="flex justify-end space-x-4">
-          <button
-            type="button"
-            onClick={() => setShowPreview(true)}
-            className="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-          >
-            Preview Report
-          </button>
-        </div>
-      ) : (
-        <>
-          <div className="mt-8 border-t border-gray-200 pt-6">
-            <h2 className="mb-4 flex items-center text-xl font-bold text-gray-900 dark:text-gray-100">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 h-6 w-6 text-orange-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z"
-                />
-              </svg>
-              Report Preview
-            </h2>
-
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
-              <h3 className="mb-4 text-lg font-medium text-gray-900 dark:text-white">
-                Report Preview
-              </h3>
-              <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-                This is how your report will appear when submitted. Please
-                review it carefully before submitting.
-              </p>
-              <div className="overflow-hidden rounded-lg border border-gray-700 bg-gray-800 shadow-md">
-                <ReportPreview {...watchAllFields} />
-              </div>
-            </div>
-
-            <div className="mt-6 flex justify-between">
-              <button
-                type="button"
-                onClick={() => setShowPreview(false)}
-                className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2 h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M11 17l-5-5m0 0l5-5m-5 5h12"
-                  />
-                </svg>
-                Back to Edit
-              </button>
-              <button
-                type="submit"
-                disabled={loading}
-                className={`rounded px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 ${
-                  loading
-                    ? 'cursor-not-allowed bg-gray-400'
-                    : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
-                }`}
-              >
-                {loading ? 'Submitting...' : 'Submit Report'}
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+      <div className="flex justify-end space-x-4">
+        <button
+          type="submit"
+          className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+        >
+          Preview Report
+        </button>
+      </div>
 
       {/* Guidelines */}
       <div id="guidelines" className="mt-8 border-t border-gray-200 pt-6">
