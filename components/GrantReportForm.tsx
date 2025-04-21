@@ -15,7 +15,6 @@ interface GrantReportFormProps {
 
 interface GrantReportFormData {
   project_name: string
-  report_number: string
   time_spent: string
   next_quarter: string
   money_usage: string
@@ -47,7 +46,6 @@ export default function GrantReportForm({
   } = useForm<GrantReportFormData>({
     defaultValues: {
       project_name: grantDetails.project_name,
-      report_number: '',
       time_spent: '',
       next_quarter: '',
       money_usage: '',
@@ -87,9 +85,7 @@ export default function GrantReportForm({
   // Load saved form data from localStorage on initial render
   useEffect(() => {
     try {
-      const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_${
-        watchAllFields.report_number || 'draft'
-      }`
+      const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}`
       const savedData = localStorage.getItem(storageKey)
 
       if (savedData) {
@@ -117,14 +113,14 @@ export default function GrantReportForm({
       console.error('Error loading saved form data:', e)
       // If there's an error, we just continue with empty form
     }
-  }, [grantDetails.issue_number, setValue, watchAllFields.report_number])
+  }, [grantDetails.issue_number, setValue])
 
   // Save form data to localStorage whenever it changes
   useEffect(() => {
-    if (isDirty && watchAllFields.report_number) {
+    if (isDirty) {
       try {
         const formData = getValues()
-        const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_${watchAllFields.report_number}`
+        const storageKey = `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}`
 
         // Store data with timestamp for expiration checking
         const dataToStore = {
@@ -133,24 +129,11 @@ export default function GrantReportForm({
         }
 
         localStorage.setItem(storageKey, JSON.stringify(dataToStore))
-
-        // Remove draft data if we have a report number
-        if (watchAllFields.report_number) {
-          localStorage.removeItem(
-            `${REPORT_STORAGE_KEY}_${grantDetails.issue_number}_draft`
-          )
-        }
       } catch (e) {
         console.error('Error saving form data:', e)
       }
     }
-  }, [
-    watchAllFields,
-    grantDetails.issue_number,
-    isDirty,
-    getValues,
-    watchAllFields.report_number,
-  ])
+  }, [watchAllFields, grantDetails.issue_number, isDirty, getValues])
 
   const onSubmit = async (data: GrantReportFormData) => {
     setError(undefined)
@@ -183,7 +166,6 @@ export default function GrantReportForm({
     // Validate required fields
     if (
       !data.project_name ||
-      !data.report_number ||
       !data.time_spent ||
       !data.next_quarter ||
       !data.money_usage
@@ -218,7 +200,6 @@ export default function GrantReportForm({
             clearSavedData()
             reset({
               project_name: grantDetails.project_name,
-              report_number: '',
               time_spent: '',
               next_quarter: '',
               money_usage: '',
@@ -309,7 +290,6 @@ export default function GrantReportForm({
                     clearSavedData()
                     reset({
                       project_name: grantDetails.project_name,
-                      report_number: '',
                       time_spent: '',
                       next_quarter: '',
                       money_usage: '',
@@ -345,30 +325,6 @@ export default function GrantReportForm({
         />
         {errors.project_name && (
           <small className="text-red-500">{errors.project_name.message}</small>
-        )}
-      </label>
-
-      {/* Progress Report # */}
-      <label className="block">
-        Progress Report # *
-        <br />
-        <small>
-          The sequential number of this progress report (1, 2, 3, etc).
-        </small>
-        <input
-          {...register('report_number', {
-            required: 'Report number is required',
-            pattern: {
-              value: /^\d+$/,
-              message: 'Report number must be a number',
-            },
-          })}
-          type="text"
-          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-          placeholder="1"
-        />
-        {errors.report_number && (
-          <small className="text-red-500">{errors.report_number.message}</small>
         )}
       </label>
 
