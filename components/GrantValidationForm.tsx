@@ -1,14 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
-import FormButton from '@/components/FormButton'
-import dynamic from 'next/dynamic'
 import * as EmailValidator from 'email-validator'
-
-// Dynamically import the component with SSR disabled
-const DynamicFormButton = dynamic(() => Promise.resolve(FormButton), {
-  ssr: false,
-})
 
 interface ValidationResult {
   grant_details: {
@@ -148,13 +141,17 @@ export default function GrantValidationForm({
       </div>
 
       <div className="mt-8 flex justify-center">
-        <DynamicFormButton
-          loading={loading}
-          variant={loading ? 'disabled' : 'primary'}
-          className="text-base shadow-sm"
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full rounded-md px-6 py-3 text-base font-medium text-white shadow-sm transition-colors duration-200 ${
+            loading
+              ? 'cursor-not-allowed bg-gray-400'
+              : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
+          }`}
         >
-          Start Report
-        </DynamicFormButton>
+          {loading ? 'Validating...' : 'Next'}
+        </button>
       </div>
 
       {error && (
