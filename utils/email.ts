@@ -292,41 +292,10 @@ function convertMarkdownToHtml(markdown: string): string {
   }
 
   try {
-    // Simple Markdown to HTML conversion
-    return (
-      markdown
-        // Headers
-        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-        // Bold
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Italic
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        // Links
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
-        // Lists - improved to handle nested lists better
-        .replace(/^\s*[\*\-] (.*$)/gm, '<li>$1</li>')
-        .replace(/^(\d+)\. (.*$)/gm, '<li>$2</li>')
-        // Code
-        .replace(/`(.*?)`/g, '<code>$1</code>')
-        // Code blocks
-        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-        // Paragraphs (must be last)
-        .replace(/^(?!<[hl]|<li|<pre)(.+)$/gm, '<p>$1</p>')
-        // Fix multiple line breaks
-        .replace(/\n\n+/g, '\n\n')
-        // Fix lists - wrap in ul/ol tags
-        .replace(/(<li>.*?<\/li>\n*)+/g, '<ul>$&</ul>')
-        // Fix nested lists
-        .replace(/<\/ul>\s*<ul>/g, '')
-        // Escape HTML in code blocks
-        .replace(
-          /<code>([\s\S]*?)<\/code>/g,
-          (match, p1) =>
-            `<code>${p1.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`
-        )
-    )
+    // Use marked to convert markdown to HTML
+    // Configure marked to use synchronous mode
+    marked.setOptions({ async: false })
+    return marked(markdown) as string
   } catch (error) {
     console.error('Error converting Markdown to HTML:', error)
     // Return sanitized plain text as fallback
