@@ -49,17 +49,19 @@ export default function WritePage() {
             information about your progress, challenges, and future plans.
           </p>
           {/* Instructions */}
-          <p className="text-base text-gray-800 dark:text-gray-200">
-            Refer to our{' '}
-            <CustomLink
-              href="https://opensats.org/faq/grantee"
-              className="font-bold"
-            >
-              Grantee FAQ
-            </CustomLink>{' '}
-            for answers to common questions about progress report. In
-            particular:
-            <ul>
+          <div className="text-base text-gray-800 dark:text-gray-200">
+            <p>
+              Refer to our{' '}
+              <CustomLink
+                href="https://opensats.org/faq/grantee"
+                className="font-bold"
+              >
+                Grantee FAQ
+              </CustomLink>{' '}
+              for answers to common questions about progress report. In
+              particular:
+            </p>
+            <ul className="mt-2">
               <li>
                 <CustomLink href="/faq/grantee#what-does-an-ideal-progress-report-look-like">
                   What does an ideal progress report look like?
@@ -71,7 +73,7 @@ export default function WritePage() {
                 </CustomLink>
               </li>
             </ul>
-          </p>
+          </div>
 
           <GrantReportForm grantDetails={grantDetails} />
         </div>
