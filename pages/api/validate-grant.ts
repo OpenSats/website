@@ -7,12 +7,12 @@ const GH_ORG = process.env.GH_ORG
 const GH_REPORTS_REPO = process.env.GH_REPORTS_REPO
 
 interface ValidationResponse {
-  valid: boolean;
-  project_name?: string;
-  issue_number?: number;
-  email_hash?: string;
-  email?: string;
-  error?: string;
+  valid: boolean
+  project_name?: string
+  issue_number?: number
+  email_hash?: string
+  email?: string
+  error?: string
 }
 
 export default async function handler(
@@ -26,12 +26,16 @@ export default async function handler(
   const { grant_id, email } = req.body
 
   if (!grant_id || !email) {
-    return res.status(400).json({ valid: false, error: 'Grant ID and email are required' })
+    return res
+      .status(400)
+      .json({ valid: false, error: 'Grant ID and email are required' })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
     console.error('Missing GitHub configuration')
-    return res.status(500).json({ valid: false, error: 'Server configuration error' })
+    return res
+      .status(500)
+      .json({ valid: false, error: 'Server configuration error' })
   }
 
   // Development/testing condition
@@ -53,9 +57,10 @@ export default async function handler(
     })
 
     if (searchResult.data.total_count === 0) {
-      return res
-        .status(404)
-        .json({ valid: false, error: 'Grant not found, contact support for assistance' })
+      return res.status(404).json({
+        valid: false,
+        error: 'Grant not found, contact support for assistance',
+      })
     }
 
     // Get the first matching issue
@@ -76,6 +81,8 @@ export default async function handler(
     })
   } catch (error) {
     console.error('Error validating grant:', error)
-    return res.status(500).json({ valid: false, error: 'Error validating grant' })
+    return res
+      .status(500)
+      .json({ valid: false, error: 'Error validating grant' })
   }
 }
