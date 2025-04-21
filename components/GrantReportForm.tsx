@@ -108,10 +108,7 @@ export default function GrantReportForm({
         // Set form values from saved data
         if (parsedData.formData) {
           Object.keys(parsedData.formData).forEach((key) => {
-            setValue(
-              key as keyof GrantReportFormData,
-              parsedData.formData[key]
-            )
+            setValue(key as keyof GrantReportFormData, parsedData.formData[key])
           })
           setRecoveredData(true)
         }
