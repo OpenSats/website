@@ -42,36 +42,62 @@ export default function WritePage() {
       />
 
       <PageSection title="Write Report" image="/static/images/avatar.png">
-        <p className="mb-6">
-          Write your progress report below. You can use markdown formatting to
-          structure your content. Take your time to provide detailed information
-          about your progress, challenges, and future plans.
-        </p>
-        {/* Instructions */}
-        <p className="text-base text-gray-800 dark:text-gray-200">
-          Refer to our{' '}
-          <CustomLink
-            href="https://opensats.org/faq/grantee"
-            className="font-bold"
-          >
-            Grantee FAQ
-          </CustomLink>{' '}
-          for answers to common questions about progress report. In particular:
-          <ul>
-            <li>
-              <CustomLink href="/faq/grantee#what-does-an-ideal-progress-report-look-like">
-                What does an ideal progress report look like?
-              </CustomLink>
-            </li>
-            <li>
-              <CustomLink href="/faq/grantee#what-does-a-poor-progress-report-look-like">
-                What does a poor progress report look like?
-              </CustomLink>
-            </li>
-          </ul>
-        </p>
+        <div className="space-y-6">
+          <div className="flex justify-start">
+            <button
+              type="button"
+              onClick={() => router.push('/reports/submit')}
+              className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-2 h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M11 17l-5-5m0 0l5-5m-5 5h12"
+                />
+              </svg>
+              Back
+            </button>
+          </div>
 
-        <GrantReportForm grantDetails={grantDetails} />
+          <p className="mb-6">
+            Write your progress report below. You can use markdown formatting to
+            structure your content. Take your time to provide detailed information
+            about your progress, challenges, and future plans.
+          </p>
+          {/* Instructions */}
+          <p className="text-base text-gray-800 dark:text-gray-200">
+            Refer to our{' '}
+            <CustomLink
+              href="https://opensats.org/faq/grantee"
+              className="font-bold"
+            >
+              Grantee FAQ
+            </CustomLink>{' '}
+            for answers to common questions about progress report. In particular:
+            <ul>
+              <li>
+                <CustomLink href="/faq/grantee#what-does-an-ideal-progress-report-look-like">
+                  What does an ideal progress report look like?
+                </CustomLink>
+              </li>
+              <li>
+                <CustomLink href="/faq/grantee#what-does-a-poor-progress-report-look-like">
+                  What does a poor progress report look like?
+                </CustomLink>
+              </li>
+            </ul>
+          </p>
+
+          <GrantReportForm grantDetails={grantDetails} />
+        </div>
       </PageSection>
     </>
   )
