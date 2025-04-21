@@ -91,6 +91,9 @@ export function generateReportContent(
 ): string {
   const { project_name, time_spent, next_quarter, money_usage, help_needed } = reportData
 
+  // Format the help needed section if it exists
+  const helpNeededSection = help_needed ? `## Help Needed\n${help_needed}` : ''
+
   return `# ${project_name} - Progress Report
 
 ## Time Spent
@@ -102,7 +105,7 @@ ${money_usage}
 ## Next Quarter Plans
 ${next_quarter}
 
-${formatHelpNeededSection(help_needed)}`
+${helpNeededSection}`
 }
 
 export function getReportPreview(grantDetails: any, reportData: any): string {
