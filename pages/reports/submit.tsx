@@ -5,6 +5,7 @@ import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import dynamic from 'next/dynamic'
 import GrantReportForm from '@/components/GrantReportForm'
+import PageSection from '@/components/PageSection'
 
 const GrantValidationForm = dynamic(
   () => import('@/components/GrantValidationForm'),
@@ -35,30 +36,32 @@ const ReportSubmissionPage: NextPage = () => {
         description="Submit your OpenSats grant progress report"
       />
 
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Submit Progress Report
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {!grantDetails
-              ? 'To get started, please enter your grant ID and the email associated with your grant application.'
-              : 'Please fill out all required fields in the form below.'}
-          </p>
-        </div>
-
-        <div className="container py-12">
-          <div className="lg:col-span-2 lg:mx-auto lg:w-full lg:max-w-2xl">
-            {!grantDetails ? (
-              <GrantValidationForm
-                onValidationSuccess={handleValidationSuccess}
-              />
-            ) : (
-              <GrantReportForm grantDetails={grantDetails} />
-            )}
-          </div>
-        </div>
-      </div>
+      <PageSection
+        title="Submit Progress Report"
+        image="/static/images/avatar.png"
+      >
+        {!grantDetails ? (
+          <>
+            <p>
+              To get started, please enter your grant ID and the email
+              associated with your grant application. This information will be
+              used to validate your grant and ensure you have access to submit a
+              report.
+            </p>
+            <p>
+              Once validated, you'll be able to submit your progress report
+              detailing your work and achievements since your last update. Make
+              sure to include specific details about your progress, challenges
+              overcome, and plans for the next period.
+            </p>
+            <GrantValidationForm
+              onValidationSuccess={handleValidationSuccess}
+            />
+          </>
+        ) : (
+          <GrantReportForm grantDetails={grantDetails} />
+        )}
+      </PageSection>
     </>
   )
 }
