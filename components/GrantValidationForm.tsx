@@ -16,7 +16,6 @@ interface ValidationResult {
     issue_number: number
     email: string
   }
-  email_hash: string
 }
 
 interface GrantValidationFormProps {
@@ -49,7 +48,9 @@ export default function GrantValidationForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<GrantValidationFormData>()
+  } = useForm<GrantValidationFormData>({
+    mode: 'onBlur',
+  })
 
   const onSubmit = async (data: GrantValidationFormData) => {
     setLoading(true)
@@ -73,7 +74,6 @@ export default function GrantValidationForm({
             issue_number: response.issue_number,
             email: response.email,
           },
-          email_hash: response.email_hash,
         })
       } else if (response.grant_details) {
         // Handle old format for backward compatibility
@@ -82,7 +82,6 @@ export default function GrantValidationForm({
             ...response.grant_details,
             email: response.email,
           },
-          email_hash: response.email_hash,
         })
       } else {
         // If neither format matches, show an error
