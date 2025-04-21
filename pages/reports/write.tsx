@@ -45,8 +45,8 @@ export default function WritePage() {
         <div className="space-y-6">
           <p className="mb-6">
             Write your progress report below. You can use markdown formatting to
-            structure your content. Take your time to provide detailed information
-            about your progress, challenges, and future plans.
+            structure your content. Take your time to provide detailed
+            information about your progress, challenges, and future plans.
           </p>
           {/* Instructions */}
           <p className="text-base text-gray-800 dark:text-gray-200">
@@ -57,7 +57,8 @@ export default function WritePage() {
             >
               Grantee FAQ
             </CustomLink>{' '}
-            for answers to common questions about progress report. In particular:
+            for answers to common questions about progress report. In
+            particular:
             <ul>
               <li>
                 <CustomLink href="/faq/grantee#what-does-an-ideal-progress-report-look-like">
