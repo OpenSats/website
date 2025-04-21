@@ -4,7 +4,6 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import CustomLink from '@/components/Link'
 import { useRouter } from 'next/router'
 import ReportPreview from '@/components/ReportPreview'
-import CryptoJS from 'crypto-js'
 
 interface GrantReportFormProps {
   grantDetails: {
@@ -24,9 +23,8 @@ interface GrantReportFormData {
   help_needed?: string
 }
 
-// Encryption key for local storage (in a real app, this would be more securely managed)
+// Storage key for local storage
 const STORAGE_KEY = 'opensats_report_draft'
-const ENCRYPTION_KEY = 'opensats_secure_storage'
 // Set expiration time for saved data (30 days in milliseconds)
 const STORAGE_EXPIRATION = 30 * 24 * 60 * 60 * 1000
 
@@ -97,33 +95,27 @@ export default function GrantReportForm({
       const savedData = localStorage.getItem(storageKey)
 
       if (savedData) {
-        // Decrypt the data
-        const decryptedBytes = CryptoJS.AES.decrypt(savedData, ENCRYPTION_KEY)
-        const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8)
+        const parsedData = JSON.parse(savedData)
 
-        if (decryptedText) {
-          const decryptedData = JSON.parse(decryptedText)
+        // Check if the data has expired
+        if (
+          parsedData.timestamp &&
+          Date.now() - parsedData.timestamp > STORAGE_EXPIRATION
+        ) {
+          // Data has expired, remove it
+          localStorage.removeItem(storageKey)
+          return
+        }
 
-          // Check if the data has expired
-          if (
-            decryptedData.timestamp &&
-            Date.now() - decryptedData.timestamp > STORAGE_EXPIRATION
-          ) {
-            // Data has expired, remove it
-            localStorage.removeItem(storageKey)
-            return
-          }
-
-          // Set form values from saved data
-          if (decryptedData.formData) {
-            Object.keys(decryptedData.formData).forEach((key) => {
-              setValue(
-                key as keyof GrantReportFormData,
-                decryptedData.formData[key]
-              )
-            })
-            setRecoveredData(true)
-          }
+        // Set form values from saved data
+        if (parsedData.formData) {
+          Object.keys(parsedData.formData).forEach((key) => {
+            setValue(
+              key as keyof GrantReportFormData,
+              parsedData.formData[key]
+            )
+          })
+          setRecoveredData(true)
         }
       }
     } catch (e) {
@@ -145,13 +137,7 @@ export default function GrantReportForm({
           timestamp: Date.now(),
         }
 
-        // Encrypt the data before storing
-        const encryptedData = CryptoJS.AES.encrypt(
-          JSON.stringify(dataToStore),
-          ENCRYPTION_KEY
-        ).toString()
-
-        localStorage.setItem(storageKey, encryptedData)
+        localStorage.setItem(storageKey, JSON.stringify(dataToStore))
 
         // Remove draft data if we have a report number
         if (watchAllFields.report_number) {
