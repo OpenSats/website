@@ -49,9 +49,7 @@ const ReportSubmissionPage: NextPage = () => {
                 onValidationSuccess={handleValidationSuccess}
               />
             ) : (
-              <GrantReportForm
-                grantDetails={grantDetails}
-              />
+              <GrantReportForm grantDetails={grantDetails} />
             )}
           </div>
         </div>
