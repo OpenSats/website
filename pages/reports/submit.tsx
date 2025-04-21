@@ -14,16 +14,13 @@ interface GrantDetails {
 
 interface ValidationResult {
   grant_details: GrantDetails
-  email_hash: string
 }
 
 const ReportSubmissionPage: NextPage = () => {
   const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
-  const [validatedEmailHash, setValidatedEmailHash] = useState<string>('')
 
   const handleValidationSuccess = (result: ValidationResult) => {
     setGrantDetails(result.grant_details)
-    setValidatedEmailHash(result.email_hash)
   }
 
   return (
@@ -54,7 +51,6 @@ const ReportSubmissionPage: NextPage = () => {
             ) : (
               <GrantReportForm
                 grantDetails={grantDetails}
-                email_hash={validatedEmailHash}
               />
             )}
           </div>
