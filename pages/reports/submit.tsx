@@ -6,6 +6,7 @@ import siteMetadata from '@/data/siteMetadata'
 import dynamic from 'next/dynamic'
 import GrantReportForm from '@/components/GrantReportForm'
 import PageSection from '@/components/PageSection'
+import { useRouter } from 'next/router'
 
 const GrantValidationForm = dynamic(
   () => import('@/components/GrantValidationForm'),
@@ -22,11 +23,16 @@ interface ValidationResult {
   grant_details: GrantDetails
 }
 
+const STORAGE_KEY = 'opensats_grant_details'
+
 const ReportSubmissionPage: NextPage = () => {
-  const [grantDetails, setGrantDetails] = useState<GrantDetails | null>(null)
+  const router = useRouter()
 
   const handleValidationSuccess = (result: ValidationResult) => {
-    setGrantDetails(result.grant_details)
+    // Store grant details in localStorage
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(result.grant_details))
+    // Navigate to the write page
+    router.push('/reports/write')
   }
 
   return (
@@ -40,27 +46,18 @@ const ReportSubmissionPage: NextPage = () => {
         title="Submit Progress Report"
         image="/static/images/avatar.png"
       >
-        {!grantDetails ? (
-          <>
-            <p>
-              To get started, please enter your grant ID and the email
-              associated with your grant application. This information will be
-              used to validate your grant and ensure you have access to submit a
-              report.
-            </p>
-            <p>
-              Once validated, you'll be able to submit your progress report
-              detailing your work and achievements since your last update. Make
-              sure to include specific details about your progress, challenges
-              overcome, and plans for the next period.
-            </p>
-            <GrantValidationForm
-              onValidationSuccess={handleValidationSuccess}
-            />
-          </>
-        ) : (
-          <GrantReportForm grantDetails={grantDetails} />
-        )}
+        <p>
+          To get started, please enter your grant ID and the email associated
+          with your grant application. This information will be used to validate
+          your grant and ensure you have access to submit a report.
+        </p>
+        <p>
+          Once validated, you'll be able to submit your progress report
+          detailing your work and achievements since your last update. Make sure
+          to include specific details about your progress, challenges overcome,
+          and plans for the next period.
+        </p>
+        <GrantValidationForm onValidationSuccess={handleValidationSuccess} />
       </PageSection>
     </>
   )
