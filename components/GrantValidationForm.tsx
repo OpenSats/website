@@ -126,11 +126,11 @@ export default function GrantValidationForm({
         )}
       </label>
 
-      <div className="mt-8">
+      <div className="mt-8 flex justify-end">
         <button
           type="submit"
           disabled={loading}
-          className={`w-full rounded-md px-6 py-3 text-base font-medium text-white shadow-sm transition-colors duration-200 ${
+          className={`rounded px-4 py-2 text-sm font-medium text-white ${
             loading
               ? 'cursor-not-allowed bg-gray-400'
               : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
@@ -139,7 +139,7 @@ export default function GrantValidationForm({
           {loading ? (
             'Validating...'
           ) : (
-            <span className="flex items-center justify-center">
+            <span className="flex items-center">
               Next Step
               <svg
                 xmlns="http://www.w3.org/2000/svg"
