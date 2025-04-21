@@ -122,12 +122,13 @@ ${help_needed ? `## Help Needed\n${help_needed}` : ''}`
     })
 
     // Send confirmation email
-    await sendReportConfirmationEmail({
-      to: email,
+    await sendReportConfirmationEmail(
+      email,
       project_name,
       report_number,
-      report_content: reportContent,
-    })
+      response.data.html_url,
+      reportContent
+    )
 
     return res.status(200).json({
       success: true,

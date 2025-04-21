@@ -31,11 +31,9 @@ export default function GrantReportForm({
   grantDetails,
 }: GrantReportFormProps) {
   const router = useRouter()
-  const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string>()
   const [showPreview, setShowPreview] = useState(false)
   const [recoveredData, setRecoveredData] = useState(false)
-  const [loading, setLoading] = useState(false)
 
   const {
     register,
@@ -153,7 +151,6 @@ export default function GrantReportForm({
   ])
 
   const onSubmit = async (data: GrantReportFormData) => {
-    setLoading(true)
     setError(undefined)
 
     try {
@@ -165,7 +162,6 @@ export default function GrantReportForm({
 
       if (response.error) {
         setError(response.error)
-        setLoading(false)
         return
       }
 
@@ -174,24 +170,30 @@ export default function GrantReportForm({
       router.push('/reports/success')
     } catch (e) {
       setError('Failed to submit report. Please try again.')
-      setLoading(false)
     }
   }
 
-  if (submitted) {
+  if (recoveredData) {
     return (
-      <div className="text-center">
-        <p className="text-lg text-gray-700 dark:text-gray-300">
-          Your report has been submitted successfully.
-        </p>
-        <p className="mt-4">
-          <CustomLink
-            href="/reports/submit"
-            className="text-orange-500 hover:text-orange-600"
-          >
-            Submit another report
-          </CustomLink>
-        </p>
+      <div className="mt-4 flex justify-end space-x-2">
+        <button
+          type="button"
+          onClick={() => {
+            clearSavedData()
+            reset({
+              project_name: grantDetails.project_name,
+              report_number: '',
+              time_spent: '',
+              next_quarter: '',
+              money_usage: '',
+              help_needed: '',
+            })
+            setRecoveredData(false)
+          }}
+          className="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+        >
+          Clear Data
+        </button>
       </div>
     )
   }
@@ -611,29 +613,4 @@ export default function GrantReportForm({
       </div>
     </form>
   )
-
-  if (recoveredData) {
-    return (
-      <div className="mt-4 flex justify-end space-x-2">
-        <button
-          type="button"
-          onClick={() => {
-            clearSavedData()
-            reset({
-              project_name: grantDetails.project_name,
-              report_number: '',
-              time_spent: '',
-              next_quarter: '',
-              money_usage: '',
-              help_needed: '',
-            })
-            setRecoveredData(false)
-          }}
-          className="rounded bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-        >
-          Clear Data
-        </button>
-      </div>
-    )
-  }
 }
