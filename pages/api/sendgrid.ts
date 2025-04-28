@@ -20,7 +20,6 @@ interface EmailOptions {
   html: string
   cc?: string
   from?: string
-  forceDev?: boolean
 }
 
 /**
@@ -38,26 +37,8 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
     return false
   }
 
-  // Simulate email sending in development mode unless FORCE_REAL_EMAILS is set
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    process.env.FORCE_REAL_EMAILS !== 'true'
-  ) {
-    const { to, subject, text } = options
-    console.log(' [DEV MODE] Simulating email send:')
-    console.log(`To: ${to}`)
-    console.log(`Subject: ${subject}`)
-    console.log(`From: ${options.from || FROM_ADDRESS}`)
-    console.log(
-      'Content:',
-      text.substring(0, 150) + (text.length > 150 ? '...' : '')
-    )
-    console.log('[SIMULATED] Email sent successfully!')
-    return true
-  }
-
   if (!SENDGRID_API_KEY) {
-    console.warn('SendGrid API key not configured. Email not sent.')
+    console.error('SendGrid API key not configured. Email not sent.')
     return false
   }
 
