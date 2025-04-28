@@ -5,6 +5,7 @@ import { marked } from 'marked'
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
 const CC_ADDRESS = process.env.SENDGRID_CC
+const BCC_ADDRESS = process.env.SENDGRID_BCC
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 
 // Initialize SendGrid with API key
@@ -143,6 +144,7 @@ export async function sendReportConfirmationEmail(
   const msg = {
     to: email,
     from: FROM_ADDRESS,
+    bcc: BCC_ADDRESS,
     subject: `OpenSats Progress Report Submitted for ${projectName}`,
     text: `Thank you for submitting your progress report for ${projectName}!\n\nYour progress report has been successfully submitted to OpenSats. The OpenSats team will review your report and we will reach out if we have any questions.\n\nReport Content:\n${reportContent}\n\nIf you have any questions or need assistance, please reply to this email or contact support@opensats.org.\n\nBest Regards,\nThe OpenSats Team`,
     html: `
