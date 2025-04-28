@@ -9,6 +9,7 @@ interface ValidationResult {
     project_name: string
     issue_number: number
     grant_id: string
+    email: string
   }
 }
 
@@ -54,6 +55,7 @@ export default function GrantValidationForm({
             project_name: response.project_name,
             issue_number: response.issue_number,
             grant_id: data.grant_id,
+            email: data.email,
           },
         })
       } else if (response.grant_details) {
@@ -62,6 +64,7 @@ export default function GrantValidationForm({
           grant_details: {
             ...response.grant_details,
             grant_id: data.grant_id,
+            email: data.email,
           },
         })
       } else {
