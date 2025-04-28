@@ -59,9 +59,10 @@ export default function Preview() {
         return
       }
 
-      // Clear saved data
-      localStorage.removeItem(STORAGE_KEYS.REPORT_DRAFT)
-      localStorage.removeItem(STORAGE_KEYS.GRANT_DETAILS)
+      // Clear all saved data related to report submission
+      Object.values(STORAGE_KEYS).forEach((key) => {
+        localStorage.removeItem(key)
+      })
       router.push('/reports/success')
     } catch (e) {
       console.error('Failed to submit report. Please try again.', e)
