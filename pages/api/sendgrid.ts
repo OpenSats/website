@@ -19,6 +19,7 @@ interface EmailOptions {
   text: string
   html: string
   cc?: string
+  bcc?: string
   from?: string
 }
 
@@ -42,7 +43,7 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
     return false
   }
 
-  const { to, subject, text, html, cc, from } = options
+  const { to, subject, text, html, cc, bcc, from } = options
 
   try {
     const msg = {
@@ -52,6 +53,7 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
       text,
       html,
       ...(cc ? { cc } : {}),
+      ...(bcc ? { bcc } : {}),
     }
 
     const startTime = Date.now()
@@ -77,6 +79,7 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
       textLength: text?.length || 0,
       htmlLength: html?.length || 0,
       hasCc: !!cc,
+      hasBcc: !!bcc,
     })
 
     return false
