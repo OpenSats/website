@@ -294,6 +294,7 @@ Thank you for your patience.
         }
 
         await sendEmailWithRetry(msg)
+        console.info('Application copy sent to OpenSats')
         res.status(200).json({ message: 'success' })
       } catch (err) {
         res
