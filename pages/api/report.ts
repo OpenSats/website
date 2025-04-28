@@ -114,10 +114,13 @@ export default async function handler(
       body: reportContent,
     })
 
+    // Clean up project name to remove the "by" part
+    const cleaned_project_name = project_name.replace(/\s+by\s+.*$/, '')
+
     // Send confirmation email
     await sendReportConfirmationEmail(
       email,
-      project_name,
+      cleaned_project_name,
       response.data.html_url,
       reportContent
     )
