@@ -10,7 +10,6 @@ interface ValidationResponse {
   valid: boolean
   project_name?: string
   issue_number?: number
-  email?: string
   error?: string
 }
 
@@ -22,12 +21,12 @@ export default async function handler(
     return res.status(405).json({ valid: false, error: 'Method not allowed' })
   }
 
-  const { grant_id, email } = req.body
+  const { grant_id } = req.body
 
-  if (!grant_id || !email) {
+  if (!grant_id) {
     return res
       .status(400)
-      .json({ valid: false, error: 'Grant ID and email are required' })
+      .json({ valid: false, error: 'Grant ID is required' })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
@@ -73,7 +72,6 @@ export default async function handler(
       valid: true,
       project_name,
       issue_number: issue.number,
-      email,
     })
   } catch (error) {
     console.error('Error validating grant:', error)
