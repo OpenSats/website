@@ -24,9 +24,7 @@ export default async function handler(
   const { grant_id } = req.body
 
   if (!grant_id) {
-    return res
-      .status(400)
-      .json({ valid: false, error: 'Grant ID is required' })
+    return res.status(400).json({ valid: false, error: 'Grant ID is required' })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
