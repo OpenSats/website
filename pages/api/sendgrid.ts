@@ -5,8 +5,7 @@ import { marked } from 'marked'
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
 const CC_ADDRESS = process.env.SENDGRID_CC
-const FROM_ADDRESS =
-  process.env.SENDGRID_VERIFIED_SENDER || 'support@opensats.org'
+const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
