@@ -65,7 +65,9 @@ export default async function handler(
     const issue = searchResult.data.items[0]
 
     // Extract project name from issue title
-    const project_name = issue.title.replace(/^Grant #\d+:\s*/, '') // Remove grant number prefix
+    const project_name = issue.title
+      .replace(/^Grant #\d+:\s*/, '') // Remove grant number prefix
+      .replace(/\s+by\s+.*$/, '') // Remove everything after "by" (including "by" itself)
 
     return res.status(200).json({
       valid: true,
