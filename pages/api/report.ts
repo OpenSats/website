@@ -71,7 +71,7 @@ export default async function handler(
 
   try {
     const {
-      project_name,
+      project_name: original_project_name,
       time_spent,
       next_quarter,
       money_usage,
@@ -82,7 +82,7 @@ export default async function handler(
 
     // Input validation
     if (
-      !project_name ||
+      !original_project_name ||
       !time_spent ||
       !next_quarter ||
       !money_usage ||
@@ -94,6 +94,9 @@ export default async function handler(
         error: 'Missing required fields',
       })
     }
+
+    // Clean up project name to remove the "by" part
+    const project_name = original_project_name.replace(/\s+by\s+.*$/, '')
 
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
@@ -114,13 +117,10 @@ export default async function handler(
       body: reportContent,
     })
 
-    // Clean up project name to remove the "by" part
-    const cleaned_project_name = project_name.replace(/\s+by\s+.*$/, '')
-
     // Send confirmation email
     await sendReportConfirmationEmail(
       email,
-      cleaned_project_name,
+      project_name,
       response.data.html_url,
       reportContent
     )
