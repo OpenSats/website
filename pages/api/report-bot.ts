@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
-import { sendReportConfirmationEmail } from '../../utils/email'
+import { sendReportConfirmationEmail } from './sendgrid'
 import { generateReportContent } from '../../utils/api-helpers'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
