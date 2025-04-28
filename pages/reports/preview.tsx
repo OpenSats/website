@@ -49,7 +49,7 @@ export default function Preview() {
       const reportData = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT) || '{}'
       )
-      const response = await fetchPostJSON('/api/report-bot', {
+      const response = await fetchPostJSON('/api/report', {
         ...grantDetails,
         ...reportData,
       })
