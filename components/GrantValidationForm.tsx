@@ -8,7 +8,6 @@ interface ValidationResult {
   grant_details: {
     project_name: string
     issue_number: number
-    email: string
     grant_id: string
   }
 }
@@ -40,7 +39,7 @@ export default function GrantValidationForm({
     setError(undefined)
 
     try {
-      const response = await fetchPostJSON('/api/validate-grant', data)
+      const response = await fetchPostJSON('/api/grant', data)
 
       if (response.error) {
         setError(response.error)
@@ -48,14 +47,12 @@ export default function GrantValidationForm({
         return
       }
 
-      // Check if the response has the new format (valid field)
+      // Check if the response has the valid field
       if (response.valid === true) {
-        // Convert new format to the expected format
         onValidationSuccess({
           grant_details: {
             project_name: response.project_name,
             issue_number: response.issue_number,
-            email: response.email,
             grant_id: data.grant_id,
           },
         })
@@ -64,7 +61,6 @@ export default function GrantValidationForm({
         onValidationSuccess({
           grant_details: {
             ...response.grant_details,
-            email: response.email,
             grant_id: data.grant_id,
           },
         })
