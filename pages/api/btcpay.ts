@@ -27,7 +27,7 @@ export default async function handler(
 
       let fund: Fund
       try {
-        fund = allFunds.find((f) => f.btcpay === btcpay)
+        fund = allFunds.find((f) => f.btcpay === btcpay)!
       } catch {
         throw new Error('Invalid fund.')
       }
@@ -56,9 +56,7 @@ export default async function handler(
       }
       const data = await fetchPostJSONAuthed(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        `${process.env.BTCPAY_URL!}stores/${
-          process.env.BTCPAY_STORE_ID
-        }/invoices`,
+        `${process.env.BTCPAY_URL!}stores/${fund.store}/invoices`,
         `token ${process.env.BTCPAY_API_KEY}`,
         reqData
       )
