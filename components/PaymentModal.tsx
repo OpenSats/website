@@ -59,6 +59,7 @@ const PaymentModal: React.FC<ModalProps> = ({
         projectNamePretty={fund.title}
         btcpay={fund.btcpay}
         zaprite={fund.zaprite}
+        store={fund.store}
       />
     </ReactModal>
   )
