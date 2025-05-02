@@ -57,7 +57,7 @@ export default async function handler(
       const data = await fetchPostJSONAuthed(
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         `${process.env.BTCPAY_URL!}stores/${fund.store}/invoices`,
-        `token ${process.env.BTCPAY_API_KEY}`,
+        `token ${process.env.BTCPAY_INVOICE_KEY}`,
         reqData
       )
       res.status(200).json(data)

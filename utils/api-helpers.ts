@@ -20,7 +20,7 @@ export async function fetchPostJSON(url: string, data?: object) {
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `token ${process.env.BTCPAY_API_KEY}`,
+        Authorization: `token ${process.env.BTCPAY_INVOICE_KEY}`,
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: 'follow', // manual, *follow, error
