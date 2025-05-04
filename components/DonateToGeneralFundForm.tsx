@@ -10,6 +10,7 @@ export default function DonateToGeneralFundButton() {
         projectNamePretty={generalFund.title}
         btcpay={generalFund.btcpay}
         zaprite={generalFund.zaprite}
+        store={generalFund.store}
       />
       <div className="mb-24"></div>
     </>
