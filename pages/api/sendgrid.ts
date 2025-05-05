@@ -28,7 +28,7 @@ export default async function handler(
 Thank you for applying to OpenSats! 
 
 We have received your application and will evaluate it as quickly as we can.
-Evaluation is done on a rolling basis and usually takes 2-3 months.
+Evaluation is done on a rolling basis and can in some cases take up to 3 months.
 Feel free to reach out to applications@opensats.org if you have any questions.
 
 We will reach out again once we've made a decision. 
