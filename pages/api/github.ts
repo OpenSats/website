@@ -77,6 +77,11 @@ ${
     if (mainFocus === 'layer1' || mainFocus === 'layer2') {
       issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
     }
+    
+    // Add label for applications from common grant app
+    if (req.body.source === 'common-grant-app') {
+      issueLabels.push('common-grant-app')
+    }
 
     // Repo set according to "main focus"
     let appRepo = GH_APP_REPO
