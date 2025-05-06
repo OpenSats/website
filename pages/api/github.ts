@@ -30,9 +30,13 @@ ${req.body.short_description}
 
 ${req.body.potential_impact}
 
-### Organizations Applied To
+### Other Organizations Applied To
 
-${req.body.organizations ? `This application was submitted to: ${req.body.organizations.join(', ')}` : 'No organizations specified'}
+${
+  req.body.organizations
+    ? `This application was submitted to: ${req.body.organizations.join(', ')}`
+    : 'No organizations specified'
+}
 
 ### Timeline & Milestones
 
@@ -81,7 +85,7 @@ ${
     if (mainFocus === 'layer1' || mainFocus === 'layer2') {
       issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
     }
-    
+
     // Add label for applications from common grant app
     if (req.body.source === 'common-grant-app') {
       issueLabels.push('common-grant-app')
