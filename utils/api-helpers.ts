@@ -65,3 +65,57 @@ export async function fetchPostJSONAuthed(
     throw err
   }
 }
+
+/**
+ * Generates the markdown content for a grant report
+ * @param reportData Object containing report data (project_name, time_spent, next_quarter, money_usage, help_needed)
+ * @returns Formatted markdown string for the report
+ */
+export function generateReportContent(reportData: {
+  project_name: string
+  time_spent: string
+  next_quarter: string
+  money_usage: string
+  help_needed?: string
+}): string {
+  const { project_name, time_spent, next_quarter, money_usage, help_needed } =
+    reportData
+
+  // Format the help needed section if it exists
+  const helpNeededSection = help_needed
+    ? `## Anything OpenSats could help with? \n${help_needed}`
+    : ''
+
+  return `# ${project_name} - Progress Report
+
+## Time Spent
+${time_spent}
+
+## Plans for Next Quarter
+${next_quarter}
+
+## Use of Funds
+${money_usage}
+
+${helpNeededSection}`
+}
+
+export function getReportPreview(reportData: any): string {
+  return generateReportContent(reportData)
+}
+
+export async function getGrantById(grantId: string) {
+  const response = await fetch(`/api/grants/${grantId}`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch grant details')
+  }
+  return response.json()
+}
+
+export async function getReportById(reportId: string) {
+  const response = await fetch(`/api/reports/${reportId}`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch report details')
+  }
+  return response.json()
+}
