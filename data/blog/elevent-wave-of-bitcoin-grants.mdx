@@ -1,0 +1,138 @@
+---
+title: "Eleventh Wave of Bitcoin Grants"
+date: '2025-05-14'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+draft: false
+authors: ['default', 'arvin']
+images: ['/static/images/blog/eleventh-wave-of-bitcoin-grants.jpg']
+summary: "OpenSats is funding six more open-source projects advancing the Bitcoin ecosystem."
+---
+
+In this eleventh wave of grants from our General Fund, we're proud to support a
+diverse set of contributors advancing Bitcoin's infrastructure, tooling, and
+accessibility.
+
+From open-source mining hardware and protocol-level scripting improvements to
+peer-to-peer exchange protocols and privacy-preserving payment tools, these
+projects are building critical components for a more robust and decentralized
+Bitcoin ecosystem.
+
+The three first-time project grants in this wave are:
+
+- [BitShoka](#bitshoka)
+- [Great Script Restoration](#great-script-restoration)
+- [256 Foundation](#256-foundation)
+
+In addition, OpenSats has renewed project grants for:
+
+- [Payjoin](/blog/bitcoin-grants-july-2023#payjoin-dev-kit)
+- [Mostro](/blog/nostr-grants-july-2024#mostro)
+- [P2Pool v2](https://github.com/pool2win/p2pool-v2) (evolved from p2pool,
+  including [Braidpool](/blog/bitcoin-grants-feb-2024#braidpool))
+
+All of the above grants are sourced from our General Fund, made possible by the
+generosity of our donors. Help us support free and open-source projects by
+donating to the fund:
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's take a closer look at these projects to discover their purpose, impact,
+and the value they bring to the Bitcoin ecosystem.
+
+---
+
+### BitShoka
+
+BitShoka builds on the [BitAxe](/blog/bitcoin-grants-feb-2024#the-bitaxe)
+project by focusing on reverse engineering MicroBT ASIC chips. The goal is to
+document and implement the communication protocols used in these chips, helping
+to make Bitcoin mining more accessible and transparent. Beyond technical
+progress, the project is also connected to grassroots efforts to expand mining
+globally. In Kenya, members of the African Bitcoin mining community have been
+assembling BitAxe devices since December 2024, reflecting a growing interest in
+locally-built, open-source mining tools.
+
+With support from this grant, BitShoka will dedicate the next year to decoding
+the MicroBT KF1950 ASIC protocol, integrating support into
+[ESP-miner](https://github.com/bitaxeorg/ESP-Miner), and producing a new BitAxe
+variant that runs on these chips. This work will make MicroBT-based mining
+viable for solo miners, especially in regions where durable ASICs are needed to
+handle high temperatures or other climate-related challenges.
+
+Repository: [kuenrg153/bitshoka](https://github.com/kuenrg153/bitshoka)  
+Licenses: GPL v3 & CERN OHL S v2
+
+### Great Script Restoration
+
+Great Script Restoration (GSR) is a research and development project aimed at
+reintroducing disabled opcodes to [Bitcoin
+Script](https://en.bitcoin.it/wiki/Script) in a safe and measured way. These
+opcodes were removed early in Bitcoin's history to prevent denial-of-service
+(DoS) attacks, but advances in network design make it possible to reconsider
+them. GSR proposes a new "Varops" ([Variable
+Operations](https://rusty.ozlabs.org/2024/01/19/the-great-opcode-restoration.html))
+budget model—similar to [Tapscript's
+Sigops](https://bitcoin.stackexchange.com/questions/100888/how-to-calculate-tapscript-sigops-budget)
+limit—to regulate resource use while restoring these capabilities. In
+addition, the project explores removing other restrictions, such as limits on
+stack element size, to make Script more flexible for developers.
+
+Support from this grant will help GSR progress through the research phase into
+implementation, benchmarking opcodes, drafting a proposal for community review,
+and building extensive test coverage. A testnet-ready implementation will
+follow, including activation methods and extended testing on environments like
+Inquisition or dedicated sidechains. The ultimate goal is to make Bitcoin Script
+more expressive while maintaining robust network protections.
+
+Repository:
+[jmoik/bitcoin/tree/varops](https://github.com/jmoik/bitcoin/tree/varops)  
+License: MIT
+
+### 256 Foundation
+
+The 256 Foundation is creating a fully open-source Bitcoin mining stack to
+replace proprietary mining solutions. Through four core projects—[Ember
+One](https://github.com/256-Foundation/emberone00-pcb?tab=readme-ov-file#emberone00),
+[Mujina Mining
+Firmware](https://github.com/256-Foundation/Mujina-Mining-Firmware-website?tab=readme-ov-file#open-mining-firmware),
+[Libre Board](https://github.com/256-Foundation/Libre-Board), and [Hydra
+Pool](https://github.com/256-Foundation/Hydra-Pool?tab=readme-ov-file#hydra-pool)—the
+Foundation is developing everything from standardized hashboards to modular
+control boards and open-source mining pools. These efforts aim to lower barriers
+to entry, increase hardware flexibility, and give developers more control over
+how mining infrastructure is built and operated.
+
+With support from this grant, Ember One will expand support to Intel ASICs,
+Mujina will evolve into a full-featured miner, Libre Board will complete its
+control board design, and Hydra Pool will launch with initial support for solo
+mining and payout mechanisms. Together, these projects will help shift Bitcoin
+mining toward open standards, giving builders and miners new tools to operate
+independently of proprietary systems.
+
+Repositories: [256-Foundation](https://github.com/256-Foundation)  
+License: GPL v3 & CERN OHL S v2
+
+---
+
+Each of these projects contributes to a more decentralized,
+censorship-resistant, and globally accessible Bitcoin ecosystem. Whether
+advancing protocol capabilities, building critical infrastructure, or improving
+user privacy and sovereignty, they represent the kind of work that strengthens
+Bitcoin's long-term utility and integrity.
+
+As with every funding [wave](/tags/wave), OpenSats evaluated proposals based on
+clearly defined [criteria](/apply#criteria) that are aligned with [our
+mission](https://opensats.org/mission). We remain committed to supporting
+builders who uphold the principles of free and open-source software.
+
+If you're developing something aligned with these goals, we encourage you to
+[apply for funding](/apply).
+
+To support the Bitcoin ecosystem through open-source projects like these, please
+consider donating to the General Fund.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
