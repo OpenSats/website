@@ -56,15 +56,15 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
       ...(bcc ? { bcc } : {}),
       trackingSettings: {
         clickTracking: {
-          enable: false
+          enable: false,
         },
         openTracking: {
-          enable: false
+          enable: false,
         },
         subscriptionTracking: {
-          enable: false
-        }
-      }
+          enable: false,
+        },
+      },
     }
 
     const startTime = Date.now()
@@ -73,14 +73,22 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
 
     console.log(`Email sent successfully to ${to} in ${duration}ms`)
     return true
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error sending email:', error)
-    if (error.response) {
+    if (typeof error === 'object' && error !== null && 'response' in error) {
+      // @ts-ignore
       console.error('  Status code:', error.code)
-      console.error(
-        '  Response body:',
-        JSON.stringify(error.response.body, null, 2)
-      )
+      // @ts-ignore
+      if (
+        typeof error.response === 'object' &&
+        error.response !== null &&
+        'body' in error.response
+      ) {
+        console.error(
+          '  Response body:',
+          JSON.stringify(error.response.body, null, 2)
+        )
+      }
     }
 
     console.error('Email details:', {

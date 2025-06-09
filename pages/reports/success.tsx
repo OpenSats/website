@@ -2,7 +2,6 @@ import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
-import Link from 'next/link'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
