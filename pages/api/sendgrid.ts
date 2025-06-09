@@ -54,6 +54,17 @@ async function sendEmail(options: EmailOptions): Promise<boolean> {
       html,
       ...(cc ? { cc } : {}),
       ...(bcc ? { bcc } : {}),
+      trackingSettings: {
+        clickTracking: {
+          enable: false
+        },
+        openTracking: {
+          enable: false
+        },
+        subscriptionTracking: {
+          enable: false
+        }
+      }
     }
 
     const startTime = Date.now()
