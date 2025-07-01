@@ -1,7 +1,6 @@
 import GrantApplicationForm from '@/components/GrantApplicationForm'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
-import ClosedNotice from '@/components/ClosedNotice'
 
 export default function Apply() {
   return (
@@ -25,7 +24,6 @@ export default function Apply() {
           <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
           before sending in an application.
         </p>
-        <ClosedNotice />
         <GrantApplicationForm />
       </PageSection>
     </>
