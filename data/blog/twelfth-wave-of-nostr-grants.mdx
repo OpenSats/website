@@ -1,0 +1,217 @@
+---
+title: "Twelfth Wave of Nostr Grants"
+date: '2025-06-30'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+authors: ['arvin', 'default']
+images: ['/static/images/blog/80-twelfth-wave-of-nostr-grants.jpg']
+draft: false
+summary: "OpenSats is funding nine more open-source projects advancing the nostr ecosystem."
+---
+
+We are pleased to announce our latest wave of grants supporting the nostr
+ecosystem as it evolves to become more versatile and resilient. At the heart of
+this evolution is a diverse set of tools that strengthen nostr's utility, from
+secure key management and signing workflows to decentralized collaboration and
+user-centric relay experiences.
+
+This round of funding features five first-time grants for projects advancing the
+protocol in identity management, secure signing, decentralized collaboration,
+relay discovery, and cross-protocol integration:
+
+- [Frostr](#frostr)
+- [Aegis](#aegis)
+- [Gitplaza](#gitplaza)
+- [Jumble](#jumble)
+- [Atomic Signature Swaps](#atomic-signature-swaps)
+
+In addition, we've also renewed funding for four projects that continue to make
+critical contributions across the nostr ecosystem:
+
+- [Damus](/blog/nostr-grants-july-2023#damus)
+- [Camelus](/blog/nostr-grants-december-2023#camelus)
+- [Nostromo](/blog/nostr-grants-july-2024#nostrmo)
+- [Nostroots](/blog/nostr-grants-august-2024#nostroots)
+
+This support is made possible by donors who believe in an open,
+censorship-resistant communications layer for the internet—and the builders
+who are making that a reality.
+
+Our nostr grants are sourced from [The Nostr Fund](/funds/nostr). To help us
+support the nostr ecosystem, please consider making a donation.
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+Let's dive in to learn about how each project is contributing to the future of
+nostr.
+
+---
+
+### Frostr
+
+[Frostr](https://www.frostr.org/) is a threshold signing protocol tailored for
+nostr, built on the [FROST](https://eprint.iacr.org/2020/852) (Flexible
+Round‑Optimized Schnorr Threshold) signature scheme. It provides security by
+splitting a user's nsec key into distributable shares across devices or
+services, enabling
+[threshold‑of‑n](https://en.wikipedia.org/wiki/Threshold_cryptosystem) signing
+with strong fault tolerance. Frostr leverages nostr relays to coordinate
+signing: each share maintains its own nostr identity and exchanges encrypted
+direct messages via
+[nostrp2p](https://ryogrid.github.io/tech-entry/about-nostrp2p.html), allowing
+seamless, background coordination over any relay. With libraries like Frost,
+[Bifrost](https://github.com/FROSTR-ORG/bifrost), and nostrp2p nearly complete
+and clients such as Igloo, Frost2x, Heimdall, Frostbite, and Permafrost under
+development, Frostr already enables multi-device signing, key rotation, and
+share replacement—crucial features nostr users need for secure, flexible
+identity management.
+
+With support from this grant, Frostr aims to reach full maturity over the next
+year. In the next phase, the project will finalize UX and releases for
+[Igloo](https://github.com/FROSTR-ORG/igloo-desktop) and
+[Frost2x](https://github.com/FROSTR-ORG/frost2x), then build out Heimdall
+(REST‑API signing), full mobile support via Frostbite, and self‑hostable signing
+with Permafrost. It will integrate a
+[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) bridge for
+compatibility with remote‑signing workflows, complete a security audit, and
+introduce advanced features like `sign_psbt` for interactive bitcoin p2p protocols
+over nostr. These enhancements will help to solidify Frostr as the standard for
+resilient, multi‑device, and interoperable key management and signing in the
+nostr ecosystem—enabling private identity recovery, remote signing, and the
+groundwork for next‑gen protocols like coinjoins, and Payjoins over nostr.
+
+Repositories:
+[FROSTR-ORG/repositories](https://github.com/orgs/FROSTR-ORG/repositories)  
+License: MIT
+
+---
+
+### Aegis
+
+Aegis is a lightweight, cross-platform nostr signer that offers a seamless and
+secure experience across mobile and desktop environments. Initially launched for
+iOS and available through TestFlight, Aegis enables persistent background
+connections, critical for maintaining uninterrupted signing sessions,
+especially on mobile devices. Built using
+[Flutter](https://github.com/flutter/flutter), it supports a variety of
+connection methods and introduces simple nostr key management in a user-friendly
+interface. The project fills a gap in the nostr ecosystem by offering a signer
+that's actively maintained and easy to integrate.
+
+With support from this grant, Aegis will expand to Android, macOS, Windows, and
+Linux platforms, bringing secure signing to a much broader user base.
+Development plans include multi-account support, a request history interface,
+and enhanced login options. The project will also explore user permission
+controls for more secure request handling. Long term, Aegis aims to become a
+reliable, device-agnostic signer for the nostr protocol, with continuous
+improvements made through community feedback and iterative development.
+
+Repository: [ZharlieW/Aegis](https://github.com/ZharlieW/Aegis)  
+License: LGPL-3.0
+
+---
+
+### Gitplaza
+
+Gitplaza is a decentralized, desktop-based alternative to GitHub built on the
+nostr protocol. It enables issue creation, [kanban
+board](https://codeberg.org/dluvian/gitplaza/src/branch/master/screenshots/themed_kanban_board.gif)
+management, profile browsing, and repository viewing—all designed to function
+offline by storing data locally. By removing central points of control, Gitplaza
+addresses the systemic risks of censorship and data loss inherent in centralized
+code hosting. Its goal is to reimagine collaborative development as a resilient,
+user-sovereign process.
+
+With support from this grant, Gitplaza will expand core functionality to include
+pull requests, notifications, search, upvoting, repo wikis, milestones, and
+release publishing—mirroring key GitHub features. Development will also
+include features like multi-account login, tagging, and richer activity feeds.
+Longer-term goals include integrating nostr-native tools like zaps, web-of-trust
+filtering, and ecash support, laying the groundwork for a robust,
+censorship-resistant hub for open-source collaboration.
+
+Repository: [dluvian/gitplaza](https://codeberg.org/dluvian/gitplaza)  
+License: MIT
+
+---
+
+### Jumble
+
+[Jumble](https://jumble.social/) is a nostr client designed for streamlined
+relay browsing and discovery. Available as a Progressive Web App
+([PWA](https://en.wikipedia.org/wiki/Progressive_web_app)), it supports relay
+feed browsing, relay set management, a minimalist interface, and efficient relay
+interactions—all while prioritizing user simplicity and relay diversity. After
+six months in development, Jumble delivers a stable user experience and remains
+a practical option for those exploring the growing landscape of nostr relays.
+
+With support from this grant, Jumble will continue developing core functionality
+and promote relay network growth. Priorities include improved relay
+discovery—such as surfacing relays followed by your network, rating systems,
+favorites, and advanced search—and user experience upgrades like a richer post
+editor, bookmarks, emoji support, optimized feed loading, and better video
+playback. The roadmap outlines a year of focused development to refine
+usability, expand relay-centric features, and ensure the client keeps pace as
+more specialized relays come online.
+
+Repository: [CodyTseng/jumble](https://github.com/CodyTseng/jumble)  
+License: MIT
+
+---
+
+### Atomic Signature Swaps
+
+[Atomic Signature Swaps over
+nostr](https://github.com/vstabile/nips/blob/atomic-signature-swaps/XX.md) is a
+protocol designed to enable the trustless exchange of Schnorr signatures using
+nostr events. By leveraging adaptor signatures, the project creates a
+cryptographic bridge between nostr, bitcoin (via Taproot), and Cashu, allowing
+for atomic swaps across these ecosystems. This mechanism unlocks new
+capabilities, such as allowing creators to monetize their content by getting
+paid to publish specific events, issuing automatic payment receipts, and
+facilitating decentralized peer-to-peer asset exchanges.
+
+With support from this grant, the project will focus on developing a reference
+implementation that allows users to monetize their nostr accounts through
+sponsored notes paid for with [Cashu](https://cashu.space/). This initial work
+will serve to validate and refine the protocol's formal specification as a Nostr
+Implementation Possibility
+([NIP](https://github.com/nostr-protocol/nips?tab=readme-ov-file#nips)). Key
+milestones include creating a TypeScript library to facilitate adoption by other
+developers, integrating the protocol into popular wallets and clients, and
+actively promoting the protocol through educational outreach to encourage
+innovation and new use cases.
+
+Repository:
+[vstabile/sig4sats-script](https://github.com/vstabile/sig4sats-script)  
+License: MIT
+
+---
+
+This latest wave of grants reflects the growing maturity and momentum of the
+nostr ecosystem. Each of the newly funded projects expands what's possible with
+nostr—whether enabling multi-device identity recovery, decentralized code
+collaboration, streamlined relay discovery, cross-platform signing, or trustless
+payment flows. Together, they strengthen the core foundations of identity,
+coordination, and interoperability—critical infrastructure for a more
+resilient, user-controlled future.
+
+At the same time, we're proud to continue supporting four returning projects
+that have delivered value to users and developers alike. These renewals
+recognize their ongoing impact and provide the resources needed to keep
+building, iterating, and hardening essential components of the nostr stack.
+
+Including this round of funding, OpenSats is proud to have
+[allocated more than $10MM](/transparency)
+to nostr projects since the creation of _The Nostr Fund_
+—marking an important milestone in our mission to support critical tools,
+infrastructure, and developers across the ecosystem.
+
+This progress is made possible by the generosity of our donors. If you'd like to
+help sustain this work and support the builders shaping the future of online
+communication, please consider making a donation.
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
