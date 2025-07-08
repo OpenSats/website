@@ -19,11 +19,11 @@ full-node development within the .NET and Swift ecosystems.
 
 The five first-time project grants in this wave are:
 
-- [Bitcoin Research Kit](#bitcoin-research-kit)
-- [Hashpool and Axepool](#hashpool-and-axepool)
 - [Sovran](#sovran)
 - [NLightning](#nlightning)
 - [Swift Bitcoin](#swift-bitcoin)
+- [Bitcoin Research Kit](#bitcoin-research-kit)
+- [Hashpool and Axepool](#hashpool-and-axepool)
 
 The seven project grant renewals in this wave are:
 
@@ -50,61 +50,6 @@ wave, consider donating to our General Fund.
 
 Let's explore our first-time project grants to understand what they're building
 and how it strengthens the broader Bitcoin landscape.
-
----
-
-### Bitcoin Research Kit
-
-Bitcoin Research Kit (BRK) is a toolchain that parses, indexes, computes, and
-visualizes data from a Bitcoin Core node. It aims to combine the functions of
-[Glassnode](https://glassnode.com/), [mempool.space](https://mempool.space/),
-and [electrs](https://github.com/romanz/electrs#) in one self-hostable package.
-The project focuses on performance, low resource requirements, and ease of use.
-Users can run it from a command line interface or the public site
-[Kibo.Money](https://kibo.money/). The system includes modular Rust crates, open
-APIs, and time-based charts. It supports a wide range of use cases for
-researchers, miners, node operators, and analysts.
-
-This grant will support the development of a full-featured explorer. Planned
-features include block, address, and transaction explorers, and support for both
-mempool.space and Electrum protocols. The explorer will include original data
-visualizations such as price distribution by block. The team will also improve
-the user experience for self-hosting with pre-built binaries, optional
-Cloudflare tunnels, and integrated
-[`bitcoind`](https://crates.io/crates/corepc-node) support. A `terminal` view
-for complex queries, a toggle to disable price data, and server monitoring with
-Prometheus are also planned. The project will launch a dedicated website for
-[bitcoinresearchkit.org](http://bitcoinresearchkit.org) and create independent
-branding for BRK and Kibo.
-
-Repository: [bitcoinresearchkit/brk](https://github.com/bitcoinresearchkit/brk)  
-License: MIT
-
----
-
-### Hashpool and Axepool
-
-[Hashpool](https://hashpool.dev/) is an accountless mining pool that issues
-eHash ecash tokens for each accepted mining share. It runs a modified Stratum V2
-pool, mints blinded tokens, and enables anonymous mining and trading of shares.
-[Axepool](https://hashpool.dev/dev-logs/dev-log-2025-04-05/#axepool) is a proxy
-layer for small-scale miners, such as [Bitaxes](https://bitaxe.org/). It uses 
-the Cashu protocol to simplify setup, eliminate accounts, and support frequent 
-ecash payouts.
-
-With support from this grant, the project will complete
-[NUT-04](https://github.com/cashubtc/nuts/blob/main/04.md) compliant ecash
-issuance. It will launch a mint daemon, set up [Redis](https://redis.io/about/)
-for share tracking, and apply a
-[PPLNS](https://bitcoinops.org/en/topics/pooled-mining/#pay-per-last-n-shares-pplns)
-valuation model. It will add scheduled keyset rotation and create full developer
-documentation, CI builds, and test coverage. Axepool will add SV1 multiplexing,
-Bolt 12 callbacks, Bitaxe wallet integration, and releases for home node
-platforms. A stretch goal will add a Proof of Liabilities protocol with share
-validation.
-
-Repository: [vnprc/hashpool](https://github.com/vnprc/hashpool)  
-License: MIT
 
 ---
 
@@ -175,6 +120,61 @@ full-featured Swift-native node.
 Repository:
 [swift-bitcoin/swift‑bitcoin](https://github.com/swift-bitcoin/swift-bitcoin)  
 License: MIT
+
+### Bitcoin Research Kit
+
+Bitcoin Research Kit (BRK) is a toolchain that parses, indexes, computes, and
+visualizes data from a Bitcoin Core node. It aims to combine the functions of
+[Glassnode](https://glassnode.com/), [mempool.space](https://mempool.space/),
+and [electrs](https://github.com/romanz/electrs#) in one self-hostable package.
+The project focuses on performance, low resource requirements, and ease of use.
+Users can run it from a command line interface or the public site
+[Kibo.Money](https://kibo.money/). The system includes modular Rust crates, open
+APIs, and time-based charts. It supports a wide range of use cases for
+researchers, miners, node operators, and analysts.
+
+This grant will support the development of a full-featured explorer. Planned
+features include block, address, and transaction explorers, and support for both
+mempool.space and Electrum protocols. The explorer will include original data
+visualizations such as price distribution by block. The team will also improve
+the user experience for self-hosting with pre-built binaries, optional
+Cloudflare tunnels, and integrated
+[`bitcoind`](https://crates.io/crates/corepc-node) support. A `terminal` view
+for complex queries, a toggle to disable price data, and server monitoring with
+Prometheus are also planned. The project will launch a dedicated website for
+[bitcoinresearchkit.org](http://bitcoinresearchkit.org) and create independent
+branding for BRK and Kibo.
+
+Repository: [bitcoinresearchkit/brk](https://github.com/bitcoinresearchkit/brk)  
+License: MIT
+
+---
+
+### Hashpool and Axepool
+
+[Hashpool](https://hashpool.dev/) is an accountless mining pool that issues
+eHash ecash tokens for each accepted mining share. It runs a modified Stratum V2
+pool, mints blinded tokens, and enables anonymous mining and trading of shares.
+[Axepool](https://hashpool.dev/dev-logs/dev-log-2025-04-05/#axepool) is a proxy
+layer for small-scale miners, such as [Bitaxes](https://bitaxe.org/). It uses 
+the Cashu protocol to simplify setup, eliminate accounts, and support frequent 
+ecash payouts.
+
+With support from this grant, the project will complete
+[NUT-04](https://github.com/cashubtc/nuts/blob/main/04.md) compliant ecash
+issuance. It will launch a mint daemon, set up [Redis](https://redis.io/about/)
+for share tracking, and apply a
+[PPLNS](https://bitcoinops.org/en/topics/pooled-mining/#pay-per-last-n-shares-pplns)
+valuation model. It will add scheduled keyset rotation and create full developer
+documentation, CI builds, and test coverage. Axepool will add SV1 multiplexing,
+Bolt 12 callbacks, Bitaxe wallet integration, and releases for home node
+platforms. A stretch goal will add a Proof of Liabilities protocol with share
+validation.
+
+Repository: [vnprc/hashpool](https://github.com/vnprc/hashpool)  
+License: MIT
+
+---
 
 ---
 
