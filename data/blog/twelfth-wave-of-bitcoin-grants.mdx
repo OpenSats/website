@@ -1,0 +1,206 @@
+---
+title: "Twelfth Wave of Bitcoin Grants"
+date: '2025-07-08'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+authors: ['arvin', 'dergigi', 'default']
+images: ['/static/images/blog/81-twelfth-wave-of-bitcoin-grants.jpg']
+draft: false
+summary: "OpenSats is funding twelve more open-source projects advancing the Bitcoin ecosystem."
+---
+
+We're excited to announce the twelfth wave of grants from our General Fund,
+supporting twelve open-source projects advancing the Bitcoin ecosystem. This
+round features five first-time grants and seven grant renewals for ongoing
+efforts that continue to deliver meaningful results.
+
+New project grantees in this wave are building tools for deeper bitcoin
+analytics, anonymous mining payouts, mobile ecash payments, and Lightning and
+full-node development within the .NET and Swift ecosystems.
+
+The five first-time project grants in this wave are:
+
+- [Sovran](#sovran)
+- [NLightning](#nlightning)
+- [Swift Bitcoin](#swift-bitcoin)
+- [Bitcoin Research Kit](#bitcoin-research-kit)
+- [Hashpool and Axepool](#hashpool-and-axepool)
+
+The seven project grant renewals in this wave are:
+
+- [Krux](/blog/bitcoin-grants-july-2024#krux)
+- [Vexl](/blog/bitcoin-grants-december-2023#vexl)
+- [Utreexo](/blog/bitcoin-grants-july-2024#utreexo)
+- [Nutshell](/blog/8th-wave-of-bitcoin-grants#cashu-nutshell)
+- [DLC Dev Kit](/blog/bitcoin-grants-september-2024-7th-wave#dlc-dev-kit)
+- [Bitcoin Core App](/blog/caring-for-bitcoin-core#bitcoin-core-app)
+- [Validating Lightning
+  Signer](/blog/bitcoin-grants-july-2024#validating-lightning-signer)
+
+Together, these twelve projects highlight a shared goal: making Bitcoin more
+decentralized, transparent, and user-driven—while keeping it robust, usable,
+and open to anyone who chooses to participate.
+
+None of this would be possible without the generosity of our donors. If you'd
+like to help move Bitcoin forward by supporting projects like those in this
+wave, consider donating to our General Fund.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's explore our first-time project grants to understand what they're building
+and how it strengthens the broader Bitcoin landscape.
+
+---
+
+### Sovran
+
+[Sovran](https://sovran.money) is a free and open-source ecash and Lightning 
+wallet built for iOS. It is designed to improve usability across
+[Cashu](https://cashu.space/)-based payments. The app supports multiple mints,
+NFC-based transactions, and integrates native connectivity tools like eSIM and
+VPN. Sovran has reached a stable release and ships with core Cashu
+functionality.
+
+Support from this grant will fund multipath payment support, new tools for
+managing balances across mints, and a specification for unified payment
+addresses. The team will improve NFC performance and begin development of an
+Android version. These upgrades will make Sovran more flexible, more accessible,
+and better suited for everyday ecash use.
+
+Repository: [SovranBitcoin/Sovran](https://github.com/SovranBitcoin/Sovran)  
+License: Mozilla Public License 2.0
+
+---
+
+### NLightning
+
+[NLightning](https://nlightning.ipms.io/) is an open-source Lightning Network
+node written in C# for the [.NET](https://en.wikipedia.org/wiki/.NET) ecosystem,
+implementing core BOLT specifications including
+[BOLT](https://github.com/lightning/bolts) 1-3 and 8-11. The project focuses on
+delivering a modular, efficient, and production-grade solution tailored for
+enterprise and open-source developers already working within the .NET stack.
+NLightning has published [NuGet packages](https://www.nuget.org/packages),
+supports [invoice generation through
+BOLT11](https://www.nuget.org/packages/NLightning.Bolt11/0.2.0), and maintains
+over 70% test coverage.
+
+Support from this grant will fund further implementation of BOLT 4, BOLT 5, and
+BOLT 7. The project aims to complete a full Lightning daemon with channel
+operations, [HTLC](https://bitcoinops.org/en/topics/htlc/) handling, and payment
+routing. Additional work will improve data structures, backup systems, developer
+tooling, and documentation. One of the upcoming goals of the project is to
+expand test coverage and fuzz testing to make the implementation more robust and
+production-ready.
+
+Repository: [ipms-io/nlightning](https://github.com/ipms-io/nlightning)  
+License: MIT
+
+---
+
+### Swift Bitcoin
+
+[Swift Bitcoin](https://swiftbitcoin.org/) is an open-source software
+development kit (SDK) and network client written entirely in
+[Swift](https://www.swift.org/documentation/). It offers a full node
+implementation with [PSBT](https://bitcoinops.org/en/topics/psbt/) support,
+[miniscript](https://bitcoinops.org/en/topics/miniscript/) domain-specific
+language, and [non-blocking I/O](https://github.com/apple/swift-nio#). The
+project has evolved over three years and already syncs and validates blocks,
+processes transactions, and matches Bitcoin Core on regtest. It delivers modular
+libraries for crypto, base protocol, wallet, blockchain, transport, and RPC use.
+
+Support from this grant will fund
+[testnet4](https://bitcoinops.org/en/topics/testnet/) syncing and completion of
+the wire protocol. Development will focus on peer-to-peer messaging, protocol
+alignment with Bitcoin Core, and expanded network testing. The project will also
+refine core modules, increase cross-platform stability, and move closer to a
+full-featured Swift-native node.
+
+Repository:
+[swift-bitcoin/swift‑bitcoin](https://github.com/swift-bitcoin/swift-bitcoin)  
+License: MIT
+
+---
+
+### Bitcoin Research Kit
+
+Bitcoin Research Kit (BRK) is a toolchain that parses, indexes, computes, and
+visualizes data from a Bitcoin Core node. It aims to combine the functions of
+[Glassnode](https://glassnode.com/), [mempool.space](https://mempool.space/),
+and [electrs](https://github.com/romanz/electrs#) in one self-hostable package.
+The project focuses on performance, low resource requirements, and ease of use.
+Users can run it from a command line interface or the public site
+[Kibo.Money](https://kibo.money/). The system includes modular Rust crates, open
+APIs, and time-based charts. It supports a wide range of use cases for
+researchers, miners, node operators, and analysts.
+
+This grant will support the development of a full-featured explorer. Planned
+features include block, address, and transaction explorers, and support for both
+mempool.space and Electrum protocols. The explorer will include original data
+visualizations such as price distribution by block. The team will also improve
+the user experience for self-hosting with pre-built binaries, optional
+Cloudflare tunnels, and integrated
+[`bitcoind`](https://crates.io/crates/corepc-node) support. A `terminal` view
+for complex queries, a toggle to disable price data, and server monitoring with
+Prometheus are also planned. The project will launch a dedicated website for
+[bitcoinresearchkit.org](http://bitcoinresearchkit.org) and create independent
+branding for BRK and Kibo.
+
+Repository: [bitcoinresearchkit/brk](https://github.com/bitcoinresearchkit/brk)  
+License: MIT
+
+---
+
+### Hashpool and Axepool
+
+[Hashpool](https://hashpool.dev/) is an accountless mining pool that issues
+eHash ecash tokens for each accepted mining share. It runs a modified Stratum V2
+pool, mints blinded tokens, and enables anonymous mining and trading of shares.
+[Axepool](https://hashpool.dev/dev-logs/dev-log-2025-04-05/#axepool) is a proxy
+layer for small-scale miners, such as [Bitaxes](https://bitaxe.org/). It uses 
+the Cashu protocol to simplify setup, eliminate accounts, and support frequent 
+ecash payouts.
+
+With support from this grant, the project will complete
+[NUT-04](https://github.com/cashubtc/nuts/blob/main/04.md) compliant ecash
+issuance. It will launch a mint daemon, set up [Redis](https://redis.io/about/)
+for share tracking, and apply a
+[PPLNS](https://bitcoinops.org/en/topics/pooled-mining/#pay-per-last-n-shares-pplns)
+valuation model. It will add scheduled keyset rotation and create full developer
+documentation, CI builds, and test coverage. Axepool will add SV1 multiplexing,
+Bolt 12 callbacks, Bitaxe wallet integration, and releases for home node
+platforms. A stretch goal will add a Proof of Liabilities protocol with share
+validation.
+
+Repository: [vnprc/hashpool](https://github.com/vnprc/hashpool)  
+License: MIT
+
+---
+
+From data-rich research dashboards and anonymous mining payouts to mobile ecash
+wallets and cross-platform developer tooling, the projects in this twelfth wave
+help reinforce the foundations that keep Bitcoin decentralized, robust, and open
+to all. By supporting both new efforts and ongoing work, we aim to expand
+access, improve usability, and strengthen privacy throughout the ecosystem.
+
+As with earlier [waves](/tags/wave), grant applications were reviewed against
+clear [criteria](/apply#criteria) aligned with [our mission](/mission) of
+supporting free and open-source software. If you're working on a project that
+advances Bitcoin, we encourage you to [apply for funding](/apply).
+
+In total, OpenSats has now issued [over 300 grants](/transparency) since the
+[start of our grant program][start], underscoring the scale and reach of our
+commitment to open-source builders.
+
+Our work is made possible by the generosity of our donors. If you'd like to
+help make the future of free and open-source Bitcoin development more
+sustainable, consider setting up a recurring donation to one of our funds. Any
+amount helps.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+[start]: /blog/opensats-receives-additional-funding-of-dollar10m-from-startsmall
