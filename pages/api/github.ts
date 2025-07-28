@@ -108,6 +108,9 @@ ${
     if (mainFocus === 'education') {
       appRepo = `${GH_APP_REPO}-education`
     }
+    if (mainFocus === 'eCash') {
+      appRepo = `${GH_APP_REPO}-ecash`
+    }
 
     // Tag depending on request for grant and/or request for listing
     req.body.LTS && issueLabels.push('LTS')
