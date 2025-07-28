@@ -108,7 +108,7 @@ ${
     if (mainFocus === 'education') {
       appRepo = `${GH_APP_REPO}-education`
     }
-    if (mainFocus === 'eCash') {
+    if (mainFocus === 'ecash') {
       appRepo = `${GH_APP_REPO}-ecash`
     }
 
