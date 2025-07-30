@@ -396,60 +396,68 @@ middleman.
 
 ### Payjoin Dev Kit
 
-Payjoin is a protocol for bitcoin transactions that improves on-chain privacy by
-breaking the common-input-ownership heuristic while reducing fees through output
-consolidation. The [Payjoin Dev Kit](https://github.com/payjoin), a Rust-based
+Payjoin is a protocol for batching bitcoin transactions that improves on-chain privacy by
+breaking the common-input-ownership heuristic while reducing fees.
+The [Payjoin Dev Kit](https://github.com/payjoin), a Rust-based
 library led by developer [Dan Gould](https://github.com/bitgould), addresses
 adoption barriers by providing a modular, developer-friendly toolkit to
 integrate into wallets, nodes, and payment applications.
 
 Earlier versions of Payjoin struggled to scale primarily due to the receiver
 having to keep a public server running, often behind Tor and wrapped in TLS
-encryption. Mobile wallets and most merchants found that setup impractical. With
+encryption and the requirement for both sender and receiver to be online at
+the same time. Mobile wallets and most merchants found that setup impractical. With
 [support from
 OpenSats](/blog/bitcoin-grants-july-2023#payjoin-dev-kit),
 Payjoin Dev Kit cleared those hurdles. Maintainer Dan Gould introduced
 advancements in [Async
 Payjoin](/blog/developing-advancements-in-onchain-privacy#async-payjoin)
-([merged into BIP 77](https://github.com/bitcoin/bips/pull/1483)), letting the
-sender's wallet and the receiver's wallet exchange transaction details over
-channels they already use, allowing both parties to remain offline until it is
-time to broadcast the transaction.
+([merged as BIP 77](https://github.com/bitcoin/bips/pull/1483)), letting the
+sender and the receiver exchange transaction details over encrypted messages on
+agreed upon mailboxes, allowing parties to fetch and post messages while the
+other is offline, like email.
 
-The specification quickly turned into working code. The Rust `payjoin`
+The specification was born from iterations of working code. The Rust `payjoin`
 [crate](https://github.com/payjoin/rust-payjoin) jumped from version
 [0.11](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0110)
 to
 [0.24](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0240),
-gained a simpler input-output layer, added HPKE-encrypted Oblivious HTTP
-transport, and recently introduced a session-event log for easy replay. It now
+gained a simpler interface, landed on HPKE-encrypted Oblivious HTTP
+transport to protect data without heavy Tor or TLS dependencies, and recently introduced
+a session-event log, creating a for standard way for implementors to display transaction
+history in apps and throw errors. It now
 records more than twenty thousand downloads. The
 [`payjoin-cli`](https://crates.io/crates/payjoin-cli) matured into a stable tool
-that talks to Bitcoin Core, restarts interrupted sessions automatically, and
-ships reproducible Nix builds, giving developers an easy way to test Payjoin
-flows. To keep network details private, the team published the [`ohttp-relay
-crate`](https://crates.io/crates/ohttp-relay), and community operators such as
-[Obscura VPN](https://obscura.net) and [BOBSpaces](https://bobspaces.org) now
+that talks to Bitcoin Core and restarts interrupted async sessions automatically,
+giving developers an easy way to test Payjoin
+flows. To keep network details private, the team published the [`ohttp-relay`
+crate](https://crates.io/crates/ohttp-relay), and community operators such as
+[Cake Wallet](https://cakewallet.com) and [BOB Space](https://bobspaces.net) now
 run OHTTP relays.
 
 Payjoin Dev Kit now extends beyond Rust. The
-[`payjoin-ffi`](https://github.com/LtbLightning/payjoin-ffi) module supplies
-bindings for Python, Flutter, and other toolchains, so Android, iOS, and desktop
-apps can use the same audited core. Adoption keeps ramping up:
-[Bitmask](https://bitmask.app) desktop wallet and
-[BDK-CLI](https://github.com/bitcoindevkit/bdk-cli) already send Payjoin V2,
+[`payjoin-ffi`](https://github.com/payjoin/rust-payjoin/tree/master/payjoin-ffi)
+crate builds bindings on a framework that now ships Python and Dart. Android, iOS, and desktop
+apps can use the same well-tested core. By designing tools to bind from this framework,
+like the [new one for dart](https://github.com/Uniffi-Dart/uniffi-dart), adding new languages is easy,
+and the rest of the rust-bitcoin ecosystem can re-use the same pattern to have compatible dev kits
+across many languages.
+
+Adoption keeps ramping up:
 [Bull Bitcoin](https://bullbitcoin.com) Mobile has been able to both send and
 receive it since December 2024, and [Cake Wallet](https://cakewallet.com) added
-Payjoin V2 sending in May 2025. Enterprise-grade roll-outs are still in pilot at
-[Galoy's Bria](https://github.com/GaloyMoney/bria) batching engine, at
+Payjoin V2 sending and receiving support in May 2025. Many implementations making use of
+the advanced "cut-through" batching features are in progress with
+[Liana](https://github.com/wizardsardine/liana/),
+[Galoy's Bria](https://github.com/GaloyMoney/bria),
 [Boltz](https://boltz.exchange), and for Lightning channel funding currently
 being tested in [LDK-Node](https://github.com/lightningdevkit/ldk-node).
 
-In just over a year, Payjoin Dev Kit has moved from experimental concept to
-production standard, complete with relays, directories, language bindings, and
-command-line tools. Developers can now add privacy-enhanced payments into
-wallets, nodes, and batching services quickly, lowering fees and increasing user
-anonymity without the usage of Tor or dedicated servers.
+In just over a year, Payjoin Dev Kit has transformed from experimental concept to a
+production standard protocol and toolkit, with live infrastructure, language bindings, and
+command-line tools. Developers can include this default, privacy-preserving behavior into
+wallets, nodes, and batching services, lowering fees and improving
+privacy characteristics for the whole Bitcoin network without running Tor or their own dedicated servers.
 
 ### LN Proto Test
 
