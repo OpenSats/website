@@ -135,7 +135,7 @@ wave of sovereign Bitcoin tools.
 
 ### Rust-Bitcoin
 
-[Rust‑Bitcoin](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin)
+The [rust‑bitcoin](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin) library
 is a toolkit for building Bitcoin software in Rust, offering the core building
 blocks—transactions, scripts, blocks, and network rules—that higher‑level
 libraries such as BDK, LDK, and many Rust‑based hardware‑wallet firmwares rely
@@ -422,14 +422,16 @@ The specification was born from iterations of working code. The Rust `payjoin`
 [0.11](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0110)
 to
 [0.24](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0240),
-gaining a simpler interface, implemented [HPKE-encrypted Oblivious HTTP](https://ietf-wg-ohai.github.io/oblivious-http/draft-ietf-ohai-ohttp.html) to help protect data without heavy Tor or TLS dependencies, and recently introduced
-a session-event log, creating a standard way for implementors to display transaction
-history in apps and throw errors. It now
-records more than twenty thousand downloads. The
+gaining a simpler interface, implemented [HPKE-encrypted Oblivious
+HTTP](https://ietf-wg-ohai.github.io/oblivious-http/draft-ietf-ohai-ohttp.html)
+to help protect data without heavy Tor or TLS dependencies, and recently
+introduced a session-event log, creating a standard way for implementors to
+display transaction history in apps and throw errors. It now records more than
+twenty thousand downloads. The
 [`payjoin-cli`](https://crates.io/crates/payjoin-cli) matured into a stable tool
-that talks to Bitcoin Core and restarts interrupted async sessions automatically,
-giving developers an easy way to test Payjoin
-flows. To keep network details private, the team published the [`ohttp-relay`
+that talks to Bitcoin Core and restarts interrupted async sessions
+automatically, giving developers an easy way to test Payjoin flows. To keep
+network details private, the team published the [`ohttp-relay`
 crate](https://crates.io/crates/ohttp-relay), and community operators such as
 [Cake Wallet](https://cakewallet.com) and [BOB Space](https://bobspaces.net) now
 run OHTTP relays.
@@ -576,7 +578,7 @@ uptime, and enables automated liquidity management across the Lightning network.
 
 Reliable developer libraries form the foundation for secure and resilient
 Bitcoin software. The seven initiatives detailed in this report—Bitcoin Dev
-Kit, Rust-Bitcoin, Secp256k1, DLC Dev Kit, Payjoin Dev Kit, LN Proto Test, and
+Kit, rust-bitcoin, Secp256k1, DLC Dev Kit, Payjoin Dev Kit, LN Proto Test, and
 Splicing in LDK—show how targeted open-source work speeds adoption and raises
 the security bar across the ecosystem. Stable APIs replace fragile forks,
 cryptographic upgrades become drop-in imports, and protocol tests catch
