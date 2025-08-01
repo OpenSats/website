@@ -265,70 +265,73 @@ for secure, efficient building blocks.
 
 The `secp256k1` [elliptic
 curve](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
-secures every bitcoin signature, but Swift developers have long been dealing
-with bulky C wrappers because the only audited implementation was written in
-C—forcing unsafe pointers, slow builds, and sparse documentation. With
-[OpenSats'
-support](/blog/bitcoin-grants-july-2024-6th-wave#secp256k1swift),
-the [21-DOT-DEV](https://github.com/21-DOT-DEV) collective transformed
+secures every Bitcoin signature, but Swift developers have several challenges
+integrating the curve because the only audited implementation was written in
+C—forcing them to manage unsafe pointers, complex project build setups, and
+minimal documentation. With [OpenSats'
+support](/blog/bitcoin-grants-july-2024-6th-wave#secp256k1swift), the
+[21-DOT-DEV](https://github.com/21-DOT-DEV) collective transformed
 [`swift-secp256k1`](https://github.com/21-DOT-DEV/swift-secp256k1) into a
-polished, Swift-native toolkit for wallets, Lightning nodes, and [nostr
+polished, Swift-native toolkit for Bitcoin, Cashu, and [nostr
 apps](https://nostrapps.com/).
 
 The [version
-0.18.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.18.0)
+v0.18.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.18.0)
 release introduced
 [`MuSig2`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/560), a
 multi-signature upgrade that lets several participants merge their `Schnorr`
-signatures into one—improving privacy while saving space—so iOS, macOS, and
-Linux apps can enable it with just a few lines of Swift code (instead of dealing
-with C wrappers). The API also enforces `non-copyable nonces` and feels as
-natural to use as Apple's `CryptoKit`.
+signatures into one—improving privacy while saving space—so apps can enable it
+with just a few lines of  code. In practice, this allows developers to more
+easily integrate with cooperative flows used by non-custodial swap
+protocols—such as refunds where an app co-signs the time-locked transaction with
+a single aggregated key when needed.
 
-A new `DocC`-powered
-[website](https://swiftpackageindex.com/21-DOT-DEV/swift-secp256k1/main/documentation/secp256k1)
-now builds documentation from the library's source code. Every function and data
-type is displayed in plain language, complete with inline explanations and
-ready-to-run code samples. Newcomers can open an `Xcode` playground, follow the
-step-by-step guide, and compile their first bitcoin transaction in minutes.
-
-With the
-[v0.20.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.20.0)
-release, the team began shipping a signed
-[`XCFramework`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/671) and
-[`CocoaPods`](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.20.0)
-spec. CI pipelines that once pulled more than a gigabyte of C toolchains now
-only have to fetch a single 6 MB archive, opening the door for closed-source
-apps and bandwidth-constrained mobile teams to adopt audited Bitcoin
-cryptography.
+In a following release, the team began shipping a
+[`XCFramework`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/671) which
+extends the distribution of swift-secp256k1 to
+[CocoaPods](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.20.0)
+(which can be used by cross-platform toolchains like React Native and Flutter).
+These prebuilt binaries make consumer app builds faster, continuous integration
+pipelines more deterministic, and enable module-stable Swift interfaces that
+won't break with Xcode updates.
 
 The [v0.21.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.21.0)
 release added a new
-[`UInt256`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/561) number type
-made for 256-bit math—the size bitcoin keys use. Previously, developers dealt
-with large numbers as text strings, a slow and error-prone workaround. With a
-real 256-bit integer, the library can run constant-time calculations that block
-timing attacks, enforce strict range checks for safer key handling, and pave the
-way for future upgrades such as Taproot adjustments—all while exposing a
-single, easy-to-use value that feels no more complicated than an ordinary
-`UInt64`.
+[`UInt256`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/561) that matches
+the 32-byte sizes used commonly across Bitcoin keys, so developers no longer
+need to pass critical values around as Strings or raw Data. Backed by
+[`StaticBigInt`](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0368-staticbigint.md),
+it accepts true 256-bit literals and plugs into Swift’s numeric protocols,
+letting the compiler enforce width and range at build-time—catching size/format
+mistakes before they ship. The result is easier adoption and cleaner APIs:
+developers work with a single, fixed-width integer that serializes cleanly to
+32-byte buffers and drops into generic math without glue code, improving
+robustness and integration speed.
 
-To spread these gains beyond a single library, the team released
-[`swift-plugin-tuist`](https://github.com/21-DOT-DEV/swift-plugin-tuist), a
-`SwiftPM` plugin that generates reproducible `XCFrameworks` for any package with
-a single command—giving other Bitcoin-focused Swift projects a ready-made
-build pipeline.
+To spread these gains beyond a single library, they've introduced
+[`swift-plugin-tuist`](https://github.com/21-DOT-DEV/swift-plugin-tuist)—a
+SwiftPM plugin that invokes Tuist directly (no separate install) so any package
+can generate reproducible, easier-to-manage Xcode projects  with a single
+command. By treating the project as code, development teams see fewer merge
+conflicts and less '.pbxproj' drift, and CI spins up identical workspaces on
+demand. They also publish source-of-truth API docs powered by
+[DocC](https://swiftpackageindex.com/21-DOT-DEV/swift-secp256k1/main/documentation/secp256k1)
+on every tagged release, providing instant, deep-linked symbol pages that take
+developers straight from an API to its usage.
 
-Today, the library resides under the nonprofit-oriented 21.dev organization,
-signaling long-term stewardship and clear governance, maintaining alignment with
-[OpenSats' mission](/mission) to strengthen open,
+Today, the package lives under the 21.dev GitHub organization, with plans to
+formalize 21.dev as a nonprofit entity—signaling long-term stewardship, clear
+governance, and alignment with [OpenSats' mission](/mission) for open,
 transparent infrastructure.
 
-From aggregated `Schnorr` signatures to one-click binary distribution, the
-`secp256k1` initiative has turned a niche wrapper into an enterprise-grade
-building block. It removes the last major friction points for Swift developers,
-making it easier and safer to launch wallets, hardware companions, and privacy
-tools that everyday bitcoin users can trust.
+Together, these upgrades turn swift-secp256k1 from just being a niche wrapper
+into a dependable foundation that helps teams ship faster—with prebuilt
+binaries, cleaner types, and clear docs—while making privacy the default through
+aggregated signatures that keep collaborative flows discreet on-chain. The
+result is less time spent on plumbing and more time delivering features users
+feel, sooner. If you’re building a wallet, node companion, or privacy tool using
+Swift, explore the docs and try it out to see how quickly you can go from idea
+to release.
 
 ### DLC Dev Kit
 
