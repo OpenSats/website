@@ -1,0 +1,605 @@
+---
+title: "Advancements in Developer Libraries"
+date: '2025-08-04'
+tags: ['OpenSats', 'bitcoin', 'impact', 'libraries']
+authors: ['default', 'arvin']
+images: ['/static/images/blog/82-advancements-in-developer-libraries.jpg']
+draft: false
+summary: "An impact report from the front-lines of Bitcoin developer libraries."
+---
+
+Reliable, well-audited developer libraries are the hidden plumbing of bitcoin.
+They abstract away the heavy lifting—key generation, transaction building,
+network rules—so wallet creators, node operators, and application developers
+can focus on user experience. When these libraries mature, they do more than
+save engineering hours; they embed security best practices, prevent subtle bugs
+from propagating across projects, and allow new ideas to spread quickly through
+the ecosystem.
+
+OpenSats funding enables these library developers and maintainers to do all of
+their high-impact work in public repositories, where every commit and code
+review is fully transparent, audit-ready, and immediately reusable across the
+wider Bitcoin ecosystem.
+
+This impact report highlights seven key library initiatives:
+
+- [Bitcoin Dev Kit](#bitcoin-dev-kit)
+- [Rust-Bitcoin](#rust-bitcoin)
+- [Secp256k1](#secp256k1)
+- [DLC Dev Kit](#dlc-dev-kit)
+- [Payjoin Dev Kit](#payjoin-dev-kit)
+- [LN Proto Test](#ln-proto-test)
+- [Splicing in LDK](#splicing-in-ldk)
+
+These initiatives have collectively stabilized core APIs, enhanced cryptographic
+security, improved privacy features, and enabled advanced functionalities like
+on-chain derivatives, collaborative payments, protocol testing, and dynamic
+Lightning channels, resulting in widespread adoption across wallets, nodes, and
+services that make Bitcoin development more accessible, reliable, and innovative
+for builders of this ecosystem.
+
+Let's take a closer look at how these developer library initiatives are making
+an impact.
+
+---
+
+### Bitcoin Dev Kit
+
+OpenSats has supported a series of efforts to strengthen the Bitcoin Development
+Kit ([BDK](/blog/bitcoin-and-nostr-grants-august-2023#bdk)),
+a modular Rust library for building Bitcoin wallets across platforms. BDK plays
+a key role in improving wallet reliability, onboarding, and user
+privacy—especially in environments where security, platform reach, and
+flexible trust models are critical.
+
+The BDK team developed a full-scale redesign of their library, capping it off
+with the [`BDK Wallet
+1.0.0`](https://github.com/bitcoindevkit/bdk_wallet/releases/tag/wallet-1.0.0)
+release in December 2024, bringing a stable API tied to semantic versioning,
+offering developers a solid base for smoother upgrades moving forward. Alongside
+that full‑scale redesign, the team refreshed its [Swift, Kotlin and Python
+bindings](https://github.com/bitcoindevkit/bdk-ffi?tab=readme-ov-file#supported-target-languages-and-platforms)
+so they track the new 1.0 API feature‑for‑feature, giving mobile and desktop
+apps async‑ready access to BDK.
+
+The BDK library was carved into bite-sized modules, allowing developers to pick
+and choose for specialized needs, like custom transaction builders or
+slimmed-down hardware. Syncing was enhanced with `async` options that don't lock
+up the application, as well as improved storage handling and adjustments for
+embedded gear and `WebAssembly`. BDK also released the [Book of
+BDK](https://bookofbdk.com/), containing straightforward guides, upgrade paths
+from older versions, and real-world reusable code snippets that save developers
+time.
+
+>The mission of the BDK team is to provide the best FOSS libraries for building
+>secure, modern bitcoin apps and services. With the 1.0+ releases now in the
+>hands of thousands of users through projects like
+>[Bitkey](https://github.com/proto-at-block/bitkey) and
+>[ProtonWallet](https://github.com/ProtonWallet), we have begun to achieve this
+>mission. Moreover, with projects like
+>[AnchorWatch](https://www.anchorwatch.com/),
+>[FrostSnap](https://github.com/frostsnap/frostsnap),
+>[Cove](https://github.com/bitcoinppl/cove), and [Bitcoin
+>Safe](https://github.com/andreasgriffin/bitcoin-safe), we continue to support
+>innovative new layer one wallets. Looking forward, we also see BDK playing a
+>strong supporting role for layer two projects like
+>[ldk-node](https://github.com/lightningdevkit/ldk-node) and [Second's
+>bark](https://codeberg.org/ark-bitcoin/bark). If there is a bitcoin project you
+>want to see in the world, BDK will help you build it.
+>
+><cite>—Steve Myers, BDK director/core contributor</cite>
+
+Another OpenSats-supported project, [Tor Support for
+BDK](/blog/bitcoin-grants-july-2024#tor-support-for-bdk--fedimint),
+enhanced its privacy and security, which involved
+[patching](https://github.com/bitcoindevkit/rust-electrum-client/pull/150) the
+`rust-electrum-client` library upstream. Secure links to self-hosted Electrum
+servers have become possible using self-signed TLS certificates, removing
+vulnerable unencrypted backups. This means users can depend on their own setups,
+including onion-routed ones, without data spills. In `rust-esplora-client`, this
+[removed](https://github.com/bitcoindevkit/rust-esplora-client/pull/103) a
+troublesome dependency, reviving builds for `WebAssembly` and mobile. A
+follow-up draft
+[added](https://github.com/bitcoindevkit/rust-esplora-client/pull/99) a
+swappable HTTP layer for Tor with less effort. These fixes don't just protect IP
+addresses; they extend out to other Rust tools, letting wallets function in
+places where non-Tor traffic is blocked.
+
+OpenSats support also enabled developer
+Robert Netzke ([rustaceanrob](https://github.com/rustaceanrob)) to advance BDK's
+`Kyoto` light‑client backend, which implements BIP
+[157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki)/[158](https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki)
+compact‑filter syncing. His work unlocked [direct reads of indexed
+blocks](https://github.com/rustaceanrob/kyoto/commit/183d397dceacc6ce2e001d02819d6cdef1688de1)—ideal
+for bandwidth‑conscious mobile usage and privacy tools like silent
+payments—then
+[added](https://github.com/rustaceanrob/kyoto/commit/4cb1728fc6d80118a32f3c69adc50494b1b7aa24)
+Testnet4 support for safe protocol experiments and a CI harness that [spins
+up](https://github.com/rustaceanrob/kyoto/commit/3cb8b62cb9fe160be761c7565070feeddba29662)
+`bitcoind` to catch sync errors early. Kyoto was also
+[bridged](https://github.com/bitcoindevkit/bdk-ffi/pull/591) to mobile via
+BDK‑FFI, opening doors for iOS and Android developers, while audit‑flagged
+issues in BDK's core were also
+[resolved](https://github.com/bitcoindevkit/bdk/commits?author=rustaceanrob&since=2024-11-01&until=2024-12-01).
+
+BDK's recent upgrades, including stable APIs, Tor-ready networking, and a
+compact-filter light client, have solidified the library as a core building
+block for the Bitcoin ecosystem. From hardware devices to layer-two research,
+development teams can now reach for BDK first because it keeps pace with
+features like [Silent
+Payments](/blog/developing-advancements-in-onchain-privacy#silent-payments)
+and Testnet4 while maintaining strong security and developer ergonomics.
+OpenSats' support helped to accelerate this progress; going forward, the broader
+contributor community is well-positioned to carry BDK's momentum into the next
+wave of sovereign Bitcoin tools.
+
+### Rust-Bitcoin
+
+The [rust‑bitcoin](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin) library
+is a toolkit for building Bitcoin software in Rust, offering the core building
+blocks—transactions, scripts, blocks, and network rules—that higher‑level
+libraries such as BDK, LDK, and many Rust‑based hardware‑wallet firmwares rely
+on. Because these building blocks feed directly into wallets, nodes, and other
+critical apps, even small mistakes can create transactions that won't relay or
+trigger arithmetic errors that put funds at risk. OpenSats has supported
+multiple maintainers who have transformed Rust‑Bitcoin's once‑monolithic code
+into a modular, well‑tested stack; added policy updates to keep pace with
+Bitcoin Core; and enabled cross‑project coordination—delivering a safer,
+easier‑to‑upgrade base for the entire ecosystem.
+
+The push was highlighted by the first release‑candidate of
+[`bitcoin‑units 1.0.0-rc.0`](https://crates.io/crates/bitcoin-units/1.0.0-rc.0),
+a step toward long‑term API stability, and by
+[modernizing](https://github.com/rust-bitcoin/rust-bitcoin/pull/4534) `FeeRate`
+to use milli‑vbytes (mvB), aligning fee logic with Bitcoin Core.
+
+[Tobin
+Harding](/blog/tobin-harding-receives-lts-grant-for-rust-bitcoin)
+guided the structural improvements of the Bitcoin-Rust library. He coordinated a
+[v0.32
+release](https://github.com/rust-bitcoin/rust-bitcoin/releases/tag/bitcoin-0.32.0)
+wave across the stack—updating code packages (crates) like base58ck for
+address encoding and secp256k1 for elliptic curve cryptography—while requiring
+a newer version of the Rust compiler and removing outdated compatibility layers
+for resource-constrained environments. A key step was launching
+[bitcoin-primitives
+0.101.0](https://crates.io/crates/bitcoin-primitives/0.101.0), which pulls out
+basic data types like addresses and amounts into their own crate, breaking the
+chain of forced simultaneous upgrades that used to hold back entire projects.
+
+New standalone crates came next:
+[`rust-psbt`](https://github.com/tcharding/rust-psbt) for full support of PSBT
+v2 (partially signed Bitcoin transactions, for collaborative or hardware-based
+signing), [`bitcoin-units`](https://crates.io/crates/bitcoin-units) for handling
+Bitcoin amounts safely, [`bitcoin-io`](https://crates.io/crates/bitcoin-io) for
+basic input/output operations, and the
+[corepc](https://github.com/rust-bitcoin/corepc) RPC suite for structured calls
+to Bitcoin Core nodes across different versions, including built-in tools for
+reliable testing. These changes make the library more flexible, so developers
+can mix and match only the parts they need.
+
+Harding also improved safety in bitcoin-units by enforcing bitcoin's maximum
+money supply limit
+([`MAX_MONEY`](https://github.com/rust-bitcoin/rust-bitcoin/pull/4157)) and
+introducing a
+[`NumOpResult`](https://github.com/rust-bitcoin/rust-bitcoin/pull/4007) type—a
+simple wrapper that checks for errors like arithmetic overflows during
+calculations. The
+[`locktime`](https://github.com/rust-bitcoin/rust-bitcoin/tree/master/units/src/locktime)
+module was also
+[updated](https://github.com/rust-bitcoin/rust-bitcoin/pull/4426), with
+easier-to-use constructors and corrections for subtle off-by-one errors in
+height-based checks, making it simpler to create transactions that unlock only
+after a specific block or time.
+
+>My job is to provide libraries so other devs can create software that users
+>love. If no one ever mentions rust-bitcoin while simultaneously using it every
+>day, then we win.
+>
+><cite>—Tobin Harding</cite>
+
+In parallel, [Jamil Lambert](https://github.com/jamillambert) focused on making
+the rust-bitcoin codebase more reliable through better testing and safeguards.
+He added weekly [mutation
+testing](https://github.com/sourcefrog/cargo-mutants)—a method that changes
+the code on purpose to ensure the tests are catching it—and eliminated every
+surviving mutant in
+[`bitcoin-units`](https://github.com/rust-bitcoin/rust-bitcoin/tree/master/units)
+and [`hex-conservative`](https://github.com/rust-bitcoin/hex-conservative) by
+writing precise, [targeted
+tests](https://github.com/rust-bitcoin/hex-conservative/pull/164). In
+[`bitcoin-primitives::block`](https://github.com/rust-bitcoin/rust-bitcoin/pull/4217),
+he raised test coverage from 13% to 100%, strengthening one of the most critical
+parts of the library.
+
+Lambert also restored a compile-time check in
+[`BufEncoder`](https://github.com/rust-bitcoin/hex-conservative/pull/155) that
+prevents hex-encoding crashes during signing and hashing. Behind the scenes, he
+fixed broken fuzz tests and updated GitHub Actions to keep automated checks
+running smoothly, helping ensure safety across the entire `rust-bitcoin` stack.
+
+>Testing is an important part of software development, which isn't always
+>treated as such. There are often poorly written tests that are hard to read, and
+>some don't test what they set out to... Writing and improving tests for all of
+>the missed mutants requires an understanding of what the code being tested does,
+>which has been a good way to learn about the software while also doing something
+>useful.
+>
+><cite>—Jamil Lambert</cite>
+
+Additionally, OpenSats grantee Robert Netzke
+([rustaceanrob](https://github.com/rustaceanrob)) implemented policy-level
+changes by merging upstream fixes directly into the library. He adjusted the
+`OP_RETURN` [size
+limit](https://github.com/rust-bitcoin/rust-bitcoin/commit/e0442782c8c04bdc48c2743e70f46e41c507e5f4)—a
+rule for embedding data in transactions—to exactly match Bitcoin Core's
+80-byte cap, including the space for instructions (push opcodes), which helps
+prevent transactions from being rejected by the network. He also introduced a
+[`FeeRate::from_sat_per_kvb`](https://github.com/rust-bitcoin/rust-bitcoin/commit/b96501981ffef1d32c839cd44861736ce3683964)
+helper function to express fees in the same units as Bitcoin Core's `feefilter`
+message (satoshis per kilovirtualbyte), making it easier for tools to set and
+check transaction costs accurately.
+
+Rustaceanrob also added
+[`Transaction Version 3`](https://github.com/rust-bitcoin/rust-bitcoin/commit/9e6b8faf847662cf741bc166a690d63a9328c7e3)
+([`BIP 431`](https://github.com/bitcoin/bips/blob/master/bip-0431.mediawiki))
+support to Rust‑Bitcoin, preparing the library for covenant‑style spending rules
+while preserving full compatibility with existing transactions. Together with
+his other policy fixes, this keeps Rust‑Bitcoin aligned with Bitcoin Core and
+lets developers build applications that stay reliable as the protocol evolves.
+
+Community alignment tied these efforts together. Tobin Harding hosted the
+inaugural Rust Bitcoin Summit in Nashville in 2024, uniting 30 developers from
+BDK, LDK, Fedimint, and others to synchronize on primitives and PSBT plans.
+Shared maintainer tools, like reusable CI scripts in a dedicated repo,
+streamlined reviews, while active mentorship onboarded new contributors and
+merged external PRs, ultimately broadening participation.
+
+These advancements have collectively made `rust-bitcoin` a more reliable base
+for Bitcoin tools, shortening development time and reducing risks in dependent
+projects. By enabling modular dependencies, comprehensive testing, and
+forward-compatible policies, the library now better serves the ecosystem's needs
+for secure, efficient building blocks.
+
+### Secp256k1
+
+The `secp256k1` [elliptic
+curve](https://en.bitcoin.it/wiki/Elliptic_Curve_Digital_Signature_Algorithm)
+secures every Bitcoin signature, but Swift developers have several challenges
+integrating the curve because the only audited implementation was written in
+C—forcing them to manage unsafe pointers, complex project build setups, and
+minimal documentation. With [OpenSats'
+support](/blog/bitcoin-grants-july-2024-6th-wave#secp256k1swift), the
+[21-DOT-DEV](https://github.com/21-DOT-DEV) collective transformed
+[`swift-secp256k1`](https://github.com/21-DOT-DEV/swift-secp256k1) into a
+polished, Swift-native toolkit for Bitcoin, Cashu, and [nostr
+apps](https://nostrapps.com/).
+
+The [version
+v0.18.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.18.0)
+release introduced
+[`MuSig2`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/560), a
+multi-signature upgrade that lets several participants merge their `Schnorr`
+signatures into one—improving privacy while saving space—so apps can enable it
+with just a few lines of  code. In practice, this allows developers to more
+easily integrate with cooperative flows used by non-custodial swap
+protocols—such as refunds where an app co-signs the time-locked transaction with
+a single aggregated key when needed.
+
+In a following release, the team began shipping a
+[`XCFramework`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/671) which
+extends the distribution of swift-secp256k1 to
+[CocoaPods](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.20.0)
+(which can be used by cross-platform toolchains like React Native and Flutter).
+These prebuilt binaries make consumer app builds faster, continuous integration
+pipelines more deterministic, and enable module-stable Swift interfaces that
+won't break with Xcode updates.
+
+The [v0.21.0](https://github.com/21-DOT-DEV/swift-secp256k1/releases/tag/0.21.0)
+release added a new
+[`UInt256`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/561) that matches
+the 32-byte sizes used commonly across Bitcoin keys, so developers no longer
+need to pass critical values around as Strings or raw Data. Backed by
+[`StaticBigInt`](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0368-staticbigint.md),
+it accepts true 256-bit literals and plugs into Swift’s numeric protocols,
+letting the compiler enforce width and range at build-time—catching size/format
+mistakes before they ship. The result is easier adoption and cleaner APIs:
+developers work with a single, fixed-width integer that serializes cleanly to
+32-byte buffers and drops into generic math without glue code, improving
+robustness and integration speed.
+
+To spread these gains beyond a single library, they've introduced
+[`swift-plugin-tuist`](https://github.com/21-DOT-DEV/swift-plugin-tuist)—a
+SwiftPM plugin that invokes Tuist directly (no separate install) so any package
+can generate reproducible, easier-to-manage Xcode projects  with a single
+command. By treating the project as code, development teams see fewer merge
+conflicts and less '.pbxproj' drift, and CI spins up identical workspaces on
+demand. They also publish source-of-truth API docs powered by
+[DocC](https://swiftpackageindex.com/21-DOT-DEV/swift-secp256k1/main/documentation/secp256k1)
+on every tagged release, providing instant, deep-linked symbol pages that take
+developers straight from an API to its usage.
+
+Today, the package lives under the 21.dev GitHub organization, with plans to
+formalize 21.dev as a nonprofit entity—signaling long-term stewardship, clear
+governance, and alignment with [OpenSats' mission](/mission) for open,
+transparent infrastructure.
+
+Together, these upgrades turn swift-secp256k1 from just being a niche wrapper
+into a dependable foundation that helps teams ship faster—with prebuilt
+binaries, cleaner types, and clear docs—while making privacy the default through
+aggregated signatures that keep collaborative flows discreet on-chain. The
+result is less time spent on plumbing and more time delivering features users
+feel, sooner. If you’re building a wallet, node companion, or privacy tool using
+Swift, explore the docs and try it out to see how quickly you can go from idea
+to release.
+
+### DLC Dev Kit
+
+Discreet Log Contracts (DLCs) allow parties to create conditional bitcoin
+transactions that settle based on external oracle data without ongoing trust in
+intermediaries and without revealing contract details on-chain until closure.
+The model works for derivatives, options, hedging, and prediction markets
+directly on bitcoin. Traditionally, bringing DLCs to production has required
+deep cryptography expertise and robust peer-to-peer architecture.
+
+The [DLC Dev Kit](https://github.com/bennyhodl/dlcdevkit) is a Rust library from
+[Benny Hodl](https://github.com/bennyhodl) that builds on
+[`rust-dlc`](https://github.com/p2pderivatives/rust-dlc) and [Bitcoin Dev
+Kit](https://github.com/bitcoindevkit/bdk), turning that work into simpler,
+reusable tooling.
+
+With [OpenSats'
+support](/blog/bitcoin-grants-september-2024-7th-wave#dlc-dev-kit),
+the project incorporated DLC messaging into the [nostr
+protocol](https://github.com/nostr-protocol/nostr), allowing contracts to move
+through relays rather than depend on public IPs or Tor onion services. This
+shift makes DLCs easier to run on mobile apps and embedded devices. The first
+big step was an Oracle Announcement Marketplace that lets apps discover oracle
+events. It then launched [nostr Transport
+v1](https://github.com/bennyhodl/dlcdevkit/pull/76) for basic back-and-forth
+messaging, followed by [v1.1](https://github.com/bennyhodl/dlcdevkit/pull/85),
+which adds delayed replies and larger payloads. A [nostr oracle
+client](https://github.com/bennyhodl/dlcdevkit/pull/84) now lets software pull
+attestations straight from relays.
+
+For higher-volume services, the DLC Manager underwent a refactor that replaced
+global locks with a multi-producer, single-consumer queue, enabling non-blocking
+tasks such as adaptor-signature generation, proving useful for exchanges and
+gateways handling many contracts.
+
+The DLC Dev Kit is now modular. Developers can toggle storage, transport, and
+oracle components with feature flags, keeping `WebAssembly` and mobile builds
+small. The kit also comes with an asynchronous
+[`SQLx`](https://github.com/launchbadge/sqlx) storage layer for PostgreSQL and
+SQLite, plus [Docker](https://www.docker.com/)-based tests, giving production
+servers durable and easily queried contract data.
+
+Developers also receive the
+[`ddk-payouts`](https://crates.io/crates/ddk-payouts) crate, which supplies
+ready-made builders for European options (contracts that can be exercised only
+at expiration) and for custom payout curves, so no one has to calculate outcomes
+by hand.
+
+Infrastructure work continues on the [Kormir
+oracle](https://github.com/bennyhodl/kormir), which now relies on event IDs as
+its primary key for cleaner APIs while remaining a reference point for
+spec-compliant testing. To show the DLC Dev Kit in action, the team also
+maintains the Ernest Money demo stack where [Squawk
+Box](https://github.com/ernest-money/squawkbox) handles encrypted DLC messaging
+over nostr, [Ernest Oracle](https://github.com/ernest-money/ernest-oracle)
+publishes bitcoin hashrate and fee data over nostr, and [City
+Tavern](https://github.com/ernest-money/city-tavern) forwards DLC traffic for
+clients without inbound connectivity using the Lightning Network protocol in a
+peer-to-peer framework.
+
+All of these improvements lower the barrier to adding DLCs to open-source
+bitcoin tools, giving developers stable, verifiable libraries for
+trust-minimized hedging, payments, and derivatives, without a centralized
+middleman.
+
+### Payjoin Dev Kit
+
+Payjoin is a protocol for batching bitcoin transactions that improves on-chain privacy by
+breaking the common-input-ownership heuristic while reducing fees.
+The [Payjoin Dev Kit](https://github.com/payjoin), a Rust-based
+library led by developer [Dan Gould](https://github.com/DanGould), addresses
+adoption barriers by providing a modular, developer-friendly toolkit to
+integrate into wallets, nodes, and payment applications.
+
+Earlier versions of Payjoin struggled to scale primarily due to the receiver
+having to keep a public server running, often behind Tor and wrapped in TLS
+encryption and the requirement for both sender and receiver to be online at
+the same time. Mobile wallets and most merchants found that setup impractical. With
+[support from
+OpenSats](/blog/bitcoin-grants-july-2023#payjoin-dev-kit),
+Payjoin Dev Kit cleared those hurdles. Maintainer Dan Gould introduced
+advancements in [Async
+Payjoin](/blog/developing-advancements-in-onchain-privacy#async-payjoin)
+([merged as BIP 77](https://github.com/bitcoin/bips/pull/1483)), letting the
+sender and the receiver exchange transaction details over encrypted messages on
+agreed upon mailboxes, allowing parties to fetch and post messages while the
+other is offline, like email.
+
+The specification was born from iterations of working code. The Rust `payjoin`
+[crate](https://github.com/payjoin/rust-payjoin) jumped from version
+[0.11](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0110)
+to
+[0.24](https://github.com/payjoin/rust-payjoin/blob/master/payjoin/CHANGELOG.md#0240),
+gaining a simpler interface, implemented [HPKE-encrypted Oblivious
+HTTP](https://ietf-wg-ohai.github.io/oblivious-http/draft-ietf-ohai-ohttp.html)
+to help protect data without heavy Tor or TLS dependencies, and recently
+introduced a session-event log, creating a standard way for implementors to
+display transaction history in apps and throw errors. It now records more than
+twenty thousand downloads. The
+[`payjoin-cli`](https://crates.io/crates/payjoin-cli) matured into a stable tool
+that talks to Bitcoin Core and restarts interrupted async sessions
+automatically, giving developers an easy way to test Payjoin flows. To keep
+network details private, the team published the [`ohttp-relay`
+crate](https://crates.io/crates/ohttp-relay), and community operators such as
+[Cake Wallet](https://cakewallet.com) and [BOB Space](https://bobspaces.net) now
+run OHTTP relays.
+
+Payjoin Dev Kit now extends beyond Rust. The
+[`payjoin-ffi`](https://github.com/payjoin/rust-payjoin/tree/master/payjoin-ffi)
+crate builds bindings on a framework that now ships Python and Dart. Android, iOS, and desktop
+apps can use the same well-tested core. By designing tools to bind from this framework,
+like the [new one for dart](https://github.com/Uniffi-Dart/uniffi-dart), adding new languages is easy,
+and the rest of the rust-bitcoin ecosystem can re-use the same pattern to have compatible dev kits
+across many languages.
+
+Adoption keeps ramping up:
+[Bull Bitcoin](https://bullbitcoin.com) Mobile has been able to both send and
+receive it since December 2024, and [Cake Wallet](https://cakewallet.com) added
+Payjoin V2 sending and receiving support in May 2025. Many implementations making use of
+the advanced "cut-through" batching features are in progress with
+[Liana](https://github.com/wizardsardine/liana/),
+[Galoy's Bria](https://github.com/GaloyMoney/bria),
+[Boltz](https://boltz.exchange), and for Lightning channel funding currently
+being tested in [LDK-Node](https://github.com/lightningdevkit/ldk-node).
+
+In just over a year, Payjoin Dev Kit has transformed from experimental concept to a
+production standard protocol and toolkit, with live infrastructure, language bindings, and
+command-line tools. Developers can include this default, privacy-preserving behavior into
+wallets, nodes, and batching services, lowering fees and improving
+privacy characteristics for the whole Bitcoin network without running Tor or their own dedicated servers.
+
+### LN Proto Test
+
+[`Lnprototest`](https://github.com/rustyrussell/lnprototest) is a Lightning
+protocol test framework that checks whether every implementation interprets the
+[BOLT](https://github.com/lightning/bolts) consistently. [Advancements in
+lnprototest](/blog/advancements-in-lightning-infrastructure#lnprototest),
+driven by [support from
+OpenSats](/blog/bitcoin-grants-july-2024#lightning-network-protocol-test-framework),
+has progressed from a Core Lightning utility to a
+cross-implementation suite used in continuous-integration pipelines across Rust,
+Python, and other software stacks.
+
+A [Unix-socket runner](https://github.com/vincenzopalazzo/lampo.rs/pull/274) now
+drives the Rust-based [Lampo node](https://github.com/vincenzopalazzo/lampo.rs)
+directly, proving the framework can test codebases outside [Core
+Lightning](https://github.com/ElementsProject/lightning) without requiring
+patches. A community contribution soon followed, integrating an [LDK sample
+node](https://github.com/Psycho-Pirate/ldk-sample) into the harness so any
+[`rust-lightning`](https://github.com/lightningdevkit/rust-lightning)
+application can enable full protocol tests with minimal configuration.
+
+Internal refactors have removed the
+[`TryAll`](https://github.com/rustyrussell/lnprototest/pull/122) abstraction and
+streamlined handshake scenarios, trimming execution time and shortening feedback
+loops for developers who add new test cases. Parallel work on a [strongly typed
+message layer](https://github.com/rustyrussell/lnprototest/pull/125), generated
+from Rust-Lightning structures through FFI, replaces ad-hoc parsing and lays the
+groundwork for language-neutral bindings.
+
+Community involvement has grown as well. Outreach at recent summits attracted
+new maintainers, expanding the reviewer pool and accelerating issue turnaround.
+These contributors are already planning a second major version that will further
+modularise the core while preserving the stable interface used today.
+
+This improved toolset has already prevented real-world issues. During a routine
+Core Lightning upgrade, the suite caught a [funding-signature
+mismatch](https://github.com/ElementsProject/lightning/issues/7965) that would
+have broken channel establishment across nodes, avoiding a mainnet incident and
+underscoring the value of continuous protocol testing.
+
+To coordinate broader efforts, the maintainers created the [Lightning
+Interoperability
+Initiative](https://github.com/lnspec-tools/ln-interoperability-initiative), a
+public working group that documents meeting notes, drafts specifications, and
+aligns cross-project priorities. By funding these refactors, new runners, and
+organized community processes, OpenSats has played a part in positioning
+`lnprototest` as the standard safeguard for Lightning interoperability before
+code reaches users.
+
+### Splicing in LDK
+
+Lightning channels need ways to add or remove funds without closing them
+entirely. Closing a channel means paying on-chain fees twice and losing
+liquidity during the process. Splicing lets users resize channels with a single
+on-chain transaction while the channel stays open and payments continue.
+
+OpenSats supported [advancements in
+splicing](/blog/advancements-in-lightning-infrastructure#splicing),
+enabling its addition to both [Core
+Lightning](https://github.com/ElementsProject/lightning) and [Lightning
+Development Kit](https://github.com/lightningdevkit/rust-lightning), and to
+ensure the feature behaves the same across other implementations such as
+[Eclair](https://github.com/ACINQ/eclair). The effort included protocol
+integration, interactive funding refactors, extensive testing, and ongoing
+contributions to the protocol specifications.
+
+In Core Lightning, developer [Dusty
+Daemon](/blog/dusty-daemon-receives-lts-grant) merged a
+series of commits that produced the first successful splice between Core
+Lightning and Eclair. A later clean-up merge addressed the remaining edge cases,
+so full cross-implementation interoperability is now available on the main
+branch.
+
+The same development cycle introduced [Splice
+Script](https://github.com/ElementsProject/lightning/pull/6980), a compact text
+format that lets operators describe multiple channel edits in one statement,
+which the node then translates into machine-readable instructions. Reliability
+improved through a [restart fuzz
+harness](https://github.com/ElementsProject/lightning/pull/7083) that repeatedly
+crashes the channel daemon to surface rare socket and file descriptor bugs.
+
+Additional patches now publish [funding output
+indexes](https://github.com/ElementsProject/lightning/pull/7465) and record
+[multi-transaction
+closes](https://github.com/ElementsProject/lightning/pull/7466) to improve audit
+trails. Smaller protocol adjustments accept commitment signature batches in any
+order, aligning channel reestablishment logic with Eclair, and add sanity checks that
+prevent phantom confirmations.
+
+On the Rust side, contributor [optout21](https://github.com/optout21) refactored
+the Lightning Development Kit around the draft [`splice_locked
+handshake`](https://github.com/lightningdevkit/rust-lightning/pull/3274) and
+interactive dual funding. Foundational changes such as [shared output
+negotiation](https://github.com/lightningdevkit/rust-lightning/pull/2989), [new
+signature fields](https://github.com/lightningdevkit/rust-lightning/pull/2991),
+a dedicated [splicing feature
+flag](https://github.com/lightningdevkit/rust-lightning/pull/3001), and a
+[refreshed message
+set](https://github.com/lightningdevkit/rust-lightning/pull/3129) have already
+been implemented on the main branch.
+
+A recent patch [rotates funding
+keys](https://github.com/lightningdevkit/rust-lightning/pull/3624) after each
+splice for added safety. A working prototype flows through [`ldk
+node`](https://github.com/lightningdevkit/ldk-node), allowing wallet teams to
+test pay-after-splice and splice-after-pay flows. Weekly splice sync calls feed
+lessons learned from these tests back into the specification process.
+
+Interoperability has been proven, script-driven workflows are live, and fuzz
+tests guard stability. With compliant code shipping in Core Lightning and
+Lightning Development Kit, splicing is ready for wallet adoption and final
+specification review. The feature lowers on-chain costs, preserves channel
+uptime, and enables automated liquidity management across the Lightning network.
+
+---
+
+Reliable developer libraries form the foundation for secure and resilient
+Bitcoin software. The seven initiatives detailed in this report—Bitcoin Dev
+Kit, rust-bitcoin, Secp256k1, DLC Dev Kit, Payjoin Dev Kit, LN Proto Test, and
+Splicing in LDK—show how targeted open-source work speeds adoption and raises
+the security bar across the ecosystem. Stable APIs replace fragile forks,
+cryptographic upgrades become drop-in imports, and protocol tests catch
+incompatibilities before they reach users.
+
+These projects are part of [more than 300 OpenSats
+grants](/transparency) awarded to date, each compounding
+value as modular code gets reused, vulnerabilities are prevented at scale, and
+privacy and interoperability features become standard practice.
+
+OpenSats remains committed to funding the maintainers and developers who
+strengthen Bitcoin's core infrastructure, fostering a more accessible, secure,
+and decentralized network. To support projects like these and others, please
+consider making a recurring donation to the General Fund.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+If you're a developer advancing free and open-source software that helps Bitcoin
+flourish, we encourage you to [apply for funding](/apply).
