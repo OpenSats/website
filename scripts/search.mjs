@@ -13,7 +13,9 @@ const search = async () => {
       console.log('Local search index generated...')
     }
   } catch (error) {
-    console.log('Search index generation skipped due to contentlayer import error...')
+    console.log(
+      'Search index generation skipped due to contentlayer import error...'
+    )
   }
 }
 export default search

@@ -7,7 +7,9 @@ const rss = async () => {
     generateRSS(siteMetadata, allBlogs)
     console.log('RSS feed generated...')
   } catch (error) {
-    console.log('RSS feed generation skipped due to contentlayer import error...')
+    console.log(
+      'RSS feed generation skipped due to contentlayer import error...'
+    )
   }
 }
 export default rss

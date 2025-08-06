@@ -7,7 +7,9 @@ const sitemap = async () => {
     generateSitemap(siteMetadata.siteUrl, allBlogs)
     console.log('Sitemap generated...')
   } catch (error) {
-    console.log('Sitemap generation skipped due to contentlayer import error...')
+    console.log(
+      'Sitemap generation skipped due to contentlayer import error...'
+    )
   }
 }
 export default sitemap
