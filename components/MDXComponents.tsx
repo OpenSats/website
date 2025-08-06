@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import React from 'react'
-import { MDXLayout, ComponentMap } from 'pliny/mdx-components'
-import { TOCInline } from 'pliny/ui/TOCInline'
-import { Pre } from 'pliny/ui/Pre'
-import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
+import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import type { MDXComponents as MDXComponentsType } from 'mdx/types'
+import TOCInline from 'pliny/ui/TOCInline'
+import Pre from 'pliny/ui/Pre'
+import BlogNewsletterForm from 'pliny/ui/NewsletterForm'
 
 import Image from './Image'
 import VideoPlayer from './VideoPlayer'
@@ -19,12 +20,12 @@ import YouTubeEmbed from './YouTubeEmbed'
 import Members from './Members'
 import LifetimeStats from './LifetimeStats'
 
-export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
+export const Wrapper = ({ layout, content, ...rest }: any) => {
   const Layout = require(`../layouts/${layout}`).default
   return <Layout content={content} {...rest} />
 }
 
-export const MDXComponents: ComponentMap = {
+export const MDXComponents: MDXComponentsType = {
   Image,
   VideoPlayer,
   TOCInline,
