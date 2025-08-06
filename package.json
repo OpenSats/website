@@ -38,7 +38,7 @@
     "next": "^13.5.8",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.0",
-    "pliny": "^0.4.1",
+    "pliny": "^0.0.10",
     "postcss": "^8.4.16",
     "public-google-sheets-parser": "^1.5.4",
     "react": "18.2.0",
