@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
-import type { Fund } from 'contentlayer/generated'
 import { allFunds } from 'contentlayer/generated'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
@@ -25,10 +24,8 @@ export default async function handler(
         throw new Error('Invalid fund.')
       }
 
-      let fund: Fund
-      try {
-        fund = allFunds.find((f) => f.btcpay === btcpay)!
-      } catch {
+      const fund = allFunds.find((f) => f.btcpay === btcpay)
+      if (!fund) {
         throw new Error('Invalid fund.')
       }
       const reqData = {
