@@ -1,0 +1,203 @@
+---
+title: "Thirteenth Wave of Bitcoin Grants"
+date: '2025-08-11'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+authors: ['default', 'arvin']
+images: ['/static/images/blog/83-thirteenth-wave-of-bitcoin-grants.jpg']
+draft: false
+summary: "OpenSats is funding eight more open-source projects advancing the Bitcoin ecosystem."
+---
+
+OpenSats is pleased to announce the thirteenth wave of grants from our General
+Fund for eight open-source projects that close privacy gaps, streamline
+self-custody, and help fortify Bitcoin's technical core.
+
+This round includes five first-time project grants and three grant renewals,
+with every satoshi going straight to the developers and maintainers of each
+respective project.
+
+First-time project grants:
+
+- [KMP-Tor](#kmp-tor)
+- [DTails](#dtails)
+- [Sats App](#sats-app)
+- [ngx_L402](#ngx_l402)
+- [Silent Payments Shepherd](#silent-payments-shepherd)
+
+Grant renewals:
+
+- [ASmap](/blog/bitcoin-grants-september-2024-7th-wave#asmap)
+- [Blitz Wallet](/blog/bitcoin-grants-july-2024-6th-wave#blitz-wallet)
+- [@hodlinator](/blog/caring-for-bitcoin-core#hodlinator)
+
+Each project addresses a specific need—from drop-in Tor libraries and Silent
+Payments coordination to hardened live-OS builds,
+Nginx modules that allow for seamless monetization, and
+merchant-ready e-cash wallets—strengthening privacy and
+usability across the stack.
+
+The ability to support these projects is made possible by the generosity of our
+donors. If you would like to help us continue funding important advancements
+within the Bitcoin ecosystem, please consider donating to the General Fund.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's dive in to see how each project is contributing to the future of Bitcoin.
+
+---
+
+### KMP-Tor
+
+[KMP-Tor](https://kmp-tor.matthewnelson.io/) is a [Kotlin
+Multiplatform](https://kotlinlang.org/docs/multiplatform.html) (KMP) library
+that embeds reproducible Tor binaries alongside a lightweight runtime, letting
+Android, JVM, Kotlin/Native (Linux, macOS, iOS), and Node developers integrate
+[Tor](/blog/tor-receives-support-grant) directly into their applications. The
+project handles Tor's event loop and packaging complexities, providing projects
+like [Sparrow Wallet](https://sparrowwallet.com),
+[BitBanana](https://bitbanana.app), and [Sphinx Chat](https://sphinx.chat) with
+a single dependency for privacy‑preserving network connectivity. For instance,
+Sparrow upgraded to Tor
+[`0.4.7.13`](https://github.com/torproject/tor/releases/tag/tor-0.4.7.13) by
+simply updating its `kmp‑tor` version.
+
+With support from this grant, maintainer [Matthew
+Nelson](https://github.com/05nelsonm) will extend hardware coverage in the
+companion [`kmp‑tor‑resource`](https://github.com/05nelsonm/kmp-tor-resource)
+repository—adding `riscv64` builds for `Linux‑libc`,
+`aarch64`/`riscv64`/`x86`/`x86_64` for `Linux‑musl`, and
+`aarch64`/`x86`/`x86_64` for `FreeBSD`—and complete support for Tor's roughly
+350 configuration options (about 250 implemented today). These milestones will
+keep `kmp‑tor` a dependable drop‑in Tor solution across the Bitcoin ecosystem.
+
+Repository: [05nelsonm/kmp-tor](https://github.com/05nelsonm/kmp-tor)  
+License: Apache 2.0
+
+### DTails
+
+DTails is an open‑source remastering tool for [Debian
+Live](https://www.debian.org/CD/live/)‑based operating systems, such as
+[Tails](https://tails.net/index.en.html), a privacy‑focused OS designed for
+security and anonymity. Using a straightforward GUI, it opens a stock ISO, lets
+users add or remove Bitcoin and privacy software such as [Sparrow
+Wallet](https://sparrowwallet.com/), [Liana](https://wizardsardine.com/liana/),
+[Bisq](https://bisq.network/), [SeedTool](https://seedtool.org/), [Specter
+Desktop](https://specter.solutions/desktop/index.html), and more, then rebuilds
+a bootable ISO in minutes with no persistence required. By automating package
+selection and ISO assembly, DTails removes barriers to running hardened Bitcoin
+toolsets on Tails.
+
+With support from this grant, maintainer
+[DesobedienteTecnologico](https://github.com/DesobedienteTecnologico) will
+release a redesigned GUI, implement automated diffing that highlights every file
+changed between the stock and customized ISOs, and refactor the codebase for
+reliability. If there is enough community demand, the effort will expand into a
+dedicated Tails fork pre‑bundled with Bitcoin tools, complete with its own
+website and documentation.
+
+Repository:
+[DesobedienteTecnologico/dtails](https://github.com/DesobedienteTecnologico/dtails)  
+License: GPL‑3.0
+
+### Sats App
+
+Sats App is a native [Cashu](https://cashu.space/) wallet project that combines
+a simple interface with new Swift- and Kotlin-based bindings to the Cashu
+Development Kit ([CDK](https://github.com/cashubtc/cdk)). Powered by
+[`cdk_flutter`](https://github.com/davidcaseria/cdk_flutter), it exposes the
+CDK's Rust core to iOS and Android so an application can create a seed, connect
+to a mint, and send/receive e-cash. The current code already covers seed
+creation, mint connection, and token send/receive, giving merchants a
+straightforward path to accept e-cash without extra setup.
+
+With support from this grant, the project will release fully documented Swift
+and Kotlin bindings, launch TestFlight and closed Android betas with local token
+storage, and publish public builds in the App Store and Google Play. Efforts
+will then shift to remote cloud backup, NFC tap-to-pay, and other
+merchant-centric features—advancing toward the open-source "Cash App"
+experience for Cashu.
+
+Repository:
+[davidcaseria/cdk_flutter](https://github.com/davidcaseria/cdk_flutter)  
+License: MIT
+
+### ngx_L402
+
+The `ngx_L402` project is a lightweight [NGINX](https://nginx.org) module that
+brings bitcoin-based payments directly to the web server. Written in
+Rust and delivered as a native plug-in, it enforces the [L402 authentication
+standard](https://github.com/lightninglabs/L402) from Lightning Labs and also
+accepts [Cashu](https://cashu.space/) tokens for e-cash redemptions. By moving
+payment checks inside NGINX instead of relying on
+[Aperture](https://github.com/lightninglabs/aperture) as a separate reverse
+proxy, it cuts latency, removes extra infrastructure, and lets any service
+behind NGINX gate routes with bitcoin or Lightning payments out of the box.
+[Predyx](https://beta.predyx.com/) and other early adopters are already testing
+the module, and community feedback is guiding new feature requests.
+
+With support from this grant, the roadmap will begin with core parity and
+stabilization: [gRPC](https://grpc.io/) support, time-bounded and rate-limited
+macaroons, enhanced logging, and a Docker image for quick deployment. It then
+moves to Cashu security upgrades such as dynamic pricing, scheduled redemptions,
+mint allowlists, and local double-spend protection, followed by
+[Redis](https://redis.io/)-backed token storage, [Lightning Node
+Connect](https://docs.lightning.engineering/lightning-network-tools/lightning-node-connect)
+integration, and Tor support for .onion nodes. If time and resources allow, the
+team will also add Core Lightning and Eclair support, publish tutorial
+materials, and explore ports to other reverse proxies, all to make `ngx_L402`
+the default tool for Lightning-based API monetization.
+
+Repository:
+[DhananjayPurohit/ngx_l402](https://github.com/DhananjayPurohit/ngx_l402)  
+License: MIT
+
+### Silent Payments Shepherd
+
+Silent Payments Shepherd is a coordination hub that tracks, documents, and
+unblocks every moving part of the [Silent
+Payments](/blog/developing-advancements-in-onchain-privacy#silent-payments)
+(`BIP-352`) ecosystem. Project maintainer
+[MacGyver](https://github.com/macgyver13) curates a live developer dashboard,
+keeps specifications in sync, and collaborates with wallet teams to integrate
+Silent Payments—reusable-address that let senders create one-time
+[Taproot](https://bitcoinops.org/en/topics/taproot/) outputs without any
+on-chain or out-of-band signalling,  improving privacy for payroll and other
+payment workflows. By pairing project-management discipline with hands-on
+coding, the role of Shepherd gives Silent Payments the cohesion it needs to move
+from prototypes to production-ready software.
+
+With support from this grant, the project will implement a five-phase roadmap:
+revive development and publish a public progress tracker; harden cryptography
+libraries and integrate wallet implementations in [Bitcoin
+Core](https://bitcoin.org/en/bitcoin-core/features/user-interface),
+[Electrum](https://electrum.org/), and [Sparrow](https://sparrowwallet.com/);
+define outsourced scanning and vending services so light clients can operate
+efficiently; run guided pilots with real bitcoin to validate the entire
+workflow; and work with exchanges to standardize human-readable reusable
+addresses. Each milestone removes a critical blocker on the path to mainstream
+adoption of Silent Payments across the Bitcoin stack.
+
+Repository:
+[macgyver13/silent-payments-hub](https://github.com/macgyver13/silent-payments-hub)  
+License: MIT
+
+---
+
+From reproducible Tor binaries and live-OS hardening to Silent Payments
+stewardship and rigorous Core review, this thirteenth wave strengthens Bitcoin's
+technical foundation and broadens user choice.
+
+Every grant application goes through a [mission-aligned](/mission) review process.
+If you're building free and open-source Bitcoin software that advances
+decentralization and user sovereignty, we invite you to [apply for
+funding](/apply).
+
+Our work is made possible by the generosity of our donors. If you'd like to help
+make the future of free and open-source Bitcoin development more sustainable,
+consider setting up a recurring donation to one of our funds. Any amount helps.
+
+<center>
+    <DonateRecurringButton/>
+</center>
