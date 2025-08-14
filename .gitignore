@@ -40,5 +40,8 @@ npm-debug.log*
 # Contentlayer
 .contentlayer
 
+# TypeScript
+*.tsbuildinfo
+
 # VSCode
 .vscode

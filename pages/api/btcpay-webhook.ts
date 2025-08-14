@@ -42,7 +42,7 @@ function verifyWebhookSignature(
   try {
     // BTCPay Server sends signature in format: "sha256=hash"
     const signatureHash = signature.replace('sha256=', '')
-    
+
     const expectedSignature = crypto
       .createHmac('sha256', secret)
       .update(body, 'utf8')
@@ -97,10 +97,16 @@ export default async function handler(
     const rawBody = JSON.stringify(req.body)
 
     // Verify the webhook signature
-    const signatureValid = verifyWebhookSignature(rawBody, signature, WEBHOOK_SECRET)
+    const signatureValid = verifyWebhookSignature(
+      rawBody,
+      signature,
+      WEBHOOK_SECRET
+    )
     if (!signatureValid) {
       console.error('Invalid webhook signature')
-      console.log('⚠️  WARNING: Signature verification failed, but continuing for debugging...')
+      console.log(
+        '⚠️  WARNING: Signature verification failed, but continuing for debugging...'
+      )
       // TODO: Remove this bypass once signature verification is working
       // return res.status(401).json({ error: 'Invalid signature' })
     }
