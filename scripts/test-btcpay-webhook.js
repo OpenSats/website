@@ -2,13 +2,13 @@
 
 /**
  * Test script for BTCPay Server webhook
- * 
+ *
  * This script simulates a BTCPay Server webhook payload to test your webhook endpoint.
- * 
+ *
  * Usage:
  * 1. Set your BTCPAY_WEBHOOK_SECRET environment variable
  * 2. Run: node scripts/test-btcpay-webhook.js
- * 
+ *
  * Make sure your development server is running on http://localhost:3000
  */
 
@@ -26,29 +26,29 @@ if (!WEBHOOK_SECRET) {
 
 // Sample webhook payload based on BTCPay Server documentation
 const webhookPayload = {
-  deliveryId: "test-delivery-123",
-  webhookId: "test-webhook-456",
-  originalDeliveryId: "test-delivery-123",
+  deliveryId: 'test-delivery-123',
+  webhookId: 'test-webhook-456',
+  originalDeliveryId: 'test-delivery-123',
   isRedelivery: false,
-  type: "InvoicePaymentSettled",
+  type: 'InvoicePaymentSettled',
   timestamp: Math.floor(Date.now() / 1000),
-  storeId: "test-store",
-  invoiceId: "test-invoice-789",
+  storeId: 'test-store',
+  invoiceId: 'test-invoice-789',
   metadata: {
-    orderId: "general_fund",
-    fund_name: "General Fund",
-    buyerName: "John Doe",
-    buyerEmail: "john.doe@example.com",
+    orderId: 'general_fund',
+    fund_name: 'General Fund',
+    buyerName: 'John Doe',
+    buyerEmail: 'john.doe@example.com',
     posData: {
-      orderId: "general_fund",
-      zaprite_campaign: "test-campaign",
-      fund_name: "General Fund",
-      buyerName: "John Doe",
-      buyerEmail: "john.doe@example.com"
+      orderId: 'general_fund',
+      zaprite_campaign: 'test-campaign',
+      fund_name: 'General Fund',
+      buyerName: 'John Doe',
+      buyerEmail: 'john.doe@example.com',
     },
-    zaprite_campaign: "test-campaign",
-    recipient_uuid: "test-uuid"
-  }
+    zaprite_campaign: 'test-campaign',
+    recipient_uuid: 'test-uuid',
+  },
 }
 
 // Create signature
@@ -70,9 +70,9 @@ async function testWebhook() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'btcpay-sig': signature
+        'btcpay-sig': signature,
       },
-      body: payloadString
+      body: payloadString,
     })
 
     const responseData = await response.json()
@@ -90,12 +90,13 @@ async function testWebhook() {
     } else {
       console.log('❌ Webhook test failed!')
     }
-
   } catch (error) {
     console.error('❌ Error testing webhook:', error.message)
-    
+
     if (error.code === 'ECONNREFUSED') {
-      console.log('💡 Make sure your development server is running on http://localhost:3000')
+      console.log(
+        '💡 Make sure your development server is running on http://localhost:3000'
+      )
     }
   }
 }

@@ -44,7 +44,7 @@ function verifyWebhookSignature(
       .createHmac('sha256', secret)
       .update(body, 'utf8')
       .digest('hex')
-    
+
     return crypto.timingSafeEqual(
       Buffer.from(signature, 'hex'),
       Buffer.from(expectedSignature, 'hex')
@@ -67,7 +67,7 @@ export default async function handler(
   try {
     // Get the webhook signature from headers
     const signature = req.headers['btcpay-sig'] as string
-    
+
     if (!signature) {
       console.error('Missing BTCPay signature header')
       return res.status(400).json({ error: 'Missing signature' })
@@ -80,7 +80,7 @@ export default async function handler(
 
     // Get the raw body for signature verification
     const rawBody = JSON.stringify(req.body)
-    
+
     // Verify the webhook signature
     if (!verifyWebhookSignature(rawBody, signature, WEBHOOK_SECRET)) {
       console.error('Invalid webhook signature')
@@ -95,14 +95,23 @@ export default async function handler(
       invoiceId: event.invoiceId,
       storeId: event.storeId,
       timestamp: new Date(event.timestamp * 1000).toISOString(),
-      metadata: event.metadata
+      metadata: event.metadata,
     })
 
     // Handle InvoicePaymentSettled event
     if (event.type === 'InvoicePaymentSettled') {
-      const donorName = event.metadata?.buyerName || event.metadata?.posData?.buyerName || 'Anonymous'
-      const donorEmail = event.metadata?.buyerEmail || event.metadata?.posData?.buyerEmail || 'No email provided'
-      const fundName = event.metadata?.fund_name || event.metadata?.posData?.fund_name || 'Unknown fund'
+      const donorName =
+        event.metadata?.buyerName ||
+        event.metadata?.posData?.buyerName ||
+        'Anonymous'
+      const donorEmail =
+        event.metadata?.buyerEmail ||
+        event.metadata?.posData?.buyerEmail ||
+        'No email provided'
+      const fundName =
+        event.metadata?.fund_name ||
+        event.metadata?.posData?.fund_name ||
+        'Unknown fund'
       const invoiceId = event.invoiceId
 
       console.log('🎉 Invoice Payment Settled!')
@@ -110,7 +119,10 @@ export default async function handler(
       console.log('👤 Donor Name:', donorName)
       console.log('💰 Fund:', fundName)
       console.log('🆔 Invoice ID:', invoiceId)
-      console.log('⏰ Timestamp:', new Date(event.timestamp * 1000).toISOString())
+      console.log(
+        '⏰ Timestamp:',
+        new Date(event.timestamp * 1000).toISOString()
+      )
 
       // TODO: Implement SendGrid email functionality here
       // This is where you'll add the logic to send receipts via SendGrid
@@ -118,17 +130,16 @@ export default async function handler(
     }
 
     // Return success response
-    res.status(200).json({ 
-      success: true, 
+    res.status(200).json({
+      success: true,
       message: 'Webhook processed successfully',
-      eventType: event.type 
+      eventType: event.type,
     })
-
   } catch (error) {
     console.error('Error processing BTCPay webhook:', error)
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Internal server error',
-      message: error instanceof Error ? error.message : 'Unknown error'
+      message: error instanceof Error ? error.message : 'Unknown error',
     })
   }
 }

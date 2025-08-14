@@ -88,6 +88,7 @@ The webhook includes signature verification to ensure requests come from your BT
 ## Current Functionality
 
 Currently, the webhook:
+
 - ✅ Verifies webhook signatures
 - ✅ Logs donor information to console
 - ✅ Handles `InvoicePaymentSettled` events
@@ -96,6 +97,7 @@ Currently, the webhook:
 ## Future Enhancements
 
 Planned functionality:
+
 - 🔄 Send automatic receipts via SendGrid
 - 🔄 Use dynamic templates for personalized emails
 - 🔄 Handle different fund types with specific templates
@@ -107,11 +109,13 @@ Planned functionality:
 ### Common Issues
 
 1. **Webhook not receiving events**
+
    - Check that the webhook URL is accessible from BTCPay Server
    - Verify the webhook is enabled in BTCPay Server
    - Check server logs for errors
 
 2. **Signature verification failing**
+
    - Ensure `BTCPAY_WEBHOOK_SECRET` is set correctly
    - Verify the secret matches the one in BTCPay Server
    - Check that the webhook secret hasn't been regenerated
@@ -132,11 +136,13 @@ DEBUG_WEBHOOK=true
 
 **URL**: `/api/btcpay-webhook`
 **Method**: POST
-**Headers**: 
+**Headers**:
+
 - `Content-Type: application/json`
 - `btcpay-sig: <signature>`
 
-**Response**: 
+**Response**:
+
 ```json
 {
   "success": true,
