@@ -69,11 +69,8 @@ function verifyWebhookSignature(
       .update(body)
       .digest('hex')
 
-    console.log('🔍 Signature verification debug:')
-    console.log('  Received signature:', signature)
-    console.log('  Extracted hash:', signatureHash)
-    console.log('  Expected signature:', expectedSignature)
-    console.log('  Body length:', body.length)
+    // Log signature verification result
+    console.log('🔍 Signature verification:', signatureHash === expectedSignature ? '✅ valid' : '❌ invalid')
 
     return crypto.timingSafeEqual(
       Buffer.from(signatureHash, 'hex'),
@@ -101,11 +98,8 @@ export default async function handler(
     // Get the webhook signature from headers
     const signature = req.headers['btcpay-sig'] as string
 
-    console.log('📨 Webhook headers received:')
-    console.log('  btcpayserver-sig:', req.headers['btcpayserver-sig'])
-    console.log('  btcpay-sig:', req.headers['btcpay-sig'])
-    console.log('  x-btcpay-sig:', req.headers['x-btcpay-sig'])
-    console.log('  All headers:', Object.keys(req.headers))
+    // Log basic webhook info for monitoring
+    console.log('📨 BTCPay webhook received with signature:', signature ? 'present' : 'missing')
 
     if (!signature) {
       console.error('Missing BTCPay signature header')
@@ -118,18 +112,9 @@ export default async function handler(
     }
 
     // Verify the webhook signature using raw body bytes
-    const signatureValid = verifyWebhookSignature(
-      rawBody,
-      signature,
-      WEBHOOK_SECRET
-    )
-    if (!signatureValid) {
+    if (!verifyWebhookSignature(rawBody, signature, WEBHOOK_SECRET)) {
       console.error('Invalid webhook signature')
-      console.log(
-        '⚠️  WARNING: Signature verification failed, but continuing for debugging...'
-      )
-      // TODO: Remove this bypass once signature verification is working
-      // return res.status(401).json({ error: 'Invalid signature' })
+      return res.status(401).json({ error: 'Invalid signature' })
     }
 
     // Parse the JSON body manually since we disabled the body parser
