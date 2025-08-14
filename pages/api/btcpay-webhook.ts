@@ -1,8 +1,29 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import crypto from 'crypto'
 
+// Configure Next.js to parse the body as raw bytes for signature verification
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
 // BTCPay Server webhook secret from environment variables
 const WEBHOOK_SECRET = process.env.BTCPAY_WEBHOOK_SECRET
+
+// Helper function to get raw body from request
+function getRawBody(req: NextApiRequest): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = []
+    req.on('data', (chunk: Buffer) => {
+      chunks.push(chunk)
+    })
+    req.on('end', () => {
+      resolve(Buffer.concat(chunks))
+    })
+    req.on('error', reject)
+  })
+}
 
 // BTCPay Server webhook event types
 interface BTCPayWebhookEvent {
@@ -35,17 +56,17 @@ interface BTCPayWebhookEvent {
  * Verify BTCPay Server webhook signature
  */
 function verifyWebhookSignature(
-  body: string,
+  body: Buffer,
   signature: string,
   secret: string
 ): boolean {
   try {
     // BTCPay Server sends signature in format: "sha256=hash"
     const signatureHash = signature.replace('sha256=', '')
-
+    
     const expectedSignature = crypto
       .createHmac('sha256', secret)
-      .update(body, 'utf8')
+      .update(body)
       .digest('hex')
 
     console.log('🔍 Signature verification debug:')
@@ -74,6 +95,9 @@ export default async function handler(
   }
 
   try {
+    // Get the raw body bytes for signature verification
+    const rawBody = await getRawBody(req)
+    
     // Get the webhook signature from headers
     const signature = req.headers['btcpay-sig'] as string
 
@@ -93,10 +117,7 @@ export default async function handler(
       return res.status(500).json({ error: 'Webhook secret not configured' })
     }
 
-    // Get the raw body for signature verification
-    const rawBody = JSON.stringify(req.body)
-
-    // Verify the webhook signature
+    // Verify the webhook signature using raw body bytes
     const signatureValid = verifyWebhookSignature(
       rawBody,
       signature,
@@ -111,7 +132,8 @@ export default async function handler(
       // return res.status(401).json({ error: 'Invalid signature' })
     }
 
-    const event: BTCPayWebhookEvent = req.body
+    // Parse the JSON body manually since we disabled the body parser
+    const event: BTCPayWebhookEvent = JSON.parse(rawBody.toString('utf8'))
 
     // Log the webhook event for debugging
     console.log('BTCPay webhook received:', {
