@@ -58,12 +58,19 @@ async function sendDonationReceipt(
       from: FROM_ADDRESS,
       templateId: RECEIPT_TEMPLATE_ID,
       dynamicTemplateData: {
-        donor_name: donorName,
+        donor: {
+          name: donorName,
+          // company: undefined (not used)
+        },
+        donation: {
+          date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
+          method: 'Bitcoin',
+          currency: currency || 'BTC',
+          amount: amount || 'Unknown',
+        },
+        // Additional data for reference
         fund_name: fundName,
         invoice_id: invoiceId,
-        amount: amount || 'Unknown',
-        currency: currency || 'BTC',
-        donation_date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
         receipt_number: `RCP-${invoiceId.slice(-8).toUpperCase()}`, // Generate receipt number from invoice ID
       },
       trackingSettings: {
@@ -83,7 +90,9 @@ async function sendDonationReceipt(
     await sgMail.send(msg)
     const duration = Date.now() - startTime
 
-    console.log(`📧 Receipt sent successfully to ${donorEmail} in ${duration}ms`)
+    console.log(
+      `📧 Receipt sent successfully to ${donorEmail} in ${duration}ms`
+    )
     return true
   } catch (error: unknown) {
     console.error('❌ Error sending donation receipt:', error)
@@ -151,7 +160,10 @@ function verifyWebhookSignature(
       .digest('hex')
 
     // Log signature verification result
-    console.log('🔍 Signature verification:', signatureHash === expectedSignature ? '✅ valid' : '❌ invalid')
+    console.log(
+      '🔍 Signature verification:',
+      signatureHash === expectedSignature ? '✅ valid' : '❌ invalid'
+    )
 
     return crypto.timingSafeEqual(
       Buffer.from(signatureHash, 'hex'),
@@ -180,7 +192,10 @@ export default async function handler(
     const signature = req.headers['btcpay-sig'] as string
 
     // Log basic webhook info for monitoring
-    console.log('📨 BTCPay webhook received with signature:', signature ? 'present' : 'missing')
+    console.log(
+      '📨 BTCPay webhook received with signature:',
+      signature ? 'present' : 'missing'
+    )
 
     if (!signature) {
       console.error('Missing BTCPay signature header')
@@ -245,7 +260,7 @@ export default async function handler(
           fundName,
           invoiceId
         )
-        
+
         if (receiptSent) {
           console.log('✅ Donation receipt sent successfully!')
         } else {
