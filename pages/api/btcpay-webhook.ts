@@ -63,8 +63,12 @@ async function sendDonationReceipt(
           // company: undefined (not used)
         },
         donation: {
-          date: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
-          method: 'Bitcoin',
+          date: new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }), // e.g., "August 14, 2025"
+          method: 'bitcoin',
           currency: currency || 'BTC',
           amount: amount || 'Unknown',
         },
@@ -125,6 +129,30 @@ interface BTCPayWebhookEvent {
   timestamp: number
   storeId: string
   invoiceId: string
+  payment?: {
+    value: string
+    network: string
+    method: string
+    destination: string
+    rate: number
+    paymentMethodFee: string
+    totalPaid: string
+    due: string
+    amount: string
+    networkFee: string
+    payments: Array<{
+      id: string
+      receivedDate: number
+      value: string
+      fee: string
+      networkFee: string
+      paymentMethod: string
+      paymentMethodFee: string
+      rate: number
+      destination: string
+      network: string
+    }>
+  }
   metadata?: {
     orderId?: string
     fund_name?: string
@@ -240,12 +268,17 @@ export default async function handler(
         event.metadata?.posData?.fund_name ||
         'Unknown fund'
       const invoiceId = event.invoiceId
+      
+      // Extract payment amount from the webhook event
+      const paymentAmount = event.payment?.amount || event.payment?.value || 'Unknown'
+      const paymentCurrency = event.payment?.method === 'BTC' ? 'BTC' : 'BTC' // Default to BTC for BTCPay
 
       console.log('🎉 Invoice Payment Settled!')
       console.log('📧 Donor Email:', donorEmail)
       console.log('👤 Donor Name:', donorName)
       console.log('💰 Fund:', fundName)
       console.log('🆔 Invoice ID:', invoiceId)
+      console.log('💸 Amount:', paymentAmount, paymentCurrency)
       console.log(
         '⏰ Timestamp:',
         new Date(event.timestamp * 1000).toISOString()
@@ -258,7 +291,9 @@ export default async function handler(
           donorEmail,
           donorName,
           fundName,
-          invoiceId
+          invoiceId,
+          paymentAmount,
+          paymentCurrency
         )
 
         if (receiptSent) {
