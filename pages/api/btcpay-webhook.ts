@@ -66,7 +66,7 @@ async function sendDonationReceipt(
           date: new Date().toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
-            day: 'numeric'
+            day: 'numeric',
           }), // e.g., "August 14, 2025"
           method: 'bitcoin',
           currency: currency || 'BTC',
@@ -268,9 +268,10 @@ export default async function handler(
         event.metadata?.posData?.fund_name ||
         'Unknown fund'
       const invoiceId = event.invoiceId
-      
+
       // Extract payment amount from the webhook event
-      const paymentAmount = event.payment?.amount || event.payment?.value || 'Unknown'
+      const paymentAmount =
+        event.payment?.amount || event.payment?.value || 'Unknown'
       const paymentCurrency = event.payment?.method === 'BTC' ? 'BTC' : 'BTC' // Default to BTC for BTCPay
 
       console.log('🎉 Invoice Payment Settled!')
