@@ -13,15 +13,22 @@ import ReportPreview from '../../components/ReportPreview'
 
 describe('ReportPreview', () => {
   it('renders with correct content', () => {
+    const reportContent = `# Progress Report # 1
+
+## Use of Funds
+Test usage
+
+## Progress Made
+Test progress
+
+## Plans for Next Quarter
+Test plans
+
+## Help Needed
+Test help`
+
     const { getByTestId } = render(
-      <ReportPreview
-        project_name="Test Project"
-        report_number="1"
-        time_spent="test progress"
-        next_quarter="test plans"
-        money_usage="test usage"
-        help_needed="test help"
-      />
+      <ReportPreview reportContent={reportContent} />
     )
 
     const content = getByTestId('markdown-content').textContent || ''
