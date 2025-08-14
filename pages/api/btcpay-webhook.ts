@@ -63,7 +63,7 @@ function verifyWebhookSignature(
   try {
     // BTCPay Server sends signature in format: "sha256=hash"
     const signatureHash = signature.replace('sha256=', '')
-    
+
     const expectedSignature = crypto
       .createHmac('sha256', secret)
       .update(body)
@@ -97,7 +97,7 @@ export default async function handler(
   try {
     // Get the raw body bytes for signature verification
     const rawBody = await getRawBody(req)
-    
+
     // Get the webhook signature from headers
     const signature = req.headers['btcpay-sig'] as string
 
