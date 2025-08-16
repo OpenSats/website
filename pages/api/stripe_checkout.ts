@@ -12,11 +12,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2020-08-27',
 })
 
+const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { amount, project_name, email, name }: PayReq = req.body
+  const { amount, project_name, email, name, zaprite }: PayReq = req.body
+
+  if (!ZAPRITE_USER_UUID) {
+    throw new Error('Something went wrong with Stripe setup')
+  }
 
   if (req.method === 'POST') {
     try {
@@ -41,6 +47,8 @@ export default async function handler(
         metadata: {
           donor_email: email || null,
           donor_name: name || null,
+          recipient_campaign: zaprite,
+          recipient_uuid: ZAPRITE_USER_UUID,
         },
         success_url: `${req.headers.origin}/thankyou`,
         cancel_url: `${req.headers.origin}/`,
@@ -49,6 +57,8 @@ export default async function handler(
           metadata: {
             donor_email: email || null,
             donor_name: name || null,
+            recipient_campaign: zaprite,
+            recipient_uuid: ZAPRITE_USER_UUID,
           },
         },
       }

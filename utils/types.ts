@@ -4,6 +4,7 @@ export type PayReq = {
   project_name: string
   email?: string
   name?: string
+  zaprite: string
 }
 
 export type Stats = {
