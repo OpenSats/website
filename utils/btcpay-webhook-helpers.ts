@@ -64,6 +64,31 @@ export interface BTCPayWebhookEvent {
 }
 
 /**
+ * Mask email address for privacy (e.g., john.doe@example.com -> j***@e***.com)
+ */
+function maskEmail(email: string): string {
+  if (!email || email === 'No email provided') return 'No email provided'
+  
+  const [localPart, domain] = email.split('@')
+  if (!domain) return email
+  
+  const maskedLocal = localPart.charAt(0) + '***'
+  const [domainName, tld] = domain.split('.')
+  const maskedDomain = domainName.charAt(0) + '***'
+  
+  return `${maskedLocal}@${maskedDomain}.${tld}`
+}
+
+/**
+ * Mask name for privacy (e.g., John Doe -> J*** D***)
+ */
+function maskName(name: string): string {
+  if (!name || name === 'Anonymous') return 'Anonymous'
+  
+  return name.split(' ').map(word => word.charAt(0) + '***').join(' ')
+}
+
+/**
  * Helper function to get raw body from request
  */
 export function getRawBody(req: NextApiRequest): Promise<Buffer> {
@@ -138,7 +163,7 @@ export async function sendDonationReceipt(
     const duration = Date.now() - startTime
 
     console.log(
-      `📧 Receipt sent successfully to ${donorEmail.charAt(0)}***${donorEmail.charAt(donorEmail.length - 1)} in ${duration}ms`
+      `📧 Receipt sent successfully to ${maskEmail(donorEmail)} in ${duration}ms`
     )
     return true
   } catch (error: unknown) {
@@ -223,8 +248,8 @@ export async function processBTCPayWebhook(
     const paymentCurrency = event.payment?.method === 'BTC' ? 'BTC' : 'BTC' // Default to BTC for BTCPay
 
     console.log(`🎉 ${fundName} Invoice Payment Settled!`)
-    console.log('📧 Donor Email:', donorEmail ? `${donorEmail.charAt(0)}***${donorEmail.charAt(donorEmail.length - 1)}` : 'No email provided')
-    console.log('👤 Donor Name:', donorName !== 'Anonymous' ? `${donorName.charAt(0)}***${donorName.charAt(donorName.length - 1)}` : 'Anonymous')
+    console.log('📧 Donor Email:', maskEmail(donorEmail))
+    console.log('👤 Donor Name:', maskName(donorName))
     console.log('💰 Fund:', fundDisplayName)
     console.log('🆔 Invoice ID:', invoiceId)
     console.log('💸 Amount:', paymentAmount, paymentCurrency)
