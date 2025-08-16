@@ -68,14 +68,14 @@ export interface BTCPayWebhookEvent {
  */
 function maskEmail(email: string): string {
   if (!email || email === 'No email provided') return 'No email provided'
-  
+
   const [localPart, domain] = email.split('@')
   if (!domain) return email
-  
+
   const maskedLocal = localPart.charAt(0) + '***'
   const [domainName, tld] = domain.split('.')
   const maskedDomain = domainName.charAt(0) + '***'
-  
+
   return `${maskedLocal}@${maskedDomain}.${tld}`
 }
 
@@ -84,8 +84,11 @@ function maskEmail(email: string): string {
  */
 function maskName(name: string): string {
   if (!name || name === 'Anonymous') return 'Anonymous'
-  
-  return name.split(' ').map(word => word.charAt(0) + '***').join(' ')
+
+  return name
+    .split(' ')
+    .map((word) => word.charAt(0) + '***')
+    .join(' ')
 }
 
 /**
@@ -163,7 +166,9 @@ export async function sendDonationReceipt(
     const duration = Date.now() - startTime
 
     console.log(
-      `📧 Receipt sent successfully to ${maskEmail(donorEmail)} in ${duration}ms`
+      `📧 Receipt sent successfully to ${maskEmail(
+        donorEmail
+      )} in ${duration}ms`
     )
     return true
   } catch (error: unknown) {
