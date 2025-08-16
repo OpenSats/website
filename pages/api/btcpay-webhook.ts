@@ -94,7 +94,11 @@ async function sendDonationReceipt(
     await sgMail.send(msg)
     const duration = Date.now() - startTime
 
-    console.log(`📧 Receipt sent successfully to [REDACTED] in ${duration}ms`)
+    console.log(
+      `📧 Receipt sent successfully to ${donorEmail.charAt(
+        0
+      )}***${donorEmail.charAt(donorEmail.length - 1)} in ${duration}ms`
+    )
     return true
   } catch (error: unknown) {
     console.error('❌ Error sending donation receipt:', error)
@@ -275,15 +279,21 @@ export default async function handler(
       console.log('🎉 Invoice Payment Settled!')
       console.log(
         '📧 Donor Email:',
-        donorEmail ? '[REDACTED]' : 'No email provided'
+        donorEmail
+          ? `${donorEmail.charAt(0)}***${donorEmail.charAt(
+              donorEmail.length - 1
+            )}`
+          : 'No email provided'
       )
       console.log(
         '👤 Donor Name:',
-        donorName !== 'Anonymous' ? '[REDACTED]' : 'Anonymous'
+        donorName !== 'Anonymous'
+          ? `${donorName.charAt(0)}***${donorName.charAt(donorName.length - 1)}`
+          : 'Anonymous'
       )
       console.log('💰 Fund:', fundName)
       console.log('🆔 Invoice ID:', invoiceId)
-      console.log('💸 Amount:', '[REDACTED]', paymentCurrency)
+      console.log('💸 Amount:', paymentAmount, paymentCurrency)
       console.log(
         '⏰ Timestamp:',
         new Date(event.timestamp * 1000).toISOString()

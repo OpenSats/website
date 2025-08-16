@@ -138,7 +138,7 @@ export async function sendDonationReceipt(
     const duration = Date.now() - startTime
 
     console.log(
-      `📧 Receipt sent successfully to [REDACTED] in ${duration}ms`
+      `📧 Receipt sent successfully to ${donorEmail.charAt(0)}***${donorEmail.charAt(donorEmail.length - 1)} in ${duration}ms`
     )
     return true
   } catch (error: unknown) {
@@ -223,11 +223,11 @@ export async function processBTCPayWebhook(
     const paymentCurrency = event.payment?.method === 'BTC' ? 'BTC' : 'BTC' // Default to BTC for BTCPay
 
     console.log(`🎉 ${fundName} Invoice Payment Settled!`)
-    console.log('📧 Donor Email:', donorEmail ? '[REDACTED]' : 'No email provided')
-    console.log('👤 Donor Name:', donorName !== 'Anonymous' ? '[REDACTED]' : 'Anonymous')
+    console.log('📧 Donor Email:', donorEmail ? `${donorEmail.charAt(0)}***${donorEmail.charAt(donorEmail.length - 1)}` : 'No email provided')
+    console.log('👤 Donor Name:', donorName !== 'Anonymous' ? `${donorName.charAt(0)}***${donorName.charAt(donorName.length - 1)}` : 'Anonymous')
     console.log('💰 Fund:', fundDisplayName)
     console.log('🆔 Invoice ID:', invoiceId)
-    console.log('💸 Amount:', '[REDACTED]', paymentCurrency)
+    console.log('💸 Amount:', paymentAmount, paymentCurrency)
     console.log('⏰ Timestamp:', new Date(event.timestamp * 1000).toISOString())
 
     // Send donation receipt via SendGrid
