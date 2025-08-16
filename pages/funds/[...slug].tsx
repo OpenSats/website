@@ -22,14 +22,12 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       project,
-      zaprite: project.zaprite,
     },
   }
 }
 
 export default function FundPage({
   project,
-  zaprite,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedFund, setSelectedFund] = useState<Fund>()

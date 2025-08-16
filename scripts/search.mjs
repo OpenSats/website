@@ -9,9 +9,12 @@ const __dirname = dirname(__filename)
 
 const search = async () => {
   // Read the blog data directly from the JSON file
-  const blogDataPath = join(__dirname, '../.contentlayer/generated/Blog/_index.json')
+  const blogDataPath = join(
+    __dirname,
+    '../.contentlayer/generated/Blog/_index.json'
+  )
   const allBlogs = JSON.parse(readFileSync(blogDataPath, 'utf8'))
-  
+
   if (siteMetadata?.search?.kbarConfig?.searchDocumentsPath) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
