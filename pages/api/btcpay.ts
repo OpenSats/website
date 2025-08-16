@@ -5,7 +5,7 @@ import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
 import { allFunds } from 'contentlayer/generated'
 
-const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,13 +37,10 @@ export default async function handler(
           buyerEmail: email || null,
           posData: {
             orderId: fund.btcpay,
-            zaprite_campaign: fund.zaprite,
             fund_name: fund.title,
             buyerName: name || 'anonymous',
             buyerEmail: email || null,
           },
-          zaprite_campaign: fund.zaprite,
-          recipient_uuid: ZAPRITE_USER_UUID,
         },
         checkout: { redirectURL: REDIRECT },
       }
