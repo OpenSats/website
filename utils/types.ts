@@ -7,10 +7,6 @@ export type PayReq = {
   zaprite: string
 }
 
-export type InfoReq = {
-  zaprite: string
-}
-
 export type Stats = {
   usd: {
     donations: number

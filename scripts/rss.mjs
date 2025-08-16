@@ -9,9 +9,12 @@ const __dirname = dirname(__filename)
 
 const rss = async () => {
   // Read the blog data directly from the JSON file
-  const blogDataPath = join(__dirname, '../.contentlayer/generated/Blog/_index.json')
+  const blogDataPath = join(
+    __dirname,
+    '../.contentlayer/generated/Blog/_index.json'
+  )
   const allBlogs = JSON.parse(readFileSync(blogDataPath, 'utf8'))
-  
+
   generateRSS(siteMetadata, allBlogs)
   console.log('RSS feed generated...')
 }
