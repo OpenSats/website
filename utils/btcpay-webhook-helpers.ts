@@ -7,7 +7,7 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 const RECEIPT_TEMPLATE_ID = 'd-7373b3667bea4b2eb1632319e90e1a92'
 const NOTIFICATION_TEMPLATE_ID = 'd-962d8c981b6542cd916a662189bdce4e'
-const ACCOUNTING_EMAIL = process.env.ACCOUNTING_EMAIL
+const SENDGRID_RECIPIENT_ACCOUNTING = process.env.SENDGRID_RECIPIENT_ACCOUNTING
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
@@ -205,14 +205,14 @@ export async function sendDonationNotification(
   amount?: string,
   currency?: string
 ): Promise<boolean> {
-  if (!SENDGRID_API_KEY || !FROM_ADDRESS || !ACCOUNTING_EMAIL) {
+  if (!SENDGRID_API_KEY || !FROM_ADDRESS || !SENDGRID_RECIPIENT_ACCOUNTING) {
     console.error('SendGrid or accounting email not configured. Notification not sent.')
     return false
   }
 
   try {
     const msg = {
-      to: ACCOUNTING_EMAIL,
+      to: SENDGRID_RECIPIENT_ACCOUNTING,
       from: FROM_ADDRESS,
       templateId: NOTIFICATION_TEMPLATE_ID,
       dynamicTemplateData: {
@@ -244,7 +244,7 @@ export async function sendDonationNotification(
     const duration = Date.now() - startTime
 
     console.log(
-      `📧 Donation notification sent successfully to ${ACCOUNTING_EMAIL} in ${duration}ms`
+      `📧 Donation notification sent successfully to ${SENDGRID_RECIPIENT_ACCOUNTING} in ${duration}ms`
     )
     return true
   } catch (error: unknown) {
