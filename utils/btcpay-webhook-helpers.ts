@@ -7,7 +7,7 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 const RECEIPT_TEMPLATE_ID = 'd-7373b3667bea4b2eb1632319e90e1a92'
 const NOTIFICATION_TEMPLATE_ID = 'd-962d8c981b6542cd916a662189bdce4e'
-const ACCOUNTING_EMAIL = process.env.ACCOUNTING_EMAIL || 'admin@opensats.org'
+const ACCOUNTING_EMAIL = process.env.ACCOUNTING_EMAIL
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
@@ -205,8 +205,8 @@ export async function sendDonationNotification(
   amount?: string,
   currency?: string
 ): Promise<boolean> {
-  if (!SENDGRID_API_KEY || !FROM_ADDRESS) {
-    console.error('SendGrid not configured. Notification not sent.')
+  if (!SENDGRID_API_KEY || !FROM_ADDRESS || !ACCOUNTING_EMAIL) {
+    console.error('SendGrid or accounting email not configured. Notification not sent.')
     return false
   }
 
