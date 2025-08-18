@@ -7,7 +7,7 @@ const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 const RECEIPT_TEMPLATE_ID = 'd-7373b3667bea4b2eb1632319e90e1a92'
 const NOTIFICATION_TEMPLATE_ID = 'd-962d8c981b6542cd916a662189bdce4e'
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@opensats.org'
+const ACCOUNTING_EMAIL = process.env.ACCOUNTING_EMAIL || 'admin@opensats.org'
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
@@ -212,7 +212,7 @@ export async function sendDonationNotification(
 
   try {
     const msg = {
-      to: ADMIN_EMAIL,
+      to: ACCOUNTING_EMAIL,
       from: FROM_ADDRESS,
       templateId: NOTIFICATION_TEMPLATE_ID,
       dynamicTemplateData: {
@@ -244,7 +244,7 @@ export async function sendDonationNotification(
     const duration = Date.now() - startTime
 
     console.log(
-      `📧 Donation notification sent successfully to ${ADMIN_EMAIL} in ${duration}ms`
+      `📧 Donation notification sent successfully to ${ACCOUNTING_EMAIL} in ${duration}ms`
     )
     return true
   } catch (error: unknown) {
