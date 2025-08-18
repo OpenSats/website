@@ -216,22 +216,15 @@ export async function sendDonationNotification(
       from: FROM_ADDRESS,
       templateId: NOTIFICATION_TEMPLATE_ID,
       dynamicTemplateData: {
-        donor: {
-          name: donorName,
-          email: donorEmail,
-        },
-        donation: {
-          date: new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          }),
-          method: 'bitcoin',
-          currency: currency || 'BTC',
-          amount: amount || 'Unknown',
-        },
-        fund_name: fundName,
-        invoice_id: invoiceId,
+        method: 'bitcoin',
+        amount: amount || 'Unknown',
+        currency: currency || 'BTC',
+        recipient: fundName,
+        date: new Date().toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
       },
       trackingSettings: {
         clickTracking: {
