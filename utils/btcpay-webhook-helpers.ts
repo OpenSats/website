@@ -5,9 +5,16 @@ import * as sgMail from '@sendgrid/mail'
 // SendGrid configuration
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
+const SENDER_NAME = process.env.SENDGRID_SENDER_NAME || 'OpenSats'
 const RECEIPT_TEMPLATE_ID = 'd-7373b3667bea4b2eb1632319e90e1a92'
 const NOTIFICATION_TEMPLATE_ID = 'd-962d8c981b6542cd916a662189bdce4e'
 const SENDGRID_RECIPIENT_ACCOUNTING = process.env.SENDGRID_RECIPIENT_ACCOUNTING
+
+// Helper function to format sender with name
+function getSenderWithName(): string {
+  if (!FROM_ADDRESS) return ''
+  return `${SENDER_NAME} <${FROM_ADDRESS}>`
+}
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
@@ -128,7 +135,7 @@ export async function sendDonationReceipt(
   try {
     const msg = {
       to: donorEmail,
-      from: FROM_ADDRESS,
+      from: getSenderWithName(),
       templateId: RECEIPT_TEMPLATE_ID,
       dynamicTemplateData: {
         donor: {
@@ -213,7 +220,7 @@ export async function sendDonationNotification(
   try {
     const msg = {
       to: SENDGRID_RECIPIENT_ACCOUNTING,
-      from: FROM_ADDRESS,
+      from: getSenderWithName(),
       templateId: NOTIFICATION_TEMPLATE_ID,
       dynamicTemplateData: {
         method: 'bitcoin',
