@@ -6,6 +6,8 @@ import * as sgMail from '@sendgrid/mail'
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 const RECEIPT_TEMPLATE_ID = 'd-7373b3667bea4b2eb1632319e90e1a92'
+const NOTIFICATION_TEMPLATE_ID = 'd-962d8c981b6542cd916a662189bdce4e'
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@opensats.org'
 
 // Initialize SendGrid with API key
 if (SENDGRID_API_KEY) {
@@ -193,6 +195,87 @@ export async function sendDonationReceipt(
 }
 
 /**
+ * Send donation notification email to admins using SendGrid dynamic template
+ */
+export async function sendDonationNotification(
+  donorEmail: string,
+  donorName: string,
+  fundName: string,
+  invoiceId: string,
+  amount?: string,
+  currency?: string
+): Promise<boolean> {
+  if (!SENDGRID_API_KEY || !FROM_ADDRESS) {
+    console.error('SendGrid not configured. Notification not sent.')
+    return false
+  }
+
+  try {
+    const msg = {
+      to: ADMIN_EMAIL,
+      from: FROM_ADDRESS,
+      templateId: NOTIFICATION_TEMPLATE_ID,
+      dynamicTemplateData: {
+        donor: {
+          name: donorName,
+          email: donorEmail,
+        },
+        donation: {
+          date: new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          }),
+          method: 'bitcoin',
+          currency: currency || 'BTC',
+          amount: amount || 'Unknown',
+        },
+        fund_name: fundName,
+        invoice_id: invoiceId,
+      },
+      trackingSettings: {
+        clickTracking: {
+          enable: false,
+        },
+        openTracking: {
+          enable: false,
+        },
+        subscriptionTracking: {
+          enable: false,
+        },
+      },
+    }
+
+    const startTime = Date.now()
+    await sgMail.send(msg)
+    const duration = Date.now() - startTime
+
+    console.log(
+      `📧 Donation notification sent successfully to ${ADMIN_EMAIL} in ${duration}ms`
+    )
+    return true
+  } catch (error: unknown) {
+    console.error('❌ Error sending donation notification:', error)
+    if (typeof error === 'object' && error !== null && 'response' in error) {
+      // @ts-ignore
+      console.error('  Status code:', error.code)
+      // @ts-ignore
+      if (
+        typeof error.response === 'object' &&
+        error.response !== null &&
+        'body' in error.response
+      ) {
+        console.error(
+          '  Response body:',
+          JSON.stringify(error.response.body, null, 2)
+        )
+      }
+    }
+    return false
+  }
+}
+
+/**
  * Verify BTCPay Server webhook signature
  */
 export function verifyWebhookSignature(
@@ -279,6 +362,23 @@ export async function processBTCPayWebhook(
       }
     } else {
       console.log('⚠️  No valid email address, skipping receipt')
+    }
+
+    // Send donation notification to admins
+    console.log('📧 Sending donation notification to admins...')
+    const notificationSent = await sendDonationNotification(
+      donorEmail,
+      donorName,
+      fundDisplayName,
+      invoiceId,
+      paymentAmount,
+      paymentCurrency
+    )
+
+    if (notificationSent) {
+      console.log('✅ Donation notification sent successfully!')
+    } else {
+      console.log('❌ Failed to send donation notification')
     }
   }
 }
