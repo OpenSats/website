@@ -83,14 +83,7 @@ export async function processStripeWebhook(
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     
-    // Debug: Log session data
-    console.log('🔍 Session data:', {
-      id: session.id,
-      amount_total: session.amount_total,
-      currency: session.currency,
-      metadata: session.metadata,
-      line_items: session.line_items ? 'present' : 'not expanded'
-    })
+
     
     const donorName = session.metadata?.donor_name || 'Anonymous'
     const donorEmail = session.metadata?.donor_email || 'No email provided'
@@ -114,15 +107,6 @@ export async function processStripeWebhook(
     // Send donation receipt via SendGrid
     if (donorEmail && donorEmail !== 'No email provided') {
       console.log('📧 Sending donation receipt...')
-      console.log('📧 Receipt data:', {
-        donorEmail: maskEmail(donorEmail),
-        donorName: maskName(donorName),
-        fundName,
-        sessionId,
-        paymentAmount,
-        paymentCurrency,
-        paymentMethod: 'fiat'
-      })
       const receiptSent = await sendDonationReceipt(
         donorEmail,
         donorName,
