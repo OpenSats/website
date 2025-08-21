@@ -57,7 +57,7 @@ export async function sendDonationReceipt(
   transactionId: string,
   amount?: string,
   currency?: string,
-  paymentMethod: 'bitcoin' | 'credit_card' = 'bitcoin'
+  paymentMethod: 'bitcoin' | 'credit_card' | 'fiat' = 'bitcoin'
 ): Promise<boolean> {
   if (!SENDGRID_API_KEY || !FROM_ADDRESS) {
     console.error('SendGrid not configured. Receipt not sent.')
@@ -141,7 +141,7 @@ export async function sendDonationNotification(
   transactionId: string,
   amount?: string,
   currency?: string,
-  paymentMethod: 'bitcoin' | 'credit_card' = 'bitcoin'
+  paymentMethod: 'bitcoin' | 'credit_card' | 'fiat' = 'bitcoin'
 ): Promise<boolean> {
   if (!SENDGRID_API_KEY || !FROM_ADDRESS || !SENDGRID_RECIPIENT_ACCOUNTING) {
     console.error('SendGrid or accounting email not configured. Notification not sent.')

@@ -130,7 +130,7 @@ export async function processStripeWebhook(
         sessionId,
         paymentAmount,
         paymentCurrency,
-        'credit_card'
+        'fiat'
       )
 
       if (receiptSent) {
@@ -151,7 +151,7 @@ export async function processStripeWebhook(
       sessionId,
       paymentAmount,
       paymentCurrency,
-      'credit_card'
+      'fiat'
     )
 
     if (notificationSent) {
