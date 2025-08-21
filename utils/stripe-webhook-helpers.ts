@@ -65,6 +65,19 @@ export function verifyStripeWebhookSignature(
 
 
 /**
+ * Map zaprite campaign ID to readable fund name for admin notifications
+ */
+function getFundNameForAdmin(zapriteId: string): string {
+  const fundMapping: Record<string, string> = {
+    'lZo1wcsJ0SQb58XfGC4e': 'Operations Budget',
+    '32WbND8heqmY5wYYnIpa': 'General Fund',
+    'OoYtzNjilW1NRtDsxLAj': 'The Nostr Fund',
+  }
+  
+  return fundMapping[zapriteId] || 'General Fund'
+}
+
+/**
  * Format amount from cents to dollars
  */
 function formatAmountFromCents(amount: number, currency: string): string {
@@ -87,7 +100,8 @@ export async function processStripeWebhook(
     
     const donorName = session.metadata?.donor_name || 'Anonymous'
     const donorEmail = session.metadata?.donor_email || 'No email provided'
-    const fundName = session.metadata?.recipient_campaign || 'General Fund'
+    const zapriteId = session.metadata?.recipient_campaign
+    const fundName = zapriteId || 'General Fund'
     const sessionId = session.id
 
     // Extract payment amount from the session
@@ -128,10 +142,11 @@ export async function processStripeWebhook(
 
     // Send donation notification to admins
     console.log('📧 Sending donation notification to admins...')
+    const adminFundName = zapriteId ? getFundNameForAdmin(zapriteId) : 'General Fund'
     const notificationSent = await sendDonationNotification(
       donorEmail,
       donorName,
-      fundName,
+      adminFundName,
       sessionId,
       paymentAmount,
       paymentCurrency,
