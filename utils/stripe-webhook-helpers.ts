@@ -81,15 +81,23 @@ export async function processStripeWebhook(
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     
+    // Debug: Log session data
+    console.log('🔍 Session data:', {
+      id: session.id,
+      amount_total: session.amount_total,
+      currency: session.currency,
+      metadata: session.metadata,
+      line_items: session.line_items ? 'present' : 'not expanded'
+    })
+    
     const donorName = session.metadata?.donor_name || 'Anonymous'
     const donorEmail = session.metadata?.donor_email || 'No email provided'
     const fundName = session.metadata?.recipient_campaign || 'General Fund'
     const sessionId = session.id
 
     // Extract payment amount from the session
-    const lineItems = session.line_items?.data
-    const paymentAmount = lineItems && lineItems.length > 0 
-      ? formatAmountFromCents(lineItems[0].amount_total || 0, session.currency || 'usd')
+    const paymentAmount = session.amount_total 
+      ? formatAmountFromCents(session.amount_total, session.currency || 'usd')
       : 'Unknown'
     const paymentCurrency = session.currency?.toUpperCase() || 'USD'
 
