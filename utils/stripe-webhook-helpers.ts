@@ -104,6 +104,15 @@ export async function processStripeWebhook(
     // Send donation receipt via SendGrid
     if (donorEmail && donorEmail !== 'No email provided') {
       console.log('📧 Sending donation receipt...')
+      console.log('📧 Receipt data:', {
+        donorEmail: maskEmail(donorEmail),
+        donorName: maskName(donorName),
+        fundName,
+        sessionId,
+        paymentAmount,
+        paymentCurrency,
+        paymentMethod: 'credit_card'
+      })
       const receiptSent = await sendDonationReceipt(
         donorEmail,
         donorName,
