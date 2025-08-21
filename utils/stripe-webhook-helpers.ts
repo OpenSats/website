@@ -121,7 +121,7 @@ export async function processStripeWebhook(
         sessionId,
         paymentAmount,
         paymentCurrency,
-        paymentMethod: 'credit_card'
+        paymentMethod: 'fiat'
       })
       const receiptSent = await sendDonationReceipt(
         donorEmail,
