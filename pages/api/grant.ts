@@ -23,7 +23,9 @@ export default async function handler(
 
   const { grant_id } = req.body
 
-  if (!grant_id) {
+  const normalizedGrantId = String(grant_id || '').trim()
+
+  if (!normalizedGrantId) {
     return res.status(400).json({ valid: false, error: 'Grant ID is required' })
   }
 
@@ -35,7 +37,7 @@ export default async function handler(
   }
 
   // Development/testing condition
-  if (process.env.NODE_ENV === 'development' && grant_id === '123456') {
+  if (process.env.NODE_ENV === 'development' && normalizedGrantId === '123456') {
     return res.status(200).json({
       valid: true,
       project_name: 'Test Grant',
@@ -46,21 +48,29 @@ export default async function handler(
   try {
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
-    // Instead of using the deprecated search API, we'll list all issues and filter locally
-    // This approach is more reliable and avoids the deprecation warning
-    const issuesResponse = await octokit.rest.issues.listForRepo({
-      owner: GH_ORG,
-      repo: GH_REPORTS_REPO,
-      state: 'all', // Include both open and closed issues
-      per_page: 100, // Get up to 100 issues per page
-    })
+    // Iterate through all issues using pagination and stop when we find a match
+    let matchingIssue: { title: string; body?: string | null; number: number } | undefined
 
-    // Filter issues to find the one containing the grant ID
-    const matchingIssue = issuesResponse.data.find((issue) => {
-      const titleContainsGrantId = issue.title.includes(grant_id)
-      const bodyContainsGrantId = issue.body?.includes(grant_id) || false
-      return titleContainsGrantId || bodyContainsGrantId
-    })
+    for await (const { data: issues } of octokit.paginate.iterator(
+      octokit.rest.issues.listForRepo,
+      {
+        owner: GH_ORG,
+        repo: GH_REPORTS_REPO,
+        state: 'all',
+        per_page: 100,
+      }
+    )) {
+      const found = issues.find((issue) => {
+        const titleContainsGrantId = issue.title?.includes(normalizedGrantId)
+        const bodyContainsGrantId = issue.body?.includes(normalizedGrantId) || false
+        return Boolean(titleContainsGrantId || bodyContainsGrantId)
+      })
+
+      if (found) {
+        matchingIssue = { title: found.title, body: found.body, number: found.number }
+        break
+      }
+    }
 
     if (!matchingIssue) {
       return res.status(404).json({
