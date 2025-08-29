@@ -37,7 +37,10 @@ export default async function handler(
   }
 
   // Development/testing condition
-  if (process.env.NODE_ENV === 'development' && normalizedGrantId === '123456') {
+  if (
+    process.env.NODE_ENV === 'development' &&
+    normalizedGrantId === '123456'
+  ) {
     return res.status(200).json({
       valid: true,
       project_name: 'Test Grant',
@@ -49,7 +52,9 @@ export default async function handler(
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
     // Iterate through all issues using pagination and stop when we find a match
-    let matchingIssue: { title: string; body?: string | null; number: number } | undefined
+    let matchingIssue:
+      | { title: string; body?: string | null; number: number }
+      | undefined
 
     for await (const { data: issues } of octokit.paginate.iterator(
       octokit.rest.issues.listForRepo,
@@ -62,12 +67,17 @@ export default async function handler(
     )) {
       const found = issues.find((issue) => {
         const titleContainsGrantId = issue.title?.includes(normalizedGrantId)
-        const bodyContainsGrantId = issue.body?.includes(normalizedGrantId) || false
+        const bodyContainsGrantId =
+          issue.body?.includes(normalizedGrantId) || false
         return Boolean(titleContainsGrantId || bodyContainsGrantId)
       })
 
       if (found) {
-        matchingIssue = { title: found.title, body: found.body, number: found.number }
+        matchingIssue = {
+          title: found.title,
+          body: found.body,
+          number: found.number,
+        }
         break
       }
     }
@@ -81,8 +91,8 @@ export default async function handler(
 
     // Extract project name from issue title
     const project_name = matchingIssue.title
-      .replace(/^Grant #\d+:\s*/, '') // Remove grant number prefix
-      .replace(/\s+by\s+.*$/, '') // Remove everything after "by" (including "by" itself)
+      .replace(/^Grant #\d+:\s*/, '')
+      .replace(/\s+by\s+.*$/, '')
 
     return res.status(200).json({
       valid: true,
