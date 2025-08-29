@@ -46,30 +46,38 @@ export default async function handler(
   try {
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
-    // Search for an issue with the grant ID in the title or body
-    const searchResult = await octokit.rest.search.issuesAndPullRequests({
-      q: `${grant_id} in:title,body repo:${GH_ORG}/${GH_REPORTS_REPO}`,
+    // Instead of using the deprecated search API, we'll list all issues and filter locally
+    // This approach is more reliable and avoids the deprecation warning
+    const issuesResponse = await octokit.rest.issues.listForRepo({
+      owner: GH_ORG,
+      repo: GH_REPORTS_REPO,
+      state: 'all', // Include both open and closed issues
+      per_page: 100, // Get up to 100 issues per page
     })
 
-    if (searchResult.data.total_count === 0) {
+    // Filter issues to find the one containing the grant ID
+    const matchingIssue = issuesResponse.data.find((issue) => {
+      const titleContainsGrantId = issue.title.includes(grant_id)
+      const bodyContainsGrantId = issue.body?.includes(grant_id) || false
+      return titleContainsGrantId || bodyContainsGrantId
+    })
+
+    if (!matchingIssue) {
       return res.status(404).json({
         valid: false,
         error: ERROR_MESSAGES.GRANT_NOT_FOUND,
       })
     }
 
-    // Get the first matching issue
-    const issue = searchResult.data.items[0]
-
     // Extract project name from issue title
-    const project_name = issue.title
+    const project_name = matchingIssue.title
       .replace(/^Grant #\d+:\s*/, '') // Remove grant number prefix
       .replace(/\s+by\s+.*$/, '') // Remove everything after "by" (including "by" itself)
 
     return res.status(200).json({
       valid: true,
       project_name,
-      issue_number: issue.number,
+      issue_number: matchingIssue.number,
     })
   } catch (error) {
     console.error('Error validating grant:', error)
