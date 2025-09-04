@@ -33,8 +33,7 @@ const ClosedNotice = () => {
             our <Link href="/selection">grant selection process</Link>.
           </p>
           <p className="text-sm">
-            We will re-open applications as soon as we can. Two weeks&trade;.
-            Okay, maybe four.
+            We will re-open applications on the 1st week of next month.
           </p>
         </div>
       </div>
