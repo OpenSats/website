@@ -108,6 +108,7 @@ export default function ApplicationForm() {
                   Educational material MUST be published under an{' '}
                   <strong>
                     <a
+                      className="underline text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
                       href="https://www.gnu.org/philosophy/free-doc.html"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -141,6 +142,7 @@ export default function ApplicationForm() {
                 {' '}
                 (¹) For example:{' '}
                 <a
+                  className="underline text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
                   href="https://creativecommons.org/licenses/by/4.0/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -149,6 +151,7 @@ export default function ApplicationForm() {
                 </a>
                 ,{' '}
                 <a
+                  className="underline text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
                   href="https://creativecommons.org/licenses/by-sa/4.0/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -157,6 +160,7 @@ export default function ApplicationForm() {
                 </a>
                 ,{' '}
                 <a
+                  className="underline text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
                   href="https://creativecommons.org/publicdomain/zero/1.0/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -165,6 +169,7 @@ export default function ApplicationForm() {
                 </a>
                 ,{' '}
                 <a
+                  className="underline text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300"
                   href="https://www.gnu.org/licenses/fdl-1.3.html"
                   target="_blank"
                   rel="noopener noreferrer"
