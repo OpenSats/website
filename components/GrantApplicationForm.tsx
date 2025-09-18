@@ -102,26 +102,72 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-              <p className="font-bold mb-2">Application Requirements</p>
+              <p className="mb-2 font-bold">Application Requirements</p>
               <ul className="list-disc pl-6 text-sm">
-                <li>Educational material MUST be published under an <strong>open license</strong>¹</li>
                 <li>
-                  Educational material MUST be publicly available to anyone (for free)²
+                  Educational material MUST be published under an{' '}
+                  <strong>open license</strong>¹
                 </li>
                 <li>
-                  You MUST provide at least <strong>two references</strong> that we can reach out to
+                  Educational material MUST be publicly available to anyone (for
+                  free)²
+                </li>
+                <li>
+                  You MUST provide at least <strong>two references</strong> that
+                  we can reach out to
                 </li>
               </ul>
-              <p className="font-bold mt-4 mb-2">Reporting Requirements</p>
+              <p className="mb-2 mt-4 font-bold">Reporting Requirements</p>
               <ul className="list-disc pl-6 text-sm">
-                <li><strong>Monthly</strong> progress reports MUST be submitted on time</li>
                 <li>
-                  Progress reports MUST contain proof-of-work that is easily verifiable by us
+                  <strong>Monthly</strong> progress reports MUST be submitted on
+                  time
+                </li>
+                <li>
+                  Progress reports MUST contain proof-of-work that is easily
+                  verifiable by us
                 </li>
               </ul>
-              <hr className="mt-6 mb-3 border-blue-200" />
-              <p className="mt-2 mb-0 text-xs"> (¹) For example: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>, <a href="https://www.gnu.org/licenses/fdl-1.3.html" target="_blank" rel="noopener noreferrer">GNU FDL</a></p>
-              <p className="mt-1 mb-0 text-xs"> (²) No paywalls, no signups, no invite-only systems</p>
+              <hr className="mb-3 mt-6 border-blue-200" />
+              <p className="mb-0 mt-2 text-xs">
+                {' '}
+                (¹) For example:{' '}
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY
+                </a>
+                ,{' '}
+                <a
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY-SA
+                </a>
+                ,{' '}
+                <a
+                  href="https://creativecommons.org/publicdomain/zero/1.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC0
+                </a>
+                ,{' '}
+                <a
+                  href="https://www.gnu.org/licenses/fdl-1.3.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GNU FDL
+                </a>
+              </p>
+              <p className="mb-0 mt-1 text-xs">
+                {' '}
+                (²) No paywalls, no signups, no invite-only systems
+              </p>
             </div>
           </div>
         </div>
@@ -227,9 +273,7 @@ export default function ApplicationForm() {
         >
           <option value="12 months">12 months</option>
           <option value="9 months">9 months</option>
-          <option value="6 months">
-            6 months
-          </option>
+          <option value="6 months">6 months</option>
           <option value="3 months">3 months</option>
           <option value="Other">Other (please elaborate below)</option>
         </select>
