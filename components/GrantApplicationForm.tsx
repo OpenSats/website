@@ -104,23 +104,23 @@ export default function ApplicationForm() {
             <div>
               <p className="font-bold mb-2">Application Requirements</p>
               <ul className="list-disc pl-6 text-sm">
-                <li>Educational material MUST be published under an <strong>open license</strong>¹</li>
+                <li>Educational material MUST be published under an <span className="font-semibold text-blue-900 dark:text-blue-200">open license</span>¹</li>
                 <li>
                   Educational material MUST be publicly available to anyone (for free)²
                 </li>
                 <li>
-                  You MUST provide at least <strong>two references</strong> that we can reach out to
+                  You MUST provide at least <span className="font-semibold text-blue-900 dark:text-blue-200">two references</span> that we can reach out to
                 </li>
               </ul>
               <p className="font-bold mt-4 mb-2">Reporting Requirements</p>
               <ul className="list-disc pl-6 text-sm">
-                <li><strong>Monthly</strong> progress reports MUST be submitted on time</li>
+                <li><span className="font-semibold text-blue-900 dark:text-blue-200">Monthly</span> progress reports MUST be submitted on time</li>
                 <li>
                   Progress reports MUST contain proof-of-work that is easily verifiable by us
                 </li>
               </ul>
-              <p className="mt-2 text-xs">¹For example: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, <a href="https://www.gnu.org/licenses/fdl-1.3.html">GNU FDL</a></p>
-              <p className="mt-0 text-xs">²No paywalls, no signups, no invite-only systems</p>
+              <p className="mt-2 mb-0 text-xs">¹For example: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, <a href="https://www.gnu.org/licenses/fdl-1.3.html">GNU FDL</a></p>
+              <p className="mt-0 mb-0 text-xs">²No paywalls, no signups, no invite-only systems</p>
             </div>
           </div>
         </div>
