@@ -102,7 +102,7 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-              <p className="font-bold mb-2">Education Grant Requirements</p>
+              <p className="font-bold mb-2">Requirements</p>
               <ul className="list-disc pl-6 text-sm">
                 <li>Educational material MUST be published under an open license¹</li>
                 <li>
