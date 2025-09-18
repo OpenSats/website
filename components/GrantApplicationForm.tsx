@@ -119,7 +119,7 @@ export default function ApplicationForm() {
                   Progress reports MUST contain proof-of-work that is easily verifiable by us
                 </li>
               </ul>
-              <p className="mt-2 mb-0 text-xs">¹For example: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>, <a href="https://www.gnu.org/licenses/fdl-1.3.html">GNU FDL</a></p>
+              <p className="mt-2 mb-0 text-xs">¹For example: <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0</a>, <a href="https://www.gnu.org/licenses/fdl-1.3.html" target="_blank" rel="noopener noreferrer">GNU FDL</a></p>
               <p className="mt-0 mb-0 text-xs">²No paywalls, no signups, no invite-only systems</p>
             </div>
           </div>
