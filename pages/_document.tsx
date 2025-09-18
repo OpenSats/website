@@ -6,11 +6,6 @@ class MyDocument extends Document {
     return (
       <Html lang={siteMetadata.language} className="scroll-smooth">
         <Head>
-          <link rel="preconnect" href="https://fonts.bunny.net" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.bunny.net/css?family=Inter:wght@400;600;700&display=swap"
-          />
           <link
             rel="apple-touch-icon"
             sizes="76x76"
