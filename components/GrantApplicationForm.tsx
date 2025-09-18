@@ -14,7 +14,7 @@ export default function ApplicationForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<{ [key: string]: unknown }>({
     defaultValues: {
       duration: '6 months',
     },
@@ -87,6 +87,20 @@ export default function ApplicationForm() {
           <option value="other">Other</option>
         </select>
       </label>
+      {watch('main_focus') === 'education' && (
+        <div className="mt-2">
+          <ul className="list-disc pl-6">
+            <li>Educational material MUST be published under an open license</li>
+            <li>
+              Educational material MUST be publicly available for anyone (for free)*
+            </li>
+            <li>
+              You MUST provide at least <strong>two references</strong> that we can reach out to
+            </li>
+          </ul>
+          <p className="mt-2">*No paywalls, no signups, no invite-only systems</p>
+        </div>
+      )}
 
       <label className="block">
         Project Name *<br />
@@ -283,7 +297,7 @@ export default function ApplicationForm() {
           placeholder="satoshin@gmx.com"
           {...register('email', {
             required: true,
-            validate: (v) =>
+            validate: (v: string) =>
               EmailValidator.validate(v) ||
               'Please enter a valid email address',
           })}
