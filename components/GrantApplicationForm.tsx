@@ -97,6 +97,10 @@ export default function ApplicationForm() {
             <li>
               You MUST provide at least <strong>two references</strong> that we can reach out to
             </li>
+            <li>Monthly progress reports MUST be submitted on time</li>
+            <li>
+              Progress reports MUST contain proof-of-work that is easily verifiable by us
+            </li>
           </ul>
           <p className="mt-2">*No paywalls, no signups, no invite-only systems</p>
         </div>
