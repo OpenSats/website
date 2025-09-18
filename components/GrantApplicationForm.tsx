@@ -92,7 +92,7 @@ export default function ApplicationForm() {
           <ul className="list-disc pl-6">
             <li>Educational material MUST be published under an open license</li>
             <li>
-              Educational material MUST be publicly available for anyone (for free)*
+              Educational material MUST be publicly available for anyone (for free)†
             </li>
             <li>
               You MUST provide at least <strong>two references</strong> that we can reach out to
@@ -102,7 +102,7 @@ export default function ApplicationForm() {
               Progress reports MUST contain proof-of-work that is easily verifiable by us
             </li>
           </ul>
-          <p className="mt-2">*No paywalls, no signups, no invite-only systems</p>
+          <p className="mt-2">†No paywalls, no signups, no invite-only systems</p>
         </div>
       )}
 
