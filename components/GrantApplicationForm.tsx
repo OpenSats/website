@@ -106,7 +106,7 @@ export default function ApplicationForm() {
               <ul className="list-disc pl-6 text-sm">
                 <li>Educational material MUST be published under an <strong>open license</strong>¹</li>
                 <li>
-                  Educational material MUST be publicly available for anyone (for free)²
+                  Educational material MUST be publicly available to anyone (for free)²
                 </li>
                 <li>
                   You MUST provide at least <strong>two references</strong> that we can reach out to
