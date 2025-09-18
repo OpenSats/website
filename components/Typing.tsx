@@ -11,6 +11,7 @@ export default function Typing() {
         'Contributors',
         'FOSS',
         'Freedom Tools',
+        'Freedom Tech',
         'Freedom',
         'Developers',
         'Decentralization',
