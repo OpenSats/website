@@ -5,6 +5,8 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
 import CustomLink from './Link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -94,13 +96,10 @@ export default function ApplicationForm() {
         >
           <div className="flex">
             <div className="py-1">
-              <svg
-                className="mr-4 h-6 w-6 fill-current text-blue-500"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" />
-              </svg>
+              <FontAwesomeIcon
+                icon={faGraduationCap}
+                className="mr-4 h-6 w-6 text-blue-500"
+              />
             </div>
             <div>
               <p className="font-bold mb-2">Education Grant Requirements</p>
