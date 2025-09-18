@@ -14,7 +14,11 @@ export default function ApplicationForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+      duration: '6 months',
+    },
+  })
 
   const isFLOSS = watch('free_open_source', false)
   const [failureReason, setFailureReason] = useState<string>()
@@ -184,7 +188,7 @@ export default function ApplicationForm() {
         >
           <option value="12 months">12 months</option>
           <option value="9 months">9 months</option>
-          <option value="6 months" selected>
+          <option value="6 months">
             6 months
           </option>
           <option value="3 months">3 months</option>
