@@ -102,7 +102,7 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-              <p className="font-bold mb-2">Requirements</p>
+              <p className="font-bold mb-2">Application Requirements</p>
               <ul className="list-disc pl-6 text-sm">
                 <li>Educational material MUST be published under an <strong>open license</strong>¹</li>
                 <li>
@@ -111,6 +111,9 @@ export default function ApplicationForm() {
                 <li>
                   You MUST provide at least <strong>two references</strong> that we can reach out to
                 </li>
+              </ul>
+              <p className="font-bold mt-4 mb-2">Reporting Requirements</p>
+              <ul className="list-disc pl-6 text-sm">
                 <li><strong>Monthly</strong> progress reports MUST be submitted on time</li>
                 <li>
                   Progress reports MUST contain proof-of-work that is easily verifiable by us
