@@ -88,22 +88,39 @@ export default function ApplicationForm() {
         </select>
       </label>
       {watch('main_focus') === 'education' && (
-        <div className="mt-2">
-          <ul className="list-disc pl-6">
-            <li>Educational material MUST be published under an open license¹</li>
-            <li>
-              Educational material MUST be publicly available for anyone (for free)²
-            </li>
-            <li>
-              You MUST provide at least <strong>two references</strong> that we can reach out to
-            </li>
-            <li>Monthly progress reports MUST be submitted on time</li>
-            <li>
-              Progress reports MUST contain proof-of-work that is easily verifiable by us
-            </li>
-          </ul>
-          <p className="mt-2">¹For example: CC BY, CC BY-SA, CC0, GNU FDL</p>
-          <p className="mt-1">²No paywalls, no signups, no invite-only systems</p>
+        <div
+          className="mt-2 rounded-b border-t-4 border-blue-500 bg-blue-100 px-4 py-3 text-blue-900 shadow-md"
+          role="alert"
+        >
+          <div className="flex">
+            <div className="py-1">
+              <svg
+                className="mr-4 h-6 w-6 fill-current text-blue-500"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 2L3 7v11a1 1 0 001 1h12a1 1 0 001-1V7l-7-5zM8 15v-3h4v3H8zm6-4H6V8h8v3z" />
+              </svg>
+            </div>
+            <div>
+              <p className="font-bold mb-2">Education Grant Requirements</p>
+              <ul className="list-disc pl-6 text-sm">
+                <li>Educational material MUST be published under an open license¹</li>
+                <li>
+                  Educational material MUST be publicly available for anyone (for free)²
+                </li>
+                <li>
+                  You MUST provide at least <strong>two references</strong> that we can reach out to
+                </li>
+                <li>Monthly progress reports MUST be submitted on time</li>
+                <li>
+                  Progress reports MUST contain proof-of-work that is easily verifiable by us
+                </li>
+              </ul>
+              <p className="mt-2 text-sm">¹For example: CC BY, CC BY-SA, CC0, GNU FDL</p>
+              <p className="mt-1 text-sm">²No paywalls, no signups, no invite-only systems</p>
+            </div>
+          </div>
         </div>
       )}
 
