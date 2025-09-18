@@ -111,7 +111,7 @@ export default function ApplicationForm() {
                 <li>
                   You MUST provide at least <strong>two references</strong> that we can reach out to
                 </li>
-                <li>Monthly progress reports MUST be submitted on time</li>
+                <li><strong>Monthly</strong> progress reports MUST be submitted on time</li>
                 <li>
                   Progress reports MUST contain proof-of-work that is easily verifiable by us
                 </li>
