@@ -90,9 +90,9 @@ export default function ApplicationForm() {
       {watch('main_focus') === 'education' && (
         <div className="mt-2">
           <ul className="list-disc pl-6">
-            <li>Educational material MUST be published under an open license†</li>
+            <li>Educational material MUST be published under an open license¹</li>
             <li>
-              Educational material MUST be publicly available for anyone (for free)‡
+              Educational material MUST be publicly available for anyone (for free)²
             </li>
             <li>
               You MUST provide at least <strong>two references</strong> that we can reach out to
@@ -102,8 +102,8 @@ export default function ApplicationForm() {
               Progress reports MUST contain proof-of-work that is easily verifiable by us
             </li>
           </ul>
-          <p className="mt-2">†For example: CC BY, CC BY-SA, CC0, GNU FDL</p>
-          <p className="mt-1">‡No paywalls, no signups, no invite-only systems</p>
+          <p className="mt-2">¹For example: CC BY, CC BY-SA, CC0, GNU FDL</p>
+          <p className="mt-1">²No paywalls, no signups, no invite-only systems</p>
         </div>
       )}
 
