@@ -99,7 +99,7 @@ export default function ApplicationForm() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
-                <path d="M10 2L3 7v11a1 1 0 001 1h12a1 1 0 001-1V7l-7-5zM8 15v-3h4v3H8zm6-4H6V8h8v3z" />
+                <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" />
               </svg>
             </div>
             <div>
