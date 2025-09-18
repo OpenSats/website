@@ -8,11 +8,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app youtube.com http://www.youtube.com https://www.youtube.com;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.bunny.net;
   img-src * blob: data:;
   media-src 'self' youtube.com https://www.youtube.com;
   connect-src *;
-  font-src 'self';
+  font-src 'self' https://fonts.bunny.net;
   frame-src youtube.com https://www.youtube.com;
 `
 
