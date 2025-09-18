@@ -91,7 +91,7 @@ export default function ApplicationForm() {
       </label>
       {watch('main_focus') === 'education' && (
         <div
-          className="mt-2 rounded-b border-t-4 border-blue-500 bg-blue-100 px-4 py-3 text-blue-900 shadow-md"
+          className="not-prose mt-2 rounded-b border-t-4 border-blue-500 bg-blue-100 px-4 py-3 text-blue-900 shadow-md"
           role="alert"
         >
           <div className="flex">
