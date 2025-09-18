@@ -5,6 +5,8 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
 import * as EmailValidator from 'email-validator'
 import CustomLink from './Link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -14,7 +16,11 @@ export default function ApplicationForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm<{ [key: string]: unknown }>({
+    defaultValues: {
+      duration: '6 months',
+    },
+  })
 
   const isFLOSS = watch('free_open_source', false)
   const [failureReason, setFailureReason] = useState<string>()
@@ -83,6 +89,103 @@ export default function ApplicationForm() {
           <option value="other">Other</option>
         </select>
       </label>
+      {watch('main_focus') === 'education' && (
+        <div
+          className="not-prose mt-2 rounded-b border-t-4 border-blue-500 bg-blue-100 px-4 py-3 text-blue-900 shadow-md"
+          role="alert"
+        >
+          <div className="flex">
+            <div className="py-1">
+              <FontAwesomeIcon
+                icon={faGraduationCap}
+                className="mr-4 h-6 w-6 text-blue-500"
+              />
+            </div>
+            <div>
+              <p className="mb-2 font-bold">Application Requirements</p>
+              <ul className="list-disc pl-6 text-sm">
+                <li>
+                  Educational material MUST be published under an{' '}
+                  <strong>
+                    <a
+                      className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                      href="https://www.gnu.org/philosophy/free-doc.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      open license
+                    </a>
+                  </strong>
+                  ¹
+                </li>
+                <li>
+                  Educational material MUST be publicly available to anyone (for
+                  free)²
+                </li>
+                <li>
+                  You MUST provide at least <strong>two references</strong> that
+                  we can reach out to
+                </li>
+              </ul>
+              <p className="mb-2 mt-4 font-bold">Reporting Requirements</p>
+              <ul className="list-disc pl-6 text-sm">
+                <li>
+                  <strong>Monthly</strong> progress reports MUST be submitted on
+                  time
+                </li>
+                <li>
+                  Progress reports MUST contain proof-of-work that is easily
+                  verifiable by us
+                </li>
+              </ul>
+              <hr className="mb-3 mt-6 border-blue-200" />
+              <p className="mb-0 mt-2 text-xs">
+                {' '}
+                (¹) For example:{' '}
+                <a
+                  className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY
+                </a>
+                ,{' '}
+                <a
+                  className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                  href="https://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC BY-SA
+                </a>
+                ,{' '}
+                <a
+                  className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                  href="https://creativecommons.org/publicdomain/zero/1.0/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CC0
+                </a>
+                ,{' '}
+                <a
+                  className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+                  href="https://www.gnu.org/licenses/fdl-1.3.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GNU FDL
+                </a>
+              </p>
+              <p className="mb-0 mt-1 text-xs">
+                {' '}
+                (²) No paywalls, no signups, no invite-only systems
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <label className="block">
         Project Name *<br />
@@ -184,9 +287,7 @@ export default function ApplicationForm() {
         >
           <option value="12 months">12 months</option>
           <option value="9 months">9 months</option>
-          <option value="6 months" selected>
-            6 months
-          </option>
+          <option value="6 months">6 months</option>
           <option value="3 months">3 months</option>
           <option value="Other">Other (please elaborate below)</option>
         </select>
@@ -279,7 +380,7 @@ export default function ApplicationForm() {
           placeholder="satoshin@gmx.com"
           {...register('email', {
             required: true,
-            validate: (v) =>
+            validate: (v: string) =>
               EmailValidator.validate(v) ||
               'Please enter a valid email address',
           })}

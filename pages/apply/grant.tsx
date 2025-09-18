@@ -1,7 +1,12 @@
-import GrantApplicationForm from '@/components/GrantApplicationForm'
+import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
 import ClosedNotice from '@/components/ClosedNotice'
+
+const GrantApplicationForm = dynamic(
+  () => import('@/components/GrantApplicationForm'),
+  { ssr: false }
+)
 
 export default function Apply() {
   return (
