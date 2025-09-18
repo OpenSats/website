@@ -106,7 +106,15 @@ export default function ApplicationForm() {
               <ul className="list-disc pl-6 text-sm">
                 <li>
                   Educational material MUST be published under an{' '}
-                  <strong>open license</strong>¹
+                  <strong>
+                    <a
+                      href="https://www.gnu.org/philosophy/free-doc.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      open license
+                    </a>
+                  </strong>¹
                 </li>
                 <li>
                   Educational material MUST be publicly available to anyone (for
