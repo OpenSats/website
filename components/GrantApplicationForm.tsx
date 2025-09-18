@@ -104,7 +104,7 @@ export default function ApplicationForm() {
             <div>
               <p className="font-bold mb-2">Requirements</p>
               <ul className="list-disc pl-6 text-sm">
-                <li>Educational material MUST be published under an open license¹</li>
+                <li>Educational material MUST be published under an <strong>open license</strong>¹</li>
                 <li>
                   Educational material MUST be publicly available for anyone (for free)²
                 </li>
