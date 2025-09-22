@@ -7,3 +7,507 @@ images: ['/static/images/blog/84-advancements-in-ecash.jpg']
 draft: false
 summary: "An impact report from the front-lines of ecash development."
 ---
+
+Ecash is a digital cash system based on [David Chaum's
+work](https://chaum.com/wp-content/uploads/2022/01/Chaum-blind-signatures.pdf)
+from the 1980s, using blind signatures to create and transfer bearer tokens
+without revealing spenders. Cashu adapts this model as a third-layer protocol
+issuing bitcoin-backed tokens settled through the Lightning Network, while
+Fedimint applies a federated Chaumian design that allows communities to issue
+and redeem private bearer tokens. Both of these approaches aim to deliver
+private, fast, and offline-capable transactions.
+
+As David Chaum once observed, the stakes of digital money go far beyond
+convenient payments.
+
+>The choice between keeping information in the hands of individuals or of
+>organizations is being made each time any government or business decides to
+>automate another set of transactions. In one direction lies unprecedented
+>scrutiny and control of people's lives, in the other, secure parity between
+>individuals and organizations. The shape of society in the next century may
+>depend on which approach predominates.
+>
+><cite>—[David
+>Chaum](https://groups.csail.mit.edu/mac/classes/6.805/articles/money/chaum-electronic-privacy.html)</cite>
+
+Over the past year, OpenSats has given long-term and targeted support to ecash
+developers and projects. This led to contributors proposing new protocol
+standards, improving reference implementations, enhancing wallet usability, and
+adding entry points for merchants and services. Several new standards now span
+multiple projects, signaling adoption, interoperability, and the growth of
+bitcoin-based ecash infrastructure.
+
+The nine initiatives highlighted in this impact report are:
+
+- [Cashu](#cashu)
+- [Cashu Dev Kit](#cashu-dev-kit)
+- [Nutshell](#nutshell)
+- [Minibits Wallet](#minibits-wallet)
+- [Nutstash](#nutstash)
+- [Npub.cash](#npubcash)
+- [Hashpool](#hashpool)
+- [Fedimint](#fedimint)
+- [OpenCash](#opencash)
+
+The cumulative advancements of these projects  mark a shift from experimentation
+towards reliable infrastructure, showing that ecash is becoming a more
+dependable part of Bitcoin's payment landscape.
+
+Let's take a closer look at how each of these ecash initiatives is making an
+impact.
+
+---
+
+### Cashu
+
+Over the past year, Cashu developments focused on strengthening reliability,
+expanding interoperability, and supporting new use cases. With long-term
+[support](/blog/cashu-calle-receives-lts-grant) from OpenSats, Calle advanced
+new privacy-preserving standards, improved Lightning settlement, and introduced
+features that make multi-mint and shared custody practical. These efforts moved
+Cashu toward infrastructure that operators can run and wallets can trust. Many
+of the improvements were formalized as new NUT standards—which define the
+Notation, Usage, and Terminology of the Cashu protocol.
+
+Among the changes, [cached
+responses](https://github.com/cashubtc/nuts/blob/main/19.md) (NUT-19) allow
+wallets to recover after a failed transaction rather than risking loss of funds.
+Calle also authored [clear
+authentication](https://github.com/cashubtc/nuts/blob/main/21.md) (NUT-21) and
+[blind authentication flows](https://github.com/cashubtc/nuts/blob/main/22.md),
+which allow mints to restrict access while preserving transaction privacy. An
+extension to [NUT-11](https://github.com/cashubtc/nuts/blob/main/11.md)
+introduced the `SIG_ALL` option, enabling shared custody and escrow by requiring
+multiple parties to authorize a spend. Work on [payment
+requests](https://github.com/cashubtc/nuts/blob/main/18.md) (NUT-18) also
+provided Cashu with an equivalent of a Lightning invoice, giving wallets a
+standardized way to request tokens over different communication channels, such
+as HTTP or [nostr](https://github.com/nostr-protocol/nostr).
+
+These specifications transitioned into production. The reference implementation,
+[Nutshell](https://github.com/cashubtc/nutshell), added support for [multi-mint
+payments and a Lightning path-finding
+loop](https://github.com/cashubtc/nutshell/pull/692), allowing a single invoice
+to be split across several custodians while improving payment success rates
+across multiple routes. The 0.17.x release series consolidated these advances
+into tagged builds
+([0.17.0](https://github.com/cashubtc/nutshell/releases/tag/0.17.0)), bringing
+Redis-backed caching, [Keycloak-based
+authentication](https://github.com/cashubtc/nutshell/pull/675), and [expanded
+quote responses](https://github.com/cashubtc/nuts/pull/235) that ease wallet
+integration in stateless environments.
+
+Alongside protocol changes, Calle developed tools to improve reliability and
+adoption. The [Cashu Auditor](https://github.com/callebtc/cashu-auditor)
+automates test payments between mints and exposes uptime through an API, giving
+wallet UIs visibility into mint health.
+[NFChat](https://github.com/callebtc/nfchat) demonstrated NFC-based transfers
+between Android wallets, and the [Cashu
+Decoder](https://github.com/callebtc/cashu-decoder) made it easier for
+developers to inspect and debug tokens.
+
+Work is underway on a [proposal](https://github.com/cashubtc/nuts/pull/267) for
+a nostr-based backup format for mint lists, providing multi-mint users a
+portable, censorship-resistant way to restore their setup. Together with the
+Auditor, NFChat, and Decoder, these contributions strengthened Cashu's
+foundations, improved operator confidence, and moved the protocol closer to
+production-ready ecash infrastructure.
+
+### Cashu Dev Kit
+
+The Cashu Development Kit ([CDK](https://cashudevkit.org/)) makes it easier for
+developers to build apps on top of the Cashu protocol. In 2025, the team
+[delivered](https://github.com/cashubtc/cdk/pull/932) one of the most requested
+features: mobile bindings, which allow Cashu's core functions to run directly in
+iOS and Android apps through [CDK Swift](https://github.com/cashubtc/cdk-swift)
+and [CDK Kotlin](https://github.com/cashubtc/cdk-kotlin).
+
+These bindings make CDK the most accessible path for developers who want to
+create Cashu-powered experiences on mobile.
+
+>Mobile bindings have been the number one requested CDK feature for some time.
+>With the release of our Swift and Kotlin bindings, CDK is the easiest way to
+>get started building Cashu apps. As Bitcoin monetizes, Cashu will be the
+>protocol which day-to-day and online-native payments are settled.
+>
+><cite>—David Caseria, CDK contributor</cite>
+
+Beyond bindings, the project also [worked
+on](https://github.com/cashubtc/cdk/pull/1001) simplifying multi-mint wallet
+support. A new implementation will allow developers to handle balances across
+different mints more seamlessly, supporting common wallet actions without
+requiring manual mint management. This functionality will be built into the
+bindings once complete and released in a future version of CDK.
+
+With OpenSats' [support](/blog/thirteenth-wave-of-bitcoin-grants#sats-app), the
+team is also building Sats App, a native wallet that applies CDK's new bindings
+on iOS and Android. An iOS TestFlight is targeted for late 2025.
+
+CDK is emerging as the developer toolkit that connects protocol advancements
+with real-world applications, ensuring that Cashu can move from research and
+wallets into broader usage across mobile platforms.
+
+### Nutshell
+
+As maintainer of the [Nutshell](https://github.com/cashubtc/nutshell) reference
+implementation, [lollerfirst](https://github.com/lollerfirst) focused on making
+Cashu reliable in practice. His work turned Calle's new standards into
+production code, added safeguards around issuance, and started research into
+privacy and programmability features.
+
+Using [support](/blog/8th-wave-of-bitcoin-grants#cashu-nutshell) from OpenSats,
+lollerfirst implemented [cached requests and
+responses](https://github.com/cashubtc/nutshell/pull/624) (NUT-19) and
+[signatures on quotes](https://github.com/cashubtc/nutshell/pull/670) (NUT-20)
+in production, ensuring wallets could safely retry failed operations and that
+minted tokens reached the intended recipient. Nutshell also added recipient-key
+locking for safer direct payments tied to the intended recipient's key, and
+simple shared-fund setups.
+
+In addition, support for [keyset
+management](https://github.com/cashubtc/nutshell/pull/734) was added, with new
+identifiers, expirations, rotation tools, and per-keyset balance views.
+Operators now have clearer control, while users know their tokens remain valid
+as keys rotate.
+
+Lightning settlement reliability has also been improved. Nutshell now [retries
+different routes](https://github.com/cashubtc/nutshell/pull/692) and splits
+payments into smaller parts, allowing them to be processed through multiple
+channels. This improves how Cashu wallets interact with Lightning, increasing
+the chances of settlement. The browser-based [Cashu.me wallet](http://cashu.me)
+adopted these upgrades, alongside NFC tap-to-pay, multi-mint balances, and
+simpler onboarding.
+
+Efficiency improved with [binary token
+serialization](https://github.com/cashubtc/cdk/pull/507), reducing token size by
+approximately one-third and enabling smaller, faster QR codes that are easier to
+scan under real-world conditions.
+
+On the research side, there was an exploration of anonymous-credential ecash
+([KVAC](https://github.com/lollerfirst/cashu-kvac/tree/master)), which aims to
+unlink the act of receiving tokens from spending them, so mints cannot connect
+issuance to use. Prototypes were also tested for conditional payments, where
+Discrete Log Contracts
+([DLCs](https://bitcoinops.org/en/topics/discreet-log-contracts/)) make tokens
+spendable only if a specified condition is met, and
+[synthetic-dollar](https://github.com/cashubtc/nutshell/pull/608) backends with
+[LNMarkets](https://lnmarkets.com/), which allow tokens to represent a
+stable-value balance rather than bitcoin's fluctuating price.
+
+By mid-2025, Nutshell shipped stable versions that added wallet authentication,
+recoverable payments after failures, safer mint quotes, and support for
+multi-party custody. It also delivered stronger operator controls and research
+prototypes. Nutshell remains a core implementation in the ecosystem and a
+testbed for new ideas.
+
+### Minibits Wallet
+
+[Minibits](https://www.minibits.cash/) is a Cashu wallet developed by
+independent contributor [Misovan](https://github.com/misovan). It runs on mobile
+devices and keeps payments private while preserving the bearer nature of ecash
+tokens.
+
+With [support](/blog/bitcoin-grants-september-2024-7th-wave#minibits) from
+OpenSats, Minibits expanded [beyond
+Android](https://github.com/minibits-cash/minibits_wallet/commit/3a160fc) this
+year. An iOS version launched via TestFlight, and EU users can also download it
+from the [Freedom Store](https://freedomstore.io/). The project
+[updated](https://github.com/minibits-cash/minibits_wallet/commit/9e057ba) its
+React Native codebase and libraries for compatibility with modern devices.
+
+The wallet added
+[migration](https://github.com/minibits-cash/minibits_wallet/commit/d556652) and
+transfer features. Users can export and import tokens, mint lists, and contacts
+between devices, while keeping the same public wallet address when switching
+phones. It also adopted the compact [v4 token
+format](https://github.com/minibits-cash/minibits_wallet/releases/tag/v0.1.8-beta.46)
+for all supporting mints and animated QR codes
+([NUT-16](https://github.com/cashubtc/nuts/blob/main/16.md)) for [scanning and
+display](https://github.com/minibits-cash/minibits_wallet/releases/tag/v0.1.9-beta.25),
+making large token sets easier to scan and share.
+
+Reliability improved with [WebSocket](https://cashubtc.github.io/nuts/17/)
+(NUT-17) updates, which instantly push balances, and the adoption of [cached
+responses](https://cashubtc.github.io/nuts/19/) (NUT-19), which allows wallets
+to retry incomplete payments after a crash or disconnect—a safeguard now used
+across the ecosystem. On Android, the [Nostr Wallet Connect](https://nwc.dev/)
+commands have been adjusted to minimize the likelihood of system-level
+interruptions disrupting a payment in progress.
+
+Minibits can now create and pay for [payment
+requests](https://cashubtc.github.io/nuts/18/) (NUT-18), aligning with other
+wallets that adopted the same format. Tokens can also be sent over [nostr direct
+messages](https://github.com/nostr-protocol/nips/blob/master/17.md), making it
+simple to pass ecash between people already using [nostr
+clients](https://nostrapps.com/#microblogging#all). Another addition allows
+senders to lock tokens to a recipient's public key, with an optional expiration
+if the token remains unclaimed.
+
+One of the most notable improvements was the ability to make [offline
+transfers](https://github.com/minibits-cash/minibits_wallet/commit/4e6c6e9). A
+sender can [prepare a
+payment](https://github.com/minibits-cash/minibits_wallet/commit/12dd4f9) while
+online, then go offline. The recipient can later connect to validate and redeem
+the tokens, or keep them circulating as ecash. As Misovan explained:
+
+>Thanks to the OpenSats grant, I was able to focus on the niche area of offline
+>ecash payments. For those of us used to fast internet, this may seem like a
+>curiosity, but in many underdeveloped regions it's a real necessity. Minibits
+>has become a pioneer in showcasing the unique properties of ecash for moving
+>bitcoin. The wallet enables the payer to be completely offline, leveraging
+>ecash's nature as a true bearer token stored directly in the wallet.
+
+By broadening platform support, improving reliability, enabling sender-locked
+and offline payments, and making transfers easier across devices, Minibits moved
+closer to being a daily-use mobile wallet for ecash.
+
+### Nutstash
+
+Nutstash is a web-based Cashu wallet maintained by
+[Gandlaf](https://github.com/gandlafbtc). Over the past year, with
+[support](/blog/ninth-wave-of-bitcoin-grants#nutstash) from OpenSats, the
+project gained new features for multi-mint payments, offline use, protocol
+compatibility, and security.
+
+The [2.2.0](https://github.com/gandlafbtc/nutstash-wallet/releases/tag/v2.2.0)
+release introduced multi-mint payments, allowing a single Lightning invoice to
+be paid using balances from multiple mints. Nutstash also added Lightning
+Address support, real-time balance updates over WebSockets, and compatibility
+with mints that use [clear authentication](https://cashubtc.github.io/nuts/21/)
+and [blind authentication](https://cashubtc.github.io/nuts/22/).
+
+[Offline
+features](https://github.com/gandlafbtc/nutstash-wallet/releases/tag/nutstash-v2.0.4)
+advanced as well. Users can now receive tokens without an internet connection,
+with the wallet confirming validity before adding them to the balance. A coin
+selector has been added, allowing users to choose which tokens to spend when
+sending offline. QR code and NFC transfers were updated to support these flows,
+making ecash more practical in weak-connectivity environments. Support for
+[payment requests](https://cashubtc.github.io/nuts/18/) was also added, joining
+other wallets in offering a standard invoice format.
+
+Beyond the wallet itself, Gandlaf worked on supporting tools. The [Cashu
+Brrr](https://github.com/gandlafbtc/cashu-brrr) project introduced a new
+[physical note
+template](https://github.com/gandlafbtc/cashu-brrr/commit/e9e5922f28a52cb3a07cd6d5ac36d3d842eb494d)
+for printed tokens and launched
+[OpenPleb](https://github.com/gandlafbtc/open-pleb), a self-hosted service that
+lets users pay fiat QR bills with Bitcoin via Lightning or ecash.
+
+Community involvement remained a focus. Gandlaf gave the talk "Ecash on Bitcoin
+— Cashu New Frontiers" at [Bitcoin Seoul
+2025](https://seoul-2025-pres.vercel.app/) and organized monthly [Bitcoin
+Pusan](https://bitcoinpusan.space/) meetups, offering developers and users
+practical exposure to ecash.
+
+By mid-2025, Nutstash had achieved support for multi-mint payments, offline
+transfers, standardized payment requests, shared custody arrangements, and
+improved security. These features demonstrated the practical, reliable, and
+private use of ecash in real-world applications.
+
+### Npub.cash
+
+[Npub.cash](https://npub.cash/) makes it possible to receive Lightning payments
+as Cashu ecash. When someone sends a Lightning payment to a Lightning Address,
+npub.cash receives it, and converts it into tokens, holding them until the user
+returns online to collect them.
+
+Within the past year, [Egge](https://github.com/Egge21M) released npub.cash
+[v2](https://github.com/cashubtc/npubcash-server/pull/35), a major update that
+made the system easier to run. The new version dropped dependencies on
+third-party services and instead connects directly to Cashu mints. It also
+introduced mint quotes instead of proofs, added more secure login options, and
+reorganized the codebase for simpler deployment.
+
+Users gained more control with this release. Npub.cash v2 allows users to select
+the mint they want to use and verifies the connection. It also added locked
+quotes, which require the wallet to sign before the tokens can be redeemed. This
+ensures tokens are only issued to the rightful user, extending safeguards from
+wallets to the npub.cash server. Egge also introduced `Cashu-402`
+([NUT-24](https://github.com/cashubtc/nuts/blob/main/24.md)), a way for services
+to charge for access directly through the Cashu protocol.
+
+A [WebSocket](https://github.com/cashubtc/nuts/pull/98) endpoint has been added,
+allowing wallets to receive instant notifications when a payment arrives, rather
+than waiting for periodic refreshes. To handle many concurrent payments
+reliably, Egge also created [`almnd`](https://github.com/Egge21M/almnd), a
+scheduling tool that spaces out requests to mints, allowing the system to track
+thousands of payments without overloading servers.
+
+Other wallets began integrating these improvements. Cashu.me added npub.cash v2
+as an experimental feature, and the [Sovran
+wallet](/blog/twelfth-wave-of-bitcoin-grants#sovran) listed support for using
+npub.cash addresses with different mints. Egge also built
+[`nut-bridge`](https://github.com/Egge21M/nut-bridge), a prototype that forwards
+nostr zaps as ecash "NutZaps" and issues receipts.
+
+Egge's work on npub.cash is tied to [his role as a
+maintainer](https://github.com/cashubtc/cashu-ts/releases) of `cashu-ts`, the
+main TypeScript library for the protocol. He contributed hundreds of changes,
+helped lead multiple releases, and launched a new documentation site.
+
+As Egge described:
+
+>With npub.cash v2, Lightning Addresses are no longer tied to a specific wallet.
+>Users can get an address right away, wallets can support whichever address
+>their users prefer, and providers can launch their own services in minutes.
+
+Npub.cash v2 made Lightning Addresses portable and easy to host. It allows
+people to receive Lightning payments as ecash without staying online, while
+giving them the choice to use a public service or run their own.
+
+### Hashpool
+
+[Hashpool](https://hashpool.dev/articles/what-is-hashpool/) is an accountless
+mining pool that uses ecash tokens to represent mining shares. Instead of
+tracking balances in a custodial database, the pool issues miners these private,
+bearer-style tokens for their work. When blocks are found, the tokens can be
+redeemed for bitcoin.
+
+With [support](/blog/twelfth-wave-of-bitcoin-grants#hashpool-and-axepool) from
+OpenSats, developments have focused on integrating ecash issuance directly into
+the [Stratum V2](https://stratumprotocol.org/) protocol. The connection between
+pool and mint was rebuilt to use [asynchronous
+channels](https://github.com/vnprc/hashpool/commit/44f24d5), making payout flows
+more reliable. New [message
+formats](https://github.com/vnprc/hashpool/commit/5888558) were added in line
+with Cashu standards, and the development environment was upgraded with [Nix
+Flakes](https://nix.dev/concepts/flakes.html), Bitcoin
+[regtest](https://developer.bitcoin.org/examples/testing.html) setups, and
+[command-line utilities](https://github.com/vnprc/hashpool/commit/3c232ce) for
+testing wallet balances and redemption. Together, these changes make Hashpool
+easier to test and operate under real-world mining conditions.
+
+Hashpool also explored how ecash payouts could be extended through Lightning and
+payment requests, with an [active pull
+request](https://github.com/vnprc/hashpool/pull/62) open for Lightning
+integration. These additions would allow miners to instantly redeem their tokens
+for bitcoin, thereby broadening the utility of ecash-based rewards.
+
+A related project called
+[Axepool](https://hashpool.dev/dev-logs/dev-log-2025-04-05/#axepool) applies the
+same design to small-scale miners, particularly those running
+[Bitaxe](/blog/bitcoin-grants-feb-2024#the-bitaxe) hardware. By issuing
+[eHash](https://hashpool.dev/articles/what-is-hashpool/#ehash) (ecash tokens
+backed by proof of work) directly for contributed hashpower, Axepool removes
+account requirements and minimum withdrawal limits, making it easier for
+everyday miners to receive frequent payouts. Together, Hashpool and Axepool
+demonstrate how ecash can replace traditional pool accounting with direct,
+accountless mining rewards that are private and transferable.
+
+### Fedimint
+
+Fedimint is an ecash protocol based on a federated Chaumian e-cash framework,
+designed to let communities pool custody and issue private bearer tokens. With
+OpenSats' support, contributors made progress delivering software and tooling.
+
+The Lightning Gateway project, spearheaded by
+[m1sterc001guy](/blog/m1sterc001guy-receives-lts-grant), introduced
+[LNv2](https://github.com/fedimint/fedimint/pull/7240), a new payment system
+that fixes malleability and simplifies invoices. Operators also gained a
+self-contained [LDK mode](https://github.com/fedimint/fedimint/pull/5540) that
+eliminates the need for an external Lightning node, along with improved fee
+handling, authenticated endpoints, and simple [12-word
+recovery](https://github.com/fedimint/fedimint/pull/5908) for both ecash and
+on-chain funds.
+
+Networking and deployment were improved by Harbor and core contributors, led by
+[oleonardolima](https://github.com/oleonardolima). `Tor`
+[support](https://github.com/fedimint/fedimint/pull/5443) was added for private
+connectivity, while `Iroh` [peer-to-peer
+networking](https://github.com/fedimint/fedimint/pull/7042) removed the need for
+domain names or port forwarding. Packaging advances delivered [`Docker
+Compose`](https://github.com/fedimint/fedimint/pull/7042) files and a
+[`Start9`](https://github.com/fedimint/fedimint/pull/7117) service, making
+federations easier to launch and manage.
+
+Wallet safety and upgrades were the focus of core releases coordinated by
+[Bradley Stachurski](https://github.com/bradleystachurski). A [double-spend
+vulnerability](https://github.com/fedimint/fedimint/pull/6065) was fixed, while
+[database migrations](https://github.com/fedimint/fedimint/pull/6359) and
+recovery tools were introduced. Real-world federations tested and hardened these
+changes.
+
+Experiments such as [`ROASTr`](https://github.com/m1sterc001guy/roastr) using
+[nostr-signing](https://github.com/nostr-protocol/nips/blob/master/87.md),
+conducted by m1sterc001guy, and [Ethan Tuttle](https://github.com/EthnTuttle),
+demonstrated how federations could collectively sign and broadcast authenticated
+messages. Testing utilities like
+[`Devimint`](https://delvingbitcoin.org/t/awesome-bitcoin-developer-tools-devimint/94)
+and packaging for [`StartOS`](https://github.com/EthnTuttle/fedimintd-startos)
+simplified onboarding providing operators with plug-and-play options for
+deployment.
+
+Together, with support from OpenSats, these efforts delivered real progress on
+gateways, wallets, networking, and new modules to the broader ecash landscape.
+
+### OpenCash
+
+The [OpenCash Association](https://opencash.dev/) is a nonprofit dedicated to
+advancing research and development of open-source ecash systems built on
+Bitcoin. Using [support](/blog/let-a-thousand-flowers-bloom#opencash) from
+OpenSats, its mission is to fund contributors, coordinate community efforts, and
+create the conditions for Cashu to move from prototypes into tools with
+real-world applications.
+
+In early 2025, OpenCash launched a bounty for a [BTCPay Server
+plugin](https://opencash.dev/projects) that would allow merchants already using
+BTCPay to accept Cashu payments. Community developers delivered an early beta
+plugin, [BTCNutServer](https://github.com/d4rp4t/BTCNutServer), aligned with
+that scope. The plugin allows merchants to either accept and hold ecash directly
+or automatically convert tokens into Lightning invoices. Mint whitelists give
+operators the ability to specify which issuers they trust.
+
+OpenCash also supported adoption by sponsoring design work. It backed a Cashu
+track at the [2025 Bitcoin
+Designathon](https://bitcoinmagazine.com/news/designathon-2025-invites-global-creatives-to-help-shape-the-future-of-bitcoin),
+which brought UX specialists into the ecosystem. The work addressed wallet
+setup, backup and recovery, handling multiple mints, and NFC-based payments,
+producing design patterns that wallet teams could adopt directly.
+
+Coordination across the developer community remained a priority. OpenCash
+organized recurring public developer calls, publishing minutes and agendas.
+These calls facilitated the adoption of standards such as WebSocket (NUT-17)
+updates and Payment Requests (NUT-18), ensuring implementations remained
+aligned.
+
+To create a clear entry point for newcomers, OpenCash maintained opencash.dev as
+the hub for grants, bounties, and updates. It also contributed to resources such
+as [cashu.space](https://cashu.space/) and
+[docs.cashu.space](https://docs.cashu.space/resources/learn), shortening the
+path for both developers and users who want to get involved.
+
+With long-term support from OpenSats, OpenCash advanced Cashu at several levels:
+it funded the first merchant bridge through BTCPay, sponsored design work,
+coordinated protocol development through public calls, and maintained a stable
+entry point for newcomers. These steps strengthened the foundation for Cashu as
+a privacy-preserving part of the Bitcoin ecosystem.
+
+---
+
+Ecash offers a path toward practical, privacy-preserving payments layered on
+Bitcoin. It combines the speed and liquidity of Lightning with strong privacy
+guarantees, bearer-style tokens, and the ability to transfer value offline or
+asynchronously.
+
+The advancements outlined above show a clear trend: as protocol standards
+mature, wallets are becoming more interoperable, mints more resilient, and
+tooling more user-friendly. These infrastructure developments allow merchants to
+begin relying on ecash, while user-facing improvements are making wallets
+faster, safer, and easier to use.
+
+Much work remains, but the direction is clear: ecash is evolving into a durable
+infrastructure that expands the payment capabilities of bitcoin as an asset.
+OpenSats will continue to support the contributors and maintainers who are
+driving this progress.
+
+To support projects like these and others, please consider making a recurring
+donation to the General Fund.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+If you are a developer advancing free and open-source software that helps
+Bitcoin flourish, we encourage you to [apply for
+funding](https://opensats.org/apply).
