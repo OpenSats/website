@@ -178,7 +178,7 @@ export default function GrantReportForm({
 
           {/* Project Updates */}
           <label className="block">
-            Project Updates *
+            How did you spend your time? *
             <br />
             <small>
               Describe your progress and accomplishments since the last report.
@@ -200,7 +200,7 @@ export default function GrantReportForm({
 
           {/* Plans for Next Quarter */}
           <label className="block">
-            Plans for Next Quarter *
+            What are your plans for next quarter? *
             <br />
             <small>
               Outline your goals and plans for the next quarter. Be specific
@@ -222,7 +222,7 @@ export default function GrantReportForm({
 
           {/* Use of Funds */}
           <label className="block">
-            Use of Funds *
+            How did you use the funds? *
             <br />
             <small>
               Required for legal and compliance reasons. If using for living
@@ -357,7 +357,7 @@ export default function GrantReportForm({
 
         {/* Project Updates */}
         <label className="block">
-          Project Updates *
+          How did you spend your time? *
           <br />
           <small>
             Describe your progress and accomplishments since the last report.
@@ -377,7 +377,7 @@ export default function GrantReportForm({
 
         {/* Plans for Next Quarter */}
         <label className="block">
-          Plans for Next Quarter *
+          What are your plans for next quarter? *
           <br />
           <small>
             Outline your goals and plans for the next quarter. Be specific about
@@ -399,7 +399,7 @@ export default function GrantReportForm({
 
         {/* Use of Funds */}
         <label className="block">
-          Use of Funds *
+          How did you use the funds? *
           <br />
           <small>
             Required for legal and compliance reasons. If using for living
