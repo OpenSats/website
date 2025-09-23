@@ -222,7 +222,7 @@ export default function GrantReportForm({
 
           {/* Use of Funds */}
           <label className="block">
-            Use of Funds *
+            How did you use the funds? *
             <br />
             <small>
               Required for legal and compliance reasons. If using for living
@@ -399,7 +399,7 @@ export default function GrantReportForm({
 
         {/* Use of Funds */}
         <label className="block">
-          Use of Funds *
+          How did you use the funds? *
           <br />
           <small>
             Required for legal and compliance reasons. If using for living
