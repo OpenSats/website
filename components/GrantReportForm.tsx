@@ -200,7 +200,7 @@ export default function GrantReportForm({
 
           {/* Plans for Next Quarter */}
           <label className="block">
-            Plans for Next Quarter *
+            What are your plans for next quarter? *
             <br />
             <small>
               Outline your goals and plans for the next quarter. Be specific
@@ -377,7 +377,7 @@ export default function GrantReportForm({
 
         {/* Plans for Next Quarter */}
         <label className="block">
-          Plans for Next Quarter *
+          What are your plans for next quarter? *
           <br />
           <small>
             Outline your goals and plans for the next quarter. Be specific about
