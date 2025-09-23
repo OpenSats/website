@@ -178,7 +178,7 @@ export default function GrantReportForm({
 
           {/* Project Updates */}
           <label className="block">
-            Project Updates *
+            How did you spend your time? *
             <br />
             <small>
               Describe your progress and accomplishments since the last report.
@@ -357,7 +357,7 @@ export default function GrantReportForm({
 
         {/* Project Updates */}
         <label className="block">
-          Project Updates *
+          How did you spend your time? *
           <br />
           <small>
             Describe your progress and accomplishments since the last report.
