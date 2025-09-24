@@ -396,35 +396,6 @@ easier for everyday miners to receive frequent payouts. The Axepool design is
 still in the conceptual phase and undergoing rapid iteration. Together, Hashpool
 and Axepool demonstrate how ecash can replace traditional pool accounting
 with direct, accountless mining rewards that are private and transferable.
-OpenSats, developments have focused on integrating ecash issuance directly into
-the [Stratum V2](https://stratumprotocol.org/) protocol. The connection between
-pool and mint was rebuilt to use [asynchronous
-channels](https://github.com/vnprc/hashpool/commit/44f24d5), making payout flows
-more reliable. New [message
-formats](https://github.com/vnprc/hashpool/commit/5888558) were added in line
-with Cashu standards, and the development environment was upgraded with [Nix
-Flakes](https://nix.dev/concepts/flakes.html), Bitcoin
-[regtest](https://developer.bitcoin.org/examples/testing.html) setups, and
-[command-line utilities](https://github.com/vnprc/hashpool/commit/3c232ce) for
-testing wallet balances and redemption. Together, these changes make Hashpool
-easier to test and operate under real-world mining conditions.
-
-Hashpool also explored how ecash payouts could be extended through Lightning and
-payment requests, with an [active pull
-request](https://github.com/vnprc/hashpool/pull/62) open for Lightning
-integration. These additions would allow miners to instantly redeem their tokens
-for bitcoin, thereby broadening the utility of ecash-based rewards.
-
-A related project called
-[Axepool](https://hashpool.dev/dev-logs/dev-log-2025-04-05/#axepool) applies the
-same design to small-scale miners, particularly those running
-[Bitaxe](/blog/bitcoin-grants-feb-2024#the-bitaxe) hardware. By issuing
-[eHash](https://hashpool.dev/articles/what-is-hashpool/#ehash) (ecash tokens
-backed by proof of work) directly for contributed hashpower, Axepool removes
-account requirements and minimum withdrawal limits, making it easier for
-everyday miners to receive frequent payouts. Together, Hashpool and Axepool
-demonstrate how ecash can replace traditional pool accounting with direct,
-accountless mining rewards that are private and transferable.
 
 ### Fedimint
 
