@@ -392,12 +392,17 @@ security attack surface of the protocol.  Work on Hashpool has resulted in
 [commits](https://github.com/cashubtc/cdk/commit/853f13fc85001af710175489581d701a0667e24d)
 to the cdk project.
 
-The mint role was [refactored](https://github.com/vnprc/hashpool/commit/bc50f53535dddc4eea0bb0569bf1768ada862d9b) into a proper Sv2 role using all new [extension](https://stratumprotocol.org/specification/03-Protocol-Overview/#34-protocol-extensions) message types, and the hashpool repo was upgraded with [Nix
+The mint role was [refactored] into a proper Sv2 role using all new [extension]
+message types, and the hashpool repo was upgraded with [Nix
 Flakes](https://nix.dev/concepts/flakes.html), Bitcoin
 [regtest](https://developer.bitcoin.org/examples/testing.html) setups, and
-[command-line utilities](https://github.com/vnprc/hashpool/commit/28b682df9023babbce60be34ef0e612c58f3e65d) for
-testing wallet balances and redemption. These changes make Hashpool
-easier to test and operate under real-world mining conditions.
+[command-line utilities][cli] for testing wallet balances and redemption. These
+changes make Hashpool easier to test and operate under real-world mining
+conditions.
+
+[refactored]: https://github.com/vnprc/hashpool/commit/bc50f53535dddc4eea0bb0569bf1768ada862d9b
+[extension]: https://stratumprotocol.org/specification/03-Protocol-Overview/#34-protocol-extensions
+[cli]: https://github.com/vnprc/hashpool/commit/28b682df9023babbce60be34ef0e612c58f3e65d
 
 Hashpool developer vnprc also published a [rust
 crate](https://crates.io/crates/bitcoin-nostr-relay) for transmitting bitcoin
