@@ -380,10 +380,17 @@ OpenSats, developments have focused on integrating ecash issuance directly into
 the [Stratum V2](https://stratumprotocol.org/) protocol.
 
 The Cashu mining share payment method protocol has evolved significantly and is
-close to being PR-ready. Major improvements include rewriting the cdk branch
-to conform to best practices within the cdk repo and [eliminating](https://github.com/vnprc/cdk/commit/c95fb868533e46eda029fe690fc66a805f3e7803) the need for a quote lookup API, which
-significantly increased the privacy and security attack surface of the protocol.
-Work on Hashpool has resulted in [a](https://github.com/cashubtc/cdk/commit/180a7c41b754f3b37d90e2cc92a5ba5f76b0b15e) [number](https://github.com/cashubtc/cdk/commit/714022fe140f3ed58bac9396ca6b7627dbbc59f9) [of](https://github.com/cashubtc/cdk/commit/5b30ca546d44d5bfe86f07e6091c989aa4953a2e) [merged](https://github.com/cashubtc/cdk/commit/951ff054fb61e20f99cbe6776354454c6a90a1bb) [commits](https://github.com/cashubtc/cdk/commit/853f13fc85001af710175489581d701a0667e24d) to the cdk project.
+close to being PR-ready. Major improvements include rewriting the cdk branch to
+conform to best practices within the cdk repo and
+[eliminating](https://github.com/vnprc/cdk/commit/c95fb868533e46eda029fe690fc66a805f3e7803)
+the need for a quote lookup API, which significantly increased the privacy and
+security attack surface of the protocol.  Work on Hashpool has resulted in
+[a](https://github.com/cashubtc/cdk/commit/180a7c41b754f3b37d90e2cc92a5ba5f76b0b15e)
+[number](https://github.com/cashubtc/cdk/commit/714022fe140f3ed58bac9396ca6b7627dbbc59f9)
+[of](https://github.com/cashubtc/cdk/commit/5b30ca546d44d5bfe86f07e6091c989aa4953a2e)
+[merged](https://github.com/cashubtc/cdk/commit/951ff054fb61e20f99cbe6776354454c6a90a1bb)
+[commits](https://github.com/cashubtc/cdk/commit/853f13fc85001af710175489581d701a0667e24d)
+to the cdk project.
 
 The mint role was [refactored](https://github.com/vnprc/hashpool/commit/bc50f53535dddc4eea0bb0569bf1768ada862d9b) into a proper Sv2 role using all new [extension](https://stratumprotocol.org/specification/03-Protocol-Overview/#34-protocol-extensions) message types, and the hashpool repo was upgraded with [Nix
 Flakes](https://nix.dev/concepts/flakes.html), Bitcoin
