@@ -33,4 +33,4 @@ Want to lend a helping hand? [Join our group of volunteers!](https://opensats.or
 
 We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31) too!
 
-[![opensats.org](https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22))](https://opensats.org)
+[![opensats.org](<https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22)>)](https://opensats.org)

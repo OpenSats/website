@@ -58,8 +58,6 @@ export interface BTCPayWebhookEvent {
   }
 }
 
-
-
 /**
  * Helper function to get raw body from request
  */
@@ -75,8 +73,6 @@ export function getRawBody(req: NextApiRequest): Promise<Buffer> {
     req.on('error', reject)
   })
 }
-
-
 
 /**
  * Verify BTCPay Server webhook signature

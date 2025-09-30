@@ -144,7 +144,9 @@ export async function sendDonationNotification(
   paymentMethod: 'bitcoin' | 'fiat' = 'bitcoin'
 ): Promise<boolean> {
   if (!SENDGRID_API_KEY || !FROM_ADDRESS || !SENDGRID_RECIPIENT_ACCOUNTING) {
-    console.error('SendGrid or accounting email not configured. Notification not sent.')
+    console.error(
+      'SendGrid or accounting email not configured. Notification not sent.'
+    )
     return false
   }
 

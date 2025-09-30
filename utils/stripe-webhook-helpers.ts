@@ -24,8 +24,6 @@ export interface StripeWebhookEvent {
   }
 }
 
-
-
 /**
  * Helper function to get raw body from request
  */
@@ -41,8 +39,6 @@ export function getRawBody(req: NextApiRequest): Promise<Buffer> {
     req.on('error', reject)
   })
 }
-
-
 
 /**
  * Verify Stripe webhook signature
@@ -62,18 +58,16 @@ export function verifyStripeWebhookSignature(
   }
 }
 
-
-
 /**
  * Map zaprite campaign ID to readable fund name for admin notifications
  */
 function getFundNameForAdmin(zapriteId: string): string {
   const fundMapping: Record<string, string> = {
-    'lZo1wcsJ0SQb58XfGC4e': 'Operations Budget',
+    lZo1wcsJ0SQb58XfGC4e: 'Operations Budget',
     '32WbND8heqmY5wYYnIpa': 'General Fund',
-    'OoYtzNjilW1NRtDsxLAj': 'The Nostr Fund',
+    OoYtzNjilW1NRtDsxLAj: 'The Nostr Fund',
   }
-  
+
   return fundMapping[zapriteId] || 'General Fund'
 }
 
@@ -90,14 +84,10 @@ function formatAmountFromCents(amount: number, currency: string): string {
 /**
  * Process Stripe webhook event and send donation receipt
  */
-export async function processStripeWebhook(
-  event: Stripe.Event
-): Promise<void> {
+export async function processStripeWebhook(event: Stripe.Event): Promise<void> {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
-    
 
-    
     const donorName = session.metadata?.donor_name || 'Anonymous'
     const donorEmail = session.metadata?.donor_email || 'No email provided'
     const zapriteId = session.metadata?.recipient_campaign
@@ -105,7 +95,7 @@ export async function processStripeWebhook(
     const sessionId = session.id
 
     // Extract payment amount from the session
-    const paymentAmount = session.amount_total 
+    const paymentAmount = session.amount_total
       ? formatAmountFromCents(session.amount_total, session.currency || 'usd')
       : 'Unknown'
     const paymentCurrency = session.currency?.toUpperCase() || 'USD'
@@ -142,7 +132,9 @@ export async function processStripeWebhook(
 
     // Send donation notification to admins
     console.log('📧 Sending donation notification to admins...')
-    const adminFundName = zapriteId ? getFundNameForAdmin(zapriteId) : 'General Fund'
+    const adminFundName = zapriteId
+      ? getFundNameForAdmin(zapriteId)
+      : 'General Fund'
     const notificationSent = await sendDonationNotification(
       donorEmail,
       donorName,
