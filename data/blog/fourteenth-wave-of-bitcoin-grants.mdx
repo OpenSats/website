@@ -7,3 +7,201 @@ images: ['/static/images/blog/85-fouteenth-wave-of-bitcoin-grants.jpg']
 draft: false
 summary: "OpenSats is funding ten more open-source projects advancing the Bitcoin ecosystem."
 ---
+
+OpenSats is pleased to announce our fourteenth wave of grants from the General
+Fund, providing support to four first-time recipients and six grant renewals.
+
+This round focuses on practical infrastructure by expanding access to test
+networks, making full nodes easier to run, improving transparency in Lightning
+payments, and reducing operational friction for ecash systems.
+
+The four first-time grant recipients are:
+
+- [Orchard](#orchard)
+- [Floresta](#floresta)
+- [Alt Signetfaucet](#alt-signetfaucet)
+- [Lightning Detective](#lightning-detective)
+
+The six grant renewals will go to:
+
+- [Cove][cove]
+- [Stratum V2][stratum-v2]
+- [BTCPay Server][btcpay-server]
+- [Satsie's Pocket Guides][satsies]
+- [Daniella Brozzoni (Core)][brozzoni]
+- [L0rinc (Core)][l0rinc]
+
+[cove]: /blog/bitcoin-grants-july-2024#cove
+[stratum-v2]: /blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool
+[btcpay-server]: /blog/bitcoin-grants-july-2023#btcpay-server
+[satsies]: /blog/second-wave-of-education-grants#satsies-pocket-guides
+[brozzoni]: /blog/more-for-core#danielabrozzoni
+[l0rinc]: /blog/more-for-core#l0rinc
+
+Together, these ten projects share a goal of keeping Bitcoin decentralized,
+transparent, and user-driven, while ensuring it remains robust and accessible.
+
+None of this would be possible without the generosity of our donors. If you'd
+like to help move Bitcoin forward by supporting projects like those in this
+wave, consider donating to our General Fund.
+
+<center>
+    <DonateToGeneralFundButton/>
+</center>
+
+Let's take a closer look at these projects to discover their purpose, impact,
+and the value they bring to the Bitcoin ecosystem.
+
+---
+
+### Orchard
+
+[Orchard][orchard] is a web application that unifies multiple tools to operate a
+Cashu mint. Mint operators today rely on command-line tools, SQL queries, and
+separate dashboards for Bitcoin, Lightning nodes, and other services, which
+makes operations fragmented and prone to errors. Orchard provides a single
+interface that integrates [LND][lnd], [Taproot Assets][taproot-assets] (`tapd`),
+[Cashu implementations][cashu] like `CDK` and `Nutshell`, and an AI interface
+powered by [Ollama][ollama]. Its modular architecture allows each service to be
+toggled on or off, letting operators start small and expand as needed.
+
+With support from OpenSats, Orchard will add revenue features and backups for
+Cashu mints, improve authentication and observability, increase trust through
+event logs and multi-user support, add support for Lightning implementations
+beyond LND, including [CLN][cln], and improve long-term sustainability with test
+suites, documentation, and research into revenue models. These efforts aim to
+reduce the learning curve for new operators, increase the number and quality of
+Cashu mints, and demonstrate how Bitcoin infrastructure can be improved through
+the convergence of open-source software and AI.
+
+Repository: [orangeshyguy21/orchard](https://github.com/orangeshyguy21/orchard)  
+License: MIT
+
+[orchard]: https://orchard.space/
+[lnd]: https://github.com/lightningnetwork/lnd?tab=readme-ov-file#lightning-network-daemon
+[taproot-assets]: https://docs.lightning.engineering/the-lightning-network/taproot-assets
+[cashu]: https://docs.cashu.space/mints
+[ollama]: https://docs.ollama.com/
+[cln]: https://github.com/ElementsProject/lightning?tab=readme-ov-file#readme
+
+---
+
+### Floresta
+
+Floresta is a modular and lightweight Bitcoin full node written in Rust that
+uses the [Utreexo dynamic accumulator][utreexo], a cryptographic technique that
+maintains a compact set of unspent coins (the UTXO set). While
+[Floresta][floresta] has previously received OpenSats' support, this is
+contributor [Jaoleal][jaoleal]'s first grant for his work on the project. To
+date, the project has delivered `libfloresta`, a reusable library for building
+Bitcoin applications, and `florestad`, a daemon that includes a view-only wallet
+and an integrated Electrum server. By combining pruning with Utreexo, Floresta
+has reduced storage requirements and sync times, making it possible to run full
+nodes on resource-constrained devices while still independently verifying
+Bitcoin.
+
+With support from OpenSats, Floresta will expand its RPC interface to align more
+closely with Bitcoin Core, enabling developers and infrastructure providers to
+integrate it more easily into existing applications. It will also be packaged
+for [nix-bitcoin][nix-bitcoin] and upstream [nixpkgs][nixpkgs], making
+deployment seamless for users of [NixOS][nixos]. Alongside these milestones, the
+project will continue to conduct code reviews, provide contributor support, and
+maintain its long-term stability, ensuring it remains both technically robust
+and accessible to a growing community of developers and users.
+
+Repository: [vinteumorg/Floresta](https://github.com/vinteumorg/Floresta)  
+License: MIT
+
+[utreexo]: https://eprint.iacr.org/2019/611
+[floresta]: /blog/bitcoin-grants-september-2024-7th-wave#floresta
+[jaoleal]: https://github.com/jaoleal/
+[nix-bitcoin]: https://nixbitcoin.org/
+[nixpkgs]: https://github.com/NixOS/nixpkgs
+[nixos]: https://nixos.org/
+
+---
+
+### Alt Signetfaucet
+
+[Alt Signetfaucet][alt-signetfaucet] is a Bitcoin faucet for the Signet test
+network, built in a [POSIX][posix] shell using only Bitcoin Core and BusyBox.
+Running since March 2025, it provides a reliable way for learners and developers
+to access test bitcoin for experimentation. By offering these test coins, the
+faucet makes it easier to practice Bitcoin transactions, test applications, or
+teach others how the network works. It supports a wide range of transaction
+formats, including older public key types (P2PK with uncompressed keys), and its
+activity can be tracked openly through the [mempool.space Signet
+explorer][mempool-explorer].
+
+With support from OpenSats, the project will document its current design,
+identify areas for improvement, and make updates to ensure the faucet is more
+robust and user-friendly. Planned milestones include running a faucet on a
+custom [Signet][signet] network that produces blocks at a steady pace, and
+refining the underlying `bitcoin-faucet-shell` code into a tool that anyone can
+deploy. These efforts aim to expand access to test bitcoins, ensuring it is
+easier for developers, educators, and new users to explore and learn about
+Bitcoin safely.
+
+Repository: [jsarenik/bitcoin-faucet-shell][faucet-repo]  
+License: MIT
+
+[alt-signetfaucet]: https://signet257.bublina.eu.org/about.html
+[posix]: https://standards.ieee.org/ieee/1003.1/7700/
+[mempool-explorer]: https://mempool.space/signet
+[signet]: https://bitcoinops.org/en/topics/signet/
+[faucet-repo]: https://github.com/jsarenik/bitcoin-faucet-shell
+
+---
+
+### Lightning Detective
+
+Lightning Detective is a Rust library and web service that analyzes Lightning
+invoices to determine the likely recipient. It works with the standard format
+used in the Lightning Network ([BOLT-11][bolt-11]) and compares invoice data
+with the public Lightning graph to classify the payee as a custodial service, a
+non-custodial wallet, or another type of provider. The tool can match well-known
+public nodes directly, for example, by identifying custodial wallets like Wallet
+of Satoshi, and can also detect wallets that rely on Lightning Service Providers
+([LSPs][lsps]), such as Phoenix, through ACINQ's infrastructure. A public demo
+is available at [detective.lipa.dev][detective].
+
+With support from OpenSats, the project will expand its coverage and improve
+usability. Planned work includes detecting the target network, adding support
+for common Lightning payment methods like [LNURL-Pay][lnurl-pay] and Lightning
+Addresses, exposing more invoice details, and improving error handling to
+provide more reliable results. These updates will make the library easier for
+developers to integrate into applications, while ensuring researchers and users
+have clearer insight into payment flows and wallet usage patterns across the
+Lightning Network.
+
+Repository: [getlipa/invoice-detective][repo]  
+License: MIT
+
+[bolt-11]: https://github.com/lightning/bolts/blob/master/11-payment-encoding.md
+[lsps]: https://docs.lightning.engineering/the-lightning-network/liquidity/lightning-service-provider
+[detective]: https://detective.lipa.dev/
+[lnurl-pay]: https://github.com/lnurl/luds/blob/luds/06.md
+[repo]: https://github.com/getlipa/invoice-detective
+
+---
+
+From new tools for testing and education, to infrastructure that improves
+payments and node operation, this wave of grants reflects the broad range of
+work required to keep Bitcoin decentralized and resilient. By supporting both
+new contributors and established projects, we aim to ensure that open-source
+software and research remain freely available to anyone who wishes to build,
+learn, or transact on Bitcoin.
+
+To date, OpenSats has issued [328 grants](/transparency), underscoring both the
+scale of our program and the ongoing need to sustain open-source contributors
+building across the ecosystem. If you are working on a project that advances
+Bitcoin, we encourage you to [apply for funding](/apply).
+
+Our work is made possible by the generosity of our donors. To help make the
+future of free and open-source development more sustainable, please consider
+setting up a recurring donation to one of our funds. Every contribution makes a
+difference.
+
+<center>
+    <DonateRecurringButton/>
+</center>
