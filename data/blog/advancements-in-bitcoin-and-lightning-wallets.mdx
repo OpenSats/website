@@ -272,22 +272,28 @@ self-custodial option compatible with hardware signing devices.
 OpenSats' [support] helped developer Praveen Perera advance Cove from prototype
 to production, releasing it as a non-custodial, Bitcoin-only wallet on the iOS
 App Store. Written in `Rust` and integrated through Swift and Kotlin bindings
-built on the Bitcoin Development Kit ([BDK]), the app supports [`TAPSIGNER`]
-hardware cards that let users initialize, change PINs,  create backups, and
-[sign transactions] directly through NFC.
+built on the Bitcoin Development Kit ([BDK]), the app supports [`TAPSIGNER`] and
+[`SATSCARD`] hardware cards that let users initialize, change PINs, create
+backups, and [sign transactions] directly through NFC.
+
+Beyond Cove itself, Perera contributed upstream improvements to the Rust
+ecosystem that make these features possible, including work on [`BIP-329`],
+[`rust-cktap`], and [`uniffi`], which powers Rust bindings used by projects like
+Cove and `BDK`. These upstream efforts directly strengthen Cove’s functionality
+and the broader Bitcoin app ecosystem.
 
 The wallet supports [`BIP-329`] labels, which let users name and organize
 transactions for easier tracking. It includes detailed coin control, allowing
-users to choose which coins to spend or save, improving privacy and fee
-efficiency. Custom fee settings and local currency options provide clear
+users to choose which coins to spend or save for better privacy and fee
+management. Custom fee settings and local currency options provide clear
 spending control. A decoy PIN mode unlocks a limited version of the wallet under
 duress, adding security through plausible deniability.
 
->Cove isn't doing any one new thing—it's bringing all the right pieces
->together. Coin control on a phone is hard to do well, and I'm proud of how
->usable it turned out.
+> Cove isn't doing any one new thing—it's bringing all the right pieces
+> together. Coin control on a phone is hard to do well, and I'm proud of how
+> usable it turned out.
 >
-><cite>—Praveen Perera</cite>
+> <cite>—Praveen Perera</cite>
 
 Cove also improved compatibility through [Swift] and [Android] bindings for the
 [`BBQr` animated-QR protocol]. This system breaks large transaction files into
@@ -308,11 +314,13 @@ design, helping new users start safely, while giving experienced users greater
 control, and reinforcing open standards that underpin the Bitcoin network.
 
 [Cove]: https://covebitcoinwallet.com/
-[support]: /blog/bitcoin-grants-july-2024#cove
 [BDK]: https://bitcoindevkit.org/
 [`TAPSIGNER`]: https://tapsigner.com/
+[`SATSCARD`]: https://coinkite.com/cards/satscard
 [sign transactions]: https://github.com/notmandatory/rust-cktap/pull/29
-[`BIP-329`]: https://github.com/bitcoin/bips/blob/master/bip-0329.mediawiki
+[`BIP-329`]: https://github.com/bitcoinppl/bip329
+[`rust-cktap`]: https://github.com/notmandatory/rust-cktap
+[`uniffi`]: https://github.com/mozilla/uniffi-rs
 [Swift]: https://github.com/bitcoinppl/bbqr-swift
 [Android]: https://central.sonatype.com/artifact/org.bitcoinppl/bbqr-android/overview
 [`BBQr` animated-QR protocol]: https://github.com/bitcoinppl/bbqr-ffi
