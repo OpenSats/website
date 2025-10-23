@@ -61,12 +61,12 @@ see on-chain confirmations in real time while preserving privacy.
 and security. The wallet also [warns] about look-alike address scams and tracks
 [unconfirmed transactions] to reduce risk.
 
-Behind the interface, Bitcoin Safe is prepared for full adoption of [`Compact
-Block Filters`] (`BIP157/158`), which let wallets identify their own
-transactions privately without querying external servers. This brings privacy
-closer to that of full nodes while remaining lightweight, requiring less storage
-or processing power. Project developers collaborated with the Bitcoin Dev Kit
-(`BDK`) community to refine handling of unconfirmed transactions, address
+Behind the interface, Bitcoin Safe is prepared for full adoption of [Compact
+Block Filters] (BIP157/158). Wallets download compact filters from peers and
+match them locally, removing address or xpub lookups against third-party
+servers. This improves privacy while remaining lightweight and reduces reliance
+on centralized indexers. Project developers collaborated with the Bitcoin Dev
+Kit (`BDK`) community to refine handling of unconfirmed transactions, address
 lookahead, and encrypted storage, helping improve BDK-based wallets overall.
 
 >Compact Block Filters offer fast performance while removing centralization
