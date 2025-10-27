@@ -1,0 +1,402 @@
+---
+title: "Advancements in Bitcoin and Lightning Wallets"
+date: '2025-10-27'
+tags: ['OpenSats', 'bitcoin', 'lightning', 'impact']
+authors: ['default', 'arvin', 'dergigi']
+images: ['/static/images/blog/86-advancements-in-bitcoin-and-lightning-wallets.jpg']
+draft: false
+summary: "An impact report from the front-lines of bitcoin and Lightning wallet development."
+---
+
+Wallet and node software form the core of Bitcoin's free and open financial
+ecosystem. They define how people hold, send, and verify their bitcoin without
+depending on intermediaries. As the network grows, these tools continue to
+evolve towards stronger privacy, smoother interoperability, and better usability.
+
+Over the past year, a new wave of development has advanced both on-chain and
+Lightning self-custody. Developers have improved the speed and reliability of
+mobile and desktop wallets, added advanced features once reserved for experts,
+and made complex Bitcoin functions more intuitive. This progress shows that ease
+of use and technical depth can advance together without compromising security or
+control.
+
+With support from OpenSats, the six projects featured in this impact report
+represent advances in Bitcoin and Lightning wallet development.
+
+The projects highlighted in this impact report are:
+
+- [Bitcoin Safe](#bitcoin-safe)
+- [Blixt Wallet](#blixt-wallet)
+- [Blitz Wallet](#blitz-wallet)
+- [Clams](#clams)
+- [Cove](#cove)
+- [Satsigner](#satsigner)
+
+The above list is not exhaustive. OpenSats has supported many more wallet
+projects, which we plan to highlight in future impact reports. We are also
+providing funding to several [ecash wallets](/blog/advancements-in-ecash).
+
+These projects demonstrate the ongoing refinement of self-custody across the
+Bitcoin ecosystem. From full-node operators to mobile-first users, developers
+are closing the gap between technical sophistication and everyday reliability.
+The result is a more capable and accessible network built on verifiable code and
+open collaboration.
+
+Let's take a closer look at how each of these projects is making an impact.
+
+---
+
+### Bitcoin Safe
+
+[Bitcoin Safe] is a savings wallet built for secure, private, long-term
+self-custody. It helps users manage their bitcoin holdings through a simple
+interface while maintaining control of funds.
+
+Funding [from OpenSats] enabled ongoing improvements in reliability and
+transparency. The wallet now connects directly to Bitcoin's network for [live
+transaction notifications], removing the need for centralized servers. Users can
+see on-chain confirmations in real time while preserving privacy.
+
+[Support] for hardware wallets like Blockstream Jade Plus expanded compatibility
+and security. The wallet also [warns] about look-alike address scams to help users 
+avoid common attack patterns.
+
+Behind the interface, Bitcoin Safe is prepared for full adoption of [Compact
+Block Filters] (BIP-157/158). Wallets download compact filters from peers and
+match them locally, removing address or xpub lookups against third-party
+servers. This improves privacy while remaining lightweight and reduces reliance
+on centralized indexers. Project developers collaborated with the BDK
+community to refine handling of unconfirmed transactions, address
+lookahead, and encrypted storage, helping improve BDK-based wallets overall.
+
+>Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
+>fast UX while removing centralization points, such as electrum servers.
+>
+><cite>—Andreas Griffin</cite>
+
+Translation support helps make the wallet accessible to users in multiple
+languages for broader usability, while the use of [nostr] enables private data
+synchronization, label sharing, and multi-signature coordination across devices
+through its "Sync & Chat" tool. This system reduces trust in centralized
+infrastructure while allowing smooth collaboration between co-signers.
+
+Bitcoin Safe brings modern Bitcoin libraries and decentralized communication
+tools together in one application built for long-term savings, showing how
+open-source development makes self-custody practical.
+
+[Bitcoin Safe]: https://bitcoin-safe.org/en/
+[from OpenSats]: /blog/tenth-wave-of-bitcoin-grants#bitcoin-safe
+[live transaction notifications]: https://github.com/andreasgriffin/bitcoin-p2p
+[Support]: https://github.com/andreasgriffin/bitcoin-safe/releases/tag/1.1.0
+[warns]: https://github.com/andreasgriffin/bitcoin-safe/releases/tag/1.2.2
+[Compact Block Filters]: https://bitcoinops.org/en/topics/compact-block-filters/
+[nostr]: https://github.com/nostr-protocol/nostr
+
+### Blixt Wallet
+
+[Blixt Wallet] is a non-custodial Bitcoin Lightning wallet for Android and iOS,
+focused on usability and control. Built with LND and Neutrino, it lets users
+run a full Lightning node directly on their device without relying on
+centralized services.
+
+With [a grant from OpenSats], Blixt rebuilt its core around
+[`react-native-turbo-lnd`], a C++ module that runs the Lightning Network Daemon
+(LND) directly inside the app, allowing faster Lightning payments without
+relying on background software. A new feature called Speedloader helps the app
+start quickly and stay in sync even on slower connections. This model provides a
+reference for other projects with similar goals.
+
+The project also released tools for developers building Lightning apps. For
+example, [`react-native-turbo-sqlite`] stores wallet data securely on a phone,
+and [`react-native-nitro-tor`] enables Tor-based privacy. Work continues on
+making Blixt compatible with Windows devices using React Native, allowing the
+same experience across operating systems.
+
+Blixt improved reliability through [updates to Neutrino], the lightweight
+Bitcoin client used for transaction verification. The wallet now connects to
+multiple peers in different regions, keeping connections steady and reducing
+delays during synchronization. These refinements address a long-standing
+challenge in mobile self-custody.
+
+The project also introduced [Lightning Box], a trust-minimized version of the
+Lightning Address protocol. It lets users receive payments to human-readable
+addresses, such as user@domain, while keeping custody local. A lightweight HTTP
+relay forwards payment requests to the recipient's wallet and returns the
+invoice for payment.
+
+>Having a trust-minimized Lightning Address linked to a self-custodial wallet 
+>is a valuable option in a custodial Lightning world.
+>
+><cite>—Hampus Sjöberg</cite>
+
+Released on Android in [version 0.6.9-420] and documented as an [open protocol
+draft][blip], Lightning Box is available for other wallets to adopt.
+
+These improvements make Blixt a dependable, self-custodial wallet and a model
+for secure Lightning applications. Ongoing progress on push-to-wake handling,
+platform support, and Lightning Service Provider compatibility continues this
+trajectory.
+
+[Blixt Wallet]: https://blixtwallet.github.io/
+[a grant from OpenSats]: /blog/bitcoin-grants-july-2023#blixt-wallet
+[`react-native-turbo-lnd`]: https://github.com/hsjoberg/react-native-turbo-lnd
+[`react-native-turbo-sqlite`]: https://github.com/hsjoberg/react-native-turbo-sqlite
+[`react-native-nitro-tor`]: https://github.com/niteshbalusu11/react-native-nitro-tor
+[Lightning Box]: https://github.com/hsjoberg/lightning-box
+[updates to Neutrino]: https://github.com/lightninglabs/neutrino/pull/300
+[version 0.6.9-420]: https://github.com/hsjoberg/blixt-wallet/releases/tag/v0.6.9-420
+[blip]: https://github.com/hsjoberg/blips/blob/lnurl-forwarding/blip-lnurlforward.md
+
+### Blitz Wallet
+
+[Blitz Wallet] is a self-custodial Bitcoin ecosystem focused on making payments
+simple. Its main product, the Blitz Mobile App, previously unified Lightning,
+Liquid, and ecash balances into one platform and has now transitioned to the
+Spark protocol. The goal remains to make Bitcoin payments accessible while
+ensuring users maintain full control of their funds.
+
+Over the past year, Blitz refined its approach to onboarding new Bitcoin users
+through a “custodial ladder” model—starting with easy, guided defaults and
+progressing toward full self-custody. Built with the [Breez SDK], [Blockstream
+Greenlight], and the [Blockstream Green Development Kit][gdk], Blitz combined these
+open-source tools to provide a strong foundation while using Boltz for automatic
+channel rebalancing. However, maintaining multiple networks introduced
+complexity and fragmented balances.
+
+[Breez SDK]: https://github.com/breez
+[Blockstream Greenlight]: https://github.com/Blockstream/greenlight
+[gdk]: https://github.com/Blockstream/gdk
+
+With [OpenSats' support], Blitz streamlined its design into a simpler,
+Spark-based wallet. The latest version enables receiving payments while offline,
+maintaining inbound capacity, and exiting directly to on-chain bitcoin. A new
+[Progressive Web App] version works on any browser without relying on the
+app store.
+
+Blitz has integrated a built-in store, contact-based payments, and
+[point-of-sale tools]. Through integrations with services like [The Bitcoin
+Company], [PPQ AI], [LN VPN], and [SMS4Sats], users can buy gift cards, access
+online services, and send messages using sats.
+
+The transition to Spark replaced earlier multi-network integrations, unifying
+what were once separate systems for Lightning, Liquid, and swaps into a simpler,
+more efficient architecture.
+
+>Simplicity of use is the difference between Bitcoin as a cypherpunk technology
+>and Bitcoin as a monetary revolution.
+>
+><cite>—Blake Kaufman</cite>
+
+As the first live reference implementation of [Spark], Blitz offers insight for
+developers exploring the protocol. Each iteration of Blitz development continues
+to reduce mental effort while preserving sovereignty, showing that convenience
+and self-custody can progress together. Through its public codebases and
+coordination with upstream developers, Blitz contributes to the Bitcoin
+development stack, demonstrating how simplicity and sovereignty can align for a
+great user experience.
+
+[Blitz Wallet]: https://blitzwalletapp.com/
+[OpenSats' support]: /blog/bitcoin-grants-july-2024-6th-wave#blitz-wallet
+[Progressive Web App]: https://github.com/BlitzWallet/blitz-web-app
+[point-of-sale tools]: https://github.com/BlitzWallet/blitz-wallet-pos
+[The Bitcoin Company]: https://www.thebitcoincompany.com/
+[PPQ AI]: https://ppq.ai/
+[LN VPN]: https://lnvpn.net/
+[SMS4Sats]: https://sms4sats.com/
+[Spark]: https://docs.spark.money/wallet/introduction
+
+### Clams
+
+[Clams] is a web-based interface for managing Core Lightning (CLN) nodes. It
+connects node operations with self-custodial tools across desktop and mobile.
+Operators can send and receive payments, manage channels, and monitor node
+activity through encrypted connections and user-defined permissions without
+relying on third parties.
+
+The project supports Lightning payment methods like instant `keysend` transfers,
+standard Lightning invoices ([BOLT11]), reusable invoices ([BOLT12]), and
+LNURL. As a progressive web app, it offers a consistent
+browser experience with tools for channel management, payments, plugin control,
+and UTXO tracking.
+
+[BOLT11]: https://www.bolt11.org/
+[BOLT12]: https://bolt12.org/
+
+Supported [by OpenSats], Clams released [Remote v2], rebuilding the interface
+around a local database for faster performance and scalability. Nodes processing
+over 100,000 payments now benefit from better stability. The update added
+multi-CLN connections, passphrase-encrypted sessions, and ready-to-install
+desktop versions. [Version 2.1] introduced multilingual support, starting with
+Spanish.
+
+Clams simplified self-hosting through a [full integration] with Start9's
+StartOS, allowing one-click installation and updates. Features like the
+[plugins dashboard] have simplified a complex setup, making it manageable for
+small businesses and educators locally.
+
+One major update was the unified dashboard for two CLN plugins: CLBOSS, which
+automates liquidity management, and [BOLT12 Prisms], which enables payment
+splitting across recipients.
+
+>Core Lightning's plugin ecosystem contains powerful tools like CLBOSS for
+>automated liquidity management and BOLT12 Prisms for payment splitting, but
+>interacting with these plugins requires command-line knowledge. Remote solves
+>this by providing the first comprehensive plugin dashboard. We also decided to
+>make Remote fully self-hostable. Now users can run their complete Lightning
+>stack on Start9—Bitcoin node, CLN, and plugin interfaces—entirely on their
+>own hardware with intuitive access to advanced features.
+>
+><cite>—John Gribbin</cite>
+
+Clams [implemented] BIP-353, which enables DNS-based Lightning addresses so
+users can send payments to email-like addresses. Users can open or close
+channels from the interface, adjust invoice visibility, receive sync warnings,
+and connect through Tor via Alby proxy. A new "event mode" lets educators and
+organizers deploy temporary demo nodes safely.
+
+To support developers, Clams released tools like the [BOLT12 Decoder] and
+[detailed documentation] on BOLT12 and BIP-353. Its self-hosted design keeps
+node operation verifiable and user-controlled, improving both privacy and
+usability within the Lightning ecosystem.
+
+[Clams]: https://clams.tech/
+[by OpenSats]: /blog/bitcoin-grants-december-2023#clams
+[Remote v2]: https://github.com/clams-tech/Remote/releases/tag/remote-2.0.0
+[Version 2.1]: https://github.com/clams-tech/Remote/releases/tag/remote-2.1.0
+[full integration]: https://github.com/clams-tech/clams-remote-startos
+[plugins dashboard]: https://github.com/clams-tech/Remote/pull/269
+[BOLT12 Prisms]: https://github.com/clams-tech/Remote/pull/281
+[implemented]: https://github.com/clams-tech/Remote/releases/tag/remote-2.5.0
+[BOLT12 Decoder]: https://github.com/clams-tech/bolt12-decoder-app
+[detailed documentation]: https://clams.tech/blog/
+
+### Cove
+
+[Cove] is a single-signature mobile wallet for on-chain Bitcoin use. Unlike many
+wallets that focus on Lightning or multisignature setups, Cove offers a simple,
+self-custodial option compatible with hardware signing devices.
+
+OpenSats' [support helped] developer Praveen Perera advance Cove from prototype
+to production, releasing it as a non-custodial, Bitcoin-only wallet on the iOS
+App Store. Written in Rust and integrated through Swift and Kotlin bindings
+built on the Bitcoin Development Kit ([BDK]), the app supports [TAPSIGNER] and
+[SATSCARD] hardware cards that let users initialize, change PINs, create
+backups, and [sign transactions] directly through NFC.
+
+Beyond Cove itself, Perera contributed upstream improvements to the Rust
+ecosystem that make these features possible, including work on [BIP-329],
+[`rust-cktap`], and [`uniffi`], which powers Rust bindings used by projects like
+Cove and BDK. These upstream efforts directly strengthen Cove’s functionality
+and the broader Bitcoin app ecosystem.
+
+The wallet supports [BIP-329] labels, which let users name and organize
+transactions for easier tracking. It includes detailed coin control, allowing
+users to choose which coins to spend or save for better privacy and fee
+management. Custom fee settings and local currency options provide clear
+spending control. A decoy PIN mode unlocks a limited version of the wallet under
+duress, adding security through plausible deniability.
+
+> Cove isn't doing any one new thing—it's bringing all the right pieces
+> together. Coin control on a phone is hard to do well, and I'm proud of how
+> usable it turned out.
+>
+> <cite>—Praveen Perera</cite>
+
+Cove also improved compatibility through [Swift] and [Android] bindings for the
+[BBQr] animated-QR protocol. This system breaks large transaction files into
+scannable QR sequences, allowing air-gapped hardware wallets to sign
+transactions offline while keeping private keys isolated. Developers from other
+projects, including [Fully Noded], have adopted this method to standardize
+offline signing.
+
+Through OpenSats' support, designer Adrian Lischer refined Cove's interface to
+make advanced features more approachable. Navigation and transaction flows have
+been simplified, and settings now enable switching between basic and advanced
+modes.
+
+By combining open-source libraries, hardware integration, and an intuitive user
+experience, the project helps advance open Bitcoin development and keeps privacy
+and usability in balance. Cove represents a practical evolution in mobile wallet
+design, helping new users start safely, while giving experienced users greater
+control, and reinforcing open standards that underpin the Bitcoin network.
+
+[Cove]: https://covebitcoinwallet.com/
+[support helped]: https://opensats.org/blog/bitcoin-grants-july-2024#cove
+[BDK]: https://bitcoindevkit.org/
+[TAPSIGNER]: https://tapsigner.com/
+[SATSCARD]: https://store.coinkite.com/store/satscard
+[sign transactions]: https://github.com/notmandatory/rust-cktap/pull/29
+[BIP-329]: https://github.com/bitcoinppl/bip329
+[`rust-cktap`]: https://github.com/notmandatory/rust-cktap
+[`uniffi`]: https://github.com/mozilla/uniffi-rs
+[Swift]: https://github.com/bitcoinppl/bbqr-swift
+[Android]: https://central.sonatype.com/artifact/org.bitcoinppl/bbqr-android/overview
+[BBQr]: https://github.com/bitcoinppl/bbqr-ffi
+[Fully Noded]: https://github.com/Fonta1n3/FullyNoded
+
+### Satsigner
+
+[Satsigner] is a Bitcoin wallet that gives users full visibility and control
+over their keys, transactions, and signing process. It is designed for users who
+want to understand how Bitcoin operates while balancing security with usability.
+
+Through [funding from OpenSats], the project introduced [descriptor-native
+multisignature] creation, allowing users to set up shared wallets with
+standardized, readable instructions instead of more complex configuration files.
+Clear setup flows for `watch-only` and `multisig` wallets make coordination
+easier across devices.
+
+Satsigner improved synchronization reliability by integrating an [Electrum]
+backend with progressive loading and detailed error handling. QR and NFC
+transfer handling now supports multi-part data movement between devices,
+reducing errors when signing transactions offline. These changes make it easier
+to monitor or update cold storage securely from a mobile phone.
+
+A major update added the transaction graph explorer, which visualizes inputs and
+outputs in a [Sankey] style flow diagram. This helps users see where coins
+come from and where they go, improving understanding of spending patterns and
+privacy posture.
+
+Behind the scenes, Satsigner strengthened validation for `descriptor` imports
+and exports. The wallet now checks configuration files more carefully for
+accuracy and compatibility with other software such as [Sparrow] and [Specter].
+Together, these refinements reduce errors during account setup and ensure data
+consistency across wallets.
+
+By prioritizing signer-first workflows and making multisignature use practical 
+on mobile devices, Satsigner reinforces the principles of open verification and 
+personal control that define Bitcoin self-custody.
+
+[Satsigner]: https://satsigner.com/
+[funding from OpenSats]: /blog/bitcoin-grants-feb-2024#satsigner
+[descriptor-native multisignature]: https://github.com/satsigner/satsigner/commit/bb47b855b44bd9bffb7d18b57c64616a1b202b64
+[Electrum]: https://github.com/spesmilo/electrum
+[Sankey]: https://en.wikipedia.org/wiki/Sankey_diagram
+[Sparrow]: https://sparrowwallet.com/
+[Specter]: https://specter.solutions/
+
+---
+
+Each of these projects advances the usability of bitcoin without compromising
+self-custody. By improving Lightning reliability, refining wallet interfaces,
+and strengthening privacy, they make it easier for users to hold and transact
+securely on their own terms.
+
+OpenSats supports this work to ensure that critical infrastructure remains open,
+verifiable, and decentralized. The developers behind these tools strengthen
+Bitcoin's foundation by turning technical progress into practical freedom,
+empowering anyone, anywhere, to use bitcoin with confidence and autonomy.
+
+Together, these efforts demonstrate the steady evolution of Bitcoin as both
+technology and public good. Self-custody is becoming simpler, more intuitive,
+and more resilient. Each release brings Bitcoin closer to a future where
+financial independence is not an exception, but the norm.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+If you are a developer working on free and open-source software that helps
+Bitcoin flourish, we encourage you to [apply for
+funding](/apply).
+
