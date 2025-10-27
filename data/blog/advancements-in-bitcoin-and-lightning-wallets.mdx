@@ -62,7 +62,7 @@ and security. The wallet also [warns] about look-alike address scams to help use
 avoid common attack patterns.
 
 Behind the interface, Bitcoin Safe is prepared for full adoption of [Compact
-Block Filters] (BIP157/158). Wallets download compact filters from peers and
+Block Filters] (BIP-157/158). Wallets download compact filters from peers and
 match them locally, removing address or xpub lookups against third-party
 servers. This improves privacy while remaining lightweight and reduces reliance
 on centralized indexers. Project developers collaborated with the BDK
@@ -248,7 +248,7 @@ splitting across recipients.
 >
 ><cite>—John Gribbin</cite>
 
-Clams [implemented] `BIP-353`, which enables DNS-based Lightning addresses so
+Clams [implemented] BIP-353, which enables DNS-based Lightning addresses so
 users can send payments to email-like addresses. Users can open or close
 channels from the interface, adjust invoice visibility, receive sync warnings,
 and connect through Tor via Alby proxy. A new "event mode" lets educators and
@@ -284,12 +284,12 @@ built on the Bitcoin Development Kit ([BDK]), the app supports [`TAPSIGNER`] and
 backups, and [sign transactions] directly through NFC.
 
 Beyond Cove itself, Perera contributed upstream improvements to the Rust
-ecosystem that make these features possible, including work on [`BIP-329`],
+ecosystem that make these features possible, including work on [BIP-329],
 [`rust-cktap`], and [`uniffi`], which powers Rust bindings used by projects like
 Cove and `BDK`. These upstream efforts directly strengthen Cove’s functionality
 and the broader Bitcoin app ecosystem.
 
-The wallet supports [`BIP-329`] labels, which let users name and organize
+The wallet supports [BIP-329] labels, which let users name and organize
 transactions for easier tracking. It includes detailed coin control, allowing
 users to choose which coins to spend or save for better privacy and fee
 management. Custom fee settings and local currency options provide clear
@@ -326,7 +326,7 @@ control, and reinforcing open standards that underpin the Bitcoin network.
 [`TAPSIGNER`]: https://tapsigner.com/
 [`SATSCARD`]: https://store.coinkite.com/store/satscard
 [sign transactions]: https://github.com/notmandatory/rust-cktap/pull/29
-[`BIP-329`]: https://github.com/bitcoinppl/bip329
+[BIP-329]: https://github.com/bitcoinppl/bip329
 [`rust-cktap`]: https://github.com/notmandatory/rust-cktap
 [`uniffi`]: https://github.com/mozilla/uniffi-rs
 [Swift]: https://github.com/bitcoinppl/bbqr-swift
