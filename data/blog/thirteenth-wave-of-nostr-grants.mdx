@@ -139,24 +139,24 @@ License: MIT
 [Grasp] is a distributed, nostr-native alternative to centralized git hosting
 platforms. Developed by returning grantee [Dan
 Conway,](/blog/nostr-grants-july-2023#code-collaboration-over-nostr) who
-initially worked on a git-over-nostr proof of concept, the Grasp project extends
-that work by bringing the collaborative model of [Blossom] to software
-development. It applies nostr's decentralized principles to version control.
-Built around [NIP-34], it allows repositories, commits, and merges to be
-authorized and verified directly through nostr events.
+previously created a git-over-nostr proof of concept, the Grasp project extends
+that work by applying nostr’s event-based authorization and relay architecture
+to version control. Built around [NIP-34], it allows repository actions such as
+pushes and state updates to be authorized and verified directly through signed
+nostr events, removing the need for centralized intermediaries.
 
-With support from this grant, Grasp will deliver a library for nostr clients to
-interact with git data and pull requests, a high-performance git plugin, and
-synchronization tools to maintain reliability across distributed environments.
-The project will also define a clear specification and collaborate with other
-developers to grow an open ecosystem of nostr-based git tools, positioning Grasp
-as a decentralized alternative to existing code-hosting platforms.
+With support from this grant, Grasp will deliver libraries and tooling for nostr
+clients to interact with git data and pull requests, a high-performance git
+plugin, and synchronization tools that maintain reliability across distributed
+relays. The project will also define a clear specification and collaborate with
+other developers to build an open ecosystem of nostr-based git infrastructure,
+positioning Grasp as a decentralized, verifiable alternative to existing
+code-hosting platforms.
 
 Repository: [danconwaydev.com/grasp]  
 License: MIT
 
 [Grasp]: https://ngit.dev/grasp/#why
-[Blossom]: https://github.com/hzrd149/blossom
 [NIP-34]: https://github.com/nostr-protocol/nips/blob/master/34.md
 [danconwaydev.com/grasp]: https://gitworkshop.dev/danconwaydev.com/grasp
 
