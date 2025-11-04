@@ -22,7 +22,7 @@ the community.
 First-time project grants:
 
 - [ZapTracker](#zaptracker)
-- [Plural and Social Key Recovery](#plural-and-social-key-recovery)
+- [Keydex](#keydex)
 - [Bigbrotr](#bigbrotr)
 - [Grasp](#grasp)
 
@@ -77,29 +77,30 @@ License: MIT
 [NIP-52]: https://github.com/nostr-protocol/nips/blob/master/52.md
 [pratik227/zap_dashboard]: https://github.com/pratik227/zap_dashboard
 
-### Plural and Social Key Recovery
+### Keydex
 
-Plural and Social Key Recovery is a nostr-native communities app focused on
-private, reliable group communication. It aims to replace fragmented tools like
-Telegram and GitHub by delivering topic-based conversations, privacy-preserving
-batched notifications, invitation links that work across platforms, and admin
-features for communities. The app targets [NIP-29] relay-based communities and
-will be built with [Flutter] for cross-platform performance and a clean UX.
+Keydex is an open-source backup and recovery tool for sensitive data, including
+passwords, digital wills, and cryptographic keys. Instead of storing full copies
+in one place, Keydex uses [Shamir’s Secret Sharing] to split a secret into
+pieces and distribute them to friends and family; recovery happens only when
+enough participants consent to reassemble the secret. The app is built with
+[Flutter] for cross-platform delivery and is currently in the alpha stage of
+development.
 
-Support from this grant will fund development towards an alpha release for iOS
-and Android with group creation and conversation, followed by a beta with push
-notifications, privacy-aware summaries, invitation links, and a desktop or web
-build. A 1.0 release will deliver refined features to the Apple and Google
-stores. Subsequent milestones will add decision-making tools such as polls,
-ranked-choice voting, and consent-based rounds, which could enable future
+Support from this grant will advance Keydex from an alpha prototype toward a
+dependable release by improving the secret-sharing and recovery flows, the
+consent and coordination UX, and expanding cross-platform packaging and
+distribution. Funds will also support testing, documentation, and security
+review work required for a tool that handles high-stakes data.
+
 capabilities including group wallets, code reviews, voice chat, and event RSVPs.
 
-Repository: [mplorentz]  
-License: MPL-2.0
+Repository: [mplorentz/keydex]  
+License: MIT
 
-[NIP-29]: https://github.com/nostr-protocol/nips/blob/master/29.md
+[Shamir’s Secret Sharing]: https://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf
 [Flutter]: https://flutter.dev/
-[mplorentz]: https://github.com/mplorentz
+[mplorentz/keydex]: https://github.com/mplorentz/keydex
 
 ### Bigbrotr
 
