@@ -1,0 +1,174 @@
+---
+title: "Thirteenth Wave of Nostr Grants"
+date: '2025-11-05'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+authors: ['default', 'arvin', 'dergigi']
+images: ['/static/images/blog/87-thirteenth-wave-of-nostr-grants.jpg']
+draft: false
+summary: "OpenSats is funding nine more open-source projects advancing the nostr ecosystem."
+---
+
+We are pleased to announce the latest wave of grants from The Nostr Fund, dedicated 
+to advancing the nostr ecosystem by supporting builders working to make nostr more 
+accessible, secure, and resilient.
+
+In this wave, we highlight four projects that span creator tools, data security
+and recovery, archival systems, and distributed collaboration. Five additional
+projects outlined below have received renewal grants to continue their work.
+Supporting these projects reflects our belief that resilient open-source
+software is a public good. Once built, it can be reused, adapted, and scaled by
+the community.
+
+First-time project grants:
+
+- [ZapTracker](#zaptracker)
+- [Keydex](#keydex)
+- [Bigbrotr](#bigbrotr)
+- [Grasp](#grasp)
+
+Grant renewals:
+
+- Jumble.Social ([Jun. 2025])
+- Nostr Safebox ([Dec. 2024])
+- Coop ([Nov. 2024])
+- 0xchat ([Oct. 2023])
+- Damus ([Jul. 2023])
+
+The generosity of our donors is what makes these grants possible. If you care
+about a free and open internet, please consider donating to The Nostr Fund:
+
+<center>
+    <DonateToNostrFundButton/>
+</center>
+
+Let's take a closer look at the projects receiving their first-time grants.
+
+[Jun. 2025]: /blog/twelfth-wave-of-nostr-grants#jumble
+[Dec. 2024]: /blog/9th-wave-of-nostr-grants#nostr-safebox
+[Nov. 2024]: /blog/8th-wave-nostr-grants#coop
+[Oct. 2023]: /blog/nostr-grants-october-2023#0xchat
+[Jul. 2023]: /blog/nostr-grants-july-2023#damus
+
+---
+
+### ZapTracker
+
+[ZapTracker] is an open-source dashboard for Lightning and nostr creators that
+brings together zap analytics, wallet management via [Nostr Wallet Connect],
+audience interaction, and content publishing in a single, privacy-first frontend
+application. It tracks earnings and supporters in real time, including chat and
+long-form posts, and stores data locally to avoid reliance on servers or
+third-party data collection.
+
+With support from this grant, ZapTracker plans to ship ZapGoals with [NIP-75]
+support, a calendar and RSVP for events with [NIP-52], scheduled notes and
+long-form publishing, monetized private content, audience-building follow lists,
+improving messaging security, and a UX redesign based on user feedback.
+
+Repository: [pratik227/zap_dashboard]  
+License: MIT
+
+[ZapTracker]: https://zap-tracker.vercel.app/
+[Nostr Wallet Connect]: https://nwc.dev/#how-it-works
+[NIP-75]: https://github.com/nostr-protocol/nips/blob/master/75.md
+[NIP-52]: https://github.com/nostr-protocol/nips/blob/master/52.md
+[pratik227/zap_dashboard]: https://github.com/pratik227/zap_dashboard
+
+### Keydex
+
+Keydex is an open-source backup and recovery tool for sensitive data, including
+passwords, digital wills, and cryptographic keys. Instead of storing full copies
+in one place, Keydex uses [Shamir’s Secret Sharing] to split a secret into
+pieces and distribute them to friends and family. Recovery happens only when
+enough participants consent to reassemble the secret. The app is built with
+[Flutter] for cross-platform delivery and is currently in the alpha stage of
+development.
+
+Support from this grant will advance Keydex from an alpha prototype toward a
+dependable release by improving the secret-sharing and recovery flows, the
+consent and coordination UX, and expanding cross-platform packaging and
+distribution. Funds will also support testing, documentation, and security
+review work required for a tool that handles high-stakes data.
+
+Repository: [mplorentz/keydex]  
+License: MIT
+
+[Shamir’s Secret Sharing]: https://web.mit.edu/6.857/OldStuff/Fall03/ref/Shamir-HowToShareASecret.pdf
+[Flutter]: https://flutter.dev/
+[mplorentz/keydex]: https://github.com/mplorentz/keydex
+
+### Bigbrotr
+
+[Bigbrotr] is a modular, open-source infrastructure for archiving and monitoring
+the nostr network. It enables structured analysis of public events and relay
+activity across Clearnet and Tor, offering a transparent view of network
+behavior and health. Built as containerized services with PostgreSQL for data
+management, it includes a synchronizer for event indexing, a monitor for relay
+responsiveness and metadata including [NIP-11] and [NIP-66], and a finder for
+discovering new relays. Designed for research and interoperability, Bigbrotr's
+Docker-based setup makes it simple to deploy and extend, serving as a versatile
+backend for clients, researchers, and relay operators with APIs, dashboards, and
+a [Data Vending Machine] integration for specialized data queries.
+
+With support from this grant, the project will deploy Bigbrotr on self-hosted
+hardware, optimize synchronization and monitoring, and release Lilbrotr, a
+lightweight version for indexing on low-resource devices. The roadmap includes
+finalizing Lilbrotr and documentation, publishing public APIs, and refining
+security and performance ahead of dashboard releases and community feedback
+cycles. These improvements will strengthen Bigbrotr's role as a foundation for
+advanced analytics, smarter relay selection, and reusable backend tools across
+the nostr ecosystem.
+
+Repository: [Bigbrotr/bigbrotr]  
+License: MIT
+
+[Bigbrotr]: https://bigbrotr.com/
+[NIP-11]: https://github.com/nostr-protocol/nips/blob/master/11.md
+[NIP-66]: https://github.com/nostr-protocol/nips/blob/master/66.md
+[Data Vending Machine]: https://github.com/nostr-protocol/nips/blob/bcaad2957d0e9cec20e4265298d2788be87d3190/90.md
+[Bigbrotr/bigbrotr]: https://github.com/Bigbrotr/bigbrotr
+
+### Grasp
+
+[Grasp] is a distributed, nostr-native alternative to centralized git hosting
+platforms. Developed by returning grantee [Dan
+Conway](/blog/nostr-grants-july-2023#code-collaboration-over-nostr), the Grasp project extends
+his previous work on [ngit] by applying nostr’s event-based authorization and relay architecture
+to version control. Built around [NIP-34], it allows repository actions such as
+pushes and state updates to be authorized and verified directly through signed
+nostr events, removing the need for centralized intermediaries.
+
+With support from this grant, Grasp will deliver libraries and tooling for nostr
+clients to interact with git data and pull requests, a high-performance git
+plugin, and synchronization tools that maintain reliability across distributed
+relays. The project will also define a clear specification and collaborate with
+other developers to build an open ecosystem of nostr-based git infrastructure,
+positioning Grasp as a decentralized, verifiable alternative to existing
+code-hosting platforms.
+
+Repository: [danconwaydev.com/grasp]  
+License: MIT
+
+[Grasp]: https://ngit.dev/grasp/#why
+[ngit]: https://github.com/DanConwayDev/ngit-cli
+[NIP-34]: https://github.com/nostr-protocol/nips/blob/master/34.md
+[danconwaydev.com/grasp]: https://gitworkshop.dev/danconwaydev.com/grasp
+
+---
+
+Our gratitude goes to all of our donors—big and small—who make these grants
+possible, and to the developers pushing the nostr open‑source ecosystem forward.
+Join us in strengthening nostr's long‑term future by becoming a recurring
+supporter today:
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+The projects in this wave illustrate how foundational work can turn protocols
+into thriving ecosystems. By funding tools for creators, communities,
+infrastructure, and distributed collaboration, OpenSats helps strengthen the
+long‑term viability of the nostr ecosystem.
+
+​If you are a developer working on free and open-source nostr projects, please
+consider to [apply for funding](/apply).
