@@ -14,4 +14,3 @@ export default function Monthly() {
   // This component will never render due to the redirect above
   return null
 }
-
