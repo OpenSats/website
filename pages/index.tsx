@@ -238,7 +238,7 @@ export default function Home({
       <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
         You can also find us on{' '}
         <CustomLink
-          href="https://njump.me/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
+          href="https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
           className="underline"
         >
           nostr
