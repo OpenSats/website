@@ -75,7 +75,9 @@ export default function AuthorLayout({ children, content }: Props) {
             <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
               {email && <SocialIcon kind="mail" href={`mailto:${email}`} />}
-              {nostr && <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} />}
+              {nostr && (
+                <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} />
+              )}
               {github && <SocialIcon kind="github" href={github} />}
               {twitter && <SocialIcon kind="twitter" href={twitter} />}
             </div>
