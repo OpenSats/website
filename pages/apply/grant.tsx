@@ -27,6 +27,8 @@ export default function Apply() {
         <p>
           Make sure to read the{' '}
           <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
+          and the{' '}
+          <CustomLink href="/faq/application">Application FAQ</CustomLink>{' '}
           before sending in an application.
         </p>
         <GrantApplicationForm />
