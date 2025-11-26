@@ -59,12 +59,15 @@ export default function ProjectPage({
         )}
       </aside>
       {relatedPosts.length > 0 && (
-        <section className="mt-12 divide-y divide-gray-200 dark:divide-gray-700">
-          <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            Related Announcements
-          </h2>
-          <PostList posts={relatedPosts} />
-        </section>
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+          <div></div>
+          <section className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-2">
+            <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
+              Related Announcements
+            </h2>
+            <PostList posts={relatedPosts} />
+          </section>
+        </div>
       )}
     </>
   )
