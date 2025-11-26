@@ -66,7 +66,7 @@ export default function ProjectPage({
               Related Announcements
             </h2>
           </div>
-          <PostList posts={relatedPosts} rightAlignDate />
+          <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
         </section>
       )}
     </>
