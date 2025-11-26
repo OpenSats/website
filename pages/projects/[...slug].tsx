@@ -1,8 +1,11 @@
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 import { InferGetStaticPropsType } from 'next'
-import { allProjects } from 'contentlayer/generated'
+import { allProjects, allBlogs } from 'contentlayer/generated'
+import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
+import type { Blog } from 'contentlayer/generated'
 import CustomLink from '@/components/Link'
+import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
@@ -17,9 +20,14 @@ export const getStaticProps = async ({ params }) => {
   const slug = (params.slug as string[]).join('/')
   const project = allProjects.find((p) => p.slug === slug)
 
+  // Find blog posts that mention this project
+  const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
+  const relatedPosts = getRelatedBlogPostsForProject(project, sortedPosts)
+
   return {
     props: {
       project,
+      relatedPosts: allCoreContent(relatedPosts),
     },
   }
 }
