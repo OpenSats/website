@@ -6,6 +6,7 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import CustomLink from '@/components/Link'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
+import PostList from '@/components/PostList'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
@@ -34,6 +35,7 @@ export const getStaticProps = async ({ params }) => {
 
 export default function ProjectPage({
   project,
+  relatedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -56,6 +58,14 @@ export default function ProjectPage({
           </CustomLink>
         )}
       </aside>
+      {relatedPosts.length > 0 && (
+        <section className="mt-12 divide-y divide-gray-200 dark:divide-gray-700">
+          <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 pb-8">
+            Related Blog Posts
+          </h2>
+          <PostList posts={relatedPosts} />
+        </section>
+      )}
     </>
   )
 }
