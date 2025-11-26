@@ -7,9 +7,10 @@ import siteMetadata from '@/data/siteMetadata'
 
 interface PostListProps {
   posts: CoreContent<Blog>[]
+  rightAlignDate?: boolean
 }
 
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts, rightAlignDate = false }: PostListProps) {
   if (posts.length === 0) {
     return null
   }
@@ -23,7 +24,7 @@ export default function PostList({ posts }: PostListProps) {
             <article className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:items-baseline xl:space-y-0">
               <dl>
                 <dt className="sr-only">Published on</dt>
-                <dd className="text-right text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                <dd className={`text-base font-medium leading-6 text-gray-500 dark:text-gray-400 ${rightAlignDate ? 'text-right' : ''}`}>
                   <time dateTime={date}>
                     {formatDate(date, siteMetadata.locale)}
                   </time>
