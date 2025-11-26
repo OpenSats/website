@@ -114,7 +114,7 @@ export default function ListLayout({
             </svg>
           </div>
         </div>
-          {!filteredBlogPosts.length && 'No posts found.'}
+        {!filteredBlogPosts.length && 'No posts found.'}
         <PostList posts={displayPosts} />
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (

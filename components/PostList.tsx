@@ -11,7 +11,11 @@ interface PostListProps {
   useProjectLayout?: boolean
 }
 
-export default function PostList({ posts, rightAlignDate = false, useProjectLayout = false }: PostListProps) {
+export default function PostList({
+  posts,
+  rightAlignDate = false,
+  useProjectLayout = false,
+}: PostListProps) {
   if (posts.length === 0) {
     return null
   }
@@ -22,16 +26,30 @@ export default function PostList({ posts, rightAlignDate = false, useProjectLayo
         const { path, date, title, summary, tags } = post
         return (
           <li key={path} className="py-4">
-            <article className={`items-start space-y-2 xl:grid xl:items-baseline xl:space-y-0 ${useProjectLayout ? 'xl:grid-cols-3 xl:gap-x-8' : 'xl:grid-cols-4'}`}>
+            <article
+              className={`items-start space-y-2 xl:grid xl:items-baseline xl:space-y-0 ${
+                useProjectLayout
+                  ? 'xl:grid-cols-3 xl:gap-x-8'
+                  : 'xl:grid-cols-4'
+              }`}
+            >
               <dl>
                 <dt className="sr-only">Published on</dt>
-                <dd className={`text-base font-medium leading-6 text-gray-500 dark:text-gray-400 ${rightAlignDate ? 'text-right' : ''}`}>
+                <dd
+                  className={`text-base font-medium leading-6 text-gray-500 dark:text-gray-400 ${
+                    rightAlignDate ? 'text-right' : ''
+                  }`}
+                >
                   <time dateTime={date}>
                     {formatDate(date, siteMetadata.locale)}
                   </time>
                 </dd>
               </dl>
-              <div className={`space-y-3 ${useProjectLayout ? 'xl:col-span-2' : 'xl:col-span-3'}`}>
+              <div
+                className={`space-y-3 ${
+                  useProjectLayout ? 'xl:col-span-2' : 'xl:col-span-3'
+                }`}
+              >
                 <div>
                   <h3 className="text-2xl font-bold leading-8 tracking-tight">
                     <Link
