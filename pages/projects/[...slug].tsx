@@ -44,20 +44,23 @@ export default function ProjectPage({
         content={project}
         MDXComponents={MDXComponents}
       />
-      <aside className="bg-light mb-8 flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start">
-        {project.donationLink && (
-          <CustomLink
-            href={project.donationLink}
-            className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
-          >
-            {project.donationLink.includes('geyser')
-              ? 'Donate via Geyser'
-              : project.donationLink.includes('opencollective')
-              ? 'Donate via OpenCollective'
-              : 'Donate directly'}
-          </CustomLink>
-        )}
-      </aside>
+      <div className="items-start space-y-2 mb-8 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div></div>
+        <aside className="bg-light flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start xl:col-span-2">
+          {project.donationLink && (
+            <CustomLink
+              href={project.donationLink}
+              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+            >
+              {project.donationLink.includes('geyser')
+                ? 'Donate via Geyser'
+                : project.donationLink.includes('opencollective')
+                ? 'Donate via OpenCollective'
+                : 'Donate directly'}
+            </CustomLink>
+          )}
+        </aside>
+      </div>
       {relatedPosts.length > 0 && (
         <section className="mt-12 divide-y divide-gray-200 dark:divide-gray-700">
           <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
