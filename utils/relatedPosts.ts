@@ -11,6 +11,13 @@ export function getRelatedBlogPostsForProject(
   const projectTitle = project.title.toLowerCase()
   const projectSlug = project.slug?.toLowerCase() || ''
 
+  // Escape special regex characters and create word boundary patterns
+  const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const projectTitlePattern = new RegExp(`\\b${escapeRegex(projectTitle)}\\b`, 'i')
+  const projectSlugPattern = projectSlug
+    ? new RegExp(`\\b${escapeRegex(projectSlug)}\\b`, 'i')
+    : null
+
   return blogs.filter((blog) => {
     // Build searchable content from all relevant fields
     const searchContent = [
@@ -20,12 +27,11 @@ export function getRelatedBlogPostsForProject(
       blog.body?.raw || '',
     ]
       .join(' ')
-      .toLowerCase()
 
-    // Check if project title or slug appears in the content
+    // Check if project title or slug appears as whole words in the content
     return (
-      searchContent.includes(projectTitle) ||
-      (projectSlug && searchContent.includes(projectSlug))
+      projectTitlePattern.test(searchContent) ||
+      (projectSlugPattern && projectSlugPattern.test(searchContent))
     )
   })
 }
