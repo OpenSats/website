@@ -65,7 +65,7 @@ export default function ProjectPage({
             <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
               Related Announcements
             </h2>
-            <PostList posts={relatedPosts} />
+            <PostList posts={relatedPosts} layout="three-column" />
           </section>
         </div>
       )}

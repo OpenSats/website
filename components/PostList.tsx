@@ -7,12 +7,17 @@ import siteMetadata from '@/data/siteMetadata'
 
 interface PostListProps {
   posts: CoreContent<Blog>[]
+  layout?: 'default' | 'three-column'
 }
 
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts, layout = 'default' }: PostListProps) {
   if (posts.length === 0) {
     return null
   }
+
+  const isThreeColumn = layout === 'three-column'
+  const gridCols = isThreeColumn ? 'xl:grid-cols-2' : 'xl:grid-cols-4'
+  const contentSpan = isThreeColumn ? '' : 'xl:col-span-3'
 
   return (
     <ul>
@@ -20,7 +25,7 @@ export default function PostList({ posts }: PostListProps) {
         const { path, date, title, summary, tags } = post
         return (
           <li key={path} className="py-4">
-            <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+            <article className={`space-y-2 xl:grid ${gridCols} xl:items-baseline xl:space-y-0`}>
               <dl>
                 <dt className="sr-only">Published on</dt>
                 <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
@@ -29,7 +34,7 @@ export default function PostList({ posts }: PostListProps) {
                   </time>
                 </dd>
               </dl>
-              <div className="space-y-3 xl:col-span-3">
+              <div className={`space-y-3 ${contentSpan}`}>
                 <div>
                   <h3 className="text-2xl font-bold leading-8 tracking-tight">
                     <Link
