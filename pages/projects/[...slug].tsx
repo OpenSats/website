@@ -53,10 +53,10 @@ export default function ProjectPage({
               className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
             >
               {project.donationLink.includes('geyser')
-                ? 'Donate via Geyser'
+                ? 'Support via Geyser'
                 : project.donationLink.includes('opencollective')
-                ? 'Donate via OpenCollective'
-                : 'Donate directly'}
+                ? 'Support via OpenCollective'
+                : 'Support directly'}
             </CustomLink>
           )}
         </aside>
