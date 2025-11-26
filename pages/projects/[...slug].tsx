@@ -55,7 +55,7 @@ export default function ProjectPage({
               {project.donationLink.includes('geyser')
                 ? 'Support via Geyser'
                 : project.donationLink.includes('opencollective')
-                ? 'Support via OpenCollective'
+                ? 'Support directly via OpenCollective'
                 : 'Support directly'}
             </CustomLink>
           )}
