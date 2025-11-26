@@ -44,9 +44,9 @@ export default function ProjectPage({
         content={project}
         MDXComponents={MDXComponents}
       />
-      <div className="items-start space-y-2 mb-8 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+      <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
-        <aside className="bg-light flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start xl:col-span-2">
+        <aside className="bg-light flex items-center gap-4 rounded-xl p-4 lg:flex-col lg:items-start xl:col-span-2">
           {project.donationLink && (
             <CustomLink
               href={project.donationLink}
