@@ -10,9 +10,14 @@ import Link from '@/components/Link'
 const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
 
+  const EXCLUDED_SHOWCASE_SLUGS = ['bpi', 'rgb']
+
   useEffect(() => {
     setSortedProjects(
-      projects.filter(isNotOpenSatsProject).sort(() => 0.5 - Math.random())
+      projects
+        .filter(isNotOpenSatsProject)
+        .filter((p) => !EXCLUDED_SHOWCASE_SLUGS.includes(p.slug))
+        .sort(() => 0.5 - Math.random())
     )
   }, [projects])
 
