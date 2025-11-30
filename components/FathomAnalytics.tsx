@@ -31,5 +31,3 @@ export default function FathomAnalytics() {
 
   return null
 }
-
-
