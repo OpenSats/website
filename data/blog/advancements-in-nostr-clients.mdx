@@ -1,0 +1,682 @@
+---
+title: "Advancements in Nostr Clients"
+date: '2025-12-01'
+tags: ['OpenSats', 'nostr', 'impact']
+authors: ['default', 'arvin', 'dergigi']
+images: ['/static/images/blog/88-advancements-in-nostr-clients.jpg']
+draft: false
+summary: "An impact report from the front-lines of nostr client development."
+---
+
+Free speech on the internet depends on open, uncensorable communication
+infrastructure that keeps users in control. OpenSats launched [The Nostr
+Fund](/funds/nostr) in 2023 to support the nostr ecosystem building this
+infrastructure, and since then [we have funded](/tags/nostr) work on protocol
+development, developer tooling, relays, and a wide range of clients.
+
+Nostr is a simple, open protocol for publishing and receiving signed messages,
+relayed by independent servers, not a single platform. The design is
+intentionally minimal: clients handle keys and signatures, and relays store and
+forward events. Anyone can run a client or a relay, and people are free to move
+between them without abandoning their identity or social graph. In his original
+2019 [white paper](https://fiatjaf.com/nostr.html) introducing nostr, fiatjaf
+described it as:
+
+> The simplest open protocol that is able to create a censorship-resistant
+> global 'social' network once and for all.
+>
+><cite>—fiatjaf</cite>
+
+Nostr shifts power toward users. A nostr identity is a keypair, not an account
+on a single site. If one client blocks or censors someone, removes features, or
+changes in ways they cannot accept, the user signs in to another client with the
+same keys. Their history, relationships, and audience move with them; they are
+not trapped inside any one application.
+
+The same simple protocol that routes nostr posts can also route bitcoin between
+users via Lightning zaps. Many clients treat zaps as a native social action, and
+to date, [statistics show](https://stats.nostr.band/) users have sent millions
+of zaps, totaling more than 2.6 billion sats, directly to one another over
+nostr.
+
+This impact report focuses on seven nostr clients with different approaches to
+product design and a shared commitment to openness, interoperability, and user
+sovereignty. Their progress shows how donor support translates into concrete
+improvements for people who rely on nostr for communication, coordination, and
+value transfer.
+
+The seven clients highlighted in this report are:
+
+- [Amethyst](#amethyst)
+- [Coracle](#coracle)
+- [Damus](#damus)
+- [Jumble](#jumble)
+- [NoStrudel](#nostrudel)
+- [Nostur](#nostur)
+- [Zap.stream](#zapstream)
+
+Let's take a closer look at how each of these clients has evolved over the past
+year and how donor funding supported their work.
+
+---
+
+### Amethyst
+
+[Amethyst] is a long-running Android client for nostr, built with an emphasis on
+speed, resilience, and everyday use. Over the past year, work on the project
+focused on three areas: making relay use more automatic and robust, tightening
+private communication, and adding new ways for people to post and discover
+content inside the app. With support from OpenSats, [Vitor Pamplona] shipped a
+series of releases that changed how Amethyst talks to relays, how it handles
+private media, and how users explore what is happening on nostr.
+
+The biggest shift came from moving Amethyst from a manual relay-list model to a
+dynamic [outbox model]. In older versions, users had to maintain their own lists
+of relays—the independent servers that store and forward nostr posts—and tell
+the app where to read from. If someone they followed moved to a different relay
+and the user did not update their list, posts simply stopped appearing, often
+without any clear indication that something was wrong. The outbox model flips
+that burden. Instead of asking users to guess which relays to read from,
+Amethyst now compiles the needed relay set automatically based on the user's
+actual follows and content. This was implemented in [v1.03.0], along with an
+updated Relay List interface that lets users focus on where their own notes are
+published while the client assembles an effective read set in the background.
+
+That change is not just a user-experience improvement; it also shifts how
+traffic flows across the network. Under the old approach, most activity ended up
+concentrated on 10--20 major relays, which made nostr more fragile than it
+appears on paper. With the outbox model, Amethyst can connect to as many as
+1,000 relays at once, even over mobile data, and fetch posts directly from
+smaller or personal relays when needed. It does this without noticeably
+increasing data usage, which is important for people on limited connections or
+inexpensive phones. In practice, it shows that a mobile client can participate
+in a broad relay set rather than depending on a handful of large hubs. The
+outbox model is also wired into Amethyst's embedded Tor support, which is
+enabled by default, so these connections do not have to reveal a user's IP
+address to relay operators. Over time, that makes it more difficult to track
+users by IP or location across the relays they interact with.
+
+Private messaging saw a similar step forward. With [v0.94.0], Amethyst added
+encrypted media in direct messages (DMs) so users can share images and files in
+one-to-one conversations without leaving the nostr stack. The upload feature was
+reworked to handle multiple files and encrypted delivery, making it easier to
+send sensitive material in a way that is both convenient and private. This
+builds on earlier work that helped establish [NIP-17] as the newer
+direct-messaging standard, closing metadata leaks that were present in the older
+[NIP-04] design. Taken together, encrypted media and the newer DM format make
+private communication on nostr substantially harder to track or analyze from the
+outside.
+
+Discovery features also evolved. Version [0.93.0] introduced a dedicated image
+feed powered by Olas, a photo-focused nostr service, an "Around Me" feed that
+highlights posts tied to the user's approximate location, and [NIP-63]
+interactive stories. These additions allow users to browse photos in a focused
+stream, see what is happening nearby, or tap through story-style posts that feel
+closer to what mainstream social apps already offer. In the same release,
+Amethyst moved picture and video uploads to the newer [NIP-68] and [NIP-71]
+standards so that media handling matches the latest expectations across the
+ecosystem.
+
+> This achievement (outbox transition and relay changes) is a major
+> demonstration of the true decentralized potential of nostr. By enabling mobile
+> clients to automatically connect to 1,000 relays, we have fundamentally
+> shifted the narrative. We've proven that users can be reliably served by a
+> highly distributed network—not just a few central points.
+>
+> <cite>—Vitor Pamplona</cite>
+
+Over the past year, Amethyst has become a more decentralized, private, and
+expressive way to use nostr from an Android phone. The outbox model removed much
+of the manual relay management that used to frustrate users, encrypted media
+made private conversations safer, and richer content options made the app more
+engaging for everyday use. OpenSats support made it possible to pursue these
+longer-term improvements in a sustained way, strengthening both Amethyst itself
+and the broader nostr ecosystem.
+
+[Amethyst]: https://www.amethyst.social/
+[Vitor Pamplona]: /blog/vitor-pamplona-receives-lts-grant
+[outbox model]: https://mikedilger.com/gossip-model/
+[v1.03.0]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.03.0
+[v0.94.0]: https://github.com/vitorpamplona/amethyst/releases/tag/v0.94.0
+[NIP-17]: https://github.com/nostr-protocol/nips/blob/master/17.md
+[NIP-04]: https://github.com/nostr-protocol/nips/blob/master/04.md
+[0.93.0]: https://www.amethyst.social/post/note1l83z35zhnvp9vpzt2jncqdlsdm06qmpysckrdzkhuq44e2nm6vysn585tl/
+[NIP-63]: https://github.com/vitorpamplona/nips/blob/byos/63.md
+[NIP-68]: https://github.com/nostr-protocol/nips/blob/master/68.md
+[NIP-71]: https://github.com/nostr-protocol/nips/blob/master/71.md
+
+---
+
+### Coracle
+
+[Coracle] is a web-based nostr client designed to make decentralized social
+networking approachable without sacrificing flexibility or user choice. Over the
+past year, development has focused on stronger relay controls, smoother
+synchronization, and improvements that make the [outbox model] easier for
+everyday users to understand. With OpenSats' support, [Hodlbod] and [Daniele]
+delivered upgrades that make nostr communication more reliable and practical
+while pushing forward a clearer model of what relays are for.
+
+A major milestone for Hodlbod's relay work was the merging of [NIP-43] and its
+implementation in the [zooid] relay, enabling relays to publish and maintain
+their own membership lists: a relay can sign a list of members, accept join
+requests from users, and update that list over time. The [NIP-86] implementation
+complements this by giving relay administrators a separate interface to add or
+remove members. Together, these features formalize a pattern in which relays are
+services with clear access controls and content curation policies. In other
+words, a relay can explicitly state who it is for and what kind of content it
+hosts.
+
+Coracle's 0.6.x releases added a compose option that lets users choose which
+relays will receive a posted note. This gives authors direct control over
+distribution instead of relying on a handful of large relays, and it makes the
+outbox model tangible: users decide where their posts are published, and the
+client manages the rest. These releases also introduced proof-of-work display
+and generation, as well as editing tools for web-of-trust feeds, expanding the
+ways users can shape what they see and how their content propagates.
+
+Additional development work by Daniele strengthened Coracle's day-to-day
+reliability. Version [0.6.26] introduced outbox-friendly relay controls, clearer
+publishing behavior, and smarter fallback mechanisms that keep the client
+connected even when individual relays fail. These adjustments reduce the number
+of instances where users encounter missing posts or slow-loading timelines and
+help Coracle maintain a consistent experience across a diverse relay set. The
+same release restored a global feed with performance improvements---an easy
+entry point for browsing the wider network without impacting advanced filtering
+tools.
+
+Sync performance also received attention. Improvements to [negentropy]—the
+protocol's method for reconciling differences between client and relay
+state—made timelines feel faster and more predictable, especially when switching
+between relays or refreshing a busy feed. These changes reduce wait times and
+help users understand what is happening on the network.
+
+> Much of nostr's novelty has to do with keys and digital signatures. But
+> focusing on the cryptographic aspects is, to me, actually something of a
+> distraction. The important thing to realize is that digital signatures make
+> relays possible—I mean this in the sense that digital signatures decouple data
+> storage from data authentication. This means that the same information can be
+> stored in multiple places—whether relays, local files, torrents, or anywhere
+> else—and the names associated with these places lose their power and become
+> far less meaningful. This puts the user in control, by allowing them to select
+> and move between services and custodians, with support from the protocol for
+> doing so.
+>
+> <cite>—Hodlbod</cite>
+
+Coracle has progressively improved how users read and publish notes from the
+browser. Per-note relay selection and outbox-aware relay controls let people
+choose where their notes are stored and retrieved instead of relying on a single
+default relay list. Negentropy-based sync, smarter fallback behavior when
+individual relays are slow, overloaded, or offline, and a restored global feed
+reduce missing posts and slow-loading timelines while making it easier to
+explore the wider network. With OpenSats' support, Hodlbod and Daniele focused
+on these deeper improvements to make the user experience more reliable overall
+while staying true to nostr's decentralized relay model.
+
+[Coracle]: https://app.coracle.social/
+[Hodlbod]: /blog/hodlbod-receives-lts-grant
+[Daniele]: /blog/daniele-receives-lts-grant
+[NIP-43]: https://github.com/nostr-protocol/nips/blob/master/43.md
+[zooid]: https://github.com/coracle-social/zooid
+[NIP-86]: https://github.com/nostr-protocol/nips/blob/master/86.md
+[0.6.26]: https://github.com/coracle-social/coracle/releases/tag/0.6.26
+[negentropy]: https://github.com/nostr-protocol/nips/blob/master/77.md
+
+---
+
+### Damus
+
+[Damus] is a nostr client for iOS and Android that gives users a social feed
+with integrated support for Lightning zaps. [Notedeck] is a related multi-column
+client from the same team for desktop and Android, designed for heavier activity
+and parallel monitoring of multiple timelines.
+
+Through [several rounds of support] from OpenSats beginning in [July 2023],
+contributors worked across these Damus clients to improve localization, show
+where notes are stored and propagated, improve spam resistance, and [integrate
+Nostr Wallet Connect] and zaps directly into the core client workflow.
+Contributors [Terry Yiu], [Eric Holguin], [KernelKind], and [Will Casarin]
+focused on localization, relay visibility, moderation tools, Lightning
+integration, and platform infrastructure spanning both clients.
+
+Terry Yiu's work on localization ensured that Notedeck's Android launch shipped
+with a complete translation system. He also improved how Damus displays nostr's
+relay architecture. On iOS, each note posted can show how many relays carried
+it, which specific relays saw it, and relay hints embedded in links and tags.
+When a note does not appear in a user's feed, they can see whether it failed to
+reach their relays or whether the issue lies elsewhere. This shifts relay
+behavior from an invisible implementation detail to something users can inspect,
+which matters for a protocol that relies on many independent operators.
+
+To address spam and low-quality replies without introducing centralized
+moderation, Terry implemented a [web-of-trust reply sorter] in Damus iOS.
+Replies from people in a user's social graph are prioritized, while others
+remain available but visually deprioritized. The filtering is client-side and
+opt-in, so anyone can still publish and read, but users gain more control over
+what appears in dense threads.
+
+Eric Holguin focused on the bridge between nostr activity and Lightning
+payments. His redesign of the Damus wallet view adds a clear Nostr Wallet
+Connect integration, including visible balances, recent transactions, and a zap
+explainer. Users can see what funds are available, how they move, and what it
+means to send a zap. This reduces the friction of connecting a wallet and makes
+Lightning behavior legible.
+
+Eric also [integrated] support for follow packs into Damus, along with a
+dedicated timeline in the Universe view. Follow packs, popularized by Calle's
+[following.space project], are curated sets of accounts that users can subscribe
+to in a single action. When a new user's first nostr experience is an empty
+feed, discovery itself becomes a barrier to adoption. Follow packs address that
+problem using open data structures: they are visible, shareable, and easy to
+extend or unsubscribe from, ultimately improving discovery. Damus iOS also added
+interest-based follow suggestions to help new users discover relevant accounts
+during onboarding.
+
+On desktop, KernelKind extended the same Lightning and usability focus into
+Notedeck's multi-column environment. Full Nostr Wallet Connect support is now
+[integrated directly into columns]: users connect their wallet using a Nostr
+Wallet Connect link, view balances, configure default zap amounts, and send zaps
+from timelines through both the wallet view and directly from each note in the
+timeline. This makes value transfer part of the normal reading and replying
+process.
+
+KernelKind also [reworked thread rendering] in Notedeck. These changes make
+conversations easier to follow and reduce the friction of navigating long,
+branching discussions. Replies are now structured so that only direct responses
+appear under the selected note, reply chains are shown in order, unread markers
+highlight new activity, and navigation makes it easy to move between a specific
+branch and the broader context. This improves the readability of long
+discussions, including technical discussions and project coordination, and makes
+it more feasible to keep those conversations on nostr rather than relying on
+proprietary platforms.
+
+In addition, KernelKind [implemented a notifications view] in Notedeck based on
+the Damus iOS design. It delivers real-time alerts for reactions and reposts
+with the same interaction patterns users know from Damus iOS, while running on a
+Rust-based architecture tuned for efficiency on low-end devices. Notedeck now
+groups these interactions, shows unseen indicators, and fixes navigation issues
+that previously led to dead ends when tapping a notification. This brings a
+familiar notifications experience to Notedeck and makes it clearer when people
+interact with posts.
+
+> We are working toward the Notedeck browser-platform vision: an open path for
+> developers to build on Notedeck without reinventing the wheel. OpenSats
+> accelerated this critical step toward a truly decentralized social ecosystem.
+>
+> <cite>—KernelKind</cite>
+
+A major architectural change this year was the continued development of
+[NostrDB], the event database originally built for Damus iOS. NostrDB now
+underpins Damus Android and Notedeck and is being adopted by other nostr
+applications, including [AirChat] and software built on [rust-nostr-sdk]. This
+turns what began as an internal performance improvement into shared
+infrastructure available to the broader ecosystem.
+
+At the platform level, Will Casarin advanced the Damus roadmap on Android and
+experimented with features that reduce dependency on public relays. The [Damus
+Android launch] delivered a native client with the familiar multi-column
+Notedeck interface and an integrated assistant to the mobile platform. In many
+regions, Android devices are the primary or only computing environment, so
+supporting them is important for growing a global user base.
+
+Will's addition of local-network posting introduced a local sharing mode
+([multicasting]) that lets Notedeck apps on the same Wi-Fi network share notes
+directly with each other without depending on public relays. This is useful at
+conferences, meetups, and in locations with poor or intermittent connectivity,
+and it demonstrates that nostr-style messaging can operate across different
+layers. Reducing reliance on remote infrastructure improves resilience and gives
+communities more options for how and where they host their communication.
+
+Finally, Notedeck [added algorithmic timelines], including a view that shows the
+last note per npub, supported by improvements to how timelines are stored and
+refreshed. These views allow users to create more focused feeds that reduce
+distractions without hiding the underlying data or delegating ranking decisions
+to a centralized service. Users can choose how to see information from their
+network, combining chronological feeds with higher-signal perspectives when
+needed.
+
+Across mobile and desktop, Damus and Notedeck now give nostr users a consistent
+way to read, publish, and move value on the devices they already use.
+Localization expanded access, relay visibility and web-of-trust sorting gave
+users more insight and control, Nostr Wallet Connect and zaps integrated bitcoin
+directly into everyday use, and Android support plus local-network multicasting
+expanded where and how people can participate. The evolution of Notedeck as a
+reusable Rust codebase offers a foundation other nostr applications can build
+on. OpenSats' support allowed these contributors to spend sustained time
+improving the code that strengthens both the nostr ecosystem and the broader
+goal of user-controlled infrastructure.
+
+[Damus]: https://damus.io/
+[Notedeck]: https://damus.io/notedeck/
+[several rounds of support]: /projects/damus#announcements
+[July 2023]: /blog/nostr-grants-july-2023
+[integrate Nostr Wallet Connect]: https://github.com/damus-io/damus/commit/c837f3e78d3282204f8cc3cc372a0a01eca9d3da
+[Terry Yiu]: https://github.com/tyiu
+[Eric Holguin]: https://github.com/ericholguin
+[KernelKind]: https://github.com/kernelkind
+[Will Casarin]: https://github.com/jb55
+[web-of-trust reply sorter]: https://github.com/damus-io/damus/pull/3067
+[integrated]: https://github.com/damus-io/damus/commit/36a9e81ab1d5c8807db7c3d865c4ea371c678ce2
+[following.space project]: https://following.space/
+[integrated directly into columns]: https://github.com/damus-io/notedeck/releases/tag/v0.4.0
+[reworked thread rendering]: https://github.com/damus-io/notedeck/pull/900
+[implemented a notifications view]: https://github.com/damus-io/notedeck/pull/1086
+[NostrDB]: https://github.com/damus-io/nostrdb
+[AirChat]: https://xcancel.com/getairchat
+[rust-nostr-sdk]: https://rust-nostr.org/
+[Damus Android launch]: https://damus.io/android
+[multicasting]: https://github.com/damus-io/notedeck/pull/626
+[added algorithmic timelines]: https://github.com/damus-io/notedeck/pull/712
+
+---
+
+### Jumble
+
+[Jumble] is a browser-based nostr client focused on helping users understand,
+choose, and interact with relays in a way that supports decentralization rather
+than defaulting to a few large relays. Its design centers on relay quality and
+user choice. Over the past year, with [support from OpenSats], developer [Cody
+Tseng] has added features that improve relay discovery, key handling, and
+control over where notes are published.
+
+One of the most visible changes was the [introduction of relay reviews] and
+featured relays in Jumble's Explore experience. Users can now rate the relays
+they use and browse relays that the app highlights based on reliability,
+responsiveness, or specialization. This replaces the guesswork that many
+newcomers face—trying to find a usable relay set from scattered community
+lists—and turns relay selection into something closer to a reputation system. By
+making well-run relays more discoverable and poor-performing ones easier to
+avoid, Jumble encourages users to rely less on a small set of large relays and
+instead distribute traffic across many smaller or specialized operators. These
+changes were implemented alongside improvements to relay ordering and overall
+discovery UX, offering a more intuitive way to explore the network.
+
+Jumble also improved key safety and multi-app interoperability by adding
+client-initiated [NIP-46] connections. Instead of pasting a private key into the
+browser, users can now pair Jumble with an external signer (such as [Amber],
+[Aegis], or [nos2x]) that holds the users' public and private key pairs. This
+reduces the risk of account takeover and makes it easier to use the same signer
+safely across multiple nostr apps. It replaces the old pattern of pasting
+private keys into the client directly and encourages a safer login workflow for
+people who use nostr on several devices or through several apps.
+
+Finally, Jumble added outbox-aware publishing and event republishing controls.
+Users can now send or resend notes to specific relays, ensuring that posts reach
+the communities or topic-focused relays most relevant to them. This is
+especially helpful for specialized relays that host conversations around
+particular subjects, or for routing around outages or policy changes on
+individual relays. Giving users direct control over where their posts go helps
+break dependence on a small set of large relays and advances the broader shift
+toward the inbox/outbox model many nostr clients are adopting. It also gives
+users a clearer sense of how their posts move through the network and how relay
+choice affects visibility.
+
+Jumble now gives users more insight and deliberate control in a protocol built
+on independent relay operators. Relay reviews and featured relays improve
+discovery, NIP-46 login flows make key handling safer without sacrificing
+interoperability, and targeted publishing aligns Jumble with nostr's emerging
+decentralization patterns. OpenSats' support allowed Cody Tseng to pursue these
+deeper improvements, helping Jumble move from a power-user tool toward a client
+that makes relay choice and safety understandable for everyone.
+
+[Jumble]: https://jumble.social/
+[support from OpenSats]: /blog/twelfth-wave-of-nostr-grants#jumble
+[Cody Tseng]: https://github.com/CodyTseng
+[introduction of relay reviews]: https://github.com/CodyTseng/jumble/commit/2439150c6e21d56000dbdd1c44450e5813bb25d7
+[NIP-46]: https://github.com/nostr-protocol/nips/blob/master/46.md
+[Amber]: /blog/greenart7c3-receives-lts-grant
+[Aegis]: /blog/twelfth-wave-of-nostr-grants#aegis
+[nos2x]: https://github.com/fiatjaf/nos2x
+
+---
+
+### NoStrudel
+
+[NoStrudel] is a web-based nostr client aimed at more technically inclined users
+who want a transparent view into how the protocol works while still having
+access to the features expected of a modern social application. It places a
+strong emphasis on local-first data, clear visibility into relay behavior, and
+support for emerging nostr standards. Over the past year, [OpenSats'
+support](/blog/hzrd149-receives-lts-grant) has helped noStrudel developer
+[hzrd149] improve private messaging, interoperability with other clients, and
+refine the underlying engine that powers the app.
+
+In the recent noStrudel [v0.45.0 release], the client added full support for
+[NIP-17], a newer standard for private messages on nostr, and [NIP-59] gift
+wrap, an extra layer that lets these messages travel across relays without
+exposing who the messages are for. NoStrudel also added a dedicated inbox view
+for this message format, so users see a straightforward chat interface even
+though the protocol working underneath is more complex. This brought noStrudel
+into alignment with other major clients such as Amethyst, [0xChat], Coracle,
+[Flotilla], and [Coop], allowing users to carry private conversations seamlessly
+across apps. In practice, it means encrypted, interoperable messaging that
+behaves consistently no matter which client their contacts use.
+
+NoStrudel also received a major internal upgrade through the [applesauce v4.x]
+releases, which packages its core components into a shared library for building
+nostr web clients. Maintained by hzrd149, the [applesauce] SDK provides relay
+connections, timelines, signing, contacts, mutes, bookmarks, and NIP-17
+direct-message support, along with newer protocol features such as more
+efficient syncing using [NIP-77] and improved counting with [NIP-45]. Because
+applesauce is a shared library, other developers can reuse it instead of
+rebuilding these parts from scratch, helping new clients ship stable features
+faster. For noStrudel itself, using applesauce has already led to a cleaner
+split between the app and its engine, and recent work with the library has laid
+the groundwork for moving from a [hard-coded relay list] to an outbox model that
+builds timelines from the relays used by a user's contacts.
+
+> The biggest achievement has been building out the applesauce SDK to be the
+> core of the app. This has allowed me to build and test features in isolation
+> and then integrate them back into the app when I know they are working.
+>
+> <cite>—Hzrd149</cite>
+
+A complementary set of tools expanded noStrudel's focus on local-first data. The
+introduction of [window.nostrdb.js], the [Nostr Bucket] browser extension, and
+[Umbrel Blob Box]—also developed by hzrd149—gives noStrudel access to locally
+stored events/posts and self-hosted media storage. These components allow the
+client to load timelines more quickly, reduce dependence on remote databases,
+and store images and files under the user's control. Users running noStrudel on
+[StartOS], [UmbrelOS], or in the browser gain the option to host their own
+media, keep data local, and build a more private and resilient setup without
+relying on third-party indexing services.
+
+Over the past year, these efforts have made noStrudel a more capable and
+interoperable nostr client. Gift-wrapped DMs brought its private messaging in
+line with the broader ecosystem, applesauce v4 updated the internal engine that
+drives the app, and the local-first data tools offered faster timelines and more
+user-controlled storage. OpenSats' support enabled sustained work by hzrd149
+across these areas, helping noStrudel continue its role as a transparent,
+standards-aligned client built for users who want deeper insight and control
+within the nostr network.
+
+[NoStrudel]: https://nostrudel.ninja/
+[hzrd149]: https://github.com/hzrd149
+[v0.45.0 release]: https://njump.to/naddr1qvzqqqr4gupzqfngzhsvjggdlgeycm96x4emzjlwf8dyyzdfg4hefp89zpkdgz99qyf8wumn8ghj7mn0wd68yat99e3k7mf0qy2hwumn8ghj7un9d3shjtnyv9kh2uewd9hj7qqsdeh4xarjw4jx2mpdxqkngdfdxqtn2yvk
+[NIP-59]: https://github.com/nostr-protocol/nips/blob/master/59.md
+[0xChat]: /blog/nostr-grants-october-2023#0xchat
+[Flotilla]: https://flotilla.social/
+[Coop]: /blog/8th-wave-nostr-grants#coop
+[applesauce v4.x]: https://github.com/hzrd149/applesauce/releases
+[applesauce]: https://hzrd149.github.io/applesauce/
+[NIP-77]: https://github.com/nostr-protocol/nips/blob/master/77.md
+[NIP-45]: https://github.com/nostr-protocol/nips/blob/master/45.md
+[hard-coded relay list]: https://hzrd149.github.io/applesauce/examples/#outbox/relay-selection
+[window.nostrdb.js]: https://github.com/hzrd149/window.nostrdb.js
+[Nostr Bucket]: https://github.com/hzrd149/nostr-bucket
+[Umbrel Blob Box]: https://github.com/hzrd149/umbrel-blob-box
+[StartOS]: https://github.com/Start9Labs/start-os
+[UmbrelOS]: https://umbrel.com/umbrelos
+
+---
+
+### Nostur
+
+[Nostur] is an iOS and macOS client designed to make nostr feel familiar to
+users coming from mainstream social apps while still preserving the protocol's
+core principles of openness and user control. Over the past year, development
+has focused on expanding media options, reducing onboarding friction, and
+reinforcing decentralized relay usage. With [OpenSats'
+support](/blog/nostr-grants-october-2023), Fabian delivered a series of releases
+that brought Nostur closer to a full-featured, privacy-respecting social
+experience on Apple platforms.
+
+Notes received an upgrade with the introduction of voice messages—short [audio
+notes called Yaks]. This addition closes a usability gap between nostr clients
+and mainstream messengers, allowing users to post quick recordings without
+switching apps. Because voice messages operate fully within the nostr ecosystem,
+they bring this convenience without relying on external communication channels.
+
+Media handling improved as well with the implementation of [picture-first
+posting], powered in part by Olas's photo-focused approach, along with native
+Blossom media uploads. Users can now publish posts where the image comes first,
+[browse visually rich content], and [store media] on decentralized Blossom
+servers rather than centralized services. This shift strengthens durability and
+user ownership: creators can serve their media from multiple backend locations,
+mirror it automatically, and rely on open standards instead of third-party
+silos.
+
+Nostur also made it easier for users to build meaningful feeds with the
+introduction of [one-tap conversion] of Lists into live feeds, letting users
+turn any curated set of accounts into a timeline without extra configuration.
+Follow Packs, added shortly after, help new users find active and relevant
+accounts immediately. Later releases expanded relay management by integrating
+outbox-style publishing and relay preview tools, reducing the need for manual
+list editing and aligning Nostur with the broader shift toward decentralized
+relay usage.
+
+Throughout the year, Fabian emphasized resilience, simplicity, and
+decentralization. Nostur's web-of-trust filters helped mitigate several waves of
+spam attacks without central moderation, demonstrating that open networks can
+defend themselves without restricting who can publish. Nostur was also one of
+the first iOS and macOS clients to adopt Relay Autopilot (expands a user's relay
+set based on who they follow), extending outbox-style automation to Apple
+platforms and reducing reliance on a handful of large relays. Additional
+features like live streams and support for using a WordPress site as a personal
+media backend further expand what users can do while keeping data under their
+control.
+
+> One of the goals with Nostur is to provide a social media alternative that is
+> free from manipulative algorithms, free from ad-based algorithms that
+> prioritize engagement or promote doom scrolling. I think this has worked out
+> pretty well. Nostur doesn't rely on any external algorithms, and you notice
+> that things aren't pushed on you. I open Nostur to see what the people I
+> follow have to say and not to become a target of an ad campaign.
+>
+> <cite>—Fabian</cite>
+
+Within the Apple ecosystem, Nostur is steadily becoming a more capable,
+privacy-oriented client that remains simple to use. Yaks give users an
+alternative way to post messages, decentralized media uploads give creators more
+control, and feed and outbox improvements make it easier for users to find and
+follow meaningful content. OpenSats' support made it possible for Nostur to
+expand its feature set while staying aligned with nostr's principle of
+user-driven networks.
+
+[Nostur]: https://nostur.com/
+[audio notes called Yaks]: https://github.com/nostur-com/nostur-ios-public/releases/tag/1.23.0
+[picture-first posting]: https://github.com/nostur-com/nostur-ios-public/releases/tag/1.21.0
+[browse visually rich content]: https://github.com/nostur-com/nostur-ios-public/releases/tag/1.22.0
+[store media]: https://github.com/nostur-com/nostur-ios-public/releases/tag/1.24.1
+[one-tap conversion]: https://github.com/nostur-com/nostur-ios-public/releases/tag/1.20.0
+
+---
+
+### Zap.stream
+
+[Zap.stream] is a nostr-native live-streaming client with Lightning zap
+capabilities that lets creators broadcast directly over the protocol while
+keeping control of their identity and earnings. Over the past year, OpenSats has
+[supported](/blog/kieran-receives-lts-grant) work by developer [Kieran] that
+helped the project expand from a desktop-focused tool into a full mobile
+experience, strengthen its streaming infrastructure, and introduce a
+production-ready media backend that other nostr applications can build on.
+
+A major shift came from bringing live streaming to mobile devices. The [Flutter]
+apps for iOS and Android, developed by Kieran, now let creators go live directly
+from their phone camera, receive notifications, open streams through links, and
+connect their Lightning wallet through Nostr Wallet Connect. Streaming on nostr
+is now accessible to everyday users rather than limited to desktop setups or
+custom RTMP software. These changes began with the [v1.1.0] release in May 2025
+and continued through subsequent updates that improved zap handling and polished
+the viewing and broadcasting experience. The result is a mobile app that makes
+it easy to start streaming and earning sats without giving up keys or relying on
+custodial platforms.
+
+Zap.stream's backend became more flexible through the development of their core
+streaming server, a Rust-based engine maintained by Kieran that handles live
+video. It ingests RTMP live video streams, converts them into standard or
+low-latency HLS formats used by video players, records broadcasts, and exposes
+real-time metrics for operators. Because the engine is self-hostable and
+supports horizontal scaling, anyone can run their own streaming backend that
+works with the zap.stream interface. This moves nostr live streaming away from a
+single service and toward a distributed marketplace of independent providers,
+closer to the network's broader goal of minimizing single points of failure.
+
+The project also introduced [Route96], a nostr-integrated media backend designed
+for large video files, clips, and replayable content. Deployed at
+[nostr.download], Route96 supports both [NIP-96] and Blossom, optimizing media
+with thumbnails and compression, mirroring uploads across servers, honoring
+Lightning-based storage limits, and serving files efficiently to video clients.
+For applications like zap.stream, this provides durable, decentralized storage
+without relying on legacy cloud infrastructure. For the wider ecosystem, it
+offers a ready-to-use media backbone that any nostr client can integrate with,
+enabling richer features such as VOD, clips, and image hosting without each
+project needing to build its own storage stack.
+
+As a result of this work, zap.stream has become a nostr live-streaming client
+that pairs an easy mobile experience with self-hostable, interchangeable backend
+infrastructure. The mobile apps made streaming accessible to more creators, the
+Rust engine made backend infrastructure deployable by anyone, and Route96
+provided a reliable way to store and deliver large media files. OpenSats'
+support allowed Kieran to continue development across these areas, helping
+zap.stream demonstrate what a user-controlled, open-protocol approach to live
+streaming can look like.
+
+[Zap.stream]: https://zap.stream/
+[Kieran]: https://github.com/v0l
+[Flutter]: https://github.com/nostrlabs-io/zap-stream-flutter
+[v1.1.0]: https://github.com/nostrlabs-io/zap-stream-flutter/releases/tag/v1.1.0
+[Route96]: https://github.com/v0l/route96
+[nostr.download]: https://nostr.download/
+[NIP-96]: https://github.com/nostr-protocol/nips/blob/master/96.md
+
+---
+
+The progress highlighted in this report shows nostr clients moving from early
+experiments into dependable tools for a growing user base. Outbox models are
+improving nostr's decentralization by having clients read from the relays people
+actually publish to instead of defaulting to a handful of large relays. Better
+key handling and external signers are reducing the risk of account loss.
+Local-first data stacks, media backends, and notification systems are giving
+users more control over how and where their data lives. Together, these projects
+are turning the promise of portable identity and censorship-resistant
+communication into tangible applications that people use every day.
+
+OpenSats supports this work so that the foundations of nostr remain free, open,
+and user-controlled. Grants give developers time to solve problems like sync
+reliability, spam resistance, and onboarding flows, and to release features like
+zaps, live streaming, and interoperable DMs in public code that anyone can
+inspect, reuse, and build upon. The developers behind these clients are not just
+building individual apps; they are defining how the nostr protocol feels in
+practice and proving that users do not have to trade sovereignty for
+convenience.
+
+Nostr is still young, and there is plenty left to do—from better discovery and
+safety tools to more resilient relay infrastructure and richer application
+types. With thoughtful funding and continued collaboration, client developers
+can keep pushing nostr toward a future where people everywhere can speak,
+coordinate, and move value without asking for permission.
+
+If you believe in building and maintaining censorship-resistant communication
+infrastructure, consider supporting [The Nostr Fund](/funds/nostr). Every donation directly
+helps independent developers ship open-source software that keeps users in
+control.
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+If you are a developer working on a nostr project that strengthens this
+ecosystem, we encourage you to [apply for funding](/apply).
