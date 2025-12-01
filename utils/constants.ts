@@ -10,5 +10,4 @@ export const ERROR_MESSAGES = {
   GRANT_NOT_FOUND: 'Grant not found, contact support for assistance',
 }
 
-export const MONTHLY_DONATION_URL =
-  'https://adtjkuks.donorsupport.co/page/opensats'
+export const MONTHLY_DONATION_URL = 'https://adtjkuks.donorsupport.co/page/opensats'

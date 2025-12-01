@@ -25,3 +25,4 @@ export function getRelatedBlogPostsForProject(
     return searchContent.includes(projectTitle)
   })
 }
+
