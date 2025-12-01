@@ -62,7 +62,7 @@ export default function ProjectPage({
         </aside>
       </div>
       {relatedPosts.length > 0 && (
-        <section className="mt-12 divide-y divide-gray-200 dark:divide-gray-700">
+        <section id="announcements" className="mt-12 divide-y divide-gray-200 dark:divide-gray-700">
           <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
             <div></div>
             <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 xl:col-span-2">
