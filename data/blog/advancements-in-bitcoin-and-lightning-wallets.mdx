@@ -1,11 +1,12 @@
 ---
-title: "Advancements in Bitcoin and Lightning Wallets"
+title: 'Advancements in Bitcoin and Lightning Wallets'
 date: '2025-10-27'
 tags: ['OpenSats', 'bitcoin', 'lightning', 'impact']
 authors: ['default', 'arvin', 'dergigi']
-images: ['/static/images/blog/86-advancements-in-bitcoin-and-lightning-wallets.jpg']
+images:
+  ['/static/images/blog/86-advancements-in-bitcoin-and-lightning-wallets.jpg']
 draft: false
-summary: "An impact report from the front-lines of Bitcoin and Lightning wallet development."
+summary: 'An impact report from the front-lines of Bitcoin and Lightning wallet development.'
 ---
 
 Wallet and node software form the core of Bitcoin's free and open financial
@@ -58,7 +59,7 @@ transaction notifications], removing the need for centralized servers. Users can
 see on-chain confirmations in real time while preserving privacy.
 
 [Support] for hardware wallets like Blockstream Jade Plus expanded compatibility
-and security. The wallet also [warns] about look-alike address scams to help users 
+and security. The wallet also [warns] about look-alike address scams to help users
 avoid common attack patterns.
 
 Behind the interface, Bitcoin Safe is prepared for full adoption of [Compact
@@ -69,10 +70,10 @@ on centralized indexers. Project developers collaborated with the BDK
 community to refine handling of unconfirmed transactions, address
 lookahead, and encrypted storage, helping improve BDK-based wallets overall.
 
->Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
->fast UX while removing centralization points, such as electrum servers.
+> Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
+> fast UX while removing centralization points, such as electrum servers.
 >
-><cite>—Andreas Griffin</cite>
+> <cite>—Andreas Griffin</cite>
 
 Translation support helps make the wallet accessible to users in multiple
 languages for broader usability, while the use of [nostr] enables private data
@@ -124,10 +125,10 @@ addresses, such as user@domain, while keeping custody local. A lightweight HTTP
 relay forwards payment requests to the recipient's wallet and returns the
 invoice for payment.
 
->Having a trust-minimized Lightning Address linked to a self-custodial wallet 
->is a valuable option in a custodial Lightning world.
+> Having a trust-minimized Lightning Address linked to a self-custodial wallet
+> is a valuable option in a custodial Lightning world.
 >
-><cite>—Hampus Sjöberg</cite>
+> <cite>—Hampus Sjöberg</cite>
 
 Released on Android in [version 0.6.9-420] and documented as an [open protocol
 draft][blip], Lightning Box is available for other wallets to adopt.
@@ -182,10 +183,10 @@ The transition to Spark replaced earlier multi-network integrations, unifying
 what were once separate systems for Lightning, Liquid, and swaps into a simpler,
 more efficient architecture.
 
->Simplicity of use is the difference between Bitcoin as a cypherpunk technology
->and Bitcoin as a monetary revolution.
+> Simplicity of use is the difference between Bitcoin as a cypherpunk technology
+> and Bitcoin as a monetary revolution.
 >
-><cite>—Blake Kaufman</cite>
+> <cite>—Blake Kaufman</cite>
 
 As the first live reference implementation of [Spark], Blitz offers insight for
 developers exploring the protocol. Each iteration of Blitz development continues
@@ -238,15 +239,15 @@ One major update was the unified dashboard for two CLN plugins: CLBOSS, which
 automates liquidity management, and [BOLT12 Prisms], which enables payment
 splitting across recipients.
 
->Core Lightning's plugin ecosystem contains powerful tools like CLBOSS for
->automated liquidity management and BOLT12 Prisms for payment splitting, but
->interacting with these plugins requires command-line knowledge. Remote solves
->this by providing the first comprehensive plugin dashboard. We also decided to
->make Remote fully self-hostable. Now users can run their complete Lightning
->stack on Start9—Bitcoin node, CLN, and plugin interfaces—entirely on their
->own hardware with intuitive access to advanced features.
+> Core Lightning's plugin ecosystem contains powerful tools like CLBOSS for
+> automated liquidity management and BOLT12 Prisms for payment splitting, but
+> interacting with these plugins requires command-line knowledge. Remote solves
+> this by providing the first comprehensive plugin dashboard. We also decided to
+> make Remote fully self-hostable. Now users can run their complete Lightning
+> stack on Start9—Bitcoin node, CLN, and plugin interfaces—entirely on their
+> own hardware with intuitive access to advanced features.
 >
-><cite>—John Gribbin</cite>
+> <cite>—John Gribbin</cite>
 
 Clams [implemented] BIP-353, which enables DNS-based Lightning addresses so
 users can send payments to email-like addresses. Users can open or close
@@ -363,8 +364,8 @@ accuracy and compatibility with other software such as [Sparrow] and [Specter].
 Together, these refinements reduce errors during account setup and ensure data
 consistency across wallets.
 
-By prioritizing signer-first workflows and making multisignature use practical 
-on mobile devices, Satsigner reinforces the principles of open verification and 
+By prioritizing signer-first workflows and making multisignature use practical
+on mobile devices, Satsigner reinforces the principles of open verification and
 personal control that define Bitcoin self-custody.
 
 [Satsigner]: https://satsigner.com/
@@ -393,10 +394,9 @@ and more resilient. Each release brings Bitcoin closer to a future where
 financial independence is not an exception, but the norm.
 
 <center>
-    <DonateRecurringButton/>
+  <DonateRecurringButton />
 </center>
 
 If you are a developer working on free and open-source software that helps
 Bitcoin flourish, we encourage you to [apply for
 funding](/apply).
-

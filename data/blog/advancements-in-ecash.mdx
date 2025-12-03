@@ -1,11 +1,11 @@
 ---
-title: "Advancements in Ecash"
+title: 'Advancements in Ecash'
 date: '2025-09-26'
 tags: ['OpenSats', 'bitcoin', 'impact', 'ecash']
 authors: ['default', 'arvin', 'dergigi']
 images: ['/static/images/blog/84-advancements-in-ecash.jpg']
 draft: false
-summary: "An impact report from the front-lines of ecash development."
+summary: 'An impact report from the front-lines of ecash development.'
 ---
 
 Ecash is a digital cash system based on [David Chaum's
@@ -20,14 +20,17 @@ private, fast, and offline-capable transactions.
 As David Chaum once observed, the stakes of digital money go far beyond
 convenient payments.
 
->The choice between keeping information in the hands of individuals or of
->organizations is being made each time any government or business decides to
->automate another set of transactions. In one direction lies unprecedented
->scrutiny and control of people's lives, in the other, secure parity between
->individuals and organizations. The shape of society in the next century may
->depend on which approach predominates.
+> The choice between keeping information in the hands of individuals or of
+> organizations is being made each time any government or business decides to
+> automate another set of transactions. In one direction lies unprecedented
+> scrutiny and control of people's lives, in the other, secure parity between
+> individuals and organizations. The shape of society in the next century may
+> depend on which approach predominates.
 >
-><cite>—[David Chaum](https://groups.csail.mit.edu/mac/classes/6.805/articles/money/chaum-electronic-privacy.html)</cite>
+> <cite>
+>   —[David
+>   Chaum](https://groups.csail.mit.edu/mac/classes/6.805/articles/money/chaum-electronic-privacy.html)
+> </cite>
 
 Over the past year, OpenSats has given long-term and targeted support to ecash
 developers and projects. This led to contributors proposing new protocol
@@ -104,14 +107,14 @@ between Android wallets, and the [Cashu
 Decoder](https://github.com/callebtc/cashu-decoder) made it easier for
 developers to inspect and debug tokens.
 
->Cashu has grown into a true pillar of the Bitcoin open-source movement, driving
->innovations once thought impossible. The free and open-source project has
->brought countless new developers into Bitcoin. Today, Cashu powers Bitcoin
->communities worldwide, and is already at the heart of multiple companies’
->products. This momentum is only possible thanks to our incredible grassroots
->community and the freedom-driven contributors who make Cashu what it is today.
+> Cashu has grown into a true pillar of the Bitcoin open-source movement, driving
+> innovations once thought impossible. The free and open-source project has
+> brought countless new developers into Bitcoin. Today, Cashu powers Bitcoin
+> communities worldwide, and is already at the heart of multiple companies’
+> products. This momentum is only possible thanks to our incredible grassroots
+> community and the freedom-driven contributors who make Cashu what it is today.
 >
-><cite>—Calle</cite>
+> <cite>—Calle</cite>
 
 Work is underway on a [proposal](https://github.com/cashubtc/nuts/pull/267) for
 a nostr-based backup format for mint lists, providing multi-mint users a
@@ -132,12 +135,12 @@ and [CDK Kotlin](https://github.com/cashubtc/cdk-kotlin).
 These bindings make CDK the most accessible path for developers who want to
 create Cashu-powered experiences on mobile.
 
->Mobile bindings have been the number one requested CDK feature for some time.
->With the release of our Swift and Kotlin bindings, CDK is the easiest way to
->get started building Cashu apps. As Bitcoin monetizes, Cashu will be the
->protocol which day-to-day and online-native payments are settled.
+> Mobile bindings have been the number one requested CDK feature for some time.
+> With the release of our Swift and Kotlin bindings, CDK is the easiest way to
+> get started building Cashu apps. As Bitcoin monetizes, Cashu will be the
+> protocol which day-to-day and online-native payments are settled.
 >
-><cite>—David Caseria, CDK contributor</cite>
+> <cite>—David Caseria, CDK contributor</cite>
 
 Beyond bindings, the project also [worked
 on](https://github.com/cashubtc/cdk/pull/1001) simplifying multi-mint wallet
@@ -259,14 +262,14 @@ payment](https://github.com/minibits-cash/minibits_wallet/commit/12dd4f9) while
 online, then go offline. The recipient can later connect to validate and redeem
 the tokens, or keep them circulating as ecash.
 
->Thanks to the OpenSats grant, I was able to focus on the niche area of offline
->ecash payments. For those of us used to fast internet, this may seem like a
->curiosity, but in many underdeveloped regions it's a real necessity. Minibits
->has become a pioneer in showcasing the unique properties of ecash for moving
->bitcoin. The wallet enables the payer to be completely offline, leveraging
->ecash's nature as a true bearer token stored directly in the wallet.
+> Thanks to the OpenSats grant, I was able to focus on the niche area of offline
+> ecash payments. For those of us used to fast internet, this may seem like a
+> curiosity, but in many underdeveloped regions it's a real necessity. Minibits
+> has become a pioneer in showcasing the unique properties of ecash for moving
+> bitcoin. The wallet enables the payer to be completely offline, leveraging
+> ecash's nature as a true bearer token stored directly in the wallet.
 >
-><cite>—Misovan</cite>
+> <cite>—Misovan</cite>
 
 By broadening platform support, improving reliability, enabling sender-locked
 and offline payments, and making transfers easier across devices, Minibits moved
@@ -357,11 +360,11 @@ maintainer](https://github.com/cashubtc/cashu-ts/releases) of `cashu-ts`, the
 main TypeScript library for the protocol. He contributed hundreds of changes,
 helped lead multiple releases, and launched a new documentation site.
 
->With npub.cash v2, Lightning Addresses are no longer tied to a specific wallet.
->Users can get an address right away, wallets can support whichever address
->their users prefer, and providers can launch their own services in minutes.
+> With npub.cash v2, Lightning Addresses are no longer tied to a specific wallet.
+> Users can get an address right away, wallets can support whichever address
+> their users prefer, and providers can launch their own services in minutes.
 >
-><cite>—Egge</cite>
+> <cite>—Egge</cite>
 
 Npub.cash v2 made Lightning Addresses portable and easy to host. It allows
 people to receive Lightning payments as ecash without staying online, while
@@ -384,7 +387,7 @@ close to being PR-ready. Major improvements include rewriting the cdk branch to
 conform to best practices within the cdk repo and
 [eliminating](https://github.com/vnprc/cdk/commit/c95fb868533e46eda029fe690fc66a805f3e7803)
 the need for a quote lookup API, which significantly increased the privacy and
-security attack surface of the protocol.  Work on Hashpool has resulted in
+security attack surface of the protocol. Work on Hashpool has resulted in
 [a](https://github.com/cashubtc/cdk/commit/180a7c41b754f3b37d90e2cc92a5ba5f76b0b15e)
 [number](https://github.com/cashubtc/cdk/commit/714022fe140f3ed58bac9396ca6b7627dbbc59f9)
 [of](https://github.com/cashubtc/cdk/commit/5b30ca546d44d5bfe86f07e6091c989aa4953a2e)
@@ -534,7 +537,7 @@ To support projects like these and others, please consider making a recurring
 donation to the General Fund.
 
 <center>
-    <DonateRecurringButton/>
+  <DonateRecurringButton />
 </center>
 
 If you are a developer advancing free and open-source software that helps

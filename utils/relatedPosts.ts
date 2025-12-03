@@ -43,7 +43,9 @@ export function getRelatedBlogPostsForFund(fund: Fund, blogs: Blog[]): Blog[] {
   if (!fund) return []
 
   const slug = fund.slug.split('/').pop() || fund.slug
-  const relatedTags = (FUND_TAGS_BY_SLUG[slug] || []).map((t) => t.toLowerCase())
+  const relatedTags = (FUND_TAGS_BY_SLUG[slug] || []).map((t) =>
+    t.toLowerCase()
+  )
   if (!relatedTags.length) return []
 
   return blogs.filter((blog) => {
@@ -51,5 +53,3 @@ export function getRelatedBlogPostsForFund(fund: Fund, blogs: Blog[]): Blog[] {
     return blogTags.some((tag) => relatedTags.includes(tag))
   })
 }
-
-
