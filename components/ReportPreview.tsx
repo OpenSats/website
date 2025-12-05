@@ -7,7 +7,7 @@ interface ReportPreviewProps {
 
 export default function ReportPreview({ reportContent }: ReportPreviewProps) {
   return (
-    <div className="prose prose-sm max-w-none p-6 dark:prose-invert">
+    <div className="prose prose-sm max-w-none p-6 dark:prose-dark">
       <ReactMarkdown>{reportContent}</ReactMarkdown>
     </div>
   )
