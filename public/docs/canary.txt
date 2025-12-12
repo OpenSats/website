@@ -13,8 +13,8 @@ following months:
 We include the latest Bitcoin block hash in each update to establish that the
 signature was not pre-generated:
 
-* Height: `908093`
-* Block hash: `000000000000000000022cbf9f383ba122c4dfb3399e488ae0e7699833dde961`
+* Height: `927617`
+* Block hash: `000000000000000000004b913d729e4a49bd60aca58619e131458c1b8e41750b`
 
 [0] https://opensats.org/transparency
 
