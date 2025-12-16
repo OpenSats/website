@@ -35,17 +35,12 @@ The eight first-time grants in this wave go to:
 The seven grant renewals have been awarded to:
 
 - Bitcoin Dev Kit ([Aug. 2023](blog/bitcoin-and-nostr-grants-august-2023#bdk))
-- Satoshi Nakamoto Institute ([Jul.
-  2024](/blog/announcing-the-opensats-education-initiative#satoshi-nakamoto-institute))
-- Africa Free Routing ([Sep.
-  2024](/blog/second-wave-of-education-grants#africa-free-routing))
+- Satoshi Nakamoto Institute ([Jul. 2024](/blog/announcing-the-opensats-education-initiative#satoshi-nakamoto-institute))
+- Africa Free Routing ([Sep. 2024](/blog/second-wave-of-education-grants#africa-free-routing))
 - Floresta ([Sep. 2024](/blog/bitcoin-grants-september-2024-7th-wave#floresta))
-- Yes Bitcoin Haiti ([Nov.
-  2024](/blog/3rd-wave-of-education-grants#yes-bitcoin-haiti))
-- Silent Payments Shepherd ([Aug.
-  2025](/blog/thirteenth-wave-of-bitcoin-grants#silent-payments-shepherd))
-- Swift Bitcoin ([Jul.
-  2025](/blog/twelfth-wave-of-bitcoin-grants#swift-bitcoin))
+- Yes Bitcoin Haiti ([Nov. 2024](/blog/3rd-wave-of-education-grants#yes-bitcoin-haiti))
+- Silent Payments Shepherd ([Aug. 2025](/blog/thirteenth-wave-of-bitcoin-grants#silent-payments-shepherd))
+- Swift Bitcoin ([Jul. 2025](/blog/twelfth-wave-of-bitcoin-grants#swift-bitcoin))
 
 These grants are made possible by donations to our [General
 Fund](/funds/general). If you’d like to help sustain free and open-source work,
@@ -139,13 +134,17 @@ guidelines] within the Bitcoin community, drawing on his involvement with the
 ISO C++ Committee, and to develop the [BtcK] multi-language API so that
 different programming languages can talk to Bitcoin Core through consistent,
 idiomatic bindings. Alongside this, Daniel prioritizes C++ education and
-mentorship.
+mentorship by teaching fundamentals, sharing best practices, and helping new
+maintainers grow into long-term contributors.
 
 With support from this grant, Daniel will focus on concrete near-term milestones
 that support future architectural improvements. These include helping to prepare
-a stable C API for the [Bitcoin Kernel library], ensuring its SDK is deployed
-cleanly, and replacing platform-specific packaging scripts with a unified CPack
-definition.
+a stable C API for the [Bitcoin Kernel library], making sure its SDK is deployed
+cleanly with the correct headers, library artifacts, and package configuration,
+and replacing a patchwork of platform-specific packaging scripts with a unified
+CPack definition. Because improving maintainability and educating future
+developers is an ongoing effort, progress will be iterative and aimed at the
+long-term sustainability of the Bitcoin Core project.
 
 Repositories: [purpleKarrot/btck]; [bitcoin/bitcoin]  
 Licenses: MIT
@@ -165,10 +164,19 @@ platforms, and is the most widely deployed of the [BSD family], second only to
 Linux among open-source operating systems. This project maintains the
 FreeBSD/EC2 platform, ensuring that FreeBSD runs reliably on [Amazon EC2] by
 producing and supporting cloud images and coordinating with the wider project.
+This work underpins operating system diversity for critical infrastructure,
+which is important for Bitcoin operators who cannot rely on a single-kernel
+monoculture.
 
 With support from this grant, [Colin Percival] will continue engineering work
-around the newly released [FreeBSD 15.0], including EC2 image builds and work on
-[future branches] to improve robustness and security in cloud environments.
+around the newly released [FreeBSD 15.0], including EC2 image builds and
+coordination needed to keep the release stable and supported. Additional work
+will extend to [future branches], addressing larger changes and issues deferred
+from 15.0 and improving the robustness and security of FreeBSD in cloud
+environments. The goal is to ensure that FreeBSD remains a well-maintained
+operating system option for long-term infrastructure, including those in the
+Bitcoin ecosystem that rely on operating system diversity to reduce systemic
+risk.
 
 Repository: [freebsd/freebsd-src]  
 License: BSD-2-Clause
@@ -186,11 +194,13 @@ License: BSD-2-Clause
 [Janb84] contributes to Bitcoin Core with a focus on coordinating software
 release testing and improving the supporting documentation and feedback loop
 around that work. This includes maintaining Release Candidate Testing Guides and
-running feedback threads for testers, as well as facilitating group review
-through the [PR Review Club].
+running dedicated feedback threads for testers, as well as facilitating group
+review and discussion of the testing process through the [PR Review Club].
 
-With support from this grant, janb84 will continue in-depth PR review and
-contributor-facing documentation such as [README]s and testing guides.
+With support from this grant, janb84 will continue to expand his work on Bitcoin
+Core, including in-depth PR review and contributor-facing documentation such as
+[README]s and testing guides, with the goal of improving the quality of review
+and testing so changes are easier to evaluate and safer to release.
 
 Repository: [bitcoin/bitcoin]  
 License: MIT
@@ -198,17 +208,30 @@ License: MIT
 [Janb84]: https://github.com/janb84
 [PR Review Club]: https://bitcoincore.reviews/
 [README]: https://github.com/bitcoin/bitcoin/blob/master/doc/README.md
+[bitcoin/bitcoin]: https://github.com/bitcoin/bitcoin
 
 ### LaWallet
 
 [LaWallet] is a Lightning wallet stack designed to make bitcoin onboarding
 simple and practical for communities. It provides Lightning Addresses,
-[BoltCards] for NFC payments, and [Nostr Wallet Connect] as the backend, and can
-be deployed on platforms like [Vercel] or [Netlify]. This model is already being
-deployed with [VEINTIUNO.LAT].
+[BoltCards] for NFC payments, [Nostr Wallet Connect] as the backend, and can be
+deployed for free on platforms like [Vercel] or [Netlify] to give users an
+instant Lightning wallet experience. The same stack can run on self-hosted
+platforms such as Umbrel or Start9, where communities offer courtesy NWC
+accounts and guide users toward operating their own infrastructure. LaWallet’s
+core idea is progressive custody, where users can start with hosted providers
+and later move to their own node without changing their interface or habits.
+This model is already being deployed with [VEINTIUNO.LAT] across several
+circular economies.
 
-With support from this grant, LaWallet will focus on heavy testing, bug fixes,
-and improving the operator and user experience.
+With support from this grant, LaWallet will focus on improving the stack through
+heavy testing, bug fixes, and completion of the admin dashboard. The project
+aims to have at least ten circular communities running the platform, improving
+the simple wallet frontend, NWC integrations, and BoltCard flows based on user
+feedback. Additional work will refine the deployment and management experience
+for operators, making it easier for grassroots initiatives to roll out Lightning
+Addresses, POS devices, and NFC cards while progressively guiding new users
+toward self-custody.
 
 Repository: [lawalletio/lawallet-nwc]  
 License: MIT
@@ -223,14 +246,32 @@ License: MIT
 
 ### LNHANCE
 
-The LNHANCE Expedition project explores the proposed [LNhance soft fork] by
-building proof-of-concept implementations of [Eltoo] channels, hash-lock Ark
-([hArk]), and [vaults], with a focus on [CTV] and [CSFS].
+The LNHANCE Expedition project explores the proposed [LNhance soft fork] for
+Bitcoin by building and analyzing proof-of-concept implementations of [Eltoo]
+channels, hash-lock Ark ([hArk]), and [vaults], with a focus on
+OP_CHECKTEMPLATEVERIFY ([CTV]) and OP_CHECKSIGFROMSTACK ([CSFS]). Its goal is to
+understand the practical viability, limitations, and tradeoffs of these new
+opcodes in real-world channel, Ark, and vault designs. Current work centers on a
+CTV-only vault that uses a predefined spending plan to control how quickly funds
+can be moved, support a large number of deposits and withdrawals, and provide a
+secure recovery path with clear limitations for users, alongside tools,
+documentation, educational materials, and reusable libraries that help other
+developers adopt these designs.
 
-With support from this grant, the project will complete a CTV-only vault proof
-of concept, implement Eltoo channels in [LDK], explore Ark-like protocols in
-[bark], and simulate multiparty Eltoo coinpools for decentralized miners such as
-[Braidpool].
+With support from this grant, the project will complete the CTV-only vault proof
+of concept, refine its command-line and minimal graphical interfaces, and
+document the CTV precomputed state machine design for both general and technical
+audiences. It will then implement Eltoo channels using CTV and CSFS in [LDK] and
+extend this work to multiparty Eltoo using a precomputed settlement state
+machine, comparing on-chain efficiency and design tradeoffs with existing
+approaches. Further work will apply CTV and CSFS to [Ark-like protocols] by
+implementing hArk in [bark] and exploring related designs such as [Erk]. The
+project will also simulate multiparty Eltoo coinpools as non-custodial payout
+mechanisms for decentralized miners such as
+([Braidpool](/blog/bitcoin-grants-feb-2024#braidpool)), and investigate
+additional vault designs, including social recovery, offline key delegation, and
+deleted key recursion aimed at reducing precomputation overhead to levels
+suitable for hardware wallets.
 
 Repositories: [LNHANCE-Expedition]  
 Licenses: CC0-1.0, CC BY 4.0, MIT
@@ -242,26 +283,45 @@ Licenses: CC0-1.0, CC BY 4.0, MIT
 [CTV]: https://bitcoinops.org/en/topics/op_checktemplateverify/
 [CSFS]: https://bitcoinops.org/en/topics/op_checksigfromstack/
 [LDK]: https://github.com/lightningdevkit
+[Ark-like protocols]: https://bitcoinops.org/en/topics/ark/
 [bark]: https://docs.rs/bark-wallet/latest/bark/
-[Braidpool]: https://opensats.org/blog/bitcoin-grants-feb-2024#braidpool
+[Erk]: https://blog.second.tech/erk-update/
 [LNHANCE-Expedition]: https://github.com/LNHANCE-Expedition
 
 ### Mohd Zaid
 
-[Mohd Zaid] is a developer contributing to [Braidpool], a zero-fee Bitcoin
-mining pool that aims to reduce centralization. His work includes an [Audit
-Mode] proxy and the [UHPO] accounting module built on a shared [DAG] of mining
-“beads”.
+[Mohd Zaid] is a developer contributing to [Braidpool], zero-fee Bitcoin mining
+pool that aims to reduce centralization in the Bitcoin mining landscape.
+Braidpool replaces the single-operator model of traditional pools with a shared
+Directed Acyclic Graph ([DAG]) of “[beads]” (shares or weak blocks) that records
+miners’ work quickly and with less waste. Building on this braid-like structure,
+Mohd has been working on two core pieces of infrastructure: an [Audit Mode]
+proxy that transparently logs mining activity into the DAG to create a
+tamper-evident record of work performed, and an Unspent Hash Payout Output
+([UHPO]) module that serves as an auditable accounting layer for tracking what
+each miner is owed and how payouts are constructed.
 
-With support from this grant, Mohd will harden Audit Mode, complete the UHPO
-module, integrate both systems, and research decentralized signing using
-[FROST].
+With support from this grant, Mohd will focus on turning these components into
+robust tools that miners and ecosystem partners can rely on. He will implement
+and strengthen Audit Mode, including the pass-through proxy, the DAG logic for
+anchoring mining events, and privacy features that let miners selectively share
+contribution data with contract counterparties. Mohd will then design and build
+out the UHPO module, defining its data model, core operations for tracking
+balances and settlement, and the logic to generate valid payout transactions. In
+the final phase, he plans to integrate Audit Mode and UHPO while researching and
+prototyping decentralized signing with [FROST] or similar threshold schemes,
+followed by comprehensive functional and integration testing. The goal is to
+provide an open-source foundation for transparent mining accounting and
+hashrate-linked financial tools, reducing dependence on centralized pool
+infrastructure.
 
 Repositories: [/braidpool/braidpool]  
 License: AGPL-3.0
 
 [Mohd Zaid]: https://github.com/zaidmstrr
+[Braidpool]: https://github.com/braidpool/braidpool
 [DAG]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
+[beads]: https://github.com/braidpool/braidpool/blob/main/docs/braid_consensus.md
 [Audit Mode]: https://github.com/braidpool/braidpool/pull/305
 [UHPO]: https://github.com/braidpool/braidpool/blob/main/docs/braidpool_spec.md#unspent-hasher-payment-output
 [FROST]: https://www.rfc-editor.org/rfc/rfc9591.html
