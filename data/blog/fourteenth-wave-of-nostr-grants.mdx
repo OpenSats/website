@@ -20,9 +20,9 @@ also renewing support for two previous grantees, as per below.
 
 The first-time grants in this wave will go to:
 
-- [Nostr Feedz](#nostr-feedz)
-- [Quartz](#quartz)
 - [YakiHonne](#yakihonne)
+- [Quartz](#quartz)
+- [Nostr Feedz](#nostr-feedz)
 
 The grant renewals have been awarded to:
 
@@ -43,45 +43,6 @@ Let's dive in to learn about how each project is contributing to the future of
 nostr.
 
 ---
-
-### Nostr Feedz
-
-[Nostr Feedz] is a web app that lets users follow traditional RSS feeds
-alongside nostr long-form content ([NIP-23]), with a public guide/directory for
-discovering writers. Nostr Feedz also provides a "nostr to RSS" feature that
-turns nostr long-form posts into an RSS feed, so those updates can be followed
-in standard RSS readers outside nostr.
-
-The author of Nostr Feedz, [PlebOne], also maintains a self-hostable relay
-project and runs a community instance at [relay.pleb.one]. It uses invite-only
-Web-of-Trust access and an admin dashboard for managing invites, similar to
-fiatjaf's [pyramid] and utxo's [WoT Relay].
-
-With support from this grant, PlebOne will keep building out Nostr Feedz and the
-relay project—shipping improvements, strengthening reliability, and maturing
-both into stable production services. Funding also contributes to ongoing
-maintenance and operational costs of the public instances.
-
-Repositories: [Nostr-Feedz]; [PlebOne/relay.pleb.one]  
-License: MIT
-
-### Quartz
-
-Quartz is a Kotlin Multiplatform ([KMP]) library that implements nostr
-functionality in a form that can be reused across other projects. It is
-developed alongside [Amethyst] and is already used in production. Related work
-has also included experiments integrating nostr feeds and nostr-adjacent content
-into existing readers and podcast applications, helping developers understand
-what it takes to bring nostr content into other applications.
-
-With support from this grant, the Quartz project plans to complete the remaining
-refactoring needed to move Android-specific code into shared multiplatform
-modules, then add functionality and tests to ensure the library behaves
-consistently. A final milestone is to build a simple first version of Amethyst
-for iOS that can connect to nostr and do the basics, like reading and posting.
-
-Repository: [amethyst/tree/main/quartz]  
-License: MIT
 
 ### YakiHonne
 
@@ -104,6 +65,45 @@ discovery and to explore relay-level paid feeds designed to remain interoperable
 across clients.  YakiHonne is also available on [Zapstore].
 
 Repositories: [YakiHonne](https://github.com/YakiHonne/)  
+License: MIT
+
+### Quartz
+
+Quartz is a Kotlin Multiplatform ([KMP]) library that implements nostr
+functionality in a form that can be reused across other projects. It is
+developed alongside [Amethyst] and is already used in production. Related work
+has also included experiments integrating nostr feeds and nostr-adjacent content
+into existing readers and podcast applications, helping developers understand
+what it takes to bring nostr content into other applications.
+
+With support from this grant, the Quartz project plans to complete the remaining
+refactoring needed to move Android-specific code into shared multiplatform
+modules, then add functionality and tests to ensure the library behaves
+consistently. A final milestone is to build a simple first version of Amethyst
+for iOS that can connect to nostr and do the basics, like reading and posting.
+
+Repository: [amethyst/tree/main/quartz]  
+License: MIT
+
+### Nostr Feedz
+
+[Nostr Feedz] is a web app that lets users follow traditional RSS feeds
+alongside nostr long-form content ([NIP-23]), with a public guide/directory for
+discovering writers. Nostr Feedz also provides a "nostr to RSS" feature that
+turns nostr long-form posts into an RSS feed, so those updates can be followed
+in standard RSS readers outside nostr.
+
+The author of Nostr Feedz, [PlebOne], also maintains a self-hostable relay
+project and runs a community instance at [relay.pleb.one]. It uses invite-only
+Web-of-Trust access and an admin dashboard for managing invites, similar to
+fiatjaf's [pyramid] and utxo's [WoT Relay].
+
+With support from this grant, PlebOne will keep building out Nostr Feedz and the
+relay project—shipping improvements, strengthening reliability, and maturing
+both into stable production services. Funding also contributes to ongoing
+maintenance and operational costs of the public instances.
+
+Repositories: [Nostr-Feedz]; [PlebOne/relay.pleb.one]  
 License: MIT
 
 ---
