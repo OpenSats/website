@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
+import LifetimeStats from '@/components/LifetimeStats'
 
 const OPENSATS_ORANGE = '#f97316' // tailwind orange-500
 
@@ -84,10 +85,22 @@ export default function MapPage({
       />
 
       <div>
-        <div className="space-y-2 pb-6 pt-6 md:space-y-5">
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            OpenSats supports grantees in 40+ countries around the world.
-          </p>
+        <div className="pb-6 pt-6">
+          <LifetimeStats />
+          <div className="py-4">
+            <div className="mx-auto">
+              <dl className="grid grid-cols-1">
+                <div className="mx-auto grid grid-cols-1">
+                  <dt className="text-center text-base/7 text-gray-600 dark:text-gray-300">
+                    Countries
+                  </dt>
+                  <dt className="order-first text-center text-4xl font-semibold tracking-tight text-orange-600">
+                    40+
+                  </dt>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
 
         <div className="pt-6 overflow-x-auto">
