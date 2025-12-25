@@ -67,6 +67,12 @@ export const getStaticProps = async () => {
     '<path$1$3><title>$2</title></path>'
   )
 
+  // Add viewBox for proper scaling on all screen sizes
+  svg = svg.replace(
+    /<svg([^>]*)width="([^"]*)"([^>]*)height="([^"]*)"([^>]*)>/,
+    '<svg$1width="$2"$3height="$4"$5 viewBox="0 0 $2 $4">'
+  )
+
   return { props: { svg } }
 }
 
