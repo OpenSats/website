@@ -158,9 +158,6 @@ export default function YearPage({
               />
             </svg>
           </div>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Filter by tags:
-          </p>
           <TagFilter
             tags={allTags}
             tagCounts={tagCounts}
