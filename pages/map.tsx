@@ -92,7 +92,7 @@ export default function MapPage({
 
   // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
   const grantsGiven = stats[0]?.value ? formatNumber(stats[0].value) : '...'
-  const usdAllocated = stats[1]?.value ? stats[1].value.toLocaleString() : '...'
+  const usdAllocated = stats[1]?.value ? Math.round(stats[1].value).toLocaleString() : '...'
   const satsSent = stats[2]?.value ? formatNumber(stats[2].value).replace('B', 'billion') : '...'
 
   return (
