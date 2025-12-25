@@ -105,7 +105,7 @@ export default function MapPage({
       <div>
         <div className="pb-6 pt-6">
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            OpenSats has allocated ${usdAllocated} USD and mass-sent ~{satsSent} sats to {grantsGiven} grantees in 40+ countries.
+            OpenSats has allocated ${usdAllocated} USD and sent ~{satsSent} sats to {grantsGiven} grantees in 40+ countries.
           </p>
         </div>
 
