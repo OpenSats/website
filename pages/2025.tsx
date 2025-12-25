@@ -13,6 +13,7 @@ export const getStaticProps = async () => {
   const allPosts = sortedBlogPost(allBlogs) as Blog[]
   const posts = allPosts
     .filter((post) => new Date(post.date).getFullYear() === YEAR)
+    .filter((post) => !post.title.toLowerCase().includes('wave'))
     .reverse() // Oldest first
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
   const pagination = {
