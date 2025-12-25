@@ -89,7 +89,7 @@ export default function MapPage({
             Grant map
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Countries highlighted in orange have received OpenSats grants.
+            OpenSats has supported grantees in 40+ countries around the world.
           </p>
         </div>
 
