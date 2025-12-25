@@ -50,11 +50,26 @@ interface TagFilterProps {
   tagCounts: Record<string, number>
   selectedTags: Set<string>
   onToggle: (tag: string) => void
+  onSelectAll: () => void
+  onSelectNone: () => void
 }
 
-function TagFilter({ tags, tagCounts, selectedTags, onToggle }: TagFilterProps) {
+function TagFilter({ tags, tagCounts, selectedTags, onToggle, onSelectAll, onSelectNone }: TagFilterProps) {
   return (
     <div className="flex flex-wrap gap-2 pb-6">
+      <button
+        onClick={onSelectAll}
+        className="rounded-full px-3 py-1 text-sm font-medium transition-colors border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        All
+      </button>
+      <button
+        onClick={onSelectNone}
+        className="rounded-full px-3 py-1 text-sm font-medium transition-colors border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+      >
+        None
+      </button>
+      <span className="border-l border-gray-300 dark:border-gray-600 mx-1" />
       {tags.map((tag) => {
         const isSelected = selectedTags.has(tag)
         return (
@@ -95,6 +110,9 @@ export default function YearPage({
     })
   }
 
+  const handleSelectAll = () => setSelectedTags(new Set(allTags))
+  const handleSelectNone = () => setSelectedTags(new Set())
+
   const filteredPosts = (posts as CoreContent<Blog>[]).filter((post) =>
     post.tags?.some((tag) => selectedTags.has(tag))
   )
@@ -118,6 +136,8 @@ export default function YearPage({
             tagCounts={tagCounts}
             selectedTags={selectedTags}
             onToggle={handleTagToggle}
+            onSelectAll={handleSelectAll}
+            onSelectNone={handleSelectNone}
           />
         </div>
         {!filteredPosts.length && 'No posts found.'}
