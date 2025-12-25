@@ -69,7 +69,7 @@
        y1="204.05754"
        x2="393.59485"
        y2="204.05754"
-       gradientTransform="matrix(1.4786779,0,0,0.67627982,186.12501,29.134493)"
+       gradientTransform="matrix(1.4786779,0,0,0.67627982,166.12501,29.134493)"
        gradientUnits="userSpaceOnUse" /><linearGradient
        inkscape:collect="always"
        xlink:href="#mainGradient"
@@ -78,7 +78,7 @@
        y1="335.54135"
        x2="393.59485"
        y2="335.54135"
-       gradientTransform="matrix(1.4786779,0,0,0.67627982,186.12501,29.134493)"
+       gradientTransform="matrix(1.4786779,0,0,0.67627982,166.12501,29.134493)"
        gradientUnits="userSpaceOnUse" /><linearGradient
        inkscape:collect="always"
        xlink:href="#fanGradient"
@@ -312,36 +312,36 @@
      stroke-width="3"
      stroke-linecap="round"
      id="polyline7"
-     transform="translate(186.12501,29.134493)" /><polyline
+     transform="translate(166.12501,29.134493)" /><polyline
      points="50,120 70,140 50,160"
      fill="none"
      stroke="#ea580c"
      stroke-width="3"
      stroke-linecap="round"
      id="polyline8"
-     transform="translate(186.12501,29.134493)" /><polyline
+     transform="translate(166.12501,29.134493)" /><polyline
      points="30,440 50,460 30,480"
      fill="none"
      stroke="#ea580c"
      stroke-width="3"
      stroke-linecap="round"
      id="polyline9"
-     transform="translate(186.12501,29.134493)" /><polyline
+     transform="translate(166.12501,29.134493)" /><polyline
      points="50,440 70,460 50,480"
      fill="none"
      stroke="#ea580c"
      stroke-width="3"
      stroke-linecap="round"
      id="polyline10"
-     transform="translate(186.12501,29.134493)" /><!-- Top input line curving down --><path
-     d="m 256.12501,169.13449 c 130,0 230,0 330,160 100,160 150,0 180,0"
+     transform="translate(166.12501,29.134493)" /><!-- Top input line curving down --><path
+     d="m 236.12501,169.13449 c 130,0 230,0 330,160 100,160 150,0 180,0"
      fill="none"
      stroke="url(#mainGradient)"
      stroke-width="4"
      stroke-linecap="round"
      id="path10"
      style="stroke:url(#linearGradient82)" /><!-- Bottom input line curving up --><path
-     d="m 256.12501,489.13449 c 130,0 230,0 330,-160 100,-160 150,0 180,0"
+     d="m 236.12501,489.13449 c 130,0 230,0 330,-160 100,-160 150,0 180,0"
      fill="none"
      stroke="url(#mainGradient)"
      stroke-width="4"
@@ -354,7 +354,7 @@
      opacity="0.8"
      id="g32"
      style="stroke:url(#linearGradient105)"
-     transform="translate(186.12501,29.134493)"><!-- Radial fan lines --><path
+     transform="translate(166.12501,29.134493)"><!-- Radial fan lines --><path
        d="m 580,300 q 70,0 170,-200"
        id="path12"
        style="stroke:url(#linearGradient84)" /><path
@@ -423,7 +423,7 @@
      fill="none"
      opacity="0.6"
      id="g53"
-     transform="translate(186.12501,29.134493)"><path
+     transform="translate(166.12501,29.134493)"><path
        d="M 580,300 Q 640,310 720,90"
        id="path33" /><path
        d="m 580,300 q 65,15 145,-190"
@@ -471,7 +471,7 @@
      fill="none"
      opacity="0.4"
      id="g82"
-     transform="translate(186.12501,29.134493)"><path
+     transform="translate(166.12501,29.134493)"><path
        d="m 580,300 q 40,5 120,-220"
        id="path54" /><path
        d="m 580,300 q 45,8 125,-205"
@@ -531,7 +531,7 @@
        d="m 580,300 q 40,89 120,220"
        id="path82" /></g><g
      id="g2367"
-     transform="matrix(1.2370965,0,0,1.2370965,629.60457,289.72983)"><path
+     transform="matrix(1.2370965,0,0,1.2370965,610.70187,289.72983)"><path
        id="rect7048"
        style="font-variation-settings:'wght' 700;opacity:1;fill:url(#radialGradient7056);fill-opacity:1;stroke-width:10.5833;stroke-linecap:round;stroke-linejoin:round"
        d="m 32.574123,39.318559 v 3.810103 h 16.109611 v -3.810103 z" /><path
@@ -540,82 +540,82 @@
        d="m 14.849106,16.062097 v 4.551143 l 8.944674,5.680791 v 0.136942 l -8.944674,5.680274 V 36.66239 L 27.877769,28.107357 V 24.61713 Z" /></g><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
-     x="1010.2371"
+     x="990.23712"
      y="259.13535"
      id="text110"><tspan
        sodipodi:role="line"
-       x="1010.2371"
+       x="990.23712"
        y="259.13535"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
        id="tspan110">150+</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
-     x="1011.3403"
+     x="991.34027"
      y="293.15268"
      id="text111"><tspan
        sodipodi:role="line"
-       x="1011.3403"
+       x="991.34027"
        y="293.15268"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
        id="tspan111">Active Grantees</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
-     x="1009.5587"
+     x="989.55872"
      y="400.46683"
      id="text112"><tspan
        sodipodi:role="line"
-       x="1009.5587"
+       x="989.55872"
        y="400.46683"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
        id="tspan112">40+</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
-     x="1010.3277"
+     x="990.3277"
      y="430.48416"
      id="text113"><tspan
        sodipodi:role="line"
-       x="1010.3277"
+       x="990.3277"
        y="430.48416"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
        id="tspan113">Countries</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
-     x="511.74719"
+     x="492.84448"
      y="130.83585"
      id="text2"><tspan
        sodipodi:role="line"
-       x="511.74719"
+       x="492.84448"
        y="130.83585"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:29.625px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.0694337"
        id="tspan2">Monthly Grant Payouts</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
-     x="126.906"
+     x="106.906"
      y="193.19662"
      id="text10"><tspan
        sodipodi:role="line"
-       x="126.906"
+       x="106.906"
        y="193.19662"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
        id="tspan10">$</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
-     x="232.79346"
-     y="466.44473"
+     x="213.3262"
+     y="471.03015"
      id="text11"
      transform="rotate(13.254141)"><tspan
        sodipodi:role="line"
-       x="232.79346"
-       y="466.44473"
+       x="213.3262"
+       y="471.03015"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
        id="tspan11">₿</tspan></text><text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
-     x="448.2952"
+     x="429.39249"
      y="86.858421"
      id="text13"><tspan
        sodipodi:role="line"
-       x="448.2952"
+       x="429.39249"
        y="86.858421"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:73.1233px;font-family:Inter;-inkscape-font-specification:'Inter, @opsz=32,wght=700';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;font-variation-settings:'opsz' 32, 'wght' 700;fill:#ff6b01;fill-opacity:1;stroke-width:0.166635"
        id="tspan13">~$1,000,000</tspan></text></svg>
