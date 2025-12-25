@@ -1,15 +1,20 @@
 import { useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
-import { sortedBlogPost, allCoreContent, CoreContent } from 'pliny/utils/contentlayer'
+import {
+  sortedBlogPost,
+  allCoreContent,
+  CoreContent,
+} from 'pliny/utils/contentlayer'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import PostList from '@/components/PostList'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-
-const POSTS_PER_PAGE = 100
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const years = [2023, 2024, 2025]
@@ -36,9 +41,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   // Sort tags by frequency (most common first), separate common tags
   const commonTagNames = ['opensats', 'grants', 'bitcoin']
-  const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a])
-  const allTags = sortedTags.filter((tag) => !commonTagNames.includes(tag.toLowerCase()))
-  const commonTags = sortedTags.filter((tag) => commonTagNames.includes(tag.toLowerCase()))
+  const sortedTags = Object.keys(tagCounts).sort(
+    (a, b) => tagCounts[b] - tagCounts[a]
+  )
+  const allTags = sortedTags.filter(
+    (tag) => !commonTagNames.includes(tag.toLowerCase())
+  )
+  const commonTags = sortedTags.filter((tag) =>
+    commonTagNames.includes(tag.toLowerCase())
+  )
 
   return {
     props: {
@@ -61,7 +72,15 @@ interface TagFilterProps {
   onSelectNone: () => void
 }
 
-function TagFilter({ tags, commonTags, tagCounts, selectedTags, onToggle, onSelectAll, onSelectNone }: TagFilterProps) {
+function TagFilter({
+  tags,
+  commonTags,
+  tagCounts,
+  selectedTags,
+  onToggle,
+  onSelectAll,
+  onSelectNone,
+}: TagFilterProps) {
   const [showCommon, setShowCommon] = useState(false)
 
   const displayTags = showCommon ? [...commonTags, ...tags] : tags
@@ -70,23 +89,26 @@ function TagFilter({ tags, commonTags, tagCounts, selectedTags, onToggle, onSele
     <div className="flex flex-wrap gap-2 pb-6">
       <button
         onClick={onSelectAll}
-        className="rounded-full px-3 py-1 text-sm font-medium transition-colors border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="rounded-full border border-gray-300 px-3 py-1 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-800"
       >
         All
       </button>
       <button
         onClick={onSelectNone}
-        className="rounded-full px-3 py-1 text-sm font-medium transition-colors border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+        className="rounded-full border border-gray-300 px-3 py-1 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-800"
       >
         None
       </button>
       {commonTags.length > 0 && (
         <button
           onClick={() => setShowCommon(!showCommon)}
-          className="px-2 py-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          className="px-2 py-1 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           title={showCommon ? 'Hide common tags' : 'Show common tags'}
         >
-          <FontAwesomeIcon icon={showCommon ? faChevronRight : faChevronLeft} className="h-3 w-3" />
+          <FontAwesomeIcon
+            icon={showCommon ? faChevronRight : faChevronLeft}
+            className="h-3 w-3"
+          />
         </button>
       )}
       {displayTags.map((tag) => {
@@ -117,7 +139,9 @@ export default function YearPage({
   tagCounts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const allTagsCombined = [...allTags, ...commonTags]
-  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set(allTagsCombined))
+  const [selectedTags, setSelectedTags] = useState<Set<string>>(
+    new Set(allTagsCombined)
+  )
   const [searchValue, setSearchValue] = useState('')
 
   const handleTagToggle = (tag: string) => {
@@ -138,7 +162,9 @@ export default function YearPage({
   const filteredPosts = (posts as CoreContent<Blog>[]).filter((post) => {
     const matchesTags = post.tags?.some((tag) => selectedTags.has(tag))
     const searchContent = post.title + post.summary + post.tags?.join(' ')
-    const matchesSearch = searchContent.toLowerCase().includes(searchValue.toLowerCase())
+    const matchesSearch = searchContent
+      .toLowerCase()
+      .includes(searchValue.toLowerCase())
     return matchesTags && matchesSearch
   })
 
