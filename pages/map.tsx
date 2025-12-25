@@ -86,7 +86,7 @@ export default function MapPage({
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-6 pt-6 md:space-y-5">
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            OpenSats has supported grantees in 40+ countries around the world.
+            OpenSats supports grantees in 40+ countries around the world.
           </p>
         </div>
 
