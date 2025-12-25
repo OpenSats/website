@@ -10,7 +10,7 @@ import PostList from '@/components/PostList'
 const POSTS_PER_PAGE = 100
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const years = [2024, 2025]
+  const years = [2023, 2024, 2025]
   return {
     paths: years.map((year) => ({ params: { year: String(year) } })),
     fallback: false,
