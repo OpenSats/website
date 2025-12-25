@@ -11,117 +11,164 @@
     
     <!-- Gradient for fan lines -->
     <linearGradient id="fanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="0%" stop-color="#f97316"/>
       <stop offset="100%" stop-color="#c2410c"/>
     </linearGradient>
   </defs>
   
-  <!-- Left chevron markers -->
+  <!-- Left chevron markers - BTC input -->
   <polyline points="30,120 50,140 30,160" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round"/>
   <polyline points="50,120 70,140 50,160" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round"/>
   
+  <!-- Left chevron markers - USD input -->
   <polyline points="30,440 50,460 30,480" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round"/>
   <polyline points="50,440 70,460 50,480" fill="none" stroke="#ea580c" stroke-width="3" stroke-linecap="round"/>
   
-  <!-- Top input line curving down -->
+  <!-- BTC input line curving down -->
   <path d="M 70 140 
            C 200 140, 300 140, 400 300
-           C 500 460, 550 300, 580 300" 
+           C 480 440, 520 300, 540 300" 
         fill="none" 
         stroke="url(#mainGradient)" 
         stroke-width="4" 
         stroke-linecap="round"/>
   
-  <!-- Bottom input line curving up -->
+  <!-- USD input line curving up -->
   <path d="M 70 460 
            C 200 460, 300 460, 400 300
-           C 500 140, 550 300, 580 300" 
+           C 480 160, 520 300, 540 300" 
         fill="none" 
         stroke="url(#mainGradient)" 
         stroke-width="4" 
         stroke-linecap="round"/>
   
-  <!-- Fan-out lines on the right -->
-  <g stroke="url(#fanGradient)" stroke-width="1" fill="none" opacity="0.8">
-    <!-- Radial fan lines -->
-    <path d="M 580 300 Q 650 300, 750 100"/>
-    <path d="M 580 300 Q 655 295, 755 120"/>
-    <path d="M 580 300 Q 660 290, 760 140"/>
-    <path d="M 580 300 Q 665 285, 765 160"/>
-    <path d="M 580 300 Q 670 280, 770 180"/>
-    <path d="M 580 300 Q 675 275, 775 200"/>
-    <path d="M 580 300 Q 680 270, 780 220"/>
-    <path d="M 580 300 Q 685 265, 785 240"/>
-    <path d="M 580 300 Q 690 260, 790 260"/>
-    <path d="M 580 300 Q 695 255, 795 280"/>
-    <path d="M 580 300 Q 700 250, 800 300"/>
-    <path d="M 580 300 Q 695 245, 795 320"/>
-    <path d="M 580 300 Q 690 240, 790 340"/>
-    <path d="M 580 300 Q 685 235, 785 360"/>
-    <path d="M 580 300 Q 680 230, 780 380"/>
-    <path d="M 580 300 Q 675 225, 775 400"/>
-    <path d="M 580 300 Q 670 220, 770 420"/>
-    <path d="M 580 300 Q 665 215, 765 440"/>
-    <path d="M 580 300 Q 660 210, 760 460"/>
-    <path d="M 580 300 Q 655 205, 755 480"/>
-    <path d="M 580 300 Q 650 200, 750 500"/>
+  <!-- 150+ Grantees - Dense fan-out lines -->
+  <!-- Layer 1: Primary fan lines -->
+  <g stroke="url(#fanGradient)" stroke-width="1" fill="none" opacity="0.9">
+    <path d="M 540 300 Q 620 300, 780 50"/>
+    <path d="M 540 300 Q 622 298, 782 65"/>
+    <path d="M 540 300 Q 624 296, 784 80"/>
+    <path d="M 540 300 Q 626 294, 786 95"/>
+    <path d="M 540 300 Q 628 292, 788 110"/>
+    <path d="M 540 300 Q 630 290, 790 125"/>
+    <path d="M 540 300 Q 632 288, 792 140"/>
+    <path d="M 540 300 Q 634 286, 794 155"/>
+    <path d="M 540 300 Q 636 284, 796 170"/>
+    <path d="M 540 300 Q 638 282, 798 185"/>
+    <path d="M 540 300 Q 640 280, 800 200"/>
+    <path d="M 540 300 Q 642 278, 800 215"/>
+    <path d="M 540 300 Q 644 276, 800 230"/>
+    <path d="M 540 300 Q 646 274, 800 245"/>
+    <path d="M 540 300 Q 648 272, 800 260"/>
+    <path d="M 540 300 Q 650 270, 800 275"/>
+    <path d="M 540 300 Q 652 268, 800 290"/>
+    <path d="M 540 300 Q 654 300, 800 300"/>
+    <path d="M 540 300 Q 652 332, 800 310"/>
+    <path d="M 540 300 Q 650 330, 800 325"/>
+    <path d="M 540 300 Q 648 328, 800 340"/>
+    <path d="M 540 300 Q 646 326, 800 355"/>
+    <path d="M 540 300 Q 644 324, 800 370"/>
+    <path d="M 540 300 Q 642 322, 800 385"/>
+    <path d="M 540 300 Q 640 320, 800 400"/>
+    <path d="M 540 300 Q 638 318, 798 415"/>
+    <path d="M 540 300 Q 636 316, 796 430"/>
+    <path d="M 540 300 Q 634 314, 794 445"/>
+    <path d="M 540 300 Q 632 312, 792 460"/>
+    <path d="M 540 300 Q 630 310, 790 475"/>
+    <path d="M 540 300 Q 628 308, 788 490"/>
+    <path d="M 540 300 Q 626 306, 786 505"/>
+    <path d="M 540 300 Q 624 304, 784 520"/>
+    <path d="M 540 300 Q 622 302, 782 535"/>
+    <path d="M 540 300 Q 620 300, 780 550"/>
   </g>
   
-  <!-- More dense fan lines for the spiral effect -->
-  <g stroke="#ea580c" stroke-width="0.5" fill="none" opacity="0.6">
-    <path d="M 580 300 Q 640 310, 720 90"/>
-    <path d="M 580 300 Q 645 315, 725 110"/>
-    <path d="M 580 300 Q 650 320, 730 130"/>
-    <path d="M 580 300 Q 655 325, 735 150"/>
-    <path d="M 580 300 Q 660 330, 740 170"/>
-    <path d="M 580 300 Q 665 335, 745 190"/>
-    <path d="M 580 300 Q 670 340, 750 210"/>
-    <path d="M 580 300 Q 675 345, 755 230"/>
-    <path d="M 580 300 Q 680 350, 760 250"/>
-    <path d="M 580 300 Q 685 355, 765 270"/>
-    <path d="M 580 300 Q 690 360, 770 290"/>
-    <path d="M 580 300 Q 685 365, 765 330"/>
-    <path d="M 580 300 Q 680 370, 760 350"/>
-    <path d="M 580 300 Q 675 375, 755 370"/>
-    <path d="M 580 300 Q 670 380, 750 390"/>
-    <path d="M 580 300 Q 665 385, 745 410"/>
-    <path d="M 580 300 Q 660 390, 740 430"/>
-    <path d="M 580 300 Q 655 395, 735 450"/>
-    <path d="M 580 300 Q 650 400, 730 470"/>
-    <path d="M 580 300 Q 645 405, 725 490"/>
-    <path d="M 580 300 Q 640 410, 720 510"/>
+  <!-- Layer 2: Medium density lines -->
+  <g stroke="#ea580c" stroke-width="0.6" fill="none" opacity="0.7">
+    <path d="M 540 300 Q 600 305, 750 40"/>
+    <path d="M 540 300 Q 603 308, 753 58"/>
+    <path d="M 540 300 Q 606 311, 756 76"/>
+    <path d="M 540 300 Q 609 314, 759 94"/>
+    <path d="M 540 300 Q 612 317, 762 112"/>
+    <path d="M 540 300 Q 615 320, 765 130"/>
+    <path d="M 540 300 Q 618 323, 768 148"/>
+    <path d="M 540 300 Q 621 326, 771 166"/>
+    <path d="M 540 300 Q 624 329, 774 184"/>
+    <path d="M 540 300 Q 627 332, 777 202"/>
+    <path d="M 540 300 Q 630 335, 780 220"/>
+    <path d="M 540 300 Q 633 338, 780 238"/>
+    <path d="M 540 300 Q 636 341, 780 256"/>
+    <path d="M 540 300 Q 639 344, 780 274"/>
+    <path d="M 540 300 Q 642 347, 780 292"/>
+    <path d="M 540 300 Q 642 353, 780 308"/>
+    <path d="M 540 300 Q 639 356, 780 326"/>
+    <path d="M 540 300 Q 636 359, 780 344"/>
+    <path d="M 540 300 Q 633 362, 780 362"/>
+    <path d="M 540 300 Q 630 365, 780 380"/>
+    <path d="M 540 300 Q 627 368, 777 398"/>
+    <path d="M 540 300 Q 624 371, 774 416"/>
+    <path d="M 540 300 Q 621 374, 771 434"/>
+    <path d="M 540 300 Q 618 377, 768 452"/>
+    <path d="M 540 300 Q 615 380, 765 470"/>
+    <path d="M 540 300 Q 612 383, 762 488"/>
+    <path d="M 540 300 Q 609 386, 759 506"/>
+    <path d="M 540 300 Q 606 389, 756 524"/>
+    <path d="M 540 300 Q 603 392, 753 542"/>
+    <path d="M 540 300 Q 600 395, 750 560"/>
   </g>
   
-  <!-- Extra fine detail lines -->
-  <g stroke="#c2410c" stroke-width="0.3" fill="none" opacity="0.4">
-    <path d="M 580 300 Q 620 305, 700 80"/>
-    <path d="M 580 300 Q 625 308, 705 95"/>
-    <path d="M 580 300 Q 630 311, 710 110"/>
-    <path d="M 580 300 Q 635 314, 715 125"/>
-    <path d="M 580 300 Q 640 317, 720 140"/>
-    <path d="M 580 300 Q 645 320, 725 155"/>
-    <path d="M 580 300 Q 650 323, 730 170"/>
-    <path d="M 580 300 Q 655 326, 735 185"/>
-    <path d="M 580 300 Q 660 329, 740 200"/>
-    <path d="M 580 300 Q 665 332, 745 215"/>
-    <path d="M 580 300 Q 670 335, 750 230"/>
-    <path d="M 580 300 Q 675 338, 755 245"/>
-    <path d="M 580 300 Q 680 341, 760 260"/>
-    <path d="M 580 300 Q 685 344, 765 275"/>
-    <path d="M 580 300 Q 690 347, 770 290"/>
-    <path d="M 580 300 Q 685 350, 765 325"/>
-    <path d="M 580 300 Q 680 353, 760 340"/>
-    <path d="M 580 300 Q 675 356, 755 355"/>
-    <path d="M 580 300 Q 670 359, 750 370"/>
-    <path d="M 580 300 Q 665 362, 745 385"/>
-    <path d="M 580 300 Q 660 365, 740 400"/>
-    <path d="M 580 300 Q 655 368, 735 415"/>
-    <path d="M 580 300 Q 650 371, 730 430"/>
-    <path d="M 580 300 Q 645 374, 725 445"/>
-    <path d="M 580 300 Q 640 377, 720 460"/>
-    <path d="M 580 300 Q 635 380, 715 475"/>
-    <path d="M 580 300 Q 630 383, 710 490"/>
-    <path d="M 580 300 Q 625 386, 705 505"/>
-    <path d="M 580 300 Q 620 389, 700 520"/>
+  <!-- Layer 3: Fine detail lines for density -->
+  <g stroke="#c2410c" stroke-width="0.35" fill="none" opacity="0.5">
+    <path d="M 540 300 Q 580 302, 720 30"/>
+    <path d="M 540 300 Q 583 305, 723 50"/>
+    <path d="M 540 300 Q 586 308, 726 70"/>
+    <path d="M 540 300 Q 589 311, 729 90"/>
+    <path d="M 540 300 Q 592 314, 732 110"/>
+    <path d="M 540 300 Q 595 317, 735 130"/>
+    <path d="M 540 300 Q 598 320, 738 150"/>
+    <path d="M 540 300 Q 601 323, 741 170"/>
+    <path d="M 540 300 Q 604 326, 744 190"/>
+    <path d="M 540 300 Q 607 329, 747 210"/>
+    <path d="M 540 300 Q 610 332, 750 230"/>
+    <path d="M 540 300 Q 613 335, 750 250"/>
+    <path d="M 540 300 Q 616 338, 750 270"/>
+    <path d="M 540 300 Q 619 341, 750 290"/>
+    <path d="M 540 300 Q 619 359, 750 310"/>
+    <path d="M 540 300 Q 616 362, 750 330"/>
+    <path d="M 540 300 Q 613 365, 750 350"/>
+    <path d="M 540 300 Q 610 368, 750 370"/>
+    <path d="M 540 300 Q 607 371, 747 390"/>
+    <path d="M 540 300 Q 604 374, 744 410"/>
+    <path d="M 540 300 Q 601 377, 741 430"/>
+    <path d="M 540 300 Q 598 380, 738 450"/>
+    <path d="M 540 300 Q 595 383, 735 470"/>
+    <path d="M 540 300 Q 592 386, 732 490"/>
+    <path d="M 540 300 Q 589 389, 729 510"/>
+    <path d="M 540 300 Q 586 392, 726 530"/>
+    <path d="M 540 300 Q 583 395, 723 550"/>
+    <path d="M 540 300 Q 580 398, 720 570"/>
+  </g>
+  
+  <!-- Layer 4: Ultra-fine lines for texture -->
+  <g stroke="#9a3412" stroke-width="0.2" fill="none" opacity="0.35">
+    <path d="M 540 300 Q 565 301, 690 25"/>
+    <path d="M 540 300 Q 568 304, 693 55"/>
+    <path d="M 540 300 Q 571 307, 696 85"/>
+    <path d="M 540 300 Q 574 310, 699 115"/>
+    <path d="M 540 300 Q 577 313, 702 145"/>
+    <path d="M 540 300 Q 580 316, 705 175"/>
+    <path d="M 540 300 Q 583 319, 708 205"/>
+    <path d="M 540 300 Q 586 322, 711 235"/>
+    <path d="M 540 300 Q 589 325, 714 265"/>
+    <path d="M 540 300 Q 592 328, 717 295"/>
+    <path d="M 540 300 Q 592 372, 717 305"/>
+    <path d="M 540 300 Q 589 375, 714 335"/>
+    <path d="M 540 300 Q 586 378, 711 365"/>
+    <path d="M 540 300 Q 583 381, 708 395"/>
+    <path d="M 540 300 Q 580 384, 705 425"/>
+    <path d="M 540 300 Q 577 387, 702 455"/>
+    <path d="M 540 300 Q 574 390, 699 485"/>
+    <path d="M 540 300 Q 571 393, 696 515"/>
+    <path d="M 540 300 Q 568 396, 693 545"/>
+    <path d="M 540 300 Q 565 399, 690 575"/>
   </g>
 </svg>
