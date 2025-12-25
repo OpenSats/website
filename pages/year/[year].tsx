@@ -32,17 +32,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return acc
     }, {} as Record<string, number>)
 
-  // Sort tags by frequency (most common first), hide overly common tags
-  const hiddenTags = ['opensats', 'grants', 'bitcoin']
-  const allTags = Object.keys(tagCounts)
-    .filter((tag) => !hiddenTags.includes(tag.toLowerCase()))
-    .sort((a, b) => tagCounts[b] - tagCounts[a])
+  // Sort tags by frequency (most common first), separate common tags
+  const commonTagNames = ['opensats', 'grants', 'bitcoin']
+  const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a])
+  const allTags = sortedTags.filter((tag) => !commonTagNames.includes(tag.toLowerCase()))
+  const commonTags = sortedTags.filter((tag) => commonTagNames.includes(tag.toLowerCase()))
 
   return {
     props: {
       year,
       posts: allCoreContent(posts),
       allTags,
+      commonTags,
       tagCounts,
     },
   }
@@ -50,6 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 interface TagFilterProps {
   tags: string[]
+  commonTags: string[]
   tagCounts: Record<string, number>
   selectedTags: Set<string>
   onToggle: (tag: string) => void
@@ -57,7 +59,11 @@ interface TagFilterProps {
   onSelectNone: () => void
 }
 
-function TagFilter({ tags, tagCounts, selectedTags, onToggle, onSelectAll, onSelectNone }: TagFilterProps) {
+function TagFilter({ tags, commonTags, tagCounts, selectedTags, onToggle, onSelectAll, onSelectNone }: TagFilterProps) {
+  const [showCommon, setShowCommon] = useState(false)
+
+  const displayTags = showCommon ? [...commonTags, ...tags] : tags
+
   return (
     <div className="flex flex-wrap gap-2 pb-6">
       <button
@@ -73,7 +79,16 @@ function TagFilter({ tags, tagCounts, selectedTags, onToggle, onSelectAll, onSel
         None
       </button>
       <span className="border-l border-gray-300 dark:border-gray-600 mx-1" />
-      {tags.map((tag) => {
+      {commonTags.length > 0 && (
+        <button
+          onClick={() => setShowCommon(!showCommon)}
+          className="px-2 py-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          title={showCommon ? 'Hide common tags' : 'Show common tags'}
+        >
+          {showCommon ? '>' : '<'}
+        </button>
+      )}
+      {displayTags.map((tag) => {
         const isSelected = selectedTags.has(tag)
         return (
           <button
@@ -97,9 +112,11 @@ export default function YearPage({
   year,
   posts,
   allTags,
+  commonTags,
   tagCounts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set(allTags))
+  const allTagsCombined = [...allTags, ...commonTags]
+  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set(allTagsCombined))
   const [searchValue, setSearchValue] = useState('')
 
   const handleTagToggle = (tag: string) => {
@@ -114,7 +131,7 @@ export default function YearPage({
     })
   }
 
-  const handleSelectAll = () => setSelectedTags(new Set(allTags))
+  const handleSelectAll = () => setSelectedTags(new Set(allTagsCombined))
   const handleSelectNone = () => setSelectedTags(new Set())
 
   const filteredPosts = (posts as CoreContent<Blog>[]).filter((post) => {
@@ -165,6 +182,7 @@ export default function YearPage({
           </div>
           <TagFilter
             tags={allTags}
+            commonTags={commonTags}
             tagCounts={tagCounts}
             selectedTags={selectedTags}
             onToggle={handleTagToggle}
