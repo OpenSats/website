@@ -6,6 +6,8 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import PostList from '@/components/PostList'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const POSTS_PER_PAGE = 100
 
@@ -81,10 +83,10 @@ function TagFilter({ tags, commonTags, tagCounts, selectedTags, onToggle, onSele
       {commonTags.length > 0 && (
         <button
           onClick={() => setShowCommon(!showCommon)}
-          className="px-2 py-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+          className="px-2 py-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           title={showCommon ? 'Hide common tags' : 'Show common tags'}
         >
-          {showCommon ? '>' : '<'}
+          <FontAwesomeIcon icon={showCommon ? faChevronRight : faChevronLeft} className="h-3 w-3" />
         </button>
       )}
       {displayTags.map((tag) => {
