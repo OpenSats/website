@@ -24,10 +24,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     .filter((post) => new Date(post.date).getFullYear() === year)
     .reverse() // Oldest first
 
-  // Extract all unique tags from posts
-  const allTags = Array.from(
-    new Set(posts.flatMap((post) => post.tags || []))
-  ).sort()
+  // Extract all tags and count occurrences
+  const tagCounts = posts
+    .flatMap((post) => post.tags || [])
+    .reduce((acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1
+      return acc
+    }, {} as Record<string, number>)
+
+  // Sort tags by frequency (most common first)
+  const allTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a])
 
   return {
     props: {
