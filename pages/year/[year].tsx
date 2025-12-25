@@ -32,8 +32,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return acc
     }, {} as Record<string, number>)
 
-  // Sort tags by frequency (most common first)
-  const allTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a])
+  // Sort tags by frequency (most common first), hide overly common tags
+  const hiddenTags = ['opensats', 'grants', 'bitcoin']
+  const allTags = Object.keys(tagCounts)
+    .filter((tag) => !hiddenTags.includes(tag.toLowerCase()))
+    .sort((a, b) => tagCounts[b] - tagCounts[a])
 
   return {
     props: {
