@@ -61,6 +61,15 @@ export const getStaticProps = async () => {
   // Strip XML declaration - it doesn't belong in HTML
   svg = svg.replace(/<\?xml[\s\S]*?\?>\s*/i, '').trim()
 
+  // Extract width/height and add viewBox for proper responsive scaling
+  const widthMatch = svg.match(/width="([^"]+)"/)
+  const heightMatch = svg.match(/height="([^"]+)"/)
+  if (widthMatch && heightMatch && !svg.includes('viewBox')) {
+    const width = parseFloat(widthMatch[1])
+    const height = parseFloat(heightMatch[1])
+    svg = svg.replace('<svg', `<svg viewBox="0 0 ${width} ${height}"`)
+  }
+
   // Convert title attributes to <title> child elements for native browser tooltips
   svg = svg.replace(
     /<path([^>]*)\s+title="([^"]*)"([^>]*)\s*\/>/g,
@@ -144,7 +153,7 @@ export default function MapPage({
           </p>
         </div>
 
-        <div className="overflow-x-auto pt-6">
+        <div className="pt-6">
           <div
             className="grant-map"
             dangerouslySetInnerHTML={{ __html: svg }}
@@ -154,15 +163,13 @@ export default function MapPage({
 
       <style jsx global>{`
         .grant-map {
-          max-width: 100%;
-          overflow: hidden;
+          width: 100%;
         }
 
         .grant-map svg {
           width: 100%;
           height: auto;
           display: block;
-          max-width: 100%;
         }
 
         .grant-map svg path {
