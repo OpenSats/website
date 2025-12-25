@@ -1,8 +1,10 @@
 import fs from 'fs'
 import path from 'path'
+import { useState, useEffect } from 'react'
 import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
-import LifetimeStats from '@/components/LifetimeStats'
+import PublicGoogleSheetsParser from 'public-google-sheets-parser'
+import { formatNumber } from '@/components/LifetimeStats'
 
 const OPENSATS_ORANGE = '#f97316' // tailwind orange-500
 
@@ -64,6 +66,17 @@ export const getStaticProps = async () => {
 export default function MapPage({
   svg,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [stats, setStats] = useState<{ label: string; value: number }[]>([])
+
+  useEffect(() => {
+    const parser = new PublicGoogleSheetsParser(
+      '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
+    )
+    parser.parse().then((data) => {
+      setStats(data)
+    })
+  }, [])
+
   // Generate CSS selector for highlighted countries (DRY: one selector string)
   const highlightSelector = GRANTEE_COUNTRY_CODES.length
     ? GRANTEE_COUNTRY_CODES.map((c) => `.grant-map svg #${c}`).join(', ')
@@ -77,6 +90,11 @@ export default function MapPage({
     `
     : ''
 
+  // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
+  const grantsGiven = stats[0]?.value ? formatNumber(stats[0].value) : '...'
+  const usdAllocated = stats[1]?.value ? formatNumber(stats[1].value) : '...'
+  const satsSent = stats[2]?.value ? formatNumber(stats[2].value) : '...'
+
   return (
     <>
       <PageSEO
@@ -86,21 +104,9 @@ export default function MapPage({
 
       <div>
         <div className="pb-6 pt-6">
-          <LifetimeStats />
-          <div className="py-4">
-            <div className="mx-auto">
-              <dl className="grid grid-cols-1">
-                <div className="mx-auto grid grid-cols-1">
-                  <dt className="text-center text-base/7 text-gray-600 dark:text-gray-300">
-                    Countries
-                  </dt>
-                  <dt className="order-first text-center text-4xl font-semibold tracking-tight text-orange-600">
-                    40+
-                  </dt>
-                </div>
-              </dl>
-            </div>
-          </div>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            OpenSats has allocated ${usdAllocated} USD and mass-sent ~{satsSent} sats to {grantsGiven} grantees in 40+ countries.
+          </p>
         </div>
 
         <div className="pt-6 overflow-x-auto">
