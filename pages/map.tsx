@@ -1,7 +1,4 @@
-import fs from 'fs'
-import path from 'path'
 import { useState, useEffect } from 'react'
-import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
 import Link from '@/components/Link'
 import PublicGoogleSheetsParser from 'public-google-sheets-parser'
@@ -54,9 +51,8 @@ const GRANTEE_COUNTRY_CODES: string[] = [
   'AE', // UAE
 ]
 
-export const getStaticProps = async () => {
-  const svgPath = path.join(process.cwd(), 'public', 'maps', 'world.svg')
-  let svg = fs.readFileSync(svgPath, 'utf8')
+function processSvg(svgText: string): string {
+  let svg = svgText
 
   // Strip XML declaration - it doesn't belong in HTML
   svg = svg.replace(/<\?xml[\s\S]*?\?>\s*/i, '').trim()
@@ -73,21 +69,28 @@ export const getStaticProps = async () => {
     '<svg$1width="$2"$3height="$4"$5 viewBox="0 0 $2 $4">'
   )
 
-  return { props: { svg } }
+  return svg
 }
 
-export default function MapPage({
-  svg,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function MapPage() {
   const [stats, setStats] = useState<{ label: string; value: number }[]>([])
+  const [svg, setSvg] = useState<string>('')
 
   useEffect(() => {
+    // Fetch stats from Google Sheets
     const parser = new PublicGoogleSheetsParser(
       '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
     )
     parser.parse().then((data) => {
       setStats(data)
     })
+
+    // Fetch and process SVG client-side to avoid large page data
+    fetch('/maps/world.svg')
+      .then((res) => res.text())
+      .then((svgText) => {
+        setSvg(processSvg(svgText))
+      })
   }, [])
 
   // Generate CSS selector for highlighted countries (DRY: one selector string)
@@ -151,10 +154,16 @@ export default function MapPage({
         </div>
 
         <div className="overflow-x-auto pt-6">
-          <div
-            className="grant-map"
-            dangerouslySetInnerHTML={{ __html: svg }}
-          />
+          {svg ? (
+            <div
+              className="grant-map"
+              dangerouslySetInnerHTML={{ __html: svg }}
+            />
+          ) : (
+            <div className="flex h-64 items-center justify-center text-gray-400">
+              Loading map...
+            </div>
+          )}
         </div>
       </div>
 
