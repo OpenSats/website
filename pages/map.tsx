@@ -3,6 +3,7 @@ import path from 'path'
 import { useState, useEffect } from 'react'
 import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
+import Link from '@/components/Link'
 import PublicGoogleSheetsParser from 'public-google-sheets-parser'
 import { formatNumber } from '@/components/LifetimeStats'
 
@@ -105,7 +106,7 @@ export default function MapPage({
       <div>
         <div className="pb-6 pt-6">
           <p className="text-2xl leading-9 text-gray-500 dark:text-gray-400 sm:text-3xl md:text-4xl md:leading-relaxed">
-            OpenSats has allocated ${usdAllocated} USD to free and open-source projects and sent <span className="whitespace-nowrap">~{satsSent}</span> sats to {grantsGiven} grantees in <strong className="whitespace-nowrap">40+ countries</strong>.
+            OpenSats has allocated <Link href="/transparency" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">${usdAllocated} USD</Link> to free and open-source projects and sent <Link href="/transparency" className="whitespace-nowrap text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">~{satsSent} sats</Link> to <Link href="/transparency" className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">{grantsGiven} grantees</Link> in <strong className="whitespace-nowrap">40+ countries</strong>.
           </p>
         </div>
 
