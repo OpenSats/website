@@ -40,17 +40,19 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       year,
       posts: allCoreContent(posts),
       allTags,
+      tagCounts,
     },
   }
 }
 
 interface TagFilterProps {
   tags: string[]
+  tagCounts: Record<string, number>
   selectedTags: Set<string>
   onToggle: (tag: string) => void
 }
 
-function TagFilter({ tags, selectedTags, onToggle }: TagFilterProps) {
+function TagFilter({ tags, tagCounts, selectedTags, onToggle }: TagFilterProps) {
   return (
     <div className="flex flex-wrap gap-2 pb-6">
       {tags.map((tag) => {
@@ -65,7 +67,7 @@ function TagFilter({ tags, selectedTags, onToggle }: TagFilterProps) {
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
             }`}
           >
-            {tag}
+            {tag} ({tagCounts[tag]})
           </button>
         )
       })}
@@ -77,6 +79,7 @@ export default function YearPage({
   year,
   posts,
   allTags,
+  tagCounts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set(allTags))
 
@@ -112,6 +115,7 @@ export default function YearPage({
           </p>
           <TagFilter
             tags={allTags}
+            tagCounts={tagCounts}
             selectedTags={selectedTags}
             onToggle={handleTagToggle}
           />
