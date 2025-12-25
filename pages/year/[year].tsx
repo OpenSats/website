@@ -132,17 +132,6 @@ export default function YearPage({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {year}
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Filter by tags:
-          </p>
-          <TagFilter
-            tags={allTags}
-            tagCounts={tagCounts}
-            selectedTags={selectedTags}
-            onToggle={handleTagToggle}
-            onSelectAll={handleSelectAll}
-            onSelectNone={handleSelectNone}
-          />
           <div className="relative max-w-lg">
             <label>
               <span className="sr-only">Search articles</span>
@@ -169,6 +158,17 @@ export default function YearPage({
               />
             </svg>
           </div>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Filter by tags:
+          </p>
+          <TagFilter
+            tags={allTags}
+            tagCounts={tagCounts}
+            selectedTags={selectedTags}
+            onToggle={handleTagToggle}
+            onSelectAll={handleSelectAll}
+            onSelectNone={handleSelectNone}
+          />
         </div>
         {!filteredPosts.length && 'No posts found.'}
         <PostList posts={filteredPosts} />
