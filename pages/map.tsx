@@ -61,6 +61,12 @@ export const getStaticProps = async () => {
   // Strip XML declaration - it doesn't belong in HTML
   svg = svg.replace(/<\?xml[\s\S]*?\?>\s*/i, '').trim()
 
+  // Convert title attributes to <title> child elements for native browser tooltips
+  svg = svg.replace(
+    /<path([^>]*)\s+title="([^"]*)"([^>]*)\s*\/>/g,
+    '<path$1$3><title>$2</title></path>'
+  )
+
   return { props: { svg } }
 }
 
