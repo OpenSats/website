@@ -1,0 +1,128 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient for main curves -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9B59B6"/>
+      <stop offset="30%" stop-color="#8E44AD"/>
+      <stop offset="50%" stop-color="#3498DB"/>
+      <stop offset="70%" stop-color="#5DADE2"/>
+      <stop offset="100%" stop-color="#9B59B6"/>
+    </linearGradient>
+    
+    <!-- Gradient for fan lines -->
+    <linearGradient id="fanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5DADE2"/>
+      <stop offset="100%" stop-color="#9B59B6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Left chevron markers -->
+  <polyline points="30,120 50,140 30,160" fill="none" stroke="#9B59B6" stroke-width="3" stroke-linecap="round"/>
+  <polyline points="50,120 70,140 50,160" fill="none" stroke="#9B59B6" stroke-width="3" stroke-linecap="round"/>
+  
+  <polyline points="30,440 50,460 30,480" fill="none" stroke="#9B59B6" stroke-width="3" stroke-linecap="round"/>
+  <polyline points="50,440 70,460 50,480" fill="none" stroke="#9B59B6" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Top input line curving down -->
+  <path d="M 70 140 
+           C 200 140, 300 140, 400 300
+           C 500 460, 550 300, 580 300" 
+        fill="none" 
+        stroke="url(#mainGradient)" 
+        stroke-width="4" 
+        stroke-linecap="round"/>
+  
+  <!-- Bottom input line curving up -->
+  <path d="M 70 460 
+           C 200 460, 300 460, 400 300
+           C 500 140, 550 300, 580 300" 
+        fill="none" 
+        stroke="url(#mainGradient)" 
+        stroke-width="4" 
+        stroke-linecap="round"/>
+  
+  <!-- Fan-out lines on the right -->
+  <g stroke="url(#fanGradient)" stroke-width="1" fill="none" opacity="0.8">
+    <!-- Radial fan lines -->
+    <path d="M 580 300 Q 650 300, 750 100"/>
+    <path d="M 580 300 Q 655 295, 755 120"/>
+    <path d="M 580 300 Q 660 290, 760 140"/>
+    <path d="M 580 300 Q 665 285, 765 160"/>
+    <path d="M 580 300 Q 670 280, 770 180"/>
+    <path d="M 580 300 Q 675 275, 775 200"/>
+    <path d="M 580 300 Q 680 270, 780 220"/>
+    <path d="M 580 300 Q 685 265, 785 240"/>
+    <path d="M 580 300 Q 690 260, 790 260"/>
+    <path d="M 580 300 Q 695 255, 795 280"/>
+    <path d="M 580 300 Q 700 250, 800 300"/>
+    <path d="M 580 300 Q 695 245, 795 320"/>
+    <path d="M 580 300 Q 690 240, 790 340"/>
+    <path d="M 580 300 Q 685 235, 785 360"/>
+    <path d="M 580 300 Q 680 230, 780 380"/>
+    <path d="M 580 300 Q 675 225, 775 400"/>
+    <path d="M 580 300 Q 670 220, 770 420"/>
+    <path d="M 580 300 Q 665 215, 765 440"/>
+    <path d="M 580 300 Q 660 210, 760 460"/>
+    <path d="M 580 300 Q 655 205, 755 480"/>
+    <path d="M 580 300 Q 650 200, 750 500"/>
+  </g>
+  
+  <!-- More dense fan lines for the spiral effect -->
+  <g stroke="#8E44AD" stroke-width="0.5" fill="none" opacity="0.6">
+    <path d="M 580 300 Q 640 310, 720 90"/>
+    <path d="M 580 300 Q 645 315, 725 110"/>
+    <path d="M 580 300 Q 650 320, 730 130"/>
+    <path d="M 580 300 Q 655 325, 735 150"/>
+    <path d="M 580 300 Q 660 330, 740 170"/>
+    <path d="M 580 300 Q 665 335, 745 190"/>
+    <path d="M 580 300 Q 670 340, 750 210"/>
+    <path d="M 580 300 Q 675 345, 755 230"/>
+    <path d="M 580 300 Q 680 350, 760 250"/>
+    <path d="M 580 300 Q 685 355, 765 270"/>
+    <path d="M 580 300 Q 690 360, 770 290"/>
+    <path d="M 580 300 Q 685 365, 765 330"/>
+    <path d="M 580 300 Q 680 370, 760 350"/>
+    <path d="M 580 300 Q 675 375, 755 370"/>
+    <path d="M 580 300 Q 670 380, 750 390"/>
+    <path d="M 580 300 Q 665 385, 745 410"/>
+    <path d="M 580 300 Q 660 390, 740 430"/>
+    <path d="M 580 300 Q 655 395, 735 450"/>
+    <path d="M 580 300 Q 650 400, 730 470"/>
+    <path d="M 580 300 Q 645 405, 725 490"/>
+    <path d="M 580 300 Q 640 410, 720 510"/>
+  </g>
+  
+  <!-- Extra fine detail lines -->
+  <g stroke="#7D3C98" stroke-width="0.3" fill="none" opacity="0.4">
+    <path d="M 580 300 Q 620 305, 700 80"/>
+    <path d="M 580 300 Q 625 308, 705 95"/>
+    <path d="M 580 300 Q 630 311, 710 110"/>
+    <path d="M 580 300 Q 635 314, 715 125"/>
+    <path d="M 580 300 Q 640 317, 720 140"/>
+    <path d="M 580 300 Q 645 320, 725 155"/>
+    <path d="M 580 300 Q 650 323, 730 170"/>
+    <path d="M 580 300 Q 655 326, 735 185"/>
+    <path d="M 580 300 Q 660 329, 740 200"/>
+    <path d="M 580 300 Q 665 332, 745 215"/>
+    <path d="M 580 300 Q 670 335, 750 230"/>
+    <path d="M 580 300 Q 675 338, 755 245"/>
+    <path d="M 580 300 Q 680 341, 760 260"/>
+    <path d="M 580 300 Q 685 344, 765 275"/>
+    <path d="M 580 300 Q 690 347, 770 290"/>
+    <path d="M 580 300 Q 685 350, 765 325"/>
+    <path d="M 580 300 Q 680 353, 760 340"/>
+    <path d="M 580 300 Q 675 356, 755 355"/>
+    <path d="M 580 300 Q 670 359, 750 370"/>
+    <path d="M 580 300 Q 665 362, 745 385"/>
+    <path d="M 580 300 Q 660 365, 740 400"/>
+    <path d="M 580 300 Q 655 368, 735 415"/>
+    <path d="M 580 300 Q 650 371, 730 430"/>
+    <path d="M 580 300 Q 645 374, 725 445"/>
+    <path d="M 580 300 Q 640 377, 720 460"/>
+    <path d="M 580 300 Q 635 380, 715 475"/>
+    <path d="M 580 300 Q 630 383, 710 490"/>
+    <path d="M 580 300 Q 625 386, 705 505"/>
+    <path d="M 580 300 Q 620 389, 700 520"/>
+  </g>
+</svg>
+
