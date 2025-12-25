@@ -78,7 +78,6 @@ function TagFilter({ tags, commonTags, tagCounts, selectedTags, onToggle, onSele
       >
         None
       </button>
-      <span className="border-l border-gray-300 dark:border-gray-600 mx-1" />
       {commonTags.length > 0 && (
         <button
           onClick={() => setShowCommon(!showCommon)}
