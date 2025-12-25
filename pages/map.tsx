@@ -99,8 +99,12 @@ export default function MapPage({
 
   // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
   const grantsGiven = stats[0]?.value ? formatNumber(stats[0].value) : '...'
-  const usdAllocated = stats[1]?.value ? Math.round(stats[1].value).toLocaleString() : '...'
-  const satsSent = stats[2]?.value ? formatNumber(stats[2].value).replace('B', 'billion') : '...'
+  const usdAllocated = stats[1]?.value
+    ? Math.round(stats[1].value).toLocaleString()
+    : '...'
+  const satsSent = stats[2]?.value
+    ? formatNumber(stats[2].value).replace('B', 'billion')
+    : '...'
 
   return (
     <>
@@ -112,11 +116,35 @@ export default function MapPage({
       <div>
         <div className="pb-6 pt-6">
           <p className="text-2xl leading-9 text-gray-500 dark:text-gray-400 sm:text-3xl md:text-4xl md:leading-relaxed">
-            OpenSats has allocated <Link href="/transparency" className="rounded px-1 -mx-1 bg-primary-100/50 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40">${usdAllocated} USD</Link> to free and open-source projects and sent <Link href="/transparency" className="whitespace-nowrap rounded px-1 -mx-1 bg-primary-100/50 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40">~{satsSent} sats</Link> to <Link href="/transparency" className="rounded px-1 -mx-1 bg-primary-100/50 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40">{grantsGiven} grantees</Link> in <strong className="whitespace-nowrap rounded px-2 -mx-1 bg-primary-500 text-white">40+ countries.</strong>
+            OpenSats has allocated{' '}
+            <Link
+              href="/transparency"
+              className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+            >
+              ${usdAllocated} USD
+            </Link>{' '}
+            to free and open-source projects and sent{' '}
+            <Link
+              href="/transparency"
+              className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+            >
+              ~{satsSent} sats
+            </Link>{' '}
+            to{' '}
+            <Link
+              href="/transparency"
+              className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+            >
+              {grantsGiven} grantees
+            </Link>{' '}
+            in{' '}
+            <strong className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 text-white">
+              40+ countries.
+            </strong>
           </p>
         </div>
 
-        <div className="pt-6 overflow-x-auto">
+        <div className="overflow-x-auto pt-6">
           <div
             className="grant-map"
             dangerouslySetInnerHTML={{ __html: svg }}
@@ -158,4 +186,3 @@ export default function MapPage({
     </>
   )
 }
-
