@@ -93,7 +93,7 @@ export default function MapPage({
           </p>
         </div>
 
-        <div className="pt-6">
+        <div className="pt-6 overflow-x-auto">
           <div
             className="grant-map"
             dangerouslySetInnerHTML={{ __html: svg }}
@@ -102,10 +102,16 @@ export default function MapPage({
       </div>
 
       <style jsx global>{`
+        .grant-map {
+          max-width: 100%;
+          overflow: hidden;
+        }
+
         .grant-map svg {
           width: 100%;
           height: auto;
           display: block;
+          max-width: 100%;
         }
 
         .grant-map svg path {
