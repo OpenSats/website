@@ -2,17 +2,25 @@ import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
 import { PageSEO } from '@/components/SEO'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
-import { InferGetStaticPropsType } from 'next'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 
-const YEAR = 2025
 const POSTS_PER_PAGE = 100
 
-export const getStaticProps = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const years = [2024, 2025]
+  return {
+    paths: years.map((year) => ({ params: { year: String(year) } })),
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const year = Number(params?.year)
   const allPosts = sortedBlogPost(allBlogs) as Blog[]
   const posts = allPosts
-    .filter((post) => new Date(post.date).getFullYear() === YEAR)
+    .filter((post) => new Date(post.date).getFullYear() === year)
     .filter((post) => !post.title.toLowerCase().includes('wave'))
     .filter((post) => !post.title.toLowerCase().includes('long-term'))
     .filter((post) => !post.title.toLowerCase().includes('advancements'))
@@ -25,6 +33,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
+      year,
       initialDisplayPosts: allCoreContent(initialDisplayPosts),
       posts: allCoreContent(posts),
       pagination,
@@ -32,7 +41,8 @@ export const getStaticProps = async () => {
   }
 }
 
-export default function Blog2025Page({
+export default function YearPage({
+  year,
   posts,
   initialDisplayPosts,
   pagination,
@@ -40,14 +50,14 @@ export default function Blog2025Page({
   return (
     <>
       <PageSEO
-        title={`${YEAR} - ${siteMetadata.author}`}
-        description={`All blog posts from ${YEAR}`}
+        title={`${year} - ${siteMetadata.author}`}
+        description={`All blog posts from ${year}`}
       />
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}
         pagination={pagination}
-        title={`${YEAR}`}
+        title={`${year}`}
       />
     </>
   )
