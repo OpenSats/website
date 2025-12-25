@@ -15,6 +15,7 @@ export const getStaticProps = async () => {
     .filter((post) => new Date(post.date).getFullYear() === YEAR)
     .filter((post) => !post.title.toLowerCase().includes('wave'))
     .filter((post) => !post.title.toLowerCase().includes('long-term'))
+    .filter((post) => !post.title.toLowerCase().includes('advancements'))
     .reverse() // Oldest first
   const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
   const pagination = {
