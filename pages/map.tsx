@@ -106,7 +106,7 @@ export default function MapPage({
       <div>
         <div className="pb-6 pt-6">
           <p className="text-2xl leading-9 text-gray-500 dark:text-gray-400 sm:text-3xl md:text-4xl md:leading-relaxed">
-            OpenSats has allocated <Link href="/transparency" className="underline decoration-dotted decoration-primary-500 underline-offset-4 hover:decoration-solid">${usdAllocated} USD</Link> to free and open-source projects and sent <Link href="/transparency" className="whitespace-nowrap underline decoration-dotted decoration-primary-500 underline-offset-4 hover:decoration-solid">~{satsSent} sats</Link> to <Link href="/transparency" className="underline decoration-dotted decoration-primary-500 underline-offset-4 hover:decoration-solid">{grantsGiven} grantees</Link> in <strong className="whitespace-nowrap">40+ countries</strong>.
+            OpenSats has allocated <Link href="/transparency" className="underline decoration-dashed decoration-primary-500 underline-offset-4 hover:decoration-solid">${usdAllocated} USD</Link> to free and open-source projects and sent <Link href="/transparency" className="whitespace-nowrap underline decoration-dashed decoration-primary-500 underline-offset-4 hover:decoration-solid">~{satsSent} sats</Link> to <Link href="/transparency" className="underline decoration-dashed decoration-primary-500 underline-offset-4 hover:decoration-solid">{grantsGiven} grantees</Link> in <strong className="whitespace-nowrap">40+ countries</strong>.
           </p>
         </div>
 
