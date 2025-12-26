@@ -1,36 +1,33 @@
 ---
 title: "Fifteenth Wave of Bitcoin Grants"
-date: '2025-12-16'
+date: '2025-12-27'
 tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
-authors: ['default', 'arvin']
+authors: ['default', 'arvin', 'dergigi']
 images: ['/static/images/blog/92-fifteenth-wave-of-bitcoin-grants.jpg']
 draft: false
-summary: "OpenSats is funding fifteen more open-source projects advancing the Bitcoin ecosystem."
+summary: "OpenSats is funding thirteen more open-source projects advancing the Bitcoin ecosystem."
 ---
 
 We’re pleased to announce our latest wave of grants, supporting a mix of
-protocol research, core infrastructure maintenance, privacy-preserving wallets,
-and mining decentralization—work that benefits Bitcoin’s resilience as an open
+protocol research, infrastructure maintenance, privacy-preserving wallets, and
+mining decentralization—work that benefits Bitcoin’s resilience as an open
 monetary network.
 
-This wave includes eight first-time grants and seven grant renewals. The
-projects and contributors in this round span different layers of the stack, from
-protocol-level work and Lightning infrastructure to operating systems, wallets,
-mining coordination, and Bitcoin Core maintenance. Together, they reflect a
-shared focus on strengthening Bitcoin as a public good by improving safety,
-decentralization, usability, and the ability for independent contributors to
-participate over the long term.
+This wave includes six first-time grants and seven grant renewals. The projects
+and contributors supported in this round span multiple parts of the ecosystem,
+including developer tooling, wallets, infrastructure work, and education
+initiatives. Together, they reflect a shared focus on strengthening Bitcoin as a
+public good by improving safety, decentralization, usability, and the ability
+for independent contributors to participate over the long term.
 
-The eight first-time grants in this wave go to:
+The six first-time grants in this wave go to:
 
+- [Braidpool](#braidpool)
 - [BlindBit Suite](#blindbit-suite)
 - [Dana Wallet](#dana-wallet)
-- [Daniel Pfeifer](#daniel-pfeifer)
 - [FreeBSD](#freebsd)
-- [Janb84](#janb84)
 - [LaWallet](#lawallet)
 - [LNHANCE](#lnhance)
-- [Mohd Zaid](#mohd-zaid)
 
 The seven grant renewals have been awarded to:
 
@@ -46,13 +43,50 @@ These grants are made possible by donations to our [General
 Fund](/funds/general). If you’d like to help sustain free and open-source work,
 please consider donating:
 
-<center>
-  <DonateToGeneralFundButton />
-</center>
+<div className="text-center">
+  <DonateRecurringButton />
+</div>
 
 Below, we take a closer look at each grant and the work being supported.
 
 ---
+
+### Braidpool
+
+While we have [supported Braidpool] in the past, this additional grant supports
+developer [Mohd Zaid] for his work on the project’s auditability and payout
+accounting. Building on Braidpool’s braid-like Directed Acyclic Graph (DAG) of
+“[beads]”, Mohd has been working on two core pieces of infrastructure: an [Audit
+Mode] proxy that transparently logs mining activity into the DAG to create a
+tamper-evident record of work performed, and an Unspent Hash Payout Output
+([UHPO]) module that serves as an auditable accounting layer for tracking what
+each miner is owed and how payouts are constructed.
+
+With this grant, Mohd will focus on turning these components into robust tools
+that miners and ecosystem partners can rely on. He will implement and strengthen
+Audit Mode, including the pass-through proxy, the DAG logic for anchoring mining
+events, and privacy features that let miners selectively share contribution data
+with contract counterparties. Mohd will then design and build out the UHPO
+module, defining its data model, core operations for tracking balances and
+settlement, and the logic to generate valid payout transactions. In the final
+phase, he plans to integrate Audit Mode and UHPO while researching and
+prototyping decentralized signing with [FROST] or similar threshold schemes,
+followed by comprehensive functional and integration testing. The goal is to
+provide an open-source foundation for transparent mining accounting and
+hashrate-linked financial tools, reducing dependence on centralized pool
+infrastructure.
+
+Repositories: [braidpool/braidpool]  
+License: AGPL-3.0
+
+[supported Braidpool]: /blog/bitcoin-grants-feb-2024#braidpool
+[Mohd Zaid]: https://github.com/zaidmstrr
+[Braidpool]: https://github.com/braidpool/braidpool
+[beads]: https://github.com/braidpool/braidpool/blob/main/docs/braid_consensus.md
+[Audit Mode]: https://github.com/braidpool/braidpool/pull/305
+[UHPO]: https://github.com/braidpool/braidpool/blob/main/docs/braidpool_spec.md#unspent-hasher-payment-output
+[FROST]: https://www.rfc-editor.org/rfc/rfc9591.html
+[braidpool/braidpool]: https://github.com/braidpool/braidpool
 
 ### BlindBit Suite
 
@@ -60,12 +94,13 @@ BlindBit Suite is a collection of open-source tools focused on making Silent
 Payments practical and easy to use across different Bitcoin setups. The suite
 includes [BlindBit Oracle], an indexer that serves Silent Payments–specific data
 in a privacy-preserving way, and [BlindBit Desktop], a background wallet that
-continuously scans for incoming Silent Payments. [BlindBit Scan] is a
-lightweight, self-hostable service that keeps wallets up to date by querying
-Oracle. [BlindBit Spend] is a mobile wallet that connects to Scan to spend
-discovered UTXOs without doing on-device scanning. Together with supporting
-libraries, these components aim to reduce the heavy scanning burden that Silent
-Payments impose while preserving strong privacy for users and developers.
+continuously scans for incoming Silent Payments. Two additional components round
+out the suite: [BlindBit Scan], a lightweight, self-hostable service that keeps
+wallets up to date by querying Oracle, and [BlindBit Spend], a mobile wallet
+that connects to Scan to spend discovered UTXOs without doing on-device
+scanning. Together with supporting libraries, these components aim to reduce the
+heavy scanning burden that Silent Payments impose while preserving strong
+privacy for users and developers.
 
 With support from this grant, the project will focus on making each component
 stable and ready for regular use. BlindBit Desktop will move through alpha and
@@ -86,31 +121,30 @@ License: MIT
 [BlindBit Desktop]: https://github.com/setavenger/blindbit-desktop
 [BlindBit Scan]: https://github.com/setavenger/blindbit-scan
 [BlindBit Spend]: https://github.com/setavenger/blindbit-spend
-[blindbitbtc]: https://github.com/blindbitbtc
 [Umbrel]: https://umbrel.com/
 [Start9]: https://start9.com/
+[blindbitbtc]: https://github.com/blindbitbtc
 
 ### Dana Wallet
 
-[Dana Wallet] is a mobile bitcoin wallet built for the donation use case and
-designed around [silent payments]. It does not offer receiving on legacy
-addresses, which removes the risk of accidental address reuse and helps protect
-user privacy. Incoming payments are discovered using a [BIP158]-like structure
-with local scanning, meaning no external server learns which addresses belong to
-the user. The wallet is also built around [BIP353] “email-like” payment
-identifiers, replacing copy-and-paste address flows with a more familiar and
-streamlined experience for donors and recipients.
+[Dana Wallet] is a mobile bitcoin wallet designed around [silent payments]. It
+does not offer receiving on legacy addresses, which removes the risk of
+accidental address reuse and helps protect user privacy. Incoming payments are
+discovered using a [BIP158]-like structure with local scanning, meaning no
+external server learns which addresses belong to the user. The wallet is also
+built around [BIP353] “email-like” payment identifiers, replacing copy-and-paste
+address flows with a more familiar and streamlined experience for senders and
+recipients.
 
 With support from this grant, Dana Wallet aims to move into a production-ready
 release, including a stable build on the Google Play Store. The work will focus
 on error handling, reliable recovery through chain rescans, and basic security
 features such as PIN or biometric protection. Beyond those core milestones, the
 project plans to improve the speed and consistency of scanning, allow users to
-register their own `username@danawallet.app` addresses, improve the
-transaction history view, and add features like offline mode and flexible
-denomination display. Over time, the project may introduce a contact list, and
-notifications between Dana Wallet users to make receiving silent payments more
-seamless.
+register their own `username@danawallet.app` addresses, improve the transaction
+history view, and add features like offline mode and flexible denomination
+display. Over time, the project may introduce a contact list, and notifications
+between Dana Wallet users to make receiving silent payments more seamless.
 
 Repository: [cygnet3/danawallet]  
 License: MIT
@@ -120,42 +154,6 @@ License: MIT
 [BIP158]: https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki
 [BIP353]: https://github.com/bitcoin/bips/blob/master/bip-0353.mediawiki
 [cygnet3/danawallet]: https://github.com/cygnet3/danawallet
-
-### Daniel Pfeifer
-
-[Daniel Pfeifer] is focused on improving the long-term maintainability, safety,
-and clarity of the Bitcoin Core codebase. His work centers on cleaning up the
-build system by replacing ad-hoc scripts and undocumented conventions with
-declarative, reproducible [CMake] configurations, and on refactoring C++
-components so they are easier to understand and work on in isolation. This
-includes enforcing clear ownership rules in the code and removing unsafe
-constructs. He also aims to define, document, and promote modern [C++ coding
-guidelines] within the Bitcoin community, drawing on his involvement with the
-ISO C++ Committee, and to develop the [BtcK] multi-language API so that
-different programming languages can talk to Bitcoin Core through consistent,
-idiomatic bindings. Alongside this, Daniel prioritizes C++ education and
-mentorship by teaching fundamentals, sharing best practices, and helping new
-maintainers grow into long-term contributors.
-
-With support from this grant, Daniel will focus on concrete near-term milestones
-that support future architectural improvements. These include helping to prepare
-a stable C API for the [Bitcoin Kernel library], making sure its SDK is deployed
-cleanly with the correct headers, library artifacts, and package configuration,
-and replacing a patchwork of platform-specific packaging scripts with a unified
-CPack definition. Because improving maintainability and educating future
-developers is an ongoing effort, progress will be iterative and aimed at the
-long-term sustainability of the Bitcoin Core project.
-
-Repositories: [purpleKarrot/btck]; [bitcoin/bitcoin]  
-Licenses: MIT
-
-[Daniel Pfeifer]: https://github.com/purpleKarrot
-[CMake]: https://cmake.org/
-[C++ coding guidelines]: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
-[BtcK]: https://purplekarrot.github.io/btck/
-[Bitcoin Kernel library]: https://github.com/bitcoin/bitcoin/issues/27587
-[purpleKarrot/btck]: https://github.com/purpleKarrot/btck
-[bitcoin/bitcoin]: https://github.com/bitcoin/bitcoin
 
 ### FreeBSD
 
@@ -188,27 +186,6 @@ License: BSD-2-Clause
 [FreeBSD 15.0]: https://www.freebsd.org/releases/15.0R/announce/
 [future branches]: https://wiki.freebsd.org/Releng/16.0ISSUES
 [freebsd/freebsd-src]: https://github.com/freebsd/freebsd-src
-
-### Janb84
-
-[Janb84] contributes to Bitcoin Core with a focus on coordinating software
-release testing and improving the supporting documentation and feedback loop
-around that work. This includes maintaining Release Candidate Testing Guides and
-running dedicated feedback threads for testers, as well as facilitating group
-review and discussion of the testing process through the [PR Review Club].
-
-With support from this grant, janb84 will continue to expand his work on Bitcoin
-Core, including in-depth PR review and contributor-facing documentation such as
-[README]s and testing guides, with the goal of improving the quality of review
-and testing so changes are easier to evaluate and safer to release.
-
-Repository: [bitcoin/bitcoin]  
-License: MIT
-
-[Janb84]: https://github.com/janb84
-[PR Review Club]: https://bitcoincore.reviews/
-[README]: https://github.com/bitcoin/bitcoin/blob/master/doc/README.md
-[bitcoin/bitcoin]: https://github.com/bitcoin/bitcoin
 
 ### LaWallet
 
@@ -268,10 +245,10 @@ approaches. Further work will apply CTV and CSFS to [Ark-like protocols] by
 implementing hArk in [bark] and exploring related designs such as [Erk]. The
 project will also simulate multiparty Eltoo coinpools as non-custodial payout
 mechanisms for decentralized miners such as
-([Braidpool](/blog/bitcoin-grants-feb-2024#braidpool)), and investigate
-additional vault designs, including social recovery, offline key delegation, and
-deleted key recursion aimed at reducing precomputation overhead to levels
-suitable for hardware wallets.
+[Braidpool](https://opensats.org/blog/bitcoin-grants-feb-2024#braidpool), and
+investigate additional vault designs, including social recovery, offline key
+delegation, and deleted key recursion aimed at reducing precomputation overhead
+to levels suitable for hardware wallets.
 
 Repositories: [LNHANCE-Expedition]  
 Licenses: CC0-1.0, CC BY 4.0, MIT
@@ -288,55 +265,12 @@ Licenses: CC0-1.0, CC BY 4.0, MIT
 [Erk]: https://blog.second.tech/erk-update/
 [LNHANCE-Expedition]: https://github.com/LNHANCE-Expedition
 
-### Mohd Zaid
-
-[Mohd Zaid] is a developer contributing to [Braidpool], zero-fee Bitcoin mining
-pool that aims to reduce centralization in the Bitcoin mining landscape.
-Braidpool replaces the single-operator model of traditional pools with a shared
-Directed Acyclic Graph ([DAG]) of “[beads]” (shares or weak blocks) that records
-miners’ work quickly and with less waste. Building on this braid-like structure,
-Mohd has been working on two core pieces of infrastructure: an [Audit Mode]
-proxy that transparently logs mining activity into the DAG to create a
-tamper-evident record of work performed, and an Unspent Hash Payout Output
-([UHPO]) module that serves as an auditable accounting layer for tracking what
-each miner is owed and how payouts are constructed.
-
-With support from this grant, Mohd will focus on turning these components into
-robust tools that miners and ecosystem partners can rely on. He will implement
-and strengthen Audit Mode, including the pass-through proxy, the DAG logic for
-anchoring mining events, and privacy features that let miners selectively share
-contribution data with contract counterparties. Mohd will then design and build
-out the UHPO module, defining its data model, core operations for tracking
-balances and settlement, and the logic to generate valid payout transactions. In
-the final phase, he plans to integrate Audit Mode and UHPO while researching and
-prototyping decentralized signing with [FROST] or similar threshold schemes,
-followed by comprehensive functional and integration testing. The goal is to
-provide an open-source foundation for transparent mining accounting and
-hashrate-linked financial tools, reducing dependence on centralized pool
-infrastructure.
-
-Repositories: [braidpool/braidpool]  
-License: AGPL-3.0
-
-[Mohd Zaid]: https://github.com/zaidmstrr
-[Braidpool]: https://github.com/braidpool/braidpool
-[DAG]: https://en.wikipedia.org/wiki/Directed_acyclic_graph
-[beads]: https://github.com/braidpool/braidpool/blob/main/docs/braid_consensus.md
-[Audit Mode]: https://github.com/braidpool/braidpool/pull/305
-[UHPO]: https://github.com/braidpool/braidpool/blob/main/docs/braidpool_spec.md#unspent-hasher-payment-output
-[FROST]: https://www.rfc-editor.org/rfc/rfc9591.html
-[braidpool/braidpool]: https://github.com/braidpool/braidpool
-
 ---
 
-From Silent Payments tooling and donation-focused wallet UX to long-term Bitcoin
-Core maintainability, operating system diversity, and mining decentralization
-research, this fifteenth wave supports the kind of work that keeps Bitcoin
-robust and usable without sacrificing privacy or decentralization.
-
-By funding both new contributors and ongoing maintenance, we aim to reduce
-bottlenecks that would otherwise limit review capacity, user choice, and the
-ability for independent builders to participate over the long term.
+From Silent Payments tooling and privacy-focused wallet UX to operating system
+diversity and mining decentralization work, this fifteenth wave supports the
+kind of work that keeps Bitcoin robust and usable without sacrificing privacy or
+decentralization.
 
 Our work is made possible by the generosity of our donors. If you’d like to help
 make the future of free and open-source Bitcoin development more sustainable,
