@@ -52,9 +52,12 @@ export default function StatsSentence({ className = '' }: StatsSentenceProps) {
         {grantsGiven} grantees
       </Link>{' '}
       in{' '}
-      <strong className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 text-white">
+      <Link
+        href="/map"
+        className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 font-bold text-white hover:bg-primary-600"
+      >
         40+ countries.
-      </strong>
+      </Link>
     </p>
   )
 }
