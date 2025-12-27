@@ -61,4 +61,3 @@ export default function StatsSentence({ className = '' }: StatsSentenceProps) {
     </p>
   )
 }
-
