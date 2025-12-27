@@ -262,7 +262,7 @@ export default function Home({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Apply for Funding
           </h1>
-          <StatsSentence className="text-xl leading-8 text-gray-500 dark:text-gray-400" />
+          <StatsSentence className="text-2xl leading-9 text-gray-500 dark:text-gray-400" />
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Are you an open-source contributor? Do you align with{' '}
             <CustomLink href="/mission" className="underline">
