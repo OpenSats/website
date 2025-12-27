@@ -16,6 +16,7 @@ import PaymentModal from '../components/PaymentModal'
 import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
+import StatsSentence from '@/components/StatsSentence'
 
 const MAX_DISPLAY = 2
 
@@ -261,6 +262,7 @@ export default function Home({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Apply for Funding
           </h1>
+          <StatsSentence className="text-lg leading-7 text-gray-500 dark:text-gray-400" />
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Are you an open-source contributor? Do you align with{' '}
             <CustomLink href="/mission" className="underline">

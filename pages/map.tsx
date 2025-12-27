@@ -1,11 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import { useState, useEffect } from 'react'
 import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
-import Link from '@/components/Link'
-import PublicGoogleSheetsParser from 'public-google-sheets-parser'
-import { formatNumber } from '@/components/LifetimeStats'
+import StatsSentence from '@/components/StatsSentence'
 
 const OPENSATS_ORANGE = '#f97316' // tailwind orange-500
 
@@ -82,17 +79,6 @@ export const getStaticProps = async () => {
 export default function MapPage({
   svg,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [stats, setStats] = useState<{ label: string; value: number }[]>([])
-
-  useEffect(() => {
-    const parser = new PublicGoogleSheetsParser(
-      '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
-    )
-    parser.parse().then((data) => {
-      setStats(data)
-    })
-  }, [])
-
   // Generate CSS selector for highlighted countries (DRY: one selector string)
   const highlightSelector = GRANTEE_COUNTRY_CODES.length
     ? GRANTEE_COUNTRY_CODES.map((c) => `.grant-map svg #${c}`).join(', ')
@@ -106,15 +92,6 @@ export default function MapPage({
     `
     : ''
 
-  // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
-  const grantsGiven = stats[0]?.value ? formatNumber(stats[0].value) : '...'
-  const usdAllocated = stats[1]?.value
-    ? Math.round(stats[1].value).toLocaleString()
-    : '...'
-  const satsSent = stats[2]?.value
-    ? formatNumber(stats[2].value).replace('B', 'billion')
-    : '...'
-
   return (
     <>
       <PageSEO
@@ -124,33 +101,7 @@ export default function MapPage({
 
       <div>
         <div className="pb-6 pt-6">
-          <p className="text-2xl leading-9 text-gray-500 dark:text-gray-400 sm:text-3xl md:text-4xl md:leading-relaxed">
-            OpenSats has allocated{' '}
-            <Link
-              href="/transparency"
-              className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
-            >
-              ${usdAllocated} USD
-            </Link>{' '}
-            to free and open-source projects and sent{' '}
-            <Link
-              href="/transparency"
-              className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
-            >
-              ~{satsSent} sats
-            </Link>{' '}
-            to{' '}
-            <Link
-              href="/transparency"
-              className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
-            >
-              {grantsGiven} grantees
-            </Link>{' '}
-            in{' '}
-            <strong className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 text-white">
-              40+ countries.
-            </strong>
-          </p>
+          <StatsSentence className="text-2xl leading-9 text-gray-500 dark:text-gray-400 sm:text-3xl md:text-4xl md:leading-relaxed" />
         </div>
 
         <div className="pt-6">
