@@ -201,9 +201,9 @@ export default function Home({
             <Link
               href="/apply#criteria"
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="Learn More"
+              aria-label="Application Criteria"
             >
-              Learn More &rarr;
+              Application Criteria &rarr;
             </Link>
           </div>
         </div>
