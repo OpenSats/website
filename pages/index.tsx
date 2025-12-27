@@ -16,6 +16,7 @@ import PaymentModal from '../components/PaymentModal'
 import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
+import StatsSentence from '@/components/StatsSentence'
 
 const MAX_DISPLAY = 2
 
@@ -114,9 +115,9 @@ export default function Home({
             <Link
               href="/donate"
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="Learn More"
+              aria-label="All Donation Options"
             >
-              Learn More &rarr;
+              All Donation Options &rarr;
             </Link>
           </div>
         </div>
@@ -160,6 +161,49 @@ export default function Home({
               aria-label="Our Mission"
             >
               Our Mission &rarr;
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-12">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
+            Current Allocation
+          </h1>
+          <StatsSentence className="text-2xl leading-9 text-gray-500 dark:text-gray-400" />
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/transparency"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Learn More"
+            >
+              Learn More &rarr;
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-12">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
+            Apply for Funding
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Are you an open-source contributor? Do you align with{' '}
+            <CustomLink href="/mission" className="underline">
+              our mission
+            </CustomLink>
+            ? Are you working on Bitcoin, nostr, or freedom tech in general?{' '}
+            <CustomLink href="/apply" className="underline">
+              Apply for funding!
+            </CustomLink>
+          </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/apply#criteria"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Application Criteria"
+            >
+              Application Criteria &rarr;
             </Link>
           </div>
         </div>
@@ -256,32 +300,6 @@ export default function Home({
           </Link>
         </div>
       )}
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="xl:pt-18 space-y-2 pb-8 pt-8 md:space-y-5 ">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
-            Apply for Funding
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Are you an open-source contributor? Do you align with{' '}
-            <CustomLink href="/mission" className="underline">
-              our mission
-            </CustomLink>
-            ? Are you working on Bitcoin, nostr, or freedom tech in general?{' '}
-            <CustomLink href="/apply" className="underline">
-              Apply for funding!
-            </CustomLink>
-          </p>
-          <div className="flex justify-end text-base font-medium leading-6">
-            <Link
-              href="/apply#criteria"
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="Learn More"
-            >
-              Learn More &rarr;
-            </Link>
-          </div>
-        </div>
-      </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="xl:pt-18 space-y-2 pt-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
