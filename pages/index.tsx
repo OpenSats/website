@@ -115,9 +115,9 @@ export default function Home({
             <Link
               href="/donate"
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="More Ways to Donate"
+              aria-label="All Donation Options"
             >
-              More Ways to Donate &rarr;
+              All Donation Options &rarr;
             </Link>
           </div>
         </div>
