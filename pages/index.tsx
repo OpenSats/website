@@ -263,6 +263,15 @@ export default function Home({
             Apply for Funding
           </h1>
           <StatsSentence className="text-2xl leading-9 text-gray-500 dark:text-gray-400" />
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/transparency"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Learn More"
+            >
+              Learn More &rarr;
+            </Link>
+          </div>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Are you an open-source contributor? Do you align with{' '}
             <CustomLink href="/mission" className="underline">
