@@ -7,7 +7,7 @@ const newsletters = [
     quarter: 'Q1 2026',
     title: 'Freedom Tech',
     description:
-      'Celebrating the builders of 2025. Featuring seven impact reports covering privacy, Lightning, ecash, wallets, nostr clients, developer libraries, and education.',
+      'Celebrating a year of open-source progress. Featuring seven impact reports covering privacy, Lightning, ecash, wallets, nostr clients, developer libraries, and education.',
     href: '/newsletter/2026-q1',
     date: 'January 2026',
   },
