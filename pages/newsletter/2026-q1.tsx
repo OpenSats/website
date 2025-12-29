@@ -21,7 +21,8 @@ const impactReports = [
     title: 'Advancements in Bitcoin & Lightning Wallets',
     date: 'October 2025',
     slug: 'advancements-in-bitcoin-and-lightning-wallets',
-    image: '/static/images/blog/86-advancements-in-bitcoin-and-lightning-wallets.jpg',
+    image:
+      '/static/images/blog/86-advancements-in-bitcoin-and-lightning-wallets.jpg',
     summary:
       'Six wallet projects—Bitcoin Safe, Blixt, Blitz, Clams, Cove, and Satsigner—making self-custody more practical and secure.',
     highlights: [
@@ -77,7 +78,8 @@ const impactReports = [
     title: 'Advancements in Lightning Infrastructure',
     date: 'April 2025',
     slug: 'advancements-in-lightning-infrastructure',
-    image: '/static/images/blog/74-advancements-in-lightning-infrastructure.jpg',
+    image:
+      '/static/images/blog/74-advancements-in-lightning-infrastructure.jpg',
     summary:
       'Five Lightning projects—Splicing, VLS, BLAST, Lampo, and Lnprototest—improving the speed, security, and interoperability of the Lightning Network.',
     highlights: [
@@ -91,7 +93,8 @@ const impactReports = [
     title: 'Advancements in On-Chain Privacy',
     date: 'February 2025',
     slug: 'developing-advancements-in-onchain-privacy',
-    image: '/static/images/blog/70-developing-advancements-in-onchain-privacy.jpg',
+    image:
+      '/static/images/blog/70-developing-advancements-in-onchain-privacy.jpg',
     summary:
       'Three privacy initiatives—Async Payjoin, Coinswap, and Silent Payments—disrupting transaction surveillance and enabling financial sovereignty.',
     highlights: [
@@ -180,9 +183,7 @@ export default function Newsletter2026Q1() {
                 <p className="mb-6 max-w-xl text-zinc-400">
                   Every project in this newsletter exists because of donors like
                   you. Monthly donations provide the{' '}
-                  <strong className="text-zinc-300">
-                    predictable funding
-                  </strong>{' '}
+                  <strong className="text-zinc-300">predictable funding</strong>{' '}
                   that allows developers to focus on long-term improvements
                   rather than short-term survival.
                 </p>
@@ -254,7 +255,7 @@ export default function Newsletter2026Q1() {
             </div>
 
             <div className="space-y-6">
-              {impactReports.map((report, index) => (
+              {impactReports.map((report) => (
                 <article
                   key={report.slug}
                   className="group overflow-hidden rounded-xl border border-zinc-800/50 bg-zinc-900/20 transition-colors hover:border-zinc-700/50"
@@ -352,8 +353,8 @@ export default function Newsletter2026Q1() {
               </h2>
               <p className="mx-auto mb-6 max-w-lg text-zinc-400">
                 When you donate monthly, you're not just contributing
-                funds—you're giving developers the stability to work on
-                hard problems that take months or years to solve.
+                funds—you're giving developers the stability to work on hard
+                problems that take months or years to solve.
               </p>
               <Link
                 href="/monthly"
@@ -495,4 +496,3 @@ export default function Newsletter2026Q1() {
     </>
   )
 }
-

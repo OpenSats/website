@@ -88,7 +88,9 @@ export default function NewsletterIndex() {
                       </svg>
                     </span>
                   </div>
-                  <p className="mt-3 text-xs text-zinc-500">{newsletter.date}</p>
+                  <p className="mt-3 text-xs text-zinc-500">
+                    {newsletter.date}
+                  </p>
                 </Link>
               ))}
             </div>
@@ -146,4 +148,3 @@ export default function NewsletterIndex() {
     </>
   )
 }
-
