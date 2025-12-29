@@ -107,7 +107,7 @@ export default function Newsletter2026Q1() {
   return (
     <>
       <Head>
-        <title>Freedom Tech - OpenSats Newsletter</title>
+        <title>Freedom Tech Bulletin - OpenSats</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
@@ -140,7 +140,7 @@ export default function Newsletter2026Q1() {
               </span>
             </div>
             <h1 className="mb-3 font-serif text-5xl font-light tracking-tight text-white md:text-6xl">
-              Freedom Tech
+              Freedom Tech Bulletin
             </h1>
             <p className="text-lg text-zinc-500">
               Celebrating a year of open-source progress

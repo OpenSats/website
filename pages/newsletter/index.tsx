@@ -5,7 +5,7 @@ import Link from 'next/link'
 const newsletters = [
   {
     quarter: 'Q1 2026',
-    title: 'Freedom Tech',
+    title: 'Freedom Tech Bulletin',
     description:
       'Celebrating a year of open-source progress. Featuring seven impact reports covering privacy, Lightning, ecash, wallets, nostr clients, developer libraries, and education.',
     href: '/newsletter/2026-q1',
