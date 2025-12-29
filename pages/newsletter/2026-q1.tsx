@@ -224,10 +224,10 @@ export default function Newsletter2026Q1() {
             </h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
+                { value: '131', label: 'Grants in 2025' },
+                { value: '$10.5M', label: 'Deployed' },
                 { value: '7', label: 'Impact Reports' },
                 { value: '40+', label: 'Projects Featured' },
-                { value: '300+', label: 'Total Grants' },
-                { value: '∞', label: 'Lines of FOSS Code' },
               ].map((stat) => (
                 <div
                   key={stat.label}
