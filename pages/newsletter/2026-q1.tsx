@@ -127,10 +127,10 @@ export default function Newsletter2026Q1() {
           <header className="mb-16 text-center">
             <Link href="/" className="mb-8 inline-block">
               <Image
-                src="/logo.svg"
+                src="/img/project/opensats_logo.png"
                 alt="OpenSats"
-                width={56}
-                height={56}
+                width={72}
+                height={72}
                 className="opacity-90 transition-opacity hover:opacity-100"
               />
             </Link>
