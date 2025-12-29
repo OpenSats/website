@@ -136,7 +136,7 @@ export default function Newsletter2026Q1() {
             </Link>
             <div className="mb-4">
               <span className="inline-block rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-orange-400">
-                Quarterly Newsletter
+                OpenSats Newsletter
               </span>
             </div>
             <h1 className="mb-3 font-serif text-5xl font-light tracking-tight text-white md:text-6xl">
