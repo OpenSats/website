@@ -225,7 +225,7 @@ export default function Newsletter2026Q1() {
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
                 { value: '131', label: 'Grants in 2025' },
-                { value: '$10.5M', label: 'Deployed' },
+                { value: '$10.5M', label: 'Allocated' },
                 { value: '7', label: 'Impact Reports' },
                 { value: '40+', label: 'Projects Featured' },
               ].map((stat) => (
