@@ -226,8 +226,8 @@ export default function Newsletter2026Q1() {
               {[
                 { value: '131', label: 'Grants in 2025' },
                 { value: '$10.5M', label: 'Allocated' },
-                { value: '7', label: 'Impact Reports' },
                 { value: '40+', label: 'Projects Featured' },
+                { value: '7', label: 'Impact Reports' },
               ].map((stat) => (
                 <div
                   key={stat.label}
