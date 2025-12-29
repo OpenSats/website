@@ -5,9 +5,9 @@ import Link from 'next/link'
 const newsletters = [
   {
     quarter: 'Q1 2026',
-    title: 'A Year of Open-Source Impact',
+    title: 'Building Freedom Tech',
     description:
-      'A comprehensive look back at 2025, featuring seven impact reports covering privacy, Lightning, ecash, wallets, nostr clients, developer libraries, and education.',
+      'A look back at 2025 and the open-source developers shaping the future. Featuring seven impact reports covering privacy, Lightning, ecash, wallets, nostr clients, developer libraries, and education.',
     href: '/newsletter/2026-q1',
     date: 'January 2026',
   },

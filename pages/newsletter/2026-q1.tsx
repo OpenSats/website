@@ -107,7 +107,7 @@ export default function Newsletter2026Q1() {
   return (
     <>
       <Head>
-        <title>OpenSats Q1 2026 Newsletter - Year in Review</title>
+        <title>Building Freedom Tech - OpenSats Newsletter</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
@@ -140,10 +140,10 @@ export default function Newsletter2026Q1() {
               </span>
             </div>
             <h1 className="mb-3 font-serif text-5xl font-light tracking-tight text-white md:text-6xl">
-              Q1 2026
+              Building Freedom Tech
             </h1>
             <p className="text-lg text-zinc-500">
-              A Year of Open-Source Impact
+              A look back at 2025 and the open-source developers shaping the future
             </p>
           </header>
 
