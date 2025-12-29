@@ -143,7 +143,7 @@ export default function Newsletter2026Q1() {
               Freedom Tech
             </h1>
             <p className="text-lg text-zinc-500">
-              A look back at 2025 and the open-source developers shaping the future
+              Celebrating the builders of 2025
             </p>
           </header>
 
