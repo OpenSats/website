@@ -33,28 +33,28 @@ export default function StatsSentence({ className = '' }: StatsSentenceProps) {
       OpenSats has allocated{' '}
       <Link
         href="/transparency"
-        className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+        className="-mx-1 rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
         ${usdAllocated} USD
       </Link>{' '}
       to free and open-source projects and sent{' '}
       <Link
         href="/transparency"
-        className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+        className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
         ~{satsSent} sats
       </Link>{' '}
       to{' '}
       <Link
         href="/transparency"
-        className="-mx-1 rounded bg-primary-100/50 px-1 hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
+        className="-mx-1 rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
         {grantsGiven} grantees
       </Link>{' '}
       in{' '}
       <Link
         href="/map"
-        className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 font-bold text-white hover:bg-primary-600 hover:!text-white dark:text-white"
+        className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 font-bold text-white no-underline hover:bg-primary-600 hover:!text-white dark:text-white"
       >
         40+ countries.
       </Link>
