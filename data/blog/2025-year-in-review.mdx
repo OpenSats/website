@@ -153,17 +153,48 @@ reaches developers.
 ## Impact
 
 This year we published our first impact reports, documenting what our grantees
-have built and shipped. The reports cover [on-chain
-privacy](/blog/developing-advancements-in-onchain-privacy), [Lightning
-infrastructure](/blog/advancements-in-lightning-infrastructure), [developer
-training](/blog/advancements-in-developer-training), [developer
-libraries](/blog/advancements-in-developer-libraries),
-[ecash](/blog/advancements-in-ecash), [wallets](/blog/advancements-in-bitcoin-and-lightning-wallets), and [nostr
-clients](/blog/advancements-in-nostr-clients).
+have built and shipped. Seven reports, seven areas of progress:
 
-Highlights include Payjoin V2 shipping in Bull Bitcoin and Cake Wallet, Cashu
-mobile bindings reaching maturity, and major improvements across Amethyst,
-Damus, and Coracle. We encourage you to read the reports in full.
+**[On-chain privacy](/blog/developing-advancements-in-onchain-privacy).** Payjoin
+V2 (BIP 77) went from specification to production. Bull Bitcoin Mobile shipped
+async payjoin in December 2024. Cake Wallet followed. Coinswap hit beta. Silent
+Payments integration moved forward across Bitcoin Core and third-party wallets.
+
+**[Lightning infrastructure](/blog/advancements-in-lightning-infrastructure).**
+Splicing now works between Core Lightning and Eclair. Validating Lightning
+Signer powers Greenlight, which runs Breez and Relai. BLAST can test all three
+major implementations (CLN, LND, LDK) in one harness. The lnprototest framework
+caught a funding-signature bug before it hit mainnet.
+
+**[Developer training](/blog/advancements-in-developer-training).** Summer of
+Bitcoin trained 200+ students; 35% now work in Bitcoin. Africa Free Routing ran
+bootcamps in three countries. Bitcoin Dev Launchpad took 600 applicants through
+challenges and residency, producing seven fellows. Bitshala grew to 1,200+
+community members in India.
+
+**[Developer libraries](/blog/advancements-in-developer-libraries).** BDK hit
+1.0. rust-bitcoin shipped v0.32 with modular crates. swift-secp256k1 added
+MuSig2. DLC Dev Kit integrated nostr messaging. Payjoin Dev Kit jumped from
+0.11 to 0.24 and now has Python and Dart bindings. Splicing landed in both CLN
+and LDK.
+
+**[Ecash](/blog/advancements-in-ecash).** Cashu Dev Kit shipped mobile bindings
+for iOS and Android. Minibits launched on iOS with offline transfers. Nutstash
+added multi-mint payments. Npub.cash v2 made Lightning Addresses portable.
+Hashpool prototyped ecash-based mining payouts. Fedimint shipped LNv2.
+
+**[Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets).** Bitcoin Safe
+added Compact Block Filters. Blixt built Lightning Box for trust-minimized
+Lightning Addresses. Blitz moved to Spark. Clams shipped Remote v2 for Core
+Lightning. Cove hit the iOS App Store with TAPSIGNER support.
+
+**[Nostr clients](/blog/advancements-in-nostr-clients).** Amethyst adopted the
+outbox model, connecting to 1,000+ relays on mobile. Coracle added relay
+membership controls. Damus launched on Android and shipped Notedeck. Nostur
+added voice messages. Zap.stream released mobile apps for live streaming with
+zaps.
+
+These reports run deep. We encourage you to read them.
 
 ---
 
