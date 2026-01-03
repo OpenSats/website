@@ -68,4 +68,18 @@ export default function Apply({
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           Long-Term Support
         </h2>
-        <p clas
+        <p className="mb-8">
+          We have a limited number of long-term support grants available for
+          projects that are critical to the Bitcoin ecosystem. These grants are
+          geared towards developers and maintainers of Bitcoin Core and similar.
+        </p>
+        <Link
+          href="/apply/lts"
+          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+        >
+          Apply for an OpenSats LTS Grant
+        </Link>
+      </PageSection>
+    </>
+  )
+}
