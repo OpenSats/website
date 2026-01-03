@@ -5,7 +5,6 @@ const headerNavLinks = [
   { href: '/blog', title: 'Blog' },
   { href: '/faq', title: 'FAQ' },
   { href: '/apply', title: 'Apply', isButton: true },
-  { href: '/donate', title: 'Donate', isButton: true },
 ]
 
 export default headerNavLinks
