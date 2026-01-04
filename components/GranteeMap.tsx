@@ -3,10 +3,47 @@ import { useEffect, useState } from 'react'
 const OPENSATS_ORANGE = '#f97316' // tailwind orange-500
 
 const GRANTEE_COUNTRY_CODES: string[] = [
-  'US', 'CA', 'DE', 'GB', 'IT', 'JP', 'NL', 'CH', 'CN', 'BR',
-  'AR', 'IE', 'HK', 'GE', 'SE', 'ES', 'PT', 'NO', 'GR', 'AU',
-  'IN', 'SI', 'KR', 'FI', 'CZ', 'UG', 'BE', 'FR', 'VN', 'UA',
-  'TR', 'SV', 'NZ', 'HU', 'SK', 'NG', 'PA', 'RO', 'GT', 'ID', 'AE',
+  'US',
+  'CA',
+  'DE',
+  'GB',
+  'IT',
+  'JP',
+  'NL',
+  'CH',
+  'CN',
+  'BR',
+  'AR',
+  'IE',
+  'HK',
+  'GE',
+  'SE',
+  'ES',
+  'PT',
+  'NO',
+  'GR',
+  'AU',
+  'IN',
+  'SI',
+  'KR',
+  'FI',
+  'CZ',
+  'UG',
+  'BE',
+  'FR',
+  'VN',
+  'UA',
+  'TR',
+  'SV',
+  'NZ',
+  'HU',
+  'SK',
+  'NG',
+  'PA',
+  'RO',
+  'GT',
+  'ID',
+  'AE',
 ]
 
 export default function GranteeMap() {
@@ -23,7 +60,10 @@ export default function GranteeMap() {
         if (widthMatch && heightMatch && !processed.includes('viewBox')) {
           const width = parseFloat(widthMatch[1])
           const height = parseFloat(heightMatch[1])
-          processed = processed.replace('<svg', `<svg viewBox="0 0 ${width} ${height}"`)
+          processed = processed.replace(
+            '<svg',
+            `<svg viewBox="0 0 ${width} ${height}"`
+          )
         }
 
         processed = processed.replace(
@@ -49,10 +89,7 @@ export default function GranteeMap() {
 
   return (
     <>
-      <div
-        className="grant-map"
-        dangerouslySetInnerHTML={{ __html: svg }}
-      />
+      <div className="grant-map" dangerouslySetInnerHTML={{ __html: svg }} />
       <style jsx global>{`
         .grant-map {
           width: 100%;
@@ -85,4 +122,3 @@ export default function GranteeMap() {
     </>
   )
 }
-
