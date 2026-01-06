@@ -10,6 +10,12 @@ export const getStaticProps = async () => {
     'static',
     'monthly-grant-payouts.svg'
   )
+
+  // Return 404 if the SVG file doesn't exist
+  if (!fs.existsSync(svgPath)) {
+    return { notFound: true }
+  }
+
   let svg = fs.readFileSync(svgPath, 'utf8')
 
   // Strip XML declaration - it doesn't belong in HTML
