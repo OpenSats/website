@@ -50,7 +50,7 @@
 > Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
 > fast UX while removing centralization points, such as electrum servers.
 
-—Andreas Griffin
+—Andreas Griffin, Bitcoin Safe
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#bitcoin-safe*
 
@@ -59,7 +59,7 @@
 > Having a trust-minimized Lightning Address linked to a self-custodial wallet
 > is a valuable option in a custodial Lightning world.
 
-—Hampus Sjöberg
+—Hampus Sjöberg, Blixt Wallet
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet*
 
@@ -68,7 +68,7 @@
 > Simplicity of use is the difference between Bitcoin as a cypherpunk technology
 > and Bitcoin as a monetary revolution.
 
-—Blake Kaufman
+—Blake Kaufman, Blitz Wallet
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#blitz-wallet*
 
@@ -82,7 +82,7 @@
 > stack on Start9—Bitcoin node, CLN, and plugin interfaces—entirely on their
 > own hardware with intuitive access to advanced features.
 
-—John Gribbin
+—John Gribbin, Clams
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#clams*
 
@@ -92,7 +92,7 @@
 > together. Coin control on a phone is hard to do well, and I'm proud of how
 > usable it turned out.
 
-—Praveen Perera
+—Praveen Perera, Cove
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#cove*
 
@@ -124,7 +124,7 @@
 > love. If no one ever mentions rust-bitcoin while simultaneously using it every
 > day, then we win.
 
-—Tobin Harding
+—Tobin Harding, Rust-Bitcoin
 
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
 
@@ -137,7 +137,7 @@
 > which has been a good way to learn about the software while also doing something
 > useful.
 
-—Jamil Lambert
+—Jamil Lambert, Rust-Bitcoin
 
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
 
@@ -199,7 +199,7 @@
 > technical scene. It's the first time I've seen this level of energy,
 > coordination, and long-term vision around Bitcoin FOSS in the region.
 
-—Anon Senior Developer in the Indian Bitcoin community
+—Anon Senior Developer in the Indian Bitcoin community, Growing Regional Developer Communities
 
 *Source: https://opensats.org/blog/advancements-in-developer-training#growing-regional-developer-communities*
 
@@ -212,7 +212,7 @@
 > products. This momentum is only possible thanks to our incredible grassroots
 > community and the freedom-driven contributors who make Cashu what it is today.
 
-—Calle
+—Calle, Cashu
 
 *Source: https://opensats.org/blog/advancements-in-ecash#cashu*
 
@@ -236,7 +236,7 @@
 > bitcoin. The wallet enables the payer to be completely offline, leveraging
 > ecash's nature as a true bearer token stored directly in the wallet.
 
-—Misovan
+—Misovan, Minibits Wallet
 
 *Source: https://opensats.org/blog/advancements-in-ecash#minibits-wallet*
 
@@ -246,7 +246,7 @@
 > Users can get an address right away, wallets can support whichever address
 > their users prefer, and providers can launch their own services in minutes.
 
-—Egge
+—Egge, Npub.cash
 
 *Source: https://opensats.org/blog/advancements-in-ecash#npubcash*
 
@@ -278,7 +278,7 @@
 > shifted the narrative. We've proven that users can be reliably served by a
 > highly distributed network—not just a few central points.
 
-—Vitor Pamplona
+—Vitor Pamplona, Amethyst
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#amethyst*
 
@@ -295,7 +295,7 @@
 > and move between services and custodians, with support from the protocol for
 > doing so.
 
-—Hodlbod
+—Hodlbod, Coracle
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#coracle*
 
@@ -305,7 +305,7 @@
 > developers to build on Notedeck without reinventing the wheel. OpenSats
 > accelerated this critical step toward a truly decentralized social ecosystem.
 
-—KernelKind
+—KernelKind, Damus
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#damus*
 
@@ -315,7 +315,7 @@
 > core of the app. This has allowed me to build and test features in isolation
 > and then integrate them back into the app when I know they are working.
 
-—Hzrd149
+—Hzrd149, NoStrudel
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#nostrudel*
 
@@ -328,7 +328,7 @@
 > that things aren't pushed on you. I open Nostur to see what the people I
 > follow have to say and not to become a target of an ad campaign.
 
-—Fabian
+—Fabian, Nostur
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#nostur*
 

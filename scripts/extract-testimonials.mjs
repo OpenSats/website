@@ -20,6 +20,7 @@ function toSlug(text) {
 
 /**
  * Find the section heading that contains a given position in the content
+ * Returns both the original text and the slug
  */
 function findSectionAtPosition(content, position) {
   const lines = content.substring(0, position).split('\n')
@@ -28,10 +29,20 @@ function findSectionAtPosition(content, position) {
   for (let i = lines.length - 1; i >= 0; i--) {
     const match = lines[i].match(/^#{2,3}\s+(.+)$/)
     if (match) {
-      return toSlug(match[1])
+      return {
+        text: match[1].trim(),
+        slug: toSlug(match[1]),
+      }
     }
   }
   return null
+}
+
+/**
+ * Check if a name already has a title/role (contains comma, "of", etc.)
+ */
+function hasTitle(name) {
+  return /,|( of )|( at )|( from )|(CEO)|(CIO)|(Director)|(President)|(Founder)|(Lead)|(contributor)/i.test(name)
 }
 
 async function extractTestimonials() {
@@ -68,11 +79,15 @@ async function extractTestimonials() {
       // Find the section this quote belongs to
       const section = findSectionAtPosition(content, position)
       const url = section
-        ? `${BASE_URL}/${slug}#${section}`
+        ? `${BASE_URL}/${slug}#${section.slug}`
         : `${BASE_URL}/${slug}`
 
+      // Add project name if author doesn't already have a title
+      const authorLine =
+        section && !hasTitle(name) ? `${name}, ${section.text}` : name
+
       output += `> ${cleanQuote.split('\n').join('\n> ')}\n\n`
-      output += `—${name}\n\n`
+      output += `—${authorLine}\n\n`
       output += `*Source: ${url}*\n\n---\n\n`
       totalCount++
     }
