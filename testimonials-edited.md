@@ -53,6 +53,15 @@
 
 ---
 
+> Never in my life has something so important fallen into my lap, and I feel
+> responsible to the future of humanity to get this right.
+
+—Mike Dilger
+
+*Source: https://opensats.org/blog/mike-dilger-receives-lts-grant*
+
+---
+
 > The mission of the BDK team is to provide the best FOSS libraries for building
 > secure, modern bitcoin apps and services. With the 1.0+ releases now in the
 > hands of thousands of users through projects like
@@ -102,15 +111,6 @@
 —Anon Senior Developer in the Indian Bitcoin community, Growing Regional Developer Communities
 
 *Source: https://opensats.org/blog/advancements-in-developer-training#growing-regional-developer-communities*
-
----
-
-> Never in my life has something so important fallen into my lap, and I feel
-> responsible to the future of humanity to get this right.
-
-—Mike Dilger
-
-*Source: https://opensats.org/blog/mike-dilger-receives-lts-grant*
 
 ---
 
