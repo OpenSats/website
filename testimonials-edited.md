@@ -89,7 +89,7 @@
 > into confident contributors to multiple open-source Bitcoin projects and
 > secure roles in the industry.
 
-—Conor Okus(https://github.com/ConorOkus), Spiral
+—Conor Okus, Spiral
 
 *Source: https://opensats.org/blog/advancements-in-developer-training#onboarding-student-developers*
 
