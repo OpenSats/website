@@ -29,14 +29,6 @@
 
 ---
 
-> We can rebuild it. We have the technology.
-
-—Richard Anderson on closed and permissioned systems
-
-*Source: https://opensats.org/blog/2023-year-in-review*
-
----
-
 > Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
 > fast UX while removing centralization points, such as electrum servers.
 
