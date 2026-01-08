@@ -57,11 +57,11 @@ export default async function handler(
       | undefined
 
     for await (const { data: issues } of octokit.paginate.iterator(
-      octokit.rest.issues.listForRepo,
+      octokit.rest.issues.listForRepo as any,
       {
         owner: GH_ORG,
         repo: GH_REPORTS_REPO,
-        state: 'all',
+        state: 'all' as const,
         per_page: 100,
       }
     )) {

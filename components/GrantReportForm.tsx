@@ -30,7 +30,6 @@ export default function GrantReportForm({
   const router = useRouter()
   const [error, setError] = useState<string>()
   const [recoveredData, setRecoveredData] = useState(false)
-  const [formLoadedAt, setFormLoadedAt] = useState<number | null>(null)
 
   const {
     register,
@@ -56,13 +55,9 @@ export default function GrantReportForm({
   // Track when form loads for spam protection
   useEffect(() => {
     const loadTime = Date.now()
-    setFormLoadedAt(loadTime)
     // Store form_loaded_at in localStorage for use in preview/submission
     try {
-      localStorage.setItem(
-        'opensats_form_loaded_at',
-        JSON.stringify(loadTime)
-      )
+      localStorage.setItem('opensats_form_loaded_at', JSON.stringify(loadTime))
     } catch (e) {
       console.error('Error storing form load time:', e)
     }
