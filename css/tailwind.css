@@ -41,37 +41,31 @@ input:-webkit-autofill:focus {
 }
 
 button.small {
-  @apply p-1 text-sm bg-white text-black border border-black;
+  @apply border border-black bg-white p-1 text-sm text-black;
 }
 
 button.group {
-  @apply p-2 text-sm bg-white text-black border border-black;
+  @apply border border-black bg-white p-2 text-sm text-black;
 }
 
 button.pay {
-  @apply flex-1 min-w-[20rem] border-2 border-black bg-white p-8 text-xl text-black rounded-xl flex justify-start gap-4;
+  @apply flex min-w-[20rem] flex-1 justify-start gap-4 rounded-xl border-2 border-black bg-white p-8 text-xl text-black;
 }
 
 button.pay:disabled {
-  @apply bg-gray-100 border-gray-400 text-gray-400 hover:shadow-none;
+  @apply border-gray-400 bg-gray-100 text-gray-400 hover:shadow-none;
 }
 
 button,
 button[type='submit'] {
-  @apply py-2 px-4 text-white rounded;
+  @apply rounded px-4 py-2 text-white;
 }
 
 button.secondary {
-  @apply bg-white text-black border;
+  @apply border bg-white text-black;
 }
 
 .prose > ul > li > p {
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.disabled {
-  pointer-events: none;
-  cursor: default;
-  opacity: 0.6;
 }

@@ -1,0 +1,82 @@
+---
+title: "Long-Term Support For Andrew Toth"
+date: '2025-12-03'
+tags: ['OpenSats', 'grants', 'bitcoin', 'LTS', 'core']
+authors: ['default', 'arvin']
+images: ['/static/images/blog/89-andrew-toth-lts.jpg']
+draft: false
+summary: "OpenSats welcomes Andrew Toth as an LTS grantee."
+---
+
+OpenSats is pleased to announce its long-term support for [Andrew Toth] in
+recognition of his ongoing contributions to Bitcoin Core. His work has focused
+on performance and privacy enhancements that improve the experience of running a
+fully validating node.
+
+Andrew is an active, long-time [contributor to Bitcoin Core], with contributions
+spanning initial block download (IBD), block-connection logic, caching behavior,
+and RPC performance.
+
+His improvements to [IBD and block-connection speed for pruned nodes] have
+provided significant changes for users operating with limited disk resources,
+and he has continued refining critical performance areas of the codebase as
+network conditions and hardware constraints evolve.
+
+In addition to working on performance, Andrew authored [BIP 374] and co-authored
+[BIP 375], which together help support [silent payments] through [PSBTs].
+
+He has also been involved in testing and reviewing Bitcoin Core's
+private-broadcast work, with the goal of improving network-level privacy for
+users who operate their own nodes.
+
+Andrew's other contributions to projects such as [bitcoinjs], [rust-bitcoin],
+and [Electrum Personal Server] reflect his commitment to the benefit of the
+Bitcoin ecosystem.
+
+> I’m grateful and honored to receive this grant to continue my work on Bitcoin
+> Core. Performance and privacy are essential for using Bitcoin in a
+> self-sovereign way, and I’m glad to see these efforts recognized and
+> supported.
+>
+> <cite>—Andrew Toth</cite>
+
+With support from this LTS grant, Andrew plans to continue work on several areas
+of Bitcoin Core, including:
+
+- Continued improvements in [IBD and block-connection performance].
+- Advancing [private transaction broadcast] and contributing to the follow-up
+  changes to make it reliable for users.
+- Refining caching and validation code to simplify performance-sensitive paths
+  and improve maintainability.
+- Providing ongoing review across validation, performance, and privacy-related
+  changes within Bitcoin Core.
+
+Our [mission] at OpenSats is to provide sustainable funding for the builders and
+maintainers of critical open-source infrastructure within the Bitcoin ecosystem.
+
+The OpenSats [Long-Term Support program] is made possible by the generosity of
+our donors. To help ensure sustainable funding for contributors like Andrew Toth
+and our [other LTS grantees], please consider making a recurring donation to our
+[General Fund]:
+
+<center>
+    <DonateRecurringButton/>
+</center>
+
+[Andrew Toth]: https://github.com/andrewtoth
+[contributions to Bitcoin Core]: https://github.com/bitcoin/bitcoin/pulls?q=is:pr+author:andrewtoth+is:merged+
+[contributor to Bitcoin Core]: https://github.com/bitcoin/bitcoin/pulls?q=is:pr+author:andrewtoth+is:merged+
+[IBD and block-connection speed for pruned nodes]: https://github.com/bitcoin/bitcoin/pull/28280
+[BIP 374]: https://github.com/bitcoin/bips/blob/master/bip-0374.mediawiki
+[BIP 375]: https://github.com/bitcoin/bips/blob/master/bip-0375.mediawiki
+[silent payments]: https://bitcoinops.org/en/topics/silent-payments/
+[PSBTs]: https://bitcoinops.org/en/topics/psbt/
+[bitcoinjs]: https://github.com/bitcoinjs/bip174/pull/41
+[rust-bitcoin]: https://github.com/rust-bitcoin/rust-wallet/pull/35
+[Electrum Personal Server]: https://github.com/chris-belcher/electrum-personal-server/commits?author=andrewtoth
+[IBD and block-connection performance]: https://github.com/bitcoin/bitcoin/pull/31132
+[private transaction broadcast]: https://github.com/bitcoin/bitcoin/pull/29415
+[mission]: https://opensats.org/mission
+[Long-Term Support program]: /blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors
+[other LTS grantees]: /tags/lts
+[General Fund]: /funds/general

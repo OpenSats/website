@@ -1,11 +1,11 @@
 ---
-title: "Advancements in Developer Libraries"
+title: 'Advancements in Developer Libraries'
 date: '2025-08-04'
 tags: ['OpenSats', 'bitcoin', 'impact', 'libraries']
 authors: ['default', 'arvin']
 images: ['/static/images/blog/82-advancements-in-developer-libraries.jpg']
 draft: false
-summary: "An impact report from the front-lines of Bitcoin developer libraries."
+summary: 'An impact report from the front-lines of Bitcoin developer libraries.'
 ---
 
 Reliable, well-audited developer libraries are the hidden plumbing of bitcoin.
@@ -71,23 +71,23 @@ BDK](https://bookofbdk.com/), containing straightforward guides, upgrade paths
 from older versions, and real-world reusable code snippets that save developers
 time.
 
->The mission of the BDK team is to provide the best FOSS libraries for building
->secure, modern bitcoin apps and services. With the 1.0+ releases now in the
->hands of thousands of users through projects like
->[Bitkey](https://github.com/proto-at-block/bitkey) and
->[ProtonWallet](https://github.com/ProtonWallet), we have begun to achieve this
->mission. Moreover, with projects like
->[AnchorWatch](https://www.anchorwatch.com/),
->[FrostSnap](https://github.com/frostsnap/frostsnap),
->[Cove](https://github.com/bitcoinppl/cove), and [Bitcoin
->Safe](https://github.com/andreasgriffin/bitcoin-safe), we continue to support
->innovative new layer one wallets. Looking forward, we also see BDK playing a
->strong supporting role for layer two projects like
->[ldk-node](https://github.com/lightningdevkit/ldk-node) and [Second's
->bark](https://codeberg.org/ark-bitcoin/bark). If there is a bitcoin project you
->want to see in the world, BDK will help you build it.
+> The mission of the BDK team is to provide the best FOSS libraries for building
+> secure, modern bitcoin apps and services. With the 1.0+ releases now in the
+> hands of thousands of users through projects like
+> [Bitkey](https://github.com/proto-at-block/bitkey) and
+> [ProtonWallet](https://github.com/ProtonWallet), we have begun to achieve this
+> mission. Moreover, with projects like
+> [AnchorWatch](https://www.anchorwatch.com/),
+> [FrostSnap](https://github.com/frostsnap/frostsnap),
+> [Cove](https://github.com/bitcoinppl/cove), and [Bitcoin
+> Safe](https://github.com/andreasgriffin/bitcoin-safe), we continue to support
+> innovative new layer one wallets. Looking forward, we also see BDK playing a
+> strong supporting role for layer two projects like
+> [ldk-node](https://github.com/lightningdevkit/ldk-node) and [Second's
+> bark](https://gitlab.com/ark-bitcoin/bark). If there is a bitcoin project you
+> want to see in the world, BDK will help you build it.
 >
-><cite>—Steve Myers, BDK director/core contributor</cite>
+> <cite>—Steve Myers, BDK director/core contributor</cite>
 
 Another OpenSats-supported project, [Tor Support for
 BDK](/blog/bitcoin-grants-july-2024#tor-support-for-bdk--fedimint),
@@ -192,11 +192,11 @@ easier-to-use constructors and corrections for subtle off-by-one errors in
 height-based checks, making it simpler to create transactions that unlock only
 after a specific block or time.
 
->My job is to provide libraries so other devs can create software that users
->love. If no one ever mentions rust-bitcoin while simultaneously using it every
->day, then we win.
+> My job is to provide libraries so other devs can create software that users
+> love. If no one ever mentions rust-bitcoin while simultaneously using it every
+> day, then we win.
 >
-><cite>—Tobin Harding</cite>
+> <cite>—Tobin Harding</cite>
 
 In parallel, [Jamil Lambert](https://github.com/jamillambert) focused on making
 the rust-bitcoin codebase more reliable through better testing and safeguards.
@@ -218,14 +218,14 @@ prevents hex-encoding crashes during signing and hashing. Behind the scenes, he
 fixed broken fuzz tests and updated GitHub Actions to keep automated checks
 running smoothly, helping ensure safety across the entire `rust-bitcoin` stack.
 
->Testing is an important part of software development, which isn't always
->treated as such. There are often poorly written tests that are hard to read, and
->some don't test what they set out to... Writing and improving tests for all of
->the missed mutants requires an understanding of what the code being tested does,
->which has been a good way to learn about the software while also doing something
->useful.
+> Testing is an important part of software development, which isn't always
+> treated as such. There are often poorly written tests that are hard to read, and
+> some don't test what they set out to... Writing and improving tests for all of
+> the missed mutants requires an understanding of what the code being tested does,
+> which has been a good way to learn about the software while also doing something
+> useful.
 >
-><cite>—Jamil Lambert</cite>
+> <cite>—Jamil Lambert</cite>
 
 Additionally, OpenSats grantee Robert Netzke
 ([rustaceanrob](https://github.com/rustaceanrob)) implemented policy-level
@@ -281,7 +281,7 @@ release introduced
 [`MuSig2`](https://github.com/21-DOT-DEV/swift-secp256k1/pull/560), a
 multi-signature upgrade that lets several participants merge their `Schnorr`
 signatures into one—improving privacy while saving space—so apps can enable it
-with just a few lines of  code. In practice, this allows developers to more
+with just a few lines of code. In practice, this allows developers to more
 easily integrate with cooperative flows used by non-custodial swap
 protocols—such as refunds where an app co-signs the time-locked transaction with
 a single aggregated key when needed.
@@ -311,7 +311,7 @@ robustness and integration speed.
 To spread these gains beyond a single library, they've introduced
 [`swift-plugin-tuist`](https://github.com/21-DOT-DEV/swift-plugin-tuist)—a
 SwiftPM plugin that invokes Tuist directly (no separate install) so any package
-can generate reproducible, easier-to-manage Xcode projects  with a single
+can generate reproducible, easier-to-manage Xcode projects with a single
 command. By treating the project as code, development teams see fewer merge
 conflicts and less '.pbxproj' drift, and CI spins up identical workspaces on
 demand. They also publish source-of-truth API docs powered by
@@ -598,7 +598,7 @@ and decentralized network. To support projects like these and others, please
 consider making a recurring donation to the General Fund.
 
 <center>
-    <DonateRecurringButton/>
+  <DonateRecurringButton />
 </center>
 
 If you're a developer advancing free and open-source software that helps Bitcoin

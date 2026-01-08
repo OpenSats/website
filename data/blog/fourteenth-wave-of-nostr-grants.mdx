@@ -1,0 +1,147 @@
+---
+title: "Fourteenth Wave of Nostr Grants"
+date: '2025-12-21'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+authors: ['default', 'arvin', 'dergigi']
+images: ['/static/images/blog/94-fourteenth-wave-of-nostr-grants.jpg']
+draft: false
+summary: "OpenSats is funding five more open-source projects advancing the nostr ecosystem."
+---
+
+We're pleased to announce a new wave of grants supporting contributors building
+open-source software for the nostr ecosystem. This wave of grants includes work
+on relays, developer libraries, as well as clients and services people use to
+publish and consume content via nostr.
+
+Three new grants support projects focused on improving relay access and
+feed-based reading, expanding cross-platform developer tooling, and supporting a
+full-featured client that continues to invest in usability and discovery. We're
+also renewing support for two previous grantees, as per below.
+
+The first-time grants in this wave will go to:
+
+- [YakiHonne](#yakihonne)
+- [Quartz](#quartz)
+- [Nostr Feedz](#nostr-feedz)
+
+The grant renewals have been awarded to:
+
+- Dart NDK ([Aug. 2024])
+- Mattn for [nostr-relay] ([Oct. 2023])
+
+This wave of grants is made possible by our generous donors who, like us,
+believe in an open, censorship-resistant communications layer for the internet.
+
+Our nostr grants are sourced from [The Nostr Fund]. To help us support the nostr
+ecosystem, please consider making a donation.
+
+<center>
+  <DonateToNostrFundButton />
+</center>
+
+Let's dive in to learn about how each project is contributing to the future of
+nostr.
+
+---
+
+### YakiHonne
+
+YakiHonne is a multi-platform nostr client available for [web], [iOS], and
+[Android].  It is built for a fast and straightforward user experience with a
+focus on relay discovery and publishing controls. One of its main features is a
+creator portal for long-form writing, where users can manage both drafts and
+published posts from a single dashboard.  The project has been in active
+development, and the team has iterated successfully on onboarding and discovery,
+refined UI/UX and performance characteristics, and implemented features like
+outbox-style relay publishing and Web of Trust mechanisms.
+
+With support from this grant, YakiHonne will continue improving reliability and
+user experience across devices, with particular attention to mobile stability.
+Planned work includes offline-first publishing with queued delivery, media
+improvements, mobile parity features such as NsecBunker integration, and
+expanded payment support, including Cashu and Nutzaps ([NIP-60], [NIP-61]). In
+addition to the above, the team plans to invest in better relay-based feeds for
+discovery and to explore relay-level paid feeds designed to remain interoperable
+across clients.  YakiHonne is also available on [Zapstore].
+
+Repositories: [YakiHonne](https://github.com/YakiHonne/)  
+License: MIT
+
+### Quartz
+
+Quartz is a Kotlin Multiplatform ([KMP]) library that implements nostr
+functionality in a form that can be reused across other projects. It is
+developed alongside [Amethyst] and is already used in production. Related work
+has also included experiments integrating nostr feeds and nostr-adjacent content
+into existing readers and podcast applications, helping developers understand
+what it takes to bring nostr content into other applications.
+
+With support from this grant, the Quartz project plans to complete the remaining
+refactoring needed to move Android-specific code into shared multiplatform
+modules, then add functionality and tests to ensure the library behaves
+consistently. A final milestone is to build a simple first version of Amethyst
+for iOS that can connect to nostr and do the basics, like reading and posting.
+
+Repository: [KotlinGeekDev/quartz]  
+License: MIT
+
+### Nostr Feedz
+
+[Nostr Feedz] is a web app that lets users follow traditional RSS feeds
+alongside nostr long-form content ([NIP-23]), with a public guide/directory for
+discovering writers. Nostr Feedz also provides a "nostr to RSS" feature that
+turns nostr long-form posts into an RSS feed, so those updates can be followed
+in standard RSS readers outside nostr.
+
+The author of Nostr Feedz, [PlebOne], also maintains a self-hostable relay
+project and runs a community instance at [relay.pleb.one]. It uses invite-only
+Web-of-Trust access and an admin dashboard for managing invites, similar to
+fiatjaf's [pyramid] and utxo's [WoT Relay].
+
+With support from this grant, PlebOne will keep building out Nostr Feedz and the
+relay project—shipping improvements, strengthening reliability, and maturing
+both into stable production services. Funding also contributes to ongoing
+maintenance and operational costs of the public instances.
+
+Repositories: [Nostr-Feedz]; [relay.pleb.one][gh-relay]  
+License: MIT
+
+---
+
+The projects in this wave reflect the steady work that turns nostr into software
+people can depend on. From relay infrastructure and feed-based tools to shared
+libraries and full-featured clients, each grant supports practical improvements
+that help the ecosystem remain reliable, interoperable, and easier to use.
+
+We're grateful to our donors who make this funding possible. If you'd like to
+help us continue supporting builders in the nostr ecosystem, please consider
+donating to [The Nostr Fund] or becoming a recurring supporter.
+
+<div  className="text-center">
+<DonateRecurringButton />
+</div>
+
+If you are a developer working on free and open-source nostr projects
+consider to [apply for funding](/apply).
+
+[Aug. 2024]: /blog/nostr-grants-august-2024#dart-ndk
+[nostr-relay]: https://github.com/mattn/nostr-relay
+[Oct. 2023]: /blog/nostr-grants-october-2023#algia
+[The Nostr Fund]: /funds/nostr
+[PlebOne]: https://njump.to/nprofile1qqsgmjrgsgqtg3lv9eqp36j7gtw96jqfgr9n7xw23ump62qhnhzt5hs00xqxs
+[relay.pleb.one]: https://relay.pleb.one/
+[Nostr Feedz]: https://nostrfeedz.com/
+[NIP-23]: https://github.com/nostr-protocol/nips/blob/master/23.md
+[Nostr-Feedz]: https://github.com/PlebOne/Nostr-Feedz
+[gh-relay]: https://github.com/PlebOne/relay.pleb.one
+[pyramid]: https://github.com/fiatjaf/pyramid
+[WoT Relay]: https://github.com/bitvora/wot-relay/
+[KMP]: https://kotlinlang.org/docs/multiplatform/kmp-overview.html
+[Amethyst]: /projects/amethyst
+[KotlinGeekDev/quartz]: https://github.com/KotlinGeekDev/amethyst/tree/main/quartz
+[web]: https://www.yakihonne.com
+[iOS]: https://apps.apple.com/mo/app/yakihonne/id6472556189?l=en-GB
+[Android]: https://play.google.com/store/apps/details?id=com.yakihonne.yakihonne
+[Zapstore]: https://zapstore.dev/apps/naddr1qvzqqqr7pvpzqgycd7urua6ajmgc3jjunhcseekkz0swkljhdzs0pvftxlx6cgdnqqtkxmmd9eukz6mfdphkumn99eukz6mfdphkumn97q8ugj
+[NIP-60]: https://github.com/nostr-protocol/nips/blob/master/60.md
+[NIP-61]: https://github.com/nostr-protocol/nips/blob/master/61.md

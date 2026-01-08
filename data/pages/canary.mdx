@@ -1,6 +1,6 @@
 ---
 title: Canary
-summary: "If the canary died, it was time to get out of the mine."
+summary: 'If the canary died, it was time to get out of the mine.'
 image: /static/images/avatar.png
 layout: PageLayout
 ---
@@ -26,26 +26,26 @@ following months:
 We include the latest Bitcoin block hash in each update to establish that the
 signature was not pre-generated:
 
-* Height: `908093`
-* Block hash: `000000000000000000022cbf9f383ba122c4dfb3399e488ae0e7699833dde961`
+* Height: `927617`
+* Block hash: `000000000000000000004b913d729e4a49bd60aca58619e131458c1b8e41750b`
 
 [0] https://opensats.org/transparency
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEgZihhTClIqCVYSQ5icSiXmml3n8FAmiMpNkACgkQicSiXmml
-3n9Dxw//cHZkN9uxY9uu7zlSyKC3IBvOPeKi8bTTxX3NGVT8EGl3n5FqyqncecUR
-FbVsV19OVctYpwGJGL8mwMCmBW0D0z9qkJwHkbu+R/u2vmOneDiYFkdcQizE4NEb
-tA3cKRrIZm9+3nUUSWyknEwA3p5FxPK7IqjCc9xF3GR33sxThHT/o7j8iXVy31rV
-RzXArXY9sb8cFkuJdwBh+zX7JYZkK+IDbOARUy9zm6V4F7Vb0mMaS6o0xNBP2Us3
-ghr6NjbojApXRreLqgrql4GbLw5AIuhTcZQUn3T2GVxSgUxyPtXXUZe6QNQPbjix
-ffKsT5bjW6uKfYFVNRQ2Ub/R74SoRmCzL7CRKOxJpjFOkYOm82jrGn+MNZ+6q1bx
-bXZ9gJeDEfmxKA8TNH0pXndmSzNPxJPyQdcpM6J9O8fq6VRnWzG+l0wQrhCuKne7
-wWSn482hadm9Wvlo9k5vuxkilmcx8YnIgK5Hul3RPv+ZxAlEyYKDVDtNldtAEiFT
-EMMBdpn9Q0cci+1Xbuoix6RGw3AeqUTOkcfMutjPCIfb0hMgYkgP20sx3DfTDTlN
-SEydGZXM3yN6TyjB7+H4PWp4H0k78IzCX3JIw2sTPWFNelKu9CeObzqMiAQ0Er03
-s+LJ1rC1SuwdEajQ/4csp4vaj5qtqGx0LKPMnlFHydt7OEgfolk=
-=yeTX
+iQIzBAEBCAAdFiEEgZihhTClIqCVYSQ5icSiXmml3n8FAmk8ezcACgkQicSiXmml
+3n/Rpg//VLUsuuPevfPSq1A2/Fcd4WtuPIZt2m5mS/041LnWIhwS8PnAZVtOphOf
+GGoufOvXZYR0cdihfRVdtuHEJV8JHazoL99lUtO8Xp5UTe3Y+WLg7M8c2gkg7EsW
+LveX4eDq5iDdA/QWibAekCE2ameo1XyLrL9v1R5IpSWeKI7kZCuT2drfr0T9uTso
+8zbDnV8ocOIlpXmwYaY+jFPutRdg0K3fH8kPuVclTLz9CXbcQo2hbNTDqOjhvv/z
+k1f4ULOC/zIlkoCwWmvoFMI+imDIkIaq3TWU4bjW2aNihrrqDUQ4CmFKgGBKWLSO
+EJMEbB0o/9uEJCowG9FIQWRpzcbPcp+JogUzjHG3Uo6onSREGHZm8OgcGFMJe4pi
++Zj6xAIMRTXDvLOcv8B3JLWWhY4W4WfWnFWy7c/WYwEhASIDzMn0FGx1+kMJO6tT
+ARhy8HodJn+2YXWNwfVDo2EukrNaRYV1d0CzAlrz2Q/EGlAnnFe3MGDlWvrUespp
+UsSIdVnxoa6wK61YNV4VJPKhbLDes7uBRL9q5JAHrI3okeOStxBBERlG6463XMys
+XoDqBd8dRcHGwPqLJW3onZ8Rehb6sIdXQrZqQpRDe2Vdd1z+2Wln5jrv+E62LDYP
+kEM8Jtcf183QgWT6hgT3oFoYRqj64Boh6Zn5s4HAR1Bph665rPk=
+=fkt4
 -----END PGP SIGNATURE-----
 ```
 
@@ -60,20 +60,21 @@ curl https://opensats.org/docs/dergigi.pub.asc | gpg --import
 ```
 
 2. Download the [signed canary statement][scs]
-3. Verify the signature: 
+3. Verify the signature:
 
 ```bash
 gpg --auto-key-retrieve --verify canary.txt.asc
 ```
 
 4. You should get an output that is similar to the following (make sure to check
-the date that the canary was signed):
+   the date that the canary was signed):
 
 ```bash
 gpg: Signature made Wed  7 Aug 23:30:46 2024 WEST
 gpg:                using RSA key 8198A18530A522A09561243989C4A25E69A5DE7F
 gpg: Good signature from "Gigi D. <gigi@opensats.org>" [ultimate]
 ```
+
 Unless you've taken steps to build a trust path to Gigi's key, you will see a similar warning as below. However, it can be disregarded if you've gotten "Good signature".
 
 ```bash

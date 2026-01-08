@@ -36,7 +36,7 @@ export default function PageLayout({ children, content }: Props) {
               )}
               <SocialIcon kind="github" href={git} />
               {nostr && (
-                <SocialIcon kind="nostr" href={`https://njump.me/${nostr}`} />
+                <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} />
               )}
             </div>
           </div>
