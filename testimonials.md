@@ -1,80 +1,78 @@
 # Testimonials
 
-## 0xB10C
-
 > My aim is to bring clarity and depth to the understanding of the Bitcoin
 > network's complex dynamics. This is essential for maintaining the network's
 > robustness and guiding community decisions.
+
+—0xB10C
 
 *Source: https://opensats.org/blog/0xB10C-receives-lts-grant*
 
 ---
 
-## Richard Anderson on closed and permissioned systems
-
 > We can rebuild it. We have the technology.
+
+—Richard Anderson on closed and permissioned systems
 
 *Source: https://opensats.org/blog/2023-year-in-review*
 
 ---
-
-## Satoshi Nakamoto on Bitcoin
 
 > Being open source means anyone can independently review the code. If it was
 > closed source, nobody could verify the security. I think it's essential for a
 > program of this nature to be open source.
 
+—Satoshi Nakamoto on Bitcoin
+
 *Source: https://opensats.org/blog/2023-year-in-review*
 
 ---
 
-## Francis Pouliot, CEO of Bull Bitcoin
-
 > Without the OpenSats grant awarded to Payjoin Dev Kit, Payjoin V2 may never
 > have come to exist and would have remained an idea in the mind of cypherpunks.
+
+—Francis Pouliot, CEO of Bull Bitcoin
 
 *Source: https://opensats.org/blog/2025-year-in-review#impact*
 
 ---
 
-## Christian Keroles, Director of Financial Freedom
-
 > OpenSats is a powerful force for good in the world. Their largely
 > volunteer-driven team has an outsized impact, and HRF is thrilled to support
 > their important work with this grant to help sustain their operations.
+
+—Christian Keroles, Director of Financial Freedom
 
 *Source: https://opensats.org/blog/additional-ops-budget-from-hrf*
 
 ---
 
-## Andreas Griffin
-
 > Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
 > fast UX while removing centralization points, such as electrum servers.
+
+—Andreas Griffin
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#bitcoin-safe*
 
 ---
 
-## Hampus Sjöberg
-
 > Having a trust-minimized Lightning Address linked to a self-custodial wallet
 > is a valuable option in a custodial Lightning world.
+
+—Hampus Sjöberg
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet*
 
 ---
 
-## Blake Kaufman
-
 > Simplicity of use is the difference between Bitcoin as a cypherpunk technology
 > and Bitcoin as a monetary revolution.
+
+—Blake Kaufman
 
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#blitz-wallet*
 
 ---
-
-## John Gribbin
 
 > Core Lightning's plugin ecosystem contains powerful tools like CLBOSS for
 > automated liquidity management and BOLT12 Prisms for payment splitting, but
@@ -84,21 +82,21 @@
 > stack on Start9—Bitcoin node, CLN, and plugin interfaces—entirely on their
 > own hardware with intuitive access to advanced features.
 
+—John Gribbin
+
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#clams*
 
 ---
-
-## Praveen Perera
 
 > Cove isn't doing any one new thing—it's bringing all the right pieces
 > together. Coin control on a phone is hard to do well, and I'm proud of how
 > usable it turned out.
 
+—Praveen Perera
+
 *Source: https://opensats.org/blog/advancements-in-bitcoin-and-lightning-wallets#cove*
 
 ---
-
-## Steve Myers, BDK director/core contributor
 
 > The mission of the BDK team is to provide the best FOSS libraries for building
 > secure, modern bitcoin apps and services. With the 1.0+ releases now in the
@@ -116,21 +114,21 @@
 > bark](https://gitlab.com/ark-bitcoin/bark). If there is a bitcoin project you
 > want to see in the world, BDK will help you build it.
 
+—Steve Myers, BDK director/core contributor
+
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#bitcoin-dev-kit*
 
 ---
-
-## Tobin Harding
 
 > My job is to provide libraries so other devs can create software that users
 > love. If no one ever mentions rust-bitcoin while simultaneously using it every
 > day, then we win.
 
+—Tobin Harding
+
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
 
 ---
-
-## Jamil Lambert
 
 > Testing is an important part of software development, which isn't always
 > treated as such. There are often poorly written tests that are hard to read, and
@@ -139,40 +137,40 @@
 > which has been a good way to learn about the software while also doing something
 > useful.
 
+—Jamil Lambert
+
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
 
 ---
-
-## Conor Okus(https://github.com/ConorOkus), Spiral
 
 > Over the past four years, I've watched many Summer of Bitcoin alumni grow
 > into confident contributors to multiple open-source Bitcoin projects and
 > secure roles in the industry.
 
+—Conor Okus(https://github.com/ConorOkus), Spiral
+
 *Source: https://opensats.org/blog/advancements-in-developer-training#onboarding-student-developers*
 
 ---
 
-## Setutsi Adzei, Bootcamp participant
-
 > Eye-opening, empowering, and deeply rewarding–I've gained valuable skills
 > and a strong sense of community.
+
+—Setutsi Adzei, Bootcamp participant
 
 *Source: https://opensats.org/blog/advancements-in-developer-training#lightning-development-in-africa*
 
 ---
-
-## Perez Yeboah, Bootcamp participant
 
 > It's a great thing to be part of this bootcamp. Prior to this bootcamp, I
 > didn't know much about Bitcoin development and the Lightning Network, and now
 > I can say for sure that I am very enthusiastic to be part of this journey.
 
+—Perez Yeboah, Bootcamp participant
+
 *Source: https://opensats.org/blog/advancements-in-developer-training#lightning-development-in-africa*
 
 ---
-
-## G.L., Bitcoin Dev Launchpad cohort graduate
 
 > What surprised me most was the quality of discussions and instructors, as
 > well as the high level of commitment and purpose among participants. [...] I
@@ -180,32 +178,32 @@
 > wanted to work in the BOSS ecosystem, but without the program, that career
 > transition might never have happened.
 
+—G.L., Bitcoin Dev Launchpad cohort graduate
+
 *Source: https://opensats.org/blog/advancements-in-developer-training#technical-training-and-mentorship*
 
 ---
-
-## Lucas Ferreira, founder of Vinteum
 
 > Brazil is without a doubt attracting attention from the global Bitcoin
 > builder community. The Bitcoin Dev Launchpad is helping accelerate that
 > momentum–taking people from zero Bitcoin knowledge to contributing to major
 > open-source projects in just six months.
 
+—Lucas Ferreira, founder of Vinteum
+
 *Source: https://opensats.org/blog/advancements-in-developer-training#technical-training-and-mentorship*
 
 ---
-
-## Anon Senior Developer in the Indian Bitcoin community
 
 > Bitshala is the best thing that has ever happened to the Indian Bitcoin
 > technical scene. It's the first time I've seen this level of energy,
 > coordination, and long-term vision around Bitcoin FOSS in the region.
 
+—Anon Senior Developer in the Indian Bitcoin community
+
 *Source: https://opensats.org/blog/advancements-in-developer-training#growing-regional-developer-communities*
 
 ---
-
-## Calle
 
 > Cashu has grown into a true pillar of the Bitcoin open-source movement, driving
 > innovations once thought impossible. The free and open-source project has
@@ -214,22 +212,22 @@
 > products. This momentum is only possible thanks to our incredible grassroots
 > community and the freedom-driven contributors who make Cashu what it is today.
 
+—Calle
+
 *Source: https://opensats.org/blog/advancements-in-ecash#cashu*
 
 ---
-
-## David Caseria, CDK contributor
 
 > Mobile bindings have been the number one requested CDK feature for some time.
 > With the release of our Swift and Kotlin bindings, CDK is the easiest way to
 > get started building Cashu apps. As Bitcoin monetizes, Cashu will be the
 > protocol which day-to-day and online-native payments are settled.
 
+—David Caseria, CDK contributor
+
 *Source: https://opensats.org/blog/advancements-in-ecash#cashu-dev-kit*
 
 ---
-
-## Misovan
 
 > Thanks to the OpenSats grant, I was able to focus on the niche area of offline
 > ecash payments. For those of us used to fast internet, this may seem like a
@@ -238,41 +236,41 @@
 > bitcoin. The wallet enables the payer to be completely offline, leveraging
 > ecash's nature as a true bearer token stored directly in the wallet.
 
+—Misovan
+
 *Source: https://opensats.org/blog/advancements-in-ecash#minibits-wallet*
 
 ---
-
-## Egge
 
 > With npub.cash v2, Lightning Addresses are no longer tied to a specific wallet.
 > Users can get an address right away, wallets can support whichever address
 > their users prefer, and providers can launch their own services in minutes.
 
+—Egge
+
 *Source: https://opensats.org/blog/advancements-in-ecash#npubcash*
 
 ---
-
-## Prakhar Saxena, Lampo Project Lead
 
 > Building reliable Lightning infrastructure requires both rigorous testing and
 > continuous improvements. The LDK-Lnprototest integration and enhancements to
 > Lampo aim to make the network more robust and developer-friendly. Excited to
 > push this forward!
 
+—Prakhar Saxena, Lampo Project Lead
+
 *Source: https://opensats.org/blog/advancements-in-lightning-infrastructure#lampo*
 
 ---
 
-## fiatjaf
-
 > The simplest open protocol that is able to create a censorship-resistant
 > global 'social' network once and for all.
+
+—fiatjaf
 
 *Source: https://opensats.org/blog/advancements-in-nostr-clients*
 
 ---
-
-## Vitor Pamplona
 
 > This achievement (outbox transition and relay changes) is a major
 > demonstration of the true decentralized potential of nostr. By enabling mobile
@@ -280,11 +278,11 @@
 > shifted the narrative. We've proven that users can be reliably served by a
 > highly distributed network—not just a few central points.
 
+—Vitor Pamplona
+
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#amethyst*
 
 ---
-
-## Hodlbod
 
 > Much of nostr's novelty has to do with keys and digital signatures. But
 > focusing on the cryptographic aspects is, to me, actually something of a
@@ -297,31 +295,31 @@
 > and move between services and custodians, with support from the protocol for
 > doing so.
 
+—Hodlbod
+
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#coracle*
 
 ---
-
-## KernelKind
 
 > We are working toward the Notedeck browser-platform vision: an open path for
 > developers to build on Notedeck without reinventing the wheel. OpenSats
 > accelerated this critical step toward a truly decentralized social ecosystem.
 
+—KernelKind
+
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#damus*
 
 ---
-
-## Hzrd149
 
 > The biggest achievement has been building out the applesauce SDK to be the
 > core of the app. This has allowed me to build and test features in isolation
 > and then integrate them back into the app when I know they are working.
 
+—Hzrd149
+
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#nostrudel*
 
 ---
-
-## Fabian
 
 > One of the goals with Nostur is to provide a social media alternative that is
 > free from manipulative algorithms, free from ad-based algorithms that
@@ -330,33 +328,33 @@
 > that things aren't pushed on you. I open Nostur to see what the people I
 > follow have to say and not to become a target of an ad campaign.
 
+—Fabian
+
 *Source: https://opensats.org/blog/advancements-in-nostr-clients#nostur*
 
 ---
-
-## Andrew Toth
 
 > I’m grateful and honored to receive this grant to continue my work on Bitcoin
 > Core. Performance and privacy are essential for using Bitcoin in a
 > self-sovereign way, and I’m glad to see these efforts recognized and
 > supported.
 
+—Andrew Toth
+
 *Source: https://opensats.org/blog/andrew-toth-receives-lts-grant*
 
 ---
-
-## Calle
 
 > Our mission with Cashu is to create a robust ecash protocol built for Bitcoin
 > with a focus on simplicity, efficiency, and privacy. Anyone should be able to
 > build open-source applications powered by ecash. And anyone should be able to
 > run them.
 
+—Calle
+
 *Source: https://opensats.org/blog/cashu-calle-receives-lts-grant*
 
 ---
-
-## Daniele
 
 > After thinking and acting right on a personal basis, investing in freedom
 > technology is the only way we have to change the world for better, because
@@ -365,11 +363,11 @@
 > with a mix between product design, user experience and development is what I
 > can do to help on this front.
 
+—Daniele
+
 *Source: https://opensats.org/blog/daniele-receives-lts-grant*
 
 ---
-
-## Matt Dines, CIO, Build Asset Management
 
 > Bitcoin is advancing financial freedom and economic empowerment for
 > individuals from the bottom up, across the globe, on an open and level playing
@@ -377,11 +375,11 @@
 > future, and these two organizations exhibit remarkable leadership and track
 > records through their work in this area.
 
+—Matt Dines, CIO, Build Asset Management
+
 *Source: https://opensats.org/blog/donation-commitment-from-build-asset-management*
 
 ---
-
-## Matt Odell, co-founder, OpenSats
 
 > Every profitable bitcoin business should support the open source contributors
 > that make this movement possible. We are incredibly grateful for Build Asset
@@ -391,61 +389,61 @@
 > billions worldwide while also making the bitcoin and greater freedom tech
 > ecosystem more secure and robust.
 
+—Matt Odell, co-founder, OpenSats
+
 *Source: https://opensats.org/blog/donation-commitment-from-build-asset-management*
 
 ---
-
-## Dusty Daemon
 
 > The euphoria I get from contributing to something as important as I believe
 > Lightning is, is incredible ⸻ I'd trade all those lost savings and sleepless
 > nights for it all over again.
 
+—Dusty Daemon
+
 *Source: https://opensats.org/blog/dusty-daemon-receives-lts-grant*
 
 ---
 
-## fiatjaf
-
 > Nostr is the simplest open protocol that is able to create a
 > censorship-resistant global "social" network once and for all.
+
+—fiatjaf
 
 *Source: https://opensats.org/blog/fiatjaf-receives-lts-grant*
 
 ---
 
-## Hodlbod
-
 > Building a decentralized social media client like Coracle is not just about
 > technology, but about fostering genuine community interactions and ensuring user
 > privacy.
 
+—Hodlbod
+
 *Source: https://opensats.org/blog/hodlbod-receives-lts-grant*
 
 ---
-
-## hzrd149
 
 > My hope is that noStrudel becomes a valuable learning tool for open-source
 > developers working with nostr, while Blossom addresses the critical demand for
 > distributed, censorship-resistant file hosting and backup to enhance portability
 > for nostr users and clients.
 
+—hzrd149
+
 *Source: https://opensats.org/blog/hzrd149-receives-lts-grant*
 
 ---
-
-## Will Casarin
 
 > I am deeply committed to the advancement of Bitcoin by integrating it into
 > Nostr, ensuring that freedom of speech and financial sovereignty are accessible
 > to all.
 
+—Will Casarin
+
 *Source: https://opensats.org/blog/jb55-receives-lts-grant*
 
 ---
-
-## Jon Atack
 
 > I'm concerned about decentralization, privacy, freedom and self-sovereignty.
 > Against a backdrop of increasing dystopia, control, censorship, surveillance,
@@ -453,22 +451,22 @@
 > review, maintenance, and improved decentralization, robustness, privacy and
 > user experience.
 
+—Jon Atack
+
 *Source: https://opensats.org/blog/jon-atack-receives-lts-grant*
 
 ---
-
-## Kieran
 
 > The primary goal with Snort and zap.stream is to make decentralized social
 > media and streaming more accessible, ensuring censorship resistance with user
 > control, while allowing content creators to monetize their work directly with
 > their audience using Bitcoin
 
+—Kieran
+
 *Source: https://opensats.org/blog/kieran-receives-lts-grant*
 
 ---
-
-## m1sterc001guy
 
 > My goal is improve Fedimint's Lightning user experience and to bridge the
 > functionality between federated ecash and the Lightning network. I want
@@ -476,50 +474,50 @@
 > utility of their Lightning node, and to provide Lightning payments for their
 > community.
 
+—m1sterc001guy
+
 *Source: https://opensats.org/blog/m1sterc001guy-receives-lts-grant*
 
 ---
 
-## Mike Dilger
-
 > Never in my life has something so important fallen into my lap, and I feel
 > responsible to the future of humanity to get this right.
+
+—Mike Dilger
 
 *Source: https://opensats.org/blog/mike-dilger-receives-lts-grant*
 
 ---
 
-## jackJD
-
 > Bitcoin changes absolutely everything. I don't think there is anything more
 > important in my lifetime to work on.
+
+—jackJD
 
 *Source: https://opensats.org/blog/opensats-receives-additional-funding-of-dollar21m-from-startsmall*
 
 ---
-
-## Paolo Ardoino, CEO of Tether
 
 > We at Tether believe that Bitcoin, and the free, open-source software that
 > powers it, are indispensable to a freer and decentralized future. OpenSats is
 > on the front line supporting the continued growth of this ecosystem by funding
 > the next generation of innovators, and we are proud to support their work.
 
+—Paolo Ardoino, CEO of Tether
+
 *Source: https://opensats.org/blog/opensats-receives-dollar250k-donation-from-tether*
 
 ---
-
-## Matt Odell, Co-Founder of OpenSats
 
 > OpenSats has provided [over 300 grants](/transparency) to developers working on
 > freedom tech projects. Support from Tether will help us continue to scale our
 > mission globally.
 
+—Matt Odell, Co-Founder of OpenSats
+
 *Source: https://opensats.org/blog/opensats-receives-dollar250k-donation-from-tether*
 
 ---
-
-## Dr. Álvaro Salas-Castro, President & CEO
 
 > As new supporters of OpenSats, we are deeply appreciative of the opportunity
 > to engage with a community that exemplifies transparency, professionalism, and
@@ -535,30 +533,30 @@
 > efforts significantly impact the community we are dedicated to serving.
 > Together, we can **fix the money to fix the world.**
 
+—Dr. Álvaro Salas-Castro, President & CEO
+
 *Source: https://opensats.org/blog/opensats-receives-one-million-from-reynolds-foundation*
 
 ---
 
-## Pablo
-
 > I want to work on showcasing what's possible in Nostr and bring adjacent
 > protocols and network effects in.
+
+—Pablo
 
 *Source: https://opensats.org/blog/pablofz7-receives-lts-grant*
 
 ---
 
-## Matt Odell
-
 > Freedom tech is hope. Every Bitcoin ETF should follow the lead of Bitwise and
 > donate a portion of their profits to open source developers who make this
 > movement possible.
 
+—Matt Odell
+
 *Source: https://opensats.org/blog/recurring-donations-from-bitwise-bitcoin-etf-bitb*
 
 ---
-
-## Shashwat Vangani
 
 > Working on LDK is a dream come true for me. Using a programming language that
 > has become my first love over time, alongside a team who shares my passion and
@@ -566,55 +564,57 @@
 > actual meaningful project that I truly care about. What more could one ask for?
 > :)
 
+—Shashwat Vangani
+
 *Source: https://opensats.org/blog/shashwat-vangani-receives-lts-grant*
 
 ---
-
-## SnowCait
 
 > I would like to continue to enrich the Nostr ecosystem and increase the
 > number of Nostr users, developers, and operators [...] through Nostr I have
 > become interested in Bitcoin, so I would like to strengthen wallet integration
 > and explore what else I can do.
 
+—SnowCait
+
 *Source: https://opensats.org/blog/snowcait-receives-lts-grant*
 
 ---
-
-## Stuart Bowman
 
 > The Satellite stack will enable communities and organizations on nostr to be
 > not only cryptographically sovereign, but also sovereign in terms of their
 > actual infrastructure.
 
+—Stuart Bowman
+
 *Source: https://opensats.org/blog/stuart-bowman-receives-lts-grant*
 
 ---
-
-## The Tor Project
 
 > We believe everyone should be able to explore the internet with privacy.
 > [...] We advance human rights and defend your privacy online through free
 > software and open networks.
 
+—The Tor Project
+
 *Source: https://opensats.org/blog/tor-receives-support-grant*
 
 ---
 
-## Vitor Pamplona
-
 > In every line of code, I see the potential to reshape the world—Amethyst is
 > more than a project; it's my commitment to the verifiable web.
+
+—Vitor Pamplona
 
 *Source: https://opensats.org/blog/vitor-pamplona-receives-lts-grant*
 
 ---
 
-## Yuki
-
 > My goal is to empower individuals to create high-performance, stable, efficient
 > and memory-safe applications in whichever language and environment they
 > prefer.
+
+—Yuki
 
 *Source: https://opensats.org/blog/yuki-receives-lts-grant*
 

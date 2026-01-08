@@ -71,8 +71,8 @@ async function extractTestimonials() {
         ? `${BASE_URL}/${slug}#${section}`
         : `${BASE_URL}/${slug}`
 
-      output += `## ${name}\n\n`
       output += `> ${cleanQuote.split('\n').join('\n> ')}\n\n`
+      output += `—${name}\n\n`
       output += `*Source: ${url}*\n\n---\n\n`
       totalCount++
     }
