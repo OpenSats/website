@@ -19,6 +19,101 @@
 
 ---
 
+> Thanks to the OpenSats grant, I was able to focus on the niche area of offline
+> ecash payments. For those of us used to fast internet, this may seem like a
+> curiosity, but in many underdeveloped regions it's a real necessity. Minibits
+> has become a pioneer in showcasing the unique properties of ecash for moving
+> bitcoin. The wallet enables the payer to be completely offline, leveraging
+> ecash's nature as a true bearer token stored directly in the wallet.
+
+—Misovan, Minibits Wallet
+
+*Source: https://opensats.org/blog/advancements-in-ecash#minibits-wallet*
+
+---
+
+> I'm grateful and honored to receive this grant to continue my work on Bitcoin
+> Core. Performance and privacy are essential for using Bitcoin in a
+> self-sovereign way, and I'm glad to see these efforts recognized and
+> supported.
+
+—Andrew Toth
+
+*Source: https://opensats.org/blog/andrew-toth-receives-lts-grant*
+
+---
+
+> The euphoria I get from contributing to something as important as I believe
+> Lightning is, is incredible ⸻ I'd trade all those lost savings and sleepless
+> nights for it all over again.
+
+—Dusty Daemon
+
+*Source: https://opensats.org/blog/dusty-daemon-receives-lts-grant*
+
+---
+
+> The mission of the BDK team is to provide the best FOSS libraries for building
+> secure, modern bitcoin apps and services. With the 1.0+ releases now in the
+> hands of thousands of users through projects like
+> [Bitkey](https://github.com/proto-at-block/bitkey) and
+> [ProtonWallet](https://github.com/ProtonWallet), we have begun to achieve this
+> mission. Moreover, with projects like
+> [AnchorWatch](https://www.anchorwatch.com/),
+> [FrostSnap](https://github.com/frostsnap/frostsnap),
+> [Cove](https://github.com/bitcoinppl/cove), and [Bitcoin
+> Safe](https://github.com/andreasgriffin/bitcoin-safe), we continue to support
+> innovative new layer one wallets. Looking forward, we also see BDK playing a
+> strong supporting role for layer two projects like
+> [ldk-node](https://github.com/lightningdevkit/ldk-node) and [Second's
+> bark](https://gitlab.com/ark-bitcoin/bark). If there is a bitcoin project you
+> want to see in the world, BDK will help you build it.
+
+—Steve Myers, BDK director/core contributor
+
+*Source: https://opensats.org/blog/advancements-in-developer-libraries#bitcoin-dev-kit*
+
+---
+
+> My job is to provide libraries so other devs can create software that users
+> love. If no one ever mentions rust-bitcoin while simultaneously using it every
+> day, then we win.
+
+—Tobin Harding, Rust-Bitcoin
+
+*Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
+
+---
+
+> Over the past four years, I've watched many Summer of Bitcoin alumni grow
+> into confident contributors to multiple open-source Bitcoin projects and
+> secure roles in the industry.
+
+—Conor Okus(https://github.com/ConorOkus), Spiral
+
+*Source: https://opensats.org/blog/advancements-in-developer-training#onboarding-student-developers*
+
+---
+
+> Bitshala is the best thing that has ever happened to the Indian Bitcoin
+> technical scene. It's the first time I've seen this level of energy,
+> coordination, and long-term vision around Bitcoin FOSS in the region.
+
+—Anon Senior Developer in the Indian Bitcoin community, Growing Regional Developer Communities
+
+*Source: https://opensats.org/blog/advancements-in-developer-training#growing-regional-developer-communities*
+
+---
+
+> Never in my life has something so important fallen into my lap, and I feel
+> responsible to the future of humanity to get this right.
+
+—Mike Dilger
+
+*Source: https://opensats.org/blog/mike-dilger-receives-lts-grant*
+
+---
+
 > My aim is to bring clarity and depth to the understanding of the Bitcoin
 > network's complex dynamics. This is essential for maintaining the network's
 > robustness and guiding community decisions.
@@ -80,38 +175,6 @@
 
 ---
 
-> The mission of the BDK team is to provide the best FOSS libraries for building
-> secure, modern bitcoin apps and services. With the 1.0+ releases now in the
-> hands of thousands of users through projects like
-> [Bitkey](https://github.com/proto-at-block/bitkey) and
-> [ProtonWallet](https://github.com/ProtonWallet), we have begun to achieve this
-> mission. Moreover, with projects like
-> [AnchorWatch](https://www.anchorwatch.com/),
-> [FrostSnap](https://github.com/frostsnap/frostsnap),
-> [Cove](https://github.com/bitcoinppl/cove), and [Bitcoin
-> Safe](https://github.com/andreasgriffin/bitcoin-safe), we continue to support
-> innovative new layer one wallets. Looking forward, we also see BDK playing a
-> strong supporting role for layer two projects like
-> [ldk-node](https://github.com/lightningdevkit/ldk-node) and [Second's
-> bark](https://gitlab.com/ark-bitcoin/bark). If there is a bitcoin project you
-> want to see in the world, BDK will help you build it.
-
-—Steve Myers, BDK director/core contributor
-
-*Source: https://opensats.org/blog/advancements-in-developer-libraries#bitcoin-dev-kit*
-
----
-
-> My job is to provide libraries so other devs can create software that users
-> love. If no one ever mentions rust-bitcoin while simultaneously using it every
-> day, then we win.
-
-—Tobin Harding, Rust-Bitcoin
-
-*Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
-
----
-
 > Testing is an important part of software development, which isn't always
 > treated as such. There are often poorly written tests that are hard to read, and
 > some don't test what they set out to... Writing and improving tests for all of
@@ -122,16 +185,6 @@
 —Jamil Lambert, Rust-Bitcoin
 
 *Source: https://opensats.org/blog/advancements-in-developer-libraries#rust-bitcoin*
-
----
-
-> Over the past four years, I've watched many Summer of Bitcoin alumni grow
-> into confident contributors to multiple open-source Bitcoin projects and
-> secure roles in the industry.
-
-—Conor Okus(https://github.com/ConorOkus), Spiral
-
-*Source: https://opensats.org/blog/advancements-in-developer-training#onboarding-student-developers*
 
 ---
 
@@ -177,20 +230,10 @@
 
 ---
 
-> Bitshala is the best thing that has ever happened to the Indian Bitcoin
-> technical scene. It's the first time I've seen this level of energy,
-> coordination, and long-term vision around Bitcoin FOSS in the region.
-
-—Anon Senior Developer in the Indian Bitcoin community, Growing Regional Developer Communities
-
-*Source: https://opensats.org/blog/advancements-in-developer-training#growing-regional-developer-communities*
-
----
-
 > Cashu has grown into a true pillar of the Bitcoin open-source movement, driving
 > innovations once thought impossible. The free and open-source project has
 > brought countless new developers into Bitcoin. Today, Cashu powers Bitcoin
-> communities worldwide, and is already at the heart of multiple companies’
+> communities worldwide, and is already at the heart of multiple companies'
 > products. This momentum is only possible thanks to our incredible grassroots
 > community and the freedom-driven contributors who make Cashu what it is today.
 
@@ -208,19 +251,6 @@
 —David Caseria, CDK contributor
 
 *Source: https://opensats.org/blog/advancements-in-ecash#cashu-dev-kit*
-
----
-
-> Thanks to the OpenSats grant, I was able to focus on the niche area of offline
-> ecash payments. For those of us used to fast internet, this may seem like a
-> curiosity, but in many underdeveloped regions it's a real necessity. Minibits
-> has become a pioneer in showcasing the unique properties of ecash for moving
-> bitcoin. The wallet enables the payer to be completely offline, leveraging
-> ecash's nature as a true bearer token stored directly in the wallet.
-
-—Misovan, Minibits Wallet
-
-*Source: https://opensats.org/blog/advancements-in-ecash#minibits-wallet*
 
 ---
 
@@ -307,17 +337,6 @@
 
 ---
 
-> I’m grateful and honored to receive this grant to continue my work on Bitcoin
-> Core. Performance and privacy are essential for using Bitcoin in a
-> self-sovereign way, and I’m glad to see these efforts recognized and
-> supported.
-
-—Andrew Toth
-
-*Source: https://opensats.org/blog/andrew-toth-receives-lts-grant*
-
----
-
 > Our mission with Cashu is to create a robust ecash protocol built for Bitcoin
 > with a focus on simplicity, efficiency, and privacy. Anyone should be able to
 > build open-source applications powered by ecash. And anyone should be able to
@@ -365,16 +384,6 @@
 —Matt Odell, co-founder, OpenSats
 
 *Source: https://opensats.org/blog/donation-commitment-from-build-asset-management*
-
----
-
-> The euphoria I get from contributing to something as important as I believe
-> Lightning is, is incredible ⸻ I'd trade all those lost savings and sleepless
-> nights for it all over again.
-
-—Dusty Daemon
-
-*Source: https://opensats.org/blog/dusty-daemon-receives-lts-grant*
 
 ---
 
@@ -441,15 +450,6 @@
 —m1sterc001guy
 
 *Source: https://opensats.org/blog/m1sterc001guy-receives-lts-grant*
-
----
-
-> Never in my life has something so important fallen into my lap, and I feel
-> responsible to the future of humanity to get this right.
-
-—Mike Dilger
-
-*Source: https://opensats.org/blog/mike-dilger-receives-lts-grant*
 
 ---
 
