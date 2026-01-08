@@ -373,20 +373,6 @@
 
 ---
 
-> Every profitable bitcoin business should support the open source contributors
-> that make this movement possible. We are incredibly grateful for Build Asset
-> Management choosing to lead by example with a long term commitment to the
-> OpenSats General Fund. OpenSats is currently funding hundreds of open source
-> contributors globally every month with the goal to increase freedom for
-> billions worldwide while also making the bitcoin and greater freedom tech
-> ecosystem more secure and robust.
-
-—Matt Odell, co-founder, OpenSats
-
-*Source: https://opensats.org/blog/donation-commitment-from-build-asset-management*
-
----
-
 > Building a decentralized social media client like Coracle is not just about
 > technology, but about fostering genuine community interactions and ensuring user
 > privacy.
@@ -453,15 +439,6 @@
 
 ---
 
-> Bitcoin changes absolutely everything. I don't think there is anything more
-> important in my lifetime to work on.
-
-—jackJD
-
-*Source: https://opensats.org/blog/opensats-receives-additional-funding-of-dollar21m-from-startsmall*
-
----
-
 > We at Tether believe that Bitcoin, and the free, open-source software that
 > powers it, are indispensable to a freer and decentralized future. OpenSats is
 > on the front line supporting the continued growth of this ecosystem by funding
@@ -473,52 +450,12 @@
 
 ---
 
-> OpenSats has provided [over 300 grants](/transparency) to developers working on
-> freedom tech projects. Support from Tether will help us continue to scale our
-> mission globally.
-
-—Matt Odell, Co-Founder of OpenSats
-
-*Source: https://opensats.org/blog/opensats-receives-dollar250k-donation-from-tether*
-
----
-
-> As new supporters of OpenSats, we are deeply appreciative of the opportunity
-> to engage with a community that exemplifies transparency, professionalism, and
-> inclusivity, all while championing the acceleration of freedom. We firmly
-> believe that the process is just as crucial, if not more so, than the outcome.
-> OpenSats stands as a testament to the power of both. Our organization embraces a
-> shared mantra of joyful optimism paired with a pragmatic approach: Togetherness.
-> This ethos, cultivated by the Reynolds Foundation under the visionary leadership
-> of our founder, Tim Reynolds, embodies our commitment to freedom and
-> scalability.
-> We warmly invite fellow philanthropists to join us in supporting
-> this groundbreaking endeavor, OpenSats. Their work ensures that our collective
-> efforts significantly impact the community we are dedicated to serving.
-> Together, we can **fix the money to fix the world.**
-
-—Dr. Álvaro Salas-Castro, President & CEO
-
-*Source: https://opensats.org/blog/opensats-receives-one-million-from-reynolds-foundation*
-
----
-
 > I want to work on showcasing what's possible in Nostr and bring adjacent
 > protocols and network effects in.
 
 —Pablo
 
 *Source: https://opensats.org/blog/pablofz7-receives-lts-grant*
-
----
-
-> Freedom tech is hope. Every Bitcoin ETF should follow the lead of Bitwise and
-> donate a portion of their profits to open source developers who make this
-> movement possible.
-
-—Matt Odell
-
-*Source: https://opensats.org/blog/recurring-donations-from-bitwise-bitcoin-etf-bitb*
 
 ---
 
