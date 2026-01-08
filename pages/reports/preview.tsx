@@ -49,9 +49,14 @@ export default function Preview() {
       const reportData = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT) || '{}'
       )
+      // Get form_loaded_at timestamp for spam protection
+      const formLoadedAt = JSON.parse(
+        localStorage.getItem('opensats_form_loaded_at') || 'null'
+      )
       const response = await fetchPostJSON('/api/report', {
         ...grantDetails,
         ...reportData,
+        form_loaded_at: formLoadedAt,
       })
 
       if (response.error) {
@@ -63,6 +68,8 @@ export default function Preview() {
       Object.values(STORAGE_KEYS).forEach((key) => {
         localStorage.removeItem(key)
       })
+      // Clear form_loaded_at timestamp
+      localStorage.removeItem('opensats_form_loaded_at')
       router.push('/reports/success')
     } catch (e) {
       console.error('Failed to submit report. Please try again.', e)

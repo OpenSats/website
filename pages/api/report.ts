@@ -16,6 +16,8 @@ interface ReportBotRequest extends NextApiRequest {
     help_needed?: string
     issue_number: number
     email: string
+    company_website?: string
+    form_loaded_at?: number
   }
 }
 
@@ -78,7 +80,43 @@ export default async function handler(
       help_needed,
       issue_number,
       email,
+      company_website,
+      form_loaded_at,
     } = req.body
+
+    // Spam protection: Honeypot field check
+    // If company_website is filled, it's likely a bot - silently reject
+    if (company_website && company_website.trim() !== '') {
+      console.warn('Spam detected: Honeypot field filled', {
+        email: email?.substring(0, 3) + '***',
+        timestamp: new Date().toISOString(),
+      })
+      // Return success to avoid revealing the honeypot
+      return res.status(200).json({
+        success: true,
+      })
+    }
+
+    // Spam protection: Time-based validation
+    // Require minimum time between form load and submission
+    const MIN_FORM_TIME_MS =
+      parseInt(process.env.SPAM_MIN_FORM_TIME || '2000', 10) || 2000
+
+    if (form_loaded_at && typeof form_loaded_at === 'number') {
+      const timeElapsed = Date.now() - form_loaded_at
+      if (timeElapsed < MIN_FORM_TIME_MS) {
+        console.warn('Spam detected: Form submitted too quickly', {
+          timeElapsed,
+          minRequired: MIN_FORM_TIME_MS,
+          email: email?.substring(0, 3) + '***',
+          timestamp: new Date().toISOString(),
+        })
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid submission',
+        })
+      }
+    }
 
     // Input validation
     if (

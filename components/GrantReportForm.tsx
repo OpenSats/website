@@ -18,6 +18,7 @@ interface GrantReportFormData {
   next_quarter: string
   money_usage: string
   help_needed?: string
+  company_website?: string
 }
 
 // Set expiration time for saved data (30 days in milliseconds)
@@ -29,6 +30,7 @@ export default function GrantReportForm({
   const router = useRouter()
   const [error, setError] = useState<string>()
   const [recoveredData, setRecoveredData] = useState(false)
+  const [formLoadedAt, setFormLoadedAt] = useState<number | null>(null)
 
   const {
     register,
@@ -50,6 +52,21 @@ export default function GrantReportForm({
 
   // Watch all form fields for preview
   const watchAllFields = watch()
+
+  // Track when form loads for spam protection
+  useEffect(() => {
+    const loadTime = Date.now()
+    setFormLoadedAt(loadTime)
+    // Store form_loaded_at in localStorage for use in preview/submission
+    try {
+      localStorage.setItem(
+        'opensats_form_loaded_at',
+        JSON.stringify(loadTime)
+      )
+    } catch (e) {
+      console.error('Error storing form load time:', e)
+    }
+  }, [])
 
   // Load saved form data from localStorage on initial render
   useEffect(() => {
@@ -132,6 +149,7 @@ export default function GrantReportForm({
           next_quarter: data.next_quarter,
           money_usage: data.money_usage,
           help_needed: data.help_needed || '',
+          company_website: data.company_website || '',
         })
       )
 
@@ -261,6 +279,22 @@ export default function GrantReportForm({
               className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             />
           </label>
+
+          {/* Honeypot field - hidden from users but visible to bots */}
+          <input
+            {...register('company_website')}
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              opacity: 0,
+              pointerEvents: 'none',
+            }}
+            className="hidden"
+          />
 
           {error && (
             <div className="rounded-md border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900">
@@ -436,6 +470,22 @@ export default function GrantReportForm({
             className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
           />
         </label>
+
+        {/* Honeypot field - hidden from users but visible to bots */}
+        <input
+          {...register('company_website')}
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            opacity: 0,
+            pointerEvents: 'none',
+          }}
+          className="hidden"
+        />
 
         {error && (
           <div className="rounded-md border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900">
