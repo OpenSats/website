@@ -1,5 +1,24 @@
 # Testimonials
 
+> OpenSats is a powerful force for good in the world. Their largely
+> volunteer-driven team has an outsized impact, and HRF is thrilled to support
+> their important work with this grant to help sustain their operations.
+
+—Christian Keroles, Director of Financial Freedom
+
+*Source: https://opensats.org/blog/additional-ops-budget-from-hrf*
+
+---
+
+> Without the OpenSats grant awarded to Payjoin Dev Kit, Payjoin V2 may never
+> have come to exist and would have remained an idea in the mind of cypherpunks.
+
+—Francis Pouliot, CEO of Bull Bitcoin
+
+*Source: https://opensats.org/blog/2025-year-in-review#impact*
+
+---
+
 > My aim is to bring clarity and depth to the understanding of the Bitcoin
 > network's complex dynamics. This is essential for maintaining the network's
 > robustness and guiding community decisions.
@@ -25,25 +44,6 @@
 —Satoshi Nakamoto on Bitcoin
 
 *Source: https://opensats.org/blog/2023-year-in-review*
-
----
-
-> Without the OpenSats grant awarded to Payjoin Dev Kit, Payjoin V2 may never
-> have come to exist and would have remained an idea in the mind of cypherpunks.
-
-—Francis Pouliot, CEO of Bull Bitcoin
-
-*Source: https://opensats.org/blog/2025-year-in-review#impact*
-
----
-
-> OpenSats is a powerful force for good in the world. Their largely
-> volunteer-driven team has an outsized impact, and HRF is thrilled to support
-> their important work with this grant to help sustain their operations.
-
-—Christian Keroles, Director of Financial Freedom
-
-*Source: https://opensats.org/blog/additional-ops-budget-from-hrf*
 
 ---
 
