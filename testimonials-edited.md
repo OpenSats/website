@@ -37,16 +37,6 @@
 
 ---
 
-> Being open source means anyone can independently review the code. If it was
-> closed source, nobody could verify the security. I think it's essential for a
-> program of this nature to be open source.
-
-—Satoshi Nakamoto on Bitcoin
-
-*Source: https://opensats.org/blog/2023-year-in-review*
-
----
-
 > Compact Block Filters in wallets, like Bitcoin Safe, are the best way to have
 > fast UX while removing centralization points, such as electrum servers.
 
@@ -263,15 +253,6 @@
 
 ---
 
-> The simplest open protocol that is able to create a censorship-resistant
-> global 'social' network once and for all.
-
-—fiatjaf
-
-*Source: https://opensats.org/blog/advancements-in-nostr-clients*
-
----
-
 > This achievement (outbox transition and relay changes) is a major
 > demonstration of the true decentralized potential of nostr. By enabling mobile
 > clients to automatically connect to 1,000 relays, we have fundamentally
@@ -402,15 +383,6 @@
 —Dusty Daemon
 
 *Source: https://opensats.org/blog/dusty-daemon-receives-lts-grant*
-
----
-
-> Nostr is the simplest open protocol that is able to create a
-> censorship-resistant global "social" network once and for all.
-
-—fiatjaf
-
-*Source: https://opensats.org/blog/fiatjaf-receives-lts-grant*
 
 ---
 
