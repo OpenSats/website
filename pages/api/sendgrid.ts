@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
+import { isSpamSubmission } from '@/utils/spam-helpers'
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
@@ -250,6 +251,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    // Silent rejection for spam submissions
+    if (isSpamSubmission(req.body)) {
+      return res.status(200).json({ message: 'success' })
+    }
+
     if (!SENDGRID_API_KEY || !TO_ADDRESS || !FROM_ADDRESS) {
       throw new Error('Env misconfigured')
     }
