@@ -30,7 +30,6 @@ export default function ApplicationForm() {
   const onSubmit = async (data: any) => {
     setLoading(true)
     const submissionData = { ...data, formLoadedAt }
-    console.log(submissionData)
 
     try {
       // Track application in GitHub
