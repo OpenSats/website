@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { isSpamSubmission } from '@/utils/spam-helpers'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -12,6 +13,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    // Silent rejection for spam submissions
+    if (isSpamSubmission(req.body)) {
+      return res.status(200).json({ message: 'success' })
+    }
+
     if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
       throw new Error('Env misconfigured')
     }
