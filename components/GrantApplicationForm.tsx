@@ -10,6 +10,7 @@ import { faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
+  const [formLoadedAt] = useState(() => Date.now())
   const router = useRouter()
   const {
     watch,
@@ -28,11 +29,12 @@ export default function ApplicationForm() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setLoading(true)
-    console.log(data)
+    const submissionData = { ...data, formLoadedAt }
+    console.log(submissionData)
 
     try {
       // Track application in GitHub
-      const res = await fetchPostJSON('/api/github', data)
+      const res = await fetchPostJSON('/api/github', submissionData)
       if (res.message === 'success') {
         console.info('Application tracked') // Succeed silently
       } else {
@@ -45,7 +47,7 @@ export default function ApplicationForm() {
     } finally {
       // Mail application to us
       try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
+        const res = await fetchPostJSON('/api/sendgrid', submissionData)
         if (res.message === 'success') {
           router.push('/submitted')
         } else {
@@ -67,6 +69,14 @@ export default function ApplicationForm() {
       className="apply flex max-w-2xl flex-col gap-4"
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
+      {/* Honeypot field - hidden from users, bots will fill it */}
+      <input
+        type="text"
+        {...register('honeypot')}
+        style={{ position: 'absolute', left: '-9999px' }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
 
       <hr />
       <h2>Project Details</h2>
