@@ -1,9 +1,9 @@
 export function isSpamSubmission(body: {
-  honeypot?: string
+  organization_website?: string
   formLoadedAt?: number
 }): boolean {
   // Honeypot filled = bot
-  if (body.honeypot) return true
+  if (body.organization_website) return true
 
   // Form submitted in under 10 seconds = bot
   if (body.formLoadedAt) {
