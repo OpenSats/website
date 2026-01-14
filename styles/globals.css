@@ -52,3 +52,9 @@ body {
   height: 100%;
   border: 0;
 }
+
+.offscreen-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
