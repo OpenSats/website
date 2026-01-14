@@ -68,14 +68,6 @@ export default function ApplicationForm() {
       className="apply flex max-w-2xl flex-col gap-4"
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
-      {/* Honeypot field - hidden from users, bots will fill it */}
-      <input
-        type="text"
-        {...register('honeypot')}
-        style={{ position: 'absolute', left: '-9999px' }}
-        tabIndex={-1}
-        autoComplete="off"
-      />
 
       <hr />
       <h2>Project Details</h2>
@@ -423,6 +415,16 @@ export default function ApplicationForm() {
           type="text"
           className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('personal_github')}
+        />
+      </label>
+      <label className="block offscreen-field">
+        Organization Website
+        <input
+          type="text"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('organization_website')}
+          tabIndex={-1}
+          autoComplete="off"
         />
       </label>
       <label className="block">
