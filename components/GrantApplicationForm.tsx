@@ -417,7 +417,7 @@ export default function ApplicationForm() {
           {...register('personal_github')}
         />
       </label>
-      <label className="block offscreen-field">
+      <label className="offscreen-field block">
         Organization Website
         <input
           type="text"
