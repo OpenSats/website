@@ -6,6 +6,9 @@ class MyDocument extends Document {
     return (
       <Html lang={siteMetadata.language} className="scroll-smooth">
         <Head>
+          {/* Static CSS fallback for no-JS testing */}
+          <link rel="stylesheet" href="/css/static-styles.css" />
+          <link rel="stylesheet" href="/css/nojs-fallback.css" />
           <link
             rel="apple-touch-icon"
             sizes="76x76"

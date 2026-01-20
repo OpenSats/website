@@ -1,0 +1,23 @@
+/* Fallback CSS for no-JavaScript mode - includes custom styles */
+
+.offscreen-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+/* Form input focus states for accessibility */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #f97316;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #111827;
+    color: #f9fafb;
+  }
+}
