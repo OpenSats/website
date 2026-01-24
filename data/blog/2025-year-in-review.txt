@@ -1,0 +1,64 @@
+It's January 3rd as I'm writing these lines. Genesis day. Bitcoin's 17th birthday. It's curious that Bitcoin's birthday lines up with the start of a new year: a time to reflect, a time to look back at the year that has passed. 
+
+The little thing that Satoshi launched into the world is not so little anymore. Not fully grown up, but also not a kid anymore. A teenager. More successful than most teenagers, but still a teenager. 
+
+So: where are we in terms of Bitcoin's development? There's the obvious part and the not-so-obvious part. Let's do the obvious first: Nation states hold BTC on their balance sheets. Serious people with serious suites and serious companies talk about it on TV, in a non-dismissive (serious) way. If you bring it up in conversation you don't get laughed out of the room anymore. While most people have heard of bitcoin by now, it is probably fair to say to that for the vast majority contact was peripheral and understanding superficial. Consequently, only a small percentage use it in a self-sovereign way. In absolute terms, however, the number is growing. The mainstream association now seems to be squarely in the "asset" and "digital gold" quadrant, as opposed to "speculation" a couple of years ago, or gambling and shady internet money used exclusively for questionable things before that.
+
+Now to the not-so-obvious part: Bitcoin is still alive. It has operated since seventeen years, mostly quietly, mostly in the background. A new block has been mined every 10 minutes. Over 900,000 blocks since genesis, moving trillions of sats in the process. The cumulative hash rate of the network is at an all-time high: a number so unfathomably large that it's almost impossible to put into comparison. Lightning liquidity is at an all-time high too, as is the number of merchants accepting bitcoin as a form of payment. It's now easier than ever to live on a bitcoin standard, thanks to countless open-source projects and the services that build upon them. Bitcoin gets more efficient, resilient, and useful by the day. From basic research to fuzz testing to Stratum V2 to Silent Payments to Splicing to open-source tools for merchants and users, OpenSats is funding a myriad of efforts across the stack to support Bitcoin through its teenage years.
+
+Over the last 18 months we've sent roughly $1,000,000 USD worth of sats to grantees in 40+ countries, every month. During the course of 2015 we supported more than 150 active grantees at any point in time: small teams, large teams, educational efforts, and—most importantly—individual developers.
+
+[2025-monthly-grant-payouts.svg]
+
+When we reach out to our grantees we ask three simple questions: How did you spend your time? What are your plans for next quarter? How did you use the funds? We also follow it up with a fourth: Is there anything we could help with?
+
+As we look back at 2025, it is now our turn to answer these questions.
+
+---
+
+# Announcements
+
+> How did you spend your time?
+
+Our mission is simple: we want to support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish. Our day-to-day operations thus consist of the following: receiving grant applications, evaluating grant applications (in terms of scope, technical feasibility, clarity, potential impact, and scalability), doing due diligence, and arriving at a final decision through majority vote. We want to support the best projects and people. At the same time, we want to avoid wasting donor funds, which is why we keep a close eye on our grantees to make sure that progress goals and agreed upon milestones are hit. And last but not least, we are spending our time on long-term donor relationships and fundraising efforts. After all, we can only support as many grantees as we support if there's sats in our vaults.
+
+We announce all our grants publicly on our blog, along with our initiatives and noteworthy donations. Looking at the announcements made in 2025 one should get a pretty good idea of what we've been up to: In January 2025 we've announced additional grants for bitcoin core contributors, followed by a wave of bitcoin grants announced shortly after. In February we published our first impact report: Advancements in On-Chain Privacy. In March we announced the 10th wave of grants from the General Fund as well as the 10th wave of grants from The Nostr Fund. We also published "Let a Thousand Flowers Bloom", outlining our thesis on how to best scale OpenSats horizontally. 
+
+In April we announced our 4th wave of education grants, followed by another wave of nostr grants and our next impact report: Advancements in Lightning Infrastructure. In May we announced yet another wave of grants (and grant renewals) from our General Fund.
+
+June marked the release of our third impact report, Advancements in Developer Training, highlighting progress of some of the developer-focused education initiatives we fund. Summer of Bitcoin, Africa Free Routing, Bitcoin Dev Launchpad, and Bitshala. We also announced our long-term support for SnowCait, a prolific nostr developer. In July we announced the 12th wave of grants from the General Fund as well as the Nostr Fund, respectively.
+
+In August we published yet another impact report: Advancements in Developer Libraries. We fund a lot of projects that are by their very nature invisible to the end-user. Software development kits and libraries that a myriad of projects depend upon. BDK, `rust-bitcoin`, Payjoin Dev Kit, DLC Dev Kit, libraries focused on `secp256k1`, and many others. Developing and maintaining these libraries is hard and often thankless, but paramount to a flourishing bitcoin ecosystem. As one of our grantees Tobin Harding succinctly put it: "My job is to provide libraries so other devs can create software that users love. If no one ever mentions rust-bitcoin while simultaneously using it every day, then we win." Our 13th wave of grants, also announced in August, showed our commitment to those infrastructure-like software projects: Tor, DTails, and `ngx_L402` are all puzzle pieces to the larger freedom tech picture.
+
+In September we highlighted what advancements our grantees made on the ecash front: Cashu, CDK, Nutshell, Minibits, Nutstash, npub.cash, Hashpool, Fedimint, and OpenCash. We believe that Chaumian ecash has a large role to play in bitcoin's future, and are proud to support the people and projects who are pushing this technology forward.
+
+In October we announced the 14th wave of grants from our General Fund, followed by an impact report on the Advancements in Bitcoin and Lightning Wallets. In November we published the 13th wave of nostr grants, and we concluded the year in December with the announcement of the 14th and 15th wave respectively, as well as our first impact report focusing on the nostr ecosystem: Advancements in Nostr Clients. On the last day of the year we announced our long-term support for Brad Stachurski, who was the 2nd LTS recipient in December, following Andrew Toth.
+
+
+# Allocation
+
+> How did you use the funds?
+
+OpenSats exists because we want to see contributors to Bitcoin and free and open-source tools supported by a sustainable ecosystem and consistent funding. Our LTS program (long-term support) aims to do just that: support the best people for a multi-year period. Consequently, a lot of our funds are dedicated to our LTS grantees. In 2025, we allocated a total of $3,993,949 to long-term support, up 77% from last year. That said, we allocated almost twice as much to regular, project-based grants with a total of $7,094,729 (up 3% from last year). In total, we have now given over 350 grants since launching our grant program in 2023.
+
+[2025-lts.png]
+
+As mentioned before, we are currently sending approximately $1 million worth of bitcoin to our grantees each month. Thanks to the power of magic internet money we can do this with minimal overhead and near-instant settlement—regardless of where our grantees are located. As of this writing, our grantees span over 40 countries:
+
+[GranteeMap]
+
+
+
+# Donations
+
+> Is there anything we could help with?
+
+# Outlook
+
+> What are your plans for next quarter?
+
+Where to go from here? Allow me to quote our mission statement: OpenSats is a 501(c)(3) public charity that aims to support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish. Emphasis mine.
+
+Sustainability has multiple dimensions. We want to keep doing what we've been doing in the leanest way possible, without burning out. We want to continue to offer long-term support for load-bearing internet people, providing at least some stability in an otherwise uncertain world. We want to stay true to our principles, which means not taking a cut from donations to our funds, raising funding for our operational budget separately. 
+
+
