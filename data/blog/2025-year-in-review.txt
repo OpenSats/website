@@ -39,19 +39,29 @@ In October we announced the 14th wave of grants from our General Fund, followed 
 
 > How did you use the funds?
 
-OpenSats exists because we want to see contributors to Bitcoin and free and open-source tools supported by a sustainable ecosystem and consistent funding. Our LTS program (long-term support) aims to do just that: support the best people for a multi-year period. Consequently, a lot of our funds are dedicated to our LTS grantees. In 2025, we allocated a total of $3,993,949 to long-term support, up 77% from last year. That said, we allocated almost twice as much to regular, project-based grants with a total of $7,094,729 (up 3% from last year). In total, we have now given over 350 grants since launching our grant program in 2023.
+OpenSats exists because we want to see contributors to Bitcoin and free and open-source tools supported by a sustainable ecosystem and consistent funding. Our LTS program (long-term support) aims to do just that: support the best people for a multi-year period. Consequently, a lot of our funds are dedicated to our LTS grantees. In 2025, we allocated a total of $2,328,000 from our General Fund to long-term support. We allocated twice as much to non-LTS grants, with a total of $5,639,789 allocated towards various project, as per our announcements. In total, we have now given over 350 grants since launching our grant program in 2023.
 
 [2025-lts.png]
+
+In terms of allocation percentage, the ratio of LTS grants to regular grants is the same as the previous year, with a clean 30/70 split. In terms of focus areas the list is similar too, with an increased emphasis on developer libraries and ecash.
+
+[2025-focus-areas.png]
 
 As mentioned before, we are currently sending approximately $1 million worth of bitcoin to our grantees each month. Thanks to the power of magic internet money we can do this with minimal overhead and near-instant settlement—regardless of where our grantees are located. As of this writing, our grantees span over 40 countries:
 
 [GranteeMap]
 
-
+TODO: Write text
 
 # Donations
 
 > Is there anything we could help with?
+
+TODO: Write text
+
+[2025-recurring-donations.png]
+
+[RecurringDonationButton]
 
 # Outlook
 
@@ -61,4 +71,4 @@ Where to go from here? Allow me to quote our mission statement: OpenSats is a 50
 
 Sustainability has multiple dimensions. We want to keep doing what we've been doing in the leanest way possible, without burning out. We want to continue to offer long-term support for load-bearing internet people, providing at least some stability in an otherwise uncertain world. We want to stay true to our principles, which means not taking a cut from donations to our funds, raising funding for our operational budget separately. 
 
-
+TODO: Write ending
