@@ -51,9 +51,7 @@ As mentioned before, we are currently sending approximately $1 million worth of 
 [GranteeMap]
 [StatsSentence]
 
-On the nostr side our allocation is very similar to last year: around ~35% of The Nostr Fund is allocated towards our LTS grantees: Pablo, Stuart, hzrd, Will, Yuki, Hodlbod, fiatjaf, Kieran, Vitor, Daniele, Alex, and Greenart.
-
-TODO: Insert same sentence as in 2024 report, linking to the individual nostr projects that we announced (for both new grantees and renewal).
+On the nostr side our allocation is very similar to last year: around ~35% of The Nostr Fund is allocated towards our LTS grantees: Pablo, Stuart, hzrd, Will, Yuki, Hodlbod, fiatjaf, Kieran, Vitor, Daniele, Alex, and Greenart. You can read more about the projects we funded from The Nostr Fund in our grant announcements from March, April, July, November, and December.
 
 # Donations
 
