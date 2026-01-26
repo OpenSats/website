@@ -127,6 +127,9 @@ export default function ApplicationForm() {
                   You MUST provide at least <strong>two references</strong> that
                   we can reach out to
                 </li>
+                 <li>
+                  In addition to the above, <strong>developer-focused education</strong> initiatives are what we want to support most.
+                </li>
               </ul>
               <p className="mb-2 mt-4 font-bold">Reporting Requirements</p>
               <ul className="list-disc pl-6 text-sm">
