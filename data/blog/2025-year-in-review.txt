@@ -57,18 +57,38 @@ TODO: Write text
 
 > Is there anything we could help with?
 
-TODO: Write text
+We've been fortunate to receive large donations in the past, and 2025 was no exception. The largest donation we received was a $2,000,000 gift from the Reynolds Foundation as announced in May, followed by a $400,000 donation from StarkWare and the Starknet Foundation as announced in November. Further, we are grateful to have received a multi-year commitment from Steak 'n Shake and a $250,000 donation from Tether, as announced in October. 
+
+Since we don't take a cut from donations designated for open-source development, we are incredibly grateful to have received additional operational budget from the Human Rights Foundation, as announced in February 2025 (and again in January 2026). Our operational budget is what allows us to keep the lights on, covering operations and contractor expenses, legal and compliance fees, software and services, as well as exchange and transaction fees. The financial statements on our transparency page go into more detail in regards to our operational expenses.
+
+In total we have received 674 donations totaling $ 3,158,680. The majority of these donations were made via the Lightning network, which is a trend that we observed last year already, especially when it comes to smaller donation. Some of our supporters use OpenSats as a target for zaps and streaming payments, which is something we love to see. Refer to our FAQ if you're curious on how to set this up.
+
+As mentioned in our mission statement, OpenSats is a 501(c)(3) public charity that aims to support and maintain a *sustainable* ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish. Emphasis mine. In other words: we want to continue to offer long-term support for load-bearing internet people, providing at least some stability in an otherwise uncertain world. Providing said stability depends on substantial and continual funding. We can only continue to give grants if there's enough sats in our vaults, and we can only give multi-year grants to exceptional people and projects if we receive recurring donations. 
+
+The dream is to have OpenSats supported by the public, i.e. by millions of users who benefit from the advancements that are made in the open-source ecosystem that is the freedom tech movement. We are a long stretch away from that goal, but we're confident that we'll be able to make substantial progress towards it in the next couple of years.
 
 [2025-recurring-donations.png]
 
 [RecurringDonationButton]
 
+Bitcoin is a multi-decade endeavor. As mentioned in the beginning, Bitcoin is barely 17 years old. We are still at the very beginning of this transition. A transition into a world that empowers the individual, allowing it to have more sovereignty—financial or otherwise. The cypherpunks understood that free- and open-source code is a powerful gateway to freedom, and we want to support those who create and maintain said code. That is the mission of OpenSats: support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors. Especially those that help bitcoin flourish.
+
+We can only do it with your help, and we are grateful for every sat that comes our way.
+
+
+
 # Outlook
 
 > What are your plans for next quarter?
 
-Where to go from here? Allow me to quote our mission statement: OpenSats is a 501(c)(3) public charity that aims to support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish. Emphasis mine.
+That one is easy. We want to keep doing what we're doing, which is to send billions of sats to hundreds of projects, month after month, year after year. We want to continue to support the best and brightest. Those who are aligned with our mission, who care about financial freedom and the future of the internet as much as we do.
 
-Sustainability has multiple dimensions. We want to keep doing what we've been doing in the leanest way possible, without burning out. We want to continue to offer long-term support for load-bearing internet people, providing at least some stability in an otherwise uncertain world. We want to stay true to our principles, which means not taking a cut from donations to our funds, raising funding for our operational budget separately. 
+We will continue to publish impact reports, highlighting what our grantees have been working on and how OpenSats funding is contributing to the progress that we see across the freedom tech landscape. In addition to said impact reports we want to work towards publishing a quarterly newsletter, highlighting some of the projects we fund as well as the progress that is being made. If you're interested in helping with this endeavor, please reach out to `jobs@opensats.org`. 
 
-TODO: Write ending
+Last but not least, we want to get better at outreach and outward communication. There is a large pool of developers that do not know about OpenSats and the wider freedom tech movement. Further, there are many adjacent communities that are working to solve similar problems but dismiss bitcoin (or nostr) for various reasons. Some of these barriers are ideological, others are rooted in culture and language. While we won't be able to convince everyone that bitcoin is worth their time, we are convinced that outreach, communication, and the inevitable cross-pollination of ideas that follows it, are worthwhile efforts. 
+
+Our focus is unchanged. We believe that free and open-source software is essential to the future of the internet and the world. We want to fund software that allows people to collaborate and share knowledge, without being locked into proprietary solutions. We are committed to supporting the development of free and open-source software, and we believe that bitcoin has the potential to change the world. If you care about freedom tech and how it can help to not only fix the money—but fix the world—consider supporting us in pursuing our mission.
+
+We are incredibly grateful for all the support we received in 2025, and we hope that we can transfer this momentum into the following year. The progress our grantees have made is astounding, and we are convinced that the compounding effects of all the libraries, tools, SDKs, and general software that has been shipped will pave the way for a future that has more freedom, fairness, liberty, sovereignty, and stability.
+
+Onward!
