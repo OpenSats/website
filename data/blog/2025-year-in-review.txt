@@ -51,7 +51,11 @@ As mentioned before, we are currently sending approximately $1 million worth of 
 [GranteeMap]
 [StatsSentence]
 
-On the nostr side our allocation is very similar to last year: around ~35% of The Nostr Fund is allocated towards our LTS grantees: Pablo, Stuart, hzrd, Will, Yuki, Hodlbod, fiatjaf, Kieran, Vitor, Daniele, Alex, and Greenart. You can read more about the projects we funded from The Nostr Fund in our grant announcements from March, April, July, November, and December.
+On the nostr side our allocation is very similar to last year: around ~35% of The Nostr Fund is allocated towards our LTS grantees: Pablo, Stuart, hzrd, Will, Yuki, Hodlbod, fiatjaf, Kieran, Vitor, Daniele, Alex, and Greenart. In addition to these LTS grants we gave grants to the following nostr projects this year: Chachi, Zapstore, HyperNote, Nostr Epoxy, Swae, HAMSTR, Vertex, Nostr Double Ratchet, Nostr Game Engine, Frostr, Aegis, Gitplaza, Jumble, Atomic Signature Swaps, ZapTracker, Keydex, Bigbrotr, Grasp, YakiHonne, Quartz, and Nostr Feedz.
+
+On the bitcoin side we gave grants to L0rinc, kevkevinpal, Daniela Brozzoni, Kibo, El Tor, Nutstash, rust-bitcoin, Bitcoin Safe, Stable Channels, Waye, BitShoka, Great Script Restoration, 256 Foundation, Sovran, NLightning, Swift Bitcoin, Bitcoin Research Kit, Hashpool and Axepool, KMP-Tor, DTails, Sats App, ngx_L402, Silent Payments Shepherd, Orchard, Floresta, Alt Signetfaucet, Lightning Detective, Braidpool, BlindBit Suite, Dana Wallet, FreeBSD, LaWallet, and LNHANCE.
+
+We also gave grants to 2140, OpenCash, Bitshala, Summer of Bitcoin, Bitcoin Dev Launchpad, and Foundation Formation Kit as part of our "Let a Thousand Flowers Bloom" initiative. Education grants went to Librería de Satoshi, Crack the Orange, and FREE Madeira.
 
 # Donations
 
