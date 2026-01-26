@@ -6,7 +6,7 @@ So: where are we in terms of Bitcoin's development? There's the obvious part and
 
 Now to the not-so-obvious part: Bitcoin is still alive. It has operated since seventeen years, mostly quietly, mostly in the background. A new block has been mined every 10 minutes. Over 900,000 blocks since genesis, moving trillions of sats in the process. The cumulative hash rate of the network is at an all-time high: a number so unfathomably large that it's almost impossible to put into comparison. Lightning liquidity is at an all-time high too, as is the number of merchants accepting bitcoin as a form of payment. It's now easier than ever to live on a bitcoin standard, thanks to countless open-source projects and the services that build upon them. Bitcoin gets more efficient, resilient, and useful by the day. From basic research to fuzz testing to Stratum V2 to Silent Payments to Splicing to open-source tools for merchants and users, OpenSats is funding a myriad of efforts across the stack to support Bitcoin through its teenage years.
 
-Over the last 18 months we've sent roughly $1,000,000 USD worth of sats to grantees in 40+ countries, every month. During the course of 2015 we supported more than 150 active grantees at any point in time: small teams, large teams, educational efforts, and—most importantly—individual developers.
+Over the last 18 months we've sent roughly $1,000,000 USD worth of sats to grantees in 40+ countries, every month. During the course of 2025 we supported more than 150 active grantees at any point in time: small teams, large teams, educational efforts, and—most importantly—individual developers.
 
 [2025-monthly-grant-payouts.svg]
 
