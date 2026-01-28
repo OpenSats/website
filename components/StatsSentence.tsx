@@ -30,7 +30,7 @@ export default function StatsSentence({ className = '' }: StatsSentenceProps) {
 
   return (
     <p className={className}>
-      OpenSats has allocated{' '}
+      In total, OpenSats has allocated{' '}
       <Link
         href="/transparency"
         className="-mx-1 rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
