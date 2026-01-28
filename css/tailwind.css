@@ -70,10 +70,10 @@ button.secondary {
   margin-bottom: 0;
 }
 
-.nostr-links a {
-  @apply text-purple-500;
+.prose .nostr-links a {
+  color: rgb(168 85 247) !important;
 }
 
-.nostr-links a:hover {
-  @apply text-purple-600;
+.prose .nostr-links a:hover {
+  color: rgb(147 51 234) !important;
 }
