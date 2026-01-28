@@ -18,6 +18,8 @@ import Credits from './Supporters'
 import YouTubeEmbed from './YouTubeEmbed'
 import Members from './Members'
 import LifetimeStats from './LifetimeStats'
+import GranteeMap from './GranteeMap'
+import StatsSentence from './StatsSentence'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -42,4 +44,6 @@ export const MDXComponents: ComponentMap = {
   Credits,
   Members,
   LifetimeStats,
+  GranteeMap,
+  StatsSentence,
 }

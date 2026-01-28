@@ -69,3 +69,11 @@ button.secondary {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.prose .nostr-links a {
+  color: rgb(168 85 247) !important;
+}
+
+.prose .nostr-links a:hover {
+  color: rgb(147 51 234) !important;
+}
