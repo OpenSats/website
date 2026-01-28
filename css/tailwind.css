@@ -69,3 +69,11 @@ button.secondary {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.nostr-links a {
+  @apply text-purple-500;
+}
+
+.nostr-links a:hover {
+  @apply text-purple-600;
+}
