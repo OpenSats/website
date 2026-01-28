@@ -16,7 +16,8 @@ export default function DonateRecurringButton({
         href={MONTHLY_DONATION_URL}
         className="my-15 rounded border border-orange-500 bg-transparent px-8 py-4 text-lg font-semibold no-underline hover:bg-orange-100"
       >
-        {label}{showHeart && ' 🧡'}
+        {label}
+        {showHeart && ' 🧡'}
       </CustomLink>
     </div>
   )
