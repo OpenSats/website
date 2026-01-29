@@ -322,7 +322,7 @@ export default function Home({
       </div>
       {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
         <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
+          <NewsletterForm title="Subscribe to our quarterly newsletter" />
         </div>
       )}
       <PaymentModal
