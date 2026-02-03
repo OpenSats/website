@@ -8,7 +8,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
-import { NewsletterForm } from 'pliny/ui/NewsletterForm'
+import NewsletterSignup from '@/components/NewsletterSignup'
 import { allBlogs, allProjects, allFunds } from 'contentlayer/generated'
 import type { Blog, Fund } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
@@ -320,9 +320,9 @@ export default function Home({
           </div>
         </div>
       </div>
-      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm title="Subscribe to our quarterly newsletter" />
+      {siteMetadata.newsletter?.provider && (
+        <div className="pt-8">
+          <NewsletterSignup />
         </div>
       )}
       <PaymentModal
