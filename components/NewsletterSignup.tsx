@@ -82,14 +82,15 @@ export default function NewsletterSignup({
       {error && (
         <p className="mt-3 text-sm text-red-500 dark:text-red-400">{message}</p>
       )}
-      {subscribed && !error && (
-        <p className="mt-3 text-sm text-green-600 dark:text-green-400">
-          {message}
-        </p>
-      )}
 
-      <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-        No spam. Unsubscribe anytime.
+      <p
+        className={`mt-4 text-sm ${
+          subscribed && !error
+            ? 'text-green-600 dark:text-green-400'
+            : 'text-gray-500 dark:text-gray-400'
+        }`}
+      >
+        {subscribed && !error ? message : 'No spam. Unsubscribe anytime.'}
       </p>
     </div>
   )
