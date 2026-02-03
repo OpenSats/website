@@ -8,7 +8,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
-import { NewsletterForm } from 'pliny/ui/NewsletterForm'
+import NewsletterSignup from '@/components/NewsletterSignup'
 import { allBlogs, allProjects, allFunds } from 'contentlayer/generated'
 import type { Blog, Fund } from 'contentlayer/generated'
 import { useRouter } from 'next/router'
@@ -183,32 +183,6 @@ export default function Home({
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-12">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
-            Apply for Funding
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Are you an open-source contributor? Do you align with{' '}
-            <CustomLink href="/mission" className="underline">
-              our mission
-            </CustomLink>
-            ? Are you working on Bitcoin, nostr, or freedom tech in general?{' '}
-            <CustomLink href="/apply" className="underline">
-              Apply for funding!
-            </CustomLink>
-          </p>
-          <div className="flex justify-end text-base font-medium leading-6">
-            <Link
-              href="/apply#criteria"
-              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              aria-label="Application Criteria"
-            >
-              Application Criteria &rarr;
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-2 pt-8 md:space-y-5 xl:pt-12">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Stay Updated
@@ -279,7 +253,12 @@ export default function Home({
           })}
         </ul>
       </div>
-      <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+      {siteMetadata.newsletter?.provider && (
+        <div className="pt-4">
+          <NewsletterSignup />
+        </div>
+      )}
+      <p className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400">
         You can also find us on{' '}
         <CustomLink
           href="https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
@@ -301,6 +280,32 @@ export default function Home({
         </div>
       )}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
+        <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-12">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
+            Apply for Funding
+          </h1>
+          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+            Are you an open-source contributor? Do you align with{' '}
+            <CustomLink href="/mission" className="underline">
+              our mission
+            </CustomLink>
+            ? Are you working on Bitcoin, nostr, or freedom tech in general?{' '}
+            <CustomLink href="/apply" className="underline">
+              Apply for funding!
+            </CustomLink>
+          </p>
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/apply#criteria"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="Application Criteria"
+            >
+              Application Criteria &rarr;
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="xl:pt-18 space-y-2 pt-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Explore Projects
@@ -320,11 +325,6 @@ export default function Home({
           </div>
         </div>
       </div>
-      {siteMetadata.newsletter && siteMetadata.newsletter.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm title="Subscribe to our quarterly newsletter" />
-        </div>
-      )}
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
