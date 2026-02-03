@@ -216,6 +216,11 @@ export default function Home({
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Read the latest news from OpenSats:
           </p>
+          {siteMetadata.newsletter?.provider && (
+            <div className="pt-4">
+              <NewsletterSignup />
+            </div>
+          )}
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
@@ -320,11 +325,6 @@ export default function Home({
           </div>
         </div>
       </div>
-      {siteMetadata.newsletter?.provider && (
-        <div className="pt-8">
-          <NewsletterSignup />
-        </div>
-      )}
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
