@@ -216,11 +216,6 @@ export default function Home({
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Read the latest news from OpenSats:
           </p>
-          {siteMetadata.newsletter?.provider && (
-            <div className="pt-4">
-              <NewsletterSignup />
-            </div>
-          )}
         </div>
         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
           {!posts.length && 'No posts found.'}
@@ -294,6 +289,11 @@ export default function Home({
         </CustomLink>
         .
       </p>
+      {siteMetadata.newsletter?.provider && (
+        <div className="pt-4">
+          <NewsletterSignup />
+        </div>
+      )}
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end pb-8 text-base font-medium leading-6">
           <Link
