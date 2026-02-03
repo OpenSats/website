@@ -32,7 +32,9 @@ export default function NewsletterSignup({
     const { error } = await res.json()
     if (error) {
       setError(true)
-      setMessage('Your e-mail address is invalid or you are already subscribed!')
+      setMessage(
+        'Your e-mail address is invalid or you are already subscribed!'
+      )
       return
     }
 
