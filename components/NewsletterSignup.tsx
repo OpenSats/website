@@ -8,7 +8,7 @@ interface NewsletterSignupProps {
 
 export default function NewsletterSignup({
   title = 'Subscribe to our Newsletter',
-  subtitle = 'Quarterly updates on our work.',
+  subtitle = 'Grantee highlights and the impact your support enables.',
   apiUrl = '/api/newsletter',
 }: NewsletterSignupProps) {
   const inputEl = useRef<HTMLInputElement>(null)
