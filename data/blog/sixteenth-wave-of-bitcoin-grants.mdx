@@ -67,13 +67,14 @@ and to connect them to Rust and C implementations.
 
 This grant will support formal verification on these RustCrypto crates and on
 multi-scalar multiplication for the `secp256k1` curve. The project will use the
-HAX toolchain with F* to prove panic freedom and functional correctness and to
-rule out overflows, failed bounds checks and non-terminating loops. It will also
-develop precise specifications and proofs for multi-scalar multiplication and
-will compare proof assistants for verifying performance-critical C
-implementations. The resulting code, proofs, and technical reports will be
-released under a free software license and will serve as a blueprint for future
-formal verification of Bitcoin cryptographic libraries.
+[HAX toolchain] with [F*] to verify that the code does what it is supposed to do
+and runs safely, ruling out panics, integer overflows, out-of-bounds errors, and
+infinite loops. It will also develop precise specifications and proofs for
+multi-scalar multiplication and will compare proof assistants for verifying
+performance-critical C implementations. The resulting code, proofs, and
+technical reports will be released under a free software license and will serve
+as a blueprint for future formal verification of Bitcoin cryptographic
+libraries.
 
 Repositories: [/remix7531]  
 License: MIT
@@ -81,6 +82,8 @@ License: MIT
 [remix7531]: https://github.com/remix7531
 [RustCrypto's]: https://github.com/RustCrypto/#about
 [/remix7531]: https://github.com/remix7531?tab=repositories
+[HAX toolchain]: https://cryspen.com/hax-toolchain/
+[F*]: https://fstar-lang.org/
 
 ### BitcoinerLAB and RewindBitcoin
 
