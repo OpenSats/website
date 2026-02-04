@@ -1,0 +1,394 @@
+---
+title: "Sixteenth Wave of Bitcoin Grants"
+date: '2026-02-04'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+authors: ['default', 'arvin']
+images: ['/static/images/blog/99-sixteenth-wave-of-bitcoin-grants.jpg']
+draft: false
+summary: "OpenSats is funding 17 more open-source projects advancing the Bitcoin ecosystem."
+---
+
+OpenSats is pleased to announce the 16th wave of grants from our General
+Fund, supporting seventeen open-source projects across the Bitcoin ecosystem.
+This round includes ten first-time project grants and seven grant renewals.
+
+The projects in this wave strengthen Bitcoin's ecosystem at several layers. They
+improve script tooling and developer libraries, apply formal methods to critical
+cryptographic code, and advance ecash infrastructure that mint operators can run
+themselves. Additional grants support self-custodial wallets, DIY signing
+hardware and installer software, alternative node and mining software, and
+education programs that help new developers become contributors.
+
+The first-time project grants highlighted in this wave are:
+
+- [Advancing Formal Verification for Bitcoin Cryptography](#advancing-formal-verification-for-bitcoin-cryptography)
+- [BitcoinerLAB and RewindBitcoin](#bitcoinerlab-and-rewindbitcoin)
+- [BTCaaron and Mastering Taproot](#btcaaron-and-mastering-taproot)
+- [Cashu Dev Kit (CDK)](#cashu-dev-kit-cdk)
+- [Cashu TS and Coco](#cashu-ts-and-coco)
+- [Krux-Installer](#krux-installer)
+- [Libbitcoin](#libbitcoin)
+- [Noah](#noah)
+- [Rust-Bitcoin](#rust-bitcoin)
+- [Stratum V2](#stratum-v2)
+
+Grant renewals have been awarded to:
+
+- Stable Channels ([Mar. 2025](/blog/tenth-wave-of-bitcoin-grants#stable-channels))
+- Rust-Bitcoin ([Jan. 2025](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin))
+- Nutshell ([Oct. 2024](/blog/8th-wave-of-bitcoin-grants#cashu-nutshell))
+- Minibits Wallet ([Sep. 2024](/blog/bitcoin-grants-september-2024-7th-wave#minibits))
+- Summer of Bitcoin ([Jul. 2024](/blog/announcing-the-opensats-education-initiative#summer-of-bitcoin))
+- Macadamia ([Jul. 2024](/blog/bitcoin-grants-july-2024#macadamia))
+- Cove ([Jul. 2024](/blog/bitcoin-grants-july-2024#cove))
+
+These grants are made possible by donations to our General Fund. To help sustain
+free and open-source Bitcoin development, please consider setting up a recurring
+donation.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+Let's take a closer look at the projects in this wave and how they will make an
+impact on the Bitcoin ecosystem.
+
+---
+
+### Advancing Formal Verification for Bitcoin Cryptography
+
+Advancing Formal Verification for Bitcoin Cryptography is a research effort by
+developer [remix7531] on the cryptographic building blocks that secure Bitcoin
+software. The project focuses on [RustCrypto's] `sha2` and `k256` crates and on
+multi-scalar multiplication for the `secp256k1` curve, a key operation for batch
+signature verification in Bitcoin. Remix7531 applies proof assistants and formal
+methods to construct machine-checked proofs for critical cryptographic routines
+and to connect them to Rust and C implementations.
+
+This grant will support formal verification on these RustCrypto crates and on
+multi-scalar multiplication for the `secp256k1` curve. The project will use the
+[HAX toolchain] with [F*] to verify that the code does what it is supposed to do
+and runs safely, ruling out panics, integer overflows, out-of-bounds errors, and
+infinite loops. It will also develop precise specifications and proofs for
+multi-scalar multiplication and will compare proof assistants for verifying
+performance-critical C implementations. The resulting code, proofs, and
+technical reports will be released under a free software license and will serve
+as a blueprint for future formal verification of Bitcoin cryptographic
+libraries.
+
+Repositories: [/remix7531]  
+License: MIT
+
+[remix7531]: https://github.com/remix7531
+[RustCrypto's]: https://github.com/RustCrypto/#about
+[/remix7531]: https://github.com/remix7531?tab=repositories
+[HAX toolchain]: https://cryspen.com/hax-toolchain/
+[F*]: https://fstar-lang.org/
+
+### BitcoinerLAB and RewindBitcoin
+
+[BitcoinerLAB] is a TypeScript toolkit by developer [Landabaso] for building
+Bitcoin applications with descriptors and Miniscript. It provides modules for
+address and transaction construction, signers and blockchain backends, and it
+integrates with bitcoinjs-lib for use in existing JavaScript codebases.
+Thousands of public repositories depend on BitcoinerLAB, including Ledger APIs,
+Bitcoin Keeper, LN Markets, and RewindBitcoin.
+
+[RewindBitcoin] is another project by Landabaso. It is a self-custody mobile
+wallet for iOS and Android that applies vault-style spending controls. It uses
+timelocks, pre-signed transactions, and an emergency spending path to protect
+funds in situations of theft or coercion.
+
+This grant will support BitcoinerLAB and RewindBitcoin. For BitcoinerLAB, work
+will include Taproot Miniscript support in TypeScript, broader hardware wallet
+integration through a general signer API, and a cleared backlog of features such
+as MuSig-style multisig, CPFP, and RBF in the coin selector, plus new
+documentation and use-case guides. Planned work on RewindBitcoin will explore
+Pay-to-Anchor and TRUC-based rescue flows, add hardware wallet support on top of
+that design, and improve coin control, labeling, fee management, and overall UX.
+These projects aim to create stronger Miniscript foundations for TypeScript
+developers and a practical vault wallet for people facing real risks of theft or
+coercion of their Bitcoin.
+
+Repositories: [/bitcoinerlab]; [/rewindbitcoin]  
+Licenses: MIT; GPL-3.0
+
+[BitcoinerLAB]: https://bitcoinerlab.com/
+[Landabaso]: https://github.com/landabaso
+[RewindBitcoin]: https://rewindbitcoin.com/
+[/bitcoinerlab]: https://github.com/bitcoinerlab
+[/rewindbitcoin]: https://github.com/rewindbitcoin
+
+### BTCaaron and Mastering Taproot
+
+The btcaaron project is a lightweight Python toolkit by developer
+[aaron-recompile] for Bitcoin Layer 1 development with a focus on Taproot. It
+runs on testnet and supports Legacy, SegWit, and Taproot address types, UTXO
+scanning, transaction construction, signing, and broadcasting for testnet flows.
+It also exposes a Taproot-native API for building script trees, key-path and
+script-path spends, and automatic witness construction for common spend paths.
+
+Mastering Taproot is Aaron Zhang's open-access [developer guide to Taproot],
+with full Python code samples, testnet transactions, and step-by-step stack
+execution, published in English and Chinese as a reproducible online book. The
+text uses clear examples, control block diagrams, and verifiable transaction IDs
+so readers can inspect and replay every construction.
+
+This grant will support btcaaron and Mastering Taproot. Planned work for
+btcaaron includes a refactored core structure, new helpers for Taproot
+script-path spending, PSBT v2 support, multi-leaf Taproot construction utilities
+and visualization and simulation features for Taproot scripts, along with a 1.0
+release for testnet and regtest workflows. Planned work for Mastering Taproot
+includes finalizing the English manuscript, expanding runnable examples,
+releasing Chinese translations of key chapters, and publishing tutorial videos,
+walkthroughs, and workshop materials for Bitcoin scripting education. The goal
+is a cohesive toolkit and curriculum that lowers the barrier for new Bitcoin
+developers, especially in Chinese-speaking communities, and accelerates
+practical Taproot experimentation.
+
+Repositories: [aaron-recompile/btcaaron]; [aaron-recompile/mastering-taproot]  
+Licenses: MIT; CC BY-SA 4.0
+
+[aaron-recompile]: https://github.com/aaron-recompile
+[developer guide to Taproot]: https://github.com/aaron-recompile/mastering-taproot/tree/main/book/manuscript
+[aaron-recompile/btcaaron]: https://github.com/aaron-recompile/btcaaron
+[aaron-recompile/mastering-taproot]: https://github.com/aaron-recompile/mastering-taproot
+
+### Cashu Dev Kit (CDK)
+
+Although we have [supported the CDK project] in the past, this additional grant
+supports developer [Asmo] for his work on CDK operability across cloud
+environments. [Cashu Dev Kit] is the core Rust toolkit for operating Cashu mints
+and services. It supports Postgres for storage, Prometheus for metrics, and
+provides Docker images for common environments, including ARM64. Asmo triages
+bugs, reviews pull requests, and adds features for operators and integrators.
+His work includes the Prometheus exporter and Grafana dashboard, improvements to
+Postgres and FFI support, and the Blink payment processor backend.
+
+With this grant, Asmo will turn CDK into a cloud-native infrastructure for Cashu
+mints. The roadmap expands Prometheus metrics to cover database and payment
+activity and feeds them into Orchard dashboards for mint operators. He plans to
+build a Cashu [Kubernetes Controller] that manages CDK mints and Orchard on
+Kubernetes clusters and handles rolling upgrades, configuration secrets, health
+probes, backups, and restores. Logging will move to structured JSON formats, and
+configuration will be simplified and documented so deployments stay predictable
+at different scales. Build pipelines will migrate to self-hosted GitHub runners,
+and CDK will publish several image profiles for minimal, base, standalone, and
+cloud deployments. In parallel, Asmo will prototype secure deployments on Amazon
+Nitro Enclaves and extend gRPC-based payment backends such as
+`cdk-blink-payment-processor` to support BOLT12, on-chain payments, and
+additional providers including Stripe, Strike, and LNbits.
+
+Repository: [cashubtc/cdk]  
+License: MIT
+
+[supported the CDK project]: https://opensats.org/blog/advancements-in-ecash#cashu-dev-kit
+[Asmo]: https://github.com/asmogo
+[Cashu Dev Kit]: https://cashudevkit.org/
+[Kubernetes Controller]: https://kubernetes.io/docs/concepts/architecture/controller/
+[cashubtc/cdk]: https://github.com/cashubtc/cdk
+
+### Cashu TS and Coco
+
+[Cashu TS] is a TypeScript library for building Cashu wallets and applications.
+Maintained by returning grantee [Egge], lead developer of [npub.cash], `cashu-ts`
+wraps the Cashu protocol and NUTs into a reusable wallet toolkit so developers
+can connect to mints, mint and melt ecash, and manage tokens without
+reimplementing low-level logic. The library is widely used in the Cashu
+ecosystem and powers web, mobile, and backend integrations in projects ranging
+from wallets to merchant tools.
+
+Coco builds on `cashu-ts` and adds networking, storage, key management, and a
+unified API so developers can embed a full Cashu wallet in browsers, Node.js,
+and React Native with minimal connective code.
+
+With this grant, Egge will keep `cashu-ts` aligned with new Cashu NUTs and
+protocol changes and complete its ongoing API migration while maintaining
+stability for existing dependents. He plans to refine documentation and examples
+so application teams can adopt new features without friction. He will also push
+Coco toward its first stable release and add missing protocol features such as
+automatic key handling for locked and BOLT12 mint quotes, tools for managing
+balances across multiple mints, multi-nut payments that combine funds from
+several mints for one invoice, and payment request flows with nostr integration.
+The goal is a pair of libraries that keep TypeScript Cashu support robust and
+give developers a toolkit for integrating ecash into new applications.
+
+Repositories: [cashubtc/cashu-ts]; [cashubtc/coco]  
+License: MIT
+
+[Cashu TS]: https://github.com/cashubtc/cashu-ts?tab=readme-ov-file#cashu-ts
+[Egge]: https://github.com/Egge21M
+[npub.cash]: /blog/advancements-in-ecash#npubcash
+[cashubtc/cashu-ts]: https://github.com/cashubtc/cashu-ts
+[cashubtc/coco]: https://github.com/cashubtc/coco
+
+### Krux-Installer
+
+We have [supported the krux-installer project in the past], and this additional
+support goes to developer [joazinhom] for his work on the installer and its
+platform reach. Krux is open-source firmware that turns inexpensive [Kendryte
+K210 devices] into air-gapped Bitcoin signing devices, and Krux-installer is the
+desktop application that flashes and upgrades this firmware on supported
+hardware. The installer replaces complicated command-line tools with a guided
+GUI so non-technical users can install and update Krux from official releases on
+their own devices.
+
+With this grant, joazinhom will work on modernizing Krux-installer and expanding
+its platform support by refactoring the codebase, migrating dependency
+management from Poetry to UV, and adding a device registry system that reduces
+duplication when onboarding new devices. He will move the build system to the
+[BeeWare]/Briefcase framework to produce native installers for Android and
+Flatpak-based desktops and to create a sustainable pattern for future platforms.
+In the final phase, he will focus on testing and stabilizing these builds,
+fixing touch and installation issues, and improving overall reliability for
+users flashing and upgrading Krux devices.
+
+Repository: [selfcustody/krux-installer]  
+License: MIT
+
+[supported the krux-installer project in the past]: /blog/bitcoin-grants-july-2024#krux-installer
+[joazinhom]: https://github.com/joaozinhom
+[Kendryte K210 devices]: https://selfcustody.github.io/krux/
+[BeeWare]: https://beeware.org/
+[selfcustody/krux-installer]: https://github.com/selfcustody/krux-installer
+
+### Libbitcoin
+
+[Libbitcoin] is a C++ Bitcoin development toolkit and an alternative full node
+implementation. It provides a modular node, server, and explorer stack together
+with cross-platform libraries for building Bitcoin applications. The project
+began in 2011 and produced the first independently implemented Bitcoin full node
+separate from Bitcoin Core, and it remains under active maintenance with work
+toward a version 4 release that emphasizes faster initial block download and
+better scaling with modern hardware.
+
+This grant will support work on libbitcoin v4 by developer [pmienk]. Planned
+work targets an early preview of the v4 node, followed by a full release of the
+node, explorer, and server components. The focus includes further optimization
+of initial block download, performance scaling across available CPU, disk, and
+network resources, integration and testing of the consolidated stack, and
+improvements to documentation for operators and developers. The goal is a
+well-engineered Bitcoin node, server, and explorer that provides an independent
+implementation of the protocol and a practical toolkit for downstream
+applications.
+
+Repositories: [/libbitcoin]  
+License: AGPL-3.0
+
+[Libbitcoin]: https://libbitcoin.info/
+[pmienk]: https://github.com/pmienk
+[/libbitcoin]: https://github.com/libbitcoin
+
+### Noah
+
+Noah is a self-custodial mobile wallet for [Ark], a Layer 2 protocol, developed
+by returning grantee [Hampus Sjöberg], creator of [Blixt Wallet]. Noah runs on
+Android and iOS and uses Ark's virtual transaction outputs (VTXOs), so users see
+a single balance that can send and receive over Lightning and on-chain. The
+wallet connects to [Second's Ark client Bark] and removes channel setup,
+liquidity management, and backup complexity while keeping users in control of
+their keys. A working alpha already supports sending and receiving payments and
+builds on years of experience operating Blixt as a non-custodial Lightning
+wallet.
+
+With this grant, Hampus will work on reliable Ark round syncing using silent
+push notifications, Lightning Address and future [BIP-353] support, expanded
+LNURL features, and a seed-based encrypted backup system. He will also add
+receive flows that let the app accept payments while it is offline. The roadmap
+adds auxiliary Lightning and nostr integrations such as the LNURL protocol
+suite, WebLN, Nostr Wallet Connect, payments via nostr profiles, and Tor support
+for privacy. Alongside Noah, Blixt will shift toward a power-user wallet with
+planned features including BOLT12 support tied to the upcoming `lnd` release,
+offline receive, faster chain sync, desktop builds for Windows and Linux,
+Lightning/on-chain swaps, LSP-spec support, and interface improvements.
+
+Repository: [BlixtWallet/noah]  
+License: MIT
+
+[Ark]: https://ark-protocol.org/
+[Hampus Sjöberg]: https://github.com/hsjoberg
+[Blixt Wallet]: /blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet
+[Second's Ark client Bark]: https://docs.second.tech/getting-started/
+[BIP-353]: https://github.com/bitcoin/bips/blob/master/bip-0353.mediawiki
+[BlixtWallet/noah]: https://github.com/BlixtWallet/noah
+
+### Rust-Bitcoin
+
+Through this grant, we [continue our support] for `rust-bitcoin` projects by
+providing additional funding to developer [mpbagot] for his work on the library,
+which provides Rust types and utilities for serializing, parsing, and executing
+Bitcoin protocol messages, blocks, transactions, scripts, keys, addresses, and
+PSBTs in Rust applications. The library sits at the center of the [rust-bitcoin
+organization] together with crates such as `rust-secp256k1`, `bitcoin_hashes`,
+`rust-miniscript`, and client libraries for Bitcoin Core, and it underpins
+projects like Bitcoin Dev Kit, Lightning Dev Kit, electrs and Fedimint.
+
+This grant will support work on upcoming releases of the main bitcoin crate and
+related primitives, bug fixes, expanded test coverage, documentation
+improvements, and refactoring across the crate set. Bagot will continue his
+existing cleanup patches and will take on larger tasks aimed at stable 1.0
+releases of key crates in the ecosystem. The goal is a well-tested,
+well-documented, and CC0-licensed Rust Bitcoin stack with stable APIs for
+downstream projects.
+
+Repository: [rust-bitcoin/rust-bitcoin]  
+License: CC0 1.0
+
+[continue our support]: /blog/advancements-in-developer-libraries#rust-bitcoin
+[mpbagot]: https://github.com/mpbagot
+[rust-bitcoin organization]: https://github.com/rust-bitcoin
+[rust-bitcoin/rust-bitcoin]: https://github.com/rust-bitcoin/rust-bitcoin
+
+### Stratum V2
+
+Our [support for Stratum V2 continues] with a new grant to developer [Lucas
+Balieiro] for his work on the Stratum V2 Reference Implementation (SRI),
+focusing on stability, testing, and developer tooling. SRI is the Rust reference
+implementation of the Stratum V2 mining protocol and provides core libraries and
+pool and miner applications for encrypted, decentralized pooled mining. It
+powers roles such as pool servers, miners, and job declaration clients and
+serves as the main open-source codebase for adopters of Stratum V2 in production
+mining setups.
+
+With this grant, Balieiro will improve SRI's testing infrastructure and adopter
+experience. Planned work includes expanding the continuous testing tool for
+long-running cross-implementation sessions, raising low-level crate test
+coverage from roughly 25% toward 40%, and updating documentation alongside new
+tests. He will build a unified command-line interface for launching SRI
+applications, add Docker support and binary releases for easier deployment, and
+streamline CI workflows to integrate the new testing tools. The roadmap also
+covers compatibility testing with other Stratum V2 stacks and community work,
+such as mentoring contributors and running educational sessions with the
+Brazilian Bitcoin community.
+
+Repository: [stratum-mining/stratum]  
+License: Apache-2.0/MIT
+
+[support for Stratum V2 continues]: /projects/stratumv2
+[Lucas Balieiro]: https://github.com/lucasbalieiro
+[stratum-mining/stratum]: https://github.com/stratum-mining/stratum
+
+---
+
+The projects in this wave share a focus on practical Bitcoin infrastructure that
+people can run and verify themselves. They move core libraries, wallet tooling,
+ecash systems, and mining software toward greater security and usability for
+both developers and end users. They strengthen self-custody, improve reliability
+for operators, and expand pathways for new contributors.
+
+As with all OpenSats grants, funding decisions follow a [mission-aligned] review
+process grounded in [clear criteria]. Our ability to fund this work depends on
+donations to our [General Fund]. If you would like to help sustain these
+projects and future grants, please consider setting up a recurring donation.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+If you are building free and open-source Bitcoin software, we encourage you to
+[apply for funding].
+
+[mission-aligned]: /mission
+[clear criteria]: /apply#criteria
+[General Fund]: /funds/general
+[apply for funding]: /apply
