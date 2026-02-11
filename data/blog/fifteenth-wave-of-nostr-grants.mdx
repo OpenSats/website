@@ -7,3 +7,177 @@ images: ['/static/images/blog/100-TODO.jpg']
 draft: false
 summary: "OpenSats is funding three more open-source projects advancing the nostr ecosystem."
 ---
+
+We're pleased to announce our latest wave of grants from [The Nostr
+Fund](/funds/nostr), supporting three open-source projects advancing the nostr
+ecosystem.
+
+This wave provides funding for work on agentic AI tooling, decentralized video
+infrastructure, and community-run internet access, all built to utilize nostr
+for identity, discovery, and communication.
+
+The first-time grants highlighted in this wave are:
+
+- [ContextVM](#contextvm)
+- [Nostube](#nostube)
+- [TollGate](#tollgate)
+
+These grants are made possible by our generous donors who, like us, believe in
+an open, censorship-resistant communications layer for the internet.
+
+Our nostr grants are sourced from The Nostr Fund. To help us support the nostr
+ecosystem, please consider making a donation.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+In the sections below, we will describe how each project is contributing to the
+future of nostr.
+
+---
+
+### ContextVM
+
+[ContextVM] is a protocol built on [MCP] that enables servers and clients to
+communicate over nostr. MCP is a standard that lets AI models connect to
+external tools and data sources. Nostr is an open communication network built on
+cryptographic, permissionless foundations. By combining the two, ContextVM
+removes the need for domains, [OAuth], and port forwarding. Each service is
+identified by a public key and operates from any device with only an outbound
+internet connection. Nostr handles identity, authentication, discovery, and
+transport. The project grew out of the earlier [DVMCP] effort and now publishes
+a JavaScript/TypeScript software development kit ([SDK]), a [documentation
+site], and reference tooling for [relays] and [gateways]. The [SovEng 5 cohort]
+demonstrated the protocol's practical utility, with multiple new projects built
+directly on top of it.
+
+This grant will support core protocol development, expand the SDK, and improve
+the reliability of shared infrastructure such as public relays. The team plans
+to build payment handling directly into the protocol, designed so that server
+operators can accept multiple payment methods, including Lightning and Cashu. A
+marketplace model will let servers that offer similar capabilities be discovered
+and used together, similar to the [original DVM proposal]. Additional goals
+include new SDK implementations in Go and Rust, one-click deployment packages
+for platforms like Umbrel and Start9, comprehensive documentation and tutorials,
+and integration with open-source developer tools such as [Roo Code], [goose],
+and [OpenCode] to place nostr-routed MCP services directly inside developer
+workflows.
+
+Repositories: [/contextvm]  
+License: MIT, LGPL-3.0, and GPL-3.0
+
+[ContextVM]: https://contextvm.org/
+[MCP]: https://modelcontextprotocol.io/
+[OAuth]: https://oauth.net/about/introduction/
+[DVMCP]: https://github.com/gzuuus/dvmcp
+[SDK]: https://github.com/ContextVM/sdk
+[documentation site]: https://docs.contextvm.org/
+[relays]: https://github.com/ContextVM/contextvm-relay
+[gateways]: https://github.com/ContextVM/gateway-cli
+[SovEng 5 cohort]: https://www.contextvm.org/blog/H6A1QyrVRu8DkRqZy_pJN
+[original DVM proposal]: https://github.com/nostr-protocol/nips/blob/master/90.md
+[Roo Code]: https://docs.roocode.com/
+[goose]: https://block.github.io/goose/
+[OpenCode]: https://opencode.ai/docs
+[/contextvm]: https://github.com/ContextVM
+
+### Nostube
+
+[Nostube] is a platform developed to bring long-form and short-form video to the
+nostr protocol. The web application supports uploads, playlists, subscriptions,
+comments, and user profiles in both landscape and portrait video formats. It is
+built with [React], [Vite], [TailwindCSS], [shadcn/ui], and the [Applesauce]
+development stack, connecting to nostr relays for identity, feeds, and social
+interactions.
+
+This grant will support the infrastructure needed to make decentralized video on
+nostr practical at scale. The roadmap covers uploads of multi-gigabyte files to
+dedicated [Blossom servers], paid storage with mirroring across multiple
+servers, and thumbnail generation. Video transcoding will be distributed across
+workers who are paid in Cashu to convert videos into streamable formats. Planned
+features include subtitles, HLS playback, playlists, [zaps], and improved
+profile integration. A Web of Trust model will allow users to rehost videos and
+contribute transcoded versions, improving content availability while limiting
+abuse. Development will include ongoing collaboration with other video-related
+nostr projects such as [zap.stream], [Primal], and Blossom.
+
+Repository: [flox1an/nostube]  
+License: MIT
+
+[Nostube]: https://nostu.be/
+[React]: https://react.dev/
+[Vite]: https://vite.dev/
+[TailwindCSS]: https://tailwindcss.com/
+[shadcn/ui]: https://ui.shadcn.com/
+[Applesauce]: https://applesauce.build/
+[Blossom servers]: https://github.com/hzrd149/blossom
+[zaps]: https://nostr.how/en/zaps
+[zap.stream]: https://zap.stream/
+[Primal](https://primal.net/)
+[flox1an/nostube]: <https://github.com/flox1an/nostube>
+
+### TollGate
+
+[TollGate] is a software project for turning WiFi routers into bitcoin-powered,
+pay-as-you-go internet access points. The software gives operators a
+permissionless way to resell their connection, where users pay in [ecash] in
+small increments for connectivity. The system runs on [OpenWrt-compatible]
+routers and uses nostr-based modules that work together. The merchant module
+sets prices and processes payments, the valve module controls who can access the
+internet, and the [Crows Nest] module scans for available gateways and connects
+to them. Routers running TollGate can also purchase access from other TollGate
+routers, which extends the network outward from a single upstream connection.
+The project already provides a published [protocol specification], a working
+implementation for OpenWrt routers, a pre-built [TollGateOS] firmware, and an
+[installer] with a guided setup process for supported hardware.
+
+This grant supports continued work on router software, developer experience, and
+adoption. The team plans to simplify builds and installation flows on OpenWrt
+routers and to support the development of mobile Crows Nest clients that
+discover nearby gateways and handle payments on behalf of users. Companion
+software will target common desktop and ARM devices and help those devices act
+as TollGate clients. A streamlined setup path will simplify turning a compatible
+router into a full TollGate gateway. The project also plans to collaborate with
+mesh and community network groups such as [Guifi], [Freifunk], and [Funkfeuer].
+Packages are slated for distribution through [Zapstore](https://zapstore.dev/)
+and OpenWrt package lists, and TollGate gateways are intended to be found
+through nostr-based discovery and mapping tools such as [OpenStreetMap]. Further
+work includes exploration of cellular and neutral host integrations, with the
+goal of placing TollGate modules inside privacy-focused operating systems and
+open access network stacks.
+
+Repositories: [/OpenTollGate]  
+License: The Unlicense and GPL-3.0
+
+[TollGate]: https://tollgate.me/
+[ecash]: https://cashu.space/
+[OpenWrt-compatible]: https://openwrt.org/
+[Crows Nest]: https://opentollgate.github.io/tollgate/nostr-powering-tollgate#crows-nest
+[protocol specification]: https://github.com/OpenTollGate/TollGate/tree/main/protocol
+[TollGateOS]: https://github.com/OpenTollGate/tollgate-os
+[installer]: https://github.com/OpenTollGate/tollgate-installer
+[Guifi]: https://guifi.net/en
+[Freifunk]: https://freifunk.net/
+[Funkfeuer]: https://funkfeuer.at/
+[OpenStreetMap]: https://www.openstreetmap.org/
+[/OpenTollGate]: https://github.com/OpenTollGate
+
+---
+
+The projects in this wave reflect the broadening scope of what developers are
+choosing to build on nostr. From AI tooling and video infrastructure to
+community networking, each grant supports software that uses nostr's identity
+and transport layer to solve real challenges. We look forward to seeing these
+projects make an impact and are grateful to our donors for making this support
+possible.
+
+To help us continue supporting the nostr ecosystem, please consider setting up a
+recurring donation to The Nostr Fund. Any amount helps.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+If you are working on an open-source project enhancing the nostr ecosystem, we
+encourage you to [apply for funding](/apply).
