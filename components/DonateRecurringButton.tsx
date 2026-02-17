@@ -1,17 +1,23 @@
 import CustomLink from './Link'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
 
+const DESIGNATION_IDS: Record<string, string> = {
+  nostr: 'ENWRA6YZ',
+  ops: 'ELL6P2J6',
+}
+
 type DonateRecurringButtonProps = {
   label?: string
   showHeart?: boolean
-  designationId?: string
+  designation?: keyof typeof DESIGNATION_IDS
 }
 
 export default function DonateRecurringButton({
   label = 'Give Monthly',
   showHeart = true,
-  designationId,
+  designation,
 }: DonateRecurringButtonProps) {
+  const designationId = designation ? DESIGNATION_IDS[designation] : undefined
   const href = designationId
     ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
     : MONTHLY_DONATION_URL
