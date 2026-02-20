@@ -8,12 +8,20 @@ export function FathomAnalytics() {
   useEffect(() => {
     if (!process.env.NEXT_PUBLIC_FATHOM_ID) return
 
-    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_ID, {
-      includedDomains: ['opensats.org'],
-    })
+    try {
+      Fathom.load(process.env.NEXT_PUBLIC_FATHOM_ID, {
+        includedDomains: ['opensats.org'],
+      })
+    } catch (e) {
+      console.warn('Fathom failed to load:', e)
+    }
 
     function onRouteChangeComplete() {
-      Fathom.trackPageview()
+      try {
+        Fathom.trackPageview()
+      } catch (e) {
+        console.warn('Fathom pageview tracking failed:', e)
+      }
     }
 
     router.events.on('routeChangeComplete', onRouteChangeComplete)
