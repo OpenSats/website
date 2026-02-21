@@ -13,6 +13,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { Analytics } from 'pliny/analytics'
 import { SearchProvider } from 'pliny/search'
 import LayoutWrapper from '@/components/LayoutWrapper'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import { FathomAnalytics } from '@/components/Fathom'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <FathomAnalytics />
       <LayoutWrapper>
         <SearchProvider searchConfig={siteMetadata.search}>
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
         </SearchProvider>
       </LayoutWrapper>
     </ThemeProvider>
