@@ -7,3 +7,148 @@ images: ['/static/images/blog/TODO.jpg']
 draft: false
 summary: "OpenSats announces a new round of grants focused on Bitcoin Core development."
 ---
+
+OpenSats is pleased to announce a new round of grants supporting contributors to Bitcoin Core. This round focuses on developers working to improve the long-term maintainability, safety, and privacy of Bitcoin's reference implementation, spanning build system modernization, release testing coordination, and peer-to-peer network security research.
+
+This round includes support for three first-time grantees:
+
+- [@janb84](#janb84)
+- [@naiyoma](#naiyoma)
+- [@purpleKarrot](#purplekarrot)
+
+We are also renewing grants for two additional contributors:
+
+- @danielabrozzoni ([Jan. 2025](/blog/more-for-core#danielabrozzoni))
+- @kevkevinpal ([Jan. 2025](/blog/more-for-core#kevkevinpal))
+
+These grants are sourced from our [General Fund](/funds/general), which is supported by generous donors like you. If you would like to support free and open-source projects that help Bitcoin flourish, consider donating to the fund:
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+Let's explore our grantee's contributions in more detail to understand their purpose and how the grants will support their efforts.
+
+---
+
+### @janb84
+
+[Janb84] contributes to Bitcoin Core, focusing on release testing coordination,
+pull request review, and contributor-facing documentation. This includes
+maintaining Release Candidate Testing Guides, running dedicated feedback threads
+for testers, and facilitating group review and discussion through the [PR Review
+Club]. His approach to contributing reflects a view that the human and process
+side of open-source development is as important as the code itself.
+
+With support from this grant, janb84 will continue expanding his work across
+Bitcoin Core, including in-depth pull request reviews, contributor
+documentation, and testing guides that make changes easier to evaluate and safer
+to release. He will also delve deeper into his engagement with the codebase
+itself, toward broader and more technical contributions over time.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PR's: [created](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Ajanb84), [reviewed](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Ajanb84)  
+License: MIT
+
+[Janb84]: https://github.com/janb84
+[PR Review Club]: https://bitcoincore.reviews/
+
+### @naiyoma
+
+[Naiyoma] contributes to Bitcoin Core with a focus on P2P privacy and network
+security research. Her current work addresses a fingerprinting attack that
+allows outside observers to correlate a Bitcoin node's identity across multiple
+networks, such as clearnet and Tor, potentially exposing the real IP address of
+users who rely on privacy networks. Working alongside [Daniela Brozzoni],
+Naiyoma researched and replicated the attack across the live network, published
+the findings in a [Delving Bitcoin] post, and opened a [pull request] to Bitcoin
+Core with a proposed mitigation. Alongside this, Naiyoma contributes test
+improvements, active pull request reviews across multiple areas of the codebase,
+and has two larger draft refactors in progress, dealing with P2P mempool
+handling and descriptor processing.
+
+With support from this grant, Naiyoma will continue driving the fingerprinting
+mitigation through review and into Bitcoin Core. She will research and work to
+address additional fingerprinting vectors, including [block index
+fingerprinting], and contribute to a documented inventory of known
+fingerprinting risks in the Bitcoin peer-to-peer layer. Further planned work
+includes researching a separate Address Manager for each network type and
+improvements to stale node eviction, alongside continued pull request reviews
+with a focus on P2P contributions and ongoing test improvements across the
+codebase.
+
+Repository: [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PR's: [created](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Anaiyoma), [reviewed](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Anaiyoma)  
+License: MIT
+
+[Naiyoma]: https://github.com/naiyoma
+[Daniela Brozzoni]: /blog/more-for-core#danielabrozzoni
+[Delving Bitcoin]: https://delvingbitcoin.org/t/fingerprinting-nodes-via-addr-requests/1786
+[pull request]: https://github.com/bitcoin/bitcoin/pull/33498
+[block index fingerprinting]: https://github.com/bitcoin/bitcoin/pull/24571
+
+### @purpleKarrot
+
+[PurpleKarrot] is focused on improving the long-term maintainability, safety,
+and clarity of the Bitcoin Core codebase. His work centers on cleaning up the
+build system by replacing ad hoc scripts and undocumented conventions with
+declarative, reproducible [CMake] configurations, and on refactoring C++
+components so they are easier to understand and work on in isolation. This
+includes enforcing clear ownership rules in the code and removing unsafe
+constructs. He also aims to define, document, and promote modern [C++ coding
+guidelines] within the Bitcoin community, drawing on his involvement with the
+ISO C++ Committee, and to develop the [BtcK] multi-language API so that
+different programming languages can talk to Bitcoin Core through consistent,
+idiomatic bindings. Alongside this, purpleKarrot prioritizes C++ education and
+mentorship by teaching fundamentals, sharing best practices, and helping new
+maintainers grow into long-term contributors.
+
+With support from this grant, purpleKarrot will focus on milestones that support
+future architectural improvements. These include helping to prepare a stable C
+API for the [Bitcoin Kernel library], making sure its SDK is deployed cleanly
+with the correct headers, library artifacts, and package configuration, and
+replacing a patchwork of platform-specific packaging scripts with a unified
+CPack definition. Because improving maintainability and educating future
+developers is an ongoing effort, progress will be iterative and aimed at the
+long-term sustainability of the Bitcoin Core project.
+
+Repositories: [purpleKarrot/btck](https://github.com/purpleKarrot/btck); [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)  
+PR's: [created](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Apurplekarrot), [reviewed](https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Apurplekarrot)  
+Licenses: MIT
+
+[PurpleKarrot]: https://github.com/purpleKarrot
+[CMake]: https://cmake.org/
+[C++ coding guidelines]: https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines
+[BtcK]: https://purplekarrot.github.io/btck/
+[Bitcoin Kernel library]: https://github.com/bitcoin/bitcoin/issues/27587
+
+---
+
+OpenSats remains committed to fostering a resilient Bitcoin ecosystem. These
+grants build on our [existing support] for Bitcoin Core development,
+complementing long-term funding for experienced contributors while bringing new
+talent into the fold.
+
+Contributing to Bitcoin Core is demanding and often underappreciated work, and
+we are grateful to everyone who dedicates their time and skill to it.
+
+For those looking to get involved, the [Contributing to Bitcoin Core guide] is a
+good place to start. The [PR Review Club] offers a welcoming entry point for
+those looking to engage with the review process alongside other developers. The
+[Summer of Bitcoin] and Chaincode Labs [BOSS Challenge] are also worth exploring
+for hands-on experience.
+
+We are grateful to our donors who make these grants possible and invite others
+to join us in supporting Bitcoin's future. We encourage both new and experienced
+developers to [apply for funding], and we welcome everyone to support our
+mission.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+[existing support]: /tags/core
+[Contributing to Bitcoin Core guide]: https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md
+[Summer of Bitcoin]: https://www.summerofbitcoin.org/
+[BOSS Challenge]: https://bosschallenge.xyz/
+[apply for funding]: /apply
