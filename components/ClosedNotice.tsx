@@ -24,7 +24,7 @@ const ClosedNotice = () => {
               quarterly schedule
             </Link>
             . Please have a look at{' '}
-            <Link href="/blog/2024-year-in-review">last year's report</Link> to
+            <Link href="/blog/2025-year-in-review">last year's report</Link> to
             see what kind of projects we support.
           </p>
           <p className="text-sm">
