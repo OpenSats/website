@@ -66,7 +66,7 @@ ${req.body.references}
 ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 **Years of dev experience:**
-${req.body.years_experience ? `${req.body.years_experience}` : '0'}
+${req.body.years_experience ? `${req.body.years_experience}` : 'n/a'}
 
 ### Anything Else
 
@@ -76,8 +76,10 @@ ${req.body.anything_else ? req.body.anything_else : 'No.'}
 
 ${req.body.website ? `Website: ${req.body.website}` : ''}
 ${req.body.license ? `License: ${req.body.license}` : ''}
-${req.body.github ? req.body.github : ''}
-${req.body.personal_github ? req.body.personal_github : ''}
+${req.body.github ? `GitHub: ${req.body.github}` : ''}
+${
+  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
+}
 ${
   req.body.other_contact
     ? `Other contact details: ${req.body.other_contact}`
