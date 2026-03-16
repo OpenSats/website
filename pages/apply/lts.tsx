@@ -3,8 +3,11 @@ import LTSApplicationForm from '@/components/LTSApplicationForm'
 import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
 import ClosedNotice from '@/components/ClosedNotice'
+import { applicationsOpenForClient } from '@/utils/application-status'
 
 export default function Apply() {
+  const applicationsOpen = applicationsOpenForClient()
+
   return (
     <PageSection title="Long-Term Support" image="/static/images/avatar.png">
       <p>
@@ -45,7 +48,7 @@ export default function Apply() {
         If the above does not apply to you, please consider applying for a{' '}
         <Link href="/apply/grant">General Grant</Link> instead.
       </p>
-      <ClosedNotice />
+      {!applicationsOpen && <ClosedNotice />}
       <LTSApplicationForm />
     </PageSection>
   )

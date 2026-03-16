@@ -2,6 +2,11 @@
 
 This is the codebase behind [OpenSats.org](https://opensats.org).
 
+## Project links
+
+- Application page: [opensats.org/apply](https://opensats.org/apply)
+- Repository: [github.com/OpenSats/website](https://github.com/OpenSats/website)
+
 ## Getting started
 
 This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://github.com/timlrx/tailwind-nextjs-starter-blog).
@@ -10,6 +15,10 @@ To run a development environment locally, run:
 
 - `npm install` to install dependencies
 - `npm run dev` to run the local development version
+
+To test grant application submissions locally while production remains closed,
+set both `APPLICATIONS_OPEN=true` and `NEXT_PUBLIC_APPLICATIONS_OPEN=true` in
+your local environment.
 
 Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
 

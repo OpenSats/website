@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
 import { isSpamSubmission } from '@/utils/spam-helpers'
+import { applicationsOpenForServer } from '@/utils/application-status'
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
@@ -254,6 +255,12 @@ export default async function handler(
     // Silent rejection for spam submissions
     if (isSpamSubmission(req.body)) {
       return res.status(200).json({ message: 'success' })
+    }
+
+    if (!applicationsOpenForServer()) {
+      return res
+        .status(403)
+        .json({ message: 'Applications are currently closed.' })
     }
 
     if (!SENDGRID_API_KEY || !TO_ADDRESS || !FROM_ADDRESS) {

@@ -7,6 +7,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
 import ClosedNotice from '@/components/ClosedNotice'
+import { applicationsOpenForClient } from '@/utils/application-status'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
@@ -18,6 +19,13 @@ export const getStaticProps = async () => {
 export default function Apply({
   apply,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const applicationsOpen = applicationsOpenForClient()
+  const grantHref = applicationsOpen ? '/apply/grant' : '#/apply/grant'
+  const ltsHref = applicationsOpen ? '/apply/lts' : '#/apply/lts'
+  const buttonClassName = `rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white${
+    applicationsOpen ? '' : ' disabled'
+  }`
+
   return (
     <>
       <PageSEO
@@ -51,7 +59,7 @@ export default function Apply({
           <CustomLink href="/faq/application">Application FAQ</CustomLink> to
           find answers to common questions.
         </p>
-        <ClosedNotice />
+        {!applicationsOpen && <ClosedNotice />}
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
           General Grant
         </h2>
@@ -61,10 +69,7 @@ export default function Apply({
           assess all applications to make sure grants are awarded to high impact
           projects in the Bitcoin space.
         </p>
-        <Link
-          href="#/apply/grant"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
-        >
+        <Link href={grantHref} className={buttonClassName}>
           Apply for an OpenSats General Grant
         </Link>
         <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
@@ -75,10 +80,7 @@ export default function Apply({
           projects that are critical to the Bitcoin ecosystem. These grants are
           geared towards developers and maintainers of Bitcoin Core and similar.
         </p>
-        <Link
-          href="#/apply/lts"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
-        >
+        <Link href={ltsHref} className={buttonClassName}>
           Apply for an OpenSats LTS Grant
         </Link>
       </PageSection>

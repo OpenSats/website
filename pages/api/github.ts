@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { isSpamSubmission } from '@/utils/spam-helpers'
+import { applicationsOpenForServer } from '@/utils/application-status'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -7,6 +8,38 @@ const GH_APP_REPO = process.env.GH_APP_REPO
 
 import { Octokit } from '@octokit/rest'
 const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
+
+function toOptionalString(value: unknown) {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function isDirectImageUrl(value: string) {
+  return /^(https?:\/\/.+\.(png|jpe?g|gif|webp|svg))(?:\?.*)?$/i.test(value)
+}
+
+function formatScreenshotSection(value: unknown) {
+  const screenshotUrl = toOptionalString(value)
+
+  if (!screenshotUrl) {
+    return ''
+  }
+
+  if (isDirectImageUrl(screenshotUrl)) {
+    return `Screenshot URL: ${screenshotUrl}\n\n![Application screenshot](${screenshotUrl})`
+  }
+
+  return `Screenshot URL: ${screenshotUrl}`
+}
+
+function formatDemoSection(value: unknown) {
+  const demoUrl = toOptionalString(value)
+
+  if (!demoUrl) {
+    return ''
+  }
+
+  return `Demo Video: [Watch demo](${demoUrl})`
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,6 +49,12 @@ export default async function handler(
     // Silent rejection for spam submissions
     if (isSpamSubmission(req.body)) {
       return res.status(200).json({ message: 'success' })
+    }
+
+    if (!applicationsOpenForServer()) {
+      return res
+        .status(403)
+        .json({ message: 'Applications are currently closed.' })
     }
 
     if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
@@ -77,6 +116,8 @@ ${req.body.anything_else ? req.body.anything_else : 'No.'}
 ${req.body.website ? `Website: ${req.body.website}` : ''}
 ${req.body.license ? `License: ${req.body.license}` : ''}
 ${req.body.github ? `GitHub: ${req.body.github}` : ''}
+${formatScreenshotSection(req.body.screenshot_url)}
+${formatDemoSection(req.body.demo_video_url)}
 ${
   req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
 }

@@ -3,12 +3,14 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
+import { applicationsOpenForClient } from '@/utils/application-status'
 import * as EmailValidator from 'email-validator'
 import CustomLink from './Link'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
   const [formLoadedAt] = useState(() => Date.now())
+  const applicationsOpen = applicationsOpenForClient()
   const router = useRouter()
   const {
     watch,
@@ -18,39 +20,49 @@ export default function ApplicationForm() {
   } = useForm()
 
   const isFLOSS = watch('free_open_source', false)
+  const submitDisabled = !applicationsOpen || !isFLOSS || loading
   const [failureReason, setFailureReason] = useState<string>()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setLoading(true)
+    setFailureReason(undefined)
     const submissionData = { ...data, formLoadedAt }
+    let githubCreated = false
 
     try {
       // Track application in GitHub
       const res = await fetchPostJSON('/api/github', submissionData)
       if (res.message === 'success') {
+        githubCreated = true
         console.info('Application tracked') // Succeed silently
       } else {
-        // Fail silently
+        setFailureReason(res.message || 'Failed to create GitHub application')
+        return
       }
     } catch (e) {
       if (e instanceof Error) {
-        // Fail silently
+        setFailureReason(e.message)
+        return
       }
     } finally {
-      // Mail application to us
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', submissionData)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
+      if (githubCreated) {
+        // Mail application to us
+        try {
+          const res = await fetchPostJSON('/api/sendgrid', submissionData)
+          if (res.message === 'success') {
+            router.push('/submitted')
+          } else {
+            setFailureReason(res.message)
+          }
+        } catch (e) {
+          if (e instanceof Error) {
+            setFailureReason(e.message)
+          }
+        } finally {
+          setLoading(false)
         }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
+      } else {
         setLoading(false)
       }
     }
@@ -174,6 +186,35 @@ export default function ApplicationForm() {
         />
       </label>
 
+      <label className="block">
+        Screenshot URL
+        <br />
+        <small>
+          If you have a screenshot, image album, or product mockup, share a
+          public link.
+        </small>
+        <input
+          type="url"
+          placeholder="https://"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('screenshot_url')}
+        />
+      </label>
+
+      <label className="block">
+        Demo Video URL
+        <br />
+        <small>
+          If you have a walkthrough or demo recording, share a public link.
+        </small>
+        <input
+          type="url"
+          placeholder="https://"
+          className="mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('demo_video_url')}
+        />
+      </label>
+
       <h2>Anything Else We Should Know?</h2>
 
       <label className="block">
@@ -273,9 +314,9 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={submitDisabled ? 'disabled' : 'enabled'}
         type="submit"
-        disabled={true || loading}
+        disabled={submitDisabled}
       >
         Submit LTS Application
       </FormButton>

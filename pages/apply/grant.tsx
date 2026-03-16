@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
 import ClosedNotice from '@/components/ClosedNotice'
+import { applicationsOpenForClient } from '@/utils/application-status'
 
 const GrantApplicationForm = dynamic(
   () => import('@/components/GrantApplicationForm'),
@@ -9,6 +10,8 @@ const GrantApplicationForm = dynamic(
 )
 
 export default function Apply() {
+  const applicationsOpen = applicationsOpenForClient()
+
   return (
     <>
       <PageSection title="Apply for a Grant" image="/static/images/avatar.png">
@@ -32,7 +35,7 @@ export default function Apply() {
           <CustomLink href="/faq/application">Application FAQ</CustomLink>{' '}
           before sending in an application.
         </p>
-        <ClosedNotice />
+        {!applicationsOpen && <ClosedNotice />}
         <GrantApplicationForm />
       </PageSection>
     </>
