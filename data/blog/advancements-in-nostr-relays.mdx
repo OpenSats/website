@@ -7,3 +7,511 @@ images: ['/static/images/blog/TODO']
 draft: false
 summary: 'An impact report from the front-lines of nostr relay development.'
 ---
+
+# Advancements in Nostr Relays
+
+When the nostr [white paper] was published in 2020, fiatjaf described relays as
+deliberately simple (and dumb). They accept posts from users, store them, and
+forward them to others who ask. Anyone can run a relay, and users can connect to
+whichever ones they choose through their [nostr client]. The minimal design
+gives the network its resilience: there is no single point of failure, no
+gatekeeper who can silence a user across the entire system, and no platform to
+shut down.
+
+As the network grows, so do the demands on this layer. OpenSats has funded
+relay-focused projects through [The Nostr Fund] since 2023, supporting
+developers who are building the software that runs relays and the frameworks
+that help others build new ones. These projects also include monitoring and
+hosting tools that make relay operation more accessible, personal relay
+applications that give users direct ownership of their data, and content
+filtering and feed intelligence that help people find what they care about.
+
+This report highlights ten of those projects, covering work across five areas:
+
+- [Relay Software and Infrastructure](#relay-software-and-infrastructure)
+- [Relay Discovery, Monitoring, and Hosting](#relay-discovery-monitoring-and-hosting)
+- [Personal and Portable Relays](#personal-and-portable-relays)
+- [Access and Content Distribution](#access-and-content-distribution)
+- [Relay Intelligence, Filtering, and Logic](#relay-intelligence-filtering-and-logic)
+
+Let's take a closer look at how each of these projects has made an impact over
+the past year.
+
+[white paper]: https://fiatjaf.com/nostr.html
+[nostr client]: /blog/advancements-in-nostr-clients
+[The Nostr Fund]: /funds/nostr
+
+---
+
+### Relay Software and Infrastructure
+
+The software that powers relays determines how fast, reliable, and flexible the
+network can be. When that software is packaged as shared frameworks and
+libraries, other developers can stand up new relays without writing everything
+from scratch.
+
+#### nostr-relay-nestjs
+
+[nostr-relay-nestjs] is a relay built on the NestJS framework, designed for
+clear structure, high test coverage, and easy modification. With [support from
+OpenSats][opensats-nestjs], developer Cody spent multiple quarters improving how
+quickly the relay responds to requests, expanding the set of nostr features it
+supports, and extracting reusable components that now benefit the wider relay
+development ecosystem.
+
+A central outcome of this work was the development of
+[nostr-relay][cody-nostr-relay], a standalone TypeScript framework built from
+nostr-relay-nestjs. The framework gives developers a starting point for building
+their own relays. They can choose their preferred database, add features through
+a plugin system, and build on a codebase with 100% test coverage and clear
+documentation. The core of nostr-relay-nestjs itself was replaced with this
+framework, with both projects now sharing a common foundation. One of the first
+projects built on this framework was [nostr-relay-tray], a desktop personal
+relay application covered later in this report.
+
+Speed and efficiency have been a focus across several release cycles. Cody made
+a series of improvements to how the relay stores, retrieves, and processes
+events by [reducing redundant work], [speeding up filtered searches], and
+[caching frequent requests]. As a result, most queries now complete within 10
+milliseconds. Additional features include full-text search, access control
+lists, and basic usage statistics.
+
+As the relay matured, Cody shifted his focus toward the framework and desktop
+relay projects, allowing nostr-relay-nestjs to continue serving users while the
+framework and tooling give other developers a foundation for building their own
+relay implementations.
+
+#### nostr-relay Infrastructure
+
+Developer [mattn] operates relay infrastructure for the Japanese nostr
+community, running two relay implementations on his own servers:
+[nostr-relay][mattn-nostr-relay] and [cagliostr]. With [OpenSats'
+support][opensats-mattn], he continues to maintain and develop these relays
+alongside [algia], a command-line tool for interacting with nostr.
+
+Much of mattn's work involves maintaining the underlying software that powers
+nostr-relay and cagliostr. He has been granted direct commit access to
+[fiatjaf/relayer] and [fiatjaf/eventstore], the shared framework and database
+layer that his relays and others are built on. When mattn encounters a bug in
+his own relay, he fixes it upstream in the framework, so the correction reaches
+every relay built on the same codebase.
+
+One fix [corrected a bug] where relays sent authentication challenges at the
+wrong time, an issue that had gone undetected for two years. Another [fixed
+gift-wrap deletion] so that only recipients of encrypted messages could remove
+them from the relay. A third fix [resolved a signaling failure] that caused some
+nostr apps to stall or disconnect without explanation.
+
+>While none of these fixes were flashy, I believe they were all significant
+improvements.
+>
+<cite>—mattn</cite>
+
+He also built [nostr-webhook], a service that monitors specific types of nostr
+posts and automatically triggers actions on the web when they appear. This
+allows developers to create bots on nostr with minimal setup. Together with his
+relay operations and command-line tools, mattn's work forms a consistent layer
+of infrastructure for nostr users in Japan.
+
+[nostr-relay-nestjs]: https://github.com/CodyTseng/nostr-relay-nestjs
+[opensats-nestjs]: /blog/nostr-grants-july-2023#nostr-relay-nestjs
+[cody-nostr-relay]: https://github.com/CodyTseng/nostr-relay
+[nostr-relay-tray]: https://github.com/CodyTseng/nostr-relay-tray
+[reducing redundant work]: https://github.com/CodyTseng/nostr-relay-nestjs/pull/128
+[speeding up filtered searches]: https://github.com/CodyTseng/nostr-relay-nestjs/pull/112
+[caching frequent requests]: https://github.com/CodyTseng/nostr-relay-nestjs/pull/65
+[mattn]: https://github.com/mattn
+[mattn-nostr-relay]: https://github.com/mattn/nostr-relay
+[cagliostr]: https://github.com/mattn/cagliostr
+[opensats-mattn]: /blog/nostr-grants-october-2023#algia
+[algia]: https://github.com/mattn/algia
+[fiatjaf/relayer]: https://github.com/fiatjaf/relayer
+[fiatjaf/eventstore]: https://github.com/fiatjaf/eventstore
+[corrected a bug]: https://github.com/fiatjaf/relayer/commit/1afe5a5ad405ccd1994eca6d1065c296fad7be9d
+[fixed gift-wrap deletion]: https://github.com/fiatjaf/relayer/commit/e8a2735fbc6c3391fd79b4fd22eda43dfd9dac2e
+[resolved a signaling failure]: https://github.com/fiatjaf/relayer/commit/f2fcda7ead15a5ff7494047dd89f07df09143884
+[nostr-webhook]: https://github.com/mattn/nostr-webhook
+
+---
+
+### Relay Discovery, Monitoring, and Hosting
+
+A healthy relay ecosystem depends on visibility and accessibility. Clients need
+reliable data about which relays are online and what they support. Communities
+and individuals who want to operate relays need tools that handle the technical
+complexity for them.
+
+#### nostr.watch
+
+[nostr.watch] helps users, developers, and relay operators see which relays
+exist, whether they're online, and how well they're performing. With [OpenSats'
+support][opensats-nostrwatch], developer sandwich rebuilt the monitoring
+infrastructure behind the service and created tools that make relay data more
+useful across the ecosystem.
+
+A major focus has been [NIP-66], a specification that sandwich authored for
+sharing relay health data through nostr. Relay monitoring has traditionally
+depended on whoever runs the monitoring service. With NIP-66, anyone can publish
+observations about relay status, and anyone else can read and use that data,
+eliminating the need for a single authority to be the source of truth about
+which relays are up and how they behave.
+
+To put this into practice, sandwich deployed 8 automated monitoring stations
+spread across 6 continents that regularly check relays and publish the results.
+To tag the data with accurate locations, he built and published [nostr-geotags],
+an open-source module that produces standardized geographic labels for nostr
+events.
+
+>[The pattern introduced by NIP-66] is a resilient data distribution model. The
+pattern can be applied to many domains, and is naturally resistant to censorship
+and centralization.
+>
+<cite>—sandwich</cite>
+
+Several tools were built that put NIP-66 to use. [myrelay.page] is a self-hosted
+landing page that relay operators can customize to describe their relay and its
+purpose, and it has already been adopted by other operators. An advanced relay
+list editor is also in development, and will serve as the foundation for the
+next version of nostr.watch.
+
+#### relay.tools
+
+[relay.tools] is a web-based control panel that lets anyone create, configure,
+and manage nostr relays. Users can set up a relay, define moderation rules,
+manage spam prevention, and handle billing. With [OpenSats'
+support][opensats-relaytools], developer jeremyd delivered improvements across
+hosting, billing, and moderation.
+
+A major milestone was the [self-host installer], which allows anyone to deploy
+the full relay.tools stack on a standard server using a single shell script. The
+system takes care of the setup automatically: security certificates, database
+configuration, and ongoing updates all happen behind the scenes. It also
+supports custom domain branding, so a community operator can run their own relay
+hub under their own name.
+
+Authentication was another area of focus. On nostr, relays have traditionally
+controlled who can write to them, but controlling who can read has been limited.
+jeremyd built an authentication proxy for the [strfry relay] engine that handles
+identity verification in a separate process, bringing read-level access control
+to strfry relays for the first time. This enables private communities and group
+features where membership determines what content is visible.
+
+The platform's billing system was rebuilt around Lightning payments with a
+credits-based balance. Relay hosting costs were reduced from 21,000 to 12,000
+sats per month, and relay owners who accept paid users can apply those payments
+toward their own balance. Customer support was built using nostr itself, with a
+[dedicated support account] and relay for communicating with operators. jeremyd
+also spent time working with developers building group and private community
+features for nostr, so that relay.tools can support these use cases as they
+scale.
+
+[nostr.watch]: https://nostr.watch
+[opensats-nostrwatch]: /blog/nostr-grants-october-2023
+[NIP-66]: https://github.com/nostr-protocol/nips/blob/master/66.md
+[nostr-geotags]: https://github.com/sandwichfarm/nostr-geotags
+[myrelay.page]: https://github.com/sandwichfarm/myrelay.page
+[relay.tools]: https://relay.tools/
+[opensats-relaytools]: /blog/nostr-grants-october-2023#relaytools
+[self-host installer]: https://github.com/relaytools/relay-tools-images
+[strfry relay]: https://github.com/hoytech/strfry
+[dedicated support account]: https://support.nostr1.com/
+
+---
+
+### Personal and Portable Relays
+
+Personal relay software on desktop and mobile gives users direct ownership over
+their nostr data. Posts, messages, and contact lists stay on the user's
+hardware, available offline and independent of third-party operators.
+
+#### nostr-relay-tray
+
+[nostr-relay-tray] is a desktop application that runs a personal relay, built on
+the [nostr-relay][cody-nostr-relay] TypeScript framework described earlier in
+this report. With [OpenSats' support][opensats-relaytray], developer Cody
+designed the application to make relay operation accessible to people who have
+no experience managing servers. User events are stored locally on the desktop,
+searchable, and available to any nostr client that connects to this personal
+relay.
+
+Over the past year, nostr-relay-tray gained full-text search, proof-of-work
+configuration, and a more capable [event filtering system] that gives users
+granular control over which events to accept or reject. Support for [NIP-09]
+(event deletion) was added, along with the ability to delete events by filter,
+so users can manage what their relay stores over time. Dark mode, improved tray
+icon customization, and macOS-specific interface refinements improved the user
+experience across platforms.
+
+One significant addition to nostr-relay-tray was the integration of [pigeon], a
+purpose-built reverse proxy that allows users to expose their local relay to the
+public. A relay running on someone's laptop becomes reachable by other nostr
+clients, with the proxy handling the networking layer in the background.
+
+An unexpected outcome of this work was [Jumble], which started as an event
+browser inside nostr-relay-tray and grew into a standalone client designed
+around browsing relay feeds directly. Jumble is covered in more detail in our
+[impact report on nostr clients][Jumble-opensats].
+
+Together, nostr-relay-tray and its related projects lower the barrier to
+self-hosted relay operation on desktop. A user can install the application,
+store their own data, expose it to the broader network through pigeon, and
+browse local events through Jumble without touching a command-line interface or
+configuring a server.
+
+#### Citrine
+
+[Citrine] is a nostr relay that runs on Android, turning a mobile device into a
+personal storage hub for nostr data. Nostr clients on the same device can
+connect to Citrine, read stored events, and publish new ones. This allows users
+to back up their notes locally, view their content offline, and share a single
+event store across multiple nostr apps on the same mobile device. With
+[OpenSats' support][opensats-citrine], developer [greenart7c3] has developed
+Citrine from a minimal relay into a more capable one with authentication, backup
+tools, and faster query speeds on mobile hardware.
+
+Early development focused on completing the core functions that nostr clients
+expect from a relay: accepting events, serving them back on request, and
+handling filtered queries. With that foundation in place, greenart7c3 added
+features for data management. Users can restore their contact list from the
+relay if a client loses sync, export or import the full database to move content
+between devices, and pull their existing history from public relays into local
+storage.
+
+As a relay's database grows into hundreds of thousands of events, speed on
+mobile hardware matters. greenart7c3 reworked how the database indexes and
+processes requests, pushing write speeds from roughly 10 to 68 events per second
+and read speeds from about 1.2 to nearly 5 queries per second. The gains make a
+noticeable difference for anyone relying on Citrine as a daily backup, though
+results vary by device and database size.
+
+Additional releases added authentication and protected event support, giving the
+relay control over who can connect and what content they can access. Auto-backup
+options let users schedule regular snapshots of their data, and Tor integration
+is underway for those who want to run their relay over a private connection. A
+[community contributor] added support for Android's built-in content sharing
+layer and the ability to broadcast queued events when connectivity returns, both
+shipped in [v1.0.0]. greenart7c3 also added the ability to host lightweight web
+applications from the relay in the same release, allowing for small
+nostr-connected services to run entirely from a user's phone.
+
+For users who want offline access to their notes, a reliable backup of their
+social graph, or a shared data layer for nostr apps on their phone, Citrine
+provides that foundation without requiring any additional hardware or server
+setup.
+
+[opensats-relaytray]: /blog/doubling-down-on-nostr
+[event filtering system]: https://github.com/CodyTseng/nostr-relay-tray/compare/v1.9.1...v2.0.0
+[NIP-09]: https://github.com/nostr-protocol/nips/blob/master/09.md
+[pigeon]: https://github.com/CodyTseng/pigeon
+[Jumble]: https://jumble.social/
+[Jumble-opensats]: /blog/advancements-in-nostr-clients#jumble
+[Citrine]: https://github.com/greenart7c3/Citrine
+[opensats-citrine]: /blog/greenart7c3-receives-lts-grant
+[greenart7c3]: https://github.com/greenart7c3
+[community contributor]: https://njump.to/npub1kpv7arjpaa3f37x9m9cu6sk9weeykt84kcrkd070m4amcmuk0r8sk74mkw
+[v1.0.0]: https://github.com/greenart7c3/Citrine/releases/tag/v1.0.0
+
+---
+
+### Access and Content Distribution
+
+A relay's value depends partly on who can reach it and where its content can go.
+Lowering the cost of running a relay opens participation to users in more
+regions, and bridging content into formats like RSS extends its reach to
+audiences outside of nostr.
+
+#### PlebOne Relay
+
+[PlebOne Relay] is a free, web-of-trust-filtered nostr relay designed to give
+users a spam-free experience. With [support from OpenSats][opensats-plebone],
+developer PlebOne built and operates the relay as a public service, particularly
+for users in regions where paying thousands of sats per month for a private
+relay is unrealistic.
+
+The relay went through a full architectural rebuild in late 2025, moving from
+its original backend to a new one [written in Rust][PlebOne Relay] with support
+for nostr features including event deletion, expiration, authentication, and
+live events. Performance improvements followed, with database indexing, caching,
+and data compression added to keep the relay responsive as usage grows. Login
+security was redesigned in January 2026, with [NIP-05 verification] added so
+relay users can claim a human-readable nostr address at no cost, another service
+that typically requires payment elsewhere.
+
+"The relay has been up and running for four or five months now. I have zero spam
+issues since it is a web-of-trust relay, and I get to keep it free for those who
+can't afford to pay for a private spam-free relay. I am all for people making a
+buck, but I feel there are people using nostr in other parts of the world where
+paying for a relay is not realistic." --PlebOne
+
+The relay currently serves a small, growing number of users. PlebOne has focused
+on keeping operational costs low so the service can sustain itself while
+remaining free, extending that approach to identity and other services that are
+typically gated behind payment.
+
+#### Nostr Feedz
+
+[Nostr Feedz] is a web application, also built by PlebOne, that connects nostr's
+long-form writing ecosystem with [RSS readers]. Users can follow traditional
+feeds and nostr long-form articles side by side, and the application also works
+in reverse by generating feeds from nostr long-form content, so writers who
+publish on nostr can share their work with anyone who follows content through
+RSS.
+
+The application now supports category and tag organization, multiple reading
+themes, a [Chrome extension] for subscribing to feeds from the browser, and an
+admin dashboard for managing subscriptions. Feed syncing between devices is
+handled through a custom nostr event kind, with two-way sync and category
+support shipping in January 2026. A user's subscriptions and reading progress
+stay consistent whether they access Nostr Feedz from the web or from the
+command-line client.
+
+That command-line client, [NostrFeedz-cli], extends the project to the computer
+terminal. It reads feeds and nostr long-form posts, stores everything locally
+for offline access, and supports image and video viewing through external
+viewers. Login options include [NIP-46] remote signing.
+
+Together, PlebOne Relay and Nostr Feedz address cost and accessibility
+challenges. The relay lowers the cost of participating in the network, and Nostr
+Feedz builds a bridge between nostr's publishing tools and readers who may still
+rely on RSS as their primary way of following content online.
+
+[PlebOne Relay]: https://github.com/PlebOne/relay.pleb.one
+[opensats-plebone]: /blog/fourteenth-wave-of-nostr-grants#nostr-feedz
+[NIP-05 verification]: https://github.com/nostr-protocol/nips/blob/master/05.md
+[Nostr Feedz]: https://github.com/PlebOne/Nostr-Feedz
+[RSS readers]: https://www.rssboard.org/rss-specification#whatIsRss
+[Chrome extension]: https://github.com/PlebOne/Nostr-Feedz/pull/2
+[NostrFeedz-cli]: https://github.com/PlebOne/NostrFeedz-cli
+[NIP-46]: https://github.com/nostr-protocol/nips/blob/master/46.md
+
+---
+
+### Relay Intelligence, Filtering, and Logic
+
+Publishing anything on an open protocol creates a practical challenge in how
+users find content they care about and filter out content they don't want. Some
+relays automatically classify content so users can choose what reaches them.
+Others analyze who a user follows and interacts with to show them more relevant
+posts. Both approaches keep the filtering transparent and under the user's
+control.
+
+#### nostr-filter-relay
+
+[nostr-filter-relay] is a relay that uses machine learning to classify nostr
+content and let users filter what they see. With [support from
+OpenSats][opensats-filterrelay], developer [atrifat] built a system where
+content flowing through the relay is analyzed by a set of specialized detection
+services, and users can choose which categories of content can reach them.
+
+The relay works by sitting between nostr clients and a local storage relay. As
+events arrive, they pass through a monitoring layer that sends text and media to
+classification services for analysis. These services evaluate content across
+several dimensions: whether images are safe or explicit, what language a post is
+written in, whether the text contains hate speech, what the overall sentiment
+is, and what topic it falls under. The results are stored as labels using
+[NIP-32], a nostr specification for attaching structured metadata to events.
+When a client requests events, the relay checks those labels against the user's
+preferences and delivers only what passes the filters.
+
+Posts arriving from [ActivityPub] bridges can be distinguished from nostr-native
+accounts, giving operators control over how federated content is handled. Each
+of these capabilities runs as its own open-source service, and atrifat built and
+maintains all of them. atrifat also trained custom machine learning models for
+hate speech detection, added GPU acceleration for operators whose hardware
+supports it, and implemented rate limiting and connection controls for
+stability.
+
+The filtering is opt-in by design. Users connect to the relay with parameters
+that describe what they want to see, and all filtering features can be disabled
+with a single setting. Any relay operator can deploy the full stack using the
+published Docker images, choosing which classification services to enable based
+on their community's needs. By keeping the intelligence layer modular and open
+source, nostr-filter-relay gives relay operators tools for content curation
+without requiring centralized moderation.
+
+#### AlgoRelay
+
+[AlgoRelay] is an algorithmic relay that generates personalized feeds for nostr
+users based on their social graph and interaction patterns. With [support from
+OpenSats][opensats-algorelay], developer utxo built what became the first
+nostr-native algorithmic relay, one that works across clients through the relay
+protocol itself.
+
+Most nostr feeds are chronological: a client requests recent events from the
+relays it connects to and displays them in order. This works well for small
+follow lists, but as the network grows, chronological feeds can bury interesting
+content under volume. AlgoRelay addresses this by analyzing a user's social
+graph, tracking which authors and topics generate engagement within their
+network, and ranking notes accordingly. The algorithm was [refactored early in
+development] to rank any note type, giving it flexibility beyond just short-form
+posts.
+
+Client adoption was an important milestone. AlgoRelay is now supported by four
+nostr clients: [Jumble][Jumble-opensats], [Coracle], [Nostur], and [NoStrudel].
+Users of these clients can add AlgoRelay to their relay list and receive a
+personalized feed alongside their regular chronological timeline. This
+interoperability across multiple clients is central to the project's design: the
+algorithm lives at the relay level, so any client that connects to it benefits
+without needing to implement feed ranking logic of its own.
+
+>Giving users access to more variety of feeds and the ability to tune their own
+feeds is how we can escape the biased and manipulative tactics of big tech
+algorithms.
+>
+<cite>—utxo</cite>
+
+utxo also built a [user dashboard] where users can log in and adjust how their
+feed is weighted, added [signature validation] on settings updates for security,
+and implemented [data purging tools] to manage storage over time. The approach
+is fully transparent and open source, so anyone can inspect the ranking logic,
+run their own instance, or fork the project to build a different kind of
+algorithmic feed.
+
+[nostr-filter-relay]: https://github.com/atrifat/nostr-filter-relay
+[opensats-filterrelay]: /blog/nostr-grants-july-2024#nostr-filter-relay
+[atrifat]: https://github.com/atrifat
+[NIP-32]: https://github.com/nostr-protocol/nips/blob/master/32.md
+[ActivityPub]: https://www.w3.org/TR/activitypub/
+[AlgoRelay]: https://github.com/bitvora/algo-relay
+[opensats-algorelay]: /blog/9th-wave-of-nostr-grants
+[refactored early in development]: https://github.com/bitvora/algo-relay/commit/8fe2053
+[Coracle]: /blog/advancements-in-nostr-clients#coracle
+[Nostur]: /blog/advancements-in-nostr-clients#nostur
+[NoStrudel]: /blog/advancements-in-nostr-clients#nostrudel
+[user dashboard]: https://github.com/bitvora/algo-relay/commit/c9f862e
+[signature validation]: https://github.com/bitvora/algo-relay/commit/22bcee7
+[data purging tools]: https://github.com/bitvora/algo-relay/commit/6452975
+
+---
+
+The projects covered in this report show developers working across the relay
+layer in ways that reinforce one another. Reusable frameworks and shared
+specifications are helping new relay projects start from tested foundations.
+Personal relay software on desktop and mobile is giving users direct ownership
+over their data, with tools that make self-hosting practical and remote access
+easier. Monitoring infrastructure is improving, with relay health data published
+through the protocol itself so it can be verified and reused without depending
+on a central authority. Filtering, ranking, and access management are moving
+closer to the relay layer, where they can operate transparently and under the
+user's control.
+
+The nostr ecosystem benefits from the diversity of relays built and operated in
+different ways for different needs. Some are designed for resilience and
+portability, others for discovery, moderation, or personalization. When relay
+software is accessible enough for individuals to run on their own hardware, and
+adaptable enough for communities to operate specialized relays around their own
+needs, participation remains broad and control remains distributed.
+
+Support for relay development through [The Nostr Fund] helps build the
+infrastructure that nostr depends on. If you believe in strengthening the open,
+decentralized foundations that make this work possible, consider making a
+recurring donation to help sustain this work.
+
+<center>
+  <DonateRecurringButton designation="nostr" />
+</center>
+
+If you are a developer working on a nostr project that strengthens this
+ecosystem, we encourage you to [apply for funding].
+
+[apply for funding]: /apply
