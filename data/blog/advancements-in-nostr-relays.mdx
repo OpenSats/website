@@ -189,7 +189,7 @@ hub under their own name.
 
 Authentication was another area of focus. On nostr, relays have traditionally
 controlled who can write to them, but controlling who can read has been limited.
-jeremyd built an authentication proxy for the [strfry relay] engine that handles
+jeremyd built an [authentication proxy] for the [strfry relay] engine that handles
 identity verification in a separate process, bringing read-level access control
 to strfry relays for the first time. This enables private communities and group
 features where membership determines what content is visible.
@@ -211,6 +211,7 @@ scale.
 [relay.tools]: https://relay.tools/
 [opensats-relaytools]: /blog/nostr-grants-october-2023#relaytools
 [self-host installer]: https://github.com/relaytools/relay-tools-images
+[authentication proxy]: https://github.com/relaytools/interceptor-proxy
 [strfry relay]: https://github.com/hoytech/strfry
 [dedicated support account]: https://support.nostr1.com/
 
