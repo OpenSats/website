@@ -21,7 +21,6 @@ export default function AuthorLayout({ children, content }: Props) {
     twitter,
     nostr,
     github,
-    website,
   } = content
 
   return (
@@ -80,7 +79,6 @@ export default function AuthorLayout({ children, content }: Props) {
                 <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} />
               )}
               {github && <SocialIcon kind="github" href={github} />}
-              {website && <SocialIcon kind="website" href={website} />}
               {twitter && <SocialIcon kind="twitter" href={twitter} />}
             </div>
           </div>
