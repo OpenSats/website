@@ -361,10 +361,10 @@ RSS.
 The application now supports category and tag organization, multiple reading
 themes, a [Chrome extension] for subscribing to feeds from the browser, and an
 admin dashboard for managing subscriptions. Feed syncing between devices is
-handled through a custom nostr event kind, with two-way sync and category
-support shipping in January 2026. A user's subscriptions and reading progress
-stay consistent whether they access Nostr Feedz from the web or from the
-command-line client.
+handled through a custom nostr event kind described in the [subscription sync
+spec], with two-way sync and category support shipping in January 2026. A user's
+subscriptions and reading progress stay consistent whether they access Nostr
+Feedz from the web or from the command-line client.
 
 That command-line client, [NostrFeedz-cli], extends the project to the computer
 terminal. It reads feeds and nostr long-form posts, stores everything locally
@@ -382,6 +382,7 @@ rely on RSS as their primary way of following content online.
 [Nostr Feedz]: https://github.com/PlebOne/Nostr-Feedz
 [RSS readers]: https://www.rssboard.org/rss-specification#whatIsRss
 [Chrome extension]: https://github.com/PlebOne/Nostr-Feedz/pull/2
+[subscription sync spec]: https://github.com/PlebOne/Nostr-Feedz/blob/main/SUBSCRIPTION_SYNC.md
 [NostrFeedz-cli]: https://github.com/PlebOne/NostrFeedz-cli
 [NIP-46]: https://github.com/nostr-protocol/nips/blob/master/46.md
 
