@@ -5,7 +5,7 @@ import { StepProps } from '../types'
 const inputClass =
   'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
 
-export default function ApplicantDetails({ register, errors }: StepProps) {
+export default function ApplicantDetails({ register, watch, errors }: StepProps) {
   return (
     <>
       <h2>Applicant Details</h2>
@@ -82,11 +82,13 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
         </span>
       </label>
 
-      <label className="block">
-        If someone else, please list the project&apos;s lead contributor or
-        maintainer{' '}
-        <input type="text" className={inputClass} {...register('other_lead')} />
-      </label>
+      {!watch('are_you_lead') && (
+        <label className="block">
+          If someone else, please list the project&apos;s lead contributor or
+          maintainer{' '}
+          <input type="text" className={inputClass} {...register('other_lead')} />
+        </label>
+      )}
     </>
   )
 }
