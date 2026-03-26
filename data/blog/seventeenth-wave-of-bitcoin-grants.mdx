@@ -1,0 +1,188 @@
+---
+title: "Seventeenth Wave of Bitcoin Grants"
+date: '2026-03-27'
+tags: ['OpenSats', 'grants', 'bitcoin', 'wave']
+authors: ['default', 'arvin', 'tuma']
+images: ['/static/images/blog/104-seventeenth-wave-of-bitcoin-grants.jpg']
+draft: false
+summary: "OpenSats is funding nine more open-source projects advancing the Bitcoin ecosystem."
+---
+
+OpenSats is pleased to announce the seventeenth wave of grants from our [General
+Fund], awarding three first-time grants and six grant renewals to open-source
+projects across the Bitcoin ecosystem.
+
+This round supports projects that bring transparency and direct access to three
+distinct layers of the Bitcoin experience, spanning on-chain privacy,
+ transaction construction, and open-hardware self-custody. Six renewed grants will
+continue to sustain work on education, payments, and developer training across
+the ecosystem.
+
+The three first-time grants in this wave go to:
+
+- [JoinMarket NG](#joinmarket-ng)
+- [rawBit](#rawbit)
+- [Specter DIY](#specter-diy)
+
+The six grant renewals have been awarded to:
+
+- Bitcoin Dev Launchpad ([Mar. 2025](/blog/let-a-thousand-flowers-bloom#bitcoin-dev-launchpad))
+- Bitcoin Jungle ([Sep. 2024](/blog/second-wave-of-education-grants#bitcoin-jungle))
+- Bitcoin Safe ([Mar. 2025](/blog/tenth-wave-of-bitcoin-grants#bitcoin-safe))
+- Bitshala ([Mar. 2025](/blog/let-a-thousand-flowers-bloom#bitshala))
+- Odudex for [Kern] ([Jul. 2024](/blog/bitcoin-grants-july-2024#krux))
+- Payjoin ([Jul. 2023](/blog/bitcoin-grants-july-2023#payjoin-dev-kit))
+
+These grants are made possible by donations to our General Fund. If you'd like
+to see free and open-source Bitcoin development continue to flourish, please
+consider setting up a recurring donation.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+Let's take a closer look at the projects in this wave and how they will make an
+impact on the Bitcoin ecosystem.
+
+---
+
+### JoinMarket NG
+
+[JoinMarket NG] is a reimplementation of the [JoinMarket protocol], a
+decentralized system that improves on-chain privacy for bitcoin users . The system works
+by combining inputs from multiple participants into a single transaction with
+equal-value outputs, making it difficult for malicious actors to identify and target
+individual users. The protocol uses a peer-to-peer model so transactions flow
+directly between users. JoinMarket NG is compatible with the original
+implementation, enabling users on either codebase to find and transact with each
+other. The project runs on a tested codebase with a built-in [Neutrino] based
+light client option, allowing people to participate without running a full
+Bitcoin node.
+
+With support from this grant, the project will undergo an external security
+audit to improve the code based on the findings. The project will add [nostr 
+relay] support for offer broadcasting to improve censorship resistance, patch
+known privacy vulnerabilities, and make it easier for liquidity providers to
+establish a verifiable reputation on the network. The project will also research
+[CoinJoinXT], [Lightning] integration, and [ecash] as a complementary privacy
+layer. The grant will additionally fund tutorials, videos, and onboarding
+materials for new users, alongside ongoing maintenance and compatibility with
+the broader network.
+
+Repository: [joinmarket-ng/joinmarket-ng]  
+License: MIT
+
+[JoinMarket NG]: https://joinmarket-ng.github.io/joinmarket-ng/
+[JoinMarket protocol]: https://github.com/JoinMarket-Org/joinmarket-clientserver
+[Neutrino]: https://github.com/lightninglabs/neutrino?tab=readme-ov-file#neutrino-privacy-preserving-bitcoin-light-client
+[nostr relay]: https://github.com/nostr-protocol/nostr?tab=readme-ov-file#how-it-works
+[CoinJoinXT]: https://en.bitcoin.it/wiki/CoinJoinXT
+[Lightning]: https://lightning.network/
+[ecash]: https://cashu.space/
+[joinmarket-ng/joinmarket-ng]: https://github.com/m0wer/joinmarket-ng
+
+### rawBit
+
+[rawBit] is a visual editor that helps people see how bitcoin transactions are
+built. It presents transactions as connected blocks on a canvas so users can
+link together the pieces that make up a payment and see the underlying data
+update as they work. The interface shows the raw transaction, transaction ID,
+and fees in real time. A script view walks through each step that the Bitcoin
+network checks before accepting a transaction. rawBit currently offers fourteen
+guided lessons that cover patterns such as simple payments, multisig, timelocks,
+`OP_RETURN` anchors, payment channels, [SegWit] formats, and [Taproot] key-path
+and script-path spends. Each example can be broadcast to Bitcoin [testnet] for
+independent verification. This gives developers, educators, and curious learners
+a hands-on way to explore how Bitcoin transactions are structured and validated
+at the byte and script level.
+
+With support from this grant, rawBit will grow its library of guided content for
+Bitcoin's transaction layer. The project plans to expand to twenty or more
+guided lessons and add flows that cover Lightning channel and [HTLC] patterns,
+privacy-focused payment patterns such as [CoinJoin], [PSBT] workflows, and early
+[covenant] experiments. Each new lesson will pair an interactive canvas flow with
+clear written explanations and short video walkthroughs. This grant will also
+support ongoing maintenance, testing, and interface improvements so the tool
+remains a stable visual workspace for teaching, reviewing, and discussing
+bitcoin transactions in classrooms, workshops, and independent study.
+
+Repository: [rawBit-io/rawbit]  
+License: MIT
+
+[rawBit]: https://rawbit.io/
+[SegWit]: https://bitcoinops.org/en/topics/segregated-witness/
+[Taproot]: https://bitcoinops.org/en/topics/taproot/
+[testnet]: https://bitcoinops.org/en/topics/testnet/
+[HTLC]: https://bitcoinops.org/en/topics/htlc/
+[CoinJoin]: https://bitcoinops.org/en/topics/coinjoin/
+[PSBT]: https://bitcoinops.org/en/topics/psbt/
+[covenant]: https://bitcoinops.org/en/topics/covenants/
+[rawBit-io/rawbit]: https://github.com/rawBit-io/rawbit
+
+### Specter DIY
+
+[Specter DIY] is an open-source hardware signing device that users can assemble
+from off-the-shelf components and verify from the ground up. The project
+publishes everything from firmware to schematics to give individuals,
+researchers, and developers full visibility into how their signing device works.
+Its firmware is written in [MicroPython], making the code accessible to audit
+and modify, and uses the `secp256k1` library from Bitcoin Core for cryptographic
+operations and the [`LVGL`] library for its graphical interface. Specter DIY
+also maintains [`embit`], a lightweight Bitcoin library for MicroPython and
+Python 3 that has become a shared foundation for other open-hardware projects
+including [Krux] and [SeedSigner], reducing duplicated effort across the
+ecosystem. A secure bootloader with multisig firmware signing adds a layer of
+upgrade verification, and optional smart-card support provides additional key
+storage options.
+
+With support from this grant, the project will update the foundational software
+it builds on by migrating to `LVGL` v9 and MicroPython v1.26, and introducing
+reproducible builds for compilation and firmware signing. The project will also
+build out automated testing and continuous integration pipelines. Additional
+milestones include expanded documentation and contributor onboarding guides, a
+redesigned user interface informed by community feedback, and a modular firmware
+architecture that supports independently developed apps for features such as the
+[Liquid Network] and [`BIP-85`] derived seeds.
+
+Repository: [cryptoadvance/specter-diy]  
+License: MIT
+
+[Specter DIY]: https://specter.solutions
+[MicroPython]: https://micropython.org/
+[`LVGL`]: https://docs.lvgl.io/master/introduction/index.html
+[`embit`]: https://embit.rocks/#/
+[Krux]: /blog/bitcoin-grants-december-2023#krux
+[SeedSigner]: /projects/seedsigner
+[Liquid Network]: https://liquid.net/
+[`BIP-85`]: https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki
+[cryptoadvance/specter-diy]: https://github.com/cryptoadvance/specter-diy
+
+---
+
+Transaction literacy, on-chain privacy, and key security reinforce each other.
+The projects in this wave address all three.
+
+rawBit opens up the transaction layer for education and prototyping. For
+privacy, JoinMarket NG offers CoinJoin infrastructure that operates without
+central coordination. And Specter DIY gives users a signing device they can
+build, inspect, and reproduce on their own.
+
+OpenSats has issued [more than 390 grants] to date, underscoring both the scale
+of our program and the ongoing need to support open-source contributors building
+across the ecosystem.
+
+Our ability to fund work like this depends on the generosity of our donors.
+Please consider supporting the Bitcoin ecosystem by setting up a recurring
+donation.
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+If you are building free and open-source Bitcoin software, we encourage you to
+[apply for funding].
+
+[General Fund]: /funds/general
+[Kern]: https://github.com/odudex/Kern
+[more than 390 grants]: /transparency
+[apply for funding]: /apply
