@@ -16,7 +16,7 @@ const STEPS = [
   {
     id: 'prerequisites',
     title: 'Prerequisites',
-    fields: ['read_criteria', 'read_faq'],
+    fields: ['read_criteria', 'read_faq', 'free_open_source'],
   },
   {
     id: 'project',
@@ -26,7 +26,7 @@ const STEPS = [
   {
     id: 'source',
     title: 'Source Code',
-    fields: ['free_open_source', 'license'],
+    fields: ['license'],
   },
   {
     id: 'timeline',

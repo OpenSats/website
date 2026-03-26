@@ -46,6 +46,20 @@ export default function Prerequisites({ register, errors }: StepProps) {
         name="read_faq"
         message="Please read the Application FAQ before continuing"
       />
+
+      <label className="inline-flex items-start gap-2">
+        <input
+          type="checkbox"
+          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('free_open_source', { required: true })}
+        />
+        <span>The project is free and open-source *</span>
+      </label>
+      <FieldError
+        errors={errors}
+        name="free_open_source"
+        message="Your project must be free and open-source to be eligible"
+      />
     </>
   )
 }

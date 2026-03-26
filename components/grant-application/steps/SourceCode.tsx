@@ -15,20 +15,6 @@ export default function SourceCode({ register, errors }: StepProps) {
         <input type="text" className={inputClass} {...register('github')} />
       </label>
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('free_open_source', { required: true })}
-        />
-        <span className="ml-2">Is the project free and open-source? *</span>
-      </label>
-      <FieldError
-        errors={errors}
-        name="free_open_source"
-        message="Your project must be free and open-source to be eligible"
-      />
-
       <label className="block">
         Open-Source License *<br />
         <input
