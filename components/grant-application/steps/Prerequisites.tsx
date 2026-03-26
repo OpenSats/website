@@ -20,8 +20,7 @@ export default function Prerequisites({ register, errors }: StepProps) {
         />
         <span>
           I have read the{' '}
-          <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
-          *
+          <CustomLink href="/apply#criteria">application criteria</CustomLink>
         </span>
       </label>
       <FieldError
@@ -38,7 +37,7 @@ export default function Prerequisites({ register, errors }: StepProps) {
         />
         <span>
           I have read the{' '}
-          <CustomLink href="/faq/application">Application FAQ</CustomLink> *
+          <CustomLink href="/faq/application">Application FAQ</CustomLink>
         </span>
       </label>
       <FieldError
@@ -53,7 +52,7 @@ export default function Prerequisites({ register, errors }: StepProps) {
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('free_open_source', { required: true })}
         />
-        <span>The project is free and open-source *</span>
+        <span>The project is free and open-source</span>
       </label>
       <FieldError
         errors={errors}
