@@ -29,7 +29,7 @@ export default function StepIndicator({
                       : 'border-2 border-gray-300 text-gray-400 dark:border-gray-600 dark:text-gray-500'
                 }`}
               >
-                {isCompleted ? '\u2713' : i + 1}
+                {isCompleted ? '\u2713' : i}
               </span>
               {i < steps.length - 1 && (
                 <span
