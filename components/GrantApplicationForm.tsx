@@ -11,6 +11,7 @@ import SourceCode from './grant-application/steps/SourceCode'
 import Timeline from './grant-application/steps/Timeline'
 import Budget from './grant-application/steps/Budget'
 import ReferencesReview from './grant-application/steps/ReferencesReview'
+import AnythingElse from './grant-application/steps/AnythingElse'
 import { FormValues } from './grant-application/types'
 
 const STEPS = [
@@ -53,6 +54,11 @@ const STEPS = [
     id: 'budget',
     title: 'Budget',
     fields: ['proposed_budget'],
+  },
+  {
+    id: 'anything_else',
+    title: 'Final',
+    fields: [],
   },
 ] as const
 
@@ -158,6 +164,7 @@ export default function ApplicationForm() {
       {currentStep === 4 && <SourceCode {...stepProps} />}
       {currentStep === 5 && <Timeline {...stepProps} />}
       {currentStep === 6 && <Budget {...stepProps} />}
+      {currentStep === 7 && <AnythingElse {...stepProps} />}
 
       <StepNavigation
         currentStep={currentStep}
