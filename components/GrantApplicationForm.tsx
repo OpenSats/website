@@ -17,7 +17,7 @@ const STEPS = [
   {
     id: 'prerequisites',
     title: 'Prerequisites',
-    fields: ['read_criteria', 'read_faq', 'free_open_source'],
+    fields: ['read_criteria', 'read_faq', 'has_references', 'free_open_source'],
   },
   {
     id: 'applicant',

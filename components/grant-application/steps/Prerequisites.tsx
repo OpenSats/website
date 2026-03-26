@@ -50,6 +50,23 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         <input
           type="checkbox"
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('has_references', { required: true })}
+        />
+        <span>
+          I have prepared two strong reference letters written by reputable
+          peers
+        </span>
+      </label>
+      <FieldError
+        errors={errors}
+        name="has_references"
+        message="Please prepare your reference letters before continuing"
+      />
+
+      <label className="inline-flex items-start gap-2">
+        <input
+          type="checkbox"
+          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('free_open_source', { required: true })}
         />
         <span>The project has a proper FOSS license</span>
