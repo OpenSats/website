@@ -83,8 +83,8 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        If someone else, please list the project&apos;s Lead Contributor or
-        Maintainer{' '}
+        If someone else, please list the project&apos;s lead contributor or
+        maintainer{' '}
         <input type="text" className={inputClass} {...register('other_lead')} />
       </label>
     </>
