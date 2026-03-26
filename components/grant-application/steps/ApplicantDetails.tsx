@@ -69,6 +69,8 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
         <textarea className={inputClass} {...register('other_contact')} />
       </label>
 
+      <hr />
+
       <label className="inline-flex items-center">
         <input
           type="checkbox"
