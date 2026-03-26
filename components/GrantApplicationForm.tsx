@@ -37,7 +37,7 @@ const STEPS = [
   {
     id: 'source',
     title: 'Source Code',
-    fields: ['license'],
+    fields: ['github', 'license'],
   },
   {
     id: 'timeline',

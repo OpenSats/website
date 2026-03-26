@@ -11,8 +11,9 @@ export default function SourceCode({ register, errors }: StepProps) {
       <h2>Source Code</h2>
 
       <label className="block">
-        Repository (GitHub or similar, if applicable)
-        <input type="text" className={inputClass} {...register('github')} />
+        Repository (GitHub or similar) *
+        <input type="text" className={inputClass} {...register('github', { required: true })} />
+        <FieldError errors={errors} name="github" />
       </label>
 
       <label className="block">
