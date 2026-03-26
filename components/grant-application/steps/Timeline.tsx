@@ -27,21 +27,6 @@ export default function Timeline({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Project Timeline and Potential Milestones *<br />
-        <small>
-          This will help us evaluate overall scope and potential grant duration.
-          (It&apos;s ok to pivot and/or work on something else, just let us
-          know. For now we want to see that you have a rough plan and you know
-          what you&apos;re doing.)
-        </small>
-        <textarea
-          className={inputClass}
-          {...register('timelines', { required: true })}
-        />
-        <FieldError errors={errors} name="timelines" />
-      </label>
-
-      <label className="block">
         Time Commitment
         <br />
         <small>How much time are you going to commit to the project?</small>
@@ -55,6 +40,21 @@ export default function Timeline({ register, errors }: StepProps) {
           <option value="25%">25% - Side Project</option>
         </select>
         <FieldError errors={errors} name="commitment" />
+      </label>
+
+      <label className="block">
+        Project Timeline and Potential Milestones *<br />
+        <small>
+          This will help us evaluate overall scope and potential grant duration.
+          (It&apos;s ok to pivot and/or work on something else, just let us
+          know. For now we want to see that you have a rough plan and you know
+          what you&apos;re doing.)
+        </small>
+        <textarea
+          className={inputClass}
+          {...register('timelines', { required: true })}
+        />
+        <FieldError errors={errors} name="timelines" />
       </label>
     </>
   )
