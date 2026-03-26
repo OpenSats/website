@@ -32,7 +32,7 @@ export default function Budget({ register, errors }: StepProps) {
           {...register('has_received_funding')}
         />
         <span className="ml-2">
-          Has this project received any prior funding?
+          Have you or this project received any prior funding?
         </span>
       </label>
 
