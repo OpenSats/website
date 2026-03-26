@@ -25,6 +25,11 @@ const STEPS = [
     fields: ['your_name', 'email'],
   },
   {
+    id: 'references',
+    title: 'References',
+    fields: ['references', 'years_experience'],
+  },
+  {
     id: 'project',
     title: 'Project',
     fields: [
@@ -48,11 +53,6 @@ const STEPS = [
     id: 'budget',
     title: 'Budget',
     fields: ['proposed_budget'],
-  },
-  {
-    id: 'references',
-    title: 'References',
-    fields: ['references', 'years_experience'],
   },
 ] as const
 
@@ -153,11 +153,11 @@ export default function ApplicationForm() {
 
       {currentStep === 0 && <Prerequisites {...stepProps} />}
       {currentStep === 1 && <ApplicantDetails {...stepProps} />}
-      {currentStep === 2 && <ProjectDetails {...stepProps} />}
-      {currentStep === 3 && <SourceCode {...stepProps} />}
-      {currentStep === 4 && <Timeline {...stepProps} />}
-      {currentStep === 5 && <Budget {...stepProps} />}
-      {currentStep === 6 && <ReferencesReview {...stepProps} />}
+      {currentStep === 2 && <ReferencesReview {...stepProps} />}
+      {currentStep === 3 && <ProjectDetails {...stepProps} />}
+      {currentStep === 4 && <SourceCode {...stepProps} />}
+      {currentStep === 5 && <Timeline {...stepProps} />}
+      {currentStep === 6 && <Budget {...stepProps} />}
 
       <StepNavigation
         currentStep={currentStep}
