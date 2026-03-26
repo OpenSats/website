@@ -40,7 +40,7 @@ export default function SourceCode({ register, errors }: StepProps) {
       </label>
 
       <hr />
-      <h2>Screenshots & Videos</h2>
+      <h2>Project Media</h2>
 
       <label className="block">
         Project Website
