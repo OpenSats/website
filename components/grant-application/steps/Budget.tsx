@@ -22,6 +22,9 @@ export default function Budget({ register, errors }: StepProps) {
         <FieldError errors={errors} name="proposed_budget" />
       </label>
 
+      <hr />
+      <h2>Prior Funding</h2>
+
       <label className="inline-flex items-center">
         <input
           type="checkbox"
