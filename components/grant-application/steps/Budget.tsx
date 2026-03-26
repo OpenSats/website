@@ -16,6 +16,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
           the funds will be used and the grand total.
         </small>
         <textarea
+          rows={5}
           className={inputClass}
           {...register('proposed_budget', { required: true })}
         />

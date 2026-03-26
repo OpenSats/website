@@ -51,6 +51,7 @@ export default function Timeline({ register, errors }: StepProps) {
           what you&apos;re doing.)
         </small>
         <textarea
+          rows={5}
           className={inputClass}
           {...register('timelines', { required: true })}
         />

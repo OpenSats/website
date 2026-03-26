@@ -17,6 +17,7 @@ export default function ReferencesReview({ register, errors }: StepProps) {
           project.
         </small>
         <textarea
+          rows={5}
           className={inputClass}
           {...register('references', { required: true })}
         />
@@ -30,7 +31,7 @@ export default function ReferencesReview({ register, errors }: StepProps) {
           Please list any prior contributions, preferably to other open-source
           or Bitcoin-related projects.
         </small>
-        <textarea className={inputClass} {...register('bios')} />
+        <textarea rows={5} className={inputClass} {...register('bios')} />
       </label>
 
       <label className="block">

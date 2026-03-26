@@ -152,6 +152,7 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
           quickly.
         </small>
         <textarea
+          rows={5}
           className={inputClass}
           {...register('short_description', { required: true })}
         />
@@ -165,6 +166,7 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
           open-source community?
         </small>
         <textarea
+          rows={5}
           className={inputClass}
           {...register('potential_impact', { required: true })}
         />
