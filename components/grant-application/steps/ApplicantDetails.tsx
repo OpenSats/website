@@ -83,10 +83,7 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
           sharing in case we need to reach out with questions. These could
           include nostr pubkeys, social media handles, etc.
         </small>
-        <textarea
-          className={inputClass}
-          {...register('other_contact')}
-        />
+        <textarea className={inputClass} {...register('other_contact')} />
       </label>
     </>
   )

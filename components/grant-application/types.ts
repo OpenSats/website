@@ -1,8 +1,4 @@
-import {
-  UseFormRegister,
-  UseFormWatch,
-  FieldErrors,
-} from 'react-hook-form'
+import { UseFormRegister, UseFormWatch, FieldErrors } from 'react-hook-form'
 
 export type FormValues = { [key: string]: unknown }
 

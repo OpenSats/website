@@ -7,7 +7,8 @@ import StepNavigation from './grant-application/StepNavigation'
 import Prerequisites from './grant-application/steps/Prerequisites'
 import ProjectDetails from './grant-application/steps/ProjectDetails'
 import SourceCode from './grant-application/steps/SourceCode'
-import TimelineBudget from './grant-application/steps/TimelineBudget'
+import Timeline from './grant-application/steps/Timeline'
+import Budget from './grant-application/steps/Budget'
 import ApplicantDetails from './grant-application/steps/ApplicantDetails'
 import ReferencesReview from './grant-application/steps/ReferencesReview'
 import { FormValues } from './grant-application/types'
@@ -21,7 +22,12 @@ const STEPS = [
   {
     id: 'project',
     title: 'Project',
-    fields: ['main_focus', 'project_name', 'short_description', 'potential_impact'],
+    fields: [
+      'main_focus',
+      'project_name',
+      'short_description',
+      'potential_impact',
+    ],
   },
   {
     id: 'source',
@@ -30,8 +36,13 @@ const STEPS = [
   },
   {
     id: 'timeline',
-    title: 'Timeline & Budget',
-    fields: ['duration', 'timelines', 'commitment', 'proposed_budget'],
+    title: 'Timeline',
+    fields: ['duration', 'timelines', 'commitment'],
+  },
+  {
+    id: 'budget',
+    title: 'Budget',
+    fields: ['proposed_budget'],
   },
   {
     id: 'applicant',
@@ -136,9 +147,10 @@ export default function ApplicationForm() {
       {currentStep === 0 && <Prerequisites {...stepProps} />}
       {currentStep === 1 && <ProjectDetails {...stepProps} />}
       {currentStep === 2 && <SourceCode {...stepProps} />}
-      {currentStep === 3 && <TimelineBudget {...stepProps} />}
-      {currentStep === 4 && <ApplicantDetails {...stepProps} />}
-      {currentStep === 5 && <ReferencesReview {...stepProps} />}
+      {currentStep === 3 && <Timeline {...stepProps} />}
+      {currentStep === 4 && <Budget {...stepProps} />}
+      {currentStep === 5 && <ApplicantDetails {...stepProps} />}
+      {currentStep === 6 && <ReferencesReview {...stepProps} />}
 
       <StepNavigation
         currentStep={currentStep}

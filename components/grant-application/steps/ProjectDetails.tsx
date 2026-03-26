@@ -15,7 +15,10 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
         Main Focus *
         <br />
         <small>In which area will your project have the most impact?</small>
-        <select className={inputClass} {...register('main_focus', { required: true })}>
+        <select
+          className={inputClass}
+          {...register('main_focus', { required: true })}
+        >
           <option value="">(Choose One)</option>
           <option value="core">Bitcoin Core</option>
           <option value="education">Education</option>
@@ -54,8 +57,8 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
                     >
                       open license
                     </a>
-                  </strong>
-                  {' '}&#185;
+                  </strong>{' '}
+                  &#185;
                 </li>
                 <li>
                   Educational material MUST be publicly available to anyone (for

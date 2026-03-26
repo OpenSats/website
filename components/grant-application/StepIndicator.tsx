@@ -25,8 +25,8 @@ export default function StepIndicator({
                   isCompleted
                     ? 'bg-orange-500 text-white'
                     : isCurrent
-                      ? 'border-2 border-orange-500 text-orange-500'
-                      : 'border-2 border-gray-300 text-gray-400 dark:border-gray-600 dark:text-gray-500'
+                    ? 'border-2 border-orange-500 text-orange-500'
+                    : 'border-2 border-gray-300 text-gray-400 dark:border-gray-600 dark:text-gray-500'
                 }`}
               >
                 {isCompleted ? '\u2713' : i}

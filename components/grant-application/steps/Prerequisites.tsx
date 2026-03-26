@@ -52,7 +52,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
           {...register('free_open_source', { required: true })}
         />
-        <span>All components of the project have a proper FOSS license</span>
+        <span>The project has a proper FOSS license</span>
       </label>
       <FieldError
         errors={errors}
