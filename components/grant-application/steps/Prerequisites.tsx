@@ -53,8 +53,11 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           {...register('has_references', { required: true })}
         />
         <span>
-          I have two or more written reference statements from people familiar
-          with my work
+          I have two or more{' '}
+          <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
+            written reference statements
+          </CustomLink>{' '}
+          from people familiar with my work
         </span>
       </label>
       <FieldError
