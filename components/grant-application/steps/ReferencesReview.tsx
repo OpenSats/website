@@ -48,7 +48,6 @@ export default function ReferencesReview({ register, errors }: StepProps) {
         />
         <FieldError errors={errors} name="years_experience" />
       </label>
-
     </>
   )
 }

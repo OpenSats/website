@@ -55,7 +55,11 @@ export default function AnythingElse({ register }: StepProps) {
 
       <label className="block">
         Feel free to share whatever else might be important.
-        <textarea rows={5} className={inputClass} {...register('anything_else')} />
+        <textarea
+          rows={5}
+          className={inputClass}
+          {...register('anything_else')}
+        />
       </label>
 
       <div className="prose">

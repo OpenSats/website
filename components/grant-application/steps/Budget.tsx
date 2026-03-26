@@ -54,7 +54,8 @@ export default function Budget({ register, watch, errors }: StepProps) {
           {...register('has_additional_funding')}
         />
         <span className="ml-2">
-          I receive or plan to receive additional funding during the grant period
+          I receive or plan to receive additional funding during the grant
+          period
         </span>
       </label>
 

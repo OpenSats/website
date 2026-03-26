@@ -153,7 +153,11 @@ export default function ApplicationForm() {
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
 
-      <StepIndicator steps={STEPS} currentStep={currentStep} onStepClick={handleStepClick} />
+      <StepIndicator
+        steps={STEPS}
+        currentStep={currentStep}
+        onStepClick={handleStepClick}
+      />
 
       <hr />
 
