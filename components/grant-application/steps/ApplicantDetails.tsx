@@ -45,7 +45,7 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
           {...register('are_you_lead')}
         />
         <span className="ml-2">
-          Are you the Project Lead / Lead Contributor?
+          I am the lead developer or maintainer of this project
         </span>
       </label>
 
