@@ -38,23 +38,6 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
         <FieldError errors={errors} name="email" />
       </label>
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('are_you_lead')}
-        />
-        <span className="ml-2">
-          I am the lead developer or maintainer of this project
-        </span>
-      </label>
-
-      <label className="block">
-        If someone else, please list the project&apos;s Lead Contributor or
-        Maintainer{' '}
-        <input type="text" className={inputClass} {...register('other_lead')} />
-      </label>
-
       <label className="block">
         Personal Github (or similar, if applicable)
         <input
@@ -84,6 +67,23 @@ export default function ApplicantDetails({ register, errors }: StepProps) {
           include nostr pubkeys, social media handles, etc.
         </small>
         <textarea className={inputClass} {...register('other_contact')} />
+      </label>
+
+      <label className="inline-flex items-center">
+        <input
+          type="checkbox"
+          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('are_you_lead')}
+        />
+        <span className="ml-2">
+          I am the lead developer or maintainer of this project
+        </span>
+      </label>
+
+      <label className="block">
+        If someone else, please list the project&apos;s Lead Contributor or
+        Maintainer{' '}
+        <input type="text" className={inputClass} {...register('other_lead')} />
       </label>
     </>
   )
