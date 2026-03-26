@@ -5,11 +5,11 @@ import { fetchPostJSON } from '../utils/api-helpers'
 import StepIndicator from './grant-application/StepIndicator'
 import StepNavigation from './grant-application/StepNavigation'
 import Prerequisites from './grant-application/steps/Prerequisites'
+import ApplicantDetails from './grant-application/steps/ApplicantDetails'
 import ProjectDetails from './grant-application/steps/ProjectDetails'
 import SourceCode from './grant-application/steps/SourceCode'
 import Timeline from './grant-application/steps/Timeline'
 import Budget from './grant-application/steps/Budget'
-import ApplicantDetails from './grant-application/steps/ApplicantDetails'
 import ReferencesReview from './grant-application/steps/ReferencesReview'
 import { FormValues } from './grant-application/types'
 
@@ -18,6 +18,11 @@ const STEPS = [
     id: 'prerequisites',
     title: 'Prerequisites',
     fields: ['read_criteria', 'read_faq', 'free_open_source'],
+  },
+  {
+    id: 'applicant',
+    title: 'Applicant',
+    fields: ['your_name', 'email'],
   },
   {
     id: 'project',
@@ -43,11 +48,6 @@ const STEPS = [
     id: 'budget',
     title: 'Budget',
     fields: ['proposed_budget'],
-  },
-  {
-    id: 'applicant',
-    title: 'Applicant',
-    fields: ['your_name', 'email'],
   },
   {
     id: 'references',
@@ -145,11 +145,11 @@ export default function ApplicationForm() {
       <hr />
 
       {currentStep === 0 && <Prerequisites {...stepProps} />}
-      {currentStep === 1 && <ProjectDetails {...stepProps} />}
-      {currentStep === 2 && <SourceCode {...stepProps} />}
-      {currentStep === 3 && <Timeline {...stepProps} />}
-      {currentStep === 4 && <Budget {...stepProps} />}
-      {currentStep === 5 && <ApplicantDetails {...stepProps} />}
+      {currentStep === 1 && <ApplicantDetails {...stepProps} />}
+      {currentStep === 2 && <ProjectDetails {...stepProps} />}
+      {currentStep === 3 && <SourceCode {...stepProps} />}
+      {currentStep === 4 && <Timeline {...stepProps} />}
+      {currentStep === 5 && <Budget {...stepProps} />}
       {currentStep === 6 && <ReferencesReview {...stepProps} />}
 
       <StepNavigation
