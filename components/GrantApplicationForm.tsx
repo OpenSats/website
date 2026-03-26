@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import StepIndicator from './grant-application/StepIndicator'
 import StepNavigation from './grant-application/StepNavigation'
+import Prerequisites from './grant-application/steps/Prerequisites'
 import ProjectDetails from './grant-application/steps/ProjectDetails'
 import SourceCode from './grant-application/steps/SourceCode'
 import TimelineBudget from './grant-application/steps/TimelineBudget'
@@ -12,6 +13,11 @@ import ReferencesReview from './grant-application/steps/ReferencesReview'
 import { FormValues } from './grant-application/types'
 
 const STEPS = [
+  {
+    id: 'prerequisites',
+    title: 'Prerequisites',
+    fields: ['read_criteria', 'read_faq'],
+  },
   {
     id: 'project',
     title: 'Project',
@@ -127,11 +133,12 @@ export default function ApplicationForm() {
 
       <hr />
 
-      {currentStep === 0 && <ProjectDetails {...stepProps} />}
-      {currentStep === 1 && <SourceCode {...stepProps} />}
-      {currentStep === 2 && <TimelineBudget {...stepProps} />}
-      {currentStep === 3 && <ApplicantDetails {...stepProps} />}
-      {currentStep === 4 && <ReferencesReview {...stepProps} />}
+      {currentStep === 0 && <Prerequisites {...stepProps} />}
+      {currentStep === 1 && <ProjectDetails {...stepProps} />}
+      {currentStep === 2 && <SourceCode {...stepProps} />}
+      {currentStep === 3 && <TimelineBudget {...stepProps} />}
+      {currentStep === 4 && <ApplicantDetails {...stepProps} />}
+      {currentStep === 5 && <ReferencesReview {...stepProps} />}
 
       <StepNavigation
         currentStep={currentStep}

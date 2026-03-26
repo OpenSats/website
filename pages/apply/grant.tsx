@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
-import CustomLink from '@/components/Link'
 
 const GrantApplicationForm = dynamic(
   () => import('@/components/GrantApplicationForm'),
@@ -23,13 +22,6 @@ export default function Apply() {
           depending on your location, bitcoin addresses, lightning addresses, or
           similar payment information that is required to receive donation
           payouts from OpenSats.
-        </p>
-        <p>
-          Make sure to read the{' '}
-          <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
-          and the{' '}
-          <CustomLink href="/faq/application">Application FAQ</CustomLink>{' '}
-          before sending in an application.
         </p>
         <GrantApplicationForm />
       </PageSection>
