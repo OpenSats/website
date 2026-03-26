@@ -12,10 +12,8 @@ export default function Budget({ register, errors }: StepProps) {
       <label className="block">
         Costs & Proposed Budget *<br />
         <small>
-          Current or estimated costs of the project. If you&apos;re applying for
-          a grant from the general fund, please submit a proposed budget (in
-          USD) around how much funding you are requesting and how it will be
-          used. Please include the grand total (in USD) to avoid any confusion.
+          Please submit a proposed budget in USD, including a breakdown of how
+          the funds will be used and the grand total.
         </small>
         <textarea
           className={inputClass}
