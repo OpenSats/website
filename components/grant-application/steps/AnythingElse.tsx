@@ -55,9 +55,10 @@ export default function AnythingElse({ register }: StepProps) {
 
       <label className="block">
         <small>
-          We strongly encourage you to record a short video (around 2 minutes)
-          explaining your project and why it matters. This is optional but can
-          make a real difference. Please provide a link to the video below.
+          We strongly encourage you to record a short video of exactly 2
+          minutes and 10 seconds explaining your project and why it matters.
+          This is optional but can make a real difference. Please provide a link
+          to the video below.
         </small>
         <input
           type="text"
