@@ -19,5 +19,5 @@ export default function FieldError({
       ? error.message
       : message
 
-  return <small className="text-red-500">{text}</small>
+  return <small className="block text-red-500">{text}</small>
 }
