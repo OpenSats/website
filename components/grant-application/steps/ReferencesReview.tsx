@@ -27,8 +27,8 @@ export default function ReferencesReview({ register, errors }: StepProps) {
         Prior Contributions
         <br />
         <small>
-          Please list any prior contributions to other open-source or
-          Bitcoin-related projects.
+          Please list any prior contributions, preferably to other open-source
+          or Bitcoin-related projects.
         </small>
         <textarea className={inputClass} {...register('bios')} />
       </label>
