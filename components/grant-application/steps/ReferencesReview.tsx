@@ -34,12 +34,13 @@ export default function ReferencesReview({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Years of Developer Experience
+        Years of Developer Experience *
         <input
           type="text"
           className={inputClass}
-          {...register('years_experience')}
+          {...register('years_experience', { required: true })}
         />
+        <FieldError errors={errors} name="years_experience" />
       </label>
 
       <hr />

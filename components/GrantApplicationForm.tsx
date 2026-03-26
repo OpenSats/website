@@ -52,7 +52,7 @@ const STEPS = [
   {
     id: 'references',
     title: 'References',
-    fields: ['references'],
+    fields: ['references', 'years_experience'],
   },
 ] as const
 
