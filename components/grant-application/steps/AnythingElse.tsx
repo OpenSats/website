@@ -1,3 +1,4 @@
+import CustomLink from '@/components/Link'
 import { StepProps } from '../types'
 
 const inputClass =
@@ -26,6 +27,21 @@ export default function AnythingElse({ register }: StepProps) {
         <span>
           I promise that a human, with good taste and good values, is in charge
           of the project.
+        </span>
+      </label>
+
+      <label className="inline-flex items-start gap-2">
+        <input
+          type="checkbox"
+          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('discipline_and_agency')}
+        />
+        <span>
+          I promise to bring{' '}
+          <CustomLink href="https://mariozechner.at/posts/2026-03-25-thoughts-on-slowing-the-fuck-down/">
+            discipline and agency
+          </CustomLink>{' '}
+          to the project.
         </span>
       </label>
 
