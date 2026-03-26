@@ -43,6 +43,30 @@ export default function Budget({ register, watch, errors }: StepProps) {
           <textarea className={inputClass} {...register('what_funding')} />
         </label>
       )}
+
+      <hr />
+      <h2>Additional Funding Sources</h2>
+
+      <label className="inline-flex items-center">
+        <input
+          type="checkbox"
+          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('has_additional_funding')}
+        />
+        <span className="ml-2">
+          I receive or plan to receive additional funding during the grant period
+        </span>
+      </label>
+
+      {watch('has_additional_funding') && (
+        <label className="block">
+          Please describe the additional funding sources and amounts:
+          <textarea
+            className={inputClass}
+            {...register('additional_funding')}
+          />
+        </label>
+      )}
     </>
   )
 }
