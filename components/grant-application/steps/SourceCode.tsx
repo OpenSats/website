@@ -8,7 +8,7 @@ const inputClass =
 export default function SourceCode({ register, errors }: StepProps) {
   return (
     <>
-      <h2>Source Code</h2>
+      <h2>Project Source Code</h2>
 
       <label className="block">
         Repository (GitHub or similar) *
