@@ -40,9 +40,25 @@ export default function SourceCode({ register, errors }: StepProps) {
       </label>
 
       <hr />
-      <h2>Screenshots & Videos</h2>
+      <h2>Screenshots & Media</h2>
 
       <label className="block">
+        Project Website
+        <br />
+        <small>
+          If you have a website or a project page, please provide the URL.
+        </small>
+        <input
+          type="text"
+          placeholder="https://"
+          className={inputClass}
+          {...register('website')}
+        />
+      </label>
+
+      <label className="block">
+        Screenshots & Videos
+        <br />
         <small>
           If applicable, please provide links to screenshots, demo videos, or
           other visual materials that showcase your project.

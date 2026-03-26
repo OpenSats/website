@@ -173,19 +173,6 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
         <FieldError errors={errors} name="potential_impact" />
       </label>
 
-      <label className="block">
-        Project Website
-        <br />
-        <small>
-          If you have a website or a project page, please provide the URL.
-        </small>
-        <input
-          type="text"
-          placeholder="https://"
-          className={inputClass}
-          {...register('website')}
-        />
-      </label>
     </>
   )
 }
