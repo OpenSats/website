@@ -96,6 +96,13 @@ export default function ApplicationForm() {
     scrollToTop()
   }
 
+  const handleStepClick = (step: number) => {
+    if (step < currentStep) {
+      setCurrentStep(step)
+      scrollToTop()
+    }
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     setLoading(true)
@@ -140,7 +147,7 @@ export default function ApplicationForm() {
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
 
-      <StepIndicator steps={STEPS} currentStep={currentStep} />
+      <StepIndicator steps={STEPS} currentStep={currentStep} onStepClick={handleStepClick} />
 
       <hr />
 

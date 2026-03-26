@@ -12,7 +12,11 @@ export default function SourceCode({ register, errors }: StepProps) {
 
       <label className="block">
         Repository (GitHub or similar) *
-        <input type="text" className={inputClass} {...register('github', { required: true })} />
+        <input
+          type="text"
+          className={inputClass}
+          {...register('github', { required: true })}
+        />
         <FieldError errors={errors} name="github" />
       </label>
 
