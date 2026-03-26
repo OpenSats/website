@@ -25,13 +25,18 @@ export default function ReferencesReview({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Prior Contributions
+        Prior Contributions *
         <br />
         <small>
           Please list any prior contributions, preferably to other open-source
           or Bitcoin-related projects.
         </small>
-        <textarea rows={5} className={inputClass} {...register('bios')} />
+        <textarea
+          rows={5}
+          className={inputClass}
+          {...register('bios', { required: true })}
+        />
+        <FieldError errors={errors} name="bios" />
       </label>
 
       <label className="block">
