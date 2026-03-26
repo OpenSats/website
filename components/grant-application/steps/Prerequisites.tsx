@@ -53,8 +53,8 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           {...register('has_references', { required: true })}
         />
         <span>
-          I have prepared two strong reference letters written by reputable
-          peers
+          I have two or more written reference statements from people familiar
+          with my work
         </span>
       </label>
       <FieldError
