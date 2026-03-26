@@ -37,8 +37,7 @@ export default function Budget({ register, errors }: StepProps) {
 
       <label className="block">
         Include details of all prior funding (dates & amounts):
-        <input
-          type="text"
+        <textarea
           className={inputClass}
           {...register('what_funding')}
         />
