@@ -38,6 +38,20 @@ export default function SourceCode({ register, errors }: StepProps) {
           .
         </small>
       </label>
+
+      <hr />
+      <h2>Screenshots & Videos</h2>
+
+      <label className="block">
+        <small>
+          If applicable, please provide links to screenshots, demo videos, or
+          other visual materials that showcase your project.
+        </small>
+        <textarea
+          className={inputClass}
+          {...register('screenshots_videos')}
+        />
+      </label>
     </>
   )
 }
