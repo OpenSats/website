@@ -4,7 +4,7 @@ import { StepProps } from '../types'
 const inputClass =
   'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
 
-export default function Budget({ register, errors }: StepProps) {
+export default function Budget({ register, watch, errors }: StepProps) {
   return (
     <>
       <h2>Project Budget</h2>
@@ -36,13 +36,15 @@ export default function Budget({ register, errors }: StepProps) {
         </span>
       </label>
 
-      <label className="block">
-        Include details of all prior funding (dates & amounts):
-        <textarea
-          className={inputClass}
-          {...register('what_funding')}
-        />
-      </label>
+      {watch('has_received_funding') && (
+        <label className="block">
+          Include details of all prior funding (dates & amounts):
+          <textarea
+            className={inputClass}
+            {...register('what_funding')}
+          />
+        </label>
+      )}
     </>
   )
 }
