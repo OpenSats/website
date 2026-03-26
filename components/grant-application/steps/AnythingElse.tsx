@@ -51,6 +51,23 @@ export default function AnythingElse({ register }: StepProps) {
       </small>
 
       <hr />
+      <h2>Video Application</h2>
+
+      <label className="block">
+        <small>
+          We strongly encourage you to record a short video (around 2 minutes)
+          explaining your project and why it matters. This is optional but can
+          make a real difference. Please provide a link to the video below.
+        </small>
+        <input
+          type="text"
+          placeholder="https://"
+          className={inputClass}
+          {...register('video_application')}
+        />
+      </label>
+
+      <hr />
       <h2>Anything Else We Should Know?</h2>
 
       <label className="block">
