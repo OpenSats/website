@@ -6,6 +6,30 @@ const inputClass =
 export default function AnythingElse({ register }: StepProps) {
   return (
     <>
+      <h2>Vibe Check</h2>
+
+      <label className="inline-flex items-start gap-2">
+        <input
+          type="checkbox"
+          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('no_vibed_garbage')}
+        />
+        <span>I promise to not produce vibed garbage.</span>
+      </label>
+
+      <label className="inline-flex items-start gap-2">
+        <input
+          type="checkbox"
+          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          {...register('human_in_charge')}
+        />
+        <span>
+          I promise that a human, with good taste and good values, is in charge
+          of the project.
+        </span>
+      </label>
+
+      <hr />
       <h2>Anything Else We Should Know?</h2>
 
       <label className="block">
