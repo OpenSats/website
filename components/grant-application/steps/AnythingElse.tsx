@@ -29,6 +29,11 @@ export default function AnythingElse({ register }: StepProps) {
         </span>
       </label>
 
+      <small>
+        The use of LLMs and coding agents is perfectly fine. These are tools,
+        however, and should be used with thought and care.
+      </small>
+
       <hr />
       <h2>Anything Else We Should Know?</h2>
 
