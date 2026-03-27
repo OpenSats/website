@@ -172,7 +172,6 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
         />
         <FieldError errors={errors} name="potential_impact" />
       </label>
-
     </>
   )
 }
