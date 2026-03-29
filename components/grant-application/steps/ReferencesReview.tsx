@@ -12,7 +12,7 @@ export default function ReferencesReview({ register, errors }: StepProps) {
       <label className="block">
         References *<br />
         <small>
-          Please provide written reference statements from people in the
+          Please provide at least 2 written reference statements from people in the
           Bitcoin community or open-source space who are familiar with you or
           your project.
         </small>
