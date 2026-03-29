@@ -7,7 +7,7 @@ const inputClass =
 export default function ReferencesReview({ register, errors }: StepProps) {
   return (
     <>
-      <h2>References & Prior Contributions</h2>
+      <h2>Written References & Prior Contributions</h2>
 
       <label className="block">
         References *<br />

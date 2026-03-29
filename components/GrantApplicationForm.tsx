@@ -27,7 +27,7 @@ const STEPS = [
   },
   {
     id: 'references',
-    title: 'References',
+    title: 'Written References',
     fields: ['references', 'bios', 'years_experience'],
   },
   {
