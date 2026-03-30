@@ -22,7 +22,7 @@ export default function Apply() {
           additional information necessary to ensure a fruitful partnership and
           smooth grant payouts. This may include tax related information
           depending on your location, bitcoin addresses, lightning addresses, or
-          similar payment information that is required to receive donation
+          similar payment information that is required to receive grant
           payouts from OpenSats.
         </p>
         <p>
