@@ -7,3 +7,185 @@ images: ['/static/images/blog/TODO']
 draft: false
 summary: "OpenSats is funding five open-source projects advancing the nostr ecosystem."
 ---
+
+We're pleased to announce a new wave of grants from [The Nostr
+Fund][nostr-fund], supporting contributors building open-source software for the
+nostr ecosystem. This wave includes four first-time grants and one grant
+renewal.
+
+The projects in this round include a native desktop application designed for
+larger screens and persistent connections, an alternative to centralized email,
+structured group messaging, and a localized client for Japanese language
+communities.
+
+The first-time grants in this wave will go to:
+
+- [Amethyst Desktop]
+- [Nostr Mail]
+- [Nostrord]
+- [Nurunuru]
+
+A grant renewal has been awarded to:
+
+- HAMSTR ([Apr. 2025][hamstr-apr-2025])
+
+These grants are made possible by our generous donors who believe in an open,
+censorship-resistant communications layer for the internet. To help us support
+the nostr ecosystem, please consider setting up a recurring donation.
+
+<center>
+  <DonateRecurringButton designation="nostr" />
+</center>
+
+Let's dive in to learn how each project is contributing to the future of nostr.
+
+[nostr-fund]: /funds/nostr
+[amethyst desktop]: #amethyst-desktop
+[nostr mail]: #nostr-mail
+[nostrord]: #nostrord
+[nurunuru]: #nurunuru
+[hamstr-apr-2025]: /blog/eleventh-wave-of-nostr-grants#hamstr
+
+---
+
+### Amethyst Desktop
+
+[Amethyst] is a widely used nostr client on Android, with an extensive feature
+set that includes support for feeds, direct messages, live streams, Zaps,
+marketplace listings, and dozens of [NIPs]. This grant supports contributor
+[Róbert Nagy][robert-nagy] for his work on building Amethyst Desktop, a
+standalone desktop application that reuses the shared Kotlin Multiplatform
+modules ([Quartz] and [Commons]) from the Amethyst codebase while delivering an
+interface designed for mouse-driven interaction and larger screens.
+
+Desktop interfaces built from mobile apps open up different design
+possibilities. More screen space allows the client to display protocol-level
+detail, including relay broadcast status and connection health, helping users
+make informed decisions about their relay setup. Persistent background
+connections also support more reliable sync and retry behavior. During the
+initial phase of the grant, the project will focus on delivering a desktop
+version of the [Amethyst Android][amethyst-android] experience for daily use.
+The following phase will introduce desktop-specific power features shaped by
+early user feedback, while also advancing the Amethyst project's Kotlin
+Multiplatform ([KMP]) architecture for future use on additional platforms,
+including iOS.
+
+Repository: [amethyst/tree/main/desktopApp][amethyst-desktop-repo]  
+License: MIT
+
+[amethyst]: https://amethyst.social/
+[nips]: https://github.com/nostr-protocol/nips
+[robert-nagy]: https://github.com/nrobi144
+[quartz]: https://github.com/vitorpamplona/amethyst/tree/main/quartz
+[commons]: https://github.com/vitorpamplona/amethyst/tree/main/commons
+[amethyst-android]: https://github.com/vitorpamplona/amethyst?tab=readme-ov-file#nostr-client-for-android
+[kmp]: https://kotlinlang.org/docs/multiplatform/kmp-overview.html
+[amethyst-desktop-repo]: https://github.com/vitorpamplona/amethyst/tree/main/desktopApp
+
+### Nostr Mail
+
+[Nostr Mail][nostr-mail-site] is an effort to build a complete email system on
+top of nostr, allowing any public key ([npub]) to function as an email address.
+This project consists of four components: a [protocol
+specification][nostr-mail-protocol] for sending emails between nostr users with
+[Kind 1301][kind-1301] events, using [NIP-59] gift-wrapping for privacy, a [Dart
+SDK][dart-sdk] for developers who want to integrate nostr-based email into their
+own applications, a [Flutter client][flutter-client] for reading and sending
+email across iOS, Android, desktop, and web, and [SMTP bridge
+servers][smtp-bridge] that provide backward compatibility with legacy email
+providers like Gmail and Outlook.
+
+Support from this grant will allow [Nogringo] to develop the Flutter client into
+a full-featured email application. The first phase will add spam filtering,
+attachments, and HTML support. The second phase will introduce notifications,
+labels, and folder management. The final phase will deliver native applications
+for every platform with multi-account support. The protocol specification, Dart
+package, and bridge components will continue to be updated alongside the client.
+
+Repository: [nogringo/nostr-mail][nostr-mail-repo]  
+License: MIT
+
+[nostr-mail-site]: https://nogringo.github.io/nostr-mail/
+[npub]: https://nostr-resources.com/#:~:text=What%20is%20an%20%E2%80%9Cnpub%E2%80%9D%3F
+[nostr-mail-protocol]: https://nogringo.github.io/nostr-mail/protocol/
+[kind-1301]: https://nogringo.github.io/nostr-mail/protocol/#event-kind
+[nip-59]: https://github.com/nostr-protocol/nips/blob/master/59.md
+[dart-sdk]: https://nogringo.github.io/nostr-mail/sdk/
+[flutter-client]: https://nogringo.github.io/nostr-mail/client/
+[smtp-bridge]: https://nogringo.github.io/nostr-mail/bridge/
+[nogringo]: https://github.com/nogringo
+[nostr-mail-repo]: https://github.com/nogringo/nostr-mail
+
+### Nostrord
+
+Nostrord is a Kotlin Multiplatform (KMP) client for [NIP-29] relay-based groups.
+It is designed to bring a Discord-like group experience to nostr across
+platforms, with support for chat, threads, long-form content, moderation, and
+relay-enforced membership and permissions. A [public beta][nostrord-beta] is
+already available, giving the project an active foundation to build on.
+
+With support from this grant, [Anderson Juhasc][anderson-juhasc] will continue
+developing Nostrord, with a focus on strengthening the Kotlin Multiplatform
+architecture, expanding the core NIP-29 feature set, and establishing the
+project's visual identity. Subsequent phases will improve real-time messaging,
+moderation tools, multi-account support, and cross-platform performance and
+stability, followed by user experience refinements, community-driven iteration,
+broader interoperability with other nostr clients, and a stable release.
+
+Repository: [Anderson-Juhasc/nostrord][nostrord-repo]  
+License: [Unlicense]
+
+[nip-29]: https://github.com/nostr-protocol/nips/blob/master/29.md
+[nostrord-beta]: https://web.nostrord.com/
+[anderson-juhasc]: https://github.com/Anderson-Juhasc
+[nostrord-repo]: https://github.com/Anderson-Juhasc/nostrord/
+[unlicense]: https://unlicense.org/
+
+### Nurunuru
+
+[Nurunuru] is a nostr client available on web and Android, built specifically
+for the Japanese user base by developer [tami1A84], with a visual design modeled
+on the familiar [LINE] messaging interface already popular in Japan. The goal is
+to make nostr approachable for general users who may have no prior experience
+with decentralized protocols, using familiar patterns like a tab-based layout,
+mascot characters, custom emoji, and profile badges. For new users, Nurunuru
+supports passkey-based biometric login, lowering the onboarding barrier
+significantly.
+
+The grant will support the development and launch of a native iOS version of
+Nurunuru. That work will include porting and optimizing the interface for
+iPhone, implementing secure key management through [Keychain], improving smooth
+scrolling and overall UX, and completing device testing, App Store review, and
+public release. The existing client already includes a broad feature set, with
+end-to-end encrypted messaging, Lightning zaps, custom emoji, and support for a
+wide range of NIPs.
+
+Repository: [tami1A84/null--nostr][nurunuru-repo]  
+License: [Unlicense]
+
+[tami1A84]: https://github.com/tami1A84
+[line]: https://www.line.me/en/
+[keychain]: https://support.apple.com/en-us/109016
+[nurunuru-repo]: https://github.com/tami1A84/null--nostr
+
+---
+
+The projects in this wave extend nostr into areas that are essential for broader
+adoption. Desktop access, email-like messaging, group communication, and
+localized onboarding each address a different gap between nostr's current
+capabilities and the everyday tools people rely on. Supporting this range of
+work helps ensure the ecosystem grows in ways that serve more users, across more
+platforms and use cases.
+
+We're grateful to our donors who make this funding possible. If you'd like to
+help us continue supporting builders in the nostr ecosystem, please consider
+donating to [The Nostr Fund][nostr-fund] or becoming a recurring supporter.
+
+<center>
+  <DonateRecurringButton designation="nostr" />
+</center>
+
+If you are a developer working on free and open-source nostr projects, consider
+[applying for funding][apply].
+
+[apply]: /apply
