@@ -11,7 +11,7 @@ export default function ReferencesReview({
 }: StepProps) {
   const applicantName = watch?.('your_name') || '[Applicant Name]'
   const projectName = watch?.('project_name') || '[Project Name]'
-  const suggestedSubject = `Reference: ${applicantName} – ${projectName}`
+  const suggestedSubject = `Reference for ${projectName} by ${applicantName}`
 
   return (
     <>
