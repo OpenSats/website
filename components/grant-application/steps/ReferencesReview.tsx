@@ -20,9 +20,9 @@ export default function ReferencesReview({
       <label className="block">
         References *<br />
         <small>
-          Please provide at least 2 written reference letters from people in
-          the Bitcoin community or open-source space who are familiar with you
-          or your project. Include the email address of each reference so we can
+          Please provide at least 2 written reference letters from people in the
+          Bitcoin community or open-source space who are familiar with you or
+          your project. Include the email address of each reference so we can
           reach out to verify. Cryptographically signed references (e.g. using
           PGP or Nostr) are a plus.
         </small>

@@ -1,5 +1,3 @@
-import FormButton from '@/components/FormButton'
-
 interface StepNavigationProps {
   currentStep: number
   totalSteps: number
@@ -34,13 +32,15 @@ export default function StepNavigation({
       )}
 
       {isLast ? (
-        <FormButton
-          variant={isFLOSS ? 'enabled' : 'disabled'}
+        <button
           type="submit"
           disabled={loading}
+          className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white hover:bg-orange-600 ${
+            !isFLOSS || loading ? 'cursor-not-allowed opacity-50' : ''
+          }`}
         >
           Submit Grant Application
-        </FormButton>
+        </button>
       ) : (
         <button
           type="button"
