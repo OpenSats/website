@@ -16,12 +16,12 @@ export default function StepIndicator({
 }: StepIndicatorProps) {
   return (
     <nav aria-label="Progress" className="mb-4">
-      <ol className="flex items-center justify-center gap-1 sm:gap-3">
+      <ol className="flex items-center justify-between sm:justify-center sm:gap-3">
         {steps.map((step, i) => {
           const isCompleted = i < currentStep
           const isCurrent = i === currentStep
           return (
-            <li key={step.id} className="flex items-center gap-1 sm:gap-3">
+            <li key={step.id} className="flex items-center sm:gap-3">
               <button
                 type="button"
                 onClick={() => isCompleted && onStepClick?.(i)}
