@@ -9,20 +9,16 @@ application at https://opensats.org/apply/grant
 
 **Project Name:**
 
-
 **Main Focus:** (Bitcoin, Nostr, Layer 1, Layer 2, Core, Ecash, Education, Other)
-
 
 ### Project Description
 
 A great description will help us evaluate your project more quickly.
 
-
 ### Potential Impact
 
 Why is this project important to Bitcoin or the broader free and open-source
 community?
-
 
 ---
 
@@ -36,15 +32,12 @@ Include the email address of each reference so we can reach out to verify.
 Cryptographically signed references, e.g. using PGP or Nostr, are a plus.
 References can also be sent directly to references@opensats.org.
 
-
 ### Prior Contributions
 
 Please list any prior contributions, preferably to other open-source or
 Bitcoin-related projects.
 
-
 **Years of Developer Experience:**
-
 
 ---
 
@@ -52,18 +45,14 @@ Bitcoin-related projects.
 
 **Repository (GitHub or similar):**
 
-
 **Open-Source License:**
 
-
 **Project Website:**
-
 
 ### Screenshots / Videos
 
 If applicable, please provide links to screenshots, demo videos, or other
 visual materials that showcase your project.
-
 
 ---
 
@@ -77,7 +66,6 @@ visual materials that showcase your project.
 
 This will help us evaluate overall scope and potential grant duration.
 
-
 ---
 
 ## Budget
@@ -87,13 +75,11 @@ This will help us evaluate overall scope and potential grant duration.
 Please submit a proposed budget in USD, including a breakdown of how the funds
 will be used and the grand total.
 
-
 ### Prior Funding
 
 Has this project received prior funding? (Yes / No)
 
 If yes, include details of all prior funding (dates & amounts):
-
 
 ### Additional Funding Sources
 
@@ -101,7 +87,6 @@ Do you receive or plan to receive additional funding during the grant period?
 (Yes / No)
 
 If yes, please describe the additional funding sources and amounts:
-
 
 ---
 
@@ -112,11 +97,8 @@ your project and why it matters.
 
 **Video Link:**
 
-
 ---
 
 ## Anything Else
 
 Anything else we should know? Feel free to share whatever might be important.
-
-
