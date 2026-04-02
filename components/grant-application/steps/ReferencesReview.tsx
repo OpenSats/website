@@ -23,7 +23,9 @@ export default function ReferencesReview({
           Please provide at least 2 written reference statements from people in
           the Bitcoin community or open-source space who are familiar with you
           or your project. Include the email address of each reference so we can
-          reach out to verify.
+          reach out to verify. Cryptographically signed references (e.g. using
+          PGP or Nostr) are a plus and don&apos;t require additional
+          verification.
         </small>
         <textarea
           rows={5}
@@ -41,24 +43,8 @@ export default function ReferencesReview({
           >
             references@opensats.org
           </a>{' '}
-          with the following subject line:
+          using the subject line &ldquo;{suggestedSubject}&rdquo;.
         </small>
-        <button
-          type="button"
-          className="mt-1 block w-full cursor-pointer rounded bg-gray-100 px-3 py-2 text-left font-mono text-sm text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
-          onClick={(e) => {
-            navigator.clipboard.writeText(suggestedSubject)
-            const btn = e.currentTarget
-            const original = btn.textContent
-            btn.textContent = 'Copied!'
-            setTimeout(() => {
-              btn.textContent = original
-            }, 1500)
-          }}
-          title="Click to copy"
-        >
-          {suggestedSubject}
-        </button>
       </label>
 
       <h2>Prior Contributions</h2>
