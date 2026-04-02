@@ -13,6 +13,19 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         understand what we look for.
       </p>
 
+      <h2>Prepare Your Application</h2>
+      <p>
+        You can{' '}
+        <a
+          href="/static/opensats-grant-application-template.md"
+          download="opensats-grant-application-template.md"
+          className="text-orange-500"
+        >
+          download our application template
+        </a>{' '}
+        to prepare your answers offline before filling out the form.
+      </p>
+
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
