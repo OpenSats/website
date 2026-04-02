@@ -59,7 +59,9 @@ ${req.body.proposed_budget}
 
 ${req.body.what_funding ? req.body.what_funding : ''}
 
-**Additional funding sources:** ${req.body.has_additional_funding ? 'Yes' : 'No'}
+**Additional funding sources:** ${
+      req.body.has_additional_funding ? 'Yes' : 'No'
+    }
 
 ${req.body.additional_funding ? req.body.additional_funding : ''}
 
@@ -97,11 +99,7 @@ ${
     ? `Other contact details: ${req.body.other_contact}`
     : ''
 }
-${
-  req.body.other_lead
-    ? `Project lead: ${req.body.other_lead}`
-    : ''
-}
+${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
         `
 
     // Label set according to "main focus"
