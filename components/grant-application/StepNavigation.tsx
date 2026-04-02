@@ -4,7 +4,6 @@ interface StepNavigationProps {
   onBack: () => void
   onNext: () => void
   loading: boolean
-  isFLOSS: boolean
 }
 
 export default function StepNavigation({
@@ -13,7 +12,6 @@ export default function StepNavigation({
   onBack,
   onNext,
   loading,
-  isFLOSS,
 }: StepNavigationProps) {
   const isLast = currentStep === totalSteps - 1
 
@@ -36,7 +34,7 @@ export default function StepNavigation({
           type="submit"
           disabled={loading}
           className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white hover:bg-orange-600 ${
-            !isFLOSS || loading ? 'cursor-not-allowed opacity-50' : ''
+            loading ? 'cursor-not-allowed opacity-50' : ''
           }`}
         >
           Submit Grant Application

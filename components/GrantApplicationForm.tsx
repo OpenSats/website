@@ -82,8 +82,6 @@ export default function ApplicationForm() {
     },
   })
 
-  const isFLOSS = watch('free_open_source', false)
-
   const scrollToTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -176,7 +174,6 @@ export default function ApplicationForm() {
         onBack={handleBack}
         onNext={handleNext}
         loading={loading}
-        isFLOSS={!!isFLOSS}
       />
 
       {!!failureReason && (
