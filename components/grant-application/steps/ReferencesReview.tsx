@@ -41,8 +41,24 @@ export default function ReferencesReview({
           >
             references@opensats.org
           </a>{' '}
-          using the subject line &ldquo;{suggestedSubject}&rdquo;.
+          with the following subject line:
         </small>
+        <button
+          type="button"
+          className="mt-1 block w-full cursor-pointer rounded bg-gray-100 px-3 py-2 text-left font-mono text-sm text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+          onClick={(e) => {
+            navigator.clipboard.writeText(suggestedSubject)
+            const btn = e.currentTarget
+            const original = btn.textContent
+            btn.textContent = 'Copied!'
+            setTimeout(() => {
+              btn.textContent = original
+            }, 1500)
+          }}
+          title="Click to copy"
+        >
+          {suggestedSubject}
+        </button>
       </label>
 
       <h2>Prior Contributions</h2>
