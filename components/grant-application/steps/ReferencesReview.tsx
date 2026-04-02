@@ -23,7 +23,16 @@ export default function ReferencesReview({
           Please provide at least 2 written reference statements from people in
           the Bitcoin community or open-source space who are familiar with you
           or your project. Include the email address of each reference so we can
-          reach out to verify. References can also be sent directly to{' '}
+          reach out to verify.
+        </small>
+        <textarea
+          rows={5}
+          className={inputClass}
+          {...register('references', { required: true })}
+        />
+        <FieldError errors={errors} name="references" />
+        <small className="mt-1 block">
+          References can also be sent directly to{' '}
           <a
             href={`mailto:references@opensats.org?subject=${encodeURIComponent(
               suggestedSubject
@@ -34,12 +43,6 @@ export default function ReferencesReview({
           </a>{' '}
           using the subject line &ldquo;{suggestedSubject}&rdquo;.
         </small>
-        <textarea
-          rows={5}
-          className={inputClass}
-          {...register('references', { required: true })}
-        />
-        <FieldError errors={errors} name="references" />
       </label>
 
       <h2>Prior Contributions</h2>
