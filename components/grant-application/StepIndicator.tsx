@@ -38,7 +38,7 @@ export default function StepIndicator({
               </button>
               {i < steps.length - 1 && (
                 <span
-                  className={`h-px w-3 sm:w-6 ${
+                  className={`hidden h-px sm:block sm:w-6 ${
                     isCompleted
                       ? 'bg-orange-400'
                       : 'bg-gray-300 dark:bg-gray-600'
