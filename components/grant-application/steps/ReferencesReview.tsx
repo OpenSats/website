@@ -14,7 +14,8 @@ export default function ReferencesReview({ register, errors }: StepProps) {
         <small>
           Please provide at least 2 written reference statements from people in
           the Bitcoin community or open-source space who are familiar with you
-          or your project.
+          or your project. Include the email address of each reference so we can
+          reach out to verify.
         </small>
         <textarea
           rows={5}

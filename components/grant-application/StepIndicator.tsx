@@ -21,7 +21,10 @@ export default function StepIndicator({
           const isCompleted = i < currentStep
           const isCurrent = i === currentStep
           return (
-            <li key={step.id} className="!m-0 flex items-center gap-2 !p-0 sm:gap-3">
+            <li
+              key={step.id}
+              className="!m-0 flex items-center gap-2 !p-0 sm:gap-3"
+            >
               <button
                 type="button"
                 onClick={() => isCompleted && onStepClick?.(i)}
@@ -29,8 +32,8 @@ export default function StepIndicator({
                   isCompleted
                     ? 'cursor-pointer bg-orange-500 text-white hover:bg-orange-600'
                     : isCurrent
-                      ? 'border-2 border-orange-500 text-orange-500'
-                      : 'border-2 border-gray-300 text-gray-400 dark:border-gray-600 dark:text-gray-500'
+                    ? 'border-2 border-orange-500 text-orange-500'
+                    : 'border-2 border-gray-300 text-gray-400 dark:border-gray-600 dark:text-gray-500'
                 }`}
                 disabled={!isCompleted}
               >
