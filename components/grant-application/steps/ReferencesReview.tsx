@@ -15,7 +15,11 @@ export default function ReferencesReview({ register, errors }: StepProps) {
           Please provide at least 2 written reference statements from people in
           the Bitcoin community or open-source space who are familiar with you
           or your project. Include the email address of each reference so we can
-          reach out to verify.
+          reach out to verify. References can also be sent directly to{' '}
+          <a href="mailto:references@opensats.org" className="text-orange-500">
+            references@opensats.org
+          </a>
+          .
         </small>
         <textarea
           rows={5}
