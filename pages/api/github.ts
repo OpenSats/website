@@ -68,6 +68,14 @@ ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 **Years of dev experience:**
 ${req.body.years_experience ? `${req.body.years_experience}` : 'n/a'}
 
+### Project Media
+
+${req.body.screenshots_videos ? req.body.screenshots_videos : 'None provided.'}
+
+### Video Application
+
+${req.body.video_application ? req.body.video_application : 'None provided.'}
+
 ### Anything Else
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
