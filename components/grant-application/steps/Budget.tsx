@@ -1,8 +1,5 @@
 import FieldError from '../FieldError'
-import { StepProps } from '../types'
-
-const inputClass =
-  'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
+import { StepProps, inputClass, checkboxClass } from '../types'
 
 export default function Budget({ register, watch, errors }: StepProps) {
   return (
@@ -29,7 +26,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-center">
         <input
           type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={checkboxClass}
           {...register('has_received_funding')}
         />
         <span className="ml-2">
@@ -50,7 +47,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-center">
         <input
           type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={checkboxClass}
           {...register('has_additional_funding')}
         />
         <span className="ml-2">

@@ -1,7 +1,7 @@
 import CustomLink from '@/components/Link'
 import FieldError from '../FieldError'
 import LicenseExplainer from '../LicenseExplainer'
-import { StepProps } from '../types'
+import { StepProps, checkboxClass } from '../types'
 
 export default function Prerequisites({ register, watch, errors }: StepProps) {
   return (
@@ -16,7 +16,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('read_criteria', { required: true })}
         />
         <span>
@@ -33,7 +33,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('read_faq', { required: true })}
         />
         <span>
@@ -50,7 +50,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('has_references', { required: true })}
         />
         <span>
@@ -70,7 +70,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('free_open_source', { required: true })}
         />
         <span>The project has a proper FOSS license</span>

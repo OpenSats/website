@@ -1,9 +1,6 @@
 import * as EmailValidator from 'email-validator'
 import FieldError from '../FieldError'
-import { StepProps } from '../types'
-
-const inputClass =
-  'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
+import { StepProps, inputClass, checkboxClass } from '../types'
 
 export default function ApplicantDetails({
   register,
@@ -78,7 +75,7 @@ export default function ApplicantDetails({
       <label className="inline-flex items-center">
         <input
           type="checkbox"
-          className="rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={checkboxClass}
           {...register('are_you_lead')}
         />
         <span className="ml-2">

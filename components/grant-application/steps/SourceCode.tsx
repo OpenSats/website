@@ -1,9 +1,6 @@
 import FieldError from '../FieldError'
 import LicenseExplainer from '../LicenseExplainer'
-import { StepProps } from '../types'
-
-const inputClass =
-  'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
+import { StepProps, inputClass } from '../types'
 
 export default function SourceCode({ register, errors }: StepProps) {
   return (

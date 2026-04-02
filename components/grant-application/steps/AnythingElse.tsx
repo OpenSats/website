@@ -1,8 +1,5 @@
 import CustomLink from '@/components/Link'
-import { StepProps } from '../types'
-
-const inputClass =
-  'mt-1 block w-full rounded-md border-gray-300 text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50'
+import { StepProps, inputClass, checkboxClass } from '../types'
 
 export default function AnythingElse({ register }: StepProps) {
   return (
@@ -12,7 +9,7 @@ export default function AnythingElse({ register }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('no_vibed_garbage', { required: true })}
         />
         <span>I promise to not produce vibed garbage.</span>
@@ -21,7 +18,7 @@ export default function AnythingElse({ register }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('human_in_charge', { required: true })}
         />
         <span>
@@ -33,7 +30,7 @@ export default function AnythingElse({ register }: StepProps) {
       <label className="inline-flex items-start gap-2">
         <input
           type="checkbox"
-          className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
+          className={`mt-1 ${checkboxClass}`}
           {...register('discipline_and_agency', { required: true })}
         />
         <span>
