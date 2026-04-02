@@ -93,6 +93,11 @@ ${
     ? `Other contact details: ${req.body.other_contact}`
     : ''
 }
+${
+  req.body.other_lead
+    ? `Project lead: ${req.body.other_lead}`
+    : ''
+}
         `
 
     // Label set according to "main focus"
