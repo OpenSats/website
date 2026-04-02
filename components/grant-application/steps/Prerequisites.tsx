@@ -55,7 +55,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         <span>
           I have two or more{' '}
           <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
-            written reference statements
+            written reference letters
           </CustomLink>{' '}
           from people familiar with my work
         </span>
