@@ -92,7 +92,7 @@ If yes, please describe the additional funding sources and amounts:
 
 ---
 
-## Video Application (Optional)
+## Video Application
 
 **Video Link:**
 (We strongly encourage you to record a short video, around 2 minutes, explaining
