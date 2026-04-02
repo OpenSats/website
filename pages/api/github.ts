@@ -57,7 +57,11 @@ ${req.body.proposed_budget}
 
 **Prior funding:** ${req.body.has_received_funding ? 'Yes' : 'No'}
 
-${req.body.what_funding}
+${req.body.what_funding ? req.body.what_funding : ''}
+
+**Additional funding sources:** ${req.body.has_additional_funding ? 'Yes' : 'No'}
+
+${req.body.additional_funding ? req.body.additional_funding : ''}
 
 ### References & Prior Contributions
 
