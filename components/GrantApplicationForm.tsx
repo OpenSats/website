@@ -58,7 +58,7 @@ const STEPS = [
   {
     id: 'anything_else',
     title: 'Final',
-    fields: [],
+    fields: ['no_vibed_garbage', 'human_in_charge', 'discipline_and_agency'],
   },
 ] as const
 

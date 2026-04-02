@@ -13,7 +13,7 @@ export default function AnythingElse({ register }: StepProps) {
         <input
           type="checkbox"
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('no_vibed_garbage')}
+          {...register('no_vibed_garbage', { required: true })}
         />
         <span>I promise to not produce vibed garbage.</span>
       </label>
@@ -22,7 +22,7 @@ export default function AnythingElse({ register }: StepProps) {
         <input
           type="checkbox"
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('human_in_charge')}
+          {...register('human_in_charge', { required: true })}
         />
         <span>
           I promise that a human, with good taste and good values, is in charge
@@ -34,7 +34,7 @@ export default function AnythingElse({ register }: StepProps) {
         <input
           type="checkbox"
           className="mt-1 rounded-md border-gray-300 shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50"
-          {...register('discipline_and_agency')}
+          {...register('discipline_and_agency', { required: true })}
         />
         <span>
           I promise to bring{' '}
