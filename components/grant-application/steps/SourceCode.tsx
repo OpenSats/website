@@ -1,4 +1,5 @@
 import FieldError from '../FieldError'
+import LicenseExplainer from '../LicenseExplainer'
 import { StepProps } from '../types'
 
 const inputClass =
@@ -27,6 +28,7 @@ export default function SourceCode({ register, errors }: StepProps) {
           {...register('license', { required: true })}
         />
         <FieldError errors={errors} name="license" />
+        <LicenseExplainer />
       </label>
 
       <hr />
