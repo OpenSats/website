@@ -24,8 +24,7 @@ export default function ReferencesReview({
           the Bitcoin community or open-source space who are familiar with you
           or your project. Include the email address of each reference so we can
           reach out to verify. Cryptographically signed references (e.g. using
-          PGP or Nostr) are a plus and don&apos;t require additional
-          verification.
+          PGP or Nostr) are a plus.
         </small>
         <textarea
           rows={5}
