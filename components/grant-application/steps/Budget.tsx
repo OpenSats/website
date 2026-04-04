@@ -58,11 +58,12 @@ export default function Budget({ register, watch, errors }: StepProps) {
 
       {watch('has_additional_funding') && (
         <label className="block">
-          Please describe the additional funding sources and amounts:
+          Please describe the additional funding sources and amounts: *
           <textarea
             className={inputClass}
-            {...register('additional_funding')}
+            {...register('additional_funding', { required: true })}
           />
+          <FieldError errors={errors} name="additional_funding" />
         </label>
       )}
     </>
