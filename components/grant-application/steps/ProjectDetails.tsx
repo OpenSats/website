@@ -66,9 +66,10 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
                   we can reach out to
                 </li>
                 <li>
-                  In addition to the above,{' '}
-                  <strong>developer-focused education</strong> initiatives are
-                  what we want to support most.
+                  We are only supporting{' '}
+                  <strong>developer-focused education</strong> at this point in
+                  time. If your project is an exception, please reach out to us
+                  first and we may invite you to apply.
                 </li>
               </ul>
               <p className="mb-2 mt-4 font-bold">Reporting Requirements</p>
