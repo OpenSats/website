@@ -23,18 +23,30 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <hr />
       <h2>Prior Funding</h2>
 
-      <label className="block">
-        Has this project or its contributors received prior funding? *
-        <select
-          className={inputClass}
-          {...register('has_received_funding', { required: true })}
-        >
-          <option value="">(Choose One)</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
+      <fieldset>
+        <legend>
+          Has this project or its contributors received prior funding? *
+        </legend>
+        <div className="mt-2 flex space-x-6">
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              value="yes"
+              {...register('has_received_funding', { required: true })}
+            />
+            <span className="ml-2">Yes</span>
+          </label>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              value="no"
+              {...register('has_received_funding', { required: true })}
+            />
+            <span className="ml-2">No</span>
+          </label>
+        </div>
         <FieldError errors={errors} name="has_received_funding" />
-      </label>
+      </fieldset>
 
       {watch('has_received_funding') === 'yes' && (
         <label className="block">
@@ -47,19 +59,31 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <hr />
       <h2>Additional Funding Sources</h2>
 
-      <label className="block">
-        Do you receive or plan to receive additional funding during the grant
-        period? *
-        <select
-          className={inputClass}
-          {...register('has_additional_funding', { required: true })}
-        >
-          <option value="">(Choose One)</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
+      <fieldset>
+        <legend>
+          Do you receive or plan to receive additional funding during the grant
+          period? *
+        </legend>
+        <div className="mt-2 flex space-x-6">
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              value="yes"
+              {...register('has_additional_funding', { required: true })}
+            />
+            <span className="ml-2">Yes</span>
+          </label>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              value="no"
+              {...register('has_additional_funding', { required: true })}
+            />
+            <span className="ml-2">No</span>
+          </label>
+        </div>
         <FieldError errors={errors} name="has_additional_funding" />
-      </label>
+      </fieldset>
 
       {watch('has_additional_funding') === 'yes' && (
         <label className="block">
