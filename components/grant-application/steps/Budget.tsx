@@ -1,5 +1,5 @@
 import FieldError from '../FieldError'
-import { StepProps, inputClass, checkboxClass } from '../types'
+import { StepProps, inputClass } from '../types'
 
 export default function Budget({ register, watch, errors }: StepProps) {
   return (
@@ -23,18 +23,20 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <hr />
       <h2>Prior Funding</h2>
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className={checkboxClass}
-          {...register('has_received_funding')}
-        />
-        <span className="ml-2">
-          This project or its contributors have received prior funding
-        </span>
+      <label className="block">
+        Has this project or its contributors received prior funding? *
+        <select
+          className={inputClass}
+          {...register('has_received_funding', { required: true })}
+        >
+          <option value="">(Choose One)</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <FieldError errors={errors} name="has_received_funding" />
       </label>
 
-      {watch('has_received_funding') && (
+      {watch('has_received_funding') === 'yes' && (
         <label className="block">
           Include details of all prior funding (dates & amounts): *
           <textarea className={inputClass} {...register('what_funding', { required: true })} />
@@ -45,19 +47,21 @@ export default function Budget({ register, watch, errors }: StepProps) {
       <hr />
       <h2>Additional Funding Sources</h2>
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className={checkboxClass}
-          {...register('has_additional_funding')}
-        />
-        <span className="ml-2">
-          I receive or plan to receive additional funding during the grant
-          period
-        </span>
+      <label className="block">
+        Do you receive or plan to receive additional funding during the grant
+        period? *
+        <select
+          className={inputClass}
+          {...register('has_additional_funding', { required: true })}
+        >
+          <option value="">(Choose One)</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <FieldError errors={errors} name="has_additional_funding" />
       </label>
 
-      {watch('has_additional_funding') && (
+      {watch('has_additional_funding') === 'yes' && (
         <label className="block">
           Please describe the additional funding sources and amounts: *
           <textarea
