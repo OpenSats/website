@@ -51,7 +51,10 @@ export default function Budget({ register, watch, errors }: StepProps) {
       {watch('has_received_funding') === 'yes' && (
         <label className="block">
           Include details of all prior funding (dates & amounts): *
-          <textarea className={inputClass} {...register('what_funding', { required: true })} />
+          <textarea
+            className={inputClass}
+            {...register('what_funding', { required: true })}
+          />
           <FieldError errors={errors} name="what_funding" />
         </label>
       )}
