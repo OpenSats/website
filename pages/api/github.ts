@@ -57,7 +57,13 @@ ${req.body.proposed_budget}
 
 **Prior funding:** ${req.body.has_received_funding ? 'Yes' : 'No'}
 
-${req.body.what_funding}
+${req.body.what_funding ? req.body.what_funding : ''}
+
+**Additional funding sources:** ${
+      req.body.has_additional_funding ? 'Yes' : 'No'
+    }
+
+${req.body.additional_funding ? req.body.additional_funding : ''}
 
 ### References & Prior Contributions
 
@@ -67,6 +73,14 @@ ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
 **Years of dev experience:**
 ${req.body.years_experience ? `${req.body.years_experience}` : 'n/a'}
+
+### Project Media
+
+${req.body.screenshots_videos ? req.body.screenshots_videos : 'None provided.'}
+
+### Video Application
+
+${req.body.video_application ? req.body.video_application : 'None provided.'}
 
 ### Anything Else
 
@@ -85,6 +99,7 @@ ${
     ? `Other contact details: ${req.body.other_contact}`
     : ''
 }
+${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
         `
 
     // Label set according to "main focus"
