@@ -68,8 +68,7 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
                 <li>
                   We are only supporting{' '}
                   <strong>developer-focused education</strong> at this point in
-                  time. If your project is an exception, please reach out to us
-                  first and we may invite you to apply.
+                  time.
                 </li>
               </ul>
               <p className="mb-2 mt-4 font-bold">Reporting Requirements</p>
