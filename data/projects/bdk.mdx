@@ -1,7 +1,7 @@
 ---
 title: 'Bitcoin Dev Kit'
 dateAdded: '2022-12-29'
-summary: 'Seamlessly build cross-platform mobile Bitcoin wallets.'
+summary: 'A modern, descriptor-based wallet library written in Rust.'
 nym: 'Alekos Filini'
 website: 'https://bitcoindevkit.org/'
 coverImage: '/img/project/bdk.jpeg'
@@ -12,4 +12,27 @@ tags: ['Bitcoin', 'Library']
 
 ## About this project
 
-BDK is the simplest way to integrate Bitcoin wallet features into any application, with native APIs for C, Swift, Java, and Kotlin programming languages. Designed from the ground up to be easily customized to application needs, with all of the low-level Bitcoin logic being handled by BDK so you can focus on custom-tailored user experiences.
+BDK is a Rust library for building Bitcoin wallets. It handles key management,
+coin selection, transaction construction, and blockchain syncing. Developers use
+it so they don't have to rewrite this low-level Bitcoin logic for every new
+wallet project.
+
+The library uses output descriptors and miniscript to express spending
+conditions. Complex setups like multisig or time-locked vaults work without
+writing custom Bitcoin scripts. Developers choose their own blockchain backend
+(a local full node, Electrum, Esplora, or compact block filters), their own
+database, and their own signing setup. Through BDK-FFI, the same Rust core is
+available in Swift, Kotlin, and Python, running on iOS, Android, desktop, and
+WebAssembly.
+
+BDK reached its 1.0 release in December 2024 after a full redesign that
+stabilized the API under semantic versioning. Projects like Bitkey,
+ProtonWallet, AnchorWatch, and Cove already ship with BDK. Recent work has
+added Tor connectivity, a compact block filter light client
+([Kyoto](https://github.com/rustaceanrob/kyoto)), and support for silent
+payments and Testnet4.
+
+OpenSats funds BDK because wallet infrastructure is shared infrastructure.
+Improvements here prevent bugs and save engineering time across dozens of
+downstream projects. All development happens in public repositories, open to
+anyone's review.
