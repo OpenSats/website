@@ -53,7 +53,13 @@ const STEPS = [
   {
     id: 'budget',
     title: 'Budget',
-    fields: ['proposed_budget'],
+    fields: [
+      'proposed_budget',
+      'has_received_funding',
+      'what_funding',
+      'has_additional_funding',
+      'additional_funding',
+    ],
   },
   {
     id: 'anything_else',

@@ -55,12 +55,12 @@ ${req.body.timelines}
 
 ${req.body.proposed_budget}
 
-**Prior funding:** ${req.body.has_received_funding ? 'Yes' : 'No'}
+**Prior funding:** ${req.body.has_received_funding === 'yes' ? 'Yes' : 'No'}
 
 ${req.body.what_funding ? req.body.what_funding : ''}
 
 **Additional funding sources:** ${
-      req.body.has_additional_funding ? 'Yes' : 'No'
+      req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
     }
 
 ${req.body.additional_funding ? req.body.additional_funding : ''}
@@ -136,7 +136,7 @@ ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
     req.body.LTS && issueLabels.push('LTS')
 
     // Additional tags based on yes/no answers
-    req.body.has_received_funding && issueLabels.push('prior funding')
+    req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
     !req.body.free_open_source && issueLabels.push('not FLOSS')
     !req.body.are_you_lead && issueLabels.push('surrogate')
 
