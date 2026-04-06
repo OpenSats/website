@@ -30,8 +30,10 @@ WebAssembly.
 > <cite>—[Steve Myers](/blog/advancements-in-developer-libraries#bitcoin-dev-kit)</cite>
 
 BDK reached its 1.0 release in December 2024 after a full redesign that
-stabilized the API under semantic versioning. Projects like Bitkey,
-ProtonWallet, AnchorWatch, and Cove already ship with BDK.
+stabilized the API under semantic versioning, and has since shipped 2.0 and
+beyond on an 8-week release cadence. Projects like Bitkey, ProtonWallet,
+AnchorWatch, Cove, Alby, Fedimint, and MetaMask (via bdk-wasm) already ship
+with BDK.
 
 ## Why fund it?
 
@@ -48,12 +50,15 @@ September 2024.
 
 ## What's next?
 
-Recent work has added Tor connectivity, a compact block filter light client
-([Kyoto](https://github.com/rustaceanrob/kyoto)), and support for silent
-payments and Testnet4. BDK is also becoming a building block for layer-two
-projects like [ldk-node](https://github.com/lightningdevkit/ldk-node) and
-[bark](https://gitlab.com/ark-bitcoin/bark). For a detailed look at recent
-progress, see the
+Recent releases have added Tor connectivity, a compact block filter light
+client ([Kyoto](https://github.com/rustaceanrob/kyoto)), Testnet4 support, and
+a dedicated [Silent Payments](https://github.com/bitcoindevkit/bdk-sp) crate
+(BIP352). An experimental
+[bdk-tx](https://github.com/bitcoindevkit/bdk-tx) project is decoupling
+transaction building from the wallet, and BDK is becoming a building block for
+layer-two projects like [ldk-node](https://github.com/lightningdevkit/ldk-node)
+and [bark](https://gitlab.com/ark-bitcoin/bark). The team is currently working
+towards BDK 3.0. For a detailed look at recent progress, see the
 [Advancements in Developer Libraries](/blog/advancements-in-developer-libraries)
 impact report.
 
