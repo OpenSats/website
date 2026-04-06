@@ -10,8 +10,6 @@ twitter: 'bitcoindevkit'
 tags: ['Bitcoin', 'Library']
 ---
 
-## About this project
-
 BDK is a Rust library for building Bitcoin wallets. It handles key management,
 coin selection, transaction construction, and blockchain syncing. Developers use
 it so they don't have to rewrite this low-level Bitcoin logic for every new
@@ -27,12 +25,28 @@ WebAssembly.
 
 BDK reached its 1.0 release in December 2024 after a full redesign that
 stabilized the API under semantic versioning. Projects like Bitkey,
-ProtonWallet, AnchorWatch, and Cove already ship with BDK. Recent work has
-added Tor connectivity, a compact block filter light client
-([Kyoto](https://github.com/rustaceanrob/kyoto)), and support for silent
-payments and Testnet4.
+ProtonWallet, AnchorWatch, and Cove already ship with BDK.
 
-OpenSats funds BDK because wallet infrastructure is shared infrastructure.
-Improvements here prevent bugs and save engineering time across dozens of
-downstream projects. All development happens in public repositories, open to
-anyone's review.
+## Why fund it?
+
+Wallet infrastructure is shared infrastructure. Every improvement to BDK
+prevents bugs and saves engineering time across dozens of downstream projects,
+and all development happens in public repositories, open to anyone's review.
+
+OpenSats has supported BDK-related work through multiple grants: the
+[initial BDK grant](/blog/bitcoin-and-nostr-grants-august-2023#bdk) in August
+2023, [Tor support for BDK & Fedimint](/blog/bitcoin-grants-july-2024#tor-support-for-bdk--fedimint)
+in July 2024, and a grant for the
+[Kyoto light client](/blog/bitcoin-grants-september-2024-7th-wave#kyoto) in
+September 2024.
+
+## What's next?
+
+Recent work has added Tor connectivity, a compact block filter light client
+([Kyoto](https://github.com/rustaceanrob/kyoto)), and support for silent
+payments and Testnet4. BDK is also becoming a building block for layer-two
+projects like [ldk-node](https://github.com/lightningdevkit/ldk-node) and
+[bark](https://gitlab.com/ark-bitcoin/bark). For a detailed look at recent
+progress, see the
+[Advancements in Developer Libraries](/blog/advancements-in-developer-libraries)
+impact report.
