@@ -20,8 +20,7 @@ conditions. Complex setups like multisig or time-locked vaults work without
 writing custom Bitcoin scripts. Developers choose their own blockchain backend
 (a local full node, Electrum, Esplora, or compact block filters), their own
 database, and their own signing setup. Through [`bdk-ffi`](https://github.com/bitcoindevkit/bdk-ffi), the same Rust core
-is available in Swift, Kotlin, and Python, running on iOS, Android, desktop, and
-WebAssembly.
+is available in Swift, Kotlin, and Python, running on iOS, Android, and desktop. A separate `bdk-wasm` project brings BDK to browser environments via WebAssembly.
 
 > The mission of the BDK team is to provide the best FOSS libraries for
 > building secure, modern bitcoin apps and services. [...] If there is a bitcoin
