@@ -1,9 +1,9 @@
 ---
 title: 'Amethyst'
 dateAdded: '2023-03-31'
-summary: 'Amethyst is the most feature-complete Nostr client for Android.'
+summary: 'A privacy-focused nostr client for Android with built-in Tor support.'
 nym: 'Vitor Pamplona'
-website: 'https://play.google.com/store/apps/details?id=com.vitorpamplona.amethyst'
+website: 'https://www.amethyst.social/'
 coverImage: '/static/images/projects/amethyst.png'
 git: 'https://github.com/vitorpamplona/amethyst'
 twitter: 'vitorpamplona'
@@ -12,31 +12,65 @@ tags: ['Nostr', 'Mobile', 'Android']
 showcase: true
 ---
 
-## About this project
+Amethyst is a nostr client for Android built by [Vitor
+Pamplona](/blog/vitor-pamplona-receives-lts-grant). It covers the basics you'd
+expect from a social app (feeds, profiles, DMs, group chats) but also supports
+live streams, marketplaces, long-form articles, voice notes, zaps via Wallet
+Connect, and media feeds from services like Olas. It ships with built-in Tor
+support enabled by default, so relay operators never see your IP address.
 
-Amethyst is the most feature-complete Nostr client for Android. The app offers
-three user experiences in one: note feeds, group chats and direct messages, and
-media-only feeds (Stories). The application supports both, public and private
-relays, and integrates with a vast number of Nostr services and NIPs, including
-bounties, zaps/wallet connect, long-form content, badges, file storage systems,
-highlights, polls, and lists. It currently has over 50K+ unique downloads and
-35K active users.
+What makes Amethyst stand out is how it handles relays. Most nostr clients
+connect to a handful of large relays, which pushes the network toward
+centralization. Amethyst uses the
+[outbox model](https://mikedilger.com/gossip-model/) to figure out
+automatically which relays to read from based on who you follow. In practice,
+the app can connect to over 1,000 relays at once, even on mobile data, without
+noticeable battery or bandwidth cost. The app also gives users granular control
+over every relay type: inbox, outbox, DM, search, indexer, broadcast, local,
+and more.
 
-The app is a crucial component in bringing lightning payments into the everyday
-transactions of Android users. It offers a Bitcoin-native messaging tool to
-author and distribute content, debate issues, orchestrate teams, and market and
-sell services to the most popular mobile operating system out there. This is how
-we onboard the real world into Bitcoin. We are here to open the doors of Android
-users to every other Nostr project out there.
+> This achievement is a major demonstration of the true decentralized potential
+> of nostr. By enabling mobile clients to automatically connect to 1,000 relays,
+> we have fundamentally shifted the narrative. We've proven that users can be
+> reliably served by a highly distributed network, not just a few central
+> points.
+>
+> <cite>—[Vitor Pamplona](/blog/advancements-in-nostr-clients#amethyst)</cite>
 
-Within the Nostr ecosystem, our operational strategy is decentralizing by
-design. Even though we could run our own relays, algorithms, and added services
-into the application, we believe doing that creates a centralizing incentive, an
-overly-defensive posture by the team, and must be avoided at all costs. We aim
-to support all other Nostr applications and bring their content to the Android
-ecosystem as best as possible. By developing Amethyst, we are pushing the Nostr
-community to build highly composable and fully decentralized Nostr applications,
-powered by zaps.
+Privacy goes beyond Tor. Amethyst was one of the first clients to implement
+[NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) for
+encrypted DMs, and it supports encrypted media uploads in private conversations.
+Vitor also helped design and ship
+[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md), which
+brings Web of Trust scoring to nostr, letting users choose trust providers to
+filter spam and surface reputable accounts.
 
-What Bitcoin solves in money, Nostr and Amethyst solve in communication. If
-Bitcoin can take on the FED, nostr can take on "Big Tech".
+## Why fund it?
+
+Amethyst is one of the most widely used nostr clients on Android and has been a
+testing ground for many new NIPs. Vitor doesn't just build a client; he writes
+protocol proposals, builds reference implementations, and pushes the ecosystem
+forward. His work on the outbox model, encrypted DMs, and Web of Trust has
+influenced how other clients approach these problems too.
+
+Beyond Amethyst itself, the project has produced
+[Quartz](https://github.com/vitorpamplona/amethyst/tree/main/quartz), a Kotlin
+library for nostr that other Android and Kotlin Multiplatform projects can use.
+
+OpenSats first funded Amethyst in the [first wave of nostr
+grants](/blog/nostr-grants-july-2023#amethyst) in July 2023. Vitor later
+received a [long-term support grant](/blog/vitor-pamplona-receives-lts-grant) in
+August 2024, which lets him work on Amethyst full-time.
+
+## What's next?
+
+Recent work has focused on Web of Trust integration (NIP-85), a high-performance
+local database with sub-microsecond queries for Quartz, follow lists and starter
+packs, and a redesigned voice notes UI. The Quartz library is being migrated to
+Kotlin Multiplatform, which will open the door to Amethyst Desktop and Amethyst
+iOS ports that are now in development by other contributors.
+
+The next quarter will focus on WoT-based content filtering to replace legacy
+spam filters, and continued support for the desktop and iOS efforts. For a
+detailed look at recent progress, see the [Advancements in Nostr
+Clients](/blog/advancements-in-nostr-clients#amethyst) impact report.
