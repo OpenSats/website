@@ -19,15 +19,14 @@ live streams, marketplaces, long-form articles, voice notes, zaps via Wallet
 Connect, media feeds, and more. It ships with built-in Tor
 support enabled by default, so relay operators never see your IP address.
 
-What makes Amethyst stand out is how it handles relays. Most nostr clients
-connect to a handful of large relays, which pushes the network toward
-centralization. Amethyst uses the
-[outbox model](https://mikedilger.com/gossip-model/) to figure out
-automatically which relays to read from based on who you follow. In practice,
-the app can connect to over 1,000 relays at once, even on mobile data, without
-noticeable battery or bandwidth cost. The app also gives users granular control
-over every relay type: inbox, outbox, DM, search, indexer, broadcast, local,
-and more.
+Amethyst recently moved to the
+[outbox model](https://mikedilger.com/gossip-model/), joining other clients that
+have adopted this approach to relay management. Instead of users manually
+picking which relays to read from, the app figures that out automatically based
+on who you follow. On mobile, Amethyst can connect to over 1,000 relays at once
+without noticeable battery or bandwidth cost. It also gives users granular
+control over every relay type: inbox, outbox, DM, search, indexer, broadcast,
+local, and more.
 
 > This achievement is a major demonstration of the true decentralized potential
 > of nostr. By enabling mobile clients to automatically connect to 1,000 relays,
