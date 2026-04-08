@@ -1,8 +1,8 @@
 ---
 title: 'Bitcoin Dev Kit'
 dateAdded: '2022-12-29'
-summary: 'Seamlessly build cross-platform mobile Bitcoin wallets.'
-nym: 'Alekos Filini'
+summary: 'A modern, descriptor-based wallet library written in Rust.'
+nym: 'BDK Foundation'
 website: 'https://bitcoindevkit.org/'
 coverImage: '/img/project/bdk.jpeg'
 git: 'https://github.com/bitcoindevkit'
@@ -10,6 +10,70 @@ twitter: 'bitcoindevkit'
 tags: ['Bitcoin', 'Library']
 ---
 
-## About this project
+BDK is a Rust library for building Bitcoin wallets. It handles key management,
+coin selection, transaction construction, and blockchain syncing. Developers use
+it so they don't have to rewrite this low-level Bitcoin logic for every new
+wallet project.
 
-BDK is the simplest way to integrate Bitcoin wallet features into any application, with native APIs for C, Swift, Java, and Kotlin programming languages. Designed from the ground up to be easily customized to application needs, with all of the low-level Bitcoin logic being handled by BDK so you can focus on custom-tailored user experiences.
+The library uses output descriptors and miniscript to express spending
+conditions. Complex setups like multisig or time-locked vaults work without
+writing custom Bitcoin scripts. Developers choose their own blockchain backend
+(a local full node, Electrum, Esplora, or compact block filters), their own
+database, and their own signing setup. Through [`bdk-ffi`](https://github.com/bitcoindevkit/bdk-ffi), the same Rust core
+is available in Swift, Kotlin, and Python, running on iOS, Android, and desktop.
+Experimental bindings for Dart and React Native are also in progress, with Go
+on the horizon. A separate `bdk-wasm` project brings BDK to browser
+environments via WebAssembly.
+
+> The mission of the BDK team is to provide the best FOSS libraries for
+> building secure, modern bitcoin apps and services. [...] If there is a bitcoin
+> project you want to see in the world, BDK will help you build it.
+>
+> <cite>—[Steve Myers](/blog/advancements-in-developer-libraries#bitcoin-dev-kit)</cite>
+
+BDK reached its 1.0 release in December 2024 after a full redesign that
+stabilized the API under semantic versioning, and has since shipped 2.0 and
+beyond on an 8-week release cadence. Projects like Bitkey, ProtonWallet,
+AnchorWatch, Cove, Alby, Fedimint, Bull Bitcoin, and MetaMask (via `bdk-wasm`)
+already ship with BDK.
+
+## Why fund it?
+
+A lot of wallets depend on BDK. When someone finds and fixes a bug in
+transaction building or coin selection, that fix ships to every project built on
+top of it. The same goes for new features:
+[silent payments](https://bitcoinops.org/en/topics/silent-payments/),
+[compact block filters](https://bitcoinops.org/en/topics/compact-block-filters/),
+Tor connectivity, and other protocol upgrades land once in BDK and
+become available to all downstream wallets without each team having to implement
+them separately.
+
+Building a Bitcoin wallet from scratch is hard to get right. Subtle mistakes in
+key derivation, fee estimation, or change output handling can lose people money.
+BDK lets wallet teams lean on code that has been reviewed, tested, and used in
+production by many projects, rather than rolling their own.
+
+OpenSats has supported BDK-related work through multiple grants: the
+[initial BDK grant](/blog/bitcoin-and-nostr-grants-august-2023#bdk) in August
+2023, [Tor support for BDK & Fedimint](/blog/bitcoin-grants-july-2024#tor-support-for-bdk--fedimint)
+in July 2024, and a grant for the
+[Kyoto light client](/blog/bitcoin-grants-september-2024-7th-wave#kyoto) in
+September 2024.
+
+## What's next?
+
+Recent releases have added Tor connectivity, a compact block filter light
+client ([Kyoto](https://github.com/rustaceanrob/kyoto)), Testnet4 support, and
+a dedicated [Silent Payments](https://github.com/bitcoindevkit/bdk-sp) experimental crate
+(BIP352). An experimental
+[`bdk-tx`](https://github.com/bitcoindevkit/bdk-tx) project is decoupling
+transaction building from the wallet, and BDK is becoming a building block for
+layer-two projects like [`ldk-node`](https://github.com/lightningdevkit/ldk-node)
+and [bark](https://gitlab.com/ark-bitcoin/bark).
+
+The team is currently working towards BDK 3.0. For a detailed look at recent
+progress, see the
+[Advancements in Developer Libraries](/blog/advancements-in-developer-libraries#bitcoin-dev-kit)
+impact report. Or keep an eye out for updates on the
+[BDK blog](https://bitcoindevkit.org/blog/).
+
