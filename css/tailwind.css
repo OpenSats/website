@@ -71,7 +71,7 @@ button.secondary {
 }
 
 .prose a[data-external] {
-  color: var(--tw-prose-body);
+  color: inherit;
   text-decoration: underline dotted;
   text-decoration-color: rgb(192 192 192);
   text-underline-offset: 3px;
