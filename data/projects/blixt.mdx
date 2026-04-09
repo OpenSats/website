@@ -59,18 +59,20 @@ grants](/blog/sixteenth-wave-of-bitcoin-grants).
 
 ## What's next?
 
-Blixt 0.8.0 shipped with TurboLnd fully integrated. Hampus and his team are
-now focused on [Noah](https://github.com/BlixtWallet/noah), a self-custodial
-wallet built on the [Ark](https://ark-protocol.org) protocol. Where Blixt
-requires opening Lightning channels and managing liquidity, Noah uses Virtual
-Transaction Outputs (VTXOs) so users can receive payments without an onchain
-transaction. The goal is a single balance that can send and receive via
-Lightning, onchain, or Ark, with seed-phrase-only backup and self-custodial
-Lightning Address support.
+Blixt 0.9.0 shipped in February 2026 with TurboLnd, an updated lnd (v0.20.0),
+BIP177 support, a new automatic channel opener, and the React Compiler and
+Hermes V1 for better performance. An experimental desktop build using
+[Electrobun](https://electrobun.dev/) is in progress alongside the existing
+macOS version.
 
-Desktop versions of Blixt are still in progress. A Linux build via Electron
-has a working proof of concept. The Windows build is blocked by an upstream
-issue in react-native-windows.
+Hampus and his team are also building
+[Noah](https://github.com/BlixtWallet/noah), a self-custodial wallet on the
+[Ark](https://ark-protocol.org) protocol. Where Blixt requires opening
+Lightning channels and managing liquidity, Noah uses Virtual Transaction
+Outputs (VTXOs) so users can receive payments without an onchain transaction.
+The goal is a single balance that can send and receive via Lightning, onchain,
+or Ark, with seed-phrase-only backup and self-custodial Lightning Address
+support.
 
 For a detailed look at earlier progress, see the [Advancements in Bitcoin and
 Lightning Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)
