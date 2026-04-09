@@ -27,16 +27,17 @@ export default function PageLayout({ children, content }: Props) {
               className="h-48 w-48"
             />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-100">
-              <SocialIcon kind="website" href={website} />
+              <SocialIcon kind="website" href={website} size={6} />
               {twitter && (
                 <SocialIcon
                   kind="twitter"
                   href={`https://twitter.com/${twitter}`}
+                  size={6}
                 />
               )}
-              <SocialIcon kind="github" href={git} />
+              <SocialIcon kind="github" href={git} size={6} />
               {nostr && (
-                <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} />
+                <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} size={6} />
               )}
             </div>
           </div>
