@@ -1,0 +1,59 @@
+---
+title: 'Blixt Wallet'
+dateAdded: '2023-07-14'
+summary: 'A non-custodial Lightning wallet that runs a full LND node on your phone.'
+nym: 'Hampus Sjöberg'
+website: 'https://blixtwallet.github.io/'
+coverImage: '/static/images/projects/blixt.png'
+git: 'https://github.com/hsjoberg/blixt-wallet'
+twitter: 'hampaboransen'
+nostr: 'npub1v4v57fu60zvc9d2uq23cey4fnwvxlzga9q2vta2n6xalu03rs57s0mxwu8'
+tags: ['Bitcoin', 'Lightning', 'Wallet']
+showcase: true
+---
+
+Blixt is a non-custodial Bitcoin Lightning wallet for Android, iOS, and macOS.
+It runs [LND](https://github.com/lightningnetwork/lnd) and
+[Neutrino](https://github.com/lightninglabs/neutrino) directly on the device,
+so the wallet operates a full Lightning node without relying on centralized
+servers for routing or chain data.
+
+The wallet supports LNURL (pay, auth, withdraw, channel), keysend, multi-path
+payments, a built-in WebLN browser, and Tor. Channel backups go to Google Drive
+or iCloud. A feature called Speedloader helps the app start quickly and stay
+in sync even on slower connections.
+
+Hampus rebuilt the wallet's core around
+[`react-native-turbo-lnd`](https://github.com/hsjoberg/react-native-turbo-lnd),
+a C++ module that runs LND inside the app for faster payments without background
+processes. He also improved Neutrino to connect to multiple peers in different
+regions, making sync more reliable on mobile.
+
+[Lightning Box](https://github.com/hsjoberg/lightning-box) is a trust-minimized
+Lightning Address protocol built alongside Blixt. It lets users receive
+payments at a human-readable address (user@domain) while keeping custody local.
+A lightweight HTTP relay forwards requests to the wallet and returns an invoice.
+
+## Why fund it?
+
+Running a full Lightning node on a phone is the strongest form of self-custody
+for Lightning payments. Blixt proves it works in practice and produces reusable
+tools (`react-native-turbo-lnd`,
+[`react-native-turbo-sqlite`](https://github.com/hsjoberg/react-native-turbo-sqlite),
+Lightning Box) that other wallet projects can adopt.
+
+OpenSats first funded Blixt in the [first wave of Bitcoin
+grants](/blog/bitcoin-grants-july-2023#blixt-wallet) in July 2023 and has
+[renewed the grant](/blog/renewing-our-commitment-to-bitcoin) since then.
+Hampus also received a grant for [Noah](https://github.com/niclas9/noah),
+an Ark wallet, in the [sixteenth wave of Bitcoin
+grants](/blog/sixteenth-wave-of-bitcoin-grants).
+
+## What's next?
+
+Ongoing work includes BOLT12 support, desktop platform expansion, LSP-spec
+compatibility, and push-to-wake handling for better background receive
+reliability. For a detailed look at recent progress, see the [Advancements in
+Bitcoin and Lightning
+Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)
+impact report.
