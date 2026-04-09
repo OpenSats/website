@@ -1,7 +1,7 @@
 ---
 title: 'Cashu'
 dateAdded: '2023-04-20'
-summary: 'Cashu brings near-perfect privacy for users of custodial Bitcoin applications by using a Chaumian ecash system.'
+summary: 'A Chaumian ecash protocol built for Bitcoin that brings near-perfect privacy to custodial payments.'
 nym: 'Calle'
 website: 'https://cashu.space/'
 donationLink: 'https://geyser.fund/project/cashu'
@@ -10,16 +10,65 @@ git: 'https://github.com/cashubtc'
 twitter: 'CashuBTC'
 tags: ['Bitcoin', 'Lightning', 'ecash']
 showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2023#cashu'
 ---
 
-## About this project
+Cashu is a Chaumian ecash protocol built for Bitcoin. Wallets use a mint's
+Lightning node to send and receive payments, and the mint issues ecash tokens in
+return. The mint does not know who you are, what your balance is, or who you are
+transacting with. Payments between users are private and cannot be censored.
 
-Cashu is built for Bitcoin and deeply integrated with the Lightning network. Wallets use the mint’s Lightning node for sending and receiving Bitcoin payments anonymously in exchange for ecash. This means that Cashu wallets can be used as regular Bitcoin Lightning wallets but with the added benefit of nearly perfect privacy. A Cashu mint doesn’t know who you are, what your balance is, or who you’re transacting with.
+The protocol is defined by a set of specifications called
+[NUTs](https://github.com/cashubtc/nuts) (Notation, Usage, and Terminology).
+Client libraries exist in
+[Python](https://github.com/cashubtc/nutshell),
+[TypeScript](https://github.com/cashubtc/cashu-ts),
+[Rust](https://github.com/cashubtc/cdk),
+[Go](https://github.com/elnosh/gonuts), and
+[Kotlin](https://github.com/nickhil-tekwani/cashu-kotlin). The reference mint
+implementation is [Nutshell](https://github.com/cashubtc/nutshell), and
+[Cashu.me](https://cashu.me/) is the main web wallet. Other wallets include
+[Nutstash](https://nutstash.app/),
+[Minibits](https://www.minibits.cash/), and
+[eNuts](https://www.enuts.cash/).
 
-Specifications, called Cashu NUTS (Notation, Usage, and Terminology) describe how to implement the protocol. There are multiple existing client libraries in Python, Typescript, Rust, Golang, Javascript, and Kotlin programming languages, making it easy for developers to write their own wallets.
+Recent protocol work introduced authentication for mints
+([NUT-21](https://github.com/cashubtc/nuts/blob/main/21.md)/[22](https://github.com/cashubtc/nuts/blob/main/22.md)),
+cached responses ([NUT-19](https://github.com/cashubtc/nuts/blob/main/19.md)),
+shared custody via `SIG_ALL`
+([NUT-11](https://github.com/cashubtc/nuts/blob/main/11.md)), and payment
+requests ([NUT-18](https://github.com/cashubtc/nuts/blob/main/18.md)) that work
+over HTTP and nostr. Calle also built the
+[Cashu Auditor](https://github.com/callebtc/cashu-auditor) for verifying mint
+reserves and a [Cashu Decoder](https://github.com/callebtc/cashu-decoder) for
+inspecting tokens.
 
-Cashu apps:
+## Why fund it?
 
-- Cashu.me wallet
-- Nutstash wallet
-- Nutshell
+Cashu is free, open-source software with no business model. Protocol work, the
+reference mint, the web wallet, and ecosystem coordination all depend on grants.
+
+OpenSats first funded Cashu in the
+[first wave of Bitcoin grants](/blog/bitcoin-grants-july-2023#cashu) in July
+2023. Calle received a
+[long-term support grant](/blog/cashu-calle-receives-lts-grant) in June 2024.
+Separate grants went to
+[Nutshell](/blog/8th-wave-of-bitcoin-grants#cashu-nutshell) (8th wave),
+[Nutstash](/blog/ninth-wave-of-bitcoin-grants#nutstash) (9th wave), and
+[OpenCash](/projects/opencash) for broader ecosystem coordination.
+
+## What's next?
+
+Nutshell 0.20.0 shipped in Q1 2026 with improved P2PK/HTLC validation and
+expanded test coverage. Keyset V2 derivation is rolling out across
+implementations. Bolt12 support for [Cashu.me](https://cashu.me/) is close to
+done, and security audits across the Cashu ecosystem are a priority for the
+coming months.
+
+Calle is also working on [Bitchat](https://github.com/permissionlesstech/bitchat),
+a mesh networking project that lets Android devices communicate over Bluetooth
+and Wi-Fi without internet access.
+
+For a detailed look at recent progress, see the
+[Advancements in Ecash](/blog/advancements-in-ecash#cashu) impact report.
