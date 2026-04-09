@@ -12,16 +12,19 @@ showcase: true
 ---
 
 The Cashu Development Kit (CDK) is a Rust library for building wallets and
-mints that implement the [Cashu](https://cashu.space/) protocol. It provides
+mints that implement the [Cashu](/projects/cashu) protocol. It provides
 the core protocol logic, storage backends (SQLite, PostgreSQL, Redb), an
 Axum-based mint HTTP server, and Lightning backends for CLN, LND, LNbits, and
 LDK Node. Binaries for a wallet CLI (`cdk-cli`) and a mint (`cdk-mintd`) are
 included.
 
-In 2025, CDK shipped its most requested feature: mobile bindings.
-[CDK Swift](https://github.com/cashubtc/cdk-swift) and
-[CDK Kotlin](https://github.com/cashubtc/cdk-kotlin) let developers build
-Cashu-powered apps on iOS and Android using the same Rust core. Work on
+In 2025, CDK shipped its most requested feature: language bindings.
+[CDK Swift](https://github.com/cashubtc/cdk-swift),
+[CDK Kotlin](https://github.com/cashubtc/cdk-kotlin),
+[CDK Go](https://github.com/cashubtc/cdk-go),
+[CDK Flutter](https://github.com/cashubtc/cdk-flutter), and
+[CDK Python](https://github.com/cashubtc/cdk-python) let developers build
+Cashu-powered apps across platforms using the same Rust core. Work on
 multi-mint wallet support is underway, allowing a single wallet to manage
 balances across different mints without manual switching.
 
