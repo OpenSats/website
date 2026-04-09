@@ -70,6 +70,14 @@ export default function ProjectPage({
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl px-4 py-4 xl:col-span-2 xl:px-0">
+          {project.announcementLink && (
+            <CustomLink
+              href={project.announcementLink}
+              className="block rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+            >
+              Read announcement
+            </CustomLink>
+          )}
           {project.fund && (
             <CustomLink
               href={getFundDonationUrl(project.fund)}

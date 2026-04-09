@@ -119,6 +119,7 @@ export const Projects = defineDocumentType(() => ({
     hidden: { type: 'boolean' },
     showcase: { type: 'boolean' },
     fund: { type: 'string' },
+    announcementLink: { type: 'string' },
   },
   computedFields,
 }))
