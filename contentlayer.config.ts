@@ -118,6 +118,7 @@ export const Projects = defineDocumentType(() => ({
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
     showcase: { type: 'boolean' },
+    showGeneralFundButton: { type: 'boolean' },
   },
   computedFields,
 }))

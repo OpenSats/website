@@ -7,6 +7,7 @@ import type { Blog } from 'contentlayer/generated'
 import CustomLink from '@/components/Link'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
+import { MONTHLY_DONATION_URL } from '@/utils/constants'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
@@ -57,6 +58,14 @@ export default function ProjectPage({
                 : project.donationLink.includes('opencollective')
                 ? 'Support via OpenCollective'
                 : 'Support directly'}
+            </CustomLink>
+          )}
+          {project.showGeneralFundButton && (
+            <CustomLink
+              href={MONTHLY_DONATION_URL}
+              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+            >
+              Donate to General Fund
             </CustomLink>
           )}
         </aside>
