@@ -70,6 +70,24 @@ button.secondary {
   margin-bottom: 0;
 }
 
+.prose a[data-external] {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(163 163 163);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.prose a[data-external]:hover {
+  color: var(--tw-prose-links);
+  text-decoration-color: var(--tw-prose-links);
+}
+
+:is(.dark .prose) a[data-external] {
+  text-decoration-color: rgb(115 115 115);
+}
+
 .prose .nostr-links a {
   color: rgb(168 85 247) !important;
 }
