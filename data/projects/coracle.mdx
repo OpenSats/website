@@ -1,0 +1,59 @@
+---
+title: 'Coracle'
+dateAdded: '2023-07-08'
+summary: 'A web-based nostr client focused on relay management and web of trust.'
+nym: 'Hodlbod'
+website: 'https://coracle.social/'
+coverImage: '/static/images/projects/coracle.png'
+git: 'https://github.com/coracle-social/coracle'
+twitter: 'hodlbod'
+nostr: 'npub1jlrs53pkdfjnts29kveljul2sm0actt6n8dxrrzqcersttvcuv3qdjynqn'
+tags: ['Nostr']
+showcase: true
+---
+
+Coracle is a nostr web client built by
+[Hodlbod](/blog/hodlbod-receives-lts-grant). It started as a social feed reader
+but has grown to cover group chat, direct messages, communities, marketplaces,
+and classifieds. The client runs in the browser and works across desktop and
+mobile.
+
+Where Coracle puts the most effort is relay handling. Users can choose which
+relays receive a given note, and the outbox model figures out where to fetch
+posts from based on who you follow. Smarter fallback behavior keeps timelines
+loading even when individual relays go down.
+[Negentropy](https://github.com/nostr-protocol/nips/blob/master/77.md)-based
+sync makes refreshing feeds faster by only pulling what changed. A restored
+global feed gives newcomers an easy way to browse the wider network.
+
+Hodlbod also works on relay infrastructure directly. He proposed and implemented
+[NIP-43](https://github.com/nostr-protocol/nips/blob/master/43.md) for relay
+membership lists and built [zooid](https://github.com/coracle-social/zooid), a
+relay that uses them. Combined with
+[NIP-86](https://github.com/nostr-protocol/nips/blob/master/86.md) for relay
+admin controls, these features let relays state who they serve and what content
+they host.
+
+## Why fund it?
+
+Coracle is one of the longer-running nostr clients and has been a testing ground
+for relay-related protocol improvements. Hodlbod ships NIP implementations in
+Coracle, tests them in production, and feeds results back into the spec process.
+[Daniele](/blog/daniele-receives-lts-grant) contributes UX and reliability work.
+
+The project has also produced
+[Welshman](https://github.com/coracle-social/welshman), a library extracted from
+Coracle that other nostr projects can use, and
+[Triflector](https://github.com/coracle-social/triflector), a relay
+implementation.
+
+OpenSats first funded Coracle in the [first wave of nostr
+grants](/blog/nostr-grants-july-2023#coracle) in July 2023. Hodlbod later
+received a [long-term support grant](/blog/hodlbod-receives-lts-grant).
+
+## What's next?
+
+Recent work has focused on web-of-trust feed filtering, proof-of-work display
+and generation, and per-note relay selection in the compose flow. For a
+detailed look at recent progress, see the [Advancements in Nostr
+Clients](/blog/advancements-in-nostr-clients#coracle) impact report.
