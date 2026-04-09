@@ -70,10 +70,30 @@ button.secondary {
   margin-bottom: 0;
 }
 
-.prose .nostr-links a {
+.prose a[data-external]:not([class]) {
+  color: inherit !important;
+  text-decoration: underline dotted;
+  text-decoration-color: rgb(192 192 192);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease,
+    text-decoration-style 0.15s ease;
+}
+
+.prose a[data-external]:not([class]):hover {
+  color: var(--tw-prose-links);
+  text-decoration-style: solid;
+  text-decoration-color: var(--tw-prose-links);
+}
+
+:is(.dark .prose) a[data-external]:not([class]) {
+  text-decoration-color: rgb(100 100 100);
+}
+
+.prose .nostr-links a:not([data-external]) {
   color: rgb(168 85 247) !important;
 }
 
-.prose .nostr-links a:hover {
+.prose .nostr-links a:not([data-external]):hover {
   color: rgb(147 51 234) !important;
 }

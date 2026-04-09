@@ -7,8 +7,31 @@ import type { Blog } from 'contentlayer/generated'
 import CustomLink from '@/components/Link'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
+import { MONTHLY_DONATION_URL } from '@/utils/constants'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
+
+const FUND_DESIGNATION_IDS: Record<string, string> = {
+  nostr: 'ENWRA6YZ',
+  ops: 'ELL6P2J6',
+}
+
+const FUND_LABELS: Record<string, string> = {
+  general: 'General Fund',
+  nostr: 'The Nostr Fund',
+  ops: 'Operations Budget',
+}
+
+function getFundDonationUrl(fund: string): string {
+  const designationId = FUND_DESIGNATION_IDS[fund]
+  return designationId
+    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
+    : MONTHLY_DONATION_URL
+}
+
+function getFundLabel(fund: string): string {
+  return FUND_LABELS[fund] || fund
+}
 
 export async function getStaticPaths() {
   return {
@@ -46,11 +69,27 @@ export default function ProjectPage({
       />
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
-        <aside className="bg-light flex items-center gap-4 rounded-xl px-4 py-4 lg:flex-col lg:items-start xl:col-span-2 xl:px-0">
+        <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
+          {project.announcementLink && (
+            <CustomLink
+              href={project.announcementLink}
+              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
+            >
+              Read announcement
+            </CustomLink>
+          )}
+          {project.fund && (
+            <CustomLink
+              href={getFundDonationUrl(project.fund)}
+              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
+            >
+              Donate to {getFundLabel(project.fund)}
+            </CustomLink>
+          )}
           {project.donationLink && (
             <CustomLink
               href={project.donationLink}
-              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
             >
               {project.donationLink.includes('geyser')
                 ? 'Support via Geyser'
@@ -69,7 +108,7 @@ export default function ProjectPage({
           <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
             <div></div>
             <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 xl:col-span-2">
-              Related Announcements
+              Further Reading
             </h2>
           </div>
           <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
