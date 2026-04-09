@@ -73,7 +73,7 @@ export default function ProjectPage({
           {project.announcementLink && (
             <CustomLink
               href={project.announcementLink}
-              className="block rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 sm:w-auto dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
             >
               Read announcement
             </CustomLink>
@@ -81,7 +81,7 @@ export default function ProjectPage({
           {project.fund && (
             <CustomLink
               href={getFundDonationUrl(project.fund)}
-              className="block rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 sm:w-auto dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
             >
               Donate to {getFundLabel(project.fund)}
             </CustomLink>
@@ -89,7 +89,7 @@ export default function ProjectPage({
           {project.donationLink && (
             <CustomLink
               href={project.donationLink}
-              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 sm:w-auto dark:bg-white dark:text-black dark:hover:bg-orange-500"
             >
               {project.donationLink.includes('geyser')
                 ? 'Support via Geyser'
