@@ -1,0 +1,50 @@
+---
+title: 'Cove'
+dateAdded: '2024-07-02'
+summary: 'A Bitcoin-only mobile wallet built on BDK with strong hardware wallet support.'
+nym: 'Praveen Perera'
+website: 'https://covebitcoinwallet.com/'
+coverImage: '/static/images/projects/cove.png'
+git: 'https://github.com/bitcoinppl/cove'
+twitter: 'PraveenPerera'
+tags: ['Bitcoin', 'Wallet']
+showcase: true
+---
+
+Cove is a single-signature Bitcoin wallet for iOS and Android, built on
+[BDK](/projects/bdk). The app logic is written in Rust with native UI in SwiftUI
+and Jetpack Compose. It is available on the iOS App Store and Android is in
+development.
+
+The wallet is designed around hardware signing devices. It supports
+[TAPSIGNER](https://tapsigner.com/) and
+[SATSCARD](https://store.coinkite.com/store/satscard) via NFC, and moves PSBTs
+between phone and signing device using QR codes (including animated
+[BBQr](https://github.com/bitcoinppl/bbqr-ffi) sequences) or virtual drives.
+Air-gapped workflows keep private keys off the phone entirely.
+
+Other features include BIP-329 labels for organizing transactions, detailed coin
+control, custom fee settings, watch-only mode, and a decoy PIN that opens a
+limited version of the wallet under duress. Users can connect to their own
+Electrum or Esplora node.
+
+## Why fund it?
+
+Good wallet UX for hardware signers is hard to get right on mobile. Most Bitcoin
+wallets focus on Lightning or multisig; Cove fills a gap for people who want a
+simple on-chain wallet that works well with Coldcard, Krux, or TAPSIGNER. Praveen
+has also contributed upstream improvements to
+[`rust-cktap`](https://github.com/notmandatory/rust-cktap),
+[`uniffi`](https://github.com/mozilla/uniffi-rs), and BIP-329 libraries that
+benefit the broader Rust Bitcoin ecosystem.
+
+OpenSats first funded Cove in the [fifth wave of Bitcoin
+grants](/blog/bitcoin-grants-july-2024#cove) in July 2024 and has renewed the
+grant [multiple times](/blog/sixteenth-wave-of-bitcoin-grants) since.
+
+## What's next?
+
+Current priorities include the Android release, SATSCARD spending support, UTXO
+lock/unlock, and continued UI refinements. For a detailed look at recent
+progress, see the [Advancements in Bitcoin and Lightning
+Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#cove) impact report.
