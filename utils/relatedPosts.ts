@@ -21,8 +21,9 @@ export function getRelatedBlogPostsForProject(
       .join(' ')
       .toLowerCase()
 
-    // Check if project title appears in the content
-    return searchContent.includes(projectTitle)
+    // Check if project title appears as a whole word in the content
+    const pattern = new RegExp(`\\b${projectTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`)
+    return pattern.test(searchContent)
   })
 }
 
