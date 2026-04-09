@@ -69,7 +69,15 @@ export default function ProjectPage({
       />
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
-        <aside className="bg-light flex items-center gap-4 rounded-xl px-4 py-4 lg:flex-col lg:items-start xl:col-span-2 xl:px-0">
+        <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl px-4 py-4 xl:col-span-2 xl:px-0">
+          {project.fund && (
+            <CustomLink
+              href={getFundDonationUrl(project.fund)}
+              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
+            >
+              Donate to {getFundLabel(project.fund)}
+            </CustomLink>
+          )}
           {project.donationLink && (
             <CustomLink
               href={project.donationLink}
@@ -80,14 +88,6 @@ export default function ProjectPage({
                 : project.donationLink.includes('opencollective')
                 ? 'Support via OpenCollective'
                 : 'Support directly'}
-            </CustomLink>
-          )}
-          {project.fund && (
-            <CustomLink
-              href={getFundDonationUrl(project.fund)}
-              className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
-            >
-              Donate to {getFundLabel(project.fund)}
             </CustomLink>
           )}
         </aside>
