@@ -12,7 +12,8 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, coverImage, website, twitter, git, nostr, zapstore } = content
+  const { title, summary, coverImage, website, twitter, git, nostr, zapstore } =
+    content
   return (
     <>
       <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
@@ -32,7 +33,11 @@ export default function PageLayout({ children, content }: Props) {
               )}
               <SocialIcon kind="github" href={git} size={6} />
               {nostr && (
-                <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} size={6} />
+                <SocialIcon
+                  kind="nostr"
+                  href={`https://njump.to/${nostr}`}
+                  size={6}
+                />
               )}
               {twitter && (
                 <SocialIcon

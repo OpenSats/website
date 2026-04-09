@@ -9,7 +9,9 @@ export function getRelatedBlogPostsForProject(
   blogs: Blog[]
 ): Blog[] {
   const projectTitle = project.title.toLowerCase()
-  const projectSlug = (project.slug.split('/').pop() || project.slug).toLowerCase()
+  const projectSlug = (
+    project.slug.split('/').pop() || project.slug
+  ).toLowerCase()
 
   const slugPattern =
     projectSlug !== projectTitle
