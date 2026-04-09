@@ -1,0 +1,51 @@
+---
+title: 'Cashu Dev Kit'
+dateAdded: '2025-09-26'
+summary: 'A modular Rust toolkit for building Cashu wallets and mints.'
+nym: 'thesimplekid'
+website: 'https://cashudevkit.org/'
+coverImage: '/static/images/projects/cdk.png'
+git: 'https://github.com/cashubtc/cdk'
+nostr: 'npub1qjgcmlpkeyl8mdkvp4s0xls4ytcux6my606tgfx9xttut907h0zs76lgjw'
+tags: ['Bitcoin', 'Lightning', 'ecash', 'Library']
+showcase: true
+---
+
+The Cashu Development Kit (CDK) is a Rust library for building wallets and
+mints that implement the [Cashu](https://cashu.space/) protocol. It provides
+the core protocol logic, storage backends (SQLite, PostgreSQL, Redb), an
+Axum-based mint HTTP server, and Lightning backends for CLN, LND, LNbits, and
+LDK Node. Binaries for a wallet CLI (`cdk-cli`) and a mint (`cdk-mintd`) are
+included.
+
+In 2025, CDK shipped its most requested feature: mobile bindings.
+[CDK Swift](https://github.com/cashubtc/cdk-swift) and
+[CDK Kotlin](https://github.com/cashubtc/cdk-kotlin) let developers build
+Cashu-powered apps on iOS and Android using the same Rust core. Work on
+multi-mint wallet support is underway, allowing a single wallet to manage
+balances across different mints without manual switching.
+
+## Why fund it?
+
+CDK sits between the Cashu protocol specs and the apps people use. Without a
+shared library, every wallet and mint has to implement the full protocol from
+scratch, which slows adoption and increases the surface area for bugs. CDK
+handles the hard parts (token issuance, Lightning settlement, storage,
+networking) so developers can focus on their app.
+
+OpenSats has supported CDK through the
+[Advancements in Ecash](/blog/advancements-in-ecash#cashu-dev-kit) initiative
+and awarded an additional grant for cloud and mint operability work in the
+[sixteenth wave of Bitcoin grants](/blog/sixteenth-wave-of-bitcoin-grants#cashu-dev-kit-cdk).
+
+## What's next?
+
+Current work includes Prometheus and Grafana integration for mint operators,
+Kubernetes controllers for running mints in the cloud, gRPC management
+backends, and support for additional payment processors. The project is also
+improving build tooling (container images, Nitro Enclaves) to make it easier
+to deploy mints in production.
+
+For a detailed look at recent progress, see the
+[Advancements in Ecash](/blog/advancements-in-ecash#cashu-dev-kit) impact
+report.
