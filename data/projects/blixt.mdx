@@ -48,15 +48,24 @@ Lightning Box) that other wallet projects can adopt.
 OpenSats first funded Blixt in the [first wave of Bitcoin
 grants](/blog/bitcoin-grants-july-2023#blixt-wallet) in July 2023 and has
 [renewed the grant](/blog/renewing-our-commitment-to-bitcoin) since then.
-Hampus also received a grant for [Noah](https://github.com/niclas9/noah),
+Hampus also received a grant for [Noah](https://github.com/BlixtWallet/noah),
 an Ark wallet, in the [sixteenth wave of Bitcoin
 grants](/blog/sixteenth-wave-of-bitcoin-grants).
 
 ## What's next?
 
-Ongoing work includes BOLT12 support, desktop platform expansion, LSP-spec
-compatibility, and push-to-wake handling for better background receive
-reliability. For a detailed look at recent progress, see the [Advancements in
-Bitcoin and Lightning
-Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)
+Blixt 0.8.0 shipped with TurboLnd fully integrated. Hampus is now focused on
+[Noah](https://github.com/BlixtWallet/noah), an [Ark](https://ark-protocol.org)
+wallet built with
+[`react-native-nitro-ark`](https://github.com/BlixtWallet/react-native-nitro-ark).
+Ark solves some long-standing pain points for end-user wallets: offline
+payments, easy onboarding without channels, and simpler recovery. Noah uses
+Lightning under the hood to pay the outside world.
+
+Desktop versions of Blixt are still in progress. A Linux build via Electron
+has a working proof of concept. The Windows build is blocked by an upstream
+issue in react-native-windows.
+
+For a detailed look at earlier progress, see the [Advancements in Bitcoin and
+Lightning Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)
 impact report.
