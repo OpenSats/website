@@ -11,6 +11,28 @@ import { MONTHLY_DONATION_URL } from '@/utils/constants'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
+const FUND_DESIGNATION_IDS: Record<string, string> = {
+  nostr: 'ENWRA6YZ',
+  ops: 'ELL6P2J6',
+}
+
+const FUND_LABELS: Record<string, string> = {
+  general: 'General Fund',
+  nostr: 'The Nostr Fund',
+  ops: 'Operations Budget',
+}
+
+function getFundDonationUrl(fund: string): string {
+  const designationId = FUND_DESIGNATION_IDS[fund]
+  return designationId
+    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
+    : MONTHLY_DONATION_URL
+}
+
+function getFundLabel(fund: string): string {
+  return FUND_LABELS[fund] || fund
+}
+
 export async function getStaticPaths() {
   return {
     paths: allProjects.map((p) => ({ params: { slug: p.slug.split('/') } })),
@@ -60,12 +82,12 @@ export default function ProjectPage({
                 : 'Support directly'}
             </CustomLink>
           )}
-          {project.showGeneralFundButton && (
+          {project.fund && (
             <CustomLink
-              href={MONTHLY_DONATION_URL}
+              href={getFundDonationUrl(project.fund)}
               className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
             >
-              Donate to General Fund
+              Donate to {getFundLabel(project.fund)}
             </CustomLink>
           )}
         </aside>
