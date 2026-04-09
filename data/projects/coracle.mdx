@@ -20,6 +20,14 @@ but has grown to cover group chat, direct messages, communities, marketplaces,
 and classifieds. The client runs in the browser and works across desktop and
 mobile.
 
+> Focusing on the cryptographic aspects is, to me, actually something of a
+> distraction. The important thing to realize is that digital signatures make
+> relays possible—they decouple data storage from data authentication. This
+> puts the user in control, by allowing them to select and move between
+> services and custodians, with support from the protocol for doing so.
+>
+> <cite>—[Hodlbod](/blog/advancements-in-nostr-clients#coracle)</cite>
+
 Where Coracle puts the most effort is relay handling. Users can choose which
 relays receive a given note, and the outbox model figures out where to fetch
 posts from based on who you follow. Smarter fallback behavior keeps timelines
