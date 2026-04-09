@@ -70,7 +70,7 @@ button.secondary {
   margin-bottom: 0;
 }
 
-.prose a[data-external] {
+.prose a[data-external]:not([class]) {
   color: inherit !important;
   text-decoration: underline dotted;
   text-decoration-color: rgb(192 192 192);
@@ -80,13 +80,13 @@ button.secondary {
     text-decoration-style 0.15s ease;
 }
 
-.prose a[data-external]:hover {
+.prose a[data-external]:not([class]):hover {
   color: var(--tw-prose-links);
   text-decoration-style: solid;
   text-decoration-color: var(--tw-prose-links);
 }
 
-:is(.dark .prose) a[data-external] {
+:is(.dark .prose) a[data-external]:not([class]) {
   text-decoration-color: rgb(100 100 100);
 }
 
