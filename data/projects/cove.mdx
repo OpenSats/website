@@ -15,20 +15,21 @@ announcementLink: '/blog/bitcoin-grants-july-2024#cove'
 
 Cove is a single-signature Bitcoin wallet for iOS and Android, built on
 [BDK](/projects/bdk). The app logic is written in Rust with native UI in SwiftUI
-and Jetpack Compose. It is available on the iOS App Store and Android is in
-development.
+and Jetpack Compose. It is already available on the iOS App Store, while the
+Android application is in development.
 
 The wallet is designed around hardware signing devices. It supports
 [TAPSIGNER](https://tapsigner.com/) and
-[SATSCARD](https://store.coinkite.com/store/satscard) via NFC, and moves PSBTs
-between phone and signing device using QR codes (including animated
+[SATSCARD](https://store.coinkite.com/store/satscard) via NFC, and
+moves [PSBTs](https://bitcoinops.org/en/topics/psbt/) between phone
+and signing device using QR codes (including animated
 [BBQr](https://github.com/bitcoinppl/bbqr-ffi) sequences) or virtual drives.
 Air-gapped workflows keep private keys off the phone entirely.
 
-Other features include BIP-329 labels for organizing transactions, detailed coin
-control, custom fee settings, watch-only mode, and a decoy PIN that opens a
-limited version of the wallet under duress. Users can connect to their own
-Electrum or Esplora node.
+Other features include [BIP-329](https://github.com/bitcoin/bips/blob/master/bip-0329.mediawiki)
+labels for organizing transactions, detailed coin control, custom fee settings, watch-only mode,
+and a decoy PIN that opens a limited version of the wallet under duress. Users can
+connect to their own Electrum or Esplora node.
 
 ## Why fund it?
 
