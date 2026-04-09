@@ -69,7 +69,7 @@ export default function ProjectPage({
       />
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
-        <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl px-4 py-4 xl:col-span-2 xl:px-0">
+        <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           {project.announcementLink && (
             <CustomLink
               href={project.announcementLink}
