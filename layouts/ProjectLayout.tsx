@@ -30,7 +30,6 @@ export default function PageLayout({ children, content }: Props) {
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
-              <SocialIcon kind="website" href={website} size={6} />
               <SocialIcon kind="github" href={git} size={6} />
               {nostr && (
                 <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} size={6} />
@@ -42,6 +41,7 @@ export default function PageLayout({ children, content }: Props) {
                   size={6}
                 />
               )}
+              <SocialIcon kind="website" href={website} size={6} />
             </div>
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
