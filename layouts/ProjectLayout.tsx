@@ -27,6 +27,9 @@ export default function PageLayout({ children, content }: Props) {
               className="h-48 w-48"
             />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-100">
+              {zapstore && (
+                <SocialIcon kind="zapstore" href={zapstore} size={6} />
+              )}
               <SocialIcon kind="website" href={website} size={6} />
               {twitter && (
                 <SocialIcon
@@ -38,9 +41,6 @@ export default function PageLayout({ children, content }: Props) {
               <SocialIcon kind="github" href={git} size={6} />
               {nostr && (
                 <SocialIcon kind="nostr" href={`https://njump.to/${nostr}`} size={6} />
-              )}
-              {zapstore && (
-                <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
             </div>
           </div>
