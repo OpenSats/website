@@ -90,10 +90,10 @@ button.secondary {
   text-decoration-color: rgb(100 100 100);
 }
 
-.prose .nostr-links a {
+.prose .nostr-links a:not([data-external]) {
   color: rgb(168 85 247) !important;
 }
 
-.prose .nostr-links a:hover {
+.prose .nostr-links a:not([data-external]):hover {
   color: rgb(147 51 234) !important;
 }
