@@ -1,0 +1,49 @@
+---
+title: 'Soapbox'
+dateAdded: '2023-07-08'
+summary: 'An open-source social media frontend for nostr and the fediverse, plus the Ditto self-hosted server and the Mostr bridge.'
+nym: 'Alex Gleason'
+website: 'https://soapbox.pub/'
+coverImage: '/static/images/projects/soapbox.png'
+git: 'https://gitlab.com/soapbox-pub'
+twitter: 'SoapboxTech'
+nostr: 'npub108pv4cg5ag52nq082kd5leu9ffrn2gdg6g4xdwatn73y36uzplmq9uyev6'
+tags: ['Nostr']
+showcase: true
+---
+
+Soapbox started as an alternative Mastodon frontend but has grown into a family
+of projects spanning nostr and the fediverse. The main pieces are
+[Soapbox](https://docs.soapbox.pub/soapbox/) itself (a customizable,
+self-hostable social media UI), [Ditto](https://soapbox.pub/ditto/) (a
+self-hosted nostr server with a built-in client and relay, compatible with
+Mastodon apps), and the [Mostr](https://soapbox.pub/blog/mostr-fediverse-nostr-bridge/)
+bridge, which connects nostr to the ActivityPub fediverse bidirectionally.
+
+Ditto is where most of the current development happens. It gives communities a
+way to run their own social server on nostr while staying interoperable with
+Mastodon and Bluesky through Mostr and Bridgy Fed. Users get features like zaps,
+DMs, NIP-05 username purchases, and a digital shop for profile customization,
+all from a single self-hosted instance.
+
+Alex also maintains [Nostrify](https://gitlab.com/soapbox-pub/nostrify), a
+nostr framework for web browsers and Deno that other developers can build on.
+
+## Why fund it?
+
+Bridging nostr and the fediverse expands the reach of both networks. The Mostr
+bridge alone exposes millions of fediverse users to nostr, and several have
+already moved over entirely. Ditto makes it possible to run a nostr-first server
+that still talks to the rest of the social web, lowering the barrier for
+communities that want to try nostr without cutting ties to existing networks.
+
+OpenSats first funded Soapbox in the [first wave of nostr
+grants](/blog/nostr-grants-july-2023#soapbox) in July 2023. Alex later received
+a [long-term support grant](/blog/alex-gleason-receives-lts-grant) in August
+2024.
+
+## What's next?
+
+Current priorities include migrating existing Soapbox servers to Ditto, growing
+community-run instances, and improving Ditto's Mastodon API compatibility. Alex
+is also working on UX improvements and performance tuning.
