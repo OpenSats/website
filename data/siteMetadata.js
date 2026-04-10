@@ -1,6 +1,16 @@
 // @ts-check
 
 /** @type {import("pliny/config").PlinyConfig } */
+const rawSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.SITE_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+  'https://opensats.org'
+
+const siteUrl = rawSiteUrl.startsWith('http')
+  ? rawSiteUrl.replace(/\/$/, '')
+  : `https://${rawSiteUrl.replace(/\/$/, '')}`
+
 const siteMetadata = {
   title: 'OpenSats',
   author: 'OpenSats',
@@ -9,7 +19,7 @@ const siteMetadata = {
     'OpenSats is a 501(c)(3) public charity that aims to support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://opensats.org',
+  siteUrl,
   siteRepo: 'https://github.com/OpenSats/website/',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
