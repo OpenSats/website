@@ -102,7 +102,7 @@ async function toDataUri(publicPath) {
 
 function renderSvg(project, coverImage) {
   const titleLines = wrapText(project.title, 18, 3)
-  const summaryLines = wrapText(project.summary, 34, 4)
+  const summaryLines = wrapText(project.summary, 36, 3)
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
 
@@ -143,7 +143,7 @@ function renderSvg(project, coverImage) {
           <rect x="84" y="140" width="600" height="220" />
         </clipPath>
         <clipPath id="summary-clip">
-          <rect x="84" y="348" width="600" height="150" />
+          <rect x="84" y="348" width="600" height="118" />
         </clipPath>
       </defs>
 
