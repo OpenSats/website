@@ -9,9 +9,16 @@ export function getRelatedBlogPostsForProject(
   blogs: Blog[]
 ): Blog[] {
   const projectTitle = project.title.toLowerCase()
+  const projectSlug = (
+    project.slug.split('/').pop() || project.slug
+  ).toLowerCase()
+
+  const slugPattern =
+    projectSlug !== projectTitle
+      ? new RegExp(`\\b${escapeRegExp(projectSlug)}\\b`, 'i')
+      : null
 
   return blogs.filter((blog) => {
-    // Build searchable content from all relevant fields
     const searchContent = [
       blog.title || '',
       blog.summary || '',
@@ -21,10 +28,15 @@ export function getRelatedBlogPostsForProject(
       .join(' ')
       .toLowerCase()
 
-    // Check if project title appears as a whole word in the content
-    const pattern = new RegExp(`\\b${projectTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`)
-    return pattern.test(searchContent)
+    const titlePattern = new RegExp(`\\b${escapeRegExp(projectTitle)}\\b`)
+    if (titlePattern.test(searchContent)) return true
+    if (slugPattern && slugPattern.test(searchContent)) return true
+    return false
   })
+}
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 // Map fund slugs to the tags that should be considered "related" for announcements

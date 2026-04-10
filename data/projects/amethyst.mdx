@@ -8,22 +8,21 @@ coverImage: '/static/images/projects/amethyst.png'
 git: 'https://github.com/vitorpamplona/amethyst'
 twitter: 'vitorpamplona'
 nostr: 'npub142gywvjkq0dv6nupggyn2euhx4nduwc7yz5f24ah9rpmunr2s39se3xrj0'
+zapstore: 'https://zapstore.dev/apps/com.vitorpamplona.amethyst'
 tags: ['Nostr', 'Mobile', 'Android', 'Desktop']
 showcase: true
 ---
 
-Amethyst is a nostr client for Android built by [Vitor
-Pamplona](/blog/vitor-pamplona-receives-lts-grant). It covers the basics you'd
-expect from a social app (feeds, profiles, DMs, group chats) but also supports
-live streams, marketplaces, long-form articles, voice notes, zaps via Wallet
-Connect, media feeds, and more. It ships with built-in Tor
-support enabled by default, so relay operators never see your IP address.
+Amethyst is a nostr client for Android built by [Vitor Pamplona][lts]. It
+covers the basics you'd expect from a social app (feeds, profiles, DMs, group
+chats) but also supports live streams, marketplaces, long-form articles, voice
+notes, zaps via Wallet Connect, media feeds, and more. It ships with built-in
+Tor support enabled by default, so relay operators never see your IP address.
 
-Amethyst recently moved to the
-[outbox model](https://mikedilger.com/gossip-model/), joining other clients that
-have adopted this approach to relay management. Instead of users manually
-picking which relays to read from, the app figures that out automatically based
-on who you follow. On mobile, Amethyst can connect to over 1,000 relays at once
+Amethyst recently moved to the [outbox model], joining other clients that have
+adopted this approach to relay management. Instead of users manually picking
+which relays to read from, the app figures that out automatically based on who
+you follow. On mobile, Amethyst can connect to over 1,000 relays at once
 without noticeable battery or bandwidth cost. It also gives users granular
 control over every relay type: inbox, outbox, DM, search, indexer, broadcast,
 local, and more.
@@ -34,15 +33,13 @@ local, and more.
 > reliably served by a highly distributed network, not just a few central
 > points.
 >
-> <cite>—[Vitor Pamplona](/blog/advancements-in-nostr-clients#amethyst)</cite>
+> <cite>—[Vitor Pamplona][impact-report]</cite>
 
-Amethyst was one of the first clients to implement
-[NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) for
-encrypted DMs, and it supports encrypted media uploads in private conversations.
-Vitor also helped design and ship
-[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md), which
-brings Web of Trust scoring to nostr, letting users choose trust providers to
-filter spam and surface reputable accounts.
+Amethyst was one of the first clients to implement [NIP-17] for encrypted DMs,
+and it supports encrypted media uploads in private conversations. Vitor also
+helped design and ship [NIP-85], which brings Web of Trust scoring to nostr,
+letting users choose trust providers to filter spam and surface reputable
+accounts.
 
 ## Why fund it?
 
@@ -52,14 +49,12 @@ client code, often shipping a reference implementation in Amethyst before a NIP
 is finalized. His work on encrypted DMs (NIP-17) and Web of Trust (NIP-85) has
 shaped how other clients approach these problems.
 
-Beyond Amethyst itself, the project has produced
-[Quartz](https://github.com/vitorpamplona/amethyst/tree/main/quartz), a Kotlin
-library for nostr that other Android and [Kotlin Multiplatform](https://kotlinlang.org/multiplatform/) projects can use.
+Beyond Amethyst itself, the project has produced [Quartz], a Kotlin library for
+nostr that other Android and [Kotlin Multiplatform] projects can use.
 
 OpenSats has been supporting Amethyst since the [first wave of nostr
-grants](/blog/nostr-grants-july-2023#amethyst) in July 2023. Vitor later
-received a [long-term support grant](/blog/vitor-pamplona-receives-lts-grant) in
-August 2024, which lets him work on Amethyst full-time.
+grants][wave-1] in July 2023. Vitor later received a [long-term support
+grant][lts] in August 2024, which lets him work on Amethyst full-time.
 
 ## What's next?
 
@@ -72,4 +67,13 @@ iOS port is in development.
 
 Future work will focus on using WoT scores to filter content and replace legacy
 spam filters. For a detailed look at recent progress, see the [Advancements in
-Nostr Clients](/blog/advancements-in-nostr-clients#amethyst) impact report.
+Nostr Clients][impact-report] impact report.
+
+[impact-report]: /blog/advancements-in-nostr-clients#amethyst
+[Kotlin Multiplatform]: https://kotlinlang.org/multiplatform/
+[lts]: /blog/vitor-pamplona-receives-lts-grant
+[NIP-17]: https://github.com/nostr-protocol/nips/blob/master/17.md
+[NIP-85]: https://github.com/nostr-protocol/nips/blob/master/85.md
+[outbox model]: https://mikedilger.com/gossip-model/
+[Quartz]: https://github.com/vitorpamplona/amethyst/tree/main/quartz
+[wave-1]: /blog/nostr-grants-july-2023#amethyst
