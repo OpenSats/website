@@ -159,7 +159,7 @@ function renderSvg(project, coverImage) {
       <circle cx="1035" cy="540" r="140" fill="#f97316" fill-opacity="0.06" />
 
       <rect x="84" y="72" width="236" height="38" rx="19" fill="#1f2937" />
-      <circle cx="110" cy="91" r="6" fill="url(#accent)" />
+      <circle cx="110" cy="91" r="6" fill="#22c55e" />
       <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
       <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
