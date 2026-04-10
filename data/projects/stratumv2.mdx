@@ -1,7 +1,7 @@
 ---
 title: 'Stratum V2'
 dateAdded: '2023-03-16'
-summary: 'The next generation of pooled mining.'
+summary: 'An open mining protocol that improves efficiency, security, and decentralization by giving individual miners more control.'
 nym: 'StratumV2'
 website: 'https://stratumprotocol.org/'
 coverImage: '/static/images/projects/stratumv2.jpg'
@@ -9,8 +9,23 @@ git: 'https://github.com/stratum-mining/stratum'
 twitter: 'StratumV2'
 personalTwitter: 'StratumV2'
 tags: ['Bitcoin', 'Privacy', 'Protocol', 'Mining']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool'
 ---
 
-## About this project
+Stratum V2 is the next generation of pooled mining. It replaces legacy Stratum V1 with a protocol that is more secure, more bandwidth-efficient, and better suited to modern mining operations.
 
-Stratum V2 increases security, makes data transfers more efficient, and reduces mining infrastructure requirements. It also introduces three new sub-protocols that let miners select transaction sets and improve decentralization. Previously, transaction sets were selected by pools. With Stratum V2 the transaction sets are selected by individual miners, leading to a more censorship-resistant network.
+Its biggest change is job negotiation. Under the old model, pools chose the transaction set and miners mostly supplied hash power. Stratum V2 makes it possible for individual miners to construct their own block templates, which reduces pool control and strengthens Bitcoin's censorship resistance. The protocol also improves encryption, device interoperability, and communication between miners, proxies, and pools.
+
+## Why fund it?
+
+Mining protocol upgrades are hard. They require specification work, production-ready implementations, testing tools, benchmarking, and compatibility work across real hardware and software stacks. Without dedicated funding, even obviously useful improvements can stall for years.
+
+OpenSats began supporting the Stratum V2 ecosystem in August 2023 with funding for a [testing and benchmarking tool](/blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool). Support continued with a later grant for the [Stratum V2 Reference Implementation](/blog/sixteenth-wave-of-bitcoin-grants#stratum-v2), the main open-source codebase for production adopters.
+
+## What's next?
+
+Current work is focused on the Stratum V2 Reference Implementation, interoperability testing, and the tooling needed to make deployment safer for pools and miners. That includes better compatibility across stacks, smoother translation from legacy infrastructure, and more operational confidence for teams adopting the protocol in production.
+
+As adoption grows, Stratum V2 can shift meaningful control from pools back toward miners and make the mining layer more open, competitive, and resilient.
