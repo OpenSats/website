@@ -64,7 +64,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <FieldError
         errors={errors}
         name="has_references"
-        message="Please prepare your reference letters before continuing"
+        message="Please send the reference letters asap after submitting this application, as the review process only starts once we have at least 2 reference letters."
       />
 
       <label className="inline-flex items-start gap-2">
