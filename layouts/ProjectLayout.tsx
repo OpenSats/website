@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import type { Project } from 'contentlayer/generated'
-import { PageSEO } from '@/components/SEO'
+import { ProjectSEO } from '@/components/SEO'
 import SocialIcon from '@/components/social-icons'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
@@ -12,11 +12,24 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, coverImage, website, twitter, git, nostr, zapstore } =
-    content
+  const {
+    title,
+    summary,
+    slug,
+    coverImage,
+    website,
+    twitter,
+    git,
+    nostr,
+    zapstore,
+  } = content
   return (
     <>
-      <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
+      <ProjectSEO
+        title={`${title} - OpenSats`}
+        description={`${summary}`}
+        slug={slug}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <PageHeading title={title}>
           <div className="flex flex-col items-center space-x-2 pt-8 xl:block">
