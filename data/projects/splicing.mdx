@@ -17,7 +17,7 @@ announcementLink: '/blog/bitcoin-grants-july-2023#splicing'
 
 Splicing is a Lightning protocol improvement that lets users resize channels without closing them and opening new ones. Instead of tearing down an existing channel to add or remove liquidity, a splice updates the channel's funding transaction in place.
 
-That sounds simple, but it unlocks a lot. Splicing can reduce friction for users, make liquidity management easier for node operators, and create better building blocks for advanced Lightning flows. It also lowers the operational cost of rebalancing capital on a network where opening and closing channels is expensive and disruptive.
+That gives users a cleaner way to add or remove liquidity. It also helps node operators manage capital without paying the full cost of closing channels and opening new ones.
 
 ## Why fund it?
 
@@ -27,6 +27,6 @@ OpenSats began supporting Splicing in July 2023 through a [Bitcoin grant](/blog/
 
 ## What's next?
 
-Recent work has pushed Splicing closer to broader deployment. In the [lightning infrastructure impact report](/blog/advancements-in-lightning-infrastructure#splicing), Dusty describes progress on a full implementation in Core Lightning, work on Splice Script for more expressive transaction flows, and parallel efforts to bring Splicing into LDK.
+Recent work has moved Splicing closer to broader deployment. In the [lightning infrastructure impact report](/blog/advancements-in-lightning-infrastructure#splicing), Dusty describes progress on a full implementation in Core Lightning, work on Splice Script for more expressive transaction flows, and parallel efforts to bring Splicing into LDK.
 
-The next step is wider interoperability and production adoption. Once multiple Lightning stacks can rely on the same underlying behavior, Splicing can become part of the network's normal liquidity toolkit instead of an advanced feature at the edge.
+The next step is wider interoperability and production adoption. Once multiple Lightning stacks can rely on the same underlying behavior, Splicing can become a standard liquidity tool instead of a niche feature.
