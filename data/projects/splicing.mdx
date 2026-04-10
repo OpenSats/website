@@ -1,7 +1,7 @@
 ---
 title: 'Splicing'
 dateAdded: '2023-03-10'
-summary: 'Splicing is the ability to resize Lightning channels on-the-fly, giving users of the Lightning Network many additional benefits that were not intuitively obvious at first.'
+summary: 'A Lightning protocol improvement that lets channels be resized without closing and reopening them.'
 nym: 'Dusty Daemon'
 website: 'https://lightningsplice.com/'
 coverImage: '/static/images/projects/splicing.jpg'
@@ -9,59 +9,23 @@ git: 'https://github.com/lightning/bolts/pull/863'
 twitter: 'dusty_daemon'
 personalTwitter: 'dusty_daemon'
 tags: ['Lightning', 'Protocol']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2023#splicing'
 ---
 
-## About this project
+Splicing is a Lightning protocol improvement that lets users resize channels without closing them and opening new ones. Instead of tearing down an existing channel to add or remove liquidity, a splice updates the channel's funding transaction in place.
 
-Splicing is a proposal for BOLT 2, BOLT 7, and BOLT 9 that is maintained by
-[Dusty Daemon](https://lightningsplice.com/dusty_daemon.html).
+That sounds simple, but it unlocks a lot. Splicing can reduce friction for users, make liquidity management easier for node operators, and create better building blocks for advanced Lightning flows. It also lowers the operational cost of rebalancing capital on a network where opening and closing channels is expensive and disruptive.
 
-- See the complete proposal here: [Splicing Specification](https://github.com/lightning/bolts/pull/863/files)
-- Discussion here: [Splicing Spec Conversation](https://github.com/lightning/bolts/pull/863)
+## Why fund it?
 
-At its core Splicing is a simple concept, the ability to resize Lightning
-channels. But what's become apparent over time is the ability to resize
-Lightning channels gives us many additional benefits that were not intuitively
-obvious at first, and will fundamentally improve the utility of Lightning.
+Splicing has been discussed for years, but turning a specification into production-ready code takes focused engineering. It touches protocol design, transaction construction, edge-case handling, interoperability, and developer education across multiple Lightning implementations.
 
-There are really two sides to what Splicing brings:
+OpenSats began supporting Splicing in July 2023 through a [Bitcoin grant](/blog/bitcoin-grants-july-2023#splicing) to Dusty Daemon, who has been driving both the specification and the first implementation work. That support later expanded into [long-term support](/blog/dusty-daemon-receives-lts-grant) as the project matured.
 
-- User-facing improvements
-- Backend liquidity improvements
+## What's next?
 
-Splicing is the process of moving a lightning channel's funding utxo into a new
-"spliced" utxo. The exact steps involved are quite simple: sign the 2of2
-multisignature transaction to a new location. Doing it in a trustless manner
-however, is not simple at all.
+Recent work has pushed Splicing closer to broader deployment. In the [lightning infrastructure impact report](/blog/advancements-in-lightning-infrastructure#splicing), Dusty describes progress on a full implementation in Core Lightning, work on Splice Script for more expressive transaction flows, and parallel efforts to bring Splicing into LDK.
 
-- Splicing explained: [lightningsplice.com](https://lightningsplice.com/splicing_explained.html)
-- Splicing video explanations: [lightningsplice.com/videos](https://lightningsplice.com/splicing_videos.html)
-
-## About Dusty
-
-I have been working on Bitcoin code for five years and 1.5 years ago I decided
-to dedicate myself to programming for the Lightning network. I began by learning
-about Lightning in depth and making contributions to the CoreLightning project.
-I felt particularly accomplished rooting out some complex flakiness bugs and
-porting the project to MacOS.
-
-I had heard of splicing in 2018 and saw it making the news rounds last year. On
-Clubhouse and Twitter Spaces bitcoiners were talking excitedly about using
-submarine swaps and I suggested people use splicing instead! The confused
-silence was palpable, no one had heard about it all. Diving in I realized only
-the splicing spec had been released — no one had actually written the code! So I
-decided I would take on the work of coding up the first implementation. By March
-of this year I had made the world’s first splice and published it on chain! You
-can see it here:
-[twitter](https://twitter.com/dusty_daemon/status/1522413475909316610),
-[mempool](https://mempool.space/tx/c143bbd3f983e7d07bbccf571352c2432c8e97a543d26a6962582021ec788804).
-
-Since then I have been working on finishing up the proper & complete splice
-implementation. The code is now in a beta state which you can see here:
-[PR #5675](https://github.com/ElementsProject/lightning/pull/5675)
-
-I’m looking for funding to finish the code to a polished state, build a thorough
-testing framework, evangelize to companies that would benefit from splicing, and
-bring the implementation to the other Lightning node code bases.
-
-- Dusty's worklog: [ddustin/worklog](https://github.com/ddustin/worklog)
+The next step is wider interoperability and production adoption. Once multiple Lightning stacks can rely on the same underlying behavior, Splicing can become part of the network's normal liquidity toolkit instead of an advanced feature at the edge.
