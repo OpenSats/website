@@ -26,7 +26,7 @@ export default function PageLayout({ children, content }: Props) {
   return (
     <>
       <ProjectSEO
-        title={`${title} - OpenSats`}
+        title={`${title} - funded by OpenSats`}
         description={`${summary}`}
         slug={slug}
       />
