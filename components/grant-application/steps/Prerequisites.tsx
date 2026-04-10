@@ -64,7 +64,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <FieldError
         errors={errors}
         name="has_references"
-        message="Please prepare your reference letters before continuing"
+        message="Please prepare your reference letters before continuing. Reference letters can be included as part of your application or emailed to support@opensats.org once your application is submitted. The evaluation of your application will not start until we have two references."
       />
 
       <label className="inline-flex items-start gap-2">
