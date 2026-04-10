@@ -111,6 +111,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/projects/dusty',
+          destination: '/projects/splicing',
+          permanent: true,
+        },
+        {
           source: '/faq/grantees',
           destination: '/faq/grantee',
           permanent: true,
