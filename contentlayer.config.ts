@@ -114,6 +114,7 @@ export const Projects = defineDocumentType(() => ({
     twitter: { type: 'string' },
     personalTwitter: { type: 'string' },
     nostr: { type: 'string' },
+    zapstore: { type: 'string' },
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },

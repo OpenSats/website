@@ -1,7 +1,7 @@
 ---
 title: 'Damus'
 dateAdded: '2023-04-02'
-summary: 'Damus is one of the most established and popular nostr client for iOS.'
+summary: 'A nostr client for iOS with Lightning zaps, relay transparency, and web-of-trust filtering.'
 nym: 'William Casarin'
 website: 'https://damus.io/'
 donationLink: 'https://damus.io/purple/'
@@ -11,22 +11,58 @@ twitter: 'jb55'
 nostr: 'npub1xtscya34g58tk0z605fvr788k263gsu6cy9x0mhnm87echrgufzsevkk5s'
 tags: ['Nostr', 'Mobile', 'iOS']
 showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2023#damus'
 ---
 
-## About this project
+Damus is a nostr client for iOS built by
+[William Casarin (jb55)](https://github.com/jb55). Users get a social feed with
+Lightning zaps, picture and video uploads, and automatic note translation across
+24 languages. The app connects only to relays the user configures and shows
+per-note relay propagation, so you can see exactly which relays carried a post.
 
-Damus is a popular nostr client for iOS. The goal of Damus is to integrate
-bitcoin with social, and to show the power, censorship resistance, and
-scalability of nostr in general.
+Spam filtering relies on a client-side web-of-trust model: replies from people
+in your social graph are sorted to the top, while others stay accessible but
+deprioritized. A wallet view built on
+[Nostr Wallet Connect](https://nwc.dev/) shows balances and recent transactions
+right alongside the feed.
+[Follow packs](https://following.space/) let new users populate their timeline
+in one tap.
 
-Damus includes picture and video uploading, is fully translated in 24 languages,
-supports automatic translation of notes, and includes all of the features you
-would expect from a Twitter-like client.
+The same team builds [Notedeck](https://github.com/damus-io/notedeck), a
+multi-column client for desktop and Android. Both Damus and Notedeck run on
+[NostrDB](https://github.com/damus-io/nostrdb), a fast embedded event database
+that other nostr applications have started adopting too.
 
-Damus is a pure nostr client, meaning it does not depend on external services to
-function. All it needs is a nostr relay configuration. Many recommended
-bootstrap relays are included, but they can be removed and it will only connect
-to the relays you configure, enabling strong censorship resistance if the relays
-you are using go away or turn evil.
+## Why fund it?
 
-Damus is free and open source software (GPL).
+Damus is free, open-source software (GPL). The project depends on grants and
+donations to keep its contributors working full-time on the clients and the
+shared infrastructure around them.
+
+OpenSats first funded Damus through the
+[Nostr Fund](/blog/nostr-grants-july-2023#damus) in July 2023. The grant was
+[renewed](/blog/doubling-down-on-nostr) in November 2024 and again in the
+[twelfth](/blog/twelfth-wave-of-nostr-grants) and
+[thirteenth](/blog/thirteenth-wave-of-nostr-grants) waves. A separate grant for
+[Notedeck](/blog/7th-wave-of-nostr-grants#notedeck) followed in September 2024.
+William Casarin received a
+[long-term support grant](/blog/jb55-receives-lts-grant) in June 2024 covering
+his work across Damus, Notedeck, NostrDB, and Notecrumbs.
+
+## What's next?
+
+Notedeck launched on Android in 2025 and brought multi-column timelines, Nostr
+Wallet Connect, and local-network multicasting to mobile. The multicasting
+feature lets devices on the same Wi-Fi share notes directly, without routing
+through public relays. Recent releases ([v0.7.0](https://github.com/damus-io/notedeck/releases/tag/v0.7.0)/[v0.7.1](https://github.com/damus-io/notedeck/releases/tag/v0.7.1)) added giftwrap support
+for encrypted DMs, NIP-44 encryption in NostrDB, follow packs, rolling note
+stats, and a navigation drawer.
+
+Notedeck is still in beta and distributed via APK. A Google Play Store release
+is planned, along with NIP-17 private messaging on iOS and Android. The team is
+also working on group messaging and the outbox model.
+
+For a detailed look at recent work, see the
+[Advancements in Nostr Clients](/blog/advancements-in-nostr-clients#damus)
+impact report.
