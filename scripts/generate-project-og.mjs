@@ -106,17 +106,19 @@ function renderSvg(project, coverImage) {
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
   const titleStartY = 192
-  const titleLineHeight = 72
+  const titleFontSize = titleLines.length > 1 ? 52 : 56
+  const titleLineHeight = titleLines.length > 1 ? 60 : 66
+  const titleClipWidth = 624
   const separatorY = 498
   const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
-  const summaryStartY = titleBottomY + 64
+  const summaryStartY = titleBottomY + 56
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
 
   const titleSvg = titleLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 72}">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${index === 0 ? 0 : titleLineHeight}">${escapeXml(line)}</tspan>`
     )
     .join('')
 
@@ -147,7 +149,7 @@ function renderSvg(project, coverImage) {
           <rect x="764" y="112" width="352" height="352" rx="28" />
         </clipPath>
         <clipPath id="title-clip">
-          <rect x="84" y="140" width="600" height="220" />
+          <rect x="84" y="140" width="${titleClipWidth}" height="220" />
         </clipPath>
         <clipPath id="summary-clip">
           <rect x="84" y="${summaryClipY}" width="600" height="${summaryClipHeight}" />
@@ -162,7 +164,7 @@ function renderSvg(project, coverImage) {
       <circle cx="110" cy="91" r="6" fill="#22c55e" />
       <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
-      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
+      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
       </text>
 
