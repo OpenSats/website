@@ -114,6 +114,14 @@ function renderSvg(project, coverImage) {
   const summaryStartY = titleBottomY + 56
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
+  const coverInsetBySlug = {
+    grapheneos: 8,
+    opencash: 12,
+  }
+  const coverInset = coverInsetBySlug[project.slug] ?? 0
+  const coverX = 790 + coverInset
+  const coverY = 138 + coverInset
+  const coverSize = 300 - coverInset * 2
 
   const titleSvg = titleLines
     .map(
@@ -130,8 +138,9 @@ function renderSvg(project, coverImage) {
     .join('')
 
   const coverSvg = coverImage
-    ? `<image href="${coverImage}" x="764" y="112" width="352" height="352" preserveAspectRatio="xMidYMid slice" clip-path="url(#cover-clip)" />`
-    : `<rect x="764" y="112" width="352" height="352" rx="28" fill="#18181b" />
+    ? `<rect x="${coverX}" y="${coverY}" width="${coverSize}" height="${coverSize}" rx="28" fill="#0b1220" />
+       <image href="${coverImage}" x="${coverX}" y="${coverY}" width="${coverSize}" height="${coverSize}" preserveAspectRatio="xMidYMid meet" clip-path="url(#cover-clip)" />`
+    : `<rect x="${coverX}" y="${coverY}" width="${coverSize}" height="${coverSize}" rx="28" fill="#18181b" />
        <text x="940" y="300" text-anchor="middle" fill="#a1a1aa" font-size="28" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>`
 
   return `
@@ -146,7 +155,7 @@ function renderSvg(project, coverImage) {
           <stop offset="1" stop-color="#fb923c" />
         </linearGradient>
         <clipPath id="cover-clip">
-          <rect x="764" y="112" width="352" height="352" rx="28" />
+          <rect x="${coverX}" y="${coverY}" width="${coverSize}" height="${coverSize}" rx="28" />
         </clipPath>
         <clipPath id="title-clip">
           <rect x="84" y="140" width="${titleClipWidth}" height="220" />
