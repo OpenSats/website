@@ -1,7 +1,7 @@
 ---
 title: 'Bitcoin Core'
 dateAdded: '2023-03-31'
-summary: 'Bitcoin Core is the reference implementation of the Bitcoin protocol.'
+summary: 'The reference implementation of the Bitcoin protocol and the software that anchors Bitcoin node validation, policy, and peer-to-peer networking.'
 nym: 'Bitcoin Core Developers'
 website: 'https://bitcoincore.org/en/download/'
 coverImage: '/static/images/projects/bitcoin-core.png'
@@ -9,13 +9,22 @@ git: 'https://github.com/bitcoin/bitcoin'
 twitter: 'bitcoincoreorg'
 tags: ['Bitcoin']
 showcase: true
+fund: general
+announcementLink: '/blog/caring-for-bitcoin-core'
 ---
 
-## About this project
+Bitcoin Core is the reference implementation of the Bitcoin protocol. It is the full node software that validates blocks and transactions, enforces consensus rules, relays data across the peer-to-peer network, and gives users a way to verify the system for themselves.
 
-Bitcoin uses peer-to-peer technology to operate with no central authority or
-banks; managing transactions and the issuing of bitcoins is carried out
-collectively by the network. Bitcoin is open-source; its design is public,
-nobody owns or controls Bitcoin and everyone can take part. Through many of its
-unique properties, Bitcoin allows exciting uses that could not be covered by any
-previous payment system.
+The project sits at the center of Bitcoin's technical maintenance burden. Core contributors review and test pull requests, fix bugs, improve performance, harden network behavior, maintain wallet and RPC interfaces, and keep the codebase understandable enough for new contributors to join. This is slow, exacting work, and Bitcoin depends on it.
+
+## Why fund it?
+
+Bitcoin Core is critical infrastructure. Its reliability depends on sustained review, testing, and maintenance from experienced contributors, plus a steady path for newer developers to gain context and become productive.
+
+OpenSats supports Bitcoin Core through multiple channels: long-term support grants for individual contributors, targeted funding for review and testing work, and grants for adjacent efforts such as the [Bitcoin Core App](/blog/caring-for-bitcoin-core#bitcoin-core-app) and the [Bitcoin Core Testing Suite](/blog/bitcoin-grants-feb-2024#bitcoin-core-testing-suite). Our broader commitment to the project began with the [LTS program for Bitcoin Core contributors](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors) and has continued through multiple grant rounds.
+
+## What's next?
+
+The work ahead is ongoing and unglamorous in the best sense: more review, more testing, better tooling, clearer interfaces, and continued effort to reduce bottlenecks in the contributor pipeline. Areas like `libbitcoinkernel`, package relay, wallet improvements, sync performance, and testing infrastructure all benefit from long-term, steady attention.
+
+If you want a broader picture of the work OpenSats is helping fund around the project, start with [Caring for Bitcoin Core](/blog/caring-for-bitcoin-core) and [Additional Grants for Bitcoin Core Contributors](/blog/more-for-core).
