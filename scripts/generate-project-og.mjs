@@ -143,7 +143,7 @@ function renderSvg(project, coverImage) {
           <rect x="84" y="140" width="600" height="220" />
         </clipPath>
         <clipPath id="summary-clip">
-          <rect x="84" y="370" width="600" height="150" />
+          <rect x="84" y="348" width="600" height="150" />
         </clipPath>
       </defs>
 
@@ -159,13 +159,13 @@ function renderSvg(project, coverImage) {
         ${titleSvg}
       </text>
 
-      <text x="84" y="408" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif" clip-path="url(#summary-clip)">
+      <text x="84" y="386" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif" clip-path="url(#summary-clip)">
         ${summarySvg}
       </text>
 
-      <rect x="84" y="520" width="560" height="1" fill="#3f3f46" />
-      <text x="84" y="560" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
-      <text x="84" y="596" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${projectUrl}</text>
+      <rect x="84" y="498" width="560" height="1" fill="#3f3f46" />
+      <text x="84" y="536" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
+      <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${projectUrl}</text>
 
       <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
