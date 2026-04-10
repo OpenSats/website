@@ -115,8 +115,10 @@ function renderSvg(project, coverImage) {
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
   const coverInsetBySlug = {
-    grapheneos: 8,
-    opencash: 12,
+    cdk: 14,
+    grapheneos: 20,
+    opencash: 20,
+    tor: 20,
   }
   const coverInset = coverInsetBySlug[project.slug] ?? 0
   const coverX = 790 + coverInset
