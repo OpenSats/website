@@ -101,8 +101,8 @@ async function toDataUri(publicPath) {
 }
 
 function renderSvg(project, coverImage) {
-  const titleLines = wrapText(project.title, 20, 3)
-  const summaryLines = wrapText(project.summary, 42, 4)
+  const titleLines = wrapText(project.title, 18, 3)
+  const summaryLines = wrapText(project.summary, 34, 4)
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
 
@@ -139,6 +139,12 @@ function renderSvg(project, coverImage) {
         <clipPath id="cover-clip">
           <rect x="764" y="112" width="352" height="352" rx="28" />
         </clipPath>
+        <clipPath id="title-clip">
+          <rect x="84" y="140" width="600" height="220" />
+        </clipPath>
+        <clipPath id="summary-clip">
+          <rect x="84" y="370" width="600" height="150" />
+        </clipPath>
       </defs>
 
       <rect width="1200" height="630" fill="url(#bg)" />
@@ -149,11 +155,11 @@ function renderSvg(project, coverImage) {
       <circle cx="110" cy="91" r="6" fill="url(#accent)" />
       <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
-      <text x="84" y="192" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="192" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
       </text>
 
-      <text x="84" y="408" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="408" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif" clip-path="url(#summary-clip)">
         ${summarySvg}
       </text>
 
