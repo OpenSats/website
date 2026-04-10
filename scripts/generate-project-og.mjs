@@ -123,7 +123,7 @@ function renderSvg(project, coverImage) {
   const coverSvg = coverImage
     ? `<image href="${coverImage}" x="764" y="112" width="352" height="352" preserveAspectRatio="xMidYMid slice" clip-path="url(#cover-clip)" />`
     : `<rect x="764" y="112" width="352" height="352" rx="28" fill="#18181b" />
-       <text x="940" y="300" text-anchor="middle" fill="#a1a1aa" font-size="28" font-family="Arial, Helvetica, sans-serif">OpenSats Project</text>`
+       <text x="940" y="300" text-anchor="middle" fill="#a1a1aa" font-size="28" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>`
 
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@ function renderSvg(project, coverImage) {
 
       <rect x="84" y="72" width="188" height="38" rx="19" fill="#1f2937" />
       <circle cx="110" cy="91" r="6" fill="url(#accent)" />
-      <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats Project</text>
+      <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
       <text x="84" y="192" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif">
         ${titleSvg}
