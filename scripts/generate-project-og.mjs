@@ -105,6 +105,13 @@ function renderSvg(project, coverImage) {
   const summaryLines = wrapText(project.summary, 36, 3)
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
+  const titleStartY = 192
+  const titleLineHeight = 72
+  const separatorY = 498
+  const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
+  const summaryStartY = titleBottomY + 64
+  const summaryClipY = summaryStartY - 30
+  const summaryClipHeight = separatorY - summaryClipY - 24
 
   const titleSvg = titleLines
     .map(
@@ -143,7 +150,7 @@ function renderSvg(project, coverImage) {
           <rect x="84" y="140" width="600" height="220" />
         </clipPath>
         <clipPath id="summary-clip">
-          <rect x="84" y="348" width="600" height="118" />
+          <rect x="84" y="${summaryClipY}" width="600" height="${summaryClipHeight}" />
         </clipPath>
       </defs>
 
@@ -155,15 +162,15 @@ function renderSvg(project, coverImage) {
       <circle cx="110" cy="91" r="6" fill="url(#accent)" />
       <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
-      <text x="84" y="192" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
+      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="60" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
       </text>
 
-      <text x="84" y="386" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif" clip-path="url(#summary-clip)">
+      <text x="84" y="${summaryStartY}" fill="#d4d4d8" font-size="30" font-family="Arial, Helvetica, sans-serif" clip-path="url(#summary-clip)">
         ${summarySvg}
       </text>
 
-      <rect x="84" y="498" width="560" height="1" fill="#3f3f46" />
+      <rect x="84" y="${separatorY}" width="560" height="1" fill="#3f3f46" />
       <text x="84" y="536" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
       <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${projectUrl}</text>
 
