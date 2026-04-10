@@ -1,6 +1,5 @@
 // @ts-check
 
-/** @type {import("pliny/config").PlinyConfig } */
 const rawSiteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
   process.env.SITE_URL ||
@@ -11,6 +10,7 @@ const siteUrl = rawSiteUrl.startsWith('http')
   ? rawSiteUrl.replace(/\/$/, '')
   : `https://${rawSiteUrl.replace(/\/$/, '')}`
 
+/** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'OpenSats',
   author: 'OpenSats',
