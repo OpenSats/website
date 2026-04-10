@@ -28,7 +28,8 @@ export function getRelatedBlogPostsForProject(
       .join(' ')
       .toLowerCase()
 
-    if (searchContent.includes(projectTitle)) return true
+    const titlePattern = new RegExp(`\\b${escapeRegExp(projectTitle)}\\b`)
+    if (titlePattern.test(searchContent)) return true
     if (slugPattern && slugPattern.test(searchContent)) return true
     return false
   })

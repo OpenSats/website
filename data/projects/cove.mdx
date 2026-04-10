@@ -1,0 +1,62 @@
+---
+title: 'Cove'
+dateAdded: '2024-07-02'
+summary: 'A Bitcoin-only mobile wallet built on BDK with strong hardware wallet support.'
+nym: 'Praveen Perera'
+website: 'https://covebitcoinwallet.com/'
+coverImage: '/static/images/projects/cove.svg'
+git: 'https://github.com/bitcoinppl/cove'
+donationLink: 'https://covebitcoinwallet.com/roadmap'
+twitter: 'covewallet'
+tags: ['Bitcoin', 'Wallet']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2024#cove'
+---
+
+Cove is a single-signature Bitcoin wallet for iOS and Android, built on
+[BDK](/projects/bdk). The app logic is written in Rust with native UI in SwiftUI
+and Jetpack Compose. It is available on the iOS App Store and Google Play.
+
+The wallet is designed around hardware signing devices. It supports
+[TAPSIGNER](https://tapsigner.com/) and
+[SATSCARD](https://store.coinkite.com/store/satscard) via NFC, and
+moves [PSBTs](https://bitcoinops.org/en/topics/psbt/) between phone
+and signing device using QR codes (including animated
+[BBQr](https://github.com/bitcoinppl/bbqr-ffi) sequences) or virtual drives.
+Air-gapped workflows keep private keys off the phone entirely.
+
+> Cove isn't doing any one new thing. It's bringing all the right pieces
+> together. Coin control on a phone is hard to do well, and I'm proud of how
+> usable it turned out.
+>
+> <cite>—[Praveen Perera](/blog/advancements-in-bitcoin-and-lightning-wallets#cove)</cite>
+
+Other features include [BIP-329](https://github.com/bitcoin/bips/blob/master/bip-0329.mediawiki)
+labels for organizing transactions, detailed coin control, custom fee settings, watch-only mode,
+and a decoy PIN that opens a limited version of the wallet under duress. Users can
+connect to their own Electrum or Esplora node.
+
+## Why fund it?
+
+Good wallet UX for hardware signers is hard to get right on mobile. Most Bitcoin
+wallets focus on Lightning or multisig; Cove fills a gap for people who want a
+simple on-chain wallet that works well with Coldcard, Krux, or TAPSIGNER. Praveen
+has also contributed upstream improvements to
+[`rust-cktap`](https://github.com/notmandatory/rust-cktap),
+[`uniffi`](https://github.com/mozilla/uniffi-rs), and BIP-329 libraries that
+benefit the broader Rust Bitcoin ecosystem.
+
+OpenSats has been supporting Cove since the [fifth wave of Bitcoin
+grants](/blog/bitcoin-grants-july-2024#cove) in July 2024 and has renewed the
+grant [multiple times](/blog/sixteenth-wave-of-bitcoin-grants) since.
+
+## What's next?
+
+Praveen is working on encrypted cloud backups, onboarding improvements, and
+sending to silent payment addresses. Other upcoming features include
+KeyTeleport integration and UTXO lock/unlock with labels.
+
+For a detailed look at earlier progress, see the [Advancements in Bitcoin and
+Lightning Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#cove)
+impact report.
