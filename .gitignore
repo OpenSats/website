@@ -23,6 +23,7 @@ public/sitemap.xml
 
 # search
 /public/search.json
+/public/static/images/projects/og/
 
 # misc
 .DS_Store
