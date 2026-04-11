@@ -1,7 +1,7 @@
 ---
 title: 'Stratum V2'
 dateAdded: '2023-03-16'
-summary: 'An open mining protocol that improves efficiency, security, and decentralization by giving individual miners more control.'
+summary: 'An open mining protocol that gives individual miners more control over block construction.'
 nym: 'StratumV2'
 website: 'https://stratumprotocol.org/'
 coverImage: '/static/images/projects/stratumv2.jpg'
@@ -14,9 +14,9 @@ fund: general
 announcementLink: '/blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool'
 ---
 
-Stratum V2 is a pooled mining protocol. It replaces Stratum V1 with a design that uses bandwidth more efficiently, improves security, and gives miners more control over how blocks are built.
+Stratum V2 is a pooled mining protocol designed to replace Stratum V1. It uses bandwidth more efficiently, adds encryption, and gives miners more control over how blocks are built.
 
-The main change is job negotiation. Under Stratum V1, pools chose the transaction set and miners mostly supplied hash power. Stratum V2 lets individual miners construct their own block templates. That reduces pool control and improves censorship resistance. The protocol also improves encryption, device interoperability, and communication between miners, proxies, and pools.
+The main change is job negotiation. Under V1, pools chose the transaction set and miners supplied hash power. Stratum V2 lets individual miners construct their own block templates, reducing pool control and improving censorship resistance. The protocol also improves device interoperability and communication between miners, proxies, and pools.
 
 ## Why fund it?
 
@@ -26,6 +26,8 @@ OpenSats began supporting the Stratum V2 ecosystem in August 2023 with funding f
 
 ## What's next?
 
-Current work is focused on the Stratum V2 Reference Implementation, interoperability testing, and the tooling needed to make deployment safer for pools and miners. That includes better compatibility across stacks, smoother translation from legacy infrastructure, and more confidence for teams adopting the protocol in production.
+Current work centers on the [Stratum V2 Reference Implementation][SRI] (SRI), the main open-source Rust codebase for production adopters. Active grants are funding a unified command-line interface for launching SRI applications, Docker support and binary releases for easier deployment, expanded test coverage, and compatibility testing across Stratum V2 stacks.
 
-If adoption continues, miners will have more say over block construction and less dependence on pool-controlled templates.
+As more pools and miners adopt the protocol, block construction shifts away from pool-controlled templates and toward individual miners—making the network more censorship-resistant.
+
+[SRI]: https://github.com/stratum-mining/stratum
