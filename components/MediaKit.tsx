@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+const ZIP_ASSET = '/static/brand/opensats-brand-assets.zip'
+
 const ASSETS = [
   {
     label: 'Wordmark',
@@ -64,10 +66,21 @@ function AssetCard({ asset }: { asset: Asset }) {
 
 export default function MediaKit() {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {ASSETS.map((asset) => (
-        <AssetCard key={asset.label} asset={asset} />
-      ))}
+    <div className="space-y-4">
+      <div className="flex justify-start sm:justify-end">
+        <a
+          href={ZIP_ASSET}
+          download
+          className="inline-flex items-center rounded-md border border-orange-500 px-4 py-2 text-sm font-medium text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800"
+        >
+          Download all assets (.zip)
+        </a>
+      </div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {ASSETS.map((asset) => (
+          <AssetCard key={asset.label} asset={asset} />
+        ))}
+      </div>
     </div>
   )
 }
