@@ -20,7 +20,7 @@ import Members from './Members'
 import LifetimeStats from './LifetimeStats'
 import GranteeMap from './GranteeMap'
 import StatsSentence from './StatsSentence'
-import MediaKit, { MediaKitColors } from './MediaKit'
+import MediaKit, { MediaKitColors, MediaKitDownloadLink } from './MediaKit'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
@@ -48,5 +48,6 @@ export const MDXComponents: ComponentMap = {
   GranteeMap,
   StatsSentence,
   MediaKit,
+  MediaKitDownloadLink,
   MediaKitColors,
 }

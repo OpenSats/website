@@ -96,22 +96,21 @@ function ColorSwatch({ label, hex }: { label: string; hex: string }) {
 
 export default function MediaKit() {
   return (
-    <div className="space-y-4">
-      <div className="text-sm sm:text-right">
-        <a
-          href={ZIP_ASSET}
-          download
-          className="font-medium text-orange-500 hover:text-orange-600"
-        >
-          Download all assets (.zip)
-        </a>
-      </div>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        {ASSETS.map((asset) => (
-          <AssetCard key={asset.label} asset={asset} />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {ASSETS.map((asset) => (
+        <AssetCard key={asset.label} asset={asset} />
+      ))}
     </div>
+  )
+}
+
+export function MediaKitDownloadLink() {
+  return (
+    <p>
+      <a href={ZIP_ASSET} download>
+        Download all assets (.zip)
+      </a>
+    </p>
   )
 }
 
