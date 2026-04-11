@@ -26,9 +26,9 @@ OpenSats has funded Stratum V2 development since August 2023, starting with a gr
 
 ## What's next?
 
-SRI has shipped six major releases and is now split into a [library repo][SRI] and an [application repo][sv2-apps] with precompiled binaries and Docker images. [Demand Pool][dmnd] launched with SV2 support, and [Auradine shipped the first ASIC miner with native Stratum V2][auradine].
+SRI has shipped six major releases and is now split into a [library repo][SRI] and an [application repo][sv2-apps] with precompiled binaries and Docker images. Recent work embedded the Job Declaration Server inside the pool and added a [solo mining mode][solo] similar to CKPool solo but SV2-only. [Demand Pool][dmnd] launched with SV2 support, and [Auradine shipped the first ASIC miner with native Stratum V2][auradine].
 
-Active work includes a [web UI][sv2-ui] for monitoring mining data, a [solo mining mode][solo] (similar to CKPool solo but SV2-only), a 24/7 fuzzing server, and property testing across the low-level crates. The team is also embedding the Job Declaration Server inside the pool and improving Docker-based deployment for less technical miners.
+A [web UI][sv2-ui] for monitoring mining data is in beta testing with real miners. Fuzzing already uncovered an arithmetic overflow in the `noise_sv2` crate, which has been fixed; a 24/7 fuzzing server is running and the next target is the `sv1_api` crate used by the translator proxy. Other ongoing work includes property testing across the low-level crates and improving Docker-based deployment.
 
 [auradine]: https://x.com/Auradine_Inc/status/1991159535864803665
 [dmnd]: https://dmnd.work
