@@ -19,12 +19,20 @@ That work depends on contributors who review pull requests, write and run tests,
 
 ## Why fund it?
 
-Bitcoin Core does not maintain itself. It needs steady review, testing, maintenance, and contributor development. That work is slow, technical, and easy to underfund.
+Bitcoin Core does not maintain itself. It needs review, testing, maintenance, and time for contributors to build context. That work is slow, technical, and usually underfunded.
 
 OpenSats has funded Bitcoin Core contributors since launching its [LTS program](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors) in 2023. Since then, that support has expanded to maintainers, reviewers, testers, and newer contributors working on Initial Block Download, release testing, test coverage, build system maintainability, the [Bitcoin Core Testing Suite](/blog/bitcoin-grants-feb-2024#bitcoin-core-testing-suite), and peer-to-peer privacy research.
 
 ## What's next?
 
-The backlog is still deep. Review remains a bottleneck. Release testing, testing infrastructure, `libbitcoinkernel`, package relay, wallet work, sync performance, and peer-to-peer privacy all need sustained attention.
+Review is still the choke point. Marco Falke keeps running and improving CI, nightly fuzzing, coverage, and release QA. `janb84`’s reports point to the same bottleneck through release testing, contributor docs, and review. Kevin’s current grant is focused on Core maintenance and the testing suite.
+
+Performance work is still moving. Andrew Toth is pushing validation and block-processing improvements around `#31132`, alongside follow-up work on private transaction broadcast. Lőrinc Pap is working on IBD, chainstate, coins cache maintenance, benchmarking, and secp256k1 optimization.
+
+Network privacy and peer management still need work. Private transaction broadcast has landed, but the fixes, RPC follow-ups, and tests are still being worked through. Naiyoma’s current grant focuses on fingerprinting attacks. Julien Urraca and Hodlinator have both been pushing ASMap forward.
+
+Maintainability keeps surfacing in the reports. Daniel Pfeifer is working on BtcK, CMake, CI with CTest and CDash, and libbitcoinkernel-adjacent work. Marco’s recent reports also cover undefined behavior fixes, valgrind, fuzz determinism, and hard-to-reproduce infrastructure bugs.
+
+Mining, wallet, and interfaces still need work as well. Sjors Provoost is fixing issues exposed by Stratum V2 testing, reviewing IPC changes, and landing related Core changes. Daniela Brozzoni’s current grant adds more implementation and review capacity.
 
 For a fuller picture of OpenSats support around Bitcoin Core, see [Caring for Bitcoin Core](/blog/caring-for-bitcoin-core), [Additional Grants for Bitcoin Core Contributors](/blog/more-for-core), and [5 Grants to Strengthen Bitcoin Development](/blog/five-grants-to-strengthen-bitcoin-development).
