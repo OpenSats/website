@@ -67,11 +67,11 @@ function AssetCard({ asset }: { asset: Asset }) {
 export default function MediaKit() {
   return (
     <div className="space-y-4">
-      <div className="flex justify-start sm:justify-end">
+      <div className="text-sm sm:text-right">
         <a
           href={ZIP_ASSET}
           download
-          className="inline-flex items-center rounded-md border border-orange-500 px-4 py-2 text-sm font-medium text-orange-500 hover:bg-orange-50 dark:hover:bg-gray-800"
+          className="font-medium text-orange-500 hover:text-orange-600"
         >
           Download all assets (.zip)
         </a>
