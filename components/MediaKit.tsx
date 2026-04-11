@@ -62,7 +62,7 @@ function AssetCard({ asset }: { asset: Asset }) {
   )
 }
 
-export default function PressAssets() {
+export default function MediaKit() {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {ASSETS.map((asset) => (
