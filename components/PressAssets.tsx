@@ -9,17 +9,13 @@ const ASSETS = [
   },
   {
     label: 'Icon',
+    preview: '/static/brand/opensats-icon.png',
     svg: '/static/brand/opensats-icon.svg',
     png: '/static/brand/opensats-icon.png',
     bg: 'bg-white',
   },
   {
     label: 'Mark',
-    svg: '/static/brand/opensats-icon-inverted.svg',
-    bg: 'bg-white',
-  },
-  {
-    label: 'Favicon',
     svg: '/static/brand/opensats-favicon.svg',
     png: '/static/brand/opensats-favicon.png',
     bg: 'bg-white',
@@ -38,12 +34,14 @@ function DownloadLink({ href, label }: { href: string; label: string }) {
   )
 }
 
-function AssetCard({ asset }: { asset: (typeof ASSETS)[number] }) {
+type Asset = (typeof ASSETS)[number]
+
+function AssetCard({ asset }: { asset: Asset }) {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
       <div className={`${asset.bg} flex items-center justify-center p-8`}>
         <Image
-          src={asset.svg}
+          src={asset.preview || asset.svg}
           alt={`OpenSats ${asset.label}`}
           width={200}
           height={96}
