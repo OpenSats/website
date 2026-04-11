@@ -111,28 +111,33 @@ export default function MediaKit() {
           <AssetCard key={asset.label} asset={asset} />
         ))}
       </div>
-      <div className="space-y-3 pt-2">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Colors
-        </h2>
-        <div className="space-y-4">
-          {COLOR_GROUPS.map((group) => (
-            <div key={group.label} className="space-y-2">
-              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                {group.label}
-              </h3>
-              <div className="space-y-2">
-                {group.colors.map((color) => (
-                  <ColorSwatch
-                    key={`${group.label}-${color.label}`}
-                    label={`${group.label} ${color.label}`}
-                    hex={color.hex}
-                  />
-                ))}
-              </div>
+    </div>
+  )
+}
+
+export function MediaKitColors() {
+  return (
+    <div className="space-y-3 pt-2">
+      <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        Colors
+      </h2>
+      <div className="space-y-4">
+        {COLOR_GROUPS.map((group) => (
+          <div key={group.label} className="space-y-2">
+            <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+              {group.label}
+            </h3>
+            <div className="space-y-2">
+              {group.colors.map((color) => (
+                <ColorSwatch
+                  key={`${group.label}-${color.label}`}
+                  label={`${group.label} ${color.label}`}
+                  hex={color.hex}
+                />
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   )
