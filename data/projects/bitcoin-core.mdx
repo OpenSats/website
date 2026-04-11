@@ -1,7 +1,7 @@
 ---
 title: 'Bitcoin Core'
 dateAdded: '2023-03-31'
-summary: 'The full node software that validates the chain and enforces Bitcoin’s rules.'
+summary: 'The full node software that validates the chain, relays transactions, and enforces Bitcoin’s rules.'
 nym: 'Bitcoin Core Developers'
 website: 'https://bitcoincore.org/en/download/'
 coverImage: '/static/images/projects/bitcoin-core.png'
@@ -15,26 +15,26 @@ announcementLink: '/blog/announcing-lts-grant-program-to-support-bitcoin-core-co
 
 Bitcoin Core is the full node software that validates blocks and transactions, enforces consensus rules, relays data across the peer-to-peer network, and lets users verify Bitcoin for themselves.
 
-OpenSats began funding Bitcoin Core contributors in 2023 with its [Long-Term Support program](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors), which first backed [Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors), then [Josie Baker](/blog/josi-baker-receives-opensats-lts-grant), [Sjors Provoost](/blog/sjors-provoost-receives-opensats-lts-grant), [Vasil Dimov](/blog/vasil-dimov-receives-lts-grant), [Gleb Naumenko](/blog/gleb-naumenko-receives-lts-grant), [Furszy](/blog/furszy-receives-lts-grant-for-bitcoin-core), and [Will Clark](/blog/will-clark-receives-lts-grant-for-bitcoin-core). Later LTS grants added [0xB10C](/blog/0xB10C-receives-lts-grant), [Bruno Garcia](/blog/bruno-garcia-receives-lts-grant), [Jon Atack](/blog/jon-atack-receives-lts-grant), and [Andrew Toth](/blog/andrew-toth-receives-lts-grant).
+OpenSats began funding Bitcoin Core contributors in 2023 with its [Long-Term Support program](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors), which first backed [Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors). That program later funded [Josie Baker](/blog/josi-baker-receives-opensats-lts-grant), [Sjors Provoost](/blog/sjors-provoost-receives-opensats-lts-grant), [Vasil Dimov](/blog/vasil-dimov-receives-lts-grant), [Gleb Naumenko](/blog/gleb-naumenko-receives-lts-grant), [Furszy](/blog/furszy-receives-lts-grant-for-bitcoin-core), [Will Clark](/blog/will-clark-receives-lts-grant-for-bitcoin-core), [0xB10C](/blog/0xB10C-receives-lts-grant), [Bruno Garcia](/blog/bruno-garcia-receives-lts-grant), [Jon Atack](/blog/jon-atack-receives-lts-grant), and [Andrew Toth](/blog/andrew-toth-receives-lts-grant).
 
-OpenSats also funded newer contributors through focused grant rounds. [Caring for Core](/blog/caring-for-bitcoin-core) supported [tdb3](/blog/caring-for-bitcoin-core#tdb3), [David Gumberg](/blog/caring-for-bitcoin-core#davidgumberg-david-gumberg), and [Hodlinator](/blog/caring-for-bitcoin-core#hodlinator). [Additional Grants for Bitcoin Core Contributors](/blog/more-for-core) supported [L0rinc](/blog/more-for-core#l0rinc), [kevkevinpal](/blog/more-for-core#kevkevinpal), and [Daniela Brozzoni](/blog/more-for-core#danielabrozzoni). [5 Grants to Strengthen Bitcoin Development](/blog/five-grants-to-strengthen-bitcoin-development) supported [janb84](/blog/five-grants-to-strengthen-bitcoin-development#janb84), [Naiyoma](/blog/five-grants-to-strengthen-bitcoin-development#naiyoma), and [Daniel Pfeifer](/blog/five-grants-to-strengthen-bitcoin-development#purplekarrot), and it renewed support for Daniela and Kevin.
+OpenSats has also funded newer contributors through focused grant rounds. [Caring for Core](/blog/caring-for-bitcoin-core) supported [tdb3](/blog/caring-for-bitcoin-core#tdb3), [David Gumberg](/blog/caring-for-bitcoin-core#davidgumberg-david-gumberg), and [Hodlinator](/blog/caring-for-bitcoin-core#hodlinator). [Additional Grants for Bitcoin Core Contributors](/blog/more-for-core) supported [L0rinc](/blog/more-for-core#l0rinc), [kevkevinpal](/blog/more-for-core#kevkevinpal), and [Daniela Brozzoni](/blog/more-for-core#danielabrozzoni). [5 Grants to Strengthen Bitcoin Development](/blog/five-grants-to-strengthen-bitcoin-development) supported [janb84](/blog/five-grants-to-strengthen-bitcoin-development#janb84), [Naiyoma](/blog/five-grants-to-strengthen-bitcoin-development#naiyoma), and [Daniel Pfeifer](/blog/five-grants-to-strengthen-bitcoin-development#purplekarrot), while renewing support for Daniela and Kevin.
 
 ## Why fund it?
 
-Bitcoin Core does not maintain itself. It needs people who can stay with hard problems for a long time. Review takes time. Releases need testing. Bugs show up in edge cases, old code, slow machines, and strange interactions between features.
+Bitcoin Core does not maintain itself. It needs people who can stay with difficult review, testing, and maintenance work over long stretches of time. Releases need testing. Bugs show up in edge cases, old code, slow machines, and messy interactions between features.
 
-A lot of the work is easy to miss from the outside. It includes release testing, code review, CI and fuzzing, debugging intermittent failures, benchmarking performance across different machines, improving wallet and RPC behavior, hardening privacy features, and maintaining the interfaces and tooling that other projects depend on.
+Much of the work is easy to miss from the outside. It includes release testing, code review, CI and fuzzing, debugging intermittent failures, benchmarking across different machines, improving wallet and RPC behavior, hardening privacy features, and maintaining interfaces and tooling that other projects depend on.
 
-Funding gives contributors time to do that work well and to keep doing it. It helps turn one-off fixes into sustained maintenance.
+Funding gives contributors time to do that work well and keep doing it. It turns one-off fixes into sustained maintenance.
 
 ## What's next?
 
-Review is still the bottleneck. Bitcoin Core needs contributors who can read difficult pull requests closely, test them, and help move them over the line.
+Review is still the bottleneck. Bitcoin Core needs contributors who can read difficult pull requests closely, test them on real machines, and stay with them through rebases and follow-up fixes.
 
-Performance work is still active. Initial Block Download, validation, block processing, chainstate, coins cache behavior, and benchmarking across platforms all still matter, especially for people running their own nodes on limited hardware.
+Performance work remains active. Initial Block Download, validation, block processing, chainstate, coins cache behavior, and benchmarking across platforms all still matter, especially for people running their own nodes on limited hardware.
 
-Privacy and networking work is still active too. Private transaction broadcast needs follow-up work, peer fingerprinting remains a real problem, and ASMap is still being pushed forward.
+Privacy and networking work remain active too. Private transaction broadcast still needs follow-up work, peer fingerprinting is still a real problem, and ASMap is still being pushed forward.
 
-Maintainability is another long-running need. Build tooling, CI, fuzzing, release engineering, libbitcoinkernel-related work, and smaller refactors all make the codebase easier to work on and safer to change.
+Maintainability is permanent work. Build tooling, CI, fuzzing, release engineering, libbitcoinkernel-related work, and smaller refactors make the codebase easier to work on and safer to change.
 
 Mining, wallet, and interface work continue as well. Stratum V2 has exposed useful issues on the Core side, wallet behavior keeps improving, and interfaces such as RPC and IPC still need careful iteration.
