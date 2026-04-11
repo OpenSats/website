@@ -81,18 +81,15 @@ function AssetCard({ asset }: { asset: Asset }) {
   )
 }
 
-function ColorCard({ label, hex }: { label: string; hex: string }) {
+function ColorSwatch({ label, hex }: { label: string; hex: string }) {
   return (
-    <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
-      <div className="h-24 w-full" style={{ backgroundColor: hex }} />
-      <div className="px-4 py-3">
-        <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
-          {label}
-        </div>
-        <div className="mt-1 font-mono text-sm text-gray-600 dark:text-gray-400">
-          {hex}
-        </div>
-      </div>
+    <div className="flex items-center gap-3 text-sm">
+      <span
+        className="h-4 w-4 rounded-sm border border-gray-200 dark:border-gray-700"
+        style={{ backgroundColor: hex }}
+      />
+      <span className="text-gray-900 dark:text-gray-100">{label}</span>
+      <span className="font-mono text-gray-600 dark:text-gray-400">{hex}</span>
     </div>
   )
 }
@@ -114,19 +111,19 @@ export default function MediaKit() {
           <AssetCard key={asset.label} asset={asset} />
         ))}
       </div>
-      <div className="space-y-4 pt-4">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+      <div className="space-y-3 pt-2">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           Colors
         </h2>
-        <div className="space-y-6">
+        <div className="space-y-4">
           {COLOR_GROUPS.map((group) => (
-            <div key={group.label} className="space-y-3">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            <div key={group.label} className="space-y-2">
+              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">
                 {group.label}
               </h3>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
                 {group.colors.map((color) => (
-                  <ColorCard
+                  <ColorSwatch
                     key={`${group.label}-${color.label}`}
                     label={`${group.label} ${color.label}`}
                     hex={color.hex}
