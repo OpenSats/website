@@ -28,8 +28,8 @@ const COLOR_GROUPS = [
   {
     label: 'Orange',
     colors: [
-      { label: 'Primary', hex: '#ff6b01' },
-      { label: 'Secondary', hex: '#ffb200' },
+      { label: 'Primary', hex: '#f97316' },
+      { label: 'Secondary', hex: '#ea580c' },
     ],
   },
   {
