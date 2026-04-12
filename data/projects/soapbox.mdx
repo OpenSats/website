@@ -1,7 +1,7 @@
 ---
 title: 'Soapbox'
 dateAdded: '2023-07-08'
-summary: 'Open-source social software for nostr and the fediverse, including the Ditto server and Mostr bridge.'
+summary: 'Open-source software making nostr the best place to build and create on the social web.'
 nym: 'Alex Gleason'
 website: 'https://soapbox.pub/'
 coverImage: '/static/images/projects/soapbox.svg'
@@ -16,32 +16,36 @@ fund: nostr
 announcementLink: '/blog/nostr-grants-july-2023#soapbox'
 ---
 
-Soapbox started as an alternative Mastodon frontend but has grown into a family
-of projects spanning nostr and the fediverse. The main pieces are [Soapbox]
-itself (a customizable, self-hostable social media UI), [Ditto] (a self-hosted
-nostr server with a built-in client and relay, compatible with Mastodon apps),
-and the [Mostr] bridge, which connects nostr to the ActivityPub fediverse
-bidirectionally.
+Soapbox started as an alternative Mastodon frontend, then built the [Mostr]
+bridge to connect the fediverse to nostr. When OpenSats first funded the project
+in 2023, [Ditto] was a nostr-native community server compatible with Mastodon
+apps. Since then it has grown into a full organization building open-source
+freedom tools across social media, AI-powered development, and activism, all on
+nostr.
 
-Ditto gives communities a way to run their own social server on nostr while
-staying interoperable with Mastodon through Mostr and with Bluesky through
-[Eclipse]. Users get zaps, DMs, NIP-05 username purchases, and a digital shop
-for profile customization, all from a single self-hosted instance.
+[Ditto] has evolved from that community server into a full social platform
+where users customize their profiles, publish any kind of content, and stay
+connected to followers on Bluesky and Mastodon through built-in bridges.
+[Shakespeare] is an
+open-source AI app builder that runs in the browser and works with any AI
+provider. It was used to build Ditto 2.0 itself and has shipped as a standalone
+product with its own Android app.
 
 > I'm vegan btw.
 >
 > <cite>—[Alex Gleason]</cite>
 
-Alex also maintains [Nostrify], a nostr framework for web browsers and [Deno]
-that other developers can build on. He's also building [Shakespeare].
+Alex also maintains [Nostrify], a nostr framework for [Deno] and the web, and
+[MKStack], a full-stack toolkit for building nostr apps with AI.
 
 ## Why fund it?
 
-Bridging nostr and the fediverse expands the reach of both networks. The Mostr
+Bridging nostr and the fediverse expands the reach of both networks. The [Mostr]
 bridge alone exposes millions of fediverse users to nostr, and several have
-already moved over entirely. Ditto makes it possible to run a nostr-first server
-that still talks to the rest of the social web, lowering the barrier for
-communities that want to try nostr without cutting ties to existing networks.
+already moved over entirely. Ditto bridges across content types within nostr
+itself, bringing dozens of different micro experiences into a single platform.
+Shakespeare extends that further by letting anyone build new experiences on
+nostr and deploy them without touching a terminal.
 
 OpenSats has been supporting Soapbox since the [first wave of nostr
 grants][wave-1] in July 2023. Alex later received a [long-term support
@@ -49,30 +53,30 @@ grant][lts] in August 2024.
 
 ## What's next?
 
-Ditto reached a stable release and powers community instances around the world,
-including [cobrafuma.com] in Brazil, [seewaan.com] for Arabic speakers, and
-[cvrkut.com] in Croatia. Recent versions added Cashu wallet support, machine
-translations, and video transcoding. Alex also moved the project's
-infrastructure off the cloud and onto a self-hosted server rack.
+Soapbox is pushing the boundaries of nostr and making it the best and most
+accessible place to build. Future plans include continuing to strengthen the
+connection between Ditto and Shakespeare, improving the ability to create and
+share social experiences, and improving the bridges between nostr and other
+corners of the open web. The goal is to make nostr the fun and easy place for creators and communities
+to build and thrive. People with no programming
+experience are already using these tools to ship real applications, and that
+feedback loop between building and using is only getting tighter.
 
-Alex's recent focus is [Shakespeare], an open-source tool for building Nostr
-apps by talking to an AI. It runs in the browser, stores files locally, and
-works with any AI provider the user chooses. People with no programming
-experience have already used it to build working clients. Alex has been running
-workshops at Bitcoin conferences to get it into more hands. The longer-term plan
-is to bring this back to Soapbox: letting non-technical community leaders set up
-and customize their own servers without touching a terminal.
+In 2026, Soapbox is teaming up with the World Liberty Congress to launch
+[Agora], a spin-off of Ditto built with Shakespeare tailored to activist
+fundraising needs using Bitcoin. The team also plans to tackle Bitcoin
+onboarding for general audiences, making sending sats to each other on nostr
+easier than ever with no Bitcoin knowledge required.
 
-[Alex Gleason]: https://njump.to/npub108pv4cg5ag52nq082kd5leu9ffrn2gdg6g4xdwatn73y36uzplmq9uyev6
-[cobrafuma.com]: https://cobrafuma.com
-[cvrkut.com]: https://cvrkut.com
+[Agora]: https://soapbox.pub/agora/
+[Alex Gleason]: https://njump.me/npub108pv4cg5ag52nq082kd5leu9ffrn2gdg6g4xdwatn73y36uzplmq9uyev6
 [Deno]: https://deno.com/
-[Ditto]: https://soapbox.pub/ditto/
-[Eclipse]: https://eclipse.pub/
+[Ditto]: https://ditto.pub/
+[Google Play]: https://play.google.com/store/apps/details?id=pub.ditto.app
 [lts]: /blog/alex-gleason-receives-lts-grant
-[Mostr]: https://soapbox.pub/blog/mostr-fediverse-nostr-bridge/
-[Nostrify]: https://gitlab.com/soapbox-pub/nostrify
-[seewaan.com]: https://seewaan.com
+[MKStack]: https://gitlab.com/soapbox-pub/mkstack
+[Mostr]: https://mostr.pub/
+[Nostrify]: https://nostrify.dev/
 [Shakespeare]: https://shakespeare.diy/
-[Soapbox]: https://docs.soapbox.pub/soapbox/
 [wave-1]: /blog/nostr-grants-july-2023#soapbox
+[Zapstore]: https://zapstore.dev/apps/pub.ditto.app
