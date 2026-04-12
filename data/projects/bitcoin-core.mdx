@@ -21,20 +21,22 @@ OpenSats has also funded newer contributors through focused grant rounds. [Carin
 
 ## Why fund it?
 
-Bitcoin Core does not maintain itself. It needs people who can stay with difficult review, testing, and maintenance work over long stretches of time. Releases need testing. Bugs show up in edge cases, old code, slow machines, and messy interactions between features.
+Bitcoin Core does not maintain itself. It needs people who stay with review, testing, and maintenance over months and years. Bugs hide in edge cases, old code, slow machines, and unexpected interactions between features.
 
-Much of the work is easy to miss from the outside. It includes release testing, code review, CI and fuzzing, debugging intermittent failures, benchmarking across different machines, improving wallet and RPC behavior, hardening privacy features, and maintaining interfaces and tooling that other projects depend on.
-
-Funding gives contributors time to do that work well and keep doing it. It turns one-off fixes into sustained maintenance.
+Most of the day-to-day work is invisible: release testing, CI and fuzzing upkeep, debugging intermittent failures, benchmarking on different hardware, reviewing other people's pull requests. Funding lets contributors do that work full-time. It turns one-off fixes into sustained maintenance.
 
 ## What's next?
 
-Review is still the bottleneck. Bitcoin Core needs contributors who can read difficult pull requests closely, test them on real machines, and stay with them through rebases and follow-up fixes.
+Review is the bottleneck. Large pull requests sit for months waiting for someone who can read them closely, test them on real hardware, and follow through across rebases and revisions.
 
-Performance work remains active. Initial Block Download, validation, block processing, chainstate, coins cache behavior, and benchmarking across platforms all still matter, especially for people running their own nodes on limited hardware.
+Andrew Toth is working on a block validation speedup that would improve both Initial Block Download and processing at the chain tip. L0rinc is benchmarking Core on everything from cloud servers to Raspberry Pis and looking at ways to cut memory usage. Marco Falke maintains the test framework and CI infrastructure the rest of the project depends on.
 
-Privacy and networking work remain active too. Private transaction broadcast still needs follow-up work, peer fingerprinting is still a real problem, and ASMap is still being pushed forward.
+Private transaction broadcast merged this year. Toth has follow-up work to improve reliability across restarts and give node operators more control over the feature.
 
-Maintainability is permanent work. Build tooling, CI, fuzzing, release engineering, libbitcoinkernel-related work, and smaller refactors make the codebase easier to work on and safer to change.
+Sjors Provoost maintains the Bitcoin Core side of Stratum V2, fixing bugs surfaced by SRI testing and building out the IPC methods mining software needs. He is also working on MuSig2 support through HWI and reviewing the BIP54 consensus cleanup.
 
-Mining, wallet, and interface work continue as well. Stratum V2 has exposed useful issues on the Core side, wallet behavior keeps improving, and interfaces such as RPC and IPC still need careful iteration.
+The libbitcoinkernel project is pulling Core's consensus engine into a standalone library. janb84 joined a working group tackling the global `cs_main` lock, replacing it with finer-grained locking so third-party applications can embed the kernel without running a full node.
+
+On the network side, Julien Urraca brought ASMap generation under ten minutes and coordinated collaborative runs to produce canonical ASmaps for Core. Naiyoma is researching P2P fingerprinting defenses.
+
+Build tooling, CI, fuzzing, and release engineering touch every release but rarely get attention. The codebase has to stay safe to change, and that takes people who show up for it.
