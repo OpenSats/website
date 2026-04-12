@@ -15,9 +15,7 @@ announcementLink: '/blog/announcing-lts-grant-program-to-support-bitcoin-core-co
 
 Bitcoin Core is the full node software that validates blocks and transactions, enforces consensus rules, relays data across the peer-to-peer network, and lets users verify Bitcoin for themselves.
 
-OpenSats began funding Bitcoin Core contributors in 2023 with its [Long-Term Support program](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors), which first backed [Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors). That program later funded [Josie Baker](/blog/josi-baker-receives-opensats-lts-grant), [Sjors Provoost](/blog/sjors-provoost-receives-opensats-lts-grant), [Vasil Dimov](/blog/vasil-dimov-receives-lts-grant), [Gleb Naumenko](/blog/gleb-naumenko-receives-lts-grant), [Furszy](/blog/furszy-receives-lts-grant-for-bitcoin-core), [Will Clark](/blog/will-clark-receives-lts-grant-for-bitcoin-core), [0xB10C](/blog/0xB10C-receives-lts-grant), [Bruno Garcia](/blog/bruno-garcia-receives-lts-grant), [Jon Atack](/blog/jon-atack-receives-lts-grant), and [Andrew Toth](/blog/andrew-toth-receives-lts-grant).
-
-OpenSats has also funded newer contributors through focused grant rounds. [Caring for Core](/blog/caring-for-bitcoin-core) supported [tdb3](/blog/caring-for-bitcoin-core#tdb3), [David Gumberg](/blog/caring-for-bitcoin-core#davidgumberg-david-gumberg), and [Hodlinator](/blog/caring-for-bitcoin-core#hodlinator). [Additional Grants for Bitcoin Core Contributors](/blog/more-for-core) supported [L0rinc](/blog/more-for-core#l0rinc), [kevkevinpal](/blog/more-for-core#kevkevinpal), and [Daniela Brozzoni](/blog/more-for-core#danielabrozzoni). [5 Grants to Strengthen Bitcoin Development](/blog/five-grants-to-strengthen-bitcoin-development) supported [janb84](/blog/five-grants-to-strengthen-bitcoin-development#janb84), [Naiyoma](/blog/five-grants-to-strengthen-bitcoin-development#naiyoma), and [Daniel Pfeifer](/blog/five-grants-to-strengthen-bitcoin-development#purplekarrot), while renewing support for Daniela and Kevin.
+OpenSats began funding Bitcoin Core contributors in 2023 through its [LTS program][lts-announce]. LTS grantees include Marco Falke, Josie Baker, Sjors Provoost, Vasil Dimov, Gleb Naumenko, Furszy, Will Clark, 0xB10C, Bruno Garcia, Jon Atack, and Andrew Toth. Additional contributors joined through [Caring for Core][caring], [More for Core][more-for-core], and [5 Grants to Strengthen Bitcoin Development][five-grants]: tdb3, David Gumberg, Hodlinator, L0rinc, kevkevinpal, Daniela Brozzoni, janb84, Naiyoma, and Daniel Pfeifer.
 
 ## Why fund it?
 
@@ -29,14 +27,27 @@ Most of the day-to-day work is invisible: release testing, CI and fuzzing upkeep
 
 Review is the bottleneck. Large pull requests sit for months waiting for someone who can read them closely, test them on real hardware, and follow through across rebases and revisions.
 
-Andrew Toth is working on a block validation speedup that would improve both Initial Block Download and processing at the chain tip. L0rinc is benchmarking Core on everything from cloud servers to Raspberry Pis and looking at ways to cut memory usage. Marco Falke maintains the test framework and CI infrastructure the rest of the project depends on.
+Andrew Toth is working on a [block validation speedup][validation-pr] that would improve both Initial Block Download and processing at the chain tip. L0rinc is benchmarking Core on everything from cloud servers to Raspberry Pis and looking at ways to cut memory usage. Marco Falke maintains the test framework and CI infrastructure the rest of the project depends on.
 
-Private transaction broadcast merged this year. Toth has follow-up work to improve reliability across restarts and give node operators more control over the feature.
+[Private transaction broadcast][priv-broadcast] merged this year. Toth has follow-up work to improve reliability across restarts and give node operators more control over the feature.
 
-Sjors Provoost maintains the Bitcoin Core side of Stratum V2, fixing bugs surfaced by SRI testing and building out the IPC methods mining software needs. He is also working on MuSig2 support through HWI and reviewing the BIP54 consensus cleanup.
+Sjors Provoost maintains the Bitcoin Core side of [Stratum V2][sv2], fixing bugs surfaced by [SRI][sri] testing and building out the IPC methods mining software needs. He is also working on MuSig2 support through [HWI][hwi] and reviewing the [BIP54 consensus cleanup][bip54].
 
-The libbitcoinkernel project is pulling Core's consensus engine into a standalone library. janb84 joined a working group tackling the global `cs_main` lock, replacing it with finer-grained locking so third-party applications can embed the kernel without running a full node.
+The [libbitcoinkernel][kernel] project is pulling Core's consensus engine into a standalone library. janb84 joined a working group tackling the global `cs_main` lock, replacing it with finer-grained locking so third-party applications can embed the kernel without running a full node.
 
-On the network side, Julien Urraca brought ASMap generation under ten minutes and coordinated collaborative runs to produce canonical ASmaps for Core. Naiyoma is researching P2P fingerprinting defenses.
+On the network side, Julien Urraca brought [ASMap][asmap] generation under ten minutes and coordinated collaborative runs to produce canonical ASmaps for Core. Naiyoma is researching P2P fingerprinting defenses.
 
 Build tooling, CI, fuzzing, and release engineering touch every release but rarely get attention. The codebase has to stay safe to change, and that takes people who show up for it.
+
+[asmap]: https://github.com/asmap
+[bip54]: https://github.com/bitcoin/bips/blob/master/bip-0054.mediawiki
+[caring]: /blog/caring-for-bitcoin-core
+[five-grants]: /blog/five-grants-to-strengthen-bitcoin-development
+[hwi]: https://github.com/bitcoin-core/HWI
+[kernel]: https://github.com/bitcoin/bitcoin/issues/27587
+[lts-announce]: /blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors
+[more-for-core]: /blog/more-for-core
+[priv-broadcast]: https://github.com/bitcoin/bitcoin/pull/30793
+[sri]: https://stratumprotocol.org/
+[sv2]: /projects/stratumv2
+[validation-pr]: https://github.com/bitcoin/bitcoin/pull/31132
