@@ -19,9 +19,11 @@ OpenSats began funding Bitcoin Core contributors in 2023 through its [LTS progra
 
 ## Why fund it?
 
-Bitcoin Core does not maintain itself. It needs people who stay with review, testing, and maintenance over months and years. Bugs hide in edge cases, old code, slow machines, and unexpected interactions between features.
+Fewer than 50 people regularly contribute code to software underpinning a network worth over a trillion dollars. For comparison, Meta employs around 20,000 engineers for a comparable market cap. The total annual budget for all Bitcoin Core development organizations combined is around $8 million.
 
-Most of the day-to-day work is invisible: release testing, CI and fuzzing upkeep, debugging intermittent failures, benchmarking on different hardware, reviewing other people's pull requests. Funding lets contributors do that work full-time. It turns one-off fixes into sustained maintenance.
+Most of that budget goes toward maintenance. Bug fixes, test coverage, CI upkeep, build system work, release engineering, edge cases that show up in the wild. Gloria Zhao, a Bitcoin Core maintainer, has [put maintenance][zhao-pod] at well over 70% of all project activity. The protocol upgrades get attention; the day-to-day work does not.
+
+In the [2024 CoreDev contributor survey][coredev-survey], "lack of reviewers" was the number one frustration. The top 15 contributors produce 71% of the code. If a handful of people step away, years of context leave with them. Funding gives contributors reason to stay and turns one-off fixes into sustained maintenance.
 
 ## What's next?
 
@@ -40,6 +42,7 @@ On the network side, Julien Urraca brought [ASMap][asmap] generation under ten m
 Build tooling, CI, fuzzing, and release engineering touch every release but rarely get attention. The codebase has to stay safe to change, and that takes people who show up for it.
 
 [asmap]: https://github.com/asmap
+[coredev-survey]: https://adamjonas.com/bitcoin/coredev/retro/coredev-2024-retro/
 [bip54]: https://github.com/bitcoin/bips/blob/master/bip-0054.mediawiki
 [caring]: /blog/caring-for-bitcoin-core
 [five-grants]: /blog/five-grants-to-strengthen-bitcoin-development
@@ -51,3 +54,4 @@ Build tooling, CI, fuzzing, and release engineering touch every release but rare
 [sri]: https://stratumprotocol.org/
 [sv2]: /projects/stratumv2
 [validation-pr]: https://github.com/bitcoin/bitcoin/pull/31132
+[zhao-pod]: https://www.coindesk.com/consensus-magazine/2023/02/23/can-bitcoin-afford-to-maintain-its-core-network-coindesk
