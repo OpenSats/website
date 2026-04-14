@@ -128,7 +128,9 @@ function renderSvg(project, coverImage) {
   const titleSvg = titleLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : titleLineHeight}">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${index === 0 ? 0 : titleLineHeight}">${escapeXml(
+          line
+        )}</tspan>`
     )
     .join('')
 
