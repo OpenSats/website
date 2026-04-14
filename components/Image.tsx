@@ -12,7 +12,11 @@ const Image = ({ darkSrc, className, ...rest }: ThemeImageProps) => {
   return (
     <>
       <NextImage className={`${className ?? ''} dark:hidden`} {...rest} />
-      <NextImage className={`hidden ${className ?? ''} dark:block`} {...rest} src={darkSrc} />
+      <NextImage
+        className={`hidden ${className ?? ''} dark:block`}
+        {...rest}
+        src={darkSrc}
+      />
     </>
   )
 }
