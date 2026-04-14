@@ -59,6 +59,7 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
                   title={p.title}
                   summary={p.summary}
                   coverImage={p.coverImage}
+                  coverImageDark={p.coverImageDark}
                   nym={p.nym}
                   tags={p.tags}
                 />
