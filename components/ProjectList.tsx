@@ -27,7 +27,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ exclude, projects }) => {
                 title={p.title}
                 summary={p.summary}
                 coverImage={p.coverImage}
-                coverImageDark={p.coverImageDark}
+                invertDarkImage={p.invertDarkImage}
                 nym={p.nym}
                 tags={p.tags}
               />

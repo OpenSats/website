@@ -1,4 +1,4 @@
-import Image from '@/components/Image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
@@ -7,7 +7,7 @@ export type ProjectCardProps = {
   title
   summary
   coverImage
-  coverImageDark?
+  invertDarkImage?
   nym
   tags
   customImageStyles?: React.CSSProperties
@@ -18,7 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   summary,
   coverImage,
-  coverImageDark,
+  invertDarkImage,
   nym,
   tags,
   customImageStyles,
@@ -60,7 +60,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Image
             alt={title}
             src={coverImage}
-            darkSrc={coverImageDark}
             width={1200}
             height={1200}
             style={{
@@ -68,7 +67,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               ...customImageStyles,
             }}
             priority={true}
-            className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
+            className={`cursor-pointer rounded-t-xl bg-white dark:bg-black ${
+              invertDarkImage ? 'dark:invert' : ''
+            }`}
           />
         </div>
         <figcaption className="p-2">

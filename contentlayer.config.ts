@@ -110,7 +110,7 @@ export const Projects = defineDocumentType(() => ({
     website: { type: 'string' },
     donationLink: { type: 'string' },
     coverImage: { type: 'string', required: true },
-    coverImageDark: { type: 'string' },
+    invertDarkImage: { type: 'boolean' },
     git: { type: 'string' },
     twitter: { type: 'string' },
     personalTwitter: { type: 'string' },
