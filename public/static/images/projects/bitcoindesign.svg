@@ -1,4 +1,11 @@
-<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:#111827">
+    <style>
+        @media (prefers-color-scheme: dark) {
+            svg {
+                color: #FFFFFF;
+            }
+        }
+    </style>
     <path d="M12.5 24.5C19.1274 24.5 24.5 19.1274 24.5 12.5C24.5 5.87258 19.1274 0.5 12.5 0.5C5.87258 0.5 0.5 5.87258 0.5 12.5C0.5 19.1274 5.87258 24.5 12.5 24.5Z" stroke="currentColor" stroke-width="0.5" />
     <path d="M12.5 19C16.0899 19 19 16.0899 19 12.5C19 8.91015 16.0899 6 12.5 6C8.91015 6 6 8.91015 6 12.5C6 16.0899 8.91015 19 12.5 19Z" stroke="currentColor" stroke-width="0.5" />
     <path d="M21.5955 14.6123C21.8717 14.6123 22.0955 14.3884 22.0955 14.1123C22.0955 13.8361 21.8717 13.6123 21.5955 13.6123C21.3194 13.6123 21.0955 13.8361 21.0955 14.1123C21.0955 14.3884 21.3194 14.6123 21.5955 14.6123Z" fill="currentColor" stroke="none" />
