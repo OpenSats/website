@@ -17,6 +17,7 @@ export default function PageLayout({ children, content }: Props) {
     summary,
     slug,
     coverImage,
+    darkCoverImage,
     invertDarkImage,
     website,
     twitter,
@@ -36,6 +37,7 @@ export default function PageLayout({ children, content }: Props) {
           <div className="flex flex-col items-center space-x-2 pt-8 xl:block">
             <Image
               src={coverImage}
+              darkSrc={darkCoverImage}
               alt="avatar"
               width={210}
               height={210}

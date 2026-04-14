@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from '@/components/Image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 
@@ -7,6 +7,7 @@ export type ProjectCardProps = {
   title
   summary
   coverImage
+  darkCoverImage?
   invertDarkImage?
   nym
   tags
@@ -18,6 +19,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   summary,
   coverImage,
+  darkCoverImage,
   invertDarkImage,
   nym,
   tags,
@@ -60,6 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Image
             alt={title}
             src={coverImage}
+            darkSrc={darkCoverImage}
             width={1200}
             height={1200}
             style={{
