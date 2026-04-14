@@ -9,6 +9,7 @@ git: 'https://github.com/smolcars/blixt-wallet'
 twitter: 'hampus_s'
 donationLink: 'https://github.com/sponsors/hsjoberg'
 nostr: 'npub1v4v57fu60zvc9d2uq23cey4fnwvxlzga9q2vta2n6xalu03rs57s0mxwu8'
+zapstore: 'https://zapstore.dev/apps/com.blixtwallet'
 tags: ['Bitcoin', 'Lightning', 'Wallet']
 showcase: true
 fund: general
@@ -16,10 +17,9 @@ announcementLink: '/blog/bitcoin-grants-july-2023#blixt-wallet'
 ---
 
 Blixt is a non-custodial Bitcoin Lightning wallet for Android, iOS, and macOS.
-It runs [LND](https://github.com/lightningnetwork/lnd) and
-[Neutrino](https://github.com/lightninglabs/neutrino) directly on the device,
-so the wallet operates a full Lightning node without relying on centralized
-servers for routing or chain data.
+It runs [LND] and [Neutrino] directly on the device, so the wallet operates a
+full Lightning node without relying on centralized servers for routing or chain
+data.
 
 The wallet supports LNURL (pay, auth, withdraw, channel), keysend, multi-path
 payments, a built-in WebLN browser, and Tor. Channel backups go to Google Drive
@@ -29,53 +29,59 @@ in sync even on slower connections.
 > Having a trust-minimized Lightning Address linked to a self-custodial wallet
 > is a valuable option in a custodial Lightning world.
 >
-> <cite>—[Hampus Sjöberg](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)</cite>
+> <cite>—[Hampus Sjöberg][impact-report]</cite>
 
-Hampus rebuilt the wallet's core around
-[`react-native-turbo-lnd`](https://github.com/smolcars/react-native-turbo-lnd),
+Hampus rebuilt the wallet's core around [`react-native-turbo-lnd`][turbo-lnd],
 a C++ module that runs LND inside the app for faster payments without background
 processes. He also improved Neutrino to connect to multiple peers in different
 regions, making sync more reliable on mobile.
 
-[Lightning Box](https://github.com/hsjoberg/lightning-box) is a trust-minimized
-Lightning Address protocol built alongside Blixt. It lets users receive
-payments at a human-readable address (user@domain) while keeping custody local.
-A lightweight HTTP relay forwards requests to the wallet and returns an invoice.
+[Lightning Box] is a trust-minimized Lightning Address protocol built alongside
+Blixt. It lets users receive payments at a human-readable address (user@domain)
+while keeping custody local. A lightweight HTTP relay forwards requests to the
+wallet and returns an invoice.
 
 ## Why fund it?
 
 Running a full Lightning node on a phone is about as self-sovereign as
 Lightning gets. Blixt proves it works in practice and produces reusable
-tools (`react-native-turbo-lnd`,
-[`react-native-turbo-sqlite`](https://github.com/hsjoberg/react-native-turbo-sqlite),
-Lightning Box) that other wallet projects can adopt.
+tools (`react-native-turbo-lnd`, [`react-native-turbo-sqlite`], Lightning Box)
+that other wallet projects can adopt.
 
 OpenSats has been supporting Blixt since the [first wave of Bitcoin
-grants](/blog/bitcoin-grants-july-2023#blixt-wallet) in July 2023 and has
-[renewed the grant](/blog/renewing-our-commitment-to-bitcoin) since then.
-Hampus also received a grant for [Noah](https://github.com/BlixtWallet/noah),
-an Ark wallet, in the [sixteenth wave of Bitcoin
-grants](/blog/sixteenth-wave-of-bitcoin-grants).
+grants][wave-1] in July 2023 and has [renewed the grant][renewal] since then.
+Hampus also received a grant for [Noah], an Ark wallet, in the [sixteenth wave
+of Bitcoin grants][wave-16].
 
 ## What's next?
 
-Blixt 0.9.0 shipped in February 2026 with [TurboLnd](https://github.com/smolcars/react-native-turbo-lnd), an updated LND backend (v0.20.0),
-[BIP177](https://github.com/bitcoin/bips/blob/master/bip-0177.mediawiki) support, and a new automatic channel opener. The upgrade to
-[Hermes V1](https://github.com/nicolo-ribaudo/hermes/blob/main/doc/HermesV1.md)
-and the React Compiler also made the app noticeably faster. An experimental
-desktop build using
-[Electrobun](https://electrobun.dev/) is in progress alongside the existing
-macOS version.
+Blixt 0.9.0 shipped in February 2026 with [TurboLnd][turbo-lnd], an updated
+LND backend (v0.20.0), [BIP177] support, and a new automatic channel opener.
+The upgrade to [Hermes V1] and the React Compiler also made the app noticeably
+faster. An experimental desktop build using [Electrobun] is in progress
+alongside the existing macOS version.
 
-Hampus and his team are also building
-[Noah](https://github.com/BlixtWallet/noah), a self-custodial wallet on the
-[Ark](https://ark-protocol.org) protocol. Where Blixt requires opening
-Lightning channels and managing liquidity, Noah uses Virtual Transaction
-Outputs (VTXOs) so users can receive payments without an onchain transaction.
-The goal is a single balance that can send and receive via Lightning, onchain,
-or Ark, with seed-phrase-only backup and self-custodial Lightning Address
-support.
+Hampus and his team are also building [Noah], a self-custodial wallet on the
+[Ark] protocol. Where Blixt requires opening Lightning channels and managing
+liquidity, Noah uses Virtual Transaction Outputs (VTXOs) so users can receive
+payments without an onchain transaction. The goal is a single balance that can
+send and receive via Lightning, onchain, or Ark, with seed-phrase-only backup
+and self-custodial Lightning Address support.
 
 For a detailed look at earlier progress, see the [Advancements in Bitcoin and
-Lightning Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet)
-impact report.
+Lightning Wallets][impact-report] impact report.
+
+[Ark]: https://ark-protocol.org
+[BIP177]: https://github.com/bitcoin/bips/blob/master/bip-0177.mediawiki
+[Electrobun]: https://electrobun.dev/
+[Hermes V1]: https://github.com/nicolo-ribaudo/hermes/blob/main/doc/HermesV1.md
+[Lightning Box]: https://github.com/hsjoberg/lightning-box
+[LND]: https://github.com/lightningnetwork/lnd
+[Neutrino]: https://github.com/lightninglabs/neutrino
+[Noah]: https://github.com/BlixtWallet/noah
+[`react-native-turbo-sqlite`]: https://github.com/hsjoberg/react-native-turbo-sqlite
+[turbo-lnd]: https://github.com/smolcars/react-native-turbo-lnd
+[impact-report]: /blog/advancements-in-bitcoin-and-lightning-wallets#blixt-wallet
+[renewal]: /blog/renewing-our-commitment-to-bitcoin
+[wave-1]: /blog/bitcoin-grants-july-2023#blixt-wallet
+[wave-16]: /blog/sixteenth-wave-of-bitcoin-grants
