@@ -7,6 +7,7 @@ export type ProjectCardProps = {
   title
   summary
   coverImage
+  invertDarkImage?
   nym
   tags
   customImageStyles?: React.CSSProperties
@@ -17,6 +18,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   summary,
   coverImage,
+  invertDarkImage,
   nym,
   tags,
   customImageStyles,
@@ -65,7 +67,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               ...customImageStyles,
             }}
             priority={true}
-            className="cursor-pointer rounded-t-xl bg-white dark:bg-black"
+            className={`cursor-pointer rounded-t-xl bg-white dark:bg-black ${
+              invertDarkImage ? 'dark:invert' : ''
+            }`}
           />
         </div>
         <figcaption className="p-2">
