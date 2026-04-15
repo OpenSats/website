@@ -2,8 +2,10 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
+import { GENERAL_GRANT_OPEN } from '../config'
 import StepIndicator from './grant-application/StepIndicator'
 import StepNavigation from './grant-application/StepNavigation'
+import ClosedNotice from './ClosedNotice'
 import Prerequisites from './grant-application/steps/Prerequisites'
 import ApplicantDetails from './grant-application/steps/ApplicantDetails'
 import ProjectDetails from './grant-application/steps/ProjectDetails'
@@ -12,6 +14,7 @@ import Timeline from './grant-application/steps/Timeline'
 import Budget from './grant-application/steps/Budget'
 import ReferencesReview from './grant-application/steps/ReferencesReview'
 import AnythingElse from './grant-application/steps/AnythingElse'
+import Review from './grant-application/steps/Review'
 import { FormValues } from './grant-application/types'
 
 const STEPS = [
@@ -66,6 +69,11 @@ const STEPS = [
     title: 'Final',
     fields: ['no_vibed_garbage', 'human_in_charge', 'discipline_and_agency'],
   },
+  {
+    id: 'review',
+    title: 'Review',
+    fields: [],
+  },
 ] as const
 
 export default function ApplicationForm() {
@@ -102,11 +110,14 @@ export default function ApplicationForm() {
   }
 
   const handleBack = () => {
+    if (loading) return
+    setFailureReason(undefined)
     setCurrentStep((s) => s - 1)
     scrollToTop()
   }
 
   const handleStepClick = (step: number) => {
+    if (loading) return
     if (step < currentStep) {
       setCurrentStep(step)
       scrollToTop()
@@ -115,6 +126,7 @@ export default function ApplicationForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
+    if (currentStep !== STEPS.length - 1) return
     setLoading(true)
     const submissionData = { ...data, formLoadedAt }
 
@@ -152,7 +164,7 @@ export default function ApplicationForm() {
   return (
     <form
       ref={formRef}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => e.preventDefault()}
       className="apply flex max-w-2xl flex-col gap-4"
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
@@ -173,16 +185,21 @@ export default function ApplicationForm() {
       {currentStep === 5 && <Timeline {...stepProps} />}
       {currentStep === 6 && <Budget {...stepProps} />}
       {currentStep === 7 && <AnythingElse {...stepProps} />}
+      {currentStep === 8 && <Review watch={watch} />}
+
+      {!GENERAL_GRANT_OPEN && currentStep === 0 && <ClosedNotice />}
 
       <StepNavigation
         currentStep={currentStep}
         totalSteps={STEPS.length}
         onBack={handleBack}
         onNext={handleNext}
+        onSubmit={handleSubmit(onSubmit)}
         loading={loading}
+        disabled={!GENERAL_GRANT_OPEN}
       />
 
-      {!!failureReason && (
+      {!!failureReason && currentStep === STEPS.length - 1 && (
         <p className="rounded bg-red-500 p-4 text-white">
           Something went wrong! {failureReason}
         </p>
