@@ -1,0 +1,56 @@
+---
+title: '0xchat'
+dateAdded: '2023-10-10'
+summary: 'A secure chat client for iOS and Android built on nostr, with encrypted DMs, groups, voice and video calls, and Lightning payments.'
+nym: 'water783'
+website: 'https://0xchat.com/'
+coverImage: '/static/images/projects/0xchat.png'
+git: 'https://github.com/0xchat-app'
+twitter: '0xchat_app'
+nostr: 'npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl'
+zapstore: 'https://zapstore.dev/apps/com.oxchat.nostr'
+tags: ['Nostr', 'Mobile', 'iOS', 'Android']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-october-2023#0xchat'
+---
+
+0xchat is a chat-first nostr client for iOS and Android built by
+[water783](https://njump.me/npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl).
+Users get one-to-one encrypted DMs, private and public groups, channels, voice
+notes, and audio and video calls. Relay-based signaling lets callers connect
+without a central server; the audio and video streams go through user-selected
+ICE servers.
+
+The app implements multiple DM formats: the older NIP-04 encrypted messages, the
+sealed-sender and gift-wrapped format from
+[NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) and
+[NIP-59](https://github.com/nostr-protocol/nips/blob/master/59.md), and a
+secret chat mode. That interoperability lets 0xchat users carry DM threads
+with people on Amethyst, Damus, Coop, Flotilla, and noStrudel without leaving
+their preferred app.
+
+0xchat also supports Lightning zaps, Nostr Wallet Connect for balance and
+payment flows, and [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
+remote signing via Amber, nsec.app, and other signers.
+
+## Why fund it?
+
+Encrypted messaging is one of the few use cases where nostr has a chance to
+replace an existing centralized product for everyday users. A usable mobile
+client with group chats, calls, and an onboarding flow that people already
+recognize from other messengers pushes that story forward. 0xchat is also one
+of the earliest clients to ship new DM standards, which helps the rest of the
+ecosystem converge on interoperable private messaging.
+
+OpenSats first funded 0xchat in the
+[second wave of nostr grants](/blog/nostr-grants-october-2023#0xchat) in
+October 2023 and has renewed the grant multiple times, most recently in the
+[thirteenth wave](/blog/thirteenth-wave-of-nostr-grants).
+
+## What's next?
+
+Recent releases continue to polish the UI and expand group and channel
+features, with ongoing work on giftwrap DMs, media handling, and call
+reliability. The team also ships regularly to the iOS App Store, Google Play,
+[Zapstore](https://zapstore.dev/apps/com.oxchat.nostr), and F-Droid.
