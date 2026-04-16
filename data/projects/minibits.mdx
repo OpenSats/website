@@ -1,0 +1,64 @@
+---
+title: 'Minibits'
+dateAdded: '2024-09-19'
+summary: 'A mobile Cashu wallet for Android and iOS, with Lightning, nostr, and offline token transfers.'
+nym: 'Misovan'
+website: 'https://www.minibits.cash/'
+coverImage: '/static/images/projects/minibits.png'
+git: 'https://github.com/minibits-cash/minibits_wallet'
+zapstore: 'https://zapstore.dev/apps/com.minibits_wallet'
+tags: ['Bitcoin', 'Lightning', 'ecash', 'Mobile']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-september-2024-7th-wave#minibits'
+---
+
+Minibits is a mobile [Cashu](/projects/cashu) wallet built by
+[Misovan](https://github.com/misovan). It runs on Android and iOS and lets
+users hold ecash from multiple mints, pay over Lightning, and send tokens
+directly to other users through Lightning addresses, nostr contacts, or plain
+Cashu tokens.
+
+The wallet integrates with Lightning in the usual ways (LNURL pay, LNURL
+withdraw, Lightning addresses), and also supports nostr-native flows: you can
+send ecash over [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md)
+encrypted DMs to any nostr contact. Tokens can be locked to a recipient's
+public key, and a payment can be prepared while offline for the recipient to
+claim later.
+
+Minibits keeps the "bearer" property of ecash: tokens live on the device, not
+on a server, and can be exported, imported, or transferred between phones
+while keeping the same wallet address.
+
+## Why fund it?
+
+Cashu needs well-maintained wallets on the platforms people actually use. A
+fast mobile client that supports the full stack of modern Cashu NUTs (payment
+requests, WebSockets, cached responses, v4 token format, multi-mint balances)
+tests the protocol under real-world load and surfaces bugs that only appear on
+constrained devices.
+
+OpenSats supported Minibits in the
+[seventh wave of Bitcoin grants](/blog/bitcoin-grants-september-2024-7th-wave#minibits)
+in September 2024 and renewed the grant in the
+[sixteenth wave](/blog/sixteenth-wave-of-bitcoin-grants). For a detailed
+review of what the project shipped, see the
+[Advancements in Ecash](/blog/advancements-in-ecash#minibits-wallet) impact
+report.
+
+## What's next?
+
+An iOS build shipped via [TestFlight](https://testflight.apple.com/join/3QHbAfTg)
+and via [Freedom Store](https://freedomstore.io/) for EU users. Recent work
+added the compact v4 token format, animated QR codes for large tokens
+([NUT-16](https://github.com/cashubtc/nuts/blob/main/16.md)), payment requests
+([NUT-18](https://github.com/cashubtc/nuts/blob/main/18.md)), WebSocket
+subscriptions for instant balance updates
+([NUT-17](https://github.com/cashubtc/nuts/blob/main/17.md)), cached responses
+for crash-safe payments ([NUT-19](https://github.com/cashubtc/nuts/blob/main/19.md)),
+offline transfers, P2PK-locked tokens, and token export/import with
+device-to-device migration.
+
+Upcoming work focuses on more reliable [Nostr Wallet Connect](https://nwc.dev/)
+flows, continued iOS polish, and keeping the wallet aligned with new Cashu
+NUTs as they ship.
