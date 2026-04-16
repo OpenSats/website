@@ -1,0 +1,63 @@
+---
+title: 'Mostro'
+dateAdded: '2024-07-29'
+summary: 'A non-custodial peer-to-peer Bitcoin exchange on Lightning and nostr, with federated nodes and open client implementations.'
+nym: 'Francisco Calderón'
+website: 'https://mostro.network/'
+coverImage: '/static/images/projects/mostro.png'
+donationLink: 'https://geyser.fund/project/mostro'
+git: 'https://github.com/MostroP2P'
+twitter: 'MostroP2P'
+nostr: 'npub1m0str0d7z2ww8rdh20t2n9lx520xjwhaq24p68umqp06wwrwtsnqen40un'
+tags: ['Bitcoin', 'Lightning', 'Nostr']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2024#mostro'
+---
+
+[Mostro](https://mostro.network/) is a non-custodial peer-to-peer Bitcoin
+exchange built on Lightning and nostr. Orders travel as nostr events and
+settlement happens over Lightning, without KYC and without a central
+order-book operator holding user funds. Mostro grew out of
+[lnp2pBot](https://github.com/lnp2pBot), the Telegram-based P2P exchange used
+widely across Latin America, and keeps the same peer-to-peer trading model
+while replacing the closed transport with an open protocol.
+
+The system is built around multiple independent Mostro nodes that anyone can
+run. Each node operates its own Lightning node, publishes its order book to
+nostr relays, and coordinates trades between buyers and sellers. Clients talk
+to any node through standard nostr events, so users can choose which operator
+to trade through. An open [protocol
+specification](https://mostro.network/protocol/) documents the full message
+format.
+
+Reference implementations include the [Mostro
+node](https://github.com/MostroP2P/mostro), a [mobile
+app](https://github.com/MostroP2P/mobile) for Android, a terminal UI
+([mostrix](https://github.com/MostroP2P/mostrix)), and a
+[CLI](https://github.com/MostroP2P/mostro-cli). The protocol supports
+dispute resolution with third-party mediators and a Mostro-node reputation
+system so users can pick operators they trust.
+
+## Why fund it?
+
+For users in authoritarian regimes, a resilient way to buy and sell Bitcoin
+peer-to-peer is critical infrastructure. Telegram bots worked but depended on
+a single platform that could be blocked or coerced; Mostro moves the same
+workflow onto nostr, where no single operator can shut it down.
+
+Running trading on an open protocol also lets anyone build clients, from
+mobile apps to terminal UIs to specialized interfaces for local communities.
+
+OpenSats supported Mostro in the
+[second wave of nostr grants in 2024](/blog/nostr-grants-july-2024#mostro) and
+has renewed the grant. The project is also supported by the
+[Human Rights Foundation](https://hrf.org/).
+
+## What's next?
+
+Current work includes broader client coverage, translations, community node
+operators in more regions, and protocol refinements from the real-world
+dispute cases that have already gone through the network. The mobile app is
+available for Android, with an iOS version in progress, and `mostrix` offers
+a lightweight terminal-based way to trade for users without a GUI.
