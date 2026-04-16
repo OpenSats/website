@@ -1,0 +1,61 @@
+---
+title: 'Frostr'
+dateAdded: '2025-06-30'
+summary: 'A threshold signing protocol for nostr based on FROST, with libraries and clients for multi-device key management.'
+nym: 'Austin Kelsay'
+website: 'https://www.frostr.org/'
+coverImage: '/static/images/projects/frostr.png'
+git: 'https://github.com/FROSTR-ORG'
+tags: ['Nostr', 'Signing']
+showcase: true
+fund: nostr
+announcementLink: '/blog/twelfth-wave-of-nostr-grants#frostr'
+---
+
+[Frostr](https://www.frostr.org/) is a threshold signing protocol for nostr
+built on top of [FROST](https://eprint.iacr.org/2020/852) (Flexible
+Round-Optimized Schnorr Threshold signatures). An `nsec` key is split into
+shares that live on different devices or services. Any `t`-of-`n` quorum of
+those shares can sign a nostr event together, but a single compromised share
+does not leak the key. Shares can be rotated and replaced without rotating
+the underlying identity, which matters on a protocol where your public key
+_is_ your identity.
+
+Coordination happens over nostr itself. Each share has its own nostr
+identity and exchanges encrypted DMs with the other shares to produce a
+signature, so there's no dedicated backend or custodian in the path.
+
+The project ships as a stack of libraries and clients:
+
+- [Bifrost](https://github.com/FROSTR-ORG/bifrost), the core FROST library
+- [Igloo](https://github.com/FROSTR-ORG/igloo-desktop), a desktop app for
+  managing shares
+- [Frost2x](https://github.com/FROSTR-ORG/frost2x), a browser extension that
+  signs nostr events with a share
+- Heimdall for REST-API signing, Frostbite for mobile, and Permafrost for
+  self-hosted signing nodes
+
+## Why fund it?
+
+The default key model on nostr puts one `nsec` on every device the user
+touches. That works for casual accounts and fails for anyone with a
+meaningful identity, financial tooling tied to their npub, or reason to
+worry about device compromise. Threshold signing gives nostr a
+production-grade option for multi-device keys, private recovery, and
+institutional-style custody, all without changing how clients verify
+signatures.
+
+OpenSats funded Frostr in the
+[twelfth wave of nostr grants](/blog/twelfth-wave-of-nostr-grants#frostr).
+The work is also a building block for later protocols, for example bitcoin
+coinjoins and Payjoins coordinated over nostr.
+
+## What's next?
+
+Near-term goals are a finished UX and a stable release for Igloo and
+Frost2x, then filling out the rest of the stack: Heimdall for REST-API
+signing, Frostbite for mobile, and Permafrost for self-hosted signing nodes.
+The project also plans a
+[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) bridge for
+compatibility with existing remote-signing flows, a security audit, and
+`sign_psbt` support for Bitcoin flows signed over nostr.
