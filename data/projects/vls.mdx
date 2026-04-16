@@ -1,0 +1,56 @@
+---
+title: 'Validating Lightning Signer'
+dateAdded: '2023-12-12'
+summary: 'A hardware-friendly Lightning signing stack that keeps private keys off the Lightning node itself.'
+nym: 'devrandom, Ken Sedgwick, and contributors'
+website: 'https://vls.tech/'
+coverImage: '/static/images/projects/vls.png'
+git: 'https://gitlab.com/lightning-signer/validating-lightning-signer'
+tags: ['Bitcoin', 'Lightning']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-december-2023#validating-lightning-signer'
+---
+
+[Validating Lightning Signer](https://vls.tech/) (VLS) splits a Lightning
+node into two parts: an operational node that connects to peers and
+routes payments, and a separate signer that holds the private keys and
+validates every state change before signing it. If the node is compromised,
+the attacker gets network access but no keys; the signer refuses to sign
+malicious state updates because it enforces the rules of the Lightning
+protocol itself.
+
+VLS works with [Core Lightning](https://github.com/ElementsProject/lightning)
+and [LDK](https://lightningdevkit.org/), runs on desktop, server, and
+embedded targets, and has a Dockerized deployment path for operators who want
+to separate the signer onto its own machine. The project also maintains
+[lnrod](https://gitlab.com/lightning-signer/lnrod), a reference LDK node
+that integrates VLS, as a living test bed for the signer.
+
+## Why fund it?
+
+Holding Lightning keys on an online node is the largest single attack surface
+in the current Lightning stack. VLS gives custodians, enterprises, and serious
+self-hosters a way to separate the keys from the node the same way Bitcoin
+signing devices did for on-chain funds. The design has been adopted inside
+[Greenlight](https://blockstream.com/lightning/greenlight/), which in turn
+powers wallets including [Breez](https://breez.technology/),
+[Relai](https://relai.app/), and [Blitz Wallet](/projects/blitz-wallet).
+
+OpenSats first funded VLS in the
+[December 2023 wave of Bitcoin grants](/blog/bitcoin-grants-december-2023#validating-lightning-signer)
+and renewed support in
+[July 2024](/blog/bitcoin-grants-july-2024#validating-lightning-signer). For a
+detailed look at progress, see the
+[Advancements in Lightning Infrastructure](/blog/advancements-in-lightning-infrastructure#validating-lightning-signer-vls)
+impact report.
+
+## What's next?
+
+Recent Beta releases introduced tag-team signing (multiple signers authorize
+the same state), improved performance, refined monitoring, and a Docker-based
+deployment. Near-term work focuses on mainnet readiness for higher-volume
+deployments, support for splicing and dual funding, and running the signer on
+secure enclaves. Further out, the project plans multi-signature support for
+Lightning channels, extending the security model to institutional-scale
+channel management.
