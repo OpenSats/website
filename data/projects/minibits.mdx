@@ -17,14 +17,19 @@ Minibits is a mobile [Cashu](/projects/cashu) wallet built by
 [Misovan](https://github.com/misovan). It runs on Android and iOS and lets
 users hold ecash from multiple mints, pay over Lightning, and send tokens
 directly to other users through Lightning addresses, nostr contacts, or plain
-Cashu tokens.
+Cashu tokens. The app is available in English, Slovak, Spanish, and
+Portuguese.
 
 The wallet integrates with Lightning in the usual ways (LNURL pay, LNURL
 withdraw, Lightning addresses), and also supports nostr-native flows: you can
 send ecash over [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md)
-encrypted DMs to any nostr contact. Tokens can be locked to a recipient's
-public key, and a payment can be prepared while offline for the recipient to
-claim later.
+encrypted DMs (sealed and wrapped via
+[NIP-44](https://github.com/nostr-protocol/nips/blob/master/44.md)) to any
+nostr contact. Tokens can be locked to a recipient's public key, and a payment
+can be prepared while offline for the recipient to claim later. Every wallet
+gets a persistent `name@minibits.cash` Lightning address routed through the
+project's own server, which also handles zap notifications and Nostr Wallet
+Connect delivery so payments reach the app even when it's backgrounded.
 
 Minibits keeps the "bearer" property of ecash: tokens live on the device, not
 on a server, and can be exported, imported, or transferred between phones
@@ -48,17 +53,22 @@ report.
 
 ## What's next?
 
-An iOS build shipped via [TestFlight](https://testflight.apple.com/join/3QHbAfTg)
-and via [Freedom Store](https://freedomstore.io/) for EU users. Recent work
-added the compact v4 token format, animated QR codes for large tokens
+iOS is now publicly available to EU users through
+[Freedom Store](https://freedomstore.io/) (cooperation with the Vexl
+foundation), with [TestFlight](https://testflight.apple.com/join/3QHbAfTg)
+still serving the rest of the world. Recent work added the compact v4 token
+format, animated QR codes for large tokens
 ([NUT-16](https://github.com/cashubtc/nuts/blob/main/16.md)), payment requests
 ([NUT-18](https://github.com/cashubtc/nuts/blob/main/18.md)), WebSocket
 subscriptions for instant balance updates
 ([NUT-17](https://github.com/cashubtc/nuts/blob/main/17.md)), cached responses
 for crash-safe payments ([NUT-19](https://github.com/cashubtc/nuts/blob/main/19.md)),
-offline transfers, P2PK-locked tokens, and token export/import with
-device-to-device migration.
+offline transfers, P2PK-locked tokens, token export/import with
+device-to-device migration, and a challenge-response auth flow between the
+wallet and the Minibits server inspired by
+[NIP-42](https://github.com/nostr-protocol/nips/blob/master/42.md).
 
 Upcoming work focuses on more reliable [Nostr Wallet Connect](https://nwc.dev/)
-flows, continued iOS polish, and keeping the wallet aligned with new Cashu
-NUTs as they ship.
+flows (especially under Android's background process limits), continued iOS
+polish, hardening offline transactions based on real-world usage from places
+like Cuba, and keeping the wallet aligned with new Cashu NUTs as they ship.
