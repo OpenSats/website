@@ -1,0 +1,70 @@
+---
+title: 'Blitz Wallet'
+dateAdded: '2024-07-05'
+summary: 'A self-custodial Bitcoin wallet built on the Spark protocol, with a custodial-to-self-custodial onboarding path.'
+nym: 'Blake Kaufman'
+website: 'https://blitzwalletapp.com/'
+coverImage: '/static/images/projects/blitz-wallet.png'
+git: 'https://github.com/BlitzWallet'
+twitter: 'BlitzWalletApp'
+nostr: 'npub14l69mauhjyu9j8pgmhj04vjqauzq43ch9yp9g2yx9j9tc4n8xh8s5l9dz2'
+tags: ['Bitcoin', 'Lightning', 'Wallet']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2024-6th-wave#blitz-wallet'
+---
+
+[Blitz Wallet](https://blitzwalletapp.com/) is a self-custodial Bitcoin
+wallet built by [Blake Kaufman](https://github.com/BlakeKaufman). The app has
+gone through several architectures: it started as a Lightning wallet on
+[Breez SDK](https://github.com/breez) and
+[Blockstream Greenlight](https://github.com/Blockstream/greenlight), added
+Liquid and ecash balances, and most recently moved the entire wallet onto
+the [Spark](https://docs.spark.money/wallet/introduction) protocol. The goal
+has stayed the same: one balance, one simple user interface, and a clear
+path from an easy onboarding experience to full self-custody.
+
+Blitz runs on iOS, Android, and as a
+[Progressive Web App](https://github.com/BlitzWallet/blitz-web-app) that works
+in any browser without an app store. It ships with an LNURL address for every
+user, [Nostr Wallet Connect](https://nwc.dev/), support for multiple wallets
+per user, and localization into several languages. A built-in store and
+[point-of-sale app](https://github.com/BlitzWallet/blitz-wallet-pos) round out
+the product, with integrations for
+[The Bitcoin Company](https://www.thebitcoincompany.com/),
+[PPQ AI](https://ppq.ai/), [LN VPN](https://lnvpn.net/), and
+[SMS4Sats](https://sms4sats.com/) so users can spend sats on gift cards, AI
+credits, VPN access, and SMS. A standalone
+[Spark recovery tool](https://github.com/BlitzWallet/spark-recover) works with
+any Spark wallet so users are never dependent on a single app.
+
+## Why fund it?
+
+Self-custody on Lightning is still hard for non-technical users: inbound
+liquidity, channel management, and backups all get in the way. Blitz
+experiments with ways to hide that complexity while keeping users in control
+of their keys. As the first live reference implementation of Spark, Blitz
+also gives other wallet developers a concrete example to study.
+
+OpenSats first funded Blitz in the
+[sixth wave of Bitcoin grants](/blog/bitcoin-grants-july-2024-6th-wave#blitz-wallet)
+in July 2024 and has renewed the grant since. For a longer write-up of recent
+work, see the
+[Advancements in Bitcoin and Lightning Wallets](/blog/advancements-in-bitcoin-and-lightning-wallets#blitz-wallet)
+impact report.
+
+> Simplicity of use is the difference between Bitcoin as a cypherpunk
+> technology and Bitcoin as a monetary revolution.
+>
+> <cite>—Blake Kaufman</cite>
+
+## What's next?
+
+Since shipping on the Apple App Store and Google Play in late 2025, Blitz has
+grown to over 5,000 users and added Payment Pools for shared goals, Paylinks
+for URL-based payment requests that work with any wallet and accept BTC,
+USDT, or USDC, gifting (reclaimable if unclaimed), Dollar Goals, and USDB
+(USD on Spark) send/receive and swaps. Ongoing work includes bulk payments
+and payment requests between contacts, more Point-of-Sale improvements, and
+continued mobile-to-web feature parity so anyone with a browser can run a
+full Blitz wallet.
