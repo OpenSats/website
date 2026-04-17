@@ -1,7 +1,7 @@
 ---
 title: '0xchat'
 dateAdded: '2023-10-10'
-summary: 'A secure chat client for iOS and Android built on nostr, with encrypted DMs, groups, voice and video calls, and Lightning payments.'
+summary: 'A secure chat client built on nostr for iOS, Android, and desktop, with encrypted DMs, groups, voice and video calls, and Lightning payments.'
 nym: 'water783'
 website: 'https://0xchat.com/'
 coverImage: '/static/images/projects/0xchat.png'
@@ -9,30 +9,41 @@ git: 'https://github.com/0xchat-app'
 twitter: '0xchat_app'
 nostr: 'npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl'
 zapstore: 'https://zapstore.dev/apps/com.oxchat.nostr'
-tags: ['Nostr', 'Mobile', 'iOS', 'Android']
+tags: ['Nostr', 'Mobile', 'iOS', 'Android', 'Desktop']
 showcase: true
 fund: nostr
 announcementLink: '/blog/nostr-grants-october-2023#0xchat'
 ---
 
-0xchat is a chat-first nostr client for iOS and Android built by
-[water783](https://njump.me/npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl).
-Users get one-to-one encrypted DMs, private and public groups, channels, voice
-notes, and audio and video calls. Relay-based signaling lets callers connect
+0xchat is a chat-first nostr client built by
+[water783](https://njump.me/npub10td4yrp6cl9kmjp9x5yd7r8pm96a5j07lk5mtj2kw39qf8frpt8qm9x2wl)
+and a small team of contributors. It runs on iOS, Android, and the desktop
+(macOS, Windows, Linux), with a tablet-optimized layout. Users get one-to-one
+encrypted DMs, private and public groups, channels, voice notes, and audio and
+video calls backed by a full CallKit implementation on iOS and
+ConnectionService on Android. Relay-based signaling lets callers connect
 without a central server; the audio and video streams go through user-selected
 ICE servers.
 
-The app implements multiple DM formats: the older NIP-04 encrypted messages, the
-sealed-sender and gift-wrapped format from
+The app implements multiple DM formats: the older NIP-04 encrypted messages,
+the sealed-sender and gift-wrapped format from
 [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) and
-[NIP-59](https://github.com/nostr-protocol/nips/blob/master/59.md), and a
-secret chat mode. That interoperability lets 0xchat users carry DM threads
+[NIP-59](https://github.com/nostr-protocol/nips/blob/master/59.md), a secret
+chat mode, and [NIP-104](https://github.com/nostr-protocol/nips/pull/1427)
+Nostr MLS (Messaging Layer Security) for forward-secure group chats. 0xchat
+was also the first Nostr client to ship
+[NIP-29](https://github.com/nostr-protocol/nips/blob/master/29.md)
+relay-managed groups. This interoperability lets 0xchat users carry DM threads
 with people on Amethyst, Damus, Coop, Flotilla, and noStrudel without leaving
 their preferred app.
 
-0xchat also supports Lightning zaps, Nostr Wallet Connect for balance and
-payment flows, and [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
-remote signing via Amber, nsec.app, and other signers.
+0xchat also supports Lightning zaps, a built-in [Cashu](/projects/cashu)
+wallet for ecash payments, Nostr Wallet Connect for balance and payment flows,
+and [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) remote
+signing via Amber, nsec.app, Aegis, and Nowser. A built-in Tor client (via
+[arti](https://gitlab.torproject.org/tpo/core/arti)) lets the app talk to
+onion relays and Cashu mints directly, and a Discover tab exposes "NApps"
+(third-party nostr web apps) through NIP-07.
 
 ## Why fund it?
 
@@ -50,7 +61,15 @@ October 2023 and has renewed the grant multiple times, most recently in the
 
 ## What's next?
 
-Recent releases continue to polish the UI and expand group and channel
-features, with ongoing work on giftwrap DMs, media handling, and call
-reliability. The team also ships regularly to the iOS App Store, Google Play,
-[Zapstore](https://zapstore.dev/apps/com.oxchat.nostr), and F-Droid.
+The project now ships two apps in parallel. The main 0xchat client keeps
+adding features (Posts with Markdown, global feeds, translation via
+LibreTranslate and Google ML Kit, NApps), and a smaller sibling called
+[XChat](https://github.com/0xchat-app/xchat-app-main) (formerly "0xChat Lite")
+focuses on native iOS and Android UIs and MLS-based "Circles" with their own
+relays, storage, and file servers. Upcoming work covers disappearing
+messages, Cashu wallet upgrades to support more NUTs,
+[NIP-61 Nutzaps](https://github.com/nostr-protocol/nips/blob/master/61.md),
+NIP-29 invite codes, and a BitChat integration that relays messages over
+Bluetooth Low Energy mesh. The team ships regularly to the iOS App Store,
+Google Play, [Zapstore](https://zapstore.dev/apps/com.oxchat.nostr), and
+F-Droid.
