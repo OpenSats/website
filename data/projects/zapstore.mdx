@@ -14,7 +14,15 @@ announcementLink: '/blog/10th-wave-of-nostr-grants#zapstore'
 
 Zapstore is an app store built on nostr. Developers sign and publish releases as nostr events. Users can verify binaries before installation, discover apps through follows and recommendations, and install software outside the control of a single platform owner. The Android client is the most mature today, an iOS client is in development, and the same publishing flow works for desktop binaries and CLI tools. The project supports Tor, local-first usage, and account-less flows.
 
-Zapstore also ships developer tooling. `zapstore-cli` helps publish releases and manage app metadata, while the broader stack includes relays, an indexer, signing tools, and the client apps themselves.
+Zapstore also ships the infrastructure around it. `zapstore-cli` lets developers sign and publish releases from GitHub, GitLab, or F-Droid sources (with `nsec`, [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md),
+[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md), or Amber
+via [NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md)). A
+custom Go [relay](https://github.com/zapstore/relay) backs app discovery with
+NIP-50 full-text search, a Dart [Blossom server](https://github.com/zapstore/blossomd)
+serves release binaries, and the [indexer](https://github.com/zapstore/indexer)
+crawls YAML-described sources to keep a large catalog of third-party apps
+fresh. The [purplebase](https://github.com/purplebase) Dart libraries power
+the client apps and are designed to be reusable by other nostr apps.
 
 ## Why fund it?
 
@@ -24,8 +32,8 @@ OpenSats supported Zapstore in the [tenth wave of nostr grants][wave-10]. The pr
 
 ## What's next?
 
-Recent work includes Zapstore 1.0 for Android, a redesigned package manager, custom app-catalog relays, curated app stacks, background update checks, and major improvements to the website and indexing pipeline. The indexer now supports a much larger app catalog, and the Android client has shipped steady 1.0.x releases. An iOS client is also in the works, sidestepping the App Store gatekeeping that native iOS apps are normally subject to.
+Recent work includes Zapstore 1.0 for Android, a redesigned package manager, custom app-catalog relays, curated app stacks, background update checks, deeplink support, and major improvements to the website and indexing pipeline. The relay moved from a whitelist model to a web-of-trust model with a blacklist, the new indexer has already absorbed 900+ apps, and the trust dialog now surfaces zap receipts so users can see community support levels for a signer before installing. An iOS client is also in the works, sidestepping the App Store gatekeeping that native iOS apps are normally subject to.
 
-Next steps focus on stabilizing the 1.0 app, improving relay and trust management, adding backup and restore for installed apps, and making publishing easier for developers.
+Near-term goals include a bridge relay that mirrors Play Store releases into the catalog, user-initiated indexing, installed-app backup and restore for device migration, companion-app recommendations, vouching and flagging, and a seamless migration path for developers from indexed to self-signed releases.
 
 [wave-10]: /blog/10th-wave-of-nostr-grants#zapstore
