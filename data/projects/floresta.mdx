@@ -5,7 +5,7 @@ summary: 'A lightweight and embeddable Bitcoin full node written in Rust, using 
 nym: 'Davidson Souza'
 website: 'https://getfloresta.org/'
 coverImage: '/static/images/projects/floresta.png'
-git: 'https://github.com/vinteumorg/Floresta'
+git: 'https://github.com/getfloresta/Floresta'
 tags: ['Bitcoin', 'Core']
 showcase: true
 fund: general
@@ -22,14 +22,17 @@ own, including phones and small single-board computers, without giving up
 trust-minimization.
 
 The project ships two main pieces:
-[`libfloresta`](https://github.com/vinteumorg/Floresta/tree/master/crates),
+[`libfloresta`](https://github.com/getfloresta/Floresta/tree/master/crates),
 a set of reusable crates that applications can embed, and
-[`florestad`](https://github.com/vinteumorg/Floresta/tree/master/bin/florestad),
-a daemon that runs as a standalone node with a view-only wallet and a built-in
+[`florestad`](https://github.com/getfloresta/Floresta/tree/master/bin/florestad),
+a daemon that runs as a standalone node with a watch-only wallet and a built-in
 Electrum server. Developers can use `libfloresta` the way they would use
 [`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) or
 [`bdk`](/projects/bdk), building wallets, explorers, and indexers on top of a
-validating client.
+validating client. Script verification runs through the `libbitcoinkernel`
+bindings so Floresta shares the same consensus rules as Bitcoin Core, and the
+project has its own [mdBook documentation](https://josesk999.github.io/floresta-docs/)
+covering the codebase chapter by chapter.
 
 ## Why fund it?
 
@@ -45,16 +48,26 @@ in September 2024. The [fourteenth wave](/blog/fourteenth-wave-of-bitcoin-grants
 added grants for contributors
 [João Leal](https://github.com/jaoleal),
 [Moises Pompilio](https://github.com/moisesPompilio), and
-[Jose Castillo López](https://github.com/jose-sastre). The project lives at
-[vinteumorg/Floresta](https://github.com/vinteumorg/Floresta), alongside other
-Bitcoin research and engineering work at [Vinteum](https://vinteum.org/).
+[Jose Castillo López](https://github.com/JoseSK999). The project lives at
+[getfloresta/Floresta](https://github.com/getfloresta/Floresta), with origins
+at [Vinteum](https://vinteum.org/), the Brazilian nonprofit that incubated it.
 
 ## What's next?
 
-Recent work focused on expanding `florestad`'s RPC surface to match Bitcoin
-Core more closely, so existing tooling can talk to a Floresta node without
-rewrites. Other threads include packaging for
-[nix-bitcoin](https://nixbitcoin.org/) and upstream
-[nixpkgs](https://github.com/NixOS/nixpkgs), contributor onboarding, code
-review, and improvements to the testing and fuzzing setup. `libfloresta` keeps
-gaining consumers as more wallets and indexers embed Floresta directly.
+Floresta 0.8.0 shipped in the summer of 2025 and 0.9.0 is in flight, centred
+on [SwiftSync](https://delvingbitcoin.org/t/swiftsync-speeding-up-ibd-with-pre-generated-hints/1562).
+Combined with Utreexo, SwiftSync uses implicit deletion in the accumulator to
+skip proof downloads and validate blocks out of order. On a home connection,
+syncing signet to block 290,000 dropped from 1h 15min (Utreexo) to 6 minutes
+(witnessless SwiftSync), a roughly 12x improvement. A
+[BIP draft for Utreexo](https://github.com/bitcoin/bips/pull/1923) is also
+making its way through review.
+
+Alongside the sync work, contributors are expanding `florestad`'s RPC surface
+to match Bitcoin Core more closely (so existing tooling can talk to a Floresta
+node without rewrites), migrating the functional test suite to `pytest`,
+evaluating [BDK](/projects/bdk) for the watch-only wallet, packaging the node
+for [nix-bitcoin](https://nixbitcoin.org/) and upstream
+[nixpkgs](https://github.com/NixOS/nixpkgs), and hardening the P2P layer with
+more integration tests. `libfloresta` keeps gaining consumers as more wallets
+and indexers embed Floresta directly.
