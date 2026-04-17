@@ -12,19 +12,19 @@ fund: nostr
 announcementLink: '/blog/10th-wave-of-nostr-grants#zapstore'
 ---
 
-Zapstore is a mobile app store built on nostr for both Android and later for iOS. Developers sign and publish releases as nostr events. Users can verify binaries before installation, discover apps through follows and recommendations, and install software outside the control of a single platform owner. The project supports Tor, local-first usage, and account-less flows.
+Zapstore is an app store built on nostr. Developers sign and publish releases as nostr events. Users can verify binaries before installation, discover apps through follows and recommendations, and install software outside the control of a single platform owner. The Android client is the most mature today, an iOS client is in development, and the same publishing flow works for desktop binaries and CLI tools. The project supports Tor, local-first usage, and account-less flows.
 
-Zapstore also ships developer tooling. `zapstore-cli` helps publish releases and manage app metadata, while the broader stack includes relays, an indexer, signing tools, and the Android client itself.
+Zapstore also ships developer tooling. `zapstore-cli` helps publish releases and manage app metadata, while the broader stack includes relays, an indexer, signing tools, and the client apps themselves.
 
 ## Why fund it?
 
 Software distribution is a choke point. Large app stores can delist apps, gate updates, and control how developers reach users. Zapstore gives developers a direct distribution path with signed releases and gives users another way to discover and install software they can verify.
 
-OpenSats supported Zapstore in the [tenth wave of nostr grants][wave-10]. The project helps build the publishing and discovery infrastructure that Android and iOS apps need. 
+OpenSats supported Zapstore in the [tenth wave of nostr grants][wave-10]. The project helps build the publishing and discovery infrastructure that nostr apps need across mobile, desktop, and command-line environments.
 
 ## What's next?
 
-Recent work includes Zapstore 1.0 for Android, a redesigned package manager, custom app-catalog relays, curated app stacks, background update checks, and major improvements to the website and indexing pipeline. The indexer now supports a much larger app catalog, and the Android client has shipped steady 1.0.x releases. Zapstore is also designing an iOS version of the application, which bypasses the Apple's native app store and promises an even better user experience. 
+Recent work includes Zapstore 1.0 for Android, a redesigned package manager, custom app-catalog relays, curated app stacks, background update checks, and major improvements to the website and indexing pipeline. The indexer now supports a much larger app catalog, and the Android client has shipped steady 1.0.x releases. An iOS client is also in the works, sidestepping the App Store gatekeeping that native iOS apps are normally subject to.
 
 Next steps focus on stabilizing the 1.0 app, improving relay and trust management, adding backup and restore for installed apps, and making publishing easier for developers.
 
