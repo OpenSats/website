@@ -1,7 +1,7 @@
 ---
 title: 'Bitcoin Core'
 dateAdded: '2023-03-31'
-summary: 'Bitcoin Core is the reference implementation of the Bitcoin protocol.'
+summary: 'The full node software that validates the chain, relays transactions, and enforces Bitcoin’s rules.'
 nym: 'Bitcoin Core Developers'
 website: 'https://bitcoincore.org/en/download/'
 coverImage: '/static/images/projects/bitcoin-core.png'
@@ -9,13 +9,49 @@ git: 'https://github.com/bitcoin/bitcoin'
 twitter: 'bitcoincoreorg'
 tags: ['Bitcoin']
 showcase: true
+fund: general
+announcementLink: '/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors'
 ---
 
-## About this project
+Bitcoin Core is the full node software that validates blocks and transactions, enforces consensus rules, relays data across the peer-to-peer network, and lets users verify Bitcoin for themselves.
 
-Bitcoin uses peer-to-peer technology to operate with no central authority or
-banks; managing transactions and the issuing of bitcoins is carried out
-collectively by the network. Bitcoin is open-source; its design is public,
-nobody owns or controls Bitcoin and everyone can take part. Through many of its
-unique properties, Bitcoin allows exciting uses that could not be covered by any
-previous payment system.
+OpenSats began funding Bitcoin Core contributors in 2023 through its [LTS program][lts-announce]. LTS grantees include Marco Falke, Josie Baker, Sjors Provoost, Vasil Dimov, Gleb Naumenko, Furszy, Will Clark, 0xB10C, Bruno Garcia, Jon Atack, and Andrew Toth. Additional contributors joined through [Caring for Core][caring], [More for Core][more-for-core], and [5 Grants to Strengthen Bitcoin Development][five-grants]: tdb3, David Gumberg, Hodlinator, L0rinc, kevkevinpal, Daniela Brozzoni, janb84, Naiyoma, and Daniel Pfeifer.
+
+## Why fund it?
+
+Fewer than 50 people regularly contribute code to software underpinning a network worth over a trillion dollars. For comparison, Meta employs around 20,000 engineers for a comparable market cap. The total annual budget for all Bitcoin Core development organizations combined is around $8 million.
+
+Most of that budget goes toward maintenance. Bug fixes, test coverage, CI upkeep, build system work, release engineering, edge cases that show up in the wild. A [widely cited estimate][maintenance-source] puts maintenance at well over 70% of all project activity. The protocol upgrades get attention; the day-to-day work does not.
+
+In the [2024 CoreDev contributor survey][coredev-survey], "lack of reviewers" was the number one frustration. The top 15 contributors produce 71% of the code. If a handful of people step away, years of context leave with them. Funding gives contributors reason to stay and turns one-off fixes into sustained maintenance.
+
+## What's next?
+
+Review is the bottleneck. Large pull requests sit for months waiting for someone who can read them closely, test them on real hardware, and follow through across rebases and revisions.
+
+Andrew Toth is working on a [block validation speedup][validation-pr] that would improve both Initial Block Download and processing at the chain tip. L0rinc is benchmarking Core on everything from cloud servers to Raspberry Pis and looking at ways to cut memory usage. Marco Falke maintains the test framework and CI infrastructure the rest of the project depends on.
+
+[Private transaction broadcast][priv-broadcast] merged this year. Toth has follow-up work to improve reliability across restarts and give node operators more control over the feature.
+
+Sjors Provoost maintains the Bitcoin Core side of [Stratum V2][sv2], fixing bugs surfaced by [SRI][sri] testing and building out the IPC methods mining software needs. He is also working on MuSig2 support through [HWI][hwi] and reviewing the [BIP54 consensus cleanup][bip54].
+
+The [libbitcoinkernel][kernel] project is pulling Core's consensus engine into a standalone library. janb84 joined a working group tackling the global `cs_main` lock, replacing it with finer-grained locking so third-party applications can embed the kernel without running a full node.
+
+On the network side, Julien Urraca brought [ASMap][asmap] generation under ten minutes and coordinated collaborative runs to produce canonical ASmaps for Core. Naiyoma is researching P2P fingerprinting defenses.
+
+Build tooling, CI, fuzzing, and release engineering touch every release but rarely get attention. The codebase has to stay safe to change, and that takes people who show up for it.
+
+[asmap]: https://github.com/asmap
+[coredev-survey]: https://adamjonas.com/bitcoin/coredev/retro/coredev-2024-retro/
+[bip54]: https://github.com/bitcoin/bips/blob/master/bip-0054.mediawiki
+[caring]: /blog/caring-for-bitcoin-core
+[five-grants]: /blog/five-grants-to-strengthen-bitcoin-development
+[hwi]: https://github.com/bitcoin-core/HWI
+[kernel]: https://github.com/bitcoin/bitcoin/issues/27587
+[lts-announce]: /blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors
+[more-for-core]: /blog/more-for-core
+[priv-broadcast]: https://github.com/bitcoin/bitcoin/pull/30793
+[sri]: https://stratumprotocol.org/
+[sv2]: /projects/stratumv2
+[validation-pr]: https://github.com/bitcoin/bitcoin/pull/31132
+[maintenance-source]: https://www.coindesk.com/consensus-magazine/2023/02/23/can-bitcoin-afford-to-maintain-its-core-network-coindesk
