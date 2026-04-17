@@ -22,12 +22,15 @@ that chain analysis tools rely on, and at the same time batches two payments
 into one, which saves on fees. Used widely, Payjoin makes the common-input
 heuristic useless across the whole network, not only for the people using it.
 
-The Payjoin Foundation is the non-profit stewarding this work, led by
-[Dan Gould](https://github.com/DanGould). Its flagship output is the
-[Payjoin Dev Kit](https://payjoindevkit.org/), a Rust implementation
+The [Payjoin Foundation](https://payjoin.org/) is the 501(c)(3) non-profit
+stewarding this work, incorporated in Delaware in 2025 and led by
+[Dan Gould](https://github.com/DanGould) alongside Armin Sabouri, Brandon
+Lucas, Ben Allen, Spacebear, and Chavic. Its flagship output is the
+[Payjoin Dev Kit](https://payjoin.org/), a Rust implementation
 ([rust-payjoin](https://github.com/payjoin/rust-payjoin)) with bindings for
-Python, Dart, Swift, and Kotlin. The dev kit powers [BIP
-77](https://github.com/bitcoin/bips/pull/1483), Async Payjoin, which uses
+Python, Dart, Swift, Kotlin, JavaScript, and C#. The dev kit powers
+[BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.mediawiki),
+Async Payjoin, which uses
 [HPKE-encrypted Oblivious HTTP](https://ietf-wg-ohai.github.io/oblivious-http/draft-ietf-ohai-ohttp.html)
 so sender and receiver can exchange messages without both being online at
 once. That removed the biggest practical barrier to adoption: Payjoin v1
@@ -53,20 +56,28 @@ and the
 
 ## What's next?
 
-[Bull Bitcoin](https://bullbitcoin.com/) shipped Payjoin v2 in December 2024.
-[Cake Wallet](https://cakewallet.com/) followed with send and receive support
-in May 2025. Integrations are in progress with
+[Bull Bitcoin](https://bullbitcoin.com/) shipped Payjoin v2 in December 2024
+and [Cake Wallet](https://cakewallet.com/) followed in May 2025.
+[BDK-CLI](https://github.com/bitcoindevkit/bdk-cli) shipped v3.0.0 with
+Payjoin support in early 2026. Pull requests are open for
 [Liana](https://github.com/wizardsardine/liana/),
-[Galoy's Bria](https://github.com/GaloyMoney/bria),
-[Boltz](https://boltz.exchange/), and
-[LDK-Node](https://github.com/lightningdevkit/ldk-node) for Lightning channel
-funding.
+[LDK-Node](https://github.com/lightningdevkit/ldk-node),
+[Boltz](https://boltz.exchange/), and [LEXE](https://lexe.app/), and a
+[BTCPayServer](https://btcpayserver.org/) plugin is in development.
 
-The `payjoin` crate has moved from version 0.11 to 0.24, adding a
-session-event log so apps can show transaction history, a stable interface
-for `payjoin-cli`, and the
-[`ohttp-relay`](https://crates.io/crates/ohttp-relay) crate that
-[Cake Wallet](https://cakewallet.com/) and [BOB Space](https://bobspaces.net/)
-now run as public relays. Ongoing work focuses on multi-party Payjoin,
-receiver cut-through batching, and bindings for more languages so any wallet
-can adopt it without a Rust toolchain.
+The `payjoin` crate has moved from version 0.11 to release-candidate 1.0,
+adding persistence baked into the core state machine, a session-event log
+so apps can show transaction history, and stable FFI for every binding
+target. [`payjoin-mailroom`](https://github.com/payjoin/rust-payjoin/tree/master/payjoin-mailroom)
+bundles the directory, OHTTP relay, and metrics into a single binary that
+[BOB Space](https://bobspaces.net/), Cake Wallet, Vinteum, Achow101, and
+others now run as public infrastructure.
+
+Alongside the dev kit, the Foundation runs a research track led by Armin
+Sabouri on wallet fingerprinting
+([tx-indexer](https://github.com/payjoin/tx-indexer),
+[btsim](https://github.com/payjoin/btsim), and an automated
+[RAG pipeline for wallet code](https://github.com/arminsabouri/WalletProbe)),
+publishes open [weekly dev-call notes](https://github.com/orgs/payjoin/discussions/categories/dev-call-notes)
+and a [study club](https://github.com/orgs/payjoin/discussions/categories/study-club),
+and is drafting a multiparty Payjoin v3 protocol with multiple receivers.
