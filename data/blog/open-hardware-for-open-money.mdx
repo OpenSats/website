@@ -2,8 +2,503 @@
 title: "Open Hardware for Open Money"
 date: '2026-04-21'
 tags: ['OpenSats', 'bitcoin', 'impact', 'hardware']
-authors: ['default', 'arvin', 'tuma']
+authors: ['arvin', 'tuma', 'default']
 images: ['/static/images/blog/TODO']
 draft: false
 summary: "An impact report from the front-lines of bitcoin hardware development."
 ---
+
+Bitcoin is a monetary network built on hardware components. Specialized chips,
+hashboards, control boards, and signing devices determine who can participate in
+mining, run infrastructure, and hold keys offline. Closed and proprietary
+hardware concentrates power in manufacturers and large operators, working
+against Bitcoin's decentralized design. Open-source hardware and firmware shift
+power to individuals and local communities by providing them with designs they
+can audit, adapt, and run on their own terms.
+
+Over the past year, OpenSats has provided targeted support to builders who
+create Bitcoin hardware as free and open-source infrastructure. Their projects
+live in public repositories, with schematics, firmware, manufacturing files, and
+documentation available for anyone to inspect and reuse. Many of these builders
+design for constrained environments, giving users more options to run their own
+miners and signers.
+
+Following [earlier impact reports] on Lightning infrastructure, developer
+libraries, education, wallets, and ecash, this report focuses on Bitcoin's
+hardware layer and the developers building open tools for mining and
+self-custody. The five projects highlighted here make home mining accessible
+using transparent designs, enable local partners to manufacture and repair
+boards, deliver affordable DIY air-gapped signers, and assemble an open mining
+stack for independent operators.
+
+These projects are:
+
+- [Bitaxe](#bitaxe)
+- [Bitshoka](#bitshoka)
+- [Krux](#krux)
+- [Krux-Installer](#krux-installer)
+- [256 Foundation](#256-foundation)
+
+Having mining hardware and signing devices as public infrastructure lowers
+barriers to entry and expands the pool of people who can meaningfully
+participate in Bitcoin. Let's take a closer look at how each of these
+open-source projects has made an impact over the past year.
+
+[earlier impact reports]: /tags/impact
+
+---
+
+### Bitaxe
+
+[Bitaxe] is an open-source bitcoin mining project, led by hardware designer
+[skot], that gives individuals and small operators a practical way to contribute
+directly to network security. With [support from OpenSats][bitaxe-grant], the
+project's focus has been on closing the gap between open design files and
+hardware that people can build, run, and understand. Each release moved that
+goal forward by making manufacturable boards with matching firmware available to
+anyone willing to assemble them.
+
+The [BitaxeGamma line] marked a major step in mining decentralization by using
+the [BM1370 mining chip] that reaches roughly 1.2 terahashes per second on a
+compact board intended for home or small deployments. The team
+[published][bitaxeGamma releases] the BitaxeGamma 600/601/602 hardware releases,
+with the full set of manufacturing materials, including schematics, printed
+circuit board (PCB) layouts, bills of materials, and assembly data. Hardware
+producers can now build Gamma units directly based on the public design files.
+On the firmware side, the [ESP-Miner 2.6.1 release] brought stable support for
+Gamma, adding self tests, temperature handling, tuning controls, and an improved
+web interface. A new Gamma is able to power up, check its own state, connect
+over Wi-Fi, and join a mining pool from a browser on the local network using
+only open-source software.
+
+In January 2026, this progress extended into a higher performance tier with the
+[Bitaxe GT 801 platform]. GT 801 combines two BM1370 chips on a single board and
+uses an open-source heatsink design that enables sustained operation at higher
+power levels. The project published the first GT 801 hardware release, complete
+with circuit files, mechanical drawings, and parts lists, which makes it
+possible for manufacturers and builders with circuit board experience to produce
+GT units directly from the repository. Soon after, the [ESP-Miner 2.12.2
+firmware release] added full GT support, with its own self-tests and
+power-management logic, and is available as a ready-to-install firmware
+download. Community vendors (like Solosatoshi) [now offer GT 801 miners] that
+deliver around 2.15 terahashes per second at roughly 43 watts, which gives small
+operators an efficient, open design that runs on standard household power and
+fits in compact spaces.
+
+In parallel with these hardware advancements, the team improved [AxeOS Swarm], a
+dedicated UI to manage multiple Bitaxe units that can function as a mining
+fleet. ESP-Miner 2.11.0 and its beta releases introduced a grid view in the
+browser interface, layout refinements, clear color coding for different device
+types, and device notifications. Operators can see metrics such as hashrate,
+temperature, and pool status for [Max], [Ultra], [Supra], [Gamma][BitaxeGamma
+line], and [GT][Bitaxe GT 801 platform] boards on a single screen to identify
+which miners require attention. API improvements and an [OpenAPI] description
+make it easier to automate fleet management, including coordinated firmware
+updates and the collection of long-term statistics across multiple devices.
+
+Across each hardware and firmware release during this period, the project built
+a growing base of independent miners who control their own hardware and
+software. Those miners now run Bitaxe units from homes, workshops, and community
+spaces, contributing hashrate to the network on their own terms.
+
+>My best estimates put the number of Bitaxe units sold to date at over 100,000.
+>Self-sovereign, private miners have solo mined at least six blocks. The project
+>has achieved incredible momentum while being steadfast in its commitment to
+>privacy, open source, and decentralization. Thanks to the generous financial
+>support from OpenSats I can still focus on adhering to these project goals. It
+>would never be possible with a for-profit company running the show.
+>
+><cite>—skot, Bitaxe project lead</cite>
+
+Bitaxe's progress illustrates how open miner designs can scale in practice and
+anchor meaningful hashrate in hardware that miners themselves can inspect,
+modify, and operate.
+
+[Bitaxe]: https://bitaxe.org/
+[skot]: https://github.com/skot
+[bitaxe-grant]: /blog/bitcoin-grants-feb-2024#the-bitaxe
+[BitaxeGamma line]: https://github.com/bitaxeorg/bitaxeGamma
+[BM1370 mining chip]: https://osmu.wiki/bitaxe/600/
+[bitaxeGamma releases]: https://github.com/bitaxeorg/bitaxeGamma/releases
+[ESP-Miner 2.6.1 release]: https://github.com/bitaxeorg/ESP-Miner/releases/tag/v2.6.1
+[Bitaxe GT 801 platform]: https://github.com/bitaxeorg/BitaxeGT
+[ESP-Miner 2.12.2 firmware release]: https://github.com/bitaxeorg/ESP-Miner/releases/tag/v2.12.2
+[now offer GT 801 miners]: https://www.solosatoshi.com/product/bitaxe-gt-gamma-turbo/
+[AxeOS Swarm]: https://github.com/bitaxeorg/ESP-Miner?tab=readme-ov-file#axeos-api
+[Max]: https://github.com/bitaxeorg/bitaxeMax
+[Ultra]: https://github.com/bitaxeorg/bitaxeUltra
+[Supra]: https://github.com/bitaxeorg/bitaxeSupra
+[OpenAPI]: https://www.openapis.org/what-is-openapi
+
+---
+
+### Bitshoka
+
+Bitshoka, maintained by [Kuenrg153], extends the work from Bitaxe into local
+manufacturing in Kenya and open research on [MicroBT ASICs]. For miners across
+Africa, even entry-level hardware like the Bitaxe Gamma remains out of reach
+when shipping costs, import rules, and currency constraints are taken into
+account. [OpenSats funding][bitshoka-grant] gave the team the resources to
+pursue that directly, building Bitaxe-compatible hardware locally and publishing
+boards that give developers direct access to Whatsminer chips.
+
+[Bitshoka V1.0] started from the proven BitaxeGamma 600 design and adapted it
+into a locally branded miner for the Kenyan and wider African bitcoin community.
+The hardware is a complete copy of the Gamma board, based on the BM1370 ASIC,
+with artwork that reflects its African origin. The repository includes [KiCad]
+projects, schematics, layout files, and manufacturing outputs, so [local
+partners can produce boards] directly based on the files in the repo. Bitshoka
+boards are now running successfully, validating the reverse-engineered design
+and confirming that these Made in Africa miners behave like their BitaxeGamma
+counterparts while using the same ESP-Miner firmware and configuration flow.
+
+[Bitshoka Nini V1.1] focuses on MicroBT's Whatsminer ASICs and the KF1950 chip
+used in the M30 series. The Nini repository publishes a full KiCad design for a
+Bitaxe-style board built around the KF1950, including detailed circuit diagrams,
+PCB layout, mechanical drawings, a list of materials, and manufacturing files.
+The project reports that the first batch of boards has been assembled, and that
+a [PicoBT controller] can detect and read the KF1950 on the board, which shows
+that the power delivery, signal routing, and basic communication path work as
+intended.
+
+To make ASIC research and experimentation more accessible, the [bitLode] project
+adds a dedicated bridge between a standard computer and Whatsminer hashboards.
+bitLode is a fork of the earlier [aditBoard] design, which reshapes it into a
+board that adapts the data cable from Btmicro and Whatsminer M30 hashboards to
+USB. The repository contains its own KiCad project, documentation, and
+manufacturing files, along with tagged hardware revisions that mark specific
+layouts ready for PCB orders. Once built, bitLode lets developers connect a
+laptop directly to production hashboards, capture and replay traffic, and study
+how the KF1950 responds under different conditions. In combination with Bitshoka
+Nini, [Bitaxe Raw], and logic analyzers, this gives engineers a practical path
+from raw signal traces to documented protocols and, eventually, open firmware
+that can drive MicroBT-based miners.
+
+>Being a part of the Kenyan bitcoin community, we can see how even an
+>entry-level miner like the Bitaxe Gamma is both logistically and financially
+>inaccessible to most people here. As well as adding MicroBT [Whatsminer] ASICs
+>to the Bitaxe ecosystem, the Bitshoka Nini will provide an avenue for miners
+>from emerging markets to get their hands on their own hardware to start
+>learning, experimenting, and developing.
+>
+><cite>—Kuenrg153, Bitshoka project maintainer</cite>
+
+OpenSats funding has helped the project focus on publishing designs, documenting
+findings, and keeping the work open-source for community reuse. The result is a
+manufacturing path for builders in Kenya and a growing set of open tools for
+developers studying MicroBT chips anywhere in the world.
+
+[Kuenrg153]: https://github.com/kuenrg153
+[MicroBT ASICs]: https://shop.whatsminer.com/products?lang=en-US
+[bitshoka-grant]: /blog/eleventh-wave-of-bitcoin-grants#bitshoka
+[Bitshoka V1.0]: https://github.com/kuenrg153/bitshoka
+[KiCad]: https://www.kicad.org/
+[local partners can produce boards]: https://xcancel.com/GridlessCompute/status/1937812135813497219
+[Bitshoka Nini V1.1]: https://github.com/kuenrg153/BitshokaNini_V1.1
+[PicoBT controller]: https://d-central.tech/product/picobt-hashboard-tester/
+[bitLode]: https://github.com/kuenrg153/bitLode
+[aditBoard]: https://github.com/skot/aditBoard
+[Bitaxe Raw]: https://github.com/bitaxeorg/bitaxe-raw
+
+---
+
+### Krux
+
+[Krux] is a firmware project that turns inexpensive, off-the-shelf circuit
+boards into air-gapped bitcoin signing devices. In places like Brazil, taxes and
+import fees often double the price of electronics, putting commercial hardware
+wallets beyond the reach of many people. [OpenSats funding][krux-grant]
+supported two core contributors, [Odudex] and [Tadeubas], who worked to make
+self-custody practical on affordable, widely available hardware.
+
+Under Odudex's lead, the [25.03.0] release added support for Taproot and P2WSH
+wallets that follow Miniscript. Krux can now load a wallet [descriptor] that
+defines who can spend, under which conditions, and when. The device displays it
+in a structured way and checks that the cosigners and rules match the user
+settings before a transaction is approved. SD-card signing reliability was
+improved, so when a transaction file ([PSBT]) moves from one signer to another
+on an SD card, Krux is able to keep the information intact, including signatures
+already added on other devices, so that multi-signature setups can pass around
+one file and see signatures accumulate. Camera and interface changes in the same
+release have enabled zoom options, better performance under glare, improved
+keypad layouts, and a simpler tamper-check screen, making QR code based signing
+easier on small screens.
+
+A second set of changes from Odudex focused on how Krux protects and stores
+sensitive data. The Krux Encryption Format (KEF), introduced in the [25.09.0]
+release, gives users a way to encrypt seeds and other secrets with protection
+against brute force attempts, and the possibility to move those encrypted
+envelopes using QR or SD card while staying offline. Contributor [Jean Do] led
+the design of KEF as a secure envelope format for air-gapped devices, while
+Odudex helped implement the low-level parts into Krux. On top of KEF, the new
+Datum tool lets users turn plain text into encrypted records. Users can write
+instructions, recovery hints, or account notes and save them in KEF format as QR
+codes or SD card files, so important context sits next to wallet backups in a
+human-readable yet protected form.
+
+Performance and long-term architecture were also a focus for Odudex. He [reduced
+the size of the Krux firmware][25.10.0] by 25% and enabled hardware acceleration
+for encryption and hashing on supported boards. Users gained quicker QR
+handling, faster transaction signing, and better responsiveness on low-cost
+devices. To support this, he wrote cUR, a pure C library for handling UR-based
+QR codes, and integrated it into Krux as a MicroPython module. cUR makes reading
+and writing multi-part QR codes much faster than the older Python-only approach,
+which matters when a backup or transaction spans many QR frames.
+
+Odudex has also been building [Kern], a C implementation of a Krux-style signer
+for the ESP32-P4 chip. Kern already runs on several boards, can scan static and
+animated QR codes, load keys, and sign transactions, and aims to deliver
+reliable air-gapped signers for under fifty dollars on widely available
+hardware.
+
+>By building Kern on widely available, future-proof, low-cost hardware without
+>sacrificing performance or usability, we can bring reliable Bitcoin
+>self-custody to people who were previously priced out of quality signing
+>devices. The tools I created along the way, like cUR, are open for anyone to
+>use, and hopefully can benefit other projects.
+>
+><cite>—Odudex, Krux contributor</cite>
+
+Working alongside Odudex, Tadeubas concentrated on safety checks, address
+handling, security hardening, and device support in the main Krux firmware. He
+identified and fixed a [vulnerability] that allowed firmware to be compromised
+through the SD card, and later implemented [anti-rollback protection] after
+[Craig Watkins] raised the issue during the review process to list Krux on
+Bitcoin.org. His work on the [Embit library] and Krux itself improved how the
+signer understands complex wallet definitions. Krux is now is able to recognize
+more edge cases and gives a clear warning when it cannot confidently determine
+which addresses are meant for change. That warning appears before signing, which
+lowers the chance that funds end up at an unexpected address because of a subtle
+wallet configuration issue. This kind of prevention is especially valuable for
+communities and services that use condition-based wallets to protect shared
+funds.
+
+Tadeubas also redesigned how Krux displays and exports addresses, with
+readability in mind. Receive addresses now appear in short, consistent [groups]
+with clear labels and [highlighting], so users can compare what they see on Krux
+with what a coordinator or application shows on-screen without scanning a dense
+block of characters. A new [export wallet addresses to SD] feature writes a full
+list of receive addresses to a file for offline review or for use in external
+tools. This helps when setting up donation pages, payout flows, or services that
+need a list of addresses generated from an offline signer.
+
+On the hardware side, Tadeubas used grant funds to bring Krux to the [TZT]
+touchscreen device, which combines a milled aluminum case with both touch input
+and physical buttons. Porting Krux to TZT required changes in the underlying
+[MaixPy] firmware for display, buttons, and camera support, and this work
+shipped as new device support in the [v25.10.0][25.10.0] release. TZT gives
+users a more rugged and comfortable form factor, which many users prefer for
+long-term key storage. Beyond this, Tadeubas is also developing the [Krux Apps]
+(Kapps) framework, including a nostr-focused app that would let Krux act as an
+offline nostr signer in future versions.
+
+>Projects like Krux don't just add another tool; they strengthen the entire
+>Bitcoin self-custody ecosystem by promoting openness, affordability, air-gapped
+>security, and resistance to centralized control or suppression. Contributing to
+>that effort, with OpenSats' support, has been deeply rewarding.
+>
+><cite>—Tadeubas, Krux contributor</cite>
+
+Krux runs on widely available K210 boards and now on devices like TZT,
+[Yahboom], [Maix Cube], and [WonderMV], so more users have a practical path to
+running their own air-gapped signer on hardware they can afford. OpenSats
+funding helped both contributors dedicate time to these changes and keep the
+roadmap focused on open-source development.
+
+[Krux]: https://selfcustody.github.io/krux/
+[krux-grant]: /blog/bitcoin-grants-december-2023#krux
+[Odudex]: https://github.com/odudex
+[Tadeubas]: https://github.com/tadeubas
+[25.03.0]: https://github.com/selfcustody/krux/releases/tag/v25.03.0
+[descriptor]: https://bitcoinops.org/en/topics/output-script-descriptors/
+[PSBT]: https://bitcoinops.org/en/topics/psbt/
+[25.09.0]: https://github.com/selfcustody/krux/releases/tag/v25.09.0
+[Jean Do]: https://github.com/jdlcdl
+[25.10.0]: https://github.com/selfcustody/krux/releases/tag/v25.10.0
+[Kern]: https://github.com/odudex/Kern
+[vulnerability]: https://github.com/selfcustody/krux/discussions/472
+[anti-rollback protection]: https://github.com/selfcustody/krux/pull/583
+[Craig Watkins]: https://github.com/bitcoin-dot-org/Bitcoin.org/pull/4364#issuecomment-2828998014
+[Embit library]: https://embit.rocks/#/
+[groups]: https://github.com/selfcustody/krux/pull/541
+[highlighting]: https://github.com/selfcustody/krux/pull/629
+[export wallet addresses to SD]: https://github.com/selfcustody/krux/pull/638
+[TZT]: https://selfcustody.github.io/krux/parts/#tzt
+[MaixPy]: https://github.com/selfcustody/MaixPy
+[Krux Apps]: https://github.com/selfcustody/krux/pull/485
+[Yahboom]: https://selfcustody.github.io/krux/parts/#yahboom-k210-module
+[Maix Cube]: https://selfcustody.github.io/krux/parts/#maix-cube
+[WonderMV]: https://selfcustody.github.io/krux/parts/#wondermv
+
+---
+
+### Krux-Installer
+
+[Krux-Installer] is the desktop application that allows users to install and
+update [Krux firmware] on supported devices. Getting firmware onto a signing
+device has traditionally required command-line tools and technical knowledge
+that many users don't have, which puts a practical barrier between people and
+the hardware they want to use. [OpenSats funding][installer-grant] gave
+developer [qlrd] the time to rewrite the installer into a stable, cross-platform
+tool that guides users through safe downloads, verification, and installation
+without requiring specific technical knowledge.
+
+Over the past year, Krux-Installer transitioned from an earlier JavaScript and
+Electron prototype to a new Python and Kivy codebase and reached its first
+stable release with [v0.0.20]. The application guides users to select their
+device model, choose a Krux firmware version, download it from the official
+source, and let the installer check that the file is authentic and unchanged.
+The same binary runs on Windows, macOS, on Intel or Apple chips, and common
+Linux distributions such as Debian-based systems and Fedora, so people can
+follow the same steps regardless of their desktop setup. For many users, this
+has become the recommended way to get Krux onto a device without having to learn
+command-line tools.
+
+A major focus for qlrd was creating a firmware update path for people who prefer
+to keep their signing devices completely offline. Starting with [v0.0.20-beta],
+Krux-Installer introduced an [air-gapped update flow] that prepares an SD card
+with the correct firmware files and a matching signature, then shows a
+fingerprint of the firmware on screen. The user can insert that SD card into a
+Krux device, walk through the on-device update, and compare the [fingerprint]
+shown on the computer with the one displayed on the signer's screen. If the two
+fingerprints match, the user can be confident that the update is genuine and
+unchanged, and the device was offline the entire time.
+
+The 0.0.20 release also bundled a set of safety and access improvements. Users
+gained a one-click wipe device option for supported devices, which completely
+removes the existing Krux firmware, so a signer can be decommissioned or
+returned to a clean state without manual recovery steps. The interface now
+supports twelve languages and runs on a broad set of [Krux devices], including
+M5StickV, Maix Amigo, Sipeed Bit, Sipeed Dock, Maix Cube, Yahboom, and WonderMV.
+The [0.0.21] release extended this work to include Nix packaging and added
+support for installation on newer devices, such as the TZT and Embed Fire,
+keeping the installer aligned with the growing Krux hardware ecosystem.
+
+Krux-Installer now runs on Windows, macOS, and common Linux distributions,
+supports twelve languages, and covers a broad set of Krux devices, making it
+practical also for non-English speakers and non-Linux users to manage their own
+signers. OpenSats funding provided qlrd the time to complete the rewrite, so
+that as new devices get supported, users have a simpler way to install firmware
+on them.
+
+[Krux-Installer]: https://github.com/selfcustody/krux-installer
+[Krux firmware]: https://selfcustody.github.io/krux/getting-started/
+[installer-grant]: /blog/bitcoin-grants-july-2024#krux-installer
+[qlrd]: https://github.com/qlrd
+[v0.0.20]: https://github.com/selfcustody/krux-installer/releases/tag/v0.0.20
+[v0.0.20-beta]: https://github.com/selfcustody/krux-installer/releases/tag/v0.0.20-beta
+[air-gapped update flow]: https://selfcustody.github.io/krux/getting-started/installing/from-gui/usage/#air-gapped-update-with
+[fingerprint]: https://selfcustody.github.io/krux/getting-started/usage/loading-a-mnemonic/#fingerprint
+[Krux devices]: https://selfcustody.github.io/krux/parts/
+[0.0.21]: https://github.com/selfcustody/krux-installer/releases/tag/v0.0.21
+
+---
+
+### 256 Foundation
+
+The [256 Foundation] focuses on building an open, end-to-end mining system that
+anyone can study, modify, and run. Bitcoin mining infrastructure today is
+largely built on closed hardware running proprietary firmware, which
+concentrates a critical part of the network among a small number of
+manufacturers. [OpenSats funding][256-grant] supported the team's effort to
+change that by advancing the [Ember One] open hashboard and the [Hydra Pool]
+mining software into production-ready tools that individual miners and small
+groups can operate themselves.
+
+[Ember One/00 v3] delivers a fully documented hashboard design centered on
+Bitmain's BM1362 ASICs and designed to draw around 100 watts from a wide 12-24
+volt power input. In practical terms, Ember One gives builders a standard board
+that holds the mining chips, handles power delivery, and connects over USB to a
+separate control board, using standard interfaces that are easier to inspect and
+replace. The KiCad project, manufacturing files, and assembly guide for the v3
+release are public, and the design has already been validated on real hardware.
+That combination allows a small manufacturer, a workshop, or an educator to
+start from a proven layout, order boards, and assemble working miners while
+understanding each step of the design.
+
+[Hydra Pool][hydrapool-repo] advanced into a deployable mining pool server that
+aligns with the same open approach. It is implemented in Rust and supports both
+solo mining and a [PPLNS] (Pay Per Last N Shares) pool mode for reward
+distribution, where participants share rewards over time based on their recent
+work. Payouts go directly into the first transaction in each block, which
+creates the mining reward, so the pool software never takes custody of user
+funds. Hydra Pool also exposes an API for miners to download their own share
+records and includes dashboards built on common monitoring tools for tracking
+hashrate and uptime. Recent releases package this into binaries and container
+images that run on standard Linux servers and connect to a Bitcoin full node,
+which makes it realistic for a club, business, or regional community to operate
+its own pool with verifiable accounting.
+
+At [the first Telehash] fundraiser in January 2025, the 256 Foundation used
+Hydra Pool to solo mine bitcoin block 881,423 live during the event, raising
+3.146 BTC in rewards for funding open-source mining projects. In January 2026,
+the 256 Foundation brought these components together again during [another
+Telehash fundraiser] event. Using a [pick and place machine] on site, the team
+assembled Ember One hashboards and [Libre Board] control boards, flashed them
+with their own [Mujina] mining firmware, and pointed the hashrate to a Hydra
+Pool instance that they operate. The result was a live demonstration of an open
+mining system from the hashboard, to the control board, to firmware, to the
+pool, running in front of donors and viewers. The foundation demonstrated that
+all four projects in its mining suite now function together as a complete system
+for miners and operators, and remain available as individual codebases and
+schematics for builders and researchers.
+
+>The 256 Foundation has taken the first steps with proven success in
+>open-sourcing the entire Bitcoin mining stack: hash board, control board,
+>firmware, and pool. Although the nominal hashrate and power consumption are
+>small compared to industrial-sized closed-source miners, this is a significant
+>achievement in establishing an open-source foundation that can support an
+>alternative path forward for the entire Bitcoin mining ecosystem, one that
+>avoids the perils of centralized control, closed firmware, and proprietary
+>hardware. Bitcoin miners of all shapes and sizes can start benefiting from
+>open-source, standardized, and fully customizable software and hardware today.
+>
+><cite>—[Econoalchemist], 256 Foundation co-founder</cite>
+
+The 256 Foundation has advanced this work from early prototypes to live
+demonstrations and production-ready releases, while keeping each layer
+documented and available for the wider community. The result is a more
+geographically diverse and resilient foundation for mining infrastructure that
+independent operators can study, run, and build on themselves.
+
+[256 Foundation]: https://256foundation.org/
+[256-grant]: /blog/eleventh-wave-of-bitcoin-grants#256-foundation
+[Ember One]: https://emberone.org/
+[Hydra Pool]: https://hydrapool.org/
+[Ember One/00 v3]: https://github.com/256foundation/emberone00-pcb/releases/tag/v3-release
+[hydrapool-repo]: https://github.com/256foundation/hydrapool
+[PPLNS]: https://en.bitcoin.it/wiki/Comparison_of_mining_pools
+[the first Telehash]: https://www.nobsbitcoin.com/the-first-ever-bitcoin-hashrate-fundraiser-actually-found-a-block-2/
+[another Telehash fundraiser]: https://x.com/bitcoinpark_/status/2014053511303143579
+[pick and place machine]: https://en.wikipedia.org/wiki/Pick-and-place_machine
+[Libre Board]: https://github.com/256foundation/libreboard
+[Mujina]: https://github.com/256foundation/mujina
+[Econoalchemist]: https://github.com/econoalchemist
+
+---
+
+Each project in this report operates on the same principle: publish the designs,
+document the process, and make the work available to anyone. Taken together,
+they show how open hardware can reach meaningful scale, cross geographic and
+economic barriers, and cover every layer of the mining and self-custody stack.
+
+This work strengthens Bitcoin in ways that complement its open-source software.
+Hardware that can be studied, reproduced, and repaired spreads knowledge into
+new communities and reduces dependence on traditional supply chains. Miners,
+educators, and small manufacturers now have reference designs they can fork,
+adapt, and use to teach others.
+
+OpenSats remains committed to funding builders who keep Bitcoin's hardware
+infrastructure open, auditable, and accessible. To support projects like these
+and others, please consider making a recurring donation to the [General Fund].
+
+<center>
+  <DonateRecurringButton />
+</center>
+
+If you are a developer, hardware designer, or researcher working on free and
+open-source projects that strengthen Bitcoin, we encourage you to [apply for
+funding].
+
+[General Fund]: /funds/general
+[apply for funding]: /apply
