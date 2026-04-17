@@ -1,0 +1,71 @@
+---
+title: 'Frostr'
+dateAdded: '2025-06-30'
+summary: 'A threshold signing protocol for nostr based on FROST, with libraries and clients for multi-device key management.'
+nym: 'Austin Kelsay and cmdruid'
+website: 'https://www.frostr.org/'
+coverImage: '/static/images/projects/frostr.png'
+git: 'https://github.com/FROSTR-ORG'
+tags: ['Nostr', 'Signing']
+showcase: true
+fund: nostr
+announcementLink: '/blog/twelfth-wave-of-nostr-grants#frostr'
+---
+
+[Frostr](https://www.frostr.org/) is a threshold signing protocol for nostr
+built on top of [FROST](https://eprint.iacr.org/2020/852) (Flexible
+Round-Optimized Schnorr Threshold signatures). An `nsec` key is split into
+shares that live on different devices or services. Any `t`-of-`n` quorum of
+those shares can sign a nostr event together, but a single compromised share
+does not leak the key. Shares can be rotated and replaced without rotating
+the underlying identity, which matters on a protocol where your public key
+_is_ your identity.
+
+Coordination happens over nostr itself. Each share has its own nostr
+identity and exchanges encrypted DMs with the other shares to produce a
+signature, so there's no dedicated backend or custodian in the path.
+
+The project ships as a stack of libraries and clients:
+
+- [Bifrost](https://github.com/FROSTR-ORG/bifrost), the core FROST library
+- [Igloo Desktop](https://github.com/FROSTR-ORG/igloo-desktop) for managing
+  shares on a laptop
+- [Frost2x](https://github.com/FROSTR-ORG/frost2x), a Chrome
+  [NIP-07](https://github.com/nostr-protocol/nips/blob/master/07.md) signer
+- [Igloo Server](https://github.com/FROSTR-ORG/igloo-server), a signer device
+  and personal ephemeral relay with
+  [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) support
+- [Igloo CLI](https://github.com/FROSTR-ORG/igloo-cli) on npm for scripting
+- [Igloo Web](https://iglooweb.app), a hosted web client
+- [Igloo Android](https://github.com/FROSTR-ORG/igloo-android) and
+  [Igloo iOS](https://apps.apple.com/us/app/igloo-signer/id6758069194) for
+  mobile signing, the latter live on the App Store
+
+## Why fund it?
+
+The default key model on nostr puts one `nsec` on every device the user
+touches. That works for casual accounts and fails for anyone with a
+meaningful identity, financial tooling tied to their npub, or reason to
+worry about device compromise. Threshold signing gives nostr a
+production-grade option for multi-device keys, private recovery, and
+institutional-style custody, all without changing how clients verify
+signatures.
+
+OpenSats funded Frostr in the
+[twelfth wave of nostr grants](/blog/twelfth-wave-of-nostr-grants#frostr).
+The work is also a building block for later protocols, for example bitcoin
+coinjoins and Payjoins coordinated over nostr.
+
+## What's next?
+
+With the v1 suite shipped across desktop, browser, server, CLI, web, and
+mobile, the project rewrote the core protocol and library as
+[Bifrost v2](https://github.com/FROSTR-ORG/bifrost-rs) in Rust with a WASM
+build. v2 introduces nonce pools in place of the v1 nonce-extension model,
+a streamlined onboarding flow, and live peer health monitoring. The next
+quarter focuses on rolling v2 through a v2-native set of apps (Igloo PWA,
+Igloo Chrome, Igloo Home, Igloo Shell, Igloo UI) that replace the v1
+clients, retiring the v1 protocol, and finalizing a written specification
+so Frostr can be independently implemented. A packaged
+[Umbrel distribution](https://github.com/frostr-org/igloo-server-store) for
+Igloo Server is already live, with Start9 packaging next in line.
