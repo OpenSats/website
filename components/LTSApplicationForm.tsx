@@ -3,8 +3,10 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import FormButton from '@/components/FormButton'
+import ClosedNotice from './ClosedNotice'
 import * as EmailValidator from 'email-validator'
 import CustomLink from './Link'
+import { LTS_GRANT_OPEN } from '../config'
 
 export default function ApplicationForm() {
   const [loading, setLoading] = useState(false)
@@ -70,6 +72,8 @@ export default function ApplicationForm() {
         {...register('timelines', { value: 'Ongoing work (LTS Grant).' })}
       />
       <input type="hidden" {...register('LTS', { value: true })} />
+
+      {!LTS_GRANT_OPEN && <ClosedNotice />}
 
       <hr />
       <h2>Who Are You?</h2>
@@ -273,9 +277,9 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS && LTS_GRANT_OPEN ? 'enabled' : 'disabled'}
         type="submit"
-        disabled={loading}
+        disabled={loading || !LTS_GRANT_OPEN}
       >
         Submit LTS Application
       </FormButton>

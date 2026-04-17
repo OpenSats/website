@@ -1,3 +1,7 @@
+// Grant application availability — flip these when opening/closing each quarter
+export const GENERAL_GRANT_OPEN = true
+export const LTS_GRANT_OPEN = true
+
 export const CURRENCY = 'usd'
 // Set your amount limits: Use float for decimal currencies and
 // Integer for zero-decimal currencies: https://stripe.com/docs/currencies#zero-decimal.
