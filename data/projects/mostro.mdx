@@ -27,17 +27,29 @@ The system is built around multiple independent Mostro nodes that anyone can
 run. Each node operates its own Lightning node, publishes its order book to
 nostr relays, and coordinates trades between buyers and sellers. Clients talk
 to any node through standard nostr events, so users can choose which operator
-to trade through. An open [protocol
-specification](https://mostro.network/protocol/) documents the full message
-format.
+to trade through. Order events follow
+[NIP-69](https://github.com/nostr-protocol/nips/blob/master/69.md), an
+interoperable P2P order standard that Mostro contributed upstream, and the
+full message format lives in the open
+[protocol specification](https://mostro.network/protocol/).
+
+Privacy is a core design goal. Trades use
+[NIP-59](https://github.com/nostr-protocol/nips/blob/master/59.md) gift-wrapped
+messages so relays cannot see who is talking to whom, clients rotate their
+trade keys on every order to break linkability across trades, and the node's
+database encrypts private keys and sensitive columns at rest.
 
 Reference implementations include the [Mostro
-node](https://github.com/MostroP2P/mostro), a [mobile
-app](https://github.com/MostroP2P/mobile) for Android, a terminal UI
-([mostrix](https://github.com/MostroP2P/mostrix)), and a
-[CLI](https://github.com/MostroP2P/mostro-cli). The protocol supports
-dispute resolution with third-party mediators and a Mostro-node reputation
-system so users can pick operators they trust.
+node](https://github.com/MostroP2P/mostro), a Flutter
+[mobile app](https://github.com/MostroP2P/mobile), a Ratatui
+terminal UI ([Mostrix](https://github.com/MostroP2P/mostrix)), a
+[CLI](https://github.com/MostroP2P/mostro-cli), a web client
+([mostro-web](https://github.com/MostroP2P/mostro-web)), and a
+browser-based admin/signing tool
+([mostro-webtool](https://github.com/MostroP2P/mostro-webtool)). The protocol
+supports dispute resolution with third-party solvers, and
+[Mostro Score](https://mostro.watch/) computes public reliability metrics for
+each node operator so users can pick someone they trust.
 
 ## Why fund it?
 
@@ -52,12 +64,16 @@ mobile apps to terminal UIs to specialized interfaces for local communities.
 OpenSats supported Mostro in the
 [second wave of nostr grants in 2024](/blog/nostr-grants-july-2024#mostro) and
 has renewed the grant. The project is also supported by the
-[Human Rights Foundation](https://hrf.org/).
+[Human Rights Foundation](https://hrf.org/), and the newly formed
+[Mostro Foundation](https://mostro.foundation/) handles donations and
+distributes funds to contributors.
 
 ## What's next?
 
-Current work includes broader client coverage, translations, community node
-operators in more regions, and protocol refinements from the real-world
-dispute cases that have already gone through the network. The mobile app is
-available for Android, with an iOS version in progress, and `mostrix` offers
-a lightweight terminal-based way to trade for users without a GUI.
+A public beta of the mobile app shipped in early 2026 through Zapstore and
+Google Play, and the Mostro daemon now runs a transparent "development fund"
+where a small configurable trade fee flows to contributors, audited through
+public nostr events. Ongoing work focuses on multi-node support in the mobile
+app (so users can switch between independent Mostro operators), maturing the
+Mostro Score dashboard, hardening dispute resolution, and packaging Mostro for
+[Start9](https://start9.com/) so anyone can run a node on their own hardware.
