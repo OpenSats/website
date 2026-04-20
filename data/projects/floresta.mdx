@@ -1,7 +1,7 @@
 ---
 title: 'Floresta'
 dateAdded: '2024-09-19'
-summary: 'A lightweight and embeddable Bitcoin full node written in Rust, using Utreexo to keep resource requirements low.'
+summary: 'A lightweight and embeddable Bitcoin client written in Rust that does full block validation against the Utreexo accumulator.'
 nym: 'Davidson Souza'
 website: 'https://getfloresta.org/'
 coverImage: '/static/images/projects/floresta.png'
@@ -12,14 +12,19 @@ fund: general
 announcementLink: '/blog/bitcoin-grants-september-2024-7th-wave#floresta'
 ---
 
-[Floresta](https://getfloresta.org/) is a Bitcoin full node written in Rust.
-It keeps storage and memory requirements low by combining
-[Utreexo](https://eprint.iacr.org/2019/611) (a cryptographic accumulator that
-replaces the UTXO set with a small set of Merkle roots) with
+[Floresta](https://getfloresta.org/) is a lightweight, embeddable Bitcoin
+client written in Rust. It does full block validation but replaces the UTXO
+set with [Utreexo](https://eprint.iacr.org/2019/611), a cryptographic
+accumulator that represents every unspent output as leaves in a small forest
+of Merkle trees. Combined with
 [PoW Fraud Proofs](https://blog.dlsouza.lol/2023/09/28/pow-fraud-proof.html)
-and pruning. The goal is to let people verify Bitcoin on hardware they already
-own, including phones and small single-board computers, without giving up
-trust-minimization.
+and pruning, this keeps on-disk state under a gigabyte. In the Utreexo
+taxonomy (see
+[BIP-0183](https://github.com/utreexo/biptreexo/blob/main/bip-0183.md)),
+`florestad` runs as a Compact State Node: it validates every block and every
+script against the same consensus rules as Bitcoin Core but does not archive
+the full chain or keep the full UTXO set, so it can run on phones and
+single-board computers without giving up trust-minimization.
 
 The project ships two main pieces:
 [`libfloresta`](https://github.com/getfloresta/Floresta/tree/master/crates),
@@ -29,18 +34,20 @@ a daemon that runs as a standalone node with a watch-only wallet and a built-in
 Electrum server. Developers can use `libfloresta` the way they would use
 [`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) or
 [`bdk`](/projects/bdk), building wallets, explorers, and indexers on top of a
-validating client. Script verification runs through the `libbitcoinkernel`
-bindings so Floresta shares the same consensus rules as Bitcoin Core, and the
-project has its own [mdBook documentation](https://getfloresta.github.io/floresta-docs/)
-covering the codebase chapter by chapter.
+validating client. Rather than reimplementing a script interpreter, Floresta
+delegates script verification to `libbitcoinkernel`, the C++ library that
+exposes Bitcoin Core's validation engine. The project publishes an
+[mdBook](https://getfloresta.github.io/floresta-docs/) that walks through the
+codebase chapter by chapter.
 
 ## Why fund it?
 
-Running a full node is the strongest form of trust-minimization on Bitcoin.
-Resource requirements push most users onto custodial services or light clients
-that trust third parties. Floresta does real validation with a footprint small
-enough to run on commodity hardware, which makes it a good fit for phones,
-single-board computers, and embedded wallet stacks.
+Verifying your own blocks and transactions is the strongest form of
+trust-minimization on Bitcoin. The cost of storing the full chain and UTXO set
+pushes most users onto custodial services or SPV-style light clients that
+trust third parties. Floresta does the same consensus work as a full archival
+node with a much smaller footprint, which makes it a practical fit for
+phones, single-board computers, and embedded wallet stacks.
 
 OpenSats first funded Floresta in the
 [seventh wave of Bitcoin grants](/blog/bitcoin-grants-september-2024-7th-wave#floresta)
@@ -55,9 +62,8 @@ at [Vinteum](https://vinteum.org/), the Brazilian nonprofit that incubated it.
 ## What's next?
 
 Floresta [v0.9.0](https://github.com/getfloresta/Floresta/releases/tag/v0.9.0)
-shipped in April 2026. On the wire, the node speaks
-[BIP-0183](https://github.com/utreexo/biptreexo/blob/main/bip-0183.md) Utreexo
-messaging for proof-driven sync. Script validation moved from the deprecated
+shipped in April 2026. On the wire, the node speaks BIP-0183 Utreexo messaging
+for proof-driven sync. Script validation moved from the deprecated
 `libbitcoinconsensus` to `libbitcoinkernel`. The JSON-RPC picked up
 `rescanblockchain`, `gettxout`, `ping`, `addnode`, and JSON-RPC v1 for legacy
 clients, so most Bitcoin Core tooling works against `florestad` unchanged.
