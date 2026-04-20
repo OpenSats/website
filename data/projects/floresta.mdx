@@ -54,20 +54,33 @@ at [Vinteum](https://vinteum.org/), the Brazilian nonprofit that incubated it.
 
 ## What's next?
 
-Floresta 0.8.0 shipped in the summer of 2025 and 0.9.0 is in flight, centred
-on [SwiftSync](https://delvingbitcoin.org/t/swiftsync-speeding-up-ibd-with-pre-generated-hints/1562).
-Combined with Utreexo, SwiftSync uses implicit deletion in the accumulator to
-skip proof downloads and validate blocks out of order. On a home connection,
-syncing signet to block 290,000 dropped from 1h 15min (Utreexo) to 6 minutes
-(witnessless SwiftSync), a roughly 12x improvement. A
-[BIP draft for Utreexo](https://github.com/bitcoin/bips/pull/1923) is also
-making its way through review.
+[Floresta 0.9.0](https://github.com/getfloresta/Floresta/releases/tag/v0.9.0)
+shipped in April 2026 and is the biggest release so far. The node now speaks
+BIP-0183 Utreexo messaging on the wire for proof-driven synchronization,
+validates scripts through `libbitcoinkernel` (replacing the deprecated
+`libbitcoinconsensus`), and exposes a much larger Bitcoin Core-compatible
+JSON-RPC surface (`rescanblockchain`, `gettxout`, `ping`, `addnode`, JSON-RPC
+v1 for legacy clients, and more) so existing tooling can talk to `florestad`
+without rewrites. The release also lands a modular mempool in preparation for
+transaction relay, parallel functional tests under `pytest`, expanded fuzzing
+across the chainstore and core types, `no_std` portability work, and dual
+licensing under MIT OR Apache-2.0. Earlier milestones are worth a mention too:
+[0.8.0](https://github.com/getfloresta/Floresta/releases/tag/v0.8.0) (July 2025)
+added BIP-0324 P2P v2, testnet4, Prometheus metrics, and the first `mdBook`,
+and [0.8.1](https://github.com/getfloresta/Floresta/releases/tag/v0.8.1)
+(January 2026) followed up with reindex and filter fixes.
 
-Alongside the sync work, contributors are expanding `florestad`'s RPC surface
-to match Bitcoin Core more closely (so existing tooling can talk to a Floresta
-node without rewrites), migrating the functional test suite to `pytest`,
-evaluating [BDK](/projects/bdk) for the watch-only wallet, packaging the node
-for [nix-bitcoin](https://nixbitcoin.org/) and upstream
-[nixpkgs](https://github.com/NixOS/nixpkgs), and hardening the P2P layer with
-more integration tests. `libfloresta` keeps gaining consumers as more wallets
-and indexers embed Floresta directly.
+Looking ahead, the team is working on
+[SwiftSync](https://delvingbitcoin.org/t/swiftsync-speeding-up-ibd-with-pre-generated-hints/1562),
+which combines implicit deletion in the Utreexo accumulator with pre-generated
+hints to skip proof downloads and validate blocks out of order. On a home
+connection, syncing signet to block 290,000 dropped from 1h 15min (Utreexo)
+to 6 minutes (witnessless SwiftSync), a roughly 12x improvement. A
+[BIP draft for Utreexo](https://github.com/bitcoin/bips/pull/1923) is also
+making its way through review. Contributors continue evaluating
+[BDK](/projects/bdk) for the watch-only wallet, packaging the node for
+[nix-bitcoin](https://nixbitcoin.org/) and upstream
+[nixpkgs](https://github.com/NixOS/nixpkgs), building out transaction relay on
+top of the new mempool, and hardening the P2P layer with more integration
+tests. `libfloresta` keeps gaining consumers as more wallets and indexers
+embed Floresta directly.
