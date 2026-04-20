@@ -240,7 +240,7 @@ Performance and long-term architecture were also a focus for Odudex. He [reduced
 the size of the Krux firmware][25.10.0] by 25% and enabled hardware acceleration
 for encryption and hashing on supported boards. Users gained quicker QR
 handling, faster transaction signing, and better responsiveness on low-cost
-devices. To support this, he wrote cUR, a pure C library for handling UR-based
+devices. To support this, he wrote [cUR], a pure C library for handling UR-based
 QR codes, and is integrating it into Krux as a MicroPython module. cUR makes reading
 and writing multi-part QR codes much faster than the older Python-only approach,
 which matters when a backup or transaction spans many QR frames.
@@ -315,6 +315,7 @@ roadmap focused on open-source development.
 [25.09.0]: https://github.com/selfcustody/krux/releases/tag/v25.09.0
 [Jean Do]: https://github.com/jdlcdl
 [25.10.0]: https://github.com/selfcustody/krux/releases/tag/v25.10.0
+[cUR]: https://github.com/odudex/cUR
 [Kern]: https://github.com/odudex/Kern
 [vulnerability]: https://github.com/selfcustody/krux/discussions/472
 [anti-rollback protection]: https://github.com/selfcustody/krux/pull/583
