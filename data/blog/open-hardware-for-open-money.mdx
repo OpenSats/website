@@ -148,7 +148,7 @@ The hardware is a complete copy of the Gamma board, based on the BM1370 ASIC,
 with artwork that reflects its African origin. The repository includes [KiCad]
 projects, schematics, layout files, and manufacturing outputs, so [local
 partners can produce boards] directly based on the files in the repo. Bitshoka
-boards are now running successfully, validating the reverse-engineered design
+boards are now running successfully, validating the local manufacuring process
 and confirming that these Made in Africa miners behave like their BitaxeGamma
 counterparts while using the same ESP-Miner firmware and configuration flow.
 
@@ -156,10 +156,10 @@ counterparts while using the same ESP-Miner firmware and configuration flow.
 used in the M30 series. The Nini repository publishes a full KiCad design for a
 Bitaxe-style board built around the KF1950, including detailed circuit diagrams,
 PCB layout, mechanical drawings, a list of materials, and manufacturing files.
-The project reports that the first batch of boards has been assembled, and that
-a [PicoBT controller] can detect and read the KF1950 on the board, which shows
-that the power delivery, signal routing, and basic communication path work as
-intended.
+The project reports that the first batch of boards has been assembled and that a
+[PicoBT controller] can detect and read the KF1950 on the board. Testing
+revealed a noise issue on the power rail that prevented mining, and the team has
+since designed a revised [V1.2] board to address it.
 
 To make ASIC research and experimentation more accessible, the [bitLode] project
 adds a dedicated bridge between a standard computer and Whatsminer hashboards.
@@ -196,6 +196,7 @@ developers studying MicroBT chips anywhere in the world.
 [local partners can produce boards]: https://xcancel.com/GridlessCompute/status/1937812135813497219
 [Bitshoka Nini V1.1]: https://github.com/kuenrg153/BitshokaNini_V1.1
 [PicoBT controller]: https://d-central.tech/product/picobt-hashboard-tester/
+[V1.2]: https://github.com/kuenrg153/BitshokaNini_V1.2
 [bitLode]: https://github.com/kuenrg153/bitLode
 [aditBoard]: https://github.com/skot/aditBoard
 [Bitaxe Raw]: https://github.com/bitaxeorg/bitaxe-raw
