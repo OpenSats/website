@@ -65,7 +65,7 @@ Floresta [v0.9.0](https://github.com/getfloresta/Floresta/releases/tag/v0.9.0)
 shipped in April 2026
 ([announcement post](https://www.getfloresta.org/blog/release-v0.9.0)). On the
 wire, the node speaks BIP-0183 Utreexo messaging for proof-driven sync. Script validation moved from the deprecated
-`libbitcoinconsensus` to `libbitcoinkernel`. The JSON-RPC picked up
+`libbitcoinconsensus` to `libbitcoinkernel`, which runs roughly 15x faster. The JSON-RPC picked up
 `rescanblockchain`, `gettxout`, `ping`, `addnode`, and JSON-RPC v1 for legacy
 clients, so most Bitcoin Core tooling works against `florestad` unchanged.
 v0.9.0 also landed a modular mempool (the groundwork for transaction relay),
