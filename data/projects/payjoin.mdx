@@ -25,17 +25,17 @@ heuristic useless across the whole network, not only for the people using it.
 The [Payjoin Foundation](https://payjoin.org/) is the 501(c)(3) non-profit
 stewarding this work, incorporated in Delaware in 2025 and led by
 [Dan Gould](https://github.com/DanGould) alongside Armin Sabouri, Brandon
-Lucas, Ben Allen, Spacebear, and Chavic. Its flagship output is the
-[Payjoin Dev Kit](https://payjoin.org/), a Rust implementation
+Lucas, Ben Allen, Spacebear, and Chavic. Its main project is the
+[Payjoin Dev Kit](https://github.com/payjoin): a Rust implementation
 ([rust-payjoin](https://github.com/payjoin/rust-payjoin)) with bindings for
 Python, Dart, Swift, Kotlin, JavaScript, and C#. The dev kit powers
-[BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.mediawiki),
+[BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.md),
 Async Payjoin, which uses
-[HPKE-encrypted Oblivious HTTP](https://ietf-wg-ohai.github.io/oblivious-http/draft-ietf-ohai-ohttp.html)
-so sender and receiver can exchange messages without both being online at
-once. That removed the biggest practical barrier to adoption: Payjoin v1
-needed the receiver to run a public server, often behind Tor and TLS, which
-very few wallets ever did.
+[Oblivious HTTP](https://www.rfc-editor.org/rfc/rfc9458.html) so sender and
+receiver can exchange messages without both being online at once. That
+removed the biggest practical barrier to adoption: Payjoin v1 needed the
+receiver to run a public server, often behind Tor and TLS, which very few
+wallets ever did.
 
 ## Why fund it?
 
