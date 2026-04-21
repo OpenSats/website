@@ -97,8 +97,8 @@ export default function TopicsIndex({
             Topics
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Short definitions for technical terms that show up in OpenSats
-            grants and announcements.
+            Short definitions for technical terms that show up in our blog
+            posts.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {topicCount} topics
