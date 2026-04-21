@@ -1,0 +1,12 @@
+---
+title: 'LDK'
+summary: 'A Rust library for embedding a Lightning node inside a wallet or other application.'
+category: 'Lightning'
+aliases: ['Lightning Development Kit', 'rust-lightning']
+---
+
+LDK is a modular Lightning implementation written in Rust. Instead of running as a standalone daemon, it exposes the Lightning state machine as a set of libraries that a wallet can link against. The wallet controls storage, networking, key management, and the on-chain backend.
+
+This design is aimed at mobile and custom wallets that cannot run a traditional `lnd` or Core Lightning process but still want native Lightning support. LDK is used by Cash App, Mutiny, Bitkit, and several other wallets.
+
+The project lives at [github.com/lightningdevkit](https://github.com/lightningdevkit). Related companion libraries include Rapid Gossip Sync for pathfinding data and VLS for separating signing from the rest of the node.

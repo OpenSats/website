@@ -127,6 +127,20 @@ export const Projects = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const Topics = defineDocumentType(() => ({
+  name: 'Topic',
+  filePathPattern: 'topics/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    aliases: { type: 'list', of: { type: 'string' } },
+    draft: { type: 'boolean' },
+  },
+  computedFields,
+}))
+
 export const Funds = defineDocumentType(() => ({
   name: 'Fund',
   filePathPattern: 'funds/**/*.mdx',
@@ -155,7 +169,7 @@ export const Funds = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Pages, Projects, Funds],
+  documentTypes: [Blog, Authors, Pages, Projects, Funds, Topics],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

@@ -1,0 +1,12 @@
+---
+title: 'OP_CTV'
+summary: 'A proposed Bitcoin opcode that lets a transaction commit in advance to how its coins will be spent.'
+category: 'Bitcoin'
+aliases: ['CHECKTEMPLATEVERIFY', 'CTV', 'BIP 119']
+---
+
+OP_CTV (CheckTemplateVerify) is a proposed opcode described in [BIP 119](https://github.com/bitcoin/bips/blob/master/bip-0119.mediawiki). It lets an output commit to a hash of one specific future transaction. The coins can only be spent by a transaction that matches that hash.
+
+This is a minimal form of covenant. Useful applications include congestion-controlled payment batching, vaults, non-interactive payment channels, and shared UTXO constructions such as payment pools.
+
+Further reading: the [utxos.org](https://utxos.org/) landing page, the reference implementation in [bitcoin-inquisition](https://github.com/bitcoin-inquisition/bitcoin), and the BIP itself.

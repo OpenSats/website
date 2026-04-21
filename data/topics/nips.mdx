@@ -1,0 +1,12 @@
+---
+title: 'NIPs'
+summary: 'Nostr Implementation Possibilities: the numbered specifications that define how clients and relays behave.'
+category: 'Nostr'
+aliases: ['Nostr Implementation Possibilities', 'NIP']
+---
+
+NIPs (Nostr Implementation Possibilities) are the numbered specifications of the Nostr protocol. NIP-01 defines the base event format, signatures, and how clients talk to relays. Every additional feature, from long-form posts to private messages to zaps, gets its own NIP.
+
+Clients and relays are free to pick which NIPs they implement. Two clients that share the same set of NIPs can talk to each other through any relay. A client that implements a NIP the relay does not know about can still write and read the events; the relay just stores them as opaque signed blobs.
+
+The authoritative list is kept at [github.com/nostr-protocol/nips](https://github.com/nostr-protocol/nips). Start with NIP-01, then follow the README to find the NIP that covers the feature you need.

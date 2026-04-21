@@ -1,0 +1,12 @@
+---
+title: 'Tor'
+summary: 'An anonymity network that routes traffic through three-hop circuits to hide the link between sender and destination.'
+category: 'Privacy'
+aliases: ['The Onion Router', 'onion services', 'hidden services']
+---
+
+Tor is a volunteer-run network that carries encrypted traffic through a chain of three relays. Each relay only knows the previous hop and the next hop, so no single node can tie a user to a destination. Bitcoin software uses Tor to connect to peers, fetch fee data, and publish onion services that accept inbound connections without a public IP.
+
+Onion services (sometimes called hidden services) give a server a `.onion` address instead of a regular DNS name. The server is reachable without exposing its IP, and the connection is end-to-end encrypted between the two `.onion` peers.
+
+The project lives at [torproject.org](https://www.torproject.org/). Bitcoin Core ships built-in support for Tor v3 onion services; Lightning nodes typically do the same.
