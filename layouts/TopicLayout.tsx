@@ -4,6 +4,7 @@ import { PageSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
 import Link from '@/components/Link'
+import siteMetadata from '@/data/siteMetadata'
 
 interface Props {
   children: ReactNode
@@ -11,7 +12,9 @@ interface Props {
 }
 
 export default function TopicLayout({ children, content }: Props) {
-  const { title, summary, category, aliases } = content
+  const { title, summary, category, aliases, filePath } = content
+  const repo = siteMetadata.siteRepo.replace(/\/$/, '')
+  const editUrl = `${repo}/edit/main/data/${filePath}`
   return (
     <>
       <PageSEO title={`${title} - OpenSats Topics`} description={summary} />
@@ -46,12 +49,18 @@ export default function TopicLayout({ children, content }: Props) {
           </div>
         </PageHeading>
       </div>
-      <nav className="pb-8 pt-6 text-sm">
+      <nav className="flex items-center justify-between gap-4 pb-8 pt-6 text-sm">
         <Link
           href="/topics"
           className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
         >
           &larr; All topics
+        </Link>
+        <Link
+          href={editUrl}
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          Propose edit on GitHub &rarr;
         </Link>
       </nav>
     </>
