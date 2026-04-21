@@ -107,7 +107,7 @@ export default function TopicsIndex({
           </div>
         </div>
 
-        <nav className="flex flex-wrap gap-x-3 gap-y-2 pt-6 text-sm font-semibold uppercase">
+        <nav className="flex flex-wrap gap-x-3 gap-y-2 py-6 text-sm font-semibold uppercase">
           {usedLetters.map((letter) => (
             <a
               key={letter}
