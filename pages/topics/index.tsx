@@ -111,21 +111,7 @@ export default function TopicsIndex({
             )}
             .
           </p>
-        </div>
-
-        <div className="flex flex-col gap-6 pt-6 md:flex-row md:items-center md:justify-between">
-          <nav className="flex flex-wrap gap-x-3 gap-y-2 text-sm font-semibold uppercase">
-            {usedLetters.map((letter) => (
-              <a
-                key={letter}
-                href={`#letter-${letter}`}
-                className="text-gray-700 hover:text-orange-500 dark:text-gray-200"
-              >
-                {letter}
-              </a>
-            ))}
-          </nav>
-          <div className="flex gap-3 text-sm">
+          <div className="flex gap-3 pt-2 text-sm">
             <span className="rounded-full bg-stone-800 px-3 py-1 font-semibold text-white dark:bg-white dark:text-black">
               A-Z
             </span>
@@ -137,6 +123,18 @@ export default function TopicsIndex({
             </Link>
           </div>
         </div>
+
+        <nav className="flex flex-wrap gap-x-3 gap-y-2 pt-6 text-sm font-semibold uppercase">
+          {usedLetters.map((letter) => (
+            <a
+              key={letter}
+              href={`#letter-${letter}`}
+              className="text-gray-700 hover:text-orange-500 dark:text-gray-200"
+            >
+              {letter}
+            </a>
+          ))}
+        </nav>
 
         <div className="space-y-10 pt-8">
           {groups.map(({ letter, entries }) => (

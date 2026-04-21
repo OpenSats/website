@@ -83,18 +83,17 @@ export default function TopicsByCategory({
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {topicCount} topics across {groups.length} categories.
           </p>
-        </div>
-
-        <div className="flex gap-3 pt-6 text-sm">
-          <Link
-            href="/topics"
-            className="rounded-full border border-stone-800 px-3 py-1 font-semibold text-stone-800 hover:bg-stone-100 dark:border-white dark:text-white dark:hover:bg-stone-800"
-          >
-            A-Z
-          </Link>
-          <span className="rounded-full bg-stone-800 px-3 py-1 font-semibold text-white dark:bg-white dark:text-black">
-            By category
-          </span>
+          <div className="flex gap-3 pt-2 text-sm">
+            <Link
+              href="/topics"
+              className="rounded-full border border-stone-800 px-3 py-1 font-semibold text-stone-800 hover:bg-stone-100 dark:border-white dark:text-white dark:hover:bg-stone-800"
+            >
+              A-Z
+            </Link>
+            <span className="rounded-full bg-stone-800 px-3 py-1 font-semibold text-white dark:bg-white dark:text-black">
+              By category
+            </span>
+          </div>
         </div>
 
         <div className="space-y-10 pt-8">
