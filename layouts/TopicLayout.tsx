@@ -2,8 +2,6 @@ import { ReactNode } from 'react'
 import type { Topic } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import Link from '@/components/Link'
-import siteMetadata from '@/data/siteMetadata'
 
 interface Props {
   children: ReactNode
@@ -11,9 +9,7 @@ interface Props {
 }
 
 export default function TopicLayout({ children, content }: Props) {
-  const { title, summary, aliases, filePath } = content
-  const repo = siteMetadata.siteRepo.replace(/\/$/, '')
-  const editUrl = `${repo}/edit/main/data/${filePath}`
+  const { title, summary, aliases } = content
   const hasAliases = aliases && aliases.length > 0
   return (
     <>
@@ -39,20 +35,6 @@ export default function TopicLayout({ children, content }: Props) {
           </div>
         </div>
       </div>
-      <nav className="flex items-center justify-between gap-4 pb-8 pt-6 text-sm">
-        <Link
-          href="/topics"
-          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-        >
-          &larr; All topics
-        </Link>
-        <Link
-          href={editUrl}
-          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-        >
-          Propose edit on GitHub &rarr;
-        </Link>
-      </nav>
     </>
   )
 }
