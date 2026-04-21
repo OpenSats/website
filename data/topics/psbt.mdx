@@ -1,0 +1,19 @@
+---
+title: 'PSBT'
+summary: 'A standard file format for a Bitcoin transaction that is still being constructed or signed, used by nearly every modern wallet and coordinator.'
+category: 'Bitcoin'
+aliases: ['Partially Signed Bitcoin Transaction', 'BIP 174', 'BIP 370']
+---
+
+PSBT is a container for a Bitcoin transaction that is not yet complete. A wallet builds the transaction with the inputs and outputs it wants, saves it as a PSBT, and hands it to a signer. Often the signer is an offline hardware wallet or another co-signer in a multisig group. The signer reviews the transaction, adds its signatures, and passes the PSBT back. Once every required signature is in place, any tool can finalize the PSBT into a normal transaction and broadcast it.
+
+The format, defined in [BIP 174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) and extended for taproot in [BIP 370](https://github.com/bitcoin/bips/blob/master/bip-0370.mediawiki), carries all the extra data a signer needs to sign safely without trusting the machine that assembled the transaction: previous output scripts, key derivation paths, taproot tree information, and so on. Each step of the workflow only adds to the PSBT, so multiple devices and parties can cooperate on a single transaction without any one of them needing the full picture.
+
+PSBT is the common signing surface for almost every modern Bitcoin wallet, hardware wallet, and coordinator. Two wallets that speak PSBT can cooperate on multisig, coinjoins, or dual-funded channel opens without any custom integration between them.
+
+## References
+
+- [BIP 174](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki)
+- [BIP 370](https://github.com/bitcoin/bips/blob/master/bip-0370.mediawiki)
+- [Bitcoin Core PSBT docs](https://github.com/bitcoin/bitcoin/blob/master/doc/psbt.md)
+- [rust-bitcoin PSBT module](https://docs.rs/bitcoin/latest/bitcoin/psbt/)

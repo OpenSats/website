@@ -1,0 +1,19 @@
+---
+title: 'AssumeUTXO'
+summary: 'A Bitcoin Core feature that lets a new node start from a hashed UTXO snapshot instead of rebuilding the set from genesis.'
+category: 'Bitcoin'
+aliases: ['assume UTXO', 'UTXO snapshot']
+---
+
+AssumeUTXO lets a new Bitcoin Core node load a snapshot of the UTXO set and begin sending and receiving coins right away, instead of replaying the entire chain from the genesis block before it can be used. The snapshot is identified by a hash that is compiled into the Bitcoin Core source, so the only trust is in the software the user is already running.
+
+After loading the snapshot, the node is immediately usable. In the background, it keeps verifying the full chain from genesis forward. If that background validation ever disagrees with the snapshot hash, the node shuts down and refuses to continue, so a bad snapshot cannot silently corrupt a wallet.
+
+The feature cuts initial sync for a fresh node from days on a slow machine to minutes, without introducing a new trusted party. It landed in Bitcoin Core 27.0 and works alongside pruning.
+
+## References
+
+- [AssumeUTXO design document](https://github.com/bitcoin/bitcoin/blob/master/doc/design/assumeutxo.md)
+- [AssumeUTXO usage](https://github.com/bitcoin/bitcoin/blob/master/doc/assumeutxo.md)
+- [Bitcoin Core issue #15605](https://github.com/bitcoin/bitcoin/issues/15605)
+- [Bitcoin Optech: AssumeUTXO](https://bitcoinops.org/en/topics/assumeutxo/)

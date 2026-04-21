@@ -1,0 +1,19 @@
+---
+title: 'Taproot'
+summary: 'The 2021 Bitcoin soft fork that introduced Schnorr signatures, a new output type, and a new script system, all under a single on-chain footprint.'
+category: 'Bitcoin'
+aliases: ['BIP 340', 'BIP 341', 'BIP 342', 'Schnorr', 'Schnorr signatures', 'Tapscript', 'P2TR']
+---
+
+Taproot is the soft fork that activated on Bitcoin in November 2021. It shipped three things at once: Schnorr signatures for compact, linear signing ([BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)), a new output type called pay-to-taproot or P2TR ([BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)), and a new script system called Tapscript ([BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)).
+
+The main practical effect is that a taproot output looks like a single public key on chain, no matter how the coins can actually be spent. A simple single-signature wallet, a large multisig, and a complex timelocked contract all share the same output format. The detailed spending conditions only become visible if a non-key path is taken, and even then only the branch that was used has to be revealed. This improves privacy for advanced wallets and shrinks the on-chain cost of complex scripts.
+
+Schnorr signatures also compose cleanly, so several parties can jointly produce a single signature without the verifier noticing. That property is the foundation for MuSig2 multisig and FROST threshold signing, and it is what makes protocols like Silent Payments and Ark possible in their current form.
+
+## References
+
+- [BIP 340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)
+- [BIP 341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)
+- [BIP 342](https://github.com/bitcoin/bips/blob/master/bip-0342.mediawiki)
+- [Bitcoin Optech: Taproot](https://bitcoinops.org/en/topics/taproot/)
