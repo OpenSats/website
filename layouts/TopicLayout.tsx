@@ -8,11 +8,9 @@ import Link from '@/components/Link'
 interface Props {
   children: ReactNode
   content: CoreContent<Topic>
-  prev?: { slug: string; title: string }
-  next?: { slug: string; title: string }
 }
 
-export default function TopicLayout({ children, content, prev, next }: Props) {
+export default function TopicLayout({ children, content }: Props) {
   const { title, summary, category, aliases } = content
   return (
     <>
@@ -48,38 +46,14 @@ export default function TopicLayout({ children, content, prev, next }: Props) {
           </div>
         </PageHeading>
       </div>
-      {(prev || next) && (
-        <nav className="flex flex-col justify-between gap-4 pb-8 pt-6 text-sm sm:flex-row">
-          <div>
-            {prev && (
-              <Link
-                href={`/topics/${prev.slug}`}
-                className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-              >
-                &larr; {prev.title}
-              </Link>
-            )}
-          </div>
-          <div>
-            <Link
-              href="/topics"
-              className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-            >
-              All topics
-            </Link>
-          </div>
-          <div className="sm:text-right">
-            {next && (
-              <Link
-                href={`/topics/${next.slug}`}
-                className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-              >
-                {next.title} &rarr;
-              </Link>
-            )}
-          </div>
-        </nav>
-      )}
+      <nav className="pb-8 pt-6 text-sm">
+        <Link
+          href="/topics"
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          &larr; All topics
+        </Link>
+      </nav>
     </>
   )
 }
