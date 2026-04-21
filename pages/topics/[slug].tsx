@@ -5,19 +5,19 @@ import { allTopics, allBlogs, allProjects } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { getRelatedBlogPostsForTopic } from '@/utils/relatedPosts'
+import { findProjectForTopic } from '@/utils/topicProjectLink'
 import PostList from '@/components/PostList'
 import Link from '@/components/Link'
 import siteMetadata from '@/data/siteMetadata'
 
 const DEFAULT_LAYOUT = 'TopicLayout'
 
-function normalize(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]/g, '')
-}
-
 export async function getStaticPaths() {
+  const standaloneTopics = allTopics.filter(
+    (t) => !findProjectForTopic(t, [...allProjects])
+  )
   return {
-    paths: allTopics.map((t) => ({ params: { slug: t.slug } })),
+    paths: standaloneTopics.map((t) => ({ params: { slug: t.slug } })),
     fallback: false,
   }
 }
@@ -27,23 +27,10 @@ export const getStaticProps = async ({ params }) => {
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
   const relatedPosts = getRelatedBlogPostsForTopic(topic, sortedPosts)
 
-  const topicKeys = new Set(
-    [topic.title, topic.slug, ...(topic.aliases || [])]
-      .map(normalize)
-      .filter(Boolean)
-  )
-  const project = allProjects.find(
-    (p) => topicKeys.has(normalize(p.slug)) || topicKeys.has(normalize(p.title))
-  )
-  const projectLink = project
-    ? { slug: project.slug, title: project.title }
-    : null
-
   return {
     props: {
       topic,
       relatedPosts: allCoreContent(relatedPosts),
-      projectLink,
     },
   }
 }
@@ -51,7 +38,6 @@ export const getStaticProps = async ({ params }) => {
 export default function TopicPage({
   topic,
   relatedPosts,
-  projectLink,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const repo = siteMetadata.siteRepo.replace(/\/$/, '')
   const editUrl = `${repo}/edit/main/data/${topic.filePath}`
@@ -69,22 +55,12 @@ export default function TopicPage({
         >
           &larr; All topics
         </Link>
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
-          {projectLink && (
-            <Link
-              href={`/projects/${projectLink.slug}`}
-              className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-            >
-              {projectLink.title} project page
-            </Link>
-          )}
-          <Link
-            href={editUrl}
-            className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-          >
-            Propose edit on GitHub
-          </Link>
-        </div>
+        <Link
+          href={editUrl}
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          Propose edit on GitHub
+        </Link>
       </nav>
       {relatedPosts.length > 0 && (
         <section

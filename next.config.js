@@ -1,4 +1,7 @@
 const { withContentlayer } = require('next-contentlayer')
+const {
+  computeTopicProjectMatches,
+} = require('./utils/topicProjectMatches.js')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -74,7 +77,13 @@ module.exports = () => {
       ]
     },
     async redirects() {
+      const topicToProject = computeTopicProjectMatches(__dirname).map((m) => ({
+        source: `/topics/${m.topicSlug}`,
+        destination: `/projects/${m.projectSlug}`,
+        permanent: true,
+      }))
       return [
+        ...topicToProject,
         {
           source: '/projects/nostr',
           destination: '/funds/nostr',
