@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function TopicLayout({ children, content }: Props) {
-  const { title, summary, category, aliases, filePath } = content
+  const { title, summary, aliases, filePath } = content
   const repo = siteMetadata.siteRepo.replace(/\/$/, '')
   const editUrl = `${repo}/edit/main/data/${filePath}`
   return (
@@ -21,28 +21,12 @@ export default function TopicLayout({ children, content }: Props) {
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <PageHeading title={title}>
           <div className="hidden xl:block" />
-          <div className="space-y-8 xl:col-span-2">
-            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-              <div>
-                <span className="font-semibold text-gray-900 dark:text-gray-100">
-                  Category:
-                </span>{' '}
-                <Link
-                  href={`/topics/categories#${category.toLowerCase()}`}
-                  className="underline-offset-2 hover:underline"
-                >
-                  {category}
-                </Link>
-              </div>
-              {aliases && aliases.length > 0 && (
-                <div>
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">
-                    Also covering:
-                  </span>{' '}
-                  <span className="italic">{aliases.join(', ')}</span>
-                </div>
-              )}
-            </div>
+          <div className="space-y-6 xl:col-span-2">
+            {aliases && aliases.length > 0 && (
+              <p className="text-sm italic text-gray-500 dark:text-gray-400">
+                Also covering {aliases.join(', ')}
+              </p>
+            )}
             <div className="prose max-w-none pb-8 dark:prose-dark">
               {children}
             </div>
