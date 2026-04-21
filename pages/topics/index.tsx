@@ -15,8 +15,6 @@ type Entry = {
 type Props = {
   groups: Array<{ letter: string; entries: Entry[] }>
   usedLetters: string[]
-  topicCount: number
-  aliasCount: number
 }
 
 const LETTERS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
@@ -73,8 +71,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       groups,
       usedLetters: groups.map((g) => g.letter),
-      topicCount: topics.length,
-      aliasCount: entries.length - topics.length,
     },
   }
 }
@@ -82,8 +78,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 export default function TopicsIndex({
   groups,
   usedLetters,
-  topicCount,
-  aliasCount,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -99,17 +93,6 @@ export default function TopicsIndex({
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             Short definitions for technical terms that show up in our blog
             posts.
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {topicCount} topics
-            {aliasCount > 0 && (
-              <>
-                {' '}
-                (and {aliasCount} aliases in italics for topics with alternative
-                names)
-              </>
-            )}
-            .
           </p>
           <div className="flex gap-3 pt-2 text-sm">
             <span className="rounded-full bg-stone-800 px-3 py-1 font-semibold text-white dark:bg-white dark:text-black">
