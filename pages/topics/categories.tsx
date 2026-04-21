@@ -22,7 +22,6 @@ type Group = {
 
 type Props = {
   groups: Group[]
-  topicCount: number
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
@@ -57,14 +56,12 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       groups,
-      topicCount: topics.length,
     },
   }
 }
 
 export default function TopicsByCategory({
   groups,
-  topicCount,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -79,9 +76,6 @@ export default function TopicsByCategory({
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
             The same topics, grouped by area instead of alphabetized.
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {topicCount} topics across {groups.length} categories.
           </p>
           <div className="flex gap-3 pt-2 text-sm">
             <Link
