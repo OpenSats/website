@@ -10,7 +10,8 @@ interface Props {
 
 export default function TopicLayout({ children, content }: Props) {
   const { title, summary, aliases } = content
-  const hasAliases = aliases && aliases.length > 0
+  const aliasList = aliases ?? []
+  const hasAliases = aliasList.length > 0
   return (
     <>
       <PageSEO title={`${title} - OpenSats Topics`} description={summary} />
@@ -23,7 +24,7 @@ export default function TopicLayout({ children, content }: Props) {
             </h1>
             {hasAliases && (
               <p className="mt-2 text-sm italic text-gray-400 dark:text-gray-500">
-                {aliases!.join(', ')}
+                {aliasList.join(', ')}
               </p>
             )}
           </div>

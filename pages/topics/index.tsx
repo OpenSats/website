@@ -1,16 +1,14 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allTopics, allProjects } from 'contentlayer/generated'
+import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import { getTopicLink } from '@/utils/topicProjectLink'
 
 type Entry = {
   label: string
-  href: string
+  slug: string
   isAlias: boolean
-  isProject: boolean
   sortKey: string
 }
 
@@ -35,24 +33,20 @@ function bucketKey(label: string): string {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const topics = allTopics as Topic[]
-  const projects = [...allProjects]
 
   const entries: Entry[] = []
   for (const t of topics) {
-    const link = getTopicLink(t, projects)
     entries.push({
       label: t.title,
-      href: link.href,
+      slug: t.slug,
       isAlias: false,
-      isProject: link.isProject,
       sortKey: t.title.toLowerCase(),
     })
     for (const alias of t.aliases || []) {
       entries.push({
         label: alias,
-        href: link.href,
+        slug: t.slug,
         isAlias: true,
-        isProject: link.isProject,
         sortKey: alias.toLowerCase(),
       })
     }
@@ -97,18 +91,8 @@ export default function TopicsIndex({
             Topics
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Short definitions for technical terms that show up in our{' '}
-            <Link
-              href="/blog"
-              className="text-gray-700 underline decoration-gray-300 underline-offset-2 hover:text-orange-500 hover:decoration-orange-500 dark:text-gray-300 dark:decoration-gray-600"
-            >
-              blog posts
-            </Link>
-            . Entries marked{' '}
-            <span className="align-middle text-xs uppercase tracking-wide text-orange-500">
-              project
-            </span>{' '}
-            link straight to an OpenSats-funded project page.
+            Short definitions for technical terms that show up in our blog
+            posts.
           </p>
           <div className="flex gap-3 pt-2 text-sm">
             <span className="rounded-full bg-stone-800 px-3 py-1 font-semibold text-white dark:bg-white dark:text-black">
@@ -147,12 +131,9 @@ export default function TopicsIndex({
               </h2>
               <ul className="mt-3 space-y-2">
                 {entries.map((entry, idx) => (
-                  <li
-                    key={`${entry.href}-${entry.label}-${idx}`}
-                    className="flex items-baseline gap-2"
-                  >
+                  <li key={`${entry.slug}-${idx}`}>
                     <Link
-                      href={entry.href}
+                      href={`/topics/${entry.slug}`}
                       className={
                         entry.isAlias
                           ? 'italic text-gray-600 hover:text-orange-500 dark:text-gray-400'
@@ -161,11 +142,6 @@ export default function TopicsIndex({
                     >
                       {entry.label}
                     </Link>
-                    {entry.isProject && (
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-orange-500">
-                        project
-                      </span>
-                    )}
                   </li>
                 ))}
               </ul>

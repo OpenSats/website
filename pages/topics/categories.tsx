@@ -1,10 +1,9 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allTopics, allProjects } from 'contentlayer/generated'
+import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import { getTopicLink } from '@/utils/topicProjectLink'
 
 const CATEGORY_ORDER = [
   'Bitcoin',
@@ -18,12 +17,7 @@ const CATEGORY_ORDER = [
 
 type Group = {
   category: string
-  topics: Array<{
-    href: string
-    title: string
-    summary: string
-    isProject: boolean
-  }>
+  topics: Array<{ slug: string; title: string; summary: string }>
 }
 
 type Props = {
@@ -32,18 +26,11 @@ type Props = {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const topics = allTopics as Topic[]
-  const projects = [...allProjects]
   const byCategory = new Map<string, Group['topics']>()
 
   for (const t of topics) {
-    const link = getTopicLink(t, projects)
     const bucket = byCategory.get(t.category) || []
-    bucket.push({
-      href: link.href,
-      title: t.title,
-      summary: t.summary,
-      isProject: link.isProject,
-    })
+    bucket.push({ slug: t.slug, title: t.title, summary: t.summary })
     byCategory.set(t.category, bucket)
   }
 
@@ -115,20 +102,13 @@ export default function TopicsByCategory({
               </h2>
               <ul className="mt-3 space-y-3">
                 {topics.map((t) => (
-                  <li key={t.href}>
-                    <div className="flex items-baseline gap-2">
-                      <Link
-                        href={t.href}
-                        className="font-semibold text-gray-900 hover:text-orange-500 dark:text-gray-100"
-                      >
-                        {t.title}
-                      </Link>
-                      {t.isProject && (
-                        <span className="text-[10px] font-semibold uppercase tracking-wide text-orange-500">
-                          project
-                        </span>
-                      )}
-                    </div>
+                  <li key={t.slug}>
+                    <Link
+                      href={`/topics/${t.slug}`}
+                      className="font-semibold text-gray-900 hover:text-orange-500 dark:text-gray-100"
+                    >
+                      {t.title}
+                    </Link>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       {t.summary}
                     </p>
