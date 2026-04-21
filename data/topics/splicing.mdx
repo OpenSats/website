@@ -10,3 +10,10 @@ Splicing lets two Lightning peers change the capacity of an existing channel in 
 Without splicing, a user who wants to top up a channel has to close it and open a new one. That costs two on-chain transactions, fragments liquidity, and resets reputation in pathfinding heuristics. Splicing does the same job with one transaction.
 
 The feature was first deployed in Phoenix and Core Lightning, and has since been standardized in the BOLT specification and implemented across other Lightning nodes.
+
+## References
+
+- [Splicing Proposal: Feedback please!](https://lists.linuxfoundation.org/pipermail/lightning-dev/2018-October/001463.html) — Lisa Neigut's original 2018 lightning-dev thread
+- [lightning/bolts](https://github.com/lightning/bolts) — BOLT specifications, including splicing
+- [Phoenix splicing update](https://acinq.co/blog/phoenix-splicing-update) — ACINQ's deployment writeup
+- [Core Lightning splicing](https://docs.corelightning.org/docs/splicing) — CLN user documentation

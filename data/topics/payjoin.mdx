@@ -10,3 +10,11 @@ Payjoin is a way for a sender and a receiver to cooperate on a Bitcoin transacti
 The sender and receiver talk to each other before broadcasting. The original version ([BIP 78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki)) requires the receiver to run a reachable HTTP endpoint. The newer async version ([BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.md)) uses a relay so the two sides do not have to be online at the same time.
 
 Beyond privacy, Payjoin can be used for UTXO consolidation and channel opens into existing outputs. Implementations live at [payjoin.org](https://payjoin.org/) and in the [rust-payjoin](https://github.com/payjoin/rust-payjoin) library.
+
+## References
+
+- [BIP 78: A Simple Payjoin Proposal](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki) — the interactive protocol
+- [BIP 77: Async Payjoin](https://github.com/bitcoin/bips/blob/master/bip-0077.md) — the relay-based protocol
+- [payjoin.org](https://payjoin.org/) — project home, documentation, and wallets
+- [rust-payjoin](https://github.com/payjoin/rust-payjoin) — reference Rust library
+- [Pay-to-EndPoint (P2EP)](https://joinmarket.me/blog/blog/payjoin/) — Adam "waxwing" Gibson's original writeup
