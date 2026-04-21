@@ -97,8 +97,14 @@ export default function TopicsIndex({
             Topics
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Short definitions for technical terms that show up in our blog
-            posts. Entries marked{' '}
+            Short definitions for technical terms that show up in our{' '}
+            <Link
+              href="/blog"
+              className="text-gray-700 underline decoration-gray-300 underline-offset-2 hover:text-orange-500 hover:decoration-orange-500 dark:text-gray-300 dark:decoration-gray-600"
+            >
+              blog posts
+            </Link>
+            . Entries marked{' '}
             <span className="align-middle text-xs uppercase tracking-wide text-orange-500">
               project
             </span>{' '}
