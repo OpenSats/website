@@ -43,6 +43,20 @@ export default function TopicPage({
         content={topic}
         MDXComponents={MDXComponents}
       />
+      <nav className="flex items-center justify-between gap-4 pb-8 pt-6 text-sm">
+        <Link
+          href="/topics"
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          &larr; All topics
+        </Link>
+        <Link
+          href={editUrl}
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          Propose edit on GitHub
+        </Link>
+      </nav>
       {relatedPosts.length > 0 && (
         <section
           id="related-posts"
@@ -57,20 +71,6 @@ export default function TopicPage({
           <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
         </section>
       )}
-      <nav className="flex items-center justify-between gap-4 pb-8 pt-12 text-sm">
-        <Link
-          href="/topics"
-          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-        >
-          &larr; All topics
-        </Link>
-        <Link
-          href={editUrl}
-          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
-        >
-          Propose edit on GitHub &rarr;
-        </Link>
-      </nav>
     </>
   )
 }
