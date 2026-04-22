@@ -91,59 +91,32 @@ summary: 'Signals and numbers from inside the sat-dispensing machine.'
 ## Software Shipped
 
 {/* --------------------------------------------------------------------- */}
-{/* SOFTWARE SHIPPED. Top 10 grantee deliverables from Q1 2026, curated   */}
-{/* from 150 quarterly progress reports in the OpenSats/reports repo.     */}
-{/* Kept to things that actually shipped this quarter (code released,     */}
-{/* specs ratified, apps in app stores), not grant announcements or       */}
-{/* work-in-progress.                                                     */}
+{/* SOFTWARE SHIPPED. Four landmark Q1 2026 deliverables, curated from    */}
+{/* 150 quarterly progress reports. Spec work and merged PRs count too.   */}
 {/* --------------------------------------------------------------------- */}
 
-1. **Splicing ratified in the Lightning spec.** After years of work by
-   [Dusty Daemon](https://github.com/dunxen) and collaborators, splicing is
-   now a first-class part of the [Lightning BOLTs](https://github.com/lightning/bolts).
-   Channel capacity can be added or removed without closing the channel
-   on-chain.
-2. **Private broadcast merged into Bitcoin Core.**
-   [PR #29415](https://github.com/bitcoin/bitcoin/pull/29415) merged in late
-   January after 2 years and 9 months of review. Nodes can now broadcast
-   their own transactions over Tor or I2P while still peering on clearnet
-   for blocks.
-3. **[Bitcoin Research Kit](https://github.com/bitcoinresearchkit/brk/releases)
-   hit stable.** BRK went from pre-release to `v0.2.0` this quarter through
-   a full architectural rewrite, shipping 19 BRK releases and 25 releases of
-   the underlying [anydb](https://github.com/anydb-rs/anydb) database.
-4. **Stratum V2: [SRI v1.7.0](https://github.com/stratum-mining/stratum/releases)
-   and [sv2-apps v0.1.0](https://github.com/stratum-mining/sv2-apps/releases).**
-   The reference implementation shipped its 1.7.0 release, and the
-   newly-split `sv2-apps` repository got its first tagged release.
-5. **Payjoin 1.0 release candidate.**
-   [payjoin-1.0.0-rc.2](https://github.com/payjoin/rust-payjoin/releases/tag/payjoin-1.0.0-rc.2)
-   shipped in late February, along with new
-   [C# bindings](https://github.com/payjoin/rust-payjoin/pull/1318),
-   [uniffi-dart v0.1.0](https://github.com/Uniffi-Dart/uniffi-dart/releases),
-   and payjoin support landing in
-   [bdk-cli v3.0.0](https://github.com/bitcoindevkit/bdk-cli/releases/tag/v3.0.0).
-6. **Fedimint [v0.10.0 "Lighthouse"](https://github.com/fedimint/fedimint/releases/tag/v0.10.0).**
-   The Lightning Gateway moved from CLI-only to a full UI, and the release
-   shipped as a mainnet [Start9](https://start9.com/) package.
-7. **[Amethyst v1.04 and v1.05](https://github.com/vitorpamplona/amethyst/releases).**
-   Vitor Pamplona shipped two major Amethyst releases (752 commits this
-   quarter) and merged NIP-85 Trusted Assertions and NIP-A4 Public Messages
-   for decentralized web-of-trust and simpler public DMs.
-8. **[Damus v0.7.0 and v0.7.1](https://github.com/damus-io/damus/releases).**
-   jb55 shipped two Damus releases, upgraded nostrdb to 0.9.0, and launched
-   Damus Labs behind Purple for early-access features.
-9. **Frostr [Igloo iOS](https://github.com/FROSTR-ORG) shipped on the App
-   Store, plus [Bifrost v2](https://github.com/FROSTR-ORG) in Rust/WASM.**
-   FROST-based nostr multisig is now available across all major platforms.
-10. **[nostr-relay TypeScript framework](https://github.com/CodyTseng/nostr-relay).**
-    Cody extracted the core of
-    [nostr-relay-nestjs](https://github.com/CodyTseng/nostr-relay-nestjs)
-    into a standalone library. Other relays, including one-click personal
-    relays, now build on it.
-
-More on the relay side of things in our
-[March impact report on nostr relays](/blog/advancements-in-nostr-relays).
+- **Splicing, ratified.** After years of work by
+  [Dusty Daemon](https://github.com/dunxen) and collaborators, splicing is
+  now a first-class part of the
+  [Lightning BOLTs](https://github.com/lightning/bolts). Channel capacity
+  can be added or removed without closing the channel on-chain.
+- **Private broadcast, merged into Bitcoin Core.**
+  [PR #29415](https://github.com/bitcoin/bitcoin/pull/29415) landed in late
+  January after 2 years and 9 months of review. Nodes can now broadcast
+  their own transactions over Tor or I2P while still peering on clearnet
+  for blocks.
+- **Stratum V2:
+  [SRI v1.7.0](https://github.com/stratum-mining/stratum/releases) and
+  [sv2-apps v0.1.0](https://github.com/stratum-mining/sv2-apps/releases).**
+  The reference implementation shipped its 1.7.0 release, and the
+  newly-split `sv2-apps` repository got its first tagged release.
+- **Payjoin 1.0, release candidate.**
+  [payjoin-1.0.0-rc.2](https://github.com/payjoin/rust-payjoin/releases/tag/payjoin-1.0.0-rc.2)
+  shipped in late February, along with new
+  [C# bindings](https://github.com/payjoin/rust-payjoin/pull/1318),
+  [uniffi-dart v0.1.0](https://github.com/Uniffi-Dart/uniffi-dart/releases),
+  and payjoin support landing in
+  [bdk-cli v3.0.0](https://github.com/bitcoindevkit/bdk-cli/releases/tag/v3.0.0).
 
 ## Support Open-Source
 
