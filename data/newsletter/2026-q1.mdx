@@ -30,25 +30,16 @@ summary: 'Signals and numbers from inside the sat-dispensing machine.'
 > A single scene from Q1 2026 that grounds the reader in a specific moment.
 > Two or three sentences, no heading.
 
-## Sending sats: ~$1,000,000, every month
-
-<GranteeMap />
-
-<StatsSentence className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400" />
-
 ## Signals
 
 {/* --------------------------------------------------------------------- */}
-{/* SIGNALS. Short items from inside OpenSats. One or two sentences each. */}
-{/* Not a blog recap. Items should be things a reader would only know     */}
-{/* from being close to the work. The TODO items need input from the      */}
-{/* committee or team.                                                    */}
+{/* SIGNALS. Short observations from inside OpenSats. Things a reader     */}
+{/* would only know from being close to the work. TODOs need committee    */}
+{/* input.                                                                */}
 {/* --------------------------------------------------------------------- */}
 
-- **A new nostr relay framework.** Cody, a returning Nostr Fund grantee,
-  extracted the core of his relay into a standalone TypeScript
-  [framework](https://github.com/CodyTseng/nostr-relay). One-click personal
-  relays now build on it.
+- **400 grants, and counting.** We crossed **400 grants awarded** this
+  quarter. The first one went out in July 2023.
 - **Machine-checked Bitcoin cryptography.** We funded
   [remix7531](/blog/sixteenth-wave-of-bitcoin-grants#advancing-formal-verification-for-bitcoin-cryptography)
   in February to build formal proofs in [F*](https://fstar-lang.org/) (via
@@ -56,13 +47,11 @@ summary: 'Signals and numbers from inside the sat-dispensing machine.'
   [RustCrypto](https://github.com/RustCrypto/)'s `sha2` and `k256` crates and
   for the multi-scalar multiplication routine used in batch signature
   verification on the `secp256k1` curve.
-- **400 grants, and counting.** We crossed **400 grants awarded** this
-  quarter. The first one went out in July 2023.
-- **Promise made, promise kept.**
-  [BITB](/blog/opensats-receives-donation-from-bitwise-etf) began sending a
-  share of its gross profits to our General Fund this quarter. It's part of
-  the 10% pledge Bitwise made at launch; Brink and HRF's Bitcoin Development
-  Fund get the other cuts.
+- **An impact report on nostr relays.** Our March report
+  [Advancements in Nostr Relays](/blog/advancements-in-nostr-relays) covers
+  ten projects across relay software, hosting, discovery, personal relays,
+  and content filtering. Most of this work is invisible to end users, and
+  keeps the network resilient as it grows.
 - **[TODO: application theme]**: _one sentence from the committee on a
   pattern we saw across Q1 applications. e.g. "Three separate teams applied
   with FROST nostr implementations this quarter." Needs insider input._
@@ -70,9 +59,61 @@ summary: 'Signals and numbers from inside the sat-dispensing machine.'
   funding this quarter, and a one-line reason. Optional but high-trust;
   leave blank if there's nothing to report._
 
----
+## Sats Received
 
-## Support this work
+{/* --------------------------------------------------------------------- */}
+{/* SATS RECEIVED. Donations and grants OpenSats received this quarter,   */}
+{/* plus a callback to 2025 totals via the Year in Review.                */}
+{/* --------------------------------------------------------------------- */}
+
+- **A $116,000 operating grant from the Human Rights Foundation.** HRF's
+  Q4 2025 Bitcoin Development Fund round included us in the
+  [January announcement](/blog/opensats-receives-funding-from-the-human-rights-foundation).
+  HRF funding is earmarked for our Operations Budget, kept strictly separate
+  from the 100%-pass-through grant funds.
+- **Promise made, promise kept.**
+  [Bitwise's BITB ETF](/blog/opensats-receives-donation-from-bitwise-etf)
+  began sending a share of its gross profits to our General Fund this
+  quarter. It's part of the 10% pledge Bitwise made at launch; Brink and
+  HRF's Bitcoin Development Fund get the other cuts.
+- **If you missed 2025.** Our [2025 Year in Review](/blog/2025-year-in-review)
+  went out in late January. Headline numbers: **674 donations totaling
+  $3,158,680**, a **$2M gift from the Reynolds Foundation** (the single
+  largest of the year), **2,821 grant-application evaluations** by the
+  board and committee, and **10,904 pull requests** referenced in grantee
+  progress reports.
+
+## Sats Sent: ~$1,000,000 every month
+
+<GranteeMap />
+
+<StatsSentence className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400" />
+
+## Software Shipped
+
+{/* --------------------------------------------------------------------- */}
+{/* SOFTWARE SHIPPED. Concrete grantee deliverables from Q1 2026. Keep    */}
+{/* it to things that actually shipped code this quarter, not grant       */}
+{/* announcements.                                                        */}
+{/* --------------------------------------------------------------------- */}
+
+- **[nostr-relay framework](https://github.com/CodyTseng/nostr-relay).**
+  Cody extracted the core of
+  [nostr-relay-nestjs](https://github.com/CodyTseng/nostr-relay-nestjs) into
+  a standalone TypeScript library. Other relays, including one-click
+  personal relays, now build on it.
+- **[Nostr Feedz](https://github.com/PlebOne/Nostr-Feedz) got two-way sync.**
+  PlebOne shipped two-way sync and category support in January, along with
+  a Chrome extension and a command-line client. Nostr Feedz bridges
+  long-form nostr content and RSS readers.
+- **[PlebOne Relay](https://github.com/PlebOne/relay.pleb.one) redesigned
+  its login.** NIP-05 verification went live in January, so users of the
+  free, web-of-trust relay can claim a human-readable nostr address at
+  no cost.
+
+More in our [March impact report on nostr relays](/blog/advancements-in-nostr-relays).
+
+## Support Open-Source
 
 OpenSats is a [501(c)(3) public charity](https://opensats.org/transparency).
 100% of donations to our funds go directly to open-source projects; our
