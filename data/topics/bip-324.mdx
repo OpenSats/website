@@ -9,7 +9,7 @@ BIP 324 is an encrypted transport for the Bitcoin peer-to-peer protocol. Before 
 
 The new transport does not authenticate the peer's identity, because Bitcoin nodes do not have a stable identity to authenticate. It only stops a passive observer from reading the traffic and a trivial active attacker from tampering with it. A fully malicious peer is still untrusted, and the normal validation rules continue to do the real work of keeping Bitcoin secure.
 
-Support for [BIP 324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki) landed in Bitcoin Core 26.0, and has since rolled out to other full-node implementations. Nodes negotiate the new transport on a best-effort basis and fall back to the plaintext protocol when the other side does not support it.
+Support for [BIP 324](/topics/bip-324) landed in Bitcoin Core 26.0, and has since rolled out to other full-node implementations. Nodes negotiate the new transport on a best-effort basis and fall back to the plaintext protocol when the other side does not support it.
 
 ## References
 

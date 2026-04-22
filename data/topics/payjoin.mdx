@@ -7,7 +7,7 @@ aliases: ['P2EP', 'pay-to-endpoint', 'BIP 78', 'BIP 77']
 
 Payjoin is a way for a sender and a receiver to cooperate on a Bitcoin transaction so that the receiver also contributes one of their UTXOs as input. The result looks like an ordinary payment on chain, but it breaks the common-input heuristic that assumes all inputs to a transaction belong to the same wallet.
 
-The sender and receiver talk to each other before broadcasting. The original version ([BIP 78](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki)) requires the receiver to run a reachable HTTP endpoint. The newer async version ([BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.md)) uses a relay so the two sides do not have to be online at the same time.
+The sender and receiver talk to each other before broadcasting. The original version ([BIP 78](/topics/payjoin)) requires the receiver to run a reachable HTTP endpoint. The newer async version ([BIP 77](/topics/payjoin)) uses a relay so the two sides do not have to be online at the same time.
 
 Beyond privacy, Payjoin can be used for UTXO consolidation and channel opens into existing outputs. Implementations live at [payjoin.org](https://payjoin.org/) and in the [rust-payjoin](https://github.com/payjoin/rust-payjoin) library.
 
