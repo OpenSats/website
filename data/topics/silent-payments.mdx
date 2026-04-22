@@ -5,7 +5,7 @@ category: 'Bitcoin'
 aliases: ['BIP 352']
 ---
 
-Silent Payments, specified in [BIP 352](/topics/silent-payments), let a receiver publish a single static address that a sender can pay many times. Each payment lands on a different, unlinkable on-chain output. There is no interaction between sender and receiver beyond knowing the static address.
+Silent Payments, specified in BIP 352, let a receiver publish a single static address that a sender can pay many times. Each payment lands on a different, unlinkable on-chain output. There is no interaction between sender and receiver beyond knowing the static address.
 
 The trade-off is on the receiver side: a wallet has to scan every block for outputs that could belong to it, which is more work than checking a fixed script. Light clients and specialized indexers are active areas of work.
 

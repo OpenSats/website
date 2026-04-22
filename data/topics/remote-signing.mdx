@@ -9,7 +9,7 @@ NIP-46 defines a protocol for signing [Nostr](/topic/nostr) events with a key th
 
 The signer shows each request to the user, who approves or rejects it. A good signer also stores per-app permissions, so a client that the user trusts to publish short notes does not automatically get permission to send private messages or spend from a wallet. The client never sees the private key.
 
-This separation lets a user log into a web client without pasting in their private key, try a new client without re-seeding a keypair, and revoke access for a single client without touching the others. [NIP-46](/topics/remote-signing) is implemented by Amber, nsecBunker, nsec.app, and most major Nostr clients on desktop and mobile.
+This separation lets a user log into a web client without pasting in their private key, try a new client without re-seeding a keypair, and revoke access for a single client without touching the others. NIP-46 is implemented by Amber, nsecBunker, nsec.app, and most major Nostr clients on desktop and mobile.
 
 ## References
 
