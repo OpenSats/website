@@ -19,14 +19,14 @@ const ScrollToTop = () => {
 
   return (
     <div
-      className={`fixed bottom-8 right-8 hidden ${
-        show ? 'md:flex' : 'md:hidden'
+      className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 ${
+        show ? 'flex' : 'hidden'
       }`}
     >
       <button
         aria-label="Scroll to top"
         onClick={handleScrollTop}
-        className="rounded-full bg-gray-200 p-2 text-gray-500 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+        className="rounded-full bg-gray-200 p-2 text-gray-500 shadow-md transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path
