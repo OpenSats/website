@@ -90,7 +90,7 @@ export default function TopicPage({
             href={editUrl}
             className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
           >
-            Propose edit on GitHub
+            Propose an edit
           </Link>
         </div>
       </nav>
