@@ -27,6 +27,11 @@ export default function TopicLayout({ children, content }: Props) {
                 {aliasList.join(', ')}
               </p>
             )}
+            {summary && (
+              <p className="mt-4 text-lg leading-7 text-gray-500 dark:text-gray-400">
+                {summary}
+              </p>
+            )}
           </div>
         </div>
         <div className="items-start xl:grid xl:grid-cols-3 xl:gap-x-8">

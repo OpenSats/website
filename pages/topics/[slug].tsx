@@ -58,6 +58,14 @@ export default function TopicPage({
   const editUrl = `${repo}/edit/main/data/${topic.filePath}`
   return (
     <>
+      <div className="pt-6 text-sm">
+        <Link
+          href="/topics"
+          className="text-gray-600 hover:text-orange-500 dark:text-gray-400"
+        >
+          &larr; All topics
+        </Link>
+      </div>
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
         content={topic}

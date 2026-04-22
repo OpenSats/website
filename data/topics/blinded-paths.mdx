@@ -7,7 +7,7 @@ aliases: ['route blinding', 'blinded routes']
 
 Blinded paths are a Lightning feature where the receiver of a payment provides a partial route to itself with the node identities along that route encrypted. The sender only sees how to reach the entry point of the blinded section and follows the encrypted onion from there. It does not learn the identity of the intermediate hops or the final destination.
 
-This replaces the older approach where the receiver would publish its node id in an invoice and the sender would look up a full route to it. A node that only receives via blinded paths can stay off the public channel graph entirely, which helps mobile wallets and self-hosted nodes that prefer not to broadcast their location or balances.
+This replaces the older approach where the receiver would publish its node id in an invoice and the sender would look up a full route to it. A node that only receives via blinded paths can stay off the public channel graph entirely, which helps mobile wallets and self-hosted nodes that prefer not to broadcast their location or balances to improve their privacy.
 
 BOLT 12 offers use blinded paths by default, and BOLT 04 onion messages carry them end to end. Core Lightning, LDK, and Eclair all implement blinded paths for offers and for regular payments.
 
@@ -15,4 +15,4 @@ BOLT 12 offers use blinded paths by default, and BOLT 04 onion messages carry th
 
 - [BOLT 04: Route blinding](https://github.com/lightning/bolts/blob/master/04-onion-routing.md#route-blinding)
 - [BOLT 12](https://github.com/lightning/bolts/blob/master/12-offer-encoding.md)
-- [Bitcoin Optech: Route blinding](https://bitcoinops.org/en/topics/rv-routing/)
+- [Bitcoin Optech: Route blinding](https://bitcoinops.org/en/topics/rendez-vous-routing/)

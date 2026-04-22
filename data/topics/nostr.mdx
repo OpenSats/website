@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['Notes and Other Stuff Transmitted by Relays']
 ---
 
-Nostr is a simple protocol for publishing and reading signed messages. A user's identity is a public key. A user's content is a list of "events" signed by that key. Events are stored and served by "relays", which are small servers that anyone can run.
+Nostr is a simple protocol for publishing and reading signed messages. A user's identity is a public key. A user's content is a list of "events" signed by his private key. Events are stored and served by "relays", which are small servers that anyone can run.
 
 There is no central server and no account system. A client connects to several relays at once, publishes events to all of them, and reads events from all of them. If a relay disappears or starts censoring, the client switches to another. The same identity and the same content keep working.
 
