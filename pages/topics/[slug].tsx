@@ -7,6 +7,7 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { getRelatedBlogPostsForTopic } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
 import Link from '@/components/Link'
+import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 
 const DEFAULT_LAYOUT = 'TopicLayout'
@@ -100,6 +101,7 @@ export default function TopicPage({
           <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
         </section>
       )}
+      <ScrollToTop />
     </>
   )
 }

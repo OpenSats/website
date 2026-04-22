@@ -3,6 +3,7 @@ import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
+import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 
 type Entry = {
@@ -149,6 +150,7 @@ export default function TopicsIndex({
           ))}
         </div>
       </div>
+      <ScrollToTop />
     </>
   )
 }

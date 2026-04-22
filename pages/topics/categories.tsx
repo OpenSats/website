@@ -3,6 +3,7 @@ import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
+import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 
 const CATEGORY_ORDER = [
@@ -119,6 +120,7 @@ export default function TopicsByCategory({
           ))}
         </div>
       </div>
+      <ScrollToTop />
     </>
   )
 }
