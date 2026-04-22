@@ -1,0 +1,91 @@
+---
+title: 'Floresta'
+dateAdded: '2024-09-19'
+summary: 'An embeddable Bitcoin client in Rust that validates every block using Utreexo.'
+nym: 'Davidson Souza'
+website: 'https://getfloresta.org/'
+coverImage: '/static/images/projects/floresta.png'
+git: 'https://github.com/getfloresta/Floresta'
+tags: ['Bitcoin', 'Core']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-grants-september-2024-7th-wave#floresta'
+---
+
+[Floresta](https://getfloresta.org/) is a lightweight, embeddable Bitcoin
+client written in Rust. It does full block validation but replaces the UTXO
+set with [Utreexo](https://eprint.iacr.org/2019/611), a cryptographic
+accumulator that represents every unspent output as leaves in a small forest
+of Merkle trees. Combined with
+[PoW Fraud Proofs](https://blog.dlsouza.lol/2023/09/28/pow-fraud-proof.html)
+and pruning, this keeps on-disk state under a gigabyte. In the Utreexo
+taxonomy (see
+[BIP-0183](https://github.com/utreexo/biptreexo/blob/main/bip-0183.md)),
+`florestad` runs as a Compact State Node: it validates every block and every
+script against the same consensus rules as Bitcoin Core but does not archive
+the full chain or keep the full UTXO set, so it can run on phones and
+single-board computers without giving up trust-minimization.
+
+The project ships two main pieces:
+[`libfloresta`](https://github.com/getfloresta/Floresta/tree/master/crates),
+a set of reusable crates that applications can embed, and
+[`florestad`](https://github.com/getfloresta/Floresta/tree/master/bin/florestad),
+a daemon that runs as a standalone node with a watch-only wallet and a built-in
+Electrum server. Developers can use `libfloresta` the way they would use
+[`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) or
+[`bdk`](/projects/bdk), building wallets, explorers, and indexers on top of a
+validating client. Rather than reimplementing a script interpreter, Floresta
+delegates script verification to `libbitcoinkernel`, the C++ library that
+exposes Bitcoin Core's validation engine. The project publishes an
+[mdBook](https://getfloresta.github.io/floresta-docs/) that walks through the
+codebase chapter by chapter.
+
+## Why fund it?
+
+Verifying your own blocks and transactions is the strongest form of
+trust-minimization on Bitcoin. The cost of storing the full chain and UTXO set
+pushes most users onto custodial services or SPV-style light clients that
+trust third parties. Floresta does the same consensus work as a full archival
+node with a much smaller footprint, which makes it a practical fit for
+phones, single-board computers, and embedded wallet stacks.
+
+OpenSats first funded Floresta in the
+[seventh wave of Bitcoin grants](/blog/bitcoin-grants-september-2024-7th-wave#floresta)
+in September 2024. The [fourteenth wave](/blog/fourteenth-wave-of-bitcoin-grants#floresta)
+added grants for contributors
+[João Leal](https://github.com/jaoleal),
+[Moises Pompilio](https://github.com/moisesPompilio), and
+[Jose Castillo López](https://github.com/JoseSK999). The project is open-source and
+available at [getfloresta/Floresta](https://github.com/getfloresta/Floresta), with origins
+at [Vinteum](https://vinteum.org/), the Brazilian nonprofit that incubated it.
+
+## What's next?
+
+Floresta [v0.9.0](https://github.com/getfloresta/Floresta/releases/tag/v0.9.0)
+shipped in April 2026
+([announcement post](https://www.getfloresta.org/blog/release-v0.9.0)). On the
+wire, the node speaks BIP-0183 Utreexo messaging for proof-driven sync. Script validation moved from the deprecated
+`libbitcoinconsensus` to `libbitcoinkernel`, which runs roughly 15x faster. The JSON-RPC picked up
+`rescanblockchain`, `gettxout`, `ping`, `addnode`, and JSON-RPC v1 for legacy
+clients, so most Bitcoin Core tooling works against `florestad` unchanged.
+v0.9.0 also landed a modular mempool (the groundwork for transaction relay),
+parallel `pytest` functional tests, more fuzz targets, `no_std` portability
+work, and dual licensing under MIT OR Apache-2.0. For reference,
+[v0.8.0](https://github.com/getfloresta/Floresta/releases/tag/v0.8.0)
+(July 2025) added [BIP-0324](https://github.com/bitcoin/bips/blob/master/bip-0324.mediawiki)
+P2P v2, testnet4, Prometheus metrics, and the first
+`mdBook`, while
+[v0.8.1](https://github.com/getfloresta/Floresta/releases/tag/v0.8.1)
+(January 2026) was a bugfix release covering reindex and filter issues.
+
+The next big item is
+[SwiftSync](https://delvingbitcoin.org/t/swiftsync-speeding-up-ibd-with-pre-generated-hints/1562).
+It pairs implicit deletion in the Utreexo accumulator with pre-generated hints
+so blocks can be validated out of order without downloading proofs. In one
+test, syncing signet to block 290,000 on a home connection went from 1h 15min
+with plain Utreexo to 6 minutes with witnessless SwiftSync. The
+[Utreexo BIP draft](https://github.com/bitcoin/bips/pull/1923) is under review.
+Other open work includes evaluating [BDK](/projects/bdk) as the watch-only wallet,
+packaging `florestad` for [nix-bitcoin](https://nixbitcoin.org/) and upstream
+[nixpkgs](https://github.com/NixOS/nixpkgs), transaction relay on top of the
+new mempool, and more P2P integration tests.
