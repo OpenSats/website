@@ -15,7 +15,7 @@ announcementLink: '/blog/twelfth-wave-of-nostr-grants#frostr'
 [Frostr](https://frostr.org/) is a threshold signing protocol for nostr
 built on top of [FROST](https://eprint.iacr.org/2020/852) (Flexible
 Round-Optimized Schnorr Threshold signatures). An `nsec` key is split into
-shares that live on different devices or services. Any `t`-of-`n` quorum of
+shares that live on different devices or services. Any `t-of-n` quorum of
 those shares can sign a nostr event together, but a single compromised share
 does not leak the key. Shares can be rotated and replaced without rotating
 the underlying identity, which matters on a protocol where your public key
