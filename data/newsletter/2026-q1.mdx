@@ -3,7 +3,7 @@ title: 'Sats Well Spent'
 issueNumber: 1
 date: '2026-04-22'
 quarter: 'Q1 2026'
-summary: "A quarterly recap of OpenSats grants, impact reports, and funding news — Q1 2026."
+summary: "A quarterly dispatch from OpenSats — signals, stories, and numbers from inside the work."
 ---
 
 {/* ----------------------------------------------------------------------- */}
@@ -13,102 +13,87 @@ summary: "A quarterly recap of OpenSats grants, impact reports, and funding news
 > Placeholder for Gigi's opening note.
 >
 > A short, first-person welcome introducing *Sats Well Spent* as our new
-> quarterly newsletter — why it exists, who it's for, and what readers can
+> quarterly dispatch — why it exists, who it's for, and what readers can
 > expect each quarter. Three or four paragraphs; conversational tone.
 >
 > — Gigi
 
 ---
 
-## What happened in Q1, 2026?
+{/* ----------------------------------------------------------------------- */}
+{/* COLD OPEN — a single scene from the quarter. One paragraph, no heading.  */}
+{/* ----------------------------------------------------------------------- */}
 
-Between January and March 2026, OpenSats announced four rounds of grants —
-[seventeen Bitcoin projects](/blog/sixteenth-wave-of-bitcoin-grants), [three
-nostr projects](/blog/fifteenth-wave-of-nostr-grants), [five Bitcoin Core
-contributors](/blog/five-grants-to-strengthen-bitcoin-development), and [nine
-more Bitcoin projects](/blog/seventeenth-wave-of-bitcoin-grants) — alongside
-our impact report on [nostr relays](/blog/advancements-in-nostr-relays), our
-[2025 Year in Review](/blog/2025-year-in-review), and new funding from the
-[Human Rights Foundation](/blog/opensats-receives-funding-from-the-human-rights-foundation)
-and the [Bitwise Bitcoin ETF](/blog/opensats-receives-donation-from-bitwise-etf).
+Sometime in early 2026, a researcher replicated a live-network attack that
+lets outside observers correlate the same Bitcoin node across Tor and
+clearnet — then [opened a pull
+request](https://github.com/bitcoin/bitcoin/pull/33498) with a proposed
+mitigation. [We funded her in
+March](/blog/five-grants-to-strengthen-bitcoin-development#naiyoma). She had
+been at it well before we paid her, and she'll be at it well after. That's a
+surprisingly normal week around here.
 
-## New grants, Q1 2026
+## What OpenSats doesn't fund
 
-### Bitcoin & Lightning
+{/* ----------------------------------------------------------------------- */}
+{/* FEATURE — Gigi to write (~500–700 words). Intentionally kept separate    */}
+{/* from the Editor's Note above, so it can stand on its own as the draw of  */}
+{/* this issue.                                                              */}
+{/*                                                                          */}
+{/* Suggested angles (not prescriptive):                                     */}
+{/* - OpenSats rejects far more applications than it accepts. What patterns  */}
+{/*   get declined, and why.                                                 */}
+{/* - Proposals that are business plans in OSS clothing.                     */}
+{/* - Work that's genuinely valuable but already well-funded elsewhere.      */}
+{/* - Projects without a maintainer — just a grant-funded year.              */}
+{/* - Forks for forks' sake.                                                 */}
+{/* - Anything else the committee sees repeatedly.                           */}
+{/*                                                                          */}
+{/* Tone: first-person, conversational, a little dry. Not a policy           */}
+{/* document. Sign as "Gigi".                                                */}
+{/* ----------------------------------------------------------------------- */}
 
-The [sixteenth](/blog/sixteenth-wave-of-bitcoin-grants) and
-[seventeenth](/blog/seventeenth-wave-of-bitcoin-grants) waves and a dedicated
-round of [Bitcoin Core grants](/blog/five-grants-to-strengthen-bitcoin-development)
-brought funding to Core contributors, wallets, libraries, mining, ecash, and
-hardware signing.
+> _Feature placeholder — Gigi to write._
+>
+> ~500–700 words on what OpenSats declines, and why. See suggested angles in
+> the source comments above. The goal: a piece that's useful to applicants,
+> interesting to donors, and unmistakably from us.
+>
+> — Gigi
 
-- **[Specter DIY](/blog/seventeenth-wave-of-bitcoin-grants#specter-diy)** — open
-  hardware signing device users can assemble and audit themselves, with a
-  MicroPython firmware that [SeedSigner](/projects/seedsigner), Krux, and others
-  build on.
-- **[JoinMarket NG](/blog/seventeenth-wave-of-bitcoin-grants#joinmarket-ng)** —
-  a reimplementation of JoinMarket that modernizes a peer-to-peer CoinJoin
-  protocol and adds nostr-based offer broadcasting for censorship resistance.
-- **[Noah](/blog/sixteenth-wave-of-bitcoin-grants#noah)** — a mobile self-custody
-  wallet for the Ark protocol from the creator of Blixt, collapsing Lightning
-  and on-chain into a single balance.
-- **[Rust-Bitcoin & rust-secp256k1](/blog/sixteenth-wave-of-bitcoin-grants#rust-bitcoin)** —
-  continuing support for the foundational Rust crates that BDK, LDK, electrs,
-  and Fedimint depend on.
-- **[Stratum V2](/projects/stratumv2)** — further work on the reference
-  implementation, with improved testing, tooling, and documentation for
-  encrypted, decentralized pooled mining.
-- **[Five Bitcoin Core contributors](/blog/five-grants-to-strengthen-bitcoin-development)** —
-  janb84 on release testing and PR review, naiyoma on P2P privacy and node
-  fingerprinting research, purpleKarrot on build-system and C++ modernization,
-  plus returning grantees danielabrozzoni and kevkevinpal.
+## Signals
 
-See the [full list of Bitcoin grantees](/tags/bitcoin) for everyone funded this
-quarter.
+{/* ----------------------------------------------------------------------- */}
+{/* SIGNALS — five short items from inside OpenSats, one sentence each.      */}
+{/* Not a blog recap; items should be things a reader would only know from   */}
+{/* being close to the work. Mix drafted + TODO items — the TODO ones need   */}
+{/* insider input from the committee or team.                                */}
+{/* ----------------------------------------------------------------------- */}
 
-### Nostr
-
-The [fifteenth wave of nostr grants](/blog/fifteenth-wave-of-nostr-grants)
-funded three projects exploring what else a permissionless identity and
-transport layer can be used for.
-
-- **[ContextVM](/blog/fifteenth-wave-of-nostr-grants#contextvm)** — an
-  [MCP](https://modelcontextprotocol.io/)-over-nostr protocol that lets AI tools
-  and services be addressed by public key, without domains, OAuth, or port
-  forwarding.
-- **[Nostube](/blog/fifteenth-wave-of-nostr-grants#nostube)** — a video platform
-  on nostr with uploads, playlists, zaps, and distributed Cashu-paid
-  transcoding.
-- **[TollGate](/blog/fifteenth-wave-of-nostr-grants#tollgate)** — firmware that
-  turns OpenWrt-compatible routers into pay-as-you-go WiFi access points, with
-  users paying in ecash and routers discovering each other over nostr.
-
-## Impact report: nostr relays
-
-Relays are the substrate nostr runs on: simple, permissionless servers that
-accept, store, and forward events. Our March report, [Advancements in Nostr
-Relays](/blog/advancements-in-nostr-relays), looks at ten projects we've funded
-across relay software, hosting, discovery, personal relays, and content
-filtering — the largely invisible plumbing that keeps the network censorship-
-resistant as it grows.
-
-## Funding news
-
-- **[Human Rights Foundation](/blog/opensats-receives-funding-from-the-human-rights-foundation)** —
-  a $116,000 grant to our Operations Budget as part of HRF's Q4 2025 Bitcoin
-  Development Fund round.
-- **[Bitwise Bitcoin ETF](/blog/opensats-receives-donation-from-bitwise-etf)** —
-  a recurring donation to our General Fund, part of [BITB](https://bitbetf.com/)'s
-  pledge of 10% of annual gross profits to Bitcoin open-source development.
-
-For a fuller picture, our [2025 Year in Review](/blog/2025-year-in-review) is
-the best place to start.
+- **A shipped piece of invisible infrastructure.** Cody, a returning Nostr
+  Fund grantee, extracted his relay's core into a standalone TypeScript
+  [framework](https://github.com/CodyTseng/nostr-relay); one-click personal
+  relays now build on it. Most nostr users will never hear the name, and
+  that's the point.
+- **A threshold crossed.** We passed **390 grants awarded** this quarter.
+  The first one went out in July 2023.
+- **An ETF that kept its promise.** [Bitwise's BITB
+  ETF](/blog/opensats-receives-donation-from-bitwise-etf) began recurring
+  donations to our General Fund — part of a 10%-of-gross-profits pledge they
+  made at launch. Brink and HRF's Bitcoin Development Fund get the other
+  cuts.
+- **[TODO: application theme]** — _one sentence from the committee on a
+  pattern we saw across Q1 applications. e.g. "Three separate teams applied
+  with FROST nostr implementations this quarter." Needs insider input._
+- **[TODO: a quiet wind-down]** — _one sentence on a project we've stopped
+  funding this quarter, and a one-line reason. Optional but high-trust;
+  leave blank if there's nothing to report._
 
 ## By the numbers
 
 <GranteeMap />
 
-<StatsSentence className="mt-6 text-lg leading-relaxed text-gray-700 dark:text-gray-300" />
+<StatsSentence className="mt-6 text-base leading-relaxed text-gray-600 dark:text-gray-400" />
 
 For up-to-date figures and the interactive map, see
 [opensats.org/map](https://opensats.org/map).
