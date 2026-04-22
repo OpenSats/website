@@ -23,14 +23,7 @@ protocol itself.
 VLS works with [Core Lightning](https://github.com/ElementsProject/lightning)
 and [LDK](https://lightningdevkit.org/), runs on desktop, server, and
 embedded targets, and has a Dockerized deployment path for operators who want
-to separate the signer onto its own machine. The signer enforces policy
-checks (key-reuse prevention, monotonic channel ids, resource-exhaustion
-guards) as first-class errors rather than panics, and the test suite includes
-randomized thread scheduling via
-[Shuttle](https://crates.io/crates/shuttle) and hard dependency rules via
-`cargo deny` and `cargo vet` to keep the supply chain narrow. `lnrod`, a
-reference LDK node that integrates VLS, now lives inside the main repository
-and runs end-to-end against every merge request.
+to separate the signer onto its own machine.
 
 ## Why fund it?
 
