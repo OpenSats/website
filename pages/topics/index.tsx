@@ -5,6 +5,7 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
+import { getDisplayAliases } from '@/utils/topics'
 
 type Entry = {
   label: string
@@ -43,7 +44,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
       isAlias: false,
       sortKey: t.title.toLowerCase(),
     })
-    for (const alias of t.aliases || []) {
+    for (const alias of getDisplayAliases(t)) {
       entries.push({
         label: alias,
         slug: t.slug,

@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import type { Topic } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
+import { getDisplayAliases } from '@/utils/topics'
 
 interface Props {
   children: ReactNode
@@ -9,8 +10,8 @@ interface Props {
 }
 
 export default function TopicLayout({ children, content }: Props) {
-  const { title, summary, aliases } = content
-  const aliasList = aliases ?? []
+  const { title, summary } = content
+  const aliasList = getDisplayAliases(content)
   const hasAliases = aliasList.length > 0
   return (
     <>

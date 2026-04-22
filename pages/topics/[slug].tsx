@@ -5,16 +5,13 @@ import { allTopics, allBlogs, allProjects } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { getRelatedBlogPostsForTopic } from '@/utils/relatedPosts'
+import { normalizeTerm } from '@/utils/topics'
 import PostList from '@/components/PostList'
 import Link from '@/components/Link'
 import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 
 const DEFAULT_LAYOUT = 'TopicLayout'
-
-function normalize(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]/g, '')
-}
 
 export async function getStaticPaths() {
   return {
@@ -30,11 +27,13 @@ export const getStaticProps = async ({ params }) => {
 
   const topicKeys = new Set(
     [topic.title, topic.slug, ...(topic.aliases || [])]
-      .map(normalize)
+      .map(normalizeTerm)
       .filter(Boolean)
   )
   const project = allProjects.find(
-    (p) => topicKeys.has(normalize(p.slug)) || topicKeys.has(normalize(p.title))
+    (p) =>
+      topicKeys.has(normalizeTerm(p.slug)) ||
+      topicKeys.has(normalizeTerm(p.title))
   )
   const projectLink = project
     ? { slug: project.slug, title: project.title }
