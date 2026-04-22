@@ -76,7 +76,8 @@ export default function TopicsByCategory({
             Topics by category
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            The same topics, grouped by area instead of alphabetized.
+            Short definitions for technical terms that show up in our blog
+            posts.
           </p>
           <div className="flex gap-3 pt-2 text-sm">
             <Link
