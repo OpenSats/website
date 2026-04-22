@@ -44,12 +44,12 @@ The project ships as a stack of libraries and clients:
 ## Why fund it?
 
 The default key model on nostr puts one `nsec` on every device the user
-touches. That works for casual accounts and fails for anyone with a
-meaningful identity, financial tooling tied to their npub, or reason to
-worry about device compromise. Threshold signing gives nostr a
-production-grade option for multi-device keys, private recovery, and
-institutional-style custody, all without changing how clients verify
-signatures.
+touches. A single stolen phone or leaked backup hands over the npub that
+clients, zaps, and payments are tied to, and there is no clean way to
+rotate without burning the identity. Threshold signing fixes that: the
+key is split across devices so no single compromise exposes it, and shares
+can be rotated without touching the underlying npub. Clients still see
+the same Schnorr signatures they always have.
 
 OpenSats funded Frostr in the
 [twelfth wave of nostr grants](/blog/twelfth-wave-of-nostr-grants#frostr).
@@ -61,11 +61,11 @@ coinjoins and Payjoins coordinated over nostr.
 With the v1 suite shipped across desktop, browser, server, CLI, web, and
 mobile, the project rewrote the core protocol and library as
 [Bifrost v2](https://github.com/FROSTR-ORG/bifrost-rs) in Rust with a WASM
-build. v2 introduces nonce pools in place of the v1 nonce-extension model,
-a streamlined onboarding flow, and live peer health monitoring. The next
-quarter focuses on rolling v2 through a v2-native set of apps (Igloo PWA,
-Igloo Chrome, Igloo Home, Igloo Shell, Igloo UI) that replace the v1
-clients, retiring the v1 protocol, and finalizing a written specification
-so Frostr can be independently implemented. A packaged
+build. v2 replaces v1's nonce-extension scheme with nonce pools, reworks
+the onboarding flow, and adds live peer health monitoring. Over the next
+quarter the team is landing a v2-native app suite (Igloo PWA, Igloo Chrome,
+Igloo Home, Igloo Shell, Igloo UI) to replace the v1 clients, after which
+the v1 protocol can be retired. A written specification is in progress so
+Frostr can be independently implemented. A packaged
 [Umbrel distribution](https://github.com/frostr-org/igloo-server-store) for
 Igloo Server is already live, with Start9 packaging next in line.
