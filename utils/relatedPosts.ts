@@ -7,6 +7,11 @@ function escapeRegExp(str: string): string {
 /**
  * Finds blog posts whose title, summary, tags, or body mention any of the
  * given terms as a whole word (case-insensitive).
+ *
+ * Internal separators in a term (whitespace, hyphen, underscore) are treated
+ * as interchangeable, so a term like "BIP 324" matches "BIP 324", "BIP-324",
+ * "BIP_324", and "BIP324" in blog text. Word boundaries still anchor both
+ * ends, so "BIP 32" does not match "BIP 324".
  */
 export function getRelatedBlogPostsByTerms(
   terms: string[],
@@ -18,7 +23,10 @@ export function getRelatedBlogPostsByTerms(
         .map((t) => (t || '').trim().toLowerCase())
         .filter((t) => t.length > 0)
     )
-  ).map((t) => new RegExp(`\\b${escapeRegExp(t)}\\b`, 'i'))
+  )
+    .map((t) => t.split(/[^a-z0-9]+/).filter(Boolean).map(escapeRegExp))
+    .filter((tokens) => tokens.length > 0)
+    .map((tokens) => new RegExp(`\\b${tokens.join('[\\s\\-_]*')}\\b`, 'i'))
 
   if (patterns.length === 0) return []
 
