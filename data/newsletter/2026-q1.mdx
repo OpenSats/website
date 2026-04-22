@@ -22,10 +22,17 @@ summary: 'A quarterly dispatch from OpenSats. Signals and numbers from inside th
 
 {/* --------------------------------------------------------------------- */}
 {/* COLD OPEN. A single scene from the quarter. One paragraph, no heading.*/}
-{/* [PENDING: awaiting Gigi's pick from 5 candidates.]                    */}
 {/* --------------------------------------------------------------------- */}
 
-{/* TODO: replace with chosen cold open. */}
+In February we [funded
+remix7531](/blog/sixteenth-wave-of-bitcoin-grants#advancing-formal-verification-for-bitcoin-cryptography),
+a cryptography researcher building machine-checked proofs for the low-level
+code that secures Bitcoin signing. The work covers
+[RustCrypto](https://github.com/RustCrypto/)'s `sha2` and `k256` crates and
+the multi-scalar multiplication routine used for batch signature verification
+on the `secp256k1` curve. The proofs are written in
+[F*](https://fstar-lang.org/) using the
+[HAX](https://cryspen.com/hax-toolchain/) toolchain.
 
 ## Sending sats: ~$1,000,000, every month
 
