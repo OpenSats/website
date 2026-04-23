@@ -1,0 +1,18 @@
+---
+title: 'DLC'
+summary: 'A Bitcoin smart contract whose settlement depends on a signed statement from an oracle, without the oracle seeing the contract or holding any funds.'
+category: 'Bitcoin'
+aliases: ['Discreet Log Contract', 'DLCs']
+---
+
+A Discreet Log Contract is a Bitcoin smart contract where the outcome depends on a signed statement from an oracle. Two parties lock funds into a 2-of-2 output. They prepare a set of pre-signed settlement transactions, one per possible outcome. When the oracle signs the real outcome, that signature is what unlocks the matching settlement transaction. The oracle never sees the contract, never holds any funds, and cannot steal them.
+
+DLCs work with standard Bitcoin script. Tadge Dryja introduced the idea in 2017. Adaptor signatures and Schnorr signatures, which shipped with Taproot, made DLC construction much cheaper in both bandwidth and on-chain footprint. The coordination protocol between the two parties is specified in the DLCspecs repository.
+
+DLCs are the foundation for price-feed-triggered Bitcoin derivatives, insurance contracts, and prediction markets. Implementations include rust-dlc, dlcdevkit, and 10101.
+
+## References
+
+- [Discreet Log Contracts (Dryja, 2017)](https://adiabat.github.io/dlc.pdf)
+- [DLCspecs](https://github.com/discreetlogcontracts/dlcspecs)
+- [Bitcoin Optech: Discreet Log Contracts](https://bitcoinops.org/en/topics/discreet-log-contracts/)
