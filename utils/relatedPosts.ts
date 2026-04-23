@@ -1,25 +1,37 @@
-import type { Project, Blog, Fund } from 'contentlayer/generated'
+import type { Project, Blog, Fund, Topic } from 'contentlayer/generated'
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
 
 /**
- * Finds blog posts that mention a given project by searching through
- * title, summary, tags, and body content.
+ * Finds blog posts whose title, summary, tags, or body mention any of the
+ * given terms as a whole word (case-insensitive).
+ *
+ * Internal separators in a term (whitespace, hyphen, underscore) are treated
+ * as interchangeable, so a term like "BIP 324" matches "BIP 324", "BIP-324",
+ * "BIP_324", and "BIP324" in blog text. Word boundaries still anchor both
+ * ends, so "BIP 32" does not match "BIP 324".
  */
-export function getRelatedBlogPostsForProject(
-  project: Project,
+export function getRelatedBlogPostsByTerms(
+  terms: string[],
   blogs: Blog[]
 ): Blog[] {
-  const projectTitle = project.title.toLowerCase()
-  const projectSlug = (
-    project.slug.split('/').pop() || project.slug
-  ).toLowerCase()
+  const patterns = Array.from(
+    new Set(
+      terms
+        .map((t) => (t || '').trim().toLowerCase())
+        .filter((t) => t.length > 0)
+    )
+  )
+    .map((t) => t.split(/[^a-z0-9]+/).filter(Boolean).map(escapeRegExp))
+    .filter((tokens) => tokens.length > 0)
+    .map((tokens) => new RegExp(`\\b${tokens.join('[\\s\\-_]*')}\\b`, 'i'))
 
-  const slugPattern =
-    projectSlug !== projectTitle
-      ? new RegExp(`\\b${escapeRegExp(projectSlug)}\\b`, 'i')
-      : null
+  if (patterns.length === 0) return []
 
   return blogs.filter((blog) => {
-    const searchContent = [
+    const haystack = [
       blog.title || '',
       blog.summary || '',
       (blog.tags || []).join(' '),
@@ -27,16 +39,30 @@ export function getRelatedBlogPostsForProject(
     ]
       .join(' ')
       .toLowerCase()
-
-    const titlePattern = new RegExp(`\\b${escapeRegExp(projectTitle)}\\b`)
-    if (titlePattern.test(searchContent)) return true
-    if (slugPattern && slugPattern.test(searchContent)) return true
-    return false
+    return patterns.some((p) => p.test(haystack))
   })
 }
 
-function escapeRegExp(str: string): string {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+/**
+ * Finds blog posts that mention a given project by title or slug.
+ */
+export function getRelatedBlogPostsForProject(
+  project: Project,
+  blogs: Blog[]
+): Blog[] {
+  const title = project.title
+  const slug = project.slug.split('/').pop() || project.slug
+  return getRelatedBlogPostsByTerms([title, slug], blogs)
+}
+
+/**
+ * Finds blog posts that mention a given topic by its title or any alias.
+ */
+export function getRelatedBlogPostsForTopic(
+  topic: Topic,
+  blogs: Blog[]
+): Blog[] {
+  return getRelatedBlogPostsByTerms([topic.title, ...(topic.aliases || [])], blogs)
 }
 
 // Map fund slugs to the tags that should be considered "related" for announcements

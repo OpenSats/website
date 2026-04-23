@@ -1,0 +1,18 @@
+---
+title: 'Miniscript'
+summary: 'A structured language for Bitcoin scripts that is easy to analyze, compose, and sign with a generic wallet.'
+category: 'Bitcoin'
+aliases: ['Policy language']
+---
+
+Miniscript is a structured language for writing Bitcoin scripts. Instead of hand-rolling raw opcodes, an author writes a Miniscript expression such as `and_v(v:pk(A), or_d(pk(B), older(1000)))`. The expression compiles to a valid Bitcoin script, and any Miniscript-aware wallet can analyze that expression to produce the right witness for each spending path without custom logic per policy.
+
+The structure also guarantees properties that are hard to verify on raw script: that every advertised spending path is actually spendable, that the maximum witness size can be computed up front, and that no path is [malleable](https://en.bitcoin.it/wiki/Transaction_malleability). A higher-level Policy language lets a user describe what they want in even simpler terms and have the compiler pick an efficient Miniscript.
+
+Miniscript is implemented in [rust-miniscript](https://github.com/rust-bitcoin/rust-miniscript) and used by descriptor wallets including Bitcoin Core, BDK, Liana, and most modern multisig coordinators.
+
+## References
+
+- [bitcoin.sipa.be/miniscript](https://bitcoin.sipa.be/miniscript/)
+- [rust-bitcoin/rust-miniscript](https://github.com/rust-bitcoin/rust-miniscript)
+- [Bitcoin Core descriptors](https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md)
