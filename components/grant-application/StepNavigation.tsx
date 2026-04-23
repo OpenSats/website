@@ -3,6 +3,7 @@ interface StepNavigationProps {
   totalSteps: number
   onBack: () => void
   onNext: () => void
+  onSubmit: () => void
   loading: boolean
 }
 
@@ -11,6 +12,7 @@ export default function StepNavigation({
   totalSteps,
   onBack,
   onNext,
+  onSubmit,
   loading,
 }: StepNavigationProps) {
   const isLast = currentStep === totalSteps - 1
@@ -21,7 +23,12 @@ export default function StepNavigation({
         <button
           type="button"
           onClick={onBack}
-          className="rounded-md border border-gray-300 bg-white px-5 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+          disabled={loading}
+          className={`rounded-md border border-gray-300 bg-white px-5 py-2 text-sm font-medium text-gray-700 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 ${
+            loading
+              ? 'cursor-not-allowed opacity-50'
+              : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+          }`}
         >
           Back
         </button>
@@ -31,21 +38,25 @@ export default function StepNavigation({
 
       {isLast ? (
         <button
-          type="submit"
+          type="button"
+          onClick={onSubmit}
           disabled={loading}
           className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white hover:bg-orange-600 ${
             loading ? 'cursor-not-allowed opacity-50' : ''
           }`}
         >
-          Submit Grant Application
+          {loading ? 'Submitting...' : 'Submit Grant Application'}
         </button>
       ) : (
         <button
           type="button"
           onClick={onNext}
-          className="rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white hover:bg-orange-600"
+          disabled={loading}
+          className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white ${
+            loading ? 'cursor-not-allowed opacity-50' : 'hover:bg-orange-600'
+          }`}
         >
-          Continue
+          {currentStep === totalSteps - 2 ? 'Review Application' : 'Continue'}
         </button>
       )}
     </div>
