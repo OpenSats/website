@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['versioned encryption', 'NIP-44 v2', 'Nostr encryption']
 ---
 
-NIP-44 is Nostr's current encryption scheme for direct messages and other private payloads. It uses ChaCha20 for encryption with HMAC-SHA256 for authentication and derives the shared key via Elliptic-Curve Diffie-Hellman on the secp256k1 curve. The payload is padded so the ciphertext length does not leak the plaintext length.
+NIP-44 is [Nostr's](/topics/nostr) current encryption scheme for direct messages and other private payloads. It uses ChaCha20 for encryption with HMAC-SHA256 for authentication and derives the shared key via Elliptic-Curve Diffie-Hellman on the secp256k1 curve. The payload is padded so the ciphertext length does not leak the plaintext length.
 
 NIP-44 replaces the original NIP-04, which had several well-known weaknesses. NIP-04 used AES-CBC without proper authentication, leaked message length, and let an attacker tamper with the ciphertext without being detected. NIP-44 fixes those problems while keeping the same underlying key material: the user's existing Nostr keypair.
 
