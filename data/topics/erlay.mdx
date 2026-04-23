@@ -1,0 +1,19 @@
+---
+title: 'Erlay'
+summary: 'A bandwidth-efficient transaction relay protocol for Bitcoin that replaces flooding with set reconciliation between peers.'
+category: 'Bitcoin'
+aliases: ['BIP 330', 'transaction reconciliation', 'minisketch relay']
+---
+
+Erlay is a transaction relay protocol for Bitcoin full nodes that replaces flooding with set reconciliation. Under the current scheme, every node announces every transaction to every peer. Bandwidth usage grows linearly with the number of connections a node keeps.
+
+Erlay breaks the relay into two stages. Nodes still flood transactions to a small number of outbound peers. For the rest of the network, they exchange short sketches of their mempools and reconcile the difference using the minisketch library. Two nodes that already share most transactions exchange only a few kilobytes to agree on the few they do not share.
+
+The practical result is that a well-connected node can keep many more peers without a big jump in bandwidth. That in turn makes the network more resistant to eclipse attacks. Erlay is specified in BIP 330, with implementation work in Bitcoin Core tracked across several pull requests.
+
+## References
+
+- [BIP 330](https://github.com/bitcoin/bips/blob/master/bip-0330.mediawiki)
+- [Erlay paper (Naumenko, Maxwell, Wuille, Fedorova, Beschastnikh, 2019)](https://arxiv.org/abs/1905.10518)
+- [sipa/minisketch](https://github.com/bitcoin-core/minisketch)
+- [Bitcoin Optech: Erlay](https://bitcoinops.org/en/topics/erlay/)
