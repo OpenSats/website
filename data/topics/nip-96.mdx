@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['Nostr file storage', 'NIP-96 servers', 'media upload']
 ---
 
-NIP-96 defines an HTTP API for file storage servers that [Nostr](/topics/nostr) clients can talk to. A user uploads an image or a video to a NIP-96 server and gets back a URL that is safe to reference from a Nostr event. The server keeps the file. The relay only stores the URL and a hash.
+NIP-96 defines an HTTP API for file storage servers that [Nostr](/topics/nostr) clients can talk to. A user uploads an image or a video to a NIP-96 server and gets back a URL that is safe to reference from a Nostr event. The server keeps the file. The [relay](/topics/relays) only stores the URL and a hash.
 
 Authentication uses NIP-98, a signed HTTP authorization header built from the user's Nostr keypair. A client signs each request, the server verifies the signature, and rate-limits or charges based on the authenticated pubkey. There is no email signup and no separate account system.
 
