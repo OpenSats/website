@@ -5,14 +5,14 @@ category: 'Nostr'
 aliases: ['relay-based groups', 'Nostr groups', 'moderated groups']
 ---
 
-NIP-29 defines relay-based groups on [Nostr](/topics/nostr). A group lives entirely on one relay, not in the client-side web of follows that powers most of Nostr. The relay owns the membership list, the moderation log, and the stream of group messages.
+NIP-29 defines relay-based groups on [Nostr](/topics/nostr). A group lives entirely on one [relay](/topics/relays) rather than in the client-side web of follows that powers most of Nostr. The relay owns the membership list, the moderation log, and the stream of group messages.
 
-Each group has a unique identifier made of the relay URL and a group ID. A user joins by asking the relay, and the relay's admins accept or reject. Once inside, messages are plain Nostr events tagged with the group ID. If the user switches to a different relay, the group does not follow him.
+Each group has a unique identifier made of the relay URL and a group ID. A user joins by asking the relay, and the relay's admins accept or reject. Once inside, messages are plain Nostr events tagged with the group ID. If the user switches to a different relay, the group does not follow them.
 
-This design trades portability for simpler moderation. Admins can delete posts, kick members, and set rules without coordinating across the whole network. Clients that implement NIP-29 include 0xchat, Amethyst, Chachi, and Groups.nip29.com.
+This design trades portability for simpler moderation. Admins can delete posts, kick members, and set rules without coordinating across the whole network. Clients that implement NIP-29 include 0xchat, Amethyst, and the web client at `groups.nip29.com`.
 
 ## References
 
 - [NIP-29](https://github.com/nostr-protocol/nips/blob/master/29.md)
 - [0xchat](https://0xchat.com/)
-- [Chachi](https://chachi.chat/)
+- [groups.nip29.com](https://groups.nip29.com/)
