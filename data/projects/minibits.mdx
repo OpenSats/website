@@ -27,10 +27,19 @@ send ecash over [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.m
 encrypted DMs (sealed and wrapped via
 [NIP-44](https://github.com/nostr-protocol/nips/blob/master/44.md)) to any
 nostr contact. Tokens can be locked to a recipient's public key, and a payment
-can be prepared while offline for the recipient to claim later. Every wallet
-gets a persistent `name@minibits.cash` Lightning address routed through the
-project's own server, which also handles zap notifications and Nostr Wallet
-Connect delivery so payments reach the app even when it's backgrounded.
+can be prepared while offline for the recipient to claim later.
+
+Minibits also supports NFC tap-to-pay. A user taps their phone to a
+[Numo](https://numopay.org/) point-of-sale terminal or to another Minibits
+wallet, and the wallet writes a Cashu token back to the NFC tag to settle the
+payment (the payer can stay offline during the tap). A
+[short demo](https://njump.to/nevent1qqsqaa535j70f2nxtm5apttut4u8qntfa5rwnnpjvkvlu7awt09ykdck0wrna)
+shows the flow.
+
+Every wallet gets a persistent `name@minibits.cash` Lightning address routed
+through the project's own server, which also handles zap notifications and
+Nostr Wallet Connect delivery so payments reach the app even when it's
+backgrounded.
 
 Minibits keeps the "bearer" property of ecash: tokens live on the device, not
 on a server, and can be exported, imported, or transferred between phones
