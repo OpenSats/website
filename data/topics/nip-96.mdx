@@ -1,0 +1,18 @@
+---
+title: 'NIP-96'
+summary: 'An HTTP API for file storage servers that Nostr clients can upload to and then reference by URL from events, without bloating relays.'
+category: 'Nostr'
+aliases: ['Nostr file storage', 'NIP-96 servers', 'media upload']
+---
+
+NIP-96 defines an HTTP API for file storage servers that [Nostr](/topics/nostr) clients can talk to. A user uploads an image or a video to a NIP-96 server and gets back a URL that is safe to reference from a Nostr event. The server keeps the file. The relay only stores the URL and a hash.
+
+Authentication uses NIP-98, a signed HTTP authorization header built from the user's Nostr keypair. A client signs each request, the server verifies the signature, and rate-limits or charges based on the authenticated pubkey. There is no email signup and no separate account system.
+
+NIP-96 is what makes Nostr clients able to post images and video without bloating relays. Public servers that implement it include nostr.build, nostrcheck.me, and Satellite CDN. Blossom (BUD-01/BUD-02) is a newer spec that covers similar ground and is supported by many of the same servers.
+
+## References
+
+- [NIP-96](https://github.com/nostr-protocol/nips/blob/master/96.md)
+- [NIP-98: HTTP Auth](https://github.com/nostr-protocol/nips/blob/master/98.md)
+- [nostr.build](https://nostr.build/)
