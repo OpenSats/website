@@ -1,19 +1,21 @@
 ---
 title: 'CoinJoin'
-summary: 'A cooperative Bitcoin transaction where several users contribute inputs and receive back equal-size outputs, breaking chain-analysis heuristics that link inputs and outputs.'
+summary: 'A collaborative Bitcoin transaction that combines inputs from multiple participants to break the common input ownership heuristic used by chain analysis.'
 category: 'Privacy'
-aliases: ['coinjoin', 'WabiSabi', 'JoinMarket', 'ZeroLink']
+aliases: ['coinjoin', 'CoinJoins', 'collaborative transaction', 'WabiSabi', 'JoinMarket', 'ZeroLink']
 ---
 
-CoinJoin is a Bitcoin transaction where several users contribute inputs and receive back outputs of the same denomination, so it is unclear which input paid which output. Gregory Maxwell described the idea in 2013. The transaction is cooperative but does not require trust in a coordinator beyond liveness: a dishonest coordinator cannot steal funds, only refuse to publish the final transaction.
+A CoinJoin is a [collaborative transaction](https://jamdocs.org/glossary/#collaborative-transaction): a Bitcoin transaction that is initiated and signed by multiple participants. Combining inputs from several parties breaks the common input ownership heuristic that chain-analysis firms rely on to link addresses to a single actor. hashcoin proposed the idea on bitcointalk in 2011. Gregory Maxwell popularized it in 2013. A CoinJoin is always a batch transaction, and a dishonest coordinator cannot steal funds, only refuse to publish the final transaction.
 
-Different implementations make different tradeoffs. Wasabi uses the WabiSabi protocol and a coordinator that cannot see which input maps to which output. JoinMarket uses a fee-driven market where makers earn sats for participating in joins started by takers. Ashigaru runs CoinJoins on Android, originally forked from Samourai's ZeroLink protocol.
+CoinJoins fall into two broad types. Equal-output CoinJoins produce uniform output denominations, which lets participants hide in the crowd of other identical outputs. They are easy to spot on-chain because of the uniform structure. Unequal-output CoinJoins produce varied outputs and are harder to detect via chain analysis alone. [Payjoin](/topics/payjoin) is a collaborative transaction between two parties that also qualifies as a CoinJoin under the broader definition.
 
-CoinJoin does not anonymize coins in a legal or financial sense. It makes chain-analysis heuristics less reliable. Whether that is enough in practice depends on the attacker, the size of the anonymity set, and the user's behavior before and after the join.
+Active implementations include Jam on top of JoinMarket, which uses a maker/taker market with fidelity bonds; Wasabi, which uses the WabiSabi protocol with a coordinator that cannot link inputs to outputs; and Ashigaru on Android, forked from Samourai's ZeroLink protocol. CoinJoin does not make coins anonymous. It moves chain analysis from quasi-deterministic linking to probabilistic guessing, and the privacy gained depends on anonymity set size and on how the user spends the coins afterward.
 
 ## References
 
-- [Gregory Maxwell's original CoinJoin post (2013)](https://bitcointalk.org/?topic=279249)
+- [Jam glossary: collaborative transaction](https://jamdocs.org/glossary/#collaborative-transaction)
+- [Jam glossary: CoinJoin](https://jamdocs.org/glossary/#coinjoin)
+- [hashcoin, Blind Bitcoin Transfers (2011)](https://bitcointalk.org/index.php?topic=12751.msg315793#msg315793)
+- [Gregory Maxwell, CoinJoin: Bitcoin privacy for the real world (2013)](https://bitcointalk.org/?topic=279249)
 - [WabiSabi paper](https://eprint.iacr.org/2021/206)
 - [JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver)
-- [Bitcoin Optech: CoinJoin](https://bitcoinops.org/en/topics/coinjoin/)
