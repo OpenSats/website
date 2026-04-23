@@ -1,0 +1,19 @@
+---
+title: 'BIP 158'
+summary: 'The compact block filter format for Bitcoin. A small Golomb-coded set built per block that light clients can test locally to find relevant transactions.'
+category: 'Bitcoin'
+aliases: ['compact block filters', 'Golomb-coded set filter', 'block filter format']
+---
+
+BIP 158 defines the compact block filter. For each block, a node builds a small probabilistic filter over the scripts spent and created in that block. A light client that knows which scripts belong to its wallet can test each filter locally. If the filter says the block is irrelevant, the client skips it. If it says the block might contain a match, the client fetches the full block and checks directly.
+
+The filter uses Golomb-coded sets, which give a compact on-disk representation at a controlled false-positive rate. The filter for a typical block is on the order of a few kilobytes, against the block's full one to two megabytes.
+
+BIP 158 is the filter format. [BIP 157](/topics/bip-157) is the peer-to-peer protocol for requesting the filters. Together, they power privacy-preserving SPV in modern Bitcoin wallets like Neutrino, LDK Node, and Nakamoto.
+
+## References
+
+- [BIP 158](https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki)
+- [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki)
+- [Golomb coding (Wikipedia)](https://en.wikipedia.org/wiki/Golomb_coding)
+- [Bitcoin Optech: Compact block filters](https://bitcoinops.org/en/topics/compact-block-filters/)
