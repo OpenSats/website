@@ -9,7 +9,7 @@ BIP 157 is the client-side part of the compact block filter protocol. A light cl
 
 The filter format lives in [BIP 158](/topics/bip-158). BIP 157 is the peer-to-peer message layer on top: how the filters are requested, how the filter commitments are verified, and how light clients pin down which filter series they trust.
 
-Compared to the older BIP 37 bloom filter scheme, BIP 157 and BIP 158 shift filtering from the server to the client. The client discloses no addresses to the server. This is how wallets like Neutrino, LDK Node, and Nakamoto do SPV while preserving privacy. Bitcoin Core serves filters to peers when `peerblockfilters=1` is set in the config.
+Compared to the older BIP 37 bloom filter scheme, BIP 157 and BIP 158 shift filtering from the server to the client. The client discloses no addresses to the server. This is how wallets like Neutrino, [LDK](/topics/ldk) Node, and Nakamoto do SPV while preserving privacy. Bitcoin Core serves filters to peers when `peerblockfilters=1` is set in the config.
 
 ## References
 
