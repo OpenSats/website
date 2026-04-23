@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['Nostr labels', 'labeling events', 'moderation labels']
 ---
 
-NIP-32 defines labeling events on [Nostr](/topics/nostr). A user or a service can publish a signed event that attaches a label to another event, a pubkey, a relay URL, or a free-form topic. The labels can be unnamespaced strings or come from a declared namespace, and clients can filter on them the same way they filter on any other tag.
+NIP-32 defines labeling events on [Nostr](/topics/nostr). A user or a service can publish a signed event that attaches a label to another event, a pubkey, a [relay](/topics/relays) URL, or a free-form topic. The labels can be unnamespaced strings or come from a declared namespace, and clients can filter on them the same way they filter on any other tag.
 
 Labels are useful for content moderation without central control. A moderation service publishes labels like `spam` or `scam` for the pubkeys it disapproves of. Each client chooses which services to trust and filters the feed accordingly. Two users reading the same relay can see different views based on the label providers they subscribe to.
 
