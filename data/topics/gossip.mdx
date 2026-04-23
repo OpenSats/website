@@ -1,0 +1,18 @@
+---
+title: 'Gossip'
+summary: "The Lightning Network's peer-to-peer protocol for announcing channels and routing policies, so every node can build a view of the public graph."
+category: 'Lightning'
+aliases: ['BOLT 7', 'channel_announcement', 'channel_update', 'Lightning gossip']
+---
+
+Gossip is how Lightning nodes learn about the network. When a public channel opens, the two peers publish a `channel_announcement` signed by both of their node keys, followed by `channel_update` messages that carry routing fees, CLTV delta, and channel availability. Nodes flood these messages to every peer they talk to. Over time, each participating node ends up with roughly the same view of the routing graph.
+
+Without gossip, a sender would have no way of knowing which nodes are connected or what they charge. With it, a wallet or routing node can compute a path from one pubkey to another and build a multi-hop payment.
+
+The weakness is size. The full graph runs into hundreds of megabytes and grows as more channels open. Gossip v1 is specified in BOLT 7. Gossip v2 is a proposed replacement that cuts bandwidth by letting nodes fetch only the parts of the graph they care about and by moving from flooding to a set-reconciliation protocol.
+
+## References
+
+- [BOLT 7: Peer-to-peer gossip](https://github.com/lightning/bolts/blob/master/07-routing-gossip.md)
+- [BOLT 7 extensions and gossip v2 discussion](https://github.com/lightning/bolts/pull/1092)
+- [Lightning Network paper](https://lightning.network/lightning-network-paper.pdf)
