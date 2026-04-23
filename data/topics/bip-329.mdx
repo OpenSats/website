@@ -5,7 +5,7 @@ category: 'Bitcoin'
 aliases: ['wallet labels export', 'transaction labels', 'jsonl labels']
 ---
 
-BIP 329 is a portable format for wallet labels. Labels are the notes a user attaches to transactions, addresses, public keys, and UTXOs. They are private metadata. Wallets have stored them for years, but each wallet used its own proprietary format, so switching wallets meant losing the notes.
+BIP 329 is a portable format for wallet labels. Labels are the notes a user attaches to transactions, addresses, public keys, and [UTXOs](/topics/utxo). They are private metadata. Wallets have stored them for years, but each wallet used its own proprietary format, so switching wallets meant losing the notes.
 
 The format is JSON Lines: one JSON object per line, each with a `type`, a `ref`, a `label`, and optional fields like `origin` and `spendable`. A wallet exports its labels to a `.jsonl` file, the user imports that file into another wallet, and the labels reattach to the same objects on the new side.
 
@@ -13,6 +13,6 @@ Support exists in Sparrow, BlueWallet, Nunchuk, Bitcoin Safe, and other wallets.
 
 ## References
 
-- [BIP 329](https://github.com/bitcoin/bips/blob/master/bip-0329.md)
+- [BIP 329](https://github.com/bitcoin/bips/blob/master/bip-0329.mediawiki)
+- [bips.dev: BIP 329 rendered](https://bips.dev/329)
 - [JSON Lines](https://jsonlines.org/)
-- [Sparrow: labels](https://sparrowwallet.com/docs/quick-start.html#labels)
