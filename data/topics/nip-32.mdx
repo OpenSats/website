@@ -1,0 +1,18 @@
+---
+title: 'NIP-32'
+summary: 'A Nostr spec for labels: signed events that attach a tag to another event, a pubkey, a relay, or a topic, for client-side moderation and filtering.'
+category: 'Nostr'
+aliases: ['Nostr labels', 'labeling events', 'moderation labels']
+---
+
+NIP-32 defines labeling events on [Nostr](/topics/nostr). A user or a service can publish a signed event that attaches a label to another event, a pubkey, a relay URL, or a free-form topic. The labels can be unnamespaced strings or come from a declared namespace, and clients can filter on them the same way they filter on any other tag.
+
+Labels are useful for content moderation without central control. A moderation service publishes labels like `spam` or `scam` for the pubkeys it disapproves of. Each client chooses which services to trust and filters the feed accordingly. Two users reading the same relay can see different views based on the label providers they subscribe to.
+
+Because labels are themselves signed Nostr events, they live on the same relays as the content they describe and can be shared, revoked, or disputed like any other event. NIP-32 is implemented in Coracle, Ditto, and other moderation-aware clients.
+
+## References
+
+- [NIP-32](https://github.com/nostr-protocol/nips/blob/master/32.md)
+- [Coracle](https://coracle.social/)
+- [nostr-protocol/nips](https://github.com/nostr-protocol/nips)
