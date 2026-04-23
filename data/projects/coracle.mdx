@@ -1,0 +1,79 @@
+---
+title: 'Coracle'
+dateAdded: '2023-07-08'
+summary: 'A web-based nostr client focused on relay management and web of trust.'
+nym: 'Hodlbod'
+website: 'https://coracle.social/'
+donationLink: 'https://coracle.social/about'
+coverImage: '/static/images/projects/coracle.png'
+git: 'https://github.com/coracle-social/coracle'
+nostr: 'npub1jlrs53pkdfjnts29kveljul2sm0actt6n8dxrrzqcersttvcuv3qdjynqn'
+zapstore: 'https://zapstore.dev/apps/social.coracle.app'
+tags: ['Nostr']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2023#coracle'
+---
+
+Coracle is a nostr web client built by [Hodlbod][lts]. It started as a social
+feed reader but has grown to cover group chat, direct messages, communities,
+marketplaces, and classifieds. The client runs in the browser and works across
+desktop and mobile.
+
+> Much of nostr's novelty has to do with keys and digital signatures. But
+> focusing on the cryptographic aspects is, to me, actually something of a
+> distraction. The important thing to realize is that digital signatures make
+> relays possible.
+>
+> <cite>—[Hodlbod][impact-report]</cite>
+
+Consequently, Coracle puts the most effort into relay handling. Users can choose
+which relays receive a given note, and the outbox model figures out where to
+fetch posts from based on who you follow. Smarter fallback behavior keeps
+timelines loading even when individual relays go down. [Negentropy]-based sync
+makes refreshing feeds faster by only pulling what changed. A restored global
+feed gives newcomers an easy way to browse the wider network.
+
+Hodlbod also works on relay infrastructure directly. He proposed and implemented
+[NIP-43] for relay membership lists and built [zooid], a relay that uses them.
+Combined with [NIP-86] for relay admin controls, these features let relays state
+who they serve and what content they host.
+
+## Why fund it?
+
+Coracle is one of the longer-running nostr clients and has been a testing ground
+for relay-related protocol improvements. Hodlbod ships NIP implementations in
+Coracle, tests them in production, and feeds results back into the spec process.
+[Daniele] contributes UX and reliability work.
+
+The project has also produced [Welshman], a library extracted from Coracle that
+other nostr projects can use.
+
+OpenSats has been supporting Coracle since the [first wave of nostr
+grants][wave-1] in July 2023. Hodlbod later received a [long-term support
+grant][lts].
+
+## What's next?
+
+Coracle itself is in maintenance mode while Hodlbod focuses on [Flotilla], a
+group chat client that treats relays as first-class citizens for access control
+and content policies. Active development includes voice rooms, a relay hosting
+platform, and [Pomade], an email/password login protocol for normie-friendly key
+management. The [Welshman] library that powers both clients continues to see
+major work, including a store rewrite for performance and improved outbox relay
+selection.
+
+For a detailed look at earlier progress, see the [Advancements in Nostr
+Clients][impact-report] impact report.
+
+[Daniele]: /blog/daniele-receives-lts-grant
+[Flotilla]: https://gitea.coracle.social/coracle/flotilla
+[impact-report]: /blog/advancements-in-nostr-clients#coracle
+[lts]: /blog/hodlbod-receives-lts-grant
+[Negentropy]: https://github.com/nostr-protocol/nips/blob/master/77.md
+[NIP-43]: https://github.com/nostr-protocol/nips/blob/master/43.md
+[NIP-86]: https://github.com/nostr-protocol/nips/blob/master/86.md
+[Pomade]: https://github.com/coracle-social/pomade
+[wave-1]: /blog/nostr-grants-july-2023#coracle
+[Welshman]: https://github.com/coracle-social/welshman
+[zooid]: https://github.com/coracle-social/zooid

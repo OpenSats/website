@@ -5,6 +5,7 @@ import Youtube from './youtube.svg'
 import Linkedin from './linkedin.svg'
 import Twitter from './twitter.svg'
 import Nostr from './nostr.svg'
+import Zapstore from './zapstore.svg'
 import Web from './globe-solid.svg'
 
 // Icons taken from: https://simpleicons.org/ and https://fontawesome.com (globe)
@@ -17,6 +18,7 @@ const components = {
   linkedin: Linkedin,
   twitter: Twitter,
   nostr: Nostr,
+  zapstore: Zapstore,
   website: Web,
 }
 

@@ -5,9 +5,10 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "npx contentlayer build && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
+    "build": "npx contentlayer build && node ./scripts/generate-project-og.mjs && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
+    "generate:project-og": "node ./scripts/generate-project-og.mjs",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "test": "jest"
   },
@@ -65,6 +66,7 @@
     "unist-util-visit": "^4.1.0"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@svgr/webpack": "^6.3.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/jest-dom": "^6.6.3",

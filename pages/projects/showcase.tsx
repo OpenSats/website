@@ -34,6 +34,8 @@ const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
                   title={p.title}
                   summary={p.summary}
                   coverImage={p.coverImage}
+                  darkCoverImage={p.darkCoverImage}
+                  invertDarkImage={p.invertDarkImage}
                   nym={p.nym}
                   tags={p.tags}
                 />

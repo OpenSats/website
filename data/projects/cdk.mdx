@@ -1,0 +1,63 @@
+---
+title: 'Cashu Dev Kit'
+dateAdded: '2025-09-26'
+summary: 'A modular Rust toolkit for building Cashu wallets and mints.'
+nym: 'thesimplekid'
+website: 'https://cashudevkit.org/'
+donationLink: 'https://opencash.dev/'
+coverImage: '/static/images/projects/cdk.svg'
+git: 'https://github.com/cashubtc/cdk'
+nostr: 'npub1qjgcmlpkeyl8mdkvp4s0xls4ytcux6my606tgfx9xttut907h0zs76lgjw'
+tags: ['Bitcoin', 'Lightning', 'ecash', 'Library']
+showcase: true
+fund: general
+announcementLink: '/blog/thirteenth-wave-of-bitcoin-grants#cdk--sats-app'
+---
+
+The Cashu Development Kit (CDK) is a Rust library for building wallets and
+mints that implement the [Cashu](/projects/cashu) protocol. It provides
+the core protocol logic, storage backends (SQLite, PostgreSQL, Redb), an
+Axum-based mint HTTP server, and Lightning backends for CLN, LND, LNbits, and
+LDK Node. Binaries for a wallet CLI (`cdk-cli`) and a mint (`cdk-mintd`) are
+included.
+
+> CDK is the easiest way to get started building Cashu apps. As Bitcoin
+> monetizes, Cashu will be the protocol which day-to-day and online-native
+> payments are settled.
+>
+> <cite>—[David Caseria](/blog/advancements-in-ecash#cashu-dev-kit)</cite>
+
+In 2025, CDK added language bindings for
+[Swift](https://github.com/cashubtc/cdk-swift),
+[Kotlin](https://github.com/cashubtc/cdk-kotlin),
+[Go](https://github.com/cashubtc/cdk-go),
+[Flutter](https://github.com/cashubtc/cdk-flutter), and
+[Python](https://github.com/cashubtc/cdk-python). All of them wrap the same
+Rust core, so wallet and mint developers can build on any platform without
+reimplementing the protocol. Multi-mint wallet support is also underway, letting
+a single wallet manage balances across different mints.
+
+## Why fund it?
+
+CDK sits between the Cashu protocol specs and the apps people use. Without it,
+every wallet and mint would have to implement token issuance, Lightning
+settlement, storage, and networking from scratch. CDK handles all of that in
+one place.
+
+OpenSats has supported CDK as highlighted in the
+[Advancements in Ecash](/blog/advancements-in-ecash#cashu-dev-kit) impact
+report and awarded an additional grant for cloud and mint operability work in
+the [sixteenth wave of Bitcoin grants](/blog/sixteenth-wave-of-bitcoin-grants#cashu-dev-kit-cdk).
+
+## What's next?
+
+Mint operators are getting [Prometheus](https://prometheus.io/) and
+[Grafana](https://grafana.com/) monitoring, along with Kubernetes controllers
+and gRPC management backends for running mints in the cloud. On the deployment
+side, container images and
+[Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/) support are
+making it easier to run mints in production.
+
+For a detailed look at recent progress, see the
+[Advancements in Ecash](/blog/advancements-in-ecash#cashu-dev-kit) impact
+report.
