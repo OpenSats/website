@@ -54,17 +54,17 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           {...register('has_references', { required: true })}
         />
         <span>
-          I have two or more{' '}
+          I understand that at least two{' '}
           <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
             written reference letters
           </CustomLink>{' '}
-          from people familiar with my work
+          from people familiar with my work are required
         </span>
       </label>
       <FieldError
         errors={errors}
         name="has_references"
-        message="Please prepare your reference letters before continuing. Reference letters can be included as part of your application or emailed to support@opensats.org once your application is submitted. The evaluation of your application will not start until we have two references."
+        message="Please prepare your reference letters before continuing. Reference letters can be included as part of your application or emailed to references@opensats.org once your application is submitted. The evaluation of your application will not start until we have two references."
       />
 
       <label className="inline-flex items-start gap-2">
@@ -73,7 +73,12 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           className={`mt-1 ${checkboxClass}`}
           {...register('free_open_source', { required: true })}
         />
-        <span>The project has a proper FOSS license</span>
+        <span>
+          The project has a proper{' '}
+          <CustomLink href="/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license">
+            FOSS license
+          </CustomLink>
+        </span>
       </label>
       <FieldError
         errors={errors}

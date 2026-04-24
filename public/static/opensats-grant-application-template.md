@@ -30,7 +30,12 @@ Please provide at least 2 written reference letters from people in the Bitcoin
 community or open-source space who are familiar with you or your project.
 Include the email address of each reference so we can reach out to verify.
 Cryptographically signed references, e.g. using PGP or Nostr, are a plus.
-References can also be sent directly to references@opensats.org.
+References can be included as part of your application or emailed directly to
+references@opensats.org using the subject line "Reference Letter for [Project
+Name] by [Applicant Name]".
+
+The evaluation of your application will not start until we have two written
+references.
 
 ### Prior Contributions
 
