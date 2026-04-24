@@ -73,7 +73,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           className={`mt-1 ${checkboxClass}`}
           {...register('free_open_source', { required: true })}
         />
-        <span>The project has a proper FOSS license</span>
+        <span>The project has a proper [FOSS license](https://opensats.org/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license)</span>
       </label>
       <FieldError
         errors={errors}
