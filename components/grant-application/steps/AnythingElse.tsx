@@ -1,7 +1,8 @@
 import CustomLink from '@/components/Link'
+import FieldError from '../FieldError'
 import { StepProps, inputClass, checkboxClass } from '../types'
 
-export default function AnythingElse({ register }: StepProps) {
+export default function AnythingElse({ register, errors }: StepProps) {
   return (
     <>
       <h2>Vibe Check</h2>
@@ -14,6 +15,11 @@ export default function AnythingElse({ register }: StepProps) {
         />
         <span>I promise to not produce vibed garbage.</span>
       </label>
+      <FieldError
+        errors={errors}
+        name="no_vibed_garbage"
+        message="Please confirm that you will not produce vibed garbage"
+      />
 
       <label className="inline-flex items-start gap-2">
         <input
@@ -26,6 +32,11 @@ export default function AnythingElse({ register }: StepProps) {
           of the project.
         </span>
       </label>
+      <FieldError
+        errors={errors}
+        name="human_in_charge"
+        message="Please confirm that a human is in charge of the project"
+      />
 
       <label className="inline-flex items-start gap-2">
         <input
@@ -41,6 +52,11 @@ export default function AnythingElse({ register }: StepProps) {
           to the project.
         </span>
       </label>
+      <FieldError
+        errors={errors}
+        name="discipline_and_agency"
+        message="Please confirm that you will bring discipline and agency"
+      />
 
       <small>
         The use of LLMs and coding agents is perfectly fine. These are tools,
