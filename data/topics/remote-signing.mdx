@@ -1,0 +1,18 @@
+---
+title: 'Remote signing'
+summary: 'A Nostr protocol for signing events with a key that lives on a different device or service than the client composing the event.'
+category: 'Nostr'
+aliases: ['NIP-46', 'bunker', 'nsecBunker', 'Nostr Connect']
+---
+
+NIP-46 defines a protocol for signing [Nostr](/topic/nostr) events with a key that lives on a different device or service than the one composing the event. A user's private key stays in a dedicated signer, often an Android app like Amber or a hosted bunker, and every client talks to that signer over Nostr relays to request signatures.
+
+The signer shows each request to the user, who approves or rejects it. A good signer also stores per-app permissions, so a client that the user trusts to publish short notes does not automatically get permission to send private messages or spend from a wallet. The client never sees the private key.
+
+This separation lets a user log into a web client without pasting in their private key, try a new client without re-seeding a keypair, and revoke access for a single client without touching the others. NIP-46 is implemented by Amber, nsecBunker, nsec.app, and most major Nostr clients on desktop and mobile.
+
+## References
+
+- [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
+- [Amber](https://github.com/greenart7c3/Amber)
+- [nsec.app](https://github.com/nostrband/noauth)

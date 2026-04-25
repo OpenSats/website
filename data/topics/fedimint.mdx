@@ -1,0 +1,19 @@
+---
+title: 'Fedimint'
+summary: 'A federated Chaumian ecash system where a group of guardians jointly custody the underlying Bitcoin.'
+category: 'Ecash'
+aliases: ['federated ecash', 'federated mint']
+---
+
+Fedimint is an ecash protocol where the mint is run by a federation of guardians instead of a single operator. The guardians hold the backing Bitcoin in a threshold multisig and sign blinded ecash tokens jointly. A quorum has to misbehave in order to rug the users.
+
+Members of a federation hold ecash notes in a wallet app, send them to each other, and pay or receive over Lightning via a gateway. Payments inside the federation are offline-friendly and private; payments to the outside world go through the Lightning gateway and look like regular Lightning payments.
+
+The project lives at [fedimint.org](https://fedimint.org/), with source at [github.com/fedimint/fedimint](https://github.com/fedimint/fedimint). The client side is also packaged as the `fedimint-client` crate for wallets to embed.
+
+## References
+
+- [fedimint.org](https://fedimint.org/)
+- [fedimint/fedimint](https://github.com/fedimint/fedimint)
+- [Fedimint Users](https://fedimint.org/users/intro)
+- [Fedimint Guardians](https://fedimint.org/guardians/intro)

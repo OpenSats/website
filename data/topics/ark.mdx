@@ -1,0 +1,22 @@
+---
+title: 'Ark'
+summary: 'A second-layer Bitcoin protocol that uses a shared UTXO and a coordinator to let users transact off-chain without opening channels.'
+category: 'Scaling'
+aliases: ['Ark protocol']
+---
+
+Ark is a proposed off-chain payment protocol for Bitcoin. Users deposit into a shared output controlled by a coordinator (called the Ark Service Provider), receive virtual UTXOs ("vTXOs"), and can send those vTXOs to each other during an interactive process known as "round". At any time, a user can unilaterally exit back to an on-chain UTXO without the coordinator's cooperation.
+
+Compared to Lightning, Ark does not require users to open channels, manage inbound liquidity, or stay online. The trade-off is that vTXOs have an expiry: if the user does not refresh them before the round ends, they have to exit on chain or risk to lose control of the funds.
+
+The protocol is still under active research and development. The site [arkdev.info](https://arkdev.info/) collects current specifications and implementations such as [arkade-os/arkd](https://github.com/arkade-os/arkd).
+
+## References
+
+- [Ark: An Alternative Privacy-preserving Second Layer Solution](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2023-May/021694.html)
+- [ark-protocol.org](https://ark-protocol.org/)
+- [arkdev.info](https://arkdev.info/)
+- [arkade-os/arkd](https://github.com/arkade-os/arkd)
+- [arkade-os](https://github.com/arkade-os)
+- [bark](https://gitlab.com/ark-bitcoin/bark)
+- [bark](https://gitlab.com/ark-bitcoin/bark)

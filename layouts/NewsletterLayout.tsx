@@ -32,7 +32,7 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
                 {formatDate(date, siteMetadata.locale)}
               </time>
             </div>
-            <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-50">
+            <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
               {title}
             </h1>
             {summary && (

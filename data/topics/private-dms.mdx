@@ -1,0 +1,18 @@
+---
+title: 'Private DMs'
+summary: 'The current standard for private direct messages on Nostr, using gift wrap to hide sender, receiver, and metadata from relays.'
+category: 'Nostr'
+aliases: ['NIP-17', 'NIP-59', 'gift wrap', 'Nostr DMs']
+---
+
+NIP-17 is the current standard for private direct messages on [Nostr](/topics/nostr). It replaces the older NIP-04, which leaked both the sender and the receiver of every message to any relay that stored it. Under NIP-17, messages are encrypted with NIP-44 and wrapped in the "gift wrap" construction from NIP-59, which also hides the real timestamp and other metadata.
+
+Each DM ends up stored on relays as an event whose apparent sender and receiver look random. Only the real recipient can unwrap it, and only after doing so he is able to learn who sent it. Relays cannot correlate conversations or build a social graph from DM traffic.
+
+This design lets private chat run on the same public relay network that carries every other kind of Nostr event. Clients implementing NIP-17 include Damus, Amethyst, Primal, 0xchat, and Coracle.
+
+## References
+
+- [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md)
+- [NIP-59: Gift Wrap](https://github.com/nostr-protocol/nips/blob/master/59.md)
+- [NIP-44: Versioned encryption](https://github.com/nostr-protocol/nips/blob/master/44.md)

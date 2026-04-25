@@ -1,0 +1,18 @@
+---
+title: 'Nostr Wallet Connect'
+summary: 'A Nostr protocol that lets a client pay and receive Lightning payments through a user-controlled wallet, using relays as the transport.'
+category: 'Nostr'
+aliases: ['NWC', 'NIP-47']
+---
+
+Nostr Wallet Connect is a protocol that lets a [Nostr](/topics/nostr) client pay and receive Lightning payments through a user's own wallet, using Nostr relays as the transport. The client encrypts a payment request to the wallet's public key, posts it to a relay, and the wallet picks it up, pays the invoice, and returns a signed response.
+
+A user pairs a client with a wallet once, by scanning a connection string that grants a limited budget or a specific set of permissions. After that, the client can zap, pay invoices, or fetch balances without ever seeing the wallet's seed and without running a Lightning node itself. If the user wants to revoke access, they do so in the wallet and the client immediately loses its rights.
+
+NIP-47 is supported by Alby, Mutiny, LNbits, Phoenix, Zeus, and an increasing number of Lightning wallets. On the client side, Damus, Amethyst, Primal, and most zap-capable Nostr clients speak NWC out of the box.
+
+## References
+
+- [NIP-47](https://github.com/nostr-protocol/nips/blob/master/47.md)
+- [docs.nwc.dev](https://docs.nwc.dev/)
+- [Alby NWC developer guide](https://guides.getalby.com/developer-guide/developer-guide/nostr-wallet-connect-api)
