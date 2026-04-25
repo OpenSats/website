@@ -60,6 +60,36 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/* Editor's note                                                      */
+/* A minimal "letter" treatment for the opening note in newsletter    */
+/* issues: serif body, thin orange margin rule, soft cream backdrop,  */
+/* italic sign-off.                                                   */
+/* ------------------------------------------------------------------ */
+
+.editors-note {
+  margin: 0 0 2.5rem;
+  padding: 1.75rem 2rem;
+  background-color: #fffaf3; /* warm off-white */
+  border-left: 3px solid #fdba74; /* orange-300 */
+  border-radius: 2px;
+  font-family: ui-serif, Georgia, 'Times New Roman', Times, serif;
+}
+
+.editors-note p {
+  font-family: inherit;
+}
+
+.editors-note__signoff {
+  font-style: italic;
+  text-align: right;
+}
+
+.dark .editors-note {
+  background-color: rgba(120, 53, 15, 0.12); /* faint warm tint */
+  border-left-color: #c2410c; /* orange-700 */
+}
+
+/* ------------------------------------------------------------------ */
 /* DonateRecurringButtonV2                                            */
 /* A wide split-text banner with an angled orange wedge that grows on */
 /* hover, fading in floating hearts. Inspired by Thunderbird's EOY    */
