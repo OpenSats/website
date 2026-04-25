@@ -1,0 +1,18 @@
+---
+title: 'NIP-05'
+summary: 'A Nostr spec that maps human-readable identifiers like `name@domain.com` to public keys via a JSON file hosted on the domain.'
+category: 'Nostr'
+aliases: ['Nostr address', 'nostr.json', 'DNS-based identifier', 'verified identifier']
+---
+
+NIP-05 maps human-readable identifiers like `alice@example.com` to [Nostr](/topics/nostr) public keys using a JSON file on the domain's server. A client that wants to verify the identifier fetches `https://example.com/.well-known/nostr.json?name=alice` and checks that the returned pubkey matches the one the user claims on their profile.
+
+The identifier is optional. The underlying identity is still the pubkey. NIP-05 only asserts that the user controls the domain where the identifier lives. Losing the domain means losing the NIP-05, but the Nostr account keeps working with the same keypair.
+
+Clients display the identifier as a handle next to the name or as a string the user can share instead of a raw `npub`. Hosting services like `nostrcheck.me`, `iris.to`, and `nostrplebs.com` offer NIP-05 addresses for users who do not run their own domain.
+
+## References
+
+- [NIP-05](https://github.com/nostr-protocol/nips/blob/master/05.md)
+- [nostrcheck.me](https://nostrcheck.me/)
+- [nostr-protocol/nips](https://github.com/nostr-protocol/nips)
