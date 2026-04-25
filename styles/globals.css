@@ -104,7 +104,7 @@ body {
   align-items: center;
   max-width: 480px;
   min-height: 120px;
-  margin: 2.5rem auto;
+  margin: 4rem auto;
   border-radius: 6px;
   background-color: #f4f4f5; /* neutral-100 */
   background-image: linear-gradient(to right, #ffedd5, #f4f4f5);
