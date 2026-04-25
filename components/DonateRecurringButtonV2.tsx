@@ -16,7 +16,7 @@ type DonateRecurringButtonV2Props = {
 
 export default function DonateRecurringButtonV2({
   prelude = 'Click here to',
-  cta = 'Give Monthly!',
+  cta = '>_ donate',
   preTagline = 'Help keep',
   tagline = 'FOSS Alive!',
   designation,
