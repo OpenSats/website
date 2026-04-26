@@ -36,22 +36,17 @@ export default function NewsletterIndexPage({
   return (
     <>
       <PageSEO
-        title={`Newsletter - ${siteMetadata.title}`}
-        description="Sats Well Spent — quarterly dispatches from OpenSats. Signals, numbers, and software shipped."
+        title={`Sats Well Spent - ${siteMetadata.title}`}
+        description="Sats Well Spent. A quarterly newsletter from OpenSats."
       />
       <SectionContainer>
         <div className="mx-auto max-w-2xl">
           <header className="space-y-4 pb-10 pt-4">
-            <p className="font-mono text-xs uppercase tracking-wider text-primary-500 dark:text-primary-400">
-              Sats Well Spent
-            </p>
             <h1 className="font-serif text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
-              Newsletter
+              Sats Well Spent
             </h1>
             <p className="text-lg leading-8 text-gray-600 dark:text-gray-300">
-              A quarterly dispatch from inside the sat-dispensing machine —
-              signals, numbers, sats sent and received, and notable software
-              shipped by our grantees.
+              A quarterly newsletter from inside the sat-dispensing machine.
             </p>
           </header>
 
@@ -73,7 +68,7 @@ export default function NewsletterIndexPage({
                         className="group block"
                       >
                         <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                          <span className="text-primary-500 dark:text-primary-400">
+                          <span className="text-primary-500 group-hover:text-primary-600 dark:text-primary-400 dark:group-hover:text-primary-300">
                             {issueLabel}
                           </span>
                           <span aria-hidden="true">·</span>
@@ -83,11 +78,8 @@ export default function NewsletterIndexPage({
                             {formatDate(issue.date, siteMetadata.locale)}
                           </time>
                         </div>
-                        <h2 className="mt-2 font-serif text-2xl font-bold tracking-tight text-gray-900 group-hover:text-primary-500 dark:text-gray-100 dark:group-hover:text-primary-400 sm:text-3xl">
-                          {issue.title}
-                        </h2>
                         {issue.summary && (
-                          <p className="mt-2 text-gray-600 dark:text-gray-400">
+                          <p className="mt-2 text-lg leading-7 text-gray-700 group-hover:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100">
                             {issue.summary}
                           </p>
                         )}
