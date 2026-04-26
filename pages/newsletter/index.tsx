@@ -46,7 +46,7 @@ export default function NewsletterIndexPage({
               Sats Well Spent
             </h1>
             <p className="text-lg leading-8 text-gray-600 dark:text-gray-300">
-              A quarterly newsletter from inside the sat-dispensing machine.
+              Signals, numbers, and notable software shipped by our grantees.
             </p>
           </header>
 
