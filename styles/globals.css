@@ -269,10 +269,8 @@ body {
   text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
 }
 
-.donate-banner-v2__heart {
+.donate-banner-v2__tagline-mobile {
   display: none;
-  font-size: 2.25rem;
-  line-height: 1;
 }
 
 @media (max-width: 480px) {
@@ -288,14 +286,7 @@ body {
     display: none;
   }
 
-  .donate-banner-v2__right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .donate-banner-v2__heart {
-    display: inline-flex;
-    text-shadow: none;
+  .donate-banner-v2__tagline-mobile {
+    display: inline;
   }
 }
