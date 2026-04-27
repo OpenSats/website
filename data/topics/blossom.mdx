@@ -1,0 +1,21 @@
+---
+title: 'Blossom'
+summary: 'A small HTTP protocol for storing files (blobs) on servers, addressed by their SHA-256 hash and authenticated with Nostr keys.'
+category: 'Nostr'
+aliases: ['BUD-01', 'BUD-02', 'Blobs Stored Simply on Mediaservers']
+---
+
+Blossom is a protocol for uploading and serving files over HTTP, where each file is identified by the SHA-256 hash of its bytes. A client can hand the same hash to several Blossom servers and any of them can serve the file back. There is no central registry, and there is no per-server file ID to keep track of.
+
+Authentication uses signed [Nostr](/topics/nostr) events of kind `24242`. The client signs an event that says what it wants to do (upload, list, delete, mirror), and the server checks the signature against the user's pubkey before allowing the action. The same Nostr keypair a user already has for posting notes is what authorizes file operations.
+
+A small set of endpoints does most of the work. `GET /<sha256>` fetches a blob, `PUT /upload` stores one, `GET /list/<pubkey>` lists what a given user has uploaded to that server, and `DELETE /<sha256>` removes a blob. A `PUT /mirror` endpoint lets a server fetch a blob from another server by URL, which makes it cheap to keep copies on several servers and stay resilient to any one of them going away.
+
+Blossom and [NIP-96](/topics/nip-96) cover similar ground. NIP-96 came first and is closer to a traditional upload API. Blossom is smaller, content-addressed, and easier to implement, and many media servers now support both.
+
+## References
+
+- [Blossom spec (hzrd149/blossom)](https://github.com/hzrd149/blossom)
+- [BUD-01: Server requirements and blob retrieval](https://github.com/hzrd149/blossom/blob/master/buds/01.md)
+- [BUD-02: Blob upload and management](https://github.com/hzrd149/blossom/blob/master/buds/02.md)
+- [primal.net/blossom](https://blossom.primal.net/)
