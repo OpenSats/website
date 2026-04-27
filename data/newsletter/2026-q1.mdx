@@ -97,7 +97,7 @@ FOSS, no prosperity without bitcoin.
   [2025 Year in Review](/blog/2025-year-in-review), out late January.
 - **MuSig2 ships.**
   [Bitcoin Core merged MuSig2 wallet support](https://github.com/bitcoin/bitcoin/pull/29675)
-  on October 14, letting the wallet receive and spend inputs involving
+  on October 14, so the wallet can receive and spend inputs involving
   MuSig2 aggregate keys. The change ships in
   [Bitcoin Core 31.0](https://bitcoincore.org/en/releases/31.0/),
   released April 22. On iOS, [Bittr](https://getbittr.com), an
@@ -244,13 +244,15 @@ FOSS, no prosperity without bitcoin.
   browsers running in Lock Mode.
 - **[Amethyst](/projects/amethyst) v1.05 & Amethyst Desktop.**
   [Vitor Pamplona](/blog/vitor-pamplona-receives-lts-grant) shipped
-  v1.04 and v1.05 this quarter (752 commits), with pluggable Web of
-  Trust via NIP-85, a new Quartz local DB doing sub-microsecond queries
-  in 15 MB of RAM, and NIP-A4 Public Messages. In parallel, new grantee
+  v1.04 and v1.05 this quarter, 752 commits in total. NIP-85 made Web
+  of Trust providers pluggable, the new Quartz local DB does
+  sub-microsecond queries in 15 MB of RAM, and NIP-A4 Public Messages
+  landed. In parallel, new grantee
   [Róbert Nagy](/blog/sixteenth-wave-of-nostr-grants#amethyst-desktop)
-  started porting Amethyst to JVM Desktop via Kotlin Multiplatform,
-  shipping NIP-46 bunker login, a multi-column deck, advanced search
-  operators, and a full NIP-96/NIP-17/NIP-50 media pipeline.
+  started porting Amethyst to JVM Desktop via Kotlin Multiplatform.
+  His first quarter shipped NIP-46 bunker login, a multi-column deck,
+  advanced search operators, and a full NIP-96/NIP-17/NIP-50 media
+  pipeline.
 - **[Nostr Mail](/blog/sixteenth-wave-of-nostr-grants#nostr-mail).** New
   grantee Nogringo shipped a complete email-over-nostr stack in his
   first month: the
@@ -273,20 +275,21 @@ FOSS, no prosperity without bitcoin.
 - **Dedicated nostr signers.** Two signer grantees shipped this quarter.
   [DASHU](/blog/nostr-grants-july-2024#nostrmo) released v0.3.0 of
   [Nesigner](https://nesigner.nostrmo.com), his ESP32-based hardware
-  signer, alongside [Briner](https://github.com/haorendashu/briner), a
+  signer, plus [Briner](https://github.com/haorendashu/briner), a
   browser extension that bridges Nesigner to NIP-07 web apps.
   [ZharlieW](/blog/twelfth-wave-of-nostr-grants#aegis) put out six
-  releases of [Aegis](https://github.com/ZharlieW/Aegis), adding a
-  Nostr App Browser, NIP-55 `nostrsigner:` URL-scheme support, and a
-  local relay running as an Android foreground service.
+  releases of [Aegis](https://github.com/ZharlieW/Aegis). New in those
+  releases: a Nostr App Browser, NIP-55 `nostrsigner:` URL-scheme
+  support, and a local relay that runs as an Android foreground
+  service.
 - **[nostr-double-ratchet](https://github.com/mmalmi/nostr-double-ratchet).**
   [Martti Malmi](/blog/eleventh-wave-of-nostr-grants#nostr-double-ratchet)'s
-  end-to-end encryption library for nostr now powers multi-device
-  chat with group messaging in [Iris](https://iris.to/), with a Tauri
-  build live on iOS, Play Store, ZapStore, and desktop. Voice and
-  video calls work over WebRTC, and a Cashu wallet is integrated. The
-  session manager is being extracted as a standalone module to land
-  in NDK and Notedeck next quarter.
+  end-to-end encryption library for nostr now powers multi-device chat
+  and group messaging in [Iris](https://iris.to/). The Tauri build is
+  live on iOS, Play Store, ZapStore, and desktop. Voice and video calls
+  work over WebRTC, and a Cashu wallet is integrated. Martti is
+  extracting the session manager as a standalone module so NDK and
+  Notedeck can pick it up next quarter.
 
 ---
 
