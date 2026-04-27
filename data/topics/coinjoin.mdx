@@ -5,7 +5,9 @@ category: 'Privacy'
 aliases: ['coinjoin', 'CoinJoins', 'collaborative transaction', 'WabiSabi', 'JoinMarket', 'ZeroLink']
 ---
 
-A CoinJoin is a collaborative transaction: a Bitcoin transaction that is initiated and signed by multiple participants. Combining inputs from several parties breaks the common input ownership heuristic that chain-analysis firms rely on to link addresses to a single actor. The idea was first proposed on Bitcointalk in 2011 by a user going by `hashcoin`, and popularized in 2013 by Gregory Maxwell. A CoinJoin is always a batch transaction, and a dishonest coordinator cannot steal funds, only refuse to publish the final transaction.
+A CoinJoin is a collaborative transaction: a Bitcoin transaction that is initiated and signed by multiple participants. Combining inputs from several parties breaks the common input ownership heuristic that chain-analysis firms rely on to link addresses to a single actor. The idea was first proposed on Bitcointalk in 2011 by a user going by `hashcoin`, and popularized in 2013 by Gregory Maxwell. Most CoinJoins are a specific type of batch transaction, and a dishonest coordinator cannot steal funds, only refuse to publish the final transaction.
+
+Beyond privacy, batching transactions has other benefits in some circumstances. Combining many payments into one transaction amortizes the fixed per-transaction overhead across all participants, so the total fee paid in aggregate is lower than it would be if each payment were sent on its own. Exchanges and payment processors use plain (non-CoinJoin) batching for the same reason.
 
 CoinJoins fall into two broad types. Equal-output CoinJoins produce uniform output denominations, which lets participants hide in the crowd of other identical outputs. They are easy to spot on-chain because of the uniform structure. Unequal-output CoinJoins produce varied outputs and are harder to detect via chain analysis alone. [Payjoin](/topics/payjoin) is a collaborative transaction between two parties that also qualifies as a CoinJoin under the broader definition.
 
