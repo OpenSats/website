@@ -11,9 +11,12 @@ Erlay breaks the relay into two stages. Nodes still flood transactions to a smal
 
 The practical result is that a well-connected node can keep many more peers without a big jump in bandwidth. That in turn makes the network more resistant to eclipse attacks. Erlay is specified in BIP 330, with implementation work in Bitcoin Core tracked across several pull requests.
 
+Whether Erlay is worth shipping is still an open question. As of early 2026, Bitcoin Core developers are re-evaluating its trade-offs and goals in [bitcoin/bitcoin#34542](https://github.com/bitcoin/bitcoin/issues/34542), so the design described here may yet change or be dropped.
+
 ## References
 
 - [BIP 330](https://github.com/bitcoin/bips/blob/master/bip-0330.mediawiki)
 - [Erlay paper (Naumenko, Maxwell, Wuille, Fedorova, Beschastnikh, 2019)](https://arxiv.org/abs/1905.10518)
 - [bitcoin-core/minisketch](https://github.com/bitcoin-core/minisketch)
 - [Bitcoin Optech: Erlay](https://bitcoinops.org/en/topics/erlay/)
+- [RFC: Erlay Conceptual Discussion (bitcoin/bitcoin#34542)](https://github.com/bitcoin/bitcoin/issues/34542)
