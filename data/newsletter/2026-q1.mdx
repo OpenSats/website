@@ -242,6 +242,63 @@ FOSS, no prosperity without bitcoin.
   sync, web-of-trust filtering, NIP-17 messages, multi-account sessions,
   and a cache adapter that works in non-browser environments and
   browsers running in Lock Mode.
+- **[Amethyst](https://github.com/vitorpamplona/amethyst) v1.04 and v1.05.**
+  [Vitor Pamplona](/blog/vitor-pamplona-receives-lts-grant) shipped two
+  releases of his Android nostr client this quarter, with 752 commits.
+  Web of Trust providers became pluggable via NIP-85, which Vitor
+  authored and merged. A new local database engine, Quartz, runs
+  sub-microsecond queries in about 15 MB of RAM. NIP-A4 Public Messages
+  also landed, simplifying cross-client public DMs.
+- **[Amethyst Desktop](/blog/sixteenth-wave-of-nostr-grants#amethyst-desktop).**
+  Robert from Swam is porting Amethyst to JVM Desktop via Kotlin
+  Multiplatform. The first quarter shipped NIP-46 bunker login, a
+  multi-column deck layout, advanced search with operators (`from:`,
+  `kind:`, date ranges, boolean `OR`), a full NIP-96/NIP-17/NIP-50
+  media and search pipeline, and a cache-centric feed rewrite. Tor
+  support is next.
+- **[Nostr Mail](/blog/sixteenth-wave-of-nostr-grants#nostr-mail).** New
+  grantee Nogringo shipped a complete email-over-nostr stack in his
+  first month: the
+  [Nmail](https://github.com/nogringo/nostr-mail-client) reference
+  client (web, Android, Linux), a TypeScript SDK on npm, a Dart SDK,
+  and four protocol spec documents covering gift-wrapped messages,
+  large-MIME via Blossom, labels, and settings sync. Payloads larger
+  than NIP-44's 64 KB ceiling are routed through Blossom with AES-GCM.
+- **Privacy bugs in nostr DMs.** Our
+  [nostrability](/blog/8th-wave-nostr-grants#nostrability) grantee
+  elsat used LLMs to systematically review NIP-17 DM implementations
+  across rust-nostr, 0xchat, KeyChat, Amethyst, whitenoise, coop,
+  coracle, and noStrudel. Roughly half of clients had kind-10050
+  outbox-list bugs that sent DMs into the void. Other findings:
+  sender/receiver pubkey-mismatch bugs in gift wraps, and reaction
+  loaders leaking sealed-rumor IDs to public relays. Patches merged in
+  coop and rust-nostr; private patches sent to affected clients. JSON
+  validation schemas for 32 NIPs are now public at
+  [nostrability/schemata](https://github.com/nostrability/schemata).
+- **A hardware signer for nostr.**
+  [DASHU](/blog/nostr-grants-july-2024#nostrmo) shipped v0.3.0 of
+  [Nesigner](https://nesigner.nostrmo.com), his ESP32-based hardware
+  signer. The release replaced dynamic allocation with a memory pool,
+  optimized the task queue, and added
+  [Briner](https://github.com/haorendashu/briner), a browser extension
+  that bridges Nesigner to NIP-07 web apps. Companion releases:
+  [Nostrmo](https://github.com/haorendashu/nostrmo) v3.5.0 with an
+  outbox-model refactor, and a new high-performance
+  [event store](https://github.com/haorendashu/nostr_event_store)
+  currently holding 30M events on a public test relay.
+- **[Aegis](/blog/twelfth-wave-of-nostr-grants#aegis), a nostr signer.**
+  ZharlieW shipped six releases this quarter (v0.3.4 through v0.3.9),
+  adding a Nostr App Browser with NIP-07 signing, NIP-55
+  `nostrsigner:` URL-scheme support, a local relay running as an
+  Android foreground service, dark mode, and i18n.
+- **End-to-end encrypted DMs in [Iris](https://iris.to/).**
+  [Martti Malmi](/blog/eleventh-wave-of-nostr-grants#nostr-double-ratchet)'s
+  [nostr-double-ratchet](https://github.com/mmalmi/nostr-double-ratchet)
+  library now powers multi-device chat with group messaging in Iris,
+  with a Tauri build live on iOS, Play Store, ZapStore, and desktop.
+  Voice and video calls work over WebRTC, and a Cashu wallet is
+  integrated. The session manager is being extracted as a standalone
+  library to land in NDK and Notedeck next quarter.
 
 ---
 
