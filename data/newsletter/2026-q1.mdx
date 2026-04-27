@@ -263,17 +263,6 @@ FOSS, no prosperity without bitcoin.
   and four protocol spec documents covering gift-wrapped messages,
   large-MIME via Blossom, labels, and settings sync. Payloads larger
   than NIP-44's 64 KB ceiling are routed through Blossom with AES-GCM.
-- **Nostr DM compatibility.** Our
-  [nostrability](/blog/8th-wave-nostr-grants#nostrability) grantee
-  elsat used LLMs to systematically review NIP-17 DM implementations
-  across rust-nostr, 0xchat, KeyChat, Amethyst, whitenoise, coop,
-  coracle, and noStrudel. Roughly half of clients had kind-10050
-  outbox-list bugs that sent DMs into the void. Other findings:
-  sender/receiver pubkey-mismatch bugs in gift wraps, and reaction
-  loaders leaking sealed-rumor IDs to public relays. Patches merged in
-  coop and rust-nostr; private patches sent to affected clients. JSON
-  validation schemas for 32 NIPs are now public at
-  [nostrability/schemata](https://github.com/nostrability/schemata).
 - **Dedicated nostr signers.** Two signer grantees shipped this quarter.
   [DASHU](/blog/nostr-grants-july-2024#nostrmo) released v0.3.0 of
   [Nesigner](https://nesigner.nostrmo.com), his ESP32-based hardware
