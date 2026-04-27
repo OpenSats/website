@@ -1,0 +1,20 @@
+---
+title: 'CoinJoin'
+summary: 'A collaborative Bitcoin transaction that combines inputs from multiple participants to break the common input ownership heuristic used by chain analysis.'
+category: 'Privacy'
+aliases: ['coinjoin', 'CoinJoins', 'collaborative transaction', 'WabiSabi', 'JoinMarket', 'ZeroLink']
+---
+
+A CoinJoin is a collaborative transaction: a Bitcoin transaction that is initiated and signed by multiple participants. Combining inputs from several parties breaks the common input ownership heuristic that chain-analysis firms rely on to link addresses to a single actor. The idea was first proposed on Bitcointalk in 2011 by a user going by `hashcoin`, and popularized in 2013 by Gregory Maxwell. A CoinJoin is always a batch transaction, and a dishonest coordinator cannot steal funds, only refuse to publish the final transaction.
+
+CoinJoins fall into two broad types. Equal-output CoinJoins produce uniform output denominations, which lets participants hide in the crowd of other identical outputs. They are easy to spot on-chain because of the uniform structure. Unequal-output CoinJoins produce varied outputs and are harder to detect via chain analysis alone. [Payjoin](/topics/payjoin) is a collaborative transaction between two parties that also qualifies as a CoinJoin under the broader definition.
+
+Active implementations include JoinMarket, which uses a maker/taker market with fidelity bonds; Wasabi, which uses the WabiSabi protocol with a coordinator that cannot link inputs to outputs; and Ashigaru on Android, forked from Samourai's ZeroLink protocol. CoinJoin does not make coins anonymous. It moves chain analysis from quasi-deterministic linking to probabilistic guessing, and the privacy gained depends on anonymity set size and on how the user spends the coins afterward.
+
+## References
+
+- [hashcoin, Blind Bitcoin Transfers (2011)](https://bitcointalk.org/index.php?topic=12751.msg315793#msg315793)
+- [Gregory Maxwell, CoinJoin: Bitcoin privacy for the real world (2013)](https://bitcointalk.org/?topic=279249)
+- [WabiSabi paper](https://eprint.iacr.org/2021/206)
+- [JoinMarket](https://github.com/JoinMarket-Org/joinmarket-clientserver)
+- [en.bitcoin.it: CoinJoin](https://en.bitcoin.it/wiki/CoinJoin)
