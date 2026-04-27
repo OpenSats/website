@@ -33,10 +33,16 @@ export default function DonateRecurringButtonV2({
       aria-label={`${prelude} ${cta} ${preTagline} ${tagline}`}
     >
       <span className="donate-banner-v2__left">
-        {prelude} <strong>{cta}</strong>
+        <span className="donate-banner-v2__prelude">{prelude}</span>{' '}
+        <strong>{cta}</strong>
       </span>
       <span className="donate-banner-v2__right">
-        {preTagline} <strong>{tagline}</strong>
+        <span className="donate-banner-v2__tagline">
+          {preTagline} <strong>{tagline}</strong>
+        </span>
+        <span className="donate-banner-v2__heart" aria-hidden="true">
+          🧡
+        </span>
       </span>
       <span className="donate-banner-v2__hearts" aria-hidden="true">
         <span>🧡</span>

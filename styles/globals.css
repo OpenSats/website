@@ -268,3 +268,34 @@ body {
   color: #fdba74; /* orange-300 */
   text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
 }
+
+.donate-banner-v2__heart {
+  display: none;
+  font-size: 2.25rem;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .donate-banner-v2__prelude {
+    display: none;
+  }
+
+  .donate-banner-v2__left strong {
+    white-space: nowrap;
+  }
+
+  .donate-banner-v2__tagline {
+    display: none;
+  }
+
+  .donate-banner-v2__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .donate-banner-v2__heart {
+    display: inline-flex;
+    text-shadow: none;
+  }
+}
