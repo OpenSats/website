@@ -1,0 +1,37 @@
+---
+title: 'NDK'
+dateAdded: '2026-04-27'
+summary: 'A modular TypeScript toolkit for building nostr applications, with first-class outbox-model support and reactive UI bindings for Svelte and React.'
+nym: 'PabloF7z'
+website: 'https://nostr-dev-kit.github.io/ndk/'
+coverImage: '/static/images/projects/ndk.svg'
+git: 'https://github.com/nostr-dev-kit/ndk'
+nostr: 'npub1l2vyh47mk2p0qlsku7hg0vn29faehy9hy34ygaclpn66ukqp3afqutajft'
+tags: ['Nostr', 'TypeScript', 'Library', 'SDK']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2023#ndk'
+---
+
+NDK (Nostr Development Kit) is a TypeScript toolkit for building [nostr](/topics/nostr) applications, maintained by [PabloF7z][lts]. It is structured as a monorepo of small packages so that client developers can pull in only the parts they need: a core library for relay management and event handling, framework-specific bindings for [Svelte 5](https://svelte.dev/) and [React](https://react.dev/), a [React Native](https://reactnative.dev/) integration for mobile, and standalone packages for higher-level features.
+
+> NDK is a nostr development kit that makes the experience of building nostr-related applications, whether they are relays, clients, or anything in between, better, more reliable, and overall more enjoyable to work with than existing solutions. The core goal of NDK is to improve the decentralization of nostr via intelligent conventions and data discovery features without depending on any one central point of coordination.
+>
+> <cite>—[NDK README](https://github.com/nostr-dev-kit/ndk)</cite>
+
+The advanced packages cover Web of Trust filtering, [NIP-77](https://github.com/nostr-protocol/nips/blob/master/77.md) negentropy set reconciliation, multi-account session management, [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) gift-wrapped DMs, [NIP-60](https://github.com/nostr-protocol/nips/blob/master/60.md) cashu wallet integration with [NWC](/topics/nostr-wallet-connect) and WebLN support, and a [Blossom](/topics/blossom) client for media. A set of cache adapters (in-memory LRU, IndexedDB via Dexie, SQLite, SQLite WASM, Redis, and an experimental nostr-relay-as-cache) lets the same code run anywhere from a browser tab to a server-side process. Outbox-model relay selection ([NIP-65](https://github.com/nostr-protocol/nips/blob/master/65.md)) is built into the core and used to drive subscription routing.
+
+## Why fund it?
+
+NDK is one of the most widely used TypeScript libraries for building nostr clients. Production apps such as [Highlighter](https://highlighter.com/), [Lume](https://lume.nu/), and [Flockstr](https://www.flockstr.com/) ship on top of it. By moving the hard parts (relay management, signing adapters, the outbox model, caching, NIP-46 remote signing, zaps, gift-wrapped DMs) into one library, NDK lets app developers focus on their UI and product instead of reimplementing protocol plumbing each time.
+
+OpenSats funded NDK in the [first wave of nostr grants][wave-1] in July 2023, and Pablo later received a [long-term support grant][lts] in April 2024 that funds his ongoing work on NDK alongside [nsecBunker](https://github.com/kind-0/nsecbunkerd), [Highlighter](https://highlighter.com/), and other projects.
+
+## What's next?
+
+Recent work has focused on the Svelte 5 integration with reactive runes, the multi-account `sessions` package, Web of Trust auto-filtering, and a richer mock infrastructure under `@nostr-dev-kit/ndk/test` so app developers can write deterministic tests against simulated relays. Pablo continues to push on NIP-46 (nsecBunker) flows, NIP-60 cashu wallet primitives, and improvements to the outbox model.
+
+For ongoing development, see the [NDK GitHub repository](https://github.com/nostr-dev-kit/ndk) and the [documentation site](https://nostr-dev-kit.github.io/ndk/).
+
+[lts]: /blog/pablofz7-receives-lts-grant
+[wave-1]: /blog/nostr-grants-july-2023#ndk
