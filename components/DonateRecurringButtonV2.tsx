@@ -41,7 +41,10 @@ export default function DonateRecurringButtonV2({
           {preTagline} <strong>{tagline}</strong>
         </span>
         <span className="donate-banner-v2__tagline-mobile">
-          <strong>Monthly</strong> or give once
+          <strong>Monthly</strong>
+          <span className="donate-banner-v2__tagline-mobile-sub">
+            or give once
+          </span>
         </span>
       </span>
       <span className="donate-banner-v2__hearts" aria-hidden="true">

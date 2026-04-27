@@ -289,4 +289,14 @@ body {
   .donate-banner-v2__tagline-mobile {
     display: inline;
   }
+
+  .donate-banner-v2__right strong {
+    font-size: 1.2rem;
+  }
+
+  .donate-banner-v2__tagline-mobile-sub {
+    display: block;
+    white-space: nowrap;
+    font-size: 0.95rem;
+  }
 }
