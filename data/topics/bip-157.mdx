@@ -1,0 +1,19 @@
+---
+title: 'BIP 157'
+summary: 'The peer-to-peer protocol light clients use to fetch compact block filters from full nodes, so they can scan the chain without leaking addresses to the server.'
+category: 'Bitcoin'
+aliases: ['compact block filters', 'neutrino filters', 'client-side filtering']
+---
+
+BIP 157 is the client-side part of the compact block filter protocol. A light client sends `getcfheaders` and `getcfilters` requests to a full node, the server returns the filters for the requested block range, and the client matches them locally to find the blocks that might contain transactions relevant to its wallet.
+
+The filter format lives in [BIP 158](/topics/bip-158). BIP 157 is the peer-to-peer message layer on top: how the filters are requested, how the filter commitments are verified, and how light clients pin down which filter series they trust.
+
+Compared to the older BIP 37 bloom filter scheme, BIP 157 and BIP 158 shift filtering from the server to the client. The client discloses no addresses to the server. This is how wallets like Neutrino, [LDK](/topics/ldk) Node, and Nakamoto do SPV while preserving privacy. Bitcoin Core serves filters to peers when `peerblockfilters=1` is set in the config.
+
+## References
+
+- [BIP 157](https://github.com/bitcoin/bips/blob/master/bip-0157.mediawiki)
+- [BIP 158](https://github.com/bitcoin/bips/blob/master/bip-0158.mediawiki)
+- [Bitcoin Optech: Compact block filters](https://bitcoinops.org/en/topics/compact-block-filters/)
+- [lightninglabs/neutrino](https://github.com/lightninglabs/neutrino)
