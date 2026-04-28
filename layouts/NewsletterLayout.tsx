@@ -17,7 +17,7 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
   return (
     <>
       <PageSEO title={`${title} — ${issueLabel}`} description={summary} />
-      <section className="mx-auto max-w-2xl px-3 sm:px-6 lg:px-0">
+      <section className="mx-auto max-w-2xl px-2 sm:px-6 lg:px-0">
         <article>
           <header className="border-b border-gray-200 pb-8 pt-4 dark:border-gray-800">
             <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
