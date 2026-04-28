@@ -2,7 +2,6 @@ import { ReactNode } from 'react'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Newsletter } from 'contentlayer/generated'
-import SectionContainer from '@/components/SectionContainer'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 
@@ -18,8 +17,8 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
   return (
     <>
       <PageSEO title={`${title} — ${issueLabel}`} description={summary} />
-      <SectionContainer>
-        <article className="mx-auto max-w-2xl">
+      <section className="mx-auto max-w-2xl px-3 sm:px-6 lg:px-0">
+        <article>
           <header className="border-b border-gray-200 pb-8 pt-4 dark:border-gray-800">
             <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
               <span className="text-primary-500 dark:text-primary-400">
@@ -46,7 +45,7 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
             {children}
           </div>
         </article>
-      </SectionContainer>
+      </section>
     </>
   )
 }
