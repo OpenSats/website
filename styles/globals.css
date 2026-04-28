@@ -89,6 +89,15 @@ body {
   border-left-color: #c2410c; /* orange-700 */
 }
 
+@media (max-width: 480px) {
+  .editors-note {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding: 1.25rem 1rem;
+    border-radius: 0;
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* DonateRecurringButtonV2                                            */
 /* A wide split-text banner with an angled orange wedge that grows on */
