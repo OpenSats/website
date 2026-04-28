@@ -91,8 +91,8 @@ body {
 
 @media (max-width: 480px) {
   .editors-note {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
     padding: 1.25rem 1rem;
     border-radius: 0;
   }
