@@ -125,29 +125,6 @@ FOSS, no prosperity without bitcoin.
   progress reports. The fuller picture is in our
   [2025 Year in Review](/blog/2025-year-in-review), out late January.
 - **181 donations** received in the first quarter of 2026.
-- **[Splicing](/projects/splicing) lands in the Lightning spec.** After
-  years of work by LTS grantee
-  [Dusty Daemon](/blog/dusty-daemon-receives-lts-grant) and collaborators,
-  splicing is now a [BOLT](https://github.com/lightning/bolts). Channel
-  capacity can be added or removed without closing the channel on-chain.
-- **[René Pickhardt](/blog/rene-pickhardt-receives-lts-grant) published
-  [_A Mathematical Theory of Payment Channel Networks_](https://arxiv.org/abs/2601.04835).**
-  The paper formalizes how routing, liquidity,
-  feasibility, and channel depletion actually behave on the Lightning
-  Network, and pulls together two years of his work. He also published
-  a Delving Bitcoin post on
-  [Ark as a Channel Factory](https://delvingbitcoin.org/t/ark-as-a-channel-factory-compressed-liquidity-management-for-improved-payment-feasibility/2179),
-  arguing that Ark belongs alongside Lightning as multiparty
-  infrastructure.
-- **Formal proofs for secp256k1.** We funded
-  [remix7531](/blog/sixteenth-wave-of-bitcoin-grants#advancing-formal-verification-for-bitcoin-cryptography)
-  in February to build formal proofs in [F*](https://fstar-lang.org/) (via
-  the [HAX toolchain](https://cryspen.com/hax-toolchain/)) for
-  [RustCrypto](https://github.com/RustCrypto/)'s `sha2` and `k256` crates and
-  for the multi-scalar multiplication routine used in batch signature
-  verification on the `secp256k1` curve. Yes, all of this is wildly
-  technical, but you can listen to him talk about it on the
-  [Bitcoin Optech podcast](https://bitcoinops.org/en/podcast/2026/04/21/).
 
 ---
 
@@ -225,6 +202,40 @@ FOSS, no prosperity without bitcoin.
   reader or payment provider required. Shipped this quarter by
   [lollerfirst](https://github.com/lollerfirst), our
   [Nutshell grantee](/blog/advancements-in-ecash).
+
+---
+
+## Nerd Corner
+
+{/* --------------------------------------------------------------------- */}
+{/* NERD CORNER. Long-arc spec work, formal research, and foundational    */}
+{/* proofs. Not shipping releases, but the bedrock that everything else   */}
+{/* sits on.                                                              */}
+{/* --------------------------------------------------------------------- */}
+
+- **[Splicing](/projects/splicing) lands in the Lightning spec.** After
+  years of work by LTS grantee
+  [Dusty Daemon](/blog/dusty-daemon-receives-lts-grant) and collaborators,
+  splicing is now a [BOLT](https://github.com/lightning/bolts). Channel
+  capacity can be added or removed without closing the channel on-chain.
+- **[René Pickhardt](/blog/rene-pickhardt-receives-lts-grant) published
+  [_A Mathematical Theory of Payment Channel Networks_](https://arxiv.org/abs/2601.04835).**
+  The paper formalizes how routing, liquidity,
+  feasibility, and channel depletion actually behave on the Lightning
+  Network, and pulls together two years of his work. He also published
+  a Delving Bitcoin post on
+  [Ark as a Channel Factory](https://delvingbitcoin.org/t/ark-as-a-channel-factory-compressed-liquidity-management-for-improved-payment-feasibility/2179),
+  arguing that Ark belongs alongside Lightning as multiparty
+  infrastructure.
+- **Formal proofs for secp256k1.** We funded
+  [remix7531](/blog/sixteenth-wave-of-bitcoin-grants#advancing-formal-verification-for-bitcoin-cryptography)
+  in February to build formal proofs in [F*](https://fstar-lang.org/) (via
+  the [HAX toolchain](https://cryspen.com/hax-toolchain/)) for
+  [RustCrypto](https://github.com/RustCrypto/)'s `sha2` and `k256` crates and
+  for the multi-scalar multiplication routine used in batch signature
+  verification on the `secp256k1` curve. Yes, all of this is wildly
+  technical, but you can listen to him talk about it on the
+  [Bitcoin Optech podcast](https://bitcoinops.org/en/podcast/2026/04/21/).
 
 ---
 
