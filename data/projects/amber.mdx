@@ -16,11 +16,11 @@ announcementLink: '/blog/greenart7c3-receives-lts-grant'
 
 Amber is a [nostr](/topics/nostr) signer for Android built by
 [Greenart7c3][lts]. It is the app that holds your `nsec` so other apps do not
-have to. Other nostr clients on the device, and nostr web apps in any browser,
-ask Amber to sign events for them over [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
-or [NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md). The
-secret never leaves Amber, and the user gets a per-app prompt the first time a
-new client wants to sign on its behalf.
+have to. Other nostr clients on the device, and nostr web apps in any browser, ask
+Amber to sign events for them over [NIP-46 remote signing](/topics/remote-signing)
+or [NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md), the
+on-device equivalent for Android. The secret never leaves Amber, and the user
+gets a per-app prompt the first time a new client wants to sign on its behalf.
 
 > Private keys should be exposed to as few systems as possible as each system
 > adds to the attack surface.
@@ -53,10 +53,11 @@ which funds his ongoing work on Amber and its sibling project
 ## What's next?
 
 Recent releases have focused on broader compatibility with web clients,
-[Coracle](/projects/coracle) and Snort integrations through NIP-46 so that
-desktop browsers can sign events through a phone, NIP-55 library work for
-third-party Android apps, and improvements to the user experience when used
-together with [Amethyst](/projects/amethyst). Cross-platform support beyond
-Android is on the roadmap.
+[Coracle](/projects/coracle) and Snort integrations through
+[remote signing](/topics/remote-signing) so that desktop browsers can sign
+events through a phone, NIP-55 library work for third-party Android apps, and
+improvements to the user experience when used together with
+[Amethyst](/projects/amethyst). Cross-platform support beyond Android is on the
+roadmap.
 
 [lts]: /blog/greenart7c3-receives-lts-grant
