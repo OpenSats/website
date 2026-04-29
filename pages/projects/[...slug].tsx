@@ -90,19 +90,6 @@ export default function ProjectPage({
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
-          {(() => {
-            const heartbeatUrl = getHeartbeatUrl(project.git)
-            return heartbeatUrl ? (
-              <CustomLink
-                href={heartbeatUrl}
-                aria-label={`View ${project.title} heartbeat`}
-                title="View project heartbeat"
-                className="inline-flex h-[42px] w-[42px] flex-none items-center justify-center rounded border border-stone-800 bg-transparent p-0 font-semibold leading-none text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
-              >
-                <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
-              </CustomLink>
-            ) : null
-          })()}
           {project.announcementLink && (
             <CustomLink
               href={project.announcementLink}
@@ -131,6 +118,19 @@ export default function ProjectPage({
                 : 'Support directly'}
             </CustomLink>
           )}
+          {(() => {
+            const heartbeatUrl = getHeartbeatUrl(project.git)
+            return heartbeatUrl ? (
+              <CustomLink
+                href={heartbeatUrl}
+                aria-label={`View ${project.title} heartbeat`}
+                title="View project heartbeat"
+                className="inline-flex h-[42px] w-[42px] flex-none items-center justify-center rounded border border-stone-800 bg-transparent p-0 font-semibold leading-none text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+              >
+                <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
+              </CustomLink>
+            ) : null
+          })()}
         </aside>
       </div>
       {relatedPosts.length > 0 && (
