@@ -1,0 +1,62 @@
+---
+title: 'Amber'
+dateAdded: '2026-04-29'
+summary: 'A nostr signer for Android that keeps the nsec in one app and signs events for every other client over NIP-46.'
+nym: 'Greenart7c3'
+website: 'https://github.com/greenart7c3/Amber'
+coverImage: '/static/images/projects/amber.png'
+git: 'https://github.com/greenart7c3/Amber'
+nostr: 'npub1w4uswmv6lu9yel005l3qgheysmr7tk9uvwluddznju3nuxalevvs2d0jr5'
+zapstore: 'https://zapstore.dev/apps/com.greenart7c3.nostrsigner'
+tags: ['Nostr', 'Signing', 'Mobile', 'Android']
+showcase: true
+fund: nostr
+announcementLink: '/blog/greenart7c3-receives-lts-grant'
+---
+
+Amber is a [nostr](/topics/nostr) signer for Android built by
+[Greenart7c3][lts]. It is the app that holds your `nsec` so other apps do not
+have to. Other nostr clients on the device, and nostr web apps in any browser,
+ask Amber to sign events for them over [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
+or [NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md). The
+secret never leaves Amber, and the user gets a per-app prompt the first time a
+new client wants to sign on its behalf.
+
+> Private keys should be exposed to as few systems as possible as each system
+> adds to the attack surface.
+>
+> <cite>—[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)</cite>
+
+Amber supports multiple accounts, remembered per-permission decisions for
+common kinds, signing in the background through Android content providers, and
+[Tor](/topics/tor) for the NIP-46 transport. The app ships on
+[Zapstore](https://zapstore.dev/apps/com.greenart7c3.nostrsigner),
+[F-Droid](https://f-droid.org/packages/com.greenart7c3.nostrsigner/),
+[Obtainium](https://github.com/ImranR98/Obtainium), and
+[GitHub releases](https://github.com/greenart7c3/Amber/releases), with GPG-signed
+artifacts and a published verification guide.
+
+## Why fund it?
+
+The default key model on nostr puts one `nsec` into every client a user
+touches. Each app then becomes a place the key can leak: a malicious update, a
+stolen phone, an exfiltrated backup. Putting all signing through one dedicated
+app shrinks the attack surface to a single binary that the user explicitly
+trusts and updates, and makes it possible to revoke an individual client's
+access without rotating the key.
+
+OpenSats first funded Amber in [August 2023](/blog/bitcoin-and-nostr-grants-august-2023#amber-nostr-event-signer)
+and later announced [long-term support][lts] for Greenart7c3 in October 2024,
+which funds his ongoing work on Amber and its sibling project
+[Citrine](/projects/citrine).
+
+## What's next?
+
+Recent releases have focused on broader compatibility with web clients,
+[Coracle](/projects/coracle) and Snort integrations through NIP-46 so that
+desktop browsers can sign events through a phone, NIP-55 library work for
+third-party Android apps, and improvements to the user experience when used
+together with [Amethyst](/projects/amethyst). Cross-platform support beyond
+Android is on the roadmap.
+
+[lts]: /blog/greenart7c3-receives-lts-grant
