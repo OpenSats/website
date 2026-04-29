@@ -8,6 +8,8 @@ import CustomLink from '@/components/Link'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
 
@@ -31,6 +33,24 @@ function getFundDonationUrl(fund: string): string {
 
 function getFundLabel(fund: string): string {
   return FUND_LABELS[fund] || fund
+}
+
+function getHeartbeatUrl(git?: string): string | null {
+  if (!git) return null
+  try {
+    const url = new URL(git)
+    if (url.hostname !== 'github.com' && url.hostname !== 'www.github.com') {
+      return null
+    }
+    const [owner, repo] = url.pathname.replace(/^\/+/, '').split('/')
+    if (!owner || !repo) return null
+    const cleanRepo = repo.replace(/\.git$/, '')
+    return `https://heartbeat.opensats.org/?repos=${encodeURIComponent(
+      `${owner}/${cleanRepo}`
+    )}`
+  } catch {
+    return null
+  }
 }
 
 export async function getStaticPaths() {
@@ -70,6 +90,19 @@ export default function ProjectPage({
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
+          {(() => {
+            const heartbeatUrl = getHeartbeatUrl(project.git)
+            return heartbeatUrl ? (
+              <CustomLink
+                href={heartbeatUrl}
+                aria-label={`View ${project.title} heartbeat`}
+                title="View project heartbeat"
+                className="inline-flex items-center justify-center rounded border border-stone-800 bg-transparent px-3 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+              >
+                <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
+              </CustomLink>
+            ) : null
+          })()}
           {project.announcementLink && (
             <CustomLink
               href={project.announcementLink}
