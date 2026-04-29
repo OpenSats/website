@@ -8,6 +8,7 @@ import CustomLink from '@/components/Link'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { getHeartbeatUrl } from '@/utils/heartbeat'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -33,24 +34,6 @@ function getFundDonationUrl(fund: string): string {
 
 function getFundLabel(fund: string): string {
   return FUND_LABELS[fund] || fund
-}
-
-function getHeartbeatUrl(git?: string): string | null {
-  if (!git) return null
-  try {
-    const url = new URL(git)
-    if (url.hostname !== 'github.com' && url.hostname !== 'www.github.com') {
-      return null
-    }
-    const [owner, repo] = url.pathname.replace(/^\/+/, '').split('/')
-    if (!owner || !repo) return null
-    const cleanRepo = repo.replace(/\.git$/, '')
-    return `https://heartbeat.opensats.org/?repos=${encodeURIComponent(
-      `${owner}/${cleanRepo}`
-    )}`
-  } catch {
-    return null
-  }
 }
 
 export async function getStaticPaths() {
