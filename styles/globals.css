@@ -247,15 +247,12 @@ body {
     padding: 0.75rem 1rem;
   }
 
+  .apply-banner-v2__left {
+    font-size: 0.95rem;
+  }
+
   .apply-banner-v2__left strong {
     font-size: 1.4rem;
-  }
-
-  .apply-banner-v2__prelude {
-    display: none;
-  }
-
-  .apply-banner-v2__left strong {
     white-space: nowrap;
   }
 
