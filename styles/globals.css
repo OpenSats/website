@@ -99,6 +99,28 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/* Newsletter prose: tighter list indents on mobile                   */
+/* prose-lg defaults give ul/ol ~1.625em of inline-start padding plus */
+/* a marker offset; on narrow screens that eats the column. Pull the  */
+/* indent in and shrink the marker so bullets sit closer to the text. */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .newsletter-prose ul,
+  .newsletter-prose ol {
+    padding-inline-start: 1em;
+  }
+
+  .newsletter-prose li {
+    padding-inline-start: 0.25em;
+  }
+
+  .newsletter-prose li::marker {
+    font-size: 0.9em;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* DonateRecurringButtonV2                                            */
 /* A wide split-text banner with an angled orange wedge that grows on */
 /* hover, fading in floating hearts. Inspired by Thunderbird's EOY    */

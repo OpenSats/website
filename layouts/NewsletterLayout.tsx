@@ -41,7 +41,7 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
             )}
           </header>
 
-          <div className="prose prose-lg max-w-none pb-16 pt-10 text-justify dark:prose-dark prose-headings:text-left prose-headings:font-serif prose-headings:font-semibold prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-xl prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300 sm:text-left">
+          <div className="newsletter-prose prose prose-lg max-w-none pb-16 pt-10 text-justify dark:prose-dark prose-headings:text-left prose-headings:font-serif prose-headings:font-semibold prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-xl prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300 sm:text-left">
             {children}
           </div>
         </article>
