@@ -120,6 +120,11 @@ module.exports = () => {
           destination: '/faq/grantee',
           permanent: true,
         },
+        {
+          source: '/heartbeat',
+          destination: 'https://heartbeat.opensats.org/',
+          permanent: false,
+        },
       ]
     },
     webpack: (config, options) => {
