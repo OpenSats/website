@@ -20,13 +20,20 @@ const OUTPUT_DIR = path.join(
   'images',
   'newsletter'
 )
-const FONT_FILE = path.join(
-  root,
-  'public',
-  'fonts',
-  'Inter',
-  'Inter-VariableFont_opsz,wght.ttf'
-)
+// Load static-weight Inter faces so resvg's font-weight matching maps
+// reliably (its variable-font wght axis support is best-effort). The
+// embedded family name on these files is "Inter 18pt", referenced in
+// the SVG below.
+const FONT_DIR = path.join(root, 'public', 'fonts', 'Inter', 'static')
+const FONT_FAMILY = 'Inter 18pt'
+const FONT_FILES = [
+  'Inter_18pt-Regular.ttf',
+  'Inter_18pt-Medium.ttf',
+  'Inter_18pt-SemiBold.ttf',
+  'Inter_18pt-Bold.ttf',
+  'Inter_18pt-ExtraBold.ttf',
+  'Inter_18pt-Black.ttf',
+].map((f) => path.join(FONT_DIR, f))
 
 // Source dimensions match the .donate-banner-v2 max-width/min-height in
 // styles/globals.css (480 x 120). Render at a 2.5x scale for crisp email
@@ -146,7 +153,7 @@ function renderSvg(variant) {
         </g>
 
         <!-- left side (on the wedge): white text -->
-        <g font-family="Inter, Arial, Helvetica, sans-serif" fill="#ffffff">
+        <g font-family="${FONT_FAMILY}, Inter, Arial, Helvetica, sans-serif" fill="#ffffff">
           <text
             x="${leftX}"
             y="${leftPreludeBaselineY}"
@@ -157,13 +164,13 @@ function renderSvg(variant) {
             x="${leftX}"
             y="${leftCtaBaselineY}"
             font-size="${ctaSize}"
-            font-weight="700"
+            font-weight="900"
           >${escapeXml(CTA)}</text>
         </g>
 
         <!-- right side: dark-orange text on the neutral side -->
         <g
-          font-family="Inter, Arial, Helvetica, sans-serif"
+          font-family="${FONT_FAMILY}, Inter, Arial, Helvetica, sans-serif"
           fill="${variant.rightColor}"
           text-anchor="end"
         >
@@ -177,7 +184,7 @@ function renderSvg(variant) {
             x="${rightX}"
             y="${rightTaglineBaselineY}"
             font-size="${taglineSize}"
-            font-weight="600"
+            font-weight="800"
           >${escapeXml(TAGLINE)}</text>
         </g>
       </g>
@@ -194,9 +201,9 @@ async function main() {
       fitTo: { mode: 'width', value: OUTPUT_WIDTH },
       background: 'rgba(0,0,0,0)',
       font: {
-        fontFiles: [FONT_FILE],
-        loadSystemFonts: true,
-        defaultFontFamily: 'Inter',
+        fontFiles: FONT_FILES,
+        loadSystemFonts: false,
+        defaultFontFamily: FONT_FAMILY,
       },
     })
 
