@@ -40,15 +40,14 @@ Scoring services do the graph work outside the client and return a number.
 nostr social graph and exposes the result as a query API; clients use it
 for spam filtering, follow recommendations, and ranked profile search, and
 every response is signed so a client can verify it without trusting the
-host. [Relatr](https://www.relatr.net/) by
-[gzuuus](https://github.com/gzuuus) computes a per-perspective trust score
-by combining social-graph distance with profile validations like
+host. [Relatr](https://www.relatr.net/) computes a per-perspective trust
+score by combining social-graph distance with profile validations like
 [NIP-05](/topics/nip-05) and Lightning addresses, and every instance runs
 from the perspective of one source pubkey, so the same target user can end
 up with different scores from different operators. Relatr ships as a
-deployment of [ContextVM](https://contextvm.org/), gzuuus's protocol for
-running services over nostr, so anyone can run their own from a Docker
-container or an Umbrel/Start9 one-click install.
+deployment of [ContextVM](https://contextvm.org/), a protocol for running
+services over nostr, so anyone can run their own from a Docker container or
+an Umbrel/Start9 one-click install.
 
 [NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md) is the
 publishing format that lets these scoring services hand their numbers back
