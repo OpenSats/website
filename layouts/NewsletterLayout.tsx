@@ -12,13 +12,16 @@ interface LayoutProps {
 }
 
 export default function NewsletterLayout({ content, children }: LayoutProps) {
-  const { title, issueNumber, date, quarter, summary } = content
+  const { title, issueNumber, date, quarter, headline, summary } = content
   const issueLabel = formatIssueNumber(issueNumber)
   const quarterLabel = formatQuarter(quarter)
+  const seoTitle = headline
+    ? `${title} — ${quarterLabel}: ${headline}`
+    : `${title} — ${issueLabel}`
 
   return (
     <>
-      <PageSEO title={`${title} — ${issueLabel}`} description={summary} />
+      <PageSEO title={seoTitle} description={summary} />
       <section className="mx-auto max-w-2xl px-2 sm:px-6 lg:px-0">
         <article>
           <header className="border-b border-gray-200 pb-8 pt-4 dark:border-gray-800">
@@ -36,6 +39,11 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
             <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
               {title}
             </h1>
+            {headline && (
+              <p className="mt-2 font-serif text-2xl font-semibold tracking-tight text-gray-700 dark:text-gray-300 sm:text-3xl">
+                {headline}
+              </p>
+            )}
             {summary && (
               <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
                 {summary}

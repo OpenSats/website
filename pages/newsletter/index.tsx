@@ -68,7 +68,17 @@ export default function NewsletterIndexPage({
                         className="group block"
                       >
                         <h2 className="font-serif text-3xl font-bold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-4xl">
-                          {quarterLabel}
+                          <span className="text-gray-500 dark:text-gray-400">
+                            {quarterLabel}
+                          </span>
+                          {issue.headline && (
+                            <>
+                              <span className="text-gray-500 dark:text-gray-400">
+                                :
+                              </span>{' '}
+                              {issue.headline}
+                            </>
+                          )}
                         </h2>
                         <div className="mt-2 flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
                           <span>{issueLabel}</span>

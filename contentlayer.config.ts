@@ -136,6 +136,7 @@ export const Newsletters = defineDocumentType(() => ({
     issueNumber: { type: 'number', required: true },
     date: { type: 'date', required: true },
     quarter: { type: 'string', required: true },
+    headline: { type: 'string' },
     summary: { type: 'string', required: true },
     image: { type: 'string' },
     layout: { type: 'string' },
