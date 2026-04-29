@@ -6,39 +6,37 @@ aliases: ['WoT', 'web-of-trust', 'NIP-85', 'trust rank', 'PageRank']
 ---
 
 Web of trust is the idea that reputation is a graph rather than a list kept by
-an authority. The earliest large-scale example is [PGP](https://www.openpgp.org/)
-in the early 1990s: people signed each other's keys at "key-signing parties,"
-and a recipient could decide to trust an unknown public key because someone
-they already trusted had signed it. The same shape recurs in other contexts,
-from Apache committer ladders to Wikipedia editor levels to early Bitcoin
-contributor trust: a pubkey, an identity, or a piece of content earns
-reputation through who has already vouched for it.
+an authority. The term comes from [PGP](https://www.openpgp.org/) in the early
+1990s, where people signed each other's keys at "key-signing parties" so a
+recipient could decide to trust an unknown public key once someone they
+already trusted had signed it. Variants of the same model show up in other
+permissionless systems where there is no admin to hand out reputation.
 
-[Nostr](/topics/nostr) applies that idea to events. Every user already
+[Nostr](/topics/nostr) applies the idea to events. Every user already
 publishes a follow list as a signed event. A client can read the follow lists
 of the people you follow, score every other pubkey by how close it sits in
 that graph, and apply the score as a filter: notes, replies, zaps, and DMs
-from accounts inside your circle pass through; the rest gets muted or
+from accounts inside your circle pass through, the rest gets muted or
 downranked.
 
-The result is per-user moderation that needs no central authority. Two people
-reading the same [relays](/topics/relays) see different feeds because their
-graphs are different. A spammer who buys ten thousand fake follows still
-cannot reach a user whose own contacts have not vouched for any of them.
-There is no list to game, and no operator to lobby.
+The result is per-user moderation that does not need a central authority.
+Two people reading the same [relays](/topics/relays) see different feeds
+because their graphs are different. A spammer who buys ten thousand fake
+follows still cannot reach a user whose own contacts have not vouched for
+any of them.
 
 ## Implementations
 
 A few different approaches exist on nostr today:
 
 - [pyramid](https://github.com/fiatjaf/pyramid) by [fiatjaf](/blog/fiatjaf-receives-lts-grant)
-  is a relay built around a hierarchical invite tree. Each member can invite a
-  fixed number of others, every member is responsible for their descendants,
-  and the root admin can drop entire branches. The relay's read/write
-  membership becomes the WoT, applied at the relay level instead of in each
-  client. Pyramid's inbox sub-relay also filters at the second-degree social
-  graph of its members, so unsolicited replies from outside the extended
-  network are dropped.
+  is a relay built around a hierarchical invite tree. Each member can invite
+  a fixed number of others, every member is responsible for their
+  descendants, and the root admin can drop entire branches. The relay's
+  read/write membership becomes the WoT, enforced at the relay level instead
+  of in each client. Pyramid's inbox sub-relay also filters at the
+  second-degree social graph of its members, so unsolicited replies from
+  outside the extended network are dropped.
 - [Vertex](https://vertexlab.io/) runs WoT as a service. It computes
   (Personalized) PageRank over the nostr social graph and exposes the result
   as a query API for clients. Spam filtering, follow recommendations, and
@@ -61,10 +59,9 @@ providers (Relatr) emit NIP-85 events; others (Vertex) keep their API
 outside the event format. Clients are also free to compute scores locally,
 and many do.
 
-WoT-based filtering ships in [Amethyst](/projects/amethyst),
+Client-side WoT filtering is shipped by [Amethyst](/projects/amethyst),
 [Damus](/projects/damus), [Coracle](/projects/coracle), [NDK](/projects/ndk),
-[Flotilla](/projects/flotilla), and other clients, and is one of the main
-reasons spam on nostr has stayed manageable without a content team.
+[Flotilla](/projects/flotilla), and others.
 
 ## References
 
