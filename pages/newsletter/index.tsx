@@ -67,11 +67,10 @@ export default function NewsletterIndexPage({
                         href={`/newsletter/${issue.slug}`}
                         className="group block"
                       >
-                        <h2 className="font-serif text-3xl font-bold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-4xl">
-                          {issue.headline || quarterLabel}
-                        </h2>
-                        <div className="mt-2 flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                          <span>{issueLabel}</span>
+                        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                          <span className="text-primary-500 group-hover:text-primary-600 dark:text-primary-400 dark:group-hover:text-primary-300">
+                            {issueLabel}
+                          </span>
                           {issue.headline && (
                             <>
                               <span aria-hidden="true">·</span>
@@ -83,6 +82,9 @@ export default function NewsletterIndexPage({
                             {formatDate(issue.date, siteMetadata.locale)}
                           </time>
                         </div>
+                        <h2 className="mt-2 font-serif text-3xl font-bold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-4xl">
+                          {issue.headline || quarterLabel}
+                        </h2>
                       </Link>
                     </li>
                   )
