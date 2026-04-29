@@ -1,0 +1,55 @@
+---
+title: 'Citrine'
+dateAdded: '2026-04-29'
+summary: 'A nostr relay that runs on your Android phone, used as a local cache and a private write target by other clients on the same device.'
+nym: 'Greenart7c3'
+website: 'https://github.com/greenart7c3/Citrine'
+coverImage: '/static/images/projects/citrine.png'
+git: 'https://github.com/greenart7c3/Citrine'
+nostr: 'npub1w4uswmv6lu9yel005l3qgheysmr7tk9uvwluddznju3nuxalevvs2d0jr5'
+zapstore: 'https://zapstore.dev/apps/com.greenart7c3.citrine'
+tags: ['Nostr', 'Relay', 'Mobile', 'Android']
+showcase: true
+fund: nostr
+announcementLink: '/blog/greenart7c3-receives-lts-grant'
+---
+
+Citrine is a [nostr relay](/topics/relays) that runs on Android, built by
+[Greenart7c3][lts]. Every other nostr app on the same phone can connect to it
+over `ws://localhost`, read events from it, and write events to it. The app
+exposes a small UI to start and stop the relay, pick a port, set an icon, and
+manage which content resolvers are allowed to query it.
+
+The point is to give a phone its own piece of nostr storage. Drafts and notes
+keep working when the device is offline, then get rebroadcast to public relays
+once it comes back online. Encrypted DMs, private lists, and other events the
+user does not want to push to a third-party relay can live on Citrine without
+ever leaving the device. Other clients on the phone can use it as a fast local
+cache to populate timelines without re-fetching the same events from the
+network on every launch.
+
+The database can be exported and imported, including filtering an export down
+to events from a single account, which makes it useful as a portable nostr
+backup.
+
+## Why fund it?
+
+Most nostr clients still depend on a handful of large public relays for
+storage. That is fine for public posts, but every private DM, draft, or
+mute-list update that flows through those relays is a piece of data the user
+has handed to a third party. A local relay flips the default: the device keeps
+the canonical copy of the user's events, public relays are used to broadcast
+and discover, and the user can move between phones without losing history.
+
+OpenSats announced [long-term support][lts] for Greenart7c3 in October 2024,
+which funds his work on Citrine and its sibling project [Amber](/projects/amber).
+
+## What's next?
+
+Recent work has focused on user experience improvements when Citrine is paired
+with [Amethyst](/projects/amethyst), background broadcast of events queued
+while the device was offline, and content-resolver integration so other apps
+on the same phone can query the relay without an extra setup step.
+Cross-platform support beyond Android is on the roadmap.
+
+[lts]: /blog/greenart7c3-receives-lts-grant
