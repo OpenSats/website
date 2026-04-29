@@ -1,0 +1,65 @@
+---
+title: 'LNbits'
+dateAdded: '2026-04-29'
+summary: 'A modular Lightning wallet account system with a plugin framework, used as the payments layer for shops, kiosks, hardware projects, and online services.'
+nym: 'LNbits Contributors'
+website: 'https://lnbits.com/'
+coverImage: '/static/images/projects/lnbits.svg'
+git: 'https://github.com/lnbits/lnbits'
+twitter: 'lnbits'
+tags: ['Bitcoin', 'Lightning', 'Wallet', 'Infrastructure']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-and-nostr-grants-august-2023#lnbits'
+---
+
+LNbits is a Lightning wallet account system that sits in front of an existing
+Lightning node and turns it into a multi-user platform. A single backend node
+can fund any number of independent wallet accounts, each with its own balance,
+API key, and access controls. Shops, kiosks, hosted services, and family setups
+use it to keep separate books on top of one node without having to run a
+channel for each user.
+
+The core stays small on purpose. Almost every visible feature lives as an
+optional extension: point-of-sale terminals, payment links, paywalls, BOLT
+cards, LNURL services, NIP-05 hosting, vending-machine controllers, vouchers,
+subscription billing, crowdfunding pages, and dozens more. Operators install
+only the extensions they need, and the same instance can serve a coffee shop
+and a [nostr](/topics/nostr) zap relay at the same time. The funding-source
+abstraction lets the same extensions work against LND, Core Lightning,
+[BTCPay Server](/projects/btcpayserver), Eclair, Phoenix, LNbits-as-a-funding-
+source, and other backends without rewriting the application code on top.
+
+LNbits is also widely used by hardware tinkerers. Lightning ATMs,
+point-of-sale devices, DIY hardware wallets, and nostr signing devices like
+[LNBits Box](https://shop.lnbits.com/product/lnbitsbox) build on top of its
+HTTP and LNURL APIs. The project ships a hosted instance at
+[my.lnbits.com](https://my.lnbits.com/) for users who do not want to run their
+own server.
+
+## Why fund it?
+
+Most ways to accept Lightning payments push the merchant onto somebody else's
+custodial service. LNbits is the standard way to put a self-hosted multi-tenant
+layer on top of a Lightning node, which means a small business or a community
+operator can give every cashier, vending machine, or sub-organization its own
+wallet without writing custom code or trusting a third-party processor. Because
+it is free software with no business model layered on top, the project depends
+on grants and donations to keep paying its contributors and to keep the
+extension ecosystem moving.
+
+OpenSats funded LNbits in
+[August 2023](/blog/bitcoin-and-nostr-grants-august-2023#lnbits) and has
+[renewed its support to bitcoin](/blog/renewing-our-commitment-to-bitcoin)
+multiple times since then.
+
+## What's next?
+
+Recent work has focused on the extension marketplace, signed extension releases
+with ratings and reviews, and a richer admin UI for operators running larger
+multi-tenant deployments. The team also maintains the
+[LNbits Box](https://shop.lnbits.com/product/lnbitsbox), a plug-and-play
+hardware bundle that runs LNbits locally for users who do not want to deal
+with self-hosting from scratch. New funding-source backends keep landing, so
+the same set of extensions follows the operator if they switch from LND to
+Core Lightning or to a hosted node.
