@@ -1,15 +1,70 @@
 ---
 title: 'Web of Trust'
-summary: 'A client-side filter on Nostr that derives reputation from the social graph: events from people you follow, and people they follow, are surfaced; the rest is muted.'
+summary: 'Reputation as a graph instead of an authority-managed list. On Nostr, scoring the social graph turns it into a per-user filter for events, replies, zaps, and DMs.'
 category: 'Nostr'
-aliases: ['WoT', 'web-of-trust', 'NIP-85', 'trust rank']
+aliases: ['WoT', 'web-of-trust', 'NIP-85', 'trust rank', 'PageRank']
 ---
 
-Web of trust on [Nostr](/topics/nostr) is the practice of using the social graph to decide which events a client shows. Every user already publishes a follow list as a signed event. A client can read the follow lists of the people you follow, score every other pubkey by how close it sits in that graph, and apply the score as a filter: notes, replies, zaps, and DMs from accounts inside your circle pass through, while accounts outside it get muted or downranked.
+Web of trust is the idea that reputation is a graph rather than a list kept by
+an authority. The earliest large-scale example is [PGP](https://www.openpgp.org/)
+in the early 1990s: people signed each other's keys at "key-signing parties,"
+and a recipient could decide to trust an unknown public key because someone
+they already trusted had signed it. The same shape recurs in other contexts,
+from Apache committer ladders to Wikipedia editor levels to early Bitcoin
+contributor trust: a pubkey, an identity, or a piece of content earns
+reputation through who has already vouched for it.
 
-The result is per-user moderation that needs no central authority. Two people reading the same [relays](/topics/relays) see different feeds because their graphs are different. A spammer who buys ten thousand fake follows still cannot reach a user whose own contacts have not vouched for any of them. There is no list to game, and no operator to lobby.
+[Nostr](/topics/nostr) applies that idea to events. Every user already
+publishes a follow list as a signed event. A client can read the follow lists
+of the people you follow, score every other pubkey by how close it sits in
+that graph, and apply the score as a filter: notes, replies, zaps, and DMs
+from accounts inside your circle pass through; the rest gets muted or
+downranked.
 
-[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md) standardizes published trust-rank events so that a client does not have to recompute the graph itself: a service can publish ranked pubkey lists as nostr events, and any client can subscribe to one or more services it considers trustworthy. Clients are also free to compute their own scores locally. WoT-based filtering ships in [Amethyst](/projects/amethyst), [Damus](/projects/damus), [Coracle](/projects/coracle), [NDK](/projects/ndk), and other clients, and is one of the main reasons spam on nostr has stayed manageable without a content team.
+The result is per-user moderation that needs no central authority. Two people
+reading the same [relays](/topics/relays) see different feeds because their
+graphs are different. A spammer who buys ten thousand fake follows still
+cannot reach a user whose own contacts have not vouched for any of them.
+There is no list to game, and no operator to lobby.
+
+## Implementations
+
+A few different approaches exist on nostr today:
+
+- [pyramid](https://github.com/fiatjaf/pyramid) by [fiatjaf](/blog/fiatjaf-receives-lts-grant)
+  is a relay built around a hierarchical invite tree. Each member can invite a
+  fixed number of others, every member is responsible for their descendants,
+  and the root admin can drop entire branches. The relay's read/write
+  membership becomes the WoT, applied at the relay level instead of in each
+  client. Pyramid's inbox sub-relay also filters at the second-degree social
+  graph of its members, so unsolicited replies from outside the extended
+  network are dropped.
+- [Vertex](https://vertexlab.io/) runs WoT as a service. It computes
+  (Personalized) PageRank over the nostr social graph and exposes the result
+  as a query API for clients. Spam filtering, follow recommendations, and
+  ranked profile search all read from the same scoring backend, and every
+  response is signed so a client can verify it without trusting the host.
+- [Relatr](https://www.relatr.net/) by ContextVM computes a per-perspective
+  trust score by combining social-graph distance with profile validations
+  such as [NIP-05](/topics/nip-05) addresses and Lightning addresses. Each
+  Relatr instance runs from the perspective of one source pubkey, so the
+  same target user can get different scores from different operators. The
+  service ships as a [ContextVM](https://contextvm.org/) deployment, which
+  means anyone can run their own from a Docker container or an Umbrel/Start9
+  one-click install.
+
+[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md)
+standardizes a publishing format (kind 30382 "trusted assertions") so that
+scores produced by services like the above can be read back by clients
+without each client having to recompute the graph itself. Some scoring
+providers (Relatr) emit NIP-85 events; others (Vertex) keep their API
+outside the event format. Clients are also free to compute scores locally,
+and many do.
+
+WoT-based filtering ships in [Amethyst](/projects/amethyst),
+[Damus](/projects/damus), [Coracle](/projects/coracle), [NDK](/projects/ndk),
+[Flotilla](/projects/flotilla), and other clients, and is one of the main
+reasons spam on nostr has stayed manageable without a content team.
 
 ## References
 
@@ -17,3 +72,6 @@ The result is per-user moderation that needs no central authority. Two people re
 - [NIP-85: Trusted Assertions](https://github.com/nostr-protocol/nips/blob/master/85.md)
 - [NIP-51: Lists](https://github.com/nostr-protocol/nips/blob/master/51.md)
 - [Web of Trust (Wikipedia)](https://en.wikipedia.org/wiki/Web_of_trust)
+- [fiatjaf/pyramid](https://github.com/fiatjaf/pyramid)
+- [Vertex](https://vertexlab.io/)
+- [Relatr (ContextVM)](https://github.com/ContextVM/relatr)
