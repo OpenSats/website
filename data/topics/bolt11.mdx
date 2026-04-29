@@ -1,0 +1,18 @@
+---
+title: 'BOLT 11'
+summary: 'The original Lightning invoice format: a bech32-encoded string a payer scans once to send a fixed amount to a fixed pubkey before the invoice expires.'
+category: 'Lightning'
+aliases: ['BOLT11', 'Lightning invoice', 'lnbc']
+---
+
+BOLT 11 is the invoice format that has carried almost every Lightning payment since the network went live. The receiver generates an invoice for a specific amount, signs it with the node's key, and shares the resulting string (which always starts with `lnbc` on mainnet) as text or a QR code. The payer's wallet decodes the invoice, finds a route to the destination, and pays it before it expires.
+
+Each invoice is one-shot. It encodes a payment hash that the receiver chose, an optional amount, an expiry, an optional memo, and routing hints for nodes behind unannounced channels. Once the payer settles the preimage of that hash, the invoice cannot be paid again. Asking for a fresh invoice per payment is why BOLT 11 wallets typically rely on a side channel like LNURL or a web server to hand out new strings on demand.
+
+[BOLT 12](/topics/bolt12) was designed to remove that round trip: a single offer can be paid many times, fetches the invoice over the Lightning network itself using onion messages, and supports recurring payments and refunds. BOLT 11 invoices remain the lowest common denominator that every wallet and node can read, and they continue to be the default for one-off payments.
+
+## References
+
+- [BOLT 11 specification](https://github.com/lightning/bolts/blob/master/11-payment-encoding.md)
+- [BIP 173 (bech32)](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki)
+- [Bitcoin Optech: BOLT 11 invoice](https://bitcoinops.org/en/topics/bolt11/)
