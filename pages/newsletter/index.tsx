@@ -47,7 +47,9 @@ export default function NewsletterIndexPage({
               Sats Well Spent
             </h1>
             <p className="text-lg leading-8 text-gray-600 dark:text-gray-300">
-              Signals, numbers, and notable software shipped by our grantees.
+              A quarterly look at the free and open-source projects OpenSats
+              supports, the builders behind them, and the impact your donations
+              make possible.
             </p>
           </header>
 
