@@ -1,11 +1,11 @@
 /**
- * Convert a human-friendly quarter label like "Q1 2026" into the
- * sortable, prominent form "2026-Q1" used across the newsletter UI.
- * Falls back to the original string if the input doesn't match.
+ * Canonical quarter form is "2026-Q1" — sortable and used across the
+ * newsletter UI. As a courtesy, we also normalize the human-friendly
+ * "Q1 2026" form. Anything else passes through unchanged.
  */
 export function formatQuarter(quarter?: string): string {
   if (!quarter) return ''
-  const match = quarter.match(/Q([1-4])\s+(\d{4})/i)
+  const match = quarter.match(/^Q([1-4])\s+(\d{4})$/i)
   if (!match) return quarter
   const [, q, year] = match
   return `${year}-Q${q}`
