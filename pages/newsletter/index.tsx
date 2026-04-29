@@ -8,6 +8,7 @@ import { PageSEO } from '@/components/SEO'
 import SectionContainer from '@/components/SectionContainer'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import siteMetadata from '@/data/siteMetadata'
+import { formatIssueNumber, formatQuarter } from '@/utils/newsletter'
 
 type Issue = ReturnType<typeof allCoreContent<Newsletter>>[number]
 
@@ -58,31 +59,24 @@ export default function NewsletterIndexPage({
             ) : (
               <ul className="divide-y divide-gray-200 dark:divide-gray-800">
                 {issues.map((issue) => {
-                  const issueLabel = `Issue #${String(
-                    issue.issueNumber
-                  ).padStart(2, '0')}`
+                  const issueLabel = formatIssueNumber(issue.issueNumber)
+                  const quarterLabel = formatQuarter(issue.quarter)
                   return (
                     <li key={issue.slug} className="py-8">
                       <Link
                         href={`/newsletter/${issue.slug}`}
                         className="group block"
                       >
-                        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                          <span className="text-primary-500 group-hover:text-primary-600 dark:text-primary-400 dark:group-hover:text-primary-300">
-                            {issueLabel}
-                          </span>
-                          <span aria-hidden="true">·</span>
-                          <span>{issue.quarter}</span>
+                        <h2 className="font-serif text-3xl font-bold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-4xl">
+                          {quarterLabel}
+                        </h2>
+                        <div className="mt-2 flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                          <span>{issueLabel}</span>
                           <span aria-hidden="true">·</span>
                           <time dateTime={issue.date}>
                             {formatDate(issue.date, siteMetadata.locale)}
                           </time>
                         </div>
-                        {issue.summary && (
-                          <p className="mt-2 text-lg leading-7 text-gray-700 group-hover:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100">
-                            {issue.summary}
-                          </p>
-                        )}
                       </Link>
                     </li>
                   )
