@@ -6,11 +6,10 @@ export function getHeartbeatUrl(git?: string): string | null {
       return null
     }
     const [owner, repo] = url.pathname.replace(/^\/+/, '').split('/')
-    if (!owner || !repo) return null
-    const cleanRepo = repo.replace(/\.git$/, '')
-    return `https://heartbeat.opensats.org/?repos=${encodeURIComponent(
-      `${owner}/${cleanRepo}`
-    )}`
+    if (!owner) return null
+    const cleanRepo = repo ? repo.replace(/\.git$/, '') : ''
+    const query = cleanRepo ? `${owner}/${cleanRepo}` : owner
+    return `https://heartbeat.opensats.org/?q=${encodeURIComponent(query)}`
   } catch {
     return null
   }
