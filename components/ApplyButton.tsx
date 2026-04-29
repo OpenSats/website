@@ -52,9 +52,9 @@ export default function ApplyButton({
         </span>
       </span>
       <span className="apply-banner-v2__icons" aria-hidden="true">
-        <span>🟧</span>
-        <span>🟧</span>
-        <span>🟧</span>
+        <span>✉️</span>
+        <span>✉️</span>
+        <span>✉️</span>
       </span>
     </CustomLink>
   )
