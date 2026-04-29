@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['BUD-01', 'BUD-02', 'Blobs Stored Simply on Mediaservers']
 ---
 
-Blossom is a protocol for uploading and serving files over HTTP, where each file is identified by the SHA-256 hash of its bytes. A client can hand the same hash to several Blossom servers and any of them can serve the file back. There is no central registry, and there is no per-server file ID to keep track of.
+Blossom (Blobs stored simply on mediaservers) is a protocol for uploading and serving files over HTTP, where each file is identified by the SHA-256 hash of its bytes. A client can hand the same hash to several Blossom servers and any of them can serve the file back. There is no central registry, and there is no per-server file ID to keep track of.
 
 Authentication uses signed [Nostr](/topics/nostr) events of kind `24242`. The client signs an event that says what it wants to do (upload, list, delete, mirror), and the server checks the signature against the user's pubkey before allowing the action. The same Nostr keypair a user already has for posting notes is what authorizes file operations.
 
