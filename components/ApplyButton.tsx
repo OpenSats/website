@@ -12,6 +12,8 @@ type ApplyButtonProps = {
   cta?: string
   preTagline?: string
   tagline?: string
+  taglineMobile?: string
+  taglineMobileSub?: string
   track?: ApplyTrack
   href?: string
 }
@@ -21,6 +23,8 @@ export default function ApplyButton({
   cta = '>_ apply',
   preTagline = 'Apply for an',
   tagline = 'OpenSats grant',
+  taglineMobile = 'Apply',
+  taglineMobileSub = 'for a grant',
   track = 'grant',
   href,
 }: ApplyButtonProps) {
@@ -41,9 +45,9 @@ export default function ApplyButton({
           {preTagline} <strong>{tagline}</strong>
         </span>
         <span className="apply-banner-v2__tagline-mobile">
-          <strong>Apply</strong>
+          <strong>{taglineMobile}</strong>
           <span className="apply-banner-v2__tagline-mobile-sub">
-            for a grant
+            {taglineMobileSub}
           </span>
         </span>
       </span>
