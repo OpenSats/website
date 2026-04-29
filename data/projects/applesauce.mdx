@@ -1,0 +1,37 @@
+---
+title: 'Applesauce'
+dateAdded: '2026-04-27'
+summary: 'A modular TypeScript SDK for building nostr web clients, extracted from noStrudel.'
+nym: 'hzrd149'
+website: 'https://applesauce.build/'
+coverImage: '/static/images/projects/applesauce.png'
+git: 'https://github.com/hzrd149/applesauce'
+tags: ['Nostr', 'TypeScript', 'Library', 'SDK']
+showcase: true
+fund: nostr
+announcementLink: '/blog/hzrd149-receives-lts-grant'
+---
+
+Applesauce is a TypeScript SDK for building [nostr](/topics/nostr) web clients, maintained by [hzrd149][lts]. It started as the cleaned-up internals of [noStrudel](https://nostrudel.ninja/) and has grown into a set of small, independent packages that other client developers can pick and choose from. The packages cover relay connections, timeline management, signing, and the building blocks for common nostr features like contacts, mutes, bookmarks, [NIP-17](https://github.com/nostr-protocol/nips/blob/master/17.md) direct messages, [NIP-60](https://github.com/nostr-protocol/nips/blob/master/60.md) cashu wallets, and more.
+
+> The biggest achievement has been building out the applesauce SDK to be the core of the app. This has allowed me to build and test features in isolation and then integrate them back into the app when I know they are working.
+>
+> <cite>—[Hzrd149][impact-report]</cite>
+
+The SDK pairs with React via a small set of hooks for subscribing to observable event streams, but the core packages are framework-agnostic and run anywhere TypeScript runs. Recent work has added [negentropy](https://github.com/nostr-protocol/nips/blob/master/77.md)-based syncing across multiple [relays](/topics/relays), event factories for building common event types, encrypted content caching for NIP-17 DMs, and an [MCP server](https://modelcontextprotocol.io/docs/getting-started/intro) so AI coding agents can work with applesauce primitives directly.
+
+## Why fund it?
+
+Every new nostr client used to reimplement the same basics from scratch: relay management, signing, contact lists, mute lists, NIP-17 wrappers, outbox-model relay selection. Applesauce moves that shared work into one set of packages so client developers can spend their time on the parts that make their app different. noStrudel is the largest public consumer, and the goal is for other client and tool authors to reuse the same primitives instead of rolling their own.
+
+OpenSats first supported hzrd149 in the [December 2023 wave of nostr grants][wave-1] for his work on noStrudel. He later received a [long-term support grant][lts], which is what funds the ongoing applesauce work alongside [Blossom](/topics/blossom), [nsite](https://nsyte.run/), and noStrudel itself.
+
+## What's next?
+
+V6 of applesauce is in progress, with request completion conditions that cut common request times from over 30 seconds down to under 6 seconds when an offline relay is in the set, plus more event factories and bug fixes. Alongside that, hzrd149 is helping build [marmot-ts](https://github.com/marmot-protocol/marmot-ts), a TypeScript implementation of [Messaging Layer Security](https://datatracker.ietf.org/doc/html/rfc9420) over nostr, with applesauce providing the underlying event handling.
+
+For a detailed look at recent progress, see the [Advancements in Nostr Clients][impact-report] impact report.
+
+[impact-report]: /blog/advancements-in-nostr-clients#nostrudel
+[lts]: /blog/hzrd149-receives-lts-grant
+[wave-1]: /blog/nostr-grants-december-2023#nostrudel
