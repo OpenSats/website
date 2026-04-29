@@ -42,7 +42,7 @@ export default function NewsletterIndexPage({
       />
       <SectionContainer>
         <div className="mx-auto max-w-2xl">
-          <header className="space-y-4 pb-10 pt-4">
+          <header className="space-y-4 pb-14 pt-4">
             <h1 className="font-serif text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
               Sats Well Spent
             </h1>
@@ -53,7 +53,7 @@ export default function NewsletterIndexPage({
 
           <div className="border-t border-gray-200 dark:border-gray-800">
             {issues.length === 0 ? (
-              <p className="py-10 text-gray-600 dark:text-gray-400">
+              <p className="py-12 text-gray-600 dark:text-gray-400">
                 The first issue is on its way.
               </p>
             ) : (
@@ -62,7 +62,7 @@ export default function NewsletterIndexPage({
                   const issueLabel = formatIssueNumber(issue.issueNumber)
                   const quarterLabel = formatQuarter(issue.quarter)
                   return (
-                    <li key={issue.slug} className="py-8">
+                    <li key={issue.slug} className="py-12">
                       <Link
                         href={`/newsletter/${issue.slug}`}
                         className="group block"
@@ -82,7 +82,7 @@ export default function NewsletterIndexPage({
                             {formatDate(issue.date, siteMetadata.locale)}
                           </time>
                         </div>
-                        <h2 className="mt-2 font-serif text-3xl font-bold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-4xl">
+                        <h2 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-3xl">
                           {issue.headline || quarterLabel}
                         </h2>
                       </Link>
@@ -93,7 +93,7 @@ export default function NewsletterIndexPage({
             )}
           </div>
 
-          <div className="pb-16 pt-12">
+          <div className="pb-16 pt-16">
             <NewsletterSignup />
           </div>
         </div>
