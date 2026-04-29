@@ -42,14 +42,15 @@ A few different approaches exist on nostr today:
   as a query API for clients. Spam filtering, follow recommendations, and
   ranked profile search all read from the same scoring backend, and every
   response is signed so a client can verify it without trusting the host.
-- [Relatr](https://www.relatr.net/) by ContextVM computes a per-perspective
-  trust score by combining social-graph distance with profile validations
-  such as [NIP-05](/topics/nip-05) addresses and Lightning addresses. Each
-  Relatr instance runs from the perspective of one source pubkey, so the
-  same target user can get different scores from different operators. The
-  service ships as a [ContextVM](https://contextvm.org/) deployment, which
-  means anyone can run their own from a Docker container or an Umbrel/Start9
-  one-click install.
+- [Relatr](https://www.relatr.net/) by [gzuuus](https://github.com/gzuuus)
+  computes a per-perspective trust score by combining social-graph distance
+  with profile validations such as [NIP-05](/topics/nip-05) addresses and
+  Lightning addresses. Each Relatr instance runs from the perspective of one
+  source pubkey, so the same target user can get different scores from
+  different operators. The service ships as a deployment of
+  [ContextVM](https://contextvm.org/), gzuuus's protocol for running services
+  over nostr, which means anyone can run their own from a Docker container or
+  an Umbrel/Start9 one-click install.
 
 [NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md)
 standardizes a publishing format (kind 30382 "trusted assertions") so that
