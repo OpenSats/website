@@ -38,11 +38,6 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
             <h1 className="mt-3 font-serif text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
               {title}
             </h1>
-            {headline && (
-              <p className="mt-2 font-serif text-2xl font-semibold tracking-tight text-gray-700 dark:text-gray-300 sm:text-3xl">
-                {headline}
-              </p>
-            )}
             {summary && (
               <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
                 {summary}
