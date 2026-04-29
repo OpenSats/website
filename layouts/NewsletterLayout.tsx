@@ -4,7 +4,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Newsletter } from 'contentlayer/generated'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import { formatIssueNumber, formatQuarter } from '@/utils/newsletter'
+import { formatIssueNumber } from '@/utils/newsletter'
 
 interface LayoutProps {
   content: CoreContent<Newsletter>
@@ -14,9 +14,8 @@ interface LayoutProps {
 export default function NewsletterLayout({ content, children }: LayoutProps) {
   const { title, issueNumber, date, quarter, headline, summary } = content
   const issueLabel = formatIssueNumber(issueNumber)
-  const quarterLabel = formatQuarter(quarter)
   const seoTitle = headline
-    ? `${title} — ${quarterLabel}: ${headline}`
+    ? `${title} — ${quarter}: ${headline}`
     : `${title} — ${issueLabel}`
 
   return (
@@ -30,7 +29,7 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
                 {issueLabel}
               </span>
               <span aria-hidden="true">·</span>
-              <span>{quarterLabel}</span>
+              <span>{quarter}</span>
               <span aria-hidden="true">·</span>
               <time dateTime={date}>
                 {formatDate(date, siteMetadata.locale)}

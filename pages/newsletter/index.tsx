@@ -8,7 +8,7 @@ import { PageSEO } from '@/components/SEO'
 import SectionContainer from '@/components/SectionContainer'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import siteMetadata from '@/data/siteMetadata'
-import { formatIssueNumber, formatQuarter } from '@/utils/newsletter'
+import { formatIssueNumber } from '@/utils/newsletter'
 
 type Issue = ReturnType<typeof allCoreContent<Newsletter>>[number]
 
@@ -62,7 +62,6 @@ export default function NewsletterIndexPage({
               <ul className="divide-y divide-gray-200 dark:divide-gray-800">
                 {issues.map((issue) => {
                   const issueLabel = formatIssueNumber(issue.issueNumber)
-                  const quarterLabel = formatQuarter(issue.quarter)
                   return (
                     <li key={issue.slug} className="py-12">
                       <Link
@@ -76,7 +75,7 @@ export default function NewsletterIndexPage({
                           {issue.headline && (
                             <>
                               <span aria-hidden="true">·</span>
-                              <span>{quarterLabel}</span>
+                              <span>{issue.quarter}</span>
                             </>
                           )}
                           <span aria-hidden="true">·</span>
@@ -85,7 +84,7 @@ export default function NewsletterIndexPage({
                           </time>
                         </div>
                         <h2 className="mt-3 font-serif text-2xl font-semibold tracking-tight text-gray-900 group-hover:text-primary-600 dark:text-gray-50 dark:group-hover:text-primary-400 sm:text-3xl">
-                          {issue.headline || quarterLabel}
+                          {issue.headline || issue.quarter}
                         </h2>
                       </Link>
                     </li>
