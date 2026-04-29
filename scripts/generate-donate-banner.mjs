@@ -164,7 +164,7 @@ function renderSvg(variant) {
             x="${leftX}"
             y="${leftCtaBaselineY}"
             font-size="${ctaSize}"
-            font-weight="900"
+            font-weight="800"
           >${escapeXml(CTA)}</text>
         </g>
 
@@ -184,7 +184,7 @@ function renderSvg(variant) {
             x="${rightX}"
             y="${rightTaglineBaselineY}"
             font-size="${taglineSize}"
-            font-weight="800"
+            font-weight="700"
           >${escapeXml(TAGLINE)}</text>
         </g>
       </g>
