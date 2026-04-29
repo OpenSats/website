@@ -161,40 +161,27 @@ supports. A few examples from this past quarter:
 
 <div className="nostr-links">
 
-- **[Applesauce](https://applesauce.build) v5:**
-  [hzrd149](/blog/hzrd149-receives-lts-grant) shipped v5 of his nostr
-  application library, with a new event casting system, easy negentropy
-  sync across relays, encrypted-content caching for NIP-17 DMs, NIP-60
-  Cashu wallet primitives, database storage backends, and added or
-  expanded support for nineteen NIPs.
-- **[NDK 3.0](https://github.com/nostr-dev-kit/ndk):**
-  [pablof7z](/blog/pablofz7-receives-lts-grant) released NDK 3.0 this
-  quarter after months of bug fixes, race-condition hunting, and
-  performance work. Ships with new auxiliary packages for negentropy
-  sync, web-of-trust filtering, NIP-17 messages, multi-account sessions,
-  and a cache adapter that works in non-browser environments and
-  browsers running in Lock Mode.
-- **[Amethyst](/projects/amethyst) v1.05 & Amethyst Desktop.**
-  [Vitor Pamplona](/blog/vitor-pamplona-receives-lts-grant) shipped
-  [v1.04](https://github.com/vitorpamplona/amethyst/releases/tag/v1.04.0)
-  and [v1.05](https://github.com/vitorpamplona/amethyst/releases/tag/v1.05.0)
-  this quarter, 752 commits in total. NIP-85 made Web
-  of Trust providers pluggable, the new Quartz local DB does
-  sub-microsecond queries in 15 MB of RAM, and NIP-A4 Public Messages
-  landed. In parallel, new grantee
+- **[Applesauce](https://applesauce.build) v5** by
+  [hzrd149](/blog/hzrd149-receives-lts-grant): negentropy sync across
+  relays, NIP-17 DM caching, NIP-60 Cashu wallet primitives, and expanded
+  support for 19 NIPs.
+- **[NDK 3.0](https://github.com/nostr-dev-kit/ndk)** by
+  [pablof7z](/blog/pablofz7-receives-lts-grant): a major release after
+  months of bug fixes and performance work, with new packages for
+  negentropy sync, web-of-trust filtering, NIP-17 messages, and
+  multi-account sessions.
+- **[Amethyst](/projects/amethyst) v1.05** by
+  [Vitor Pamplona](/blog/vitor-pamplona-receives-lts-grant): 752 commits
+  this quarter, pluggable Web of Trust providers, a new Quartz local DB,
+  and NIP-A4 Public Messages. New grantee
   [Róbert Nagy](/blog/sixteenth-wave-of-nostr-grants#amethyst-desktop)
-  started porting Amethyst to JVM Desktop via Kotlin Multiplatform.
-  His first quarter shipped remote-signer login, a multi-column deck,
-  advanced search, and a full media pipeline for uploads, encrypted
-  attachments, and relay search.
-- **[nostr-double-ratchet](https://github.com/mmalmi/nostr-double-ratchet).**
-  [Martti Malmi](/blog/eleventh-wave-of-nostr-grants#nostr-double-ratchet)'s
-  end-to-end encryption library for nostr now powers multi-device chat
-  and group messaging in [Iris](https://iris.to/). The Tauri build is
-  live on iOS, Play Store, ZapStore, and desktop. Voice and video calls
-  work over WebRTC, and a Cashu wallet is integrated. Martti is
-  extracting the session manager as a standalone module so NDK and
-  Notedeck can pick it up next quarter.
+  also kicked off Amethyst Desktop, with remote-signer login and a
+  multi-column deck shipped in his first quarter.
+- **[nostr-double-ratchet](https://github.com/mmalmi/nostr-double-ratchet)**
+  by [Martti Malmi](/blog/eleventh-wave-of-nostr-grants#nostr-double-ratchet):
+  the end-to-end encryption library now powers multi-device chat and group
+  messaging in [Iris](https://iris.to/), with WebRTC voice and video calls
+  and a Cashu wallet integrated.
 
 The above is but a small sliver of what our grantees have shipped. For a
 deeper look at what's happening in nostr, read our
