@@ -25,38 +25,35 @@ because their graphs are different. A spammer who buys ten thousand fake
 follows still cannot reach a user whose own contacts have not vouched for
 any of them.
 
-## Implementations
+The relay-level version of this is [pyramid](https://github.com/fiatjaf/pyramid)
+by [fiatjaf](/blog/fiatjaf-receives-lts-grant), a relay built around a
+hierarchical invite tree. Each member can invite a fixed number of others,
+every member is responsible for their descendants, and the root admin can
+drop entire branches. Membership becomes the WoT, enforced when reading and
+writing rather than after the fact in each client. Pyramid's inbox
+sub-relay further filters at the second-degree social graph of its members,
+so unsolicited replies from outside the extended network are dropped before
+they reach the user.
 
-A few different approaches exist on nostr today:
+Scoring services do the graph work outside the client and return a number.
+[Vertex](https://vertexlab.io/) computes (Personalized) PageRank over the
+nostr social graph and exposes the result as a query API; clients use it
+for spam filtering, follow recommendations, and ranked profile search, and
+every response is signed so a client can verify it without trusting the
+host. [Relatr](https://www.relatr.net/) by
+[gzuuus](https://github.com/gzuuus) computes a per-perspective trust score
+by combining social-graph distance with profile validations like
+[NIP-05](/topics/nip-05) and Lightning addresses, and every instance runs
+from the perspective of one source pubkey, so the same target user can end
+up with different scores from different operators. Relatr ships as a
+deployment of [ContextVM](https://contextvm.org/), gzuuus's protocol for
+running services over nostr, so anyone can run their own from a Docker
+container or an Umbrel/Start9 one-click install.
 
-- [pyramid](https://github.com/fiatjaf/pyramid) by [fiatjaf](/blog/fiatjaf-receives-lts-grant)
-  is a relay built around a hierarchical invite tree. Each member can invite
-  a fixed number of others, every member is responsible for their
-  descendants, and the root admin can drop entire branches. The relay's
-  read/write membership becomes the WoT, enforced at the relay level instead
-  of in each client. Pyramid's inbox sub-relay also filters at the
-  second-degree social graph of its members, so unsolicited replies from
-  outside the extended network are dropped.
-- [Vertex](https://vertexlab.io/) runs WoT as a service. It computes
-  (Personalized) PageRank over the nostr social graph and exposes the result
-  as a query API for clients. Spam filtering, follow recommendations, and
-  ranked profile search all read from the same scoring backend, and every
-  response is signed so a client can verify it without trusting the host.
-- [Relatr](https://www.relatr.net/) by [gzuuus](https://github.com/gzuuus)
-  computes a per-perspective trust score by combining social-graph distance
-  with profile validations such as [NIP-05](/topics/nip-05) addresses and
-  Lightning addresses. Each Relatr instance runs from the perspective of one
-  source pubkey, so the same target user can get different scores from
-  different operators. The service ships as a deployment of
-  [ContextVM](https://contextvm.org/), gzuuus's protocol for running services
-  over nostr, which means anyone can run their own from a Docker container or
-  an Umbrel/Start9 one-click install.
-
-[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md)
-standardizes a publishing format (kind 30382 "trusted assertions") so that
-scores produced by services like the above can be read back by clients
-without each client having to recompute the graph itself. Some scoring
-providers (Relatr) emit NIP-85 events; others (Vertex) keep their API
+[NIP-85](https://github.com/nostr-protocol/nips/blob/master/85.md) is the
+publishing format that lets these scoring services hand their numbers back
+to clients without each client recomputing the graph. It defines kind 30382
+"trusted assertions". Relatr emits NIP-85 events; Vertex keeps its API
 outside the event format. Clients are also free to compute scores locally,
 and many do.
 
