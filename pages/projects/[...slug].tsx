@@ -97,7 +97,7 @@ export default function ProjectPage({
                 href={heartbeatUrl}
                 aria-label={`View ${project.title} heartbeat`}
                 title="View project heartbeat"
-                className="inline-flex items-center justify-center rounded border border-stone-800 bg-transparent px-3 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+                className="inline-flex aspect-square h-[42px] items-center justify-center rounded border border-stone-800 bg-transparent font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
               >
                 <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
               </CustomLink>
