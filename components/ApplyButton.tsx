@@ -1,7 +1,7 @@
 import CustomLink from './Link'
 
 const APPLY_PATHS = {
-  grant: '/apply',
+  grant: '/apply/grant',
   lts: '/apply/lts',
 } as const
 
