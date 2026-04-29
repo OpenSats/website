@@ -106,18 +106,6 @@ export default function ProjectPage({
               Donate to {getFundLabel(project.fund)}
             </CustomLink>
           )}
-          {project.donationLink && (
-            <CustomLink
-              href={project.donationLink}
-              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
-            >
-              {project.donationLink.includes('geyser')
-                ? 'Support via Geyser'
-                : project.donationLink.includes('opencollective')
-                ? 'Support via OpenCollective'
-                : 'Support directly'}
-            </CustomLink>
-          )}
           {(() => {
             const heartbeatUrl = getHeartbeatUrl(project.git)
             return heartbeatUrl ? (
@@ -132,6 +120,18 @@ export default function ProjectPage({
               </CustomLink>
             ) : null
           })()}
+          {project.donationLink && (
+            <CustomLink
+              href={project.donationLink}
+              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
+            >
+              {project.donationLink.includes('geyser')
+                ? 'Support via Geyser'
+                : project.donationLink.includes('opencollective')
+                ? 'Support via OpenCollective'
+                : 'Support directly'}
+            </CustomLink>
+          )}
         </aside>
       </div>
       {relatedPosts.length > 0 && (
