@@ -237,6 +237,20 @@ body {
 }
 
 @media (max-width: 480px) {
+  .apply-banner-v2 {
+    min-height: 88px;
+    margin: 3rem auto;
+  }
+
+  .apply-banner-v2__left,
+  .apply-banner-v2__right {
+    padding: 0.75rem 1rem;
+  }
+
+  .apply-banner-v2__left strong {
+    font-size: 1.4rem;
+  }
+
   .apply-banner-v2__prelude {
     display: none;
   }
