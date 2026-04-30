@@ -29,6 +29,21 @@ const faviconSvgPath = path.join(
   'opensats-favicon.svg'
 )
 
+// Bundle Inter so resvg renders identically on macOS and Vercel's
+// Linux build env (where Georgia/Arial aren't installed). Mirrors the
+// font pattern used in generate-donate-banner.mjs and
+// generate-heartbeat-button.mjs.
+const FONT_DIR = path.join(root, 'public', 'fonts', 'Inter', 'static')
+const FONT_FAMILY = 'Inter 18pt'
+const FONT_FILES = [
+  'Inter_18pt-Regular.ttf',
+  'Inter_18pt-Medium.ttf',
+  'Inter_18pt-SemiBold.ttf',
+  'Inter_18pt-Bold.ttf',
+  'Inter_18pt-ExtraBold.ttf',
+  'Inter_18pt-Black.ttf',
+].map((f) => path.join(FONT_DIR, f))
+
 const WIDTH = 1200
 const HEIGHT = 630
 
@@ -169,15 +184,15 @@ function renderIndexSvg() {
 
       ${logoMark({ x: 84, y: 200, size: 56 })}
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
+      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         Sats Well Spent
       </text>
 
-      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         A quarterly newsletter from OpenSats.
       </text>
 
-      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Inter 18pt" letter-spacing="1">
         opensats.org/newsletter
       </text>
 
@@ -219,21 +234,21 @@ function renderIssueSvg(issue) {
 
       ${logoMark({ x: 84, y: logoY, size: logoSize })}
 
-      <text x="${kickerX}" y="${kickerY}" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
+      <text x="${kickerX}" y="${kickerY}" fill="#f97316" font-size="22" font-weight="700" font-family="Inter 18pt" letter-spacing="2">
         ${escapeXml(kicker)}
       </text>
 
-      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
+      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         ${titleSvg}
       </text>
 
       <text x="84" y="${
         titleStartY + (titleLines.length - 1) * titleLineHeight + 76
-      }" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+      }" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         ${escapeXml(seriesLabel)}
       </text>
 
-      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Inter 18pt" letter-spacing="1">
         opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
@@ -265,6 +280,11 @@ async function loadNewsletters() {
 function renderToPng(svg) {
   const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: WIDTH },
+    font: {
+      fontFiles: FONT_FILES,
+      loadSystemFonts: false,
+      defaultFontFamily: FONT_FAMILY,
+    },
   })
   return resvg.render().asPng()
 }

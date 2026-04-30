@@ -24,6 +24,19 @@ const heartIconPath = path.join(
   'heartbeat.svg'
 )
 
+// Bundle Inter so resvg renders the text identically on macOS and on
+// Vercel's Linux build env (where Georgia/Arial aren't installed).
+const FONT_DIR = path.join(root, 'public', 'fonts', 'Inter', 'static')
+const FONT_FAMILY = 'Inter 18pt'
+const FONT_FILES = [
+  'Inter_18pt-Regular.ttf',
+  'Inter_18pt-Medium.ttf',
+  'Inter_18pt-SemiBold.ttf',
+  'Inter_18pt-Bold.ttf',
+  'Inter_18pt-ExtraBold.ttf',
+  'Inter_18pt-Black.ttf',
+].map((f) => path.join(FONT_DIR, f))
+
 const WIDTH = 1200
 const HEIGHT = 630
 
@@ -73,18 +86,18 @@ function renderSvg({ faviconUri, heartPath }) {
 
       <image href="${faviconUri}" x="84" y="200" width="56" height="56" />
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
+      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         Heartbeat
       </text>
 
-      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         A live feed of releases, commits, and
       </text>
-      <text x="84" y="412" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="412" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         pull requests from the projects we fund.
       </text>
 
-      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Inter 18pt" letter-spacing="1">
         heartbeat.opensats.org
       </text>
 
@@ -110,6 +123,11 @@ async function main() {
   const svg = renderSvg({ faviconUri, heartPath })
   const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: WIDTH },
+    font: {
+      fontFiles: FONT_FILES,
+      loadSystemFonts: false,
+      defaultFontFamily: FONT_FAMILY,
+    },
   })
   const png = resvg.render().asPng()
   await fs.writeFile(outputPath, png)
