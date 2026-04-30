@@ -5,6 +5,7 @@ import SocialIcon from '@/components/social-icons'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
 import Image from '@/components/Image'
+import { getHeartbeatUrl } from '@/utils/heartbeat'
 
 interface Props {
   children: ReactNode
@@ -25,6 +26,7 @@ export default function PageLayout({ children, content }: Props) {
     nostr,
     zapstore,
   } = content
+  const heartbeatUrl = getHeartbeatUrl(git)
   return (
     <>
       <ProjectSEO
@@ -48,6 +50,9 @@ export default function PageLayout({ children, content }: Props) {
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
               <SocialIcon kind="github" href={git} size={6} />
+              {heartbeatUrl && (
+                <SocialIcon kind="heartbeat" href={heartbeatUrl} size={6} />
+              )}
               {nostr && (
                 <SocialIcon
                   kind="nostr"
