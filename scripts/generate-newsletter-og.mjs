@@ -154,6 +154,10 @@ function renderIndexSvg() {
         A quarterly newsletter from OpenSats.
       </text>
 
+      <text x="84" y="566" fill="#52525b" font-size="18" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+        opensats.org/newsletter
+      </text>
+
       ${loveLetterSvg()}
     </svg>
   `
@@ -198,6 +202,10 @@ function renderIssueSvg(issue) {
         titleStartY + (titleLines.length - 1) * titleLineHeight + 56
       }" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
         Sats Well Spent
+      </text>
+
+      <text x="84" y="566" fill="#52525b" font-size="18" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+        opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
       ${loveLetterSvg()}
