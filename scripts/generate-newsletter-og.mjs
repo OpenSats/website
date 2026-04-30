@@ -195,7 +195,7 @@ function renderIssueSvg(issue) {
 
   const titleFontSize = titleLines.length > 1 ? 64 : 76
   const titleLineHeight = titleLines.length > 1 ? 72 : 84
-  const titleStartY = titleLines.length > 1 ? 280 : 320
+  const titleStartY = titleLines.length > 1 ? 300 : 340
 
   const titleSvg = titleLines
     .map(
@@ -206,7 +206,7 @@ function renderIssueSvg(issue) {
     )
     .join('')
 
-  const kickerY = titleStartY - 60
+  const kickerY = titleStartY - 80
   const logoSize = 36
   const logoY = kickerY - logoSize + 8
   const kickerX = 84 + logoSize + 14
@@ -227,7 +227,7 @@ function renderIssueSvg(issue) {
       </text>
 
       <text x="84" y="${
-        titleStartY + (titleLines.length - 1) * titleLineHeight + 56
+        titleStartY + (titleLines.length - 1) * titleLineHeight + 76
       }" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
         Sats Well Spent
       </text>
