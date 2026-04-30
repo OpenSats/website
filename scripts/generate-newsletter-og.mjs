@@ -157,6 +157,34 @@ function loveLetterSvg() {
   `
 }
 
+function cypherpunkLaptopSvg() {
+  return `
+    <g transform="translate(760, 150)">
+      <ellipse cx="170" cy="180" rx="220" ry="160" fill="#f97316" fill-opacity="0.12" />
+      <ellipse cx="170" cy="278" rx="200" ry="12" fill="#000" fill-opacity="0.45" />
+
+      <path d="M 20,240 L 320,240 L 360,272 L -20,272 Z"
+            fill="#fff7ed" stroke="#fb923c" stroke-width="3" stroke-linejoin="round" />
+      <rect x="138" y="248" width="64" height="6" rx="2" fill="#fed7aa" />
+
+      <rect x="20" y="0" width="300" height="240" rx="14" fill="#fff7ed" stroke="#fed7aa" stroke-width="3" />
+      <rect x="34" y="14" width="272" height="212" rx="6" fill="#0f0f11" />
+
+      <g font-family="Inter 18pt">
+        <text x="50" y="46"  fill="#fb923c" font-size="18" font-weight="700">$ gpg --gen-key</text>
+        <text x="50" y="70"  fill="#a1a1aa" font-size="16">generating keypair...</text>
+        <text x="50" y="94"  fill="#a1a1aa" font-size="16">[#########.] 80%</text>
+        <text x="50" y="128" fill="#fb923c" font-size="18" font-weight="700">def encrypt(m, k):</text>
+        <text x="70" y="150" fill="#fafaf9" font-size="16">return aes(m, k)</text>
+        <text x="50" y="184" fill="#fb923c" font-size="18" font-weight="700">$ ./privacy --on</text>
+        <text x="50" y="206" fill="#a1a1aa" font-size="16">listening on :1984</text>
+      </g>
+
+      <circle cx="170" cy="8" r="2.5" fill="#fb923c" fill-opacity="0.6" />
+    </g>
+  `
+}
+
 function baseDefs() {
   return `
     <defs>
@@ -252,7 +280,7 @@ function renderIssueSvg(issue) {
         opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
-      ${loveLetterSvg()}
+      ${issue.slug === '2026-Q1' ? cypherpunkLaptopSvg() : loveLetterSvg()}
     </svg>
   `
 }
