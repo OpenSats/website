@@ -81,18 +81,6 @@ function formatIssueNumber(issueNumber) {
   return `Issue #${String(issueNumber).padStart(2, '0')}`
 }
 
-function formatIssueDate(dateString) {
-  const date = new Date(dateString)
-  if (Number.isNaN(date.getTime())) {
-    return ''
-  }
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
-
 // Stylized love-letter envelope with an orange heart seal, positioned on the
 // right side of the OG card. The artwork mirrors the love-letter emoji while
 // swapping the traditional red heart for OpenSats orange.
@@ -152,66 +140,19 @@ function backgroundDecor() {
   `
 }
 
-function brandPill(label = 'OpenSats Newsletter') {
-  return `
-    <rect x="84" y="72" width="320" height="38" rx="19" fill="#1f2937" />
-    <circle cx="110" cy="91" r="6" fill="#f97316" />
-    <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-      label
-    )}</text>
-  `
-}
-
 function renderIndexSvg() {
-  const titleLines = ['Sats Well Spent']
-  const summaryLines = wrapText(
-    'A quarterly dispatch on the free and open-source projects OpenSats supports — and the builders behind them.',
-    32,
-    4
-  )
-  const url = 'opensats.org/newsletter'
-  const titleStartY = 200
-  const titleFontSize = 64
-  const titleLineHeight = 72
-  const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
-  const summaryStartY = titleBottomY + 64
-  const separatorY = 500
-
-  const titleSvg = titleLines
-    .map(
-      (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : titleLineHeight}">${escapeXml(
-          line
-        )}</tspan>`
-    )
-    .join('')
-
-  const summarySvg = summaryLines
-    .map(
-      (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 38}">${escapeXml(line)}</tspan>`
-    )
-    .join('')
-
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${baseDefs()}
       ${backgroundDecor()}
-      ${brandPill('OpenSats Newsletter')}
 
-      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
-        ${titleSvg}
+      <text x="84" y="300" fill="#fafaf9" font-size="76" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
+        Sats Well Spent
       </text>
 
-      <text x="84" y="${summaryStartY}" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
-        ${summarySvg}
+      <text x="84" y="356" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+        A quarterly newsletter from OpenSats.
       </text>
-
-      <rect x="84" y="${separatorY}" width="560" height="1" fill="#3f3f46" />
-      <text x="84" y="538" fill="#a1a1aa" font-size="22" font-family="Arial, Helvetica, sans-serif">A quarterly dispatch</text>
-      <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-        url
-      )}</text>
 
       ${loveLetterSvg()}
     </svg>
@@ -220,21 +161,14 @@ function renderIndexSvg() {
 
 function renderIssueSvg(issue) {
   const issueLabel = formatIssueNumber(issue.issueNumber)
-  const dateLabel = formatIssueDate(issue.date)
-  const kickerParts = [issueLabel, issue.quarter, dateLabel].filter(Boolean)
-  const kicker = kickerParts.join('  ·  ')
+  const kicker = `${issueLabel}  ·  ${issue.quarter}`
 
   const headlineText = issue.headline || issue.title
   const titleLines = wrapText(headlineText, 18, 2)
-  const summaryLines = wrapText(issue.summary || '', 32, 5)
-  const url = `opensats.org/newsletter/${issue.slug}`
 
-  const titleStartY = 210
-  const titleFontSize = titleLines.length > 1 ? 56 : 64
-  const titleLineHeight = titleLines.length > 1 ? 64 : 72
-  const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
-  const summaryStartY = titleBottomY + 56
-  const separatorY = 500
+  const titleFontSize = titleLines.length > 1 ? 64 : 76
+  const titleLineHeight = titleLines.length > 1 ? 72 : 84
+  const titleStartY = titleLines.length > 1 ? 280 : 320
 
   const titleSvg = titleLines
     .map(
@@ -245,20 +179,14 @@ function renderIssueSvg(issue) {
     )
     .join('')
 
-  const summarySvg = summaryLines
-    .map(
-      (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 38}">${escapeXml(line)}</tspan>`
-    )
-    .join('')
-
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${baseDefs()}
       ${backgroundDecor()}
-      ${brandPill('Sats Well Spent')}
 
-      <text x="84" y="160" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
+      <text x="84" y="${
+        titleStartY - 60
+      }" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
         ${escapeXml(kicker.toUpperCase())}
       </text>
 
@@ -266,15 +194,11 @@ function renderIssueSvg(issue) {
         ${titleSvg}
       </text>
 
-      <text x="84" y="${summaryStartY}" fill="#d4d4d8" font-size="26" font-family="Arial, Helvetica, sans-serif">
-        ${summarySvg}
+      <text x="84" y="${
+        titleStartY + (titleLines.length - 1) * titleLineHeight + 56
+      }" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+        Sats Well Spent
       </text>
-
-      <rect x="84" y="${separatorY}" width="560" height="1" fill="#3f3f46" />
-      <text x="84" y="538" fill="#a1a1aa" font-size="22" font-family="Arial, Helvetica, sans-serif">A quarterly dispatch</text>
-      <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-        url
-      )}</text>
 
       ${loveLetterSvg()}
     </svg>
