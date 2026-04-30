@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Newsletter } from 'contentlayer/generated'
+import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { formatIssueNumber } from '@/utils/newsletter'
@@ -25,9 +26,12 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
         <article>
           <header className="border-b border-gray-200 pb-8 pt-4 dark:border-gray-800">
             <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              <span className="text-primary-500 dark:text-primary-400">
+              <Link
+                href="/newsletter"
+                className="text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300"
+              >
                 {issueLabel}
-              </span>
+              </Link>
               <span aria-hidden="true">·</span>
               <span>{quarter}</span>
               <span aria-hidden="true">·</span>
