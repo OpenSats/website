@@ -54,10 +54,11 @@ export default function StatsSentence({ className = '' }: StatsSentenceProps) {
       in{' '}
       <Link
         href="/map"
-        className="-mx-1 whitespace-nowrap rounded bg-primary-500 px-2 font-bold text-white no-underline hover:bg-primary-600 hover:!text-white dark:text-white"
+        className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        40+ countries.
+        40+ countries
       </Link>
+      .
     </p>
   )
 }

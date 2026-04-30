@@ -1,0 +1,248 @@
+---
+title: 'Sats Well Spent'
+issueNumber: 1
+date: '2026-04-30'
+quarter: '2026-Q1'
+headline: 'Cypherpunks Write Code'
+summary: 'A quarterly look at the free and open-source projects OpenSats supports, the builders behind them, and the impact your donations make possible.'
+---
+
+<div className="editors-note">
+
+Dear Reader,
+
+I could write endless pages on the projects that OpenSats has funded, and
+maybe one day I will. But today, let me do the opposite instead: talk about
+what OpenSats _doesn't_ fund, and why.
+
+We don't fund anything that is closed source. FOSS is non-negotiable.
+"Source viewable" doesn't cut it either. All projects must have a proper
+license that makes the source code
+[free as in freedom](/faq/application#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license).
+
+We don't fund anything that has a shitcoin attached to it. We are bitcoin
+only, and always will be. Money printing takes from the many and gives to
+the few, which is clearly and obviously immoral. It's a travesty that money
+printing is so widespread and normalized as it is today. And while fiat
+money is the worst offender, shitcoins are a close second. We exist to
+solve the problem of sustainable funding, and projects that print their
+own money don't have a funding problem, obviously. (Money printing isn't
+sustainable long-term either, but that's a story for another day.)
+
+While we do fund projects that could evolve into for-profit endeavors, we
+try to focus on funding software and infrastructure that _can't_ be
+monetized easily. We are not a VC, or an incubator, or an entity that
+_invests_ in projects, products, or startups. Investments and profits are
+important, but OpenSats is focusing on something else: providing a
+sustainable and consistent ecosystem to fund FOSS contributors. That was
+[our mission statement from Day 1](/mission), and it will continue to be
+going forward.
+
+In the next couple of years we hope to move closer to our goal of
+long-term sustainability. The plan is simple: grow the overall
+ecosystem, encourage individuals and companies to give to open-source
+projects (either via OpenSats or directly), help said projects to become
+self-sustaining, and encourage other orgs to do the same.
+["Let a thousand flowers bloom"](/blog/let-a-thousand-flowers-bloom) and
+all that.
+
+My hope is that OpenSats will eventually become obsolete. Until it is, we
+are dependent on donors who believe, like we do, that free and open-source
+software is paramount to a free and prosperous society.
+
+No prosperity without bitcoin.  
+No freedom without FOSS.
+
+<p className="editors-note__signoff">— <a href="/about/dergigi">Gigi</a></p>
+
+</div>
+
+---
+
+## Running the Numbers
+
+Whether you're using bitcoin, nostr, or any other cryptographic system,
+you're relying on astronomically large numbers and their mathematical
+relationships. Our numbers are orders of magnitude smaller, but no less
+consequential (in our humble opinion, at least).
+
+- **400 grants, and counting.** This quarter, we crossed
+  [400 grants awarded](/transparency) since our inception.
+- **3,000+ application evaluations.** Every
+  [grant application](/selection#our-process-for-reviewing-grant-proposals)
+  is reviewed independently by multiple board members and technical
+  committees.
+- **10,904 pull requests.** Our grantees cited that many in their 2025
+  progress reports. The fuller picture is in our
+  [2025 Year in Review](/blog/2025-year-in-review), out late January.
+- **1,224 issues closed**, leading to [477 releases](https://heartbeat.opensats.org/?types=release). That's in 2026-Q1 alone.
+  Explore them all at [heartbeat.opensats.org](/heartbeat).
+
+We expect these numbers to increase quite drastically going forward.
+Creating software is now easier than ever, as is writing grant
+applications. And while still challenging at scale, sending sats gets
+easier by the day too.
+
+---
+
+## Sats Sent: ~$1,000,000 every month
+
+<StatsSentence className="mb-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400" />
+
+<GranteeMap />
+
+Bitcoin & open-source software is what allows us to efficiently operate on
+such a scale. We send [**~\$1,000,000 worth** of sats](/transparency) to our grantees
+every month. We do that with an incredibly small team, at almost zero cost.
+By leveraging bitcoin for payouts, we pay **less than 0.0005%** (about \$5)
+in transaction fees each month to send money to all our grantees, globally and
+almost instantly. A fraction of the costs other NGOs face and a
+testament to operating on the Bitcoin standard.
+
+---
+
+## Sats Received
+
+In Q1 2026, 181 donations totaled
+[**\$281,747.52**](/transparency#financial-statements). 113 USD donations
+brought in \$88,284.45, and 68 bitcoin-based donations brought in
+\$193,463.07. Two of the larger donations this quarter were recurring,
+which is what we love to see:
+
+- **A \$116,000 operating grant from the Human Rights Foundation.** HRF's
+  Q4 2025 Bitcoin Development Fund round included us in the
+  [January announcement](/blog/opensats-receives-funding-from-the-human-rights-foundation).
+  HRF funding is going to our Operations Budget, which allows us to operate
+  without taking a cut from donations to our grant funds.
+- **A \$77,666 donation from Bitwise.**
+  [Bitwise's BITB ETF](/blog/opensats-receives-donation-from-bitwise-etf)
+  began sending a share of its gross profits to our General Fund this
+  quarter. It's part of the 10% pledge Bitwise made at launch; Brink and
+  HRF's Bitcoin Development Fund are the other recipients.
+
+We deeply appreciate all the support we've received so far. As mentioned above and in our
+[2025 Year in Review](/blog/2025-year-in-review#donations), we are giving out
+grants on the order of \$1M per month, meaning we are a long stretch away from
+our recurring funding goal. **So today we're asking you to help us out.** If
+you get value from the software we fund, please consider giving a donation to
+support it!
+
+<DonateRecurringButtonV2 />
+
+---
+
+## Software Shipped
+
+Our grantees are involved in [hundreds of projects](/heartbeat) and new software is
+shipped constantly. Some highlights of this past quarter include:
+
+- **[Payjoin](/projects/payjoin) release candidate:**
+  [payjoin-1.0.0-rc.2](https://github.com/payjoin/rust-payjoin/releases/tag/payjoin-1.0.0-rc.2)
+  shipped in late February.
+- **[Stratum V2](/projects/stratumv2):**
+  the reference implementation shipped
+  [v1.8.0](https://github.com/stratum-mining/stratum/releases/tag/v1.8.0)
+  in March.
+- **[Smite](https://github.com/morehouse/smite) by
+  [Matt Morehouse](/blog/matt-morehouse-lightning-security-lts-grant):**
+  a snapshot fuzzer for Lightning, supporting LND, LDK, CLN, and Eclair.
+  Already turned up DoS bugs in Eclair and LND.
+- **[Private broadcast](https://github.com/bitcoin/bitcoin/issues/34476)
+  merged into [Bitcoin Core](/projects/bitcoin-core)** in late January,
+  led by our long-term support (LTS) grantee
+  [Vasil Dimov](/blog/vasil-dimov-receives-lts-grant). Nodes can now
+  broadcast transactions over Tor or I2P while still peering on clearnet
+  for blocks.
+- **[Numo](https://github.com/cashubtc/Numo) ships tap-to-pay:** turns
+  any NFC-capable Android phone into a merchant terminal accepting
+  bitcoin over [Cashu](/projects/cashu) and Lightning.
+
+But software isn't everything. Our grantees also work on protocol
+specifications, publish academic research, and work on formal proof systems to
+make sure that things are as reliable and secure as they can be.
+
+- After years of work by LTS grantee
+  [Dusty Daemon](/blog/dusty-daemon-receives-lts-grant) and colleagues,
+  [splicing](/projects/splicing) is now a
+  [BOLT](https://github.com/lightning/bolts). Splicing makes the
+  Lightning Network faster, cheaper, and more reliable.
+- **[René Pickhardt](/blog/rene-pickhardt-receives-lts-grant) published
+  [_A Mathematical Theory of Payment Channel Networks_](https://arxiv.org/abs/2601.04835).**
+  The paper formalizes how routing, liquidity, feasibility, and channel
+  depletion behave on the Lightning Network.
+- **Formal proofs for secp256k1.** We funded
+  [remix7531](/blog/sixteenth-wave-of-bitcoin-grants#advancing-formal-verification-for-bitcoin-cryptography)
+  in February to write formal proofs for the cryptographic routines
+  used in bitcoin signature verification. He talks about it on the
+  [Bitcoin Optech podcast](https://bitcoinops.org/en/podcast/2026/04/21/).
+
+We could list endless bullet points when it comes to software releases
+for the projects we fund, but frankly, it would be too much. Instead
+of boring you with changelogs and releases, we've built
+[OpenSats heartbeat](/heartbeat), a live feed of every release,
+commit, and pull request across the projects we fund.
+
+<ViewHeartbeatButton />
+
+If you [select our nostr fund](https://heartbeat.opensats.org/?types=release&funds=nostr),
+you'll see that this quarter brought new releases for
+[Amber](/projects/amber),
+[Amethyst](/projects/amethyst),
+[Applesauce](/projects/applesauce),
+[Citrine](/projects/citrine),
+[Igloo](/projects/frostr),
+[LNbits](/projects/lnbits),
+[Mostro](/projects/mostro),
+[NDK](/projects/ndk),
+[ngit](/projects/ngit),
+[Notedeck](/projects/damus),
+[ZapStore](/projects/zapstore), and more.
+
+---
+
+## Cypherpunks Write Code
+
+"[Cypherpunks write code](https://nakamotoinstitute.org/library/cypherpunk-manifesto/)"
+is what Eric Hughes wrote in March of 1993. He went on to specify that the
+"code is free for all to use" so that others "may practice and play with
+it." What he is describing, of course, is what we now know as free and
+open-source software, or FOSS for short. Bitcoin was built as open-source
+software because,
+[in the words of its creator](https://satoshi.nakamotoinstitute.org/quotes/trusted-third-parties/#:~:text=it%27s%20essential%20for%20a%20program%20of%20this%20nature%20to%20be%20open%20source),
+"being open source means anyone can independently review the code. If it
+was closed source, nobody could verify the security." Thus, "[it is]
+essential for a program of this nature to be open source."
+
+OpenSats was created to provide **sustainable funding for those who work
+on open-source software**, especially those who work on projects that help
+Bitcoin flourish. The sad reality is that most software today, financial
+or otherwise, is closed-source and exploitative. It doesn't have to be.
+But building the tools that ensure self-sovereignty, financial freedom,
+and free speech in the hyperdigitized world we find ourselves in requires
+funding, and the reality is that **less than 1%** of users who benefit
+from the FOSS ecosystem give back to it, financially or otherwise.
+
+Our hope is that this will change as the need for open and interoperable
+systems becomes more obvious. This newsletter is part of our efforts to
+make the case for these open systems; to tell the stories of the people who are
+working on freedom tech, and why they choose to go through the pains of
+[working in public](https://bitcoin-resources.com/books/working-in-public).
+
+Hughes wrote his Manifesto in 1993. Thirty years later, and his
+prediction that "cryptography will ineluctably spread over the whole
+globe" turned out to be on point. The question now is, to paraphrase
+Hal Finney, will this cryptography be used to control people, or will
+it be used to liberate and protect them?
+
+We are doing what we can to make sure that it is the latter, but we can't do it
+without your help.
+
+<DonateRecurringButtonV2 />
+
+
+---
+
+This is the first issue of [_Sats Well Spent_](/newsletter). If you'd
+like the next one delivered to your inbox, subscribe below.
+
+<NewsletterSignup />

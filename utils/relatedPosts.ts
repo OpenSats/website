@@ -24,7 +24,12 @@ export function getRelatedBlogPostsByTerms(
         .filter((t) => t.length > 0)
     )
   )
-    .map((t) => t.split(/[^a-z0-9]+/).filter(Boolean).map(escapeRegExp))
+    .map((t) =>
+      t
+        .split(/[^a-z0-9]+/)
+        .filter(Boolean)
+        .map(escapeRegExp)
+    )
     .filter((tokens) => tokens.length > 0)
     .map((tokens) => new RegExp(`\\b${tokens.join('[\\s\\-_]*')}\\b`, 'i'))
 
@@ -62,7 +67,10 @@ export function getRelatedBlogPostsForTopic(
   topic: Topic,
   blogs: Blog[]
 ): Blog[] {
-  return getRelatedBlogPostsByTerms([topic.title, ...(topic.aliases || [])], blogs)
+  return getRelatedBlogPostsByTerms(
+    [topic.title, ...(topic.aliases || [])],
+    blogs
+  )
 }
 
 // Map fund slugs to the tags that should be considered "related" for announcements

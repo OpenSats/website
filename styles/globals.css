@@ -59,6 +59,286 @@ body {
   top: -9999px;
 }
 
+/* ------------------------------------------------------------------ */
+/* Editor's note                                                      */
+/* A minimal "letter" treatment for the opening note in newsletter    */
+/* issues: serif body, thin orange margin rule, soft cream backdrop,  */
+/* italic sign-off.                                                   */
+/* ------------------------------------------------------------------ */
+
+.editors-note {
+  margin: 0 0 2.5rem;
+  padding: 1.75rem 2rem;
+  background-color: #fffaf3; /* warm off-white */
+  border-left: 3px solid #fdba74; /* orange-300 */
+  border-radius: 2px;
+  font-family: ui-serif, Georgia, 'Times New Roman', Times, serif;
+}
+
+.editors-note p {
+  font-family: inherit;
+}
+
+.editors-note__signoff {
+  font-style: italic;
+  text-align: right;
+}
+
+.dark .editors-note {
+  background-color: rgba(120, 53, 15, 0.12); /* faint warm tint */
+  border-left-color: #c2410c; /* orange-700 */
+}
+
+@media (max-width: 480px) {
+  .editors-note {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 1.25rem 1rem;
+    border-radius: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Newsletter prose: tighter list indents on mobile                   */
+/* prose-lg defaults give ul/ol ~1.625em of inline-start padding plus */
+/* a marker offset; on narrow screens that eats the column. Pull the  */
+/* indent in and shrink the marker so bullets sit closer to the text. */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 640px) {
+  .newsletter-prose ul,
+  .newsletter-prose ol {
+    padding-inline-start: 1em;
+  }
+
+  .newsletter-prose li {
+    padding-inline-start: 0.25em;
+  }
+
+  .newsletter-prose li::marker {
+    font-size: 0.9em;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* DonateRecurringButtonV2                                            */
+/* A wide split-text banner with an angled orange wedge that grows on */
+/* hover, fading in floating hearts. Inspired by Thunderbird's EOY    */
+/* donate banner.                                                     */
+/* ------------------------------------------------------------------ */
+
+.donate-banner-v2 {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 480px;
+  min-height: 120px;
+  margin: 4rem auto;
+  border-radius: 6px;
+  background-color: #f4f4f5; /* neutral-100 */
+  background-image: linear-gradient(to right, #ffedd5, #f4f4f5);
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-decoration: none !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.donate-banner-v2::after {
+  content: '';
+  position: absolute;
+  top: -210px;
+  left: -240px;
+  height: 420px;
+  width: 420px;
+  background-color: #ea580c; /* orange-600 */
+  background-image: linear-gradient(#f97316, #c2410c); /* orange-500 -> orange-700 */
+  transform: rotate(36deg);
+  transition: transform 0.3s ease-in-out;
+  z-index: 0;
+}
+
+.donate-banner-v2__left,
+.donate-banner-v2__right {
+  position: relative;
+  flex: 1;
+  padding: 1rem 1.25rem;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  z-index: 2;
+}
+
+.donate-banner-v2__left {
+  color: white;
+}
+
+.donate-banner-v2__left strong {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: white;
+}
+
+.donate-banner-v2__right {
+  text-align: right;
+  color: #9a3412; /* orange-800 */
+  text-shadow: 0 0 4px #f4f4f5, 0 1px 1px #f4f4f5;
+}
+
+.donate-banner-v2__right strong {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #9a3412;
+}
+
+.donate-banner-v2__hearts {
+  position: absolute;
+  inset-block-end: 0.5rem;
+  inset-inline-end: 0.75rem;
+  display: none;
+  align-items: end;
+  gap: 4px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.donate-banner-v2__hearts > span {
+  display: inline-flex;
+  opacity: 0;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.donate-banner-v2__hearts > span:nth-child(2) {
+  font-size: 2.5rem;
+  transform: translateY(-6px);
+}
+
+.donate-banner-v2:hover {
+  transform: scale(1.05);
+}
+
+.donate-banner-v2:hover::after {
+  transform: scale(3);
+}
+
+.donate-banner-v2:hover .donate-banner-v2__right {
+  opacity: 0;
+}
+
+.donate-banner-v2:hover .donate-banner-v2__left {
+  transform: translate(20px, 4px);
+}
+
+.donate-banner-v2:hover .donate-banner-v2__hearts {
+  display: flex;
+}
+
+.donate-banner-v2:hover .donate-banner-v2__hearts > span {
+  animation: donate-banner-v2-heart-fade 1s forwards ease-in-out;
+}
+
+.donate-banner-v2:hover .donate-banner-v2__hearts > span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.donate-banner-v2:hover .donate-banner-v2__hearts > span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+@keyframes donate-banner-v2-heart-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.donate-banner-v2:hover .donate-banner-v2__hearts > span:nth-child(2) {
+  animation: donate-banner-v2-heart-fade-mid 1s forwards ease-in-out;
+}
+
+@keyframes donate-banner-v2-heart-fade-mid {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-banner-v2,
+  .donate-banner-v2::after,
+  .donate-banner-v2__left,
+  .donate-banner-v2__right,
+  .donate-banner-v2__hearts > span {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.dark .donate-banner-v2 {
+  background-color: #27272a; /* neutral-800 */
+  background-image: linear-gradient(to right, #431407, #27272a); /* orange-950 -> neutral-800 */
+  box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dark .donate-banner-v2__right,
+.dark .donate-banner-v2__right strong {
+  color: #fdba74; /* orange-300 */
+  text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
+}
+
+.donate-banner-v2__tagline-mobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .donate-banner-v2__prelude {
+    display: none;
+  }
+
+  .donate-banner-v2__left strong {
+    white-space: nowrap;
+  }
+
+  .donate-banner-v2__tagline {
+    display: none;
+  }
+
+  .donate-banner-v2__tagline-mobile {
+    display: inline;
+  }
+
+  .donate-banner-v2__right strong {
+    font-size: 1.2rem;
+  }
+
+  .donate-banner-v2__tagline-mobile-sub {
+    display: block;
+    white-space: nowrap;
+    font-size: 0.95rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* ApplyButton banner                                                 */
+/* Mirrors the v2 donate banner so an apply-for-a-grant CTA can share */
+/* the same orange-gradient aesthetic with hover animation, dark-mode */
+/* support, and a mobile-optimized layout.                            */
+/* ------------------------------------------------------------------ */
+
 .apply-banner-v2 {
   position: relative;
   display: flex;
