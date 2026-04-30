@@ -1,0 +1,66 @@
+---
+title: 'ngit'
+dateAdded: '2026-04-29'
+summary: 'A git plugin and remote helper that puts repository state, pull requests, and issues on nostr, with normal git servers used as the data store.'
+nym: 'DanConwayDev'
+website: 'https://ngit.dev/'
+coverImage: '/static/images/projects/ngit.svg'
+git: 'https://github.com/DanConwayDev/ngit-cli'
+nostr: 'npub15qydau2hjma6ngxkl2cyar74wzyjshvl65za5k5rl69264ar2exs5cyejr'
+tags: ['Nostr', 'Git', 'Developer Tools']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2023#code-collaboration-over-nostr'
+---
+
+ngit is a git plugin built on top of [nostr](/topics/nostr) by
+[DanConwayDev][thirteenth]. It uses [NIP-34](https://github.com/nostr-protocol/nips/blob/master/34.md)
+to publish repository announcements, the current state of a repo's branches,
+proposals (the nostr equivalent of pull requests), and issues as signed events.
+Git data itself still lives on regular git servers (self-hosted, GitHub,
+Codeberg, anywhere else), and a maintainer can list multiple of them in their
+repository announcement so contributors can swap them out the way they would
+swap out [relays](/topics/relays).
+
+The CLI ships two binaries: `ngit` for the user-facing commands and
+`git-remote-nostr`, a remote helper that lets the rest of the git toolchain
+talk to nostr-aware repos as if they were normal remotes. After installation, a
+contributor can clone a repository directly with
+`git clone nostr://<npub>/<identifier>` and push a proposal with `git push -u
+origin pr/my-branch`. The branches that show up under `pr/` are the open
+proposals from other contributors, so reviewing or rebasing on top of someone
+else's PR works with the commands a git user already knows.
+
+[gitworkshop.dev](https://gitworkshop.dev/) is the companion web frontend.
+Repositories are discoverable through the nostr index that ngit publishes to,
+and the same proposals and issues that the CLI works with are shown in a
+familiar PR-and-issue UI in the browser.
+
+## Why fund it?
+
+Centralized code-hosting platforms decide which projects are allowed to ship,
+which accounts can collaborate, and which repositories disappear overnight.
+That is a real-world failure mode for free-software projects, and self-hosting
+git is only half a fix because it leaves the hard parts (proposals, issues,
+discovery, identity) tied to whichever forge happens to be on top. ngit moves
+those hard parts onto nostr, where the same key that signs notes also signs
+commits and proposals, multiple git servers act as redundant storage, and a
+contributor who falls out with one server can keep working from another
+without losing history or identity.
+
+OpenSats funded ngit in the
+[first wave of nostr grants](/blog/nostr-grants-july-2023#code-collaboration-over-nostr)
+in July 2023 and renewed support in the
+[thirteenth wave][thirteenth] in 2025 for [Grasp](https://ngit.dev/grasp/), a
+distributed nostr-native git host that builds on the same NIP-34 foundation.
+
+## What's next?
+
+Recent work covers a high-performance git plugin, libraries that let other
+nostr clients read and write git data and pull requests directly, and
+synchronization tools that keep state consistent across multiple distributed
+relays. Grasp itself is moving toward a clear written specification and an
+open ecosystem of nostr-based git infrastructure that other developers can
+build on.
+
+[thirteenth]: /blog/thirteenth-wave-of-nostr-grants#grasp
