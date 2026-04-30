@@ -5,10 +5,11 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "npx contentlayer build && node ./scripts/generate-project-og.mjs && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
+    "build": "npx contentlayer build && node ./scripts/generate-project-og.mjs && node ./scripts/generate-newsletter-og.mjs && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "generate:project-og": "node ./scripts/generate-project-og.mjs",
+    "generate:newsletter-og": "node ./scripts/generate-newsletter-og.mjs",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "test": "jest"
   },
