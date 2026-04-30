@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function ViewHeartbeatButton({
-  href = '/heartbeat',
+  href = 'https://heartbeat.opensats.org',
   label = 'Open Heartbeat',
 }: Props) {
   return (
