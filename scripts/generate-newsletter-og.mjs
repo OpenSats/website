@@ -188,7 +188,8 @@ function renderIndexSvg() {
 
 function renderIssueSvg(issue) {
   const issueLabel = formatIssueNumber(issue.issueNumber)
-  const kicker = `${issueLabel}  ·  ${issue.quarter}`
+  const kicker = issue.quarter
+  const seriesLabel = `${issue.title}, ${issueLabel}`
 
   const headlineText = issue.headline || issue.title
   const titleLines = wrapText(headlineText, 14, 2)
@@ -219,7 +220,7 @@ function renderIssueSvg(issue) {
       ${logoMark({ x: 84, y: logoY, size: logoSize })}
 
       <text x="${kickerX}" y="${kickerY}" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
-        ${escapeXml(kicker.toUpperCase())}
+        ${escapeXml(kicker)}
       </text>
 
       <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
@@ -229,7 +230,7 @@ function renderIssueSvg(issue) {
       <text x="84" y="${
         titleStartY + (titleLines.length - 1) * titleLineHeight + 76
       }" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
-        Sats Well Spent
+        ${escapeXml(seriesLabel)}
       </text>
 
       <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
