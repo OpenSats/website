@@ -191,7 +191,7 @@ function renderIssueSvg(issue) {
   const kicker = `${issueLabel}  ·  ${issue.quarter}`
 
   const headlineText = issue.headline || issue.title
-  const titleLines = wrapText(headlineText, 18, 2)
+  const titleLines = wrapText(headlineText, 14, 2)
 
   const titleFontSize = titleLines.length > 1 ? 64 : 76
   const titleLineHeight = titleLines.length > 1 ? 72 : 84
