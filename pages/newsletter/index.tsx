@@ -4,7 +4,7 @@ import type { Newsletter } from 'contentlayer/generated'
 import { allCoreContent } from 'pliny/utils/contentlayer'
 import { formatDate } from 'pliny/utils/formatDate'
 import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
+import { NewsletterSEO } from '@/components/SEO'
 import SectionContainer from '@/components/SectionContainer'
 import NewsletterSignup from '@/components/NewsletterSignup'
 import siteMetadata from '@/data/siteMetadata'
@@ -36,7 +36,7 @@ export default function NewsletterIndexPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <PageSEO
+      <NewsletterSEO
         title={`Sats Well Spent - ${siteMetadata.title}`}
         description="Sats Well Spent. A quarterly newsletter from OpenSats."
       />

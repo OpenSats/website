@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-// Generate transparent PNGs of the "Open Heartbeat" button for use in
+// Generate transparent PNGs of the "View Heartbeat" button for use in
 // newsletter platforms (e.g. Buttondown) that don't render SVG/HTML
 // buttons. Mirrors the ViewHeartbeatButton component in components/
-// (outlined, font-semibold "Open Heartbeat" with the FontAwesome
-// heart-pulse glyph). Two variants are produced so the button can be
+// (outlined, font-semibold "View Heartbeat" with the FontAwesome
+// heart-pulse glyph). Three variants are produced so the button can be
 // swapped via prefers-color-scheme or chosen per-template.
 
 import fs from 'node:fs/promises'
@@ -36,7 +36,7 @@ const FONT_FILES = [
 ].map((f) => path.join(FONT_DIR, f))
 
 // Logical button geometry roughly mirrors the in-page button
-// (rounded 4px, 1.5px stroke, font-semibold 16px "Open Heartbeat",
+// (rounded 4px, 1.5px stroke, font-semibold 16px "View Heartbeat",
 // 18x18 icon, 8px gap). Rendered at 2.5x for crisp retina embeds.
 const WIDTH = 240
 const HEIGHT = 56
@@ -48,7 +48,7 @@ const STROKE = 1.5
 const ICON_SIZE = 18
 const ICON_GAP = 8
 const FONT_SIZE = 16
-const LABEL = 'Open Heartbeat'
+const LABEL = 'View Heartbeat'
 
 // FontAwesome icon shape: [viewBoxWidth, viewBoxHeight, ligatures,
 // unicode, svgPathData]. heart-pulse is 512x512 today.

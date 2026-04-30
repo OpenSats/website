@@ -24,6 +24,8 @@ public/sitemap.xml
 # search
 /public/search.json
 /public/static/images/projects/og/
+/public/static/images/newsletter/og/
+/public/static/images/heartbeat/og.png
 
 # misc
 .DS_Store

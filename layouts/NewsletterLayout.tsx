@@ -3,7 +3,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Newsletter } from 'contentlayer/generated'
 import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
+import { NewsletterSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { formatIssueNumber } from '@/utils/newsletter'
 
@@ -13,7 +13,7 @@ interface LayoutProps {
 }
 
 export default function NewsletterLayout({ content, children }: LayoutProps) {
-  const { title, issueNumber, date, quarter, headline, summary } = content
+  const { slug, title, issueNumber, date, quarter, headline, summary } = content
   const issueLabel = formatIssueNumber(issueNumber)
   const seoTitle = headline
     ? `${title} — ${quarter}: ${headline}`
@@ -21,7 +21,12 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
 
   return (
     <>
-      <PageSEO title={seoTitle} description={summary} />
+      <NewsletterSEO
+        title={seoTitle}
+        description={summary}
+        slug={slug}
+        ogType="article"
+      />
       <section className="mx-auto max-w-2xl px-2 sm:px-6 lg:px-0">
         <article>
           <header className="border-b border-gray-200 pb-8 pt-4 dark:border-gray-800">

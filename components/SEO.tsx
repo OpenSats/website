@@ -103,6 +103,35 @@ export const ProjectSEO = ({ title, description, slug }: ProjectSEOProps) => {
   )
 }
 
+interface NewsletterSEOProps {
+  title: string
+  description: string
+  slug?: string
+  ogType?: string
+}
+
+export const NewsletterSEO = ({
+  title,
+  description,
+  slug,
+  ogType = 'website',
+}: NewsletterSEOProps) => {
+  const ogImagePath = slug
+    ? `/static/images/newsletter/og/${slug}.png`
+    : `/static/images/newsletter/og/index.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType={ogType}
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
 export const TagSEO = ({ title, description }: PageSEOProps) => {
   const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
   const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
