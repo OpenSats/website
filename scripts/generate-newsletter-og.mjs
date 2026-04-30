@@ -21,9 +21,30 @@ const newslettersIndexPath = path.join(
   'Newsletter',
   '_index.json'
 )
+const faviconSvgPath = path.join(
+  root,
+  'public',
+  'static',
+  'brand',
+  'opensats-favicon.svg'
+)
 
 const WIDTH = 1200
 const HEIGHT = 630
+
+let faviconDataUri = ''
+
+async function loadFavicon() {
+  const svg = await fs.readFile(faviconSvgPath, 'utf8')
+  faviconDataUri = `data:image/svg+xml;base64,${Buffer.from(svg).toString(
+    'base64'
+  )}`
+}
+
+function logoMark({ x, y, size }) {
+  if (!faviconDataUri) return ''
+  return `<image href="${faviconDataUri}" x="${x}" y="${y}" width="${size}" height="${size}" />`
+}
 
 function escapeXml(value = '') {
   return value
@@ -146,15 +167,17 @@ function renderIndexSvg() {
       ${baseDefs()}
       ${backgroundDecor()}
 
-      <text x="84" y="300" fill="#fafaf9" font-size="76" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
+      ${logoMark({ x: 84, y: 200, size: 56 })}
+
+      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="700" font-family="Georgia, 'Times New Roman', serif">
         Sats Well Spent
       </text>
 
-      <text x="84" y="356" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
+      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Arial, Helvetica, sans-serif">
         A quarterly newsletter from OpenSats.
       </text>
 
-      <text x="84" y="566" fill="#52525b" font-size="18" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
         opensats.org/newsletter
       </text>
 
@@ -183,14 +206,19 @@ function renderIssueSvg(issue) {
     )
     .join('')
 
+  const kickerY = titleStartY - 60
+  const logoSize = 36
+  const logoY = kickerY - logoSize + 8
+  const kickerX = 84 + logoSize + 14
+
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${baseDefs()}
       ${backgroundDecor()}
 
-      <text x="84" y="${
-        titleStartY - 60
-      }" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
+      ${logoMark({ x: 84, y: logoY, size: logoSize })}
+
+      <text x="${kickerX}" y="${kickerY}" fill="#f97316" font-size="22" font-weight="700" font-family="Arial, Helvetica, sans-serif" letter-spacing="2">
         ${escapeXml(kicker.toUpperCase())}
       </text>
 
@@ -204,7 +232,7 @@ function renderIssueSvg(issue) {
         Sats Well Spent
       </text>
 
-      <text x="84" y="566" fill="#52525b" font-size="18" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
+      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">
         opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
@@ -249,6 +277,7 @@ async function writeImage(filename, svg) {
 
 async function main() {
   await ensureOutputDir()
+  await loadFavicon()
 
   const newsletters = await loadNewsletters()
 
