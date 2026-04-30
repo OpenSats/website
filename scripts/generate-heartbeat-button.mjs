@@ -62,10 +62,19 @@ const VARIANTS = [
   {
     name: 'open-heartbeat-light',
     color: '#1c1917', // stone-900, matches the in-page light-mode button
+    fill: 'none',
   },
   {
     name: 'open-heartbeat-dark',
     color: '#ffffff',
+    fill: 'none',
+  },
+  {
+    // Universal: dark border + dark glyph on a white pill, so the
+    // button stays legible on both white and dark email backgrounds.
+    name: 'open-heartbeat-neutral',
+    color: '#1c1917',
+    fill: '#ffffff',
   },
 ]
 
@@ -106,7 +115,7 @@ function renderSvg(variant) {
         height="${HEIGHT - STROKE}"
         rx="${RADIUS}"
         ry="${RADIUS}"
-        fill="none"
+        fill="${variant.fill}"
         stroke="${variant.color}"
         stroke-width="${STROKE}"
       />
