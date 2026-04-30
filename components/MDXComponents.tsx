@@ -23,6 +23,7 @@ import LifetimeStats from './LifetimeStats'
 import GranteeMap from './GranteeMap'
 import StatsSentence from './StatsSentence'
 import NewsletterSignup from './NewsletterSignup'
+import ViewHeartbeatButton from './ViewHeartbeatButton'
 import MediaKit, { MediaKitColors, MediaKitDownloadLink } from './MediaKit'
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
@@ -53,6 +54,7 @@ export const MDXComponents: ComponentMap = {
   GranteeMap,
   StatsSentence,
   NewsletterSignup,
+  ViewHeartbeatButton,
   MediaKit,
   MediaKitDownloadLink,
   MediaKitColors,
