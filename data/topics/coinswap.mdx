@@ -1,0 +1,18 @@
+---
+title: 'Coinswap'
+summary: 'Atomic multi-hop swaps that move coins through intermediate keys so the spender of an input is not obviously the receiver of the final output.'
+category: 'Privacy'
+aliases: ['CoinSwap', 'coin swap', 'atomic coin swap']
+---
+
+A coinswap protocol routes value through one or more intermediate transactions so the entity spending an early UTXO is not obviously the same as the entity receiving the later one. Greg Maxwell [outlined the idea on Bitcointalk in 2013](https://bitcointalk.org/index.php?topic=321228.0); later work turned it into concrete client and server software, including the open [specification and implementation](https://github.com/citadel-tech/coinswap) advanced by groups such as Citadel Tech with support from OpenSats (see our [on-chain privacy impact report](/blog/developing-advancements-in-onchain-privacy#coinswap)).
+
+A [CoinJoin](/topics/coinjoin) usually batches many inputs into one co-signed transaction. [Payjoin](/topics/payjoin) has the receiver add their own input to a two-party payment. Coinswap chains separate transactions so each hop can look like a normal spend, which pushes back on heuristics that equate one transaction with one ownership hop.
+
+Coinswap still costs block space and coordination time, and wallet support is thinner than for simpler tools. When it works, it trades extra hops for a break in the direct graph link between source and destination outputs.
+
+## References
+
+- [Bitcoin Optech: Coinswap](https://bitcoinops.org/en/topics/coinswap/)
+- [Greg Maxwell, CoinSwap: Transaction graph disjointing (2013)](https://bitcointalk.org/index.php?topic=321228.0)
+- [Citadel Tech coinswap repository](https://github.com/citadel-tech/coinswap)
