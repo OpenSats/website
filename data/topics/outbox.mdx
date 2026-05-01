@@ -1,6 +1,6 @@
 ---
 title: 'Outbox model'
-summary: 'Per-user relay lists (NIP-65, kind 10002) so clients know where someone publishes and where to deliver mentions.'
+summary: 'A Nostr client pattern where each user publishes their own relay list, so other clients know where to read their notes and where to deliver mentions. Specified in NIP-65.'
 category: 'Nostr'
 aliases:
   [
@@ -8,19 +8,18 @@ aliases:
     'Relay list metadata',
     'outbox',
     'outbox-style',
-    'kind 10002',
     'NIP65',
     'NIP 65',
   ]
 ---
 
-[Nostr](/topics/nostr) clients used to depend on hand-picked default relays. That works until a follow moves their notes to a relay you never added. [NIP-65](https://github.com/nostr-protocol/nips/blob/master/65.md) fixes the discovery side with `kind:10002` relay list metadata: a replaceable event full of `r` tags, each naming a relay URL and optionally marking it `read`, `write`, or both when the marker is omitted.
+[Nostr](/topics/nostr) clients used to depend on hand-picked default relays. That works until someone you follow moves their notes to a relay you never added. [NIP-65](https://github.com/nostr-protocol/nips/blob/master/65.md) fixes the discovery side by having each user publish their own relay list: a replaceable event with a set of relay URLs, each optionally marked `read`, `write`, or both.
 
-Authors publish `kind:10002` so followers know which relays actually store their events. People you tag publish theirs so replies can reach relays they really read. The spec tells clients to fetch someone's timeline from that author's **write** relays, to load mention traffic from each tagged user's **read** relays, and to publish new notes to your own write set plus every tagged party's read set. After broadcasting, clients should push the author's updated `kind:10002` anywhere the note went so the routing hint stays accurate.
+Authors publish a relay list so followers know which relays actually store their events. People you tag publish theirs so replies can reach relays they really read. The spec tells clients to fetch someone's timeline from that author's **write** relays, to load mention traffic from each tagged user's **read** relays, and to publish new notes to your own write set plus every tagged party's read set. After broadcasting, clients should push the author's updated relay list anywhere the note went so the routing hint stays accurate.
 
-That behavior is the **outbox model**: build a live relay set from follows and `kind:10002` hints, then subscribe accordingly. Our [nostr clients impact report](/blog/advancements-in-nostr-clients) walks through Amethyst's shift to this approach so traffic spreads across many relays instead of piling onto a few public hubs.
+That behavior is the **outbox model**: build a live relay set from follows and their published relay lists, then subscribe accordingly. Our [nostr clients impact report](/blog/advancements-in-nostr-clients) walks through Amethyst's shift to this approach so traffic spreads across many relays instead of piling onto a few public hubs.
 
-The `kind:10002` list is optional, but when it is in play it prevents a lot of "I follow them but nothing shows up" confusion. Under the hood it is only metadata; [relays](/topics/relays) still store and forward events like before.
+Publishing a relay list is optional, but when users do it, the client can avoid a lot of "I follow them but nothing shows up" confusion. Under the hood it is only metadata; [relays](/topics/relays) still store and forward events like before.
 
 ## References
 
