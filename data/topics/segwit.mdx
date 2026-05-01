@@ -1,0 +1,22 @@
+---
+title: 'SegWit'
+summary: 'Segregated Witness: a 2017 Bitcoin soft fork that moved signatures out of the transaction body, fixed transaction malleability, expanded block capacity, and made Lightning possible.'
+category: 'Bitcoin'
+aliases: ['Segregated Witness', 'BIP 141', 'BIP 143', 'BIP 144', 'P2WPKH', 'P2WSH', 'bc1q', 'witness program']
+---
+
+SegWit (Segregated Witness) is a soft fork activated on the Bitcoin network in August 2017. It introduced a new transaction format where signatures and other unlocking data (the witness) live in a separate structure from the inputs and outputs. Old nodes ignore the witness and still see a valid transaction; new nodes verify it.
+
+The change fixed third-party transaction malleability. In the old format, anyone who saw an unconfirmed transaction could tweak its signature encoding and produce a different txid for the same payment. A wallet that tracked a child transaction by its parent's txid could then end up referencing a non-existent parent once the malleated version confirmed. Protocols that chain unconfirmed transactions, Lightning in particular, could not be built on top of that. Segregating the witness from the part that determines the txid closed the gap and made Lightning and other off-chain protocols practical.
+
+SegWit also raised effective block capacity. A block's limit is now 4 million weight units, where each non-witness byte counts as four and each witness byte counts as one. Real blocks sit somewhere between 1 MB (no witness) and 4 MB (all witness), commonly around 2 MB. Transactions that use SegWit inputs pay less per signature because the witness bytes that hold the signature are cheaper to include.
+
+A SegWit transaction commits to its script through a witness program: a short push in an output that carries a version byte and a program. Version 0 programs cover P2WPKH (single-key) and P2WSH (script hash) outputs, and are addressed as bech32 strings beginning with `bc1q`. Some wallets wrap v0 programs inside a P2SH output (`3...` addresses) for compatibility with older software that cannot pay bech32 addresses directly. SegWit also defined a versioned address space for witness programs, which [Taproot](/topics/taproot) later used to deploy as version 1 without reworking the address format.
+
+## References
+
+- [BIP 141: Segregated Witness (consensus)](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki)
+- [BIP 143: Transaction signature verification for v0 witness](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki)
+- [BIP 144: Segregated Witness (peer services)](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki)
+- [BIP 173: bech32 address format](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki)
+- [Bitcoin Optech: Segregated Witness](https://bitcoinops.org/en/topics/segregated-witness/)
