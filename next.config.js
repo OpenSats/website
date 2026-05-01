@@ -116,6 +116,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/topics/tor',
+          destination: '/topics/onion-routing',
+          permanent: true,
+        },
+        {
           source: '/faq/grantees',
           destination: '/faq/grantee',
           permanent: true,
