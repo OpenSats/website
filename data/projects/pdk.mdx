@@ -1,11 +1,11 @@
 ---
-title: 'Payjoin'
+title: 'Payjoin Dev Kit'
 dateAdded: '2023-07-14'
-summary: 'A privacy-preserving batching protocol for Bitcoin transactions.'
+summary: 'The reference Rust library for Payjoin, with FFI bindings for Python, Dart, Swift, Kotlin, JavaScript, and C#.'
 nym: 'Dan Gould'
-website: 'https://payjoin.org/'
+website: 'https://payjoindevkit.org/'
 donationLink: 'https://payjoin.org/donate'
-coverImage: '/static/images/projects/payjoin.svg'
+coverImage: '/static/images/projects/pdk.svg'
 git: 'https://github.com/payjoin'
 twitter: 'payjoindevkit'
 tags: ['Bitcoin', 'Privacy']
@@ -14,20 +14,19 @@ fund: general
 announcementLink: '/blog/bitcoin-grants-july-2023#payjoin-dev-kit'
 ---
 
-[Payjoin](https://payjoin.org/) is a protocol that lets the sender and
-receiver of a Bitcoin transaction cooperate to build a single transaction
-with inputs from both parties. The resulting transaction breaks the
+The [Payjoin Dev Kit](https://payjoindevkit.org/) (PDK) is the reference
+Rust implementation of [Payjoin](/topics/payjoin), the cooperative on-chain
+transaction protocol that breaks the
 [common-input-ownership heuristic](https://en.bitcoin.it/wiki/Privacy#Common-input-ownership_heuristic)
-that chain analysis tools rely on, and at the same time batches two payments
-into one, which saves on fees. Used widely, Payjoin makes the common-input
-heuristic useless across the whole network, not only for the people using it.
+chain analysis relies on. PDK ships the
+[rust-payjoin](https://github.com/payjoin/rust-payjoin) crate along with
+FFI bindings for Python, Dart, Swift, Kotlin, JavaScript, and C#, so any
+wallet or service can add Payjoin by dropping in one library instead of
+each team reimplementing the protocol.
 
-The [Payjoin Foundation](https://payjoin.org/) is the 501(c)(3) non-profit
-stewarding this work, incorporated in Delaware in 2025 and led by
-[Dan Gould](https://github.com/DanGould). Its main project is the
-[Payjoin Dev Kit](https://github.com/payjoin): a Rust implementation
-([rust-payjoin](https://github.com/payjoin/rust-payjoin)) with bindings for
-Python, Dart, Swift, Kotlin, JavaScript, and C#. The dev kit powers
+PDK is stewarded by the [Payjoin Foundation](https://payjoin.org/), a
+501(c)(3) non-profit incorporated in Delaware in 2025 and led by
+[Dan Gould](https://github.com/DanGould). The dev kit powers
 [BIP 77](https://github.com/bitcoin/bips/blob/master/bip-0077.md),
 Async Payjoin, which uses
 [Oblivious HTTP](https://www.rfc-editor.org/rfc/rfc9458.html) so sender and
