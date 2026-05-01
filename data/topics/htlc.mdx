@@ -1,0 +1,21 @@
+---
+title: 'HTLC'
+summary: 'A conditional Bitcoin payment that settles when the receiver reveals a secret preimage, and refunds the sender after a timeout. The building block Lightning uses to route payments across a chain of channels.'
+category: 'Lightning'
+aliases: ['Hashed Time-Locked Contract', 'HTLCs', 'hashlock']
+---
+
+An HTLC (Hashed Time-Locked Contract) is a conditional payment with two ways to resolve. The receiver can claim the funds by revealing a secret whose SHA-256 hash the sender pinned in the output script. If the receiver fails to reveal the secret by a deadline, the output expires and the sender sweeps the funds back. Both outcomes are enforceable on chain.
+
+Lightning chains these contracts across a route. The final receiver picks a secret, hashes it, and hands the hash to the sender. The sender opens an HTLC to the first hop; each hop opens one to the next. All of them commit to the same hash with decreasing CLTV timeouts. When the receiver reveals the preimage to claim their HTLC, every router upstream can claim theirs with the same preimage. The preimage travels back along the route and every channel settles in turn.
+
+The decreasing timeouts protect the routers. If the receiver disappears, each hop has a window to cancel upstream before its downstream HTLC expires. A hop that waits too long to cancel risks losing the funds to a race on chain, so implementations force-close the channel well before any timeout in dispute.
+
+HTLCs expose Lightning to [channel jamming](https://bitcoinops.org/en/topics/channel-jamming-attacks/): an attacker can open routes and hold HTLCs pending for a long time to tie up liquidity across intermediaries without paying any fee. Point Time Locked Contracts (PTLCs) are a proposed replacement that uses Schnorr adaptor signatures instead of a shared hash preimage. Each hop gets an independent adaptor, which removes the cross-hop linkability of a shared hash and is one of the ingredients of the proposed jamming mitigations. PTLCs require [Taproot](/topics/taproot) output types, so deployment waits on Lightning implementations shipping Taproot channels.
+
+## References
+
+- [BOLT 2: Peer protocol (HTLC flow)](https://github.com/lightning/bolts/blob/master/02-peer-protocol.md)
+- [BOLT 3: Transactions and HTLC outputs](https://github.com/lightning/bolts/blob/master/03-transactions.md)
+- [Bitcoin Optech: HTLC](https://bitcoinops.org/en/topics/htlc/)
+- [Bitcoin Optech: PTLC](https://bitcoinops.org/en/topics/ptlc/)
