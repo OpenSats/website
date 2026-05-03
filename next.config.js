@@ -126,6 +126,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/topics/cashu',
+          destination: '/topics/ecash',
+          permanent: true,
+        },
+        {
           source: '/faq/grantees',
           destination: '/faq/grantee',
           permanent: true,
