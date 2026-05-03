@@ -1,0 +1,20 @@
+---
+title: 'Eltoo'
+summary: 'A proposed Lightning channel update protocol where the latest state replaces earlier ones without a penalty transaction. Requires SIGHASH_ANYPREVOUT (BIP 118) to let update transactions rebind to any prior state.'
+category: 'Lightning'
+aliases: ['eltoo', 'LN-Symmetry', 'BIP 118', 'SIGHASH_ANYPREVOUT', 'SIGHASH_NOINPUT']
+---
+
+Eltoo is an alternative channel update protocol for Lightning. In today's Lightning, each new channel state invalidates the previous one through a cryptographic penalty: if a counterparty ever broadcasts an outdated state, the other side can sweep the entire channel balance as punishment. The penalty mechanism deters cheating but makes state loss dangerous. A user who restores from an old backup can look indistinguishable from an attacker, and broadcasting a stale state costs the channel.
+
+Eltoo replaces the penalty with update transactions that rebind. Each new channel state produces an update transaction that can spend any prior update transaction's output. If either party broadcasts an old state, the other party's newer update transaction replaces it before the settlement path confirms. Old backups are harmless: whoever holds the more recent state wins.
+
+The mechanism depends on a flexible signature hash flag, historically called SIGHASH_NOINPUT and now specified as SIGHASH_ANYPREVOUT in [BIP 118](https://github.com/bitcoin/bips/blob/master/bip-0118.mediawiki). The flag lets a signature commit to the output being spent without committing to the specific previous transaction it is attached to, so an update transaction signed once can rebind to any eligible prior output. SIGHASH_ANYPREVOUT needs a Bitcoin soft fork to activate and has not yet done so. The original proposal was published in 2018 by Christian Decker, Rusty Russell, and Olaoluwa Osuntokun, and refinements that adjust the construction for [Taproot](/topics/taproot) channels are sometimes called LN-Symmetry.
+
+Eltoo is often discussed alongside [Ark](/topics/ark) and other second-layer proposals because the same ANYPREVOUT primitive would simplify other stateful off-chain protocols. Until BIP 118 activates, Lightning channels remain on the penalty-based protocol from the original BOLTs.
+
+## References
+
+- [Decker, Russell, Osuntokun: eltoo (2018)](https://blockstream.com/eltoo.pdf)
+- [BIP 118: SIGHASH_ANYPREVOUT](https://github.com/bitcoin/bips/blob/master/bip-0118.mediawiki)
+- [Bitcoin Optech: eltoo](https://bitcoinops.org/en/topics/eltoo/)

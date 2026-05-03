@@ -1,11 +1,11 @@
 ---
-title: 'Splicing'
+title: 'Channel splicing'
 summary: 'Resizing a Lightning channel without closing it by adding or removing funds in a single on-chain transaction.'
 category: 'Lightning'
-aliases: ['splice-in', 'splice-out']
+aliases: ['splicing', 'splice-in', 'splice-out']
 ---
 
-Splicing lets two Lightning peers change the capacity of an existing channel in place. A splice-in adds new funds from an on-chain UTXO. A splice-out sends funds out of the channel to an on-chain address. Either way, the channel stays open and routing history is preserved.
+Channel splicing lets two Lightning peers change the capacity of an existing channel in place. A splice-in adds new funds from an on-chain UTXO. A splice-out sends funds out of the channel to an on-chain address. Either way, the channel stays open and routing history is preserved.
 
 Without splicing, a user who wants to top up a channel has to close it and open a new one. That costs two on-chain transactions, fragments liquidity, and resets reputation in pathfinding heuristics. Splicing does the same job with one transaction.
 

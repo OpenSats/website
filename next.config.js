@@ -116,6 +116,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/topics/splicing',
+          destination: '/topics/channel-splicing',
+          permanent: true,
+        },
+        {
           source: '/topics/grapheneos',
           destination: '/projects/grapheneos',
           permanent: true,
