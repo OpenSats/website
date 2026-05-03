@@ -121,6 +121,16 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/topics/grapheneos',
+          destination: '/projects/grapheneos',
+          permanent: true,
+        },
+        {
+          source: '/topics/cashu',
+          destination: '/topics/ecash',
+          permanent: true,
+        },
+        {
           source: '/projects/payjoin',
           destination: '/projects/pdk',
           permanent: true,
