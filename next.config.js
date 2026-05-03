@@ -131,6 +131,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/projects/payjoin',
+          destination: '/projects/pdk',
+          permanent: true,
+        },
+        {
           source: '/faq/grantees',
           destination: '/faq/grantee',
           permanent: true,
