@@ -5,7 +5,7 @@ category: 'Privacy'
 aliases: ['Tor', 'The Onion Router', 'onion services', 'hidden services']
 ---
 
-Onion routing wraps a message in multiple layers of encryption, each addressed to one of a chain of intermediate relays. Each relay peels off its own layer and forwards what remains to the next hop. Because a relay can only decrypt the layer addressed to it, no relay sees both where the traffic came from and where it is going. An observer watching the sender's network sees a connection to the first relay and nothing else; an observer watching the destination sees a connection from the last relay and nothing else.
+Onion routing wraps a message in multiple layers of encryption, each addressed to one of a chain of intermediate relays. Each relay peels off its own layer and forwards what remains to the next hop. Because a relay can only decrypt the layer addressed to it, no relay sees both the initial sender and the final receiver. An observer watching the sender's network sees a connection to the first relay and nothing else; an observer watching the destination sees a connection from the last relay and nothing else.
 
 The main deployed onion routing network is [Tor](/projects/tor), a volunteer-run network that carries traffic through three-hop circuits. Tor also defines onion services (sometimes called hidden services): servers that accept inbound connections through the network and expose a `.onion` address instead of a public IP or DNS name. The connection stays end-to-end encrypted between the two peers.
 
