@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['NIP-46', 'bunker', 'nsecBunker', 'Nostr Connect']
 ---
 
-NIP-46 defines a protocol for signing [Nostr](/topic/nostr) events with a key that lives on a different device or service than the one composing the event. A user's private key stays in a dedicated signer, often an Android app like Amber or a hosted bunker, and every client talks to that signer over Nostr relays to request signatures.
+NIP-46 defines a protocol for signing [Nostr](/topics/nostr) events with a key that lives on a different device or service than the one composing the event. A user's private key stays in a dedicated signer, often an Android app like Amber or a hosted bunker, and every client talks to that signer over Nostr relays to request signatures.
 
 The signer shows each request to the user, who approves or rejects it. A good signer also stores per-app permissions, so a client that the user trusts to publish short notes does not automatically get permission to send private messages or spend from a wallet. The client never sees the private key.
 

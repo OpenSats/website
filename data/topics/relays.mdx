@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['Nostr relay']
 ---
 
-A relay is a WebSocket server that accepts, stores, and serves [Nostr](/topic/nostr) events. Clients connect to several relays at once. Writing a note means sending the same signed event to each of them. Reading a feed means subscribing to filters on each of them and merging the results.
+A relay is a WebSocket server that accepts, stores, and serves [Nostr](/topics/nostr) events. Clients connect to several relays at once. Writing a note means sending the same signed event to each of them. Reading a feed means subscribing to filters on each of them and merging the results.
 
 Relays do not need to know about each other. They do not need to trust each other. Each one is independently replaceable. A user who does not like a relay's policy can drop it and pick another without losing their identity or their history, as long as some other relay has a copy of the events they care about.
 
