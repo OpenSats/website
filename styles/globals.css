@@ -300,6 +300,31 @@ body {
   text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
 }
 
+/* Purple variant — used for the Nostr fund. Mirrors the orange variant   */
+/* but swaps the gradient, wedge, and accent text to brand-kit purples.   */
+.donate-banner-v2--purple {
+  background-image: linear-gradient(to right, #f3e8ff, #f4f4f5); /* purple-100 -> neutral-100 */
+}
+
+.donate-banner-v2--purple::after {
+  background-color: #9333ea; /* purple-600 */
+  background-image: linear-gradient(#a855f7, #7e22ce); /* purple-500 -> purple-700 */
+}
+
+.donate-banner-v2--purple .donate-banner-v2__right,
+.donate-banner-v2--purple .donate-banner-v2__right strong {
+  color: #6b21a8; /* purple-800 */
+}
+
+.dark .donate-banner-v2--purple {
+  background-image: linear-gradient(to right, #3b0764, #27272a); /* purple-950 -> neutral-800 */
+}
+
+.dark .donate-banner-v2--purple .donate-banner-v2__right,
+.dark .donate-banner-v2--purple .donate-banner-v2__right strong {
+  color: #d8b4fe; /* purple-300 */
+}
+
 .donate-banner-v2__tagline-mobile {
   display: none;
 }
