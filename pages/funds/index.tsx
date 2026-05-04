@@ -15,7 +15,10 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
 
   useEffect(() => {
     setShowcaseProjects(
-      projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
+      projects
+        .filter(isShowcaseProject)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 12)
     )
     setOpenSatsFunds(funds.sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects, funds])
