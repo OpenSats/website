@@ -9,7 +9,7 @@ Onion routing wraps a message in multiple layers of encryption, each addressed t
 
 The main deployed onion routing network is [Tor](/projects/tor), a volunteer-run network that carries traffic through three-hop circuits. Tor also defines onion services (sometimes called hidden services): servers that accept inbound connections through the network and expose a `.onion` address instead of a public IP or DNS name. The connection stays end-to-end encrypted between the two peers.
 
-Bitcoin software uses onion routing to connect to peers, fetch fee data, and publish reachable nodes without a public IP. Bitcoin Core ships built-in support for Tor v3 onion services, and Lightning nodes typically do the same. Lightning also uses onion routing to forward payments hop by hop. Each forwarding node learns only the previous hop, the next hop, and the instructions for its own step. Running a full node behind an onion service keeps the operator's IP address private and removes the need to open ports on a home network.
+Bitcoin software uses onion routing to connect to peers, fetch fee data, and publish reachable nodes without a public IP. Bitcoin Core ships built-in support for Tor v3 onion services, and Lightning nodes typically do the same. Lightning routes each payment in an onion packet. A forwarding node sees the incoming channel, the outgoing channel, and the forwarding instructions for that hop. Running a full node behind an onion service keeps the operator's IP address private and removes the need to open ports on a home network.
 
 ## References
 
