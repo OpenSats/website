@@ -25,8 +25,9 @@ export default function PageLayout({ children, content }: Props) {
     git,
     nostr,
     zapstore,
+    heartbeat,
   } = content
-  const heartbeatUrl = getHeartbeatUrl(git)
+  const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
   return (
     <>
       <ProjectSEO
