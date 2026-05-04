@@ -1,0 +1,19 @@
+---
+title: 'BOLT 12'
+summary: 'A Lightning specification for reusable payment offers that replace one-shot invoices.'
+category: 'Lightning'
+aliases: ['BOLT12', 'offers']
+---
+
+BOLT 12 defines "offers" for the Lightning Network. An offer is a small string or QR code that a payer scans to request a regular Lightning invoice from the receiver over the Lightning network itself, using onion messages. The same offer can be paid many times.
+
+Compared to BOLT 11 invoices, offers are reusable, smaller, and do not require a side channel such as LNURL to fetch a fresh invoice per payment. They also support recurring payments and refunds.
+
+The specification lives alongside the rest of the Lightning protocol at [github.com/lightning/bolts](https://github.com/lightning/bolts) and is implemented in Core Lightning, LDK, and Eclair.
+
+## References
+
+- [BOLT 12 specification](https://github.com/lightning/bolts/blob/master/12-offer-encoding.md)
+- [bolt12.org](https://bolt12.org/)
+- [LDK: BOLT 12 has arrived](https://lightningdevkit.org/blog/bolt12-has-arrived/)
+- [Awesome BOLT 12](https://github.com/Rsync25/awesome-bolt12/)

@@ -15,7 +15,10 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
 
   useEffect(() => {
     setShowcaseProjects(
-      projects.filter(isShowcaseProject).sort(() => 0.5 - Math.random())
+      projects
+        .filter(isShowcaseProject)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 12)
     )
     setOpenSatsFunds(funds.sort((a, b) => a.title.localeCompare(b.title)))
   }, [projects, funds])
@@ -59,6 +62,8 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
                   title={p.title}
                   summary={p.summary}
                   coverImage={p.coverImage}
+                  darkCoverImage={p.darkCoverImage}
+                  invertDarkImage={p.invertDarkImage}
                   nym={p.nym}
                   tags={p.tags}
                 />

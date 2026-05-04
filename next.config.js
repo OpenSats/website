@@ -111,9 +111,44 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/projects/dusty',
+          destination: '/projects/splicing',
+          permanent: true,
+        },
+        {
+          source: '/projects/payjoin',
+          destination: '/projects/pdk',
+          permanent: true,
+        },
+        {
+          source: '/topics/splicing',
+          destination: '/topics/channel-splicing',
+          permanent: true,
+        },
+        {
+          source: '/topics/grapheneos',
+          destination: '/projects/grapheneos',
+          permanent: true,
+        },
+        {
+          source: '/topics/cashu',
+          destination: '/topics/ecash',
+          permanent: true,
+        },
+        {
+          source: '/topics/tor',
+          destination: '/topics/onion-routing',
+          permanent: true,
+        },
+        {
           source: '/faq/grantees',
           destination: '/faq/grantee',
           permanent: true,
+        },
+        {
+          source: '/heartbeat',
+          destination: 'https://heartbeat.opensats.org/',
+          permanent: false,
         },
       ]
     },

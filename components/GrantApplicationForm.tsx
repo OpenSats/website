@@ -12,6 +12,7 @@ import Timeline from './grant-application/steps/Timeline'
 import Budget from './grant-application/steps/Budget'
 import ReferencesReview from './grant-application/steps/ReferencesReview'
 import AnythingElse from './grant-application/steps/AnythingElse'
+import Review from './grant-application/steps/Review'
 import { FormValues } from './grant-application/types'
 
 const STEPS = [
@@ -66,6 +67,11 @@ const STEPS = [
     title: 'Final',
     fields: ['no_vibed_garbage', 'human_in_charge', 'discipline_and_agency'],
   },
+  {
+    id: 'review',
+    title: 'Review',
+    fields: [],
+  },
 ] as const
 
 export default function ApplicationForm() {
@@ -93,6 +99,8 @@ export default function ApplicationForm() {
   }
 
   const handleNext = async () => {
+    if (loading) return
+    setFailureReason(undefined)
     const fieldsToValidate = [...STEPS[currentStep].fields]
     const isValid = await trigger(fieldsToValidate)
     if (isValid) {
@@ -102,11 +110,15 @@ export default function ApplicationForm() {
   }
 
   const handleBack = () => {
+    if (loading) return
+    setFailureReason(undefined)
     setCurrentStep((s) => s - 1)
     scrollToTop()
   }
 
   const handleStepClick = (step: number) => {
+    if (loading) return
+    setFailureReason(undefined)
     if (step < currentStep) {
       setCurrentStep(step)
       scrollToTop()
@@ -115,6 +127,8 @@ export default function ApplicationForm() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
+    if (currentStep !== STEPS.length - 1 || loading) return
+
     setLoading(true)
     const submissionData = { ...data, formLoadedAt }
 
@@ -152,7 +166,7 @@ export default function ApplicationForm() {
   return (
     <form
       ref={formRef}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={(e) => e.preventDefault()}
       className="apply flex max-w-2xl flex-col gap-4"
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
@@ -173,12 +187,14 @@ export default function ApplicationForm() {
       {currentStep === 5 && <Timeline {...stepProps} />}
       {currentStep === 6 && <Budget {...stepProps} />}
       {currentStep === 7 && <AnythingElse {...stepProps} />}
+      {currentStep === 8 && <Review watch={watch} />}
 
       <StepNavigation
         currentStep={currentStep}
         totalSteps={STEPS.length}
         onBack={handleBack}
         onNext={handleNext}
+        onSubmit={handleSubmit(onSubmit)}
         loading={loading}
       />
 

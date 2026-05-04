@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
 import type { Project } from 'contentlayer/generated'
-import { PageSEO } from '@/components/SEO'
+import { ProjectSEO } from '@/components/SEO'
 import SocialIcon from '@/components/social-icons'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
 import Image from '@/components/Image'
+import { getHeartbeatUrl } from '@/utils/heartbeat'
 
 interface Props {
   children: ReactNode
@@ -12,26 +13,46 @@ interface Props {
 }
 
 export default function PageLayout({ children, content }: Props) {
-  const { title, summary, coverImage, website, twitter, git, nostr, zapstore } =
-    content
+  const {
+    title,
+    summary,
+    slug,
+    coverImage,
+    darkCoverImage,
+    invertDarkImage,
+    website,
+    twitter,
+    git,
+    nostr,
+    zapstore,
+  } = content
+  const heartbeatUrl = getHeartbeatUrl(git)
   return (
     <>
-      <PageSEO title={`${title} - OpenSats`} description={`${summary}`} />
+      <ProjectSEO
+        title={`${title} - funded by OpenSats`}
+        description={`${summary}`}
+        slug={slug}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <PageHeading title={title}>
           <div className="flex flex-col items-center space-x-2 pt-8 xl:block">
             <Image
               src={coverImage}
+              darkSrc={darkCoverImage}
               alt="avatar"
               width={210}
               height={210}
-              className="h-48 w-48"
+              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''}`}
             />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-80">
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
               <SocialIcon kind="github" href={git} size={6} />
+              {heartbeatUrl && (
+                <SocialIcon kind="heartbeat" href={heartbeatUrl} size={6} />
+              )}
               {nostr && (
                 <SocialIcon
                   kind="nostr"

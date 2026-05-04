@@ -1,0 +1,55 @@
+---
+title: 'Validating Lightning Signer'
+dateAdded: '2023-12-12'
+summary: 'A hardware-friendly Lightning signing stack that keeps private keys off the Lightning node itself.'
+nym: 'devrandom and contributors'
+website: 'https://vls.tech/'
+coverImage: '/static/images/projects/vls.png'
+git: 'https://gitlab.com/lightning-signer/validating-lightning-signer'
+tags: ['Bitcoin', 'Lightning']
+fund: general
+announcementLink: '/blog/bitcoin-grants-december-2023#validating-lightning-signer'
+---
+
+[Validating Lightning Signer](https://vls.tech/) (VLS) splits a Lightning
+node into two parts: an operational node that connects to peers and
+routes payments, and a separate signer that holds the private keys and
+validates every state change before signing it. If the node is compromised,
+the attacker gets network access but no keys; the signer refuses to sign
+malicious state updates because it enforces the rules of the Lightning
+protocol itself.
+
+VLS works with [Core Lightning](https://github.com/ElementsProject/lightning)
+and [LDK](https://lightningdevkit.org/), runs on desktop, server, and
+embedded targets, and has a Dockerized deployment path for operators who want
+to separate the signer onto its own machine.
+
+## Why fund it?
+
+Holding Lightning keys on an online node is the largest single attack surface
+in the current Lightning stack. VLS gives custodians, enterprises, and serious
+self-hosters a way to separate the keys from the node the same way Bitcoin
+signing devices did for on-chain funds. The design has been adopted inside
+[Greenlight](https://blockstream.com/lightning/greenlight/), Blockstream's
+hosted Lightning service, where the signer runs on the user's device while
+the node runs in Blockstream's cloud.
+
+OpenSats first funded VLS in the
+[December 2023 wave of Bitcoin grants](/blog/bitcoin-grants-december-2023#validating-lightning-signer)
+and renewed support in
+[July 2024](/blog/bitcoin-grants-july-2024#validating-lightning-signer).
+[Blockstream](https://blockstream.com/) and the
+[Human Rights Foundation](https://hrf.org/) also back the project. For a
+detailed look at progress, see the
+[Advancements in Lightning Infrastructure](/blog/advancements-in-lightning-infrastructure#validating-lightning-signer-vls)
+impact report.
+
+## What's next?
+
+The team is pushing toward an official 1.0 mainnet-ready release.
+[Version 0.14](https://gitlab.com/lightning-signer/validating-lightning-signer/-/releases/v0.14.0)
+shipped in late 2025 with a reworked release process and cleaner dependency
+graph. Ongoing work covers splicing, dual funding, key-reuse policy
+errors, running the signer on secure enclaves, and filling out the
+integration docs. LND support is the most requested next integration target,
+but it depends on changes upstream in LND before VLS can be wired in.

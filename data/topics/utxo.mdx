@@ -1,0 +1,18 @@
+---
+title: 'UTXO'
+summary: "Bitcoin's accounting model: a wallet's balance is the sum of every output addressed to it that has not yet been spent."
+category: 'Bitcoin'
+aliases: ['Unspent Transaction Output', 'UTXOs', 'UTXO set', 'UTXO model']
+---
+
+UTXO stands for Unspent Transaction Output. It is Bitcoin's accounting model. A wallet's balance is the sum of every output addressed to that wallet that has not yet been used as input to a later transaction. There is no account with a running balance stored anywhere.
+
+Every Bitcoin transaction consumes one or more UTXOs and creates one or more new outputs. The old ones are destroyed in the process. Full nodes track the entire set of currently unspent outputs, called the UTXO set, and check each new transaction against it. This model makes parallel validation straightforward, since two transactions that spend different UTXOs do not depend on each other. Protocols like [Silent Payments](/topics/silent-payments) and tools like [PSBTs](/topics/psbt) are built on top of this same model.
+
+The UTXO set grows with adoption. Keeping it on disk and keeping lookups fast are ongoing concerns for full-node software. Features like [AssumeUTXO](/topics/assumeutxo) and pruning exist to manage how nodes load, store, and verify the set.
+
+## References
+
+- [Learn Me A Bitcoin: UTXO](https://learnmeabitcoin.com/technical/transaction/utxo/)
+- [Mastering Bitcoin: transactions](https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch06_transactions.adoc)
+- [en.bitcoin.it: UTXO](https://en.bitcoin.it/wiki/UTXO)

@@ -110,6 +110,8 @@ export const Projects = defineDocumentType(() => ({
     website: { type: 'string' },
     donationLink: { type: 'string' },
     coverImage: { type: 'string', required: true },
+    darkCoverImage: { type: 'string' },
+    invertDarkImage: { type: 'boolean' },
     git: { type: 'string' },
     twitter: { type: 'string' },
     personalTwitter: { type: 'string' },
@@ -121,6 +123,37 @@ export const Projects = defineDocumentType(() => ({
     showcase: { type: 'boolean' },
     fund: { type: 'string' },
     announcementLink: { type: 'string' },
+  },
+  computedFields,
+}))
+
+export const Newsletters = defineDocumentType(() => ({
+  name: 'Newsletter',
+  filePathPattern: 'newsletter/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    issueNumber: { type: 'number', required: true },
+    date: { type: 'date', required: true },
+    quarter: { type: 'string', required: true },
+    headline: { type: 'string' },
+    summary: { type: 'string', required: true },
+    image: { type: 'string' },
+    layout: { type: 'string' },
+  },
+  computedFields,
+}))
+
+export const Topics = defineDocumentType(() => ({
+  name: 'Topic',
+  filePathPattern: 'topics/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    summary: { type: 'string', required: true },
+    category: { type: 'string', required: true },
+    aliases: { type: 'list', of: { type: 'string' } },
+    draft: { type: 'boolean' },
   },
   computedFields,
 }))
@@ -153,7 +186,7 @@ export const Funds = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Pages, Projects, Funds],
+  documentTypes: [Blog, Authors, Pages, Projects, Funds, Newsletters, Topics],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

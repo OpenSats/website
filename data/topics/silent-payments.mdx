@@ -1,0 +1,18 @@
+---
+title: 'Silent Payments'
+summary: 'A way to receive Bitcoin to a reusable static address without reusing on-chain addresses.'
+category: 'Bitcoin'
+aliases: ['BIP 352']
+---
+
+Silent Payments, specified in BIP 352, let a receiver publish a single static address that a sender can pay many times. Each payment lands on a different, unlinkable on-chain output. There is no interaction between sender and receiver beyond knowing the static address.
+
+The trade-off is on the receiver side: a wallet has to scan every block for outputs that could belong to it, which is more work than checking a fixed script. Light clients and specialized indexers are active areas of work.
+
+Silent Payments remove the old choice between address reuse and address rotation schemes such as [BIP 47](https://github.com/bitcoin/bips/blob/master/bip-0047.mediawiki). A donation address or a shop address can stay the same in public without leaking its whole payment history.
+
+## References
+
+- [BIP 352](https://github.com/bitcoin/bips/blob/master/bip-0352.mediawiki)
+- [silentpayments.xyz](https://silentpayments.xyz/)
+- [Ruben Somsen's original proposal](https://gist.github.com/RubenSomsen/c43b79517e7cb701ebf77eec6dbb46b8)

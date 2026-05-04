@@ -1,0 +1,19 @@
+---
+title: 'Relays'
+summary: 'The small servers that store and forward signed events on Nostr.'
+category: 'Nostr'
+aliases: ['Nostr relay']
+---
+
+A relay is a WebSocket server that accepts, stores, and serves [Nostr](/topics/nostr) events. Clients connect to several relays at once. Writing a note means sending the same signed event to each of them. Reading a feed means subscribing to filters on each of them and merging the results.
+
+Relays do not need to know about each other. They do not need to trust each other. Each one is independently replaceable. A user who does not like a relay's policy can drop it and pick another without losing their identity or their history, as long as some other relay has a copy of the events they care about.
+
+Different relays optimize for different things: large public archives, small paid relays with strict spam filters, private relays for a single user, or specialized relays that only accept a specific kind of event. Implementations include [strfry](https://github.com/hoytech/strfry), [nostr-rs-relay](https://github.com/scsibug/nostr-rs-relay), and [relay.tools](https://relay.tools/).
+
+## References
+
+- [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md)
+- [hoytech/strfry](https://github.com/hoytech/strfry)
+- [scsibug/nostr-rs-relay](https://github.com/scsibug/nostr-rs-relay)
+- [relay.tools](https://relay.tools/)

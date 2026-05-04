@@ -68,6 +68,12 @@ interface PageSEOProps {
   description: string
 }
 
+interface ProjectSEOProps {
+  title: string
+  description: string
+  slug: string
+}
+
 export const PageSEO = ({ title, description }: PageSEOProps) => {
   const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
   const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
@@ -78,6 +84,50 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
       ogType="website"
       ogImage={ogImageUrl}
       twImage={twImageUrl}
+    />
+  )
+}
+
+export const ProjectSEO = ({ title, description, slug }: ProjectSEOProps) => {
+  const ogImagePath = `/static/images/projects/og/${slug}.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="website"
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
+interface NewsletterSEOProps {
+  title: string
+  description: string
+  slug?: string
+  ogType?: string
+}
+
+export const NewsletterSEO = ({
+  title,
+  description,
+  slug,
+  ogType = 'website',
+}: NewsletterSEOProps) => {
+  const ogImagePath = slug
+    ? `/static/images/newsletter/og/${slug}.png`
+    : `/static/images/newsletter/og/index.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType={ogType}
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
     />
   )
 }

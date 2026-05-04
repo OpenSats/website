@@ -1,0 +1,18 @@
+---
+title: 'Ecash'
+summary: 'Digital bearer tokens issued by a mint using blind signatures, so that spending and redeeming cannot be linked to the original withdrawal.'
+category: 'Ecash'
+aliases: ['e-cash', 'digital cash', 'Chaumian ecash']
+---
+
+Ecash is digital money that behaves like paper cash. Whoever holds a valid token can spend it, and the token carries no record of who used it before. David Chaum introduced the idea in 1982 using blind signatures: a mint signs a token without seeing its contents, so when the token is later redeemed, the mint cannot link the redemption to the original withdrawal.
+
+A bearer token is only as good as the party holding the backing funds. An ecash mint is a custodian. Someone who deposits sats with a mint trusts it not to disappear or inflate the supply. Thanks to the blind signature scheme, the mint cannot censor individual redemptions, but it can still rug-pull everyone at once. Ecash trades the self-custody property of Bitcoin for stronger privacy, low fees, instant settlement between users of the same mint, and the ability to send money by handing over a string.
+
+On Bitcoin, two open protocols put this idea to use. [Cashu](/projects/cashu) is a single-operator mint backed by sats on Lightning, specified as a set of [NUTs](https://github.com/cashubtc/nuts) with multiple interoperable mint and wallet implementations. [Fedimint](/topics/fedimint) replaces the single operator with a federation of guardians that jointly hold the backing funds.
+
+## References
+
+- [Chaum: Blind Signatures for Untraceable Payments (1982)](https://chaum.com/wp-content/uploads/2022/01/Chaum-blind-signatures.pdf)
+- [Cashu protocol](https://cashu.space/)
+- [Fedimint](https://fedimint.org/)

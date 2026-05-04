@@ -1,0 +1,113 @@
+---
+title: "Call for Applications"
+date: '2026-04-29'
+tags: ['OpenSats', 'bitcoin', 'grants', 'applications']
+authors: ['default', 'arvin', 'tuma', 'btcschellingpt']
+images: ['/static/images/blog/107-call-for-applications-spring-2026.jpg']
+draft: false
+summary: "OpenSats is seeking grant proposals that advance base layer privacy."
+---
+
+Developers and contributors working on Bitcoin, nostr, and adjacent freedom tech
+can [apply for a grant] at any time, and our board reviews proposals on a
+rolling basis.
+
+Twice a year, in the spring and fall, we plan to highlight a focus area where we
+would like to see strong proposals. This spring, the focus is on privacy at
+Bitcoin's base layer.
+
+<ApplyButton preTagline="for an" tagline="OpenSats grant" />
+
+Privacy on Bitcoin matters for the same reasons it matters anywhere else. People
+accepting bitcoin for their work, running a small business, donating to causes,
+or saving for the future reasonably expect the same kind of day-to-day financial
+privacy they would get from traditional banking tools. As [Greg Maxwell] put it
+back in 2013:
+
+>Traditional banking provides a fair amount of privacy by default. Your inlaws
+don't see that you're buying birth control that deprives them of grandchildren,
+your employer doesn't learn about the non-profits you support with money from
+your paycheck, and thieves don't see your latest purchases or how wealthy you
+are to help them target and scam you. Poor privacy in Bitcoin can be a major
+practical disadvantage for both individuals and businesses.
+
+There are real privacy gaps on-chain today. Much of that sits in wallet behavior
+and transaction construction, which makes it a great area for open-source
+development to improve the experience for users.
+
+A lot of privacy work supported by OpenSats has already happened at higher
+layers of the bitcoin stack. For example, on Layer 2, grantees have advanced
+[BOLT12 offers] and receiver-side privacy for Lightning payments, and on Layer
+3, grantees building [Cashu, Nutshell, Minibits, Fedimint, and related projects]
+have turned Chaumian ecash from research into production infrastructure. That
+work will continue.
+
+Base-layer work is where privacy improvements carry the furthest. For instance,
+every on-chain transaction that uses [Silent Payments] instead of reusing
+addresses, uses [collaborative transaction] methods such as [Payjoin], or opens
+Lightning channels, raises the baseline privacy of everyday users with minimal
+change, if any, to how they already transact. We would like to fund more of this
+type of work.
+
+There are several Layer 1 privacy-centric projects that already receive OpenSats
+support, including [Payjoin Dev Kit] and [Async Payjoin], [Silent
+Payments][sp-grant], [Coinswap], [JoinMarket NG], [Floresta], [ASmap], and
+Bitcoin Core [P2P privacy and node-fingerprinting research]. Foundational
+libraries like [rust-bitcoin] and [BDK] are the basis of much of this privacy
+work, alongside the [Kyoto light client] project, which implements [BIP 157] and
+[BIP 158] compact-block filters that Silent Payments and other privacy tools
+rely on.
+
+This spring, we would especially welcome proposals that extend and improve Layer
+1 work mentioned above, as well as new projects taking fresh approaches to
+on-chain privacy. That includes deeper integration of existing techniques into
+widely used wallets, research and tooling that strengthen the surrounding
+ecosystem, and ideas we have not yet considered.
+
+Strong applications are clear about the problem being addressed, the users being
+served, and a concrete plan for getting there. If your project improves
+base-layer privacy in Bitcoin and is free and open source, please consider
+submitting a grant application.
+
+<ApplyButton
+  prelude="Ready to"
+  cta=">_ apply?"
+  preTagline="Submit a"
+  tagline="grant proposal"
+  taglineMobile="Submit"
+  taglineMobileSub="a proposal"
+/>
+
+Applications go through our [standard process]: a concise proposal reviewed by
+our board on technical merit, potential impact, and ability to execute. Our
+[Application FAQ] covers review timelines, budget guidance, reference letters,
+and other common questions.
+
+Grants awarded to Bitcoin Layer 1 privacy projects will be sourced from our
+[General Fund]. If you would like to help us fund more privacy work on the base
+layer, please [consider making a recurring donation].
+
+[apply for a grant]: /apply
+[Greg Maxwell]: https://bitcointalk.org/index.php?topic=279249.0
+[BOLT12 offers]: /blog/advancements-in-lightning-infrastructure
+[Cashu, Nutshell, Minibits, Fedimint, and related projects]: /blog/advancements-in-ecash
+[Silent Payments]: /topics/silent-payments
+[collaborative transaction]: https://jamdocs.org/glossary/#collaborative-transaction
+[Payjoin]: /topics/payjoin
+[Payjoin Dev Kit]: /projects/pdk
+[Async Payjoin]: /projects/pdk
+[sp-grant]: /blog/developing-advancements-in-onchain-privacy#silent-payments
+[Coinswap]: /blog/developing-advancements-in-onchain-privacy#coinswap
+[JoinMarket NG]: /blog/seventeenth-wave-of-bitcoin-grants#joinmarket-ng
+[Floresta]: /projects/floresta
+[ASmap]: /blog/bitcoin-grants-september-2024-7th-wave#asmap
+[P2P privacy and node-fingerprinting research]: /blog/five-grants-to-strengthen-bitcoin-development#naiyoma
+[rust-bitcoin]: /blog/ninth-wave-of-bitcoin-grants
+[BDK]: /projects/bdk
+[Kyoto light client]: /blog/bitcoin-grants-september-2024-7th-wave
+[BIP 157]: /topics/bip-157
+[BIP 158]: /topics/bip-158
+[standard process]: /apply/grant
+[Application FAQ]: /faq/application
+[General Fund]: /funds/general
+[consider making a recurring donation]: /donate

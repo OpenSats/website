@@ -1,0 +1,86 @@
+---
+title: 'Mostro'
+dateAdded: '2024-07-29'
+summary: 'A non-custodial peer-to-peer Bitcoin exchange on Lightning and nostr with federated nodes and open clients.'
+nym: 'Francisco Calderón'
+website: 'https://mostro.network/'
+coverImage: '/static/images/projects/mostro.png'
+donationLink: 'https://geyser.fund/project/mostro'
+git: 'https://github.com/MostroP2P'
+zapstore: 'https://zapstore.dev/apps/network.mostro.app'
+twitter: 'MostroP2P'
+nostr: 'npub1m0str0d7z2ww8rdh20t2n9lx520xjwhaq24p68umqp06wwrwtsnqen40un'
+tags: ['Bitcoin', 'Lightning', 'Nostr']
+fund: nostr
+announcementLink: '/blog/nostr-grants-july-2024#mostro'
+---
+
+[Mostro](https://mostro.network/) is a non-custodial peer-to-peer Bitcoin
+exchange built on Lightning and nostr. Orders travel as nostr events and
+settlement happens over Lightning, without KYC and without a central
+order-book operator holding user funds. Mostro grew out of
+[lnp2pBot](https://github.com/lnp2pBot), the Telegram-based peer-to-peer
+exchange used widely across Latin America, and keeps the same trading model
+while replacing the closed transport with an open protocol.
+
+The system is built around multiple independent Mostro nodes that anyone can
+run. Each node operates its own Lightning node, publishes its order book to
+nostr relays, and coordinates trades between buyers and sellers. Clients talk
+to any node through standard nostr events, so users can choose which operator
+to trade through. Order events follow
+[NIP-69](https://github.com/nostr-protocol/nips/blob/master/69.md), an
+interoperable peer-to-peer order standard that Mostro contributed upstream,
+and the full message format lives in the open
+[protocol specification](https://mostro.network/protocol/).
+
+Trades use
+[NIP-59](https://github.com/nostr-protocol/nips/blob/master/59.md) gift-wrapped
+messages so relays cannot see who is talking to whom, clients rotate their
+trade keys on every order to break linkability across trades, and the node's
+database encrypts private keys and sensitive columns at rest.
+
+Reference implementations include the [Mostro
+node](https://github.com/MostroP2P/mostro), a Flutter
+[mobile app](https://github.com/MostroP2P/mobile), a Ratatui
+terminal UI ([Mostrix](https://github.com/MostroP2P/mostrix)), a
+[CLI](https://github.com/MostroP2P/mostro-cli), and a browser-based
+admin/signing tool
+([mostro-webtool](https://github.com/MostroP2P/mostro-webtool)). The protocol
+supports dispute resolution with third-party solvers, and
+[Mostro Score](https://mostro.watch/) computes public reliability metrics for
+each node operator so users can pick someone they trust.
+
+## Why fund it?
+
+For users in authoritarian regimes, a resilient way to buy and sell Bitcoin
+peer-to-peer is critical infrastructure. Telegram bots worked but depended on
+a single platform that could be blocked or coerced; Mostro moves the same
+workflow onto nostr, where no single operator can shut it down.
+
+Running trading on an open protocol also lets anyone build clients, from
+mobile apps to terminal UIs to interfaces tailored to a specific
+[local community](https://mostro.community/).
+
+OpenSats supported Mostro in the
+[second wave of nostr grants in 2024](/blog/nostr-grants-july-2024#mostro) and
+[renewed the grant in 2025](/blog/eleventh-wave-of-bitcoin-grants).
+The project is also supported by the
+[Human Rights Foundation](https://hrf.org/), and the newly formed
+[Mostro Foundation](https://mostro.foundation/) handles donations and
+distributes funds to contributors.
+
+## What's next?
+
+The [mobile app](https://github.com/MostroP2P/mobile) reached public beta in
+early 2026 and now ships for Android through
+[Zapstore](https://zapstore.dev/apps/network.mostro.app) and direct APK
+downloads, with desktop builds for Linux, macOS, and Windows attached to
+every release. Multi-node support landed in v1.1.1, so users can already
+switch between independent Mostro operators from inside the app. The Mostro
+daemon also runs a transparent "development fund" where a small configurable
+trade fee flows to contributors, audited through public nostr events.
+
+Ongoing work focuses on shipping the iOS client, maturing the
+[Mostro Score](https://mostro.watch/) dashboard, hardening dispute
+resolution, and packaging Mostro for [Start9](https://start9.com/) so anyone
+can run a node on their own hardware.

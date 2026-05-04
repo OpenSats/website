@@ -1,0 +1,61 @@
+---
+title: 'Flotilla'
+dateAdded: '2026-04-29'
+summary: 'A Discord-like nostr client built around the idea of "relays as groups," with chat, threads, events, voice rooms, and white-labeled instances.'
+nym: 'Hodlbod'
+website: 'https://flotilla.social/'
+coverImage: '/static/images/projects/flotilla.png'
+git: 'https://gitea.coracle.social/coracle/flotilla'
+nostr: 'npub1jlrs53pkdfjnts29kveljul2sm0actt6n8dxrrzqcersttvcuv3qdjynqn'
+tags: ['Nostr', 'Communities', 'Chat']
+fund: nostr
+announcementLink: '/blog/hodlbod-receives-lts-grant'
+---
+
+Flotilla is a community-focused nostr client built by [Hodlbod][lts], the
+creator of [Coracle](/projects/coracle). The model is "relays as groups": each
+[relay](/topics/relays) is the home of a community, and the relay's own
+configuration decides who can read and write there. A user joins a community by
+adding the relay; a community owner sets policy by running, hosting, or paying
+for the relay. Members get chat, threads, events, voice rooms, zaps, and
+private messages without any of those features being routed through a central
+operator.
+
+The web app is a PWA. Users can join multiple communities at once, switch
+between them like servers in Discord, and take part in synchronous chat or
+asynchronous threads on the same relays. Other features include a calendar of
+nostr events, [NIP-17](/topics/private-dms) gift-wrapped DMs, [web of
+trust](/topics/web-of-trust) filtering, and "white-labeled" instances that an
+operator can brand for their own community.
+
+## Why fund it?
+
+Most online communities live on platforms whose owners can change the rules,
+demonetize the operator, or deplatform the members at any time. Self-hosted
+alternatives exist, but each one is its own silo with its own accounts. Flotilla
+puts community ownership back in the operator's hands by leaning on nostr
+primitives that already work: a relay anyone can run, an identity that travels
+between communities, and an event format that other clients can read. A user
+who is part of ten Flotilla communities still has one keypair, one inbox, and
+one social graph.
+
+OpenSats supports Hodlbod through a [long-term support grant][lts], which is
+what funds the ongoing work on Flotilla alongside Coracle and the
+[Welshman](https://github.com/coracle-social/welshman) library that powers both
+clients.
+
+## What's next?
+
+Coracle has moved into maintenance mode while Flotilla takes the lead. Active
+work includes voice and video rooms, [Caravel](https://caravel.community/), a
+relay-hosting platform built so non-technical operators can spin up a community
+without running their own server, and [Pomade], an email-and-password login
+protocol that lets newcomers join Flotilla without first learning about
+keypairs.
+
+For a detailed look at recent progress, see the [Advancements in Nostr
+Clients][impact-report] impact report.
+
+[impact-report]: /blog/advancements-in-nostr-clients
+[lts]: /blog/hodlbod-receives-lts-grant
+[Pomade]: https://github.com/coracle-social/pomade

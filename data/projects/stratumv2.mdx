@@ -1,16 +1,46 @@
 ---
 title: 'Stratum V2'
 dateAdded: '2023-03-16'
-summary: 'The next generation of pooled mining.'
+summary: 'An open mining protocol that gives individual miners more control over block construction.'
 nym: 'StratumV2'
 website: 'https://stratumprotocol.org/'
-coverImage: '/static/images/projects/stratumv2.jpg'
-git: 'https://github.com/stratum-mining/stratum'
+donationLink: 'https://stratumprotocol.org/#start-mining-image'
+coverImage: '/static/images/projects/stratumv2.svg'
+git: 'https://github.com/stratum-mining/'
 twitter: 'StratumV2'
 personalTwitter: 'StratumV2'
 tags: ['Bitcoin', 'Privacy', 'Protocol', 'Mining']
+showcase: true
+fund: general
+announcementLink: '/blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool'
 ---
 
-## About this project
+Stratum V2 is a pooled mining protocol designed to replace Stratum V1. It uses bandwidth more efficiently, adds encryption, and gives miners more control over how blocks are built.
 
-Stratum V2 increases security, makes data transfers more efficient, and reduces mining infrastructure requirements. It also introduces three new sub-protocols that let miners select transaction sets and improve decentralization. Previously, transaction sets were selected by pools. With Stratum V2 the transaction sets are selected by individual miners, leading to a more censorship-resistant network.
+The main change is job negotiation. Under V1, pools chose the transaction set and miners supplied hash power. Stratum V2 lets individual miners construct their own block templates, reducing pool control and improving censorship resistance. The protocol also improves device interoperability and communication between miners, proxies, and pools.
+
+## Why fund it?
+
+Shipping a new mining protocol requires spec work, a production-quality implementation, testing tools, and compatibility work across real hardware and software. Without dedicated funding, that kind of work stalls.
+
+OpenSats has funded Stratum V2 development since August 2023, starting with a grant to [Gabriele Vernetti][gitgab19] for a [testing and benchmarking tool][wave-aug23]. Gabriele went on to lead the [Stratum V2 Reference Implementation][SRI] (SRI), build the [sv2-wizard] configuration tool, and coordinate interoperability testing with pools and hardware vendors. In early 2026, [Lucas Balieiro][lucas] received a grant focused on [fuzzing, security testing, and developer tooling][wave-16].
+
+## What's next?
+
+SRI has shipped releases [`1.0.0`][sri-1-0] through [`1.6.0`][sri-1-6] and is now split into a [library repo][SRI] and an [application repo][sv2-apps] with precompiled binaries and Docker images. Recent work embedded the [Job Declaration Server](https://github.com/stratum-mining/sv2-apps/blob/main/pool-apps/jd-server/README.md) inside the pool and added a [solo mining mode][solo] similar to CKPool solo but SV2-only. [Demand Pool][dmnd] launched with SV2 support, and [Auradine shipped the first ASIC miner with native Stratum V2][auradine].
+
+A [web UI][sv2-ui] for monitoring mining data is in beta testing with real miners. [Fuzzing](https://en.wikipedia.org/wiki/Fuzzing) already uncovered an arithmetic overflow in the `noise_sv2` crate, which has been fixed; a 24/7 fuzzing server is running and the next target is the `sv1_api` crate used by the translator proxy. Other ongoing work includes property testing across the low-level crates and improving Docker-based deployment.
+
+[auradine]: https://x.com/Auradine_Inc/status/1991159535864803665
+[dmnd]: https://dmnd.work
+[gitgab19]: https://github.com/GitGab19
+[lucas]: https://github.com/lucasbalieiro
+[solo]: https://github.com/stratum-mining/sv2-apps/pull/321
+[sri-1-0]: https://github.com/stratum-mining/stratum/releases/tag/v1.0.0
+[sri-1-6]: https://github.com/stratum-mining/stratum/releases/tag/v1.6.0
+[SRI]: https://github.com/stratum-mining/stratum
+[sv2-apps]: https://github.com/stratum-mining/sv2-apps
+[sv2-ui]: https://github.com/stratum-mining/sv2-ui
+[sv2-wizard]: https://github.com/stratum-mining/sv2-wizard
+[wave-16]: /blog/sixteenth-wave-of-bitcoin-grants#stratum-v2
+[wave-aug23]: /blog/bitcoin-and-nostr-grants-august-2023#stratum-v2-testing--benchmarking-tool

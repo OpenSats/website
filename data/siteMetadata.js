@@ -9,6 +9,10 @@ const siteMetadata = {
     'OpenSats is a 501(c)(3) public charity that aims to support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish.',
   language: 'en-us',
   theme: 'system', // system, dark or light
+  // Must be the canonical production URL: it backs RSS <guid>s, sitemap
+  // entries, and og:url tags, all of which need to be stable across
+  // deploys. Do not derive this from VERCEL_URL — that value is unique
+  // per deployment and would change every release.
   siteUrl: 'https://opensats.org',
   siteRepo: 'https://github.com/OpenSats/website/',
   siteLogo: '/static/images/logo.png',

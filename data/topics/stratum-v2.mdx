@@ -1,0 +1,19 @@
+---
+title: 'Stratum V2'
+summary: 'A next-generation Bitcoin mining protocol that lets individual miners build their own block templates.'
+category: 'Mining'
+aliases: ['Stratum V2', 'SV2', 'SRI']
+---
+
+Stratum V2 is a pooled mining protocol designed to replace the original Stratum V1. It uses bandwidth more efficiently, adds encryption between miners and pools, and, most importantly, lets the individual miner choose the transaction set for the blocks they work on. Under V1, the pool picks the transactions.
+
+Moving block construction to the miner reduces pool control over what goes into blocks. It improves censorship resistance and gives miners a direct interest in local mempool policy. The protocol also improves device interoperability and communication between miners, proxies, and pools.
+
+The reference implementation is the [Stratum V2 Reference Implementation](https://github.com/stratum-mining/stratum) (SRI). See also the [Stratum V2 project page](/projects/stratumv2) for OpenSats grants in this area and [stratumprotocol.org](https://stratumprotocol.org/) for the specification.
+
+## References
+
+- [stratumprotocol.org](https://stratumprotocol.org/)
+- [stratum-mining/stratum](https://github.com/stratum-mining/stratum)
+- [Braiins: Stratum V2 Overview](https://braiins.com/blog/past-and-future-of-bitcoin-mining-protocols-stratum-v2-overview)
+- [Stratum V2 specification](https://stratumprotocol.org/specification/)

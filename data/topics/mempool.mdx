@@ -1,0 +1,19 @@
+---
+title: 'Mempool'
+summary: 'The set of valid but unconfirmed transactions each full node keeps in memory, from which miners and fee estimators pull candidates.'
+category: 'Bitcoin'
+aliases: ['memory pool', 'transaction pool', 'tx pool']
+---
+
+Every Bitcoin full node validates transactions it hears on the network and keeps accepted, non-conflicting ones in its **mempool** until they confirm in a block or expire under local policy. There is no global mempool: each peer maintains its own view based on what it saw, in which order, and which feerate rules it applies. Wallets ask their node (or a service like [mempool.space](https://mempool.space)) for a snapshot of that view when they estimate fees or when they show "pending" activity to a user.
+
+Miners and mining pools pull work from their own mempool (or from a pool template builder) when they assemble candidate blocks. [Stratum V2](/topics/stratum-v2) discussions often assume miners can see enough of the fee market to pick transactions with less blind trust in the pool operator. Policy changes such as package relay and feerate-based eviction adjust how those candidates enter and leave the set without changing consensus rules for confirmed blocks.
+
+The mempool is where soft congestion shows up first: when demand for block space spikes, the same mempool data is what drives rising feerates for the next confirmations.
+
+## References
+
+- [Bitcoin Core RPC: `getmempoolinfo`](https://developer.bitcoin.org/reference/rpc/getmempoolinfo.html)
+- [Bitcoin Core RPC: `getrawmempool`](https://developer.bitcoin.org/reference/rpc/getrawmempool.html)
+- [Bitcoin Optech: Package relay](https://bitcoinops.org/en/topics/package-relay/)
+- [mempool.space FAQ: What is a mempool?](https://mempool.space/docs/faq#what-is-a-mempool)
