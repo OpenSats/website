@@ -103,8 +103,10 @@ function wrapText(text, maxCharsPerLine, maxLines) {
 
 // Light-mode palette. Background matches the site's light theme; text
 // is warm near-black/grey so the orange logomark stays the only true
-// accent. A faint orange wash in the bottom-right keeps the card from
-// feeling sterile.
+// accent. The right-side decoration is a faint decentralized network:
+// jittered nodes connected to nearby neighbours, with a radial opacity
+// falloff so the cluster reads as denser in the middle and dissolves
+// toward the edges.
 const COLORS = {
   background: '#fafaf9',
   title: '#0c0a09',
@@ -112,22 +114,119 @@ const COLORS = {
   url: '#a8a29e',
   separator: '#e7e5e4',
   accent: '#f97316',
+  network: '#d6d3d1',
 }
 
 const PADDING = 84
 const CONTENT_WIDTH = WIDTH - PADDING * 2
 
-function backgroundDecor() {
+// Tiny seeded PRNG (LCG). Deterministic for a given seed, so each topic
+// renders the same network on every build but every topic gets its own
+// unique cluster.
+function makeRng(seed) {
+  let s = seed >>> 0 || 1
+  return () => {
+    s = (s * 9301 + 49297) % 233280
+    return s / 233280
+  }
+}
+
+// djb2 string hash → 32-bit unsigned int. Used to derive a per-topic
+// PRNG seed from the slug.
+function hashString(value = '') {
+  let h = 5381
+  for (let i = 0; i < value.length; i++) {
+    h = (h * 33 + value.charCodeAt(i)) >>> 0
+  }
+  return h
+}
+
+function networkDecor(seed) {
+  // Bounded region. The Y ceiling stops well above the separator (which
+  // sits at ~y=532) so nodes never collide with the URL row.
+  const minX = 720
+  const maxX = WIDTH - 60
+  const minY = 70
+  const maxY = 500
+
+  const spacing = 58
+  const jitter = 16
+  const dropRate = 0.18
+
+  // Falloff anchored slightly off-centre to feel less symmetric.
+  const cx = (minX + maxX) / 2 + 20
+  const cy = (minY + maxY) / 2 - 10
+  const fadeRadius = Math.hypot(maxX - cx, maxY - cy) * 0.92
+
+  const fadeAt = (x, y) => {
+    const d = Math.hypot(x - cx, y - cy) / fadeRadius
+    if (d >= 1) return 0
+    return Math.max(0, 1 - d * d)
+  }
+
+  const rand = makeRng(seed)
+  const nodes = []
+  for (let y = minY; y <= maxY; y += spacing) {
+    for (let x = minX; x <= maxX; x += spacing) {
+      if (rand() < dropRate) continue
+      const jx = (rand() - 0.5) * 2 * jitter
+      const jy = (rand() - 0.5) * 2 * jitter
+      const nx = x + jx
+      const ny = y + jy
+      if (ny > maxY || ny < minY) continue
+      const f = fadeAt(nx, ny)
+      if (f <= 0.04) continue
+      nodes.push({
+        x: nx,
+        y: ny,
+        r: 2.4 + rand() * 1.8,
+        opacity: f,
+      })
+    }
+  }
+
+  const threshold = spacing * 1.4
+  let edgesSvg = ''
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const a = nodes[i]
+      const b = nodes[j]
+      const d = Math.hypot(a.x - b.x, a.y - b.y)
+      if (d > threshold) continue
+      const linkStrength = 1 - d / threshold
+      const opacity = linkStrength * ((a.opacity + b.opacity) / 2) * 0.7
+      if (opacity < 0.02) continue
+      edgesSvg += `<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(
+        1
+      )}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="${
+        COLORS.network
+      }" stroke-width="1" stroke-opacity="${opacity.toFixed(2)}" />`
+    }
+  }
+
+  let nodesSvg = ''
+  for (const n of nodes) {
+    nodesSvg += `<circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(
+      1
+    )}" r="${n.r.toFixed(1)}" fill="${
+      COLORS.network
+    }" fill-opacity="${n.opacity.toFixed(2)}" />`
+  }
+
+  return `<g>${edgesSvg}${nodesSvg}</g>`
+}
+
+function backgroundDecor(seed) {
   return `
     <rect width="${WIDTH}" height="${HEIGHT}" fill="${COLORS.background}" />
-    <circle cx="1140" cy="610" r="220" fill="${COLORS.accent}" fill-opacity="0.07" />
-    <circle cx="1080" cy="540" r="120" fill="${COLORS.accent}" fill-opacity="0.05" />
+    ${networkDecor(seed)}
   `
 }
 
 function renderTopicSvg(topic) {
   const titleLines = wrapText(topic.title, 22, 2)
   const topicUrl = `opensats.org/topics/${topic.slug}`
+  const seed = hashString(topic.slug)
 
   const logoSize = 88
   const logoX = PADDING
@@ -173,7 +272,7 @@ function renderTopicSvg(topic) {
 
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${backgroundDecor()}
+      ${backgroundDecor(seed)}
 
       <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
@@ -207,10 +306,11 @@ function renderIndexSvg() {
   const logoSize = 88
   const logoX = PADDING
   const logoY = PADDING + 8
+  const seed = hashString('topics-index')
 
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${backgroundDecor()}
+      ${backgroundDecor(seed)}
 
       <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
