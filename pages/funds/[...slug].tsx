@@ -39,7 +39,10 @@ export const getStaticProps = async ({ params }) => {
   const project = allFunds.find((f) => f.slug === slug)
 
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
-  const relatedPosts = getRelatedBlogPostsForFund(project, sortedPosts)
+  const relatedPosts = getRelatedBlogPostsForFund(project, sortedPosts).slice(
+    0,
+    5
+  )
 
   return {
     props: {
