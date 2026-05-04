@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['NIP-57', 'Lightning zaps', 'zap']
 ---
 
-A zap is a public Lightning payment attached to a [Nostr](/topic/nostr) event. A user who likes a note, a profile, or a reply can send sats to the author. The payment then surfaces on Nostr as a "zap receipt": a signed Nostr event that proves the Lightning invoice was paid. Other clients render the zap under the original note, so everyone sees who tipped whom and how much.
+A zap is a public Lightning payment attached to a [Nostr](/topics/nostr) event. A user who likes a note, a profile, or a reply can send sats to the author. The payment then surfaces on Nostr as a "zap receipt": a signed Nostr event that proves the Lightning invoice was paid. Other clients render the zap under the original note, so everyone sees who tipped whom and how much.
 
 The mechanism is defined in NIP-57. The receiver advertises a zap endpoint, such as a LNURL, in their profile. The sender asks the endpoint for a Lightning invoice that references the target event. After payment, the endpoint publishes the zap receipt to the same relays that carry the original event.
 
