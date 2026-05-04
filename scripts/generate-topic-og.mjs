@@ -225,6 +225,7 @@ function backgroundDecor(seed) {
 
 function renderTopicSvg(topic) {
   const titleLines = wrapText(topic.title, 22, 2)
+  const summaryText = topic.ogSummary || topic.summary
   const topicUrl = `opensats.org/topics/${topic.slug}`
   const seed = hashString(topic.slug)
 
@@ -257,8 +258,8 @@ function renderTopicSvg(topic) {
     Math.floor(summaryAvailable / summaryLineHeight)
   )
   const summaryLines =
-    maxSummaryLines > 0 && topic.summary
-      ? wrapText(topic.summary, 52, maxSummaryLines)
+    maxSummaryLines > 0 && summaryText
+      ? wrapText(summaryText, 52, maxSummaryLines)
       : []
 
   const summarySvg = summaryLines
