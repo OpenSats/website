@@ -34,6 +34,7 @@ export default function DonateRecurringButtonV2({
     variant === 'purple'
       ? 'donate-banner-v2 donate-banner-v2--purple'
       : 'donate-banner-v2'
+  const heart = variant === 'purple' ? '💜' : '🧡'
 
   return (
     <CustomLink
@@ -57,9 +58,9 @@ export default function DonateRecurringButtonV2({
         </span>
       </span>
       <span className="donate-banner-v2__hearts" aria-hidden="true">
-        <span>🧡</span>
-        <span>🧡</span>
-        <span>🧡</span>
+        <span>{heart}</span>
+        <span>{heart}</span>
+        <span>{heart}</span>
       </span>
     </CustomLink>
   )
