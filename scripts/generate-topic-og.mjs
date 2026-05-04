@@ -44,9 +44,9 @@ let faviconDataUri = ''
 
 async function loadBrandAssets() {
   const faviconSvg = await fs.readFile(faviconSvgPath, 'utf8')
-  faviconDataUri = `data:image/svg+xml;base64,${Buffer.from(faviconSvg).toString(
-    'base64'
-  )}`
+  faviconDataUri = `data:image/svg+xml;base64,${Buffer.from(
+    faviconSvg
+  ).toString('base64')}`
 }
 
 function escapeXml(value = '') {
@@ -101,180 +101,144 @@ function wrapText(text, maxCharsPerLine, maxLines) {
   return lines
 }
 
-function baseDefs() {
-  return `
-    <defs>
-      <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#09090b" />
-        <stop offset="1" stop-color="#171717" />
-      </linearGradient>
-    </defs>
-  `
+// Light-mode palette. Background matches the site's light theme; text
+// is warm near-black/grey so the orange logomark stays the only true
+// accent. A faint orange wash in the bottom-right keeps the card from
+// feeling sterile.
+const COLORS = {
+  background: '#fafaf9',
+  title: '#0c0a09',
+  summary: '#44403c',
+  url: '#a8a29e',
+  separator: '#e7e5e4',
+  accent: '#f97316',
 }
+
+const PADDING = 84
+const CONTENT_WIDTH = WIDTH - PADDING * 2
 
 function backgroundDecor() {
   return `
-    <rect width="1200" height="630" fill="url(#bg)" />
-    <circle cx="1110" cy="92" r="180" fill="#f97316" fill-opacity="0.08" />
-    <circle cx="1035" cy="540" r="140" fill="#f97316" fill-opacity="0.06" />
-  `
-}
-
-// Right-side brand card mirroring the project OG layout. Instead of a
-// project logo we drop in the OpenSats logomark — the orange `>_` mark
-// from our favicon, rendered on the dark card with an orange halo.
-function brandCard() {
-  const cardX = 736
-  const cardY = 84
-  const cardSize = 408
-  const cx = cardX + cardSize / 2
-  const cy = cardY + cardSize / 2 - 18
-  const markSize = 200
-  const markX = cx - markSize / 2
-  const markY = cy - markSize / 2
-  const labelY = cardY + cardSize - 76
-
-  return `
-    <defs>
-      <radialGradient id="halo" cx="0.5" cy="0.5" r="0.55">
-        <stop offset="0" stop-color="#f97316" stop-opacity="0.45" />
-        <stop offset="0.6" stop-color="#f97316" stop-opacity="0.12" />
-        <stop offset="1" stop-color="#f97316" stop-opacity="0" />
-      </radialGradient>
-    </defs>
-    <rect x="${cardX}" y="${cardY}" width="${cardSize}" height="${cardSize}" rx="36" fill="#0f1115" stroke="#27272a" stroke-width="2" />
-    <circle cx="${cx}" cy="${cy}" r="180" fill="url(#halo)" />
-    <image href="${faviconDataUri}" x="${markX}" y="${markY}" width="${markSize}" height="${markSize}" preserveAspectRatio="xMidYMid meet" />
-    <rect x="${cardX + 28}" y="${labelY}" width="${
-    cardSize - 56
-  }" height="38" rx="19" fill="#18181b" />
-    <text x="${cardX + cardSize / 2}" y="${
-    labelY + 26
-  }" text-anchor="middle" fill="#f4f4f5" font-size="18" font-weight="600" font-family="Inter 18pt" letter-spacing="2">
-      OPENSATS
-    </text>
+    <rect width="${WIDTH}" height="${HEIGHT}" fill="${COLORS.background}" />
+    <circle cx="1140" cy="610" r="220" fill="${COLORS.accent}" fill-opacity="0.07" />
+    <circle cx="1080" cy="540" r="120" fill="${COLORS.accent}" fill-opacity="0.05" />
   `
 }
 
 function renderTopicSvg(topic) {
-  const titleLines = wrapText(topic.title, 16, 2)
-  const categoryLabel = (topic.category || 'Topic').toUpperCase()
+  const titleLines = wrapText(topic.title, 22, 2)
   const topicUrl = `opensats.org/topics/${topic.slug}`
 
-  const titleFontSize = titleLines.length > 1 ? 64 : 76
-  const titleLineHeight = titleLines.length > 1 ? 72 : 84
-  const titleStartY = 232
-  const titleClipWidth = 620
+  const logoSize = 88
+  const logoX = PADDING
+  const logoY = PADDING + 8
+  const logoBottom = logoY + logoSize
+
+  const titleFontSize = titleLines.length > 1 ? 80 : 96
+  const titleLineHeight = titleLines.length > 1 ? 92 : 108
+  const titleStartY = logoBottom + (titleLines.length > 1 ? 96 : 112)
 
   const titleSvg = titleLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : titleLineHeight}">${escapeXml(
-          line
-        )}</tspan>`
+        `<tspan x="${PADDING}" dy="${
+          index === 0 ? 0 : titleLineHeight
+        }">${escapeXml(line)}</tspan>`
     )
     .join('')
 
   const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
-  const summaryStartY = titleBottomY + 64
-  const summaryLineHeight = 36
-  const separatorY = 498
-  const summaryAvailable = separatorY - summaryStartY - 16
+  const summaryStartY = titleBottomY + 56
+  const summaryLineHeight = 42
+  const urlY = 568
+  const separatorY = urlY - 36
+  const summaryAvailable = separatorY - summaryStartY - 24
   const maxSummaryLines = Math.max(
     0,
     Math.floor(summaryAvailable / summaryLineHeight)
   )
   const summaryLines =
     maxSummaryLines > 0 && topic.summary
-      ? wrapText(topic.summary, 36, maxSummaryLines)
+      ? wrapText(topic.summary, 52, maxSummaryLines)
       : []
 
   const summarySvg = summaryLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${
+        `<tspan x="${PADDING}" dy="${
           index === 0 ? 0 : summaryLineHeight
         }">${escapeXml(line)}</tspan>`
     )
     .join('')
 
-  // Top-left "TOPIC · CATEGORY" pill mirrors the project OG "OpenSats funded"
-  // badge so the cards feel like a series.
-  const pillText = `TOPIC · ${categoryLabel}`
-  const charWidth = 8.4
-  const pillPadding = 24
-  const pillTextWidth = pillText.length * charWidth
-  const pillWidth = Math.max(176, Math.round(pillTextWidth + pillPadding * 2))
-  const pillX = 84
-  const pillY = 96
-  const pillTextX = pillX + pillWidth / 2
-
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${baseDefs()}
-      <clipPath id="title-clip">
-        <rect x="84" y="${titleStartY - 80}" width="${titleClipWidth}" height="${
-    titleLineHeight * titleLines.length + 24
-  }" />
-      </clipPath>
-
       ${backgroundDecor()}
 
-      <rect x="${pillX}" y="${pillY}" width="${pillWidth}" height="40" rx="20" fill="#1f2937" />
-      <text x="${pillTextX}" y="${
-    pillY + 27
-  }" text-anchor="middle" fill="#fb923c" font-size="18" font-weight="700" font-family="Inter 18pt" letter-spacing="2">
-        ${escapeXml(pillText)}
-      </text>
+      <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
-      <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="900" font-family="Inter 18pt" letter-spacing="-2" clip-path="url(#title-clip)">
+      <text x="${PADDING}" y="${titleStartY}" fill="${
+    COLORS.title
+  }" font-size="${titleFontSize}" font-weight="900" font-family="Inter 18pt" letter-spacing="-3">
         ${titleSvg}
       </text>
 
       ${
         summaryLines.length > 0
-          ? `<text x="84" y="${summaryStartY}" fill="#d4d4d8" font-size="26" font-family="Inter 18pt">
+          ? `<text x="${PADDING}" y="${summaryStartY}" fill="${COLORS.summary}" font-size="30" font-family="Inter 18pt">
               ${summarySvg}
             </text>`
           : ''
       }
 
-      <rect x="84" y="${separatorY}" width="560" height="1" fill="#3f3f46" />
-      <image href="${faviconDataUri}" x="84" y="520" width="32" height="32" />
-      <text x="128" y="544" fill="#a1a1aa" font-size="22" font-weight="600" font-family="Inter 18pt">OpenSats Topics</text>
-      <text x="84" y="582" fill="#71717a" font-size="20" font-family="Inter 18pt" letter-spacing="1">${escapeXml(
-        topicUrl
-      )}</text>
-
-      ${brandCard()}
+      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
+    COLORS.separator
+  }" />
+      <text x="${PADDING}" y="${urlY}" fill="${
+    COLORS.url
+  }" font-size="22" font-family="Inter 18pt" letter-spacing="1">${escapeXml(
+    topicUrl
+  )}</text>
     </svg>
   `
 }
 
 function renderIndexSvg() {
+  const logoSize = 88
+  const logoX = PADDING
+  const logoY = PADDING + 8
+
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${baseDefs()}
       ${backgroundDecor()}
 
-      <image href="${faviconDataUri}" x="84" y="200" width="56" height="56" />
+      <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
+      <text x="${PADDING}" y="320" fill="${
+    COLORS.title
+  }" font-size="120" font-weight="900" font-family="Inter 18pt" letter-spacing="-4">
         Topics
       </text>
 
-      <text x="84" y="372" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="${PADDING}" y="384" fill="${
+    COLORS.summary
+  }" font-size="30" font-family="Inter 18pt">
         Short definitions for technical terms
       </text>
-      <text x="84" y="408" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="${PADDING}" y="426" fill="${
+    COLORS.summary
+  }" font-size="30" font-family="Inter 18pt">
         that show up in our blog posts.
       </text>
 
-      <text x="84" y="566" fill="#a1a1aa" font-size="20" font-family="Inter 18pt" letter-spacing="1">
+      <rect x="${PADDING}" y="532" width="${CONTENT_WIDTH}" height="1" fill="${
+    COLORS.separator
+  }" />
+      <text x="${PADDING}" y="568" fill="${
+    COLORS.url
+  }" font-size="22" font-family="Inter 18pt" letter-spacing="1">
         opensats.org/topics
       </text>
-
-      ${brandCard()}
     </svg>
   `
 }
