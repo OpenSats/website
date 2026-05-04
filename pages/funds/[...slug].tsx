@@ -83,12 +83,12 @@ export default function FundPage({
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           <CustomLink
             href="/newsletter#subscribe"
-            aria-label="Subscribe to newsletter"
-            title="Subscribe to newsletter"
+            aria-label="Read our Newsletter"
+            title="Read our Newsletter"
             className="inline-flex w-full flex-none items-center justify-center gap-2 rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-[42px] sm:w-[42px] sm:gap-0 sm:p-0 sm:leading-none"
           >
             <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
-            <span className="sm:hidden">Subscribe</span>
+            <span className="sm:hidden">Read our Newsletter</span>
           </CustomLink>
           {project.heartbeat && (
             <CustomLink
