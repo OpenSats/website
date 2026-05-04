@@ -5,7 +5,7 @@ category: 'Bitcoin'
 aliases: ['output descriptor', 'descriptor', 'descriptors', 'BIP 380', 'wpkh', 'wsh', 'tr()']
 ---
 
-An output descriptor is a notation for the scripts a wallet produces. A descriptor like `wpkh([d34db33f/84h/0h/0h]xpub.../0/*)` reads as: derive native SegWit P2WPKH addresses from this extended public key, at derivation path `0/i`, starting at `i=0`, and remember that the key originated from fingerprint `d34db33f` at path `m/84h/0h/0h`. Imported into any descriptor-aware wallet, that one string scans and spends the same UTXOs as the wallet that exported it, with no ambiguity about script type or derivation.
+An output descriptor is a notation for the scripts a wallet produces. A descriptor like `wpkh([d34db33f/84h/0h/0h]xpub.../0/*)` reads as: derive native [SegWit](/topics/segwit) P2WPKH addresses from this extended public key, at derivation path `0/i`, starting at `i=0`, and remember that the key originated from fingerprint `d34db33f` at path `m/84h/0h/0h`. Imported into any descriptor-aware wallet, that one string scans and spends the same UTXOs as the wallet that exported it, with no ambiguity about script type or derivation.
 
 Before descriptors, sharing a wallet across tools required out-of-band conventions. Two wallets could agree on the same master seed and then disagree on which derivation path to scan or which script type to expect. Descriptors fold every piece of that information into one string. A checksum at the end catches accidental edits, and the key-origin fields (`[fingerprint/path]`) tell a hardware signer which of its child keys should sign a given input.
 
