@@ -83,12 +83,6 @@ export default function FundPage({
           >
             Subscribe to Newsletter
           </CustomLink>
-          <button
-            onClick={openPaymentModal}
-            className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
-          >
-            Donate sats directly
-          </button>
           {project.heartbeat && (
             <CustomLink
               href={project.heartbeat}
@@ -100,6 +94,12 @@ export default function FundPage({
               <span className="sm:hidden">View Heartbeat</span>
             </CustomLink>
           )}
+          <button
+            onClick={openPaymentModal}
+            className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
+          >
+            Donate sats directly
+          </button>
           <CustomLink
             href={getFundDonationUrl(project.slug)}
             className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
