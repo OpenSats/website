@@ -2,7 +2,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
+import { TopicSEO } from '@/components/SEO'
 import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 import { getDisplayAliases } from '@/utils/topics'
@@ -83,7 +83,7 @@ export default function TopicsIndex({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <PageSEO
+      <TopicSEO
         title={`Topics - ${siteMetadata.title}`}
         description="An index of technical topics covered by OpenSats, with short definitions and pointers for further reading."
       />

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import type { Topic } from 'contentlayer/generated'
-import { PageSEO } from '@/components/SEO'
+import { TopicSEO } from '@/components/SEO'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import { getDisplayAliases } from '@/utils/topics'
 
@@ -10,12 +10,16 @@ interface Props {
 }
 
 export default function TopicLayout({ children, content }: Props) {
-  const { title, summary } = content
+  const { title, summary, slug } = content
   const aliasList = getDisplayAliases(content)
   const hasAliases = aliasList.length > 0
   return (
     <>
-      <PageSEO title={`${title} - OpenSats Topics`} description={summary} />
+      <TopicSEO
+        title={`${title} - OpenSats Topics`}
+        description={summary}
+        slug={slug}
+      />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
           <div></div>
