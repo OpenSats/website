@@ -103,6 +103,35 @@ export const ProjectSEO = ({ title, description, slug }: ProjectSEOProps) => {
   )
 }
 
+interface TopicSEOProps {
+  title: string
+  description: string
+  slug?: string
+  ogType?: string
+}
+
+export const TopicSEO = ({
+  title,
+  description,
+  slug,
+  ogType = 'website',
+}: TopicSEOProps) => {
+  const ogImagePath = slug
+    ? `/static/images/topics/og/${slug}.png`
+    : `/static/images/topics/og/index.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType={ogType}
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
 interface NewsletterSEOProps {
   title: string
   description: string
