@@ -8,7 +8,10 @@ import { useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import PostList from '@/components/PostList'
 import CustomLink from '@/components/Link'
-import { getRelatedBlogPostsForFund } from '@/utils/relatedPosts'
+import {
+  getFundPrimaryTag,
+  getRelatedBlogPostsForFund,
+} from '@/utils/relatedPosts'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -122,6 +125,17 @@ export default function FundPage({
             </h2>
           </div>
           <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
+          {getFundPrimaryTag(project) && (
+            <div className="flex justify-end pt-4 text-base font-medium leading-6">
+              <CustomLink
+                href={`/tags/${getFundPrimaryTag(project)}`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label="View all related announcements"
+              >
+                All Related Announcements &rarr;
+              </CustomLink>
+            </div>
+          )}
         </section>
       )}
     </>
