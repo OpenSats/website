@@ -7,9 +7,29 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { useState } from 'react'
 import PaymentModal from '@/components/PaymentModal'
 import PostList from '@/components/PostList'
-import { getRelatedBlogPostsForFund } from '@/utils/relatedPosts'
+import CustomLink from '@/components/Link'
+import {
+  getFundPrimaryTag,
+  getRelatedBlogPostsForFund,
+} from '@/utils/relatedPosts'
+import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
+
+const FUND_DESIGNATION_IDS: Record<string, string> = {
+  nostr: 'ENWRA6YZ',
+  ops: 'ELL6P2J6',
+}
+
+function getFundDonationUrl(fund: string): string {
+  const designationId = FUND_DESIGNATION_IDS[fund]
+  return designationId
+    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
+    : MONTHLY_DONATION_URL
+}
 
 export async function getStaticPaths() {
   return {
@@ -23,7 +43,10 @@ export const getStaticProps = async ({ params }) => {
   const project = allFunds.find((f) => f.slug === slug)
 
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
-  const relatedPosts = getRelatedBlogPostsForFund(project, sortedPosts)
+  const relatedPosts = getRelatedBlogPostsForFund(project, sortedPosts).slice(
+    0,
+    5
+  )
 
   return {
     props: {
@@ -55,14 +78,43 @@ export default function FundPage({
         content={project}
         MDXComponents={MDXComponents}
       />
-      <aside className="bg-light mb-8 flex min-w-[20rem] items-center justify-between gap-4 rounded-xl p-4 lg:flex-col lg:items-start">
-        <button
-          onClick={openPaymentModal}
-          className="block rounded border border-stone-800 bg-stone-800 px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500"
-        >
-          Donate Now!
-        </button>
-      </aside>
+      <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+        <div></div>
+        <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
+          <CustomLink
+            href="/newsletter#subscribe"
+            aria-label="Read our Newsletter"
+            title="Read our Newsletter"
+            className="inline-flex w-full flex-none items-center justify-center gap-2 rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-[42px] sm:w-[42px] sm:gap-0 sm:p-0 sm:leading-none"
+          >
+            <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
+            <span className="sm:hidden">Read our Newsletter</span>
+          </CustomLink>
+          {project.heartbeat && (
+            <CustomLink
+              href={project.heartbeat}
+              aria-label={`View ${project.title} heartbeat`}
+              title="View fund heartbeat"
+              className="inline-flex w-full flex-none items-center justify-center gap-2 rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-[42px] sm:w-[42px] sm:gap-0 sm:p-0 sm:leading-none"
+            >
+              <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
+              <span className="sm:hidden">View Heartbeat</span>
+            </CustomLink>
+          )}
+          <button
+            onClick={openPaymentModal}
+            className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
+          >
+            Donate sats directly
+          </button>
+          <CustomLink
+            href={getFundDonationUrl(project.slug)}
+            className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto sm:flex-1"
+          >
+            Donate monthly
+          </CustomLink>
+        </aside>
+      </div>
       <PaymentModal
         isOpen={modalOpen}
         onRequestClose={closeModal}
@@ -77,6 +129,17 @@ export default function FundPage({
             </h2>
           </div>
           <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
+          {getFundPrimaryTag(project) && (
+            <div className="flex justify-end pt-4 text-base font-medium leading-6">
+              <CustomLink
+                href={`/tags/${getFundPrimaryTag(project)}`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label="View all related announcements"
+              >
+                All Related Announcements &rarr;
+              </CustomLink>
+            </div>
+          )}
         </section>
       )}
     </>

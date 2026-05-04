@@ -25,8 +25,11 @@ export default function PageLayout({ children, content }: Props) {
     git,
     nostr,
     zapstore,
+    heartbeat,
+    tags,
   } = content
-  const heartbeatUrl = getHeartbeatUrl(git)
+  const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
+  const isFund = (tags || []).includes('Fund')
   return (
     <>
       <ProjectSEO
@@ -43,7 +46,9 @@ export default function PageLayout({ children, content }: Props) {
               alt="avatar"
               width={210}
               height={210}
-              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''}`}
+              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''} ${
+                isFund ? 'hidden xl:block' : ''
+              }`}
             />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-80">
               {zapstore && (

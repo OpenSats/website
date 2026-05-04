@@ -117,6 +117,7 @@ export const Projects = defineDocumentType(() => ({
     personalTwitter: { type: 'string' },
     nostr: { type: 'string' },
     zapstore: { type: 'string' },
+    heartbeat: { type: 'string' },
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
@@ -173,6 +174,7 @@ export const Funds = defineDocumentType(() => ({
     twitter: { type: 'string' },
     nostr: { type: 'string' },
     personalTwitter: { type: 'string' },
+    heartbeat: { type: 'string' },
     zaprite: { type: 'string', required: true },
     btcpay: { type: 'string', required: true },
     store: { type: 'string', required: true },
@@ -180,6 +182,7 @@ export const Funds = defineDocumentType(() => ({
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
     showcase: { type: 'boolean' },
+    announcementLink: { type: 'string' },
   },
   computedFields,
 }))
