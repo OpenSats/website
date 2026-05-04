@@ -78,7 +78,7 @@ export default function FundPage({
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           <CustomLink
-            href="/newsletter"
+            href="/newsletter#subscribe"
             className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
           >
             Subscribe to Newsletter
