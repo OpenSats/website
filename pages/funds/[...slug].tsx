@@ -86,7 +86,7 @@ export default function FundPage({
             onClick={openPaymentModal}
             className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
           >
-            Donate sats
+            Donate sats directly
           </button>
           {project.heartbeat && (
             <CustomLink
