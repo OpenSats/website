@@ -9,7 +9,7 @@ A coinswap protocol routes value through one or more intermediate transactions s
 
 A [CoinJoin](/topics/coinjoin) usually batches many inputs into one co-signed transaction. [Payjoin](/topics/payjoin) has the receiver add their own input to a two-party payment. Coinswap chains separate transactions so each hop can look like a normal spend, which pushes back on heuristics that equate one transaction with one ownership hop.
 
-Coinswap costs block space and coordination time, and wallet support is thinner than for simpler tools. When it works, it trades extra hops for a break in the direct graph link between source and destination outputs. A reference implementation lives in the [citadel-tech/coinswap](https://github.com/citadel-tech/coinswap) repository.
+Coinswap trades a break in the direct graph link between source and destination outputs for extra hops, block space, and coordination time.  A reference implementation lives in the [citadel-tech/coinswap](https://github.com/citadel-tech/coinswap) repository.
 
 ## References
 
