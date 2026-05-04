@@ -116,6 +116,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/projects/payjoin',
+          destination: '/projects/pdk',
+          permanent: true,
+        },
+        {
           source: '/topics/splicing',
           destination: '/topics/channel-splicing',
           permanent: true,
@@ -131,8 +136,8 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/projects/payjoin',
-          destination: '/projects/pdk',
+          source: '/topics/tor',
+          destination: '/topics/onion-routing',
           permanent: true,
         },
         {
