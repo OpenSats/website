@@ -14,6 +14,7 @@ import {
 } from '@/utils/relatedPosts'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
@@ -82,9 +83,11 @@ export default function FundPage({
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           <CustomLink
             href="/newsletter#subscribe"
-            className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
+            aria-label="Subscribe to newsletter"
+            className="inline-flex w-full items-center justify-center gap-2 rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
           >
-            Subscribe to Newsletter
+            <FontAwesomeIcon icon={faEnvelope} className="h-4 w-4" />
+            <span>Subscribe</span>
           </CustomLink>
           {project.heartbeat && (
             <CustomLink
