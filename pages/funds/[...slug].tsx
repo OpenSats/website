@@ -109,7 +109,7 @@ export default function FundPage({
           </button>
           <CustomLink
             href={getFundDonationUrl(project.slug)}
-            className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
+            className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto sm:flex-1"
           >
             Donate monthly
           </CustomLink>
