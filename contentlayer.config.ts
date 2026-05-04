@@ -182,6 +182,7 @@ export const Funds = defineDocumentType(() => ({
     bonusUSD: { type: 'number', default: 0 },
     hidden: { type: 'boolean' },
     showcase: { type: 'boolean' },
+    announcementLink: { type: 'string' },
   },
   computedFields,
 }))
