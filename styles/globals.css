@@ -38,6 +38,11 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+html.ReactModal__Html--open,
+body.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 .video-container {
   position: relative;
   width: 100%;

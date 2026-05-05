@@ -24,8 +24,10 @@ const PaymentModal: React.FC<ModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
-      className="max-h-full w-full overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:rounded-xl"
-      overlayClassName="inset-0 fixed bg-[rgba(0,_0,_0,_0.75)] flex items-center justify-center"
+      bodyOpenClassName="ReactModal__Body--open"
+      htmlOpenClassName="ReactModal__Html--open"
+      className="relative z-10 max-h-full w-full overflow-y-auto bg-white p-8 shadow-xl dark:bg-stone-800 sm:m-8 sm:rounded-xl"
+      overlayClassName="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,_0,_0,_0.75)]"
       appElement={
         typeof window === 'undefined'
           ? undefined
