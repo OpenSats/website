@@ -100,7 +100,7 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
-const LOGOMARK_SIZE = 72
+const LOGOMARK_SIZE = 88
 
 function renderSvg(project, coverImage, logomark) {
   const titleLines = wrapText(project.title, 18, 3)
@@ -176,9 +176,6 @@ function renderSvg(project, coverImage, logomark) {
       <circle cx="1035" cy="540" r="140" fill="#f97316" fill-opacity="0.06" />
 
       <image href="${logomark}" x="84" y="72" width="${LOGOMARK_SIZE}" height="${LOGOMARK_SIZE}" />
-      <text x="${
-        84 + LOGOMARK_SIZE + 18
-      }" y="120" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
       <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
@@ -195,9 +192,7 @@ function renderSvg(project, coverImage, logomark) {
       <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
       <rect x="764" y="486" width="352" height="38" rx="19" fill="#18181b" />
-      <text x="940" y="512" text-anchor="middle" fill="#f4f4f5" font-size="18" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-        project.title
-      )}</text>
+      <text x="940" y="512" text-anchor="middle" fill="#f4f4f5" font-size="18" font-family="Arial, Helvetica, sans-serif">Donate today!</text>
     </svg>
   `
 }
@@ -239,10 +234,10 @@ async function main() {
   const allProjects = await loadProjects()
   await ensureOutputDir()
 
-  const logomark = await toDataUri('/img/project/opensats_logo.png')
+  const logomark = await toDataUri('/static/brand/opensats-favicon.png')
   if (!logomark) {
     throw new Error(
-      'Missing logomark at public/img/project/opensats_logo.png; cannot render project OGs.'
+      'Missing logomark at public/static/brand/opensats-favicon.png; cannot render project OGs.'
     )
   }
 
