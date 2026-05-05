@@ -54,7 +54,7 @@ function urlPathForSlug(slug) {
 }
 
 function renderPageSvg(page) {
-  const titleLines = wrapText(page.title, 22, 2)
+  const titleLines = wrapText(page.title, 22, 2, `page ${page.slug} title`)
   const summaryText = page.summary || ''
   const pageUrl = `opensats.org/${urlPathForSlug(page.slug)}`
   const seed = hashString(`page:${page.slug}`)
@@ -89,7 +89,7 @@ function renderPageSvg(page) {
   )
   const summaryLines =
     maxSummaryLines > 0 && summaryText
-      ? wrapText(summaryText, 52, maxSummaryLines)
+      ? wrapText(summaryText, 52, maxSummaryLines, `page ${page.slug} summary`)
       : []
 
   const summarySvg = summaryLines

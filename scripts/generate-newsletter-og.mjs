@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
+import { wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -68,49 +69,6 @@ function escapeXml(value = '') {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
-}
-
-function clampText(text = '', maxLength) {
-  const normalized = text.replace(/\s+/g, ' ').trim()
-  if (normalized.length <= maxLength) {
-    return normalized
-  }
-  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`
-}
-
-function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = clampText(text, maxCharsPerLine * maxLines + maxLines).split(
-    ' '
-  )
-  const lines = []
-  let current = ''
-
-  for (const word of words) {
-    const candidate = current ? `${current} ${word}` : word
-    if (candidate.length <= maxCharsPerLine) {
-      current = candidate
-      continue
-    }
-
-    if (current) {
-      lines.push(current)
-      if (lines.length === maxLines) {
-        return lines
-      }
-    }
-
-    current = word
-  }
-
-  if (current && lines.length < maxLines) {
-    lines.push(current)
-  }
-
-  if (lines.length > maxLines) {
-    return lines.slice(0, maxLines)
-  }
-
-  return lines
 }
 
 function formatIssueNumber(issueNumber) {
@@ -235,7 +193,12 @@ function renderIssueSvg(issue) {
   const seriesLabel = `${issue.title}, ${issueLabel}`
 
   const headlineText = issue.headline || issue.title
-  const titleLines = wrapText(headlineText, 14, 2)
+  const titleLines = wrapText(
+    headlineText,
+    14,
+    2,
+    `newsletter ${issue.slug || issue.issueNumber} headline`
+  )
 
   const titleFontSize = titleLines.length > 1 ? 64 : 76
   const titleLineHeight = titleLines.length > 1 ? 72 : 84

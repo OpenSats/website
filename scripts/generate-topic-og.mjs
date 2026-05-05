@@ -23,7 +23,7 @@ const outputDir = path.join(ROOT, 'public', 'static', 'images', 'topics', 'og')
 let faviconDataUri = ''
 
 function renderTopicSvg(topic) {
-  const titleLines = wrapText(topic.title, 22, 2)
+  const titleLines = wrapText(topic.title, 22, 2, `topic ${topic.slug} title`)
   const summaryText = topic.ogSummary || topic.summary
   const topicUrl = `opensats.org/topics/${topic.slug}`
   const seed = hashString(topic.slug)
@@ -58,7 +58,7 @@ function renderTopicSvg(topic) {
   )
   const summaryLines =
     maxSummaryLines > 0 && summaryText
-      ? wrapText(summaryText, 52, maxSummaryLines)
+      ? wrapText(summaryText, 52, maxSummaryLines, `topic ${topic.slug} summary`)
       : []
 
   const summarySvg = summaryLines

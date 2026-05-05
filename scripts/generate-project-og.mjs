@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
+import { wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -41,73 +42,6 @@ function escapeXml(value = '') {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
-}
-
-function clampText(text = '', maxLength) {
-  const normalized = text.replace(/\s+/g, ' ').trim()
-  if (normalized.length <= maxLength) {
-    return normalized
-  }
-
-  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`
-}
-
-function wrapText(text, maxCharsPerLine, maxLines) {
-  const normalized = (text || '').replace(/\s+/g, ' ').trim()
-  const words = normalized.split(' ').filter(Boolean)
-  const lines = []
-  let current = ''
-  let truncated = false
-
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i]
-    const candidate = current ? `${current} ${word}` : word
-    if (candidate.length <= maxCharsPerLine) {
-      current = candidate
-      continue
-    }
-
-    if (current) {
-      lines.push(current)
-      current = ''
-      if (lines.length === maxLines) {
-        truncated = true
-        break
-      }
-    }
-
-    current = word
-  }
-
-  if (current) {
-    if (lines.length < maxLines) {
-      lines.push(current)
-    } else {
-      truncated = true
-    }
-  }
-
-  if (truncated && lines.length > 0) {
-    lines[lines.length - 1] = appendEllipsis(
-      lines[lines.length - 1],
-      maxCharsPerLine
-    )
-  }
-
-  return lines
-}
-
-function appendEllipsis(line, maxCharsPerLine) {
-  let trimmed = line.replace(/[\s.,;:!?…]+$/, '')
-  while (trimmed.length + 1 > maxCharsPerLine) {
-    const lastSpace = trimmed.lastIndexOf(' ')
-    if (lastSpace === -1) {
-      trimmed = trimmed.slice(0, Math.max(0, maxCharsPerLine - 1))
-      break
-    }
-    trimmed = trimmed.slice(0, lastSpace).replace(/[\s.,;:!?]+$/, '')
-  }
-  return `${trimmed}…`
 }
 
 async function toDataUri(publicPath) {
@@ -180,7 +114,12 @@ function invertSvgDarkColors(svg) {
 const LOGOMARK_SIZE = 56
 
 function renderSvg(project, coverImage, logomark) {
-  const titleLines = wrapText(project.title, 18, 3)
+  const titleLines = wrapText(
+    project.title,
+    18,
+    3,
+    `project ${project.slug} title`
+  )
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
   const titleStartY = 192
@@ -194,13 +133,19 @@ function renderSvg(project, coverImage, logomark) {
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
   // Fit as many summary lines as the vertical space below the title
-  // allows. wrapText still appends "…" if even this expanded count
-  // can't hold the full text, so the copy never reads as cut off.
+  // allows. wrapText throws if the copy doesn't fit, so the build fails
+  // loudly and the source summary gets shortened instead of silently
+  // truncated on the OG card.
   const maxSummaryLines = Math.max(
     1,
     Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
   )
-  const summaryLines = wrapText(project.summary, 36, maxSummaryLines)
+  const summaryLines = wrapText(
+    project.summary,
+    36,
+    maxSummaryLines,
+    `project ${project.slug} summary`
+  )
   const coverInsetBySlug = {
     cdk: 14,
     grapheneos: 20,

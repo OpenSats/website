@@ -100,23 +100,19 @@ export function escapeXml(value = '') {
     .replaceAll("'", '&#39;')
 }
 
-export function clampText(text = '', maxLength) {
-  const normalized = text.replace(/\s+/g, ' ').trim()
-  if (normalized.length <= maxLength) {
-    return normalized
-  }
-  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`
-}
-
-export function wrapText(text, maxCharsPerLine, maxLines) {
+// Wrap `text` greedily into at most `maxLines` lines of at most
+// `maxCharsPerLine` characters. Throws when the text doesn't fit so the
+// build fails loudly instead of silently truncating copy. The fix is
+// always to shorten the source string (or its OG override) so it fits
+// the layout budget. Pass `context` (e.g. a slug or field name) to make
+// the error message actionable.
+export function wrapText(text, maxCharsPerLine, maxLines, context = '') {
   const normalized = (text || '').replace(/\s+/g, ' ').trim()
   const words = normalized.split(' ').filter(Boolean)
   const lines = []
   let current = ''
-  let truncated = false
 
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i]
+  for (const word of words) {
     const candidate = current ? `${current} ${word}` : word
     if (candidate.length <= maxCharsPerLine) {
       current = candidate
@@ -126,48 +122,27 @@ export function wrapText(text, maxCharsPerLine, maxLines) {
     if (current) {
       lines.push(current)
       current = ''
-      if (lines.length === maxLines) {
-        truncated = true
-        break
-      }
     }
 
     current = word
   }
 
   if (current) {
-    if (lines.length < maxLines) {
-      lines.push(current)
-    } else {
-      truncated = true
-    }
+    lines.push(current)
   }
 
-  if (truncated && lines.length > 0) {
-    lines[lines.length - 1] = appendEllipsis(
-      lines[lines.length - 1],
-      maxCharsPerLine
+  const overflowsWidth = lines.some((line) => line.length > maxCharsPerLine)
+  if (lines.length > maxLines || overflowsWidth) {
+    const where = context ? ` for ${context}` : ''
+    throw new Error(
+      `OG text does not fit${where}: needs ${lines.length} line(s) at ` +
+        `${maxCharsPerLine} chars/line, budget is ${maxLines}. ` +
+        `Shorten the source copy (or its OG override) so it fits.\n` +
+        `  text: ${JSON.stringify(normalized)}`
     )
   }
 
   return lines
-}
-
-// Append "…" to a line, dropping trailing punctuation/whitespace and
-// trimming back word-by-word until the result fits within
-// maxCharsPerLine. Used to mark wrap-induced truncation so the copy
-// reads as deliberately abbreviated rather than randomly cut.
-function appendEllipsis(line, maxCharsPerLine) {
-  let trimmed = line.replace(/[\s.,;:!?…]+$/, '')
-  while (trimmed.length + 1 > maxCharsPerLine) {
-    const lastSpace = trimmed.lastIndexOf(' ')
-    if (lastSpace === -1) {
-      trimmed = trimmed.slice(0, Math.max(0, maxCharsPerLine - 1))
-      break
-    }
-    trimmed = trimmed.slice(0, lastSpace).replace(/[\s.,;:!?]+$/, '')
-  }
-  return `${trimmed}…`
 }
 
 // Tiny seeded PRNG (LCG). Deterministic for a given seed, so each slug

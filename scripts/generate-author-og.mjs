@@ -64,7 +64,7 @@ function rolePartsFor(author) {
 }
 
 function renderAuthorSvg(author, avatarDataUri) {
-  const titleLines = wrapText(author.name, 14, 2)
+  const titleLines = wrapText(author.name, 14, 2, `author ${author.slug} name`)
   const role = rolePartsFor(author).join(', ')
   const handle = author.nym ? `@${author.nym}` : ''
   // The "default" author is the OpenSats umbrella page rendered at

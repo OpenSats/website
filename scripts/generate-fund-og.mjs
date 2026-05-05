@@ -39,7 +39,7 @@ function renderFundSvg(fund, coverDataUri) {
   // "Operations Budget" → "Ops Budget"). Falls back to `title` so most
   // funds need no extra frontmatter.
   const headline = fund.ogTitle || fund.title
-  const titleLines = wrapText(headline, 16, 2)
+  const titleLines = wrapText(headline, 16, 2, `fund ${fund.slug} title`)
   const fundUrl = `opensats.org/funds/${fund.slug}`
   const seed = hashString(`fund:${fund.slug}`)
 
@@ -71,8 +71,9 @@ function renderFundSvg(fund, coverDataUri) {
   const separatorY = urlY - 36
 
   // Wrap the summary tightly so it never collides with the circular
-  // logo on the right. wrapText appends "…" if even the maxed-out line
-  // count can't fit, so the copy never reads as silently cut off.
+  // logo on the right. wrapText throws if the copy doesn't fit, so the
+  // build fails loudly and the source summary gets shortened instead of
+  // being silently truncated on the OG card.
   const maxSummaryLines = Math.max(
     1,
     Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
@@ -80,7 +81,12 @@ function renderFundSvg(fund, coverDataUri) {
   // 38 chars/line keeps the text column clear of the circular logo on
   // the right while still letting longer summaries (ops fund) fit in
   // the available 4-line budget.
-  const summaryLines = wrapText(fund.summary, 38, maxSummaryLines)
+  const summaryLines = wrapText(
+    fund.summary,
+    38,
+    maxSummaryLines,
+    `fund ${fund.slug} summary`
+  )
 
   const summarySvg = summaryLines
     .map(
