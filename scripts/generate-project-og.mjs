@@ -224,10 +224,6 @@ function renderSvg(project, coverImage, logomark) {
 
       <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
-      <rect x="764" y="486" width="352" height="38" rx="19" fill="#18181b" />
-      <text x="940" y="512" text-anchor="middle" fill="#f4f4f5" font-size="18" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-        project.title
-      )}</text>
     </svg>
   `
 }
