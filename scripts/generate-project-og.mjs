@@ -100,7 +100,9 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
-function renderSvg(project, coverImage) {
+const LOGOMARK_SIZE = 72
+
+function renderSvg(project, coverImage, logomark) {
   const titleLines = wrapText(project.title, 18, 3)
   const summaryLines = wrapText(project.summary, 36, 3)
   const kicker = escapeXml(project.nym)
@@ -173,9 +175,10 @@ function renderSvg(project, coverImage) {
       <circle cx="1110" cy="92" r="180" fill="#f97316" fill-opacity="0.08" />
       <circle cx="1035" cy="540" r="140" fill="#f97316" fill-opacity="0.06" />
 
-      <rect x="84" y="72" width="236" height="38" rx="19" fill="#1f2937" />
-      <circle cx="110" cy="91" r="6" fill="#22c55e" />
-      <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
+      <image href="${logomark}" x="84" y="72" width="${LOGOMARK_SIZE}" height="${LOGOMARK_SIZE}" />
+      <text x="${
+        84 + LOGOMARK_SIZE + 18
+      }" y="120" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
 
       <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
@@ -209,7 +212,7 @@ async function loadProjects() {
   return JSON.parse(file)
 }
 
-async function writeProjectImage(project) {
+async function writeProjectImage(project, logomark) {
   let coverImage = null
 
   try {
@@ -218,7 +221,7 @@ async function writeProjectImage(project) {
     console.warn(`Skipping cover image for ${project.slug}: ${error.message}`)
   }
 
-  const svg = renderSvg(project, coverImage)
+  const svg = renderSvg(project, coverImage, logomark)
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: 'width',
@@ -236,8 +239,15 @@ async function main() {
   const allProjects = await loadProjects()
   await ensureOutputDir()
 
+  const logomark = await toDataUri('/img/project/opensats_logo.png')
+  if (!logomark) {
+    throw new Error(
+      'Missing logomark at public/img/project/opensats_logo.png; cannot render project OGs.'
+    )
+  }
+
   for (const project of allProjects) {
-    await writeProjectImage(project)
+    await writeProjectImage(project, logomark)
   }
 
   console.log(`Generated ${allProjects.length} project OG images.`)
