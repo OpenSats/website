@@ -1,17 +1,41 @@
 import Image from '@/components/Image'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import SocialIcon from '@/components/social-icons'
+
+const FUND_LABELS: Record<FundId, string> = {
+  general: 'General Fund',
+  nostr: 'Nostr Fund',
+  ops: 'Operations Budget',
+}
+
+export type FundId = 'general' | 'nostr' | 'ops'
+
+export type LastUpdate = { date: string; href: string }
 
 export type ProjectCardProps = {
-  slug
-  title
-  summary
-  coverImage
-  darkCoverImage?
-  invertDarkImage?
-  nym
-  tags
+  slug: string
+  title: string
+  summary: string
+  coverImage: string
+  darkCoverImage?: string
+  invertDarkImage?: boolean
+  nym: string
+  fund?: FundId
+  lastUpdate?: LastUpdate
+  git?: string
+  nostr?: string
+  heartbeat?: string
+  zapstore?: string
+  // Accepted for backwards compatibility; the redesigned card no longer
+  // surfaces tag chips or per-card image overrides.
+  tags?: string[]
   customImageStyles?: React.CSSProperties
+}
+
+function shortDate(iso: string): string {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return ''
+  return d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -22,65 +46,79 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   darkCoverImage,
   invertDarkImage,
   nym,
-  tags,
-  customImageStyles,
+  fund,
+  lastUpdate,
+  git,
+  nostr,
+  heartbeat,
+  zapstore,
 }) => {
-  const [isHorizontal, setIsHorizontal] = useState<boolean | null>(null)
-
-  useEffect(() => {
-    const img = document.createElement('img')
-    img.src = coverImage
-
-    // check if image is horizontal - added additional 10% to height to ensure only true
-    // horizontals get flagged.
-    img.onload = () => {
-      const { naturalWidth, naturalHeight } = img
-      const isHorizontal = naturalWidth >= naturalHeight * 1.1
-      setIsHorizontal(isHorizontal)
-    }
-  }, [coverImage])
-
-  let cardStyle
-  if (tags.includes('Nostr')) {
-    cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-purple-600 bg-stone-100 dark:border-purple-600 dark:bg-stone-900'
-  } else if (tags.includes('Lightning')) {
-    cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-yellow-300 bg-stone-100 dark:border-yellow-300 dark:bg-stone-900'
-  } else if (tags.includes('Bitcoin')) {
-    cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-orange-400 bg-stone-100 dark:border-orange-400 dark:bg-stone-900'
-  } else {
-    cardStyle =
-      'h-full space-y-4 rounded-xl border-b-4 border-stone-100 bg-stone-100 dark:border-stone-800 dark:bg-stone-900'
-  }
+  const hasFooter = Boolean(lastUpdate || git || heartbeat || nostr || zapstore)
 
   return (
-    <figure className={cardStyle}>
-      <Link href={`${slug}`} passHref>
-        <div className="flex h-36 w-full sm:h-52">
+    <figure className="flex h-full flex-col overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-900">
+      <Link href={slug} className="block">
+        <div className="relative aspect-[4/3] w-full bg-white dark:bg-black">
           <Image
             alt={title}
             src={coverImage}
             darkSrc={darkCoverImage}
-            width={1200}
-            height={1200}
-            style={{
-              objectFit: isHorizontal ? 'fill' : 'cover',
-              ...customImageStyles,
-            }}
-            priority={true}
-            className={`cursor-pointer rounded-t-xl bg-white dark:bg-black ${
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={`cursor-pointer object-cover ${
               invertDarkImage ? 'dark:invert' : ''
             }`}
           />
         </div>
-        <figcaption className="p-2">
-          <h2 className="font-bold">{title}</h2>
-          <div className="mb-4 text-sm">by {nym}</div>
-          <div className="mb-2 line-clamp-3">{summary}</div>
-        </figcaption>
       </Link>
+      <figcaption className="flex flex-1 flex-col gap-2 p-4">
+        <h2 className="font-bold leading-tight">
+          <Link href={slug} className="hover:text-orange-500">
+            {title}
+          </Link>
+        </h2>
+        <div className="text-sm text-stone-500 dark:text-stone-400">
+          by {nym}
+          {fund && (
+            <>
+              {' · '}
+              <Link
+                href={`/funds/${fund}`}
+                className="underline-offset-2 hover:text-orange-500 hover:underline"
+              >
+                via the {FUND_LABELS[fund]}
+              </Link>
+            </>
+          )}
+        </div>
+        <p className="line-clamp-3 text-sm">{summary}</p>
+        {hasFooter && (
+          <div className="mt-auto flex items-center justify-between gap-2 pt-2 text-xs text-stone-500 dark:text-stone-400">
+            {lastUpdate ? (
+              <Link
+                href={lastUpdate.href}
+                className="underline-offset-2 hover:text-orange-500 hover:underline"
+              >
+                Last update · {shortDate(lastUpdate.date)}
+              </Link>
+            ) : (
+              <span />
+            )}
+            <span className="flex items-center gap-2 [&>a]:opacity-70 [&>a]:transition-opacity [&>a]:hover:opacity-100">
+              <SocialIcon kind="github" href={git} size={4} />
+              <SocialIcon kind="heartbeat" href={heartbeat} size={4} />
+              {nostr && (
+                <SocialIcon
+                  kind="nostr"
+                  href={`https://njump.to/${nostr}`}
+                  size={4}
+                />
+              )}
+              <SocialIcon kind="zapstore" href={zapstore} size={4} />
+            </span>
+          </div>
+        )}
+      </figcaption>
     </figure>
   )
 }
