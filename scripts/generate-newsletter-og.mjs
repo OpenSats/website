@@ -212,11 +212,11 @@ function renderIndexSvg() {
 
       ${logoMark({ x: 84, y: 200, size: 56 })}
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
+      <text x="84" y="336" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         Sats Well Spent
       </text>
 
-      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="84" y="392" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         A quarterly newsletter from OpenSats.
       </text>
 
