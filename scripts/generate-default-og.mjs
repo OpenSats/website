@@ -30,7 +30,7 @@ const outputPath = path.join(
 // word ("FOSS") in the brand orange without breaking the rest of the
 // line into separate <text> elements.
 const HEADLINE_LINES = [
-  [{ text: 'Sustainable funding' }],
+  [{ text: 'Providing sustainable funding' }],
   [
     { text: 'for ' },
     { text: 'FOSS', color: COLORS.accent },
@@ -50,8 +50,11 @@ const WORDMARK_HEIGHT = WORDMARK_WIDTH / WORDMARK_ASPECT
 const LOGO_SIZE = 320
 
 function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
-  const headlineFontSize = 64
-  const headlineLineHeight = 78
+  // Sized so the longest line ("Providing sustainable funding") fits
+  // comfortably within the safe area to the left of the logomark
+  // without overflow.
+  const headlineFontSize = 48
+  const headlineLineHeight = 62
 
   // Bottom-anchor the headline and logomark on the same baseline so
   // the wordmark gets full breathing room at the top and the main
