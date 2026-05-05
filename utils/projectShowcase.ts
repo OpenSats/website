@@ -94,7 +94,16 @@ export function sortFunds(funds: Fund[]): Fund[] {
 }
 
 export function sortProjects(projects: Project[]): Project[] {
-  return [...projects].sort((a, b) => a.title.localeCompare(b.title))
+  return [...projects].sort((a, b) => {
+    const showcaseDelta =
+      Number(Boolean(b.showcase)) - Number(Boolean(a.showcase))
+
+    if (showcaseDelta !== 0) {
+      return showcaseDelta
+    }
+
+    return a.title.localeCompare(b.title)
+  })
 }
 
 export function getProjectsForFund(
@@ -102,32 +111,6 @@ export function getProjectsForFund(
   fundSlug: string
 ): Project[] {
   return sortProjects(projects.filter((project) => project.fund === fundSlug))
-}
-
-export function getFeaturedProjectsForFund(
-  projects: Project[],
-  fundSlug: string,
-  limit = 3
-): Project[] {
-  const matchingProjects = getProjectsForFund(projects, fundSlug)
-  const featuredProjects = matchingProjects.filter(
-    (project) => project.showcase
-  )
-  const remainingProjects = matchingProjects.filter(
-    (project) => !project.showcase
-  )
-
-  return [...featuredProjects, ...remainingProjects].slice(0, limit)
-}
-
-export function getHighlightedProjects(
-  projects: Project[],
-  limit = 6
-): Project[] {
-  return sortProjects(projects.filter((project) => project.showcase)).slice(
-    0,
-    limit
-  )
 }
 
 export function countProjectsForFund(
