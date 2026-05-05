@@ -26,10 +26,17 @@ const outputPath = path.join(
   'og-default.png'
 )
 
+// Headline is split into segments per line so we can color a single
+// word ("FOSS") in the brand orange without breaking the rest of the
+// line into separate <text> elements.
 const HEADLINE_LINES = [
-  'Sustainable funding',
-  'for FOSS developers',
-  'in the bitcoin space.',
+  [{ text: 'Sustainable funding' }],
+  [
+    { text: 'for ' },
+    { text: 'FOSS', color: COLORS.accent },
+    { text: ' developers' },
+  ],
+  [{ text: 'in the bitcoin space.' }],
 ]
 
 // Small wordmark in the header slot so the brand reads first without
@@ -43,19 +50,34 @@ const WORDMARK_HEIGHT = WORDMARK_WIDTH / WORDMARK_ASPECT
 const LOGO_SIZE = 320
 
 function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
-  const wordmarkX = PADDING
-  const wordmarkY = 64
-
-  const headlineX = PADDING
   const headlineFontSize = 64
   const headlineLineHeight = 78
-  const headlineStartY = 260
-  const headlineSvg = HEADLINE_LINES.map(
-    (line, index) =>
-      `<tspan x="${headlineX}" dy="${
-        index === 0 ? 0 : headlineLineHeight
-      }">${escapeXml(line)}</tspan>`
-  ).join('')
+
+  // Anchor the headline so its visual midpoint sits on the canvas
+  // midpoint, then push the wordmark just above the first headline
+  // baseline so the brand mark and headline read as one block instead
+  // of a floating header. The logomark is then centered on the same
+  // canvas midpoint, giving the whole composition a single horizontal
+  // axis of symmetry.
+  const headlineX = PADDING
+  const headlineMidLineBaselineY = OG_HEIGHT / 2 + headlineFontSize / 3
+  const headlineStartY = headlineMidLineBaselineY - headlineLineHeight
+
+  const wordmarkX = PADDING
+  const wordmarkY = headlineStartY - headlineFontSize - 28
+
+  const headlineSvg = HEADLINE_LINES.map((segments, lineIndex) => {
+    const inner = segments
+      .map((segment) =>
+        segment.color
+          ? `<tspan fill="${segment.color}">${escapeXml(segment.text)}</tspan>`
+          : escapeXml(segment.text)
+      )
+      .join('')
+    return `<tspan x="${headlineX}" dy="${
+      lineIndex === 0 ? 0 : headlineLineHeight
+    }">${inner}</tspan>`
+  }).join('')
 
   const logoX = OG_WIDTH - PADDING - LOGO_SIZE
   const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
