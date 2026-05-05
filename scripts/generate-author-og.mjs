@@ -32,6 +32,20 @@ const outputDir = path.join(
   'og'
 )
 
+// Authors who don't get a custom OG card and fall back to the default
+// brand image. Keep this list in sync with AUTHORS_WITHOUT_OG in
+// components/SEO.tsx.
+const SKIP_SLUGS = new Set([
+  'bayer',
+  'cfunk',
+  'dtonon',
+  'ecurrencyhodler',
+  'jason',
+  'julian',
+  'lorenzo',
+  'niftynei',
+])
+
 const AVATAR_SIZE = 320
 const AVATAR_CX = OG_WIDTH - PADDING - AVATAR_SIZE / 2
 const AVATAR_CY = OG_HEIGHT / 2 - 28
@@ -180,11 +194,18 @@ async function main() {
 
   const authors = await loadContentlayerIndex('Authors')
 
+  let written = 0
   for (const author of authors) {
+    if (SKIP_SLUGS.has(author.slug)) continue
     await writeAuthorImage(author)
+    written += 1
   }
 
-  console.log(`Generated ${authors.length} author OG images.`)
+  console.log(
+    `Generated ${written} author OG images (skipped ${
+      authors.length - written
+    } author${authors.length - written === 1 ? '' : 's'}).`
+  )
 }
 
 main().catch((error) => {

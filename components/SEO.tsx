@@ -136,8 +136,25 @@ export const FundSEO = ({ title, description, slug }: ProjectSEOProps) => {
   )
 }
 
+// Authors who don't get a custom OG card and fall back to the default
+// brand image. Keep this list in sync with SKIP_SLUGS in
+// scripts/generate-author-og.mjs.
+const AUTHORS_WITHOUT_OG = new Set([
+  'bayer',
+  'cfunk',
+  'dtonon',
+  'ecurrencyhodler',
+  'jason',
+  'julian',
+  'lorenzo',
+  'niftynei',
+])
+
 export const AuthorSEO = ({ title, description, slug }: ProjectSEOProps) => {
-  const ogImagePath = `/static/images/authors/og/${slug}.png`
+  const hasCustomOg = !AUTHORS_WITHOUT_OG.has(slug)
+  const ogImagePath = hasCustomOg
+    ? `/static/images/authors/og/${slug}.png`
+    : siteMetadata.socialBanner
   const ogImageUrl = siteMetadata.siteUrl + ogImagePath
 
   return (
