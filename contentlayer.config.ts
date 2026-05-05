@@ -151,6 +151,7 @@ export const Topics = defineDocumentType(() => ({
   fields: {
     title: { type: 'string', required: true },
     summary: { type: 'string', required: true },
+    ogSummary: { type: 'string' },
     category: { type: 'string', required: true },
     aliases: { type: 'list', of: { type: 'string' } },
     draft: { type: 'boolean' },

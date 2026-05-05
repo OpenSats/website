@@ -2,7 +2,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allTopics } from 'contentlayer/generated'
 import type { Topic } from 'contentlayer/generated'
 import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
+import { TopicSEO } from '@/components/SEO'
 import ScrollToTop from '@/components/ScrollToTop'
 import siteMetadata from '@/data/siteMetadata'
 
@@ -66,7 +66,7 @@ export default function TopicsByCategory({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <PageSEO
+      <TopicSEO
         title={`Topics by category - ${siteMetadata.title}`}
         description="Technical topics covered by OpenSats, grouped by category."
       />
