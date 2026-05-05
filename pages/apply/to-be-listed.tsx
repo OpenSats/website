@@ -1,9 +1,14 @@
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
+import { PageSEO } from '@/components/SEO'
 
 export default function Apply() {
   return (
     <>
+      <PageSEO
+        title="Apply to Be Listed - OpenSats"
+        description="Reach out to have your free and open-source project listed in the OpenSats project showcase."
+      />
       <PageSection title="Apply to Be Listed" image="/static/images/avatar.png">
         <p>
           We list some of the most noteworthy projects in our project showcase

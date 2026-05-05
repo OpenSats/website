@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
+import { PageSEO } from '@/components/SEO'
 
 const GrantApplicationForm = dynamic(
   () => import('@/components/GrantApplicationForm'),
@@ -9,6 +10,10 @@ const GrantApplicationForm = dynamic(
 export default function Apply() {
   return (
     <>
+      <PageSEO
+        title="Apply for a Grant - OpenSats"
+        description="Apply for an OpenSats grant. Global, nym-friendly, and flexible."
+      />
       <PageSection title="Apply for a Grant" image="/static/images/avatar.png">
         <p>
           The information collected below will be used to evaluate your grant

@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
-import { PageSEO } from '@/components/SEO'
+import { AuthorSEO, PageSEO } from '@/components/SEO'
 import CustomLink from '@/components/Link'
 
 interface Props {
@@ -21,14 +21,18 @@ export default function AuthorLayout({ children, content }: Props) {
     twitter,
     nostr,
     github,
+    slug,
   } = content
+  const seoTitle = `About ${name} - OpenSats`
+  const seoDescription = `${name} is part of the team at OpenSats.`
 
   return (
     <>
-      <PageSEO
-        title={`About ${name} - OpenSats`}
-        description={`${name} is part of the team at OpenSats.`}
-      />
+      {slug ? (
+        <AuthorSEO title={seoTitle} description={seoDescription} slug={slug} />
+      ) : (
+        <PageSEO title={seoTitle} description={seoDescription} />
+      )}
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="items-start space-y-2 pb-8 pt-6 md:space-y-5 xl:grid xl:grid-cols-3 xl:gap-x-8">
           <div></div>

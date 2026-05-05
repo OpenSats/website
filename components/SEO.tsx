@@ -66,6 +66,7 @@ const CommonSEO = ({
 interface PageSEOProps {
   title: string
   description: string
+  slug?: string
 }
 
 interface ProjectSEOProps {
@@ -74,9 +75,12 @@ interface ProjectSEOProps {
   slug: string
 }
 
-export const PageSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+export const PageSEO = ({ title, description, slug }: PageSEOProps) => {
+  const ogImagePath = slug
+    ? `/static/images/pages/og/${slug}.png`
+    : siteMetadata.socialBanner
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+  const twImageUrl = ogImageUrl
   return (
     <CommonSEO
       title={title}
@@ -97,6 +101,36 @@ export const ProjectSEO = ({ title, description, slug }: ProjectSEOProps) => {
       title={title}
       description={description}
       ogType="website"
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
+export const FundSEO = ({ title, description, slug }: ProjectSEOProps) => {
+  const ogImagePath = `/static/images/funds/og/${slug}.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="website"
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
+export const AuthorSEO = ({ title, description, slug }: ProjectSEOProps) => {
+  const ogImagePath = `/static/images/authors/og/${slug}.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="profile"
       ogImage={ogImageUrl}
       twImage={ogImageUrl}
     />

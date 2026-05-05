@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects } from 'contentlayer/generated'
 import { Project } from 'contentlayer/generated'
 import { isNotOpenSatsProject } from '../funds'
 import Link from '@/components/Link'
+import { PageSEO } from '@/components/SEO'
 
 const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
   const [sortedProjects, setSortedProjects] = useState<Project[]>()
@@ -18,9 +18,10 @@ const ProjectShowcase: NextPage<{ projects: Project[] }> = ({ projects }) => {
 
   return (
     <>
-      <Head>
-        <title>OpenSats | Project Showcase</title>
-      </Head>
+      <PageSEO
+        title="Project Showcase - OpenSats"
+        description="A showcase of free and open-source Bitcoin and Nostr projects supported by OpenSats."
+      />
       <section className="flex flex-col p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Project Showcase</h1>

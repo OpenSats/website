@@ -17,7 +17,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/OpenSats/website/',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter.png',
+  socialBanner: '/static/images/og-default.png',
   email: 'support@opensats.org',
   github: 'https://github.com/OpenSats',
   twitter: 'https://twitter.com/OpenSats',

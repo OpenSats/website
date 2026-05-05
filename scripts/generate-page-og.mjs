@@ -18,15 +18,33 @@ import {
   writePng,
 } from './lib/og-network.mjs'
 
-const outputDir = path.join(ROOT, 'public', 'static', 'images', 'topics', 'og')
+// Generates per-slug OG images for static MDX-driven pages
+// (data/pages/*.mdx). Visually it's the topic OG template — same light
+// surface, network decoration, Inter type — so every standalone page
+// gets a coherent, on-brand share card without falling back to the
+// generic default.
+const outputDir = path.join(ROOT, 'public', 'static', 'images', 'pages', 'og')
+
+// Most page slugs collide 1:1 with their URL path. The exceptions all
+// live under /faq or /reports and get a manual override here. Any new
+// MDX page that follows the slug == url-path convention "just works".
+const SLUG_TO_URL_PATH = {
+  'faq-application': 'faq/application',
+  'faq-grantees': 'faq/grantee',
+  'report-success': 'reports/success',
+}
 
 let faviconDataUri = ''
 
-function renderTopicSvg(topic) {
-  const titleLines = wrapText(topic.title, 22, 2)
-  const summaryText = topic.ogSummary || topic.summary
-  const topicUrl = `opensats.org/topics/${topic.slug}`
-  const seed = hashString(topic.slug)
+function urlPathForSlug(slug) {
+  return SLUG_TO_URL_PATH[slug] ?? slug
+}
+
+function renderPageSvg(page) {
+  const titleLines = wrapText(page.title, 22, 2)
+  const summaryText = page.summary || ''
+  const pageUrl = `opensats.org/${urlPathForSlug(page.slug)}`
+  const seed = hashString(`page:${page.slug}`)
 
   const logoSize = 88
   const logoX = PADDING
@@ -96,74 +114,27 @@ function renderTopicSvg(topic) {
       <text x="${PADDING}" y="${urlY}" fill="${
     COLORS.url
   }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(
-    topicUrl
+    pageUrl
   )}</text>
     </svg>
   `
 }
 
-function renderIndexSvg() {
-  const logoSize = 88
-  const logoX = PADDING
-  const logoY = PADDING + 8
-  const seed = hashString('topics-index')
-
-  return `
-    <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${backgroundDecor(seed)}
-
-      <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
-
-      <text x="${PADDING}" y="320" fill="${
-    COLORS.title
-  }" font-size="120" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-4">
-        Topics
-      </text>
-
-      <text x="${PADDING}" y="384" fill="${
-    COLORS.summary
-  }" font-size="30" font-family="${INTER_FONT_FAMILY}">
-        Short definitions for technical terms
-      </text>
-      <text x="${PADDING}" y="426" fill="${
-    COLORS.summary
-  }" font-size="30" font-family="${INTER_FONT_FAMILY}">
-        that show up in our blog posts.
-      </text>
-
-      <rect x="${PADDING}" y="532" width="${CONTENT_WIDTH}" height="1" fill="${
-    COLORS.separator
-  }" />
-      <text x="${PADDING}" y="568" fill="${
-    COLORS.url
-  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
-        opensats.org/topics
-      </text>
-    </svg>
-  `
-}
-
-async function writeImage(filename, svg) {
-  await writePng(path.join(outputDir, filename), renderSvgToPng(svg))
+async function writeImage(slug, svg) {
+  await writePng(path.join(outputDir, `${slug}.png`), renderSvgToPng(svg))
 }
 
 async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
 
-  const topics = await loadContentlayerIndex('Topic')
+  const pages = await loadContentlayerIndex('Pages')
 
-  await writeImage('index.png', renderIndexSvg())
-
-  for (const topic of topics) {
-    await writeImage(`${topic.slug}.png`, renderTopicSvg(topic))
+  for (const page of pages) {
+    await writeImage(page.slug, renderPageSvg(page))
   }
 
-  console.log(
-    `Generated topic OG images: index + ${topics.length} topic${
-      topics.length === 1 ? '' : 's'
-    }.`
-  )
+  console.log(`Generated ${pages.length} page OG images.`)
 }
 
 main().catch((error) => {

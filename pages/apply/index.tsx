@@ -1,5 +1,4 @@
 import Link from '@/components/Link'
-import { PageSEO } from '@/components/SEO'
 import { InferGetStaticPropsType } from 'next'
 import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
@@ -19,10 +18,6 @@ export default function Apply({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <PageSEO
-        title="Apply to One of Opensats' Grant Programs"
-        description="Global. Nym-friendly. Flexible."
-      />
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
         content={apply}

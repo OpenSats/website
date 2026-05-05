@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import type { Project } from 'contentlayer/generated'
-import { ProjectSEO } from '@/components/SEO'
+import { FundSEO, ProjectSEO } from '@/components/SEO'
 import SocialIcon from '@/components/social-icons'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
@@ -10,9 +10,14 @@ import { getHeartbeatUrl } from '@/utils/heartbeat'
 interface Props {
   children: ReactNode
   content: CoreContent<Project>
+  kind?: 'project' | 'fund'
 }
 
-export default function PageLayout({ children, content }: Props) {
+export default function PageLayout({
+  children,
+  content,
+  kind = 'project',
+}: Props) {
   const {
     title,
     summary,
@@ -27,13 +32,12 @@ export default function PageLayout({ children, content }: Props) {
     zapstore,
   } = content
   const heartbeatUrl = getHeartbeatUrl(git)
+  const SEO = kind === 'fund' ? FundSEO : ProjectSEO
+  const seoTitle =
+    kind === 'fund' ? `${title} - OpenSats` : `${title} - funded by OpenSats`
   return (
     <>
-      <ProjectSEO
-        title={`${title} - funded by OpenSats`}
-        description={`${summary}`}
-        slug={slug}
-      />
+      <SEO title={seoTitle} description={`${summary}`} slug={slug} />
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <PageHeading title={title}>
           <div className="flex flex-col items-center space-x-2 pt-8 xl:block">

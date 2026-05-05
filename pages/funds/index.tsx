@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import Link from '@/components/Link'
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import ProjectCard from '../../components/ProjectCard'
 import { allProjects, allFunds } from 'contentlayer/generated'
 import { Project, Fund } from 'contentlayer/generated'
+import { PageSEO } from '@/components/SEO'
 
 const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
   projects,
@@ -25,9 +25,10 @@ const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
 
   return (
     <>
-      <Head>
-        <title>OpenSats | Funds & Projects</title>
-      </Head>
+      <PageSEO
+        title="Funds & Projects - OpenSats"
+        description="Browse OpenSats funds and the free and open-source projects they support."
+      />
       <section className="flex flex-col items-center p-4 md:p-8">
         <div className="flex w-full items-center justify-between pb-8">
           <h1 id="funds">Our Funds</h1>

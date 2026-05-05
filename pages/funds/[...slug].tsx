@@ -9,7 +9,7 @@ import PaymentModal from '@/components/PaymentModal'
 import PostList from '@/components/PostList'
 import { getRelatedBlogPostsForFund } from '@/utils/relatedPosts'
 
-const DEFAULT_LAYOUT = 'ProjectLayout'
+const DEFAULT_LAYOUT = 'FundLayout'
 
 export async function getStaticPaths() {
   return {
