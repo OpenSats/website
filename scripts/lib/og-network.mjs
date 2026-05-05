@@ -109,13 +109,14 @@ export function clampText(text = '', maxLength) {
 }
 
 export function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = clampText(text, maxCharsPerLine * maxLines + maxLines).split(
-    ' '
-  )
+  const normalized = (text || '').replace(/\s+/g, ' ').trim()
+  const words = normalized.split(' ').filter(Boolean)
   const lines = []
   let current = ''
+  let truncated = false
 
-  for (const word of words) {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
     const candidate = current ? `${current} ${word}` : word
     if (candidate.length <= maxCharsPerLine) {
       current = candidate
@@ -124,23 +125,49 @@ export function wrapText(text, maxCharsPerLine, maxLines) {
 
     if (current) {
       lines.push(current)
+      current = ''
       if (lines.length === maxLines) {
-        return lines
+        truncated = true
+        break
       }
     }
 
     current = word
   }
 
-  if (current && lines.length < maxLines) {
-    lines.push(current)
+  if (current) {
+    if (lines.length < maxLines) {
+      lines.push(current)
+    } else {
+      truncated = true
+    }
   }
 
-  if (lines.length > maxLines) {
-    return lines.slice(0, maxLines)
+  if (truncated && lines.length > 0) {
+    lines[lines.length - 1] = appendEllipsis(
+      lines[lines.length - 1],
+      maxCharsPerLine
+    )
   }
 
   return lines
+}
+
+// Append "…" to a line, dropping trailing punctuation/whitespace and
+// trimming back word-by-word until the result fits within
+// maxCharsPerLine. Used to mark wrap-induced truncation so the copy
+// reads as deliberately abbreviated rather than randomly cut.
+function appendEllipsis(line, maxCharsPerLine) {
+  let trimmed = line.replace(/[\s.,;:!?…]+$/, '')
+  while (trimmed.length + 1 > maxCharsPerLine) {
+    const lastSpace = trimmed.lastIndexOf(' ')
+    if (lastSpace === -1) {
+      trimmed = trimmed.slice(0, Math.max(0, maxCharsPerLine - 1))
+      break
+    }
+    trimmed = trimmed.slice(0, lastSpace).replace(/[\s.,;:!?]+$/, '')
+  }
+  return `${trimmed}…`
 }
 
 // Tiny seeded PRNG (LCG). Deterministic for a given seed, so each slug

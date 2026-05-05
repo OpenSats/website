@@ -23,7 +23,6 @@ const LOGOMARK_SIZE = 56
 
 function renderSvg(fund, coverImage, logomark) {
   const titleLines = wrapText(fund.title, 18, 3)
-  const summaryLines = wrapText(fund.summary, 36, 3)
   const kicker = escapeXml(fund.nym)
   const fundUrl = escapeXml(`opensats.org/funds/${fund.slug}`)
   const titleStartY = 192
@@ -33,8 +32,17 @@ function renderSvg(fund, coverImage, logomark) {
   const separatorY = 498
   const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
   const summaryStartY = titleBottomY + 56
+  const summaryLineHeight = 38
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
+  // Fit as many summary lines as the vertical space below the title
+  // allows. wrapText still appends "…" if even this expanded count
+  // can't hold the full text, so the copy never reads as cut off.
+  const maxSummaryLines = Math.max(
+    1,
+    Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
+  )
+  const summaryLines = wrapText(fund.summary, 36, maxSummaryLines)
   const coverInset = 0
   const coverX = 790 + coverInset
   const coverY = 138 + coverInset
@@ -52,7 +60,9 @@ function renderSvg(fund, coverImage, logomark) {
   const summarySvg = summaryLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 38}">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${
+          index === 0 ? 0 : summaryLineHeight
+        }">${escapeXml(line)}</tspan>`
     )
     .join('')
 

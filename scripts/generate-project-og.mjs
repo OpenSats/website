@@ -53,13 +53,14 @@ function clampText(text = '', maxLength) {
 }
 
 function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = clampText(text, maxCharsPerLine * maxLines + maxLines).split(
-    ' '
-  )
+  const normalized = (text || '').replace(/\s+/g, ' ').trim()
+  const words = normalized.split(' ').filter(Boolean)
   const lines = []
   let current = ''
+  let truncated = false
 
-  for (const word of words) {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
     const candidate = current ? `${current} ${word}` : word
     if (candidate.length <= maxCharsPerLine) {
       current = candidate
@@ -68,23 +69,45 @@ function wrapText(text, maxCharsPerLine, maxLines) {
 
     if (current) {
       lines.push(current)
+      current = ''
       if (lines.length === maxLines) {
-        return lines
+        truncated = true
+        break
       }
     }
 
     current = word
   }
 
-  if (current && lines.length < maxLines) {
-    lines.push(current)
+  if (current) {
+    if (lines.length < maxLines) {
+      lines.push(current)
+    } else {
+      truncated = true
+    }
   }
 
-  if (lines.length > maxLines) {
-    return lines.slice(0, maxLines)
+  if (truncated && lines.length > 0) {
+    lines[lines.length - 1] = appendEllipsis(
+      lines[lines.length - 1],
+      maxCharsPerLine
+    )
   }
 
   return lines
+}
+
+function appendEllipsis(line, maxCharsPerLine) {
+  let trimmed = line.replace(/[\s.,;:!?…]+$/, '')
+  while (trimmed.length + 1 > maxCharsPerLine) {
+    const lastSpace = trimmed.lastIndexOf(' ')
+    if (lastSpace === -1) {
+      trimmed = trimmed.slice(0, Math.max(0, maxCharsPerLine - 1))
+      break
+    }
+    trimmed = trimmed.slice(0, lastSpace).replace(/[\s.,;:!?]+$/, '')
+  }
+  return `${trimmed}…`
 }
 
 async function toDataUri(publicPath) {
@@ -104,7 +127,6 @@ const LOGOMARK_SIZE = 56
 
 function renderSvg(project, coverImage, logomark) {
   const titleLines = wrapText(project.title, 18, 3)
-  const summaryLines = wrapText(project.summary, 36, 3)
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
   const titleStartY = 192
@@ -114,8 +136,17 @@ function renderSvg(project, coverImage, logomark) {
   const separatorY = 498
   const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
   const summaryStartY = titleBottomY + 56
+  const summaryLineHeight = 38
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
+  // Fit as many summary lines as the vertical space below the title
+  // allows. wrapText still appends "…" if even this expanded count
+  // can't hold the full text, so the copy never reads as cut off.
+  const maxSummaryLines = Math.max(
+    1,
+    Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
+  )
+  const summaryLines = wrapText(project.summary, 36, maxSummaryLines)
   const coverInsetBySlug = {
     cdk: 14,
     grapheneos: 20,
@@ -139,7 +170,9 @@ function renderSvg(project, coverImage, logomark) {
   const summarySvg = summaryLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 38}">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${
+          index === 0 ? 0 : summaryLineHeight
+        }">${escapeXml(line)}</tspan>`
     )
     .join('')
 
