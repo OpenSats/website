@@ -6,12 +6,15 @@ const DESIGNATION_IDS: Record<string, string> = {
   ops: 'ELL6P2J6',
 }
 
+type DonateRecurringButtonV2Variant = 'orange' | 'purple'
+
 type DonateRecurringButtonV2Props = {
   prelude?: string
   cta?: string
   preTagline?: string
   tagline?: string
   designation?: keyof typeof DESIGNATION_IDS
+  variant?: DonateRecurringButtonV2Variant
 }
 
 export default function DonateRecurringButtonV2({
@@ -20,16 +23,23 @@ export default function DonateRecurringButtonV2({
   preTagline = 'Help us provide',
   tagline = 'sustainable funding',
   designation,
+  variant = 'orange',
 }: DonateRecurringButtonV2Props) {
   const designationId = designation ? DESIGNATION_IDS[designation] : undefined
   const href = designationId
     ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
     : MONTHLY_DONATION_URL
 
+  const className =
+    variant === 'purple'
+      ? 'donate-banner-v2 donate-banner-v2--purple'
+      : 'donate-banner-v2'
+  const heart = variant === 'purple' ? '💜' : '🧡'
+
   return (
     <CustomLink
       href={href}
-      className="donate-banner-v2"
+      className={className}
       aria-label={`${prelude} ${cta} ${preTagline} ${tagline}`}
     >
       <span className="donate-banner-v2__left">
@@ -48,9 +58,9 @@ export default function DonateRecurringButtonV2({
         </span>
       </span>
       <span className="donate-banner-v2__hearts" aria-hidden="true">
-        <span>🧡</span>
-        <span>🧡</span>
-        <span>🧡</span>
+        <span>{heart}</span>
+        <span>{heart}</span>
+        <span>{heart}</span>
       </span>
     </CustomLink>
   )
