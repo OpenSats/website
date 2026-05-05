@@ -53,15 +53,18 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   const headlineFontSize = 64
   const headlineLineHeight = 78
 
-  // Anchor the headline so its visual midpoint sits on the canvas
-  // midpoint, then push the wordmark just above the first headline
-  // baseline so the brand mark and headline read as one block instead
-  // of a floating header. The logomark is then centered on the same
-  // canvas midpoint, giving the whole composition a single horizontal
-  // axis of symmetry.
+  // Bottom-anchor the headline and logomark on the same baseline so
+  // the wordmark gets full breathing room at the top and the main
+  // content sits as a unified block at the bottom of the canvas.
+  // BOTTOM_Y mirrors the wordmark's top inset (~64px) for a balanced
+  // top/bottom margin.
+  const BOTTOM_Y = OG_HEIGHT - 64
+
   const headlineX = PADDING
-  const headlineMidLineBaselineY = OG_HEIGHT / 2 + headlineFontSize / 3
-  const headlineStartY = headlineMidLineBaselineY - headlineLineHeight
+  const headlineDescender = Math.round(headlineFontSize * 0.18)
+  const headlineLastBaselineY = BOTTOM_Y - headlineDescender
+  const headlineStartY =
+    headlineLastBaselineY - (HEADLINE_LINES.length - 1) * headlineLineHeight
 
   const wordmarkX = PADDING
   const wordmarkY = 64
@@ -80,7 +83,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   }).join('')
 
   const logoX = OG_WIDTH - PADDING - LOGO_SIZE
-  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
+  const logoY = BOTTOM_Y - LOGO_SIZE
 
   return `
     <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
