@@ -123,6 +123,51 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
+// Honor the project's invertDarkImage flag for SVG covers so monochrome
+// dark-on-light logos (bitcoindesign, etc.) render legibly on the OG
+// card's dark navy frame. Mirrors the live site's `dark:invert` CSS
+// filter without depending on resvg's SVG filter support.
+async function loadCoverImageDataUri(project) {
+  if (!project.coverImage) return null
+
+  const extension = path.extname(project.coverImage).toLowerCase()
+  if (extension !== '.svg' || !project.invertDarkImage) {
+    return toDataUri(project.coverImage)
+  }
+
+  const filePath = path.join(
+    root,
+    'public',
+    project.coverImage.replace(/^\//, '')
+  )
+  const text = await fs.readFile(filePath, 'utf8')
+  const inverted = invertSvgDarkColors(text)
+  const base64 = Buffer.from(inverted, 'utf8').toString('base64')
+  return `data:image/svg+xml;base64,${base64}`
+}
+
+// Replace any near-black hex fill/stroke in an SVG with the OG card's
+// off-white. Uses perceived luminance so the helper generalizes beyond
+// any one specific dark hex.
+function invertSvgDarkColors(svg) {
+  const LIGHT = '#fafaf9'
+  const isDark = (r, g, b) => 0.299 * r + 0.587 * g + 0.114 * b < 50
+
+  return svg
+    .replace(/#([0-9a-f]{6})\b/gi, (match, hex) => {
+      const r = parseInt(hex.slice(0, 2), 16)
+      const g = parseInt(hex.slice(2, 4), 16)
+      const b = parseInt(hex.slice(4, 6), 16)
+      return isDark(r, g, b) ? LIGHT : match
+    })
+    .replace(/#([0-9a-f]{3})\b/gi, (match, hex) => {
+      const r = parseInt(hex[0] + hex[0], 16)
+      const g = parseInt(hex[1] + hex[1], 16)
+      const b = parseInt(hex[2] + hex[2], 16)
+      return isDark(r, g, b) ? LIGHT : match
+    })
+}
+
 const LOGOMARK_SIZE = 56
 
 function renderSvg(project, coverImage, logomark) {
@@ -242,7 +287,7 @@ async function writeProjectImage(project, logomark) {
   let coverImage = null
 
   try {
-    coverImage = await toDataUri(project.coverImage)
+    coverImage = await loadCoverImageDataUri(project)
   } catch (error) {
     console.warn(`Skipping cover image for ${project.slug}: ${error.message}`)
   }
