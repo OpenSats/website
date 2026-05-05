@@ -28,9 +28,12 @@ const outputPath = path.join(
 
 // Headline is split into segments per line so we can color a single
 // word ("FOSS") in the brand orange without breaking the rest of the
-// line into separate <text> elements.
+// line into separate <text> elements. Four short lines let the type
+// stay big while keeping every line clear of the logomark on the
+// right.
 const HEADLINE_LINES = [
-  [{ text: 'Providing sustainable funding' }],
+  [{ text: 'Providing' }],
+  [{ text: 'sustainable funding' }],
   [
     { text: 'for ' },
     { text: 'FOSS', color: COLORS.accent },
@@ -38,6 +41,8 @@ const HEADLINE_LINES = [
   ],
   [{ text: 'in the bitcoin space.' }],
 ]
+
+const FOOTER_LABEL = 'a 501(c)(3) public charity'
 
 // Small wordmark in the header slot so the brand reads first without
 // competing with the headline below it.
@@ -50,24 +55,21 @@ const WORDMARK_HEIGHT = WORDMARK_WIDTH / WORDMARK_ASPECT
 const LOGO_SIZE = 320
 
 function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
-  // Sized so the longest line ("Providing sustainable funding") fits
-  // comfortably within the safe area to the left of the logomark
-  // without overflow.
-  const headlineFontSize = 48
-  const headlineLineHeight = 62
-
-  // Bottom-anchor the headline and logomark on the same baseline so
-  // the wordmark gets full breathing room at the top and the main
-  // content sits as a unified block at the bottom of the canvas.
-  // BOTTOM_Y mirrors the wordmark's top inset (~64px) for a balanced
-  // top/bottom margin.
-  const BOTTOM_Y = OG_HEIGHT - 64
+  // Bigger headline now that the copy is split across four short lines
+  // — every line clears the logomark on the right at this width.
+  const headlineFontSize = 60
+  const headlineLineHeight = 74
 
   const headlineX = PADDING
-  const headlineDescender = Math.round(headlineFontSize * 0.18)
-  const headlineLastBaselineY = BOTTOM_Y - headlineDescender
+
+  // Center the four-line headline vertically on the canvas midpoint so
+  // it sits naturally between the wordmark header and the footer line.
+  const linesCount = HEADLINE_LINES.length
+  const headlineCenterY = OG_HEIGHT / 2
   const headlineStartY =
-    headlineLastBaselineY - (HEADLINE_LINES.length - 1) * headlineLineHeight
+    headlineCenterY -
+    ((linesCount - 1) / 2) * headlineLineHeight +
+    headlineFontSize / 3
 
   const wordmarkX = PADDING
   const wordmarkY = 64
@@ -86,7 +88,9 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   }).join('')
 
   const logoX = OG_WIDTH - PADDING - LOGO_SIZE
-  const logoY = BOTTOM_Y - LOGO_SIZE
+  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
+
+  const footerY = 580
 
   return `
     <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -103,6 +107,12 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
       </text>
 
       <image href="${logoDataUri}" x="${logoX}" y="${logoY}" width="${LOGO_SIZE}" height="${LOGO_SIZE}" />
+
+      <text x="${PADDING}" y="${footerY}" fill="${
+    COLORS.url
+  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
+        ${escapeXml(FOOTER_LABEL)}
+      </text>
     </svg>
   `
 }
