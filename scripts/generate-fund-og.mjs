@@ -34,7 +34,12 @@ const COVER_Y = COVER_CY - COVER_SIZE / 2
 let faviconDataUri = ''
 
 function renderFundSvg(fund, coverDataUri) {
-  const titleLines = wrapText(fund.title, 16, 2)
+  // Funds can supply an `ogTitle` override when the canonical `title`
+  // doesn't fit on a single line at the OG headline size (e.g.
+  // "Operations Budget" → "Ops Budget"). Falls back to `title` so most
+  // funds need no extra frontmatter.
+  const headline = fund.ogTitle || fund.title
+  const titleLines = wrapText(headline, 16, 2)
   const fundUrl = `opensats.org/funds/${fund.slug}`
   const seed = hashString(`fund:${fund.slug}`)
 
