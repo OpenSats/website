@@ -23,9 +23,16 @@ public/sitemap.xml
 
 # search
 /public/search.json
+
+# generated OG images (built by scripts/generate-*-og.mjs at build time)
 /public/static/images/projects/og/
 /public/static/images/newsletter/og/
+/public/static/images/funds/og/
+/public/static/images/pages/og/
+/public/static/images/authors/og/
+/public/static/images/topics/og/
 /public/static/images/heartbeat/og.png
+/public/static/images/og-default.png
 
 # misc
 .DS_Store
