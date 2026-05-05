@@ -100,7 +100,7 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
-const LOGOMARK_SIZE = 88
+const LOGOMARK_SIZE = 56
 
 function renderSvg(project, coverImage, logomark) {
   const titleLines = wrapText(project.title, 18, 3)

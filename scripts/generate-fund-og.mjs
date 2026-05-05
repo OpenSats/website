@@ -19,7 +19,7 @@ import {
 // /funds/<slug>.
 const outputDir = path.join(ROOT, 'public', 'static', 'images', 'funds', 'og')
 
-const LOGOMARK_SIZE = 88
+const LOGOMARK_SIZE = 56
 
 function renderSvg(fund, coverImage, logomark) {
   const titleLines = wrapText(fund.title, 18, 3)
