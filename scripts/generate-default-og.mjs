@@ -28,7 +28,7 @@ const outputPath = path.join(
   'og-default.png'
 )
 
-const TAGLINE = 'Funding FOSS projects that help Bitcoin flourish.'
+const TAGLINE = 'Funding free and open-source projects that help Bitcoin flourish.'
 const URL_LABEL = 'opensats.org'
 
 // Wordmark is 1121x161 in the source SVG (~7:1). At 580px wide it
