@@ -4,7 +4,6 @@ import {
   OG_WIDTH,
   OG_HEIGHT,
   PADDING,
-  CONTENT_WIDTH,
   COLORS,
   INTER_FONT_FAMILY,
   escapeXml,
@@ -32,8 +31,6 @@ const HEADLINE_LINES = [
   'for FOSS developers',
   'in the bitcoin space.',
 ]
-const CTA_LABEL = 'Donate \u2192'
-const CTA_URL = 'opensats.org/donate'
 
 // Small wordmark in the header slot so the brand reads first without
 // competing with the headline below it.
@@ -52,7 +49,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   const headlineX = PADDING
   const headlineFontSize = 64
   const headlineLineHeight = 78
-  const headlineStartY = 230
+  const headlineStartY = 260
   const headlineSvg = HEADLINE_LINES.map(
     (line, index) =>
       `<tspan x="${headlineX}" dy="${
@@ -61,17 +58,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   ).join('')
 
   const logoX = OG_WIDTH - PADDING - LOGO_SIZE
-  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2 - 20
-
-  const urlY = 568
-  const separatorY = urlY - 36
-
-  const ctaWidth = 200
-  const ctaHeight = 56
-  const ctaRadius = ctaHeight / 2
-  const ctaX = OG_WIDTH - PADDING - ctaWidth
-  const ctaY = urlY - ctaHeight + 14
-  const ctaTextY = ctaY + ctaHeight / 2 + 9
+  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
 
   return `
     <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,25 +75,6 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
       </text>
 
       <image href="${logoDataUri}" x="${logoX}" y="${logoY}" width="${LOGO_SIZE}" height="${LOGO_SIZE}" />
-
-      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
-    COLORS.separator
-  }" />
-
-      <text x="${PADDING}" y="${urlY}" fill="${
-    COLORS.url
-  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
-        ${escapeXml(CTA_URL)}
-      </text>
-
-      <rect x="${ctaX}" y="${ctaY}" width="${ctaWidth}" height="${ctaHeight}" rx="${ctaRadius}" ry="${ctaRadius}" fill="${
-    COLORS.accent
-  }" />
-      <text x="${
-        ctaX + ctaWidth / 2
-      }" y="${ctaTextY}" text-anchor="middle" fill="#ffffff" font-size="26" font-family="${INTER_FONT_FAMILY}" font-weight="700">
-        ${escapeXml(CTA_LABEL)}
-      </text>
     </svg>
   `
 }
