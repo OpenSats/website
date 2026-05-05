@@ -34,6 +34,19 @@ const SLUG_TO_URL_PATH = {
   'report-success': 'reports/success',
 }
 
+// Utility / legal / form-result pages that don't benefit from a custom
+// social card and look better falling back to the default brand OG.
+// Keep this list in sync with PAGES_WITHOUT_OG in components/SEO.tsx.
+const SKIP_SLUGS = new Set([
+  'canary',
+  'pgp',
+  'privacy',
+  'report-success',
+  'submitted',
+  'terms',
+  'thankyou',
+])
+
 let faviconDataUri = ''
 
 function urlPathForSlug(slug) {
@@ -130,11 +143,18 @@ async function main() {
 
   const pages = await loadContentlayerIndex('Pages')
 
+  let written = 0
   for (const page of pages) {
+    if (SKIP_SLUGS.has(page.slug)) continue
     await writeImage(page.slug, renderPageSvg(page))
+    written += 1
   }
 
-  console.log(`Generated ${pages.length} page OG images.`)
+  console.log(
+    `Generated ${written} page OG images (skipped ${
+      pages.length - written
+    } utility page${pages.length - written === 1 ? '' : 's'}).`
+  )
 }
 
 main().catch((error) => {

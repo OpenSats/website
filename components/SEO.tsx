@@ -75,8 +75,22 @@ interface ProjectSEOProps {
   slug: string
 }
 
+// Utility / legal / form-result pages that don't get a custom social
+// card and fall back to the default brand OG. Keep this list in sync
+// with SKIP_SLUGS in scripts/generate-page-og.mjs.
+const PAGES_WITHOUT_OG = new Set([
+  'canary',
+  'pgp',
+  'privacy',
+  'report-success',
+  'submitted',
+  'terms',
+  'thankyou',
+])
+
 export const PageSEO = ({ title, description, slug }: PageSEOProps) => {
-  const ogImagePath = slug
+  const hasCustomOg = slug ? !PAGES_WITHOUT_OG.has(slug) : false
+  const ogImagePath = hasCustomOg
     ? `/static/images/pages/og/${slug}.png`
     : siteMetadata.socialBanner
   const ogImageUrl = siteMetadata.siteUrl + ogImagePath
