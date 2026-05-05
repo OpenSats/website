@@ -28,7 +28,8 @@ const outputPath = path.join(
   'og-default.png'
 )
 
-const TAGLINE = 'Funding free and open-source projects that help Bitcoin flourish.'
+const TAGLINE = 'Providing sustainable funding for free and open-source'
+const TAGLINE_LINE_2 = 'projects in the bitcoin space.'
 const URL_LABEL = 'opensats.org'
 
 // Wordmark is 1121x161 in the source SVG (~7:1). At 580px wide it
@@ -49,6 +50,7 @@ function renderDefaultSvg(wordmarkDataUri) {
   })
 
   const taglineY = WORDMARK_Y + WORDMARK_HEIGHT + 64
+  const taglineLine2Y = taglineY + 44
   const urlY = 568
   const separatorY = urlY - 36
 
@@ -63,8 +65,13 @@ function renderDefaultSvg(wordmarkDataUri) {
 
       <text x="${PADDING}" y="${taglineY}" fill="${
     COLORS.summary
-  }" font-size="32" font-family="${INTER_FONT_FAMILY}" font-weight="500">
+  }" font-size="30" font-family="${INTER_FONT_FAMILY}" font-weight="500">
         ${escapeXml(TAGLINE)}
+      </text>
+      <text x="${PADDING}" y="${taglineLine2Y}" fill="${
+    COLORS.summary
+  }" font-size="30" font-family="${INTER_FONT_FAMILY}" font-weight="500">
+        ${escapeXml(TAGLINE_LINE_2)}
       </text>
 
       <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
