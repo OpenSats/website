@@ -8,18 +8,17 @@ import {
   COLORS,
   INTER_FONT_FAMILY,
   escapeXml,
-  hashString,
   loadWordmarkDataUri,
-  networkDecor,
+  publicAssetToDataUri,
   renderSvgToPng,
   writePng,
 } from './lib/og-network.mjs'
 
 // Single static brand image used as the og:image / twitter:image fallback
-// for everything that doesn't have a per-slug OG. Kept in the same visual
-// family as the topic OGs (light surface, Inter type, faint network
-// decoration) but distinct enough to read as the brand mark rather than
-// a content page.
+// for everything that doesn't have a per-slug OG. Different from the
+// topic-style template on purpose: the brand fallback leads with the
+// orange logomark + the mission statement so it works as a stand-alone
+// "what is this site" card on social cards and link previews.
 const outputPath = path.join(
   ROOT,
   'public',
@@ -28,36 +27,45 @@ const outputPath = path.join(
   'og-default.png'
 )
 
-const TAGLINE = 'Providing sustainable funding for free and open-source'
-const TAGLINE_LINE_2 = 'projects in the bitcoin space.'
+const HEADLINE_LINES = [
+  'Sustainable funding',
+  'for FOSS developers',
+  'in the bitcoin space.',
+]
 const CTA_LABEL = 'Donate \u2192'
 const CTA_URL = 'opensats.org/donate'
 
-// Wordmark is 1121x161 in the source SVG (~7:1). At 580px wide it
-// renders at ~83px tall, leaving comfortable room for the tagline + URL
-// underneath while keeping the right side free for the network
-// decoration cluster.
-const WORDMARK_WIDTH = 580
+// Small wordmark in the header slot so the brand reads first without
+// competing with the headline below it.
+const WORDMARK_WIDTH = 220
 const WORDMARK_ASPECT = 1121 / 161
 const WORDMARK_HEIGHT = WORDMARK_WIDTH / WORDMARK_ASPECT
-const WORDMARK_X = PADDING
-const WORDMARK_Y = 220
 
-function renderDefaultSvg(wordmarkDataUri) {
-  // Single right-side cluster, same shape as topic OGs but seeded
-  // distinctly so the brand image still has its own fingerprint.
-  const network = networkDecor({
-    seed: hashString('opensats-default'),
-  })
+// Logomark is a square. Sized so it visually balances the three-line
+// headline on the left and stays inside the safe area on the right.
+const LOGO_SIZE = 320
 
-  const taglineY = WORDMARK_Y + WORDMARK_HEIGHT + 64
-  const taglineLine2Y = taglineY + 44
+function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
+  const wordmarkX = PADDING
+  const wordmarkY = 64
+
+  const headlineX = PADDING
+  const headlineFontSize = 64
+  const headlineLineHeight = 78
+  const headlineStartY = 230
+  const headlineSvg = HEADLINE_LINES.map(
+    (line, index) =>
+      `<tspan x="${headlineX}" dy="${
+        index === 0 ? 0 : headlineLineHeight
+      }">${escapeXml(line)}</tspan>`
+  ).join('')
+
+  const logoX = OG_WIDTH - PADDING - LOGO_SIZE
+  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2 - 20
+
   const urlY = 568
   const separatorY = urlY - 36
 
-  // Donate CTA pill, right-aligned on the same baseline as the URL.
-  // Sits below the network cluster (which fades out by ~y=500), so it
-  // shares the footer row with the URL without crowding the decoration.
   const ctaWidth = 200
   const ctaHeight = 56
   const ctaRadius = ctaHeight / 2
@@ -70,20 +78,16 @@ function renderDefaultSvg(wordmarkDataUri) {
       <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${
     COLORS.background
   }" />
-      ${network}
 
-      <image href="${wordmarkDataUri}" x="${WORDMARK_X}" y="${WORDMARK_Y}" width="${WORDMARK_WIDTH}" height="${WORDMARK_HEIGHT}" />
+      <image href="${wordmarkDataUri}" x="${wordmarkX}" y="${wordmarkY}" width="${WORDMARK_WIDTH}" height="${WORDMARK_HEIGHT}" />
 
-      <text x="${PADDING}" y="${taglineY}" fill="${
-    COLORS.summary
-  }" font-size="30" font-family="${INTER_FONT_FAMILY}" font-weight="500">
-        ${escapeXml(TAGLINE)}
+      <text x="${headlineX}" y="${headlineStartY}" fill="${
+    COLORS.title
+  }" font-size="${headlineFontSize}" font-weight="800" font-family="${INTER_FONT_FAMILY}" letter-spacing="-2">
+        ${headlineSvg}
       </text>
-      <text x="${PADDING}" y="${taglineLine2Y}" fill="${
-    COLORS.summary
-  }" font-size="30" font-family="${INTER_FONT_FAMILY}" font-weight="500">
-        ${escapeXml(TAGLINE_LINE_2)}
-      </text>
+
+      <image href="${logoDataUri}" x="${logoX}" y="${logoY}" width="${LOGO_SIZE}" height="${LOGO_SIZE}" />
 
       <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
     COLORS.separator
@@ -108,8 +112,18 @@ function renderDefaultSvg(wordmarkDataUri) {
 }
 
 async function main() {
-  const wordmarkDataUri = await loadWordmarkDataUri()
-  const svg = renderDefaultSvg(wordmarkDataUri)
+  const [wordmarkDataUri, logoDataUri] = await Promise.all([
+    loadWordmarkDataUri(),
+    publicAssetToDataUri('/img/project/opensats_logo.png'),
+  ])
+
+  if (!logoDataUri) {
+    throw new Error(
+      'Missing logomark at public/img/project/opensats_logo.png; cannot render default OG.'
+    )
+  }
+
+  const svg = renderDefaultSvg(wordmarkDataUri, logoDataUri)
   await writePng(outputPath, renderSvgToPng(svg))
   console.log('Generated default OG image at', path.relative(ROOT, outputPath))
 }
