@@ -11,7 +11,7 @@ type FundPageCopy = {
   showcaseHeading: string
   showcaseDescription: string
   emptyState: string
-  badgeClassName: string
+  eyebrowClassName: string
 }
 
 const FUND_DESIGNATION_IDS: Partial<Record<FundSlug, string>> = {
@@ -19,8 +19,7 @@ const FUND_DESIGNATION_IDS: Partial<Record<FundSlug, string>> = {
   ops: 'ELL6P2J6',
 }
 
-const DEFAULT_BADGE_CLASS_NAME =
-  'bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-200'
+const DEFAULT_EYEBROW_CLASS_NAME = 'text-stone-600 dark:text-stone-300'
 
 const FUND_PAGE_COPY: Record<FundSlug, FundPageCopy> = {
   general: {
@@ -31,8 +30,7 @@ const FUND_PAGE_COPY: Record<FundSlug, FundPageCopy> = {
     showcaseDescription:
       'A cross-section of the bitcoin and freedom-tech work currently listed under the General Fund.',
     emptyState: 'No listed projects are attached to this fund yet.',
-    badgeClassName:
-      'bg-orange-100 text-orange-800 dark:bg-orange-500/15 dark:text-orange-200',
+    eyebrowClassName: 'text-orange-700 dark:text-orange-300',
   },
   nostr: {
     eyebrow: 'Nostr protocol and ecosystem',
@@ -42,8 +40,7 @@ const FUND_PAGE_COPY: Record<FundSlug, FundPageCopy> = {
     showcaseDescription:
       'Projects currently listed under the Nostr Fund, from clients and relays to publishing and identity tooling.',
     emptyState: 'No listed projects are attached to this fund yet.',
-    badgeClassName:
-      'bg-purple-100 text-purple-800 dark:bg-purple-500/15 dark:text-purple-200',
+    eyebrowClassName: 'text-purple-700 dark:text-purple-300',
   },
   ops: {
     eyebrow: 'Keeps OpenSats running',
@@ -54,8 +51,7 @@ const FUND_PAGE_COPY: Record<FundSlug, FundPageCopy> = {
       'This bucket covers OpenSats itself, so there are no downstream project cards to browse here.',
     emptyState:
       'The Operations Budget covers OpenSats itself, so this section stays focused on the fund rather than downstream projects.',
-    badgeClassName:
-      'bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-200',
+    eyebrowClassName: 'text-sky-700 dark:text-sky-300',
   },
 }
 
@@ -70,7 +66,7 @@ export function getFundPageCopy(slug: string): FundPageCopy {
     showcaseHeading: 'Projects',
     showcaseDescription: 'Browse projects connected to this fund.',
     emptyState: 'No listed projects are attached to this fund yet.',
-    badgeClassName: DEFAULT_BADGE_CLASS_NAME,
+    eyebrowClassName: DEFAULT_EYEBROW_CLASS_NAME,
   }
 }
 

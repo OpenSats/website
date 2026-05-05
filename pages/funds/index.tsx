@@ -44,27 +44,27 @@ const FundsPage: NextPage<Props> = ({ funds, projects }) => {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
             {funds.map((fund) => (
               <CustomLink
                 key={fund.slug}
                 href={`#${fund.slug}`}
-                className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:border-primary-500 hover:text-primary-500 dark:border-gray-700 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+                className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
               >
                 {fund.title}
               </CustomLink>
             ))}
             <CustomLink
               href="/projects/showcase"
-              className="inline-flex rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-500 dark:bg-white dark:text-black dark:hover:bg-primary-400"
+              className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
             >
               Browse all projects
             </CustomLink>
           </div>
 
-          <ul className="grid gap-6 xl:grid-cols-3">
+          <ul className="border-b border-gray-200 dark:border-gray-800">
             {funds.map((fund) => (
-              <li key={fund.slug} className="h-full">
+              <li key={fund.slug}>
                 <FundOverviewCard fund={fund} projects={projects} />
               </li>
             ))}
@@ -81,14 +81,14 @@ const FundsPage: NextPage<Props> = ({ funds, projects }) => {
                 <section
                   key={fund.slug}
                   id={fund.slug}
-                  className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-stone-900"
+                  className="border-y border-gray-200 py-8 dark:border-gray-800"
                 >
                   <div className="max-w-3xl space-y-4">
-                    <span
-                      className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${fundCopy.badgeClassName}`}
+                    <p
+                      className={`text-xs font-semibold uppercase tracking-[0.18em] ${fundCopy.eyebrowClassName}`}
                     >
                       {fundCopy.showcaseHeading}
-                    </span>
+                    </p>
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
                       {fund.title}
                     </h2>
@@ -103,16 +103,16 @@ const FundsPage: NextPage<Props> = ({ funds, projects }) => {
                     </p>
                   </div>
 
-                  <div className="mt-8 flex flex-wrap gap-3">
+                  <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
                     <CustomLink
                       href={`/funds/${fund.slug}`}
-                      className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:border-primary-500 hover:text-primary-500 dark:border-gray-700 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+                      className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
                     >
                       Read fund page
                     </CustomLink>
                     <CustomLink
                       href={getFundDonateUrl(fund.slug)}
-                      className="inline-flex rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-500 dark:bg-white dark:text-black dark:hover:bg-primary-400"
+                      className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
                     >
                       Give monthly
                     </CustomLink>

@@ -45,15 +45,15 @@ export default function ProjectGroup({
       </div>
 
       {projects.length > 0 ? (
-        <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-800 dark:border-gray-800">
           {projects.map((project) => (
-            <li key={project.slug} className="h-full">
+            <li key={project.slug}>
               <ProjectDirectoryCard project={project} />
             </li>
           ))}
         </ul>
       ) : (
-        <p className="rounded-3xl border border-dashed border-gray-300 px-6 py-8 text-sm leading-6 text-gray-600 dark:border-gray-700 dark:text-gray-300">
+        <p className="border-y border-dashed border-gray-300 py-8 text-sm leading-6 text-gray-600 dark:border-gray-700 dark:text-gray-300">
           {emptyMessage || 'Nothing to show here yet.'}
         </p>
       )}

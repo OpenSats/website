@@ -44,13 +44,13 @@ const ProjectShowcase: NextPage<Props> = ({ projects }) => {
               fund they sit under.
             </p>
             <p className="text-base leading-7 text-gray-600 dark:text-gray-300">
-              Each card leads with the work itself and sends you into the full
+              Each entry leads with the work itself and sends you into the full
               project page for background, funding context, and announcements.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-stone-900">
+          <dl className="grid gap-6 border-y border-gray-200 py-6 dark:border-gray-800 sm:grid-cols-3">
+            <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 Listed projects
               </div>
@@ -58,7 +58,7 @@ const ProjectShowcase: NextPage<Props> = ({ projects }) => {
                 {projects.length}
               </div>
             </div>
-            <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-stone-900">
+            <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 Highlighted projects
               </div>
@@ -66,7 +66,7 @@ const ProjectShowcase: NextPage<Props> = ({ projects }) => {
                 {highlightedProjectCount}
               </div>
             </div>
-            <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-stone-900">
+            <div>
               <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 Funding tracks represented
               </div>
@@ -74,30 +74,30 @@ const ProjectShowcase: NextPage<Props> = ({ projects }) => {
                 {representedFunds}
               </div>
             </div>
-          </div>
+          </dl>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
             <CustomLink
               href="#highlights"
-              className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:border-primary-500 hover:text-primary-500 dark:border-gray-700 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+              className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
             >
               Highlights
             </CustomLink>
             <CustomLink
               href="#general-projects"
-              className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:border-primary-500 hover:text-primary-500 dark:border-gray-700 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+              className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
             >
               General Fund
             </CustomLink>
             <CustomLink
               href="#nostr-projects"
-              className="inline-flex rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:border-primary-500 hover:text-primary-500 dark:border-gray-700 dark:text-gray-100 dark:hover:border-primary-400 dark:hover:text-primary-400"
+              className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
             >
               Nostr Fund
             </CustomLink>
             <CustomLink
               href="/funds"
-              className="inline-flex rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-500 dark:bg-white dark:text-black dark:hover:bg-primary-400"
+              className="text-gray-900 underline decoration-gray-300 underline-offset-4 hover:text-primary-500 dark:text-gray-100 dark:decoration-gray-700 dark:hover:text-primary-400"
             >
               Compare funds
             </CustomLink>
