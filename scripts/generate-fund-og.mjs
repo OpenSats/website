@@ -77,7 +77,10 @@ function renderFundSvg(fund, coverDataUri) {
     1,
     Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
   )
-  const summaryLines = wrapText(fund.summary, 32, maxSummaryLines)
+  // 38 chars/line keeps the text column clear of the circular logo on
+  // the right while still letting longer summaries (ops fund) fit in
+  // the available 4-line budget.
+  const summaryLines = wrapText(fund.summary, 38, maxSummaryLines)
 
   const summarySvg = summaryLines
     .map(
