@@ -1,111 +1,156 @@
-import type { NextPage } from 'next'
-import Link from '@/components/Link'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import ProjectCard from '../../components/ProjectCard'
-import { allProjects, allFunds } from 'contentlayer/generated'
-import { Project, Fund } from 'contentlayer/generated'
+import { useState } from 'react'
+import Link from '@/components/Link'
+import StatsSentence from '@/components/StatsSentence'
+import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
+import PaymentModal from '@/components/PaymentModal'
+import { allFunds } from 'contentlayer/generated'
+import type { Fund } from 'contentlayer/generated'
 
-const AllProjects: NextPage<{ projects: Project[]; funds: Fund[] }> = ({
-  projects,
-  funds,
-}) => {
-  const [showcaseProjects, setShowcaseProjects] = useState<Project[]>()
-  const [openSatsFunds, setOpenSatsFunds] = useState<Fund[]>()
+type FundsIndexProps = {
+  funds: Fund[]
+}
 
-  useEffect(() => {
-    setShowcaseProjects(
-      projects
-        .filter(isShowcaseProject)
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 12)
-    )
-    setOpenSatsFunds(funds.sort((a, b) => a.title.localeCompare(b.title)))
-  }, [projects, funds])
+type FundConfig = {
+  slug: 'general' | 'nostr' | 'ops'
+  designation?: 'nostr' | 'ops'
+  variant?: 'orange' | 'purple'
+  preTagline: string
+  tagline: string
+}
+
+const FUND_ORDER: FundConfig[] = [
+  {
+    slug: 'general',
+    preTagline: 'Help us support',
+    tagline: 'Bitcoin & FOSS',
+  },
+  {
+    slug: 'nostr',
+    designation: 'nostr',
+    variant: 'purple',
+    preTagline: 'Help us support',
+    tagline: 'Nostr development',
+  },
+  {
+    slug: 'ops',
+    designation: 'ops',
+    preTagline: 'Help us keep',
+    tagline: 'OpenSats running',
+  },
+]
+
+const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
+  const [modalFund, setModalFund] = useState<Fund | undefined>(undefined)
+
+  const closeModal = () => setModalFund(undefined)
+
+  const sections = FUND_ORDER.map((cfg) => ({
+    cfg,
+    fund: funds.find((f) => f.slug === cfg.slug),
+  })).filter((s): s is { cfg: FundConfig; fund: Fund } => Boolean(s.fund))
 
   return (
     <>
       <Head>
-        <title>OpenSats | Funds & Projects</title>
+        <title>OpenSats | Funds</title>
       </Head>
-      <section className="flex flex-col items-center p-4 md:p-8">
-        <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Our Funds</h1>
-        </div>
-        <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3">
-          {openSatsFunds &&
-            openSatsFunds.map((f, i) => (
-              <li key={i} className="">
-                <ProjectCard
-                  slug={`/funds/${f.slug}`}
-                  title={f.title}
-                  summary={f.summary}
-                  coverImage={f.coverImage}
-                  nym={f.nym}
-                  tags={f.tags}
-                  customImageStyles={{ objectFit: 'cover' }}
-                />
-              </li>
-            ))}
-        </ul>
+      <section className="pt-4 md:pb-8">
+        <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:py-4 md:text-5xl md:leading-14 lg:text-6xl">
+          Where your money goes
+        </h1>
+        <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
+          OpenSats is a 501(c)(3) public charity. 100% of every dollar donated
+          to the General Fund and the Nostr Fund goes to grantees. Our own
+          bills are paid out of a separate Operations Budget.
+        </p>
+        <StatsSentence className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400" />
       </section>
-      <section className="flex flex-col p-4 md:p-8">
-        <div className="flex w-full items-center justify-between pb-8">
-          <h1 id="funds">Project Showcase</h1>
-        </div>
-        <ul className="grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-          {showcaseProjects &&
-            showcaseProjects.map((p, i) => (
-              <li key={i} className="">
-                <ProjectCard
-                  slug={`/projects/${p.slug}`}
-                  title={p.title}
-                  summary={p.summary}
-                  coverImage={p.coverImage}
-                  darkCoverImage={p.darkCoverImage}
-                  invertDarkImage={p.invertDarkImage}
-                  nym={p.nym}
-                  tags={p.tags}
-                />
-              </li>
-            ))}
-        </ul>
-        <div className="flex justify-end pt-4 text-base font-medium leading-6">
-          <Link
-            href="/projects/showcase"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="View Project Showcase"
-          >
-            More Projects &rarr;
-          </Link>
-        </div>
-      </section>
+
+      <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+        {sections.map(({ cfg, fund }) => (
+          <li key={fund.slug} className="py-10 first:pt-6">
+            <div className="flex flex-col gap-4">
+              <div>
+                <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+                  {fund.title}
+                </h2>
+                <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
+                  {fund.summary}
+                </p>
+              </div>
+              <DonateRecurringButtonV2
+                designation={cfg.designation}
+                variant={cfg.variant}
+                preTagline={cfg.preTagline}
+                tagline={cfg.tagline}
+              />
+              <div className="flex flex-wrap items-center gap-4">
+                <button
+                  onClick={() => setModalFund(fund)}
+                  className="rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+                >
+                  Donate sats directly
+                </button>
+                <Link
+                  href={`/funds/${fund.slug}`}
+                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  aria-label={`Read more about the ${fund.title}`}
+                >
+                  Read the fund page &rarr;
+                </Link>
+                {fund.heartbeat && (
+                  <Link
+                    href={fund.heartbeat}
+                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    aria-label={`View ${fund.title} heartbeat`}
+                  >
+                    View heartbeat &rarr;
+                  </Link>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex justify-end pt-4 text-base font-medium leading-6">
+        <Link
+          href="/projects/showcase"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="Browse all funded projects"
+        >
+          Browse all funded projects &rarr;
+        </Link>
+      </div>
+
+      <PaymentModal
+        isOpen={Boolean(modalFund)}
+        onRequestClose={closeModal}
+        fund={modalFund}
+      />
     </>
   )
 }
 
-export default AllProjects
+export default FundsIndex
 
-export async function getStaticProps() {
-  const projects = allProjects
-  const funds = allFunds
-
-  return {
-    props: {
-      projects,
-      funds,
-    },
-  }
+export const getStaticProps: GetStaticProps<FundsIndexProps> = async () => {
+  return { props: { funds: allFunds } }
 }
 
-export function isOpenSatsProject(project: Project): boolean {
+export function isOpenSatsProject(project: { nym: string }): boolean {
   return project.nym === 'OpenSats'
 }
 
-export function isNotOpenSatsProject(project: Project): boolean {
+export function isNotOpenSatsProject(project: { nym: string }): boolean {
   return !isOpenSatsProject(project)
 }
 
-export function isShowcaseProject(project: Project): boolean {
-  return isNotOpenSatsProject(project) && project.showcase
+export function isShowcaseProject(project: {
+  nym: string
+  showcase?: boolean
+}): boolean {
+  return isNotOpenSatsProject(project) && Boolean(project.showcase)
 }
