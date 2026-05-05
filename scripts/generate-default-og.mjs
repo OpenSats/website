@@ -67,10 +67,15 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
   const logoBottomY = logoY + LOGO_SIZE
 
-  // Pin the last headline baseline to the logomark's bottom edge so
-  // the text and logo sit on the same visual ground line.
+  // Land the last headline baseline a touch above the logomark's
+  // bottom edge so the text feels grounded with the logo without
+  // sitting flush at the bottom.
   const linesCount = HEADLINE_LINES.length
-  const headlineStartY = logoBottomY - (linesCount - 1) * headlineLineHeight
+  const headlineBaselineLift = 24
+  const headlineStartY =
+    logoBottomY -
+    headlineBaselineLift -
+    (linesCount - 1) * headlineLineHeight
 
   const wordmarkX = PADDING
   const wordmarkY = 64
