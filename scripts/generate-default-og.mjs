@@ -63,14 +63,14 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
 
   const headlineX = PADDING
 
-  // Center the four-line headline vertically on the canvas midpoint so
-  // it sits naturally between the wordmark header and the footer line.
+  const logoX = OG_WIDTH - PADDING - LOGO_SIZE
+  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
+  const logoBottomY = logoY + LOGO_SIZE
+
+  // Pin the last headline baseline to the logomark's bottom edge so
+  // the text and logo sit on the same visual ground line.
   const linesCount = HEADLINE_LINES.length
-  const headlineCenterY = OG_HEIGHT / 2
-  const headlineStartY =
-    headlineCenterY -
-    ((linesCount - 1) / 2) * headlineLineHeight +
-    headlineFontSize / 3
+  const headlineStartY = logoBottomY - (linesCount - 1) * headlineLineHeight
 
   const wordmarkX = PADDING
   const wordmarkY = 64
@@ -87,9 +87,6 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
       lineIndex === 0 ? 0 : headlineLineHeight
     }">${inner}</tspan>`
   }).join('')
-
-  const logoX = OG_WIDTH - PADDING - LOGO_SIZE
-  const logoY = (OG_HEIGHT - LOGO_SIZE) / 2
 
   const footerY = 580
 
