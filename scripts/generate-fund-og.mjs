@@ -23,7 +23,6 @@ const LOGOMARK_SIZE = 56
 
 function renderSvg(fund, coverImage, logomark) {
   const titleLines = wrapText(fund.title, 18, 3)
-  const kicker = escapeXml(fund.nym)
   const fundUrl = escapeXml(`opensats.org/funds/${fund.slug}`)
   const titleStartY = 192
   const titleFontSize = titleLines.length > 1 ? 52 : 56
@@ -109,8 +108,7 @@ function renderSvg(fund, coverImage, logomark) {
       </text>
 
       <rect x="84" y="${separatorY}" width="560" height="1" fill="#3f3f46" />
-      <text x="84" y="536" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
-      <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${fundUrl}</text>
+      <text x="84" y="540" fill="#a1a1aa" font-size="22" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">${fundUrl}</text>
 
       <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
