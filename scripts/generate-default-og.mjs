@@ -43,6 +43,7 @@ const HEADLINE_LINES = [
 ]
 
 const FOOTER_LABEL = 'a 501(c)(3) public charity'
+const FOOTER_URL = 'opensats.org'
 
 // Small wordmark in the header slot so the brand reads first without
 // competing with the headline below it.
@@ -112,6 +113,13 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
     COLORS.url
   }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
         ${escapeXml(FOOTER_LABEL)}
+      </text>
+      <text x="${
+        OG_WIDTH - PADDING
+      }" y="${footerY}" text-anchor="end" fill="${
+    COLORS.url
+  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
+        ${escapeXml(FOOTER_URL)}
       </text>
     </svg>
   `
