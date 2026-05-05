@@ -64,7 +64,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   const headlineStartY = headlineMidLineBaselineY - headlineLineHeight
 
   const wordmarkX = PADDING
-  const wordmarkY = headlineStartY - headlineFontSize - 28
+  const wordmarkY = 64
 
   const headlineSvg = HEADLINE_LINES.map((segments, lineIndex) => {
     const inner = segments
