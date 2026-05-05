@@ -123,11 +123,20 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
-// Honor the project's invertDarkImage flag for SVG covers so monochrome
-// dark-on-light logos (bitcoindesign, etc.) render legibly on the OG
-// card's dark navy frame. Mirrors the live site's `dark:invert` CSS
-// filter without depending on resvg's SVG filter support.
+// Pick the cover that best matches the OG card's dark background:
+//
+// 1. A dedicated `darkCoverImage` (e.g. Satoshi Nakamoto Institute's
+//    light-on-dark variant) wins when set.
+// 2. Otherwise, an SVG cover with `invertDarkImage: true` gets its
+//    dark hex fills swapped for off-white. Mirrors the live site's
+//    `dark:invert` behavior without depending on resvg's SVG filter
+//    support.
+// 3. Otherwise, the cover is embedded as-is.
 async function loadCoverImageDataUri(project) {
+  if (project.darkCoverImage) {
+    return toDataUri(project.darkCoverImage)
+  }
+
   if (!project.coverImage) return null
 
   const extension = path.extname(project.coverImage).toLowerCase()
