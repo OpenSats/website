@@ -276,7 +276,7 @@ function renderSvg(project, coverImage, logomark) {
       <text x="84" y="536" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
       <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${projectUrl}</text>
 
-      <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
+      <rect x="736" y="84" width="408" height="408" rx="36" fill="#0b1220" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
     </svg>
   `
