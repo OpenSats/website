@@ -28,12 +28,10 @@ const outputPath = path.join(
 
 // Headline is split into segments per line so we can color a single
 // word ("FOSS") in the brand orange without breaking the rest of the
-// line into separate <text> elements. Four short lines let the type
-// stay big while keeping every line clear of the logomark on the
-// right.
+// line into separate <text> elements. Three short lines keep the type
+// big while every line stays clear of the logomark on the right.
 const HEADLINE_LINES = [
-  [{ text: 'Providing' }],
-  [{ text: 'sustainable funding' }],
+  [{ text: 'Sustainable funding' }],
   [
     { text: 'for ' },
     { text: 'FOSS', color: COLORS.accent },
@@ -56,8 +54,8 @@ const WORDMARK_HEIGHT = WORDMARK_WIDTH / WORDMARK_ASPECT
 const LOGO_SIZE = 320
 
 function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
-  // Bigger headline now that the copy is split across four short lines
-  // — every line clears the logomark on the right at this width.
+  // Three-line headline at 60/74 keeps the longest line clear of the
+  // logomark on the right and leaves room above for the wordmark.
   const headlineFontSize = 60
   const headlineLineHeight = 74
 
