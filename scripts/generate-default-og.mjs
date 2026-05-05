@@ -30,7 +30,8 @@ const outputPath = path.join(
 
 const TAGLINE = 'Providing sustainable funding for free and open-source'
 const TAGLINE_LINE_2 = 'projects in the bitcoin space.'
-const URL_LABEL = 'opensats.org'
+const CTA_LABEL = 'Donate \u2192'
+const CTA_URL = 'opensats.org/donate'
 
 // Wordmark is 1121x161 in the source SVG (~7:1). At 580px wide it
 // renders at ~83px tall, leaving comfortable room for the tagline + URL
@@ -53,6 +54,16 @@ function renderDefaultSvg(wordmarkDataUri) {
   const taglineLine2Y = taglineY + 44
   const urlY = 568
   const separatorY = urlY - 36
+
+  // Donate CTA pill, right-aligned on the same baseline as the URL.
+  // Sits below the network cluster (which fades out by ~y=500), so it
+  // shares the footer row with the URL without crowding the decoration.
+  const ctaWidth = 200
+  const ctaHeight = 56
+  const ctaRadius = ctaHeight / 2
+  const ctaX = OG_WIDTH - PADDING - ctaWidth
+  const ctaY = urlY - ctaHeight + 14
+  const ctaTextY = ctaY + ctaHeight / 2 + 9
 
   return `
     <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,10 +88,20 @@ function renderDefaultSvg(wordmarkDataUri) {
       <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
     COLORS.separator
   }" />
+
       <text x="${PADDING}" y="${urlY}" fill="${
     COLORS.url
   }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
-        ${escapeXml(URL_LABEL)}
+        ${escapeXml(CTA_URL)}
+      </text>
+
+      <rect x="${ctaX}" y="${ctaY}" width="${ctaWidth}" height="${ctaHeight}" rx="${ctaRadius}" ry="${ctaRadius}" fill="${
+    COLORS.accent
+  }" />
+      <text x="${
+        ctaX + ctaWidth / 2
+      }" y="${ctaTextY}" text-anchor="middle" fill="#ffffff" font-size="26" font-family="${INTER_FONT_FAMILY}" font-weight="700">
+        ${escapeXml(CTA_LABEL)}
       </text>
     </svg>
   `
