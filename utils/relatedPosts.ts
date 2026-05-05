@@ -100,3 +100,15 @@ export function getRelatedBlogPostsForFund(fund: Fund, blogs: Blog[]): Blog[] {
     return blogTags.some((tag) => relatedTags.includes(tag))
   })
 }
+
+/**
+ * Returns the primary "related" tag for a fund (the first tag mapped in
+ * FUND_TAGS_BY_SLUG), suitable for linking to the corresponding /tags/<tag>
+ * archive page. Returns null when no mapping exists.
+ */
+export function getFundPrimaryTag(fund: Fund): string | null {
+  if (!fund) return null
+  const slug = fund.slug.split('/').pop() || fund.slug
+  const tags = FUND_TAGS_BY_SLUG[slug]
+  return tags?.[0]?.toLowerCase() ?? null
+}

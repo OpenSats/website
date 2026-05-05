@@ -94,7 +94,7 @@ export default function NewsletterIndexPage({
             )}
           </div>
 
-          <div className="pb-16 pt-16">
+          <div id="subscribe" className="scroll-mt-24 pb-16 pt-16">
             <NewsletterSignup />
           </div>
         </div>

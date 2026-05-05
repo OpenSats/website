@@ -30,11 +30,14 @@ export default function PageLayout({
     git,
     nostr,
     zapstore,
+    heartbeat,
   } = content
-  const heartbeatUrl = getHeartbeatUrl(git)
-  const SEO = kind === 'fund' ? FundSEO : ProjectSEO
-  const seoTitle =
-    kind === 'fund' ? `${title} - OpenSats` : `${title} - funded by OpenSats`
+  const isFund = kind === 'fund'
+  const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
+  const SEO = isFund ? FundSEO : ProjectSEO
+  const seoTitle = isFund
+    ? `${title} - OpenSats`
+    : `${title} - funded by OpenSats`
   return (
     <>
       <SEO title={seoTitle} description={`${summary}`} slug={slug} />
@@ -47,7 +50,9 @@ export default function PageLayout({
               alt="avatar"
               width={210}
               height={210}
-              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''}`}
+              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''} ${
+                isFund ? 'hidden xl:block' : ''
+              }`}
             />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-80">
               {zapstore && (
