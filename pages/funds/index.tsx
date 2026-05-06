@@ -109,6 +109,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
               </p>
             </div>
             <DonateRecurringButtonV2
+              prelude=""
               designation={PRIMARY_FUND_CONFIG.designation}
               variant={PRIMARY_FUND_CONFIG.variant}
               preTagline={PRIMARY_FUND_CONFIG.preTagline}
