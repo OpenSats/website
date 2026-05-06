@@ -58,7 +58,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
       </Head>
       <section className="pt-4 md:pb-8">
         <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:py-4 md:text-5xl md:leading-14 lg:text-6xl">
-          Where your money goes
+          Make the most of your donation
         </h1>
         <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
           OpenSats is a 501(c)(3) public charity. 100% of every dollar donated
