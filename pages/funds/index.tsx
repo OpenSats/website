@@ -61,7 +61,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
           Make the most of your donation
         </h1>
         <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
-          OpenSats is a 501(c)(3) public charity. 100% of every dollar donated
+          OpenSats is a 501(c)(3) public charity. 100% of every sat donated
           to the General Fund and the Nostr Fund goes to grantees. Our own bills
           are paid out of a separate Operations Budget.
         </p>
