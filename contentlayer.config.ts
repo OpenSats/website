@@ -155,7 +155,6 @@ export const Topics = defineDocumentType(() => ({
     ogSummary: { type: 'string' },
     category: { type: 'string', required: true },
     aliases: { type: 'list', of: { type: 'string' } },
-    showRelatedPosts: { type: 'boolean' },
     draft: { type: 'boolean' },
   },
   computedFields,

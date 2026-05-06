@@ -23,10 +23,7 @@ export async function getStaticPaths() {
 export const getStaticProps = async ({ params }) => {
   const topic = allTopics.find((t) => t.slug === params.slug)
   const sortedPosts = sortedBlogPost(allBlogs) as Blog[]
-  const relatedPosts =
-    topic.showRelatedPosts === false
-      ? []
-      : getRelatedBlogPostsForTopic(topic, sortedPosts)
+  const relatedPosts = getRelatedBlogPostsForTopic(topic, sortedPosts)
 
   const topicKeys = new Set(
     [topic.title, topic.slug, ...(topic.aliases || [])]
@@ -89,7 +86,7 @@ export default function TopicPage({
           </Link>
         </div>
       </nav>
-      {topic.showRelatedPosts !== false && relatedPosts.length > 0 && (
+      {relatedPosts.length > 0 && (
         <section
           id="related-posts"
           className="mt-12 divide-y divide-gray-200 dark:divide-gray-700"
