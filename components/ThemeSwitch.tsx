@@ -41,11 +41,14 @@ const ThemeSwitch = () => {
         ) : current === 'dark' ? (
           <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
         ) : (
-          <path
-            fillRule="evenodd"
-            d="M3 5a2 2 0 012-2h10a2 2 0 012 2v6a2 2 0 01-2 2h-3v1h2a1 1 0 110 2H6a1 1 0 110-2h2v-1H5a2 2 0 01-2-2V5zm12 0H5v6h10V5z"
-            clipRule="evenodd"
-          />
+          <>
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12z"
+              clipRule="evenodd"
+            />
+            <path d="M10 4a6 6 0 010 12V4z" />
+          </>
         )}
       </svg>
     </button>
