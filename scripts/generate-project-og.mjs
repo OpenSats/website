@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
+import { wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -43,50 +44,6 @@ function escapeXml(value = '') {
     .replaceAll("'", '&#39;')
 }
 
-function clampText(text = '', maxLength) {
-  const normalized = text.replace(/\s+/g, ' ').trim()
-  if (normalized.length <= maxLength) {
-    return normalized
-  }
-
-  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`
-}
-
-function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = clampText(text, maxCharsPerLine * maxLines + maxLines).split(
-    ' '
-  )
-  const lines = []
-  let current = ''
-
-  for (const word of words) {
-    const candidate = current ? `${current} ${word}` : word
-    if (candidate.length <= maxCharsPerLine) {
-      current = candidate
-      continue
-    }
-
-    if (current) {
-      lines.push(current)
-      if (lines.length === maxLines) {
-        return lines
-      }
-    }
-
-    current = word
-  }
-
-  if (current && lines.length < maxLines) {
-    lines.push(current)
-  }
-
-  if (lines.length > maxLines) {
-    return lines.slice(0, maxLines)
-  }
-
-  return lines
-}
-
 async function toDataUri(publicPath) {
   const filePath = path.join(root, 'public', publicPath.replace(/^\//, ''))
   const extension = path.extname(filePath).toLowerCase()
@@ -100,9 +57,69 @@ async function toDataUri(publicPath) {
   return `data:${mimeType};base64,${buffer.toString('base64')}`
 }
 
-function renderSvg(project, coverImage) {
-  const titleLines = wrapText(project.title, 18, 3)
-  const summaryLines = wrapText(project.summary, 36, 3)
+// Pick the cover that best matches the OG card's dark background:
+//
+// 1. A dedicated `darkCoverImage` (e.g. Satoshi Nakamoto Institute's
+//    light-on-dark variant) wins when set.
+// 2. Otherwise, an SVG cover with `invertDarkImage: true` gets its
+//    dark hex fills swapped for off-white. Mirrors the live site's
+//    `dark:invert` behavior without depending on resvg's SVG filter
+//    support.
+// 3. Otherwise, the cover is embedded as-is.
+async function loadCoverImageDataUri(project) {
+  if (project.darkCoverImage) {
+    return toDataUri(project.darkCoverImage)
+  }
+
+  if (!project.coverImage) return null
+
+  const extension = path.extname(project.coverImage).toLowerCase()
+  if (extension !== '.svg' || !project.invertDarkImage) {
+    return toDataUri(project.coverImage)
+  }
+
+  const filePath = path.join(
+    root,
+    'public',
+    project.coverImage.replace(/^\//, '')
+  )
+  const text = await fs.readFile(filePath, 'utf8')
+  const inverted = invertSvgDarkColors(text)
+  const base64 = Buffer.from(inverted, 'utf8').toString('base64')
+  return `data:image/svg+xml;base64,${base64}`
+}
+
+// Replace any near-black hex fill/stroke in an SVG with the OG card's
+// off-white. Uses perceived luminance so the helper generalizes beyond
+// any one specific dark hex.
+function invertSvgDarkColors(svg) {
+  const LIGHT = '#fafaf9'
+  const isDark = (r, g, b) => 0.299 * r + 0.587 * g + 0.114 * b < 50
+
+  return svg
+    .replace(/#([0-9a-f]{6})\b/gi, (match, hex) => {
+      const r = parseInt(hex.slice(0, 2), 16)
+      const g = parseInt(hex.slice(2, 4), 16)
+      const b = parseInt(hex.slice(4, 6), 16)
+      return isDark(r, g, b) ? LIGHT : match
+    })
+    .replace(/#([0-9a-f]{3})\b/gi, (match, hex) => {
+      const r = parseInt(hex[0] + hex[0], 16)
+      const g = parseInt(hex[1] + hex[1], 16)
+      const b = parseInt(hex[2] + hex[2], 16)
+      return isDark(r, g, b) ? LIGHT : match
+    })
+}
+
+const LOGOMARK_SIZE = 56
+
+function renderSvg(project, coverImage, logomark) {
+  const titleLines = wrapText(
+    project.title,
+    18,
+    3,
+    `project ${project.slug} title`
+  )
   const kicker = escapeXml(project.nym)
   const projectUrl = escapeXml(`opensats.org/projects/${project.slug}`)
   const titleStartY = 192
@@ -112,8 +129,23 @@ function renderSvg(project, coverImage) {
   const separatorY = 498
   const titleBottomY = titleStartY + (titleLines.length - 1) * titleLineHeight
   const summaryStartY = titleBottomY + 56
+  const summaryLineHeight = 38
   const summaryClipY = summaryStartY - 30
   const summaryClipHeight = separatorY - summaryClipY - 24
+  // Fit as many summary lines as the vertical space below the title
+  // allows. wrapText throws if the copy doesn't fit, so the build fails
+  // loudly and the source summary gets shortened instead of silently
+  // truncated on the OG card.
+  const maxSummaryLines = Math.max(
+    1,
+    Math.floor((separatorY - summaryStartY - 24) / summaryLineHeight)
+  )
+  const summaryLines = wrapText(
+    project.summary,
+    36,
+    maxSummaryLines,
+    `project ${project.slug} summary`
+  )
   const coverInsetBySlug = {
     cdk: 14,
     grapheneos: 20,
@@ -137,7 +169,9 @@ function renderSvg(project, coverImage) {
   const summarySvg = summaryLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${index === 0 ? 0 : 38}">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${
+          index === 0 ? 0 : summaryLineHeight
+        }">${escapeXml(line)}</tspan>`
     )
     .join('')
 
@@ -173,9 +207,7 @@ function renderSvg(project, coverImage) {
       <circle cx="1110" cy="92" r="180" fill="#f97316" fill-opacity="0.08" />
       <circle cx="1035" cy="540" r="140" fill="#f97316" fill-opacity="0.06" />
 
-      <rect x="84" y="72" width="236" height="38" rx="19" fill="#1f2937" />
-      <circle cx="110" cy="91" r="6" fill="#22c55e" />
-      <text x="128" y="98" fill="#e5e7eb" font-size="20" font-family="Arial, Helvetica, sans-serif">OpenSats funded</text>
+      <image href="${logomark}" x="84" y="72" width="${LOGOMARK_SIZE}" height="${LOGOMARK_SIZE}" />
 
       <text x="84" y="${titleStartY}" fill="#fafaf9" font-size="${titleFontSize}" font-weight="700" font-family="Arial, Helvetica, sans-serif" clip-path="url(#title-clip)">
         ${titleSvg}
@@ -189,12 +221,8 @@ function renderSvg(project, coverImage) {
       <text x="84" y="536" fill="#a1a1aa" font-size="24" font-family="Arial, Helvetica, sans-serif">${kicker}</text>
       <text x="84" y="570" fill="#71717a" font-size="20" font-family="Arial, Helvetica, sans-serif">${projectUrl}</text>
 
-      <rect x="736" y="84" width="408" height="408" rx="36" fill="#111827" stroke="#27272a" stroke-width="2" />
+      <rect x="736" y="84" width="408" height="408" rx="36" fill="#0b1220" stroke="#27272a" stroke-width="2" />
       ${coverSvg}
-      <rect x="764" y="486" width="352" height="38" rx="19" fill="#18181b" />
-      <text x="940" y="512" text-anchor="middle" fill="#f4f4f5" font-size="18" font-family="Arial, Helvetica, sans-serif">${escapeXml(
-        project.title
-      )}</text>
     </svg>
   `
 }
@@ -209,16 +237,16 @@ async function loadProjects() {
   return JSON.parse(file)
 }
 
-async function writeProjectImage(project) {
+async function writeProjectImage(project, logomark) {
   let coverImage = null
 
   try {
-    coverImage = await toDataUri(project.coverImage)
+    coverImage = await loadCoverImageDataUri(project)
   } catch (error) {
     console.warn(`Skipping cover image for ${project.slug}: ${error.message}`)
   }
 
-  const svg = renderSvg(project, coverImage)
+  const svg = renderSvg(project, coverImage, logomark)
   const resvg = new Resvg(svg, {
     fitTo: {
       mode: 'width',
@@ -236,8 +264,15 @@ async function main() {
   const allProjects = await loadProjects()
   await ensureOutputDir()
 
+  const logomark = await toDataUri('/static/brand/opensats-favicon.png')
+  if (!logomark) {
+    throw new Error(
+      'Missing logomark at public/static/brand/opensats-favicon.png; cannot render project OGs.'
+    )
+  }
+
   for (const project of allProjects) {
-    await writeProjectImage(project)
+    await writeProjectImage(project, logomark)
   }
 
   console.log(`Generated ${allProjects.length} project OG images.`)

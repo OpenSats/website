@@ -86,14 +86,14 @@ function renderSvg({ faviconUri, heartPath }) {
 
       <image href="${faviconUri}" x="84" y="200" width="56" height="56" />
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
+      <text x="84" y="336" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         Heartbeat
       </text>
 
-      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="84" y="392" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         A live feed of releases, commits, and
       </text>
-      <text x="84" y="412" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="84" y="428" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         pull requests from the projects we fund.
       </text>
 

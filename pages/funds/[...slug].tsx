@@ -17,7 +17,7 @@ import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const DEFAULT_LAYOUT = 'ProjectLayout'
+const DEFAULT_LAYOUT = 'FundLayout'
 
 const FUND_DESIGNATION_IDS: Record<string, string> = {
   nostr: 'ENWRA6YZ',

@@ -166,6 +166,7 @@ export const Funds = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    ogTitle: { type: 'string' },
     dateAdded: { type: 'date', required: true },
     summary: { type: 'string', required: true },
     nym: { type: 'string', required: true },

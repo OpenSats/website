@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
+import { wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -68,49 +69,6 @@ function escapeXml(value = '') {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;')
-}
-
-function clampText(text = '', maxLength) {
-  const normalized = text.replace(/\s+/g, ' ').trim()
-  if (normalized.length <= maxLength) {
-    return normalized
-  }
-  return `${normalized.slice(0, maxLength - 1).trimEnd()}…`
-}
-
-function wrapText(text, maxCharsPerLine, maxLines) {
-  const words = clampText(text, maxCharsPerLine * maxLines + maxLines).split(
-    ' '
-  )
-  const lines = []
-  let current = ''
-
-  for (const word of words) {
-    const candidate = current ? `${current} ${word}` : word
-    if (candidate.length <= maxCharsPerLine) {
-      current = candidate
-      continue
-    }
-
-    if (current) {
-      lines.push(current)
-      if (lines.length === maxLines) {
-        return lines
-      }
-    }
-
-    current = word
-  }
-
-  if (current && lines.length < maxLines) {
-    lines.push(current)
-  }
-
-  if (lines.length > maxLines) {
-    return lines.slice(0, maxLines)
-  }
-
-  return lines
 }
 
 function formatIssueNumber(issueNumber) {
@@ -212,11 +170,11 @@ function renderIndexSvg() {
 
       ${logoMark({ x: 84, y: 200, size: 56 })}
 
-      <text x="84" y="320" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
+      <text x="84" y="336" fill="#fafaf9" font-size="76" font-weight="900" font-family="Inter 18pt" letter-spacing="-2">
         Sats Well Spent
       </text>
 
-      <text x="84" y="376" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
+      <text x="84" y="392" fill="#d4d4d8" font-size="28" font-family="Inter 18pt">
         A quarterly newsletter from OpenSats.
       </text>
 
@@ -235,7 +193,12 @@ function renderIssueSvg(issue) {
   const seriesLabel = `${issue.title}, ${issueLabel}`
 
   const headlineText = issue.headline || issue.title
-  const titleLines = wrapText(headlineText, 14, 2)
+  const titleLines = wrapText(
+    headlineText,
+    14,
+    2,
+    `newsletter ${issue.slug || issue.issueNumber} headline`
+  )
 
   const titleFontSize = titleLines.length > 1 ? 64 : 76
   const titleLineHeight = titleLines.length > 1 ? 72 : 84

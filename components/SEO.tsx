@@ -66,6 +66,7 @@ const CommonSEO = ({
 interface PageSEOProps {
   title: string
   description: string
+  slug?: string
 }
 
 interface ProjectSEOProps {
@@ -74,9 +75,26 @@ interface ProjectSEOProps {
   slug: string
 }
 
-export const PageSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+// Utility / legal / form-result pages that don't get a custom social
+// card and fall back to the default brand OG. Keep this list in sync
+// with SKIP_SLUGS in scripts/generate-page-og.mjs.
+const PAGES_WITHOUT_OG = new Set([
+  'canary',
+  'pgp',
+  'privacy',
+  'report-success',
+  'submitted',
+  'terms',
+  'thankyou',
+])
+
+export const PageSEO = ({ title, description, slug }: PageSEOProps) => {
+  const hasCustomOg = slug ? !PAGES_WITHOUT_OG.has(slug) : false
+  const ogImagePath = hasCustomOg
+    ? `/static/images/pages/og/${slug}.png`
+    : siteMetadata.socialBanner
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+  const twImageUrl = ogImageUrl
   return (
     <CommonSEO
       title={title}
@@ -97,6 +115,53 @@ export const ProjectSEO = ({ title, description, slug }: ProjectSEOProps) => {
       title={title}
       description={description}
       ogType="website"
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
+export const FundSEO = ({ title, description, slug }: ProjectSEOProps) => {
+  const ogImagePath = `/static/images/funds/og/${slug}.png`
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="website"
+      ogImage={ogImageUrl}
+      twImage={ogImageUrl}
+    />
+  )
+}
+
+// Authors who don't get a custom OG card and fall back to the default
+// brand image. Keep this list in sync with SKIP_SLUGS in
+// scripts/generate-author-og.mjs.
+const AUTHORS_WITHOUT_OG = new Set([
+  'bayer',
+  'cfunk',
+  'dtonon',
+  'ecurrencyhodler',
+  'jason',
+  'julian',
+  'lorenzo',
+  'niftynei',
+])
+
+export const AuthorSEO = ({ title, description, slug }: ProjectSEOProps) => {
+  const hasCustomOg = !AUTHORS_WITHOUT_OG.has(slug)
+  const ogImagePath = hasCustomOg
+    ? `/static/images/authors/og/${slug}.png`
+    : siteMetadata.socialBanner
+  const ogImageUrl = siteMetadata.siteUrl + ogImagePath
+
+  return (
+    <CommonSEO
+      title={title}
+      description={description}
+      ogType="profile"
       ogImage={ogImageUrl}
       twImage={ogImageUrl}
     />
