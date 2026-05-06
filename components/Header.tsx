@@ -24,7 +24,7 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className="flex items-center gap-2 text-base leading-5 sm:gap-3">
+      <div className="flex items-center gap-3 text-base leading-5 sm:gap-4">
         <div className="block">
           {headerNavLinks.map((link) => (
             <Link
