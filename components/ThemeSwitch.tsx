@@ -9,10 +9,12 @@ const ThemeSwitch = () => {
 
   // Cycle through: system → light → dark → system, so users can
   // explicitly opt back into following their OS preference.
-  const nextTheme = theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system'
+  const nextTheme =
+    theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system'
 
   const labels: Record<string, string> = {
-    system: 'Use system theme (currently active). Click to switch to light mode.',
+    system:
+      'Use system theme (currently active). Click to switch to light mode.',
     light: 'Light mode active. Click to switch to dark mode.',
     dark: 'Dark mode active. Click to follow system theme.',
   }
