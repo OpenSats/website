@@ -45,7 +45,15 @@ export const CLUSTERS: Cluster[] = [
     id: 'nostr-infra',
     title: 'Nostr Infrastructure',
     blurb: 'Relays, libraries, signers, and developer tooling.',
-    slugs: ['ndk', 'applesauce', 'citrine', 'frostr', 'amber', 'ngit', 'zapstore'],
+    slugs: [
+      'ndk',
+      'applesauce',
+      'citrine',
+      'frostr',
+      'amber',
+      'ngit',
+      'zapstore',
+    ],
   },
   {
     id: 'privacy-infra',

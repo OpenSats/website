@@ -62,8 +62,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
         </h1>
         <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
           OpenSats is a 501(c)(3) public charity. 100% of every dollar donated
-          to the General Fund and the Nostr Fund goes to grantees. Our own
-          bills are paid out of a separate Operations Budget.
+          to the General Fund and the Nostr Fund goes to grantees. Our own bills
+          are paid out of a separate Operations Budget.
         </p>
         <StatsSentence className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400" />
       </section>
