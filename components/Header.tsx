@@ -25,22 +25,31 @@ const Header = () => {
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
-        <div className="block">
-          {headerNavLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className={
-                link.isButton
-                  ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
-                  : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
-              }
-            >
-              {link.title}
-            </Link>
-          ))}
+        <div className="flex items-center">
+          {headerNavLinks
+            .filter((link) => !link.isButton)
+            .map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className="hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block"
+              >
+                {link.title}
+              </Link>
+            ))}
+          <ThemeSwitch />
+          {headerNavLinks
+            .filter((link) => link.isButton)
+            .map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white"
+              >
+                {link.title}
+              </Link>
+            ))}
         </div>
-        <ThemeSwitch />
         <MobileNav />
       </div>
     </header>
