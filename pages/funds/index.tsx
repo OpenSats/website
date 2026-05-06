@@ -11,9 +11,11 @@ import type { Fund } from 'contentlayer/generated'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type FundsIndexProps = {
   funds: Fund[]
+  lifetimeStats: LifetimeStat[] | null
 }
 
 type FundConfig = {
@@ -56,7 +58,7 @@ function getMonthlyDonationUrl(cfg: FundConfig): string {
     : MONTHLY_DONATION_URL
 }
 
-const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
+const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined)
   const closeModal = () => setModalFund(undefined)
 
@@ -80,7 +82,10 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
           the General Fund and the Nostr Fund goes to grantees. Our own bills
           are paid out of a separate Operations Budget.
         </p>
-        <StatsSentence className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400" />
+        <StatsSentence
+          initialStats={lifetimeStats}
+          className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400"
+        />
       </section>
 
       {primaryFund && (
@@ -214,7 +219,11 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
 export default FundsIndex
 
 export const getStaticProps: GetStaticProps<FundsIndexProps> = async () => {
-  return { props: { funds: allFunds } }
+  const lifetimeStats = await getLifetimeStats()
+  return {
+    props: { funds: allFunds, lifetimeStats },
+    revalidate: 60 * 60 * 12,
+  }
 }
 
 export function isOpenSatsProject(project: { nym: string }): boolean {

@@ -9,6 +9,7 @@ import type { Blog } from 'contentlayer/generated'
 import { sortedBlogPost } from 'pliny/utils/contentlayer'
 import { buildClusters } from '@/utils/projectClusters'
 import { getLatestPostForProject } from '@/utils/relatedPosts'
+import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type CardData = {
   slug: string
@@ -35,6 +36,7 @@ type RenderCluster = {
 
 type ShowcaseProps = {
   clusters: RenderCluster[]
+  lifetimeStats: LifetimeStat[] | null
 }
 
 const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops']
@@ -67,7 +69,10 @@ function toCardData(
   }
 }
 
-const ProjectShowcase: NextPage<ShowcaseProps> = ({ clusters }) => {
+const ProjectShowcase: NextPage<ShowcaseProps> = ({
+  clusters,
+  lifetimeStats,
+}) => {
   return (
     <>
       <Head>
@@ -78,7 +83,10 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({ clusters }) => {
         <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:py-4 md:text-5xl md:leading-14 lg:text-6xl">
           Project Showcase
         </h1>
-        <StatsSentence className="text-lg leading-7 text-gray-500 dark:text-gray-400" />
+        <StatsSentence
+          initialStats={lifetimeStats}
+          className="text-lg leading-7 text-gray-500 dark:text-gray-400"
+        />
       </section>
 
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -134,6 +142,11 @@ export const getStaticProps: GetStaticProps<ShowcaseProps> = async () => {
     projects: c.projects.map((p) => toCardData(p, sortedBlogs)),
   }))
 
+  const lifetimeStats = await getLifetimeStats()
+
   // Strip `undefined` values so getStaticProps can serialize the payload.
-  return { props: JSON.parse(JSON.stringify({ clusters })) }
+  return {
+    props: JSON.parse(JSON.stringify({ clusters, lifetimeStats })),
+    revalidate: 60 * 60 * 12,
+  }
 }

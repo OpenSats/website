@@ -17,6 +17,7 @@ import { isShowcaseProject } from './funds'
 import Typing from '@/components/Typing'
 import CustomLink from '@/components/Link'
 import StatsSentence from '@/components/StatsSentence'
+import { getLifetimeStats } from '@/utils/lifetimeStats'
 
 const MAX_DISPLAY = 2
 
@@ -31,7 +32,12 @@ export const getStaticProps = async () => {
   const generalFund = allFunds.find((f) => f.slug === 'general')
   const opsFund = allFunds.find((f) => f.slug === 'ops')
 
-  return { props: { posts, projects, generalFund, opsFund } }
+  const lifetimeStats = await getLifetimeStats()
+
+  return {
+    props: { posts, projects, generalFund, opsFund, lifetimeStats },
+    revalidate: 60 * 60 * 12,
+  }
 }
 
 export default function Home({
@@ -39,6 +45,7 @@ export default function Home({
   projects,
   generalFund,
   opsFund,
+  lifetimeStats,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -170,7 +177,10 @@ export default function Home({
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Current Allocation
           </h1>
-          <StatsSentence className="text-2xl leading-9 text-gray-500 dark:text-gray-400" />
+          <StatsSentence
+            initialStats={lifetimeStats}
+            className="text-2xl leading-9 text-gray-500 dark:text-gray-400"
+          />
           <div className="flex justify-end text-base font-medium leading-6">
             <Link
               href="/transparency"
