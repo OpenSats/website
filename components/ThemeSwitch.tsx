@@ -23,7 +23,7 @@ const ThemeSwitch = () => {
     <button
       aria-label={labels[current]}
       title={labels[current]}
-      className="ml-1 mr-1 h-8 w-8 rounded p-1 text-gray-400 transition-colors duration-300 hover:text-gray-900 focus-visible:text-gray-900 dark:text-gray-600 dark:hover:text-gray-100 dark:focus-visible:text-gray-100 sm:ml-4"
+      className="flex h-8 w-8 items-center justify-center rounded p-1 text-gray-400 transition-colors duration-300 hover:text-gray-900 focus-visible:text-gray-900 dark:text-gray-600 dark:hover:text-gray-100 dark:focus-visible:text-gray-100"
       onClick={() => setTheme(nextTheme)}
     >
       <svg
