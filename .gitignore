@@ -24,7 +24,10 @@ public/sitemap.xml
 # search
 /public/search.json
 
-# generated OG images (built by scripts/generate-*-og.mjs at build time)
+# generated OG images (built by scripts/generate-*-og.mjs at build time).
+# og-default.png is intentionally tracked as a brand fallback so the site
+# always has a working share image even if the generation pipeline breaks
+# (font issues, resvg regression, etc.).
 /public/static/images/projects/og/
 /public/static/images/newsletter/og/
 /public/static/images/funds/og/
@@ -32,7 +35,6 @@ public/sitemap.xml
 /public/static/images/authors/og/
 /public/static/images/topics/og/
 /public/static/images/heartbeat/og.png
-/public/static/images/og-default.png
 
 # misc
 .DS_Store
