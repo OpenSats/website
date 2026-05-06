@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 import StatsSentence from '@/components/StatsSentence'
 import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
 import PaymentModal from '@/components/PaymentModal'
@@ -9,6 +10,7 @@ import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { MONTHLY_DONATION_URL } from '@/utils/constants'
 
 type FundsIndexProps = {
   funds: Fund[]
@@ -22,12 +24,13 @@ type FundConfig = {
   tagline: string
 }
 
-const FUND_ORDER: FundConfig[] = [
-  {
-    slug: 'general',
-    preTagline: 'Help us support',
-    tagline: 'Bitcoin & FOSS',
-  },
+const PRIMARY_FUND_CONFIG: FundConfig = {
+  slug: 'general',
+  preTagline: 'Help us support',
+  tagline: 'Bitcoin & FOSS',
+}
+
+const SECONDARY_FUND_CONFIGS: FundConfig[] = [
   {
     slug: 'nostr',
     designation: 'nostr',
@@ -43,12 +46,22 @@ const FUND_ORDER: FundConfig[] = [
   },
 ]
 
+const DESIGNATION_IDS = { nostr: 'ENWRA6YZ', ops: 'ELL6P2J6' } as const
+
+function getMonthlyDonationUrl(cfg: FundConfig): string {
+  return cfg.designation
+    ? `${MONTHLY_DONATION_URL}?designationId=${
+        DESIGNATION_IDS[cfg.designation]
+      }`
+    : MONTHLY_DONATION_URL
+}
+
 const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined)
-
   const closeModal = () => setModalFund(undefined)
 
-  const sections = FUND_ORDER.map((cfg) => ({
+  const primaryFund = funds.find((f) => f.slug === PRIMARY_FUND_CONFIG.slug)
+  const secondaryFunds = SECONDARY_FUND_CONFIGS.map((cfg) => ({
     cfg,
     fund: funds.find((f) => f.slug === cfg.slug),
   })).filter((s): s is { cfg: FundConfig; fund: Fund } => Boolean(s.fund))
@@ -70,64 +83,116 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
         <StatsSentence className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400" />
       </section>
 
-      <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-        {sections.map(({ cfg, fund }) => (
-          <li
-            key={fund.slug}
-            className="items-start py-10 first:pt-6 xl:grid xl:grid-cols-3 xl:gap-x-8"
-          >
-            <div></div>
-            <div className="flex flex-col gap-4 xl:col-span-2">
-              <div>
-                <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-                  {fund.title}
-                </h2>
-                <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-                  {fund.summary}
-                </p>
-              </div>
-              <DonateRecurringButtonV2
-                designation={cfg.designation}
-                variant={cfg.variant}
-                preTagline={cfg.preTagline}
-                tagline={cfg.tagline}
-              />
-              <div className="flex flex-wrap items-center gap-4 text-base font-medium leading-6">
-                <button
-                  onClick={() => setModalFund(fund)}
-                  className="inline-flex items-center gap-1.5 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label={`Donate sats directly to the ${fund.title}`}
-                >
-                  <FontAwesomeIcon
-                    icon={faBitcoin}
-                    className="h-4 w-4"
-                    aria-hidden="true"
-                  />
-                  Donate sats directly &rarr;
-                </button>
-                <Link
-                  href={`/funds/${fund.slug}`}
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label={`Read more about the ${fund.title}`}
-                >
-                  Read the fund page &rarr;
-                </Link>
-                {fund.heartbeat && (
-                  <Link
-                    href={fund.heartbeat}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`View ${fund.title} heartbeat`}
-                  >
-                    View heartbeat &rarr;
-                  </Link>
-                )}
-              </div>
+      {primaryFund && (
+        <section className="items-start py-10 xl:grid xl:grid-cols-3 xl:gap-x-8">
+          <div className="hidden pt-2 xl:flex xl:justify-center">
+            <Image
+              src={primaryFund.coverImage}
+              alt={primaryFund.title}
+              width={210}
+              height={210}
+              className="h-40 w-40"
+            />
+          </div>
+          <div className="flex flex-col gap-4 xl:col-span-2">
+            <div>
+              <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+                {primaryFund.title}
+              </h2>
+              <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
+                {primaryFund.summary}
+              </p>
             </div>
-          </li>
-        ))}
-      </ul>
+            <DonateRecurringButtonV2
+              designation={PRIMARY_FUND_CONFIG.designation}
+              variant={PRIMARY_FUND_CONFIG.variant}
+              preTagline={PRIMARY_FUND_CONFIG.preTagline}
+              tagline={PRIMARY_FUND_CONFIG.tagline}
+            />
+            <div className="flex flex-wrap items-center gap-4 text-base font-medium leading-6">
+              <button
+                onClick={() => setModalFund(primaryFund)}
+                className="inline-flex items-center gap-1.5 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label={`Donate sats directly to the ${primaryFund.title}`}
+              >
+                <FontAwesomeIcon
+                  icon={faBitcoin}
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+                Donate sats directly &rarr;
+              </button>
+              <Link
+                href={`/funds/${primaryFund.slug}`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label={`Read more about the ${primaryFund.title}`}
+              >
+                Read the fund page &rarr;
+              </Link>
+              {primaryFund.heartbeat && (
+                <Link
+                  href={primaryFund.heartbeat}
+                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  aria-label={`View ${primaryFund.title} heartbeat`}
+                >
+                  View heartbeat &rarr;
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
-      <div className="flex justify-end pt-4 text-base font-medium leading-6">
+      {secondaryFunds.length > 0 && (
+        <section className="border-t border-gray-200 pt-10 dark:border-gray-700">
+          <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+            Designate your gift
+          </h2>
+          <p className="pt-1 text-base text-gray-500 dark:text-gray-400">
+            Earmark a recurring donation for a specific fund instead.
+          </p>
+          <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
+            {secondaryFunds.map(({ cfg, fund }) => (
+              <article
+                key={fund.slug}
+                className="flex gap-4 rounded-xl bg-stone-100 p-4 dark:bg-stone-900"
+              >
+                <Image
+                  src={fund.coverImage}
+                  alt={fund.title}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 shrink-0 rounded-lg"
+                />
+                <div className="flex flex-1 flex-col gap-2">
+                  <h3 className="text-lg font-bold">{fund.title}</h3>
+                  <p className="line-clamp-2 text-sm text-gray-500 dark:text-gray-400">
+                    {fund.summary}
+                  </p>
+                  <div className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-1 text-sm font-medium leading-6">
+                    <Link
+                      href={getMonthlyDonationUrl(cfg)}
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      aria-label={`Donate monthly to ${fund.title}`}
+                    >
+                      Donate monthly &rarr;
+                    </Link>
+                    <Link
+                      href={`/funds/${fund.slug}`}
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                      aria-label={`Read more about ${fund.title}`}
+                    >
+                      Read the fund page &rarr;
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div className="flex justify-end pt-8 text-base font-medium leading-6">
         <Link
           href="/projects/showcase"
           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
