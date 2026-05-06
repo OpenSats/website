@@ -115,7 +115,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
               preTagline={PRIMARY_FUND_CONFIG.preTagline}
               tagline={PRIMARY_FUND_CONFIG.tagline}
             />
-            <div className="flex flex-wrap items-center gap-4 text-base font-medium leading-6">
+            <div className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2 text-base font-medium leading-6">
               <button
                 onClick={() => setModalFund(primaryFund)}
                 className="inline-flex items-center gap-1.5 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
