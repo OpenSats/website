@@ -19,7 +19,7 @@ const Header = () => {
           <Wordmark className="hidden h-6 w-auto text-gray-900 dark:text-gray-100 lg:block" />
         </Link>
       </div>
-      <div className="flex items-center text-base leading-5">
+      <div className="flex items-center gap-3 text-base leading-5 sm:gap-4">
         <div className="block">
           {headerNavLinks.map((link) => (
             <Link
