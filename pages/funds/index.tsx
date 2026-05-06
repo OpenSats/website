@@ -72,8 +72,12 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
 
       <ul className="divide-y divide-gray-200 dark:divide-gray-700">
         {sections.map(({ cfg, fund }) => (
-          <li key={fund.slug} className="py-10 first:pt-6">
-            <div className="flex flex-col gap-4">
+          <li
+            key={fund.slug}
+            className="items-start py-10 first:pt-6 xl:grid xl:grid-cols-3 xl:gap-x-8"
+          >
+            <div></div>
+            <div className="flex flex-col gap-4 xl:col-span-2">
               <div>
                 <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
                   {fund.title}
