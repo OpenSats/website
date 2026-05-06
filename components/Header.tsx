@@ -15,8 +15,8 @@ const Header = () => {
           aria-label={siteMetadata.headerTitle}
           className="flex items-center"
         >
-          <Logo className="block h-9 w-auto sm:h-10 lg:hidden" />
-          <Wordmark className="hidden h-9 w-auto text-gray-900 dark:text-gray-100 lg:block xl:h-10 2xl:h-11" />
+          <Logo className="block h-9 w-auto lg:hidden" />
+          <Wordmark className="hidden h-9 w-auto text-gray-900 dark:text-gray-100 lg:block" />
         </Link>
       </div>
       <div className="flex items-center text-base leading-5">
