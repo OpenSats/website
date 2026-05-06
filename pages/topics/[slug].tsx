@@ -54,7 +54,7 @@ export default function TopicPage({
   projectLink,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const repo = siteMetadata.siteRepo.replace(/\/$/, '')
-  const editUrl = `${repo}/edit/main/data/${topic.filePath}`
+  const editUrl = `${repo}/blob/master/data/${topic.filePath}`
   return (
     <>
       <MDXLayoutRenderer
