@@ -7,7 +7,7 @@ aliases: ['sat', 'satoshi', 'satoshis', 'millisat', 'millisats', 'millisatoshi',
 
 A **sat**, or **satoshi**, is one hundred millionth of a bitcoin: `0.00000001 BTC`. *Sat* and *sats* are the everyday shorthand for *satoshi* and *satoshis*. On-chain outputs are denominated in sats, even if wallets choose to display balances in bitcoin or fiat terms.
 
-Because one bitcoin contains `100,000,000` sats, small Bitcoin amounts are usually easier to read and talk about in sats. Saying "25,000 sats" is more natural than saying `0.00025 BTC`. At OpenSats, both donations and grant payments are often described this way. They are still bitcoin amounts, expressed in the smaller unit.
+Because one bitcoin contains `100,000,000` sats, small Bitcoin amounts are usually easier to read and talk about in sats. Saying "25,000 sats" is more natural than saying "0.00025 BTC". At OpenSats, both donations and grant payments are often described this way. They are still bitcoin amounts, expressed in the smaller unit.
 
 Lightning goes one step smaller internally with **millisatoshis**, abbreviated **msats**. One sat equals `1,000 msats`. Msats are useful for routing fees, channel accounting, and invoice precision, even though the network cannot transfer sub-millisatoshi amounts and on-chain settlement still resolves in whole sats. Topics like BOLT 11 invoices and Zaps often rely on this finer unit.
 
