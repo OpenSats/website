@@ -119,7 +119,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
               <button
                 onClick={() => setModalFund(primaryFund)}
                 className="inline-flex items-center gap-1.5 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Donate sats directly to the ${primaryFund.title}`}
+                aria-label={`Donate sats directly to ${primaryFund.title}`}
               >
                 <FontAwesomeIcon
                   icon={faBitcoin}
@@ -131,7 +131,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
               <Link
                 href={`/funds/${primaryFund.slug}`}
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Read more about the ${primaryFund.title}`}
+                aria-label={`Read more about ${primaryFund.title}`}
               >
                 Read the fund page &rarr;
               </Link>
