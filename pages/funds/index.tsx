@@ -7,6 +7,8 @@ import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
 import PaymentModal from '@/components/PaymentModal'
 import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 
 type FundsIndexProps = {
   funds: Fund[]
@@ -61,8 +63,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
           Make the most of your donation
         </h1>
         <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
-          OpenSats is a 501(c)(3) public charity. 100% of every sat donated
-          to the General Fund and the Nostr Fund goes to grantees. Our own bills
+          OpenSats is a 501(c)(3) public charity. 100% of every sat donated to
+          the General Fund and the Nostr Fund goes to grantees. Our own bills
           are paid out of a separate Operations Budget.
         </p>
         <StatsSentence className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400" />
@@ -86,12 +88,18 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds }) => {
                 preTagline={cfg.preTagline}
                 tagline={cfg.tagline}
               />
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-wrap items-center gap-4 text-base font-medium leading-6">
                 <button
                   onClick={() => setModalFund(fund)}
-                  className="rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black"
+                  className="inline-flex items-center gap-1.5 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                  aria-label={`Donate sats directly to the ${fund.title}`}
                 >
-                  Donate sats directly
+                  <FontAwesomeIcon
+                    icon={faBitcoin}
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  Donate sats directly &rarr;
                 </button>
                 <Link
                   href={`/funds/${fund.slug}`}
