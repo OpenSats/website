@@ -1,30 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import PublicGoogleSheetsParser from 'public-google-sheets-parser'
-
-export function formatNumber(num: number): string {
-  const abbreviations = ['k', 'M', 'B', 'T']
-  let i = 0
-  while (num > 1e3 && i < abbreviations.length) {
-    num /= 1e3
-    if (num < 1e3) {
-      return `${num.toFixed(1)} ${abbreviations[i]}`
-    }
-    i += 1
-  }
-  return num.toString()
-}
+import React from 'react'
+import { formatNumber, useAnimatedLifetimeStats } from '@/utils/lifetimeStats'
 
 const LifetimeStats = () => {
-  const [items, setItems] = useState([])
-
-  useEffect(() => {
-    const parser = new PublicGoogleSheetsParser(
-      '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
-    )
-    parser.parse().then((data) => {
-      setItems(data)
-    })
-  }, [])
+  const items = useAnimatedLifetimeStats()
 
   return (
     <div className="py-4">

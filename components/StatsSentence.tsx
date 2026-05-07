@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react'
 import Link from '@/components/Link'
-import PublicGoogleSheetsParser from 'public-google-sheets-parser'
-import { formatNumber } from '@/components/LifetimeStats'
 import {
-  LIFETIME_STATS_SHEET_ID,
+  formatNumber,
   type LifetimeStat,
+  useAnimatedLifetimeStats,
 } from '@/utils/lifetimeStats'
 
 type StatsSentenceProps = {
@@ -12,33 +10,16 @@ type StatsSentenceProps = {
   initialStats?: LifetimeStat[] | null
 }
 
-const skeleton = (
-  <span className="inline-block h-[1em] w-12 animate-pulse rounded bg-stone-200 align-middle dark:bg-stone-700" />
-)
-
 export default function StatsSentence({
   className = '',
   initialStats,
 }: StatsSentenceProps) {
-  const [stats, setStats] = useState<LifetimeStat[]>(initialStats ?? [])
-
-  useEffect(() => {
-    const parser = new PublicGoogleSheetsParser(LIFETIME_STATS_SHEET_ID)
-    parser.parse().then((data) => {
-      if (Array.isArray(data) && data.length > 0) {
-        setStats(data as LifetimeStat[])
-      }
-    })
-  }, [])
+  const stats = useAnimatedLifetimeStats(initialStats)
 
   // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
-  const grantsGiven = stats[0]?.value ? formatNumber(stats[0].value) : null
-  const usdAllocated = stats[1]?.value
-    ? Math.round(stats[1].value).toLocaleString()
-    : null
-  const satsSent = stats[2]?.value
-    ? formatNumber(stats[2].value).replace('B', 'billion')
-    : null
+  const grantsGiven = formatNumber(stats[0]?.value ?? 0)
+  const usdAllocated = Math.round(stats[1]?.value ?? 0).toLocaleString()
+  const satsSent = formatNumber(stats[2]?.value ?? 0).replace('B', 'billion')
 
   return (
     <p className={className}>
@@ -47,21 +28,21 @@ export default function StatsSentence({
         href="/transparency"
         className="-mx-1 rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        {usdAllocated ? <>${usdAllocated} USD</> : <>{skeleton} USD</>}
+        ${usdAllocated} USD
       </Link>{' '}
       to free and open-source projects and sent{' '}
       <Link
         href="/transparency"
         className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        {satsSent ? <>~{satsSent} sats</> : <>{skeleton} sats</>}
+        ~{satsSent} sats
       </Link>{' '}
       to{' '}
       <Link
         href="/transparency"
         className="-mx-1 rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        {grantsGiven ? <>{grantsGiven} grantees</> : <>{skeleton} grantees</>}
+        {grantsGiven} grantees
       </Link>{' '}
       in{' '}
       <Link
