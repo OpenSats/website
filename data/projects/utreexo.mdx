@@ -18,7 +18,8 @@ codebase centers on the [`utreexo`](https://github.com/utreexo/utreexo)
 accumulator library and [`utreexod`](https://github.com/utreexo/utreexod), a
 full node and bridge node implementation that serves those proofs to peers.
 
-Bridge nodes matter because today's Bitcoin network relays blocks and
+Bridge nodes are nodes that keep the entire Merkle forest and attach proofs to new blocks and transactions.
+They matter because today's Bitcoin network relays blocks and
 transactions without Utreexo proofs. `utreexod` fills that gap, while related
 work in [Floresta](/projects/floresta) brings the same model to a Rust
 compact-state client. The broader effort also includes protocol specifications
@@ -39,8 +40,8 @@ implementation work.
 
 ## What's next?
 
-Recent work landed in [`utreexod` v0.5.0][v0-5-0] and [`v0.5.1`][v0-5-1]. The
-current release line brings SwiftSync-based IBD, bridge-node performance and
+Recent work landed in [`utreexod` v0.5.0][v0-5-0] and [v0.5.1][v0-5-1]. The
+current release line brings [SwiftSync][SwifSync gist]-based IBD, bridge-node performance and
 database work, and continued cleanup of the Utreexo wire protocol. In parallel,
 [BIP 181, 182, and 183][bips-pr] remain under review, covering the accumulator,
 validation, and P2P message layer.
@@ -53,3 +54,4 @@ the protocol.
 [bips-pr]: https://github.com/bitcoin/bips/pull/1923
 [v0-5-0]: https://github.com/utreexo/utreexod/releases/tag/v0.5.0
 [v0-5-1]: https://github.com/utreexo/utreexod/releases/tag/v0.5.1
+[SwiftSync gist]:https://gist.github.com/RubenSomsen/a61a37d14182ccd78760e477c78133cd
