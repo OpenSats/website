@@ -4,37 +4,15 @@ import { InferGetStaticPropsType } from 'next'
 import { allProjects, allBlogs } from 'contentlayer/generated'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
-import CustomLink from '@/components/Link'
+import { PageActionLink } from '@/components/PageAction'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
-import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { getFundDonationUrl, getFundLabel } from '@/utils/funds'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const DEFAULT_LAYOUT = 'ProjectLayout'
-
-const FUND_DESIGNATION_IDS: Record<string, string> = {
-  nostr: 'ENWRA6YZ',
-  ops: 'ELL6P2J6',
-}
-
-const FUND_LABELS: Record<string, string> = {
-  general: 'General Fund',
-  nostr: 'The Nostr Fund',
-  ops: 'Operations Budget',
-}
-
-function getFundDonationUrl(fund: string): string {
-  const designationId = FUND_DESIGNATION_IDS[fund]
-  return designationId
-    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
-    : MONTHLY_DONATION_URL
-}
-
-function getFundLabel(fund: string): string {
-  return FUND_LABELS[fund] || fund
-}
 
 export async function getStaticPaths() {
   return {
@@ -74,46 +52,37 @@ export default function ProjectPage({
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           {project.announcementLink && (
-            <CustomLink
-              href={project.announcementLink}
-              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
-            >
+            <PageActionLink href={project.announcementLink}>
               Read announcement
-            </CustomLink>
+            </PageActionLink>
           )}
           {project.fund && (
-            <CustomLink
-              href={getFundDonationUrl(project.fund)}
-              className="block w-full rounded border border-stone-800 bg-transparent px-4 py-2 text-center font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:w-auto"
-            >
+            <PageActionLink href={getFundDonationUrl(project.fund)}>
               Donate to {getFundLabel(project.fund)}
-            </CustomLink>
+            </PageActionLink>
           )}
           {(() => {
             const heartbeatUrl = getHeartbeatUrl(project.git)
             return heartbeatUrl ? (
-              <CustomLink
+              <PageActionLink
                 href={heartbeatUrl}
                 aria-label={`View ${project.title} heartbeat`}
                 title="View project heartbeat"
-                className="inline-flex w-full flex-none items-center justify-center gap-2 rounded border border-stone-800 bg-transparent px-4 py-2 font-semibold text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-[42px] sm:w-[42px] sm:gap-0 sm:p-0 sm:leading-none"
+                layout="mobileTextDesktopSquare"
               >
                 <FontAwesomeIcon icon={faHeartPulse} className="h-4 w-4" />
                 <span className="sm:hidden">View Heartbeat</span>
-              </CustomLink>
+              </PageActionLink>
             ) : null
           })()}
           {project.donationLink && (
-            <CustomLink
-              href={project.donationLink}
-              className="block w-full rounded border border-stone-800 bg-stone-800 px-4 py-2 text-center font-semibold text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500 sm:w-auto"
-            >
+            <PageActionLink href={project.donationLink} variant="solid">
               {project.donationLink.includes('geyser')
                 ? 'Support via Geyser'
                 : project.donationLink.includes('opencollective')
                 ? 'Support via OpenCollective'
                 : 'Support directly'}
-            </CustomLink>
+            </PageActionLink>
           )}
         </aside>
       </div>

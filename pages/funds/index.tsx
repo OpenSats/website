@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
+import { PageActionButton, PageActionLink } from '@/components/PageAction'
 import StatsSentence from '@/components/StatsSentence'
 import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
 import PaymentModal from '@/components/PaymentModal'
@@ -15,7 +16,7 @@ import {
   faHeartPulse,
   faRepeat,
 } from '@fortawesome/free-solid-svg-icons'
-import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import { getFundDonationUrl } from '@/utils/funds'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type FundsIndexProps = {
@@ -73,15 +74,6 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
   },
 ]
 
-const DESIGNATION_IDS = { nostr: 'ENWRA6YZ', ops: 'ELL6P2J6' } as const
-
-const OUTLINE_ACTION_BUTTON_CLASSES =
-  'inline-flex shrink-0 items-center justify-center rounded border border-stone-800 bg-transparent text-stone-800 transition-colors hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black'
-
-const TEXT_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} h-11 w-11 gap-0 sm:h-auto sm:w-auto sm:gap-2 sm:px-4 sm:py-2 sm:text-sm sm:font-semibold sm:leading-6`
-
-const ICON_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} h-11 w-11 sm:h-[42px] sm:w-[42px] sm:p-0 sm:leading-none`
-
 type FundActionRowProps = {
   fund: Fund
   cfg: FundConfig
@@ -91,10 +83,9 @@ type FundActionRowProps = {
 function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
   return (
     <div className="flex flex-wrap items-center justify-end gap-3 pt-6">
-      <button
-        type="button"
+      <PageActionButton
         onClick={onDonate}
-        className={TEXT_ACTION_BUTTON_CLASSES}
+        layout="mobileSquareDesktopText"
         aria-label={`Donate sats directly to ${fund.title}`}
         title="Donate sats"
       >
@@ -104,10 +95,10 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
           aria-hidden="true"
         />
         <span className="hidden sm:inline">Donate sats directly</span>
-      </button>
-      <Link
+      </PageActionButton>
+      <PageActionLink
         href={getMonthlyDonationUrl(cfg)}
-        className={TEXT_ACTION_BUTTON_CLASSES}
+        layout="mobileSquareDesktopText"
         aria-label={`Donate monthly to ${fund.title}`}
         title="Donate monthly"
       >
@@ -117,11 +108,11 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
           aria-hidden="true"
         />
         <span className="hidden sm:inline">Donate monthly</span>
-      </Link>
+      </PageActionLink>
       {fund.heartbeat && (
-        <Link
+        <PageActionLink
           href={fund.heartbeat}
-          className={ICON_ACTION_BUTTON_CLASSES}
+          layout="square"
           aria-label={`View ${fund.title} heartbeat`}
           title="View heartbeat"
         >
@@ -130,11 +121,11 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
             className="h-4 w-4"
             aria-hidden="true"
           />
-        </Link>
+        </PageActionLink>
       )}
-      <Link
+      <PageActionLink
         href={`/funds/${fund.slug}`}
-        className={TEXT_ACTION_BUTTON_CLASSES}
+        layout="mobileSquareDesktopText"
         aria-label={`Learn more about ${fund.title}`}
         title={`Learn more about ${fund.title}`}
       >
@@ -144,17 +135,13 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
           aria-hidden="true"
         />
         <span className="hidden sm:inline">Learn more</span>
-      </Link>
+      </PageActionLink>
     </div>
   )
 }
 
 function getMonthlyDonationUrl(cfg: FundConfig): string {
-  return cfg.designation
-    ? `${MONTHLY_DONATION_URL}?designationId=${
-        DESIGNATION_IDS[cfg.designation]
-      }`
-    : MONTHLY_DONATION_URL
+  return getFundDonationUrl(cfg.designation ?? cfg.slug)
 }
 
 const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
