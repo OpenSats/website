@@ -50,13 +50,11 @@ function createParser() {
 function getAnimationStartValue(targetValue: number): number {
   if (targetValue <= 0) return 0
 
-  const digits = Math.max(Math.floor(targetValue).toString().length, 1)
+  const halvedValue = targetValue / 2
+  const digits = Math.max(Math.floor(halvedValue).toString().length, 1)
   const magnitude = 10 ** Math.max(digits - 2, 0)
-  const roundedDown = Math.floor(targetValue / magnitude) * magnitude
 
-  return roundedDown === targetValue
-    ? Math.max(targetValue - magnitude, 0)
-    : roundedDown
+  return Math.floor(halvedValue / magnitude) * magnitude
 }
 
 function createStartStats(targetStats: LifetimeStat[]): LifetimeStat[] {
