@@ -11,11 +11,7 @@ import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-import {
-  faArrowRight,
-  faHeartPulse,
-  faRepeat,
-} from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight, faRepeat } from '@fortawesome/free-solid-svg-icons'
 import { getFundDonationUrl } from '@/utils/funds'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
@@ -109,20 +105,6 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
         />
         <span className="hidden sm:inline">Donate monthly</span>
       </PageActionLink>
-      {fund.heartbeat && (
-        <PageActionLink
-          href={fund.heartbeat}
-          layout="desktopSquare"
-          aria-label={`View ${fund.title} heartbeat`}
-          title="View heartbeat"
-        >
-          <FontAwesomeIcon
-            icon={faHeartPulse}
-            className="h-4 w-4"
-            aria-hidden="true"
-          />
-        </PageActionLink>
-      )}
       <PageActionLink
         href={`/funds/${fund.slug}`}
         layout="mobileSquareDesktopText"
