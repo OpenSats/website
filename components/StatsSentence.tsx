@@ -2,6 +2,7 @@ import Link from '@/components/Link'
 import {
   formatNumber,
   type LifetimeStat,
+  useAnimatedCount,
   useAnimatedLifetimeStats,
 } from '@/utils/lifetimeStats'
 
@@ -20,6 +21,7 @@ export default function StatsSentence({
   const grantsGiven = formatNumber(stats[0]?.value ?? 0)
   const usdAllocated = Math.round(stats[1]?.value ?? 0).toLocaleString()
   const satsSent = formatNumber(stats[2]?.value ?? 0).replace('B', 'billion')
+  const countryCount = Math.round(useAnimatedCount(40))
 
   return (
     <p className={className}>
@@ -49,7 +51,7 @@ export default function StatsSentence({
         href="/map"
         className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        40+ countries
+        {countryCount}+ countries
       </Link>
       .
     </p>

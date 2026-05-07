@@ -121,6 +121,46 @@ export async function getLifetimeStats(): Promise<LifetimeStat[] | null> {
   return lifetimeStatsPromise
 }
 
+export function useAnimatedCount(
+  targetValue: number,
+  durationMs = 1200
+): number {
+  const [value, setValue] = useState(() => getAnimationStartValue(targetValue))
+  const frameRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const startValue = getAnimationStartValue(targetValue)
+    setValue(startValue)
+
+    if (prefersReducedMotion()) {
+      setValue(targetValue)
+      return
+    }
+
+    const startTime = performance.now()
+
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / durationMs, 1)
+      const eased = easeOutCubic(progress)
+      setValue(startValue + (targetValue - startValue) * eased)
+
+      if (progress < 1) {
+        frameRef.current = window.requestAnimationFrame(step)
+      }
+    }
+
+    frameRef.current = window.requestAnimationFrame(step)
+
+    return () => {
+      if (frameRef.current !== null) {
+        window.cancelAnimationFrame(frameRef.current)
+      }
+    }
+  }, [targetValue, durationMs])
+
+  return value
+}
+
 export function useAnimatedLifetimeStats(
   initialStats?: LifetimeStat[] | null,
   durationMs = 1200
