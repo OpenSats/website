@@ -155,7 +155,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           OpenSats is a 501(c)(3) public charity. 100% of every{' '}
           <Link
             href="/topics/sats"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+            className="text-inherit underline decoration-dotted underline-offset-[3px] decoration-1 decoration-neutral-300 transition-[color,text-decoration-color,text-decoration-style] duration-150 ease-in-out hover:text-primary-500 hover:decoration-solid hover:decoration-primary-500 dark:decoration-neutral-600 dark:hover:text-primary-400 dark:hover:decoration-primary-400"
           >
             sat
           </Link>{' '}
