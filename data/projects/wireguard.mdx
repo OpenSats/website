@@ -1,0 +1,60 @@
+---
+title: 'WireGuard'
+dateAdded: '2026-05-07'
+summary: 'A lean VPN protocol and software suite for secure networking across servers, phones, and desktops.'
+nym: 'Jason A. Donenfeld'
+website: 'https://www.wireguard.com/'
+donationLink: 'https://www.wireguard.com/donations/'
+coverImage: '/static/images/projects/wireguard.png'
+git: 'https://www.wireguard.com/repositories/'
+tags: ['Privacy', 'Protocol', 'Infrastructure']
+fund: general
+announcementLink: '/blog/jason-donenfeld-lts-grant'
+---
+
+WireGuard is a VPN protocol and software project created by [Jason A.
+Donenfeld][grant]. It securely encapsulates IP packets over UDP and keeps
+configuration close to the Unix networking model: add an interface, assign
+keys, define which IPs each peer may route, and send traffic through it.
+Initially released for the Linux kernel, it now ships maintained
+implementations and clients across Linux, Windows, macOS, iOS, Android,
+FreeBSD, and OpenBSD.
+
+The official project is split across several repositories. Core pieces include
+the Linux kernel implementation, the `wireguard-tools` userspace utilities like
+[`wg(8)`][wg-man] and `wg-quick`, the `wireguard-go` userspace
+implementation, and first-party clients for Apple, Windows, and Android. The
+project site also points to active work around the Rust implementation,
+FreeBSD and OpenBSD ports, `wg-dynamic`, and benchmarking tools like
+`kbench9000`.
+
+## Why fund it?
+
+WireGuard is infrastructure that people already rely on. Bitcoin node
+operators and infrastructure teams use it to secure traffic between nodes and
+data centers. The code stays small enough to audit, which makes steady
+maintenance across kernels, userspace tools, and client platforms especially
+valuable.
+
+OpenSats announced [long-term support for Jason Donenfeld][grant] in September 2024. WireGuard's own [donations page][donations] also lists OpenSats as a
+non-profit foundation donor supporting the project in 2024 and 2025. That
+support helps keep WireGuard development sustainable as free open source
+software.
+
+## What's next?
+
+The project continues to ship maintenance and platform work across the mature
+Linux, Windows, Apple, Android, and userspace codebases while newer components
+keep moving. The official repository list still marks the Rust
+implementation, FreeBSD and OpenBSD kernel ports, `wg-dynamic`, and
+`kbench9000` as active work.
+
+If you want to dig deeper, start with the [main site][site], the [repository
+list][repos], or the [technical whitepaper][paper].
+
+[donations]: https://www.wireguard.com/donations/
+[grant]: /blog/jason-donenfeld-lts-grant
+[paper]: https://www.wireguard.com/papers/wireguard.pdf
+[repos]: https://www.wireguard.com/repositories/
+[site]: https://www.wireguard.com/
+[wg-man]: https://git.zx2c4.com/wireguard-tools/about/src/man/wg.8
