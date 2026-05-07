@@ -273,11 +273,12 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS ? 'enabled' : 'disabled'}
+        variant={isFLOSS && !loading ? 'enabled' : 'disabled'}
         type="submit"
-        disabled={loading}
+        disabled={loading || !isFLOSS}
+        aria-busy={loading}
       >
-        Submit LTS Application
+        {loading ? 'Submitting…' : 'Submit LTS Application'}
       </FormButton>
 
       {!!failureReason && (
