@@ -5,7 +5,7 @@ category: 'Scaling'
 aliases: ['utreexo accumulator', 'compact-state node', 'compact state node']
 ---
 
-Utreexo is a proposed protocol for representing Bitcoin's UTXO set with a small cryptographic accumulator instead of storing every unspent output directly. In practice, the accumulator is usually described as a forest of Merkle trees that commits to the current UTXO set.
+Utreexo is a proposed protocol for representing Bitcoin's [UTXO](/topics/utxo) set with a small cryptographic accumulator instead of storing every unspent output directly. In practice, the accumulator is usually described as a forest of Merkle trees that commits to the current UTXO set.
 
 When a transaction spends a coin, the spender or a bridge node supplies an inclusion proof showing that the spent output is part of that committed set. A validating node can check the proof, update its accumulator, and keep enforcing Bitcoin's consensus rules without keeping the full UTXO set on disk.
 
