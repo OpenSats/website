@@ -76,11 +76,11 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
 const DESIGNATION_IDS = { nostr: 'ENWRA6YZ', ops: 'ELL6P2J6' } as const
 
 const OUTLINE_ACTION_BUTTON_CLASSES =
-  'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded border border-stone-800 bg-transparent text-stone-800 transition-colors hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-auto sm:w-auto sm:px-4 sm:py-2 sm:text-sm sm:font-semibold sm:leading-6'
+  'inline-flex shrink-0 items-center justify-center rounded border border-stone-800 bg-transparent text-stone-800 transition-colors hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black'
 
-const TEXT_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} gap-0 sm:gap-2`
+const TEXT_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} h-11 w-11 gap-0 sm:h-auto sm:w-auto sm:gap-2 sm:px-4 sm:py-2 sm:text-sm sm:font-semibold sm:leading-6`
 
-const ICON_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} sm:h-[42px] sm:w-[42px] sm:p-0`
+const ICON_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} h-11 w-11 sm:h-[42px] sm:w-[42px] sm:p-0 sm:leading-none`
 
 type FundActionRowProps = {
   fund: Fund
