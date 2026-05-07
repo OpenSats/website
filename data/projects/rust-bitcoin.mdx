@@ -1,0 +1,29 @@
+---
+title: 'rust-bitcoin'
+dateAdded: '2026-05-07'
+summary: 'A low-level Rust Bitcoin library stack for protocol messages, transactions, scripts, keys, addresses, and PSBTs.'
+nym: 'rust-bitcoin Maintainers'
+website: 'https://rust-bitcoin.org/'
+coverImage: '/static/images/projects/rust-bitcoin.svg'
+git: 'https://github.com/rust-bitcoin/rust-bitcoin'
+tags: ['Bitcoin', 'Library']
+showcase: true
+fund: general
+announcementLink: '/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin'
+---
+
+[`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) is the low-level library stack much of the Rust Bitcoin ecosystem builds on. The main `bitcoin` crate gives developers types and utilities for protocol messages, blocks, transactions, scripts, keys, addresses, and [PSBTs](/topics/psbt). The wider [`rust-bitcoin` organization](https://github.com/rust-bitcoin) also maintains companion crates for hashing, secp256k1, [Miniscript](/topics/miniscript), and Bitcoin Core RPC access.
+
+Projects such as [BDK](/projects/bdk), [LDK](/topics/ldk), [electrs](https://github.com/romanz/electrs), and [Fedimint](/topics/fedimint) build on this stack. OpenSats has supported maintainers working on crate stabilization, extracted-crate refactors, broader test coverage, and the `corepc` work that helps Rust projects talk to Bitcoin Core.
+
+## Why fund it?
+
+A lot of Bitcoin software in Rust starts here. Wallets, hardware wallet firmware, indexers, and node-adjacent tools all depend on exact behavior around fee rates, locktimes, addresses, scripts, hashes, and transaction serialization. Bugs at this layer can ripple outward into many other projects at once.
+
+OpenSats first funded [`rust-bitcoin` maintainer Tobin Harding](/blog/tobin-harding-receives-lts-grant-for-rust-bitcoin) in 2023. Support continued with a dedicated [project grant](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin) in 2025 and a [renewal](/blog/sixteenth-wave-of-bitcoin-grants#rust-bitcoin) in 2026. That work pushed `bitcoin-units`, `bitcoin-primitives`, and `consensus_encoding` toward 1.0 releases, expanded test coverage across the stack, and kept work moving on `corepc` and the ongoing `crypto` split.
+
+## What's next?
+
+Current work is centered on pushing the stabilizing crates closest to 1.0, especially `hashes`, `units`, `primitives`, and `consensus_encoding`. Maintainers are also building an incremental upgrade path from `rust-bitcoin 0.32.x` to the newer extracted-crate architecture so downstream projects can move forward in smaller steps.
+
+In parallel, work continues on the `crypto` split, the move of PSBT code into `rust-psbt`, and the async client in `corepc`.
