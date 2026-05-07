@@ -241,8 +241,9 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
             </span>
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Pick where your gift should focus. If you skip a designation, it
-            supports the Bitcoin & FOSS grant program described above.
+            These pools fund nostr development or our own operations,
+            respectively. Refer to the individual fund pages to learn more about
+            their purpose and impact.
           </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
             {secondaryFunds.map(({ cfg, fund }) => (
