@@ -1,0 +1,68 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="honest-link" x1="40" y1="40" x2="360" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#cbd5e1" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#7dd3fc" stop-opacity="0.5" />
+    </linearGradient>
+    <linearGradient id="attack-link" x1="200" y1="104" x2="200" y2="296" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb923c" />
+      <stop offset="1" stop-color="#f97316" />
+    </linearGradient>
+    <radialGradient id="victim-core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(184 184) rotate(45) scale(112)">
+      <stop offset="0" stop-color="#e0f2fe" />
+      <stop offset="1" stop-color="#7dd3fc" />
+    </radialGradient>
+  </defs>
+
+  <g stroke="url(#honest-link)" stroke-linecap="round" stroke-width="8">
+    <path d="M78 78 L132 146" />
+    <path d="M200 48 L200 104" />
+    <path d="M322 78 L268 146" />
+    <path d="M352 200 L296 200" />
+    <path d="M322 322 L268 254" />
+    <path d="M200 352 L200 296" />
+    <path d="M78 322 L132 254" />
+    <path d="M48 200 L104 200" />
+  </g>
+
+  <g stroke="url(#attack-link)" stroke-linecap="round" stroke-width="12">
+    <path d="M200 126 L200 165" />
+    <path d="M256 152 L226 182" />
+    <path d="M274 214 L235 204" />
+    <path d="M239 268 L218 229" />
+    <path d="M161 268 L182 229" />
+    <path d="M126 214 L165 204" />
+    <path d="M144 152 L174 182" />
+  </g>
+
+  <circle cx="200" cy="200" r="94" stroke="#fb923c" stroke-width="8" stroke-dasharray="8 14" opacity="0.7" />
+
+  <g stroke="#fdba74" stroke-width="6" opacity="0.7">
+    <path d="M144 152 L200 126 L256 152 L274 214 L239 268 L161 268 L126 214 Z" />
+  </g>
+
+  <circle cx="200" cy="200" r="56" fill="url(#victim-core)" />
+  <circle cx="224" cy="192" r="54" fill="#0f172a" fill-opacity="0.94" />
+  <circle cx="184" cy="184" r="8" fill="#f8fafc" />
+
+  <g fill="#93c5fd" stroke="#38bdf8" stroke-width="6">
+    <circle cx="78" cy="78" r="18" />
+    <circle cx="200" cy="48" r="18" />
+    <circle cx="322" cy="78" r="18" />
+    <circle cx="352" cy="200" r="18" />
+    <circle cx="322" cy="322" r="18" />
+    <circle cx="200" cy="352" r="18" />
+    <circle cx="78" cy="322" r="18" />
+    <circle cx="48" cy="200" r="18" />
+  </g>
+
+  <g fill="#f97316" stroke="#ea580c" stroke-width="6">
+    <circle cx="200" cy="126" r="16" />
+    <circle cx="256" cy="152" r="16" />
+    <circle cx="274" cy="214" r="16" />
+    <circle cx="239" cy="268" r="16" />
+    <circle cx="161" cy="268" r="16" />
+    <circle cx="126" cy="214" r="16" />
+    <circle cx="144" cy="152" r="16" />
+  </g>
+</svg>
