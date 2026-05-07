@@ -52,12 +52,18 @@ export default function ProjectPage({
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           {project.announcementLink && (
-            <PageActionLink href={project.announcementLink}>
+            <PageActionLink
+              variant="outlineMuted"
+              href={project.announcementLink}
+            >
               Read announcement
             </PageActionLink>
           )}
           {project.fund && (
-            <PageActionLink href={getFundDonationUrl(project.fund)}>
+            <PageActionLink
+              variant="outlineMuted"
+              href={getFundDonationUrl(project.fund)}
+            >
               Donate to {getFundLabel(project.fund)}
             </PageActionLink>
           )}
@@ -65,6 +71,7 @@ export default function ProjectPage({
             const heartbeatUrl = getHeartbeatUrl(project.git)
             return heartbeatUrl ? (
               <PageActionLink
+                variant="outlineMuted"
                 href={heartbeatUrl}
                 aria-label={`View ${project.title} heartbeat`}
                 title="View project heartbeat"
@@ -76,7 +83,7 @@ export default function ProjectPage({
             ) : null
           })()}
           {project.donationLink && (
-            <PageActionLink href={project.donationLink} variant="solid">
+            <PageActionLink href={project.donationLink} variant="solidMuted">
               {project.donationLink.includes('geyser')
                 ? 'Support via Geyser'
                 : project.donationLink.includes('opencollective')

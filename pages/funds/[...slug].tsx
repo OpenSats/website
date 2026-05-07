@@ -71,6 +71,7 @@ export default function FundPage({
         <div></div>
         <aside className="bg-light flex flex-wrap items-center gap-4 rounded-xl py-4 xl:col-span-2">
           <PageActionLink
+            variant="outlineMuted"
             href="/newsletter#subscribe"
             aria-label="Read our Newsletter"
             title="Read our Newsletter"
@@ -81,6 +82,7 @@ export default function FundPage({
           </PageActionLink>
           {project.heartbeat && (
             <PageActionLink
+              variant="outlineMuted"
               href={project.heartbeat}
               aria-label={`View ${project.title} heartbeat`}
               title="View fund heartbeat"
