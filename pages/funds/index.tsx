@@ -89,7 +89,7 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
       >
         <FontAwesomeIcon
           icon={faBitcoin}
-          className="h-[1.125rem] w-[1.125rem]"
+          className="h-4 w-4"
           aria-hidden="true"
         />
         {!useCompactDonateActions && (
