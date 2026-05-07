@@ -241,7 +241,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
             </span>
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-            These pools fund nostr development or our own operations,
+            These funds support nostr development or our own operations,
             respectively. Refer to the individual fund pages to learn more about
             their purpose and impact.
           </p>
