@@ -82,6 +82,7 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
   return (
     <div className="flex flex-wrap items-center justify-end gap-3 pt-6">
       <PageActionButton
+        variant="outlineMuted"
         onClick={onDonate}
         layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
         aria-label={`Donate sats directly to ${fund.title}`}
@@ -97,6 +98,7 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
         )}
       </PageActionButton>
       <PageActionLink
+        variant="outlineMuted"
         href={getMonthlyDonationUrl(cfg)}
         layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
         aria-label={`Donate monthly to ${fund.title}`}
@@ -112,6 +114,7 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
         )}
       </PageActionLink>
       <PageActionLink
+        variant="outlineMuted"
         href={`/funds/${fund.slug}`}
         layout="mobileSquareDesktopText"
         aria-label={`Learn more about ${fund.title}`}

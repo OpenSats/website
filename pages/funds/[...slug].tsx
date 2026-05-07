@@ -90,12 +90,12 @@ export default function FundPage({
               <span className="sm:hidden">View Heartbeat</span>
             </PageActionLink>
           )}
-          <PageActionButton onClick={openPaymentModal}>
+          <PageActionButton variant="outlineMuted" onClick={openPaymentModal}>
             Donate sats directly
           </PageActionButton>
           <PageActionLink
             href={getFundDonationUrl(project.slug)}
-            variant="solid"
+            variant="solidMuted"
             className="sm:flex-1"
           >
             Donate monthly
