@@ -152,9 +152,15 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           Make the most of your donation
         </h1>
         <p className="text-xl leading-7 text-gray-500 dark:text-gray-400">
-          OpenSats is a 501(c)(3) public charity. 100% of every sat donated to
-          our open-source funds goes to grantees. Our own bills are paid out of
-          a separate Operations Budget.
+          OpenSats is a 501(c)(3) public charity. 100% of every{' '}
+          <Link
+            href="/topics/sats"
+            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          >
+            sat
+          </Link>{' '}
+          donated to our open-source funds goes to grantees. Our own bills are
+          paid out of a separate Operations Budget.
         </p>
         <StatsSentence
           initialStats={lifetimeStats}
