@@ -1,0 +1,27 @@
+---
+title: 'rust-bitcoin'
+dateAdded: '2026-05-07'
+summary: 'A low-level Rust Bitcoin library stack for protocol messages, transactions, scripts, keys, addresses, and PSBTs.'
+nym: 'rust-bitcoin Maintainers'
+website: 'https://rust-bitcoin.org/'
+coverImage: '/static/images/projects/rust-bitcoin.svg'
+git: 'https://github.com/rust-bitcoin/rust-bitcoin'
+tags: ['Bitcoin', 'Library']
+showcase: true
+fund: general
+announcementLink: '/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin'
+---
+
+[`rust-bitcoin`](https://github.com/rust-bitcoin/rust-bitcoin) is the low-level library stack much of the Rust Bitcoin ecosystem builds on. The main `bitcoin` crate gives developers types and utilities for protocol messages, blocks, transactions, scripts, keys, addresses, and [PSBTs](/topics/psbt). The wider [`rust-bitcoin` organization](https://github.com/rust-bitcoin) also maintains companion crates for hashing, secp256k1, Miniscript, and Bitcoin Core RPC access.
+
+Projects such as [BDK](/projects/bdk), [LDK](https://github.com/lightningdevkit), [electrs](https://github.com/romanz/electrs), and [Fedimint](https://github.com/fedimint/fedimint) build on this stack. OpenSats has supported maintainers working on API stability, modularization, policy updates that track Bitcoin Core, and the testing work that keeps downstream software safe to upgrade.
+
+## Why fund it?
+
+A lot of Bitcoin software in Rust starts here. Wallets, hardware wallet firmware, indexers, and node-adjacent tools all depend on exact behavior around fee rates, locktimes, addresses, scripts, hashes, and transaction serialization. Bugs at this layer can ripple outward into many other projects at once.
+
+OpenSats first funded [`rust-bitcoin` maintainer Tobin Harding](/blog/tobin-harding-receives-lts-grant-for-rust-bitcoin) in 2023. Support continued with a dedicated [project grant](/blog/ninth-wave-of-bitcoin-grants#rust-bitcoin) in 2025 and a [renewal](/blog/sixteenth-wave-of-bitcoin-grants#rust-bitcoin) in 2026. That work helped split the codebase into smaller crates such as [`bitcoin-primitives`](https://docs.rs/bitcoin-primitives/latest/bitcoin_primitives/), [`bitcoin-units`](https://docs.rs/bitcoin-units/latest/bitcoin_units/), and [`bitcoin-io`](https://docs.rs/bitcoin-io/latest/bitcoin_io/), improved test coverage, and kept common policy rules aligned with Bitcoin Core.
+
+## What's next?
+
+The current push is toward stable 1.0 releases across key crates in the stack. That includes upcoming releases of the main `bitcoin` crate and related primitives, bug fixes, broader test coverage, documentation improvements, and more cleanup across the repo. The goal is a well-tested, well-documented, CC0-licensed Rust Bitcoin stack that downstream projects can rely on for years.
