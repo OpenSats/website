@@ -158,7 +158,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           OpenSats is a 501(c)(3) public charity. 100% of every{' '}
           <Link
             href="/topics/sats"
-            className="text-inherit underline decoration-dotted underline-offset-[3px] decoration-1 decoration-neutral-300 transition-[color,text-decoration-color,text-decoration-style] duration-150 ease-in-out hover:text-primary-500 hover:decoration-solid hover:decoration-primary-500 dark:decoration-neutral-600 dark:hover:text-primary-400 dark:hover:decoration-primary-400"
+            className="text-inherit underline decoration-neutral-300 decoration-dotted decoration-1 underline-offset-[3px] transition-[color,text-decoration-color,text-decoration-style] duration-150 ease-in-out hover:text-primary-500 hover:decoration-primary-500 hover:decoration-solid dark:decoration-neutral-600 dark:hover:text-primary-400 dark:hover:decoration-primary-400"
           >
             sat
           </Link>{' '}
@@ -242,8 +242,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             These funds support nostr development or our own operations,
-            respectively. Refer to the respective pages linked below to learn more
-            about their purpose and impact.
+            respectively. Refer to the respective pages linked below to learn
+            more about their purpose and impact.
           </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
             {secondaryFunds.map(({ cfg, fund }) => (
