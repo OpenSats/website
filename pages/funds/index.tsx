@@ -173,9 +173,9 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
                 }
                 darkSrc={PRIMARY_FUND_CONFIG.fundsIndexCoverImageDark}
                 alt={primaryFund.title}
-                width={210}
-                height={210}
-                className="h-40 w-40 rounded-2xl"
+                width={250}
+                height={250}
+                className="h-[12.5rem] w-[12.5rem] rounded-2xl"
               />
             </div>
           </div>
