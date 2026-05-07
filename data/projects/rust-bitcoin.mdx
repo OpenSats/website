@@ -24,4 +24,6 @@ OpenSats first funded [`rust-bitcoin` maintainer Tobin Harding](/blog/tobin-hard
 
 ## What's next?
 
-The current push is toward stable 1.0 releases across key crates in the stack. That includes upcoming releases of the main `bitcoin` crate and related primitives, bug fixes, broader test coverage, documentation improvements, and more cleanup across the repo. The goal is a well-tested, well-documented, CC0-licensed Rust Bitcoin stack that downstream projects can rely on for years.
+Current work is centered on pushing the stabilizing crates closest to 1.0, especially `hashes`, `units`, `primitives`, and `consensus_encoding`. Maintainers are also building an incremental upgrade path from `rust-bitcoin 0.32.x` to the newer extracted-crate architecture so downstream projects can move forward in smaller steps.
+
+In parallel, work continues on the `crypto` split, the move of PSBT code into `rust-psbt`, and the async client in `corepc`.
