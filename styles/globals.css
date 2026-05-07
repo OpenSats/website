@@ -135,6 +135,8 @@ body.ReactModal__Body--open {
 .donate-banner-v2 {
   position: relative;
   display: flex;
+  box-sizing: border-box;
+  width: 100%;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
