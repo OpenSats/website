@@ -9,6 +9,7 @@ type ActionVariant = 'outline' | 'solid'
 type ActionLayout =
   | 'full'
   | 'square'
+  | 'desktopSquare'
   | 'mobileTextDesktopSquare'
   | 'mobileSquareDesktopText'
 
@@ -25,6 +26,8 @@ const LAYOUT_CLASSES: Record<ActionLayout, string> = {
   full: 'block w-full px-4 py-2 text-center font-semibold sm:w-auto',
   square:
     'inline-flex h-11 w-11 shrink-0 items-center justify-center sm:h-[42px] sm:w-[42px] sm:p-0 sm:leading-none',
+  desktopSquare:
+    'hidden shrink-0 items-center justify-center sm:inline-flex sm:h-[42px] sm:w-[42px] sm:p-0 sm:leading-none',
   mobileTextDesktopSquare:
     'inline-flex w-full flex-none items-center justify-center gap-2 px-4 py-2 font-semibold sm:h-[42px] sm:w-[42px] sm:gap-0 sm:p-0 sm:leading-none',
   mobileSquareDesktopText:

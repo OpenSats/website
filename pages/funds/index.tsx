@@ -112,7 +112,7 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
       {fund.heartbeat && (
         <PageActionLink
           href={fund.heartbeat}
-          layout="square"
+          layout="desktopSquare"
           aria-label={`View ${fund.title} heartbeat`}
           title="View heartbeat"
         >
