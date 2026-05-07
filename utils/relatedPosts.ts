@@ -4,6 +4,21 @@ function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+function stripMarkdownForSearch(raw = ''): string {
+  return raw
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]*`/g, ' ')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, ' $1 ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, ' $1 ')
+    .replace(/\[([^\]]+)\]\[[^\]]*\]/g, ' $1 ')
+    .replace(/^\[[^\]]+\]:\s+\S+.*$/gm, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/https?:\/\/\S+/g, ' ')
+    .replace(/[>#*_~|]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 /**
  * Finds blog posts whose title, summary, tags, or body mention any of the
  * given terms as a whole word (case-insensitive).
@@ -12,6 +27,10 @@ function escapeRegExp(str: string): string {
  * as interchangeable, so a term like "BIP 324" matches "BIP 324", "BIP-324",
  * "BIP_324", and "BIP324" in blog text. Word boundaries still anchor both
  * ends, so "BIP 32" does not match "BIP 324".
+ *
+ * Body matching runs against plain text extracted from the MDX body, not the
+ * raw markdown source. That keeps URLs, reference definitions, and MDX syntax
+ * from creating false matches.
  */
 export function getRelatedBlogPostsByTerms(
   terms: string[],
@@ -40,7 +59,7 @@ export function getRelatedBlogPostsByTerms(
       blog.title || '',
       blog.summary || '',
       (blog.tags || []).join(' '),
-      blog.body?.raw || '',
+      stripMarkdownForSearch(blog.body?.raw || ''),
     ]
       .join(' ')
       .toLowerCase()
