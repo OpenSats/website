@@ -14,6 +14,7 @@ const CATEGORY_ORDER = [
   'Mining',
   'Nostr',
   'Scaling',
+  'Open Source',
 ]
 
 type Group = {
