@@ -10,7 +10,11 @@ import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-import { faHeartPulse, faRepeat } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRight,
+  faHeartPulse,
+  faRepeat,
+} from '@fortawesome/free-solid-svg-icons'
 import { MONTHLY_DONATION_URL } from '@/utils/constants'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
@@ -70,6 +74,80 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
 ]
 
 const DESIGNATION_IDS = { nostr: 'ENWRA6YZ', ops: 'ELL6P2J6' } as const
+
+const OUTLINE_ACTION_BUTTON_CLASSES =
+  'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded border border-stone-800 bg-transparent text-stone-800 transition-colors hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black sm:h-auto sm:w-auto sm:px-4 sm:py-2 sm:text-sm sm:font-semibold sm:leading-6'
+
+const TEXT_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} gap-0 sm:gap-2`
+
+const ICON_ACTION_BUTTON_CLASSES = `${OUTLINE_ACTION_BUTTON_CLASSES} sm:h-[42px] sm:w-[42px] sm:p-0`
+
+type FundActionRowProps = {
+  fund: Fund
+  cfg: FundConfig
+  onDonate: () => void
+}
+
+function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
+  return (
+    <div className="flex flex-wrap items-center justify-end gap-3 pt-6">
+      <button
+        type="button"
+        onClick={onDonate}
+        className={TEXT_ACTION_BUTTON_CLASSES}
+        aria-label={`Donate sats directly to ${fund.title}`}
+        title="Donate sats"
+      >
+        <FontAwesomeIcon
+          icon={faBitcoin}
+          className="h-[1.125rem] w-[1.125rem]"
+          aria-hidden="true"
+        />
+        <span className="hidden sm:inline">Donate sats directly</span>
+      </button>
+      <Link
+        href={getMonthlyDonationUrl(cfg)}
+        className={TEXT_ACTION_BUTTON_CLASSES}
+        aria-label={`Donate monthly to ${fund.title}`}
+        title="Donate monthly"
+      >
+        <FontAwesomeIcon
+          icon={faRepeat}
+          className="h-4 w-4"
+          aria-hidden="true"
+        />
+        <span className="hidden sm:inline">Donate monthly</span>
+      </Link>
+      {fund.heartbeat && (
+        <Link
+          href={fund.heartbeat}
+          className={ICON_ACTION_BUTTON_CLASSES}
+          aria-label={`View ${fund.title} heartbeat`}
+          title="View heartbeat"
+        >
+          <FontAwesomeIcon
+            icon={faHeartPulse}
+            className="h-4 w-4"
+            aria-hidden="true"
+          />
+        </Link>
+      )}
+      <Link
+        href={`/funds/${fund.slug}`}
+        className={TEXT_ACTION_BUTTON_CLASSES}
+        aria-label={`Learn more about ${fund.title}`}
+        title={`Learn more about ${fund.title}`}
+      >
+        <FontAwesomeIcon
+          icon={faArrowRight}
+          className="h-4 w-4 sm:hidden"
+          aria-hidden="true"
+        />
+        <span className="hidden sm:inline">Learn more</span>
+      </Link>
+    </div>
+  )
+}
 
 function getMonthlyDonationUrl(cfg: FundConfig): string {
   return cfg.designation
@@ -161,56 +239,11 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
                 tax-deductible donation to a 501(c)(3).
               </p>
             </div>
-            <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-6 text-sm font-medium leading-6">
-              <button
-                type="button"
-                onClick={() => setModalFund(primaryFund)}
-                className="inline-flex w-max shrink-0 items-center gap-1.5 whitespace-nowrap p-0 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Donate sats directly to ${primaryFund.title}`}
-                title="Donate sats"
-              >
-                <FontAwesomeIcon
-                  icon={faBitcoin}
-                  className="h-3.5 w-3.5"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:inline">Donate sats directly</span>
-              </button>
-              <Link
-                href={getMonthlyDonationUrl(PRIMARY_FUND_CONFIG)}
-                className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Donate monthly to ${primaryFund.title}`}
-                title="Donate monthly"
-              >
-                <FontAwesomeIcon
-                  icon={faRepeat}
-                  className="h-3.5 w-3.5"
-                  aria-hidden="true"
-                />
-                <span className="hidden sm:inline">Donate monthly</span>
-              </Link>
-              {primaryFund.heartbeat && (
-                <Link
-                  href={primaryFund.heartbeat}
-                  className="inline-flex shrink-0 items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                  aria-label={`View ${primaryFund.title} heartbeat`}
-                  title="View heartbeat"
-                >
-                  <FontAwesomeIcon
-                    icon={faHeartPulse}
-                    className="h-3.5 w-3.5"
-                    aria-hidden="true"
-                  />
-                </Link>
-              )}
-              <Link
-                href={`/funds/${primaryFund.slug}`}
-                className="inline-flex shrink-0 items-center whitespace-nowrap text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                aria-label={`Learn more about ${primaryFund.title}`}
-              >
-                Learn more &rarr;
-              </Link>
-            </div>
+            <FundActionRow
+              fund={primaryFund}
+              cfg={PRIMARY_FUND_CONFIG}
+              onDonate={() => setModalFund(primaryFund)}
+            />
           </div>
         </section>
       )}
@@ -218,11 +251,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
       {secondaryFunds.length > 0 && (
         <section className="border-t border-gray-200 pt-10 dark:border-gray-700">
           <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
-            Designate your gift
+            Designate your donation to a specific fund
           </h2>
-          <p className="pt-1 text-base text-gray-500 dark:text-gray-400">
-            Earmark a recurring donation for a specific fund instead.
-          </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
             {secondaryFunds.map(({ cfg, fund }) => (
               <article
@@ -244,55 +274,12 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
                     </p>
                   </div>
                 </div>
-                <div className="mt-auto flex flex-wrap items-center justify-end gap-x-4 gap-y-2 pt-6 text-sm font-medium leading-6">
-                  <button
-                    type="button"
-                    onClick={() => setModalFund(fund)}
-                    className="inline-flex w-max shrink-0 items-center gap-1.5 whitespace-nowrap p-0 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Donate sats directly to ${fund.title}`}
-                    title="Donate sats"
-                  >
-                    <FontAwesomeIcon
-                      icon={faBitcoin}
-                      className="h-3.5 w-3.5"
-                      aria-hidden="true"
-                    />
-                    <span className="hidden sm:inline">Donate sats</span>
-                  </button>
-                  <Link
-                    href={getMonthlyDonationUrl(cfg)}
-                    className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Donate monthly to ${fund.title}`}
-                    title="Donate monthly"
-                  >
-                    <FontAwesomeIcon
-                      icon={faRepeat}
-                      className="h-3.5 w-3.5"
-                      aria-hidden="true"
-                    />
-                    <span className="hidden sm:inline">Donate monthly</span>
-                  </Link>
-                  {fund.heartbeat && (
-                    <Link
-                      href={fund.heartbeat}
-                      className="inline-flex shrink-0 items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`View ${fund.title} heartbeat`}
-                      title="View heartbeat"
-                    >
-                      <FontAwesomeIcon
-                        icon={faHeartPulse}
-                        className="h-3.5 w-3.5"
-                        aria-hidden="true"
-                      />
-                    </Link>
-                  )}
-                  <Link
-                    href={`/funds/${fund.slug}`}
-                    className="inline-flex shrink-0 items-center whitespace-nowrap text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Learn more about ${fund.title}`}
-                  >
-                    Learn more &rarr;
-                  </Link>
+                <div className="mt-auto">
+                  <FundActionRow
+                    fund={fund}
+                    cfg={cfg}
+                    onDonate={() => setModalFund(fund)}
+                  />
                 </div>
               </article>
             ))}
