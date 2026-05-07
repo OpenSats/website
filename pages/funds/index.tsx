@@ -77,11 +77,13 @@ type FundActionRowProps = {
 }
 
 function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
+  const useCompactDonateActions = cfg.slug !== 'general'
+
   return (
     <div className="flex flex-wrap items-center justify-end gap-3 pt-6">
       <PageActionButton
         onClick={onDonate}
-        layout="mobileSquareDesktopText"
+        layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
         aria-label={`Donate sats directly to ${fund.title}`}
         title="Donate sats"
       >
@@ -90,11 +92,13 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
           className="h-[1.125rem] w-[1.125rem]"
           aria-hidden="true"
         />
-        <span className="hidden sm:inline">Donate sats directly</span>
+        {!useCompactDonateActions && (
+          <span className="hidden sm:inline">Donate sats directly</span>
+        )}
       </PageActionButton>
       <PageActionLink
         href={getMonthlyDonationUrl(cfg)}
-        layout="mobileSquareDesktopText"
+        layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
         aria-label={`Donate monthly to ${fund.title}`}
         title="Donate monthly"
       >
@@ -103,7 +107,9 @@ function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
           className="h-4 w-4"
           aria-hidden="true"
         />
-        <span className="hidden sm:inline">Donate monthly</span>
+        {!useCompactDonateActions && (
+          <span className="hidden sm:inline">Donate monthly</span>
+        )}
       </PageActionLink>
       <PageActionLink
         href={`/funds/${fund.slug}`}
