@@ -16,7 +16,7 @@ const BASE_ACTION_CLASSES = 'rounded transition-colors'
 
 const VARIANT_CLASSES: Record<ActionVariant, string> = {
   outline:
-    'border border-stone-800 bg-transparent text-stone-800 hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:border-white dark:text-white dark:hover:bg-orange-500 dark:hover:text-black',
+    'border border-stone-800 bg-transparent text-stone-800 hover:border-transparent hover:bg-stone-800 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-black',
   solid:
     'border border-stone-800 bg-stone-800 text-white hover:border-transparent hover:bg-orange-500 hover:text-stone-800 dark:bg-white dark:text-black dark:hover:bg-orange-500',
 }
