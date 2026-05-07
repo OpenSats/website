@@ -1,0 +1,30 @@
+---
+title: 'Bitcoin Research Kit'
+dateAdded: '2026-05-07'
+summary: 'A self-hostable Bitcoin analytics stack that indexes chain data, computes metrics, serves an API, and powers the public Bitview instance.'
+nym: 'nym21'
+website: 'https://bitview.space/'
+coverImage: '/static/images/projects/bitcoinresearchkit.svg'
+git: 'https://github.com/bitcoinresearchkit/brk'
+tags: ['Bitcoin', 'Research', 'Infrastructure']
+fund: general
+announcementLink: '/blog/twelfth-wave-of-bitcoin-grants#bitcoin-research-kit'
+---
+
+Bitcoin Research Kit (BRK) is an open-source analytics stack for Bitcoin. It parses chain data from a [Bitcoin Core](/projects/bitcoin-core) node, indexes blocks and transactions, computes metrics, serves an API, and renders charts from the same local dataset. The upstream [README][readme] describes it as a self-hostable package that combines pieces users usually reach for through separate services such as [Glassnode](https://glassnode.com/), [mempool.space](https://mempool.space/), and [electrs](https://github.com/romanz/electrs). [Bitview][bitview] is the project's official free hosted instance.
+
+The current stack covers more than charts. BRK exposes 8,000+ metrics across 15 time resolutions, tracks blockchain data for blocks, transactions, addresses, and UTXOs, and includes mempool data such as fee estimates, projected blocks, and unconfirmed transactions. It also ships client libraries for JavaScript, Python, and Rust. All of that runs with a Bitcoin Core node as the only required external dependency, which keeps the data pipeline local and verifiable.
+
+## Why fund it?
+
+Researchers, miners, and node operators need reliable chain data. When analytics, explorer data, and market indicators sit behind someone else's API, the verification story gets weaker. BRK lowers that dependency by letting anyone compute the same metrics from their own node and expose them through their own API or UI.
+
+OpenSats highlighted BRK in the [twelfth wave of Bitcoin grants][announce]. That grant backed work on a fuller explorer, easier self-hosting, and better operator tooling. The project is MIT licensed, fully open-source, and the upstream README currently lists OpenSats as a supporter through June 2026.
+
+## What's next?
+
+The grant announcement laid out the near-term roadmap: explorer views for blocks, addresses, and transactions; support for mempool.space and Electrum protocols; prebuilt binaries and integrated `bitcoind` support for self-hosters; a terminal view for more complex queries; a toggle for disabling price data; and Prometheus monitoring. The public BRK stack already includes Bitview, a documented API, and language clients. The next stretch is making that same data pipeline easier to run and more useful for researchers, miners, node operators, and analysts.
+
+[announce]: /blog/twelfth-wave-of-bitcoin-grants#bitcoin-research-kit
+[bitview]: https://bitview.space/
+[readme]: https://github.com/bitcoinresearchkit/brk/blob/main/docs/README.md
