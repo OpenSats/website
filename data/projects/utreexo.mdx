@@ -1,0 +1,55 @@
+---
+title: 'Utreexo'
+dateAdded: '2026-05-07'
+summary: 'A compact-state Bitcoin project built around a hash-based accumulator, bridge nodes, and the protocol work needed to make them interoperable.'
+nym: 'Calvin Kim'
+website: 'https://github.com/utreexo/utreexod'
+coverImage: '/static/images/projects/utreexo.jpg'
+git: 'https://github.com/utreexo'
+tags: ['Bitcoin', 'Core', 'Protocol']
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2024#utreexo'
+---
+
+Utreexo is a project to shrink the state a Bitcoin node needs to carry. It
+replaces the full UTXO set with a small set of accumulator roots derived from a
+hash-based Merkle forest, while separate proofs show that a spend is valid. The
+codebase centers on the [`utreexo`](https://github.com/utreexo/utreexo)
+accumulator library and [`utreexod`](https://github.com/utreexo/utreexod), a
+full node and bridge node implementation that serves those proofs to peers.
+
+Bridge nodes matter because today's Bitcoin network relays blocks and
+transactions without Utreexo proofs. `utreexod` fills that gap, while related
+work in [Floresta](/projects/floresta) brings the same model to a Rust
+compact-state client. The broader effort also includes protocol specifications
+for the accumulator, validation rules, and peer-to-peer messages.
+
+## Why fund it?
+
+Running your own node works best when the hardware requirements stay within
+reach. The storage and disk I/O cost of the full UTXO set pushes many users
+toward hosted infrastructure or lighter clients. Utreexo cuts that cost and
+opens the door to compact-state nodes on phones, single-board computers, and
+other constrained devices while preserving full verification.
+
+OpenSats first funded Utreexo in the
+[fifth wave of Bitcoin grants](/blog/bitcoin-grants-july-2024#utreexo),
+supporting work on transaction messaging, BIP writing, and bridge-node
+implementation work.
+
+## What's next?
+
+Recent work landed in [`utreexod` v0.5.0][v0-5-0] and [`v0.5.1`][v0-5-1]. The
+current release line brings SwiftSync-based IBD, bridge-node performance and
+database work, and continued cleanup of the Utreexo wire protocol. In parallel,
+[BIP 181, 182, and 183][bips-pr] remain under review, covering the accumulator,
+validation, and P2P message layer.
+
+Near-term work includes finishing the SwiftSync-related spec updates,
+strengthening bridge-node reliability and performance, and keeping
+implementations like `utreexod` and [Floresta](/projects/floresta) aligned on
+the protocol.
+
+[bips-pr]: https://github.com/bitcoin/bips/pull/1923
+[v0-5-0]: https://github.com/utreexo/utreexod/releases/tag/v0.5.0
+[v0-5-1]: https://github.com/utreexo/utreexod/releases/tag/v0.5.1
