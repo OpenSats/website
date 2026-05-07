@@ -251,7 +251,10 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
       {secondaryFunds.length > 0 && (
         <section className="border-t border-gray-200 pt-10 dark:border-gray-700">
           <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
-            Designate your donation to a specific fund
+            <span className="sm:hidden">Designate your gift</span>
+            <span className="hidden sm:inline">
+              Designate your donation to a specific fund
+            </span>
           </h2>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
             {secondaryFunds.map(({ cfg, fund }) => (
