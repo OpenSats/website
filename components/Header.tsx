@@ -1,9 +1,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
-import LogoNostr from '@/data/logo-nostr.svg'
 import Wordmark from '@/data/wordmark.svg'
-import WordmarkNostr from '@/data/wordmark-nostr.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
@@ -21,9 +19,6 @@ const Header = ({ theme = 'default' }: HeaderProps) => {
       ? 'rounded border border-purple-500 bg-transparent px-4 py-2 font-semibold text-purple-600 hover:border-transparent hover:bg-purple-600 hover:text-white dark:border-purple-400 dark:text-purple-300 dark:hover:bg-purple-400 dark:hover:text-gray-950'
       : 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
 
-  const MobileLogo = theme === 'nostr' ? LogoNostr : Logo
-  const DesktopWordmark = theme === 'nostr' ? WordmarkNostr : Wordmark
-
   return (
     <header className="flex items-center justify-between py-10">
       <div>
@@ -32,8 +27,8 @@ const Header = ({ theme = 'default' }: HeaderProps) => {
           aria-label={siteMetadata.headerTitle}
           className="flex items-center"
         >
-          <MobileLogo className="block h-7 w-auto lg:hidden" />
-          <DesktopWordmark
+          <Logo className="block h-7 w-auto lg:hidden" />
+          <Wordmark
             className={`hidden h-6 w-auto lg:block ${
               theme === 'nostr'
                 ? 'text-purple-900 dark:text-purple-100'

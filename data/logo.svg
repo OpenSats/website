@@ -87,11 +87,11 @@
        inkscape:collect="always"
        id="linearGradient7054">
       <stop
-         style="stop-color:#ffb200;stop-opacity:1;"
+         style="stop-color:var(--opensats-logo-start,#ffb200);stop-opacity:1;"
          offset="0"
          id="stop7050" />
       <stop
-         style="stop-color:#ff6b01;stop-opacity:1;"
+         style="stop-color:var(--opensats-logo-end,#ff6b01);stop-opacity:1;"
          offset="0.49295774"
          id="stop7052" />
     </linearGradient>

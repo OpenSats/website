@@ -613,6 +613,12 @@ body.ReactModal__Body--open {
   }
 }
 
+.site-theme--nostr {
+  --opensats-accent: #a855f7;
+  --opensats-logo-start: #a855f7;
+  --opensats-logo-end: #7e22ce;
+}
+
 .site-theme--nostr .text-primary-500 {
   color: #9333ea;
 }
