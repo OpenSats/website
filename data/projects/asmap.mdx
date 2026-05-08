@@ -1,0 +1,53 @@
+---
+title: 'ASmap'
+dateAdded: '2026-05-07'
+summary: 'A project that builds reproducible IP-to-AS maps for Bitcoin Core so nodes can diversify peers across autonomous systems.'
+nym: 'ASmap Contributors'
+website: 'https://asmap.org/'
+coverImage: '/static/images/projects/asmap.png'
+git: 'https://github.com/asmap/kartograf'
+tags: ['Bitcoin', 'Security', 'Networking']
+fund: general
+announcementLink: '/blog/bitcoin-grants-september-2024-7th-wave#asmap'
+---
+
+ASmap maps IP address ranges to the [autonomous systems][as wiki] that announce them and
+feeds that data into Bitcoin Core. Core can use an ASmap file to spread peers
+across independent network operators instead of relying only on IP-based
+bucketing. That makes [eclipse attacks][eclipse optech] harder.
+
+The public ASmap project ties together the research, tooling, and operational
+work behind this feature. Its main tool, [Kartograf][kartograf], builds IP-to-AS
+maps from public routing data and preserves the intermediate artifacts needed
+for review and reproduction. The current workflow draws from [RPKI][rpki],
+[IRR databases][irr], and [RouteViews][routeviews].
+
+## Why fund it?
+
+Peer diversity is part of Bitcoin's security model. Bitcoin Core has accepted
+user-provided ASmap files since [v0.20.0][core-20], so better map generation
+feeds directly into the software node operators already run.
+
+OpenSats funded ASmap in the [seventh wave of Bitcoin grants][wave-7] in
+September 2024. That grant focused on improving ASmap generation,
+strengthening data sources, and making the tooling faster and easier to use.
+
+## What's next?
+
+The public roadmap is straightforward: improve [Kartograf][kartograf],
+coordinate more collaborative map-generation runs, and make high-quality ASmap
+files easier to publish and verify. The [bitcoin-core/asmap-data][asmap-data]
+repository already acts as a public place to share encoded files for Bitcoin
+Core, and the broader integration work is tracked in the main [Bitcoin Core
+issue][tracking].
+
+[asmap-data]: https://github.com/bitcoin-core/asmap-data
+[core-20]: https://github.com/bitcoin/bitcoin/blob/master/doc/release-notes/release-notes-0.20.0.md#new-settings
+[irr]: https://www.arin.net/resources/manage/irr/
+[kartograf]: https://github.com/asmap/kartograf
+[rpki]: https://www.ripe.net/manage-ips-and-asns/resource-management/rpki/what-is-rpki/
+[routeviews]: https://publicdata.caida.org/datasets/routing/routeviews-prefix2as/README.txt
+[tracking]: https://github.com/bitcoin/bitcoin/issues/33879
+[wave-7]: /blog/bitcoin-grants-september-2024-7th-wave#asmap
+[as wiki]: https://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29
+[eclipse optech]: https://bitcoinops.org/en/topics/eclipse-attacks/
