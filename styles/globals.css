@@ -357,6 +357,17 @@ body.ReactModal__Body--open {
     align-items: flex-start;
   }
 
+  /* Keep the painted wedge left of the mobile CTA copy (two narrow columns). */
+  .donate-banner-v2::after {
+    left: -305px;
+    top: -218px;
+    transform: rotate(32deg) scale(1.06);
+  }
+
+  .donate-banner-v2:hover::after {
+    transform: rotate(32deg) scale(3);
+  }
+
   .donate-banner-v2__prelude {
     display: none;
   }
