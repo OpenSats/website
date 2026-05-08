@@ -1,8 +1,8 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
 import { useState } from 'react'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
+import { PageSEO } from '@/components/SEO'
 import { PageActionButton, PageActionLink } from '@/components/PageAction'
 import StatsSentence from '@/components/StatsSentence'
 import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
@@ -49,6 +49,9 @@ const PRIMARY_FUND_CONFIG: FundConfig = {
   fundsIndexCoverImage: '/static/images/funds/general-fund-index-light.svg',
   fundsIndexCoverImageDark: '/static/images/funds/general-fund-index-dark.svg',
 }
+
+const FUNDS_INDEX_DESCRIPTION =
+  'Support Bitcoin, FOSS, nostr development, or OpenSats operations. OpenSats is a 501(c)(3) public charity, and 100% of donations to our open-source funds go to grantees.'
 
 const SECONDARY_FUND_CONFIGS: FundConfig[] = [
   {
@@ -147,9 +150,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
 
   return (
     <>
-      <Head>
-        <title>OpenSats | Funds</title>
-      </Head>
+      <PageSEO title="OpenSats | Funds" description={FUNDS_INDEX_DESCRIPTION} />
       <section className="pt-4 md:pb-8">
         <h1 className="py-2 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:py-4 md:text-5xl md:leading-14 lg:text-6xl">
           Make the most of your donation
