@@ -6,6 +6,7 @@ import { kebabCase } from 'pliny/utils/kebabCase'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
+import { getBlogPageTheme } from '@/utils/pageTheme'
 
 const DEFAULT_LAYOUT = 'PostLayout'
 
@@ -31,10 +32,7 @@ export const getStaticProps = async ({ params }) => {
     return coreContent(authorResults)
   })
   const normalizedTags = post.tags?.map((tag) => kebabCase(tag)) || []
-  const pageTheme =
-    normalizedTags.includes('nostr') && !normalizedTags.includes('bitcoin')
-      ? 'nostr'
-      : 'default'
+  const pageTheme = getBlogPageTheme(normalizedTags)
 
   return {
     props: {
