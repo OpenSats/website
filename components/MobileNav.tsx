@@ -10,9 +10,7 @@ const MobileNav = ({ theme = 'default' }: MobileNavProps) => {
   const [navShow, setNavShow] = useState(false)
 
   const menuButtonClass =
-    theme === 'nostr'
-      ? 'flex h-8 w-8 items-center justify-center rounded p-1 text-purple-700 dark:text-purple-300'
-      : 'flex h-8 w-8 items-center justify-center rounded p-1 text-gray-900 dark:text-gray-100'
+    'flex h-8 w-8 items-center justify-center rounded p-1 text-gray-900 dark:text-gray-100'
 
   const overlayClass =
     theme === 'nostr'
@@ -20,14 +18,9 @@ const MobileNav = ({ theme = 'default' }: MobileNavProps) => {
       : 'fixed left-0 top-0 z-10 h-full w-full transform bg-gray-200 opacity-95 duration-300 ease-in-out dark:bg-gray-800'
 
   const navLinkClass =
-    theme === 'nostr'
-      ? 'text-2xl font-bold tracking-tight text-purple-900 dark:text-purple-100'
-      : 'text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100'
+    'text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100'
 
-  const closeIconClass =
-    theme === 'nostr'
-      ? 'h-8 w-8 text-purple-900 dark:text-purple-100'
-      : 'h-8 w-8 text-gray-900 dark:text-gray-100'
+  const closeIconClass = 'h-8 w-8 text-gray-900 dark:text-gray-100'
 
   const onToggleNav = () => {
     setNavShow((status) => {

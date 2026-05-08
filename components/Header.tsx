@@ -14,9 +14,7 @@ interface HeaderProps {
 
 const Header = ({ theme = 'default' }: HeaderProps) => {
   const navLinkClass =
-    theme === 'nostr'
-      ? 'hidden p-1 font-medium text-purple-700 hover:text-purple-800 dark:text-purple-300 dark:hover:text-purple-200 sm:p-4 md:inline-block'
-      : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
+    'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
 
   const buttonClass =
     theme === 'nostr'
