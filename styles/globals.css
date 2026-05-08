@@ -354,7 +354,7 @@ body.ReactModal__Body--open {
 
 @media (max-width: 480px) {
   .donate-banner-v2 {
-    align-items: flex-start;
+    align-items: center;
   }
 
   /* Keep the painted wedge left of the mobile CTA copy (two narrow columns). */
