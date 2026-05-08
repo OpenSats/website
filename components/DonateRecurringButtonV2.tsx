@@ -32,8 +32,8 @@ export default function DonateRecurringButtonV2({
 
   const className =
     variant === 'purple'
-      ? 'donate-banner-v2 donate-banner-v2--purple'
-      : 'donate-banner-v2'
+      ? 'not-prose donate-banner-v2 donate-banner-v2--purple'
+      : 'not-prose donate-banner-v2'
   const heart = variant === 'purple' ? '💜' : '🧡'
 
   return (
