@@ -1,0 +1,59 @@
+---
+title: 'utreexod'
+dateAdded: '2026-05-07'
+summary: 'A fully validating Bitcoin node and bridge node implementation of the Utreexo protocol.'
+nym: 'Calvin Kim'
+website: 'https://github.com/utreexo/utreexod'
+coverImage: '/static/images/projects/utreexod.jpg'
+git: 'https://github.com/utreexo/utreexod'
+tags: ['Bitcoin', 'Core']
+fund: general
+announcementLink: '/blog/bitcoin-grants-july-2024#utreexo'
+---
+
+`utreexod` is the Go daemon implementation of [Utreexo](/topics/utreexo), the compact-state
+approach that replaces the full UTXO set with a small accumulator plus proofs.
+It runs as a fully validating Bitcoin node and can also run as a bridge node
+that keeps the full forest and serves proofs to peers.
+
+Bridge nodes matter because Bitcoin blocks and transactions are still relayed
+without Utreexo proofs. A compact-state client needs someone to generate those
+proofs and attach them to the data it receives. `utreexod` fills that role
+today, while projects like [Floresta](/projects/floresta) build other clients
+around the same protocol work.
+
+The main tradeoff is bandwidth. `utreexod` uses much less disk I/O and memory
+than a traditional node, but it downloads extra proof data. It can also start
+from a hardcoded UTXO state, which avoids the usual initial block download path
+and brings a validating node online much faster.
+
+## Why fund it?
+
+Running your own node gets harder as the chain grows and the UTXO set gets more
+expensive to store. `utreexod` takes a different path: keep full validation,
+shrink local state, and move proof generation to bridge nodes. That makes
+compact-state verification practical on cheaper hardware and opens the door to
+more validating clients.
+
+OpenSats first funded Utreexo in the
+[fifth wave of Bitcoin grants](/blog/bitcoin-grants-july-2024#utreexo),
+supporting work on `utreexod`, bridge-node implementation, transaction
+messaging, and the BIPs needed to make multiple implementations interoperate.
+
+## What's next?
+
+Recent work landed in [`utreexod` v0.5.0][v0-5-0] and [v0.5.1][v0-5-1].
+v0.5.0 added [SwiftSync-based][SwiftSync gist] proofless IBD and cut worst-case extra sync
+bandwidth from about 1.4 TB to about 200 GB. It also pushed more of the
+protocol onto dedicated Utreexo messages and continued bridge-node and indexer
+work. v0.5.1 followed with a netsync fix.
+
+Current work includes bridge-node performance, faster proof generation for
+historical blocks, and the review process for [BIP 181, 182, and 183][bips-pr],
+which define the accumulator, validation rules, and P2P message layer that
+other implementations need.
+
+[bips-pr]: https://github.com/bitcoin/bips/pull/1923
+[v0-5-0]: https://github.com/utreexo/utreexod/releases/tag/v0.5.0
+[v0-5-1]: https://github.com/utreexo/utreexod/releases/tag/v0.5.1
+[SwiftSync gist]:https://gist.github.com/RubenSomsen/a61a37d14182ccd78760e477c78133cd
