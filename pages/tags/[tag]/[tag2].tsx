@@ -44,7 +44,7 @@ export const getStaticProps = async (context) => {
       posts: filteredPosts,
       tag,
       tag2,
-      pageTheme: tag === 'nostr' || tag2 === 'nostr' ? 'nostr' : 'default',
+      pageTheme: 'default',
     },
   }
 }

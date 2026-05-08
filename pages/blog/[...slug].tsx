@@ -30,9 +30,11 @@ export const getStaticProps = async ({ params }) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
     return coreContent(authorResults)
   })
-  const pageTheme = post.tags?.some((tag) => kebabCase(tag) === 'nostr')
-    ? 'nostr'
-    : 'default'
+  const normalizedTags = post.tags?.map((tag) => kebabCase(tag)) || []
+  const pageTheme =
+    normalizedTags.includes('nostr') && !normalizedTags.includes('bitcoin')
+      ? 'nostr'
+      : 'default'
 
   return {
     props: {
