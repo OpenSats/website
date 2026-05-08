@@ -137,13 +137,15 @@ body.ReactModal__Body--open {
   display: flex;
   box-sizing: border-box;
   width: 100%;
+  min-width: 0;
+  max-width: min(480px, 100%);
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  max-width: 480px;
   min-height: 120px;
   margin: 4rem auto;
   border-radius: 6px;
+  isolation: isolate;
   background-color: #f4f4f5; /* neutral-100 */
   background-image: linear-gradient(to right, #ffedd5, #f4f4f5);
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
@@ -165,8 +167,11 @@ body.ReactModal__Body--open {
   width: 420px;
   background-color: #ea580c; /* orange-600 */
   background-image: linear-gradient(#f97316, #c2410c); /* orange-500 -> orange-700 */
-  transform: rotate(36deg);
+  /* Slight scale hides subpixel gaps vs border-radius clipping (esp. Mobile Safari). */
+  transform: rotate(36deg) scale(1.03);
+  transform-origin: center;
   transition: transform 0.3s ease-in-out;
+  backface-visibility: hidden;
   z-index: 0;
 }
 
@@ -235,7 +240,7 @@ body.ReactModal__Body--open {
 }
 
 .donate-banner-v2:hover::after {
-  transform: scale(3);
+  transform: rotate(36deg) scale(3);
 }
 
 .donate-banner-v2:hover .donate-banner-v2__right {
