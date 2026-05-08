@@ -32,36 +32,38 @@ export default function DonateRecurringButtonV2({
 
   const className =
     variant === 'purple'
-      ? 'not-prose donate-banner-v2 donate-banner-v2--purple'
-      : 'not-prose donate-banner-v2'
+      ? 'donate-banner-v2 donate-banner-v2--purple'
+      : 'donate-banner-v2'
   const heart = variant === 'purple' ? '💜' : '🧡'
 
   return (
-    <CustomLink
-      href={href}
-      className={className}
-      aria-label={`${prelude} ${cta} ${preTagline} ${tagline}`}
-    >
-      <span className="donate-banner-v2__left">
-        <span className="donate-banner-v2__prelude">{prelude}</span>{' '}
-        <strong>{cta}</strong>
-      </span>
-      <span className="donate-banner-v2__right">
-        <span className="donate-banner-v2__tagline">
-          {preTagline} <strong>{tagline}</strong>
+    <div className="donate-banner-v2-shell not-prose flex w-full shrink-0 justify-center">
+      <CustomLink
+        href={href}
+        className={className}
+        aria-label={`${prelude} ${cta} ${preTagline} ${tagline}`}
+      >
+        <span className="donate-banner-v2__left">
+          <span className="donate-banner-v2__prelude">{prelude}</span>{' '}
+          <strong>{cta}</strong>
         </span>
-        <span className="donate-banner-v2__tagline-mobile">
-          <strong>Monthly</strong>
-          <span className="donate-banner-v2__tagline-mobile-sub">
-            or give once
+        <span className="donate-banner-v2__right">
+          <span className="donate-banner-v2__tagline">
+            {preTagline} <strong>{tagline}</strong>
+          </span>
+          <span className="donate-banner-v2__tagline-mobile">
+            <strong>Monthly</strong>
+            <span className="donate-banner-v2__tagline-mobile-sub">
+              or give once
+            </span>
           </span>
         </span>
-      </span>
-      <span className="donate-banner-v2__hearts" aria-hidden="true">
-        <span>{heart}</span>
-        <span>{heart}</span>
-        <span>{heart}</span>
-      </span>
-    </CustomLink>
+        <span className="donate-banner-v2__hearts" aria-hidden="true">
+          <span>{heart}</span>
+          <span>{heart}</span>
+          <span>{heart}</span>
+        </span>
+      </CustomLink>
+    </div>
   )
 }

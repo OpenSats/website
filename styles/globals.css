@@ -132,18 +132,25 @@ body.ReactModal__Body--open {
 /* donate banner.                                                     */
 /* ------------------------------------------------------------------ */
 
+/*
+ * Outer shell: full-row flex center inside Tailwind Typography (.prose),
+ * matching what <center> used to give without affecting body text flow.
+ */
+.donate-banner-v2-shell {
+  margin-block: 4rem;
+}
+
 .donate-banner-v2 {
   position: relative;
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  min-width: 0;
   max-width: min(480px, 100%);
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   min-height: 120px;
-  margin: 4rem auto;
+  margin: 0;
   border-radius: 6px;
   isolation: isolate;
   background-color: #f4f4f5; /* neutral-100 */
