@@ -17,6 +17,8 @@ import ErrorBoundary from '@/components/ErrorBoundary'
 import { FathomAnalytics } from '@/components/Fathom'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const theme = pageProps.pageTheme === 'nostr' ? 'nostr' : 'default'
+
   return (
     <ThemeProvider
       attribute="class"
@@ -28,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <FathomAnalytics />
-      <LayoutWrapper>
+      <LayoutWrapper theme={theme}>
         <SearchProvider searchConfig={siteMetadata.search}>
           <ErrorBoundary>
             <Component {...pageProps} />

@@ -26,7 +26,13 @@ export const getStaticProps = async (context) => {
         post.draft !== true && post.tags.map((t) => kebabCase(t)).includes(tag)
     )
   )
-  return { props: { posts: filteredPosts, tag } }
+  return {
+    props: {
+      posts: filteredPosts,
+      tag,
+      pageTheme: tag === 'nostr' ? 'nostr' : 'default',
+    },
+  }
 }
 
 export default function Tag({

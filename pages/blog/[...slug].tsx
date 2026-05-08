@@ -2,6 +2,7 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import PageTitle from '@/components/PageTitle'
 import { MDXComponents } from '@/components/MDXComponents'
 import { sortedBlogPost, coreContent } from 'pliny/utils/contentlayer'
+import { kebabCase } from 'pliny/utils/kebabCase'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
@@ -29,6 +30,9 @@ export const getStaticProps = async ({ params }) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
     return coreContent(authorResults)
   })
+  const pageTheme = post.tags?.some((tag) => kebabCase(tag) === 'nostr')
+    ? 'nostr'
+    : 'default'
 
   return {
     props: {
@@ -36,6 +40,7 @@ export const getStaticProps = async ({ params }) => {
       authorDetails,
       prev,
       next,
+      pageTheme,
     },
   }
 }

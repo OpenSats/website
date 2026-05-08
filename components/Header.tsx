@@ -1,12 +1,31 @@
 import siteMetadata from '@/data/siteMetadata'
 import headerNavLinks from '@/data/headerNavLinks'
 import Logo from '@/data/logo.svg'
+import LogoNostr from '@/data/logo-nostr.svg'
 import Wordmark from '@/data/wordmark.svg'
+import WordmarkNostr from '@/data/wordmark-nostr.svg'
 import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 
-const Header = () => {
+interface HeaderProps {
+  theme?: 'default' | 'nostr'
+}
+
+const Header = ({ theme = 'default' }: HeaderProps) => {
+  const navLinkClass =
+    theme === 'nostr'
+      ? 'hidden p-1 font-medium text-purple-700 hover:text-purple-800 dark:text-purple-300 dark:hover:text-purple-200 sm:p-4 md:inline-block'
+      : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
+
+  const buttonClass =
+    theme === 'nostr'
+      ? 'rounded border border-purple-500 bg-transparent px-4 py-2 font-semibold text-purple-600 hover:border-transparent hover:bg-purple-600 hover:text-white dark:border-purple-400 dark:text-purple-300 dark:hover:bg-purple-400 dark:hover:text-gray-950'
+      : 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
+
+  const MobileLogo = theme === 'nostr' ? LogoNostr : Logo
+  const DesktopWordmark = theme === 'nostr' ? WordmarkNostr : Wordmark
+
   return (
     <header className="flex items-center justify-between py-10">
       <div>
@@ -15,8 +34,14 @@ const Header = () => {
           aria-label={siteMetadata.headerTitle}
           className="flex items-center"
         >
-          <Logo className="block h-7 w-auto lg:hidden" />
-          <Wordmark className="hidden h-6 w-auto text-gray-900 dark:text-gray-100 lg:block" />
+          <MobileLogo className="block h-7 w-auto lg:hidden" />
+          <DesktopWordmark
+            className={`hidden h-6 w-auto lg:block ${
+              theme === 'nostr'
+                ? 'text-purple-900 dark:text-purple-100'
+                : 'text-gray-900 dark:text-gray-100'
+            }`}
+          />
         </Link>
       </div>
       <div className="flex items-center gap-3 text-base leading-5 sm:gap-4">
@@ -25,18 +50,14 @@ const Header = () => {
             <Link
               key={link.title}
               href={link.href}
-              className={
-                link.isButton
-                  ? 'rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 hover:border-transparent hover:bg-orange-500 hover:text-white'
-                  : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
-              }
+              className={link.isButton ? buttonClass : navLinkClass}
             >
               {link.title}
             </Link>
           ))}
         </div>
         <ThemeSwitch />
-        <MobileNav />
+        <MobileNav theme={theme} />
       </div>
     </header>
   )
