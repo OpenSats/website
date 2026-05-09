@@ -663,9 +663,23 @@ body.ReactModal__Body--open {
   color: #7e22ce;
 }
 
+.site-theme--nostr .hover\:text-orange-500:hover {
+  color: #9333ea;
+}
+
 .site-theme--nostr .hover\:bg-primary-100:hover,
 .site-theme--nostr .bg-primary-100\/50 {
   background-color: rgba(243, 232, 255, 0.7);
+}
+
+.site-theme--nostr .hover\:bg-orange-500:hover,
+.site-theme--nostr .dark\:hover\:bg-orange-500:hover {
+  background-color: #9333ea;
+}
+
+.site-theme--nostr .hover\:text-stone-800:hover,
+.site-theme--nostr .dark\:hover\:text-stone-800:hover {
+  color: #fff;
 }
 
 .site-theme--nostr .focus\:border-primary-500:focus {
@@ -700,6 +714,10 @@ body.ReactModal__Body--open {
 .dark .site-theme--nostr .dark\:text-primary-400,
 .dark .site-theme--nostr .dark\:hover\:text-primary-400:hover,
 .dark .site-theme--nostr .dark\:hover\:text-primary-300:hover {
+  color: #d8b4fe;
+}
+
+.dark .site-theme--nostr .dark\:hover\:text-orange-400:hover {
   color: #d8b4fe;
 }
 

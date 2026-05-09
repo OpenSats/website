@@ -14,6 +14,7 @@ import {
   getRelatedBlogPostsForFund,
 } from '@/utils/relatedPosts'
 import { getFundDonationUrl } from '@/utils/funds'
+import { getFundPageTheme } from '@/utils/pageTheme'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,6 +42,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       project,
       relatedPosts: allCoreContent(relatedPosts),
+      pageTheme: getFundPageTheme(project?.slug),
     },
   }
 }

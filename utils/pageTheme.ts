@@ -16,6 +16,10 @@ export function getBlogPageTheme(tags: string[] = []): SiteTheme {
     : 'default'
 }
 
+export function getFundPageTheme(slug?: string): SiteTheme {
+  return slug === 'nostr' ? 'nostr' : 'default'
+}
+
 export function getHashThemeOverride(
   slug?: string,
   hash?: string
