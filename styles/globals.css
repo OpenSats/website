@@ -355,6 +355,7 @@ body.ReactModal__Body--open {
 @media (max-width: 480px) {
   .donate-banner-v2 {
     align-items: center;
+    min-height: 96px;
   }
 
   /* Keep the painted wedge left of the mobile CTA copy (two narrow columns). */
@@ -372,6 +373,11 @@ body.ReactModal__Body--open {
     display: none;
   }
 
+  .donate-banner-v2__left,
+  .donate-banner-v2__right {
+    padding: 0.75rem 0.875rem;
+  }
+
   .donate-banner-v2__tagline {
     display: none;
   }
@@ -381,18 +387,19 @@ body.ReactModal__Body--open {
   }
 
   .donate-banner-v2__left strong {
-    font-size: clamp(1.35rem, 5vw, 1.65rem);
+    font-size: clamp(1.15rem, 4.3vw, 1.35rem);
+    white-space: nowrap;
   }
 
   .donate-banner-v2__right strong {
-    font-size: 1.15rem;
+    font-size: 1rem;
   }
 
   .donate-banner-v2__tagline-mobile-sub {
     display: block;
-    margin-top: 0.15rem;
-    font-size: 0.95rem;
-    line-height: 1.25;
+    margin-top: 0.1rem;
+    font-size: 0.8rem;
+    line-height: 1.15;
   }
 }
 
