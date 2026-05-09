@@ -5,13 +5,18 @@ import Header from './Header'
 
 interface Props {
   children: ReactNode
+  theme?: 'default' | 'nostr'
 }
 
-const LayoutWrapper = ({ children }: Props) => {
+const LayoutWrapper = ({ children, theme = 'default' }: Props) => {
   return (
     <SectionContainer>
-      <div className={`flex h-screen flex-col justify-between font-sans`}>
-        <Header />
+      <div
+        className={`flex h-screen flex-col justify-between font-sans ${
+          theme === 'nostr' ? 'site-theme--nostr' : ''
+        }`}
+      >
+        <Header theme={theme} />
         <main className="mb-auto">{children}</main>
         <Footer />
       </div>
