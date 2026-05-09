@@ -32,6 +32,8 @@ const ThemeSwitch = () => {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
+        className="h-5 w-5 flex-shrink-0"
+        aria-hidden="true"
       >
         {!mounted ? null : current === 'light' ? (
           <path
