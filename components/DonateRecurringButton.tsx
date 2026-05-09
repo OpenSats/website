@@ -1,36 +1,40 @@
-import CustomLink from './Link'
-import { MONTHLY_DONATION_URL } from '@/utils/constants'
+import DonateRecurringButtonV2 from './DonateRecurringButtonV2'
 
-const DESIGNATION_IDS: Record<string, string> = {
-  nostr: 'ENWRA6YZ',
-  ops: 'ELL6P2J6',
-}
+type DonateRecurringButtonDesignation = 'nostr' | 'ops'
 
 type DonateRecurringButtonProps = {
   label?: string
   showHeart?: boolean
-  designation?: keyof typeof DESIGNATION_IDS
+  designation?: DonateRecurringButtonDesignation
 }
 
 export default function DonateRecurringButton({
   label = 'Give Monthly',
-  showHeart = true,
   designation,
 }: DonateRecurringButtonProps) {
-  const designationId = designation ? DESIGNATION_IDS[designation] : undefined
-  const href = designationId
-    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
-    : MONTHLY_DONATION_URL
+  const variant = designation === 'nostr' ? 'purple' : 'orange'
+
+  const fundSpecificCopy =
+    designation === 'nostr'
+      ? {
+          preTagline: 'Help us support',
+          tagline: 'Nostr development',
+        }
+      : designation === 'ops'
+      ? {
+          preTagline: 'Help us keep',
+          tagline: 'OpenSats running',
+        }
+      : {}
+
+  const customCta = label !== 'Give Monthly' ? { cta: label } : {}
 
   return (
-    <div className="mb-10 mt-12 flex justify-center">
-      <CustomLink
-        href={href}
-        className="my-15 rounded border border-orange-500 bg-transparent px-8 py-4 text-lg font-semibold no-underline hover:bg-orange-100"
-      >
-        {label}
-        {showHeart && ' 🧡'}
-      </CustomLink>
-    </div>
+    <DonateRecurringButtonV2
+      designation={designation}
+      variant={variant}
+      {...fundSpecificCopy}
+      {...customCta}
+    />
   )
 }
