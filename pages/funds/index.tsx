@@ -176,27 +176,41 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
         <section className="items-start py-10 xl:grid xl:grid-cols-3 xl:gap-x-8">
           <div className="hidden pt-2 xl:block">
             <div className="flex justify-center">
-              <Image
-                src={
-                  PRIMARY_FUND_CONFIG.fundsIndexCoverImage ??
-                  primaryFund.coverImage
-                }
-                darkSrc={PRIMARY_FUND_CONFIG.fundsIndexCoverImageDark}
-                alt={primaryFund.title}
-                width={250}
-                height={250}
-                className="h-[12.5rem] w-[12.5rem] rounded-2xl"
-              />
+              <Link
+                href={`/funds/${primaryFund.slug}`}
+                aria-label={`View ${primaryFund.title}`}
+                className="rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+              >
+                <Image
+                  src={
+                    PRIMARY_FUND_CONFIG.fundsIndexCoverImage ??
+                    primaryFund.coverImage
+                  }
+                  darkSrc={PRIMARY_FUND_CONFIG.fundsIndexCoverImageDark}
+                  alt={primaryFund.title}
+                  width={250}
+                  height={250}
+                  className="h-[12.5rem] w-[12.5rem] rounded-2xl"
+                />
+              </Link>
             </div>
           </div>
           <div className="flex w-full min-w-0 flex-col gap-4 xl:col-span-2 xl:col-start-2">
             <div>
               <h2 className="text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-                {primaryFund.title}
+                <Link
+                  href={`/funds/${primaryFund.slug}`}
+                  className="transition-colors duration-150 hover:text-primary-500 dark:hover:text-primary-400"
+                >
+                  {primaryFund.title}
+                </Link>
               </h2>
-              <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
+              <Link
+                href={`/funds/${primaryFund.slug}`}
+                className="block pt-2 text-lg leading-7 text-gray-500 transition-colors duration-150 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+              >
                 {PRIMARY_FUND_CONFIG.blurb ?? primaryFund.summary}
-              </p>
+              </Link>
             </div>
             <DonateRecurringButtonV2
               preTagline={PRIMARY_FUND_CONFIG.preTagline}
@@ -243,8 +257,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             These funds support nostr development or our own operations,
-            respectively. Refer to the respective pages linked below to learn
-            more about their purpose and impact.
+            respectively. Refer to each page linked below to learn more about
+            their purpose and impact.
           </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
             {secondaryFunds.map(({ cfg, fund }) => (
@@ -253,19 +267,30 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
                 className="flex flex-col gap-3 rounded-xl bg-stone-100 p-4 dark:bg-stone-900"
               >
                 <div className="flex gap-4">
-                  <Image
-                    src={fund.coverImage}
-                    alt={fund.title}
-                    width={64}
-                    height={64}
-                    className="h-16 w-16 shrink-0 rounded-lg"
-                  />
-                  <div className="flex flex-1 flex-col gap-1">
-                    <h3 className="text-lg font-bold">{fund.title}</h3>
+                  <Link
+                    href={`/funds/${fund.slug}`}
+                    aria-label={`View ${fund.title}`}
+                    className="shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-900"
+                  >
+                    <Image
+                      src={fund.coverImage}
+                      alt={fund.title}
+                      width={64}
+                      height={64}
+                      className="h-16 w-16 shrink-0 rounded-lg"
+                    />
+                  </Link>
+                  <Link
+                    href={`/funds/${fund.slug}`}
+                    className="flex flex-1 flex-col gap-1 rounded-lg transition-colors duration-150 hover:text-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:hover:text-primary-400 dark:focus-visible:ring-offset-stone-900"
+                  >
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
+                      {fund.title}
+                    </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {cfg.blurb ?? fund.summary}
                     </p>
-                  </div>
+                  </Link>
                 </div>
                 <div className="mt-auto">
                   <FundActionRow
