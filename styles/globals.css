@@ -133,18 +133,27 @@ body.ReactModal__Body--open {
 /* donate banner.                                                     */
 /* ------------------------------------------------------------------ */
 
+/*
+ * Outer shell: full-row flex center inside Tailwind Typography (.prose),
+ * matching what <center> used to give without affecting body text flow.
+ */
+.donate-banner-v2-shell {
+  margin-block: 4rem;
+}
+
 .donate-banner-v2 {
   position: relative;
   display: flex;
   box-sizing: border-box;
   width: 100%;
+  max-width: min(480px, 100%);
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  max-width: 480px;
   min-height: 120px;
-  margin: 4rem auto;
+  margin: 0;
   border-radius: 6px;
+  isolation: isolate;
   background-color: #f4f4f5; /* neutral-100 */
   background-image: linear-gradient(to right, #ffedd5, #f4f4f5);
   box-shadow: 4px 4px 24px rgba(0, 0, 0, 0.15);
@@ -154,7 +163,7 @@ body.ReactModal__Body--open {
   overflow: hidden;
   transition: transform 0.3s ease-in-out;
   font-size: 1.1rem;
-  line-height: 1.1;
+  line-height: 1.25;
 }
 
 .donate-banner-v2::after {
@@ -165,22 +174,24 @@ body.ReactModal__Body--open {
   height: 420px;
   width: 420px;
   background-color: #ea580c; /* orange-600 */
-  background-image: linear-gradient(
-    #f97316,
-    #c2410c
-  ); /* orange-500 -> orange-700 */
-  transform: rotate(36deg);
+  background-image: linear-gradient(#f97316, #c2410c); /* orange-500 -> orange-700 */
+  /* Slight scale hides subpixel gaps vs border-radius clipping (esp. Mobile Safari). */
+  transform: rotate(36deg) scale(1.03);
+  transform-origin: center;
   transition: transform 0.3s ease-in-out;
+  backface-visibility: hidden;
   z-index: 0;
 }
 
 .donate-banner-v2__left,
 .donate-banner-v2__right {
   position: relative;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   padding: 1rem 1.25rem;
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   z-index: 2;
+  overflow-wrap: break-word;
 }
 
 .donate-banner-v2__left {
@@ -192,6 +203,7 @@ body.ReactModal__Body--open {
   font-size: 1.7rem;
   font-weight: 700;
   color: white;
+  line-height: 1.15;
 }
 
 .donate-banner-v2__right {
@@ -205,6 +217,7 @@ body.ReactModal__Body--open {
   font-size: 1.3rem;
   font-weight: 600;
   color: #9a3412;
+  line-height: 1.2;
 }
 
 .donate-banner-v2__hearts {
@@ -235,7 +248,7 @@ body.ReactModal__Body--open {
 }
 
 .donate-banner-v2:hover::after {
-  transform: scale(3);
+  transform: rotate(36deg) scale(3);
 }
 
 .donate-banner-v2:hover .donate-banner-v2__right {
@@ -356,12 +369,29 @@ body.ReactModal__Body--open {
 }
 
 @media (max-width: 480px) {
+  .donate-banner-v2 {
+    align-items: center;
+    min-height: 96px;
+  }
+
+  /* Keep the painted wedge left of the mobile CTA copy (two narrow columns). */
+  .donate-banner-v2::after {
+    left: -305px;
+    top: -218px;
+    transform: rotate(32deg) scale(1.06);
+  }
+
+  .donate-banner-v2:hover::after {
+    transform: rotate(32deg) scale(3);
+  }
+
   .donate-banner-v2__prelude {
     display: none;
   }
 
-  .donate-banner-v2__left strong {
-    white-space: nowrap;
+  .donate-banner-v2__left,
+  .donate-banner-v2__right {
+    padding: 0.75rem 0.875rem;
   }
 
   .donate-banner-v2__tagline {
@@ -372,14 +402,20 @@ body.ReactModal__Body--open {
     display: inline;
   }
 
+  .donate-banner-v2__left strong {
+    font-size: clamp(1.15rem, 4.3vw, 1.35rem);
+    white-space: nowrap;
+  }
+
   .donate-banner-v2__right strong {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .donate-banner-v2__tagline-mobile-sub {
     display: block;
-    white-space: nowrap;
-    font-size: 0.95rem;
+    margin-top: 0.1rem;
+    font-size: 0.8rem;
+    line-height: 1.15;
   }
 }
 

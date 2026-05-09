@@ -53,7 +53,12 @@ export default async function handler(
 
     // Iterate through all issues using pagination and stop when we find a match
     let matchingIssue:
-      | { title: string; body?: string | null; number: number }
+      | {
+          title: string
+          body?: string | null
+          number: number
+          state: 'open' | 'closed'
+        }
       | undefined
 
     for await (const { data: issues } of octokit.paginate.iterator(
@@ -77,6 +82,7 @@ export default async function handler(
           title: found.title,
           body: found.body,
           number: found.number,
+          state: found.state as 'open' | 'closed',
         }
         break
       }
@@ -86,6 +92,13 @@ export default async function handler(
       return res.status(404).json({
         valid: false,
         error: ERROR_MESSAGES.GRANT_NOT_FOUND,
+      })
+    }
+
+    if (matchingIssue.state === 'closed') {
+      return res.status(409).json({
+        valid: false,
+        error: ERROR_MESSAGES.PAST_GRANT,
       })
     }
 

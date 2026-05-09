@@ -8,6 +8,8 @@ export const STORAGE_KEYS = {
 
 export const ERROR_MESSAGES = {
   GRANT_NOT_FOUND: 'Grant not found, contact support for assistance',
+  PAST_GRANT:
+    'This is a past grant that already ended. Please use your new grant number.',
 }
 
 export const MONTHLY_DONATION_URL =
