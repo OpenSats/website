@@ -1,0 +1,21 @@
+---
+title: 'Utreexo'
+summary: 'A protocol for representing the Bitcoin UTXO set with a small accumulator and inclusion proofs.'
+category: 'Bitcoin'
+aliases: ['utreexo accumulator', 'compact-state node', 'compact state node']
+---
+
+Utreexo is a proposed protocol for representing Bitcoin's [UTXO](/topics/utxo) set with a small cryptographic accumulator instead of storing every unspent output directly. In practice, the accumulator is usually described as a forest of Merkle trees that commits to the current UTXO set.
+
+When a transaction spends a coin, the spender or a bridge node supplies an inclusion proof showing that the spent output is part of that committed set. A validating node can check the proof, update its accumulator, and keep enforcing Bitcoin's consensus rules without keeping the full UTXO set on disk.
+
+This shifts some cost from local storage to extra proof data and bandwidth. The payoff is that fully validating compact-state nodes become practical on smaller machines, and sync strategies such as SwiftSync can parallelize more of the initial block download work.
+
+OpenSats has funded work on the protocol itself and on implementations built around it, including [utreexod](/projects/utreexod) and [Floresta](/projects/floresta). Draft BIPs now cover the accumulator format, validation rules, and P2P messages needed for interoperable implementations.
+
+## References
+
+- [Utreexo paper](https://eprint.iacr.org/2019/611)
+- [Bitcoin Optech: Utreexo](https://bitcoinops.org/en/topics/utreexo/)
+- [BIPs for Utreexo](https://github.com/bitcoin/bips/pull/1923)
+- [utreexo/utreexo](https://github.com/utreexo/utreexo)
