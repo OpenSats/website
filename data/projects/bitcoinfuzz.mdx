@@ -1,0 +1,30 @@
+---
+title: 'bitcoinfuzz'
+dateAdded: '2026-05-12'
+summary: 'A differential fuzzing framework for Bitcoin protocol implementations and libraries.'
+nym: 'Bruno Garcia'
+website: 'https://github.com/bitcoinfuzz/bitcoinfuzz'
+coverImage: '/static/images/projects/bitcoinfuzz.png'
+git: 'https://github.com/bitcoinfuzz/bitcoinfuzz'
+tags: ['Bitcoin', 'Core']
+fund: general
+announcementLink: '/blog/bruno-garcia-receives-lts-grant'
+---
+
+`bitcoinfuzz` is a differential fuzzing project for Bitcoin software. It builds multiple implementations and libraries side by side, feeds them the same randomized inputs, and checks whether they parse, validate, or serialize data differently. That makes it a practical way to catch crashes, consensus edge cases, and subtle non-conformance bugs across the Bitcoin stack.
+
+The project focuses on breadth as well as depth. Its public repository includes support for a growing set of Bitcoin, Lightning, and library modules, along with a separate public [corpora](https://github.com/bitcoinfuzz/corpora) repository for reusable fuzz inputs. The goal is simple: make it easier to compare real-world implementations under stress and surface mismatches before they become production problems.
+
+## Why fund it?
+
+Bitcoin depends on multiple independently maintained implementations, bindings, and libraries. That diversity is useful, but it also raises the cost of checking whether the same inputs produce the same behavior everywhere. Differential fuzzing closes part of that gap.
+
+OpenSats highlighted `bitcoinfuzz` in its [grant announcement for Bruno Garcia][announcement]. Support for this work helps fund ongoing maintenance, new fuzz targets, new module integrations, and the infrastructure needed to keep cross-implementation testing useful over time.
+
+## What's next?
+
+Recent work has expanded `bitcoinfuzz` in several directions. The latest public report highlights differential `libbitcoinkernel` work, new Utreexo and `rustreexo` coverage, `libwally-core` integration, a new `verify_script` target, and build-system improvements such as moving Bitcoin Core to a submodule and fixing multi-module Go build conflicts. The public roadmap also includes adding `libbitcoin-system`, more Utreexo targets, PSBT v2 parsing, and additional secp256k1 and MuSig2 coverage.
+
+That direction fits the broader pattern of the project. `bitcoinfuzz` keeps widening the set of implementations it can compare while adding deeper targets around parsing, scripts, P2P messages, Lightning data, and wallet-related behavior. When it works, the payoff is immediate: bugs get found earlier, discrepancies get isolated faster, and the wider Bitcoin ecosystem gets sturdier software.
+
+[announcement]: /blog/bruno-garcia-receives-lts-grant
