@@ -11,20 +11,20 @@ fund: general
 announcementLink: '/blog/bruno-garcia-receives-lts-grant'
 ---
 
-`bitcoinfuzz` is a differential fuzzing project for Bitcoin software. It builds multiple implementations and libraries side by side, feeds them the same randomized inputs, and checks whether they parse, validate, or serialize data differently. That makes it a practical way to catch crashes, consensus edge cases, and subtle non-conformance bugs across the Bitcoin stack.
+`bitcoinfuzz` is a differential fuzzing harness for Bitcoin implementations and libraries. It builds multiple modules side by side, feeds them the same randomized inputs, and compares how they parse, validate, and serialize data. That catches crashes, consensus edge cases, and behavior mismatches before they ship downstream.
 
-The project focuses on breadth as well as depth. Its public repository includes support for a growing set of Bitcoin, Lightning, and library modules, along with a separate public [corpora](https://github.com/bitcoinfuzz/corpora) repository for reusable fuzz inputs. The goal is simple: make it easier to compare real-world implementations under stress and surface mismatches before they become production problems.
+The public repository already covers a broad set of Bitcoin, Lightning, and library modules, along with a separate public [corpora](https://github.com/bitcoinfuzz/corpora) repository for shared fuzz inputs. The reports show why that matters. Earlier work exposed a critical NBitcoin consensus bug through script evaluation. The latest public report adds differential `libbitcoinkernel` modules, the first Utreexo target with `rustreexo`, `libwally-core` integration that found three bugs including a BIP32 non-conformance, `bitcoin-s`, and a new `verify_script` target across Bitcoin Core, `btcd`, and NBitcoin.
 
 ## Why fund it?
 
-Bitcoin depends on multiple independently maintained implementations, bindings, and libraries. That diversity is useful, but it also raises the cost of checking whether the same inputs produce the same behavior everywhere. Differential fuzzing closes part of that gap.
+Bitcoin has multiple full nodes, libraries, bindings, and wallet stacks. That diversity needs constant cross-checking. `bitcoinfuzz` turns implementation differences into concrete test cases that maintainers can inspect and fix.
 
-OpenSats highlighted `bitcoinfuzz` in its [grant announcement for Bruno Garcia][announcement]. Support for this work helps fund ongoing maintenance, new fuzz targets, new module integrations, and the infrastructure needed to keep cross-implementation testing useful over time.
+OpenSats highlighted `bitcoinfuzz` in its [grant announcement for Bruno Garcia][announcement]. Support for this work helps fund maintenance, new targets, new module integrations, shared corpora, and the build infrastructure needed to keep cross-implementation testing useful as the ecosystem changes.
 
 ## What's next?
 
-Recent work has expanded `bitcoinfuzz` in several directions. The latest public report highlights differential `libbitcoinkernel` work, new Utreexo and `rustreexo` coverage, `libwally-core` integration, a new `verify_script` target, and build-system improvements such as moving Bitcoin Core to a submodule and fixing multi-module Go build conflicts. The public roadmap also includes adding `libbitcoin-system`, more Utreexo targets, PSBT v2 parsing, and additional secp256k1 and MuSig2 coverage.
+The latest public report gives a concrete roadmap. Next work includes `libbitcoin-system` coverage for block, script, and transaction parsing, more Utreexo targets, PSBT v2 support in the `psbt_parse` harness, a full `ellswift` roundtrip target covering `btcd` and `secp256k1`, and a MuSig2 target.
 
-That direction fits the broader pattern of the project. `bitcoinfuzz` keeps widening the set of implementations it can compare while adding deeper targets around parsing, scripts, P2P messages, Lightning data, and wallet-related behavior. When it works, the payoff is immediate: bugs get found earlier, discrepancies get isolated faster, and the wider Bitcoin ecosystem gets sturdier software.
+Infrastructure work is moving too. The recent report notes that Bitcoin Core moved to a submodule, multi-module Go build conflicts were fixed, and Docker CI setup kept improving. That keeps the harness easier to update while the target set grows.
 
 [announcement]: /blog/bruno-garcia-receives-lts-grant
