@@ -1,0 +1,39 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Applesauce logo">
+  <defs>
+    <clipPath id="topAppleClip"><path d="M88 122C82 106 91 92 109 88C124 85 138 90 145 101C152 113 151 127 143 136C135 146 120 152 106 149C93 147 82 137 88 122Z"/></clipPath>
+    <clipPath id="leftAppleClip"><path d="M57 164C52 150 60 136 76 131C93 126 108 132 116 145C124 158 123 174 114 184C104 195 88 200 73 196C61 193 51 180 57 164Z"/></clipPath>
+    <clipPath id="rightAppleClip"><path d="M124 165C119 151 127 137 144 132C161 127 177 133 185 146C194 159 194 176 184 187C173 199 156 203 141 198C129 194 118 180 124 165Z"/></clipPath>
+  </defs>
+
+  <path d="M93 58C85 48 88 35 101 32C98 40 103 46 111 47C109 38 114 30 125 30C124 39 129 45 138 49C147 53 156 61 160 71C168 72 175 76 181 82C175 84 170 88 167 94C158 88 149 86 140 87C127 89 115 95 105 102C96 108 88 113 81 119C77 106 78 92 83 79C86 71 89 64 93 58Z" fill="#7b50c2"/>
+  <path d="M95 64C105 57 117 54 132 54C141 54 149 56 155 61C149 65 143 69 137 73C130 76 122 78 113 78C105 78 98 73 95 64Z" fill="#ffffff"/>
+  <ellipse cx="126" cy="59" rx="6" ry="12" fill="#ffffff"/>
+  <ellipse cx="145" cy="57" rx="6" ry="12" fill="#ffffff"/>
+
+  <g>
+    <path d="M57 164C52 150 60 136 76 131C93 126 108 132 116 145C124 158 123 174 114 184C104 195 88 200 73 196C61 193 51 180 57 164Z" fill="#ff5117"/>
+    <ellipse cx="85" cy="187" rx="33" ry="22" fill="#dc0d28" clip-path="url(#leftAppleClip)"/>
+    <path d="M65 154C69 149 73 146 78 145" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    <path d="M86 134C84 127 81 121 77 116" fill="none" stroke="#513630" stroke-width="6" stroke-linecap="round"/>
+    <path d="M82 119C91 113 100 112 108 117C100 125 92 128 82 119Z" fill="#70a01a"/>
+    <path d="M82 119C89 118 96 119 101 123C96 125 89 125 82 119Z" fill="#2f7c31" opacity="0.9"/>
+  </g>
+
+  <g>
+    <path d="M124 165C119 151 127 137 144 132C161 127 177 133 185 146C194 159 194 176 184 187C173 199 156 203 141 198C129 194 118 180 124 165Z" fill="#ff5117"/>
+    <ellipse cx="154" cy="188" rx="33" ry="22" fill="#dc0d28" clip-path="url(#rightAppleClip)"/>
+    <path d="M133 156C137 151 142 148 147 147" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    <path d="M154 136C153 129 150 123 146 118" fill="none" stroke="#513630" stroke-width="6" stroke-linecap="round"/>
+    <path d="M151 121C160 115 169 114 177 119C169 127 161 130 151 121Z" fill="#70a01a"/>
+    <path d="M151 121C158 120 165 121 170 125C165 127 158 127 151 121Z" fill="#2f7c31" opacity="0.9"/>
+  </g>
+
+  <g>
+    <path d="M88 122C82 106 91 92 109 88C124 85 138 90 145 101C152 113 151 127 143 136C135 146 120 152 106 149C93 147 82 137 88 122Z" fill="#ff5117"/>
+    <ellipse cx="117" cy="138" rx="29" ry="20" fill="#dc0d28" clip-path="url(#topAppleClip)"/>
+    <path d="M94 113C99 107 104 104 110 103" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    <path d="M120 94C120 87 118 81 114 76" fill="none" stroke="#513630" stroke-width="6" stroke-linecap="round"/>
+    <path d="M117 79C126 73 136 73 145 79C136 87 127 89 117 79Z" fill="#70a01a"/>
+    <path d="M117 79C124 78 131 79 137 83C131 85 124 85 117 79Z" fill="#2f7c31" opacity="0.9"/>
+  </g>
+</svg>
