@@ -1,0 +1,30 @@
+---
+title: 'libbitcoin'
+dateAdded: '2026-05-12'
+summary: 'A modular C++ Bitcoin toolkit with an alternative full node, server, explorer, and supporting libraries.'
+nym: 'pmienk'
+website: 'https://libbitcoin.info/'
+coverImage: '/static/images/projects/libbitcoin.svg'
+git: 'https://github.com/libbitcoin'
+tags: ['Bitcoin', 'Node', 'Library']
+fund: general
+announcementLink: '/blog/sixteenth-wave-of-bitcoin-grants#libbitcoin'
+---
+
+`libbitcoin` is a modular C++ toolkit for building Bitcoin software. The project spans libraries, a full node, a query server, an explorer CLI, and supporting components for networking, database, and protocol work. OpenSats described it as an alternative full node implementation with a cross-platform stack for downstream Bitcoin applications.
+
+The public [`libbitcoin` organization](https://github.com/libbitcoin) shows that structure clearly. [`libbitcoin-system`](https://github.com/libbitcoin/libbitcoin-system) is the base development toolkit, [`libbitcoin-node`](https://github.com/libbitcoin/libbitcoin-node) and [`libbitcoin-server`](https://github.com/libbitcoin/libbitcoin-server) cover node and query-server roles, and [`libbitcoin-explorer`](https://github.com/libbitcoin/libbitcoin-explorer) ships the `bx` command line tool. Separate public repos also handle network, database, protocol, client, and build layers.
+
+## Why fund it?
+
+Bitcoin benefits from multiple independently maintained implementations. Different codebases surface different tradeoffs around architecture, performance, and operator tooling. `libbitcoin` has been part of that diversity since 2011, when it produced the first independently implemented full node separate from Bitcoin Core.
+
+OpenSats funded [libbitcoin][announcement] to support work toward the v4 stack. That support helps maintain an independent implementation, improve documentation for operators and developers, and keep the node, server, explorer, and library components usable for downstream projects.
+
+## What's next?
+
+The public direction is clear from the grant announcement. Work is aimed at an early preview of the v4 node, followed by full releases of the node, explorer, and server components. That includes faster initial block download, better scaling across CPU, disk, and network resources, and more integration work across the consolidated stack.
+
+Recent public repository activity also shows steady maintenance across the toolkit, including CI updates and ongoing changes in the core, network, database, and server repos. The next step is to turn that active development into a polished v4 release that operators and developers can rely on.
+
+[announcement]: /blog/sixteenth-wave-of-bitcoin-grants#libbitcoin
