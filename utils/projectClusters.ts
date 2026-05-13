@@ -13,8 +13,8 @@ export type ResolvedCluster = Omit<Cluster, 'slugs'> & {
 
 /**
  * Editorial groupings for the project showcase. Order matters — clusters are
- * rendered in the order they appear here, and projects within a cluster are
- * rendered in the order their slugs are listed.
+ * rendered in the order they appear here. Projects within each cluster are
+ * sorted alphabetically by title when clusters are built.
  */
 export const CLUSTERS: Cluster[] = [
   {
@@ -109,7 +109,10 @@ export function buildClusters(allProjects: Project[]): ResolvedCluster[] {
     ...rest,
     projects: slugs
       .map((slug) => bySlug.get(slug))
-      .filter((p): p is Project => Boolean(p)),
+      .filter((p): p is Project => Boolean(p))
+      .sort((a, b) =>
+        a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
+      ),
   })).filter((c) => c.projects.length > 0)
 
   if (process.env.NODE_ENV !== 'production') {
