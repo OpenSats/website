@@ -105,20 +105,35 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
         {clusters.map((cluster) => (
           <section key={cluster.id} className="py-10 first:pt-6">
             <div className="pb-6">
-              <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+              <h2
+                id={`showcase-cluster-${cluster.id}`}
+                className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+              >
                 {cluster.title}
               </h2>
               <p className="pt-1 text-base text-gray-500 dark:text-gray-400">
                 {cluster.blurb}
               </p>
             </div>
-            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {cluster.projects.map((p) => (
-                <li key={p.slug}>
-                  <ProjectCard {...p} />
-                </li>
-              ))}
-            </ul>
+            <div
+              className="-mx-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 pt-1 sm:mx-0 md:snap-x md:snap-mandatory"
+              aria-labelledby={`showcase-cluster-${cluster.id}`}
+              role="region"
+            >
+              <ul className="flex w-max max-w-none flex-nowrap gap-4 px-4 sm:px-0">
+                {cluster.projects.map((p) => (
+                  <li
+                    key={p.slug}
+                    className="w-[min(22rem,calc(100vw-2.5rem))] shrink-0 md:w-[min(22rem,calc((100vw-6rem)/3))] md:snap-start"
+                  >
+                    <ProjectCard
+                      {...p}
+                      imageSizes="(max-width: 768px) min(22rem, 90vw), (max-width: 1024px) 30vw, 22rem"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
         ))}
       </div>
