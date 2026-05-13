@@ -11,7 +11,7 @@ fund: general
 announcementLink: '/blog/bruno-garcia-receives-lts-grant'
 ---
 
-`bitcoinfuzz` is a differential fuzzing harness for Bitcoin implementations and libraries. It builds multiple modules side by side, feeds them the same randomized inputs, and compares how they parse, validate, and serialize data. That catches crashes, consensus edge cases, and behavior mismatches before they ship downstream.
+`bitcoinfuzz` is a differential [fuzzing](/topics/fuzzing) harness for Bitcoin implementations and libraries. It builds multiple modules side by side, feeds them the same randomized inputs, and compares how they parse, validate, and serialize data. That catches crashes, consensus edge cases, and behavior mismatches before they ship downstream.
 
 The public repository already covers a broad set of Bitcoin, Lightning, and library modules, along with a separate public [corpora](https://github.com/bitcoinfuzz/corpora) repository for shared fuzz inputs. Public work on the repo shows the direction clearly. Earlier fuzzing exposed a critical NBitcoin consensus bug through script evaluation, and newer public pull requests add differential `libbitcoinkernel` modules, the first Utreexo target with `rustreexo`, `libwally-core`, `bitcoin-s`, and a `verify_script` target across Bitcoin Core, `btcd`, and NBitcoin.
 

@@ -1,0 +1,28 @@
+---
+title: 'Fuzzing'
+summary: 'Automated testing that feeds malformed or randomized inputs into software to expose crashes, logic bugs, and inconsistent behavior.'
+category: 'Open Source'
+aliases:
+  [
+    'fuzz testing',
+    'fuzzer',
+    'fuzzers',
+    'differential fuzzing',
+    'coverage-guided fuzzing',
+  ]
+---
+
+**Fuzzing** is an automated testing technique that feeds software large numbers of unexpected, malformed, or randomized inputs and watches what breaks. A good fuzz target treats every crash, hang, assertion failure, memory error, or inconsistent result as a bug worth investigating.
+
+Modern fuzzers usually mutate a seed corpus, keep inputs that reach new code paths, and then keep iterating. That makes fuzzing especially good at finding edge cases that are tedious to cover by hand. It is widely used on parsers, network protocols, script engines, wallet logic, and other code that has to handle untrusted input safely.
+
+Some fuzzers focus on one implementation at a time. **Differential fuzzing** compares two or more implementations with the same input and flags mismatches in parsing, validation, or serialization. That matters in Bitcoin and Lightning, where consensus and interoperability depend on separate codebases agreeing on the same rules.
+
+OpenSats funds projects that use fuzzing to harden critical freedom tech. [bitcoinfuzz](/projects/bitcoinfuzz) focuses on cross-implementation testing in the Bitcoin stack, and other grantees use fuzzing to improve protocol libraries, node software, and security tooling.
+
+## References
+
+- [Wikipedia: Fuzzing](https://en.wikipedia.org/wiki/Fuzzing)
+- [Google OSS-Fuzz](https://google.github.io/oss-fuzz/)
+- [Bitcoin Core fuzzing docs](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md)
+- [bitcoinfuzz/bitcoinfuzz](https://github.com/bitcoinfuzz/bitcoinfuzz)
