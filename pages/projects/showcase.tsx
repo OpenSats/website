@@ -4,11 +4,8 @@ import { PageSEO } from '@/components/SEO'
 import StatsSentence from '@/components/StatsSentence'
 import ProjectCard from '@/components/ProjectCard'
 import type { FundId } from '@/components/ProjectCard'
-import { allBlogs, allProjects } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
-import { sortedBlogPost } from 'pliny/utils/contentlayer'
+import { allProjects } from 'contentlayer/generated'
 import { buildClusters } from '@/utils/projectClusters'
-import { getLatestPostForProject } from '@/utils/relatedPosts'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type CardData = {
@@ -24,7 +21,6 @@ type CardData = {
   nostr?: string
   heartbeat?: string
   zapstore?: string
-  lastUpdate?: { date: string; href: string }
 }
 
 type RenderCluster = {
@@ -41,11 +37,7 @@ type ShowcaseProps = {
 
 const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops']
 
-function toCardData(
-  project: (typeof allProjects)[number],
-  sortedBlogs: Blog[]
-): CardData {
-  const latest = getLatestPostForProject(project, sortedBlogs)
+function toCardData(project: (typeof allProjects)[number]): CardData {
   const fund = (KNOWN_FUNDS as string[]).includes(project.fund || '')
     ? (project.fund as FundId)
     : undefined
@@ -63,9 +55,6 @@ function toCardData(
     nostr: project.nostr,
     heartbeat: project.heartbeat,
     zapstore: project.zapstore,
-    lastUpdate: latest
-      ? { date: latest.date, href: `/blog/${latest.slug}` }
-      : undefined,
   }
 }
 
@@ -163,12 +152,11 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
 export default ProjectShowcase
 
 export const getStaticProps: GetStaticProps<ShowcaseProps> = async () => {
-  const sortedBlogs = sortedBlogPost(allBlogs) as Blog[]
   const clusters: RenderCluster[] = buildClusters(allProjects).map((c) => ({
     id: c.id,
     title: c.title,
     blurb: c.blurb,
-    projects: c.projects.map((p) => toCardData(p, sortedBlogs)),
+    projects: c.projects.map((p) => toCardData(p)),
   }))
 
   const lifetimeStats = await getLifetimeStats()

@@ -11,8 +11,6 @@ const FUND_LABELS: Record<FundId, string> = {
 
 export type FundId = 'general' | 'nostr' | 'ops'
 
-export type LastUpdate = { date: string; href: string }
-
 export type ProjectCardProps = {
   slug: string
   title: string
@@ -22,7 +20,6 @@ export type ProjectCardProps = {
   invertDarkImage?: boolean
   nym: string
   fund?: FundId
-  lastUpdate?: LastUpdate
   git?: string
   nostr?: string
   heartbeat?: string
@@ -37,12 +34,6 @@ export type ProjectCardProps = {
   imageFit?: 'cover' | 'contain'
 }
 
-function shortDate(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
-}
-
 const ProjectCard: React.FC<ProjectCardProps> = ({
   slug,
   title,
@@ -52,7 +43,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   invertDarkImage,
   nym,
   fund,
-  lastUpdate,
   git,
   nostr,
   heartbeat,
@@ -62,9 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   imageFit = 'cover',
 }) => {
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git) || undefined
-  const hasFooter = Boolean(
-    lastUpdate || git || heartbeatUrl || nostr || zapstore
-  )
+  const hasFooter = Boolean(git || heartbeatUrl || nostr || zapstore)
 
   return (
     <figure className="flex h-full flex-col overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-900">
@@ -108,29 +96,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
         <p className="line-clamp-3 text-sm">{summary}</p>
         {hasFooter && (
-          <div className="mt-auto flex items-center justify-between gap-2 pt-2 text-xs text-stone-500 dark:text-stone-400">
-            {lastUpdate ? (
-              <Link
-                href={lastUpdate.href}
-                className="underline-offset-2 hover:text-orange-500 hover:underline"
-              >
-                Last update · {shortDate(lastUpdate.date)}
-              </Link>
-            ) : (
-              <span />
+          <div className="mt-auto flex items-center justify-end gap-2 pt-2 text-xs text-stone-500 dark:text-stone-400 [&>a]:opacity-70 [&>a]:transition-opacity [&>a]:hover:opacity-100">
+            <SocialIcon kind="github" href={git} size={4} />
+            {nostr && (
+              <SocialIcon
+                kind="nostr"
+                href={`https://njump.to/${nostr}`}
+                size={4}
+              />
             )}
-            <span className="flex items-center gap-2 [&>a]:opacity-70 [&>a]:transition-opacity [&>a]:hover:opacity-100">
-              <SocialIcon kind="github" href={git} size={4} />
-              {nostr && (
-                <SocialIcon
-                  kind="nostr"
-                  href={`https://njump.to/${nostr}`}
-                  size={4}
-                />
-              )}
-              <SocialIcon kind="zapstore" href={zapstore} size={4} />
-              <SocialIcon kind="heartbeat" href={heartbeatUrl} size={4} />
-            </span>
+            <SocialIcon kind="zapstore" href={zapstore} size={4} />
+            <SocialIcon kind="heartbeat" href={heartbeatUrl} size={4} />
           </div>
         )}
       </figcaption>
