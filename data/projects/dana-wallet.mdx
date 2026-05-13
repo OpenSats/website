@@ -1,0 +1,40 @@
+---
+title: 'Dana Wallet'
+dateAdded: '2026-05-12'
+summary: 'A mobile Bitcoin wallet built around silent payments, BIP353 addresses, and local scanning for private on-chain receiving.'
+nym: 'cygnet3'
+website: 'https://danawallet.app/'
+donationLink: 'https://github.com/cygnet3/dana?tab=readme-ov-file#donate-to-dana'
+coverImage: '/static/images/projects/dana-wallet.webp'
+darkCoverImage: '/static/images/projects/dana-wallet-dark.webp'
+git: 'https://github.com/cygnet3/dana'
+nostr: 'npub17vjlv6u4dg2ypyy5je9zc3lpeyfrnfrpmzgwt8v4rc289p2m79cqepwz5q'
+zapstore: 'https://zapstore.dev/apps/dev.silentpayments.danawallet'
+tags: ['Bitcoin', 'Privacy', 'Wallet', 'Mobile']
+fund: general
+announcementLink: '/blog/fifteenth-wave-of-bitcoin-grants#dana-wallet'
+---
+
+Dana Wallet is a mobile Bitcoin wallet designed around [silent payments][silent-payments] and [BIP353](/topics/bip-353)-style identifiers like `yourname@danawallet.app`. Instead of handing out reusable receive addresses, it gives users a more familiar payment flow while still deriving fresh on-chain outputs for each payment. The wallet discovers incoming payments through local scanning over a [BIP158](/topics/bip-158)-like structure, which helps keep address ownership private from outside servers.
+
+The project combines the wallet itself with the surrounding pieces needed to make that flow usable in practice: Dana address registration, app distribution through GitHub releases, [Zapstore](/projects/zapstore), and a self-hosted [F-Droid repository][fdroid], plus backend work around the [Blindbit oracle][blindbit-oracle] infrastructure. The current public releases are still marked experimental, but the project has already shipped multiple production-oriented improvements across the wallet, its transaction storage, and its scanning stack.
+
+## Why fund it?
+
+Dana Wallet is working on a hard part of Bitcoin UX. Silent payments offer stronger on-chain privacy, but they only matter to regular users if the wallet experience is simple, understandable, and reliable on a phone. Dana focuses on that last mile: clean receiving flows, human-readable identifiers, local scanning, and the engineering work needed to turn a promising protocol into something people can actually use.
+
+OpenSats included Dana Wallet in the [fifteenth wave of Bitcoin grants][grant]. That support is helping move the wallet toward broader public use.
+
+## What's next?
+
+Recent grant reports show steady progress toward a more usable, stable wallet: claimable Dana addresses, a contact list, local transaction storage in SQLite, offline wallet creation, multiple app flavors on the project's F-Droid repo, and releases through [v0.7.3][release]. The next steps include faster launch times, background syncing, a Blindbit V2 backend, an official F-Droid release, iOS investigation, and a more complete project website.
+
+If you want to dig deeper, start with the [project site][site], the [main repository][repo], the [grant announcement][grant], or the [F-Droid repository][fdroid].
+
+[blindbit-oracle]: https://github.com/setavenger/blindbit-oracle
+[fdroid]: https://fdroid.danawallet.app/fdroid/repo/
+[grant]: /blog/fifteenth-wave-of-bitcoin-grants#dana-wallet
+[release]: https://github.com/cygnet3/dana/releases/tag/v0.7.3
+[repo]: https://github.com/cygnet3/dana
+[silent-payments]: /topics/silent-payments
+[site]: https://danawallet.app/
