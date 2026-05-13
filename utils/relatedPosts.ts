@@ -79,6 +79,22 @@ export function getRelatedBlogPostsForProject(
   return getRelatedBlogPostsByTerms([title, slug], blogs)
 }
 
+export type LatestPost = { slug: string; date: string; title: string }
+
+/**
+ * Returns the most recent related blog post for a project as a small DTO,
+ * or null if there are none. Expects `sortedBlogs` to already be sorted
+ * newest-first (e.g. via pliny's `sortedBlogPost`).
+ */
+export function getLatestPostForProject(
+  project: Project,
+  sortedBlogs: Blog[]
+): LatestPost | null {
+  const [latest] = getRelatedBlogPostsForProject(project, sortedBlogs)
+  if (!latest) return null
+  return { slug: latest.slug, date: latest.date, title: latest.title }
+}
+
 /**
  * Finds blog posts that mention a given topic by its title or any alias.
  */
