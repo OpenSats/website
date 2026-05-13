@@ -33,6 +33,7 @@ export type ProjectCardProps = {
   customImageStyles?: React.CSSProperties
   /** Passed to next/image `sizes` (layout-specific). */
   imageSizes?: string
+  imageFit?: 'cover' | 'contain'
 }
 
 function shortDate(iso: string): string {
@@ -56,6 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   heartbeat,
   zapstore,
   imageSizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
+  imageFit = 'cover',
 }) => {
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git) || undefined
   const hasFooter = Boolean(
@@ -72,9 +74,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             darkSrc={darkCoverImage}
             fill
             sizes={imageSizes}
-            className={`cursor-pointer object-cover ${
-              invertDarkImage ? 'dark:invert' : ''
-            }`}
+            className={`cursor-pointer ${
+              imageFit === 'contain'
+                ? 'object-contain p-4 sm:p-5'
+                : 'object-cover'
+            } ${invertDarkImage ? 'dark:invert' : ''}`}
           />
         </div>
       </Link>

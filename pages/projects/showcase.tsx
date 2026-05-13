@@ -128,6 +128,7 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
                   >
                     <ProjectCard
                       {...p}
+                      imageFit="contain"
                       imageSizes="(max-width: 768px) min(22rem, 90vw), (max-width: 1024px) 30vw, 22rem"
                     />
                   </li>
