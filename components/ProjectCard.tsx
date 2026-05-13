@@ -27,6 +27,7 @@ export type ProjectCardProps = {
   nostr?: string
   heartbeat?: string
   zapstore?: string
+  showAttribution?: boolean
   // Accepted for backwards compatibility; the redesigned card no longer
   // surfaces tag chips or per-card image overrides.
   tags?: string[]
@@ -56,6 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   nostr,
   heartbeat,
   zapstore,
+  showAttribution = true,
   imageSizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
   imageFit = 'cover',
 }) => {
@@ -88,20 +90,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {title}
           </Link>
         </h2>
-        <div className="text-sm text-stone-500 dark:text-stone-400">
-          by {nym}
-          {fund && (
-            <>
-              {' · '}
-              <Link
-                href={`/funds/${fund}`}
-                className="underline-offset-2 hover:text-orange-500 hover:underline"
-              >
-                via the {FUND_LABELS[fund]}
-              </Link>
-            </>
-          )}
-        </div>
+        {showAttribution && (
+          <div className="text-sm text-stone-500 dark:text-stone-400">
+            by {nym}
+            {fund && (
+              <>
+                {' · '}
+                <Link
+                  href={`/funds/${fund}`}
+                  className="underline-offset-2 hover:text-orange-500 hover:underline"
+                >
+                  via the {FUND_LABELS[fund]}
+                </Link>
+              </>
+            )}
+          </div>
+        )}
         <p className="line-clamp-3 text-sm">{summary}</p>
         {hasFooter && (
           <div className="mt-auto flex items-center justify-between gap-2 pt-2 text-xs text-stone-500 dark:text-stone-400">
