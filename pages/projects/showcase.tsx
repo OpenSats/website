@@ -88,6 +88,19 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
           </Link>
           .
         </p>
+        <nav aria-label="Project showcase sections" className="pt-6">
+          <div className="flex flex-wrap gap-2">
+            {clusters.map((cluster) => (
+              <Link
+                key={cluster.id}
+                href={`#showcase-cluster-${cluster.id}`}
+                className="rounded-full border border-gray-200 px-3 py-1 text-sm text-gray-600 transition hover:border-orange-400 hover:text-orange-500 dark:border-gray-700 dark:text-gray-300 dark:hover:border-orange-400 dark:hover:text-orange-400"
+              >
+                {cluster.title}
+              </Link>
+            ))}
+          </div>
+        </nav>
       </section>
 
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -96,9 +109,14 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
             <div className="pb-6">
               <h2
                 id={`showcase-cluster-${cluster.id}`}
-                className="text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+                className="scroll-mt-24 text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
               >
-                {cluster.title}
+                <span className="flex flex-wrap items-center gap-3">
+                  <span>{cluster.title}</span>
+                  <span className="rounded-full bg-stone-200 px-2.5 py-0.5 text-sm font-medium text-stone-600 dark:bg-stone-800 dark:text-stone-300">
+                    {cluster.projects.length}
+                  </span>
+                </span>
               </h2>
               <p className="pt-1 text-base text-gray-500 dark:text-gray-400">
                 {cluster.blurb}
