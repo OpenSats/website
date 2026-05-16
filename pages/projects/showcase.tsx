@@ -90,7 +90,7 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
         </p>
       </section>
 
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="divide-y divide-gray-200 overflow-x-hidden dark:divide-gray-700">
         {clusters.map((cluster) => (
           <section key={cluster.id} className="py-10 first:pt-6">
             <div className="pb-6">
@@ -105,7 +105,7 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({
               </p>
             </div>
             <div
-              className="-mx-4 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 pt-1 sm:mx-0 md:snap-x md:snap-mandatory"
+              className="-mx-4 max-w-full overflow-x-auto overflow-y-hidden overscroll-x-contain pb-2 pt-1 sm:mx-0 md:snap-x md:snap-mandatory"
               aria-labelledby={`showcase-cluster-${cluster.id}`}
               role="region"
             >
