@@ -22,20 +22,12 @@ export const CLUSTERS: Cluster[] = [
     id: 'core',
     title: 'Protocol Maintenance & Development',
     blurb: 'The full node, validation, and the protocol underneath.',
-    slugs: [
-      'bitcoin-core',
-      'libbitcoin',
-      'floresta',
-      'utreexod',
-      'splicing',
-      'vls',
-      'asmap',
-    ],
+    slugs: ['bitcoin-core', 'libbitcoin', 'floresta', 'utreexod', 'asmap'],
   },
   {
     id: 'education',
     title: 'Education & Research',
-    blurb: 'People bringing in the next wave of contributors.',
+    blurb: 'Projects that bring in the next wave of contributors.',
     slugs: [
       'summerofbitcoin',
       'satoshinakamotoinstitute',
@@ -55,6 +47,12 @@ export const CLUSTERS: Cluster[] = [
     title: 'Mining',
     blurb: 'Mining protocols and infrastructure.',
     slugs: ['stratumv2'],
+  },
+  {
+    id: 'lightning',
+    title: 'Lightning',
+    blurb: 'Lightning protocols, security, and infrastructure.',
+    slugs: ['splicing', 'vls'],
   },
   {
     id: 'dev-tooling-testing',
