@@ -60,14 +60,7 @@ export const CLUSTERS: Cluster[] = [
     title: 'Developer Tooling & Testing',
     blurb:
       'Libraries, kits, and workflow tools engineers use to build and ship.',
-    slugs: [
-      'bdk',
-      'rust-bitcoin',
-      'ndk',
-      'ngit',
-      'bitcoinfuzz',
-      'bitcoinresearchkit',
-    ],
+    slugs: ['bdk', 'rust-bitcoin', 'bitcoinfuzz', 'bitcoinresearchkit'],
   },
   {
     id: 'wallets',
@@ -94,10 +87,16 @@ export const CLUSTERS: Cluster[] = [
     slugs: ['damus', 'amethyst', '0xchat', 'coracle', 'flotilla', 'soapbox'],
   },
   {
+    id: 'nostr-dev-tooling',
+    title: 'Nostr Developer Tooling',
+    blurb: 'SDKs and tools for building on nostr.',
+    slugs: ['applesauce', 'ndk', 'ngit'],
+  },
+  {
     id: 'nostr-infra',
     title: 'Nostr Infrastructure',
-    blurb: 'Relays, libraries, signers, and developer tooling.',
-    slugs: ['applesauce', 'citrine', 'frostr', 'amber', 'zapstore'],
+    blurb: 'Relays, signers, and core infrastructure for nostr.',
+    slugs: ['citrine', 'frostr', 'amber', 'zapstore'],
   },
 ]
 
