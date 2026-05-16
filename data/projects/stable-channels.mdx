@@ -1,0 +1,29 @@
+---
+title: 'Stable Channels'
+dateAdded: '2025-03-14'
+summary: 'A self-custodial Lightning wallet for bitcoin-backed dollar balances.'
+nym: 'Stable Channels contributors'
+website: 'https://stablechannels.com/'
+coverImage: '/static/images/projects/stable-channels.png'
+git: 'https://github.com/toneloc/stable-channels'
+tags: ['Bitcoin', 'Lightning']
+showcase: true
+fund: general
+announcementLink: '/blog/tenth-wave-of-bitcoin-grants#stable-channels'
+---
+
+[Stable Channels](https://stablechannels.com/) is a self-custodial Lightning project for bitcoin-backed dollar balances. Two counterparties keep a Lightning channel open and settle against the BTC/USD price at regular intervals. One side stays near a target dollar value. The other side takes the corresponding bitcoin exposure.
+
+The current implementation ships as a desktop wallet backed by its own Lightning node. Users hold their own keys, both sides post bitcoin collateral, and the whole system stays inside the Bitcoin and Lightning stack from end to end.
+
+## Why fund it?
+
+Many Bitcoin users want a way to manage volatility inside a self-custodial system. Stable Channels tackles that directly. It uses open-source code and standard Lightning channels to build a synthetic dollar balance out of bitcoin collateral.
+
+OpenSats funded Stable Channels in the [tenth wave of Bitcoin grants](/blog/tenth-wave-of-bitcoin-grants#stable-channels). The project is also pushing the discussion forward through public technical writing such as its [Delving Bitcoin post](https://delvingbitcoin.org/t/stable-channels-peer-to-peer-dollar-balances-on-lightning/875).
+
+## What's next?
+
+Current work is focused on the Rust implementation, desktop releases, and the mechanics that make the system usable in practice: channel setup, price feeds, and frequent rebalancing between counterparties.
+
+The next phase is broader Lightning compatibility and fuller payment support. The long-term goal is a smoother way to move between dollar stability and bitcoin exposure inside a Lightning wallet.
