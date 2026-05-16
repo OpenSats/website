@@ -73,7 +73,7 @@ const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
           <p className="pt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
             {summary}
           </p>
-          <p className="pt-3 text-sm font-medium leading-6">
+          <p className="pt-3 text-right text-sm font-medium leading-6">
             <Link
               href={slug}
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
