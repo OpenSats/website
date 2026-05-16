@@ -32,7 +32,7 @@ const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
 }) => {
   return (
     <li className="py-5 first:pt-0 last:pb-0">
-      <article className="relative grid grid-cols-[4rem_minmax(0,1fr)] items-start gap-3 pr-5 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-5 sm:pr-0">
+      <article className="relative grid grid-cols-[4rem_minmax(0,1fr)] items-start gap-3 pr-6 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-5 sm:pr-0">
         <Link href={slug} className="block">
           <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded border border-gray-200 bg-white dark:border-gray-800 dark:bg-black sm:h-24 sm:w-24">
             <Image
@@ -86,7 +86,7 @@ const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
         <Link
           href={slug}
           aria-label={`Learn more about ${title}`}
-          className="absolute inset-y-0 right-0 flex items-center text-gray-300 transition-colors hover:text-gray-400 dark:text-gray-600 dark:hover:text-gray-500 sm:hidden"
+          className="absolute inset-y-0 -right-1 flex items-center text-gray-300 transition-colors hover:text-gray-400 dark:text-gray-600 dark:hover:text-gray-500 sm:hidden"
         >
           <svg
             aria-hidden="true"
