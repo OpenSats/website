@@ -78,7 +78,8 @@ const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
               href={slug}
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             >
-              View project page &rarr;
+              <span className="sr-only sm:not-sr-only">Learn more</span>
+              <span aria-hidden="true"> &rarr;</span>
             </Link>
           </p>
         </div>
