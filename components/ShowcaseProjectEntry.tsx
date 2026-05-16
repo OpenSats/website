@@ -32,18 +32,17 @@ const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
 }) => {
   return (
     <li className="py-5 first:pt-0 last:pb-0">
-      <article className="grid gap-4 sm:grid-cols-[5.5rem_minmax(0,1fr)] sm:gap-5">
+      <article className="grid gap-4 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-5">
         <Link href={slug} className="block">
-          <div className="aspect-square relative overflow-hidden rounded border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
+          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded border border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
             <Image
               alt={title}
               src={coverImage}
               darkSrc={darkCoverImage}
-              fill
-              sizes="88px"
-              className={`object-contain p-3 ${
-                invertDarkImage ? 'dark:invert' : ''
-              }`}
+              width={96}
+              height={96}
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              className={`p-3 ${invertDarkImage ? 'dark:invert' : ''}`}
             />
           </div>
         </Link>
