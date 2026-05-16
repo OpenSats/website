@@ -58,7 +58,6 @@ export const CLUSTERS: Cluster[] = [
     slugs: [
       'bdk',
       'rust-bitcoin',
-      'cdk',
       'ndk',
       'ngit',
       'bitcoinfuzz',
@@ -81,7 +80,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'chaumian-ecash',
     title: 'Chaumian ecash',
     blurb: 'Ecash wallets and mint software on Cashu.',
-    slugs: ['minibits', 'cashu', 'opencash'],
+    slugs: ['minibits', 'cashu', 'cdk', 'opencash'],
   },
   {
     id: 'nostr-clients',
