@@ -19,12 +19,6 @@ export const CLUSTERS: Cluster[] = [
     slugs: ['tor', 'grapheneos', 'wireguard'],
   },
   {
-    id: 'privacy',
-    title: 'Privacy',
-    blurb: 'Wallet and payment tools built for more private Bitcoin use.',
-    slugs: ['pdk', 'dana-wallet', 'mostro'],
-  },
-  {
     id: 'core',
     title: 'Protocol Maintenance & Development',
     blurb: 'The full node, validation, and the protocol underneath.',
@@ -49,6 +43,12 @@ export const CLUSTERS: Cluster[] = [
       'bitcoindesign',
       'bitshala',
     ],
+  },
+  {
+    id: 'privacy',
+    title: 'Privacy',
+    blurb: 'Wallet and payment tools built for more private Bitcoin use.',
+    slugs: ['pdk', 'dana-wallet', 'mostro'],
   },
   {
     id: 'dev-tooling-testing',
