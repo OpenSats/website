@@ -27,7 +27,6 @@ export const CLUSTERS: Cluster[] = [
       'libbitcoin',
       'floresta',
       'utreexod',
-      'stratumv2',
       'splicing',
       'vls',
       'asmap',
@@ -49,6 +48,12 @@ export const CLUSTERS: Cluster[] = [
     title: 'Privacy',
     blurb: 'Wallet and payment tools built for more private Bitcoin use.',
     slugs: ['pdk', 'dana-wallet', 'mostro'],
+  },
+  {
+    id: 'mining',
+    title: 'Mining',
+    blurb: 'Mining protocols and infrastructure.',
+    slugs: ['stratumv2'],
   },
   {
     id: 'dev-tooling-testing',
