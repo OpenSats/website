@@ -13,30 +13,21 @@ export type ResolvedCluster = Omit<Cluster, 'slugs'> & {
 
 export const CLUSTERS: Cluster[] = [
   {
-    id: 'privacy-infra',
-    title: 'Privacy & Infrastructure',
-    blurb: 'The plumbing that keeps the rest of the stack honest.',
-    slugs: ['tor', 'grapheneos', 'pdk', 'wireguard'],
+    id: 'infrastructure',
+    title: 'Infrastructure',
+    blurb: 'Operating systems, anonymity networks, and secure networking.',
+    slugs: ['tor', 'grapheneos', 'wireguard'],
   },
   {
     id: 'core',
     title: 'Protocol Maintenance & Development',
-    blurb: 'The full node, validation, and the protocol underneath.',
-    slugs: [
-      'bitcoin-core',
-      'libbitcoin',
-      'floresta',
-      'utreexod',
-      'stratumv2',
-      'splicing',
-      'vls',
-      'asmap',
-    ],
+    blurb: 'Full nodes, validation, and core protocol work.',
+    slugs: ['bitcoin-core', 'libbitcoin', 'floresta', 'utreexod', 'asmap'],
   },
   {
     id: 'education',
     title: 'Education & Research',
-    blurb: 'People bringing in the next wave of contributors.',
+    blurb: 'Projects that bring in the next wave of contributors.',
     slugs: [
       'summerofbitcoin',
       'satoshinakamotoinstitute',
@@ -45,37 +36,48 @@ export const CLUSTERS: Cluster[] = [
     ],
   },
   {
+    id: 'privacy',
+    title: 'Privacy',
+    blurb:
+      'Wallet and payment tools built to make privacy best practices easier and more user-friendly.',
+    slugs: ['pdk', 'dana-wallet', 'mostro'],
+  },
+  {
+    id: 'mining',
+    title: 'Mining',
+    blurb: 'Mining protocols and infrastructure.',
+    slugs: ['stratumv2'],
+  },
+  {
+    id: 'lightning',
+    title: 'Lightning',
+    blurb: 'Lightning protocols, security, and infrastructure.',
+    slugs: ['splicing', 'vls'],
+  },
+  {
     id: 'dev-tooling-testing',
     title: 'Developer Tooling & Testing',
     blurb:
       'Libraries, kits, and workflow tools engineers use to build and ship.',
-    slugs: [
-      'bdk',
-      'rust-bitcoin',
-      'cdk',
-      'ndk',
-      'ngit',
-      'bitcoinfuzz',
-      'bitcoinresearchkit',
-    ],
+    slugs: ['bdk', 'rust-bitcoin', 'bitcoinfuzz', 'bitcoinresearchkit'],
   },
   {
     id: 'wallets',
     title: 'Wallets',
-    blurb: 'Self-custody software people actually use.',
-    slugs: ['cove', 'blixt', 'blitz-wallet', 'dana-wallet'],
+    blurb: 'Self-custody software built for everyday use.',
+    slugs: ['cove', 'blixt', 'blitz-wallet'],
   },
   {
     id: 'lightning-payments',
     title: 'Merchant Tooling & Payments',
     blurb: 'Payments, point-of-sale, and merchant tooling on Lightning.',
-    slugs: ['btcpayserver', 'lnbits', 'mostro'],
+    slugs: ['btcpayserver', 'lnbits'],
   },
   {
     id: 'chaumian-ecash',
     title: 'Chaumian ecash',
     blurb: 'Ecash wallets and mint software on Cashu.',
-    slugs: ['minibits', 'cashu', 'opencash'],
+    slugs: ['minibits', 'cashu', 'cdk', 'opencash'],
   },
   {
     id: 'nostr-clients',
@@ -84,10 +86,16 @@ export const CLUSTERS: Cluster[] = [
     slugs: ['damus', 'amethyst', '0xchat', 'coracle', 'flotilla', 'soapbox'],
   },
   {
+    id: 'nostr-dev-tooling',
+    title: 'Nostr Developer Tooling',
+    blurb: 'SDKs and tools for building on nostr.',
+    slugs: ['applesauce', 'ndk', 'ngit'],
+  },
+  {
     id: 'nostr-infra',
     title: 'Nostr Infrastructure',
-    blurb: 'Relays, libraries, signers, and developer tooling.',
-    slugs: ['applesauce', 'citrine', 'frostr', 'amber', 'zapstore'],
+    blurb: 'Relays, signers, and core infrastructure for nostr.',
+    slugs: ['citrine', 'frostr', 'amber', 'zapstore'],
   },
 ]
 

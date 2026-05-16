@@ -316,7 +316,7 @@ export default function Home({
           <ProjectList projects={projects} />
           <div className="flex justify-end pt-4 text-base font-medium leading-6">
             <Link
-              href="/projects/showcase"
+              href="/projects"
               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               aria-label="View All Projects"
             >

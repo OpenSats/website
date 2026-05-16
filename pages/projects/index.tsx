@@ -60,13 +60,9 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({ clusters }) => {
           Project Showcase
         </h1>
         <p className="max-w-3xl pt-3 text-lg leading-7 text-gray-500 dark:text-gray-400">
-          OpenSats has funded work across Bitcoin and Nostr, from full node
-          infrastructure to wallets, payments, and education. This page groups a
-          selection of those projects by the part of the stack they help
-          strengthen.
-        </p>
-        <p className="max-w-3xl pt-3 text-lg leading-7 text-gray-500 dark:text-gray-400">
-          For the full list, see our{' '}
+          Below is a showcase of various projects we are funding or have funded
+          in the past. Please keep in mind that the list is not exhaustive. For
+          the full list, see our{' '}
           <Link
             href="/tags/grants"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"

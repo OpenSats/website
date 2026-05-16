@@ -101,13 +101,13 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/projects',
-          destination: '/funds',
+          source: '/projects/showcase',
+          destination: '/projects',
           permanent: true,
         },
         {
           source: '/projects/all',
-          destination: '/projects/showcase',
+          destination: '/projects',
           permanent: true,
         },
         {
