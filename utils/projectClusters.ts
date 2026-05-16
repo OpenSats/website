@@ -13,10 +13,16 @@ export type ResolvedCluster = Omit<Cluster, 'slugs'> & {
 
 export const CLUSTERS: Cluster[] = [
   {
-    id: 'privacy-infra',
-    title: 'Privacy & Infrastructure',
-    blurb: 'The plumbing that keeps the rest of the stack honest.',
-    slugs: ['tor', 'grapheneos', 'pdk', 'wireguard'],
+    id: 'infrastructure',
+    title: 'Infrastructure',
+    blurb: 'Operating systems, anonymity networks, and secure networking.',
+    slugs: ['tor', 'grapheneos', 'wireguard'],
+  },
+  {
+    id: 'privacy',
+    title: 'Privacy',
+    blurb: 'Wallet and payment tools built for more private Bitcoin use.',
+    slugs: ['pdk', 'dana-wallet'],
   },
   {
     id: 'core',
@@ -63,7 +69,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'wallets',
     title: 'Wallets',
     blurb: 'Self-custody software people actually use.',
-    slugs: ['cove', 'blixt', 'blitz-wallet', 'dana-wallet'],
+    slugs: ['cove', 'blixt', 'blitz-wallet'],
   },
   {
     id: 'lightning-payments',
