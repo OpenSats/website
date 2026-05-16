@@ -60,7 +60,7 @@ const ProjectShowcase: NextPage<ShowcaseProps> = ({ clusters }) => {
           Project Showcase
         </h1>
         <p className="max-w-3xl pt-3 text-lg leading-7 text-gray-500 dark:text-gray-400">
-          The below is a showcase of various projects we are funding or have
+         Below is a showcase of various projects we are funding or have
           funded in the past. Please keep in mind that the list is not
           exhaustive. For the full list, see our{' '}
           <Link
