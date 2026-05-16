@@ -22,7 +22,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'privacy',
     title: 'Privacy',
     blurb: 'Wallet and payment tools built for more private Bitcoin use.',
-    slugs: ['pdk', 'dana-wallet'],
+    slugs: ['pdk', 'dana-wallet', 'mostro'],
   },
   {
     id: 'core',
@@ -74,7 +74,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'lightning-payments',
     title: 'Merchant Tooling & Payments',
     blurb: 'Payments, point-of-sale, and merchant tooling on Lightning.',
-    slugs: ['btcpayserver', 'lnbits', 'mostro'],
+    slugs: ['btcpayserver', 'lnbits'],
   },
   {
     id: 'chaumian-ecash',
