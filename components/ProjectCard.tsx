@@ -66,7 +66,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             width={1200}
             height={1200}
             style={{
-              objectFit: isHorizontal ? 'fill' : 'cover',
+              objectFit: isHorizontal ? 'contain' : 'cover',
               ...customImageStyles,
             }}
             priority={true}
