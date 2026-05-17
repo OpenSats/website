@@ -1,0 +1,44 @@
+---
+title: 'Bitaxe'
+dateAdded: '2026-05-17'
+summary: 'Open-source Bitcoin mining hardware and firmware built for home and small-scale miners.'
+nym: 'skot'
+website: 'https://www.bitaxe.org/'
+coverImage: '/static/images/projects/bitaxe-photo.webp'
+git: 'https://github.com/skot/bitaxe'
+tags: ['Bitcoin', 'Mining', 'Hardware']
+fund: general
+announcementLink: '/blog/bitcoin-grants-feb-2024#the-bitaxe'
+---
+
+Bitaxe is an open-source Bitcoin mining project that gives home miners and small operators a way to run ASIC hardware they can inspect, modify, and build themselves. The project pairs public board designs with open firmware, which makes it easier to study how a miner works, assemble compatible hardware, or buy from community manufacturers that publish their changes back out.
+
+The original [hardware repo][repo] remains the entry point, and newer work also ships through the [bitaxeorg organization][org], including [bitaxeGamma][gamma], [BitaxeGT][gt], and the [ESP-Miner][firmware] firmware that powers setup, pool connections, tuning, and browser-based management through AxeOS.
+
+> My best estimates put the number of Bitaxe units sold to date at over 100,000. Self-sovereign, private miners have solo mined at least six blocks.
+>
+> <cite>[skot](/blog/open-hardware-for-open-money#bitaxe), Bitaxe project lead</cite>
+
+## Why fund it?
+
+Bitcoin mining hardware has been opaque and concentrated for years. Bitaxe pushes in the opposite direction by publishing the board files, firmware, manufacturing data, and tooling people need to understand how a miner works and improve it themselves.
+
+OpenSats first supported Bitaxe in the [February 2024 grant announcement][grant]. The project later featured in the [Open Hardware for Open Money report][report], which tracks how the work expanded from early reference boards into newer Gamma and GT releases.
+
+## What's next?
+
+Recent public releases show Bitaxe still improving both hardware and firmware. The [bitaxeGamma 603][gamma-603] and [GT-801][gt-801] hardware releases published new manufacturable boards, while [ESP-Miner v2.13.1][esp-2-13-1] continued shipping firmware support for newer boards and multi-device management.
+
+The next step is to keep making open miner designs easier to build, run, and adapt. If you want to dig deeper, start with the [project site][site], the [main hardware repo][repo], the [grant announcement][grant], or the [Open Hardware for Open Money report][report].
+
+[esp-2-13-1]: https://github.com/bitaxeorg/ESP-Miner/releases/tag/v2.13.1
+[firmware]: https://github.com/bitaxeorg/ESP-Miner
+[gamma]: https://github.com/bitaxeorg/bitaxeGamma
+[gamma-603]: https://github.com/bitaxeorg/bitaxeGamma/releases/tag/gamma-603
+[grant]: /blog/bitcoin-grants-feb-2024#the-bitaxe
+[gt]: https://github.com/bitaxeorg/BitaxeGT
+[gt-801]: https://github.com/bitaxeorg/BitaxeGT/releases/tag/GT-801
+[org]: https://github.com/bitaxeorg
+[repo]: https://github.com/skot/bitaxe
+[report]: /blog/open-hardware-for-open-money#bitaxe
+[site]: https://www.bitaxe.org/
