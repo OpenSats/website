@@ -1,0 +1,31 @@
+---
+title: 'Jumble'
+dateAdded: '2025-07-01'
+summary: 'A browser-based nostr client for relay discovery, relay reviews, safer signing, and targeted publishing.'
+nym: 'Cody Tseng'
+website: 'https://jumble.social/'
+donationLink: 'https://geyser.fund/project/jumble'
+coverImage: '/static/images/projects/jumble.svg'
+darkCoverImage: '/static/images/projects/jumble-dark.svg'
+git: 'https://github.com/CodyTseng/jumble'
+tags: ['Nostr', 'Web', 'PWA']
+showcase: true
+fund: nostr
+announcementLink: '/blog/twelfth-wave-of-nostr-grants#jumble'
+---
+
+Jumble is a browser-based [nostr](/topics/nostr) client built by Cody Tseng. It focuses on relays: browsing relay feeds directly, managing relay sets, and helping users understand where notes are stored and propagated. The app runs as a Progressive Web App at [jumble.social](https://jumble.social/), and recent work also added a desktop build for people who want more websocket capacity and OS-level secret storage.
+
+The relay discovery layer is what makes Jumble stand out. The client added relay reviews and featured relays in its Explore view so users can compare operators by reliability, responsiveness, or specialization instead of guessing from scattered community lists. It also supports [NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md) remote signing, which lets users pair Jumble with external signers instead of pasting private keys into the browser, plus outbox-aware publishing and republishing controls for sending notes to specific relays.
+
+## Why fund it?
+
+Relay choice shapes how decentralized nostr feels in practice. Many clients hide that layer. Jumble makes it visible and usable, which helps users spread activity across more relays instead of defaulting to a few large ones. That helps traffic move toward smaller or specialized relays and gives users a clearer sense of how notes move through the protocol.
+
+OpenSats first funded Jumble in the [twelfth wave of nostr grants](/blog/twelfth-wave-of-nostr-grants#jumble) and renewed support in the [thirteenth wave of nostr grants](/blog/thirteenth-wave-of-nostr-grants). The grant funds continued work on relay discovery, safer signing flows, and broader client usability.
+
+## What's next?
+
+The roadmap from the original grant included richer relay discovery through favorites, ratings, network-followed relays, and search, plus a better post editor, bookmarks, emoji support, faster feed loading, and improved video playback. More recent work has focused on relay reviews, NIP-46 login flows, targeted publishing, community-hosted instances, and desktop packaging.
+
+For a closer look at recent progress, see the [Advancements in Nostr Clients](/blog/advancements-in-nostr-clients#jumble) impact report.
