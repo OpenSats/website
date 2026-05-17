@@ -64,8 +64,8 @@ export const CLUSTERS: Cluster[] = [
   {
     id: 'wallets',
     title: 'Wallets',
-    blurb: 'Self-custody software built for everyday use.',
-    slugs: ['cove', 'blixt', 'blitz-wallet'],
+    blurb: 'Self-custody wallets and signing devices built for everyday use.',
+    slugs: ['cove', 'blixt', 'blitz-wallet', 'krux'],
   },
   {
     id: 'lightning-payments',
