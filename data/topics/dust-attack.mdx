@@ -1,0 +1,18 @@
+---
+title: 'Dust attack'
+summary: 'A privacy attack where someone sends tiny amounts of bitcoin to a known address so later spending can help link outputs and cluster a wallet.'
+category: 'Privacy'
+aliases: ['dust attacks', 'output linking', 'address reuse', 'reuse avoidance']
+---
+
+A dust attack is a privacy attack that uses tiny Bitcoin outputs to create or exploit address reuse. An attacker sends a small amount of bitcoin, called **dust**, to an address that has already appeared on-chain. If the wallet later spends that dust together with other coins, chain analysts can use the shared spend to learn more about which [UTXOs](/topics/utxo) belong to the same person or service.
+
+The broader problem is often called **output linking** or **address reuse**. When the same address receives multiple payments, outside observers can already make a reasonable guess that those outputs belong to the same recipient. Dust attacks make that problem worse because the target did not choose the reuse. The attacker manufactures one more linkable output and waits for the wallet to merge it with other funds.
+
+Wallets reduce the damage in a few ways. Fresh addresses prevent ordinary reuse, and coin control can keep suspicious dust out of privacy-sensitive spends. Some wallets also track reused addresses and warn before spending from them. Protocols such as [Silent Payments](/topics/silent-payments) go one step further by letting a recipient publish reusable payment information without putting the same on-chain address on the blockchain again.
+
+## References
+
+- [Bitcoin Optech: Output linking](https://bitcoinops.org/en/topics/output-linking/)
+- [Bitcoin Wiki: Address reuse](https://en.bitcoin.it/wiki/Address_reuse)
+- [Bitcoin Optech: Discussion of dust attack mitigations](https://bitcoinops.org/en/newsletters/2026/02/06/#discussion-of-dust-attack-mitigations)
