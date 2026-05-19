@@ -8,27 +8,27 @@ draft: false
 summary: "OpenSats is funding five open-source projects advancing the nostr ecosystem."
 ---
  
-We're pleased to announce a new wave of grants from [The Nostr
-Fund][nostr-fund], supporting five open-source projects building across the
-nostr ecosystem. This wave includes three first-time grants and two grant
-renewals.
+We're pleased to announce a new wave of grants from [The Nostr Fund][nostr-fund], supporting
+five open-source projects building across the nostr ecosystem. This wave
+includes four first-time grants and one grant renewal.
 
 The projects in this round extend nostr into app discovery, private calls,
 software distribution, client onboarding, and access to AI tools. The first-time
 grants include a browser-based launcher for discovering and using nostr apps, an
-encrypted audio and video calling app for mobile and desktop users, and a
-protocol that connects AI clients and providers through nostr discovery and
-bitcoin-native payments.
+encrypted audio and video calling app for mobile and desktop users, a protocol
+that connects AI clients and providers through nostr discovery and
+bitcoin-native payments, and a polished mobile client that abstracts the
+complexity of nostr and Lightning for first-time users.
 
 The first-time grants in this wave will go to:
 
 - [44Billion](#44billion)
 - [NosCall](#noscall)
 - [Routstr](#routstr)
+- [Wisp](#wisp)
 
 The returning grantees in this wave are:
 
-- utxo/barrydeen for [Wisp][wisp] ([Dec. 2024][wisp-prior])
 - Zapstore ([Mar. 2025][zapstore-prior])
 
 These grants are made possible by our generous donors who believe in an open,
@@ -143,12 +143,44 @@ License: GPL-3.0
 
 ---
 
-Returning support for utxo/barrydeen and renewed support for Zapstore continue
-on a similar path. Barry's new project, Wisp, focuses on a polished client
-experience with strong [relay][relays-topic-closing] behavior, built-in
-Lightning functionality, and onboarding that makes nostr easier to use from the
-start. Zapstore advances permissionless software distribution with signed
-releases, social discovery, and bitcoin payments for developers.
+### Wisp
+
+[Wisp][wisp-site] is a [nostr][nostr-topic-wisp] client for Android, built for
+speed and for users new to the protocol. It implements the [outbox
+model][outbox-topic-wisp] and supports dedicated DM relay sets for private
+messaging. The client includes a non-custodial [Lightning][sats-topic-wisp]
+wallet built using [Breez SDK (Spark)][breez-sdk-spark] that runs as a node on
+the device, with seed-phrase recovery and encrypted backup to the user's own
+relays. Upon signing up, a new user can receive [zaps][zaps-topic], open a
+[private message][private-dms-topic] thread, and upload photos through
+[Blossom][blossom-topic]. Wisp has been one of the fastest-growing nostr clients
+on Android since launch.
+
+With support from this grant, creator Barry Deen will work on the client
+full-time. Near-term development includes a web client and a "normie mode" that
+displays Lightning wallet balances in USD and lets users cash out with
+[Bitrefill][bitrefill] gift cards. iOS development and beta launch are planned
+for the second half of the year, along with private relay-based communities.
+
+Repository: [barrydeen/wisp][wisp-repo]  
+License: MIT
+
+[wisp-site]: https://wisp.mobile
+[nostr-topic-wisp]: /topics/nostr
+[outbox-topic-wisp]: /topics/outbox
+[sats-topic-wisp]: /topics/sats
+[breez-sdk-spark]: https://github.com/breez/spark-sdk#breez-sdk---spark
+[zaps-topic]: /topics/zaps
+[private-dms-topic]: /topics/private-dms
+[blossom-topic]: /topics/blossom
+[bitrefill]: https://www.bitrefill.com/us/en/
+[wisp-repo]: https://github.com/barrydeen/wisp
+
+---
+
+Renewed support for Zapstore continues the work of building permissionless
+software distribution on nostr, with signed releases, social discovery, and
+bitcoin payments going directly to developers.
 
 The projects in this wave reflect the variety of work happening across the nostr
 ecosystem. App launchers, private calls, AI access, mobile clients, and signed
