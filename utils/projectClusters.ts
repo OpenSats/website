@@ -45,8 +45,8 @@ export const CLUSTERS: Cluster[] = [
   {
     id: 'mining',
     title: 'Mining',
-    blurb: 'Mining protocols and infrastructure.',
-    slugs: ['stratumv2'],
+    blurb: 'Mining hardware, protocols, and infrastructure.',
+    slugs: ['stratumv2', 'bitaxe'],
   },
   {
     id: 'lightning',
@@ -64,8 +64,8 @@ export const CLUSTERS: Cluster[] = [
   {
     id: 'wallets',
     title: 'Wallets',
-    blurb: 'Self-custody software built for everyday use.',
-    slugs: ['cove', 'blixt', 'blitz-wallet'],
+    blurb: 'Self-custody wallets and signing devices built for everyday use.',
+    slugs: ['cove', 'blixt', 'blitz-wallet', 'krux'],
   },
   {
     id: 'lightning-payments',
@@ -83,7 +83,15 @@ export const CLUSTERS: Cluster[] = [
     id: 'nostr-clients',
     title: 'Nostr Clients',
     blurb: 'How people read and post on nostr today.',
-    slugs: ['damus', 'amethyst', '0xchat', 'coracle', 'flotilla', 'soapbox'],
+    slugs: [
+      'damus',
+      'amethyst',
+      '0xchat',
+      'coracle',
+      'flotilla',
+      'jumble',
+      'soapbox',
+    ],
   },
   {
     id: 'nostr-dev-tooling',

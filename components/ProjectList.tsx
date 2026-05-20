@@ -29,6 +29,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ exclude, projects }) => {
                 coverImage={p.coverImage}
                 darkCoverImage={p.darkCoverImage}
                 invertDarkImage={p.invertDarkImage}
+                containCoverImage={p.containCoverImage}
                 nym={p.nym}
                 tags={p.tags}
               />

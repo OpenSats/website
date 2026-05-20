@@ -25,6 +25,7 @@ export default function PageLayout({
     coverImage,
     darkCoverImage,
     invertDarkImage,
+    containCoverImage,
     website,
     twitter,
     git,
@@ -44,21 +45,17 @@ export default function PageLayout({
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <PageHeading title={title}>
           <div className="flex flex-col items-center space-x-2 pt-8 xl:block">
-            <div
-              className={`relative h-48 w-48 ${
+            <Image
+              src={coverImage}
+              darkSrc={darkCoverImage}
+              alt="avatar"
+              width={210}
+              height={210}
+              style={containCoverImage ? { objectFit: 'contain' } : undefined}
+              className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''} ${
                 isFund ? 'hidden xl:block' : ''
               }`}
-            >
-              <Image
-                src={coverImage}
-                darkSrc={darkCoverImage}
-                alt="avatar"
-                fill
-                sizes="12rem"
-                style={{ objectFit: 'contain' }}
-                className={invertDarkImage ? 'dark:invert' : ''}
-              />
-            </div>
+            />
             <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-80">
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />

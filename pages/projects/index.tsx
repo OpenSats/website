@@ -13,6 +13,7 @@ type EntryData = {
   coverImage: string
   darkCoverImage?: string
   invertDarkImage?: boolean
+  containCoverImage?: boolean
   nym: string
   fund?: FundId
 }
@@ -42,6 +43,7 @@ function toEntryData(project: (typeof allProjects)[number]): EntryData {
     coverImage: project.coverImage,
     darkCoverImage: project.darkCoverImage,
     invertDarkImage: project.invertDarkImage,
+    containCoverImage: project.containCoverImage,
     nym: project.nym,
     fund,
   }
