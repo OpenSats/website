@@ -83,7 +83,15 @@ export const CLUSTERS: Cluster[] = [
     id: 'nostr-clients',
     title: 'Nostr Clients',
     blurb: 'How people read and post on nostr today.',
-    slugs: ['damus', 'amethyst', '0xchat', 'coracle', 'flotilla', 'soapbox'],
+    slugs: [
+      'damus',
+      'amethyst',
+      '0xchat',
+      'coracle',
+      'flotilla',
+      'jumble',
+      'soapbox',
+    ],
   },
   {
     id: 'nostr-dev-tooling',
