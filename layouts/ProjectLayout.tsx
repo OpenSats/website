@@ -25,6 +25,7 @@ export default function PageLayout({
     coverImage,
     darkCoverImage,
     invertDarkImage,
+    containCoverImage,
     website,
     twitter,
     git,
@@ -50,6 +51,7 @@ export default function PageLayout({
               alt="avatar"
               width={210}
               height={210}
+              style={containCoverImage ? { objectFit: 'contain' } : undefined}
               className={`h-48 w-48 ${invertDarkImage ? 'dark:invert' : ''} ${
                 isFund ? 'hidden xl:block' : ''
               }`}
