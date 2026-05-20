@@ -1,0 +1,18 @@
+---
+title: 'Lightning Address'
+summary: 'A human-readable Lightning payment identifier like `name@domain` that resolves to a fresh invoice over LNURL.'
+category: 'Lightning'
+aliases: ['Lightning Addresses']
+---
+
+A Lightning Address is a human-readable payment identifier, usually written like `name@domain`, that lets someone receive Bitcoin over Lightning without sending a new invoice for each payment. A wallet or service resolves the identifier over HTTPS and uses LNURL to fetch a fresh [BOLT 11](/topics/bolt11) invoice when the sender wants to pay.
+
+The familiar format matters because BOLT 11 invoices are long, single-use strings. Lightning Address gives wallets a reusable destination that fits naturally in profiles, websites, and chats. Many wallets and hosted services support it today, and self-custodial variants exist as well.
+
+Lightning Address inherits the strengths and weaknesses of LNURL. It is easy to deploy with standard web infrastructure, which helped it spread quickly. It also means the domain or hosting service may learn about payment requests and, in custodial setups, may control part of the payment flow. Newer approaches such as [BIP 353](/topics/bip-353) aim to provide the same kind of human-readable payment experience with stronger verification.
+
+## References
+
+- [lightningaddress.com](https://lightningaddress.com/)
+- [Bitcoin Optech: LNURL](https://bitcoinops.org/en/topics/lnurl/)
+- [LNURL Documents (LUDs)](https://github.com/lnurl/luds)
