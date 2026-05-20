@@ -1,0 +1,29 @@
+---
+title: 'ContextVM'
+dateAdded: '2026-02-17'
+summary: 'A nostr-routed MCP protocol with SDKs, relays, and gateways for exposing services by public key.'
+nym: 'ContextVM contributors'
+website: 'https://contextvm.org/'
+coverImage: '/static/images/projects/contextvm.svg'
+darkCoverImage: '/static/images/projects/contextvm-dark.svg'
+containCoverImage: true
+git: 'https://github.com/ContextVM'
+tags: ['Nostr', 'MCP', 'Protocol', 'SDK']
+showcase: true
+fund: nostr
+announcementLink: '/blog/fifteenth-wave-of-nostr-grants#contextvm'
+---
+
+ContextVM is a protocol for exposing and calling [MCP](https://modelcontextprotocol.io/) servers over [nostr](/topics/nostr). Instead of reaching a service through a domain name, API key, and open port, a client can find it through a public key and talk to it over relays. That gives developers a way to publish tools from any machine with an outbound connection.
+
+The project grew out of [DVMCP](https://github.com/gzuuus/dvmcp). The current stack includes [TypeScript](https://github.com/ContextVM/sdk) and [Rust](https://github.com/ContextVM/rs-sdk) SDKs, a [relay](https://github.com/ContextVM/contextvm-relay), and a [CLI tool](https://github.com/ContextVM/cvmi) to navigate and use the ContextVM protocol. The [documentation site](https://docs.contextvm.org/) describes the project as the intersection of Nostr and MCP.
+
+## Why fund it?
+
+MCP is quickly becoming a common way to connect AI tools to outside systems. Most deployments still assume conventional web plumbing and centralized service discovery. ContextVM routes the same model through nostr instead. That makes service identity portable, keeps discovery open, and lowers the setup burden for developers who want to expose a tool without running public web infrastructure.
+
+OpenSats funded ContextVM in the [fifteenth wave of nostr grants](/blog/fifteenth-wave-of-nostr-grants#contextvm). The grant supports protocol work, SDK improvements, and public infrastructure such as shared relays.
+
+## What's next?
+
+Current work is focused on making the protocol easier to use in real developer workflows. The roadmap includes payment support, feature parity between TypeScript and Rust SDKs, one-click deployments, and better integrations with open-source development tools.

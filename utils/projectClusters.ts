@@ -103,7 +103,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'nostr-infra',
     title: 'Nostr Infrastructure',
     blurb: 'Relays, signers, and core infrastructure for nostr.',
-    slugs: ['citrine', 'frostr', 'amber', 'zapstore'],
+    slugs: ['citrine', 'contextvm', 'frostr', 'amber', 'zapstore'],
   },
 ]
 
