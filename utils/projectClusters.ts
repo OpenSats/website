@@ -45,8 +45,8 @@ export const CLUSTERS: Cluster[] = [
   {
     id: 'mining',
     title: 'Mining',
-    blurb: 'Mining protocols and infrastructure.',
-    slugs: ['stratumv2'],
+    blurb: 'Mining hardware, protocols, and infrastructure.',
+    slugs: ['stratumv2', 'bitaxe'],
   },
   {
     id: 'lightning',
