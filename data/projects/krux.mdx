@@ -11,7 +11,7 @@ fund: general
 announcementLink: '/blog/bitcoin-grants-december-2023#krux'
 ---
 
-Krux is open-source firmware that turns inexpensive Kendryte K210 boards into air-gapped Bitcoin signing devices. It supports single-signature and multisignature wallets, moves [PSBTs][psbt] over QR codes or SD cards, and includes tools for message signing, backups, and offline wallet review.
+Krux is open-source firmware that turns inexpensive [Kendryte K210][k210] boards into air-gapped Bitcoin signing devices. It supports single-signature and multisignature wallets, moves [PSBTs][psbt] over QR codes or SD cards, and includes tools for message signing, backups, and offline wallet review.
 
 Because Krux runs on widely available hardware, users can flash supported devices themselves or build a signer from off-the-shelf parts. Public docs, broad coordinator compatibility, and the companion [Krux Installer][installer] make the project accessible to people who want air-gapped signing without paying for a proprietary hardware wallet.
 
@@ -27,15 +27,16 @@ That matters even more in places where import fees can make commercial hardware 
 
 Recent public updates show Krux pushing on three fronts: broader hardware support, smoother signer UX, and tighter security. Releases through [v26.04.0][release] added more supported devices, improved descriptor and QR handling, and shipped a broad set of safety checks around PSBT parsing, KEF decryption, and SD-card inputs.
 
-The public roadmap is still moving toward faster QR tooling, continued Kapps work, and more polished device flows. The [OpenSats open-hardware report][report] is a good snapshot of where the project has been heading across firmware releases, new device ports, and ongoing signer UX work.
+The public roadmap is still moving toward faster QR tooling, continued Kapps work, and more polished device flows. The [Open Hardware for Open Money report][report] is a good snapshot of where the project has been heading across firmware releases, new device ports, and ongoing signer UX work.
 
 If you want to dig deeper, start with the [project site][site], the [main repository][repo], the [grant announcement][grant], or the [release history][releases].
 
 [grant]: /blog/bitcoin-grants-december-2023#krux
 [installer]: https://github.com/selfcustody/krux-installer/releases
-[psbt]: https://bitcoinops.org/en/topics/psbt/
+[psbt]: /topics/psbt/
 [release]: https://github.com/selfcustody/krux/releases/tag/v26.04.0
 [releases]: https://github.com/selfcustody/krux/releases
 [report]: /blog/open-hardware-for-open-money#krux
 [repo]: https://github.com/selfcustody/krux
 [site]: https://selfcustody.github.io/krux/
+[k210]: https://www.kendryte.com/en/proDetail/210
