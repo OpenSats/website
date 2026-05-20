@@ -1,0 +1,17 @@
+---
+title: 'Dust limit'
+summary: 'A standardness policy threshold below which a Bitcoin output is too small to be worth spending later.'
+category: 'Bitcoin'
+aliases: ['Uneconomical outputs']
+---
+
+The dust limit is the relay and mining policy threshold below which a transaction output is too small to spend economically later. If creating an output would likely cost as much as or more than its value to spend in a future transaction, default nodes classify that output as dust and treat the transaction as non-standard.
+
+Each script type has its own practical threshold because policy estimates the future cost of spending that output. Small [UTXOs](/topics/utxo) become more obviously uneconomical when fees rise and the [mempool](/topics/mempool) is crowded.
+
+Dust limit comes from node policy. Consensus rules still allow blocks that contain outputs below the default dust limit. Default nodes usually do not relay those transactions, and standard mining templates usually do not include them.
+
+## References
+
+- [Bitcoin Optech: Uneconomical outputs](https://bitcoinops.org/en/topics/uneconomical-outputs/)
+- [Learn Bitcoin: Dust Limit](https://www.learnbitcoin.com/glossary/dust-limit)
