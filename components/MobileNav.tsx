@@ -4,13 +4,15 @@ import headerNavLinks from '@/data/headerNavLinks'
 
 interface MobileNavProps {
   theme?: 'default' | 'nostr'
+  overlay?: boolean
 }
 
-const MobileNav = ({ theme = 'default' }: MobileNavProps) => {
+const MobileNav = ({ theme = 'default', overlay = false }: MobileNavProps) => {
   const [navShow, setNavShow] = useState(false)
 
-  const menuButtonClass =
-    'flex h-8 w-8 items-center justify-center rounded p-1 text-gray-900 dark:text-gray-100'
+  const menuButtonClass = overlay
+    ? 'flex h-8 w-8 items-center justify-center rounded p-1 text-white'
+    : 'flex h-8 w-8 items-center justify-center rounded p-1 text-gray-900 dark:text-gray-100'
 
   const overlayClass =
     theme === 'nostr'
