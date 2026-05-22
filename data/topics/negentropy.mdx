@@ -8,7 +8,7 @@ aliases: ['NIP-77', 'Negentropy Syncing']
 
 Negentropy is a general set reconciliation protocol for comparing large sets efficiently. [Nostr](/topics/nostr) uses it for syncing. Negentropy is not Nostr-specific and was not developed for Nostr. Instead of sending a full list of event IDs, both sides exchange compact messages that reveal which items overlap and which ones are missing on either side.
 
-In Nostr, Negentropy is used through NIP-77, one of the Nostr [NIPs](/topics/nips). NIP-77 is a Nostr-friendly wrapper around the underlying binary Negentropy protocol. It hex-encodes the protocol in `NEG-OPEN`, `NEG-MSG`, and `NEG-CLOSE` messages, scoped to a normal Nostr filter. Once both sides learn which event IDs are missing, they can use ordinary Nostr messages such as `REQ` and `EVENT` to download or upload the actual events.
+In Nostr, Negentropy is used through NIP-77, one of the Nostr [NIPs](/topics/nips). NIP-77 adapts the underlying protocol to Nostr so a client and relay can compare the events they have within a chosen filter. Once both sides know what is missing, they can sync the actual events through the usual Nostr flow.
 
 This makes sync cheaper when a client and relay already share much of the same history. It is useful for client-relay sync, relay-relay sync, and other cases where bandwidth matters and both sides want to reconcile large event sets with minimal overhead.
 
