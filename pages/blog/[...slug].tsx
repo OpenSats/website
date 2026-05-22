@@ -7,8 +7,7 @@ import { InferGetStaticPropsType } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import { getBlogPageTheme } from '@/utils/pageTheme'
-
-const DEFAULT_LAYOUT = 'PostLayout'
+import { getBlogLayout, isSpotlightLayout } from '@/utils/getBlogLayout'
 
 export async function getStaticPaths() {
   return {
@@ -41,6 +40,7 @@ export const getStaticProps = async ({ params }) => {
       prev,
       next,
       pageTheme,
+      headerOverlay: isSpotlightLayout(post),
     },
   }
 }
@@ -64,7 +64,7 @@ export default function BlogPostPage({
         </div>
       ) : (
         <MDXLayoutRenderer
-          layout={post.layout || DEFAULT_LAYOUT}
+          layout={getBlogLayout(post)}
           content={post}
           MDXComponents={MDXComponents}
           toc={post.toc}

@@ -5,8 +5,9 @@ import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
-import PostDefaultHeader from '@/components/post/PostDefaultHeader'
+import PostCoverHero from '@/components/post/PostCoverHero'
 import PostArticleBody from '@/components/post/PostArticleBody'
+import { getSpotlightHeroImage } from '@/components/post/postShared'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -16,36 +17,43 @@ interface LayoutProps {
   children: ReactNode
 }
 
-export default function PostLayout({
+export default function SpotlightLayout({
   content,
   authorDetails,
   next,
   prev,
   children,
 }: LayoutProps) {
-  const { path, date, title } = content
+  const { path, date, title, images } = content
 
   return (
-    <SectionContainer>
+    <>
       <BlogSEO
         url={`${siteMetadata.siteUrl}/${path}`}
         authorDetails={authorDetails}
         {...content}
       />
       <ScrollTopAndComment />
-      <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <PostDefaultHeader date={date} title={title} />
-          <PostArticleBody
-            content={content}
-            authorDetails={authorDetails}
-            next={next}
-            prev={prev}
-          >
-            {children}
-          </PostArticleBody>
-        </div>
-      </article>
-    </SectionContainer>
+      <PostCoverHero
+        title={title}
+        date={date}
+        coverImage={getSpotlightHeroImage(images)}
+      />
+      <SectionContainer>
+        <article>
+          <div className="min-[1000px]:divide-y min-[1000px]:divide-gray-200 min-[1000px]:dark:divide-gray-700">
+            <PostArticleBody
+              content={content}
+              authorDetails={authorDetails}
+              next={next}
+              prev={prev}
+              spotlight
+            >
+              {children}
+            </PostArticleBody>
+          </div>
+        </article>
+      </SectionContainer>
+    </>
   )
 }
