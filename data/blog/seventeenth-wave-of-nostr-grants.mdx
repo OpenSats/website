@@ -1,0 +1,199 @@
+---
+title: "Seventeenth Wave of Nostr Grants"
+date: '2026-05-20'
+tags: ['OpenSats', 'grants', 'nostr', 'wave']
+authors: ['arvin', 'tuma', 'default']
+images: ['/static/images/blog/108-seventeenth-wave-of-nostr-grants.jpg']
+draft: false
+summary: "OpenSats is funding five open-source projects advancing the nostr ecosystem."
+---
+ 
+We're pleased to announce a new wave of grants from [The Nostr Fund][nostr-fund], supporting
+five open-source projects building across the nostr ecosystem. This wave
+includes four first-time grants and one grant renewal.
+
+The projects in this round extend nostr into app discovery, private calls,
+software distribution, client onboarding, and access to AI tools. The first-time
+grants include a browser-based launcher for discovering and using nostr apps, an
+encrypted audio and video calling app for mobile and desktop users, a protocol
+that connects AI clients and providers through nostr discovery and
+bitcoin-native payments, and a polished mobile client that abstracts the
+complexity of nostr and Lightning for first-time users.
+
+The first-time grants in this wave will go to:
+
+- [44Billion](#44billion)
+- [NosCall](#noscall)
+- [Routstr](#routstr)
+- [Wisp](#wisp)
+
+The returning grantee in this wave is:
+
+- Zapstore ([Mar. 2025][zapstore-prior])
+
+These grants are made possible by our generous donors who believe in an open,
+censorship-resistant communications layer for the internet. To help us support
+the nostr ecosystem, please consider setting up a recurring donation to The
+Nostr Fund.
+
+<DonateRecurringButton designation="nostr" />
+
+Let's dive in to learn about how each project is contributing to the future of
+nostr.
+
+[nostr-fund]: /funds/nostr
+[wisp]: https://github.com/barrydeen/wisp
+[wisp-prior]: /blog/9th-wave-of-nostr-grants#algorelay
+[zapstore-prior]: /blog/10th-wave-of-nostr-grants#zapstore
+
+---
+
+### 44Billion
+
+[44Billion][44billion-site] is a nostr app launcher with an app store for
+discovering and installing nostr applications. It presents nostr apps through a
+familiar toolbar-style interface, where installed apps sit in one place and can
+receive access to [window.nostr][nip-07] after the user signs in. The project
+includes the core platform, a signer module, an app store, and a public
+[relay][relays-topic]. Users can create an account with a simple profile setup,
+import an existing nsec, or sync encrypted key material across devices using
+passkeys. This gives non-technical users a clearer path into nostr apps while
+keeping app discovery, app publishing, and signing infrastructure open.
+
+With support from this grant, 44Billion will focus on platform and app store
+improvements, including ratings, reviews, category filtering, and sorting by
+downloads. The next phase will add two starter apps designed for non-technical
+users: a microblogging app with a public group joining around localized topics,
+followed by a messenger app focused first on direct messages. Together, these
+pieces aim to make nostr app discovery and first-use onboarding feel closer to
+the patterns people are already accustomed to.
+
+Repositories: [44Billion][44billion-repo]  
+License: MIT
+
+[44billion-site]: https://44billion.net
+[nip-07]: https://github.com/nostr-protocol/nips/blob/master/07.md
+[relays-topic]: /topics/relays
+[44billion-repo]: https://github.com/44Billion
+
+---
+
+### NosCall
+
+NosCall is an audio and video calling application built for nostr users. The app
+is written in Flutter and uses WebRTC for real-time media, with nostr libraries
+handling the protocol layer for encrypted [call signaling][call-signaling]
+between users. Its current feature set includes audio and video calls,
+end-to-end encryption, call history, contact management, and support for iOS and
+Android, with macOS already part of the project structure. Private communication
+has long been one of nostr's most important use cases, and real-time calls add a
+familiar way for users to communicate through identities they already control.
+
+The grant will support continued work on reliability, performance, and
+user-facing features that make private calling practical in daily use. Planned
+milestones include push notifications for incoming calls, friend grouping,
+favorites, voice messages, and desktop releases for Linux and Windows. NosCall
+also plans to add a pay-to-call mechanism, allowing a user to require payment
+before another party can initiate a voice call. Additional planned work includes
+[NIP-05][nip-05] identity support, login via external nostr
+[signers][remote-signing], custom [relay][relays-topic-noscall] configuration,
+and [Tor][tor-topic] network support for users who want an extra layer of
+network anonymity.
+
+Repository: [sanah9/noscall][noscall-repo]  
+License: MIT
+
+[call-signaling]: https://github.com/nostr-protocol/nips/pull/2301
+[nip-05]: /topics/nip-05
+[remote-signing]: /topics/remote-signing
+[relays-topic-noscall]: /topics/relays
+[tor-topic]: /topics/onion-routing
+[noscall-repo]: https://github.com/sanah9/noscall
+
+---
+
+### Routstr
+
+[Routstr][routstr-site] is a decentralized protocol for permissionless AI
+inference. It uses nostr for discovery and communication between clients and
+providers, with Lightning and Cashu [ecash][ecash-topic] payments used to add
+funds to their balances. For users and developers, Routstr can work as an
+OpenAI-compatible API endpoint: a client points an existing SDK or application
+at a Routstr provider, pays per request with a Cashu token, and receives the
+model response. This gives nostr applications a path to use AI services through
+open discovery and bitcoin-native payments, while giving operators a way to sell
+access to hosted or local inference infrastructure.
+
+With support from this grant, Routstr will focus on hardening its minimum viable
+protocol into a v1 release, improving reliability around edge cases, failures,
+retries, and timeouts, and adding security and abuse-resistance improvements.
+The roadmap also includes dynamic pricing, batch processing, performance
+benchmarks, specialized worker-node software for local inference, better
+operator documentation, [Umbrel][umbrel]-ready distribution, and application
+work across Routstr Chat, agentic AI features, nostr feed ranking, and a
+framework for building nostr bots.
+
+Repositories: [Routstr][routstr-repo]  
+License: GPL-3.0
+
+[routstr-site]: https://routstr.com/
+[ecash-topic]: /topics/ecash
+[umbrel]: https://github.com/getumbrel/umbrel
+[routstr-repo]: https://github.com/Routstr
+
+---
+
+### Wisp
+
+[Wisp][wisp-site] is a nostr client for Android, built for speed and for users
+new to the protocol. It implements the [outbox model][outbox-topic-wisp] and
+supports dedicated DM relay sets for private messaging. The client includes a
+non-custodial wallet based on the [Breez SDK (Spark)][breez-sdk-spark],
+with seed-phrase recovery and encrypted
+backup to the user's own relays. Upon signing up, a new user can receive
+[zaps][zaps-topic], open a [private message][private-dms-topic] thread, and
+upload photos through [Blossom][blossom-topic]. Wisp has been one of the
+fastest-growing nostr clients on Android since launch.
+
+With support from this grant, creator Barry Deen will work on the client
+full-time. Near-term development includes a web client and a "normie mode" that
+displays Lightning wallet balances in USD and lets users cash out with
+[Bitrefill][bitrefill] gift cards. iOS development and beta launch are planned
+for the second half of the year, along with private relay-based communities.
+
+Repository: [barrydeen/wisp][wisp-repo]  
+License: MIT
+
+[wisp-site]: https://wisp.mobile
+[outbox-topic-wisp]: /topics/outbox
+[breez-sdk-spark]: https://github.com/breez/spark-sdk#breez-sdk---spark
+[zaps-topic]: /topics/zaps
+[private-dms-topic]: /topics/private-dms
+[blossom-topic]: /topics/blossom
+[bitrefill]: https://www.bitrefill.com/us/en/
+[wisp-repo]: https://github.com/barrydeen/wisp
+
+---
+
+Renewed support for [Zapstore](/projects/zapstore) continues the work of building permissionless
+software distribution on nostr, with signed releases, social discovery, and
+bitcoin payments going directly to developers.
+
+The projects in this wave reflect the variety of work happening across the nostr
+ecosystem. App launchers, private calls, AI access, mobile clients, and signed
+software distribution all bring the protocol closer to the tools people already
+use. Each grant supports work that can make nostr easier to adopt while
+preserving the open, interoperable, and user-controlled foundations that make
+the network valuable.
+
+We're grateful to our donors who make this funding possible. If you'd like to
+help us continue supporting builders in the nostr ecosystem, please consider
+donating to The Nostr Fund or becoming a recurring supporter.
+
+<DonateRecurringButton designation="nostr" />
+
+If you are a developer working on free and open-source nostr projects, consider
+[applying for funding][apply].
+
+[relays-topic-closing]: /topics/relays
+[apply]: /apply

@@ -112,6 +112,7 @@ export const Projects = defineDocumentType(() => ({
     coverImage: { type: 'string', required: true },
     darkCoverImage: { type: 'string' },
     invertDarkImage: { type: 'boolean' },
+    containCoverImage: { type: 'boolean' },
     git: { type: 'string' },
     twitter: { type: 'string' },
     personalTwitter: { type: 'string' },

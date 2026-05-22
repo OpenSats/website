@@ -9,6 +9,7 @@ export type ProjectCardProps = {
   coverImage
   darkCoverImage?
   invertDarkImage?
+  containCoverImage?
   nym
   tags
   customImageStyles?: React.CSSProperties
@@ -21,6 +22,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   coverImage,
   darkCoverImage,
   invertDarkImage,
+  containCoverImage,
   nym,
   tags,
   customImageStyles,
@@ -66,7 +68,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             width={1200}
             height={1200}
             style={{
-              objectFit: isHorizontal ? 'fill' : 'cover',
+              objectFit: containCoverImage
+                ? 'contain'
+                : isHorizontal
+                ? 'fill'
+                : 'cover',
               ...customImageStyles,
             }}
             priority={true}

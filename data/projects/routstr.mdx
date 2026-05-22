@@ -1,0 +1,38 @@
+---
+title: 'Routstr'
+dateAdded: '2026-05-12'
+summary: 'A decentralized AI inference protocol that uses Nostr discovery and Bitcoin ecash micropayments for private, pay-per-request model access.'
+nym: 'Routstr contributors'
+website: 'https://routstr.com/'
+donationLink: 'https://routstr.com/topup'
+coverImage: '/static/images/projects/routstr.png'
+announcementLink: '/blog/seventeenth-wave-of-nostr-grants#routstr'
+git: 'https://github.com/Routstr'
+nostr: 'npub130mznv74rxs032peqym6g3wqavh472623mt3z5w73xq9r6qqdufs7ql29s'
+tags: ['Bitcoin', 'Nostr', 'Privacy', 'Protocol']
+fund: general
+---
+
+Routstr is a decentralized AI inference protocol for private, pay-per-request access to language models. It combines [Nostr](/topics/nostr) for node discovery with [Cashu](/projects/cashu) ecash for Bitcoin micropayments, so users can connect to providers without opening accounts or handing over a credit card. The core system is OpenAI-compatible, which lets developers point existing SDKs and tools at a Routstr node instead of a centralized API.
+
+The project has grown into a wider stack around that protocol. The [Routstr organization][org] now maintains the [core payment proxy][core], a formal [Routstr Improvement Protocols][protocol] repo, a local daemon called [`routstrd`][routstrd], chat and platform front ends, docs for both users and node operators, and supporting tooling for payments, routing, and evaluations.
+
+## Why fund it?
+
+AI infrastructure is drifting toward closed platforms, gated accounts, and payment rails that exclude many users by default. Routstr takes the opposite direction: open protocols, Bitcoin-native micropayments, Nostr-based discovery, and software that anyone can run or build on. That makes it useful to developers who want model access without vendor lock-in and to operators who want to monetize hardware or upstream access on their own terms.
+
+For OpenSats, Routstr sits at an interesting intersection of Bitcoin, Nostr, privacy, and open infrastructure. Supporting it helps push those systems into a new application layer instead of leaving AI access entirely to centralized providers.
+
+## What's next?
+
+The public [roadmap][roadmap] focuses on protocol hardening, node discovery, client behavior, quality audits, and smarter routing across the network. The Routstr organization already ships public repos for `routstrd`, client SDKs, docs, chat and platform apps, and protocol work. The near-term job is to make that stack more reliable for both users and node operators.
+
+If you want to dig deeper, start with the [main site][site], the [docs][docs], the [RIP repository][protocol], or the [roadmap][roadmap].
+
+[docs]: https://docs.routstr.com/
+[org]: https://github.com/Routstr
+[protocol]: https://github.com/Routstr/protocol
+[roadmap]: https://routstr.com/roadmap
+[routstrd]: https://github.com/Routstr/routstrd
+[site]: https://routstr.com/
+[core]: https://github.com/Routstr/routstr-core
