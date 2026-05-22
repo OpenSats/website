@@ -175,9 +175,7 @@ export default function PostArticleBody({
             </div>
           )}
         </div>
-        <div
-          className={spotlight ? 'pt-4 min-[1000px]:pt-8' : 'pt-4 xl:pt-8'}
-        >
+        <div className={spotlight ? 'pt-4 min-[1000px]:pt-8' : 'pt-4 xl:pt-8'}>
           <Link
             href={`/${basePath}`}
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
