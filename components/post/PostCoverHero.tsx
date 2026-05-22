@@ -38,7 +38,7 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_right]"
+          className="object-cover object-[72%_center] lg:object-[center_right]"
         />
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent lg:from-black/60 lg:via-transparent"
