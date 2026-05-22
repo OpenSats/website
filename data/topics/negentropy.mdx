@@ -6,7 +6,7 @@ category: 'Nostr'
 aliases: ['NIP-77', 'Negentropy Syncing']
 ---
 
-Negentropy is a set reconciliation protocol. It lets two sides compare large sets efficiently, learn which IDs each side has that the other side needs, and then transfer only the missing records. [Nostr](/topics/nostr) uses it for syncing.
+Negentropy is a set reconciliation protocol. It lets two sides compare large sets efficiently, learn which entries each side has that the other side needs, and then transfer only the missing records. [Nostr](/topics/nostr) uses it to sync events between clients and relays.
 
 In Nostr, NIP-77 brings Negentropy into the protocol so a client and relay can compare the events they have within a chosen filter and sync whatever is missing.
 
