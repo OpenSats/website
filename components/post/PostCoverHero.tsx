@@ -3,7 +3,6 @@ import siteMetadata from '@/data/siteMetadata'
 import PostDefaultHeader from '@/components/post/PostDefaultHeader'
 import {
   postDateShortTemplate,
-  postDateTemplate,
   postSectionClasses,
   postSpotlightGridClasses,
 } from '@/components/post/postShared'
@@ -21,10 +20,6 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
   }
 
   const formattedDate = new Date(date).toLocaleDateString(
-    siteMetadata.locale,
-    postDateTemplate
-  )
-  const formattedDateShort = new Date(date).toLocaleDateString(
     siteMetadata.locale,
     postDateShortTemplate
   )
@@ -59,12 +54,7 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
                   <div>
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-xs font-medium text-white/90 sm:text-sm">
-                      <time dateTime={date}>
-                        <span className="xl:hidden">{formattedDateShort}</span>
-                        <span className="hidden xl:inline">
-                          {formattedDate}
-                        </span>
-                      </time>
+                      <time dateTime={date}>{formattedDate}</time>
                     </dd>
                   </div>
                   <div>
