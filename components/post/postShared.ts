@@ -19,6 +19,9 @@ export const editUrl = (path: string) =>
 export const discussUrl = () =>
   `https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f`
 
+/** Spotlight posts: images[0] = OG/social, images[1] = cover hero. */
+export const getSpotlightHeroImage = (images?: string[]) => images?.[1]
+
 /** Keep in sync with SectionContainer horizontal layout. */
 export const postSectionClasses =
   'mx-2 max-w-3xl px-4 sm:px-6 md:mx-auto lg:mx-auto xl:max-w-5xl xl:px-0'

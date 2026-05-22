@@ -7,6 +7,7 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import PostCoverHero from '@/components/post/PostCoverHero'
 import PostArticleBody from '@/components/post/PostArticleBody'
+import { getSpotlightHeroImage } from '@/components/post/postShared'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -23,7 +24,7 @@ export default function SpotlightLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { path, date, title, heroImage } = content
+  const { path, date, title, images } = content
 
   return (
     <>
@@ -33,7 +34,11 @@ export default function SpotlightLayout({
         {...content}
       />
       <ScrollTopAndComment />
-      <PostCoverHero title={title} date={date} coverImage={heroImage} />
+      <PostCoverHero
+        title={title}
+        date={date}
+        coverImage={getSpotlightHeroImage(images)}
+      />
       <SectionContainer>
         <article>
           <div className="min-[1000px]:divide-y min-[1000px]:divide-gray-200 min-[1000px]:dark:divide-gray-700">
