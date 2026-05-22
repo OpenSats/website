@@ -58,7 +58,11 @@ const Header = ({
             <Link
               key={link.title}
               href={link.href}
-              className={link.isButton ? buttonClass : navLinkClass}
+              className={
+                link.isButton
+                  ? `${buttonClass}${overlay ? ' hidden lg:inline-flex' : ''}`
+                  : navLinkClass
+              }
             >
               {link.title}
             </Link>
