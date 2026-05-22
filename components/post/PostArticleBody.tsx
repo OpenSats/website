@@ -6,11 +6,7 @@ import Link from '@/components/Link'
 import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import {
-  discussUrl,
-  editUrl,
-  postGridClasses,
-} from '@/components/post/postShared'
+import { discussUrl, editUrl } from '@/components/post/postShared'
 
 interface Props {
   content: CoreContent<Blog>
@@ -36,14 +32,26 @@ export default function PostArticleBody({
 
   return (
     <div
-      className={`grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:divide-y-0 ${postGridClasses}`}
+      className={
+        spotlight
+          ? 'grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 min-[1000px]:grid min-[1000px]:grid-cols-4 min-[1000px]:gap-x-6 min-[1000px]:divide-y-0'
+          : 'grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0'
+      }
     >
-      <dl className="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+      <dl
+        className={
+          spotlight
+            ? 'pb-10 pt-6 min-[1000px]:border-b min-[1000px]:border-gray-200 min-[1000px]:pt-11 min-[1000px]:dark:border-gray-700'
+            : 'pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700'
+        }
+      >
         <dt className="sr-only">Authors</dt>
         <dd>
           <ul
-            className={`flex flex-wrap gap-4 xl:block xl:space-x-0 xl:space-y-8 ${
-              spotlight ? 'justify-start' : 'justify-center sm:space-x-12'
+            className={`flex flex-wrap gap-4 ${
+              spotlight
+                ? 'justify-start min-[1000px]:block min-[1000px]:space-x-0 min-[1000px]:space-y-8'
+                : 'justify-center sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8'
             }`}
           >
             {authorDetails.map((author) => (
@@ -81,7 +89,13 @@ export default function PostArticleBody({
           </ul>
         </dd>
       </dl>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
+      <div
+        className={
+          spotlight
+            ? 'divide-y divide-gray-200 dark:divide-gray-700 min-[1000px]:col-span-3 min-[1000px]:row-span-2 min-[1000px]:pb-0'
+            : 'divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0'
+        }
+      >
         <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
           {children}
         </div>
@@ -109,9 +123,17 @@ export default function PostArticleBody({
         )}
       </div>
       <footer>
-        <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
+        <div
+          className={
+            spotlight
+              ? 'divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 min-[1000px]:col-start-1 min-[1000px]:row-start-2 min-[1000px]:divide-y'
+              : 'divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y'
+          }
+        >
           {tags && (
-            <div className="py-4 xl:py-8">
+            <div
+              className={spotlight ? 'py-4 min-[1000px]:py-8' : 'py-4 xl:py-8'}
+            >
               <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                 Tags
               </h2>
@@ -123,7 +145,13 @@ export default function PostArticleBody({
             </div>
           )}
           {(next || prev) && (
-            <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
+            <div
+              className={
+                spotlight
+                  ? 'flex justify-between py-4 min-[1000px]:block min-[1000px]:space-y-8 min-[1000px]:py-8'
+                  : 'flex justify-between py-4 xl:block xl:space-y-8 xl:py-8'
+              }
+            >
               {prev && (
                 <div>
                   <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
@@ -147,7 +175,9 @@ export default function PostArticleBody({
             </div>
           )}
         </div>
-        <div className="pt-4 xl:pt-8">
+        <div
+          className={spotlight ? 'pt-4 min-[1000px]:pt-8' : 'pt-4 xl:pt-8'}
+        >
           <Link
             href={`/${basePath}`}
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"

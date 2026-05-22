@@ -4,8 +4,9 @@ import PostDefaultHeader from '@/components/post/PostDefaultHeader'
 import {
   postDateShortTemplate,
   postDateTemplate,
-  postGridClasses,
+  postFullBleedClasses,
   postSectionClasses,
+  postSpotlightGridClasses,
 } from '@/components/post/postShared'
 
 interface Props {
@@ -30,7 +31,7 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
   )
 
   return (
-    <div className="relative left-1/2 right-1/2 -mb-2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] sm:mb-0">
+    <div className={`${postFullBleedClasses} -mb-2 sm:mb-0`}>
       <div className="relative min-h-[min(70vh,28rem)] w-full max-lg:max-h-[32rem] lg:aspect-[1916/821] lg:max-h-none lg:min-h-0">
         <Image
           src={coverImage}
@@ -50,8 +51,8 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
         />
         <div className="absolute inset-x-0 bottom-0 pb-6 lg:pb-8">
           <div className={postSectionClasses}>
-            <div className={postGridClasses}>
-              <div className="xl:col-span-3">
+            <div className={postSpotlightGridClasses}>
+              <div className="min-[1000px]:col-span-3">
                 <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-white/80 sm:text-xs">
                   Developer Spotlight
                 </p>

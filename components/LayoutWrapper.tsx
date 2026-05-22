@@ -30,7 +30,11 @@ const LayoutWrapper = ({
               : undefined
           }
         />
-        <main className="mb-auto">{children}</main>
+        <main
+          className={`mb-auto ${headerOverlay ? 'overflow-x-hidden' : ''}`}
+        >
+          {children}
+        </main>
         <Footer />
       </div>
     </SectionContainer>

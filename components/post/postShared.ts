@@ -22,8 +22,16 @@ export const discussUrl = () =>
 /** Spotlight posts: images[0] = OG/social, images[1] = cover hero. */
 export const getSpotlightHeroImage = (images?: string[]) => images?.[1]
 
-/** Matches SectionContainer + PostArticleBody grid for aligned spotlight hero text. */
+/** Keep in sync with SectionContainer horizontal layout. */
 export const postSectionClasses =
-  'mx-2 max-w-3xl px-4 sm:px-6 lg:mx-auto xl:mx-auto xl:max-w-5xl xl:px-0'
+  'mx-2 max-w-3xl px-4 sm:px-6 md:mx-auto lg:mx-auto xl:max-w-5xl xl:px-0'
+
+/** Full-bleed from a centered section without shifting content off-screen. */
+export const postFullBleedClasses =
+  'relative w-screen max-w-[100vw] shrink-0 -ml-[calc(50%-50vw)] -mr-[calc(50%-50vw)]'
 
 export const postGridClasses = 'xl:grid xl:grid-cols-4 xl:gap-x-6'
+
+/** Spotlight posts use the sidebar grid from 1000px so tablet widths align. */
+export const postSpotlightGridClasses =
+  'min-[1000px]:grid min-[1000px]:grid-cols-4 min-[1000px]:gap-x-6'
