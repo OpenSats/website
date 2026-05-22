@@ -1,16 +1,16 @@
 ---
 title: 'Negentropy'
-summary: 'A general set reconciliation protocol that Nostr uses to help clients and relays figure out which events each side is missing without exchanging every event ID.'
-ogSummary: 'A general set reconciliation protocol that Nostr uses for efficient event syncing.'
+summary: 'A set reconciliation protocol for finding which records each side is missing without exchanging every ID.'
+ogSummary: 'A set reconciliation protocol for finding which records each side is missing.'
 category: 'Nostr'
 aliases: ['NIP-77', 'Negentropy Syncing']
 ---
 
-Negentropy is a general set reconciliation protocol for comparing large sets efficiently. [Nostr](/topics/nostr) uses it for syncing. Negentropy is not Nostr-specific and was not developed for Nostr. Instead of sending a full list of event IDs, both sides exchange compact messages that reveal which items overlap and which ones are missing on either side.
+Negentropy is an existing set reconciliation protocol. It lets two sides compare large sets efficiently, learn which IDs each side has that the other side needs, and then transfer only the missing records. [Nostr](/topics/nostr) uses it for syncing.
 
-In Nostr, Negentropy is used through NIP-77, one of the Nostr [NIPs](/topics/nips). NIP-77 adapts the underlying protocol to Nostr so a client and relay can compare the events they have within a chosen filter. Once both sides know what is missing, they can sync the actual events through the usual Nostr flow.
+In Nostr, NIP-77 brings Negentropy into the protocol so a client and relay can compare the events they have within a chosen filter and sync whatever is missing.
 
-This makes sync cheaper when a client and relay already share much of the same history. It is useful for client-relay sync, relay-relay sync, and other cases where bandwidth matters and both sides want to reconcile large event sets with minimal overhead.
+This makes sync cheaper when both sides already share much of the same history. It is useful for client-relay sync, relay-relay sync, and other cases where bandwidth matters.
 
 ## References
 
