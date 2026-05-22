@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from './Link'
 import headerNavLinks from '@/data/headerNavLinks'
 
@@ -8,6 +9,7 @@ interface MobileNavProps {
 }
 
 const MobileNav = ({ theme = 'default', overlay = false }: MobileNavProps) => {
+  const router = useRouter()
   const [navShow, setNavShow] = useState(false)
 
   const menuButtonClass = overlay
@@ -24,16 +26,25 @@ const MobileNav = ({ theme = 'default', overlay = false }: MobileNavProps) => {
 
   const closeIconClass = 'h-8 w-8 text-gray-900 dark:text-gray-100'
 
+  useEffect(() => {
+    if (!navShow) {
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [navShow])
+
+  useEffect(() => {
+    setNavShow(false)
+  }, [router.asPath])
+
   const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        document.body.style.overflow = 'auto'
-      } else {
-        // Prevent scrolling
-        document.body.style.overflow = 'hidden'
-      }
-      return !status
-    })
+    setNavShow((status) => !status)
   }
 
   return (
