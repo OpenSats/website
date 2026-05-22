@@ -7,6 +7,12 @@ export const postDateTemplate: Intl.DateTimeFormatOptions = {
   day: 'numeric',
 }
 
+export const postDateShortTemplate: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}
+
 export const editUrl = (path: string) =>
   `${siteMetadata.siteRepo}/blob/master/data/${path}`
 

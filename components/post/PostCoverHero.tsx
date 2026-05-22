@@ -2,6 +2,7 @@ import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 import PostDefaultHeader from '@/components/post/PostDefaultHeader'
 import {
+  postDateShortTemplate,
   postDateTemplate,
   postGridClasses,
   postSectionClasses,
@@ -19,9 +20,18 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
     return <PostDefaultHeader date={date} title={title} />
   }
 
+  const formattedDate = new Date(date).toLocaleDateString(
+    siteMetadata.locale,
+    postDateTemplate
+  )
+  const formattedDateShort = new Date(date).toLocaleDateString(
+    siteMetadata.locale,
+    postDateShortTemplate
+  )
+
   return (
     <div className="relative left-1/2 right-1/2 -mb-2 -ml-[50vw] -mr-[50vw] w-screen max-w-[100vw] sm:mb-0">
-      <div className="relative aspect-[1916/821] min-h-56 w-full sm:min-h-64 lg:min-h-0">
+      <div className="relative min-h-[min(70vh,28rem)] w-full max-lg:max-h-[32rem] lg:aspect-[1916/821] lg:max-h-none lg:min-h-0">
         <Image
           src={coverImage}
           alt=""
@@ -31,36 +41,36 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
           className="object-cover object-[center_right]"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent lg:from-black/60 lg:via-transparent"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent lg:from-black/80 lg:via-black/30"
           aria-hidden
         />
-        <div className="absolute inset-x-0 bottom-0 pb-8">
+        <div className="absolute inset-x-0 bottom-0 pb-6 lg:pb-8">
           <div className={postSectionClasses}>
             <div className={postGridClasses}>
               <div className="xl:col-span-3">
-                <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-widest text-white/80 sm:text-xs">
                   Developer Spotlight
                 </p>
-                <dl className="mt-3 space-y-3">
+                <dl className="mt-2 space-y-2 sm:mt-3 sm:space-y-3">
                   <div>
                     <dt className="sr-only">Published on</dt>
-                    <dd className="text-sm font-medium text-white/90">
+                    <dd className="text-xs font-medium text-white/90 sm:text-sm">
                       <time dateTime={date}>
-                        {new Date(date).toLocaleDateString(
-                          siteMetadata.locale,
-                          postDateTemplate
-                        )}
+                        <span className="lg:hidden">{formattedDateShort}</span>
+                        <span className="hidden lg:inline">
+                          {formattedDate}
+                        </span>
                       </time>
                     </dd>
                   </div>
                   <div>
                     <dt className="sr-only">Title</dt>
                     <dd>
-                      <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                      <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl sm:leading-tight md:text-4xl lg:text-5xl lg:leading-tight">
                         {title}
                       </h1>
                     </dd>

@@ -26,7 +26,7 @@ const LayoutWrapper = ({
           overlay={headerOverlay}
           className={
             headerOverlay
-              ? 'absolute inset-x-0 top-0 z-30 bg-transparent py-6 sm:py-8'
+              ? 'absolute inset-x-0 top-0 z-30 bg-transparent py-4 sm:py-6 lg:py-8'
               : undefined
           }
         />

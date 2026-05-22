@@ -47,6 +47,7 @@ export default function SpotlightLayout({
               authorDetails={authorDetails}
               next={next}
               prev={prev}
+              spotlight
             >
               {children}
             </PostArticleBody>
