@@ -4,7 +4,6 @@ import PostDefaultHeader from '@/components/post/PostDefaultHeader'
 import {
   postDateShortTemplate,
   postDateTemplate,
-  postFullBleedClasses,
   postSectionClasses,
   postSpotlightGridClasses,
 } from '@/components/post/postShared'
@@ -31,25 +30,25 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
   )
 
   return (
-    <div className={`${postFullBleedClasses} -mb-2 sm:mb-0`}>
-      <div className="relative min-h-[min(70vh,28rem)] w-full max-lg:max-h-[32rem] lg:aspect-[1916/821] lg:max-h-none lg:min-h-0">
+    <div className="relative w-full">
+      <div className="relative min-h-[min(70vh,28rem)] w-full max-lg:max-h-[32rem] xl:aspect-[1916/821] xl:max-h-none xl:min-h-0">
         <Image
           src={coverImage}
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[72%_center] lg:object-[center_right]"
+          className="object-cover object-[72%_center] xl:object-[center_right]"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent lg:from-black/60 lg:via-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent xl:from-black/60 xl:via-transparent"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent lg:from-black/80 lg:via-black/30"
+          className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent xl:from-black/80 xl:via-black/30"
           aria-hidden
         />
-        <div className="absolute inset-x-0 bottom-0 pb-6 lg:pb-8">
+        <div className="absolute inset-x-0 bottom-0 pb-6 xl:pb-8">
           <div className={postSectionClasses}>
             <div className={postSpotlightGridClasses}>
               <div className="min-[1000px]:col-span-3">
@@ -61,8 +60,8 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-xs font-medium text-white/90 sm:text-sm">
                       <time dateTime={date}>
-                        <span className="lg:hidden">{formattedDateShort}</span>
-                        <span className="hidden lg:inline">
+                        <span className="xl:hidden">{formattedDateShort}</span>
+                        <span className="hidden xl:inline">
                           {formattedDate}
                         </span>
                       </time>
@@ -71,7 +70,7 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
                   <div>
                     <dt className="sr-only">Title</dt>
                     <dd>
-                      <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl sm:leading-tight md:text-4xl lg:text-5xl lg:leading-tight">
+                      <h1 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-3xl sm:leading-tight md:text-4xl xl:text-5xl xl:leading-tight">
                         {title}
                       </h1>
                     </dd>

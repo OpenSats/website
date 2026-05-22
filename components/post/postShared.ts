@@ -26,10 +26,6 @@ export const getSpotlightHeroImage = (images?: string[]) => images?.[1]
 export const postSectionClasses =
   'mx-2 max-w-3xl px-4 sm:px-6 md:mx-auto lg:mx-auto xl:max-w-5xl xl:px-0'
 
-/** Full-bleed from a centered section without shifting content off-screen. */
-export const postFullBleedClasses =
-  'relative w-screen max-w-[100vw] shrink-0 -ml-[calc(50%-50vw)] -mr-[calc(50%-50vw)]'
-
 export const postGridClasses = 'xl:grid xl:grid-cols-4 xl:gap-x-6'
 
 /** Spotlight posts use the sidebar grid from 1000px so tablet widths align. */

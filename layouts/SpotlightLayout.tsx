@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
+import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
@@ -38,19 +39,21 @@ export default function SpotlightLayout({
         date={date}
         coverImage={getSpotlightHeroImage(images)}
       />
-      <article>
-        <div className="min-[1000px]:divide-y min-[1000px]:divide-gray-200 min-[1000px]:dark:divide-gray-700">
-          <PostArticleBody
-            content={content}
-            authorDetails={authorDetails}
-            next={next}
-            prev={prev}
-            spotlight
-          >
-            {children}
-          </PostArticleBody>
-        </div>
-      </article>
+      <SectionContainer>
+        <article>
+          <div className="min-[1000px]:divide-y min-[1000px]:divide-gray-200 min-[1000px]:dark:divide-gray-700">
+            <PostArticleBody
+              content={content}
+              authorDetails={authorDetails}
+              next={next}
+              prev={prev}
+              spotlight
+            >
+              {children}
+            </PostArticleBody>
+          </div>
+        </article>
+      </SectionContainer>
     </>
   )
 }

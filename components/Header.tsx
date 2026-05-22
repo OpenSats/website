@@ -36,7 +36,7 @@ const Header = ({
 
   return (
     <header
-      className={`flex items-center justify-between ${className ?? 'py-10'}`}
+      className={`flex w-full items-center justify-between ${className ?? 'py-10'}`}
     >
       <div>
         <Link
