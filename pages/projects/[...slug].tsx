@@ -92,11 +92,7 @@ export default function ProjectPage({
                   : 'solid'
               }
             >
-              {project.donationLink.includes('geyser')
-                ? 'Support via Geyser'
-                : project.donationLink.includes('opencollective')
-                ? 'Support via OpenCollective'
-                : 'Support directly'}
+              Support directly
             </PageActionLink>
           )}
         </aside>
