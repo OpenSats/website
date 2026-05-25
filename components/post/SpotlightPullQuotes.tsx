@@ -55,12 +55,12 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
           style={{ top: `${topPercents[index]}%` }}
         >
           <span
-            className="block text-[6rem] leading-[0.55] text-gray-300 dark:text-gray-600"
+            className="block text-[4.5rem] leading-[0.55] text-gray-300 dark:text-gray-600 xl:text-[6rem]"
             aria-hidden="true"
           >
             &ldquo;
           </span>
-          <p className="-mt-6 text-pretty text-3xl font-normal leading-snug text-gray-800 dark:text-gray-200">
+          <p className="-mt-4 text-pretty text-xl font-normal leading-snug text-gray-800 dark:text-gray-200 xl:-mt-6 xl:text-3xl">
             {quote}
           </p>
         </blockquote>
