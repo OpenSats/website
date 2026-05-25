@@ -7,13 +7,13 @@ const quoteFont = Lora({
   display: 'swap',
 })
 
-const QUOTE_RANGE = { start: 21, end: 79 } as const
+const QUOTE_RANGE = { start: 20, end: 90 } as const
 
 interface Props {
   quotes: string[]
 }
 
-/** Evenly distribute quote tops from 21% to 79% based on count. */
+/** Evenly distribute quote tops from 20% to 90% based on count. */
 function getQuoteTopPercents(total: number): number[] {
   if (total <= 0) {
     return []
