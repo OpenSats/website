@@ -57,6 +57,7 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    pullQuotes: { type: 'list', of: { type: 'string' } },
   },
   computedFields,
 }))
