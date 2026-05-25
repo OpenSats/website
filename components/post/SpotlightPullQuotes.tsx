@@ -45,7 +45,7 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
 
   return (
     <div
-      className="relative hidden w-full min-[1000px]:block min-[1000px]:flex-1"
+      className="relative hidden w-full min-[1000px]:block min-[1000px]:flex-1 xl:pr-4"
       style={{ minHeight: getQuoteAreaMinHeight(quotes.length) }}
     >
       {quotes.map((quote, index) => (
