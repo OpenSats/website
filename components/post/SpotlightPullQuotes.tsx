@@ -11,9 +11,13 @@ interface Props {
   quotes: string[]
 }
 
-/** Place quotes at 10%, 30%, 50%, … down the sidebar quote area. */
-function getQuoteTopPercent(index: number) {
-  return Math.min(10 + index * 20, 90)
+/** Spread quotes evenly from 10% to 90% of the sidebar quote area. */
+function getQuoteTopPercent(index: number, total: number) {
+  if (total <= 1) {
+    return 10
+  }
+
+  return 10 + (index * 80) / (total - 1)
 }
 
 export default function SpotlightPullQuotes({ quotes }: Props) {
@@ -27,7 +31,7 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
         <blockquote
           key={quote}
           className={`absolute left-0 right-0 ${quoteFont.className}`}
-          style={{ top: `${getQuoteTopPercent(index)}%` }}
+          style={{ top: `${getQuoteTopPercent(index, quotes.length)}%` }}
         >
           <span
             className="block text-[6rem] leading-[0.55] text-gray-300 dark:text-gray-600"
