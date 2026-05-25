@@ -194,7 +194,7 @@ export default function PostArticleBody({
   return (
     <div className={classes.wrapper}>
       {spotlight ? (
-        <aside className={classes.sidebar}>
+        <aside className={postArticleBodyClasses.spotlight.sidebar}>
           {authorBlock}
           {sidebarFooter}
           {pullQuotes && pullQuotes.length > 0 && (
