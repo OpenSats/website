@@ -194,18 +194,26 @@ export default function PostArticleBody({
   return (
     <div className={classes.wrapper}>
       {spotlight ? (
-        <aside className={postArticleBodyClasses.spotlight.sidebar}>
-          {authorBlock}
-          {sidebarFooter}
-          {pullQuotes && pullQuotes.length > 0 && (
-            <SpotlightPullQuotes quotes={pullQuotes} />
-          )}
-        </aside>
+        <>
+          <aside className={postArticleBodyClasses.spotlight.sidebar}>
+            {authorBlock}
+            <div className="hidden min-[1000px]:contents">
+              {sidebarFooter}
+              {pullQuotes && pullQuotes.length > 0 && (
+                <SpotlightPullQuotes quotes={pullQuotes} />
+              )}
+            </div>
+          </aside>
+          {contentBlock}
+          <div className="min-[1000px]:hidden">{sidebarFooter}</div>
+        </>
       ) : (
-        authorBlock
+        <>
+          {authorBlock}
+          {contentBlock}
+          {sidebarFooter}
+        </>
       )}
-      {contentBlock}
-      {!spotlight && sidebarFooter}
     </div>
   )
 }
