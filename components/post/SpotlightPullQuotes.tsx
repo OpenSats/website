@@ -11,13 +11,13 @@ interface Props {
   quotes: string[]
 }
 
-/** Spread quotes evenly from 10% to 90% of the sidebar quote area. */
+/** Spread quotes evenly from 21% to 79% of the sidebar quote area. */
 function getQuoteTopPercent(index: number, total: number) {
   if (total <= 1) {
-    return 10
+    return 50
   }
 
-  return 10 + (index * 80) / (total - 1)
+  return 21 + (index * 58) / (total - 1)
 }
 
 export default function SpotlightPullQuotes({ quotes }: Props) {
