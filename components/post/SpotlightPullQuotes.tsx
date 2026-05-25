@@ -39,7 +39,7 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
           >
             &ldquo;
           </span>
-          <p className="-mt-6 text-3xl font-normal leading-snug text-gray-800 dark:text-gray-200">
+          <p className="-mt-6 text-pretty text-3xl font-normal leading-snug text-gray-800 dark:text-gray-200">
             {quote}
           </p>
         </blockquote>
