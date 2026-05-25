@@ -7,17 +7,33 @@ const quoteFont = Lora({
   display: 'swap',
 })
 
+const QUOTE_RANGE = { start: 21, end: 79 } as const
+
 interface Props {
   quotes: string[]
 }
 
-/** Spread quotes evenly from 21% to 79% of the sidebar quote area. */
-function getQuoteTopPercent(index: number, total: number) {
-  if (total <= 1) {
-    return 50
+/** Evenly distribute quote tops from 21% to 79% based on count. */
+function getQuoteTopPercents(total: number): number[] {
+  if (total <= 0) {
+    return []
   }
 
-  return 21 + (index * 58) / (total - 1)
+  if (total === 1) {
+    return [(QUOTE_RANGE.start + QUOTE_RANGE.end) / 2]
+  }
+
+  const span = QUOTE_RANGE.end - QUOTE_RANGE.start
+
+  return Array.from(
+    { length: total },
+    (_, index) => QUOTE_RANGE.start + (index * span) / (total - 1)
+  )
+}
+
+/** Taller quote lists need more vertical room so blocks do not overlap. */
+function getQuoteAreaMinHeight(total: number): string {
+  return `${Math.max(28, total * 9)}rem`
 }
 
 export default function SpotlightPullQuotes({ quotes }: Props) {
@@ -25,13 +41,18 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
     return null
   }
 
+  const topPercents = getQuoteTopPercents(quotes.length)
+
   return (
-    <div className="relative hidden min-h-[32rem] w-full min-[1000px]:block min-[1000px]:flex-1">
+    <div
+      className="relative hidden w-full min-[1000px]:block min-[1000px]:flex-1"
+      style={{ minHeight: getQuoteAreaMinHeight(quotes.length) }}
+    >
       {quotes.map((quote, index) => (
         <blockquote
           key={quote}
           className={`absolute left-0 right-0 ${quoteFont.className}`}
-          style={{ top: `${getQuoteTopPercent(index, quotes.length)}%` }}
+          style={{ top: `${topPercents[index]}%` }}
         >
           <span
             className="block text-[6rem] leading-[0.55] text-gray-300 dark:text-gray-600"
