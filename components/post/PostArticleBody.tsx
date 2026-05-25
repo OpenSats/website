@@ -39,7 +39,7 @@ const postArticleBodyClasses = {
     wrapper:
       'grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 min-[1000px]:grid min-[1000px]:grid-cols-4 min-[1000px]:gap-x-6 min-[1000px]:divide-y-0',
     sidebar:
-      'min-[1000px]:col-start-1 min-[1000px]:row-span-2 min-[1000px]:flex min-[1000px]:flex-col',
+      'min-[1000px]:col-start-1 min-[1000px]:row-span-2 min-[1000px]:flex min-[1000px]:min-h-0 min-[1000px]:flex-col',
     authorBlock: 'pb-10 pt-6 min-[1000px]:pt-11',
     authorList:
       'justify-start min-[1000px]:block min-[1000px]:space-x-0 min-[1000px]:space-y-8',
