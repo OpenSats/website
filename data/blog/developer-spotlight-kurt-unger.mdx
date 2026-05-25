@@ -1,0 +1,253 @@
+---
+title: "Made in Africa: Kurt and the Open-Source Bitcoin Miner That Anyone Can Make"
+date: '2026-05-22'
+tags: ['OpenSats', 'bitcoin', 'hardware', 'spotlight']
+authors: ['ville']
+images: ['/static/images/spotlight/kurt-unger/featured.jpg', '/static/images/spotlight/kurt-unger/hero.jpg']
+draft: false
+summary: "A developer spotlight on Kurt Unger, an OpenSats grantee who's building Bitcoin mining hardware that's understandable, repairable, and open."
+---
+
+Somewhere far away from the Kenyan main roads, where the sounds of birds and the
+occasional dog drown the traffic noise, Kurt sits at an L-shaped desk in a small
+detached garage. He's trying to read a Bitcoin mining chip nobody outside its
+Chinese factory has ever publicly described.
+
+One of the promises of Bitcoin is that it's transparent and open. The code is
+open-source, so you never have to take anyone's word for it. This is what the
+Bitcoin community means when they say "don't trust, verify." You can read the
+code, run a node, and confirm the rules for yourself. But the hardware that
+performs the computational work that keeps the system running remains mostly
+closed. Bitcoin miners arrive as sealed boxes from a few giant companies, most
+of them based in China, whose designs are proprietary and whose chips are
+inscrutable.
+
+Kurt has been thinking about this problem from his garage in Nairobi, where he
+has been working on something small, stubborn, and strange: an open-source
+Bitcoin miner called [*Bitshoka Nini*][bitshoka-grant].
+
+Its design files are open, and the board can be studied, copied, changed, and
+fabricated again. While the project is a clear underdog, it might yet change the
+*status quo*, or at least that's the hope. The struggle it represents isn't
+about beating industrial miners at their own scale. Rather, it's about
+knowledge, access, and who gets to understand the machines that keep Bitcoin
+running.
+
+> The Bitshoka project aimed to reverse engineer MicroBT's WhatsMiner chips and
+> make them open-source, enabling solo mining and increasing decentralization in
+> Africa.
+
+On one side of his desk sits a Weller soldering iron, and an old power supply
+from the 1970s—fished from the trash in the early 2000s, repaired more times
+than he can count, and still working, albeit begrudgingly. "To me, it represents
+the values of recycling, recovery, and quality," he says. "It's a reminder that
+old is often just as good as new! I doubt my newer digital supply will be
+working 50 years from now." Even the workbench has family history: it's the
+old dining table Kurt's wife remembers making cookies on as a kid at her
+friend's house in the '80s.
+
+> Anything I leave on the desk quickly gets a nice layer of African dust on
+> it!
+
+On the other side, Kurt has an old Lenovo T460s with a red TrackPoint (to which
+he is admittedly addicted). The laptop runs Linux, hosts a local LLM, and
+interfaces with his electronics.
+
+![Kurt Unger's hardware workbench](/static/images/spotlight/kurt-unger/workbench.jpg)
+
+In his garage, he keeps a floor-to-ceiling homemade shelf filled with totes of
+plumbing and electrical parts. "In Kenya, houses always need fixing!" he says.
+He adds that "an old dresser holds spare bike parts and another dresser holds
+various electronic spare parts and things that I've been meaning to fix but
+probably never will."
+
+> I actually really like my home lab—though my wife cannot understand how I get
+> anything done in there!
+
+Kurt is known online as [kuenrg153][kuenrg-github]. The name comes from his high
+school days. In physics, *k* stands for kinetic energy in a system, and *u* for
+potential energy. Together, they're the total energy. The "enrg" at the end just
+sounds like "energy," depending on how you read it. *Erg*, as it happens, is
+also a unit of energy.
+
+That's the kind of thing only an engineer full of energy would come up with. The
+funny part is that after all these years, Kurt still doesn't really know how to
+pronounce his *nom de guerre*. Neither do I.
+
+Kurt calls himself a "fairly experienced hardware and electrical engineer who
+also happens to be a bit of a Luddite in some ways—yes, a walking
+contradiction!" While mostly a jest, he does recognize that "every technology
+adoption brings compromises that we may or may not be aware of." After all, he's
+been "developing hardware electronics, some of it very cutting edge, for over
+twenty years."
+
+Kurt doesn't seem like someone who found Bitcoin through memes, price charts, or
+because a suited evangelist in an orange tie converted him. Neither
+hyperinflation nor censorship forced him to look for alternatives. He came
+across Bitcoin through electric power and wires, broken machines, and the
+question of what practical infrastructure could look like in places where it's
+not taken for granted.
+
+Long before any of that, though, like all engineers' hero stories, there were
+LEGO bricks. Technic, specifically.
+
+> I'm one of those people who has always known, without any doubt, that I would
+> pursue engineering / tech as a career. Every Christmas and birthday, the
+> question wasn't, "What will my presents be?"—the only question was, "Which Lego
+> set will I get?!?!"
+
+One of his earliest electronics memories is from seventh or eighth grade, trying
+to make a Morse code machine out of a cheap soldering iron, solder, and
+cereal-box cardboard. He doesn't remember finishing it, but he remembers burning
+his arm on the iron. He also built a generator out of Lego Technic, which may or
+may not have worked, too.
+
+Much later, Kurt moved with his wife to rural Tanzania. There they lived for
+three years without relying on much of the public infrastructure that people in
+wealthier countries treat as normal. That's where he realized how open-source
+empowers people.
+
+Most people there couldn't afford proprietary software, so they relied on
+pirated copies of Windows, Office, games, even antivirus programs. Nearly all of
+it came loaded with viruses, and Kurt ended up spending much of his time
+cleaning infected computers and flash drives. Open-source was the only software
+he could count on to be both free and safe. He preached Linux and OpenOffice
+every chance he got, but in a place where people were still learning the basics
+by teaching each other what they knew from others, asking them to switch tools
+was tough.
+
+During those years in Tanzania, the family grew by two (and later by three), and
+Kurt's interest in renewable energy grew with it. He moved back to Canada to
+study electrical engineering, then returned to Kenya to work on hardware for
+emerging markets.
+
+Eventually, that path led him to *Gridless*, the Nairobi-based company that uses
+surplus renewable energy in rural Africa to mine bitcoin. There, Kurt applied
+his knowledge and skills to maintain and repair the mining hardware. That's
+where Bitcoin became less magic internet money and more infrastructural fact.
+
+> My own, smaller, a-ha moment came when I realized how truly open-source it
+> \[Bitcoin\] was.
+
+The bigger picture clicked when he started thinking about microgrids. Small
+hydro and solar projects across rural Africa share a common problem: the
+communities around them need power, but not steadily enough to keep the project
+viable. Surplus electricity goes unused.
+
+That's when Bitcoin miners can take whatever power the village isn't using, and
+then go quiet when the village needs the electricity. In doing so, the community
+gets reliable electricity that it wouldn't otherwise have. Kurt recalls that,
+"After spending more than 10 years thinking about rural electrification,
+actually seeing small communities thrive because they finally have stable,
+reliable power—made possible through the Gridless miners—is deeply
+satisfying."
+
+And this is where [open hardware][open-hardware] starts to matter: if the miners
+are expensive to import, hard to repair, and built by a handful of companies far
+away, then the energy may be local, but the power still isn't.
+
+[*Bitshoka Nini*][bitshoka-nini] starts where most open-source projects do:
+building upon existing work. "Shoka" in Swahili means axe, hence the
+[*Bitaxe*][bitaxe], an open-source Bitcoin miner that was also funded by
+OpenSats. In open source, copying is the point: someone publishes the files,
+then somebody else picks them up, builds, breaks, and fixes them before putting
+the work back into the wild.
+
+The main difference between the two is the ASIC, or the application-specific
+integrated circuit. An ASIC is a specialist in a world of generalists: useless
+at nearly everything, but frighteningly good at one thing. Namely, guessing
+numbers until you get the right one. However, no one had publicly analyzed the
+chip codenamed KF1950, so Kurt had to reverse-engineer it from scratch. Kurt
+chose this chip, made by MicroBT for their WhatsMiner machines, because they are
+sold for "virtually pennies", as Kurt puts it. The other more common chip,
+Bitmain's BM1370, used by other open-source miners, costs about fifty dollars or
+so. 
+
+> But truly, the proudest moments were when I confirmed that the first Bitshoka
+> hardware could communicate with the ASIC and later when I interfaced with a
+> WhatsMiner hashboard via the bitLode USB adapter board. Those initial "Hello
+> ASIC" moments were amazing!
+
+Opening up a chip like this will not make one tiny machine rival an industrial
+mine, and it doesn't have to. What it can do is let more people understand,
+build, repair, and take part in the hardware side of the Bitcoin community.
+
+Kurt is part of [OSMU][osmu], the Open Source Miners United, a community that
+understands its tiny machines won't beat the industrial farms on raw computing
+power. In the OSMU Discord, when asked about the value of home mining, one
+member answered immediately: "Vires in Numeris," a Latin phrase meaning
+"Strength in Numbers." The saying originates all the way back to 2011 in the
+[BitcoinTalk][bitcointalk] internet forum, when people still experimented with
+the money.
+
+The argument is not that one home miner can outmuscle an industrial operation.
+It is that many small miners, spread across many places, make the system harder
+to pressure through a few large targets.
+
+---
+
+And then *Nini* failed.
+
+It wasn't the Nairobi dust, but rather the board could talk to the chip, but it
+couldn't mine. Kurt traced the issue to the power circuit and redesigned the
+board. He ordered a new version, but it hasn't arrived yet.
+
+Despite the setback, Kurt says that he is able to keep going "because of support
+from my wife (and kids) as well as the great community \[he has\] in
+Nairobi—both in the Bitcoin space and out of it." He continues, "seeing the work
+that others around me are doing, and how my work can support them and vice
+versa, is also very encouraging."
+
+> Hardware development is hard; hardware development in Africa is even
+> harder for a myriad of reasons.
+
+For anyone who wants to help, Kurt points to the OSMU Discord.
+People can also message him there directly as @kuenrg. He's happy to help people
+contributing to open-source Bitcoin hardware. He's also apparently eager to give
+monologues on open-source peer-to-peer energy.
+
+Right now, Kurt is guiding the development of *Jua Kali*—"hot sun" in
+Swahili—Bitcoin miners at *Gridless*. He's also working on something he calls
+*Stimatofali*—"stima" for electricity, "matofali" for bricks—an open-source way
+for solar home systems to share power with each other, like snapping electric
+bricks together.
+
+Receiving the grant is what allowed Kurt to work on reverse engineering the
+hardware full time. He says that without OpenSats, he wouldn't have had the time
+or justification to spend months studying the boards, translating the knowledge
+into a schematic, and then creating the circuit board.
+
+> OpenSats has provided incredible support. \[...\] The support from OpenSats
+> helped me during every challenge along the way; without them, I would have felt
+> that I should probably be doing my time and energy elsewhere.
+
+So, for now, Kurt waits. He ordered ten new boards that are being made in the
+Nairobi fab, according to instructions he created. Until then, his logic
+analyzer and soldering iron stays out, ready. 
+
+Sometimes, against the odds, one of those small open-source miners scattered
+across the world [finds a block][finds-a-block]—not bad for underdogs working
+from home. "When I look up from my work and the mess in front of me," he says,
+"I see a small lawn and a bunch of banana trees. There are often a bunch of
+bananas on the trees, which we try to harvest before the monkeys get them."
+Kurt, who hacked a computer chip and kept a fifty-year-old power supply alive,
+likes his odds.
+
+---
+
+This is the first post of our [OpenSats spotlight] series. For comments,
+corrections, or suggestions, please reach out to spotlight@opensats.org. If you
+want to support Kurt directly, join the [OSMU community][osmu] and start
+building. Our support for Kurt's work was made possible thanks to your generous
+donations to the [General Fund].
+
+[bitshoka-grant]: /blog/eleventh-wave-of-bitcoin-grants#bitshoka
+[bitshoka-nini]: https://github.com/kuenrg153/BitshokaNini_V1.2
+[kuenrg-github]: https://github.com/kuenrg153
+[open-hardware]: /blog/open-hardware-for-open-money
+[bitaxe]: /projects/bitaxe
+[osmu]: https://osmu.wiki/
+[bitcointalk]: https://bitcointalk.org/index.php?topic=4994.msg140770#msg140770
+[finds-a-block]: https://stacker.news/items/1486473
+[OpenSats spotlight]: /tags/spotlight
+[General Fund]: /funds/general
