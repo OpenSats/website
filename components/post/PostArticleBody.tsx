@@ -7,6 +7,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
+import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
 interface Props {
   content: CoreContent<Blog>
@@ -37,14 +38,15 @@ const postArticleBodyClasses = {
   spotlight: {
     wrapper:
       'grid-rows-[auto_1fr] divide-y divide-gray-200 pb-8 dark:divide-gray-700 min-[1000px]:grid min-[1000px]:grid-cols-4 min-[1000px]:gap-x-6 min-[1000px]:divide-y-0',
-    authorBlock:
-      'pb-10 pt-6 min-[1000px]:border-b min-[1000px]:border-gray-200 min-[1000px]:pt-11 min-[1000px]:dark:border-gray-700',
+    sidebar:
+      'min-[1000px]:col-start-1 min-[1000px]:row-span-2 min-[1000px]:flex min-[1000px]:flex-col',
+    authorBlock: 'pb-10 pt-6 min-[1000px]:pt-11',
     authorList:
       'justify-start min-[1000px]:block min-[1000px]:space-x-0 min-[1000px]:space-y-8',
     contentBlock:
       'divide-y divide-gray-200 dark:divide-gray-700 min-[1000px]:col-span-3 min-[1000px]:row-span-2 min-[1000px]:pb-0',
     footerBlock:
-      'divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 min-[1000px]:col-start-1 min-[1000px]:row-start-2 min-[1000px]:divide-y',
+      'divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 min-[1000px]:divide-y',
     tagsBlock: 'py-4 min-[1000px]:py-8',
     paginationBlock:
       'flex justify-between py-4 min-[1000px]:block min-[1000px]:space-y-8 min-[1000px]:py-8',
@@ -60,130 +62,150 @@ export default function PostArticleBody({
   children,
   spotlight = false,
 }: Props) {
-  const { filePath, path, slug, tags } = content
+  const { filePath, path, slug, tags, pullQuotes } = content
   const basePath = path.split('/')[0]
   const [loadComments, setLoadComments] = useState(false)
   const classes = spotlight
     ? postArticleBodyClasses.spotlight
     : postArticleBodyClasses.default
 
-  return (
-    <div className={classes.wrapper}>
-      <dl className={classes.authorBlock}>
-        <dt className="sr-only">Authors</dt>
-        <dd>
-          <ul className={`flex flex-wrap gap-4 ${classes.authorList}`}>
-            {authorDetails.map((author) => (
-              <li className="flex items-center space-x-2" key={author.name}>
-                {author.avatar && (
-                  <Link href={`/about/${author.slug}`}>
-                    <Image
-                      src={author.avatar}
-                      width={38}
-                      height={38}
-                      alt="avatar"
-                      className="h-10 w-10 rounded-full"
-                    />
-                  </Link>
-                )}
-                <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                  <dt className="sr-only">Name</dt>
-                  <dd className="text-gray-900 dark:text-gray-100">
-                    {author.name}
-                  </dd>
-                  <dt className="sr-only">Twitter</dt>
-                  <dd>
-                    {author.nym && (
-                      <Link
-                        href={`/about/${author.slug}`}
-                        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      >
-                        @{author.nym}
-                      </Link>
-                    )}
-                  </dd>
-                </dl>
-              </li>
-            ))}
-          </ul>
-        </dd>
-      </dl>
-      <div className={classes.contentBlock}>
-        <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
-          {children}
-        </div>
-        <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
-          <Link href={discussUrl()} rel="nofollow">
-            Discuss on nostr
-          </Link>
-          {` • `}
-          <Link href={editUrl(filePath)}>View on GitHub</Link>
-        </div>
-        {siteMetadata.comments && (
-          <div
-            className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-            id="comment"
-          >
-            {!loadComments && (
-              <button onClick={() => setLoadComments(true)}>
-                Load Comments
-              </button>
+  const authorBlock = (
+    <dl className={classes.authorBlock}>
+      <dt className="sr-only">Authors</dt>
+      <dd>
+        <ul className={`flex flex-wrap gap-4 ${classes.authorList}`}>
+          {authorDetails.map((author) => (
+            <li className="flex items-center space-x-2" key={author.name}>
+              {author.avatar && (
+                <Link href={`/about/${author.slug}`}>
+                  <Image
+                    src={author.avatar}
+                    width={38}
+                    height={38}
+                    alt="avatar"
+                    className="h-10 w-10 rounded-full"
+                  />
+                </Link>
+              )}
+              <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                <dt className="sr-only">Name</dt>
+                <dd className="text-gray-900 dark:text-gray-100">
+                  {author.name}
+                </dd>
+                <dt className="sr-only">Twitter</dt>
+                <dd>
+                  {author.nym && (
+                    <Link
+                      href={`/about/${author.slug}`}
+                      className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                    >
+                      @{author.nym}
+                    </Link>
+                  )}
+                </dd>
+              </dl>
+            </li>
+          ))}
+        </ul>
+      </dd>
+    </dl>
+  )
+
+  const sidebarFooter = (
+    <footer>
+      <div className={classes.footerBlock}>
+        {tags && (
+          <div className={classes.tagsBlock}>
+            <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              Tags
+            </h2>
+            <div className="flex flex-wrap">
+              {tags.map((tag) => (
+                <Tag key={tag} text={tag} />
+              ))}
+            </div>
+          </div>
+        )}
+        {(next || prev) && (
+          <div className={classes.paginationBlock}>
+            {prev && (
+              <div>
+                <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Previous Post
+                </h2>
+                <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                  <Link href={`/${prev.path}`}>{prev.title}</Link>
+                </div>
+              </div>
             )}
-            {loadComments && (
-              <Comments commentsConfig={siteMetadata.comments} slug={slug} />
+            {next && (
+              <div>
+                <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                  Next Post
+                </h2>
+                <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                  <Link href={`/${next.path}`}>{next.title}</Link>
+                </div>
+              </div>
             )}
           </div>
         )}
       </div>
-      <footer>
-        <div className={classes.footerBlock}>
-          {tags && (
-            <div className={classes.tagsBlock}>
-              <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                Tags
-              </h2>
-              <div className="flex flex-wrap">
-                {tags.map((tag) => (
-                  <Tag key={tag} text={tag} />
-                ))}
-              </div>
-            </div>
+      <div className={classes.backLinkBlock}>
+        <Link
+          href={`/${basePath}`}
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="Back to the blog"
+        >
+          &larr; Back to the blog
+        </Link>
+      </div>
+    </footer>
+  )
+
+  const contentBlock = (
+    <div className={classes.contentBlock}>
+      <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
+        {children}
+      </div>
+      <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+        <Link href={discussUrl()} rel="nofollow">
+          Discuss on nostr
+        </Link>
+        {` • `}
+        <Link href={editUrl(filePath)}>View on GitHub</Link>
+      </div>
+      {siteMetadata.comments && (
+        <div
+          className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
+          id="comment"
+        >
+          {!loadComments && (
+            <button onClick={() => setLoadComments(true)}>Load Comments</button>
           )}
-          {(next || prev) && (
-            <div className={classes.paginationBlock}>
-              {prev && (
-                <div>
-                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Previous Post
-                  </h2>
-                  <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${prev.path}`}>{prev.title}</Link>
-                  </div>
-                </div>
-              )}
-              {next && (
-                <div>
-                  <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                    Next Post
-                  </h2>
-                  <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                    <Link href={`/${next.path}`}>{next.title}</Link>
-                  </div>
-                </div>
-              )}
-            </div>
+          {loadComments && (
+            <Comments commentsConfig={siteMetadata.comments} slug={slug} />
           )}
         </div>
-        <div className={classes.backLinkBlock}>
-          <Link
-            href={`/${basePath}`}
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="Back to the blog"
-          >
-            &larr; Back to the blog
-          </Link>
-        </div>
-      </footer>
+      )}
+    </div>
+  )
+
+  return (
+    <div className={classes.wrapper}>
+      {spotlight ? (
+        <aside className={classes.sidebar}>
+          {authorBlock}
+          {sidebarFooter}
+          {pullQuotes && pullQuotes.length > 0 && (
+            <SpotlightPullQuotes quotes={pullQuotes} />
+          )}
+        </aside>
+      ) : (
+        authorBlock
+      )}
+      {contentBlock}
+      {!spotlight && sidebarFooter}
     </div>
   )
 }
