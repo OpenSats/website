@@ -1,3 +1,12 @@
+import { Lora } from 'next/font/google'
+
+const quoteFont = Lora({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  style: ['italic'],
+  display: 'swap',
+})
+
 interface Props {
   quotes: string[]
 }
@@ -17,16 +26,16 @@ export default function SpotlightPullQuotes({ quotes }: Props) {
       {quotes.map((quote, index) => (
         <blockquote
           key={quote}
-          className="absolute left-0 right-0 not-italic pl-10"
+          className={`absolute left-0 right-0 pl-12 ${quoteFont.className}`}
           style={{ top: `${getQuoteTopPercent(index)}%` }}
         >
           <span
-            className="absolute left-0 top-0 font-serif text-6xl leading-none text-gray-300 dark:text-gray-600"
+            className="absolute left-0 top-[-0.15em] text-7xl leading-none text-gray-300 dark:text-gray-600"
             aria-hidden="true"
           >
             &ldquo;
           </span>
-          <p className="text-xl font-semibold leading-snug text-gray-900 dark:text-gray-100">
+          <p className="text-[1.35rem] font-normal leading-relaxed text-gray-800 dark:text-gray-200">
             {quote}
           </p>
         </blockquote>
