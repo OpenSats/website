@@ -52,7 +52,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'lightning',
     title: 'Lightning',
     blurb: 'Lightning protocols, security, and infrastructure.',
-    slugs: ['splicing', 'vls'],
+    slugs: ['splicing', 'stable-channels', 'vls'],
   },
   {
     id: 'dev-tooling-testing',
