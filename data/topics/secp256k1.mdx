@@ -1,0 +1,19 @@
+---
+title: 'secp256k1'
+summary: 'The elliptic curve Bitcoin uses for public keys, ECDSA signatures, and BIP 340 Schnorr signatures.'
+category: 'Bitcoin'
+aliases: ['secp 256k1', 'curve secp256k1']
+---
+
+`secp256k1` is the elliptic curve Bitcoin uses for its public-key cryptography. Every standard Bitcoin private key maps to a public key on this curve, and both legacy ECDSA signatures and the [Schnorr signatures](/topics/taproot) introduced by Taproot use that same key space.
+
+The curve was defined in the SEC 2 standards as a Koblitz curve over a 256-bit prime field. In practice, Bitcoin developers care less about the label and more about the tradeoffs: `secp256k1` supports fast, specialized arithmetic, and its parameters were chosen in a transparent way instead of from an opaque seed. That made it a good fit for a system that needs signatures verified everywhere, from full nodes to hardware wallets.
+
+Most Bitcoin software relies on [`libsecp256k1`](https://github.com/bitcoin-core/secp256k1), the optimized C library maintained under the Bitcoin Core organization. It provides high-assurance implementations of core operations such as key generation, ECDSA signing and verification, and optional modules for Schnorr signatures, [BIP 324](/topics/bip-324), and MuSig2.
+
+## References
+
+- [SEC 2 v2: Recommended Elliptic Curve Domain Parameters](https://www.secg.org/sec2-v2.pdf)
+- [Bitcoin Wiki: secp256k1](https://en.bitcoin.it/wiki/Secp256k1)
+- [bitcoin-core/secp256k1](https://github.com/bitcoin-core/secp256k1)
+- [BIP 340: Schnorr Signatures for secp256k1](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki)
