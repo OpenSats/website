@@ -1,0 +1,21 @@
+---
+title: 'Lightning Network'
+summary: 'A peer-to-peer network of payment channels built on Bitcoin where bilateral 2-of-2 multisig channels let participants transact off-chain, with only channel opens and closes settling on the base layer.'
+ogSummary: 'A Bitcoin payment network where off-chain channels route payments without touching the base layer for each transaction.'
+category: 'Lightning'
+aliases: ['Lightning', 'LN', 'payment channels', 'BOLT', 'off-chain payments']
+---
+
+Proposed by Joseph Poon and Thaddeus Dryja in a [2016 paper](https://lightning.network/lightning-network-paper.pdf), Lightning Network is a second-layer payment network for Bitcoin. Two peers lock bitcoin into a 2-of-2 multisig output on-chain and update the balance between them by exchanging signed commitment transactions off-chain. Payments hop across the channel network and settle in milliseconds; Bitcoin only records the channel open and close. Safe deployment depended on [SegWit](/topics/segwit), which activated in August 2017 and fixed the transaction malleability problem that had made pre-signed channel contracts unsafe. First mainnet deployments followed in early 2018.
+
+The protocol is defined by the BOLT (Basis of Lightning Technology) documents at [github.com/lightning/bolts](https://github.com/lightning/bolts). The main implementations are LND (Lightning Labs), Core Lightning (Blockstream), Eclair (ACINQ), and [LDK](/topics/ldk) (Spiral). Each channel requires pre-funded on-chain capital, and inbound liquidity must be actively managed. A node must also stay online, or use a watchtower, because a dishonest partner can try to close the channel using an old, favorable balance. Hence the honest party has a limited window to catch this and claim a penalty, or lose their funds entirely.
+
+Subtopic pages cover the routing primitive ([HTLCs](/topics/htlc)), the invoice formats ([BOLT 11](/topics/bolt11) and [BOLT 12](/topics/bolt12)), receiver privacy ([blinded paths](/topics/blinded-paths)), channel management ([channel splicing](/topics/channel-splicing)), graph discovery ([gossip](/topics/gossip)), payment-hop privacy ([onion routing](/topics/onion-routing)), and payment addressing ([Lightning Address](/topics/lightning-address)).
+
+## References
+
+- [The Bitcoin Lightning Network: Scalable Off-Chain Instant Payments (Poon & Dryja, 2016)](https://lightning.network/lightning-network-paper.pdf)
+- [lightning.network](https://lightning.network/)
+- [lightning/bolts](https://github.com/lightning/bolts)
+- [Bitcoin Optech: Payment channels](https://bitcoinops.org/en/topics/payment-channels/)
+- [Bitcoin Optech: Lightning Network](https://bitcoinops.org/en/topics/lightning-network/)
