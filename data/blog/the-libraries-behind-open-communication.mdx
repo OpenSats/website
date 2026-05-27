@@ -143,7 +143,7 @@ it.
 [relay-structural]: https://github.com/hzrd149/applesauce/commit/e2f0ecc
 [dynamic-relay-groups]: https://github.com/hzrd149/applesauce/commit/136964d
 [applesauce-relay-release]: https://github.com/hzrd149/applesauce/releases/tag/applesauce-relay%401.0.0
-[negentropy]: https://github.com/nostr-protocol/nips/blob/master/77.md
+[negentropy]: /topics/negentropy
 [async-storage]: https://github.com/hzrd149/applesauce/commit/688f126
 [sqlite-backends]: https://github.com/hzrd149/applesauce/commit/3d9e03b
 [android-signer-applesauce]: https://github.com/hzrd149/applesauce/commit/5f152fc
@@ -217,7 +217,7 @@ lifecycle management. A [companion Relay Intelligence Layer][ndkswift-ril] helps
 apps make better decisions about which relays to use for outbox-style
 publishing. The protocol stack on NDKSwift now covers Cashu wallets and nutzaps,
 gift-wrapped messages, encrypted direct messages, [Nostr Wallet Connect][nwc],
-Lightning zaps, the [outbox model][outbox], and Negentropy sync. Together, those
+Lightning [zaps], the [outbox model][outbox], and [Negentropy] sync. Together, those
 pieces give Apple developers a maintained path through several of the hardest
 parts of building a full nostr client.
 
@@ -275,7 +275,7 @@ connection and interaction were added alongside the underlying library.
 
 Dart NDK also added support for Trusted Assertions, which lets applications use
 a configured trust provider for statistics and trust values, then cache and
-store those values for offline use. Blossom support follows Dart NDK's broader
+store those values for offline use. [Blossom] support follows Dart NDK's broader
 same high-level/direct-access pattern. Most applications can use the high-level
 files use case, which checks downloads and upload files, while automatically
 handling Blossom URLs. Applications that need more control over blob operations
@@ -325,6 +325,7 @@ more nostr builders maintained tools in the environments they already use.
 [ndkswift-reliability]: https://github.com/pablof7z/NDKSwift/pull/61
 [ndkswift-ril]: https://github.com/pablof7z/NDKSwift/pull/56
 [nwc]: /topics/nostr-wallet-connect
+[blossom]: /topics/blossom
 [ndkswiftui]: https://github.com/pablof7z/NDKSwift/tree/master/Sources/NDKSwiftUI
 [chirp]: https://github.com/pablof7z/NDKSwift/tree/master/Examples/Apps/Chirp
 [dart-ndk-site]: https://dart-nostr.com/
@@ -341,6 +342,7 @@ more nostr builders maintained tools in the environments they already use.
 [dart-pubdev]: https://pub.dev/packages/ndk
 [nostr-mail-grant]: /blog/sixteenth-wave-of-nostr-grants#nostr-mail
 [post-quantum-demo]: https://github.com/relaystr/ndk/pull/545
+[zaps]: /topics/zaps
 
 ---
 
