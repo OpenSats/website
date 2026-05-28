@@ -529,7 +529,8 @@ place to contribute, extend, and build related tools.
 The library also gained [proof-of-work support][php-pow]. PHP applications can
 now attach proof-of-work to a nostr event or verify it on incoming events,
 something relays and clients can use to filter spam. This work shipped in
-[version 1.9.0][php-v190] along with the encrypted messaging stack.
+[version 1.9.0][php-v190], following the encrypted messaging stack that arrived
+in earlier releases.
 
 Relay handling improved across the v1.9 release line. PHP applications can now
 read [a user's published list of preferred read and write
@@ -544,9 +545,9 @@ which shipped in the latest GitHub release at the time of writing, [version
 1.9.4][php-v194], in February 2026.
 
 >'PHP is dead' is an often heard statement about the programming language.
->The reality is that the majority of the web is still running on this technology.
+>Reality is that the majority of the web is still running on this technology.
 >With the development of this library, I'm able to bring PHP back in sight among
->other nostr developers.
+>other nostr developer.
 >
 ><cite>–Sebastix, nostr-php maintainer</cite>
 
@@ -560,7 +561,8 @@ public key, including mirrors at [nsite.lol][nsite-lol] and
 [nostro.re][nostro-re], among other mirrors. A PHP library teaching its own
 users how to build on a censorship-resistant protocol by hosting its
 documentation on that protocol reflects the same principle that the library
-serves.
+serves. As of May 2026, the library had been [installed more than 28,000
+times][php-installs] through Packagist, PHP's primary package registry.
 
 PHP developers now have a library they can use to build a wider range of nostr
 features, with the encrypted messaging stack closing the most apparent gap. The
@@ -568,8 +570,10 @@ roadmap continues to track several features PHP developers will likely need
 next, including Nostr Wallet Connect for Lightning payments through nostr,
 already partially addressed by Djuri's separate library, remote signing so a PHP
 application can sign events on behalf of a user without holding the user's
-private key, event counts and search capability for richer queries, and async
-concurrent request handling for high-traffic applications.
+private key, and event counts and search capability for richer queries. Handling
+asynchronous and concurrent requests, a long-standing difficulty in PHP's
+request-response model, has already received [dedicated research][async-ref] and
+a [documented working approach][async-guide] during the past year.
 
 [nostr-php]: https://github.com/nostrver-se/nostr-php
 [php]: https://www.php.net/
@@ -592,6 +596,7 @@ concurrent request handling for high-traffic applications.
 [nostr-php-dev]: https://nostr-php.dev/
 [nsite-lol]: https://npub1phpdev2d38u5hzs4jrsh360mevh0rjctu9669quy97wu23u8sqdqpfha0j.nsite.lol/
 [nostro-re]: https://npub1phpdev2d38u5hzs4jrsh360mevh0rjctu9669quy97wu23u8sqdqpfha0j.nosto.re/
+[php-installs]: https://packagist.org/packages/swentel/nostr-php/stats
 [async-ref]: https://nostr-php.dev/references/async-concurrent-requests
 [async-guide]: https://nostr-php.dev/guides/asynchronous-and-concurrent-requests
 
