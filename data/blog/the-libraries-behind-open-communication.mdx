@@ -719,7 +719,10 @@ web bookmarks, and code snippets. Underneath this sits a high-performance local
 database engine designed to keep Amethyst responsive while using a small memory
 footprint. The combination of broad NIP coverage and an efficient local store is
 what makes the modular per-NIP architecture practical at the scale active
-clients generate.
+clients generate. That architecture now supports projects beyond
+[Amethyst][amethyst] itself, such as the [Amber][amber] nostr signer, the
+[Citrine][citrine] local relay, and the [Robosats][robosats] peer-to-peer
+exchange, all building on Quartz for their protocol work.
 
 Foundational work was also added for [Marmot][marmot], a group-messaging system
 that runs the IETF's [Messaging Layer Security][mls] standard over nostr. The
@@ -733,9 +736,10 @@ surfaces][marmot-ui], and [thread-safety fixes][marmot-thread-safety].
 The library that started inside Amethyst now stands on its own, with two
 developers and two grants behind it. Vitor continues to drive the core through
 his long-term grant, and KotlinGeekDev's dedicated iOS work brought the platform
-side to parity. Together, that arrangement gave Quartz the room to grow from an
-internal module into shared Kotlin infrastructure that other nostr apps can
-build on.
+side to parity. That foundation is already being built on by the newly funded
+[Amethyst Desktop][amethyst-desktop] effort, which uses Quartz alongside the iOS
+work to bring Amethyst to larger screens. What began as an internal module is
+now shared Kotlin infrastructure that other nostr apps depend on.
 
 [quartz]: https://github.com/vitorpamplona/amethyst/tree/main/quartz
 [amethyst]: /projects/amethyst
@@ -754,6 +758,9 @@ build on.
 [quartz-v100]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.00.0
 [quartz-v107]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.07.0
 [amethyst-features]: https://github.com/vitorpamplona/amethyst#supported-features
+[amber]: /projects/amber
+[citrine]: /projects/citrine
+[robosats]: https://github.com/RoboSats/robosats
 [marmot]: https://github.com/marmot-protocol
 [mls]: https://datatracker.ietf.org/doc/html/rfc9420
 [marmot-initial]: https://github.com/vitorpamplona/amethyst/commit/33ae066
@@ -762,6 +769,7 @@ build on.
 [marmot-higher-level]: https://github.com/vitorpamplona/amethyst/pull/2147
 [marmot-ui]: https://github.com/vitorpamplona/amethyst/pull/2149
 [marmot-thread-safety]: https://github.com/vitorpamplona/amethyst/pull/2169
+[amethyst-desktop]: https://opensats.org/blog/sixteenth-wave-of-nostr-grants#amethyst-desktop
 
 ---
 
