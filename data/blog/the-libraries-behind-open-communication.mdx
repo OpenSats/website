@@ -696,11 +696,13 @@ signatures, password hashing, and more. The alternative paths were either too
 convoluted or required resources KotlinGeekDev didn't have, so he compiled the
 original C libsodium source, extracted the iOS library files, and wrote bindings
 to the C headers by hand. A [follow-up cleanup][quartz-cleanup] removed the
-Swift bridge that earlier iterations had relied on. The repository's iOS
-[Feature Parity Table][feature-parity], which tracks how iOS support compares to
-Android features, now shows iOS at full parity for cryptography, data handling,
-file storage, and most utilities. Together, this work made it more realistic to
-build iOS nostr apps with Quartz.
+Swift bridge that earlier iterations had relied on. Vitor later [replaced that
+approach][libsodium-kotlin] with a fully custom Kotlin implementation of the
+same cryptographic primitives, removing the dependency on the C library
+entirely. The repository's iOS [Feature Parity Table][feature-parity], which
+tracks how iOS support compares to Android features, now shows iOS at full
+parity for cryptography, data handling, file storage, and most utilities.
+Together, this work made it more realistic to build iOS nostr apps with Quartz.
 
 > Something I can point to is getting Libsodium to work on iOS for Quartz […].
 > It was remarkable for me because I used libsodium source code to make it work,
