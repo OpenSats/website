@@ -178,12 +178,16 @@ Dart developers.
 NDK was originally created by [pablof7z][pablof7z-grant] for web and
 JavaScript-based apps, and its design has since been carried onto other
 platforms. Pablo brought the same patterns into NDKSwift for Apple-platform apps
-written in Swift, and a separate team of grantees led by [frnandu][frnandu],
-[Leo][leo], and [Nogringo][nogringo] built Dart NDK to give Flutter developers a
-comparable toolkit. With OpenSats' [support][ndk-grant] for Pablo's NDK and
-NDKSwift work, and [a separate grant][dart-ndk-grant] for Dart NDK, the past
-year produced major version work on the TypeScript side, an architectural
-rewrite on the Swift side, and growing adoption in Flutter and Dart.
+written in Swift. He has also been building [NMP][nmp], a separate Rust
+framework that takes a different approach to the same cross-platform problem,
+putting the relay connections, signing, and message handling in one Rust core
+while each platform's app handles only the interface. A separate team of
+grantees led by [frnandu][frnandu], [Leo][leo], and [Nogringo][nogringo] built
+Dart NDK to give Flutter developers a comparable toolkit. With OpenSats'
+[support][ndk-grant] for Pablo's NDK and NDKSwift work, and [a separate
+grant][dart-ndk-grant] for Dart NDK, the past year produced major version work
+on the TypeScript side, an architectural rewrite on the Swift side, and growing
+adoption in Flutter and Dart.
 
 On the TypeScript side, NDK reached its [v3.0 release][ndk-v3] in November 2025,
 a major architecture update touching subscriptions, relay connections, cache
@@ -313,6 +317,7 @@ more nostr builders maintained tools in the environments they already use.
 [ndkswift]: https://github.com/pablof7z/NDKSwift
 [dart-ndk]: https://github.com/relaystr/ndk
 [pablof7z-grant]: /blog/pablofz7-receives-lts-grant
+[nmp]: https://github.com/pablof7z/nostr-multi-platform
 [frnandu]: https://github.com/frnandu/
 [leo]: https://github.com/1-leo
 [nogringo]: https://github.com/nogringo
