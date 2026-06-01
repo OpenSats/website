@@ -14,17 +14,20 @@ announcementLink: '/blog/greenart7c3-receives-lts-grant'
 ---
 
 Amber is a [nostr](/topics/nostr) signer for Android built by
-[Greenart7c3][lts]. It is the app that holds your `nsec` so other apps do not
-have to. Other nostr clients on the device, and nostr web apps in any browser, ask
-Amber to sign events for them over [NIP-46 remote signing](/topics/remote-signing)
-or [NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md), the
+[Greenart7c3][lts]. It is the app that holds your [`nsec`](/topics/nsec) so
+other apps do not have to. Other nostr clients on the device, and nostr web
+apps in any browser, ask Amber to sign events for them over [NIP-46 remote
+signing](/topics/remote-signing) or
+[NIP-55](https://github.com/nostr-protocol/nips/blob/master/55.md), the
 on-device equivalent for Android. The secret never leaves Amber, and the user
 gets a per-app prompt the first time a new client wants to sign on its behalf.
 
 > Private keys should be exposed to as few systems as possible as each system
 > adds to the attack surface.
 >
-> <cite>—[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)</cite>
+> <cite>
+>   —[NIP-46](https://github.com/nostr-protocol/nips/blob/master/46.md)
+> </cite>
 
 Amber supports multiple accounts, remembered per-permission decisions for
 common kinds, signing in the background through Android content providers, and
@@ -37,12 +40,12 @@ artifacts and a published verification guide.
 
 ## Why fund it?
 
-The default key model on nostr puts one `nsec` into every client a user
-touches. Each app then becomes a place the key can leak: a malicious update, a
-stolen phone, an exfiltrated backup. Putting all signing through one dedicated
-app shrinks the attack surface to a single binary that the user explicitly
-trusts and updates, and makes it possible to revoke an individual client's
-access without rotating the key.
+The default key model on nostr puts one [`nsec`](/topics/nsec) into every
+client a user touches. Each app then becomes a place the key can leak: a
+malicious update, a stolen phone, an exfiltrated backup. Putting all signing
+through one dedicated app shrinks the attack surface to a single binary that
+the user explicitly trusts and updates, and makes it possible to revoke an
+individual client's access without rotating the key.
 
 OpenSats first funded Amber in [August 2023](/blog/bitcoin-and-nostr-grants-august-2023#amber-nostr-event-signer)
 and later announced [long-term support][lts] for Greenart7c3 in October 2024,
