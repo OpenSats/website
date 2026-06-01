@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
 import { PageSEO } from '@/components/SEO'
+import ClosedNotice from '@/components/ClosedNotice'
 
 const GrantApplicationForm = dynamic(
   () => import('@/components/GrantApplicationForm'),
@@ -28,6 +29,7 @@ export default function Apply() {
           similar payment information that is required to receive grant payouts
           from OpenSats.
         </p>
+        <ClosedNotice />
         <GrantApplicationForm />
       </PageSection>
     </>

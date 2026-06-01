@@ -3,6 +3,7 @@ import LTSApplicationForm from '@/components/LTSApplicationForm'
 import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
+import ClosedNotice from '@/components/ClosedNotice'
 
 export default function Apply() {
   return (
@@ -50,6 +51,7 @@ export default function Apply() {
           If the above does not apply to you, please consider applying for a{' '}
           <Link href="/apply/grant">General Grant</Link> instead.
         </p>
+        <ClosedNotice />
         <LTSApplicationForm />
       </PageSection>
     </>
