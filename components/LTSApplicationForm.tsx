@@ -11,13 +11,11 @@ export default function ApplicationForm() {
   const [formLoadedAt] = useState(() => Date.now())
   const router = useRouter()
   const {
-    watch,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
-  const isFLOSS = watch('free_open_source', false)
   const [failureReason, setFailureReason] = useState<string>()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -273,9 +271,9 @@ export default function ApplicationForm() {
       </div>
 
       <FormButton
-        variant={isFLOSS && !loading ? 'enabled' : 'disabled'}
+        variant="disabled"
         type="submit"
-        disabled={loading || !isFLOSS}
+        disabled={true}
         aria-busy={loading}
       >
         {loading ? 'Submitting…' : 'Submit LTS Application'}
