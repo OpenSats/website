@@ -10,7 +10,7 @@ Proposed by Joseph Poon and Thaddeus Dryja in a [2016 paper](https://lightning.n
 
 The protocol is defined by the BOLT (Basis of Lightning Technology) documents at [github.com/lightning/bolts](https://github.com/lightning/bolts). The main implementations are LND (Lightning Labs), Core Lightning (Blockstream), Eclair (ACINQ), and [LDK](/topics/ldk) (Spiral). Each channel requires pre-funded on-chain capital, and inbound liquidity must be actively managed. A node must also stay online, or use a watchtower, because a dishonest partner can try to close the channel using an old, favorable balance. Hence the honest party has a limited window to catch this and claim a penalty, or lose the balance owed to them in that channel.
 
-Subtopic pages cover the routing primitive ([HTLCs](/topics/htlc)), the invoice formats ([BOLT 11](/topics/bolt11) and [BOLT 12](/topics/bolt12)), receiver privacy ([blinded paths](/topics/blinded-paths)), channel management ([channel splicing](/topics/channel-splicing)), graph discovery ([gossip](/topics/gossip)), payment-hop privacy ([onion routing](/topics/onion-routing)), and payment addressing ([Lightning Address](/topics/lightning-address)).
+Related topic pages cover routing with [HTLCs](/topics/htlc), invoices with [BOLT 11](/topics/bolt11) and [BOLT 12](/topics/bolt12), and channel management with [channel splicing](/topics/channel-splicing). The broader topic set also includes blinded paths, gossip, onion routing, and Lightning Address.
 
 ## References
 
