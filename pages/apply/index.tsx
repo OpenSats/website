@@ -85,7 +85,8 @@ export default function Apply({
         {!open && (
           <>
             <p className="mt-8">
-              Before you begin, please read our{' '}
+              We will accept applications again soon. To prepare your
+              application please read our{' '}
               <CustomLink href="/apply#criteria">
                 application criteria
               </CustomLink>{' '}
