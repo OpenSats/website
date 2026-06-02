@@ -6,6 +6,7 @@ import { MDXComponents } from '@/components/MDXComponents'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
 import ClosedNotice from '@/components/ClosedNotice'
+import { areApplicationsOpen } from '@/utils/applicationWindow'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
@@ -17,6 +18,7 @@ export const getStaticProps = async () => {
 export default function Apply({
   apply,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const open = areApplicationsOpen()
   return (
     <>
       <MDXLayoutRenderer
@@ -57,8 +59,10 @@ export default function Apply({
           projects in the Bitcoin space.
         </p>
         <Link
-          href="#/apply/grant"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href={open ? '/apply/grant' : '#/apply/grant'}
+          className={`${
+            open ? '' : 'disabled'
+          } rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white`}
         >
           Apply for an OpenSats General Grant
         </Link>
@@ -71,8 +75,10 @@ export default function Apply({
           geared towards developers and maintainers of Bitcoin Core and similar.
         </p>
         <Link
-          href="#/apply/lts"
-          className="disabled rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+          href={open ? '/apply/lts' : '#/apply/lts'}
+          className={`${
+            open ? '' : 'disabled'
+          } rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white`}
         >
           Apply for an OpenSats LTS Grant
         </Link>
