@@ -82,31 +82,38 @@ export default function Apply({
         >
           Apply for an OpenSats LTS Grant
         </Link>
-        <p className="mt-8">
-          Before you begin, please read our{' '}
-          <CustomLink href="/apply#criteria">application criteria</CustomLink>{' '}
-          and <CustomLink href="/faq/application">Application FAQ</CustomLink>,
-          prepare at least two{' '}
-          <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
-            written reference letters
-          </CustomLink>
-          , and make sure your project uses a proper{' '}
-          <CustomLink href="/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license">
-            FOSS license
-          </CustomLink>
-          .
-        </p>
-        <p className="mt-8">
-          You can{' '}
-          <a
-            href="/static/opensats-grant-application-template.md"
-            download="opensats-grant-application-template.md"
-            className="text-orange-500"
-          >
-            download our application template
-          </a>{' '}
-          to prepare your answers offline before filling out the form.
-        </p>
+        {!open && (
+          <>
+            <p className="mt-8">
+              Before you begin, please read our{' '}
+              <CustomLink href="/apply#criteria">
+                application criteria
+              </CustomLink>{' '}
+              and{' '}
+              <CustomLink href="/faq/application">Application FAQ</CustomLink>,
+              prepare at least two{' '}
+              <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
+                written reference letters
+              </CustomLink>
+              , and make sure your project uses a proper{' '}
+              <CustomLink href="/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license">
+                FOSS license
+              </CustomLink>
+              .
+            </p>
+            <p className="mt-8">
+              You can{' '}
+              <a
+                href="/static/opensats-grant-application-template.md"
+                download="opensats-grant-application-template.md"
+                className="text-orange-500"
+              >
+                download our application template
+              </a>{' '}
+              to prepare your answers offline before filling out the form.
+            </p>
+          </>
+        )}
       </PageSection>
     </>
   )
