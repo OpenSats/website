@@ -1,6 +1,9 @@
 import Link from './Link'
+import { areApplicationsOpen } from '@/utils/applicationWindow'
 
 const ClosedNotice = () => {
+  if (areApplicationsOpen()) return null
+
   return (
     <div
       className="rounded-b border-t-4 border-orange-500 bg-yellow-100 px-4 py-3 text-yellow-900 shadow-md"
