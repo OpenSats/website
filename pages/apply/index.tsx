@@ -82,6 +82,17 @@ export default function Apply({
         >
           Apply for an OpenSats LTS Grant
         </Link>
+        <p className="mt-8">
+          You can{' '}
+          <a
+            href="/static/opensats-grant-application-template.md"
+            download="opensats-grant-application-template.md"
+            className="text-orange-500"
+          >
+            download our application template
+          </a>{' '}
+          to prepare your answers offline before filling out the form.
+        </p>
       </PageSection>
     </>
   )
