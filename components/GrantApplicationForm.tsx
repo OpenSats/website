@@ -14,6 +14,7 @@ import ReferencesReview from './grant-application/steps/ReferencesReview'
 import AnythingElse from './grant-application/steps/AnythingElse'
 import Review from './grant-application/steps/Review'
 import { FormValues } from './grant-application/types'
+import { areApplicationsOpen } from '@/utils/applicationWindow'
 
 const STEPS = [
   {
@@ -163,6 +164,10 @@ export default function ApplicationForm() {
 
   const stepProps = { register, watch, errors }
 
+  // When applications are closed, only show the first step so applicants can
+  // still read the prerequisites and download the template to prepare.
+  const open = areApplicationsOpen()
+
   return (
     <form
       ref={formRef}
@@ -171,32 +176,38 @@ export default function ApplicationForm() {
     >
       <input type="hidden" {...register('general_fund', { value: true })} />
 
-      <StepIndicator
-        steps={STEPS}
-        currentStep={currentStep}
-        onStepClick={handleStepClick}
-      />
+      {open && (
+        <>
+          <StepIndicator
+            steps={STEPS}
+            currentStep={currentStep}
+            onStepClick={handleStepClick}
+          />
 
-      <hr />
+          <hr />
+        </>
+      )}
 
       {currentStep === 0 && <Prerequisites {...stepProps} />}
-      {currentStep === 1 && <ApplicantDetails {...stepProps} />}
-      {currentStep === 2 && <ProjectDetails {...stepProps} />}
-      {currentStep === 3 && <ReferencesReview {...stepProps} />}
-      {currentStep === 4 && <SourceCode {...stepProps} />}
-      {currentStep === 5 && <Timeline {...stepProps} />}
-      {currentStep === 6 && <Budget {...stepProps} />}
-      {currentStep === 7 && <AnythingElse {...stepProps} />}
-      {currentStep === 8 && <Review watch={watch} />}
+      {open && currentStep === 1 && <ApplicantDetails {...stepProps} />}
+      {open && currentStep === 2 && <ProjectDetails {...stepProps} />}
+      {open && currentStep === 3 && <ReferencesReview {...stepProps} />}
+      {open && currentStep === 4 && <SourceCode {...stepProps} />}
+      {open && currentStep === 5 && <Timeline {...stepProps} />}
+      {open && currentStep === 6 && <Budget {...stepProps} />}
+      {open && currentStep === 7 && <AnythingElse {...stepProps} />}
+      {open && currentStep === 8 && <Review watch={watch} />}
 
-      <StepNavigation
-        currentStep={currentStep}
-        totalSteps={STEPS.length}
-        onBack={handleBack}
-        onNext={handleNext}
-        onSubmit={handleSubmit(onSubmit)}
-        loading={loading}
-      />
+      {open && (
+        <StepNavigation
+          currentStep={currentStep}
+          totalSteps={STEPS.length}
+          onBack={handleBack}
+          onNext={handleNext}
+          onSubmit={handleSubmit(onSubmit)}
+          loading={loading}
+        />
+      )}
 
       {!!failureReason && (
         <p className="rounded bg-red-500 p-4 text-white">

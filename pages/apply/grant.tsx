@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
 import { PageSEO } from '@/components/SEO'
 import ClosedNotice from '@/components/ClosedNotice'
-import { areApplicationsOpen } from '@/utils/applicationWindow'
 
 const GrantApplicationForm = dynamic(
   () => import('@/components/GrantApplicationForm'),
@@ -31,7 +30,7 @@ export default function Apply() {
           from OpenSats.
         </p>
         <ClosedNotice />
-        {areApplicationsOpen() && <GrantApplicationForm />}
+        <GrantApplicationForm />
       </PageSection>
     </>
   )
