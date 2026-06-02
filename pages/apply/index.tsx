@@ -49,39 +49,40 @@ export default function Apply({
           find answers to common questions.
         </p>
         <ClosedNotice />
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-          General Grant
-        </h2>
-        <p className="mb-8">
-          General grants are funded by donations to the OpenSats General Fund
-          and will be distributed periodically by our board. We evaluate and
-          assess all applications to make sure grants are awarded to high impact
-          projects in the Bitcoin space.
-        </p>
-        <Link
-          href={open ? '/apply/grant' : '#/apply/grant'}
-          className={`${
-            open ? '' : 'disabled'
-          } rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white`}
-        >
-          Apply for an OpenSats General Grant
-        </Link>
-        <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
-          Long-Term Support
-        </h2>
-        <p className="mb-8">
-          We have a limited number of long-term support grants available for
-          projects that are critical to the Bitcoin ecosystem. These grants are
-          geared towards developers and maintainers of Bitcoin Core and similar.
-        </p>
-        <Link
-          href={open ? '/apply/lts' : '#/apply/lts'}
-          className={`${
-            open ? '' : 'disabled'
-          } rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white`}
-        >
-          Apply for an OpenSats LTS Grant
-        </Link>
+        {open && (
+          <>
+            <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+              General Grant
+            </h2>
+            <p className="mb-8">
+              General grants are funded by donations to the OpenSats General
+              Fund and will be distributed periodically by our board. We
+              evaluate and assess all applications to make sure grants are
+              awarded to high impact projects in the Bitcoin space.
+            </p>
+            <Link
+              href="/apply/grant"
+              className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+            >
+              Apply for an OpenSats General Grant
+            </Link>
+            <h2 className="mb-4 text-xl font-bold leading-normal md:text-2xl">
+              Long-Term Support
+            </h2>
+            <p className="mb-8">
+              We have a limited number of long-term support grants available for
+              projects that are critical to the Bitcoin ecosystem. These grants
+              are geared towards developers and maintainers of Bitcoin Core and
+              similar.
+            </p>
+            <Link
+              href="/apply/lts"
+              className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+            >
+              Apply for an OpenSats LTS Grant
+            </Link>
+          </>
+        )}
         {!open && (
           <>
             <p className="mt-8">
