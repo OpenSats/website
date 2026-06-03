@@ -1,0 +1,18 @@
+---
+title: 'Covenants'
+summary: 'A category of Bitcoin proposals that restrict how coins can be spent in future transactions.'
+ogSummary: 'Bitcoin proposals that restrict how coins can be spent in future transactions.'
+category: 'Bitcoin'
+aliases: ['covenant', 'Bitcoin covenant']
+---
+
+Covenants are proposed changes to Bitcoin's spending rules that let an output constrain some part of a future spend, most commonly the scripts or destinations that the spending transaction may create. Instead of only checking whether the current spender is authorized, a covenant also narrows what an authorized spender is allowed to do next.
+
+Bitcoin does not currently support general covenants on mainnet. The term describes a family of proposals rather than one specific feature. [OP_CTV](/topics/op-ctv), for example, is a minimal covenant proposal that commits an output to one specific future transaction template.
+
+People are interested in covenants because they could enable vaults, congestion-controlled batching, payment pools, and other constructions that trade some future spending flexibility for stronger safety or coordination guarantees. The main debate is over how much expressiveness is useful, how much complexity is acceptable, and which design keeps the security model understandable for wallets and node software.
+
+## References
+
+- [Bitcoin Optech: Covenants](https://bitcoinops.org/en/topics/covenants/)
+- [BIP 119: OP_CHECKTEMPLATEVERIFY](https://github.com/bitcoin/bips/blob/master/bip-0119.mediawiki)
