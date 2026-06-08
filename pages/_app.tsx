@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Analytics analyticsConfig={siteMetadata.analytics} />
       <FathomAnalytics />
-      <LayoutWrapper theme={theme}>
+      <LayoutWrapper theme={theme} headerOverlay={pageProps.headerOverlay}>
         <SearchProvider searchConfig={siteMetadata.search}>
           <ErrorBoundary>
             <Component {...pageProps} />

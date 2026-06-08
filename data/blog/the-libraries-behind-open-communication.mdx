@@ -1,0 +1,829 @@
+---
+title: "The Libraries Behind Open Communication"
+date: '2026-06-01'
+tags: ['OpenSats', 'nostr', 'impact', 'libraries']
+authors: ['arvin', 'tuma', 'default']
+images: ['/static/images/blog/109-the-libraries-behind-open-communication.jpg']
+draft: false
+summary: "An impact report from the front-lines of nostr developer libraries."
+---
+
+Most users experience nostr through apps for social media, live streaming, and
+secure messaging, among other uses. Underneath each one sits a stack of code
+that handles the nostr protocol itself, generating keys, signing events,
+connecting to relays, parsing event kinds, and delivering a consistent
+experience across a network of independently run relays.
+
+The protocol remains simple by design, and much of the work for building on
+nostr lives one layer up in developer libraries that package the recurring parts
+of app development. These libraries let new projects spend less time rebuilding
+the same infrastructure and more time shaping the experience they want to offer.
+
+As nostr matures, the surface area each library has to cover continues to
+expand. New [NIPs][nips] introduce features like voice messages, picture-first
+posts, bookmarks, polls, calendar events, ecash wallets, private messages, and
+group chat over Messaging Layer Security. Better defaults, such as the [outbox
+model][outbox], change how clients choose relays. [Private
+messaging][private-dms] has also moved toward newer encryption formats, and
+libraries are where those updates reach the apps built on top of them. When a
+library keeps current with the protocol or makes advancements, the apps using it
+have a clear path to do the same.
+
+Through [The Nostr Fund][nostr-fund], OpenSats has supported maintainers working
+on developer libraries in the languages nostr builders already use. This report
+highlights work spanning TypeScript, Rust, Apple platforms, Android and Kotlin
+Multiplatform, Flutter, Dart, PHP, and Ruby. Together, these projects form part
+of the shared toolkit layer that nostr apps, services, and integrations build
+on.
+
+The nostr library initiatives highlighted in this impact report are:
+
+- [Applesauce](#applesauce)
+- [NDK](#ndk) (incl. NDKSwift & Dart NDK)
+- [rust-nostr](#rust-nostr)
+- [nostr-php](#nostr-php)
+- [nostr-ruby](#nostr-ruby)
+- [Quartz](#quartz)
+
+Each section looks at how these libraries evolved over the past year and how
+donor funding supported work that compounds across the broader nostr ecosystem.
+
+[nips]: /topics/nips
+[outbox]: /topics/outbox
+[private-dms]: /topics/private-dms
+[nostr-fund]: /funds/nostr
+
+---
+
+### Applesauce
+
+[Applesauce][applesauce] is a TypeScript framework that gives developers
+building nostr apps a ready-made set of building blocks. A new nostr client
+project has to solve the same recurring challenges before it's able to do
+anything meaningful: reading events from [relays][relays], managing connections,
+signing messages, and storing data locally. Applesauce packages common solutions
+to those needs, giving developers a more direct path from protocol plumbing to
+user-facing products. With OpenSats' [support][hzrd149-lts], which followed
+[earlier funding][hzrd149-earlier] for hzrd149's broader nostr work, development
+over the past year focused on making nostr data easier to work with, expanding
+storage and signing options, improving relay behavior, and covering more of the
+protocol features developers expect.
+
+One practical improvement came from a new [event casting system][event-casting],
+which was formalized and expanded in the v6 release. Events arriving from relays
+are generic data blobs that each app has to interpret before it can display them
+or act on them. The casting system turns those generic events into clearly
+labeled, ready-to-use objects for the things developers actually want to handle,
+such as a note, profile, zap, or comment, and makes it easier for user
+interfaces to read relationships between events with less custom code. The same
+release also reworked how events are created and modified. Earlier versions
+required apps to set up a central `EventFactory` object to manage all the
+different events, while v6 added [dedicated event factories][event-factories]
+for common event types, including notes, profiles, zaps, reactions, and
+comments.
+
+Around the same time, hzrd149 published a separate set of [tools for AI coding
+agents][ai-agents], including an MCP server that lets coding assistants run live
+semantic search over Applesauce documentation and code examples, and an
+installable agent skill that gives compatible agents Applesauce-specific context
+and workflow guidance. When a developer asks an AI assistant for help building
+with Applesauce, the assistant can pull from real documentation and examples,
+with the [source code available][applesauce-mcp] for anyone who wants to run
+their own copy of the MCP server locally. The documentation at Applesauce's
+website was also reorganized by topic, and new example apps were added as
+features shipped, giving both human developers and coding agents clearer working
+examples to build on. The same release cycle also added a simpler way for apps
+to subscribe to live updates and introduced caching for private messages, so
+apps that handle [encrypted nostr DMs][private-dms] can avoid asking the user to
+decrypt the same message repeatedly.
+
+The relay layer received deeper [structural work][relay-structural], which
+matters because relay choice is part of how nostr preserves user control. A new
+[outbox model][outbox] lets a client read the relay preferences each followed
+user has published and connect to the right places, aligning Applesauce with the
+broader push toward user-selected relays. A separate change added [dynamic relay
+groups][dynamic-relay-groups], so an app can switch between different sets of
+relays without rebuilding its connection layer. The
+[applesauce-relay@1.0.0][applesauce-relay-release] release added support for
+[Negentropy][negentropy], a sync method that lets an app catch up on events it
+missed without downloading everything from scratch, with multi-relay sync
+expanded in later releases. Alongside this, the `applesauce-actions` package
+gives developers pre-built actions for common operations such as updating relay
+lists, follow sets, and mute lists.
+
+> Every time a new feature is added or something is reworked, I try to add an
+> example app to the documentation site demonstrating how to use the new
+> feature. I've found these examples really help coding agents on other projects
+> understand how to implement common things on nostr since it provides them a
+> shortcut. Without these example apps, agents need to read the documents, find
+> the relevant code, and reason through how a login page should be built. But
+> with the examples, the agents can copy the already working login view and then
+> modify it as they see fit.
+>
+> <cite>–hzrd149, Applesauce creator and maintainer</cite>
+
+Storage and protocol coverage expanded as well. New [async storage
+interfaces][async-storage] and [multiple SQLite backends][sqlite-backends] give
+developers more flexibility in how their apps save data locally. An Android
+native [signer and account][android-signer-applesauce] opened the framework to
+mobile developers building Android apps. On the protocol side, Applesauce added
+support across encrypted direct messages, long-form articles, nostr groups and
+chat, calendar events, live streams, polls, and the [Cashu ecash][ecash] family
+of specs covering nostr-native wallets, nutzaps, and mint discovery. That ecash
+work brings payments and wallet functionality into the same framework that
+already handles social events, giving developers a more consistent path for
+clients that combine social features and payments.
+
+Applesauce closes the period with a [v6 release line][v6-release] that brought
+these capabilities together across the package. OpenSats' support helped improve
+a library that other nostr builders can use directly, and those improvements can
+carry into the clients ([Dear Nostr][dear-nostr], [noStrudel][nostrudel],
+[Nostube][nostube]), tools ([Relatr][relatr]), and experiments built on top of
+it.
+
+[applesauce]: https://applesauce.build/
+[relays]: /topics/relays
+[hzrd149-lts]: /blog/hzrd149-receives-lts-grant
+[hzrd149-earlier]: /blog/nostr-grants-december-2023#nostrudel
+[event-casting]: https://github.com/hzrd149/applesauce/commit/aa40cf6
+[event-factories]: https://applesauce.build/creating/factory/
+[ai-agents]: https://applesauce.build/introduction/agents.html
+[applesauce-mcp]: https://github.com/hzrd149/applesauce-mcp
+[relay-structural]: https://github.com/hzrd149/applesauce/commit/e2f0ecc
+[dynamic-relay-groups]: https://github.com/hzrd149/applesauce/commit/136964d
+[applesauce-relay-release]: https://github.com/hzrd149/applesauce/releases/tag/applesauce-relay%401.0.0
+[negentropy]: /topics/negentropy
+[async-storage]: https://github.com/hzrd149/applesauce/commit/688f126
+[sqlite-backends]: https://github.com/hzrd149/applesauce/commit/3d9e03b
+[android-signer-applesauce]: https://github.com/hzrd149/applesauce/commit/5f152fc
+[ecash]: /topics/ecash
+[v6-release]: https://github.com/hzrd149/applesauce/tags
+[dear-nostr]: https://github.com/dergigi/dearnostr
+[nostrudel]: https://github.com/hzrd149/nostrudel
+[nostube]: https://github.com/flox1an/nostube
+[relatr]: https://github.com/ContextVM/relatr
+
+---
+
+### NDK
+
+[NDK][ndk], the Nostr Development Kit, is a high-level software development
+toolkit for the nostr ecosystem. Before a user ever sees a post, a nostr app has
+to connect to [relays][relays], sign and verify messages, parse events, store
+data so the UX is fast, and keep up with the protocol specs nostr is built on.
+NDK handles much of that work so app developers can focus on the product
+experience. This section covers a year of work across three related
+implementations of the same design: the original TypeScript NDK, the
+Apple-platform [NDKSwift][ndkswift], and [Dart NDK][dart-ndk] for Flutter and
+Dart developers.
+
+NDK was originally created by [pablof7z][pablof7z-grant] for web and
+JavaScript-based apps, and its design has since been carried onto other
+platforms. Pablo brought the same patterns into NDKSwift for Apple-platform apps
+written in Swift. He has also been building [NMP][nmp], a separate Rust
+framework that takes a different approach to the same cross-platform problem,
+putting the relay connections, signing, and message handling in one Rust core
+while each platform's app handles only the interface. A separate team of
+grantees led by [frnandu][frnandu], [Leo][leo], and [Nogringo][nogringo] built
+Dart NDK to give Flutter developers a comparable toolkit. With OpenSats'
+[support][ndk-grant] for Pablo's NDK and NDKSwift work, and [a separate
+grant][dart-ndk-grant] for Dart NDK, the past year produced major version work
+on the TypeScript side, an architectural rewrite on the Swift side, and growing
+adoption in Flutter and Dart.
+
+On the TypeScript side, NDK reached its [v3.0 release][ndk-v3] in November 2025,
+a major architecture update touching subscriptions, relay connections, cache
+layers, performance, and a developer-facing API. One distinctive addition is a
+set of AI Guardrails. As more developers use AI coding assistants to build nostr
+apps, those assistants can produce code that looks plausible while using NDK in
+unsafe or inefficient ways, such as blocking on relay responses, generating
+malformed events, or skipping the performance features NDK already provides. The
+guardrails are runtime checks that catch those patterns when they happen, and
+the error messages explain what went wrong and how to fix it. Whether code was
+written by a human or generated by an LLM, issues are detected earlier, and a
+clearer path to correction is provided.
+
+Around the [v3.0][ndk-v3] work, [performance improvements][ndk-perf] added a
+fast path for events the toolkit has already seen, so it avoids redoing
+expensive parsing the second time around. [Further fixes][ndk-fixes] improved
+remote-signer behavior, including a bug in the nostrconnect flow that could
+confuse a [remote signer's][remote-signing] pubkey with the actual user's. Pablo
+also published companion packages for [higher-level encrypted direct
+messaging][ndk-dms], [Negentropy-based sync][ndk-sync], [web-of-trust filtering
+and sorting][ndk-wot], and [lightweight multi-account session
+management][ndk-sessions], with the latter three appearing as part of the
+broader v3.0 package work. On the framework-adapter side, the Svelte integration
+was rebuilt for Svelte 5 as a registry of components that developers copy into
+their own codebases, letting each piece, such as mentions, link previews, media
+handlers, and content rendering, be customized locally. [NDK Kotlin][ndk-kotlin]
+is also in early development, positioning the NDK family to eventually cover
+Android the same way it now covers the web and Apple platforms.
+
+For Apple-platform developers, [NDKSwift][ndkswift] went through a parallel
+transformation. The package was [split into separate modules][ndkswift-modules]
+so an app that only needs part of the toolkit can depend on a smaller surface
+area, and the codebase was [migrated to Swift 6][ndkswift-swift6] with the
+safety conformance required by its stricter concurrency model. A [new
+connection-reliability subsystem][ndkswift-reliability] gave Apple-platform apps
+clearer handling for dropped connections, network changes, health checks, and
+lifecycle management. A [companion Relay Intelligence Layer][ndkswift-ril] helps
+apps make better decisions about which relays to use for outbox-style
+publishing. The protocol stack on NDKSwift now covers Cashu wallets and nutzaps,
+gift-wrapped messages, encrypted direct messages, [Nostr Wallet Connect][nwc],
+Lightning [zaps], the [outbox model][outbox], and [Negentropy] sync. Together, those
+pieces give Apple developers a maintained path through several of the hardest
+parts of building a full nostr client.
+
+NDKSwift also gained a dedicated SwiftUI module, [`NDKSwiftUI`][ndkswiftui],
+packaged with ready-to-use building blocks for profile pictures, rich text,
+Markdown rendering, and image caching. Alongside the library, Pablo built
+[Chirp][chirp], a reference iOS nostr client that lives in the NDKSwift
+repository. Chirp is source-available as a reference app, and its purpose is to
+show developers how a real SwiftUI nostr client built on NDKSwift looks
+end-to-end. One of its pieces is an embeddable kind registry, which lets an app
+render different kinds of nostr content, including notes, long-form articles,
+and highlights, with the right component for each kind. A rewrite of the Olas
+iOS client on top of NDKSwift is also in progress, demonstrating how a
+production app can be built using the modular pieces NDKSwift provides.
+
+For Flutter and Dart developers, [Dart NDK][dart-ndk-site], built by frnandu,
+Leo, and Nogringo, had a significant year of its own. Its design gives
+developers high-level use cases for common nostr tasks, such as lists and
+metadata, while still allowing lower-level relay queries when an app needs them.
+Inbox and outbox gossip are built into that flow by default, helping
+applications make better relay choices without requiring every Flutter developer
+to understand the details of relay selection. Checking whether a nostr message
+is authentic is also one of the most CPU-heavy things a nostr app does, and the
+team made that work faster and less disruptive for mobile apps. A [Rust-backed
+verifier][rust-verifier] handles verification in native code, while a separate
+change moves [signature checks off the screen-rendering thread][sig-thread] so a
+Flutter app can keep scrolling smoothly while it catches up on a backlog of
+events. [Additional work][off-thread-work] extended that same off-thread
+treatment to other heavy operations, and a [web-targeted verifier][web-verifier]
+covers environments where native code is unavailable. The project also added
+[remote-signer support][dart-remote-signer] over NIP-46, gift-wrap encryption,
+and a [search][dart-search] use case.
+
+Structurally, Dart NDK [provides a separate Flutter
+package][dart-flutter-package] so non-Flutter Dart projects can depend on the
+core software development kit without taking on visual components. Its separated
+architecture also lets developers swap out major components, including storage,
+signing, and verification. The library now ships with multiple database options,
+multiple signers and verifiers, and support for remote signers, giving app
+builders more room to choose the tradeoffs that fit their environment. It also
+gained a [persistent cache layer][dart-cache] and shipped a [new command-line
+tool][dart-cli] for querying nostr relays directly and providing easy access for
+agents.
+
+Wallet development created a unified interface for Cashu, [Nostr Wallet
+Connect][nwc], and LNURL, [building on the earlier work][dart-wallet-earlier]
+that combined wallets into one interface. Common wallet actions, such as
+transactions, sending, and receiving, can use one API, while specialized wallet
+operations remain available where needed. A Cashu wallet, for example, may need
+to restore parameters such as mints, currencies, or nostr-based recovery data
+that do not belong in a generic wallet interface. Keeping those details in
+specialized APIs lets the common wallet flow stay simple while preserving the
+deeper controls each wallet type needs. Reusable Flutter widgets for wallet
+connection and interaction were added alongside the underlying library.
+
+Dart NDK also added support for Trusted Assertions, which lets applications use
+a configured trust provider for statistics and trust values, then cache and
+store those values for offline use. [Blossom] support follows Dart NDK's broader
+same high-level/direct-access pattern. Most applications can use the high-level
+files use case, which checks downloads and upload files, while automatically
+handling Blossom URLs. Applications that need more control over blob operations
+can use the dedicated Blossom interface directly. Together with offline storage,
+these additions move Dart NDK closer to a complete toolkit for Flutter apps
+built on nostr.
+
+> The goal of [Dart] NDK is to make it easy for developers familiar with
+> Firebase or Supabase to switch to nostr—no NIP knowledge required.
+>
+> <cite>–Leo, Dart NDK maintainer</cite>
+
+Dart NDK is available on [pub.dev][dart-pubdev] and in active use across a
+growing set of downstream apps, including Camelus, YANA, Zapstore, Freeflow,
+Hostr, Zapstream, Bitblik, Donow, and Submarine. In early 2026, Nogringo,
+himself an OpenSats grantee for [a different nostr project][nostr-mail-grant],
+joined as a regular core contributor, putting three active maintainers behind
+the library with weekly coordination calls. The team also published an
+experimental [post-quantum signature demo][post-quantum-demo] to encourage
+ecosystem discussion about what nostr might need if quantum-resistant
+cryptography becomes a practical concern.
+
+Together, OpenSats' support for NDK, NDKSwift, and Dart NDK helped extend a
+common development approach across web, Apple, and Flutter/Dart apps, giving
+more nostr builders maintained tools in the environments they already use.
+
+[ndk]: https://github.com/nostr-dev-kit/ndk
+[ndkswift]: https://github.com/pablof7z/NDKSwift
+[dart-ndk]: https://github.com/relaystr/ndk
+[pablof7z-grant]: /blog/pablofz7-receives-lts-grant
+[nmp]: https://github.com/pablof7z/nostr-multi-platform
+[frnandu]: https://github.com/frnandu/
+[leo]: https://github.com/1-leo
+[nogringo]: https://github.com/nogringo
+[ndk-grant]: /blog/nostr-grants-july-2023#ndk
+[dart-ndk-grant]: /blog/nostr-grants-august-2024#dart-ndk
+[ndk-v3]: https://github.com/nostr-dev-kit/ndk/pull/354
+[ndk-perf]: https://github.com/nostr-dev-kit/ndk/pull/351
+[ndk-fixes]: https://github.com/nostr-dev-kit/ndk/pull/374
+[remote-signing]: /topics/remote-signing
+[ndk-dms]: https://github.com/nostr-dev-kit/ndk/pull/342
+[ndk-sync]: https://github.com/nostr-dev-kit/ndk/tree/master/sync
+[ndk-wot]: https://github.com/nostr-dev-kit/ndk/tree/master/wot
+[ndk-sessions]: https://github.com/nostr-dev-kit/ndk/tree/master/sessions
+[ndk-kotlin]: https://github.com/nostr-dev-kit/kotlin
+[ndkswift-modules]: https://github.com/pablof7z/NDKSwift/pull/13
+[ndkswift-swift6]: https://github.com/pablof7z/NDKSwift/pull/18
+[ndkswift-reliability]: https://github.com/pablof7z/NDKSwift/pull/61
+[ndkswift-ril]: https://github.com/pablof7z/NDKSwift/pull/56
+[nwc]: /topics/nostr-wallet-connect
+[blossom]: /topics/blossom
+[ndkswiftui]: https://github.com/pablof7z/NDKSwift/tree/master/Sources/NDKSwiftUI
+[chirp]: https://github.com/pablof7z/NDKSwift/tree/master/Examples/Apps/Chirp
+[dart-ndk-site]: https://dart-nostr.com/
+[rust-verifier]: https://github.com/relaystr/ndk/pull/350
+[sig-thread]: https://github.com/relaystr/ndk/pull/345
+[off-thread-work]: https://github.com/relaystr/ndk/pull/327
+[web-verifier]: https://github.com/relaystr/ndk/pull/253
+[dart-remote-signer]: https://github.com/relaystr/ndk/pull/207
+[dart-search]: https://pub.dev/documentation/ndk/latest/presentation_layer_ndk/Ndk/search.html
+[dart-flutter-package]: https://github.com/relaystr/ndk/pull/244
+[dart-cache]: https://github.com/relaystr/ndk/pull/427
+[dart-cli]: https://github.com/relaystr/ndk/pull/495
+[dart-wallet-earlier]: https://github.com/relaystr/ndk/pull/194
+[dart-pubdev]: https://pub.dev/packages/ndk
+[nostr-mail-grant]: /blog/sixteenth-wave-of-nostr-grants#nostr-mail
+[post-quantum-demo]: https://github.com/relaystr/ndk/pull/545
+[zaps]: /topics/zaps
+
+---
+
+### rust-nostr
+
+[`rust-nostr`][rust-nostr] is a Rust implementation of the nostr protocol, with
+higher-level tooling for building apps on top of it. The project includes a
+software development kit that handles signing events and managing
+[relay][relays] connections, a client for [Nostr Wallet Connect][nwc] so apps
+can request Lightning payments through a user's wallet, a custom relay
+framework, multiple signer integrations, and bindings for Python, Kotlin, Swift,
+JavaScript, Flutter, React Native, and .NET.
+
+That reach makes rust-nostr a shared foundation for a growing number of apps and
+tools across the ecosystem, including the Damus [Notedeck][notedeck] desktop
+client, [Primal's Blossom media server][primal-blossom], the [White
+Noise][whitenoise] secure messaging app built on Messaging Layer Security, the
+[Mostro][mostro] peer-to-peer bitcoin exchange that runs over Lightning and
+nostr, [`ngit`][ngit] for code collaboration over nostr, and the [Nostr
+VPN][nostr-vpn] mesh networking project. With OpenSats' support through both the
+[original project grant][rust-nostr-grant] and an [LTS grant][yuki-lts], Yuki
+Kishimoto has spent the past year keeping the library up-to-date with the nostr
+protocol, strengthening the parts downstream apps depend on most, and widening
+the set of platforms and languages the project can serve.
+
+On the protocol side, released versions across the year added typed support for
+[polls][rust-polls], [voice messages][rust-voice], [chats][rust-chats],
+[threads][rust-threads], [bookmarks][rust-bookmarks], [hold
+invoices][rust-hold-invoices] in Nostr Wallet Connect, and the [Cashu wallet
+kinds][rust-cashu] that let nostr clients hold ecash directly. Additional work
+targeted for upcoming releases adds [highlights][rust-highlights] and further
+refinements to the right-to-vanish flow that lets users ask the network to
+forget them.
+
+Beyond the protocol, the relay framework and relay pool went through substantial
+reworking. [`nostr-relay-builder`][relay-builder] was developed into a tool an
+operator can use to spin up a custom relay with control over what it accepts and
+serves. Yuki added [authenticated handling][rust-auth-handling] of direct
+messages and [gift-wrapped][private-dms] events, [protected
+events][rust-protected] so authors can mark a post as accepted only when
+published by them, and [multi-filter request handling][rust-multi-filter] so a
+single subscription can ask for several kinds of content at once. The policy
+system itself was [reorganized][rust-policy] so that read and write rules are
+clearly separated, making it cleaner to decide what a relay stores and what it
+returns. The relay pool added a [`Monitor`][rust-monitor] for connection status
+and stats in real time, the ability to [put idle relays to
+sleep][rust-idle-sleep] so apps use less power and bandwidth in the background,
+and a more reliable [event stream][rust-event-stream] for subscriptions that
+span many [relays][relays].
+
+One major focus this past year was gossip, the part of a nostr client that
+figures out which relays a user actually publishes to, so the client can read
+from the right places. Gossip used to be an experimental option inside the
+software development kit, and during the past year, it became its own subsystem
+with a dedicated [`nostr-gossip`][nostr-gossip] crate that defines how gossip
+storage works, an in-memory backend, and a separate [SQLite-backed
+storage][rust-sqlite-gossip] crate so apps can remember what they have learned
+about who publishes where between sessions. The toolkit side gained efficiency
+improvements that [fetch user lists][rust-fetch-lists] only when needed,
+[filtering][rust-filtering] for which relays are considered during selection,
+[better concurrency][rust-concurrency] through per-key locks, and a [background
+refresher][rust-refresher] that keeps gossip data up-to-date automatically. The
+effect for downstream apps is practical: a client built on rust-nostr can follow
+a user's published relay choices with less custom relay-selection code.
+
+> Relay selection is one of the key parts of Nostr decentralization. Without
+> practical gossip support, we tend to converge around a small set of large
+> relays. By making gossip easier to use at the SDK level, rust-nostr helps
+> applications find where users actually publish and read, making relay usage
+> more distributed.
+>
+> <cite>–Yuki Kishimoto, rust-nostr creator and maintainer</cite>
+
+The past year also saw the library reach more developers, platforms, and
+programming languages through work on signing and the wrappers that bridge Rust
+to other environments. The code that lets a web app sign nostr events through a
+browser extension was [moved][rust-browser-signer-move] into its own dedicated
+library, separating web signing from the mobile and desktop versions. A new
+[browser signer][rust-browser-signer] proxy, [extended][rust-browser-extended]
+and [refined][rust-browser-refined] in follow-up work, enables a native desktop
+application to use that same signer through a local bridge, so users can keep
+one trusted key across web and native apps. On the bindings side, the .NET
+wrapper received support for [Android and iOS runtimes][rust-net-mobile], Kotlin
+Multiplatform [bindings][rust-kmp] allow apps written for Android, iOS, and
+desktop to share the same nostr code, and the Python packages expanded to cover
+more chip architectures. Yuki also built
+[`android-signer`][android-signer-rust], a set of libraries that let apps
+written in languages other than Java and Kotlin connect to Android-based nostr
+signers, opening on-device signing on Android to apps written in Rust, Flutter,
+and React Native.
+
+After a year of work, rust-nostr moved closer to its beta milestone, with
+[v0.44.0][rust-v044] tagged in November 2025 and further work on the master
+branch for upcoming releases. OpenSats' support helped Yuki keep rust-nostr
+current with the protocol while making it more useful across languages and
+platforms. That work matters because downstream teams can adopt better relay
+handling, signing, wallet, and protocol support without rebuilding those pieces
+themselves.
+
+[rust-nostr]: https://github.com/rust-nostr/nostr
+[notedeck]: https://github.com/damus-io/notedeck
+[nostr-sdk-swift]: https://github.com/rust-nostr/nostr-sdk-swift
+[primal-blossom]: https://github.com/PrimalHQ/primal-blossom-server
+[whitenoise]: https://github.com/marmot-protocol/whitenoise
+[mostro]: /projects/mostro
+[ngit]: /projects/ngit
+[nostr-vpn]: https://github.com/mmalmi/nostr-vpn
+[rust-nostr-grant]: /blog/nostr-grants-july-2023#rust-nostr--nostr-sdk
+[yuki-lts]: /blog/yuki-receives-lts-grant
+[rust-polls]: https://github.com/rust-nostr/nostr/pull/892
+[rust-voice]: https://github.com/rust-nostr/nostr/pull/1032
+[rust-chats]: https://github.com/rust-nostr/nostr/pull/1067
+[rust-threads]: https://github.com/rust-nostr/nostr/pull/1071
+[rust-bookmarks]: https://github.com/rust-nostr/nostr/pull/1077
+[rust-hold-invoices]: https://github.com/rust-nostr/nostr/pull/1019
+[rust-cashu]: https://github.com/rust-nostr/nostr/pull/1092
+[rust-highlights]: https://github.com/rust-nostr/nostr/pull/1191
+[relay-builder]: https://github.com/rust-nostr/nostr/tree/master/crates/nostr-relay-builder
+[rust-auth-handling]: https://github.com/rust-nostr/nostr/pull/1104
+[rust-protected]: https://github.com/rust-nostr/nostr/pull/875
+[rust-multi-filter]: https://github.com/rust-nostr/nostr/pull/1099
+[rust-policy]: https://github.com/rust-nostr/nostr/pull/1166
+[rust-monitor]: https://github.com/rust-nostr/nostr/pull/851
+[rust-idle-sleep]: https://github.com/rust-nostr/nostr/pull/926
+[rust-event-stream]: https://github.com/rust-nostr/nostr/pull/1088
+[nostr-gossip]: https://github.com/rust-nostr/nostr/pull/1114
+[rust-sqlite-gossip]: https://github.com/rust-nostr/nostr/pull/1091
+[rust-fetch-lists]: https://github.com/rust-nostr/nostr/pull/1090
+[rust-filtering]: https://github.com/rust-nostr/nostr/pull/1128
+[rust-concurrency]: https://github.com/rust-nostr/nostr/pull/1250
+[rust-refresher]: https://github.com/rust-nostr/nostr/pull/1260
+[rust-browser-signer-move]: https://github.com/rust-nostr/nostr/pull/937
+[rust-browser-signer]: https://github.com/rust-nostr/nostr/pull/994
+[rust-browser-extended]: https://github.com/rust-nostr/nostr/pull/1001
+[rust-browser-refined]: https://github.com/rust-nostr/nostr/pull/1005
+[rust-net-mobile]: https://github.com/rust-nostr/nostr-sdk-ffi/pull/53
+[rust-kmp]: https://github.com/rust-nostr/nostr-sdk-ffi/pull/39
+[android-signer-rust]: https://github.com/rust-nostr/android-signer
+[rust-v044]: https://github.com/rust-nostr/nostr/releases/tag/v0.44.0
+
+---
+
+### nostr-php
+
+[`nostr-php`][nostr-php] is a PHP helper library for nostr, giving developers a
+toolkit for adding nostr features to PHP-based websites and services. [PHP][php]
+still powers a large share of the public web, so a maintained PHP library keeps
+nostr accessible to developers already working in that environment. With
+OpenSats' [support][nostr-php-grant], [Sebastix][sebastix] has spent the past
+year adding protocol coverage with significant contributions from an active
+community of developers building on the library.
+
+Encrypted messaging was the clearest area of progress this year. Earlier in the
+reporting period, PHP applications lacked support for private nostr messages
+using the protocol's current standards. That gap was filled across a series of
+releases that added [encrypted direct messages and modern versioned
+encryption][php-encrypted-dms], the underlying primitive other private-messaging
+specs built on, with follow-up [encryption fixes][php-encryption-fixes]
+validated against real test vectors so the implementation behaves as other
+clients expect. The library also got support for [resolving human-readable nostr
+identifiers][php-identifiers], the `name@domain.tld` format that lets a user be
+addressed without a long public key, and a full implementation of [private
+direct messages][php-private-dms], including chat messages, file messages, and
+the related gift-wrapped envelopes that hide the sender and message contents
+from [relays][relays] while improving metadata privacy.
+
+Most of this encryption-stack work was contributed by [Djuri Baars][dsbaars], a
+developer who has become a frequent contributor to nostr-php itself and who has
+separately built a complete [Nostr Wallet Connect implementation for
+PHP][php-nwc] on top of the library. That contribution path shows the value of
+funding shared infrastructure: one maintained library gives other developers a
+place to contribute, extend, and build related tools.
+
+The library also gained [proof-of-work support][php-pow]. PHP applications can
+now attach proof-of-work to a nostr event or verify it on incoming events,
+something relays and clients can use to filter spam. This work shipped in
+[version 1.9.0][php-v190], following the encrypted messaging stack that arrived
+in earlier releases.
+
+Relay handling improved across the v1.9 release line. PHP applications can now
+read [a user's published list of preferred read and write
+relays][php-relay-list] directly from nostr, which lets a client follow each
+user's relay choices instead of relying on a fixed list. A new [persistent
+connection class][php-persistent-conn] keeps a relay's WebSocket connection open
+across multiple operations rather than reconnecting for each one, and [extra
+profile metadata fields][php-profile-meta] let user profiles carry richer
+information. Ergonomics and reliability work continued with [stronger relay-set
+behavior][php-relay-set] and [configurable request timeouts][php-timeouts],
+which shipped in the latest GitHub release at the time of writing, [version
+1.9.4][php-v194], in February 2026.
+
+>'PHP is dead' is an often heard statement about the programming language.
+>Reality is that the majority of the web is still running on this technology.
+>With the development of this library, I'm able to bring PHP back in sight among
+>other nostr developer.
+>
+><cite>–Sebastix, nostr-php maintainer</cite>
+
+The companion documentation site at [nostr-php.dev][nostr-php-dev] grew
+alongside the library to give adopting developers a clearer reference, with new
+and updated pages covering private direct messages, tag management,
+getting-started instructions for trying the library in a browser, profile
+bootstrapping, and an in-progress NIP-19 guide. The documentation is also
+deployed on nostr as an [nsite](/topics/nsite), where gateways serve the site
+from its nostr public key, including mirrors at [nsite.lol][nsite-lol] and
+[nostro.re][nostro-re], among other mirrors. A PHP library teaching its own
+users how to build on a censorship-resistant protocol by hosting its
+documentation on that protocol reflects the same principle that the library
+serves. As of May 2026, the library had been [installed more than 28,000
+times][php-installs] through Packagist, PHP's primary package registry.
+
+PHP developers now have a library they can use to build a wider range of nostr
+features, with the encrypted messaging stack closing the most apparent gap. The
+roadmap continues to track several features PHP developers will likely need
+next, including Nostr Wallet Connect for Lightning payments through nostr,
+already partially addressed by Djuri's separate library, remote signing so a PHP
+application can sign events on behalf of a user without holding the user's
+private key, and event counts and search capability for richer queries. Handling
+asynchronous and concurrent requests, a long-standing difficulty in PHP's
+request-response model, has already received [dedicated research][async-ref] and
+a [documented working approach][async-guide] during the past year.
+
+[nostr-php]: https://github.com/nostrver-se/nostr-php
+[php]: https://www.php.net/
+[nostr-php-grant]: /blog/nostr-grants-july-2024#nostr-php
+[sebastix]: https://github.com/sebastix
+[php-encrypted-dms]: https://github.com/nostrver-se/nostr-php/pull/84
+[php-encryption-fixes]: https://github.com/nostrver-se/nostr-php/pull/88
+[php-identifiers]: https://github.com/nostrver-se/nostr-php/pull/89
+[php-private-dms]: https://github.com/nostrver-se/nostr-php/pull/90
+[dsbaars]: https://github.com/dsbaars
+[php-nwc]: https://github.com/dsbaars/nostr-php-nwc
+[php-pow]: https://github.com/nostrver-se/nostr-php/pull/97
+[php-v190]: https://github.com/nostrver-se/nostr-php/releases/tag/1.9.0
+[php-relay-list]: https://github.com/nostrver-se/nostr-php/pull/100
+[php-persistent-conn]: https://github.com/nostrver-se/nostr-php/pull/99
+[php-profile-meta]: https://github.com/nostrver-se/nostr-php/pull/94
+[php-relay-set]: https://github.com/nostrver-se/nostr-php/pull/95
+[php-timeouts]: https://github.com/nostrver-se/nostr-php/pull/106
+[php-v194]: https://github.com/nostrver-se/nostr-php/releases/tag/1.9.4
+[nostr-php-dev]: https://nostr-php.dev/
+[nsite-lol]: https://npub1phpdev2d38u5hzs4jrsh360mevh0rjctu9669quy97wu23u8sqdqpfha0j.nsite.lol/
+[nostro-re]: https://npub1phpdev2d38u5hzs4jrsh360mevh0rjctu9669quy97wu23u8sqdqpfha0j.nosto.re/
+[php-installs]: https://packagist.org/packages/swentel/nostr-php/stats
+[async-ref]: https://nostr-php.dev/references/async-concurrent-requests
+[async-guide]: https://nostr-php.dev/guides/asynchronous-and-concurrent-requests
+
+---
+
+### nostr-ruby
+
+[`nostr-ruby`][nostr-ruby] is a Ruby library for nostr, distributed as the
+`nostr_ruby` gem. It gives Ruby developers the building blocks for working with
+the protocol: generating and managing keys, signing and validating events,
+encoding and decoding the [bech32][bech32] identifier formats nostr uses, and
+connecting to [relays][relays]. [Ruby][ruby] is widely used for web
+applications, internal tools, and scripting, especially in the [Rails][rails]
+community, so a maintained Ruby library keeps the door open for developers who
+want to add nostr functionality to a service, automation, or backend system.
+
+With OpenSats' [support][dtonon-grant], the library creator and maintainer
+[daniele][dtonon] has been working on `nostr_ruby` over a multi-year arc, with
+the [v0.3.1][ruby-v031] release representing the current state of the library. A
+large portion of recent development work has been focused on rebuilding the
+client and relay interface layer with relay subscription and query support. The
+v0.3 architecture gave Ruby applications a cleaner way to connect to relays,
+send events, subscribe to filters, and process incoming responses, which is the
+foundation that everything else in a nostr client builds on.
+
+The past year's work also focused on keeping the gem compatible with the
+surrounding Ruby ecosystem as it moved forward. [Version 0.3.1][ruby-v031]
+shipped in November 2025 as a maintenance release, [relaxing gem dependency
+constraints][ruby-deps] so the gem composes cleanly with newer versions of the
+libraries it depends on. The release also produced [a smaller gem
+package][ruby-smaller] that ships only the files developers need, [removed an
+unused require][ruby-unused-require] that no longer served the gem, and added a
+[`justfile`][ruby-justfile] for build and release tasks. Libraries that other
+developers rely on need to keep working as the dependency landscape shifts
+around them, and v0.3.1 helped keep the v0.3 line usable and maintainable in
+modern Ruby projects.
+
+The roadmap continues to track the library's most significant open gap: it still
+uses NIP-04 for encrypted direct messages, the older encryption format the
+broader ecosystem is phasing out in favor of [NIP-44][nip-44] versioned
+encryption and the [NIP-17][private-dms] private direct message format that
+builds on it. daniele has flagged NIP-44 as planned future work, which would
+bring Ruby applications onto the encrypted messaging stack that the rest of the
+ecosystem is converging on.
+
+Through OpenSats' support, daniele kept `nostr_ruby` maintained through the past
+year, improving compatibility, tightening the package, and keeping the gem
+usable as Ruby's dependency landscape moved forward. With that foundation in
+place, nostr remains accessible to Ruby developers who want to build
+applications, tooling, or integrations in the language.
+
+[nostr-ruby]: https://github.com/dtonon/nostr-ruby
+[bech32]: https://bitcoinops.org/en/topics/bech32/
+[ruby]: https://www.ruby-lang.org/en/
+[rails]: https://rubyonrails.org/
+[dtonon-grant]: /blog/daniele-receives-lts-grant
+[dtonon]: https://github.com/dtonon
+[ruby-v031]: https://github.com/dtonon/nostr-ruby/releases/tag/v0.3.1
+[ruby-deps]: https://github.com/dtonon/nostr-ruby/commit/236a124
+[ruby-smaller]: https://github.com/dtonon/nostr-ruby/commit/09df41b
+[ruby-unused-require]: https://github.com/dtonon/nostr-ruby/commit/ed4af9e
+[ruby-justfile]: https://github.com/dtonon/nostr-ruby/commit/43dbd4c
+[nip-44]: /topics/nip-44
+
+---
+
+### Quartz
+
+[Quartz][quartz] is a cross-platform Kotlin library that gives developers a
+ready-to-use set of nostr building blocks, including primitives for handling
+events, signer integrations, NIP support, event builders, and storage
+infrastructure. It began as an internal module of [Amethyst][amethyst], a
+popular Android nostr client built by Vitor Pamplona, before being pulled out
+into its own publicly available software development kit. Quartz gives Kotlin
+developers a shared place for protocol work that many apps would otherwise need
+to implement separately. With OpenSats' [support][vitor-grant] of Vitor's work,
+alongside a separate grant [supporting][quartz-grant] KotlinGeekDev's dedicated
+iOS effort, the year's work focused on completing the Kotlin Multiplatform
+migration, restructuring the library around the outbox model, extending protocol
+coverage, and [laying the foundation for MLS-based][quartz-mls] group messaging.
+
+An important structural shift was Quartz's [completed migration to Kotlin
+Multiplatform][quartz-kmp] and its independent publication to [Maven
+Central][maven-central]. The library is now available under
+[com.vitorpamplona.quartz][quartz-maven] with platform-specific variants for
+Android, JVM, iOS ARM64, iOS Simulator, and Linux x64. The [v1.04.0
+release][quartz-v104] recorded the KMP migration as finished, Maven publishing
+added, and the OpenTimestamps Java code converted to pure Kotlin in the same
+window. Subsequent work continued to expand platform support, with [linuxX64
+support][quartz-linux] added in March 2026. The practical effect is that Quartz
+is now a reusable toolkit that other projects can depend on directly.
+
+The iOS side of that migration came largely from a dedicated grant supporting
+KotlinGeekDev, whose [KMP completeness work][kmp-completeness], merged in early
+March 2026, filled in the cryptographic, data-handling, and utility layers iOS
+needed. Secp256k1 came online with help from the underlying secp256k1-kmp
+library, which was already multiplatform-capable. The hardest piece was
+[libsodium][libsodium], a software library for encryption, decryption,
+signatures, password hashing, and more. The alternative paths were either too
+convoluted or required resources KotlinGeekDev didn't have, so he compiled the
+original C libsodium source, extracted the iOS library files, and wrote bindings
+to the C headers by hand. A [follow-up cleanup][quartz-cleanup] removed the
+Swift bridge that earlier iterations had relied on. Vitor later [replaced that
+approach][libsodium-kotlin] with a fully custom Kotlin implementation of the
+same cryptographic primitives, removing the dependency on the C library
+entirely. The repository's iOS [Feature Parity Table][feature-parity], which
+tracks how iOS support compares to Android features, now shows iOS at full
+parity for cryptography, data handling, file storage, and most utilities.
+Together, this work made it more realistic to build iOS nostr apps with Quartz.
+
+> Something I can point to is getting Libsodium to work on iOS for Quartz […].
+> It was remarkable for me because I used libsodium source code to make it work,
+> because the other solutions were either too convoluted, or required resources I
+> didn't have.
+>
+> <cite>–KotlinGeekDev, Quartz/Amethyst contributor</cite>
+
+Beyond the iOS work, the [v1.00.0 release][quartz-v100] completed the migration
+to the outbox model and reorganized Quartz around per-NIP modules. Quartz moved
+from a single fixed relay pool to a dynamic relay pool where each NIP specifies
+its intended [relays][relays] and can grow or shrink as users scroll. Each NIP
+now lives in its own dedicated folder with its own relay clients, event
+builders, filter builders, caching systems, and helper functions, while still
+sharing Amethyst's main relay and cache engine when appropriate. The arrangement
+gives each protocol spec room to evolve independently and lets new NIPs
+integrate as distinct modules.
+
+Protocol coverage expanded substantially during the year. The [v1.07.0
+release][quartz-v107] added support across marketplace events, relay-based
+groups, labeling, Cashu wallet kinds, such as nutzaps, vanish requests, relay
+discovery, P2P order events, Negentropy sync, trusted assertions, relay
+management, mint discoverability, app handlers, DVM events, and other protocol
+areas. Newer additions visible in [Amethyst's supported
+features][amethyst-features] list, all built on Quartz, include voice messages,
+web bookmarks, and code snippets. Underneath this sits a high-performance local
+database engine designed to keep Amethyst responsive while using a small memory
+footprint. The combination of broad NIP coverage and an efficient local store is
+what makes the modular per-NIP architecture practical at the scale active
+clients generate. That architecture now supports projects beyond
+[Amethyst][amethyst] itself, such as the [Amber][amber] nostr signer, the
+[Citrine][citrine] local relay, and the [Robosats][robosats] peer-to-peer
+exchange, all building on Quartz for their protocol work.
+
+Foundational work was also added for [Marmot][marmot], a group-messaging system
+that runs the IETF's [Messaging Layer Security][mls] standard over nostr. The
+[initial implementation][marmot-initial] included [interop test
+vectors][marmot-interop] from the spec, so Quartz's Marmot can be checked
+against other MLS implementations. This foundation shipped in the [v1.08.0
+release][quartz-v108]. Three further pieces were then merged: [higher-level
+Marmot integration][marmot-higher-level], [UI and group-chat
+surfaces][marmot-ui], and [thread-safety fixes][marmot-thread-safety].
+
+The library that started inside Amethyst now stands on its own, with two
+developers and two grants behind it. Vitor continues to drive the core through
+his long-term grant, and KotlinGeekDev's dedicated iOS work brought the platform
+side to parity. That foundation is already being built on by the newly funded
+[Amethyst Desktop][amethyst-desktop] effort, which uses Quartz alongside the iOS
+work to bring Amethyst to larger screens. What began as an internal module is
+now shared Kotlin infrastructure that other nostr apps depend on.
+
+[quartz]: https://github.com/vitorpamplona/amethyst/tree/main/quartz
+[amethyst]: /projects/amethyst
+[vitor-grant]: /blog/vitor-pamplona-receives-lts-grant
+[quartz-grant]: /blog/fourteenth-wave-of-nostr-grants#quartz
+[quartz-mls]: https://github.com/vitorpamplona/amethyst/pull/2106
+[quartz-kmp]: https://github.com/vitorpamplona/amethyst/commit/ce81157
+[maven-central]: https://mvnrepository.com/artifact/com.vitorpamplona.quartz/quartz-android
+[quartz-maven]: https://central.sonatype.com/namespace/com.vitorpamplona.quartz
+[quartz-v104]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.04.0
+[quartz-linux]: https://github.com/vitorpamplona/amethyst/pull/1973
+[kmp-completeness]: https://github.com/vitorpamplona/amethyst/pull/1757
+[libsodium]: https://libsodium.gitbook.io/doc
+[quartz-cleanup]: https://github.com/vitorpamplona/amethyst/pull/1909
+[libsodium-kotlin]: https://github.com/vitorpamplona/amethyst/commit/d586a0dc259917de617591c52afae41d62af8c6a
+[feature-parity]: https://github.com/vitorpamplona/amethyst#feature-parity-table
+[quartz-v100]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.00.0
+[quartz-v107]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.07.0
+[amethyst-features]: https://github.com/vitorpamplona/amethyst#supported-features
+[amber]: /projects/amber
+[citrine]: /projects/citrine
+[robosats]: https://github.com/RoboSats/robosats
+[marmot]: https://github.com/marmot-protocol
+[mls]: https://datatracker.ietf.org/doc/html/rfc9420
+[marmot-initial]: https://github.com/vitorpamplona/amethyst/commit/33ae066
+[marmot-interop]: https://github.com/vitorpamplona/amethyst/commit/fe505c2
+[quartz-v108]: https://github.com/vitorpamplona/amethyst/releases/tag/v1.08.0
+[marmot-higher-level]: https://github.com/vitorpamplona/amethyst/pull/2147
+[marmot-ui]: https://github.com/vitorpamplona/amethyst/pull/2149
+[marmot-thread-safety]: https://github.com/vitorpamplona/amethyst/pull/2169
+[amethyst-desktop]: https://opensats.org/blog/sixteenth-wave-of-nostr-grants#amethyst-desktop
+
+---
+
+The libraries covered in this report show nostr developer tooling reaching
+further into the languages and platforms developers already work in. TypeScript,
+Rust, Apple platforms, Android and Kotlin Multiplatform, Flutter and Dart, PHP,
+and Ruby each gained a year of progress, and several themes ran across the
+group.
+
+The outbox model became a first-class concern in many of these libraries, giving
+apps better ways to find users where they actually publish. Encryption support
+moved toward the newer versioned format and the gift-wrapped private message
+format that builds on it. Support for the ecash family of specs landed in
+several libraries, making it easier for clients to combine social features and
+payments through one consistent stack.
+
+Library work is rarely the most visible part of an ecosystem, but its leverage
+is apparent. When a maintainer adds a capability to a shared library, every app
+that depends on that library gets a clearer path to the same capability.
+OpenSats' grants gave these maintainers time to focus on improvements that
+compound across the rest of the network, and the projects highlighted here are
+part of the broader set of [grants we have funded][nostr-grants] for nostr
+development since 2023.
+
+If you believe in building and maintaining censorship-resistant communication
+infrastructure, consider supporting [The Nostr Fund][nostr-fund]. Every donation
+helps independent developers build open-source software that keeps users in
+control.
+
+<DonateRecurringButton designation="nostr" />
+
+If you are a developer working on a nostr project that strengthens this
+ecosystem, we encourage you to [apply for funding][apply].
+
+[nostr-grants]: /tags/nostr
+[apply]: /apply

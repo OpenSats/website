@@ -83,20 +83,8 @@ export default function ProjectPage({
             ) : null
           })()}
           {project.donationLink && (
-            <PageActionLink
-              href={project.donationLink}
-              variant={
-                project.donationLink.includes('geyser') ||
-                project.donationLink.includes('opencollective')
-                  ? 'solidMuted'
-                  : 'solid'
-              }
-            >
-              {project.donationLink.includes('geyser')
-                ? 'Support via Geyser'
-                : project.donationLink.includes('opencollective')
-                ? 'Support via OpenCollective'
-                : 'Support directly'}
+            <PageActionLink href={project.donationLink} variant="solid">
+              Support directly
             </PageActionLink>
           )}
         </aside>
