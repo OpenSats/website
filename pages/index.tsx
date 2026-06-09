@@ -182,7 +182,7 @@ export default function Home({
           </div>
         </div>
       </div>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
+      <div>
         <div className="space-y-2 pb-2 pt-8 md:space-y-5 xl:pt-12">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
             Stay Updated
@@ -191,17 +191,16 @@ export default function Home({
             Read the latest news from OpenSats:
           </p>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+        <ul>
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags, images } = post
             return (
               <li key={slug} className="py-12">
                 <article>
-                  <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
-                    <div className="relative">
-                      <h1 className="sr-only">Published on</h1>
-                      <Link href={`/blog/${slug}`}>
+                  <div className="space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-4 xl:space-y-0">
+                    <div>
+                      <Link href={`/blog/${slug}`} className="block">
                         <Image
                           src={images[0]}
                           alt="blog post"
@@ -209,37 +208,47 @@ export default function Home({
                           height={300}
                         />
                       </Link>
-                      <h2 className="absolute left-5 top-3 text-base font-semibold text-white xl:left-2.5 xl:top-1">
-                        <time dateTime={date}>
-                          {formatDate(date, siteMetadata.locale)}
-                        </time>
-                      </h2>
                     </div>
                     <div className="space-y-2 xl:col-span-2">
                       <div className="space-y-4">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
+                        <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
+                          <Link
+                            href={`/blog/${slug}`}
+                            className="text-gray-900 dark:text-gray-100"
+                          >
+                            {title}
+                          </Link>
+                        </h2>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
                       </div>
-                      <div className="hidden text-base font-medium leading-6 md:block">
+                      <div className="flex items-baseline text-base font-medium leading-6">
+                        <div className="hidden flex-wrap items-baseline xl:flex">
+                          <span className="sr-only">Published on</span>
+                          <time
+                            dateTime={date}
+                            className="text-sm font-medium text-gray-500 dark:text-gray-400"
+                          >
+                            {formatDate(date, siteMetadata.locale)}
+                          </time>
+                          <span
+                            aria-hidden
+                            className="mx-3 text-sm font-medium text-gray-500 dark:text-gray-400"
+                          >
+                            &middot;
+                          </span>
+                          {tags.map((tag) => (
+                            <Tag
+                              key={tag}
+                              text={tag}
+                              className="mr-3 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                            />
+                          ))}
+                        </div>
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="ml-auto text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${title}"`}
                         >
                           Read more &rarr;
@@ -258,16 +267,6 @@ export default function Home({
           <NewsletterSignup />
         </div>
       )}
-      <p className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400">
-        You can also find us on{' '}
-        <CustomLink
-          href="https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
-          className="underline"
-        >
-          nostr
-        </CustomLink>
-        .
-      </p>
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end pb-8 text-base font-medium leading-6">
           <Link
