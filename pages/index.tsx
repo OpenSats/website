@@ -228,10 +228,16 @@ export default function Home({
                           <span className="sr-only">Published on</span>
                           <time
                             dateTime={date}
-                            className="mr-3 text-sm font-medium text-gray-500 dark:text-gray-400"
+                            className="text-sm font-medium text-gray-500 dark:text-gray-400"
                           >
                             {formatDate(date, siteMetadata.locale)}
                           </time>
+                          <span
+                            aria-hidden
+                            className="mx-3 text-sm font-medium text-gray-500 dark:text-gray-400"
+                          >
+                            &middot;
+                          </span>
                           {tags.map((tag) => (
                             <Tag
                               key={tag}
