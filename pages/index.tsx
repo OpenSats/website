@@ -212,7 +212,7 @@ export default function Home({
                     <div className="space-y-2 xl:col-span-2">
                       <div className="space-y-4">
                         <div>
-                          <div className="flex flex-wrap items-baseline">
+                          <div className="hidden flex-wrap items-baseline xl:flex">
                             <span className="sr-only">Published on</span>
                             <time
                               dateTime={date}
