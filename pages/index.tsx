@@ -225,16 +225,20 @@ export default function Home({
                       </div>
                       <div className="flex items-baseline text-base font-medium leading-6">
                         <div className="hidden flex-wrap items-baseline xl:flex">
-                          {tags.map((tag) => (
-                            <Tag key={tag} text={tag} />
-                          ))}
                           <span className="sr-only">Published on</span>
                           <time
                             dateTime={date}
-                            className="text-sm font-medium text-gray-500 dark:text-gray-400"
+                            className="mr-3 text-sm font-medium text-gray-500 dark:text-gray-400"
                           >
                             {formatDate(date, siteMetadata.locale)}
                           </time>
+                          {tags.map((tag) => (
+                            <Tag
+                              key={tag}
+                              text={tag}
+                              className="mr-3 text-sm font-medium uppercase text-gray-500 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400"
+                            />
+                          ))}
                         </div>
                         <Link
                           href={`/blog/${slug}`}
