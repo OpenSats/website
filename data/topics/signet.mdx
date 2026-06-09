@@ -1,0 +1,25 @@
+---
+title: 'Signet'
+summary: 'Bitcoin’s signed test network, defined by BIP 325, for more predictable multi-party testing than testnet.'
+category: 'Bitcoin'
+aliases:
+  [
+    'BIP 325',
+    'default signet',
+    'global signet',
+    'custom signet',
+    'signet test network',
+  ]
+---
+
+Signet is a Bitcoin test network defined by [BIP 325](https://github.com/bitcoin/bips/blob/master/bip-0325.mediawiki). In addition to proof of work, each block must satisfy a challenge chosen for that signet. That extra rule lets operators coordinate block production, planned reorgs, and other test conditions much more predictably than on testnet.
+
+The public default signet is the network most developers mean when they say `signet`. Bitcoin Core supports it directly, and anyone can also launch a custom signet with a different challenge and seed nodes. That makes signet useful for wallet testing, integration testing between independent services, and protocol experiments that need a shared network without the chaos of testnet.
+
+Signet sits between testnet and regtest. Testnet is open and often unstable. Regtest is fully local and easy to control. Signet gives multiple independent parties a shared environment with controlled unreliability, which is why teams use it to rehearse software changes before mainnet.
+
+## References
+
+- [BIP 325: Signet](https://github.com/bitcoin/bips/blob/master/bip-0325.mediawiki)
+- [Bitcoin Optech: Signet](https://bitcoinops.org/en/topics/signet/)
+- [Bitcoin Wiki: Signet](https://en.bitcoin.it/wiki/Signet)
