@@ -199,9 +199,8 @@ export default function Home({
               <li key={slug} className="py-12">
                 <article>
                   <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
-                    <div className="relative">
-                      <h1 className="sr-only">Published on</h1>
-                      <Link href={`/blog/${slug}`}>
+                    <div>
+                      <Link href={`/blog/${slug}`} className="block">
                         <Image
                           src={images[0]}
                           alt="blog post"
@@ -209,15 +208,22 @@ export default function Home({
                           height={300}
                         />
                       </Link>
-                      <h2 className="absolute left-5 top-3 text-base font-semibold text-white xl:left-2.5 xl:top-1">
-                        <time dateTime={date}>
-                          {formatDate(date, siteMetadata.locale)}
-                        </time>
-                      </h2>
                     </div>
                     <div className="space-y-2 xl:col-span-2">
                       <div className="space-y-4">
                         <div>
+                          <div className="flex flex-wrap items-baseline">
+                            <span className="sr-only">Published on</span>
+                            <time
+                              dateTime={date}
+                              className="mr-3 text-sm font-medium text-gray-500 dark:text-gray-400"
+                            >
+                              {formatDate(date, siteMetadata.locale)}
+                            </time>
+                            {tags.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
+                          </div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
                             <Link
                               href={`/blog/${slug}`}
@@ -226,11 +232,6 @@ export default function Home({
                               {title}
                             </Link>
                           </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
                         </div>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
