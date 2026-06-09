@@ -1,0 +1,19 @@
+---
+title: 'Package relay'
+summary: 'A proposed relay policy that lets Bitcoin nodes evaluate related transactions together instead of one by one.'
+category: 'Bitcoin'
+aliases: ['BIP 331', 'Ancestor Package Relay', 'transaction package relay']
+---
+
+Package relay is a proposed Bitcoin relay feature that lets nodes accept or reject a group of related transactions as one package. Instead of looking at each transaction in isolation, the node evaluates the combined feerate and relationships across the whole set.
+
+This matters because some useful fee-bumping patterns depend on a low-fee parent and a higher-fee child. Without package relay, a node may reject the parent before it ever considers the child, which breaks CPFP in cases where the parent fee is too low for current mempool conditions.
+
+That limitation matters most for time-sensitive protocols. Lightning channels, [vaults](/topics/vaults), and other contract systems may need to attach fees after the fact in order to confirm before a timeout. Package relay aims to make those fee-bumping strategies more reliable without weakening denial-of-service protections on the peer-to-peer network.
+
+BIP 331 specifies ancestor package relay for Bitcoin's peer services layer. As of mid-2026, the proposal remains under active design and implementation review.
+
+## References
+
+- [Bitcoin Optech: Package relay](https://bitcoinops.org/en/topics/package-relay/)
+- [BIP 331: Ancestor Package Relay](https://github.com/bitcoin/bips/blob/master/bip-0331.mediawiki)
