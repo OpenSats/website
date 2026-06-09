@@ -1,0 +1,19 @@
+---
+title: 'NDK'
+summary: 'A modular TypeScript toolkit for building Nostr apps, with relay routing, caching, signing flows, and higher-level client features.'
+category: 'Nostr'
+aliases: ['Nostr Development Kit', 'nostr-dev-kit']
+---
+
+NDK usually refers to PabloF7z's Nostr Development Kit, a TypeScript toolkit for building [Nostr](/topics/nostr) apps. It packages the work every client has to do anyway: connect to [relays](/topics/relays), subscribe to and publish events, sign and verify messages, cache data locally, and route traffic with the [outbox model](/topics/outbox).
+
+Instead of shipping one giant framework, NDK is split into packages. The core library handles relay connections and event flows. Companion packages add higher-level tools for [private DMs](/topics/private-dms), [remote signing](/topics/remote-signing), [web of trust](/topics/web-of-trust) filtering, [Nostr Wallet Connect](/topics/nostr-wallet-connect), and [Blossom](/topics/blossom). Framework bindings for React, Svelte, React Native, and other environments let app developers keep the protocol plumbing out of their UI code.
+
+The name also points to a broader family of related libraries. NDKSwift brings the same general approach to Apple platforms, and Dart NDK does similar work for Flutter and Dart apps. On OpenSats, the main [NDK project page](/projects/ndk) tracks the original TypeScript implementation maintained by [PabloF7z](/blog/pablofz7-receives-lts-grant).
+
+NDK matters because it lowers the cost of building serious Nostr software. When relay selection, event parsing, signing adapters, and caching are handled in a shared library, app developers can spend more time on product decisions and less time re-implementing protocol basics.
+
+## References
+
+- [NDK docs](https://nostr-dev-kit.github.io/ndk/)
+- [nostr-dev-kit/ndk](https://github.com/nostr-dev-kit/ndk)
