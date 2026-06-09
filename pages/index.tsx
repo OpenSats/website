@@ -237,7 +237,7 @@ export default function Home({
                           {summary}
                         </div>
                       </div>
-                      <div className="hidden text-base font-medium leading-6 md:block">
+                      <div className="text-base font-medium leading-6">
                         <Link
                           href={`/blog/${slug}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
