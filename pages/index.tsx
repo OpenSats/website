@@ -261,16 +261,6 @@ export default function Home({
           <NewsletterSignup />
         </div>
       )}
-      <p className="pt-4 text-lg leading-7 text-gray-500 dark:text-gray-400">
-        You can also find us on{' '}
-        <CustomLink
-          href="https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f"
-          className="underline"
-        >
-          nostr
-        </CustomLink>
-        .
-      </p>
       {posts.length > MAX_DISPLAY && (
         <div className="flex justify-end pb-8 text-base font-medium leading-6">
           <Link
