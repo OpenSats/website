@@ -9,11 +9,11 @@ Vaults are Bitcoin custody constructions that separate a withdrawal into stages.
 
 The goal is simple: turn key compromise from an instant loss into a security incident with response time. Different vault designs offer different delays, recovery paths, and assumptions about how many keys, devices, or pre-signed transactions must stay safe.
 
-Some vaults can be built today with timelocks, pre-signed transactions, and careful key management. Proposed covenants could make them simpler and more flexible. [OP_CTV](/topics/op-ctv) can express predefined vault trees, and BIP 345 proposes `OP_VAULT` and `OP_VAULT_RECOVER` as opcodes tailored to this use case.
+Some vaults can be built today with timelocks, pre-signed transactions, and careful key management. Proposed [covenants](/topics/covenant) could make them simpler and more flexible. [OP_CTV](/topics/op-ctv) can express predefined vault trees, and BIP 345 proposes `OP_VAULT` and `OP_VAULT_RECOVER` as opcodes tailored to this use case.
 
 Vaults matter for self-custody, inheritance planning, institutional storage, and coercion resistance. They also introduce tradeoffs in setup complexity, recovery procedures, and how tightly future spending paths are constrained.
 
 ## References
 
 - [Bitcoin Optech: Vaults](https://bitcoinops.org/en/topics/vaults/)
-- [BIP 345: `OP_VAULT`](https://en.bitcoin.it/wiki/BIP_0345)
+- [BIP 345: `OP_VAULT`](https://github.com/bitcoin/bips/blob/master/bip-0345.mediawiki)
