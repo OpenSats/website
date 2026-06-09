@@ -1,0 +1,31 @@
+---
+title: 'LDK'
+dateAdded: '2026-06-09'
+summary: 'A modular Lightning library stack that lets developers embed Lightning nodes into wallets and other applications.'
+nym: 'LDK Developers'
+website: 'https://lightningdevkit.org/'
+coverImage: '/static/images/projects/ldk.svg'
+invertDarkImage: true
+git: 'https://github.com/lightningdevkit/rust-lightning'
+tags: ['Lightning', 'Rust', 'Library', 'SDK']
+fund: general
+announcementLink: '/blog/shashwat-vangani-receives-lts-grant'
+---
+
+LDK, short for Lightning Dev Kit, is a modular Lightning implementation built around the `rust-lightning` library. Instead of asking every wallet or service to run a standalone node daemon, it exposes the Lightning state machine as reusable Rust crates that developers can embed inside their own application.
+
+The project is designed to be flexible. Teams choose their own persistence, chain data source, networking stack, routing setup, and key management model. The core library is runtime-agnostic, companion crates handle background processing and chain sync, and the broader stack now includes `ldk-node` for teams that want a more batteries-included starting point.
+
+That design makes LDK a good fit for mobile wallets, servers, LSP infrastructure, and other applications that want Lightning support without adopting one full node architecture.
+
+## Why fund it?
+
+A reusable Lightning library lets many products share the same protocol work. When a feature lands in LDK, downstream wallets and services can adopt it without each team reimplementing blinded paths, invoice flows, dual funding, splicing messages, or other Lightning details on its own.
+
+OpenSats has funded LDK work through [Shashwat Vangani's LTS grant](/blog/shashwat-vangani-receives-lts-grant), which supports BOLT 12 deployment in LDK, and through the splicing work covered in the [Advancements in Developer Libraries](/blog/advancements-in-developer-libraries#splicing-in-ldk) impact report. That support helped move BOLT 12 features such as blinded paths, invoice overpayments, and invoice-request retries forward, while also pushing the library toward interoperable channel splicing.
+
+## What's next?
+
+Current work centers on finishing the path from protocol support to wallet adoption. Shashwat's funded work focuses on BOLT 12 inside LDK, especially blinded paths, invoice overpayments, and retrying invoice requests. The splicing work in `rust-lightning` has already landed foundational pieces for interactive dual funding, new message flows, feature flags, and funding-key rotation after splices.
+
+A working prototype is flowing through [`ldk-node`](https://github.com/lightningdevkit/ldk-node), and the next step is broader wallet integration, continued interoperability testing, and more production use of the features that have already landed upstream.
