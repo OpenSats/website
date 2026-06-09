@@ -5,13 +5,13 @@ category: 'Bitcoin'
 aliases: ['eclipse attack', 'network eclipse', 'peer eclipse']
 ---
 
-Eclipse attacks isolate a Bitcoin node from honest peers while keeping it connected to attacker-controlled ones. Once the victim is cut off, the attacker can delay blocks, filter transactions, and shape what the node learns about the network.
+Eclipse attacks isolate a [Bitcoin node](/topics/bitcoin-node) from honest peers while keeping it connected to attacker-controlled ones. Once the victim is cut off, the attacker can delay blocks, filter transactions, and shape what the node learns about the network.
 
 That creates several risks. A merchant or service can be shown stale chain state for longer than expected. A wallet or Lightning node can miss time-sensitive events. The attacker can also learn which transactions came from the victim, which weakens privacy.
 
 The key weakness is connectivity. The eclipsed node still checks Bitcoin's rules, yet it does so against a filtered view of the network. That is why peer diversity matters so much for [Bitcoin Core](/projects/bitcoin-core) and other node implementations.
 
-Mitigations focus on making peer selection harder to monopolize. [ASmap](https://asmap.org/) helps Bitcoin Core avoid concentrating too many peers inside a single autonomous system, and [Erlay](/topics/erlay) makes it cheaper for honest nodes to keep more connections. Operators can also reduce risk by using diverse network paths and maintaining trusted connections where appropriate.
+Mitigations focus on making peer selection harder to monopolize. [ASmap](/projects/asmap) helps Bitcoin Core avoid concentrating too many peers inside a single autonomous system, and [Erlay](/topics/erlay) makes it cheaper for honest nodes to keep more connections. Operators can also reduce risk by using diverse network paths and maintaining trusted connections where appropriate.
 
 ## References
 
