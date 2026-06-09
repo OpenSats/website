@@ -1,0 +1,17 @@
+---
+title: 'OP_CSFS'
+summary: 'A proposed opcode that checks a signature against an arbitrary message supplied by script, instead of only the spending transaction.'
+category: 'Bitcoin'
+aliases: ['OP_CHECKSIGFROMSTACK', 'CSFS', 'CHECKSIGFROMSTACK']
+---
+
+OP_CSFS, short for `OP_CHECKSIGFROMSTACK`, is a proposed opcode that verifies a signature against a message and public key placed on the script stack. Bitcoin's existing signature opcodes derive the signed message from the transaction being spent. OP_CSFS would make it possible to verify signatures over other precommitted data instead.
+
+That extra flexibility matters for more expressive contract designs. Protocol designers often discuss OP_CSFS alongside [OP_CTV](/topics/op-ctv), because the two together can help encode staged spending rules, delegated recovery flows, and other covenant-like constructions such as [vaults](/topics/vaults).
+
+OP_CSFS already exists on Elements-based sidechains, where it is used as an experimental opcode. On Bitcoin, it remains a proposal rather than a deployed consensus rule.
+
+## References
+
+- [Bitcoin Optech: `OP_CHECKSIGFROMSTACK`](https://bitcoinops.org/en/topics/op_checksigfromstack/)
+- [Elements: Additional opcodes](https://elementsproject.org/features/opcodes)
