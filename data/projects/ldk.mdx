@@ -14,15 +14,15 @@ announcementLink: '/blog/shashwat-vangani-receives-lts-grant'
 
 LDK, short for Lightning Dev Kit, is a modular Lightning implementation built around the `rust-lightning` library. Instead of asking every wallet or service to run a standalone node daemon, it exposes the Lightning state machine as reusable Rust crates that developers can embed inside their own application.
 
-The project is designed to be flexible. Teams choose their own persistence, chain data source, networking stack, routing setup, and key management model. The core library is runtime-agnostic, companion crates handle background processing and chain sync, and the broader stack now includes `ldk-node` for teams that want a more batteries-included starting point.
+The project is designed to be flexible. Teams choose their own persistence, chain data source, networking stack, routing setup, and key management model. The core library is runtime-agnostic, companion crates handle background processing and chain sync, and the broader stack now includes `ldk-node` for teams that want a more batteries-included starting point, and a standalone daemon called `ldk-server`.
 
 That design makes LDK a good fit for mobile wallets, servers, LSP infrastructure, and other applications that want Lightning support without adopting one full node architecture.
 
 ## Why fund it?
 
-A reusable Lightning library lets many products share the same protocol work. When a feature lands in LDK, downstream wallets and services can adopt it without each team reimplementing blinded paths, invoice flows, dual funding, splicing messages, or other Lightning details on its own.
+A reusable Lightning library lets many products share the same protocol work. When a feature lands in LDK, downstream wallets and services can adopt it without each team reimplementing [blinded paths](/topics/blinded-paths), invoice flows, dual funding, [splicing](/topics/channel-splicing) messages, or other Lightning details on its own.
 
-OpenSats has funded LDK work through [`ldk-splicing`](/blog/bitcoin-grants-feb-2024#splicing-in-ldk) and through [Shashwat Vangani's LTS grant](/blog/shashwat-vangani-receives-lts-grant), which supports BOLT 12 deployment in LDK. The [Advancements in Developer Libraries](/blog/advancements-in-developer-libraries#splicing-in-ldk) impact report covers how the splicing work progressed. Together, this support helped move BOLT 12 features such as blinded paths, invoice overpayments, and invoice-request retries forward, while also pushing the library toward interoperable channel splicing.
+OpenSats has funded LDK work through [`ldk-splicing`](/blog/bitcoin-grants-feb-2024#splicing-in-ldk) and through [Shashwat Vangani's LTS grant](/blog/shashwat-vangani-receives-lts-grant), which supports [BOLT 12](/topics/bolt12) deployment in LDK. The [Advancements in Developer Libraries](/blog/advancements-in-developer-libraries#splicing-in-ldk) impact report covers how the splicing work progressed. Together, this support helped move BOLT 12 features such as blinded paths, invoice overpayments, and invoice-request retries forward, while also pushing the library toward interoperable channel splicing.
 
 ## What's next?
 
