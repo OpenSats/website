@@ -211,36 +211,34 @@ export default function Home({
                     </div>
                     <div className="space-y-2 xl:col-span-2">
                       <div className="space-y-4">
-                        <div>
-                          <div className="hidden flex-wrap items-baseline xl:flex">
-                            <span className="sr-only">Published on</span>
-                            <time
-                              dateTime={date}
-                              className="mr-3 text-sm font-medium text-gray-500 dark:text-gray-400"
-                            >
-                              {formatDate(date, siteMetadata.locale)}
-                            </time>
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
-                              {title}
-                            </Link>
-                          </h2>
-                        </div>
+                        <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
+                          <Link
+                            href={`/blog/${slug}`}
+                            className="text-gray-900 dark:text-gray-100"
+                          >
+                            {title}
+                          </Link>
+                        </h2>
                         <div className="prose max-w-none text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
                       </div>
-                      <div className="text-right text-base font-medium leading-6">
+                      <div className="flex items-baseline text-base font-medium leading-6">
+                        <div className="hidden flex-wrap items-baseline xl:flex">
+                          <span className="sr-only">Published on</span>
+                          <time
+                            dateTime={date}
+                            className="mr-3 text-sm font-medium text-gray-500 dark:text-gray-400"
+                          >
+                            {formatDate(date, siteMetadata.locale)}
+                          </time>
+                          {tags.map((tag) => (
+                            <Tag key={tag} text={tag} />
+                          ))}
+                        </div>
                         <Link
                           href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="ml-auto text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${title}"`}
                         >
                           Read more &rarr;
