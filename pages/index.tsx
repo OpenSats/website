@@ -198,7 +198,7 @@ export default function Home({
             return (
               <li key={slug} className="py-12">
                 <article>
-                  <div className="space-x-4 space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:space-y-0">
+                  <div className="space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-4 xl:space-y-0">
                     <div>
                       <Link href={`/blog/${slug}`} className="block">
                         <Image
