@@ -1,0 +1,20 @@
+---
+title: 'Bitcoin node'
+summary: 'Software that connects to the Bitcoin network, validates blocks and transactions, tracks chain state, and helps enforce the protocol rules.'
+category: 'Bitcoin'
+aliases: ['full node', 'full nodes', 'Bitcoin full node', 'Bitcoin node software']
+---
+
+A Bitcoin node is software that speaks Bitcoin's peer-to-peer protocol. It connects to other nodes, downloads blocks and transactions, checks them against the rules, and keeps track of the current chain state.
+
+In practice, people usually mean a **full node**: software that independently verifies every block and transaction instead of trusting a third-party server. Running one is how a user checks Bitcoin's rules for themselves, including the supply limit, script validity, and whether a payment really confirmed.
+
+Nodes can be packaged in different ways. Some are general-purpose implementations like [Bitcoin Core](/projects/bitcoin-core). Some are lightweight or specialized designs such as [Floresta](/projects/floresta). Some are pruned, which means they discard old block data after validation to save disk space. Pruned nodes are still full nodes because they still verify the chain themselves.
+
+Wallets, Lightning apps, block explorers, mining software, and other services often depend on a node for trustworthy chain data and transaction broadcast. Without enough people running their own nodes, more users end up relying on centralized infrastructure to tell them what Bitcoin says.
+
+## References
+
+- [Running a full node](https://bitcoin.org/en/full-node)
+- [Bitcoin Core validation](https://bitcoin.org/en/bitcoin-core/features/validation)
+- [bitcoin/bitcoin](https://github.com/bitcoin/bitcoin)
