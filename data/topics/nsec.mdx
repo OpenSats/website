@@ -5,7 +5,7 @@ category: 'Nostr'
 aliases: ['nostr private key', 'nostr secret key', 'nsec1']
 ---
 
-`nsec` is the standard human-readable encoding for a Nostr private key. [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) wraps the raw 32-byte secret in a [Bech32](https://en.bitcoin.it/wiki/Bech32) string that starts with the `nsec1` prefix. The matching public identity is usually shared as an `npub` string.
+`nsec` is the standard human-readable encoding for a Nostr private key. [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) wraps the raw 32-byte secret in a [Bech32](/topics/bech32) string that starts with the `nsec1` prefix. The matching public identity is usually shared as an `npub` string.
 
 Whoever has the `nsec` can sign events, publish notes, change profile metadata, authorize client connections, and decrypt content tied to the same keypair. In practice, the `nsec` is the account. Users should keep it in a dedicated signer such as [Amber](/projects/amber), hardware-backed storage, or a [remote-signing](/topics/remote-signing) setup instead of pasting it into every client.
 

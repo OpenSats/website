@@ -1,0 +1,20 @@
+---
+title: 'Bech32'
+summary: 'The checksummed base32 address format used for native SegWit outputs. Version 0 uses bech32 and version 1+ uses bech32m.'
+category: 'Bitcoin'
+aliases:
+  ['Bech32m', 'Bech32(m)', 'bc1', 'bc1q', 'bc1p', 'native SegWit address']
+---
+
+Bech32 is the checksummed base32 format introduced in BIP 173 for native [SegWit](/topics/segwit) addresses. On mainnet those addresses start with `bc1`, which is why people often call them `bc1 addresses`. The format avoids mixed case, uses a character set that works well in QR codes, and includes a checksum that catches almost all common typing errors.
+
+Version 0 witness outputs use the original Bech32 checksum. Those are the `bc1q...` addresses used for P2WPKH and P2WSH. When [Taproot](/topics/taproot) introduced version 1 witness outputs, Bitcoin adopted Bech32m through BIP 350. Those `bc1p...` addresses keep the same structure and character set but use a different checksum constant that fixes a weakness in the original design for future witness versions.
+
+In practice, Bech32 and Bech32m are one address family. Wallets need to decode both, enforce the right encoding for each witness version, and reject mixed-case or malformed strings. The distinction matters because version 0 outputs remain valid only under Bech32, while Taproot and later witness versions require Bech32m.
+
+## References
+
+- [BIP 173: Bech32](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki)
+- [BIP 350: Bech32m](https://github.com/bitcoin/bips/blob/master/bip-0350.mediawiki)
+- [Bitcoin Optech: Bech32(m)](https://bitcoinops.org/en/topics/bech32/)
+- [Bitcoin Wiki: Bech32](https://en.bitcoin.it/wiki/Bech32)

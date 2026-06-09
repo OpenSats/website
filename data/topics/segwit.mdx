@@ -11,7 +11,7 @@ The change fixed third-party transaction malleability. In the old format, anyone
 
 SegWit also raised effective block capacity. A block's limit is now 4 million weight units, where each non-witness byte counts as four and each witness byte counts as one. Real blocks sit somewhere between 1 MB (no witness) and 4 MB (all witness), commonly around 2 MB. Transactions that use SegWit inputs pay less per signature because the witness bytes that hold the signature are cheaper to include.
 
-A SegWit transaction commits to its script through a witness program: a short push in an output that carries a version byte and a program. Version 0 programs cover P2WPKH (single-key) and P2WSH (script hash) outputs, and are addressed as bech32 strings beginning with `bc1q`. Some wallets wrap v0 programs inside a P2SH output (`3...` addresses) for compatibility with older software that cannot pay bech32 addresses directly. SegWit also defined a versioned address space for witness programs, which [Taproot](/topics/taproot) later used to deploy as version 1 without reworking the address format.
+A SegWit transaction commits to its script through a witness program: a short push in an output that carries a version byte and a program. Version 0 programs cover P2WPKH (single-key) and P2WSH (script hash) outputs, and are addressed as [bech32](/topics/bech32) strings beginning with `bc1q`. Some wallets wrap v0 programs inside a P2SH output (`3...` addresses) for compatibility with older software that cannot pay bech32 addresses directly. SegWit also defined a versioned address space for witness programs, which [Taproot](/topics/taproot) later used to deploy as version 1 without reworking the address format.
 
 ## References
 
