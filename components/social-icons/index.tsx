@@ -26,7 +26,31 @@ const components = {
   donate: Donate,
 }
 
-const SocialIcon = ({ kind, href, size = 8 }) => {
+const labels: Record<keyof typeof components, string> = {
+  mail: 'Send email',
+  github: 'View on GitHub',
+  facebook: 'Facebook',
+  youtube: 'YouTube',
+  linkedin: 'LinkedIn',
+  twitter: 'View on X',
+  nostr: 'View on Nostr',
+  zapstore: 'View on Zapstore',
+  website: 'Visit website',
+  heartbeat: 'View heartbeat',
+  donate: 'Support directly',
+}
+
+const SocialIcon = ({
+  kind,
+  href,
+  size = 8,
+  title,
+}: {
+  kind: keyof typeof components
+  href?: string
+  size?: number
+  title?: string
+}) => {
   if (
     !href ||
     (kind === 'mail' &&
@@ -35,6 +59,7 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
     return null
 
   const SocialSvg = components[kind]
+  const label = title ?? labels[kind]
 
   return (
     <a
@@ -42,8 +67,10 @@ const SocialIcon = ({ kind, href, size = 8 }) => {
       target="_blank"
       rel="noopener noreferrer"
       href={href}
+      title={label}
+      aria-label={label}
     >
-      <span className="sr-only">{kind}</span>
+      <span className="sr-only">{label}</span>
       <SocialSvg
         className={`fill-current text-gray-700 hover:text-orange-500 dark:text-gray-200 dark:hover:text-orange-400 h-${size} w-${size}`}
       />
