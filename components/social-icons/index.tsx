@@ -10,7 +10,7 @@ import Web from './globe-solid.svg'
 import Heartbeat from './heartbeat.svg'
 import Donate from './hand-holding-heart.svg'
 
-// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (globe, heartbeat, donate)
+// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (house, heartbeat, donate)
 
 const components = {
   mail: Mail,
