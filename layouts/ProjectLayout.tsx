@@ -85,7 +85,7 @@ export default function PageLayout({
             </div>
             {totalSatsSent && (
               <p
-                className="pt-4 text-sm text-gray-500 dark:text-gray-400"
+                className="pt-4 text-2xl text-gray-500 dark:text-gray-400"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
                 {Math.round(animatedSatsSent).toLocaleString('en-US')} sats
