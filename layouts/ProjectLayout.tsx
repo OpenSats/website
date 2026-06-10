@@ -100,7 +100,7 @@ export default function PageLayout({
                     total sats sent
                     <Link
                       href="/transparency"
-                      title={`The total amount of sats OpenSats has sent to ${title} to date. Click to learn more on our transparency page.`}
+                      title={`Total sats OpenSats has sent to ${title}. Our transparency page has financial reports, grant records, and policy documents.`}
                       aria-label="Learn more about total sats sent"
                       className="opacity-70 transition-opacity hover:opacity-100"
                     >
