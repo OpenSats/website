@@ -122,6 +122,7 @@ export const Projects = defineDocumentType(() => ({
     heartbeat: { type: 'string' },
     tags: { type: 'list', of: { type: 'string' } },
     bonusUSD: { type: 'number', default: 0 },
+    totalSatsSent: { type: 'number' },
     hidden: { type: 'boolean' },
     showcase: { type: 'boolean' },
     fund: { type: 'string' },

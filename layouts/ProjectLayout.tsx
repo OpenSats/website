@@ -6,6 +6,10 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
 import Image from '@/components/Image'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
+import { useAnimatedCount } from '@/utils/lifetimeStats'
+import Bitcoin from '@/components/social-icons/bitcoin.svg'
+import CircleQuestion from '@/components/social-icons/circle-question.svg'
+import Link from '@/components/Link'
 
 interface Props {
   children: ReactNode
@@ -32,8 +36,11 @@ export default function PageLayout({
     nostr,
     zapstore,
     heartbeat,
+    donationLink,
+    totalSatsSent,
   } = content
   const isFund = kind === 'fund'
+  const animatedSatsSent = useAnimatedCount(totalSatsSent ?? 0)
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
   const SEO = isFund ? FundSEO : ProjectSEO
   const seoTitle = isFund
@@ -56,7 +63,7 @@ export default function PageLayout({
                 isFund ? 'hidden xl:block' : ''
               }`}
             />
-            <div className="flex space-x-3 pt-6 [&>a]:opacity-50 [&>a]:transition-opacity [&>a]:hover:opacity-80">
+            <div className="flex justify-center gap-4 pt-6 xl:w-48 xl:justify-start [&_svg]:text-gray-400 [&_svg]:transition-colors dark:[&_svg]:text-gray-500">
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
@@ -79,7 +86,34 @@ export default function PageLayout({
                 />
               )}
               <SocialIcon kind="website" href={website} size={6} />
+              {donationLink && (
+                <SocialIcon kind="donate" href={donationLink} size={6} />
+              )}
             </div>
+            {totalSatsSent && (
+              <div
+                className="pb-6 pt-14 text-center xl:w-48 xl:text-left"
+                title={`Total sats sent to ${title} by OpenSats`}
+              >
+                <div className="inline-flex flex-col">
+                  <p className="flex items-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
+                    <Bitcoin className="h-6 w-6 shrink-0 fill-current text-orange-500 dark:text-orange-400" />
+                    {Math.round(animatedSatsSent).toLocaleString('en-US')}
+                  </p>
+                  <p className="flex items-center gap-1 pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                    total sats sent
+                    <Link
+                      href="/transparency"
+                      title={`All-time sats sent to ${title}. See how OpenSats handles funds, reporting, and grants on our transparency page.`}
+                      aria-label="Learn more about total sats sent"
+                      className="opacity-70 transition-opacity hover:opacity-100"
+                    >
+                      <CircleQuestion className="h-3.5 w-3.5 fill-current" />
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
             {children}
