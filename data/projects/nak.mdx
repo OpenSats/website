@@ -1,0 +1,61 @@
+---
+title: 'nak'
+dateAdded: '2026-06-10'
+summary: 'A command-line tool for doing all things nostr, from publishing and querying events to key management, relay inspection, and protocol debugging.'
+nym: 'fiatjaf'
+coverImage: '/static/images/projects/nak.jpg'
+git: 'https://github.com/fiatjaf/nak'
+nostr: 'npub180cvv07tjdrrgpa0j7j7tmnyl2yr6yr7l8j4s3evf6u64th6gkwsyjh6w6'
+tags: ['Nostr', 'CLI', 'Developer Tools']
+fund: nostr
+announcementLink: '/blog/fiatjaf-receives-lts-grant'
+---
+
+`nak` is a command-line tool built by [fiatjaf][lts] for doing “all things
+nostr” from a terminal. The repository describes it as a “nostr army knife,”
+and that framing fits. Developers can use `nak` to create and sign events,
+publish them to relays, query and filter relay data, decode and encode
+[NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md)
+identifiers, inspect profiles, generate and encrypt keys, and chain the
+results into other Unix tools like `jq`.
+
+Because it is a CLI, `nak` is useful well beyond app development. It gives
+client authors, relay operators, bot builders, and power users a fast way to
+inspect live relay behavior, script repeated tasks, and test new protocol ideas
+without building a UI first. The project has also grown into a broader toolbox,
+with commands and code paths for bunker signing, negentropy sync,
+git-related workflows, Blossom, wallet operations, `nsite`, `nostrfs`, and
+newer features like an MCP server.
+
+## Why fund it?
+
+Nostr needs good terminal-native tools. A lot of protocol work starts as quick
+experiments: publish a test event, inspect replies from several relays, verify
+a signature, replay a message, or script an admin task. When that work depends
+on a full client UI or custom one-off code, iteration slows down and fewer
+people can participate. `nak` makes the protocol easier to explore, debug, and
+automate from a shell.
+
+OpenSats supports `nak` through [fiatjaf's long-term support grant][lts]. In
+the announcement for that grant, OpenSats called out `nak` as one of the side
+projects that the grant would help him continue to ship alongside
+[`nos2x`](https://github.com/fiatjaf/nos2x),
+[`khatru`](https://github.com/fiatjaf/khatru),
+[`eventstore`](https://github.com/fiatjaf/eventstore),
+[`njump`](https://njump.me/about), and other nostr tools.
+
+## What's next?
+
+Development is active. `nak` shipped [v0.19.12][releases] on June 9, 2026, and
+recent commits show continued work on protocol-safety fixes for gift-wrapped
+events, better `kind` handling, `nsite` logging, profile examples in the
+README, and preliminary podcast support. That pace matches the role `nak`
+plays in the ecosystem: a practical tool that keeps absorbing new nostr
+capabilities as the protocol surface expands.
+
+For ongoing development, see the [nak repository][repo] and its
+[release history][releases].
+
+[lts]: /blog/fiatjaf-receives-lts-grant
+[repo]: https://github.com/fiatjaf/nak
+[releases]: https://github.com/fiatjaf/nak/releases
