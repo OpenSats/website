@@ -41,6 +41,13 @@ export default function ProjectPage({
   project,
   relatedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const grantAnnouncements = relatedPosts.filter((post) =>
+    (post.tags || []).some((tag) => tag.toLowerCase() === 'grants')
+  )
+  const furtherReading = relatedPosts.filter(
+    (post) => !(post.tags || []).some((tag) => tag.toLowerCase() === 'grants')
+  )
+
   return (
     <>
       <MDXLayoutRenderer
@@ -89,9 +96,27 @@ export default function ProjectPage({
           )}
         </aside>
       </div>
-      {relatedPosts.length > 0 && (
+      {grantAnnouncements.length > 0 && (
         <section
           id="announcements"
+          className="mt-12 divide-y divide-gray-200 dark:divide-gray-700"
+        >
+          <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+            <div></div>
+            <h2 className="pb-8 text-3xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14 xl:col-span-2">
+              Grant Announcements
+            </h2>
+          </div>
+          <PostList
+            posts={grantAnnouncements}
+            rightAlignDate
+            useProjectLayout
+          />
+        </section>
+      )}
+      {furtherReading.length > 0 && (
+        <section
+          id="further-reading"
           className="mt-12 divide-y divide-gray-200 dark:divide-gray-700"
         >
           <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
@@ -100,7 +125,7 @@ export default function ProjectPage({
               Further Reading
             </h2>
           </div>
-          <PostList posts={relatedPosts} rightAlignDate useProjectLayout />
+          <PostList posts={furtherReading} rightAlignDate useProjectLayout />
         </section>
       )}
     </>
