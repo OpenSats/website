@@ -8,6 +8,8 @@ import Image from '@/components/Image'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
 import { useAnimatedCount } from '@/utils/lifetimeStats'
 import Bitcoin from '@/components/social-icons/bitcoin.svg'
+import CircleQuestion from '@/components/social-icons/circle-question.svg'
+import Link from '@/components/Link'
 
 interface Props {
   children: ReactNode
@@ -93,8 +95,16 @@ export default function PageLayout({
                   <Bitcoin className="h-5 w-5 fill-current text-gray-400 dark:text-gray-500" />
                   {Math.round(animatedSatsSent).toLocaleString('en-US')}
                 </p>
-                <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                <p className="flex items-center justify-center gap-1 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500 xl:justify-start">
                   total sats sent
+                  <Link
+                    href="/transparency"
+                    title={`The total amount of sats OpenSats has sent to ${title} to date. Click to learn more on our transparency page.`}
+                    aria-label="Learn more about total sats sent"
+                    className="opacity-70 transition-opacity hover:opacity-100"
+                  >
+                    <CircleQuestion className="h-3.5 w-3.5 fill-current" />
+                  </Link>
                 </p>
               </div>
             )}
