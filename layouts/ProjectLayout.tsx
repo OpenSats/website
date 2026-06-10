@@ -93,7 +93,7 @@ export default function PageLayout({
               >
                 <div className="inline-flex flex-col">
                   <p className="flex items-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
-                    <Bitcoin className="h-6 w-6 shrink-0 fill-current" />
+                    <Bitcoin className="h-6 w-6 shrink-0 fill-current text-orange-500 dark:text-orange-400" />
                     {Math.round(animatedSatsSent).toLocaleString('en-US')}
                   </p>
                   <p className="flex items-center gap-1 pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
