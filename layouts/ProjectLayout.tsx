@@ -63,7 +63,7 @@ export default function PageLayout({
                 isFund ? 'hidden xl:block' : ''
               }`}
             />
-            <div className="flex justify-center gap-4 pt-5 [&_svg]:text-gray-400 [&_svg]:transition-colors dark:[&_svg]:text-gray-500 xl:w-48">
+            <div className="flex justify-center gap-4 pt-5 [&_svg]:text-gray-400 [&_svg]:transition-colors dark:[&_svg]:text-gray-500 xl:w-48 xl:justify-start">
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
@@ -92,7 +92,7 @@ export default function PageLayout({
             </div>
             {totalSatsSent && (
               <div
-                className="pb-6 pt-10 text-center xl:w-48"
+                className="pb-6 pt-10 text-center xl:w-48 xl:text-left"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
                 <div className="inline-flex flex-col">
