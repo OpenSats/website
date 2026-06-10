@@ -8,8 +8,9 @@ import Nostr from './nostr.svg'
 import Zapstore from './zapstore.svg'
 import Web from './globe-solid.svg'
 import Heartbeat from './heartbeat.svg'
+import Donate from './hand-holding-heart.svg'
 
-// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (globe, heartbeat)
+// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (globe, heartbeat, donate)
 
 const components = {
   mail: Mail,
@@ -22,6 +23,7 @@ const components = {
   zapstore: Zapstore,
   website: Web,
   heartbeat: Heartbeat,
+  donate: Donate,
 }
 
 const SocialIcon = ({ kind, href, size = 8 }) => {

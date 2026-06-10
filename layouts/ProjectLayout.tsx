@@ -36,6 +36,7 @@ export default function PageLayout({
     nostr,
     zapstore,
     heartbeat,
+    donationLink,
     totalSatsSent,
   } = content
   const isFund = kind === 'fund'
@@ -85,6 +86,9 @@ export default function PageLayout({
                 />
               )}
               <SocialIcon kind="website" href={website} size={6} />
+              {donationLink && (
+                <SocialIcon kind="donate" href={donationLink} size={6} />
+              )}
             </div>
             {totalSatsSent && (
               <div
