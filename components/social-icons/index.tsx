@@ -8,9 +8,9 @@ import Nostr from './nostr.svg'
 import Zapstore from './zapstore.svg'
 import Web from './globe-solid.svg'
 import Heartbeat from './heartbeat.svg'
-import Donate from './hand-holding-heart.svg'
+import Donate from './gratipay.svg'
 
-// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (house, heartbeat, donate)
+// Icons taken from: https://simpleicons.org/ and https://fontawesome.com (house, heartbeat, gratipay)
 
 const components = {
   mail: Mail,
