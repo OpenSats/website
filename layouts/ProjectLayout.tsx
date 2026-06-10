@@ -32,6 +32,7 @@ export default function PageLayout({
     nostr,
     zapstore,
     heartbeat,
+    totalSatsSent,
   } = content
   const isFund = kind === 'fund'
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
@@ -80,6 +81,14 @@ export default function PageLayout({
               )}
               <SocialIcon kind="website" href={website} size={6} />
             </div>
+            {totalSatsSent && (
+              <p
+                className="pt-4 text-sm text-gray-500 dark:text-gray-400"
+                title={`Total sats sent to ${title} by OpenSats`}
+              >
+                {totalSatsSent.toLocaleString('en-US')} sats sent
+              </p>
+            )}
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
             {children}
