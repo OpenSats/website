@@ -9,7 +9,7 @@ BIP 353 defines human-readable Bitcoin payment instructions that live in DNS. A 
 
 BIP 21 has since been superseded by [BIP 321](https://github.com/bitcoin/bips/blob/master/bip-0321.mediawiki), which generalizes the URI format to support multiple payment methods in a single URI. BIP 353 still references BIP 21 directly, so wallets implementing BIP 353 today read the TXT record as a BIP 21 URI in practice.
 
-DNSSEC matters because the sender does not want to trust the recipient's resolver. Every response is signed by the domain's DNSSEC key, so a middleman on an untrusted network cannot rewrite the payment address. Wallets that have announced support include [LDK](/topics/ldk) Node and Blink, along with research implementations driven by Matt Corallo.
+DNSSEC matters because the sender does not want to trust the recipient's resolver. Every response is signed by the domain's DNSSEC key, so a middleman on an untrusted network cannot rewrite the payment address. Wallets that have announced support include [LDK Node](https://github.com/lightningdevkit/ldk-node) and Blink, along with research implementations driven by Matt Corallo.
 
 The goal is a single identifier that looks like email and works across payment rails. The recipient can change or add payment methods without each sender's wallet hard-coding which one to use.
 
