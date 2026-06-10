@@ -88,14 +88,14 @@ export default function PageLayout({
             </div>
             {totalSatsSent && (
               <div
-                className="pt-4 text-center xl:text-left"
+                className="pt-4 text-center xl:text-right"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
-                <p className="flex items-center justify-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300 xl:justify-start">
+                <p className="flex items-center justify-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300 xl:justify-end">
                   <Bitcoin className="h-6 w-6 fill-current" />
                   {Math.round(animatedSatsSent).toLocaleString('en-US')}
                 </p>
-                <p className="flex items-center justify-center gap-1 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500 xl:justify-start">
+                <p className="flex items-center justify-center gap-1 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500 xl:justify-end">
                   total sats sent
                   <Link
                     href="/transparency"
