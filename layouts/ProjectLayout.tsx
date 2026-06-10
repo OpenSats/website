@@ -84,13 +84,17 @@ export default function PageLayout({
               <SocialIcon kind="website" href={website} size={6} />
             </div>
             {totalSatsSent && (
-              <p
-                className="pt-4 text-2xl text-gray-500 dark:text-gray-400"
+              <div
+                className="pt-4 text-center xl:text-left"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
-                {Math.round(animatedSatsSent).toLocaleString('en-US')} sats
-                sent
-              </p>
+                <p className="text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
+                  {Math.round(animatedSatsSent).toLocaleString('en-US')}
+                </p>
+                <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                  total sats sent
+                </p>
+              </div>
             )}
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-dark xl:col-span-2">
