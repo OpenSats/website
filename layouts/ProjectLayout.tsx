@@ -7,6 +7,7 @@ import PageHeading from '@/components/PageHeading'
 import Image from '@/components/Image'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
 import { useAnimatedCount } from '@/utils/lifetimeStats'
+import Bitcoin from '@/components/social-icons/bitcoin.svg'
 
 interface Props {
   children: ReactNode
@@ -88,7 +89,8 @@ export default function PageLayout({
                 className="pt-4 text-center xl:text-left"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
-                <p className="text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
+                <p className="flex items-center justify-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300 xl:justify-start">
+                  <Bitcoin className="h-5 w-5 fill-current text-gray-400 dark:text-gray-500" />
                   {Math.round(animatedSatsSent).toLocaleString('en-US')}
                 </p>
                 <p className="text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
