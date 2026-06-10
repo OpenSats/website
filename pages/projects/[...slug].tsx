@@ -7,6 +7,7 @@ import type { Blog } from 'contentlayer/generated'
 import { PageActionLink } from '@/components/PageAction'
 import { getRelatedBlogPostsForProject } from '@/utils/relatedPosts'
 import PostList from '@/components/PostList'
+import BackToProjects from '@/components/BackToProjects'
 import { getFundDonationUrl, getFundLabel } from '@/utils/funds'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
 import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
@@ -129,6 +130,14 @@ export default function ProjectPage({
           <PostList posts={furtherReading} rightAlignDate useProjectLayout />
         </section>
       )}
+      <footer className="pt-8 text-base font-medium leading-6">
+        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
+          <div></div>
+          <div className="xl:col-span-2">
+            <BackToProjects />
+          </div>
+        </div>
+      </footer>
     </>
   )
 }
