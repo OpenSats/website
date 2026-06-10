@@ -1,0 +1,16 @@
+---
+title: 'CPFP'
+summary: 'A Bitcoin fee-bumping technique where a high-fee child transaction helps confirm a low-fee parent.'
+category: 'Bitcoin'
+aliases: ['Child Pays for Parent', 'child-pays-for-parent']
+---
+
+CPFP, short for Child Pays for Parent, is a Bitcoin fee-bumping technique. A user spends an output from an unconfirmed low-fee transaction in a new child transaction with a higher feerate. Miners that evaluate the pair together can profit by confirming both transactions, so the expensive child helps pull the parent into a block.
+
+Wallets use CPFP when the original fee is too low for current [mempool](/topics/mempool) conditions and the spender of an output from that transaction can create the child. That can help either the sender or the receiver accelerate confirmation, depending on who controls a spendable output.
+
+CPFP depends on relay and mining policy rather than consensus alone. Nodes and miners need to accept the low-fee parent and consider the package's combined economics. Proposed improvements such as [package relay](/topics/package-relay) aim to make CPFP more reliable when fee pressure is high.
+
+## References
+
+- [Bitcoin Optech: Child pays for parent (CPFP)](https://bitcoinops.org/en/topics/cpfp/)
