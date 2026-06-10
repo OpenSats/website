@@ -92,7 +92,7 @@ export default function PageLayout({
             </div>
             {totalSatsSent && (
               <div
-                className="pb-6 pt-10 text-center xl:w-48 xl:text-left"
+                className="pb-6 pt-20 text-center xl:w-48 xl:text-left"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
                 <div className="inline-flex flex-col">
