@@ -33,6 +33,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       project,
       relatedPosts: allCoreContent(relatedPosts),
+      pageTheme: project?.fund === 'nostr' ? 'nostr' : 'default',
     },
   }
 }
