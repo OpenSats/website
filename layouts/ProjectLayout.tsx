@@ -63,7 +63,7 @@ export default function PageLayout({
                 isFund ? 'hidden xl:block' : ''
               }`}
             />
-            <div className="flex justify-center gap-4 pt-5 [&_svg]:text-gray-400 [&_svg]:transition-colors dark:[&_svg]:text-gray-500 xl:w-48 xl:justify-start">
+            <div className="flex justify-center gap-4 pt-5 xl:w-48 xl:justify-start [&_svg]:text-gray-400 [&_svg]:transition-colors dark:[&_svg]:text-gray-500">
               {zapstore && (
                 <SocialIcon kind="zapstore" href={zapstore} size={6} />
               )}
