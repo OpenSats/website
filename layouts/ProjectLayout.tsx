@@ -6,6 +6,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import PageHeading from '@/components/PageHeading'
 import Image from '@/components/Image'
 import { getHeartbeatUrl } from '@/utils/heartbeat'
+import { useAnimatedCount } from '@/utils/lifetimeStats'
 
 interface Props {
   children: ReactNode
@@ -35,6 +36,7 @@ export default function PageLayout({
     totalSatsSent,
   } = content
   const isFund = kind === 'fund'
+  const animatedSatsSent = useAnimatedCount(totalSatsSent ?? 0)
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
   const SEO = isFund ? FundSEO : ProjectSEO
   const seoTitle = isFund
@@ -86,7 +88,8 @@ export default function PageLayout({
                 className="pt-4 text-sm text-gray-500 dark:text-gray-400"
                 title={`Total sats sent to ${title} by OpenSats`}
               >
-                {totalSatsSent.toLocaleString('en-US')} sats sent
+                {Math.round(animatedSatsSent).toLocaleString('en-US')} sats
+                sent
               </p>
             )}
           </div>
