@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import type { Project } from 'contentlayer/generated'
 import { FundSEO, ProjectSEO } from '@/components/SEO'
 import SocialIcon from '@/components/social-icons'
@@ -41,6 +41,19 @@ export default function PageLayout({
   } = content
   const isFund = kind === 'fund'
   const animatedSatsSent = useAnimatedCount(totalSatsSent ?? 0)
+  const [showSatsInfo, setShowSatsInfo] = useState(false)
+  const satsInfoRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (!showSatsInfo) return
+    const handleClick = (event: MouseEvent) => {
+      if (!satsInfoRef.current?.contains(event.target as Node)) {
+        setShowSatsInfo(false)
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [showSatsInfo])
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
   const SEO = isFund ? FundSEO : ProjectSEO
   const seoTitle = isFund
@@ -91,25 +104,35 @@ export default function PageLayout({
               )}
             </div>
             {totalSatsSent && (
-              <div
-                className="pb-6 pt-14 text-center xl:w-48 xl:text-left"
-                title={`Total sats sent to ${title} by OpenSats`}
-              >
+              <div className="pb-6 pt-14 text-center xl:w-48 xl:text-left">
                 <div className="inline-flex flex-col">
                   <p className="flex items-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
                     <Bitcoin className="h-6 w-6 shrink-0 fill-current text-orange-500 dark:text-orange-400" />
                     {Math.round(animatedSatsSent).toLocaleString('en-US')}
                   </p>
-                  <p className="flex items-center gap-1 pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                  <p className="flex items-center gap-1 whitespace-nowrap pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
                     total sats sent
-                    <Link
-                      href="/transparency"
-                      title={`All-time sats sent to ${title}. See how OpenSats handles funds, reporting, and grants on our transparency page.`}
-                      aria-label="Learn more about total sats sent"
-                      className="opacity-70 transition-opacity hover:opacity-100"
-                    >
-                      <CircleQuestion className="h-3.5 w-3.5 fill-current" />
-                    </Link>
+                    <span className="relative flex" ref={satsInfoRef}>
+                      <button
+                        type="button"
+                        onClick={() => setShowSatsInfo((value) => !value)}
+                        aria-label="Learn more about total sats sent"
+                        aria-expanded={showSatsInfo}
+                        className="p-0 text-inherit transition-colors hover:text-gray-500 dark:hover:text-gray-400"
+                      >
+                        <CircleQuestion className="h-3.5 w-3.5 fill-current" />
+                      </button>
+                      {showSatsInfo && (
+                        <span className="absolute left-1/2 top-full z-10 mt-2 block w-64 -translate-x-1/2 whitespace-normal rounded-lg bg-gray-900 p-3 text-left text-xs font-normal normal-case tracking-normal text-gray-100 shadow-lg dark:bg-gray-700">
+                          Numbers are cumulative past payouts and don't reflect
+                          current or historical balances. Sats are sent monthly
+                          and spent on the work the grant was given for.{' '}
+                          <Link href="/transparency" className="underline">
+                            Learn more &rarr;
+                          </Link>
+                        </span>
+                      )}
+                    </span>
                   </p>
                 </div>
               </div>

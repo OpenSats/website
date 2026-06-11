@@ -23,14 +23,7 @@ import {
 // (light bg, Inter type, faint network decoration) but with a circular
 // avatar on the right replacing the dense network cluster, so the
 // person, not the abstract pattern, is the focal point.
-const outputDir = path.join(
-  ROOT,
-  'public',
-  'static',
-  'images',
-  'authors',
-  'og'
-)
+const outputDir = path.join(ROOT, 'public', 'static', 'images', 'authors', 'og')
 
 // Authors who don't get a custom OG card and fall back to the default
 // brand image. Keep this list in sync with AUTHORS_WITHOUT_OG in
@@ -185,7 +178,10 @@ async function writeAuthorImage(author) {
     console.warn(`Missing avatar for ${author.slug}: ${author.avatar}`)
   }
   const svg = renderAuthorSvg(author, avatarDataUri)
-  await writePng(path.join(outputDir, `${author.slug}.png`), renderSvgToPng(svg))
+  await writePng(
+    path.join(outputDir, `${author.slug}.png`),
+    renderSvgToPng(svg)
+  )
 }
 
 async function main() {

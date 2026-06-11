@@ -13,13 +13,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const root = path.resolve(__dirname, '..')
 
-const OUTPUT_DIR = path.join(
-  root,
-  'public',
-  'static',
-  'images',
-  'newsletter'
-)
+const OUTPUT_DIR = path.join(root, 'public', 'static', 'images', 'newsletter')
 // Load static-weight Inter faces so resvg's font-weight matching maps
 // reliably (its variable-font wght axis support is best-effort). The
 // embedded family name on these files is "Inter 18pt", referenced in
@@ -108,11 +102,11 @@ function renderSvg(variant) {
   const leftLineGap = 8
   const leftStackHeight = preludeSize + leftLineGap + ctaSize
   const leftPreludeBaselineY = (HEIGHT - leftStackHeight) / 2 + preludeSize
-  const leftCtaBaselineY =
-    leftPreludeBaselineY + leftLineGap + ctaSize * 0.95
+  const leftCtaBaselineY = leftPreludeBaselineY + leftLineGap + ctaSize * 0.95
 
   const rightStackHeight = preTaglineSize + leftLineGap + taglineSize
-  const rightPreTaglineBaselineY = (HEIGHT - rightStackHeight) / 2 + preTaglineSize
+  const rightPreTaglineBaselineY =
+    (HEIGHT - rightStackHeight) / 2 + preTaglineSize
   const rightTaglineBaselineY =
     rightPreTaglineBaselineY + leftLineGap + taglineSize * 0.95
 

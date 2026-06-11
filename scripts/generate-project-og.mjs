@@ -169,9 +169,9 @@ function renderSvg(project, coverImage, logomark) {
   const summarySvg = summaryLines
     .map(
       (line, index) =>
-        `<tspan x="84" dy="${
-          index === 0 ? 0 : summaryLineHeight
-        }">${escapeXml(line)}</tspan>`
+        `<tspan x="84" dy="${index === 0 ? 0 : summaryLineHeight}">${escapeXml(
+          line
+        )}</tspan>`
     )
     .join('')
 
