@@ -128,8 +128,6 @@ export default function MultiStepApplicationForm({
         onStepClick={handleStepClick}
       />
 
-      <hr />
-
       {steps[currentStep].render(stepProps)}
 
       <StepNavigation
