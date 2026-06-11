@@ -120,6 +120,8 @@ export default function MultiStepApplicationForm({
         <input key={name} type="hidden" {...register(name, { value })} />
       ))}
 
+      <hr />
+
       <StepIndicator
         steps={steps}
         currentStep={currentStep}
