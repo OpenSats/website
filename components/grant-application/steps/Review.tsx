@@ -1,74 +1,15 @@
 import { UseFormWatch } from 'react-hook-form'
 import { FormValues } from '../types'
 
-interface ReviewProps {
-  watch: UseFormWatch<FormValues>
+export interface ReviewSection {
+  title: string
+  fields: readonly (readonly [string, string])[]
 }
 
-const sections = [
-  {
-    title: 'Applicant',
-    fields: [
-      ['Your Name', 'your_name'],
-      ['Email', 'email'],
-      ['Personal GitHub', 'personal_github'],
-      ['Other Contact Details', 'other_contact'],
-      ['Lead Developer or Maintainer', 'are_you_lead'],
-      ['Project Lead', 'other_lead'],
-    ],
-  },
-  {
-    title: 'Project',
-    fields: [
-      ['Main Focus', 'main_focus'],
-      ['Project Name', 'project_name'],
-      ['Project Description', 'short_description'],
-      ['Potential Impact', 'potential_impact'],
-    ],
-  },
-  {
-    title: 'Written References',
-    fields: [
-      ['References', 'references'],
-      ['Prior Contributions', 'bios'],
-      ['Years of Developer Experience', 'years_experience'],
-    ],
-  },
-  {
-    title: 'Source Code',
-    fields: [
-      ['Repository', 'github'],
-      ['Open-Source License', 'license'],
-      ['Project Website', 'website'],
-      ['Screenshots / Videos', 'screenshots_videos'],
-    ],
-  },
-  {
-    title: 'Timeline',
-    fields: [
-      ['Duration', 'duration'],
-      ['Time Commitment', 'commitment'],
-      ['Project Timeline and Potential Milestones', 'timelines'],
-    ],
-  },
-  {
-    title: 'Budget',
-    fields: [
-      ['Costs & Proposed Budget', 'proposed_budget'],
-      ['Prior Funding', 'has_received_funding'],
-      ['Prior Funding Details', 'what_funding'],
-      ['Additional Funding Sources', 'has_additional_funding'],
-      ['Additional Funding Details', 'additional_funding'],
-    ],
-  },
-  {
-    title: 'Final',
-    fields: [
-      ['Video Application', 'video_application'],
-      ['Anything Else', 'anything_else'],
-    ],
-  },
-] as const
+interface ReviewProps {
+  watch: UseFormWatch<FormValues>
+  sections: readonly ReviewSection[]
+}
 
 const formatValue = (value: unknown) => {
   if (typeof value === 'boolean') return value ? 'Yes' : 'No'
@@ -76,7 +17,7 @@ const formatValue = (value: unknown) => {
   return ''
 }
 
-export default function Review({ watch }: ReviewProps) {
+export default function Review({ watch, sections }: ReviewProps) {
   const values = watch()
 
   return (
