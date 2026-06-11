@@ -18,8 +18,7 @@ announcementLink: '/blog/nostr-grants-july-2023#coracle'
 
 Coracle is a nostr web client built by [Hodlbod][lts]. It started as a social
 feed reader and now focuses on broadcast social media, relay management, and
-web of trust. The client runs in the browser and works across desktop and
-mobile.
+web of trust across desktop and mobile browsers.
 
 > Much of nostr's novelty has to do with keys and digital signatures. But
 > focusing on the cryptographic aspects is, to me, actually something of a
@@ -35,6 +34,11 @@ timelines loading even when individual relays go down. [Negentropy]-based sync
 makes refreshing feeds faster by only pulling what changed. A restored global
 feed gives newcomers an easy way to browse the wider network.
 
+The same project now includes [Flotilla], a community-focused client built
+around the idea of relays as groups. Users can join multiple communities at
+once, move between chat, threads, events, voice rooms, and private messages on
+the same relay network, and keep one identity across every community they join.
+
 Hodlbod also works on relay infrastructure directly. He proposed and implemented
 [NIP-43] for relay membership lists and built [zooid], a relay that uses them.
 Combined with [NIP-86] for relay admin controls, these features let relays state
@@ -47,6 +51,10 @@ for relay-related protocol improvements. Hodlbod ships NIP implementations in
 Coracle, tests them in production, and feeds results back into the spec process.
 [Daniele] contributes UX and reliability work.
 
+That work now extends into Flotilla, where relay operators can shape access
+control and community policy at the relay level instead of handing both to a
+central platform.
+
 The project has also produced [Welshman], a library extracted from Coracle that
 other nostr projects can use.
 
@@ -56,13 +64,12 @@ grant][lts].
 
 ## What's next?
 
-Coracle itself is in maintenance mode while Hodlbod focuses on [Flotilla], a
-group chat client that treats relays as first-class citizens for access control
-and content policies. Active development includes voice rooms, a relay hosting
-platform, and [Pomade], an email/password login protocol for normie-friendly key
-management. The [Welshman] library that powers both clients continues to see
-major work, including a store rewrite for performance and improved outbox relay
-selection.
+Coracle itself is in maintenance mode while most active product development
+happens in [Flotilla]. Current work includes voice and video rooms, a relay
+hosting platform for non-technical community operators, and [Pomade], an
+email/password login protocol for normie-friendly key management. The
+[Welshman] library that powers both clients continues to see major work,
+including a store rewrite for performance and improved outbox relay selection.
 
 For a detailed look at earlier progress, see the [Advancements in Nostr
 Clients][impact-report] impact report.
