@@ -97,7 +97,7 @@ export const CLUSTERS: Cluster[] = [
     id: 'nostr-dev-tooling',
     title: 'Nostr Developer Tooling',
     blurb: 'SDKs and tools for building on nostr.',
-    slugs: ['applesauce', 'ndk', 'ngit'],
+    slugs: ['applesauce', 'nak', 'ndk', 'ngit'],
   },
   {
     id: 'nostr-infra',
