@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import type { Project } from 'contentlayer/generated'
 import { FundSEO, ProjectSEO } from '@/components/SEO'
 import SocialIcon from '@/components/social-icons'
@@ -41,6 +41,19 @@ export default function PageLayout({
   } = content
   const isFund = kind === 'fund'
   const animatedSatsSent = useAnimatedCount(totalSatsSent ?? 0)
+  const [showSatsInfo, setShowSatsInfo] = useState(false)
+  const satsInfoRef = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    if (!showSatsInfo) return
+    const handleClick = (event: MouseEvent) => {
+      if (!satsInfoRef.current?.contains(event.target as Node)) {
+        setShowSatsInfo(false)
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [showSatsInfo])
   const heartbeatUrl = heartbeat || getHeartbeatUrl(git)
   const SEO = isFund ? FundSEO : ProjectSEO
   const seoTitle = isFund
@@ -99,14 +112,27 @@ export default function PageLayout({
                   </p>
                   <p className="flex items-center gap-1 pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
                     total sats sent
-                    <Link
-                      href="/transparency"
-                      title={`Approximate all-time sats sent to ${title}. These are past payouts, not balances. See how OpenSats handles funds, reporting, and grants on our transparency page.`}
-                      aria-label="Learn more about total sats sent"
-                      className="opacity-70 transition-opacity hover:opacity-100"
-                    >
-                      <CircleQuestion className="h-3.5 w-3.5 fill-current" />
-                    </Link>
+                    <span className="relative flex" ref={satsInfoRef}>
+                      <button
+                        type="button"
+                        onClick={() => setShowSatsInfo((value) => !value)}
+                        aria-label="Learn more about total sats sent"
+                        aria-expanded={showSatsInfo}
+                        className="opacity-70 transition-opacity hover:opacity-100"
+                      >
+                        <CircleQuestion className="h-3.5 w-3.5 fill-current" />
+                      </button>
+                      {showSatsInfo && (
+                        <span className="absolute left-1/2 top-full z-10 mt-2 block w-64 -translate-x-1/2 rounded-lg bg-gray-900 p-3 text-left text-xs font-normal normal-case tracking-normal text-gray-100 shadow-lg dark:bg-gray-700">
+                          Approximate all-time sats sent to {title}. These are
+                          past payouts, not balances: the money has been spent
+                          on the work it was given for.{' '}
+                          <Link href="/transparency" className="underline">
+                            Learn more
+                          </Link>
+                        </span>
+                      )}
+                    </span>
                   </p>
                 </div>
               </div>
