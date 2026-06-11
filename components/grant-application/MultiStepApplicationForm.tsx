@@ -39,7 +39,11 @@ export default function MultiStepApplicationForm({
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm<FormValues>({ defaultValues })
+  } = useForm<FormValues>({
+    // Hidden fields are seeded as default values so watch() sees them on
+    // first render, before the hidden inputs register on mount.
+    defaultValues: { ...hiddenFields, ...defaultValues },
+  })
 
   const scrollToTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
