@@ -91,10 +91,7 @@ export default function PageLayout({
               )}
             </div>
             {totalSatsSent && (
-              <div
-                className="pb-6 pt-14 text-center xl:w-48 xl:text-left"
-                title={`Approximate total of sats sent to ${title} by OpenSats`}
-              >
+              <div className="pb-6 pt-14 text-center xl:w-48 xl:text-left">
                 <div className="inline-flex flex-col">
                   <p className="flex items-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
                     <Bitcoin className="h-6 w-6 shrink-0 fill-current text-orange-500 dark:text-orange-400" />
