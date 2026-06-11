@@ -110,7 +110,7 @@ export default function PageLayout({
                     <Bitcoin className="h-6 w-6 shrink-0 fill-current text-orange-500 dark:text-orange-400" />
                     {Math.round(animatedSatsSent).toLocaleString('en-US')}
                   </p>
-                  <p className="flex items-center gap-1 pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                  <p className="flex items-center gap-1 whitespace-nowrap pl-8 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
                     total sats sent
                     <span className="relative flex" ref={satsInfoRef}>
                       <button
@@ -123,7 +123,7 @@ export default function PageLayout({
                         <CircleQuestion className="h-3.5 w-3.5 fill-current" />
                       </button>
                       {showSatsInfo && (
-                        <span className="absolute left-1/2 top-full z-10 mt-2 block w-64 -translate-x-1/2 rounded-lg bg-gray-900 p-3 text-left text-xs font-normal normal-case tracking-normal text-gray-100 shadow-lg dark:bg-gray-700">
+                        <span className="absolute left-1/2 top-full z-10 mt-2 block w-64 -translate-x-1/2 whitespace-normal rounded-lg bg-gray-900 p-3 text-left text-xs font-normal normal-case tracking-normal text-gray-100 shadow-lg dark:bg-gray-700">
                           Approximate all-time sats sent to {title}. These are
                           past payouts, not balances: the money has been spent
                           on the work it was given for.{' '}
