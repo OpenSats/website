@@ -17,8 +17,8 @@ node into two parts: an operational node that connects to peers and
 routes payments, and a separate signer that holds the private keys and
 validates every state change before signing it. If the node is compromised,
 the attacker gets network access but no keys; the signer refuses to sign
-malicious state updates because it independently enforces both the Lightning 
-protocol's rules and the operator's own policies (approved destinations, 
+malicious state updates because it independently enforces both the Lightning
+protocol's rules and the operator's own policies (approved destinations,
 velocity limits, spend caps, etc).
 
 VLS works with [Core Lightning](https://github.com/ElementsProject/lightning)
@@ -39,7 +39,7 @@ the node runs in Blockstream's cloud.
 OpenSats first funded VLS in the
 [December 2023 wave of Bitcoin grants](/blog/bitcoin-grants-december-2023#validating-lightning-signer)
 and renewed support in
-[July 2024](/blog/bitcoin-grants-july-2024#validating-lightning-signer). [Spiral](https://spiral.xyz/), 
+[July 2024](/blog/bitcoin-grants-july-2024#validating-lightning-signer). [Spiral](https://spiral.xyz/),
 [Blockstream](https://blockstream.com/) and the
 [Human Rights Foundation](https://hrf.org/) also back the project. For a
 detailed look at progress, see the
@@ -50,8 +50,8 @@ impact report.
 
 The team is pushing toward an official 1.0 mainnet-ready release.
 [Version 0.14](https://gitlab.com/lightning-signer/validating-lightning-signer/-/releases/v0.14.0)
-shipped in late 2025 with BOLT12 signing support, expanded HTLC monitoring, 
-and a cleaner dependency setup. Ongoing work covers splicing, dual funding, 
+shipped in late 2025 with BOLT12 signing support, expanded HTLC monitoring,
+and a cleaner dependency setup. Ongoing work covers splicing, dual funding,
 improved recovery flows, running the signer on secure enclaves, and filling out the
 integration docs. LND support is the most requested next integration target,
 but it depends on changes upstream in LND before VLS can be wired in.

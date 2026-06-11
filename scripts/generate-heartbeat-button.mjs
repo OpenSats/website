@@ -16,13 +16,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const root = path.resolve(__dirname, '..')
 
-const OUTPUT_DIR = path.join(
-  root,
-  'public',
-  'static',
-  'images',
-  'newsletter'
-)
+const OUTPUT_DIR = path.join(root, 'public', 'static', 'images', 'newsletter')
 
 // See generate-donate-banner.mjs for the rationale behind embedding
 // static-weight Inter faces under the "Inter 18pt" family.

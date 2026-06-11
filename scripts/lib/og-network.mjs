@@ -242,9 +242,9 @@ export function networkDecor({
   for (const n of nodes) {
     nodesSvg += `<circle cx="${n.x.toFixed(1)}" cy="${n.y.toFixed(
       1
-    )}" r="${n.r.toFixed(
-      1
-    )}" fill="${color}" fill-opacity="${n.opacity.toFixed(2)}" />`
+    )}" r="${n.r.toFixed(1)}" fill="${color}" fill-opacity="${n.opacity.toFixed(
+      2
+    )}" />`
   }
 
   return `<g>${edgesSvg}${nodesSvg}</g>`
@@ -252,7 +252,9 @@ export function networkDecor({
 
 export function backgroundDecor(seed, options = {}) {
   return `
-    <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${COLORS.background}" />
+    <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${
+    COLORS.background
+  }" />
     ${networkDecor({ seed, ...options })}
   `
 }

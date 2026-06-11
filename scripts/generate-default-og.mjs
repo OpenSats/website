@@ -71,9 +71,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   const linesCount = HEADLINE_LINES.length
   const headlineBaselineLift = 24
   const headlineStartY =
-    logoBottomY -
-    headlineBaselineLift -
-    (linesCount - 1) * headlineLineHeight
+    logoBottomY - headlineBaselineLift - (linesCount - 1) * headlineLineHeight
 
   const wordmarkX = PADDING
   const wordmarkY = 64
@@ -114,9 +112,7 @@ function renderDefaultSvg(wordmarkDataUri, logoDataUri) {
   }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
         ${escapeXml(FOOTER_LABEL)}
       </text>
-      <text x="${
-        OG_WIDTH - PADDING
-      }" y="${footerY}" text-anchor="end" fill="${
+      <text x="${OG_WIDTH - PADDING}" y="${footerY}" text-anchor="end" fill="${
     COLORS.url
   }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">
         ${escapeXml(FOOTER_URL)}

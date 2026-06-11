@@ -58,7 +58,12 @@ function renderTopicSvg(topic) {
   )
   const summaryLines =
     maxSummaryLines > 0 && summaryText
-      ? wrapText(summaryText, 52, maxSummaryLines, `topic ${topic.slug} summary`)
+      ? wrapText(
+          summaryText,
+          52,
+          maxSummaryLines,
+          `topic ${topic.slug} summary`
+        )
       : []
 
   const summarySvg = summaryLines

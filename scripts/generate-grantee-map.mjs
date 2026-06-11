@@ -16,13 +16,7 @@ const __dirname = path.dirname(__filename)
 const root = path.resolve(__dirname, '..')
 
 const SOURCE_SVG = path.join(root, 'public', 'maps', 'world.svg')
-const OUTPUT_DIR = path.join(
-  root,
-  'public',
-  'static',
-  'images',
-  'newsletter'
-)
+const OUTPUT_DIR = path.join(root, 'public', 'static', 'images', 'newsletter')
 
 const WIDTH = 2400 // render width in pixels
 
@@ -30,10 +24,46 @@ const HIGHLIGHT_COLOR = '#f97316' // tailwind orange-500
 
 // Keep this in sync with components/GranteeMap.tsx
 const GRANTEE_COUNTRY_CODES = [
-  'US', 'CA', 'DE', 'GB', 'IT', 'JP', 'NL', 'CH', 'CN', 'BR',
-  'AR', 'IE', 'HK', 'GE', 'SE', 'ES', 'PT', 'NO', 'GR', 'AU',
-  'IN', 'SI', 'KR', 'FI', 'CZ', 'UG', 'BE', 'FR', 'VN', 'UA',
-  'TR', 'SV', 'NZ', 'HU', 'SK', 'NG', 'PA', 'RO', 'GT', 'ID',
+  'US',
+  'CA',
+  'DE',
+  'GB',
+  'IT',
+  'JP',
+  'NL',
+  'CH',
+  'CN',
+  'BR',
+  'AR',
+  'IE',
+  'HK',
+  'GE',
+  'SE',
+  'ES',
+  'PT',
+  'NO',
+  'GR',
+  'AU',
+  'IN',
+  'SI',
+  'KR',
+  'FI',
+  'CZ',
+  'UG',
+  'BE',
+  'FR',
+  'VN',
+  'UA',
+  'TR',
+  'SV',
+  'NZ',
+  'HU',
+  'SK',
+  'NG',
+  'PA',
+  'RO',
+  'GT',
+  'ID',
   'AE',
 ]
 
@@ -65,9 +95,7 @@ function buildStyledSvg(rawSvg, variant) {
 
   // Strip the inline width/height — viewBox alone gives resvg the aspect
   // ratio it needs and fitTo controls the output resolution.
-  svg = svg
-    .replace(/\s+width="[^"]+"/, '')
-    .replace(/\s+height="[^"]+"/, '')
+  svg = svg.replace(/\s+width="[^"]+"/, '').replace(/\s+height="[^"]+"/, '')
 
   // Make sure a viewBox exists; fall back to the original width/height
   // if mapsvg's source somehow ships without one.
@@ -81,9 +109,9 @@ function buildStyledSvg(rawSvg, variant) {
     }
   }
 
-  const highlightSelector = GRANTEE_COUNTRY_CODES
-    .map((code) => `#${escapeForCss(code)}`)
-    .join(', ')
+  const highlightSelector = GRANTEE_COUNTRY_CODES.map(
+    (code) => `#${escapeForCss(code)}`
+  ).join(', ')
 
   // Inject a stylesheet right after the opening <svg ...> tag. resvg-js
   // supports SVG <style> elements with simple selectors.
@@ -99,10 +127,7 @@ function buildStyledSvg(rawSvg, variant) {
     }
   `
 
-  return svg.replace(
-    /<svg([^>]*)>/,
-    `<svg$1><style><![CDATA[${css}]]></style>`
-  )
+  return svg.replace(/<svg([^>]*)>/, `<svg$1><style><![CDATA[${css}]]></style>`)
 }
 
 async function main() {
