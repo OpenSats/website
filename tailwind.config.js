@@ -101,6 +101,10 @@ module.exports = {
               color: theme('colors.gray.900'),
               borderLeftColor: theme('colors.gray.200'),
             },
+            // MDX wraps multi-line <cite> content in a paragraph, which would
+            // otherwise receive the auto-generated quotation marks
+            'blockquote cite p::before': { content: 'none' },
+            'blockquote cite p::after': { content: 'none' },
           },
         },
         dark: {

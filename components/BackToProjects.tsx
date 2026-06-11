@@ -6,7 +6,7 @@ const BackToProjects = () => {
       <Link
         href="/projects"
         aria-label="Back to projects"
-        className="text-primary"
+        className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
       >
         &larr; Back to projects
       </Link>
