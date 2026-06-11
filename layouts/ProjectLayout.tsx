@@ -128,7 +128,7 @@ export default function PageLayout({
                           current or historical balances. Sats are sent monthly
                           and spent on the work the grant was given for.{' '}
                           <Link href="/transparency" className="underline">
-                            Learn more
+                            Learn more &rarr;
                           </Link>
                         </span>
                       )}
