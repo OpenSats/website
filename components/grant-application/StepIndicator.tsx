@@ -23,7 +23,9 @@ export default function StepIndicator({
           return (
             <li
               key={step.id}
-              className="!m-0 flex items-center gap-2 !p-0 sm:gap-3"
+              className={`!m-0 flex items-center gap-2 !p-0 sm:gap-3 ${
+                i < steps.length - 1 ? 'min-w-0' : ''
+              }`}
             >
               <button
                 type="button"
@@ -41,7 +43,7 @@ export default function StepIndicator({
               </button>
               {i < steps.length - 1 && (
                 <span
-                  className={`hidden h-px sm:block sm:w-6 ${
+                  className={`hidden h-px min-w-0 shrink sm:block sm:w-6 ${
                     isCompleted
                       ? 'bg-orange-400'
                       : 'bg-gray-300 dark:bg-gray-600'
