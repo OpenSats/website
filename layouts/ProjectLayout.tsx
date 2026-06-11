@@ -93,7 +93,7 @@ export default function PageLayout({
             {totalSatsSent && (
               <div
                 className="pb-6 pt-14 text-center xl:w-48 xl:text-left"
-                title={`Total sats sent to ${title} by OpenSats`}
+                title={`Approximate total of sats sent to ${title} by OpenSats`}
               >
                 <div className="inline-flex flex-col">
                   <p className="flex items-center gap-2 text-2xl font-medium tabular-nums tracking-tight text-gray-600 dark:text-gray-300">
@@ -104,7 +104,7 @@ export default function PageLayout({
                     total sats sent
                     <Link
                       href="/transparency"
-                      title={`All-time sats sent to ${title}. See how OpenSats handles funds, reporting, and grants on our transparency page.`}
+                      title={`Approximate all-time sats sent to ${title}. These are past payouts, not balances. See how OpenSats handles funds, reporting, and grants on our transparency page.`}
                       aria-label="Learn more about total sats sent"
                       className="opacity-70 transition-opacity hover:opacity-100"
                     >
