@@ -16,9 +16,9 @@ totalSatsSent: 693072327
 announcementLink: '/blog/nostr-grants-july-2023#coracle'
 ---
 
-Coracle is a nostr web client built by [Hodlbod][lts]. It started as a social
-feed reader and now focuses on broadcast social media, relay management, and
-web of trust across desktop and mobile browsers.
+Coracle is a [nostr] web client built by [Hodlbod][lts]. It started as a social
+feed reader and now focuses on broadcast social media, [relay] management, and
+[web of trust][wot] across desktop and mobile browsers.
 
 > Much of nostr's novelty has to do with keys and digital signatures. But
 > focusing on the cryptographic aspects is, to me, actually something of a
@@ -28,7 +28,7 @@ web of trust across desktop and mobile browsers.
 > <cite>—[Hodlbod][impact-report]</cite>
 
 Consequently, Coracle puts the most effort into relay handling. Users can choose
-which relays receive a given note, and the outbox model figures out where to
+which relays receive a given note, and the [outbox model][outbox] figures out where to
 fetch posts from based on who you follow. Smarter fallback behavior keeps
 timelines loading even when individual relays go down. [Negentropy]-based sync
 makes refreshing feeds faster by only pulling what changed. A restored global
@@ -85,3 +85,7 @@ Clients][impact-report] impact report.
 [wave-1]: /blog/nostr-grants-july-2023#coracle
 [Welshman]: https://github.com/coracle-social/welshman
 [zooid]: https://github.com/coracle-social/zooid
+[nostr]: /topics/nostr
+[relay]: /topics/relays
+[wot]: /topics/web-of-trust
+[outbox] : /topics/outbox
