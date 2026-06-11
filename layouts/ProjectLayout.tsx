@@ -118,7 +118,7 @@ export default function PageLayout({
                         onClick={() => setShowSatsInfo((value) => !value)}
                         aria-label="Learn more about total sats sent"
                         aria-expanded={showSatsInfo}
-                        className="opacity-70 transition-opacity hover:opacity-100"
+                        className="p-0 opacity-70 transition-opacity hover:opacity-100"
                       >
                         <CircleQuestion className="h-3.5 w-3.5 fill-current" />
                       </button>
