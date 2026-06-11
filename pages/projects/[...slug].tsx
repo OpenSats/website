@@ -77,7 +77,8 @@ export default function ProjectPage({
             </PageActionLink>
           )}
           {(() => {
-            const heartbeatUrl = getHeartbeatUrl(project.git)
+            const heartbeatUrl =
+              project.heartbeat || getHeartbeatUrl(project.git)
             return heartbeatUrl ? (
               <PageActionLink
                 variant="outlineMuted"
