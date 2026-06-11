@@ -92,8 +92,8 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           />
           <span>
             My track record meets the LTS criteria above, and a{' '}
-            <CustomLink href="/apply/grant">General Grant</CustomLink> would
-            not be the right fit for me
+            <CustomLink href="/apply/grant">General Grant</CustomLink> would not
+            be the right fit for me
           </span>
         </label>
       )}
