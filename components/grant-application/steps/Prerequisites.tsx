@@ -87,6 +87,28 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       />
       {watch('free_open_source') && <LicenseExplainer />}
 
+      {watch('LTS') && (
+        <>
+          <label className="inline-flex items-start gap-2">
+            <input
+              type="checkbox"
+              className={`mt-1 ${checkboxClass}`}
+              {...register('lts_right_fit', { required: true })}
+            />
+            <span>
+              My track record meets the LTS criteria above, and a{' '}
+              <CustomLink href="/apply/grant">General Grant</CustomLink> would
+              not be the right fit for me
+            </span>
+          </label>
+          <FieldError
+            errors={errors}
+            name="lts_right_fit"
+            message="LTS Grants are reserved for proven long-term contributors. If this does not describe you, please consider applying for a General Grant instead."
+          />
+        </>
+      )}
+
       <h2>Prepare Your Application</h2>
       <p>
         You can{' '}
