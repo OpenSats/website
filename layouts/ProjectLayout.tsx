@@ -124,10 +124,10 @@ export default function PageLayout({
                       </button>
                       {showSatsInfo && (
                         <span className="absolute left-1/2 top-full z-10 mt-2 block w-64 -translate-x-1/2 whitespace-normal rounded-lg bg-gray-900 p-3 text-left text-xs font-normal normal-case tracking-normal text-gray-100 shadow-lg dark:bg-gray-700">
-                          Approximate all-time sats sent to the project. These
-                          are past payouts and don't reflect current or
-                          historical balances. Sats are sent monthly and spent
-                          on the work the grant was given for.{' '}
+                          Numbers are accumulative past payouts and don't
+                          reflect current or historical balances. Sats are sent
+                          monthly and spent on the work the grant was given
+                          for.{' '}
                           <Link href="/transparency" className="underline">
                             Learn more
                           </Link>
