@@ -1,9 +1,25 @@
 import CustomLink from '@/components/Link'
-import FieldError from '../FieldError'
+import CheckboxGroupError from '../CheckboxGroupError'
 import LicenseExplainer from '../LicenseExplainer'
 import { StepProps, checkboxClass } from '../types'
 
 export default function Prerequisites({ register, watch, errors }: StepProps) {
+  const isLts = watch('LTS')
+  const checkboxFields = isLts
+    ? ([
+        'read_criteria',
+        'read_faq',
+        'has_references',
+        'free_open_source',
+        'lts_right_fit',
+      ] as const)
+    : ([
+        'read_criteria',
+        'read_faq',
+        'has_references',
+        'free_open_source',
+      ] as const)
+
   return (
     <>
       <h2>Before You Begin</h2>
@@ -24,11 +40,6 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           <CustomLink href="/apply#criteria">application criteria</CustomLink>
         </span>
       </label>
-      <FieldError
-        errors={errors}
-        name="read_criteria"
-        message="Please read the application criteria before continuing"
-      />
 
       <label className="inline-flex items-start gap-2">
         <input
@@ -41,11 +52,6 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           <CustomLink href="/faq/application">Application FAQ</CustomLink>
         </span>
       </label>
-      <FieldError
-        errors={errors}
-        name="read_faq"
-        message="Please read the Application FAQ before continuing"
-      />
 
       <label className="inline-flex items-start gap-2">
         <input
@@ -61,11 +67,6 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           from people familiar with my work are required
         </span>
       </label>
-      <FieldError
-        errors={errors}
-        name="has_references"
-        message="Please prepare your reference letters before continuing. Reference letters can be included as part of your application or emailed to references@opensats.org once your application is submitted. The evaluation of your application will not start until we have two references."
-      />
 
       <label className="inline-flex items-start gap-2">
         <input
@@ -80,12 +81,24 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           </CustomLink>
         </span>
       </label>
-      <FieldError
-        errors={errors}
-        name="free_open_source"
-        message="Your project must be free and open-source to be eligible"
-      />
       {watch('free_open_source') && <LicenseExplainer />}
+
+      {isLts && (
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('lts_right_fit', { required: true })}
+          />
+          <span>
+            My track record meets the LTS criteria above, and a{' '}
+            <CustomLink href="/apply/grant">General Grant</CustomLink> would not
+            be the right fit for me
+          </span>
+        </label>
+      )}
+
+      <CheckboxGroupError errors={errors} names={checkboxFields} />
 
       <h2>Prepare Your Application</h2>
       <p>

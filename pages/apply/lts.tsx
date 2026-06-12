@@ -1,10 +1,14 @@
+import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
-import LTSApplicationForm from '@/components/LTSApplicationForm'
-import Link from '@/components/Link'
 import CustomLink from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import ClosedNotice from '@/components/ClosedNotice'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
+
+const LTSApplicationForm = dynamic(
+  () => import('@/components/LTSApplicationForm'),
+  { ssr: false }
+)
 
 export default function Apply() {
   return (
@@ -47,10 +51,14 @@ export default function Apply() {
             be able to work collaboratively and constructively with potential
             users and other open-source contributors.
           </li>
+          <li>
+            show a clear step up over regular grants and renewals. LTS Grants
+            are reserved for proven contributors with a long-term track record.
+          </li>
         </ul>
         <p>
           If the above does not apply to you, please consider applying for a{' '}
-          <Link href="/apply/grant">General Grant</Link> instead.
+          <CustomLink href="/apply/grant">General Grant</CustomLink> instead.
         </p>
         <ClosedNotice />
         {areApplicationsOpen() && <LTSApplicationForm />}

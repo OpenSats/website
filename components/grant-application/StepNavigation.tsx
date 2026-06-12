@@ -5,6 +5,7 @@ interface StepNavigationProps {
   onNext: () => void
   onSubmit: () => void
   loading: boolean
+  submitLabel: string
 }
 
 export default function StepNavigation({
@@ -14,6 +15,7 @@ export default function StepNavigation({
   onNext,
   onSubmit,
   loading,
+  submitLabel,
 }: StepNavigationProps) {
   const isLast = currentStep === totalSteps - 1
 
@@ -44,7 +46,7 @@ export default function StepNavigation({
           aria-busy={loading}
           className="cursor-not-allowed rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white opacity-50"
         >
-          {loading ? 'Submitting...' : 'Submit Grant Application'}
+          {loading ? 'Submitting...' : submitLabel}
         </button>
       ) : (
         <button
