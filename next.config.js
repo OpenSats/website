@@ -121,6 +121,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/projects/flotilla',
+          destination: '/projects/coracle',
+          permanent: true,
+        },
+        {
           source: '/topics/splicing',
           destination: '/topics/channel-splicing',
           permanent: true,
