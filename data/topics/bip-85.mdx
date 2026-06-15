@@ -1,0 +1,19 @@
+---
+title: 'BIP 85'
+summary: 'A standard for deriving independent child entropy, mnemonics, and seeds from one master BIP 32 root key.'
+category: 'Bitcoin'
+aliases: ['BIP85', 'deterministic entropy', 'child mnemonics', 'derived seeds']
+---
+
+BIP 85 defines a way to derive fresh wallet entropy from one master BIP 32 root key. One root seed can produce separate child secrets for different devices, apps, and use cases, while still giving the user one backup to keep safe.
+
+The standard derives a hardened child key and runs it through HMAC-SHA512 to produce application-specific entropy. Wallets can turn that entropy into a 12-word, 18-word, or 24-word BIP 39 mnemonic, an HD seed, a WIF, or other formats covered by the spec. Each child output stays isolated from the others, so one exposed child mnemonic does not expose the parent seed or sibling children.
+
+BIP 85 is useful for people who want separate wallets for spending, savings, testing, or signing devices without managing a growing stack of backups. It also shows up in tools like [Specter DIY](/blog/seventeenth-wave-of-bitcoin-grants#specter-diy), which added support for BIP 85 derived seeds as part of its broader device roadmap.
+
+## References
+
+- [BIP 85](https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki)
+- [BIP 39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
+- [BIP 32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
+- [bips.dev: BIP 85 rendered](https://bips.dev/85/)
