@@ -9,7 +9,7 @@ CoinJoinXT is a proposed Bitcoin privacy protocol that extends the basic idea be
 
 That structure aims to make the resulting on-chain footprint look less like a single obvious mix. If the graph blends in with ordinary transaction activity, chain analysis has a harder time identifying where the coordinated protocol starts and ends. Some designs also preserve CoinJoin-style ambiguity even after the construction is recognized, because observers still cannot reliably match equal-valued outputs back to specific inputs.
 
-The tradeoffs are extra block space, more coordination, and stricter transaction requirements. Early CoinJoinXT designs leaned on SegWit to avoid transaction malleability problems, and later writeups describe variants that would benefit from Schnorr-style aggregated signing. CoinJoinXT remains a research direction rather than a widely deployed wallet feature, though JoinMarket contributors and other privacy researchers have published design notes and proof-of-concept code.
+The tradeoffs are extra block space, more coordination, and stricter transaction requirements. Early CoinJoinXT designs leaned on [SegWit][/topics/segwit] to avoid transaction malleability problems, and later writeups describe variants that would benefit from [Schnorr][/topics/taproot]-style aggregated signing. CoinJoinXT remains a research direction rather than a widely deployed wallet feature, though JoinMarket contributors and other privacy researchers have published design notes and proof-of-concept code.
 
 ## References
 
