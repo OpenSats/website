@@ -6,7 +6,7 @@ aliases:
   ['Wallet Import Format', 'wallet import format', 'wallet export format']
 ---
 
-`WIF` stands for Wallet Import Format. It is the standard Base58Check encoding for a single Bitcoin private key, used when a wallet needs to import, export, sweep, or recover one key directly.
+`WIF` stands for Wallet Import Format. It is the standard [Base58Check](/topics/base58) encoding for a single Bitcoin private key, used when a wallet needs to import, export, sweep, or recover one key directly.
 
 A WIF string wraps the raw 32-byte private key with a network prefix, an optional compression marker, and a checksum. On mainnet, that prefix is `0x80`. The checksum helps catch copy errors, and the compression marker tells software whether the key should be used with compressed public keys. That is why mainnet WIF strings often start with `5`, `K`, or `L`, while testnet WIF strings often start with `9` or `c`.
 
