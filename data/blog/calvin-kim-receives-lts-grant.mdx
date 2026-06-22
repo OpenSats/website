@@ -7,3 +7,72 @@ authors: ['arvin', 'tuma']
 images: ['/static/images/blog/TODO.jpg']
 summary: 'OpenSats Welcomes Calvin Kim as an LTS Grantee.'
 ---
+
+OpenSats is pleased to announce its long-term support for [Calvin Kim] in
+recognition of his ongoing work on Bitcoin client diversity and making nodes
+easier to run.
+
+Anyone can run a Bitcoin node using software that independently verifies every
+transaction without trusting a third party. [Bitcoin Core] is the dominant node
+software today, but having more than one viable option is healthy for the
+overall decentralized network.
+
+Calvin is among the leading contributors to [btcd], an alternative node software
+written in the [Go] programming language. Parts of btcd are reused by other
+Bitcoin software, including the [lnd] Lightning implementation, which is built
+with btcd's code libraries. People who use that software are relying on Calvin's
+work, often without knowing it.
+
+His work on btcd has been the unglamorous kind that keeps software dependable.
+He made btcd lighter to run and faster to start up, adding the ability to [run a
+node on smaller hard drives], and bringing its [startup sync] in line with
+modern, faster methods. He also [sped up how the software checks new blocks] and
+fixed a long list of bugs along the way.
+
+Beyond btcd, Calvin is working on a newer approach for reducing how much data a
+node has to store. He is the lead developer of [utreexod], a node software built
+around a cryptographic accumulator called [Utreexo]. A node has to store a
+record of every [unspent coin] in existence so it can tell real coins from fake
+ones, and that record keeps growing. Utreexo shrinks that record dramatically by
+replacing it with a compact cryptographic summary, small enough to verify the
+whole chain on something as modest as [a cheap, low-power computer]. This lowers
+the cost and effort of verifying Bitcoin for yourself, keeping barriers low for
+people who want to run their own node. Calvin wrote the technical specifications
+([BIPs 181, 182, and 183]) that define how it works so that other developers can
+build compatible software.
+
+With this grant, Calvin will continue his work across btcd and utreexod,
+including:
+
+- Maintaining btcd and bringing new features, such as faster block download.
+- Building tools unique to btcd, including support for direct connections with
+  popular wallet software, continuing the work that lets nodes run on minimal
+  hardware.
+- Launching the first public test version of utreexod alongside the team behind
+  [Floresta], putting these ideas in front of real users for the first time.
+
+OpenSats' [mission] is to provide sustainable funding for the builders and
+maintainers of critical open-source infrastructure within the Bitcoin ecosystem.
+
+The [Long-Term Support program] is made possible by the generosity of our
+donors. To continue supporting contributors like Calvin and our [other LTS
+grantees], consider making a recurring donation to the [General Fund].
+
+[Calvin Kim]: https://github.com/kcalvinalvin
+[Bitcoin Core]: /projects/bitcoin-core
+[btcd]: https://github.com/btcsuite/btcd
+[Go]: https://go.dev/
+[lnd]: https://github.com/lightningnetwork/lnd
+[run a node on smaller hard drives]: https://github.com/btcsuite/btcd/pull/1971
+[startup sync]: https://github.com/btcsuite/btcd/pull/2428
+[sped up how the software checks new blocks]: https://github.com/btcsuite/btcd/pull/1955
+[utreexod]: /projects/utreexod
+[Utreexo]: /topics/utreexo
+[unspent coin]: /topics/utxo
+[a cheap, low-power computer]: https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/
+[BIPs 181, 182, and 183]: https://github.com/bitcoin/bips/pull/1923
+[Floresta]: /projects/floresta
+[mission]: /mission
+[Long-Term Support program]: /blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors
+[other LTS grantees]: /tags/lts
+[General Fund]: https://adtjkuks.donorsupport.co/page/opensats
