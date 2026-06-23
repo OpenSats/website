@@ -8,7 +8,7 @@ aliases:
 
 BIP 32 is the standard for hierarchical deterministic wallets. Instead of storing a pile of unrelated private keys, a BIP 32 wallet derives a whole tree of keys from one master seed. That gives wallets a common structure for accounts, branches, and address chains, and it removes the need to back up every new key separately.
 
-It also defines extended keys. An extended private key (`xprv`) can derive child private keys and child public keys. A matching extended public key (`xpub`) can derive child public keys only, which makes watch-only wallets, accounting systems, and multisig coordinators possible without exposing spending keys.
+It also defines extended keys. An extended private key (`xprv`) can derive child private keys and child public keys. A matching extended public key (`xpub`) can derive child public keys only, which makes watch-only wallets, accounting systems, and multisig coordinators possible without exposing spending keys. Those serialized `xpub` and `xprv` strings are usually [Base58Check](/topics/base58) encodings with version bytes that identify the extended key type.
 
 BIP 32 also distinguishes between normal and hardened child derivation. Normal child keys can be derived from an `xpub`. Hardened child keys cannot, which is why common wallet paths mark account-level steps with `h`, `'`, or `H`. That split lets wallets share some branches safely while keeping higher-level secrets private.
 
