@@ -31,9 +31,7 @@ fixed a long list of bugs along the way.
 
 Beyond btcd, Calvin is working on a newer approach for reducing how much data a
 node has to store. He is the lead developer of [utreexod], a node software built
-around a cryptographic accumulator called [Utreexo]. A node has to store a
-record of every [unspent coin] in existence so it can tell real coins from fake
-ones, and that record keeps growing. Utreexo shrinks that record dramatically by
+around a cryptographic accumulator called [Utreexo]. A node has to maintain a record of every [unspent coin] in existence so it can tell valid spends from invalid or double-spent ones, and that record tends to grow over time. Utreexo shrinks that record dramatically by
 replacing it with a compact cryptographic summary, small enough to verify the
 whole chain on something as modest as [a cheap, low-power computer]. This lowers
 the cost and effort of verifying Bitcoin for yourself, keeping barriers low for
