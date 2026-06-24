@@ -31,13 +31,15 @@ fixed a long list of bugs along the way.
 
 Beyond btcd, Calvin is working on a newer approach for reducing how much data a
 node has to store. He is the lead developer of [utreexod], a node software built
-around a cryptographic accumulator called [Utreexo]. A node has to maintain a record of every [unspent coin] in existence so it can tell valid spends from invalid or double-spent ones, and that record tends to grow over time. Utreexo shrinks that record dramatically by
-replacing it with a compact cryptographic summary, small enough to verify the
-whole chain on something as modest as [a cheap, low-power computer]. This lowers
-the cost and effort of verifying Bitcoin for yourself, keeping barriers low for
-people who want to run their own node. Calvin wrote the technical specifications
-([BIPs 181, 182, and 183]) that define how it works so that other developers can
-build compatible software.
+around a cryptographic accumulator called [Utreexo]. A node has to maintain a
+record of every [unspent coin] in existence so it can tell valid spends from
+invalid or double-spent ones, and that record tends to grow over time. Utreexo
+shrinks that record dramatically by replacing it with a compact cryptographic
+summary, small enough to verify the whole chain on something as modest as [a
+cheap, low-power computer]. This lowers the cost and effort of verifying Bitcoin
+for yourself, keeping barriers low for people who want to run their own node.
+Calvin wrote the technical specifications ([BIPs 181, 182, and 183]) that define
+how it works so that other developers can build compatible software.
 
 With this grant, Calvin will continue his work across btcd and utreexod,
 including:
