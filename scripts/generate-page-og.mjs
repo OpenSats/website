@@ -204,9 +204,14 @@ function estimateTextWidth(text, fontSize) {
 function segmentsToWords(segments) {
   const words = []
   for (const segment of segments) {
+    if (segment.highlight) {
+      words.push({ text: segment.text, highlight: true, atomic: true })
+      continue
+    }
+
     for (const part of segment.text.split(/(\s+)/)) {
       if (part) {
-        words.push({ text: part, highlight: segment.highlight })
+        words.push({ text: part, highlight: false, atomic: false })
       }
     }
   }
@@ -238,6 +243,12 @@ function layoutHighlightedSentence(segments, options) {
       !isSpace &&
       currentWidth + width > maxWidth
     ) {
+      lines.push(currentLine)
+      currentLine = []
+      currentWidth = 0
+    }
+
+    if (word.atomic && currentWidth + width > maxWidth && currentLine.length) {
       lines.push(currentLine)
       currentLine = []
       currentWidth = 0
