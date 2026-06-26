@@ -4,6 +4,10 @@ import {
   resolveLifetimeStats,
 } from '../utils/lifetimeStats.ts'
 import {
+  renderGranteeMapDataUri,
+  WORLD_MAP_ASPECT,
+} from './lib/grantee-map.mjs'
+import {
   ROOT,
   OG_WIDTH,
   OG_HEIGHT,
@@ -17,6 +21,7 @@ import {
   hashString,
   loadContentlayerIndex,
   loadFaviconDataUri,
+  networkDecor,
   renderSvgToPng,
   wrapText,
   writePng,
@@ -188,6 +193,74 @@ function renderTransparencySvg(stats) {
   `
 }
 
+function renderMapSvg(mapDataUri) {
+  const pageUrl = 'opensats.org/map'
+  const seed = hashString('page:map')
+
+  const mapWidth = 560
+  const mapHeight = mapWidth / WORLD_MAP_ASPECT
+  const mapX = OG_WIDTH - PADDING - mapWidth
+  const mapY = (OG_HEIGHT - mapHeight - 48) / 2 - 16
+
+  const logoSize = 72
+  const logoX = PADDING
+  const logoY = PADDING + 8
+  const titleStartY = logoY + logoSize + 72
+  const summaryStartY = titleStartY + 72
+  const urlY = 568
+  const separatorY = urlY - 36
+
+  const summaryLines = wrapText(
+    'Countries where OpenSats has awarded grants.',
+    24,
+    3,
+    'page map summary'
+  )
+
+  const summarySvg = summaryLines
+    .map(
+      (line, index) =>
+        `<tspan x="${PADDING}" dy="${
+          index === 0 ? 0 : 38
+        }">${escapeXml(line)}</tspan>`
+    )
+    .join('')
+
+  const networkSvg = networkDecor({
+    seed,
+    minX: mapX - 40,
+    maxX: OG_WIDTH - 30,
+    minY: 40,
+    maxY: OG_HEIGHT - 60,
+    spacing: 60,
+    jitter: 14,
+    dropRate: 0.22,
+    centerOffsetX: 0,
+    centerOffsetY: 0,
+    fadeFactor: 1.0,
+  })
+
+  return `
+    <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${COLORS.background}" />
+      ${networkSvg}
+
+      <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
+
+      <text x="${PADDING}" y="${titleStartY}" fill="${COLORS.title}" font-size="88" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-3">Map</text>
+
+      <text x="${PADDING}" y="${summaryStartY}" fill="${COLORS.summary}" font-size="28" font-family="${INTER_FONT_FAMILY}">
+        ${summarySvg}
+      </text>
+
+      <image href="${mapDataUri}" x="${mapX}" y="${mapY}" width="${mapWidth}" height="${mapHeight}" />
+
+      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${COLORS.separator}" />
+      <text x="${PADDING}" y="${urlY}" fill="${COLORS.url}" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(pageUrl)}</text>
+    </svg>
+  `
+}
+
 async function writeImage(slug, svg) {
   await writePng(path.join(outputDir, `${slug}.png`), renderSvgToPng(svg))
 }
@@ -198,6 +271,16 @@ async function main() {
 
   const pages = await loadContentlayerIndex('Pages')
   const transparencyStats = await resolveLifetimeStats()
+  const mapDataUri = await renderGranteeMapDataUri(
+    {
+      base: '#e5e7eb',
+      baseOpacity: 1,
+      highlight: COLORS.accent,
+      stroke: '#ffffff',
+      strokeWidth: 0.5,
+    },
+    900
+  )
 
   let written = 0
   for (const page of pages) {
@@ -213,7 +296,11 @@ async function main() {
   }
 
   for (const page of EXTRA_PAGES) {
-    await writeImage(page.slug, renderPageSvg(page))
+    if (page.slug === 'map') {
+      await writeImage('map', renderMapSvg(mapDataUri))
+    } else {
+      await writeImage(page.slug, renderPageSvg(page))
+    }
     written += 1
   }
 
