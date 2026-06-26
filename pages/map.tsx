@@ -97,6 +97,7 @@ export default function MapPage({
       <PageSEO
         title="Map - OpenSats"
         description="Countries where OpenSats has awarded grants."
+        slug="map"
       />
 
       <div>
