@@ -22,6 +22,7 @@ import {
   hashString,
   loadContentlayerIndex,
   loadFaviconDataUri,
+  measureTextBBoxWithResvg,
   measureTextWidthWithResvg,
   networkDecor,
   renderSvgToPng,
@@ -261,23 +262,25 @@ function lineToRuns(line) {
   return runs
 }
 
+// Even padding inside the pill on both sides; a small gap separates the pill
+// from the following plain text so the two never touch.
+const HIGHLIGHT_PAD = 14
+const AFTER_HIGHLIGHT_GAP = 8
+
+function advanceWidth(text, fontSize) {
+  const { x, width } = measureTextBBoxWithResvg(text, fontSize)
+  return x + width
+}
+
 function tokenWidth(token, fontSize) {
   if (token.kind === 'highlight') {
-    return (
-      measureTextWidthWithResvg(token.text, fontSize) +
-      HIGHLIGHT_PAD_LEFT +
-      HIGHLIGHT_PAD_RIGHT
-    )
+    return advanceWidth(token.text, fontSize) + HIGHLIGHT_PAD * 2 + AFTER_HIGHLIGHT_GAP
   }
   if (token.atomic) {
     return measureTextWidthWithResvg(token.text, fontSize)
   }
   return measureText(token.text, fontSize)
 }
-
-const HIGHLIGHT_PAD_LEFT = 10
-const HIGHLIGHT_PAD_RIGHT = 3
-const AFTER_HIGHLIGHT_GAP = 8
 
 function layoutHighlightedSentence(segments, options) {
   const {
@@ -345,9 +348,16 @@ function layoutHighlightedSentence(segments, options) {
 
     for (const run of lineToRuns(trimmed)) {
       if (run.kind === 'highlight') {
-        const pillWidth = measureTextWidthWithResvg(run.text, fontSize)
-        const rectWidth = pillWidth + HIGHLIGHT_PAD_LEFT + HIGHLIGHT_PAD_RIGHT
-        svg += `<rect x="${xCursor - HIGHLIGHT_PAD_LEFT}" y="${
+        const { x: inkX, width: inkWidth } = measureTextBBoxWithResvg(
+          run.text,
+          fontSize
+        )
+        // Anchor the pill on the actual ink so left/right padding is equal,
+        // independent of the glyph's left side bearing.
+        const inkLeft = xCursor + inkX
+        const rectX = inkLeft - HIGHLIGHT_PAD
+        const rectWidth = inkWidth + HIGHLIGHT_PAD * 2
+        svg += `<rect x="${rectX}" y="${
           lineY - fontSize - padY + 8
         }" width="${rectWidth}" height="${
           fontSize + padY * 2
@@ -355,7 +365,7 @@ function layoutHighlightedSentence(segments, options) {
         svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
           run.text
         )}</text>`
-        xCursor += pillWidth + HIGHLIGHT_PAD_RIGHT + AFTER_HIGHLIGHT_GAP
+        xCursor = rectX + rectWidth + AFTER_HIGHLIGHT_GAP
         continue
       }
 

@@ -271,13 +271,17 @@ export function renderSvgToPng(svg) {
   return resvg.render().asPng()
 }
 
-const textWidthCache = new Map()
+const textBBoxCache = new Map()
 
-/** Measure rendered text width using the same Inter + resvg stack as OG output. */
-export function measureTextWidthWithResvg(text, fontSize) {
+/**
+ * Measure rendered text using the same Inter + resvg stack as OG output.
+ * Returns the ink bounding box relative to a glyph origin at x=0, so callers
+ * can account for the left side bearing when drawing tight highlight pills.
+ */
+export function measureTextBBoxWithResvg(text, fontSize) {
   const key = `${fontSize}\0${text}`
-  if (textWidthCache.has(key)) {
-    return textWidthCache.get(key)
+  if (textBBoxCache.has(key)) {
+    return textBBoxCache.get(key)
   }
 
   const svgHeight = Math.ceil(fontSize * 2)
@@ -292,9 +296,14 @@ export function measureTextWidthWithResvg(text, fontSize) {
     },
   })
   const bbox = resvg.getBBox()
-  const width = bbox?.width ?? 0
-  textWidthCache.set(key, width)
-  return width
+  const result = { x: bbox?.x ?? 0, width: bbox?.width ?? 0 }
+  textBBoxCache.set(key, result)
+  return result
+}
+
+/** Measure rendered text width using the same Inter + resvg stack as OG output. */
+export function measureTextWidthWithResvg(text, fontSize) {
+  return measureTextBBoxWithResvg(text, fontSize).width
 }
 
 // Removes and recreates the directory so stale output never ships.
