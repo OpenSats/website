@@ -3,10 +3,7 @@ import { allPages } from 'contentlayer/generated'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { MDXComponents } from '@/components/MDXComponents'
 import LifetimeStats from '@/components/LifetimeStats'
-import {
-  resolveLifetimeStats,
-  type LifetimeStat,
-} from '@/utils/lifetimeStats'
+import { resolveLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 const DEFAULT_LAYOUT = 'PageLayout'
 
