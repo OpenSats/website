@@ -271,6 +271,32 @@ export function renderSvgToPng(svg) {
   return resvg.render().asPng()
 }
 
+const textWidthCache = new Map()
+
+/** Measure rendered text width using the same Inter + resvg stack as OG output. */
+export function measureTextWidthWithResvg(text, fontSize) {
+  const key = `${fontSize}\0${text}`
+  if (textWidthCache.has(key)) {
+    return textWidthCache.get(key)
+  }
+
+  const svgHeight = Math.ceil(fontSize * 2)
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="${svgHeight}">
+    <text x="0" y="${fontSize}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(text)}</text>
+  </svg>`
+  const resvg = new Resvg(svg, {
+    font: {
+      fontFiles: INTER_FONT_FILES,
+      loadSystemFonts: false,
+      defaultFontFamily: INTER_FONT_FAMILY,
+    },
+  })
+  const bbox = resvg.getBBox()
+  const width = bbox?.width ?? 0
+  textWidthCache.set(key, width)
+  return width
+}
+
 // Removes and recreates the directory so stale output never ships.
 export async function ensureCleanDir(dir) {
   await fs.rm(dir, { recursive: true, force: true })

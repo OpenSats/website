@@ -22,6 +22,7 @@ import {
   hashString,
   loadContentlayerIndex,
   loadFaviconDataUri,
+  measureTextWidthWithResvg,
   networkDecor,
   renderSvgToPng,
   wrapText,
@@ -214,21 +215,14 @@ function measureText(text, fontSize) {
 function buildRenderTokens(segments) {
   const tokens = []
 
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i]
-    const next = segments[i + 1]
-
+  for (const segment of segments) {
     if (segment.highlight) {
-      const glue =
-        next && !next.highlight && /^\s+(to|in)\s+$/.test(next.text)
-          ? next.text.trimStart()
-          : ''
-      tokens.push({
-        kind: 'highlight',
-        text: segment.text,
-        glue,
-      })
-      if (glue) i += 1
+      tokens.push({ kind: 'highlight', text: segment.text, atomic: true })
+      continue
+    }
+
+    if (/^\s+(to|in)\s+$/.test(segment.text)) {
+      tokens.push({ kind: 'plain', text: segment.text, atomic: true })
       continue
     }
 
@@ -247,7 +241,7 @@ function lineToRuns(line) {
   let plain = ''
 
   for (const token of line) {
-    if (token.kind === 'plain') {
+    if (token.kind === 'plain' && !token.atomic) {
       plain += token.text
       continue
     }
@@ -256,6 +250,7 @@ function lineToRuns(line) {
       runs.push({ kind: 'plain', text: plain })
       plain = ''
     }
+
     runs.push(token)
   }
 
@@ -268,10 +263,21 @@ function lineToRuns(line) {
 
 function tokenWidth(token, fontSize) {
   if (token.kind === 'highlight') {
-    return measureText(token.text + (token.glue || ''), fontSize)
+    return (
+      measureTextWidthWithResvg(token.text, fontSize) +
+      HIGHLIGHT_PAD_LEFT +
+      HIGHLIGHT_PAD_RIGHT
+    )
+  }
+  if (token.atomic) {
+    return measureTextWidthWithResvg(token.text, fontSize)
   }
   return measureText(token.text, fontSize)
 }
+
+const HIGHLIGHT_PAD_LEFT = 10
+const HIGHLIGHT_PAD_RIGHT = 3
+const AFTER_HIGHLIGHT_GAP = 8
 
 function layoutHighlightedSentence(segments, options) {
   const {
@@ -282,7 +288,6 @@ function layoutHighlightedSentence(segments, options) {
     lineHeight,
     textColor,
     highlightBg = HIGHLIGHT_BG,
-    padX = 8,
     padY = 8,
   } = options
 
@@ -306,7 +311,7 @@ function layoutHighlightedSentence(segments, options) {
     }
 
     if (
-      token.kind === 'highlight' &&
+      token.atomic &&
       currentWidth + width > maxWidth &&
       currentLine.length
     ) {
@@ -340,30 +345,27 @@ function layoutHighlightedSentence(segments, options) {
 
     for (const run of lineToRuns(trimmed)) {
       if (run.kind === 'highlight') {
-        const textWidth = measureText(run.text, fontSize)
-        svg += `<rect x="${xCursor - padX}" y="${
+        const pillWidth = measureTextWidthWithResvg(run.text, fontSize)
+        const rectWidth = pillWidth + HIGHLIGHT_PAD_LEFT + HIGHLIGHT_PAD_RIGHT
+        svg += `<rect x="${xCursor - HIGHLIGHT_PAD_LEFT}" y="${
           lineY - fontSize - padY + 8
-        }" width="${textWidth + padX * 2}" height="${
+        }" width="${rectWidth}" height="${
           fontSize + padY * 2
         }" rx="10" fill="${highlightBg}" />`
         svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
           run.text
         )}</text>`
-        xCursor += textWidth
-
-        if (run.glue) {
-          svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
-            run.glue
-          )}</text>`
-          xCursor += measureText(run.glue, fontSize)
-        }
+        xCursor += pillWidth + HIGHLIGHT_PAD_RIGHT + AFTER_HIGHLIGHT_GAP
         continue
       }
 
       svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
         run.text
       )}</text>`
-      xCursor += measureText(run.text, fontSize)
+      xCursor +=
+        run.kind === 'plain' && run.atomic
+          ? measureTextWidthWithResvg(run.text, fontSize)
+          : measureText(run.text, fontSize)
     }
 
     lineY += lineHeight
