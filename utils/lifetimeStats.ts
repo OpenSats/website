@@ -37,6 +37,24 @@ export function formatLifetimeStatDisplay(
   return formatted
 }
 
+/** Matches the country count shown in StatsSentence (`40+ countries`). */
+export const STATS_COUNTRY_COUNT = 40
+
+export function formatStatsSentenceValues(stats: LifetimeStat[]) {
+  return {
+    grantsGiven: formatNumber(stats[0]?.value ?? 0),
+    usdAllocated: Math.round(stats[1]?.value ?? 0).toLocaleString(),
+    satsSent: formatNumber(stats[2]?.value ?? 0).replace('B', 'billion'),
+    countryCount: STATS_COUNTRY_COUNT,
+  }
+}
+
+export function formatMapOgSentence(stats: LifetimeStat[]): string {
+  const { satsSent, grantsGiven, countryCount } =
+    formatStatsSentenceValues(stats)
+  return `OpenSats has sent ~${satsSent} sats to ${grantsGiven} grantees in ${countryCount}+ countries`
+}
+
 function coerceStatValue(value: unknown): number | null {
   if (typeof value === 'number' && Number.isFinite(value)) {
     return value
