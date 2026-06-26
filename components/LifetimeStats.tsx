@@ -1,11 +1,16 @@
 import React from 'react'
 import {
   formatLifetimeStatDisplay,
+  type LifetimeStat,
   useAnimatedLifetimeStats,
 } from '@/utils/lifetimeStats'
 
-const LifetimeStats = () => {
-  const items = useAnimatedLifetimeStats()
+type LifetimeStatsProps = {
+  initialStats?: LifetimeStat[] | null
+}
+
+const LifetimeStats = ({ initialStats }: LifetimeStatsProps) => {
+  const items = useAnimatedLifetimeStats(initialStats)
 
   return (
     <div className="py-4">

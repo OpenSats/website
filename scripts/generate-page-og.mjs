@@ -1,8 +1,7 @@
 import path from 'node:path'
 import {
   formatLifetimeStatDisplay,
-  getLifetimeStats,
-  normalizeLifetimeStats,
+  resolveLifetimeStats,
 } from '../utils/lifetimeStats.ts'
 import {
   ROOT,
@@ -198,7 +197,7 @@ async function main() {
   faviconDataUri = await loadFaviconDataUri()
 
   const pages = await loadContentlayerIndex('Pages')
-  const transparencyStats = normalizeLifetimeStats(await getLifetimeStats())
+  const transparencyStats = await resolveLifetimeStats()
 
   let written = 0
   for (const page of pages) {
