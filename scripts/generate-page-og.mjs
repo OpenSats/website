@@ -1,5 +1,10 @@
 import path from 'node:path'
 import {
+  formatLifetimeStatDisplay,
+  getLifetimeStats,
+  normalizeLifetimeStats,
+} from '../utils/lifetimeStats.ts'
+import {
   ROOT,
   OG_WIDTH,
   OG_HEIGHT,
@@ -18,11 +23,10 @@ import {
   writePng,
 } from './lib/og-network.mjs'
 
-// Generates per-slug OG images for static MDX-driven pages
-// (data/pages/*.mdx). Visually it's the topic OG template — same light
-// surface, network decoration, Inter type — so every standalone page
-// gets a coherent, on-brand share card without falling back to the
-// generic default.
+// Generates per-slug OG images for MDX-driven pages (data/pages/*.mdx) and a
+// small set of TSX-only routes. Visually it's the topic OG template — same
+// light surface, network decoration, Inter type — except transparency, which
+// foregrounds the three lifetime stats shown on the live page.
 const outputDir = path.join(ROOT, 'public', 'static', 'images', 'pages', 'og')
 
 // Most page slugs collide 1:1 with their URL path. The exceptions all
@@ -33,6 +37,15 @@ const SLUG_TO_URL_PATH = {
   'faq-grantees': 'faq/grantee',
   'report-success': 'reports/success',
 }
+
+// TSX-only routes that are not backed by data/pages/*.mdx.
+const EXTRA_PAGES = [
+  {
+    slug: 'map',
+    title: 'Map',
+    summary: 'Countries where OpenSats has awarded grants.',
+  },
+]
 
 // Utility / legal / form-result pages that don't benefit from a custom
 // social card and look better falling back to the default brand OG.
@@ -133,6 +146,49 @@ function renderPageSvg(page) {
   `
 }
 
+function renderTransparencySvg(stats) {
+  const pageUrl = 'opensats.org/transparency'
+  const seed = hashString('page:transparency')
+
+  const logoSize = 72
+  const logoX = PADDING
+  const logoY = PADDING + 8
+  const titleX = logoX + logoSize + 24
+  const titleY = logoY + logoSize / 2 + 18
+
+  const colWidth = CONTENT_WIDTH / 3
+  const numberY = 360
+  const labelY = 430
+  const urlY = 568
+  const separatorY = urlY - 36
+
+  const statColumns = stats
+    .map((stat, index) => {
+      const centerX = PADDING + colWidth * index + colWidth / 2
+      const value = formatLifetimeStatDisplay(index, stat.value)
+      return `
+        <text x="${centerX}" y="${numberY}" fill="${COLORS.accent}" font-size="56" font-weight="700" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(value)}</text>
+        <text x="${centerX}" y="${labelY}" fill="${COLORS.summary}" font-size="26" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(stat.label)}</text>
+      `
+    })
+    .join('')
+
+  return `
+    <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
+      ${backgroundDecor(seed)}
+
+      <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
+
+      <text x="${titleX}" y="${titleY}" fill="${COLORS.title}" font-size="56" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-2">Transparency</text>
+
+      ${statColumns}
+
+      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${COLORS.separator}" />
+      <text x="${PADDING}" y="${urlY}" fill="${COLORS.url}" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(pageUrl)}</text>
+    </svg>
+  `
+}
+
 async function writeImage(slug, svg) {
   await writePng(path.join(outputDir, `${slug}.png`), renderSvgToPng(svg))
 }
@@ -142,18 +198,30 @@ async function main() {
   faviconDataUri = await loadFaviconDataUri()
 
   const pages = await loadContentlayerIndex('Pages')
+  const transparencyStats = normalizeLifetimeStats(await getLifetimeStats())
 
   let written = 0
   for (const page of pages) {
     if (SKIP_SLUGS.has(page.slug)) continue
+
+    if (page.slug === 'transparency') {
+      await writeImage('transparency', renderTransparencySvg(transparencyStats))
+    } else {
+      await writeImage(page.slug, renderPageSvg(page))
+    }
+
+    written += 1
+  }
+
+  for (const page of EXTRA_PAGES) {
     await writeImage(page.slug, renderPageSvg(page))
     written += 1
   }
 
+  const skipped = pages.filter((page) => SKIP_SLUGS.has(page.slug)).length
+
   console.log(
-    `Generated ${written} page OG images (skipped ${
-      pages.length - written
-    } utility page${pages.length - written === 1 ? '' : 's'}).`
+    `Generated ${written} page OG images (skipped ${skipped} utility page${skipped === 1 ? '' : 's'}, plus ${EXTRA_PAGES.length} TSX route${EXTRA_PAGES.length === 1 ? '' : 's'}).`
   )
 }
 
