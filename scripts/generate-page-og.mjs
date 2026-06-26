@@ -197,25 +197,80 @@ function renderTransparencySvg(stats) {
 // Tailwind primary-100 — matches StatsSentence highlight pills on light bg.
 const HIGHLIGHT_BG = '#ffedd5'
 
-function estimateTextWidth(text, fontSize) {
-  return text.length * fontSize * 0.52
+function measureText(text, fontSize) {
+  let width = 0
+  for (const char of text) {
+    if (char === ' ') {
+      width += fontSize * 0.34
+    } else if (/[0-9~$+]/.test(char)) {
+      width += fontSize * 0.58
+    } else {
+      width += fontSize * 0.52
+    }
+  }
+  return width
 }
 
-function segmentsToWords(segments) {
-  const words = []
-  for (const segment of segments) {
+function buildRenderTokens(segments) {
+  const tokens = []
+
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i]
+    const next = segments[i + 1]
+
     if (segment.highlight) {
-      words.push({ text: segment.text, highlight: true, atomic: true })
+      const glue =
+        next && !next.highlight && /^\s+(to|in)\s+$/.test(next.text)
+          ? next.text.trimStart()
+          : ''
+      tokens.push({
+        kind: 'highlight',
+        text: segment.text,
+        glue,
+      })
+      if (glue) i += 1
       continue
     }
 
     for (const part of segment.text.split(/(\s+)/)) {
       if (part) {
-        words.push({ text: part, highlight: false, atomic: false })
+        tokens.push({ kind: 'plain', text: part })
       }
     }
   }
-  return words
+
+  return tokens
+}
+
+function lineToRuns(line) {
+  const runs = []
+  let plain = ''
+
+  for (const token of line) {
+    if (token.kind === 'plain') {
+      plain += token.text
+      continue
+    }
+
+    if (plain) {
+      runs.push({ kind: 'plain', text: plain })
+      plain = ''
+    }
+    runs.push(token)
+  }
+
+  if (plain) {
+    runs.push({ kind: 'plain', text: plain })
+  }
+
+  return runs
+}
+
+function tokenWidth(token, fontSize) {
+  if (token.kind === 'highlight') {
+    return measureText(token.text + (token.glue || ''), fontSize)
+  }
+  return measureText(token.text, fontSize)
 }
 
 function layoutHighlightedSentence(segments, options) {
@@ -227,16 +282,18 @@ function layoutHighlightedSentence(segments, options) {
     lineHeight,
     textColor,
     highlightBg = HIGHLIGHT_BG,
+    padX = 8,
+    padY = 8,
   } = options
 
-  const words = segmentsToWords(segments)
+  const tokens = buildRenderTokens(segments)
   const lines = []
   let currentLine = []
   let currentWidth = 0
 
-  for (const word of words) {
-    const width = estimateTextWidth(word.text, fontSize)
-    const isSpace = /^\s+$/.test(word.text)
+  for (const token of tokens) {
+    const width = tokenWidth(token, fontSize)
+    const isSpace = token.kind === 'plain' && /^\s+$/.test(token.text)
 
     if (
       currentLine.length &&
@@ -248,13 +305,17 @@ function layoutHighlightedSentence(segments, options) {
       currentWidth = 0
     }
 
-    if (word.atomic && currentWidth + width > maxWidth && currentLine.length) {
+    if (
+      token.kind === 'highlight' &&
+      currentWidth + width > maxWidth &&
+      currentLine.length
+    ) {
       lines.push(currentLine)
       currentLine = []
       currentWidth = 0
     }
 
-    currentLine.push(word)
+    currentLine.push(token)
     currentWidth += width
   }
 
@@ -266,29 +327,43 @@ function layoutHighlightedSentence(segments, options) {
   let lineY = y
 
   for (const line of lines) {
-    let xCursor = x
-
-    for (const word of line) {
-      const width = estimateTextWidth(word.text, fontSize)
-      if (word.highlight && word.text.trim()) {
-        const padX = 8
-        const padY = 6
-        svg += `<rect x="${xCursor - padX}" y="${
-          lineY - fontSize - padY + 6
-        }" width="${width + padX * 2}" height="${
-          fontSize + padY * 2
-        }" rx="8" fill="${highlightBg}" />`
-      }
-      xCursor += width
+    let trimmed = line
+    while (
+      trimmed.length &&
+      trimmed[0].kind === 'plain' &&
+      /^\s+$/.test(trimmed[0].text)
+    ) {
+      trimmed = trimmed.slice(1)
     }
 
-    xCursor = x
-    for (const word of line) {
-      const width = estimateTextWidth(word.text, fontSize)
+    let xCursor = x
+
+    for (const run of lineToRuns(trimmed)) {
+      if (run.kind === 'highlight') {
+        const textWidth = measureText(run.text, fontSize)
+        svg += `<rect x="${xCursor - padX}" y="${
+          lineY - fontSize - padY + 8
+        }" width="${textWidth + padX * 2}" height="${
+          fontSize + padY * 2
+        }" rx="10" fill="${highlightBg}" />`
+        svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
+          run.text
+        )}</text>`
+        xCursor += textWidth
+
+        if (run.glue) {
+          svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
+            run.glue
+          )}</text>`
+          xCursor += measureText(run.glue, fontSize)
+        }
+        continue
+      }
+
       svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
-        word.text
+        run.text
       )}</text>`
-      xCursor += width
+      xCursor += measureText(run.text, fontSize)
     }
 
     lineY += lineHeight
@@ -310,8 +385,8 @@ function renderMapSvg(mapDataUri, stats) {
   const logoX = PADDING
   const logoY = PADDING + 8
   const sentenceX = PADDING
-  const sentenceY = logoY + logoSize + 112
-  const sentenceMaxWidth = mapX - PADDING - 32
+  const sentenceY = logoY + logoSize + 96
+  const sentenceMaxWidth = mapX - PADDING - 24
   const urlY = 568
   const separatorY = urlY - 36
 
@@ -321,8 +396,8 @@ function renderMapSvg(mapDataUri, stats) {
       x: sentenceX,
       y: sentenceY,
       maxWidth: sentenceMaxWidth,
-      fontSize: 32,
-      lineHeight: 52,
+      fontSize: 38,
+      lineHeight: 58,
       textColor: COLORS.summary,
     }
   )
