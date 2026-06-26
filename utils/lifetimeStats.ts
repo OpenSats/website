@@ -6,7 +6,7 @@ export type LifetimeStat = { label: string; value: number }
 export const LIFETIME_STATS_SHEET_ID =
   '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
 
-const DEFAULT_LIFETIME_STATS: LifetimeStat[] = [
+export const DEFAULT_LIFETIME_STATS: LifetimeStat[] = [
   { label: 'Grants given', value: 404 },
   { label: 'USD allocated', value: 34668655 },
   { label: 'Sats sent', value: 39524655813 },
@@ -27,7 +27,17 @@ export function formatNumber(num: number): string {
   return Math.round(num).toString()
 }
 
-function normalizeLifetimeStats(
+export function formatLifetimeStatDisplay(
+  index: number,
+  value: number
+): string {
+  const formatted = formatNumber(value)
+  if (index === 1) return `$ ${formatted}`
+  if (index === 2) return `~${formatted}`
+  return formatted
+}
+
+export function normalizeLifetimeStats(
   data: LifetimeStat[] | null | undefined,
   fallback: LifetimeStat[] = DEFAULT_LIFETIME_STATS
 ): LifetimeStat[] {
