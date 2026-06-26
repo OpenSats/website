@@ -50,9 +50,25 @@ export function formatStatsSentenceValues(stats: LifetimeStat[]) {
 }
 
 export function formatMapOgSentence(stats: LifetimeStat[]): string {
+  return formatMapOgSentenceSegments(stats)
+    .map((segment) => segment.text)
+    .join('')
+}
+
+export function formatMapOgSentenceSegments(
+  stats: LifetimeStat[]
+): Array<{ text: string; highlight: boolean }> {
   const { satsSent, grantsGiven, countryCount } =
     formatStatsSentenceValues(stats)
-  return `OpenSats has sent ~${satsSent} sats to ${grantsGiven} grantees in ${countryCount}+ countries`
+
+  return [
+    { text: 'OpenSats has sent ', highlight: false },
+    { text: `~${satsSent} sats`, highlight: true },
+    { text: ' to ', highlight: false },
+    { text: `${grantsGiven} grantees`, highlight: true },
+    { text: ' in ', highlight: false },
+    { text: `${countryCount}+ countries`, highlight: true },
+  ]
 }
 
 function coerceStatValue(value: unknown): number | null {

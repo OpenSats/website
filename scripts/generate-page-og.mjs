@@ -1,7 +1,7 @@
 import path from 'node:path'
 import {
   formatLifetimeStatDisplay,
-  formatMapOgSentence,
+  formatMapOgSentenceSegments,
   resolveLifetimeStats,
 } from '../utils/lifetimeStats.ts'
 import {
@@ -194,6 +194,98 @@ function renderTransparencySvg(stats) {
   `
 }
 
+// Tailwind primary-100 — matches StatsSentence highlight pills on light bg.
+const HIGHLIGHT_BG = '#ffedd5'
+
+function estimateTextWidth(text, fontSize) {
+  return text.length * fontSize * 0.52
+}
+
+function segmentsToWords(segments) {
+  const words = []
+  for (const segment of segments) {
+    for (const part of segment.text.split(/(\s+)/)) {
+      if (part) {
+        words.push({ text: part, highlight: segment.highlight })
+      }
+    }
+  }
+  return words
+}
+
+function layoutHighlightedSentence(segments, options) {
+  const {
+    x,
+    y,
+    maxWidth,
+    fontSize,
+    lineHeight,
+    textColor,
+    highlightBg = HIGHLIGHT_BG,
+  } = options
+
+  const words = segmentsToWords(segments)
+  const lines = []
+  let currentLine = []
+  let currentWidth = 0
+
+  for (const word of words) {
+    const width = estimateTextWidth(word.text, fontSize)
+    const isSpace = /^\s+$/.test(word.text)
+
+    if (
+      currentLine.length &&
+      !isSpace &&
+      currentWidth + width > maxWidth
+    ) {
+      lines.push(currentLine)
+      currentLine = []
+      currentWidth = 0
+    }
+
+    currentLine.push(word)
+    currentWidth += width
+  }
+
+  if (currentLine.length) {
+    lines.push(currentLine)
+  }
+
+  let svg = ''
+  let lineY = y
+
+  for (const line of lines) {
+    let xCursor = x
+
+    for (const word of line) {
+      const width = estimateTextWidth(word.text, fontSize)
+      if (word.highlight && word.text.trim()) {
+        const padX = 8
+        const padY = 6
+        svg += `<rect x="${xCursor - padX}" y="${
+          lineY - fontSize - padY + 6
+        }" width="${width + padX * 2}" height="${
+          fontSize + padY * 2
+        }" rx="8" fill="${highlightBg}" />`
+      }
+      xCursor += width
+    }
+
+    xCursor = x
+    for (const word of line) {
+      const width = estimateTextWidth(word.text, fontSize)
+      svg += `<text x="${xCursor}" y="${lineY}" fill="${textColor}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
+        word.text
+      )}</text>`
+      xCursor += width
+    }
+
+    lineY += lineHeight
+  }
+
+  return svg
+}
+
 function renderMapSvg(mapDataUri, stats) {
   const pageUrl = 'opensats.org/map'
   const seed = hashString('page:map')
@@ -206,26 +298,23 @@ function renderMapSvg(mapDataUri, stats) {
   const logoSize = 72
   const logoX = PADDING
   const logoY = PADDING + 8
-  const titleStartY = logoY + logoSize + 72
-  const summaryStartY = titleStartY + 72
+  const sentenceX = PADDING
+  const sentenceY = logoY + logoSize + 112
+  const sentenceMaxWidth = mapX - PADDING - 32
   const urlY = 568
   const separatorY = urlY - 36
 
-  const summaryLines = wrapText(
-    formatMapOgSentence(stats),
-    26,
-    4,
-    'page map summary'
+  const sentenceSvg = layoutHighlightedSentence(
+    formatMapOgSentenceSegments(stats),
+    {
+      x: sentenceX,
+      y: sentenceY,
+      maxWidth: sentenceMaxWidth,
+      fontSize: 32,
+      lineHeight: 52,
+      textColor: COLORS.summary,
+    }
   )
-
-  const summarySvg = summaryLines
-    .map(
-      (line, index) =>
-        `<tspan x="${PADDING}" dy="${
-          index === 0 ? 0 : 34
-        }">${escapeXml(line)}</tspan>`
-    )
-    .join('')
 
   const networkSvg = networkDecor({
     seed,
@@ -248,11 +337,7 @@ function renderMapSvg(mapDataUri, stats) {
 
       <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
-      <text x="${PADDING}" y="${titleStartY}" fill="${COLORS.title}" font-size="88" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-3">Map</text>
-
-      <text x="${PADDING}" y="${summaryStartY}" fill="${COLORS.summary}" font-size="24" font-family="${INTER_FONT_FAMILY}">
-        ${summarySvg}
-      </text>
+      ${sentenceSvg}
 
       <image href="${mapDataUri}" x="${mapX}" y="${mapY}" width="${mapWidth}" height="${mapHeight}" />
 
