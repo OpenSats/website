@@ -1,8 +1,8 @@
 ---
 title: "Egge’s Bitcoin Journey: From Marketer to Cashu Maintainer"
-date: '2026-06-17'
+date: '2026-06-30'
 tags: ['bitcoin', 'ecash', 'spotlight']
-authors: ['tuma']
+authors: ['tuma', 'ville']
 images: ['/static/images/spotlight/egge/TODO', '/static/images/spotlight/egge/egge.png']
 draft: false
 summary: "Bitcoin took Egge off the predictable path, leading him towards a brilliant career in FOSS."
@@ -98,14 +98,16 @@ were building into a non-custodial application.
 required linking the offline and online worlds. Egge found a solution in the Cashu protocol, which just
 “turned out to be the perfect bridge between those two worlds”
 
-<Image
-  src="/static/images/spotlight/egge/npub-cash.png"
-  darkSrc="/static/images/spotlight/egge/npub-cash.png"
-  alt="The npub.cash website"
-  width={1904}
-  height={1484}
-  className="w-full h-auto"
-/>
+<BrowserFrame url="https://npub.cash">
+  <Image
+    src="/static/images/spotlight/egge/npub-cash.png"
+    darkSrc="/static/images/spotlight/egge/npub-cash.png"
+    alt="The npub.cash website"
+    width={2880}
+    height={1696}
+    className="w-full h-auto"
+  />
+</BrowserFrame>
 
 That same project also helped Egge obtain his first OpenSats grant, a success he recalls as
 one of the most important moments of his life, one of those occasions worth remembering.
@@ -152,14 +154,16 @@ later. When asked to resurrect a beloved Cashu wallet, eNuts, he quickly underst
 `cashu-ts` was a solid toolkit for Cashu operations, building a complete application around it still
 required deep domain knowledge.
 
-<Image
-  src="/static/images/spotlight/egge/enuts-light.png"
-  darkSrc="/static/images/spotlight/egge/enuts-dark.png"
-  alt="The eNuts iOS wallet"
-  width={860}
-  height={1868}
-  className="mx-auto max-w-sm h-auto"
-/>
+<PhoneFrame>
+  <Image
+    src="/static/images/spotlight/egge/enuts-light.png"
+    alt="The eNuts iOS wallet"
+    width={1206}
+    height={2622}
+    sizes="(max-width: 640px) 100vw, 384px"
+    className="w-full h-auto"
+  />
+</PhoneFrame>
 
 Working on [eNuts] meant rewriting most of the logic from scratch.
 The wallet hadn’t been updated for a long time, and was incompatible with the rapidly changing Cashu ecosystem.
@@ -173,14 +177,16 @@ ecosystem around Cashu, and for him personally. Developers can now integrate a f
 in any application with just a few lines of code, expanding the reach of the ecosystem by building on
 Egge’s shoulders. He hopes Coco will lower the entry barrier for developers who want to add Cashu to their apps.
 
-<Image
-  src="/static/images/spotlight/egge/coco-light.png"
-  darkSrc="/static/images/spotlight/egge/coco-dark.png"
-  alt="Coco main page"
-  width={1904}
-  height={1484}
-  className="w-full h-auto"
-/>
+<BrowserFrame url="https://cashubtc.github.io/coco">
+  <Image
+    src="/static/images/spotlight/egge/coco-light.png"
+    darkSrc="/static/images/spotlight/egge/coco-dark.png"
+    alt="Coco main page"
+    width={2880}
+    height={1696}
+    className="w-full h-auto"
+  />
+</BrowserFrame>
 
 ​His focus now is making Coco the best possible library to build on Cashu. To do so, he needs feedback from contributors,
 testers, and adopters: “Coco is still young. While most of its primitives have already been battle-tested,
@@ -202,7 +208,7 @@ But change doesn’t happen by itself. It needs people investing their time into
 that, in Egge’s eyes, will make the future brighter. Bitcoin needs more people working on it.
 “Not only developers, but people in many different areas. There is so much work to be done across so many different fields.”
 
-​“Cypherpunks write code”, as Eric Hughes stated in his [A Cypherpunk Manifesto][cypherpunk-manifesto].
+​“Cypherpunks write code”, as Eric Hughes stated in his [A Cypherpunk's Manifesto][cypherpunk-manifesto].
 However, writing code is not the only thing that can help Bitcoin thrive.
 It needs educators, marketers, designers, and all the talented people out there.
 Egge’s journey is a good reminder that anyone can have a real chance and a real impact in this space.
@@ -233,7 +239,7 @@ out to [spotlight@opensats.org](mailto:spotlight@opensats.org).*
 [NUT-17]: https://github.com/cashubtc/nuts/blob/main/17.md
 [Gandlaf]: https://github.com/gandlafbtc
 [Calle]: /blog/cashu-calle-receives-lts-grant
-[enuts]: https://github.com/cashubtc/eNuts
+[enuts]: https://enuts.cash/
 [Coco]: https://github.com/cashubtc/coco
 [cypherpunk-manifesto]: https://nakamotoinstitute.org/library/cypherpunk-manifesto/
 [fifth-wave-nostr]: /blog/nostr-grants-july-2024#npubcash
