@@ -2,14 +2,14 @@
 title: 'Vaults'
 summary: 'Bitcoin custody constructions that delay withdrawals and preserve a recovery path if a key is stolen or a spend is coerced.'
 category: 'Bitcoin'
-aliases: ['vault', 'bitcoin vault', 'OP_VAULT', 'BIP 345']
+aliases: ['vault', 'bitcoin vault']
 ---
 
 Vaults are Bitcoin custody constructions that separate a withdrawal into stages. A first transaction starts the withdrawal and enforces a delay. During that delay, the owner can trigger a recovery path and move the coins to safety if a key was stolen or a spend was coerced.
 
 The goal is simple: turn key compromise from an instant loss into a security incident with response time. Different vault designs offer different delays, recovery paths, and assumptions about how many keys, devices, or pre-signed transactions must stay safe.
 
-Some vaults can be built today with timelocks, pre-signed transactions, and careful key management. Proposed [covenants](/topics/covenant) could make them simpler and more flexible. [OP_CTV](/topics/op-ctv) can express predefined vault trees, and BIP 345 proposes `OP_VAULT` and `OP_VAULT_RECOVER` as opcodes tailored to this use case.
+Some vaults can be built today with timelocks, pre-signed transactions, and careful key management. Proposed [covenants](/topics/covenant) could make them simpler and more flexible. [OP_CTV](/topics/op-ctv) can express predefined vault trees, and BIP 345's [OP_VAULT](/topics/op-vault) and `OP_VAULT_RECOVER` are opcodes tailored to this use case.
 
 Vaults matter for self-custody, inheritance planning, institutional storage, and coercion resistance. They also introduce tradeoffs in setup complexity, recovery procedures, and how tightly future spending paths are constrained.
 
