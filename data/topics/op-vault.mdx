@@ -1,0 +1,18 @@
+---
+title: 'OP_VAULT'
+summary: 'A proposed pair of Bitcoin opcodes for vault withdrawals with a built-in recovery path.'
+category: 'Bitcoin'
+aliases: ['BIP 345', 'OP_VAULT_RECOVER', 'vault opcode']
+---
+
+`OP_VAULT` is a proposed tapscript opcode described in BIP 345. The proposal pairs `OP_VAULT` with `OP_VAULT_RECOVER` to support a specialized kind of [covenant](/topics/covenant) built for [vaults](/topics/vaults). Together, the opcodes aim to enforce a delayed withdrawal path while preserving a prespecified recovery path that can move the coins to safety before the delay expires.
+
+`OP_VAULT` focuses on one use case: staged vault withdrawals. That specialization gives vault designs predictable safety rules, simpler wallet behavior, and a recovery flow that stays available until the final withdrawal completes. The proposal is often discussed alongside [OP_CTV](/topics/op-ctv), which BIP 345 uses as part of the overall design.
+
+BIP 345 is closed. The proposal still serves as a useful reference point in discussions about covenant-enabled vault design. It helps show the tradeoff between general-purpose covenant tools and opcodes designed for one narrow security model.
+
+## References
+
+- [BIP 345: `OP_VAULT`](https://github.com/bitcoin/bips/blob/master/bip-0345.mediawiki)
+- [bips.dev: `OP_VAULT`](https://bips.dev/345/)
+- [Bitcoin Optech: Vaults](https://bitcoinops.org/en/topics/vaults/)
