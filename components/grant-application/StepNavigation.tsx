@@ -42,9 +42,11 @@ export default function StepNavigation({
         <button
           type="button"
           onClick={onSubmit}
-          disabled={true}
+          disabled={loading}
           aria-busy={loading}
-          className="cursor-not-allowed rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white opacity-50"
+          className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white ${
+            loading ? 'cursor-not-allowed opacity-50' : 'hover:bg-orange-600'
+          }`}
         >
           {loading ? 'Submitting...' : submitLabel}
         </button>
