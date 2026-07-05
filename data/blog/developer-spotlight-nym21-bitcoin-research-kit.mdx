@@ -21,11 +21,12 @@ That is nym21, a pseudonymous developer and OpenSats grantee describing why the
 
 The spite was for companies like [Glassnode][glassnode], which charges from \$99 a
 month to \$11,200 a year for institutional-grade Bitcoin data, among other things.
-nym21 gives the same data away for free.
+nym21 gives away as much of that data as he can, for free.
 
-He self-hosts it from a base-model Mac mini he calls "the best bang for your buck
-server," with an external drive bolted on for storage. It's been answering
-requests, without a crash, for months. He runs it from his own desk rather than a
+He self-hosts it from two base-model Mac minis, for redundancy, the machine he
+calls "the best bang for your buck server," each with an external drive bolted on
+for storage. They've been answering requests, without a crash, for months. He runs
+one from a TV stand at home and the other from a relative's office rather than a
 data center on purpose: he wanted the same experience a self-hoster would have,
 the same rough edges, so the thing would actually be good to run at home.
 
@@ -68,16 +69,17 @@ to pull its prices from an exchange. nym21 didn't want to depend on anyone.
 
 He stumbled on a thing called Simple Steve's price oracle, the proof that
 Bitcoin's dollar price could be inferred from the chain itself, then spent two
-weeks hunting for a cleaner method.
+weeks hunting for a way to compute an accurate price for every single block.
 
 He found one. The method itself is almost embarrassingly simple. People are
 forever sending round dollar amounts of bitcoin (fifty dollars' worth, a hundred),
 and every one of those payments is written into the public ledger. Gather enough
 of them and the day's price comes into view. It only works once a lot of people
-are transacting, so it starts in 2018, at block 525,000, and from there it sits
-within a few percent of the exchange price almost every day. Bitcoin's early years
-were too quiet to read this way, so those prices, back to 2009, he just filled in
-by hand.
+are transacting, so it starts in January 2015, at block 340,000, and from there it
+sits within a few percent of the exchange price almost every day. (Until a few
+weeks ago it started in 2018; then he saw Steve reaching for 2016. "I had to do
+better!") Bitcoin's early years were too quiet to read this way, so those prices,
+back to 2009, he just filled in by hand.
 
 <BrowserFrame url="https://bitview.space">
   <Image
@@ -98,7 +100,7 @@ Blockstream satellite.
 > It honestly felt like a discovery.
 
 All that parsing and arithmetic produces something you can look at: thousands of
-charts, every one computed from the raw chain on that single Mac mini.
+charts, every one computed from the raw chain on a single Mac mini.
 
 <Image
   src="/static/images/spotlight/nym21/cloud.png"
@@ -189,21 +191,27 @@ it," nym21 says, "and helped get it to the finish line."
 
 By his own account, nym21 thanked Check on Nostr, and that thank-you turned into a
 running conversation. Over the next two years Check went from donor to self-hoster
-to running CheckOnChain, his own widely-read analytics service, entirely on BRK.
+to running the entire on-chain side of CheckOnChain, his own widely-read analytics
+service, from his own instance of BRK.
 
-Before long it wasn't just Check. CryptoVizArt, an analyst at Glassnode itself,
-came to nym21 wanting a chart Glassnode didn't offer: every coin sorted by how long
-since it last moved, priced at the moment it did.
+Before long it wasn't just Check. CryptoVizArt, the lead research analyst at
+Glassnode itself, saw a dataset BRK had just released (every coin sorted by the
+price at which it last moved) and came to nym21 curious, for his own research,
+whether it could be cut finer: the same picture, broken out by how old the coins
+are, a view even Glassnode doesn't offer yet.
 
-nym21 assumed it would be expensive to compute and store. It wasn't. "The
-computation was essentially free," he says, "and storing it, thanks to the
-age-band structure, was practically free too, under a gigabyte." Glassnode's own
-analyst had started reaching for the free tool when the paid one came up short.
+nym21's first instinct was that it would be expensive to compute and store. It
+wasn't; the pieces were already there. "The computation was essentially free," he
+says, "and storing it, thanks to the age-band structure, was practically free too,
+under a gigabyte." That last part matters: everything has to fit on a consumer
+machine, so each new dataset is a running trade-off against ease of hosting, a bit
+like Bitcoin itself. Glassnode's own lead analyst had started reaching for the
+free tool when the paid one came up short.
 
-The clearest proof that BRK had become infrastructure, though, was the day someone
-got caught using it.
+The clearest proof that BRK had become infrastructure, though, came when a paid
+analytics platform turned out to be running on it.
 
-In the spring of 2026, nym21 noticed that newhedge, a slick paid analytics
+In the spring of 2026, nym21 noticed that Newhedge, a slick paid analytics
 platform, was publishing charts that looked an awful lot like his. He could be
 certain because of the price oracle: BRK computes prices in its own way, so a chart
 built on its data carries a fingerprint, and "it's not possible to have the same
@@ -212,18 +220,22 @@ result" by accident. He said so in public, tagging the company.
 Newhedge's Alon Shvartsman replied within the half hour. "You're right, we should
 have credited BRK," he wrote. "We started using it recently and absolutely love
 it... happy to support/sponsor the project, let's talk!" nym21 was not entirely
-mollified.
+mollified: he'd already spotted more charts, and said so, disappointed that the
+attribution only arrived after the issue was raised in public.
 
-> already found 2 more charts from your latest update but I'll stop here it's 'bad'
-> enough Very glad you love it and you can use it, it is MIT after all, just a shame
-> you had to be caught red-handed to talk about it but sure let's talk
+Then Shvartsman put a number on it: Newhedge was using BRK as a source across
+"30–40 charts."
 
-Then Shvartsman came clean on the scale of it: newhedge was using BRK as a source
-across "30–40 charts."
+That's thirty to forty. One pseudonymous developer's free tool, quietly powering
+that many charts on a paid product. That's the other side of an MIT license:
+anyone can use the work, build on it, even build a business on it, and most will
+never ask permission, or contribute anything back.
 
-That's thirty to forty. Note that it's just one pseudonymous developer's free tool,
-quietly powering that many charts on a paid product, and the credit only arrived
-because the credit got demanded.
+What began as a public dispute ended somewhere better. Newhedge added attribution
+across its charts immediately, and Shvartsman followed through on the support soon
+after. The two have been on good terms since, helping each other improve their
+respective projects; a few months later, Shvartsman would even write a reference
+letter backing one of nym21's grant applications.
 
 Weeks later, the recognition climbed past the on-chain crowd. Jameson Lopp, Casa
 co-founder and one of the most influential voices in Bitcoin, stumbled upon the
@@ -263,6 +275,11 @@ AI slop.
 He treats efficiency the same way. A full mempool.space instance, he found, can eat
 around 250% of the blockchain's own size. "I took it as a challenge," he says, and
 got BRK's equivalent down to roughly 45%.
+
+And that equivalent is no toy: BRK reimplements the mempool.space APIs wholesale,
+answers millions of requests through them every month, and has made its way into
+Sparrow, one of Bitcoin's most respected wallets, with Cove possibly next. He
+counts it among the highlights of the whole project.
 
 The Mac mini isn't the destination, either. The point of getting it this lean is to
 run it on something anyone could leave going in a closet: a Start9, an Umbrel box.
@@ -312,7 +329,7 @@ instead is simple:
 nym21 has been an OpenSats grantee since December 2024. The grant lets him work on
 the [Bitcoin Research Kit][brk] full-time and keep it free to use, verify, and
 self-host. If you want to support nym21, tell someone the project exists. (Just
-remember to credit him for the work; looking at you newhedge!)
+remember to credit him for the work.)
 
 Our support for nym21's work was made possible thanks to your generous donations to
 [The General Fund][General Fund].
