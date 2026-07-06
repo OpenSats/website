@@ -1,0 +1,18 @@
+---
+title: 'OP_PAIRCOMMIT'
+summary: 'A proposed tapscript opcode that hashes two stack elements into one tagged commitment, enabling Merkle-style commitments inside script.'
+category: 'Bitcoin'
+aliases: ['BIP 442', 'PAIRCOMMIT']
+---
+
+OP_PAIRCOMMIT is a draft opcode proposed in BIP 442 for [Taproot](/topics/taproot) script spends. When executed, it takes the top two stack elements, hashes them together with a tagged hash construction, and pushes one 32-byte commitment back onto the stack.
+
+Bitcoin script already has simple ways to commit to single items with hashes. OP_PAIRCOMMIT adds a compact way to commit to pairs of items, and repeated applications can build Merkle-style commitments to larger sets of data. That makes it useful for advanced contracts that need to commit to structured data while revealing only the branch being used.
+
+The proposal is discussed as a building block for more expressive tapscript contracts, including designs that need better in-script data commitments or staged delegation logic. It is also one of the opcode candidates discussed in the broader [LNHANCE](/topics/lnhance) proposal set.
+
+## References
+
+- [BIP 442: OP_PAIRCOMMIT](https://github.com/bitcoin/bips/blob/master/bip-0442.md)
+- [bips.dev: BIP 442 rendered](https://bips.dev/442/)
+- [Delving Bitcoin: `OP_PAIRCOMMIT` as a candidate for addition to LNHANCE](https://delvingbitcoin.org/t/op-paircommit-as-a-candidate-for-addition-to-lnhance/1216)
