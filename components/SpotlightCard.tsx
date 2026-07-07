@@ -31,10 +31,10 @@ function CompactCard({ post }: { post: CoreContent<Blog> }) {
         {ogImage && (
           <Image
             src={ogImage}
-            alt={title}
+            alt=""
             fill
             sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
           />
         )}
       </div>
@@ -74,7 +74,7 @@ function HeroCard({ post }: { post: CoreContent<Blog> }) {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[70%_center] transition-transform duration-300 group-hover:scale-105 lg:object-center"
+            className="object-cover object-[70%_center] transition-transform duration-300 motion-safe:group-hover:scale-105 lg:object-center"
           />
         )}
         <div
