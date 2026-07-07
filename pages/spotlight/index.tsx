@@ -1,5 +1,6 @@
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
+import Link from '@/components/Link'
 import SpotlightCard from '@/components/SpotlightCard'
 import { kebabCase } from 'pliny/utils/kebabCase'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
@@ -54,6 +55,16 @@ export default function Spotlight({
           ))}
         </div>
       )}
+
+      <div className="flex justify-end pt-8 text-base font-medium leading-6">
+        <Link
+          href="/apply"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="Apply for funding"
+        >
+          Could you be next? Apply for funding &rarr;
+        </Link>
+      </div>
     </>
   )
 }
