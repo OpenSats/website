@@ -52,6 +52,12 @@ const EXTRA_PAGES = [
     title: 'Map',
     summary: 'Countries where OpenSats has awarded grants.',
   },
+  {
+    slug: 'spotlight',
+    title: 'Developer Spotlights',
+    summary:
+      'Meet the developers OpenSats supports and the open-source work they are building.',
+  },
 ]
 
 // Utility / legal / form-result pages that don't benefit from a custom

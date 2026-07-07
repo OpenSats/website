@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import Link from '@/components/Link'
@@ -7,6 +8,9 @@ import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
+
+const PAGE_DESCRIPTION =
+  'Meet the developers OpenSats supports and the open-source work they are building.'
 
 export const getStaticProps = async () => {
   const posts = allCoreContent(
@@ -26,12 +30,38 @@ export default function Spotlight({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [featured, ...rest] = posts
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Developer Spotlights',
+    description: PAGE_DESCRIPTION,
+    url: `${siteMetadata.siteUrl}/spotlight`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: posts.map((post, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${siteMetadata.siteUrl}/${post.path}`,
+        name: post.title,
+      })),
+    },
+  }
+
   return (
     <>
       <PageSEO
         title={`Developer Spotlights - ${siteMetadata.title}`}
-        description="Meet the developers OpenSats supports and the open-source work they are building."
+        description={PAGE_DESCRIPTION}
+        slug="spotlight"
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </Head>
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
           Developer Spotlights
