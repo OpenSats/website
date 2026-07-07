@@ -58,18 +58,18 @@ export default function Spotlight({
 
       <div className="flex flex-col items-end gap-4 pt-8 text-base font-medium leading-6">
         <Link
-          href="/donate"
-          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-          aria-label="Donate to OpenSats"
-        >
-          Help fund developers like these &rarr;
-        </Link>
-        <Link
           href="/apply"
           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
           aria-label="Apply for funding"
         >
           Could you be next? Apply for funding &rarr;
+        </Link>
+        <Link
+          href="/donate"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="Donate to OpenSats"
+        >
+          Help fund developers like these &rarr;
         </Link>
       </div>
     </>
