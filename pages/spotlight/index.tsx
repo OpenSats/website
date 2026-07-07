@@ -95,7 +95,7 @@ export default function Spotlight({
           Could you be next? Apply for funding &rarr;
         </Link>
         <Link
-          href="/donate"
+          href="/funds"
           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
           aria-label="Donate to OpenSats"
         >
