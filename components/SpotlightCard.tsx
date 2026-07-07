@@ -41,19 +41,6 @@ export default function SpotlightCard({ post, featured = false }: Props) {
             className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
             aria-hidden
           />
-          {ogImage && (
-            <div className="absolute right-4 top-4 hidden w-40 overflow-hidden rounded-md border-2 border-white/80 shadow-lg sm:block lg:w-56">
-              <div className="relative aspect-[16/9]">
-                <Image
-                  src={ogImage}
-                  alt={title}
-                  fill
-                  sizes="14rem"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          )}
           <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
               Developer Spotlight
