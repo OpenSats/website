@@ -14,62 +14,18 @@ interface Props {
   featured?: boolean
 }
 
-export default function SpotlightCard({ post, featured = false }: Props) {
+const cardClasses =
+  'group block overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60 transition-colors hover:border-primary-500 dark:border-gray-700 dark:hover:border-primary-400'
+
+function CompactCard({ post }: { post: CoreContent<Blog> }) {
   const { path, date, title, summary, images } = post
   const ogImage = getSpotlightOgImage(images)
-
-  if (featured) {
-    const heroImage = getSpotlightHeroImage(images) ?? ogImage
-    return (
-      <Link
-        href={`/${path}`}
-        aria-label={`Read the spotlight: ${title}`}
-        className="group relative block overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60 transition-colors hover:border-primary-500 dark:border-gray-700 dark:hover:border-primary-400"
-      >
-        <div className="relative min-h-[24rem] w-full sm:aspect-[2/1] sm:min-h-0 lg:aspect-[21/9]">
-          {heroImage && (
-            <Image
-              src={heroImage}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-[70%_center] transition-transform duration-300 group-hover:scale-105 lg:object-center"
-            />
-          )}
-          <div
-            className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
-            aria-hidden
-          />
-          <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
-              Developer Spotlight
-            </p>
-            <time
-              dateTime={date}
-              className="mt-2 block text-sm font-medium text-white/90"
-            >
-              {formatDate(date, siteMetadata.locale)}
-            </time>
-            <h2 className="mt-2 max-w-3xl text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
-              {title}
-            </h2>
-            {summary && (
-              <p className="mt-3 line-clamp-2 max-w-2xl text-white/90 sm:line-clamp-3">
-                {summary}
-              </p>
-            )}
-          </div>
-        </div>
-      </Link>
-    )
-  }
 
   return (
     <Link
       href={`/${path}`}
       aria-label={`Read the spotlight: ${title}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60 transition-colors hover:border-primary-500 dark:border-gray-700 dark:hover:border-primary-400"
+      className={`flex h-full flex-col ${cardClasses}`}
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden">
         {ogImage && (
@@ -97,5 +53,71 @@ export default function SpotlightCard({ post, featured = false }: Props) {
         )}
       </div>
     </Link>
+  )
+}
+
+function HeroCard({ post }: { post: CoreContent<Blog> }) {
+  const { path, date, title, summary, images } = post
+  const heroImage = getSpotlightHeroImage(images) ?? getSpotlightOgImage(images)
+
+  return (
+    <Link
+      href={`/${path}`}
+      aria-label={`Read the spotlight: ${title}`}
+      className={`relative ${cardClasses}`}
+    >
+      <div className="relative aspect-[2/1] w-full lg:aspect-[21/9]">
+        {heroImage && (
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[70%_center] transition-transform duration-300 group-hover:scale-105 lg:object-center"
+          />
+        )}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
+          aria-hidden
+        />
+        <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/80">
+            Developer Spotlight
+          </p>
+          <time
+            dateTime={date}
+            className="mt-2 block text-sm font-medium text-white/90"
+          >
+            {formatDate(date, siteMetadata.locale)}
+          </time>
+          <h2 className="mt-2 max-w-3xl text-2xl font-extrabold leading-tight tracking-tight text-white sm:text-3xl md:text-4xl">
+            {title}
+          </h2>
+          {summary && (
+            <p className="mt-3 line-clamp-2 max-w-2xl text-white/90 sm:line-clamp-3">
+              {summary}
+            </p>
+          )}
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+export default function SpotlightCard({ post, featured = false }: Props) {
+  if (!featured) {
+    return <CompactCard post={post} />
+  }
+
+  return (
+    <>
+      <div className="md:hidden">
+        <CompactCard post={post} />
+      </div>
+      <div className="hidden md:block">
+        <HeroCard post={post} />
+      </div>
+    </>
   )
 }
