@@ -22,6 +22,9 @@ export const discussUrl = () =>
 /** Spotlight posts: images[0] = OG/social, images[1] = cover hero. */
 export const getSpotlightHeroImage = (images?: string[]) => images?.[1]
 
+/** Spotlight posts: images[0] = OG/social preview. */
+export const getSpotlightOgImage = (images?: string[]) => images?.[0]
+
 /** Keep in sync with SectionContainer horizontal layout. */
 export const postSectionClasses =
   'mx-2 max-w-3xl px-4 sm:px-6 md:mx-auto lg:mx-auto xl:max-w-5xl xl:px-0'
