@@ -56,7 +56,7 @@ export default function Spotlight({
         </div>
       )}
 
-      <div className="flex flex-col gap-4 pt-8 text-base font-medium leading-6 sm:flex-row sm:justify-between">
+      <div className="flex flex-col items-end gap-4 pt-8 text-base font-medium leading-6">
         <Link
           href="/donate"
           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
