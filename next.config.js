@@ -151,11 +151,6 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/spotlight',
-          destination: '/tags/spotlight',
-          permanent: true,
-        },
-        {
           source: '/heartbeat',
           destination: 'https://heartbeat.opensats.org/',
           permanent: false,
