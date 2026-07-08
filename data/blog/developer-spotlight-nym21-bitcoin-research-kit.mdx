@@ -46,7 +46,7 @@ everyone else has.
 
 The crux is that a raw ledger doesn't answer questions. "Are long-term holders
 selling?" has a real answer sitting in that data, but getting it means parsing the
-whole chain and doing the arithmetic each time the next block is found.
+whole chain and doing the arithmetic each time a new block is found.
 
 <Image
   src="/static/images/spotlight/nym21/drawing.png"
@@ -57,8 +57,8 @@ whole chain and doing the arithmetic each time the next block is found.
 />
 
 Glassnode, which did as much as anyone to turn on-chain analysis into a paid
-product, built that machinery once, charged for the answers, and called it just
-good business. It's just the most visible of a crowded field, every one of them
+product, built that machinery once, charged for the answers, and called it "just
+good business". It's just the most visible of a crowded field, each one of them
 fencing the same public data behind a login, a subscription, or a house view on
 what's worth showing. None of it, nym21 bet, needed a data center. Only a spare
 computer.
@@ -185,8 +185,8 @@ For a few years the project was just nym21, funding it himself, known to almost
 nobody. In 2024 he put up a Geyser crowdfunding page to buy the server that would
 run it. Then James Check found the page.
 
-Yes, that James Check: the one whose Glassnode videos had taught nym21 the subject
-in the first place. Check didn't know him from anyone. "He somehow got aware of
+Yes, the very same James Check whose Glassnode videos had taught nym21 the subject
+in the first place. Check "somehow got aware of
 it," nym21 says, "and helped get it to the finish line."
 
 By his own account, nym21 thanked Check on Nostr, and that thank-you turned into a
@@ -260,16 +260,16 @@ on BRK, nym21 was spending most of his energy making sure BRK depended on nothin
 "Limiting the use of dependencies has been an on-going quest of mine," he says, and
 he means it almost literally. The hardest one to shake was the price itself: he'd
 been burned when Coingecko changed its terms under him, and again when exchanges
-rewrote their APIs. The oracle from earlier was the finish line of that fight: once
+rewrote their APIs. The on-chain oracle was the finish line of that fight: once
 price could be computed from the chain itself, he never had to ask an exchange for
 anything again.
 
 The rest he removed the same way. He keeps the whole thing speaking plain HTTP, so
-it runs behind anything, on anyone's hardware, offline if it has to.
+it can run behind anything, on anyone's hardware, offline if it has to.
 
 He prunes the Rust crates he leans on as aggressively as he can, wary of the
 supply-chain surprises that come from trusting too much code you didn't write, a
-bet that looks smarter every month another npm package turns out to be malware or
+bet that looks smarter every time another npm package turns out to be malware or
 AI slop.
 
 He treats efficiency the same way. A full mempool.space instance, he found, can eat
