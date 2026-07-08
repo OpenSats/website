@@ -271,6 +271,41 @@ export function renderSvgToPng(svg) {
   return resvg.render().asPng()
 }
 
+const textBBoxCache = new Map()
+
+/**
+ * Measure rendered text using the same Inter + resvg stack as OG output.
+ * Returns the ink bounding box relative to a glyph origin at x=0, so callers
+ * can account for the left side bearing when drawing tight highlight pills.
+ */
+export function measureTextBBoxWithResvg(text, fontSize) {
+  const key = `${fontSize}\0${text}`
+  if (textBBoxCache.has(key)) {
+    return textBBoxCache.get(key)
+  }
+
+  const svgHeight = Math.ceil(fontSize * 2)
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="${svgHeight}">
+    <text x="0" y="${fontSize}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(text)}</text>
+  </svg>`
+  const resvg = new Resvg(svg, {
+    font: {
+      fontFiles: INTER_FONT_FILES,
+      loadSystemFonts: false,
+      defaultFontFamily: INTER_FONT_FAMILY,
+    },
+  })
+  const bbox = resvg.getBBox()
+  const result = { x: bbox?.x ?? 0, width: bbox?.width ?? 0 }
+  textBBoxCache.set(key, result)
+  return result
+}
+
+/** Measure rendered text width using the same Inter + resvg stack as OG output. */
+export function measureTextWidthWithResvg(text, fontSize) {
+  return measureTextBBoxWithResvg(text, fontSize).width
+}
+
 // Removes and recreates the directory so stale output never ships.
 export async function ensureCleanDir(dir) {
   await fs.rm(dir, { recursive: true, force: true })

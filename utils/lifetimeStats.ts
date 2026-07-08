@@ -6,10 +6,10 @@ export type LifetimeStat = { label: string; value: number }
 export const LIFETIME_STATS_SHEET_ID =
   '1mLEbHcrJibLN2PKxYq1LHJssq0CGuJRRoaZwot-ncZQ'
 
-const DEFAULT_LIFETIME_STATS: LifetimeStat[] = [
-  { label: 'Grants given', value: 404 },
-  { label: 'USD allocated', value: 34668655 },
-  { label: 'Sats sent', value: 39524655813 },
+export const DEFAULT_LIFETIME_STATS: LifetimeStat[] = [
+  { label: 'Grants given', value: 319 },
+  { label: 'USD allocated', value: 27400000 },
+  { label: 'Sats sent', value: 31200000000 },
 ]
 
 let lifetimeStatsPromise: Promise<LifetimeStat[] | null> | null = null
@@ -27,18 +27,79 @@ export function formatNumber(num: number): string {
   return Math.round(num).toString()
 }
 
-function normalizeLifetimeStats(
+export function formatLifetimeStatDisplay(
+  index: number,
+  value: number
+): string {
+  const formatted = formatNumber(value)
+  if (index === 1) return `$ ${formatted}`
+  if (index === 2) return `~${formatted}`
+  return formatted
+}
+
+/** Matches the country count shown in StatsSentence (`40+ countries`). */
+export const STATS_COUNTRY_COUNT = 40
+
+export function formatStatsSentenceValues(stats: LifetimeStat[]) {
+  return {
+    grantsGiven: formatNumber(stats[0]?.value ?? 0),
+    usdAllocated: Math.round(stats[1]?.value ?? 0).toLocaleString(),
+    satsSent: formatNumber(stats[2]?.value ?? 0).replace('B', 'billion'),
+    countryCount: STATS_COUNTRY_COUNT,
+  }
+}
+
+export function formatMapOgSentence(stats: LifetimeStat[]): string {
+  return formatMapOgSentenceSegments(stats)
+    .map((segment) => segment.text)
+    .join('')
+}
+
+export function formatMapOgSentenceSegments(
+  stats: LifetimeStat[]
+): Array<{ text: string; highlight: boolean }> {
+  const { satsSent, grantsGiven, countryCount } =
+    formatStatsSentenceValues(stats)
+
+  return [
+    { text: 'OpenSats has sent ', highlight: false },
+    { text: `~${satsSent} sats`, highlight: true },
+    { text: ' to ', highlight: false },
+    { text: `${grantsGiven} grantees`, highlight: true },
+    { text: ' in ', highlight: false },
+    { text: `${countryCount}+ countries`, highlight: true },
+  ]
+}
+
+function coerceStatValue(value: unknown): number | null {
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    return value
+  }
+
+  if (typeof value === 'string') {
+    const parsed = Number(value.replace(/,/g, '').trim())
+    if (Number.isFinite(parsed)) {
+      return parsed
+    }
+  }
+
+  return null
+}
+
+export function normalizeLifetimeStats(
   data: LifetimeStat[] | null | undefined,
   fallback: LifetimeStat[] = DEFAULT_LIFETIME_STATS
 ): LifetimeStat[] {
   return fallback.map((fallbackItem, index) => {
     const item = data?.[index]
+    const coercedValue = coerceStatValue(item?.value)
+
     return {
       label:
         typeof item?.label === 'string' && item.label.length > 0
           ? item.label
           : fallbackItem.label,
-      value: typeof item?.value === 'number' ? item.value : fallbackItem.value,
+      value: coercedValue ?? fallbackItem.value,
     }
   })
 }
@@ -119,6 +180,11 @@ export async function getLifetimeStats(): Promise<LifetimeStat[] | null> {
   }
 
   return lifetimeStatsPromise
+}
+
+/** Build-time helper: always returns a full stats array, using defaults on fetch failure. */
+export async function resolveLifetimeStats(): Promise<LifetimeStat[]> {
+  return normalizeLifetimeStats(await getLifetimeStats())
 }
 
 export function useAnimatedCount(

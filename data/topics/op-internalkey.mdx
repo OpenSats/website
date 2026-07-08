@@ -1,0 +1,19 @@
+---
+title: 'OP_INTERNALKEY'
+summary: "A proposed tapscript opcode that pushes a taproot output's internal key onto the stack so scripts can reuse it directly."
+category: 'Bitcoin'
+aliases: ['BIP 349', 'OP_SUCCESS203', 'taproot internal key']
+---
+
+`OP_INTERNALKEY` is a proposed tapscript opcode described in BIP 349. During a [Taproot](/topics/taproot) script-path spend, it would push the taproot output's internal key onto the stack in x-only form. A script could then refer to that key directly instead of hardcoding the same 32-byte value inside the leaf.
+
+That matters because many taproot constructions already depend on the internal key. Reusing it inside script can save block space, keep key-path and script-path logic aligned, and make some constructions easier to update when the internal key changes. The BIP highlights aggregate-key policies, hash-locked scripts, and re-keyable covenant-style trees as concrete examples.
+
+`OP_INTERNALKEY` remains a draft proposal. If activated, it would replace one of tapscript's reserved `OP_SUCCESS` opcodes in a soft fork, so older nodes would continue to treat the upgraded opcode space safely until they validate the new rule set.
+
+## References
+
+- [BIP 349: `OP_INTERNALKEY`](https://github.com/bitcoin/bips/blob/master/bip-0349.md)
+- [bips.dev: `OP_INTERNALKEY`](https://bips.dev/349/)
+- [BIP 341: Taproot](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki)
+- [Bitcoin Core PR #29269: reference implementation](https://github.com/bitcoin/bitcoin/pull/29269)

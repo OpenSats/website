@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import {
-  formatNumber,
+  formatStatsSentenceValues,
   type LifetimeStat,
   useAnimatedCount,
   useAnimatedLifetimeStats,
@@ -16,12 +16,9 @@ export default function StatsSentence({
   initialStats,
 }: StatsSentenceProps) {
   const stats = useAnimatedLifetimeStats(initialStats)
-
-  // stats[0] = grants given, stats[1] = USD allocated, stats[2] = sats sent
-  const grantsGiven = formatNumber(stats[0]?.value ?? 0)
-  const usdAllocated = Math.round(stats[1]?.value ?? 0).toLocaleString()
-  const satsSent = formatNumber(stats[2]?.value ?? 0).replace('B', 'billion')
-  const countryCount = Math.round(useAnimatedCount(40))
+  const { grantsGiven, usdAllocated, satsSent, countryCount } =
+    formatStatsSentenceValues(stats)
+  const animatedCountryCount = Math.round(useAnimatedCount(countryCount))
 
   return (
     <p className={className}>
@@ -51,7 +48,7 @@ export default function StatsSentence({
         href="/map"
         className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        {countryCount}+ countries
+        {animatedCountryCount}+ countries
       </Link>
       .
     </p>

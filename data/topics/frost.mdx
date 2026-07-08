@@ -1,0 +1,21 @@
+---
+title: 'FROST'
+summary: 'A threshold Schnorr signature scheme that lets a group produce one standard signature without giving one party the full private key.'
+category: 'Bitcoin'
+aliases:
+  [
+    'Flexible Round-Optimized Schnorr Threshold Signatures',
+    'threshold Schnorr signatures',
+  ]
+---
+
+`FROST` stands for Flexible Round-Optimized Schnorr Threshold Signatures. It is a threshold signing scheme for Schnorr keys. A secret key is split into shares, and a quorum of participants can cooperate to produce one valid signature without reconstructing the full key in one place.
+
+That matters anywhere one signer is a liability. A `t-of-n` policy can distribute trust across people, devices, or servers while still tolerating some offline or compromised participants. To outside verifiers, the result still looks like a normal Schnorr signature.
+
+In the Bitcoin ecosystem, FROST is relevant to wallet security, custody, federated systems, and protocols that need threshold signing without exposing a multisig policy on chain. OpenSats-funded work in this area includes [Frostr](/projects/frostr), a nostr threshold signing protocol built on FROST. FROST also fits naturally alongside [Taproot](/topics/taproot), which brought Schnorr signatures to Bitcoin.
+
+## References
+
+- [RFC 9591: The Flexible Round-Optimized Schnorr Threshold (FROST) Protocol](https://www.rfc-editor.org/rfc/rfc9591.html)
+- [CFRG FROST draft repository](https://github.com/cfrg/draft-irtf-cfrg-frost)

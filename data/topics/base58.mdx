@@ -1,0 +1,21 @@
+---
+title: 'Base58'
+summary: 'The text encoding Bitcoin uses for legacy addresses, WIF keys, and extended keys. Base58Check adds version bytes and a checksum.'
+category: 'Bitcoin'
+aliases:
+  ['Base58Check', 'legacy addresses']
+---
+
+Base58 is the compact text encoding Bitcoin uses for older address and key formats. It avoids visually similar characters such as `0`, `O`, `I`, and `l`, which makes long strings easier to read, copy, and transcribe.
+
+Bitcoin rarely uses plain Base58 on its own. Most user-facing strings use Base58Check, which prepends a version byte, appends a four-byte checksum, and then encodes the result in Base58. That extra structure lets software distinguish between different payloads and catch many typing mistakes before funds move.
+
+Legacy P2PKH and P2SH addresses are Base58Check strings, which is why they often start with `1` or `3` on mainnet. [WIF](/topics/wif) private keys also use Base58Check, and [BIP 32](/topics/bip-32) extended keys such as `xpubs` and `xprvs` use the same family of encodings with different version bytes.
+
+Newer output types use different address encodings. Native [SegWit](/topics/segwit) and [Taproot](/topics/taproot) addresses use [Bech32](/topics/bech32) or Bech32m instead, which were designed specifically for witness outputs.
+
+## References
+
+- [Bitcoin Wiki: Base58Check encoding](https://en.bitcoin.it/wiki/Base58Check_encoding)
+- [Bitcoin Developer Glossary: Base58check](https://developer.bitcoin.org/glossary.html#term-Base58check)
+- [Bitcoin Core source: `src/base58.h`](https://raw.githubusercontent.com/bitcoin/bitcoin/master/src/base58.h)
