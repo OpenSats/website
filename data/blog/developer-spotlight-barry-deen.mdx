@@ -13,3 +13,431 @@ pullQuotes:
   - "Bitcoiners are so accustomed to really complicated UX that they don’t see the problems on nostr."
   - "I guess you can say I’m kind of a normie too."
 ---
+
+Before the internet became a handful of apps, it felt more like a place.
+
+People made web pages, gathered in chat rooms, and followed links down strange
+paths, often delighted to discover others with shared interests on the far side
+of the world. The web was rough and uneven then, but that was part of the charm.
+A kid could learn a little code, put something online, and find out the world
+was bigger than the room he was sitting in.
+
+Barry Deen was ten years old in Toronto when that feeling got him. He taught
+himself HTML and Perl, built his first website, and made his first money online.
+For a while, he ran [kaiosama.com][kaiosama], the second biggest Dragon Ball Z
+site on the internet. Since then, he has made more than 500 websites, a number
+he has lost track of.
+
+He did not grow up with money, and he says so plainly: “Grew up so poor but went
+to a rich kid school.” He is comfortable now, by a wide margin, but the early
+version of himself never quite left. All these years later: “I still carry that
+‘poor kid’ identity with me everywhere.”
+
+Online, he became known as [UTXO the Webmaster][utxo].
+
+Today, most of his energy goes into [Wisp][wisp-app], his [open-source][foss]
+social app built on [nostr][nostr], an open protocol for publishing and sharing
+all kinds of information online, controlled by no company or government. Wisp’s
+mission can fit into a sentence: make a decentralized network feel easy, social,
+and worth opening every day, for people who will never care what a protocol is.
+Getting there took him twenty years, one badly timed bitcoin trade, and a long
+detour through nostr’s plumbing.
+
+### Built by the web
+
+Ask Barry to describe himself and the builder is still front and center:
+
+> I’m an entrepreneur, a lover of all things tech, a foodie, and of course, a
+> bitcoiner. I’m the guy the family calls when the computer is broken.
+
+After high school, he skipped university and started a software business with
+his brother. That helped him land webmaster jobs at Aviva Insurance and American
+Express. They were good jobs by normal standards, and for the first time he was
+making real money. Almost immediately, he learned he could not stand having a
+boss or letting other people control his time.
+
+So, he set out to buy his time back. He used his savings to buy websites on
+marketplaces like [Flippa][flippa] and [Empire Flippers][empire-flippers],
+improve them, sell them, trade domains, and keep going. The math appealed to
+him. A public stock might take decades to earn back its price; a small website,
+bought well, could sometimes do it in a couple of years. He also played poker
+and counted cards, for the income and the fun of it.
+
+Large website and domain sales eventually gave him financial independence. It
+did not make money irrelevant. It made time the thing he had won and could now
+choose how to spend.
+
+It is tempting to call that ambition and leave it there. Barry put a finer point
+on it in a reply on nostr. Fellow bitcoiner American HODL [had
+posted][hodl-post] that people with hard childhoods tend to split into three
+groups: most are crushed by the weight, a few make real peace with it and move
+on, and a rare third group neither heals nor breaks but turns the old feeling
+into "a motor that never turns off," trying to "justify their existence with
+external achievement."
+
+“[I am #3][i-am-3],” Barry wrote back. The poor kid who taught himself to build
+never stopped needing to. Most of what follows is the sound of that motor.
+
+The city he loved eventually wore him down. Barry was born and raised in Toronto
+and loved it through the 1990s and 2000s, when it felt magical to him. After the
+financial crisis, and especially after COVID, the traffic, crime, and house
+prices made it unbearable. So, he moved north, “as far away from the city as I
+can reasonably manage.”
+
+In the new house, he built out a basement to do what he does best. He calls the
+whole thing a giant man cave: a workstation, a TV and entertainment area, a gym,
+and a homelab for experimenting and running servers. “If I’m going to be a
+basement dweller,” he says, “might as well be a sick basement.” The gym has a
+white power rack and a Canadian flag draped over the weight pegs. Everything
+down there earns its keep.
+
+![Barry's basement gym](/static/images/spotlight/barry-deen/basement-gym.jpg)
+
+### Money that lives on the internet
+
+Bitcoin did not click for Barry the first time, or the third time. He had passed
+on it at a dollar, at a hundred, at a thousand, then bought near the top of the
+2017 run, around nineteen thousand dollars a coin. He bought other crypto too,
+“sadly,” as he puts it now. At first, it was just something to gamble on in
+Coinbase, and with bitcoin down more than eighty percent a year later, it looked
+like a failed investment.
+
+His perspective changed in 2019, thanks to a website he had bought that already
+accepted crypto for a small share of sales. This time, he got to work on
+payments within a business he owned. "I experienced that same magical feeling I
+had as a kid learning to use the internet for the first time," he says.
+
+> Money that lives on the internet that I can control, that’s so cool.
+
+He wanted to replace the site’s Coinbase processing with bitcoin-only,
+self-custody payments, so users would actually control their own bitcoin, not
+leave it with a third party. [BTCPay Server][btcpay] provided the way but was
+missing features he needed, so he made his [first open-source
+contribution][first-contribution] to add them. The investor had become a user,
+the user a contributor, and the contributor the kind of bitcoiner who holds his
+own keys and wants others to do the same. That conviction is still the
+foundation of his work: in Barry’s view, bitcoin loses something essential when
+ordinary people cannot easily hold it themselves.
+
+His first bitcoin conference, in 2021, sealed it. Going meant stepping out from
+behind his UTXO the Webmaster handle, far outside his comfort zone, and giving
+up being anonymous. He decided at that moment that this was a community he
+wanted to be part of, and hopefully help lead.
+
+### Plumbing in the wilderness
+
+Nostr appealed to Barry for the same reason bitcoin did: it offered open access,
+but aimed to make online communication free from centralized control. Anyone can
+build an application on it. Anyone can run a [relay][relays], a server that
+helps carry messages across the network. And an account does not have to live
+inside one company’s platform. The network belongs to the people using it.
+
+Barry joined in 2022. One of his first posts was just two words, “Running
+nostr,” echoing early bitcoin developer Hal Finney’s famous 2009 Twitter post,
+“[Running bitcoin][running-bitcoin].” The nostr protocol made the internet feel
+buildable again. The apps were another story.
+
+He came to nostr first as a user, and as a user he felt the experience getting
+worse. Apps were slow. Basic features lagged. It was hard to recommend to normal
+people.
+
+So he decided to build beneath the surface. He built [WoT Relay][wot] to fight
+spam, [Haven][haven] to help posts move around the network and be found, and
+[Algo Relay][algo] as an experiment in richer feeds. He also built
+[Aegis][aegis], a tool that let anyone run their own premium relay and [media
+server][blossom] with payments handled in the background. He made bots for fun,
+too, like [Rektbot][rektbot], which posts to nostr whenever big liquidations hit
+traders making heavily leveraged bitcoin bets.
+
+Most of this work lived underneath, laying the groundwork for better experiences
+on top. The trouble is that people do not notice plumbing when it works, and
+nostr apps did not widely adopt what he produced. The [routing model][outbox] he
+cared about did not become standard fast enough. He had a small grant to work on
+Algo Relay and canceled it himself, for lack of interest.
+
+At the time, he says, “My work felt like it was all for nothing.”
+
+Then he made [his first donation ask][donation-ask] from the nostr community,
+covering everything he had built for it so far. Millions of [sats][sats] came in
+over hundreds of [zaps][zaps]. A sat is a tiny fraction of a bitcoin; a zap is
+one of those fractions attached to a nostr post like a tip. He got emotional.
+
+> I never received that level of recognition, ever; it’s a very rewarding
+> feeling. Absolutely magical.
+
+The money helped. The recognition mattered more.
+
+### The app he’d been waiting for
+
+Everything up to this point turned out to be preparation. Two decades of
+building had taught him how to make things people actually want to use. Bitcoin
+had taught him what it means to hold something valuable yourself instead of
+trusting it to others. The years in the nostr wilderness had given him strong
+opinions about how the network should work underneath.
+
+And yet he had resigned himself, for a while, to not building the nostr app he
+wanted. He had the backend instincts, the relay knowledge, the product taste.
+What he lacked was the front-end skill to make something polished enough to hand
+to normal friends. Then Claude Opus, one of the new generation of AI coding
+models, got good enough.
+
+“Finally my vision for my perfect daily driver was possible,” he says. “I had
+the right architecture in mind for years, and now finally I have the developer
+who could make it come to life.”
+
+The result is Wisp, a mobile app built on one stubborn idea: it should just
+work. Posts show up where they should. Under the hood, every post lives on many
+relays, so the app asks dozens at once and shows whichever copy arrives first,
+one reason it feels quick. “Don’t take my word for it, ask the users what they
+think,” he says. “The real reason why Wisp is good is because it’s fast.” It
+finds what you are looking for without you having to think about it, and handles
+the complex settings in the background so the experience stays simple.
+
+A new person downloads the app and signs in with whatever they already have. The
+welcome screen shows the Wisp logo, a swarm of profile pictures, “338 people
+online now,” and three buttons: Continue with Apple, Continue with Google,
+Continue with Nostr. The Nostr button is for people who already know. Apple and
+Google are for everyone else.
+
+> My only goal with Wisp is to make people like nostr and have it not feel so
+> slow and broken.
+
+![Wisp view on the iPhone](/static/images/spotlight/barry-deen/iphone-wisp-screen.jpg)
+
+The approach is working. Wisp has been the fastest-growing nostr app on Android
+since launch, and an iOS beta is now out on TestFlight.
+
+His product philosophy is blunt. He believes in opinionated software, a clean
+experience, and minimal configuration. One app should not try to please
+everyone. Choice, to him, comes from having many apps with different ideas. He
+has little patience for software that needs a manual. “I always find it funny
+when someone needs a guide on how to use software,” he says. “That basically
+means the software is bad.”
+
+It plays out in decisions that power users can argue about for days. For anyone
+who installs Wisp, the app starts in [normie mode][normie-mode]: zap amounts
+show in dollars instead of sats, and the word Bitcoin quietly becomes “money.”
+His thesis is that plenty of people see the word Bitcoin, assume crypto, assume
+scam, and run, and he would rather lose the vocabulary than lose the person. The
+dollar view even changed his own habits; a zap that sounds respectable in sats
+can look silly in pennies. “When you look at it in pennies, it’s too low, man,”
+he says. “It’s offensive.” Under the joke is the instinct he applies to
+everything: say what the button does.
+
+### One-man crew
+
+Wisp came together at a pace that barely seems real. It went from first idea in
+February 2026 to a working [version][version] in about nine weeks, and the
+public record shows it: more than a thousand changes and dozens of releases. It
+reads like the work of a small team.
+
+But there is no team. Barry did not even write most of the code himself, and did
+not have to. He spent the last two decades learning to build software, and with
+Wisp that skill moved somewhere else. He uses AI agents to do much of the
+coding: he defines the patterns, splits the work into pieces that several agents
+can run at once without colliding, reviews what comes back, fixes what breaks,
+and keeps pushing. It shifts his role from writing every line to orchestrating
+how the system comes together.
+
+“I am only a developer by necessity,” he says. His calling, as he sees it, is
+building products and businesses; he learned to code only because hiring
+developers was too expensive. Now that a model can handle the mechanical work
+for a few dollars a day, he does not miss doing it all himself. “To me it feels
+amazing,” he says.
+
+Claude and Codex do the heavy lifting on his main project. The local models he
+runs himself, Qwen and Gemma, play a supporting role, handling chatbots, search,
+agents, and private experiments on a homemade rig in the homelab: four high-end
+graphics cards mounted in an open frame, a stack of tower computers, and cabling
+strung across a corner built for tinkering.
+
+![Barry's homelab](/static/images/spotlight/barry-deen/server-rig-monitor.jpg)
+
+There is an obvious tension in an open-source developer leaning on closed-source
+AI, and his answer is practical. “I have no need for privacy when I’m building
+Wisp,” he says. “All that code is published.” Open-source models are catching up
+fast and genuinely excite him; Claude is not the only good tool, and when the
+machines fall short, he still writes the code himself. The fast pace is partly
+the new machinery and partly the old temperament, and his own answer credits the
+unglamorous half:
+
+> The biggest secret is just long hours, attention to detail, and hard work.
+> Proof of work.
+
+He works on all of this at a walnut-edged standing desk with a wide monitor and
+a laptop open beside it, a mechanical keyboard under his hands, and bitcoin
+blocks streaming by from [mempool.space][mempool-space] on one side of the
+screen while code runs on the other. A microphone sits within reach, and a Guy
+Fawkes mask from [V for Vendetta][v] rests near the keyboard.
+
+On the wall hangs a large [MADEX][madex] painting of an armored warrior in a
+plumed helmet, sword in hand, built up in heavy texture and sealed in glossy
+resin. It was the first piece of valuable art he ever bought. Look closely, and
+the collage beneath the resin is made from pages of [The Bitcoin Standard][tbs],
+and along the bottom edge, lettered small, runs a line borrowed from the film
+[300][300] about free men standing against a tyrant.
+
+![The workstation and painting](/static/images/spotlight/barry-deen/workstation-desk-painting.jpg)
+
+> I am revenge building for years of broken nostr UX.
+
+The revenge is mostly a working app that feels effortless to normal users. His
+favorite feature began as a tangent. During the nine-week sprint, he was playing
+with [grimoire][grimoire], a nostr app built for developers, “looking for ideas
+to steal.” [fiatjaf][fiatjaf], the creator of nostr, had mentioned
+[NIP-29][nip-29], one of the protocol’s specs for group chat rooms, to him many
+times, but it never clicked. “He’s an architect,” Barry says, referring to
+fiatjaf, “and I don’t speak that language.” An architect hands you the
+blueprint; Barry needs to see the building go up. In grimoire, he finally did,
+chat rooms alive on the screen, and they struck him as beautiful and nostalgic,
+the kind of place the early web used to be. He brought chat rooms into Wisp.
+“Chat rooms are awesome,” he says. Most people do not wake up wanting an open
+communication protocol. They want somewhere to talk.
+
+### Easy is worth the effort
+
+Underneath the whole project sits a worry, one that has run through his work
+since his BTCPay days: open tools keep drifting back under the control of a few
+companies, simply because the easy path keeps winning. He has watched it happen
+with bitcoin, where people keep handing their coins back to custodians. “We
+could have done better to reach more people,” he says, “to make our tools
+easier, to warn people that bitcoin only has value when you hold the keys.”
+
+Something similar happens with social media. People pour years into building an
+audience and a body of work they do not truly own inside the platforms. The
+followers, the posts, the reach, all of it lives inside a company, on terms the
+company sets. Same trade, different asset: you put in the effort, and someone
+else ends up holding what you built.
+
+The response is the one he always has. When he sees a barrier, he makes a tool
+to clear it. And the barrier here is not the idea but the experience. Open,
+self-sovereign tools tend to be built by and for technical people, and Barry
+thinks his own tribe is part of the problem. “Bitcoiners are so accustomed to
+really complicated UX that they don’t see the problems on nostr,” he says. They
+have lost the taste for easy. So a normal person bounces off the open tools and
+goes back to the easy custodial app. The open alternative can be right on
+principle and still lose, purely because it is harder to use. Making it easy
+enough that an ordinary person will actually choose it is, more than anything,
+what he is trying to do.
+
+The proof is on Wisp's own welcome screen. Behind the Continue with Apple and
+Continue with Google buttons, the app quietly generates a real nostr
+[keypair][nsec-keypair] on the phone, locks its backup behind a PIN only the
+user knows, and encrypts it, so the user who signed up like it was any other
+social media app is already holding their own nostr keys.
+
+### Fuel for the motor
+
+Barry’s future for Wisp is large enough to sound unreasonable if you strip out
+the grin. Asked where Wisp could be in eighteen months if everything goes right,
+he imagines “hundreds of millions of users having fun, chatting with their
+friends, posting memes, live streaming and zapping away like crazy.” He wants
+bitcoin to feel like a normal way to send money to friends and creators, and
+social media where people own what they post and are not kept angry for ad
+views. There is no final version in his mind. Competitors will keep improving,
+so Wisp has to keep moving.
+
+OpenSats gives him the room to do that full-time. The grant, awarded in [May
+2026][wisp-grant], funds a full year of Wisp development. He bought back his
+time once through websites and domains, but open-source work still competes with
+the paying work he could be doing instead. Funding removes that pull and lets
+him aim the whole motor at one target.
+
+### The normie and the quiet house
+
+Back home, none of it carries much weight. He is open about what he does, and
+his neighbors and family mostly treat it as ordinary Barry stuff. The eye-rolls
+sting a little, he admits, though he understands their point of view.
+
+> It does sound a little whack to say we’re going to overthrow the financial
+> system with our Raspberry Pis in the basement and restore freedom of speech
+> with a bunch of janky apps lol.
+
+His lives as Barry and UTXO the Webmaster collided exactly once, the year he
+brought his closest friend, a man he calls a brother, to a bitcoin conference.
+The friend met the people from Barry’s other life and walked away a bitcoiner.
+In Barry’s words, “he got orange pilled af.”
+
+The rest of the time he is closer to ordinary than UTXO the Webmaster might
+suggest. He cooks, hikes with Harvey, his big Rottweiler, and spends time with
+friends and family. When he works late, it is usually because he is trying to
+fix an obnoxious software bug; he would rather call it at a reasonable hour, eat
+a meal, watch some television, and scroll nostr before bed.
+
+He keeps trying to get back into the video games he loved as a kid and cannot
+quite manage it. [StarCraft][starcraft] is still the best ever made, he will
+tell you, and it is not even close. “RIP being young,” he says. He is not
+complaining. He considers himself “very blessed, comparatively speaking.”
+Building things is his happy place. “I guess you can say I’m kind of a normie
+too.”
+
+When all is said and done for the day, and evening comes, Barry turns off the
+basement lights to head upstairs. In a dark corner, a few small [Bitaxe][bitaxe]
+miners run through the night, mostly for the fun of it but also with a long shot
+at lottery odds: the tiny chance they solve a Bitcoin block and pay out the full
+reward, currently a little over three bitcoin. They will still be at it in the
+morning. So will Barry.
+
+The house goes quiet. Downstairs, the warrior keeps watch over the workstation.
+Upstairs, Harvey is asleep on his orthopedic bed, though sometimes, he likes to
+sleep beside it.
+
+![Harvey beside his bed](/static/images/spotlight/barry-deen/harvey-beside-bed.jpg)
+
+---
+
+Barry Deen received [a grant for Wisp][wisp-grant] in May 2026. “Without
+OpenSats,” he says, “I would have no choice but to work on other projects and
+Wisp would forever be a side project. Not having to worry about my lost
+opportunity cost gives me the space to give Wisp everything I got.”
+
+If you want to support Barry, recommend Wisp to someone who wants nostr to feel
+easy, social, and alive. Our support for Barry’s work was made possible thanks
+to your generous donations to [The Nostr Fund][nostr-fund].
+
+For comments, corrections, or suggestions about our [Spotlight series][opensats-spotlight], please reach out to spotlight@opensats.org.
+
+---
+
+<DonateRecurringButton designation="nostr" />
+
+
+[300]: https://www.imdb.com/title/tt0416449
+[aegis]: https://github.com/bitvora/aegis
+[algo]: https://github.com/barrydeen/algo-relay
+[bitaxe]: /projects/bitaxe
+[blossom]: /topics/blossom
+[btcpay]: /projects/btcpayserver
+[donation-ask]: https://primal.net/e/nevent1qqsd98eghh783kf33e38rfl6uk4c477g3f5qs8rtfhqm7x2es5nn0kgc8x7kk
+[empire-flippers]: https://empireflippers.com/
+[fiatjaf]: /blog/fiatjaf-receives-lts-grant
+[first-contribution]: https://github.com/btcpayserver/btcpayserver-greenfield-php/commit/b9cb4b200eb404cda681244e0ea1dc54a934dfed
+[flippa]: https://flippa.com/
+[foss]: /topics/foss
+[grimoire]: https://grimoire.rocks/
+[haven]: https://github.com/barrydeen/haven
+[hodl-post]: https://primal.net/e/nevent1qqsdgn4vuh7xx6wtr7an9muzwxhwgyf052c3a8yu2z94psjjj885n3gjvzc6v
+[i-am-3]: https://primal.net/e/nevent1qqsqqqrwll7attj86hxre6ktsfpdm3havrlu5vavup3wag4rlgxa2kcgyptta
+[kaiosama]: https://web.archive.org/web/20001019071723/http://www.kaiosama.com/index.php3
+[madex]: https://madex.art/
+[mempool-space]: https://mempool.space
+[nip-29]: /topics/nip-29
+[normie-mode]: https://r2.primal.net/cache/3/87/ea/387eae3658b7239951842d53de5111ac48063756feb8f0c314e018accbe92fe2.jpg
+[nostr]: /topics/nostr
+[nostr-fund]: /funds/nostr
+[nsec-keypair]: /topics/nsec
+[opensats-spotlight]: /spotlight
+[outbox]: /topics/outbox
+[relays]: /topics/relays
+[rektbot]: https://primal.net/p/nprofile1qqspcm9j9xtt42lfyx7dghytvgfm9k4sjmuguja9v7x585v45xrg25gym6chp
+[running-bitcoin]: https://x.com/halfin/status/1110302988
+[sats]: /topics/sats
+[starcraft]: https://starcraft.blizzard.com/en-us/
+[tbs]: https://saifedean.com/tbs
+[utxo]: https://primal.net/utxo
+[v]: https://www.imdb.com/title/tt0434409/
+[version]: https://github.com/barrydeen/wisp/releases/tag/v1.0.0
+[wisp-app]: https://wisp.mobile/
+[wisp-grant]: /blog/seventeenth-wave-of-nostr-grants#wisp
+[wot]: https://github.com/barrydeen/wot-relay
+[zaps]: /topics/zaps
