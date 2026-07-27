@@ -13,14 +13,13 @@ fund: nostr
 announcementLink: '/blog/seventeenth-wave-of-nostr-grants#wisp'
 ---
 
-Wisp is a fast Android [nostr](/topics/nostr) client built by
-[Barry Deen][barry]. It packages the familiar parts of a social app into one
-mobile experience: a chronological feed, photos and videos, rooms, live
-streams, private messages, reactions, and a wallet for sending money as easily
-as liking a post.
+Wisp is an Android [nostr](/topics/nostr) client built by [Barry Deen][barry].
+It feels like a regular social app: chronological posts, photos, videos, rooms,
+live streams, private messages, reactions, and a wallet for sending money as
+easily as liking a post.
 
-The client is designed for people who are new to nostr. Wisp implements the
-[outbox model](/topics/outbox), supports dedicated DM relay sets, and uses
+The client keeps nostr's moving parts out of the user's way. Wisp implements
+the [outbox model](/topics/outbox), supports dedicated DM relay sets, and uses
 end-to-end encrypted [private messages](/topics/private-dms). Users can join
 topic rooms, build custom feeds, upload media through [Blossom](/topics/blossom),
 and move around the network without depending on a single platform account.
@@ -33,29 +32,26 @@ wallet backups are stored on relays the user controls.
 
 ## Why fund it?
 
-Nostr needs clients that feel useful before a user understands relays, keys, or
-Lightning. Wisp hides much of that complexity while keeping the underlying
-protocol benefits intact: portable identity, user-chosen relays, open-source
-code, and direct bitcoin payments.
+Most people meet nostr through a client. If the app makes relays, keys, and
+Lightning feel like homework, they leave. Wisp keeps the experience familiar.
+Users still own the identity and choose the relays.
 
 OpenSats supported Wisp in the [seventeenth wave of Nostr
 grants](/blog/seventeenth-wave-of-nostr-grants#wisp). The grant helps Barry work
 on Wisp full-time and keeps development focused on onboarding, mobile polish,
 private messaging, and payments.
 
-Barry is also working on relay infrastructure that can make clients like Wisp
-more useful: [MOAR][moar], a configurable multi-tenant relay gateway;
-[Haven][haven], a personal relay for storing, backing up, and sharing user
-events; and [AlgoRelay][algo-relay], an algorithmic relay for personalized
-feeds.
+Barry is also working on relay infrastructure around Wisp: [MOAR][moar], a
+configurable multi-tenant relay gateway; [Haven][haven], a personal relay for
+storing, backing up, and sharing user events; and [AlgoRelay][algo-relay], an
+algorithmic relay for personalized feeds.
 
 ## What's next?
 
-The roadmap starts by rounding out the Android app: leaving beta, making the
-wallet easier to understand with Normie Mode, distributing through Google Play,
-and bringing Wisp to the web. From there, the work moves across platforms with
-[Wisp for iOS][wisp-ios], while [Dark Wisp][dark-wisp] explores a more
-privacy-focused Android fork. Relay-based private communities are also planned.
+Barry's grant plan starts with the Android app: leave beta, keep Normie Mode
+clear for people who think in dollars, keep Google Play releases moving, and
+ship the web client. After that comes [Wisp for iOS][wisp-ios], [Dark
+Wisp][dark-wisp], and relay-based private communities.
 
 [barry]: https://njump.me/npub1utx00neqgqln72j22kej3ux7803c2k986henvvha4thuwfkper4s7r50e8
 [algo-relay]: https://github.com/barrydeen/algo-relay
