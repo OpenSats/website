@@ -230,7 +230,7 @@ running smoothly, helping ensure safety across the entire `rust-bitcoin` stack.
 Additionally, OpenSats grantee Robert Netzke
 ([rustaceanrob](https://github.com/rustaceanrob)) implemented policy-level
 changes by merging upstream fixes directly into the library. He adjusted the
-`OP_RETURN` [size
+[OP_RETURN](/topics/op-return) [size
 limit](https://github.com/rust-bitcoin/rust-bitcoin/commit/e0442782c8c04bdc48c2743e70f46e41c507e5f4)—a
 rule for embedding data in transactions—to exactly match Bitcoin Core's
 80-byte cap, including the space for instructions (push opcodes), which helps
