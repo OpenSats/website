@@ -1,0 +1,53 @@
+---
+title: 'Wisp'
+dateAdded: '2026-05-20'
+summary: 'A fast Android nostr client with private messaging, custom feeds, live streams, and a built-in Lightning wallet.'
+nym: 'Barry Deen'
+website: 'https://wisp.mobile/'
+coverImage: '/static/images/projects/wisp.svg'
+git: 'https://github.com/barrydeen/wisp'
+nostr: 'npub1utx00neqgqln72j22kej3ux7803c2k986henvvha4thuwfkper4s7r50e8'
+zapstore: 'https://zapstore.dev/apps/com.wisp.app'
+tags: ['Nostr', 'Mobile', 'Android', 'Wallet']
+fund: nostr
+announcementLink: '/blog/seventeenth-wave-of-nostr-grants#wisp'
+---
+
+Wisp is a fast Android [nostr](/topics/nostr) client built by
+[Barry Deen][barry]. It packages the familiar parts of a social app into one
+mobile experience: a chronological feed, photos and videos, rooms, live
+streams, private messages, reactions, and a wallet for sending money as easily
+as liking a post.
+
+The client is designed for people who are new to nostr. Wisp implements the
+[outbox model](/topics/outbox), supports dedicated DM relay sets, and uses
+end-to-end encrypted [private messages](/topics/private-dms). Users can join
+topic rooms, build custom feeds, upload media through [Blossom](/topics/blossom),
+and move around the network without depending on a single platform account.
+
+Wisp also includes a non-custodial wallet based on the
+[Breez SDK (Spark)][breez-sdk-spark]. New users can receive [zaps](/topics/zaps),
+send tips to creators, pay friends, and recover their wallet with a seed phrase.
+Encrypted wallet backups are stored on relays the user controls.
+
+## Why fund it?
+
+Nostr needs clients that feel useful before a user understands relays, keys, or
+Lightning. Wisp hides much of that complexity while keeping the underlying
+protocol benefits intact: portable identity, user-chosen relays, open-source
+code, and direct bitcoin payments.
+
+OpenSats supported Wisp in the [seventeenth wave of Nostr
+grants](/blog/seventeenth-wave-of-nostr-grants#wisp). The grant helps Barry work
+on Wisp full-time and keeps development focused on onboarding, mobile polish,
+private messaging, and payments.
+
+## What's next?
+
+Near-term work includes a web client, a simpler wallet mode that can show
+balances in USD, and gift-card cash-outs through [Bitrefill][bitrefill]. Barry
+is also working toward an iOS beta and private relay-based communities.
+
+[barry]: https://njump.me/npub1utx00neqgqln72j22kej3ux7803c2k986henvvha4thuwfkper4s7r50e8
+[breez-sdk-spark]: https://github.com/breez/spark-sdk#breez-sdk---spark
+[bitrefill]: https://www.bitrefill.com/us/en/
