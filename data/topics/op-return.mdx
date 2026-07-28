@@ -1,0 +1,18 @@
+---
+title: 'OP_RETURN'
+summary: 'A Bitcoin script opcode commonly used for provably unspendable outputs that carry small pieces of data.'
+category: 'Bitcoin'
+aliases: ['null data', 'data carrier', 'provably unspendable output']
+---
+
+OP_RETURN is a Bitcoin script opcode that immediately makes a script fail if someone tries to spend it. Wallets and protocols use that behavior to create provably unspendable outputs, most often for small data commitments that do not need to remain in the [UTXO](/topics/utxo) set.
+
+These outputs are commonly called null data outputs. They are useful when a protocol needs to anchor a commitment, identifier, or other small marker in a transaction without pretending the output can later be spent. Because the coins assigned to an OP_RETURN output are unspendable, standard OP_RETURN outputs usually carry no spendable value.
+
+OP_RETURN is not a general data-storage feature. Consensus rules and node relay policy are separate, and standardness limits have changed over time. Most applications that need larger or private data should store that data elsewhere and use OP_RETURN only for the minimal public commitment they need on chain.
+
+## References
+
+- [Bitcoin Developer Guide: Null Data](https://developer.bitcoin.org/devguide/transactions.html#null-data)
+- [Bitcoin Wiki: OP_RETURN](https://en.bitcoin.it/wiki/OP_RETURN)
+- [Bitcoin Core: script opcode definitions](https://github.com/bitcoin/bitcoin/blob/master/src/script/script.h)

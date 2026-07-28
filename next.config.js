@@ -76,6 +76,11 @@ module.exports = () => {
     async redirects() {
       return [
         {
+          source: '/tags/spotlight',
+          destination: '/spotlight',
+          permanent: true,
+        },
+        {
           source: '/projects/nostr',
           destination: '/funds/nostr',
           permanent: true,

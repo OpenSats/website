@@ -1,0 +1,18 @@
+---
+title: 'OP_CAT'
+summary: 'A proposed Bitcoin opcode for tapscript that concatenates two stack values into one value.'
+category: 'Bitcoin'
+aliases: ['BIP 347', 'CAT']
+---
+
+OP_CAT is a proposed tapscript opcode described in BIP 347. It takes two values from the stack, joins them together in order, and pushes the combined value back onto the stack.
+
+That small operation matters because Bitcoin script has many ways to hash, compare, and check signatures, but no active opcode for building larger values from smaller stack elements. Reintroducing OP_CAT in tapscript would make it easier to express some advanced contract patterns, including Merkle-style commitments, tree signatures, and [covenant](/topics/covenant)-like constructions.
+
+OP_CAT existed in early Bitcoin versions and was disabled in 2010 along with several other opcodes. The modern proposal is narrower: it would only apply in tapscript and would keep tapscript's existing stack element size limit, so it is discussed as a soft-fork change rather than a return to the original scripting environment.
+
+## References
+
+- [BIP 347: OP_CAT in Tapscript](https://github.com/bitcoin/bips/blob/master/bip-0347.mediawiki)
+- [bips.dev: BIP 347 rendered](https://bips.dev/347/)
+- [Bitcoin Optech: OP_CAT](https://bitcoinops.org/en/topics/op_cat/)
