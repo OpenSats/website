@@ -217,14 +217,79 @@ id est laborum.
 
 ## Software Shipped
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent elementum
-facilisis leo vel fringilla est ullamcorper eget nulla. Nibh tellus molestie
-nunc non blandit massa enim nec dui.
+Our grantees shipped over 500 releases this quarter, spread across more than
+90 of the [hundreds of projects](/heartbeat) we support. Some highlights:
+
+- **Cluster mempool shipped:**
+  [Bitcoin Core 31.0](https://github.com/bitcoin/bitcoin/releases/tag/v31.0)
+  came out in April. Its headline change is a redesign of the mempool
+  that orders transactions by the feerate at which they would actually
+  be mined. Block building and eviction get smarter, and the new
+  replace-by-fee rules close the known ways a replacement could leave
+  the mempool worse off. Several of our
+  [Bitcoin Core](/projects/bitcoin-core) grantees contributed to the
+  release.
+- **Splicing you can type:** Core Lightning
+  [v26.04](https://github.com/ElementsProject/lightning/releases/tag/v26.04)
+  added `splicein` and `spliceout` commands. Last quarter we wrote about
+  LTS grantee [Dusty Daemon](/blog/dusty-daemon-receives-lts-grant)
+  getting [splicing](/projects/splicing) into the BOLTs. This quarter,
+  node operators can resize a channel with a single command. The same
+  release made payments more reliable through parallel pathfinding in
+  askrene.
+- **[Cashu](/projects/cashu) mints learn on-chain:**
+  [CDK v0.17.0](https://github.com/cashubtc/cdk/releases/tag/v0.17.0)
+  implements NUT-30, which adds on-chain deposits and withdrawals to
+  mints that previously spoke Lightning only.
+- **Two Utreexo nodes, two releases:**
+  [Floresta](/projects/floresta)
+  [v0.9.0](https://github.com/vinteumorg/floresta/releases/tag/v0.9.0)
+  implements the BIP-183 messaging flow for proof-driven sync, and
+  [utreexod](/projects/utreexod)
+  [v0.6.0](https://github.com/utreexo/utreexod/releases/tag/v0.6.0)
+  sped up historical proof generation. LTS grantee
+  [Calvin Kim](/blog/calvin-kim-receives-lts-grant) leads the utreexod
+  work.
+- **[Krux](/projects/krux) patches what the robots found:**
+  [v26.04.0](https://github.com/selfcustody/krux/releases/tag/v26.04.0)
+  fixes a batch of security issues that AI-assisted audits surfaced in
+  the hardware signer, including stricter PSBT checks and protections
+  against malicious QR codes and SD cards.
+- **New firmware for the [Bitaxe](/projects/bitaxe):**
+  [ESP-Miner v2.14.0](https://github.com/bitaxeorg/ESP-Miner/releases/tag/v2.14.0)
+  gives the open-source home miner a customizable dashboard, a
+  scoreboard, and logs that survive reboots.
+
+Releases are one part of the story. Our grantees also write protocol
+specifications, hunt for bugs, and build prototypes of what might come
+next:
+
+- The LNHANCE Expedition's
+  [MCCV](https://github.com/LNHANCE-Expedition/mccv) vault ("More
+  Complicated CTV Vault") can now be tried on signet. This quarter
+  brought a working CLI, persistent storage, and a user guide.
+- [Smite](https://github.com/morehouse/smite), the Lightning snapshot
+  fuzzer we covered last issue, gained an IR-based fuzzing engine and
+  `smitebot`, a tool that automates long fuzzing campaigns.
+- [Bitcoinfuzz](/projects/bitcoinfuzz) added miniscript and descriptor
+  modules and collected fresh trophies, among them a BIP32 seed length
+  validation bug that affected several libraries.
+
+As always, [OpenSats heartbeat](/heartbeat) has the full picture: a live
+feed of every release, commit, and pull request across the projects we
+fund.
 
 <ViewHeartbeatButton />
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet cursus sit amet
-dictum sit amet justo donec enim diam.
+If you [select our nostr fund](https://heartbeat.opensats.org/?types=release&funds=nostr),
+you'll see that this quarter brought new releases for
+[Amber](/projects/amber), [Amethyst](/projects/amethyst),
+[Applesauce](/projects/applesauce), [Citrine](/projects/citrine),
+[Coracle](/projects/coracle), [Jumble](/projects/jumble),
+[Mostro](/projects/mostro), [nak](/projects/nak),
+[ngit](/projects/ngit), [Wisp](/projects/wisp),
+[ZapStore](/projects/zapstore), and more. Wisp reached v1.0.0 and
+Citrine reached v3.0.0, both firsts for their projects.
 
 ---
 
