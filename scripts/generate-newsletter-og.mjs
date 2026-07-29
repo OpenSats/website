@@ -143,6 +143,58 @@ function cypherpunkLaptopSvg() {
   `
 }
 
+// Open map with a path to an orange beacon. Matches the Q2 headline
+// "Territory of Freedom": frontier, open ground, a place to go.
+function territoryMapSvg() {
+  // Anchored at (760, 150) inside the 1200x630 canvas.
+  return `
+    <g transform="translate(760, 150)">
+      <ellipse cx="170" cy="180" rx="220" ry="160" fill="#f97316" fill-opacity="0.12" />
+
+      <!-- drop shadow -->
+      <rect x="14" y="22" width="340" height="240" rx="14" fill="#000" fill-opacity="0.45" />
+
+      <!-- map sheet -->
+      <rect x="0" y="0" width="340" height="240" rx="14" fill="#fff7ed" stroke="#fed7aa" stroke-width="3" />
+
+      <!-- faint contour lines -->
+      <path d="M 28,72 C 70,52 110,92 150,78 C 190,64 230,48 310,62"
+            stroke="#fed7aa" stroke-width="2.5" fill="none" stroke-linecap="round" />
+      <path d="M 28,118 C 80,102 120,138 168,124 C 220,108 260,96 312,112"
+            stroke="#fed7aa" stroke-width="2.5" fill="none" stroke-linecap="round" />
+      <path d="M 28,168 C 76,154 124,186 176,170 C 228,154 268,148 312,162"
+            stroke="#fed7aa" stroke-width="2.5" fill="none" stroke-linecap="round" />
+
+      <!-- dashed border suggesting open / unfinished edges -->
+      <path d="M 48,28 L 48,212" stroke="#fb923c" stroke-width="2" stroke-dasharray="6 8"
+            stroke-linecap="round" fill="none" opacity="0.55" />
+      <path d="M 48,212 L 292,212" stroke="#fb923c" stroke-width="2" stroke-dasharray="6 8"
+            stroke-linecap="round" fill="none" opacity="0.55" />
+
+      <!-- trail across the map -->
+      <path d="M 64,196 C 100,176 118,150 148,132 C 178,114 198,96 228,78"
+            stroke="#fb923c" stroke-width="5" fill="none"
+            stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- destination pin -->
+      <g transform="translate(208, 28)">
+        <path d="M 20,78 C -4,54 -8,34 4,18 C 12,8 20,4 20,4 C 20,4 28,8 36,18 C 48,34 44,54 20,78 Z"
+              fill="#000" fill-opacity="0.22" transform="translate(2, 3)" />
+        <path d="M 20,78 C -4,54 -8,34 4,18 C 12,8 20,4 20,4 C 20,4 28,8 36,18 C 48,34 44,54 20,78 Z"
+              fill="#f97316" stroke="#c2410c" stroke-width="2" />
+        <circle cx="20" cy="28" r="9" fill="#fff7ed" />
+        <circle cx="20" cy="28" r="4.5" fill="#f97316" />
+      </g>
+    </g>
+  `
+}
+
+function issueArtwork(slug) {
+  if (slug === '2026-Q1') return cypherpunkLaptopSvg()
+  if (slug === '2026-Q2') return territoryMapSvg()
+  return loveLetterSvg()
+}
+
 function baseDefs() {
   return `
     <defs>
@@ -243,7 +295,7 @@ function renderIssueSvg(issue) {
         opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
-      ${issue.slug === '2026-Q1' ? cypherpunkLaptopSvg() : loveLetterSvg()}
+      ${issueArtwork(issue.slug)}
     </svg>
   `
 }
