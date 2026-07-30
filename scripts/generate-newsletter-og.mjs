@@ -29,6 +29,14 @@ const faviconSvgPath = path.join(
   'brand',
   'opensats-favicon.svg'
 )
+const territoryMapPngPath = path.join(
+  root,
+  'public',
+  'static',
+  'images',
+  'newsletter',
+  'territory-map.png'
+)
 
 // Bundle Inter so resvg renders identically on macOS and Vercel's
 // Linux build env (where Georgia/Arial aren't installed). Mirrors the
@@ -49,12 +57,18 @@ const WIDTH = 1200
 const HEIGHT = 630
 
 let faviconDataUri = ''
+let territoryMapDataUri = ''
 
 async function loadFavicon() {
   const svg = await fs.readFile(faviconSvgPath, 'utf8')
   faviconDataUri = `data:image/svg+xml;base64,${Buffer.from(svg).toString(
     'base64'
   )}`
+}
+
+async function loadTerritoryMap() {
+  const png = await fs.readFile(territoryMapPngPath)
+  territoryMapDataUri = `data:image/png;base64,${png.toString('base64')}`
 }
 
 function logoMark({ x, y, size }) {
@@ -141,6 +155,29 @@ function cypherpunkLaptopSvg() {
       <circle cx="170" cy="8" r="2.5" fill="#fb923c" fill-opacity="0.6" />
     </g>
   `
+}
+
+// Isometric topographic map for Q2 "Territory of Freedom".
+// Artwork derived from a public topo/map icon, recolored to OpenSats orange.
+function territoryMapSvg() {
+  if (!territoryMapDataUri) return loveLetterSvg()
+
+  // Anchored at (740, 110) inside the 1200x630 canvas.
+  const size = 380
+  return `
+    <g transform="translate(740, 110)">
+      <ellipse cx="${size / 2}" cy="${size / 2 + 20}" rx="200" ry="160"
+               fill="#f97316" fill-opacity="0.14" />
+      <image href="${territoryMapDataUri}"
+             x="0" y="0" width="${size}" height="${size}" />
+    </g>
+  `
+}
+
+function issueArtwork(slug) {
+  if (slug === '2026-Q1') return cypherpunkLaptopSvg()
+  if (slug === '2026-Q2') return territoryMapSvg()
+  return loveLetterSvg()
 }
 
 function baseDefs() {
@@ -243,7 +280,7 @@ function renderIssueSvg(issue) {
         opensats.org/newsletter/${escapeXml(issue.slug)}
       </text>
 
-      ${issue.slug === '2026-Q1' ? cypherpunkLaptopSvg() : loveLetterSvg()}
+      ${issueArtwork(issue.slug)}
     </svg>
   `
 }
@@ -290,6 +327,7 @@ async function writeImage(filename, svg) {
 async function main() {
   await ensureOutputDir()
   await loadFavicon()
+  await loadTerritoryMap()
 
   const newsletters = await loadNewsletters()
 

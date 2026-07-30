@@ -68,7 +68,7 @@ export default function Spotlight({
         </h1>
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
           Get to know the developers we support and the open-source projects
-          they pour their days into.
+          they pour their days (and nights) into.
         </p>
       </div>
 
