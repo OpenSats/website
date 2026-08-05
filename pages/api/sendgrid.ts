@@ -298,7 +298,9 @@ Thank you for your patience.
           to: TO_ADDRESS, // OpenSats
           cc: CC_ADDRESS, // Processing & backup
           from: FROM_ADDRESS, // Verified sender
-          subject: `OpenSats Application for ${req.body.project_name}`,
+          subject: req.body.RED
+            ? `OpenSats RED: Application for ${req.body.project_name}`
+            : `OpenSats Application for ${req.body.project_name}`,
           html: `${body}`,
           text: body.replace(/<[^>]*>/g, ''), // Strip HTML for plain text version
         }
