@@ -28,9 +28,8 @@ export default function ApplyRed() {
         </p>
         <p>
           In light of recent events, we are fast-tracking these red team
-          applications. Tell us what you are researching and your token spend so
-          far and going forward. If approved, we will follow up with any details
-          needed for payouts. Prefer a full project grant instead? See{' '}
+          applications. If approved, we will follow up with any details needed
+          for payouts. Prefer a full project grant instead? See{' '}
           <CustomLink href="/apply/grant">General Grant</CustomLink>.
         </p>
         <RedApplicationForm />
