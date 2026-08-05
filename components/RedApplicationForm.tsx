@@ -28,9 +28,9 @@ const REVIEW_SECTIONS: ReviewSection[] = [
   {
     title: 'Budget',
     fields: [
-      ['Duration', 'duration'],
       ['Token Spend So Far', 'token_spend_so_far'],
       ['Expected Ongoing Burn', 'estimated_token_burn'],
+      ['Duration', 'duration'],
       ['Requested Reimbursement', 'proposed_budget'],
     ],
   },

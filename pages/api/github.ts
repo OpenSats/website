@@ -60,13 +60,13 @@ ${req.body.disclosure_links}
 }
 ### Budget
 
-**Duration:** ${req.body.duration || 'n/a'}
-
 **Spend so far:**
 ${req.body.token_spend_so_far || 'n/a'}
 
 **Expected ongoing burn:**
 ${req.body.estimated_token_burn || 'n/a'}
+
+**Duration:** ${req.body.duration || 'n/a'}
 
 **Requested reimbursement:**
 ${req.body.proposed_budget || 'n/a'}
