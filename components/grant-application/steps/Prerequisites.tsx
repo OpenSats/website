@@ -33,11 +33,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
     return (
       <>
         <h2>Before You Begin</h2>
-        <p>
-          This track is for security researchers red-teaming Bitcoin and related
-          free and open-source software. Applications are focused on supporting
-          that work, including reimbursement for LLM token spend.
-        </p>
+        <p>Confirm the following before continuing.</p>
 
         <label className="inline-flex items-start gap-2">
           <input
