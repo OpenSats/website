@@ -27,7 +27,7 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       <label className="block">
         Expected Ongoing Burn *<br />
         <small>
-          Rough estimate of monthly or ongoing token spend while this research
+          Rough estimate of monthly or ongoing spend while this research
           continues.
         </small>
         <textarea
