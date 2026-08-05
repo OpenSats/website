@@ -5,7 +5,11 @@ import { StepProps, checkboxClass } from '../types'
 
 export default function Prerequisites({ register, watch, errors }: StepProps) {
   const isLts = watch('LTS')
-  const checkboxFields = isLts
+  const isRed = watch('RED')
+
+  const checkboxFields = isRed
+    ? (['red_security_research', 'responsible_disclosure'] as const)
+    : isLts
     ? ([
         'read_criteria',
         'read_faq',
@@ -19,6 +23,45 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         'has_references',
         'free_open_source',
       ] as const)
+
+  if (isRed) {
+    return (
+      <>
+        <h2>Before You Begin</h2>
+        <p>
+          This track is for security researchers red-teaming Bitcoin and related
+          free and open-source software. Applications are focused on supporting
+          that work, including reimbursement for LLM token spend.
+        </p>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('red_security_research', { required: true })}
+          />
+          <span>
+            I am applying for security research / red teaming support, not a
+            general project grant
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('responsible_disclosure', { required: true })}
+          />
+          <span>
+            I will practice responsible disclosure when reporting vulnerabilities
+            to maintainers
+          </span>
+        </label>
+
+        <CheckboxGroupError errors={errors} names={checkboxFields} />
+      </>
+    )
+  }
 
   return (
     <>
