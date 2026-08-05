@@ -8,7 +8,11 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
   const isRed = watch('RED')
 
   const checkboxFields = isRed
-    ? (['red_security_research', 'responsible_disclosure'] as const)
+    ? ([
+        'red_security_research',
+        'responsible_disclosure',
+        'foss_outputs',
+      ] as const)
     : isLts
     ? ([
         'read_criteria',
@@ -55,6 +59,18 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           <span>
             I will practice responsible disclosure when reporting vulnerabilities
             to maintainers
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('foss_outputs', { required: true })}
+          />
+          <span>
+            Findings, tools, and other work product from this engagement will be
+            open-sourced either directly or through OpenSats
           </span>
         </label>
 

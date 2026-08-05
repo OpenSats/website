@@ -41,7 +41,11 @@ const STEPS: StepConfig[] = [
   {
     id: 'prerequisites',
     title: 'Prerequisites',
-    fields: ['red_security_research', 'responsible_disclosure'],
+    fields: [
+      'red_security_research',
+      'responsible_disclosure',
+      'foss_outputs',
+    ],
     render: (props) => <Prerequisites {...props} />,
   },
   {
