@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../../utils/api-helpers'
@@ -20,6 +20,28 @@ interface MultiStepApplicationFormProps {
   submitLabel: string
 }
 
+function resolveStepIndex(
+  steps: readonly StepConfig[],
+  stepParam: string | string[] | undefined
+): number {
+  const raw = Array.isArray(stepParam) ? stepParam[0] : stepParam
+  if (!raw) return 0
+
+  const byId = steps.findIndex((step) => step.id === raw)
+  if (byId >= 0) return byId
+
+  const asNumber = Number.parseInt(raw, 10)
+  if (
+    !Number.isNaN(asNumber) &&
+    asNumber >= 0 &&
+    asNumber < steps.length
+  ) {
+    return asNumber
+  }
+
+  return 0
+}
+
 export default function MultiStepApplicationForm({
   steps,
   hiddenFields = {},
@@ -32,6 +54,11 @@ export default function MultiStepApplicationForm({
   const [failureReason, setFailureReason] = useState<string>()
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
+
+  useEffect(() => {
+    if (!router.isReady) return
+    setCurrentStep(resolveStepIndex(steps, router.query.step))
+  }, [router.isReady, router.query.step, steps])
 
   const {
     watch,
