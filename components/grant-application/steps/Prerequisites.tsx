@@ -69,8 +69,10 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
             {...register('foss_outputs', { required: true })}
           />
           <span>
-            Findings, tools, and other work product from this engagement will be
-            open-sourced either directly or through OpenSats
+            I agree that publishable outputs from this engagement (findings,
+            tools, and other work product) will be released under a free and
+            open-source license through OpenSats after any needed coordinated
+            disclosure
           </span>
         </label>
 
