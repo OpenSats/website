@@ -6,8 +6,8 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
     <>
       <h2>Budget</h2>
       <p>
-        Security research often burns a lot of LLM tokens. Tell us what you have
-        spent and what you need reimbursed.
+        Security research burns a lot of LLM tokens these days. Tell us what you
+        have spent and what you need reimbursed.
       </p>
 
       <label className="block">
