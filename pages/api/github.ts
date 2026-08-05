@@ -26,9 +26,38 @@ export default async function handler(
     const byOrFor = req.body.LTS ? 'for' : 'by'
     const issueTitle = `${req.body.project_name} ${byOrFor} ${req.body.your_name}`
 
-    const tokenSection =
-      req.body.token_spend_so_far || req.body.estimated_token_burn
-        ? `
+    const contactFooter = `
+---
+
+${req.body.website ? `Website: ${req.body.website}` : ''}
+${req.body.license ? `License: ${req.body.license}` : ''}
+${req.body.github ? `GitHub: ${req.body.github}` : ''}
+${
+  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
+}
+${
+  req.body.other_contact
+    ? `Other contact details: ${req.body.other_contact}`
+    : ''
+}
+${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
+`
+
+    // Condensed information for screening purposes, no PII
+    const issueBody = req.body.RED
+      ? `
+### Research
+
+${req.body.short_description}
+
+${
+  req.body.disclosure_links
+    ? `### Disclosure Links
+
+${req.body.disclosure_links}
+`
+    : ''
+}
 ### Budget
 
 **Spend so far:**
@@ -36,19 +65,11 @@ ${req.body.token_spend_so_far || 'n/a'}
 
 **Expected ongoing burn:**
 ${req.body.estimated_token_burn || 'n/a'}
-`
-        : ''
 
-    const disclosureSection = req.body.disclosure_links
-      ? `
-### Disclosure Links
-
-${req.body.disclosure_links}
-`
-      : ''
-
-    // Condensed information for screening purposes, no PII
-    const issueBody = `
+**Requested reimbursement:**
+${req.body.proposed_budget || 'n/a'}
+${contactFooter}`
+      : `
 ### Description
 
 ${req.body.short_description}
@@ -56,7 +77,7 @@ ${req.body.short_description}
 ### Potential Impact
 
 ${req.body.potential_impact}
-${disclosureSection}${tokenSection}
+
 ### Other Organizations Applied To
 
 ${
@@ -81,8 +102,8 @@ ${req.body.proposed_budget}
 ${req.body.what_funding ? req.body.what_funding : ''}
 
 **Additional funding sources:** ${
-      req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
-    }
+          req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
+        }
 
 ${req.body.additional_funding ? req.body.additional_funding : ''}
 
@@ -106,22 +127,7 @@ ${req.body.video_application ? req.body.video_application : 'None provided.'}
 ### Anything Else
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
-
----
-
-${req.body.website ? `Website: ${req.body.website}` : ''}
-${req.body.license ? `License: ${req.body.license}` : ''}
-${req.body.github ? `GitHub: ${req.body.github}` : ''}
-${
-  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
-}
-${
-  req.body.other_contact
-    ? `Other contact details: ${req.body.other_contact}`
-    : ''
-}
-${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
-        `
+${contactFooter}`
 
     // Label set according to "main focus" (absent for RED applications)
     const mainFocus = req.body.main_focus
