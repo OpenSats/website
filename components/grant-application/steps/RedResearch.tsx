@@ -32,20 +32,6 @@ export default function RedResearch({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Potential Impact *<br />
-        <small>
-          Why does this research matter for Bitcoin or related free and
-          open-source software?
-        </small>
-        <textarea
-          rows={5}
-          className={inputClass}
-          {...register('potential_impact', { required: true })}
-        />
-        <FieldError errors={errors} name="potential_impact" />
-      </label>
-
-      <label className="block">
         Disclosure Links
         <br />
         <small>
