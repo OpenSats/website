@@ -26,8 +26,8 @@ export default function ApplyRed() {
           applications.
         </p>
         <p>
-          Tell us what you are researching and what token spend you need
-          reimbursed. If approved, we will follow up with any details needed for
+          Tell us what you are researching and your token spend so far and going
+          forward. If approved, we will follow up with any details needed for
           payouts. Prefer a full project grant instead? See{' '}
           <CustomLink href="/apply/grant">General Grant</CustomLink>.
         </p>
