@@ -31,7 +31,6 @@ const REVIEW_SECTIONS: ReviewSection[] = [
       ['Token Spend So Far', 'token_spend_so_far'],
       ['Expected Ongoing Burn', 'estimated_token_burn'],
       ['Duration', 'duration'],
-      ['Requested Reimbursement', 'proposed_budget'],
     ],
   },
 ]
@@ -62,7 +61,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'budget',
     title: 'Budget',
-    fields: ['duration', 'estimated_token_burn', 'proposed_budget'],
+    fields: ['duration', 'estimated_token_burn'],
     render: (props) => <TokenReimbursement {...props} />,
   },
   {

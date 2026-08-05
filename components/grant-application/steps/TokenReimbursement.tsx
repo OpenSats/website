@@ -52,20 +52,6 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
         </select>
         <FieldError errors={errors} name="duration" />
       </label>
-
-      <label className="block">
-        Requested Reimbursement (USD) *<br />
-        <small>
-          How much are you asking OpenSats to reimburse? Include a short
-          breakdown if useful.
-        </small>
-        <textarea
-          rows={4}
-          className={inputClass}
-          {...register('proposed_budget', { required: true })}
-        />
-        <FieldError errors={errors} name="proposed_budget" />
-      </label>
     </>
   )
 }
