@@ -11,7 +11,8 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       </p>
 
       <label className="block">
-        Token Spend So Far *<br />
+        Token Spend So Far
+        <br />
         <small>
           Approximate usage to date (tokens, USD, or both). Include the tools or
           providers if helpful.
@@ -19,9 +20,8 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
         <textarea
           rows={4}
           className={inputClass}
-          {...register('token_spend_so_far', { required: true })}
+          {...register('token_spend_so_far')}
         />
-        <FieldError errors={errors} name="token_spend_so_far" />
       </label>
 
       <label className="block">

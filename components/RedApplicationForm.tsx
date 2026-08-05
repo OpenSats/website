@@ -61,11 +61,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'tokens',
     title: 'Token Reimbursement',
-    fields: [
-      'token_spend_so_far',
-      'estimated_token_burn',
-      'proposed_budget',
-    ],
+    fields: ['estimated_token_burn', 'proposed_budget'],
     render: (props) => <TokenReimbursement {...props} />,
   },
   {
