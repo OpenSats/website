@@ -155,7 +155,7 @@ ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
 
     // Tag depending on request for grant and/or request for listing
     req.body.LTS && issueLabels.push('LTS')
-    req.body.RED && issueLabels.push('red-team')
+    req.body.RED && issueLabels.push('RED')
 
     // Additional tags based on yes/no answers
     req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
