@@ -35,8 +35,9 @@ export default function RedResearch({ register, errors }: StepProps) {
         Prior Work *<br />
         <small>
           Links or references that show a trail of trust or prior work in
-          Bitcoin security or a closely related space (disclosures, write-ups,
-          patches, public research, etc.).
+          Bitcoin security or a closely related space, plus any disclosures or
+          write-ups for this engagement (patches, public research, advisories,
+          etc.).
         </small>
         <textarea
           rows={5}
@@ -44,16 +45,6 @@ export default function RedResearch({ register, errors }: StepProps) {
           {...register('prior_work', { required: true })}
         />
         <FieldError errors={errors} name="prior_work" />
-      </label>
-
-      <label className="block">
-        Disclosure Links
-        <br />
-        <small>
-          Optional links specific to this engagement: advisories, write-ups, or
-          coordinated disclosures in progress.
-        </small>
-        <textarea className={inputClass} {...register('disclosure_links')} />
       </label>
     </>
   )

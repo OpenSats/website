@@ -56,14 +56,6 @@ ${req.body.short_description}
 
 ${req.body.prior_work || 'n/a'}
 
-${
-  req.body.disclosure_links
-    ? `### Disclosure Links
-
-${req.body.disclosure_links}
-`
-    : ''
-}
 ### Budget
 
 **Spend so far:**

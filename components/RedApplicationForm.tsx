@@ -23,7 +23,6 @@ const REVIEW_SECTIONS: ReviewSection[] = [
       ['Short Title', 'project_name'],
       ['What Are You Researching?', 'short_description'],
       ['Prior Work', 'prior_work'],
-      ['Disclosure Links', 'disclosure_links'],
     ],
   },
   {
