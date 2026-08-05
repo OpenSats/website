@@ -26,6 +26,27 @@ export default async function handler(
     const byOrFor = req.body.LTS ? 'for' : 'by'
     const issueTitle = `${req.body.project_name} ${byOrFor} ${req.body.your_name}`
 
+    const tokenSection =
+      req.body.token_spend_so_far || req.body.estimated_token_burn
+        ? `
+### Token Reimbursement
+
+**Spend so far:**
+${req.body.token_spend_so_far || 'n/a'}
+
+**Expected ongoing burn:**
+${req.body.estimated_token_burn || 'n/a'}
+`
+        : ''
+
+    const disclosureSection = req.body.disclosure_links
+      ? `
+### Disclosure Links
+
+${req.body.disclosure_links}
+`
+      : ''
+
     // Condensed information for screening purposes, no PII
     const issueBody = `
 ### Description
@@ -35,7 +56,7 @@ ${req.body.short_description}
 ### Potential Impact
 
 ${req.body.potential_impact}
-
+${disclosureSection}${tokenSection}
 ### Other Organizations Applied To
 
 ${
@@ -49,7 +70,7 @@ ${
 ${req.body.duration ? `Grant duration: ${req.body.duration}` : ''}
 ${req.body.commitment ? `Time commitment: ${req.body.commitment}` : ''}
 
-${req.body.timelines}
+${req.body.timelines || ''}
 
 ### Proposed Budget
 
@@ -67,7 +88,7 @@ ${req.body.additional_funding ? req.body.additional_funding : ''}
 
 ### References & Prior Contributions
 
-${req.body.references}
+${req.body.references || ''}
 
 ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
@@ -134,11 +155,14 @@ ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
 
     // Tag depending on request for grant and/or request for listing
     req.body.LTS && issueLabels.push('LTS')
+    req.body.RED && issueLabels.push('RED')
 
     // Additional tags based on yes/no answers
     req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
-    !req.body.free_open_source && issueLabels.push('not FLOSS')
-    !req.body.are_you_lead && issueLabels.push('surrogate')
+    if (!req.body.RED) {
+      !req.body.free_open_source && issueLabels.push('not FLOSS')
+      !req.body.are_you_lead && issueLabels.push('surrogate')
+    }
 
     try {
       await octokit.rest.issues.create({
