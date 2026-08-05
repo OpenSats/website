@@ -11,6 +11,21 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       </p>
 
       <label className="block">
+        Duration *
+        <br />
+        <small>How long do you need support for?</small>
+        <select
+          className={inputClass}
+          {...register('duration', { required: true })}
+        >
+          <option value="1 month">1 month</option>
+          <option value="3 months">3 months</option>
+          <option value="6 months">6 months</option>
+        </select>
+        <FieldError errors={errors} name="duration" />
+      </label>
+
+      <label className="block">
         Token Spend So Far
         <br />
         <small>

@@ -60,6 +60,8 @@ ${req.body.disclosure_links}
 }
 ### Budget
 
+**Duration:** ${req.body.duration || 'n/a'}
+
 **Spend so far:**
 ${req.body.token_spend_so_far || 'n/a'}
 

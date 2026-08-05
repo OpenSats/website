@@ -28,6 +28,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
   {
     title: 'Budget',
     fields: [
+      ['Duration', 'duration'],
       ['Token Spend So Far', 'token_spend_so_far'],
       ['Expected Ongoing Burn', 'estimated_token_burn'],
       ['Requested Reimbursement', 'proposed_budget'],
@@ -61,7 +62,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'budget',
     title: 'Budget',
-    fields: ['estimated_token_burn', 'proposed_budget'],
+    fields: ['duration', 'estimated_token_burn', 'proposed_budget'],
     render: (props) => <TokenReimbursement {...props} />,
   },
   {
@@ -79,6 +80,7 @@ export default function RedApplicationForm() {
     <MultiStepApplicationForm
       steps={STEPS}
       hiddenFields={{ RED: true }}
+      defaultValues={{ duration: '3 months' }}
       submitLabel="Submit Red Application"
     />
   )
