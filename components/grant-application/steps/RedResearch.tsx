@@ -7,24 +7,6 @@ export default function RedResearch({ register, errors }: StepProps) {
       <h2>Research</h2>
 
       <label className="block">
-        Main Focus *
-        <br />
-        <small>Which area are you primarily researching?</small>
-        <select
-          className={inputClass}
-          {...register('main_focus', { required: true })}
-        >
-          <option value="">(Choose One)</option>
-          <option value="core">Bitcoin Core</option>
-          <option value="layer1">Layer1 / Bitcoin</option>
-          <option value="layer2">Layer2 / Lightning</option>
-          <option value="nostr">Nostr</option>
-          <option value="other">Other</option>
-        </select>
-        <FieldError errors={errors} name="main_focus" />
-      </label>
-
-      <label className="block">
         Short Title *<br />
         <small>
           A brief label for this research (e.g. target software or focus area).

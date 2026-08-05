@@ -20,7 +20,6 @@ const REVIEW_SECTIONS: ReviewSection[] = [
   {
     title: 'Research',
     fields: [
-      ['Main Focus', 'main_focus'],
       ['Short Title', 'project_name'],
       ['What Are You Researching?', 'short_description'],
       ['Potential Impact', 'potential_impact'],
@@ -57,12 +56,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'research',
     title: 'Research',
-    fields: [
-      'main_focus',
-      'project_name',
-      'short_description',
-      'potential_impact',
-    ],
+    fields: ['project_name', 'short_description', 'potential_impact'],
     render: (props) => <RedResearch {...props} />,
   },
   {

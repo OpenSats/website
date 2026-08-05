@@ -123,9 +123,11 @@ ${
 ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
         `
 
-    // Label set according to "main focus"
-    const mainFocus = `${req.body.main_focus}`.toLowerCase()
-    const issueLabels = [mainFocus]
+    // Label set according to "main focus" (absent for RED applications)
+    const mainFocus = req.body.main_focus
+      ? `${req.body.main_focus}`.toLowerCase()
+      : ''
+    const issueLabels = mainFocus ? [mainFocus] : []
     if (mainFocus === 'layer1' || mainFocus === 'layer2') {
       issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
     }
