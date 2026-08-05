@@ -20,8 +20,9 @@ export default function RedResearch({ register, errors }: StepProps) {
       <label className="block">
         What Are You Researching? *<br />
         <small>
-          Describe the software you are red-teaming and what you are looking
-          for. Include findings so far if you have any.
+          Describe the software you are red-teaming and the general scope of
+          what you propose to do. Do not include exploit code, reproduction
+          steps, or other nonpublic technical findings.
         </small>
         <textarea
           rows={5}

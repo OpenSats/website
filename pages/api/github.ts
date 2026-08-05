@@ -65,6 +65,20 @@ ${req.body.token_spend_so_far || 'n/a'}
 ${req.body.estimated_token_burn || 'n/a'}
 
 **Duration:** ${req.body.duration || 'n/a'}
+
+### Acknowledgments
+
+**Terms effective:** ${req.body.red_terms_effective || 'n/a'}
+
+- Not authorization: ${req.body.red_ack_not_authorization ? 'Yes' : 'No'}
+- Sanctions / export-control: ${req.body.red_ack_sanctions ? 'Yes' : 'No'}
+- Authorized LLM/compute accounts: ${
+          req.body.red_ack_llm_accounts ? 'Yes' : 'No'
+        }
+- Accurate info / responsible disclosure: ${
+          req.body.red_ack_accurate_responsible ? 'Yes' : 'No'
+        }
+- Terms & privacy: ${req.body.red_ack_terms ? 'Yes' : 'No'}
 ${contactFooter}`
       : `
 ### Description

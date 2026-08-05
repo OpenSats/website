@@ -85,15 +85,6 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         </label>
 
         <CheckboxGroupError errors={errors} names={checkboxFields} />
-
-        <div className="prose">
-          <small>
-            If approved, you will be asked to sign a written agreement covering
-            custody of work product, coordinated disclosure, and free and
-            open-source release of publishable outputs. More detailed terms may
-            follow.
-          </small>
-        </div>
       </>
     )
   }

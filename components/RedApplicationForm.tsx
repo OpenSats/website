@@ -6,6 +6,11 @@ import ApplicantDetails from './grant-application/steps/ApplicantDetails'
 import RedResearch from './grant-application/steps/RedResearch'
 import TokenReimbursement from './grant-application/steps/TokenReimbursement'
 import Review, { ReviewSection } from './grant-application/steps/Review'
+import RedLegalAcknowledgments from './grant-application/steps/RedLegalAcknowledgments'
+import {
+  RED_ACK_FIELDS,
+  RED_TERMS_EFFECTIVE,
+} from './grant-application/redTerms'
 
 const REVIEW_SECTIONS: ReviewSection[] = [
   {
@@ -68,9 +73,12 @@ const STEPS: StepConfig[] = [
   {
     id: 'review',
     title: 'Review',
-    fields: [],
+    fields: [...RED_ACK_FIELDS],
     render: (props) => (
-      <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+      <>
+        <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+        <RedLegalAcknowledgments {...props} />
+      </>
     ),
   },
 ]
@@ -79,9 +87,13 @@ export default function RedApplicationForm() {
   return (
     <MultiStepApplicationForm
       steps={STEPS}
-      hiddenFields={{ RED: true }}
+      hiddenFields={{
+        RED: true,
+        red_terms_effective: RED_TERMS_EFFECTIVE,
+      }}
       defaultValues={{ duration: '1 month' }}
       submitLabel="Submit Red Application"
+      submitRequiresChecked={RED_ACK_FIELDS}
     />
   )
 }

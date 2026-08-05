@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
+import RedBeforeYouApply from '@/components/RedBeforeYouApply'
 import { PageSEO } from '@/components/SEO'
 
 const RedApplicationForm = dynamic(
@@ -32,6 +33,7 @@ export default function ApplyRed() {
           for payouts. Prefer a full project grant instead? See{' '}
           <CustomLink href="/apply/grant">General Grant</CustomLink>.
         </p>
+        <RedBeforeYouApply />
         <RedApplicationForm />
       </PageSection>
     </>

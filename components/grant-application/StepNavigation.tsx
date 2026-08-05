@@ -6,6 +6,7 @@ interface StepNavigationProps {
   onSubmit: () => void
   loading: boolean
   submitLabel: string
+  submitDisabled?: boolean
 }
 
 export default function StepNavigation({
@@ -16,8 +17,10 @@ export default function StepNavigation({
   onSubmit,
   loading,
   submitLabel,
+  submitDisabled = false,
 }: StepNavigationProps) {
   const isLast = currentStep === totalSteps - 1
+  const submitBlocked = loading || submitDisabled
 
   return (
     <div className="flex justify-between pt-4">
@@ -42,10 +45,12 @@ export default function StepNavigation({
         <button
           type="button"
           onClick={onSubmit}
-          disabled={loading}
+          disabled={submitBlocked}
           aria-busy={loading}
           className={`rounded-md bg-orange-500 px-6 py-2 text-sm font-semibold text-white ${
-            loading ? 'cursor-not-allowed opacity-50' : 'hover:bg-orange-600'
+            submitBlocked
+              ? 'cursor-not-allowed opacity-50'
+              : 'hover:bg-orange-600'
           }`}
         >
           {loading ? 'Submitting...' : submitLabel}
