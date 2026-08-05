@@ -59,7 +59,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           />
           <span>
             I have a demonstrable track record in this space (or a closely
-            related one) and understand these applications are highly selective
+            related one)
           </span>
         </label>
 
