@@ -22,6 +22,10 @@ export default function ApplyRed() {
           application is for researchers doing that work.
         </p>
         <p>
+          In light of recent events, we are fast-tracking these red team
+          applications.
+        </p>
+        <p>
           Tell us what you are researching and what token spend you need
           reimbursed. If approved, we will follow up with any details needed for
           payouts. Prefer a full project grant instead? See{' '}

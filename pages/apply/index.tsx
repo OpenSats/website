@@ -122,7 +122,8 @@ export default function Apply({
         <p className="mb-8">
           For security researchers red-teaming Bitcoin and related free and
           open-source software. Short application focused on research context
-          and LLM token reimbursement. Always open.
+          and LLM token reimbursement. Always open. In light of recent events,
+          we are fast-tracking these applications.
         </p>
         <Link
           href="/apply/red"
