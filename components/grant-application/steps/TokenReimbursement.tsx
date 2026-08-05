@@ -4,7 +4,7 @@ import { StepProps, inputClass } from '../types'
 export default function TokenReimbursement({ register, errors }: StepProps) {
   return (
     <>
-      <h2>Token Reimbursement</h2>
+      <h2>Budget</h2>
       <p>
         Security research often burns a lot of LLM tokens. Tell us what you have
         spent and what you need reimbursed.

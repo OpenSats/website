@@ -26,7 +26,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
     ],
   },
   {
-    title: 'Token Reimbursement',
+    title: 'Budget',
     fields: [
       ['Token Spend So Far', 'token_spend_so_far'],
       ['Expected Ongoing Burn', 'estimated_token_burn'],
@@ -59,8 +59,8 @@ const STEPS: StepConfig[] = [
     render: (props) => <RedResearch {...props} />,
   },
   {
-    id: 'tokens',
-    title: 'Token Reimbursement',
+    id: 'budget',
+    title: 'Budget',
     fields: ['estimated_token_burn', 'proposed_budget'],
     render: (props) => <TokenReimbursement {...props} />,
   },

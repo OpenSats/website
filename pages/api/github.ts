@@ -29,7 +29,7 @@ export default async function handler(
     const tokenSection =
       req.body.token_spend_so_far || req.body.estimated_token_burn
         ? `
-### Token Reimbursement
+### Budget
 
 **Spend so far:**
 ${req.body.token_spend_so_far || 'n/a'}
