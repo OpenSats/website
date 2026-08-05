@@ -24,7 +24,9 @@ export default async function handler(
     console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
 
     const byOrFor = req.body.LTS ? 'for' : 'by'
-    const issueTitle = `${req.body.RED ? 'RED: ' : ''}${req.body.project_name} ${byOrFor} ${req.body.your_name}`
+    const issueTitle = `${req.body.RED ? 'RED: ' : ''}${
+      req.body.project_name
+    } ${byOrFor} ${req.body.your_name}`
 
     const contactFooter = `
 ---

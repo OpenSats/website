@@ -31,11 +31,7 @@ function resolveStepIndex(
   if (byId >= 0) return byId
 
   const asNumber = Number.parseInt(raw, 10)
-  if (
-    !Number.isNaN(asNumber) &&
-    asNumber >= 0 &&
-    asNumber < steps.length
-  ) {
+  if (!Number.isNaN(asNumber) && asNumber >= 0 && asNumber < steps.length) {
     return asNumber
   }
 

@@ -57,8 +57,8 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
             {...register('responsible_disclosure', { required: true })}
           />
           <span>
-            I will practice responsible disclosure when reporting vulnerabilities
-            to maintainers
+            I will practice responsible disclosure when reporting
+            vulnerabilities to maintainers
           </span>
         </label>
 
