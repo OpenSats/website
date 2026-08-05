@@ -7,10 +7,7 @@ export default function RedResearch({ register, errors }: StepProps) {
       <h2>Research</h2>
 
       <label className="block">
-        Short Title *<br />
-        <small>
-          A brief label for this research (e.g. target software or focus area).
-        </small>
+        Short Title *
         <input
           type="text"
           className={inputClass}
