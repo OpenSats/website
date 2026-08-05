@@ -286,7 +286,9 @@ export function measureTextBBoxWithResvg(text, fontSize) {
 
   const svgHeight = Math.ceil(fontSize * 2)
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="${svgHeight}">
-    <text x="0" y="${fontSize}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(text)}</text>
+    <text x="0" y="${fontSize}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
+    text
+  )}</text>
   </svg>`
   const resvg = new Resvg(svg, {
     font: {

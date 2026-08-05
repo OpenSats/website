@@ -180,8 +180,16 @@ function renderTransparencySvg(stats) {
       const centerX = PADDING + colWidth * index + colWidth / 2
       const value = formatLifetimeStatDisplay(index, stat.value)
       return `
-        <text x="${centerX}" y="${numberY}" fill="${COLORS.accent}" font-size="56" font-weight="700" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(value)}</text>
-        <text x="${centerX}" y="${labelY}" fill="${COLORS.summary}" font-size="26" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(stat.label)}</text>
+        <text x="${centerX}" y="${numberY}" fill="${
+        COLORS.accent
+      }" font-size="56" font-weight="700" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(
+        value
+      )}</text>
+        <text x="${centerX}" y="${labelY}" fill="${
+        COLORS.summary
+      }" font-size="26" font-family="${INTER_FONT_FAMILY}" text-anchor="middle">${escapeXml(
+        stat.label
+      )}</text>
       `
     })
     .join('')
@@ -192,12 +200,20 @@ function renderTransparencySvg(stats) {
 
       <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
-      <text x="${titleX}" y="${titleY}" fill="${COLORS.title}" font-size="56" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-2">Transparency</text>
+      <text x="${titleX}" y="${titleY}" fill="${
+    COLORS.title
+  }" font-size="56" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-2">Transparency</text>
 
       ${statColumns}
 
-      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${COLORS.separator}" />
-      <text x="${PADDING}" y="${urlY}" fill="${COLORS.url}" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(pageUrl)}</text>
+      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
+    COLORS.separator
+  }" />
+      <text x="${PADDING}" y="${urlY}" fill="${
+    COLORS.url
+  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(
+    pageUrl
+  )}</text>
     </svg>
   `
 }
@@ -280,7 +296,11 @@ function advanceWidth(text, fontSize) {
 
 function tokenWidth(token, fontSize) {
   if (token.kind === 'highlight') {
-    return advanceWidth(token.text, fontSize) + HIGHLIGHT_PAD * 2 + AFTER_HIGHLIGHT_GAP
+    return (
+      advanceWidth(token.text, fontSize) +
+      HIGHLIGHT_PAD * 2 +
+      AFTER_HIGHLIGHT_GAP
+    )
   }
   if (token.atomic) {
     return measureTextWidthWithResvg(token.text, fontSize)
@@ -309,21 +329,13 @@ function layoutHighlightedSentence(segments, options) {
     const width = tokenWidth(token, fontSize)
     const isSpace = token.kind === 'plain' && /^\s+$/.test(token.text)
 
-    if (
-      currentLine.length &&
-      !isSpace &&
-      currentWidth + width > maxWidth
-    ) {
+    if (currentLine.length && !isSpace && currentWidth + width > maxWidth) {
       lines.push(currentLine)
       currentLine = []
       currentWidth = 0
     }
 
-    if (
-      token.atomic &&
-      currentWidth + width > maxWidth &&
-      currentLine.length
-    ) {
+    if (token.atomic && currentWidth + width > maxWidth && currentLine.length) {
       lines.push(currentLine)
       currentLine = []
       currentWidth = 0
@@ -436,7 +448,9 @@ function renderMapSvg(mapDataUri, stats) {
 
   return `
     <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${COLORS.background}" />
+      <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${
+    COLORS.background
+  }" />
       ${networkSvg}
 
       <image href="${faviconDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
@@ -445,8 +459,14 @@ function renderMapSvg(mapDataUri, stats) {
 
       <image href="${mapDataUri}" x="${mapX}" y="${mapY}" width="${mapWidth}" height="${mapHeight}" />
 
-      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${COLORS.separator}" />
-      <text x="${PADDING}" y="${urlY}" fill="${COLORS.url}" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(pageUrl)}</text>
+      <rect x="${PADDING}" y="${separatorY}" width="${CONTENT_WIDTH}" height="1" fill="${
+    COLORS.separator
+  }" />
+      <text x="${PADDING}" y="${urlY}" fill="${
+    COLORS.url
+  }" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(
+    pageUrl
+  )}</text>
     </svg>
   `
 }
@@ -497,7 +517,11 @@ async function main() {
   const skipped = pages.filter((page) => SKIP_SLUGS.has(page.slug)).length
 
   console.log(
-    `Generated ${written} page OG images (skipped ${skipped} utility page${skipped === 1 ? '' : 's'}, plus ${EXTRA_PAGES.length} TSX route${EXTRA_PAGES.length === 1 ? '' : 's'}).`
+    `Generated ${written} page OG images (skipped ${skipped} utility page${
+      skipped === 1 ? '' : 's'
+    }, plus ${EXTRA_PAGES.length} TSX route${
+      EXTRA_PAGES.length === 1 ? '' : 's'
+    }).`
   )
 }
 
