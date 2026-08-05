@@ -71,8 +71,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           <span>
             I agree that publishable outputs from this engagement (findings,
             tools, and other work product) will be released under a free and
-            open-source license through OpenSats after any needed coordinated
-            disclosure
+            open-source license after any needed coordinated disclosure
           </span>
         </label>
 
