@@ -79,7 +79,7 @@ export default function RedApplicationForm() {
     <MultiStepApplicationForm
       steps={STEPS}
       hiddenFields={{ RED: true }}
-      defaultValues={{ duration: '3 months' }}
+      defaultValues={{ duration: '1 month' }}
       submitLabel="Submit Red Application"
     />
   )
