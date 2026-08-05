@@ -14,8 +14,8 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
         Token Spend So Far
         <br />
         <small>
-          Approximate usage to date (tokens, USD, or both). Include the tools or
-          providers if helpful.
+          Prefer USD; include approximate token spend too if you can. Mention
+          tools or providers if helpful.
         </small>
         <textarea
           rows={4}
