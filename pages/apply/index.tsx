@@ -120,10 +120,10 @@ export default function Apply({
           Red Teaming
         </h2>
         <p className="mb-8">
-          For people already finding issues in Bitcoin and related free and
-          open-source software. Highly selective; a demonstrable trail of prior
-          work is expected. Always open. In light of recent events, we are
-          fast-tracking these applications.
+          For security researchers red-teaming Bitcoin and related free and
+          open-source software. Short application focused on research context
+          and LLM token reimbursement. Always open. In light of recent events,
+          we are fast-tracking these applications.
         </p>
         <Link
           href="/apply/red"

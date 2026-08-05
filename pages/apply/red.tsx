@@ -17,9 +17,9 @@ export default function ApplyRed() {
       />
       <PageSection title="Red Teaming" image="/static/images/avatar.png">
         <p>
-          This track is for people already finding issues in Bitcoin and related
-          free and open-source software, not for building generic LLM audit
-          harnesses or seeking token reimbursement alone.
+          Finding exploits in Bitcoin and related free and open-source software
+          takes time, skill, and often a lot of LLM tokens. This short
+          application is for researchers doing that work.
         </p>
         <p>
           While there is urgency and we want to fund generously, we will be

@@ -34,10 +34,9 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <>
         <h2>Before You Begin</h2>
         <p>
-          This track supports people already red-teaming Bitcoin and related
-          free and open-source software, including LLM token spend for that
-          work. It is not for generic audit harnesses or token reimbursement on
-          its own.
+          This track is for security researchers red-teaming Bitcoin and related
+          free and open-source software. Applications are focused on supporting
+          that work, including reimbursement for LLM token spend.
         </p>
 
         <label className="inline-flex items-start gap-2">
