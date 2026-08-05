@@ -22,6 +22,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
     fields: [
       ['Short Title', 'project_name'],
       ['What Are You Researching?', 'short_description'],
+      ['Prior Work', 'prior_work'],
       ['Disclosure Links', 'disclosure_links'],
     ],
   },
@@ -39,7 +40,12 @@ const STEPS: StepConfig[] = [
   {
     id: 'prerequisites',
     title: 'Prerequisites',
-    fields: ['red_security_research', 'responsible_disclosure', 'foss_outputs'],
+    fields: [
+      'red_security_research',
+      'red_track_record',
+      'responsible_disclosure',
+      'foss_outputs',
+    ],
     render: (props) => <Prerequisites {...props} />,
   },
   {
@@ -51,7 +57,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'research',
     title: 'Research',
-    fields: ['project_name', 'short_description'],
+    fields: ['project_name', 'short_description', 'prior_work'],
     render: (props) => <RedResearch {...props} />,
   },
   {

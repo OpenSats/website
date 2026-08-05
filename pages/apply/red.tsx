@@ -17,18 +17,19 @@ export default function ApplyRed() {
       />
       <PageSection title="Red Teaming" image="/static/images/avatar.png">
         <p>
-          Finding exploits in Bitcoin and related free and open-source software
-          takes time, skill, and often a lot of LLM tokens. This short
-          application is for researchers doing that work.
+          This track is for people already finding issues in Bitcoin and related
+          free and open-source software, not for building generic LLM audit
+          harnesses or seeking token reimbursement alone.
+        </p>
+        <p>
+          We will be highly selective. A demonstrable trail of trust or prior
+          work in Bitcoin security (or a closely related space) is expected.
         </p>
         <p>
           In light of recent events, we are fast-tracking these red team
-          applications.
-        </p>
-        <p>
-          Tell us what you are researching and your token spend so far and going
-          forward. If approved, we will follow up with any details needed for
-          payouts. Prefer a full project grant instead? See{' '}
+          applications. Tell us what you are researching and your token spend so
+          far and going forward. If approved, we will follow up with any details
+          needed for payouts. Prefer a full project grant instead? See{' '}
           <CustomLink href="/apply/grant">General Grant</CustomLink>.
         </p>
         <RedApplicationForm />

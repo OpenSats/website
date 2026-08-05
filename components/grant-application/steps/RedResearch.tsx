@@ -32,11 +32,26 @@ export default function RedResearch({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
+        Prior Work *<br />
+        <small>
+          Links or references that show a trail of trust or prior work in
+          Bitcoin security or a closely related space (disclosures, write-ups,
+          patches, public research, etc.).
+        </small>
+        <textarea
+          rows={5}
+          className={inputClass}
+          {...register('prior_work', { required: true })}
+        />
+        <FieldError errors={errors} name="prior_work" />
+      </label>
+
+      <label className="block">
         Disclosure Links
         <br />
         <small>
-          Optional links to advisories, write-ups, coordinated disclosures, or
-          related proof-of-work.
+          Optional links specific to this engagement: advisories, write-ups, or
+          coordinated disclosures in progress.
         </small>
         <textarea className={inputClass} {...register('disclosure_links')} />
       </label>

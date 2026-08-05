@@ -10,6 +10,7 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
   const checkboxFields = isRed
     ? ([
         'red_security_research',
+        'red_track_record',
         'responsible_disclosure',
         'foss_outputs',
       ] as const)
@@ -33,9 +34,10 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
       <>
         <h2>Before You Begin</h2>
         <p>
-          This track is for security researchers red-teaming Bitcoin and related
-          free and open-source software. Applications are focused on supporting
-          that work, including reimbursement for LLM token spend.
+          This track supports people already red-teaming Bitcoin and related
+          free and open-source software, including LLM token spend for that
+          work. It is not for generic audit harnesses or token reimbursement on
+          its own.
         </p>
 
         <label className="inline-flex items-start gap-2">
@@ -47,6 +49,18 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           <span>
             I am applying for security research / red teaming support, not a
             general project grant
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('red_track_record', { required: true })}
+          />
+          <span>
+            I have a demonstrable track record in this space (or a closely
+            related one) and understand these applications are highly selective
           </span>
         </label>
 

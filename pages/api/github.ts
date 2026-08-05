@@ -52,6 +52,10 @@ ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
 
 ${req.body.short_description}
 
+### Prior Work
+
+${req.body.prior_work || 'n/a'}
+
 ${
   req.body.disclosure_links
     ? `### Disclosure Links
