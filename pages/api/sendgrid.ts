@@ -268,7 +268,7 @@ export default async function handler(
 
     const thankYouMessage = req.body.RED
       ? `
-Thanks for your RED application. We've received it and are fast-tracking review. We'll follow up as soon as we can. Questions: applications@opensats.org
+Thanks for your RED application. We've received it and are fast-tracking review. We'll follow up as soon as we can. Questions: red@opensats.org
     `
       : `
 Thank you for applying to OpenSats! 
