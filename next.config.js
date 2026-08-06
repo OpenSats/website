@@ -160,6 +160,11 @@ module.exports = () => {
           destination: 'https://heartbeat.opensats.org/',
           permanent: false,
         },
+        {
+          source: '/red',
+          destination: '/apply/red',
+          permanent: false,
+        },
       ]
     },
     webpack: (config, options) => {

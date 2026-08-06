@@ -2,11 +2,16 @@ import * as EmailValidator from 'email-validator'
 import FieldError from '../FieldError'
 import { StepProps, inputClass, checkboxClass } from '../types'
 
+interface ApplicantDetailsProps extends StepProps {
+  showLeadFields?: boolean
+}
+
 export default function ApplicantDetails({
   register,
   watch,
   errors,
-}: StepProps) {
+  showLeadFields = true,
+}: ApplicantDetailsProps) {
   return (
     <>
       <h2>Applicant Details</h2>
@@ -70,29 +75,33 @@ export default function ApplicantDetails({
         <textarea className={inputClass} {...register('other_contact')} />
       </label>
 
-      <hr />
+      {showLeadFields && (
+        <>
+          <hr />
 
-      <label className="inline-flex items-center">
-        <input
-          type="checkbox"
-          className={checkboxClass}
-          {...register('are_you_lead')}
-        />
-        <span className="ml-2">
-          I am the lead developer or maintainer of this project
-        </span>
-      </label>
+          <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              className={checkboxClass}
+              {...register('are_you_lead')}
+            />
+            <span className="ml-2">
+              I am the lead developer or maintainer of this project
+            </span>
+          </label>
 
-      {!watch('are_you_lead') && (
-        <label className="block">
-          If someone else, please list the project&apos;s lead contributor or
-          maintainer{' '}
-          <input
-            type="text"
-            className={inputClass}
-            {...register('other_lead')}
-          />
-        </label>
+          {!watch('are_you_lead') && (
+            <label className="block">
+              If someone else, please list the project&apos;s lead contributor
+              or maintainer{' '}
+              <input
+                type="text"
+                className={inputClass}
+                {...register('other_lead')}
+              />
+            </label>
+          )}
+        </>
       )}
     </>
   )

@@ -18,6 +18,8 @@ interface MultiStepApplicationFormProps {
   hiddenFields?: Record<string, string | boolean>
   defaultValues?: DefaultValues<FormValues>
   submitLabel: string
+  /** When set, submit stays disabled until every listed field is truthy. */
+  submitRequiresChecked?: readonly string[]
 }
 
 export default function MultiStepApplicationForm({
@@ -25,6 +27,7 @@ export default function MultiStepApplicationForm({
   hiddenFields = {},
   defaultValues,
   submitLabel,
+  submitRequiresChecked,
 }: MultiStepApplicationFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -76,9 +79,11 @@ export default function MultiStepApplicationForm({
     }
   }
 
+  const submitDisabled = !!submitRequiresChecked?.some((name) => !watch(name))
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    if (currentStep !== steps.length - 1 || loading) return
+    if (currentStep !== steps.length - 1 || loading || submitDisabled) return
 
     setLoading(true)
     const submissionData = { ...data, formLoadedAt }
@@ -142,6 +147,7 @@ export default function MultiStepApplicationForm({
         onSubmit={handleSubmit(onSubmit)}
         loading={loading}
         submitLabel={submitLabel}
+        submitDisabled={submitDisabled}
       />
 
       {!!failureReason && (

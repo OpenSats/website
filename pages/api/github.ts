@@ -24,10 +24,63 @@ export default async function handler(
     console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
 
     const byOrFor = req.body.LTS ? 'for' : 'by'
-    const issueTitle = `${req.body.project_name} ${byOrFor} ${req.body.your_name}`
+    const issueTitle = `${req.body.RED ? 'RED: ' : ''}${
+      req.body.project_name
+    } ${byOrFor} ${req.body.your_name}`
+
+    const contactFooter = `
+---
+
+${req.body.website ? `Website: ${req.body.website}` : ''}
+${req.body.license ? `License: ${req.body.license}` : ''}
+${req.body.github ? `GitHub: ${req.body.github}` : ''}
+${
+  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
+}
+${
+  req.body.other_contact
+    ? `Other contact details: ${req.body.other_contact}`
+    : ''
+}
+${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
+`
 
     // Condensed information for screening purposes, no PII
-    const issueBody = `
+    const issueBody = req.body.RED
+      ? `
+### Research
+
+${req.body.short_description}
+
+### Prior Work
+
+${req.body.prior_work || 'n/a'}
+
+### Budget
+
+**Spend so far:**
+${req.body.token_spend_so_far || 'n/a'}
+
+**Expected ongoing burn:**
+${req.body.estimated_token_burn || 'n/a'}
+
+**Duration:** ${req.body.duration || 'n/a'}
+
+### Acknowledgments
+
+**Terms effective:** ${req.body.red_terms_effective || 'n/a'}
+
+- Not authorization: ${req.body.red_ack_not_authorization ? 'Yes' : 'No'}
+- Sanctions / export-control: ${req.body.red_ack_sanctions ? 'Yes' : 'No'}
+- Authorized LLM/compute accounts: ${
+          req.body.red_ack_llm_accounts ? 'Yes' : 'No'
+        }
+- Accurate info / responsible disclosure: ${
+          req.body.red_ack_accurate_responsible ? 'Yes' : 'No'
+        }
+- Terms & privacy: ${req.body.red_ack_terms ? 'Yes' : 'No'}
+${contactFooter}`
+      : `
 ### Description
 
 ${req.body.short_description}
@@ -49,7 +102,7 @@ ${
 ${req.body.duration ? `Grant duration: ${req.body.duration}` : ''}
 ${req.body.commitment ? `Time commitment: ${req.body.commitment}` : ''}
 
-${req.body.timelines}
+${req.body.timelines || ''}
 
 ### Proposed Budget
 
@@ -60,14 +113,14 @@ ${req.body.proposed_budget}
 ${req.body.what_funding ? req.body.what_funding : ''}
 
 **Additional funding sources:** ${
-      req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
-    }
+          req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
+        }
 
 ${req.body.additional_funding ? req.body.additional_funding : ''}
 
 ### References & Prior Contributions
 
-${req.body.references}
+${req.body.references || ''}
 
 ${req.body.bios ? req.body.bios : 'No prior contributions.'}
 
@@ -85,26 +138,13 @@ ${req.body.video_application ? req.body.video_application : 'None provided.'}
 ### Anything Else
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
+${contactFooter}`
 
----
-
-${req.body.website ? `Website: ${req.body.website}` : ''}
-${req.body.license ? `License: ${req.body.license}` : ''}
-${req.body.github ? `GitHub: ${req.body.github}` : ''}
-${
-  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
-}
-${
-  req.body.other_contact
-    ? `Other contact details: ${req.body.other_contact}`
-    : ''
-}
-${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
-        `
-
-    // Label set according to "main focus"
-    const mainFocus = `${req.body.main_focus}`.toLowerCase()
-    const issueLabels = [mainFocus]
+    // Label set according to "main focus" (absent for RED applications)
+    const mainFocus = req.body.main_focus
+      ? `${req.body.main_focus}`.toLowerCase()
+      : ''
+    const issueLabels = mainFocus ? [mainFocus] : []
     if (mainFocus === 'layer1' || mainFocus === 'layer2') {
       issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
     }
@@ -134,11 +174,14 @@ ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
 
     // Tag depending on request for grant and/or request for listing
     req.body.LTS && issueLabels.push('LTS')
+    req.body.RED && issueLabels.push('RED')
 
     // Additional tags based on yes/no answers
     req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
-    !req.body.free_open_source && issueLabels.push('not FLOSS')
-    !req.body.are_you_lead && issueLabels.push('surrogate')
+    if (!req.body.RED) {
+      !req.body.free_open_source && issueLabels.push('not FLOSS')
+      !req.body.are_you_lead && issueLabels.push('surrogate')
+    }
 
     try {
       await octokit.rest.issues.create({
