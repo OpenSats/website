@@ -616,6 +616,37 @@ body.ReactModal__Body--open {
   text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
 }
 
+.apply-banner-v2--red {
+  background-image: linear-gradient(to right, #fee2e2, #f4f4f5); /* red-100 */
+}
+
+.apply-banner-v2--red::after {
+  background-color: #dc2626; /* red-600 */
+  background-image: linear-gradient(
+    #ef4444,
+    #b91c1c
+  ); /* red-500 -> red-700 */
+}
+
+.apply-banner-v2--red .apply-banner-v2__right,
+.apply-banner-v2--red .apply-banner-v2__right strong {
+  color: #991b1b; /* red-800 */
+}
+
+.dark .apply-banner-v2--red {
+  background-image: linear-gradient(
+    to right,
+    #450a0a,
+    #27272a
+  ); /* red-950 -> neutral-800 */
+}
+
+.dark .apply-banner-v2--red .apply-banner-v2__right,
+.dark .apply-banner-v2--red .apply-banner-v2__right strong {
+  color: #fca5a5; /* red-300 */
+  text-shadow: 0 0 4px #1c1917, 0 1px 1px #1c1917;
+}
+
 .apply-banner-v2__tagline-mobile {
   display: none;
 }

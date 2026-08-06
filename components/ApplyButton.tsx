@@ -16,6 +16,7 @@ type ApplyButtonProps = {
   taglineMobileSub?: string
   track?: ApplyTrack
   href?: string
+  variant?: 'default' | 'red'
 }
 
 export default function ApplyButton({
@@ -27,13 +28,16 @@ export default function ApplyButton({
   taglineMobileSub = 'for a grant',
   track = 'grant',
   href,
+  variant = 'default',
 }: ApplyButtonProps) {
   const target = href ?? APPLY_PATHS[track]
+  const className =
+    variant === 'red' ? 'apply-banner-v2 apply-banner-v2--red' : 'apply-banner-v2'
 
   return (
     <CustomLink
       href={target}
-      className="apply-banner-v2"
+      className={className}
       aria-label={`${prelude} ${cta} — ${preTagline} ${tagline}`}
     >
       <span className="apply-banner-v2__left">
