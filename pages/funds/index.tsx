@@ -3,16 +3,13 @@ import { useState } from 'react'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
-import { PageActionButton, PageActionLink } from '@/components/PageAction'
 import StatsSentence from '@/components/StatsSentence'
 import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
 import PaymentModal from '@/components/PaymentModal'
+import { FundActionRow, FundCard, FUND_CARD_BLURBS } from '@/components/FundCard'
+import type { FundCardDesignation } from '@/components/FundCard'
 import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
-import { faArrowRight, faRepeat } from '@fortawesome/free-solid-svg-icons'
-import { getFundDonationUrl } from '@/utils/funds'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type FundsIndexProps = {
@@ -22,7 +19,7 @@ type FundsIndexProps = {
 
 type FundConfig = {
   slug: 'general' | 'nostr' | 'ops' | 'red'
-  designation?: 'nostr' | 'ops' | 'red'
+  designation?: FundCardDesignation
   variant?: 'orange' | 'purple' | 'red'
   preTagline: string
   tagline: string
@@ -60,8 +57,7 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
     variant: 'red',
     preTagline: 'Help us cover',
     tagline: 'ongoing LLM costs',
-    blurb:
-      'Funding for people red teaming critical Bitcoin software, including reimbursement of past LLM token costs.',
+    blurb: FUND_CARD_BLURBS.red,
   },
   {
     slug: 'nostr',
@@ -69,83 +65,16 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
     variant: 'purple',
     preTagline: 'Help us support',
     tagline: 'Nostr development',
-    blurb:
-      'Pays grants to relay operators, client developers, library maintainers, designers, and protocol-level contributors working on nostr.',
+    blurb: FUND_CARD_BLURBS.nostr,
   },
   {
     slug: 'ops',
     designation: 'ops',
     preTagline: 'Help us keep',
     tagline: 'OpenSats running',
-    blurb:
-      'Contributions to the OpenSats Operations Budget are used to cover our operating expenses as we continue to facilitate frictionless, tax-deductible donations from the community to the Bitcoin & FOSS ecosystems at a pass-through rate of 100%.',
+    blurb: FUND_CARD_BLURBS.ops,
   },
 ]
-
-type FundActionRowProps = {
-  fund: Fund
-  cfg: FundConfig
-  onDonate: () => void
-}
-
-function FundActionRow({ fund, cfg, onDonate }: FundActionRowProps) {
-  const useCompactDonateActions = cfg.slug !== 'general'
-
-  return (
-    <div className="flex flex-wrap items-center justify-end gap-3 pt-6">
-      <PageActionButton
-        variant="outlineMuted"
-        onClick={onDonate}
-        layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
-        aria-label={`Donate sats directly to ${fund.title}`}
-        title="Donate sats"
-      >
-        <FontAwesomeIcon
-          icon={faBitcoin}
-          className="h-6 w-6"
-          aria-hidden="true"
-        />
-        {!useCompactDonateActions && (
-          <span className="hidden sm:inline">Donate sats directly</span>
-        )}
-      </PageActionButton>
-      <PageActionLink
-        variant="outlineMuted"
-        href={getMonthlyDonationUrl(cfg)}
-        layout={useCompactDonateActions ? 'square' : 'mobileSquareDesktopText'}
-        aria-label={`Donate monthly to ${fund.title}`}
-        title="Donate monthly"
-      >
-        <FontAwesomeIcon
-          icon={faRepeat}
-          className="h-4 w-4"
-          aria-hidden="true"
-        />
-        {!useCompactDonateActions && (
-          <span className="hidden sm:inline">Donate monthly</span>
-        )}
-      </PageActionLink>
-      <PageActionLink
-        variant="outlineMuted"
-        href={`/funds/${fund.slug}`}
-        layout="mobileSquareDesktopText"
-        aria-label={`Learn more about ${fund.title}`}
-        title={`Learn more about ${fund.title}`}
-      >
-        <FontAwesomeIcon
-          icon={faArrowRight}
-          className="h-4 w-4 sm:hidden"
-          aria-hidden="true"
-        />
-        <span className="hidden sm:inline">Learn more</span>
-      </PageActionLink>
-    </div>
-  )
-}
-
-function getMonthlyDonationUrl(cfg: FundConfig): string {
-  return getFundDonationUrl(cfg.designation ?? cfg.slug)
-}
 
 const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
   const [modalFund, setModalFund] = useState<Fund | undefined>(undefined)
@@ -249,7 +178,7 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
             </div>
             <FundActionRow
               fund={primaryFund}
-              cfg={PRIMARY_FUND_CONFIG}
+              compactActions={false}
               onDonate={() => setModalFund(primaryFund)}
             />
           </div>
@@ -271,44 +200,13 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
           </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {secondaryFunds.map(({ cfg, fund }) => (
-              <article
+              <FundCard
                 key={fund.slug}
-                className="flex flex-col gap-3 rounded-xl bg-stone-100 p-4 dark:bg-stone-900"
-              >
-                <div className="flex gap-4">
-                  <Link
-                    href={`/funds/${fund.slug}`}
-                    aria-label={`View ${fund.title}`}
-                    className="shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-900"
-                  >
-                    <Image
-                      src={fund.coverImage}
-                      alt={fund.title}
-                      width={64}
-                      height={64}
-                      className="h-16 w-16 shrink-0 rounded-lg"
-                    />
-                  </Link>
-                  <Link
-                    href={`/funds/${fund.slug}`}
-                    className="flex flex-1 flex-col gap-1 rounded-lg transition-colors duration-150 hover:text-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:hover:text-primary-400 dark:focus-visible:ring-offset-stone-900"
-                  >
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      {fund.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {cfg.blurb ?? fund.summary}
-                    </p>
-                  </Link>
-                </div>
-                <div className="mt-auto">
-                  <FundActionRow
-                    fund={fund}
-                    cfg={cfg}
-                    onDonate={() => setModalFund(fund)}
-                  />
-                </div>
-              </article>
+                fund={fund}
+                blurb={cfg.blurb}
+                designation={cfg.designation}
+                onDonate={() => setModalFund(fund)}
+              />
             ))}
           </div>
         </section>

@@ -18,6 +18,7 @@ import DonateToRedFundButton from './DonateToRedFundButton'
 import DonateRecurringButton from './DonateRecurringButton'
 import DonateRecurringButtonV2 from './DonateRecurringButtonV2'
 import ApplyButton from './ApplyButton'
+import FundCard from './FundCard'
 import DesignTeam from './DesignTeam'
 import Credits from './Supporters'
 import YouTubeEmbed from './YouTubeEmbed'
@@ -52,6 +53,7 @@ export const MDXComponents: ComponentMap = {
   DonateRecurringButton,
   DonateRecurringButtonV2,
   ApplyButton,
+  FundCard,
   DesignTeam,
   YouTubeEmbed,
   Credits,
