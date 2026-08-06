@@ -6,7 +6,11 @@ import { PageSEO } from '@/components/SEO'
 import StatsSentence from '@/components/StatsSentence'
 import DonateRecurringButtonV2 from '@/components/DonateRecurringButtonV2'
 import PaymentModal from '@/components/PaymentModal'
-import { FundActionRow, FundCard, FUND_CARD_BLURBS } from '@/components/FundCard'
+import {
+  FundActionRow,
+  FundCard,
+  FUND_CARD_BLURBS,
+} from '@/components/FundCard'
 import type { FundCardDesignation } from '@/components/FundCard'
 import { allFunds } from 'contentlayer/generated'
 import type { Fund } from 'contentlayer/generated'
