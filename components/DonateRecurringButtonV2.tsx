@@ -14,7 +14,11 @@ type DonateRecurringButtonV2Props = {
   cta?: string
   preTagline?: string
   tagline?: string
+  taglineMobile?: string
+  taglineMobileSub?: string
   designation?: keyof typeof DESIGNATION_IDS
+  /** Override the monthly FundraiseUp URL (e.g. `?donate` for one-time). */
+  href?: string
   variant?: DonateRecurringButtonV2Variant
 }
 
@@ -35,13 +39,18 @@ export default function DonateRecurringButtonV2({
   cta = '>_ donate',
   preTagline = 'Help us provide',
   tagline = 'sustainable funding',
+  taglineMobile = 'Monthly',
+  taglineMobileSub = 'or give once',
   designation,
+  href: hrefOverride,
   variant = 'orange',
 }: DonateRecurringButtonV2Props) {
   const designationId = designation ? DESIGNATION_IDS[designation] : undefined
-  const href = designationId
-    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
-    : MONTHLY_DONATION_URL
+  const href =
+    hrefOverride ??
+    (designationId
+      ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
+      : MONTHLY_DONATION_URL)
 
   const className = VARIANT_CLASS[variant]
   const heart = VARIANT_HEART[variant]
@@ -62,9 +71,9 @@ export default function DonateRecurringButtonV2({
             {preTagline} <strong>{tagline}</strong>
           </span>
           <span className="donate-banner-v2__tagline-mobile">
-            <strong>Monthly</strong>
+            <strong>{taglineMobile}</strong>
             <span className="donate-banner-v2__tagline-mobile-sub">
-              or give once
+              {taglineMobileSub}
             </span>
           </span>
         </span>
