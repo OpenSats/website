@@ -2,7 +2,7 @@ import CustomLink from '@/components/Link'
 
 export default function RedBeforeYouApply() {
   return (
-    <div className="prose mb-8 max-w-2xl dark:prose-invert">
+    <div className="mb-8 max-w-2xl">
       <h3>Before you apply</h3>
 
       <p>
