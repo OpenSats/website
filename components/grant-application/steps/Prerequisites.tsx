@@ -5,7 +5,16 @@ import { StepProps, checkboxClass } from '../types'
 
 export default function Prerequisites({ register, watch, errors }: StepProps) {
   const isLts = watch('LTS')
-  const checkboxFields = isLts
+  const isRed = watch('RED')
+
+  const checkboxFields = isRed
+    ? ([
+        'red_security_research',
+        'red_track_record',
+        'responsible_disclosure',
+        'foss_outputs',
+      ] as const)
+    : isLts
     ? ([
         'read_criteria',
         'read_faq',
@@ -19,6 +28,66 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         'has_references',
         'free_open_source',
       ] as const)
+
+  if (isRed) {
+    return (
+      <>
+        <h2>Before You Begin</h2>
+        <p>Confirm the following before continuing.</p>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('red_security_research', { required: true })}
+          />
+          <span>
+            I am applying for security research / red teaming support, not a
+            general project grant
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('red_track_record', { required: true })}
+          />
+          <span>
+            I have a demonstrable track record in this space (or a closely
+            related one)
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('responsible_disclosure', { required: true })}
+          />
+          <span>
+            I accept accountability for the responsible disclosure of identified
+            vulnerabilities to maintainers
+          </span>
+        </label>
+
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('foss_outputs', { required: true })}
+          />
+          <span>
+            I agree that publishable outputs from this engagement (findings,
+            tools, and other work product) will be released under a free and
+            open-source license after any needed coordinated disclosure
+          </span>
+        </label>
+
+        <CheckboxGroupError errors={errors} names={checkboxFields} />
+      </>
+    )
+  }
 
   return (
     <>

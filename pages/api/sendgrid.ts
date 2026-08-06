@@ -266,7 +266,11 @@ export default async function handler(
       body += `<h3>${key}</h3><p>${value}</p>`
     }
 
-    const thankYouMessage = `
+    const thankYouMessage = req.body.RED
+      ? `
+Thanks for your RED application. We've received it and are fast-tracking review. We'll follow up as soon as we can. Questions: red@opensats.org
+    `
+      : `
 Thank you for applying to OpenSats! 
 
 We have received your application and will evaluate it soon.
@@ -282,7 +286,9 @@ Thank you for your patience.
       const msg = {
         to: `${req.body.email}`, // Applicant
         from: FROM_ADDRESS, // Verified sender
-        subject: `Your Application to OpenSats`,
+        subject: req.body.RED
+          ? `Your OpenSats RED Application`
+          : `Your Application to OpenSats`,
         html: `${thankYouMessage}`,
         text: thankYouMessage,
       }
@@ -298,7 +304,9 @@ Thank you for your patience.
           to: TO_ADDRESS, // OpenSats
           cc: CC_ADDRESS, // Processing & backup
           from: FROM_ADDRESS, // Verified sender
-          subject: `OpenSats Application for ${req.body.project_name}`,
+          subject: req.body.RED
+            ? `OpenSats RED: Application for ${req.body.project_name}`
+            : `OpenSats Application for ${req.body.project_name}`,
           html: `${body}`,
           text: body.replace(/<[^>]*>/g, ''), // Strip HTML for plain text version
         }

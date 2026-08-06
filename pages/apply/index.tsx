@@ -116,6 +116,21 @@ export default function Apply({
             </p>
           </>
         )}
+        <h2 className="mb-4 mt-12 text-xl font-bold leading-normal md:text-2xl">
+          Red Teaming
+        </h2>
+        <p className="mb-8">
+          For security researchers red-teaming Bitcoin and related free and
+          open-source software. Short application focused on research context
+          and LLM token reimbursement. Always open. In light of recent events,
+          we are fast-tracking these applications.
+        </p>
+        <Link
+          href="/apply/red"
+          className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
+        >
+          Apply for Red Teaming Support
+        </Link>
       </PageSection>
     </>
   )
