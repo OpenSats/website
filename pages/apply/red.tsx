@@ -15,8 +15,9 @@ export default function ApplyRed() {
       <PageSEO
         title="Apply for Red Teaming Support - OpenSats"
         description="Apply for OpenSats red teaming support, including LLM token reimbursement for security research on Bitcoin software."
+        slug="apply-red"
       />
-      <PageSection title="Red Teaming" image="/static/images/avatar.png">
+      <PageSection title="Red Teaming" image="/static/brand/logo-red.png">
         <p>
           Finding exploits in Bitcoin and related free and open-source software
           takes time, skill, and often a lot of LLM tokens. This short

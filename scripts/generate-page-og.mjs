@@ -25,6 +25,7 @@ import {
   measureTextBBoxWithResvg,
   measureTextWidthWithResvg,
   networkDecor,
+  publicAssetToDataUri,
   renderSvgToPng,
   wrapText,
   writePng,
@@ -43,6 +44,8 @@ const SLUG_TO_URL_PATH = {
   'faq-application': 'faq/application',
   'faq-grantees': 'faq/grantee',
   'report-success': 'reports/success',
+  // Short /red redirect lands on /apply/red; social card leads with /red.
+  'apply-red': 'red',
 }
 
 // TSX-only routes that are not backed by data/pages/*.mdx.
@@ -57,6 +60,12 @@ const EXTRA_PAGES = [
     title: 'Developer Spotlights',
     summary:
       'Meet the developers OpenSats supports and the open-source work they are building.',
+  },
+  {
+    slug: 'apply-red',
+    title: 'Code RED',
+    summary:
+      'Priority support for people red teaming Bitcoin software, including LLM token reimbursement.',
   },
 ]
 
@@ -77,6 +86,81 @@ let faviconDataUri = ''
 
 function urlPathForSlug(slug) {
   return SLUG_TO_URL_PATH[slug] ?? slug
+}
+
+function renderRedSvg(logoDataUri) {
+  const pageUrl = 'opensats.org/red'
+  const seed = hashString('page:apply-red')
+  const title = 'Code RED'
+  const summaryLines = [
+    'Priority support for people red teaming',
+    'Bitcoin software, including LLM token',
+    'reimbursement.',
+  ]
+
+  const logoSize = 300
+  const logoX = OG_WIDTH - PADDING - logoSize
+  const logoY = (OG_HEIGHT - logoSize) / 2 - 12
+
+  const titleY = 280
+  const summaryStartY = 348
+  const summaryLineHeight = 40
+  const urlY = 568
+
+  const summarySvg = summaryLines
+    .map(
+      (line, index) =>
+        `<tspan x="${PADDING}" dy="${
+          index === 0 ? 0 : summaryLineHeight
+        }">${escapeXml(line)}</tspan>`
+    )
+    .join('')
+
+  const networkSvg = networkDecor({
+    seed,
+    minX: logoX - 80,
+    maxX: OG_WIDTH - 40,
+    minY: 40,
+    maxY: OG_HEIGHT - 50,
+    spacing: 58,
+    jitter: 14,
+    dropRate: 0.2,
+    centerOffsetX: 10,
+    centerOffsetY: 0,
+    fadeFactor: 1.0,
+    color: '#7f1d1d',
+  })
+
+  return `
+    <svg width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="red-bg" x1="0" y1="0" x2="${OG_WIDTH}" y2="${OG_HEIGHT}" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#09090b" />
+          <stop offset="1" stop-color="#1c1917" />
+        </linearGradient>
+      </defs>
+
+      <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="url(#red-bg)" />
+      <circle cx="1080" cy="90" r="200" fill="#dc2626" fill-opacity="0.10" />
+      <circle cx="980" cy="540" r="160" fill="#b91c1c" fill-opacity="0.08" />
+      ${networkSvg}
+
+      <text x="${PADDING}" y="${titleY}" fill="#fafaf9" font-size="84" font-weight="900" font-family="${INTER_FONT_FAMILY}" letter-spacing="-3">${escapeXml(
+    title
+  )}</text>
+
+      <text x="${PADDING}" y="${summaryStartY}" fill="#d6d3d1" font-size="28" font-family="${INTER_FONT_FAMILY}">
+        ${summarySvg}
+      </text>
+
+      <image href="${logoDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
+
+      <rect x="${PADDING}" y="${urlY - 36}" width="${CONTENT_WIDTH}" height="1" fill="#44403c" />
+      <text x="${PADDING}" y="${urlY}" fill="#a8a29e" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(
+    pageUrl
+  )}</text>
+    </svg>
+  `
 }
 
 function renderPageSvg(page) {
@@ -478,6 +562,10 @@ async function writeImage(slug, svg) {
 async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
+  const redLogoDataUri = await publicAssetToDataUri('/static/brand/logo-red.png')
+  if (!redLogoDataUri) {
+    throw new Error('Missing red logo at public/static/brand/logo-red.png')
+  }
 
   const pages = await loadContentlayerIndex('Pages')
   const transparencyStats = await resolveLifetimeStats()
@@ -508,6 +596,12 @@ async function main() {
   for (const page of EXTRA_PAGES) {
     if (page.slug === 'map') {
       await writeImage('map', renderMapSvg(mapDataUri, transparencyStats))
+    } else if (page.slug === 'apply-red') {
+      const redSvg = renderRedSvg(redLogoDataUri)
+      // /apply/red owns the meta tags; /red redirects there. Write both
+      // filenames so either slug resolves if wiring changes later.
+      await writeImage('apply-red', redSvg)
+      await writeImage('red', redSvg)
     } else {
       await writeImage(page.slug, renderPageSvg(page))
     }
