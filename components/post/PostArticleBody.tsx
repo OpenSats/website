@@ -10,9 +10,11 @@ import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
-// Dynamic import avoids a circular dep with pliny's layout `require()` in MDXComponents.
-const FundCardEmbed = dynamic(() =>
-  import('@/components/FundCard').then((mod) => mod.FundCardEmbed)
+// Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
+// circular dep with pliny's layout `require()` in MDXComponents.
+const FundCardEmbed = dynamic(
+  () => import('@/components/FundCard').then((mod) => mod.FundCardEmbed),
+  { ssr: false }
 )
 
 interface Props {
