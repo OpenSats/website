@@ -32,7 +32,9 @@ export default function ApplyButton({
 }: ApplyButtonProps) {
   const target = href ?? APPLY_PATHS[track]
   const className =
-    variant === 'red' ? 'apply-banner-v2 apply-banner-v2--red' : 'apply-banner-v2'
+    variant === 'red'
+      ? 'apply-banner-v2 apply-banner-v2--red'
+      : 'apply-banner-v2'
 
   return (
     <CustomLink
