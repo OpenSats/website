@@ -97,7 +97,7 @@ const FUND_TAGS_BY_SLUG: Record<string, string[]> = {
   nostr: ['nostr'],
   general: ['bitcoin'],
   ops: ['funding'],
-  red: ['security', 'grants'],
+  red: ['security'],
 }
 
 /**
