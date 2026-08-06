@@ -159,16 +159,16 @@ type FundCardEmbedProps = {
 }
 
 /**
- * Self-contained fund card for MDX embeds (includes PaymentModal).
+ * Self-contained fund card for post footers and embeds (includes PaymentModal).
  */
-export default function FundCardEmbed({ slug }: FundCardEmbedProps) {
+export function FundCardEmbed({ slug }: FundCardEmbedProps) {
   const fund = allFunds.find((f) => f.slug === slug)
   const [modalOpen, setModalOpen] = useState(false)
 
   if (!fund) return null
 
   return (
-    <div className="not-prose my-10 w-full max-w-md sm:max-w-lg">
+    <div className="not-prose w-full max-w-md sm:max-w-lg">
       <FundCard
         fund={fund}
         blurb={FUND_CARD_BLURBS[slug]}

@@ -58,6 +58,14 @@ export const Blog = defineDocumentType(() => ({
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
     pullQuotes: { type: 'list', of: { type: 'string' } },
+    /**
+     * Optional fund card shown below the post body (after discuss/GitHub links).
+     * Values match secondary fund designations on /funds.
+     */
+    fundCard: {
+      type: 'enum',
+      options: ['red', 'nostr', 'ops'],
+    },
   },
   computedFields,
 }))
