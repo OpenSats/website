@@ -5,7 +5,7 @@ const FUND_LABELS: Record<FundId, string> = {
   general: 'General Fund',
   nostr: 'Nostr Fund',
   ops: 'Operations Budget',
-  red: 'Code RED',
+  red: 'Red Team Fund',
 }
 
 export type FundId = 'general' | 'nostr' | 'ops' | 'red'

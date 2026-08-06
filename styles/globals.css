@@ -364,7 +364,7 @@ body.ReactModal__Body--open {
   color: #d8b4fe; /* purple-300 */
 }
 
-/* Red variant — used for Code RED. Mirrors the orange/purple variants */
+/* Red variant — used for the Red Team Fund. Mirrors orange/purple */
 /* with brand-kit reds matching the apply-banner-v2--red treatment.    */
 .donate-banner-v2--red {
   background-image: linear-gradient(

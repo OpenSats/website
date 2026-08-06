@@ -51,7 +51,7 @@ const PRIMARY_FUND_CONFIG: FundConfig = {
 }
 
 const FUNDS_INDEX_DESCRIPTION =
-  'Support Bitcoin, FOSS, nostr development, Code RED red teaming, or OpenSats operations. OpenSats is a 501(c)(3) public charity, and 100% of donations to our open-source funds go to grantees.'
+  'Support Bitcoin, FOSS, nostr development, red teaming, or OpenSats operations. OpenSats is a 501(c)(3) public charity, and 100% of donations to our open-source funds go to grantees.'
 
 const SECONDARY_FUND_CONFIGS: FundConfig[] = [
   {

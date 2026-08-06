@@ -67,7 +67,7 @@ function getFundNameForAdmin(zapriteId: string): string {
     '32WbND8heqmY5wYYnIpa': 'General Fund',
     OoYtzNjilW1NRtDsxLAj: 'The Nostr Fund',
     // TODO: replace key once Stripe/Zaprite campaign ID is provisioned
-    TODO_RED_ZAPRITE: 'Code RED',
+    TODO_RED_ZAPRITE: 'Red Team Fund',
   }
 
   return fundMapping[zapriteId] || 'General Fund'

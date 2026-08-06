@@ -13,7 +13,7 @@ export const config = {
   },
 }
 
-// BTCPay Server webhook secret for Code RED
+// BTCPay Server webhook secret for the Red Team Fund
 const WEBHOOK_SECRET = process.env.BTCPAY_WEBHOOK_SECRET_RED
 
 export default async function handler(
@@ -34,7 +34,7 @@ export default async function handler(
 
     // Log basic webhook info for monitoring
     console.log(
-      '📨 BTCPay Code RED webhook received with signature:',
+      '📨 BTCPay Red Team Fund webhook received with signature:',
       signature ? 'present' : 'missing'
     )
 
@@ -44,7 +44,7 @@ export default async function handler(
     }
 
     if (!WEBHOOK_SECRET) {
-      console.error('BTCPay Code RED webhook secret not configured')
+      console.error('BTCPay Red Team Fund webhook secret not configured')
       return res.status(500).json({ error: 'Webhook secret not configured' })
     }
 
@@ -58,7 +58,7 @@ export default async function handler(
     const event: BTCPayWebhookEvent = JSON.parse(rawBody.toString('utf8'))
 
     // Log the webhook event for debugging
-    console.log('BTCPay Code RED webhook received:', {
+    console.log('BTCPay Red Team Fund webhook received:', {
       type: event.type,
       invoiceId: event.invoiceId,
       storeId: event.storeId,
@@ -67,16 +67,16 @@ export default async function handler(
     })
 
     // Process the webhook event
-    await processBTCPayWebhook(event, 'Code RED')
+    await processBTCPayWebhook(event, 'Red Team Fund')
 
     // Return success response
     res.status(200).json({
       success: true,
-      message: 'Code RED webhook processed successfully',
+      message: 'Red Team Fund webhook processed successfully',
       eventType: event.type,
     })
   } catch (error) {
-    console.error('Error processing BTCPay Code RED webhook:', error)
+    console.error('Error processing BTCPay Red Team Fund webhook:', error)
     res.status(500).json({
       error: 'Internal server error',
       message: error instanceof Error ? error.message : 'Unknown error',

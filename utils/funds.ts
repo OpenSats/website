@@ -10,7 +10,7 @@ const FUND_LABELS: Record<string, string> = {
   general: 'General Fund',
   nostr: 'The Nostr Fund',
   ops: 'Operations Budget',
-  red: 'Code RED',
+  red: 'Red Team Fund',
 }
 
 export function getFundDonationUrl(fund: string): string {
