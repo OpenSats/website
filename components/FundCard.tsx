@@ -168,7 +168,7 @@ export function FundCardEmbed({ slug }: FundCardEmbedProps) {
   if (!fund) return null
 
   return (
-    <div className="not-prose w-full max-w-md sm:max-w-lg">
+    <div className="not-prose w-full">
       <FundCard
         fund={fund}
         blurb={FUND_CARD_BLURBS[slug]}
