@@ -4,7 +4,8 @@ import { InferGetStaticPropsType } from 'next'
 import { allFunds, allBlogs } from 'contentlayer/generated'
 import type { Fund, Blog } from 'contentlayer/generated'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import PaymentModal from '@/components/PaymentModal'
 import PostList from '@/components/PostList'
 import CustomLink from '@/components/Link'
@@ -51,6 +52,7 @@ export default function FundPage({
   project,
   relatedPosts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedFund, setSelectedFund] = useState<Fund>()
 
@@ -62,6 +64,14 @@ export default function FundPage({
     setSelectedFund(project)
     setModalOpen(true)
   }
+
+  useEffect(() => {
+    if (router.isReady && router.query.donate != null) {
+      setSelectedFund(project)
+      setModalOpen(true)
+    }
+  }, [project, router.isReady, router.query.donate])
+
   return (
     <>
       <MDXLayoutRenderer

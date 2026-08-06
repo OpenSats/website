@@ -4,17 +4,34 @@ import { MONTHLY_DONATION_URL } from '@/utils/constants'
 const DESIGNATION_IDS: Record<string, string> = {
   nostr: 'ENWRA6YZ',
   ops: 'ELL6P2J6',
+  red: 'EK2SCE54',
 }
 
-type DonateRecurringButtonV2Variant = 'orange' | 'purple'
+type DonateRecurringButtonV2Variant = 'orange' | 'purple' | 'red'
 
 type DonateRecurringButtonV2Props = {
   prelude?: string
   cta?: string
   preTagline?: string
   tagline?: string
+  taglineMobile?: string
+  taglineMobileSub?: string
   designation?: keyof typeof DESIGNATION_IDS
+  /** Override the monthly FundraiseUp URL (e.g. `?donate` for one-time). */
+  href?: string
   variant?: DonateRecurringButtonV2Variant
+}
+
+const VARIANT_CLASS: Record<DonateRecurringButtonV2Variant, string> = {
+  orange: 'donate-banner-v2',
+  purple: 'donate-banner-v2 donate-banner-v2--purple',
+  red: 'donate-banner-v2 donate-banner-v2--red',
+}
+
+const VARIANT_HEART: Record<DonateRecurringButtonV2Variant, string> = {
+  orange: '🧡',
+  purple: '💜',
+  red: '❤️',
 }
 
 export default function DonateRecurringButtonV2({
@@ -22,19 +39,21 @@ export default function DonateRecurringButtonV2({
   cta = '>_ donate',
   preTagline = 'Help us provide',
   tagline = 'sustainable funding',
+  taglineMobile = 'Monthly',
+  taglineMobileSub = 'or give once',
   designation,
+  href: hrefOverride,
   variant = 'orange',
 }: DonateRecurringButtonV2Props) {
   const designationId = designation ? DESIGNATION_IDS[designation] : undefined
-  const href = designationId
-    ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
-    : MONTHLY_DONATION_URL
+  const href =
+    hrefOverride ??
+    (designationId
+      ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
+      : MONTHLY_DONATION_URL)
 
-  const className =
-    variant === 'purple'
-      ? 'donate-banner-v2 donate-banner-v2--purple'
-      : 'donate-banner-v2'
-  const heart = variant === 'purple' ? '💜' : '🧡'
+  const className = VARIANT_CLASS[variant]
+  const heart = VARIANT_HEART[variant]
 
   return (
     <div className="donate-banner-v2-shell not-prose flex w-full shrink-0 justify-center">
@@ -52,9 +71,9 @@ export default function DonateRecurringButtonV2({
             {preTagline} <strong>{tagline}</strong>
           </span>
           <span className="donate-banner-v2__tagline-mobile">
-            <strong>Monthly</strong>
+            <strong>{taglineMobile}</strong>
             <span className="donate-banner-v2__tagline-mobile-sub">
-              or give once
+              {taglineMobileSub}
             </span>
           </span>
         </span>

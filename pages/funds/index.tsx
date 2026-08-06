@@ -21,9 +21,9 @@ type FundsIndexProps = {
 }
 
 type FundConfig = {
-  slug: 'general' | 'nostr' | 'ops'
-  designation?: 'nostr' | 'ops'
-  variant?: 'orange' | 'purple'
+  slug: 'general' | 'nostr' | 'ops' | 'red'
+  designation?: 'nostr' | 'ops' | 'red'
+  variant?: 'orange' | 'purple' | 'red'
   preTagline: string
   tagline: string
   /**
@@ -51,9 +51,18 @@ const PRIMARY_FUND_CONFIG: FundConfig = {
 }
 
 const FUNDS_INDEX_DESCRIPTION =
-  'Support Bitcoin, FOSS, nostr development, or OpenSats operations. OpenSats is a 501(c)(3) public charity, and 100% of donations to our open-source funds go to grantees.'
+  'Support Bitcoin, FOSS, nostr development, red teaming, or OpenSats operations. OpenSats is a 501(c)(3) public charity, and 100% of donations to our open-source funds go to grantees.'
 
 const SECONDARY_FUND_CONFIGS: FundConfig[] = [
+  {
+    slug: 'red',
+    designation: 'red',
+    variant: 'red',
+    preTagline: 'Help us cover',
+    tagline: 'ongoing LLM costs',
+    blurb:
+      'Funding for people red teaming critical Bitcoin software, including reimbursement of past LLM token costs.',
+  },
   {
     slug: 'nostr',
     designation: 'nostr',
@@ -256,11 +265,11 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
             </span>
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-            These funds support nostr development or our own operations,
-            respectively. Refer to each page linked below to learn more about
+            These funds support red teaming, nostr development, or our own
+            operations. Refer to each page linked below to learn more about
             their purpose and impact.
           </p>
-          <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {secondaryFunds.map(({ cfg, fund }) => (
               <article
                 key={fund.slug}
