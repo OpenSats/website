@@ -1,4 +1,5 @@
 import { useState, ReactNode } from 'react'
+import dynamic from 'next/dynamic'
 import { Comments } from 'pliny/comments'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
@@ -8,6 +9,13 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
+
+// Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
+// circular dep with pliny's layout `require()` in MDXComponents.
+const FundCardEmbed = dynamic(
+  () => import('@/components/FundCard').then((mod) => mod.FundCardEmbed),
+  { ssr: false }
+)
 
 interface Props {
   content: CoreContent<Blog>
@@ -62,7 +70,7 @@ export default function PostArticleBody({
   children,
   spotlight = false,
 }: Props) {
-  const { filePath, path, slug, tags, pullQuotes } = content
+  const { filePath, path, slug, tags, pullQuotes, fundCard } = content
   const basePath = path.split('/')[0]
   const [loadComments, setLoadComments] = useState(false)
   const classes = spotlight
@@ -175,6 +183,11 @@ export default function PostArticleBody({
         {` • `}
         <Link href={editUrl(filePath)}>View on GitHub</Link>
       </div>
+      {fundCard && (
+        <div className="pb-8 pt-8">
+          <FundCardEmbed slug={fundCard} />
+        </div>
+      )}
       {siteMetadata.comments && (
         <div
           className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
