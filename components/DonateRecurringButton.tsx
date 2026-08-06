@@ -13,7 +13,11 @@ export default function DonateRecurringButton({
   designation,
 }: DonateRecurringButtonProps) {
   const variant =
-    designation === 'nostr' ? 'purple' : designation === 'red' ? 'red' : 'orange'
+    designation === 'nostr'
+      ? 'purple'
+      : designation === 'red'
+      ? 'red'
+      : 'orange'
 
   const fundSpecificCopy =
     designation === 'nostr'
