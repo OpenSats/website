@@ -14,6 +14,7 @@ import DonateToGeneralFundForm from './DonateToGeneralFundForm'
 import DonateToGeneralFundButton from './DonateToGeneralFundButton'
 import DonateToNostrFundButton from './DonateToNostrFundButton'
 import DonateToOperationsButton from './DonateToOperationsButton'
+import DonateToRedFundButton from './DonateToRedFundButton'
 import DonateRecurringButton from './DonateRecurringButton'
 import DonateRecurringButtonV2 from './DonateRecurringButtonV2'
 import ApplyButton from './ApplyButton'
@@ -47,6 +48,7 @@ export const MDXComponents: ComponentMap = {
   DonateToGeneralFundButton,
   DonateToNostrFundButton,
   DonateToOperationsButton,
+  DonateToRedFundButton,
   DonateRecurringButton,
   DonateRecurringButtonV2,
   ApplyButton,

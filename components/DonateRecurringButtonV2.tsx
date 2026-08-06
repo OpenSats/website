@@ -4,9 +4,11 @@ import { MONTHLY_DONATION_URL } from '@/utils/constants'
 const DESIGNATION_IDS: Record<string, string> = {
   nostr: 'ENWRA6YZ',
   ops: 'ELL6P2J6',
+  // TODO: replace with DonorSupport designation once provisioned
+  red: 'TODO_RED_DESIGNATION',
 }
 
-type DonateRecurringButtonV2Variant = 'orange' | 'purple'
+type DonateRecurringButtonV2Variant = 'orange' | 'purple' | 'red'
 
 type DonateRecurringButtonV2Props = {
   prelude?: string
@@ -15,6 +17,18 @@ type DonateRecurringButtonV2Props = {
   tagline?: string
   designation?: keyof typeof DESIGNATION_IDS
   variant?: DonateRecurringButtonV2Variant
+}
+
+const VARIANT_CLASS: Record<DonateRecurringButtonV2Variant, string> = {
+  orange: 'donate-banner-v2',
+  purple: 'donate-banner-v2 donate-banner-v2--purple',
+  red: 'donate-banner-v2 donate-banner-v2--red',
+}
+
+const VARIANT_HEART: Record<DonateRecurringButtonV2Variant, string> = {
+  orange: '🧡',
+  purple: '💜',
+  red: '❤️',
 }
 
 export default function DonateRecurringButtonV2({
@@ -30,11 +44,8 @@ export default function DonateRecurringButtonV2({
     ? `${MONTHLY_DONATION_URL}?designationId=${designationId}`
     : MONTHLY_DONATION_URL
 
-  const className =
-    variant === 'purple'
-      ? 'donate-banner-v2 donate-banner-v2--purple'
-      : 'donate-banner-v2'
-  const heart = variant === 'purple' ? '💜' : '🧡'
+  const className = VARIANT_CLASS[variant]
+  const heart = VARIANT_HEART[variant]
 
   return (
     <div className="donate-banner-v2-shell not-prose flex w-full shrink-0 justify-center">

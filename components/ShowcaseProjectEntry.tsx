@@ -5,9 +5,10 @@ const FUND_LABELS: Record<FundId, string> = {
   general: 'General Fund',
   nostr: 'Nostr Fund',
   ops: 'Operations Budget',
+  red: 'Code RED',
 }
 
-export type FundId = 'general' | 'nostr' | 'ops'
+export type FundId = 'general' | 'nostr' | 'ops' | 'red'
 
 export type ShowcaseProjectEntryProps = {
   slug: string

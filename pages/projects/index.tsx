@@ -29,7 +29,7 @@ type ShowcaseProps = {
   clusters: RenderCluster[]
 }
 
-const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops']
+const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops', 'red']
 
 function toEntryData(project: (typeof allProjects)[number]): EntryData {
   const fund = (KNOWN_FUNDS as string[]).includes(project.fund || '')
