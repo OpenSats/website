@@ -32,8 +32,8 @@ export default function DonateRecurringButton({
         }
       : designation === 'red'
       ? {
-          preTagline: 'Help us support',
-          tagline: 'red teaming',
+          preTagline: 'Help us cover',
+          tagline: 'ongoing LLM costs',
         }
       : {}
 

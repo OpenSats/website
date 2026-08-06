@@ -58,8 +58,8 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
     slug: 'red',
     designation: 'red',
     variant: 'red',
-    preTagline: 'Help us support',
-    tagline: 'red teaming',
+    preTagline: 'Help us cover',
+    tagline: 'ongoing LLM costs',
     blurb:
       'Fast-track funding for people red teaming critical Bitcoin software, including reimbursement of past LLM token costs.',
   },
