@@ -14,7 +14,6 @@ export const config = {
 }
 
 // BTCPay Server webhook secret for Code RED
-// TODO: set BTCPAY_WEBHOOK_SECRET_RED once the store webhook is provisioned
 const WEBHOOK_SECRET = process.env.BTCPAY_WEBHOOK_SECRET_RED
 
 export default async function handler(
