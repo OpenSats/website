@@ -184,7 +184,7 @@ export default function PostArticleBody({
         <Link href={editUrl(filePath)}>View on GitHub</Link>
       </div>
       {fundCard && (
-        <div className="pb-8">
+        <div className="pb-8 pt-8">
           <FundCardEmbed slug={fundCard} />
         </div>
       )}
