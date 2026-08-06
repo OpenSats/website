@@ -61,7 +61,7 @@ const SECONDARY_FUND_CONFIGS: FundConfig[] = [
     preTagline: 'Help us cover',
     tagline: 'ongoing LLM costs',
     blurb:
-      'Fast-track funding for people red teaming critical Bitcoin software, including reimbursement of past LLM token costs.',
+      'Funding for people red teaming critical Bitcoin software, including reimbursement of past LLM token costs.',
   },
   {
     slug: 'nostr',
