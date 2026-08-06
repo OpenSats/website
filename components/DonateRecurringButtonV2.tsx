@@ -4,8 +4,7 @@ import { MONTHLY_DONATION_URL } from '@/utils/constants'
 const DESIGNATION_IDS: Record<string, string> = {
   nostr: 'ENWRA6YZ',
   ops: 'ELL6P2J6',
-  // TODO: replace with DonorSupport designation once provisioned
-  red: 'TODO_RED_DESIGNATION',
+  red: 'EK2SCE54',
 }
 
 type DonateRecurringButtonV2Variant = 'orange' | 'purple' | 'red'
