@@ -265,8 +265,8 @@ const FundsIndex: NextPage<FundsIndexProps> = ({ funds, lifetimeStats }) => {
             </span>
           </h2>
           <p className="max-w-3xl pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
-            These funds support Code RED red teaming, nostr development, or our
-            own operations. Refer to each page linked below to learn more about
+            These funds support red teaming, nostr development, or our own
+            operations. Refer to each page linked below to learn more about
             their purpose and impact.
           </p>
           <div className="grid grid-cols-1 gap-6 pt-6 sm:grid-cols-2 lg:grid-cols-3">
