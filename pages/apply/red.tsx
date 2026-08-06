@@ -33,6 +33,7 @@ export default function ApplyRed() {
           for payouts. Prefer a full project grant instead? See{' '}
           <CustomLink href="/apply/grant">General Grant</CustomLink>.
         </p>
+        <hr />
         <RedBeforeYouApply />
         <RedApplicationForm />
       </PageSection>
