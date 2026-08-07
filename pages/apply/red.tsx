@@ -24,9 +24,13 @@ export default function ApplyRed() {
           application is for researchers doing that work.
         </p>
         <p>
-          While there is urgency and we want to fund generously, we will be
-          forced to be selective. A demonstrable trail of trust or prior work in
-          Bitcoin security (or a closely related space) is expected.
+          While{' '}
+          <CustomLink href="/blog/code-red-supporting-first-responders">
+            there is urgency
+          </CustomLink>{' '}
+          and we want to fund generously, we will be forced to be selective. A
+          demonstrable trail of trust or prior work in Bitcoin security (or a
+          closely related space) is expected.
         </p>
         <p>
           In light of recent events, we are fast-tracking these red team
