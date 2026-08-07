@@ -24,8 +24,9 @@ export default function ApplyRed() {
           application is for researchers doing that work.
         </p>
         <p>
+          While{' '}
           <CustomLink href="/blog/code-red-supporting-first-responders">
-            While there is urgency
+            there is urgency
           </CustomLink>{' '}
           and we want to fund generously, we will be forced to be selective. A
           demonstrable trail of trust or prior work in Bitcoin security (or a
