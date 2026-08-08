@@ -59,12 +59,6 @@ body.ReactModal__Body--open {
   border: 0;
 }
 
-.offscreen-field {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-}
-
 /* ------------------------------------------------------------------ */
 /* Editor's note                                                      */
 /* A minimal "letter" treatment for the opening note in newsletter    */

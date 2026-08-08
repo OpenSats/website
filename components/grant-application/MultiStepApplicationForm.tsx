@@ -31,7 +31,6 @@ export default function MultiStepApplicationForm({
 }: MultiStepApplicationFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [formLoadedAt] = useState(() => Date.now())
   const [failureReason, setFailureReason] = useState<string>()
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
@@ -86,10 +85,9 @@ export default function MultiStepApplicationForm({
     if (currentStep !== steps.length - 1 || loading || submitDisabled) return
 
     setLoading(true)
-    const submissionData = { ...data, formLoadedAt }
 
     try {
-      const res = await fetchPostJSON('/api/github', submissionData)
+      const res = await fetchPostJSON('/api/github', data)
       if (res.message === 'success') {
         console.info('Application tracked')
       } else {
@@ -101,7 +99,7 @@ export default function MultiStepApplicationForm({
       }
     } finally {
       try {
-        const res = await fetchPostJSON('/api/sendgrid', submissionData)
+        const res = await fetchPostJSON('/api/sendgrid', data)
         if (res.message === 'success') {
           router.push('/submitted')
         } else {
