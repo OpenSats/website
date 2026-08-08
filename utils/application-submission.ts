@@ -60,8 +60,8 @@ export async function submitApplication(
   const token = turnstile
     ? await turnstile.waitForToken()
     : typeof data[TURNSTILE_TOKEN_FIELD] === 'string'
-      ? (data[TURNSTILE_TOKEN_FIELD] as string)
-      : ''
+    ? (data[TURNSTILE_TOKEN_FIELD] as string)
+    : ''
 
   if (!token) {
     throw new Error('Please complete the bot verification challenge.')

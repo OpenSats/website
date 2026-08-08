@@ -2,10 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
 import { sendApplicationEmails } from '@/utils/application-emails'
-import {
-  assertTurnstile,
-  TURNSTILE_FAILURE_MESSAGE,
-} from '@/utils/turnstile'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
