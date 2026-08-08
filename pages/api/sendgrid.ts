@@ -1,6 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
+import {
+  assertTurnstile,
+  TURNSTILE_FAILURE_MESSAGE,
+  TURNSTILE_TOKEN_FIELD,
+} from '@/utils/turnstile'
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
@@ -263,11 +268,16 @@ export default async function handler(
     return res.status(405).end('Method Not Allowed')
   }
 
+  if (!(await assertTurnstile(req))) {
+    return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
+  }
+
   if (!SENDGRID_API_KEY || !TO_ADDRESS || !FROM_ADDRESS) {
     throw new Error('Env misconfigured')
   }
 
   const body = Object.entries(req.body)
+    .filter(([key]) => key !== TURNSTILE_TOKEN_FIELD)
     .map(
       ([key, value]) => `<h3>${escapeHtml(key)}</h3><p>${escapeHtml(value)}</p>`
     )

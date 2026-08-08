@@ -1,4 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import {
+  assertTurnstile,
+  TURNSTILE_FAILURE_MESSAGE,
+} from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -12,6 +16,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    if (!(await assertTurnstile(req))) {
+      return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
+    }
+
     if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
       throw new Error('Env misconfigured')
     }
