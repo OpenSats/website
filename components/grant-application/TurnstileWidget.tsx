@@ -5,28 +5,23 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from 'react'
 
 const TURNSTILE_SCRIPT = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+const CALLBACK_NAME = '__opensatsTurnstileCallback'
+const EXPIRED_CALLBACK_NAME = '__opensatsTurnstileExpired'
+const ERROR_CALLBACK_NAME = '__opensatsTurnstileError'
 
 declare global {
   interface Window {
     turnstile?: {
-      render: (
-        element: HTMLElement,
-        options: {
-          sitekey: string
-          action?: string
-          callback?: (token: string) => void
-          'expired-callback'?: () => void
-          'error-callback'?: () => void
-        }
-      ) => string
       reset: (widgetId?: string) => void
-      remove: (widgetId?: string) => void
+      ready?: (callback: () => void) => void
     }
+    [CALLBACK_NAME]?: (token: string) => void
+    [EXPIRED_CALLBACK_NAME]?: () => void
+    [ERROR_CALLBACK_NAME]?: () => void
   }
 }
 
@@ -43,26 +38,28 @@ interface TurnstileWidgetProps {
   onTokenChange?: (token: string | undefined) => void
 }
 
+/**
+ * Implicit-render Turnstile widget (Spin contract).
+ * Uses api.js without `render=explicit` so Cloudflare auto-mounts
+ * `.cf-turnstile` after the script loads — works with Next.js dynamic imports
+ * where Script `onLoad` can miss.
+ */
 const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
   function TurnstileWidget({ onTokenChange }, ref) {
-    const containerRef = useRef<HTMLDivElement>(null)
-    const widgetIdRef = useRef<string>()
     const tokenRef = useRef<string>()
     const waitersRef = useRef<Array<(token: string) => void>>([])
-    const [scriptReady, setScriptReady] = useState(false)
+    const onTokenChangeRef = useRef(onTokenChange)
+    onTokenChangeRef.current = onTokenChange
 
-    const setToken = useCallback(
-      (token: string | undefined) => {
-        tokenRef.current = token
-        onTokenChange?.(token)
-        if (token) {
-          const waiters = waitersRef.current
-          waitersRef.current = []
-          waiters.forEach((resolve) => resolve(token))
-        }
-      },
-      [onTokenChange]
-    )
+    const setToken = useCallback((token: string | undefined) => {
+      tokenRef.current = token
+      onTokenChangeRef.current?.(token)
+      if (token) {
+        const waiters = waitersRef.current
+        waitersRef.current = []
+        waiters.forEach((resolve) => resolve(token))
+      }
+    }, [])
 
     const waitForToken = useCallback(() => {
       if (tokenRef.current) return Promise.resolve(tokenRef.current)
@@ -73,9 +70,7 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
 
     const reset = useCallback(() => {
       setToken(undefined)
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current)
-      }
+      window.turnstile?.reset()
     }, [setToken])
 
     const resetAndWaitForToken = useCallback(() => {
@@ -95,32 +90,17 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
     )
 
     useEffect(() => {
-      if (
-        !scriptReady ||
-        !SITE_KEY ||
-        !containerRef.current ||
-        !window.turnstile
-      ) {
-        return
-      }
-      if (widgetIdRef.current) return
-
-      widgetIdRef.current = window.turnstile.render(containerRef.current, {
-        sitekey: SITE_KEY,
-        action: 'turnstile-spin-v2',
-        callback: (token) => setToken(token),
-        'expired-callback': () => setToken(undefined),
-        'error-callback': () => setToken(undefined),
-      })
+      window[CALLBACK_NAME] = (token: string) => setToken(token)
+      window[EXPIRED_CALLBACK_NAME] = () => setToken(undefined)
+      window[ERROR_CALLBACK_NAME] = () => setToken(undefined)
 
       return () => {
-        if (widgetIdRef.current && window.turnstile) {
-          window.turnstile.remove(widgetIdRef.current)
-          widgetIdRef.current = undefined
-        }
+        delete window[CALLBACK_NAME]
+        delete window[EXPIRED_CALLBACK_NAME]
+        delete window[ERROR_CALLBACK_NAME]
         setToken(undefined)
       }
-    }, [scriptReady, setToken])
+    }, [setToken])
 
     if (!SITE_KEY) {
       return (
@@ -132,16 +112,14 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
 
     return (
       <>
-        <Script
-          src={`${TURNSTILE_SCRIPT}?render=explicit`}
-          strategy="afterInteractive"
-          onLoad={() => setScriptReady(true)}
-        />
+        <Script src={TURNSTILE_SCRIPT} strategy="afterInteractive" />
         <div
-          ref={containerRef}
           className="cf-turnstile"
           data-sitekey={SITE_KEY}
           data-action="turnstile-spin-v2"
+          data-callback={CALLBACK_NAME}
+          data-expired-callback={EXPIRED_CALLBACK_NAME}
+          data-error-callback={ERROR_CALLBACK_NAME}
         />
       </>
     )
