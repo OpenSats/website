@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
@@ -190,6 +191,14 @@ ${contactFooter}`
         body: issueBody,
         labels: issueLabels,
       })
+
+      // Best-effort: GitHub record is the source of truth; email failure must
+      // not block a successful submit (avoids a second Turnstile mid-flight).
+      try {
+        await sendApplicationEmails(req.body)
+      } catch (emailErr) {
+        console.error('Application emails failed after issue create:', emailErr)
+      }
 
       res.status(200).json({ message: 'success' })
     } catch (err) {

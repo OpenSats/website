@@ -17,12 +17,10 @@ type PostJSON = (
 export interface TurnstileControls {
   waitForToken: () => Promise<string>
   reset: () => void
-  resetAndWaitForToken: () => Promise<string>
 }
 
 export interface ApplicationDeliveryResult {
   github: boolean
-  email: boolean
 }
 
 export const SUBMISSION_ERROR =
@@ -59,34 +57,27 @@ export async function submitApplication(
   postJSON: PostJSON = fetchPostJSON,
   turnstile?: TurnstileControls
 ): Promise<ApplicationDeliveryResult> {
-  // Tokens are single-use: verify one for GitHub, then reset and verify
-  // another for SendGrid so siteverify does not reject timeout-or-duplicate.
-  const githubToken = turnstile
+  const token = turnstile
     ? await turnstile.waitForToken()
-    : String(data[TURNSTILE_TOKEN_FIELD] || '')
+    : typeof data[TURNSTILE_TOKEN_FIELD] === 'string'
+      ? (data[TURNSTILE_TOKEN_FIELD] as string)
+      : ''
 
-  if (!githubToken) {
+  if (!token) {
     throw new Error('Please complete the bot verification challenge.')
   }
 
+  // One Turnstile token: /api/github verifies and creates the issue, then
+  // sends application emails server-side (best-effort).
   const github = await postSucceeded(
     postJSON,
     '/api/github',
-    withTurnstileToken(data, githubToken)
+    withTurnstileToken(data, token)
   )
   if (!github) {
     turnstile?.reset()
     throw new Error(SUBMISSION_ERROR)
   }
 
-  const emailToken = turnstile
-    ? await turnstile.resetAndWaitForToken()
-    : String(data[TURNSTILE_TOKEN_FIELD] || '')
-
-  const email = await postSucceeded(
-    postJSON,
-    '/api/sendgrid',
-    withTurnstileToken(data, emailToken)
-  )
-  return { github, email }
+  return { github: true }
 }

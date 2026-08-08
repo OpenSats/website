@@ -1,15 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
+import { sendApplicationEmails } from '@/utils/application-emails'
 import {
   assertTurnstile,
   TURNSTILE_FAILURE_MESSAGE,
-  TURNSTILE_TOKEN_FIELD,
 } from '@/utils/turnstile'
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 const TO_ADDRESS = process.env.SENDGRID_RECIPIENT
-const CC_ADDRESS = process.env.SENDGRID_CC
 const BCC_ADDRESS = process.env.SENDGRID_BCC
 const FROM_ADDRESS = process.env.SENDGRID_VERIFIED_SENDER
 
@@ -250,15 +249,6 @@ export async function sendReportConfirmationEmail(
   return sendEmailWithRetry(msg)
 }
 
-function escapeHtml(value: unknown): string {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -276,68 +266,14 @@ export default async function handler(
     throw new Error('Env misconfigured')
   }
 
-  const body = Object.entries(req.body)
-    .filter(([key]) => key !== TURNSTILE_TOKEN_FIELD)
-    .map(
-      ([key, value]) => `<h3>${escapeHtml(key)}</h3><p>${escapeHtml(value)}</p>`
-    )
-    .join('')
-
-  const thankYouMessage = req.body.RED
-    ? `
-Thanks for your RED application. We've received it and are fast-tracking review. We'll follow up as soon as we can. Questions: red@opensats.org
-    `
-    : `
-Thank you for applying to OpenSats! 
-
-We have received your application and will evaluate it soon.
-This process can take 2-3 months, but in most cases it's faster.
-Feel free to reach out to applications@opensats.org if you have any questions.
-
-We will reach out again once we've made a decision. 
-Thank you for your patience.
-    `
-
-  const internalMessage = {
-    to: TO_ADDRESS,
-    cc: CC_ADDRESS,
-    from: FROM_ADDRESS,
-    subject: req.body.RED
-      ? `OpenSats RED: Application for ${req.body.project_name}`
-      : `OpenSats Application for ${req.body.project_name}`,
-    html: `${body}`,
-    text: body.replace(/<[^>]*>/g, ''),
-  }
-
-  const applicantMessage = {
-    to: `${req.body.email}`,
-    from: FROM_ADDRESS,
-    subject: req.body.RED
-      ? `Your OpenSats RED Application`
-      : `Your Application to OpenSats`,
-    html: `${thankYouMessage}`,
-    text: thankYouMessage,
-  }
-
-  const [internalSent, applicantSent] = await Promise.all([
-    sendEmailWithRetry(internalMessage),
-    sendEmailWithRetry(applicantMessage),
-  ])
+  const { internalSent, applicantSent } = await sendApplicationEmails(req.body)
 
   if (!internalSent) {
-    console.error('Application copy was not accepted by SendGrid')
     return res
       .status(502)
       .json({ message: 'Application email delivery failed' })
   }
 
-  if (!applicantSent) {
-    console.warn('Application stored, but applicant confirmation was not sent')
-  } else {
-    console.info('Application receipt sent')
-  }
-
-  console.info('Application copy sent to OpenSats')
   return res.status(200).json({
     message: 'success',
     applicantConfirmationSent: applicantSent,

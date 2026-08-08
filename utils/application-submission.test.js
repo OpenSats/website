@@ -6,78 +6,47 @@ const { submitApplication } = require('./application-submission.ts')
 describe('submitApplication', () => {
   const submission = { project_name: 'Test project' }
 
-  function turnstileMock(tokens) {
-    let index = 0
-    const waitForToken = jest.fn(
-      async () => tokens[Math.min(index, tokens.length - 1)]
-    )
-    const reset = jest.fn(() => {
-      index += 1
-    })
-    const resetAndWaitForToken = jest.fn(async () => {
-      reset()
-      return waitForToken()
-    })
-    return { waitForToken, reset, resetAndWaitForToken }
+  function turnstileMock(token) {
+    return {
+      waitForToken: jest.fn(async () => token),
+      reset: jest.fn(),
+    }
   }
 
-  it('creates the GitHub record before sending email, with fresh tokens', async () => {
+  it('creates the GitHub record with a Turnstile token', async () => {
     const postJSON = jest.fn().mockResolvedValue({ message: 'success' })
-    const turnstile = turnstileMock(['token-1', 'token-2'])
+    const turnstile = turnstileMock('token-1')
 
     await expect(
       submitApplication(submission, postJSON, turnstile)
     ).resolves.toEqual({
       github: true,
-      email: true,
     })
-    expect(postJSON.mock.calls.map((call) => call[0])).toEqual([
-      '/api/github',
-      '/api/sendgrid',
-    ])
-    expect(postJSON.mock.calls[0][1]['cf-turnstile-response']).toBe('token-1')
-    expect(postJSON.mock.calls[1][1]['cf-turnstile-response']).toBe('token-2')
-    expect(turnstile.resetAndWaitForToken).toHaveBeenCalledTimes(1)
-  })
-
-  it('succeeds when GitHub is confirmed even if email fails', async () => {
-    const postJSON = jest.fn(async (url) => ({
-      message: url === '/api/github' ? 'success' : 'Email delivery failed',
-    }))
-    const turnstile = turnstileMock(['token-1', 'token-2'])
-
-    await expect(
-      submitApplication(submission, postJSON, turnstile)
-    ).resolves.toEqual({
-      github: true,
-      email: false,
-    })
-  })
-
-  it('forces a retry when GitHub fails and does not email anyone', async () => {
-    const postJSON = jest.fn(async (url) => {
-      if (url === '/api/github') throw new Error('GitHub unavailable')
-      return { message: 'success' }
-    })
-    const turnstile = turnstileMock(['token-1', 'token-2'])
-
-    await expect(
-      submitApplication(submission, postJSON, turnstile)
-    ).rejects.toThrow('Please try again.')
     expect(postJSON).toHaveBeenCalledTimes(1)
     expect(postJSON).toHaveBeenCalledWith(
       '/api/github',
       expect.objectContaining({ 'cf-turnstile-response': 'token-1' })
     )
+  })
+
+  it('forces a retry when GitHub fails', async () => {
+    const postJSON = jest.fn(async () => {
+      throw new Error('GitHub unavailable')
+    })
+    const turnstile = turnstileMock('token-1')
+
+    await expect(
+      submitApplication(submission, postJSON, turnstile)
+    ).rejects.toThrow('Please try again.')
+    expect(postJSON).toHaveBeenCalledTimes(1)
     expect(turnstile.reset).toHaveBeenCalled()
-    expect(turnstile.resetAndWaitForToken).not.toHaveBeenCalled()
   })
 
   it('forces a retry when GitHub returns a non-success response', async () => {
-    const postJSON = jest.fn(async (url) => ({
-      message: url === '/api/github' ? 'Application storage failed' : 'success',
-    }))
-    const turnstile = turnstileMock(['token-1', 'token-2'])
+    const postJSON = jest.fn().mockResolvedValue({
+      message: 'Application storage failed',
+    })
+    const turnstile = turnstileMock('token-1')
 
     await expect(
       submitApplication(submission, postJSON, turnstile)
@@ -90,7 +59,6 @@ describe('submitApplication', () => {
     const turnstile = {
       waitForToken: jest.fn(async () => ''),
       reset: jest.fn(),
-      resetAndWaitForToken: jest.fn(),
     }
 
     await expect(

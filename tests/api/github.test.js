@@ -24,8 +24,13 @@ jest.mock('@/utils/turnstile', () => {
   }
 })
 
+jest.mock('@/utils/application-emails', () => ({
+  sendApplicationEmails: jest.fn(),
+}))
+
 const { __create: createIssue } = require('@octokit/rest')
 const { assertTurnstile } = require('@/utils/turnstile')
+const { sendApplicationEmails } = require('@/utils/application-emails')
 const handler = require('../../pages/api/github.ts').default
 
 function responseMock() {
@@ -67,7 +72,13 @@ describe('/api/github', () => {
     createIssue.mockResolvedValue({ data: { number: 1 } })
     assertTurnstile.mockReset()
     assertTurnstile.mockResolvedValue(true)
+    sendApplicationEmails.mockReset()
+    sendApplicationEmails.mockResolvedValue({
+      internalSent: true,
+      applicantSent: true,
+    })
     jest.spyOn(console, 'log').mockImplementation(() => undefined)
+    jest.spyOn(console, 'error').mockImplementation(() => undefined)
   })
 
   afterEach(() => {
@@ -75,6 +86,18 @@ describe('/api/github', () => {
   })
 
   it('creates an issue when Turnstile verification succeeds', async () => {
+    const response = responseMock()
+
+    await handler({ method: 'POST', body: validApplication }, response)
+
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toEqual({ message: 'success' })
+    expect(createIssue).toHaveBeenCalled()
+    expect(sendApplicationEmails).toHaveBeenCalledWith(validApplication)
+  })
+
+  it('still succeeds when application emails fail after issue create', async () => {
+    sendApplicationEmails.mockRejectedValue(new Error('SendGrid down'))
     const response = responseMock()
 
     await handler({ method: 'POST', body: validApplication }, response)
@@ -93,5 +116,6 @@ describe('/api/github', () => {
     expect(response.statusCode).toBe(403)
     expect(response.payload.message).not.toBe('success')
     expect(createIssue).not.toHaveBeenCalled()
+    expect(sendApplicationEmails).not.toHaveBeenCalled()
   })
 })
