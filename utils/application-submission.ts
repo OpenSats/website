@@ -1,4 +1,5 @@
 import { fetchPostJSON } from './api-helpers'
+import { TURNSTILE_TOKEN_FIELD } from './turnstile'
 
 export interface ApplicationSubmissionData {
   [key: string]: unknown
@@ -12,6 +13,11 @@ type PostJSON = (
   url: string,
   data: ApplicationSubmissionData
 ) => Promise<DestinationResponse>
+
+export interface TurnstileControls {
+  waitForToken: () => Promise<string>
+  reset: () => Promise<string>
+}
 
 export interface ApplicationDeliveryResult {
   github: boolean
@@ -40,17 +46,48 @@ async function postSucceeded(
   }
 }
 
+function withTurnstileToken(
+  data: ApplicationSubmissionData,
+  token: string
+): ApplicationSubmissionData {
+  return { ...data, [TURNSTILE_TOKEN_FIELD]: token }
+}
+
 export async function submitApplication(
   data: ApplicationSubmissionData,
-  postJSON: PostJSON = fetchPostJSON
+  postJSON: PostJSON = fetchPostJSON,
+  turnstile?: TurnstileControls
 ): Promise<ApplicationDeliveryResult> {
-  // GitHub first: only email after the issue exists, so retries do not
-  // re-send the applicant receipt or internal copy on a failed create.
-  const github = await postSucceeded(postJSON, '/api/github', data)
+  // Tokens are single-use: verify one for GitHub, then reset and verify
+  // another for SendGrid so siteverify does not reject timeout-or-duplicate.
+  const githubToken = turnstile
+    ? await turnstile.waitForToken()
+    : String(data[TURNSTILE_TOKEN_FIELD] || '')
+
+  if (!githubToken) {
+    throw new Error('Please complete the bot verification challenge.')
+  }
+
+  const github = await postSucceeded(
+    postJSON,
+    '/api/github',
+    withTurnstileToken(data, githubToken)
+  )
   if (!github) {
+    if (turnstile) {
+      void turnstile.reset()
+    }
     throw new Error(SUBMISSION_ERROR)
   }
 
-  const email = await postSucceeded(postJSON, '/api/sendgrid', data)
+  const emailToken = turnstile
+    ? await turnstile.reset()
+    : String(data[TURNSTILE_TOKEN_FIELD] || '')
+
+  const email = await postSucceeded(
+    postJSON,
+    '/api/sendgrid',
+    withTurnstileToken(data, emailToken)
+  )
   return { github, email }
 }
