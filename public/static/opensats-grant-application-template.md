@@ -9,7 +9,7 @@ application at https://opensats.org/apply/grant
 
 **Project Name:**
 
-**Main Focus:** (Bitcoin, Nostr, Layer 1, Layer 2, Core, Ecash, Education, Other)
+**Main Focus:** (Bitcoin, Nostr, Layer 1, Layer 2, Core, Ecash, Education, Security, Other)
 
 ### Project Description
 

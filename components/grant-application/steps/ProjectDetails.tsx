@@ -19,6 +19,7 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
           <option value="">(Choose One)</option>
           <option value="core">Bitcoin Core</option>
           <option value="education">Education</option>
+          <option value="security">Security</option>
           <option value="layer1">Layer1 / Bitcoin</option>
           <option value="layer2">Layer2 / Lightning</option>
           <option value="ecash">Layer3 / eCash</option>
