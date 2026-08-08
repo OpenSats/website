@@ -1,0 +1,60 @@
+---
+title: 'Bitcoin Improvement Proposals'
+dateAdded: '2026-08-08'
+summary: "Bitcoin's public specification process and proposal archive."
+nym: 'BIP Editors and Authors'
+website: 'https://bips.dev/'
+coverImage: '/static/images/projects/bips.svg'
+containCoverImage: true
+git: 'https://github.com/bitcoin/bips'
+tags: ['Bitcoin', 'Protocol', 'Documentation']
+fund: general
+announcementLink: '/blog/jon-atack-receives-lts-grant'
+---
+
+Bitcoin Improvement Proposals (BIPs) are the public specification process and
+archive for Bitcoin. They give authors a structured way to document protocol
+changes, peer-to-peer behavior, wallet standards, application conventions, and
+process updates so implementers can review the same technical proposal from the
+same source of truth.
+
+The [BIPs repository][repo] is the canonical publication medium. It stores each
+proposal as a versioned text file, tracks edits through Git history, and makes
+the latest accepted draft easy to retrieve. The rendered [bips.dev][bips-dev]
+site gives developers and reviewers a faster way to browse those specifications.
+
+## Why fund it?
+
+Bitcoin development relies on written specifications when changes touch more
+than one implementation, wallet, library, or user workflow. BIPs help turn
+mailing list discussions and design sketches into stable documents that can be
+reviewed, referenced, implemented, tested, and challenged over time.
+
+That work is mostly coordination and maintenance. Authors have to define scope,
+write clear specifications, address objections, record rationale, and revise the
+proposal as review improves it. Editors keep the process moving by checking
+format, scope, metadata, licensing, status, and publication criteria.
+
+OpenSats funds [Jon Atack][jon-announce], a Bitcoin Core contributor and BIP
+editor, through the Long-Term Support program. His grant includes work on BIP
+proposal review and maintenance, especially where proposals affect Bitcoin's
+consensus rules, decentralization, security, robustness, privacy, or user
+experience.
+
+## What's next?
+
+The BIP process was refreshed by [BIP 3][bip-3], which replaced the older BIP 2
+process and clarified the role of BIP authors, deputies, editors, proposal
+types, statuses, and publication criteria.
+
+The repository remains active because Bitcoin remains active. Current and future
+work includes new consensus proposals, peer-service changes, wallet
+interoperability standards, application-level conventions, and process
+improvements. Keeping the archive readable, reviewable, and current gives the
+ecosystem a durable place to debate technical changes without tying publication
+to adoption.
+
+[bip-3]: https://github.com/bitcoin/bips/blob/master/bip-0003.md
+[bips-dev]: https://bips.dev/
+[jon-announce]: /blog/jon-atack-receives-lts-grant
+[repo]: https://github.com/bitcoin/bips
