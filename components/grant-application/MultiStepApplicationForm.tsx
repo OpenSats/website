@@ -1,7 +1,7 @@
 import { ReactNode, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
-import { fetchPostJSON } from '../../utils/api-helpers'
+import { submitApplication } from '../../utils/application-submission'
 import StepIndicator from './StepIndicator'
 import StepNavigation from './StepNavigation'
 import { FormValues, StepProps } from './types'
@@ -85,33 +85,17 @@ export default function MultiStepApplicationForm({
     if (currentStep !== steps.length - 1 || loading || submitDisabled) return
 
     setLoading(true)
+    setFailureReason(undefined)
 
     try {
-      const res = await fetchPostJSON('/api/github', data)
-      if (res.message === 'success') {
-        console.info('Application tracked')
-      } else {
-        // Fail silently
-      }
+      await submitApplication(data)
+      router.push('/submitted')
     } catch (e) {
       if (e instanceof Error) {
-        // Fail silently
+        setFailureReason(e.message)
       }
     } finally {
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', data)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
-        setLoading(false)
-      }
+      setLoading(false)
     }
   }
 
