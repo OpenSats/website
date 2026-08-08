@@ -1,7 +1,12 @@
 import { ReactNode, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
-import { submitApplication } from '../../utils/application-submission'
+import {
+  SUBMISSION_CONTACT,
+  SUBMISSION_CONTACT_AFTER_FAILURES,
+  SUBMISSION_ERROR,
+  submitApplication,
+} from '../../utils/application-submission'
 import StepIndicator from './StepIndicator'
 import StepNavigation from './StepNavigation'
 import { FormValues, StepProps } from './types'
@@ -32,6 +37,7 @@ export default function MultiStepApplicationForm({
   const [currentStep, setCurrentStep] = useState(0)
   const [loading, setLoading] = useState(false)
   const [failureReason, setFailureReason] = useState<string>()
+  const [failedAttempts, setFailedAttempts] = useState(0)
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter()
 
@@ -91,9 +97,14 @@ export default function MultiStepApplicationForm({
       await submitApplication(data)
       router.push('/submitted')
     } catch (e) {
-      if (e instanceof Error) {
-        setFailureReason(e.message)
-      }
+      const nextFailures = failedAttempts + 1
+      setFailedAttempts(nextFailures)
+      const baseMessage = e instanceof Error ? e.message : SUBMISSION_ERROR
+      setFailureReason(
+        nextFailures >= SUBMISSION_CONTACT_AFTER_FAILURES
+          ? `${baseMessage} ${SUBMISSION_CONTACT}`
+          : baseMessage
+      )
     } finally {
       setLoading(false)
     }

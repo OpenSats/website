@@ -37,7 +37,7 @@ describe('submitApplication', () => {
     })
 
     await expect(submitApplication(submission, postJSON)).rejects.toThrow(
-      'create your application record on GitHub'
+      'Please try again.'
     )
     expect(postJSON).toHaveBeenCalledTimes(1)
     expect(postJSON).toHaveBeenCalledWith('/api/github', submission)
@@ -54,4 +54,14 @@ describe('submitApplication', () => {
     )
     expect(postJSON).toHaveBeenCalledTimes(1)
   })
+
+  it('does not mention applications@ in the base error', async () => {
+    const postJSON = jest.fn().mockRejectedValue(new Error('Network error'))
+
+    await expect(submitApplication(submission, postJSON)).rejects.toThrow(
+      "We couldn't create your application record on GitHub. It has not been marked as submitted. Please try again."
+    )
+  })
 })
+
+

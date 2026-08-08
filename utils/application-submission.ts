@@ -18,8 +18,14 @@ export interface ApplicationDeliveryResult {
   email: boolean
 }
 
-const SUBMISSION_ERROR =
-  "We couldn't create your application record on GitHub. It has not been marked as submitted. Please try again or contact applications@opensats.org."
+export const SUBMISSION_ERROR =
+  "We couldn't create your application record on GitHub. It has not been marked as submitted. Please try again."
+
+export const SUBMISSION_CONTACT =
+  'If this keeps happening, email applications@opensats.org.'
+
+/** Show the contact line after this many failed submit attempts. */
+export const SUBMISSION_CONTACT_AFTER_FAILURES = 3
 
 async function postSucceeded(
   postJSON: PostJSON,
