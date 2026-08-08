@@ -54,13 +54,17 @@ export default function ApplicantDetails({
       </label>
 
       <label className="offscreen-field block">
-        Organization Website
+        Company Fax
         <input
-          type="text"
+          type="tel"
           className={inputClass}
-          {...register('organization_website')}
+          {...register('company_fax')}
           tabIndex={-1}
           autoComplete="off"
+          aria-hidden="true"
+          data-1p-ignore
+          data-bwignore
+          data-lpignore="true"
         />
       </label>
 

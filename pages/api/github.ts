@@ -1,3 +1,4 @@
+import { Octokit } from '@octokit/rest'
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { isSpamSubmission } from '@/utils/spam-helpers'
 
@@ -5,199 +6,207 @@ const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
 const GH_APP_REPO = process.env.GH_APP_REPO
 
-import { Octokit } from '@octokit/rest'
-const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
-    // Silent rejection for spam submissions
-    if (isSpamSubmission(req.body)) {
-      return res.status(200).json({ message: 'success' })
-    }
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST')
+    return res.status(405).end('Method Not Allowed')
+  }
 
-    if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
-      throw new Error('Env misconfigured')
-    }
-    console.log(`REPO: ${GH_ORG}/${GH_APP_REPO}`)
+  const application = req.body || {}
 
-    const byOrFor = req.body.LTS ? 'for' : 'by'
-    const issueTitle = `${req.body.RED ? 'RED: ' : ''}${
-      req.body.project_name
-    } ${byOrFor} ${req.body.your_name}`
+  if (isSpamSubmission(application)) {
+    console.warn('Application rejected by spam checks')
+    return res.status(422).json({ message: 'Submission rejected' })
+  }
+
+  if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
+    console.error('GitHub application storage is not configured')
+    return res.status(500).json({ message: 'Application storage unavailable' })
+  }
+
+  try {
+    const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
+    const byOrFor = application.LTS ? 'for' : 'by'
+    const issueTitle = `${application.RED ? 'RED: ' : ''}${
+      application.project_name
+    } ${byOrFor} ${application.your_name}`
 
     const contactFooter = `
 ---
 
-${req.body.website ? `Website: ${req.body.website}` : ''}
-${req.body.license ? `License: ${req.body.license}` : ''}
-${req.body.github ? `GitHub: ${req.body.github}` : ''}
+${application.website ? `Website: ${application.website}` : ''}
+${application.license ? `License: ${application.license}` : ''}
+${application.github ? `GitHub: ${application.github}` : ''}
 ${
-  req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
-}
-${
-  req.body.other_contact
-    ? `Other contact details: ${req.body.other_contact}`
+  application.personal_github
+    ? `Personal GitHub: ${application.personal_github}`
     : ''
 }
-${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
+${
+  application.other_contact
+    ? `Other contact details: ${application.other_contact}`
+    : ''
+}
+${application.other_lead ? `Project lead: ${application.other_lead}` : ''}
 `
 
+    const organizations = Array.isArray(application.organizations)
+      ? application.organizations.join(', ')
+      : application.organizations
+      ? String(application.organizations)
+      : ''
+
     // Condensed information for screening purposes, no PII
-    const issueBody = req.body.RED
+    const issueBody = application.RED
       ? `
 ### Research
 
-${req.body.short_description}
+${application.short_description}
 
 ### Prior Work
 
-${req.body.prior_work || 'n/a'}
+${application.prior_work || 'n/a'}
 
 ### Budget
 
 **Spend so far:**
-${req.body.token_spend_so_far || 'n/a'}
+${application.token_spend_so_far || 'n/a'}
 
 **Expected ongoing burn:**
-${req.body.estimated_token_burn || 'n/a'}
+${application.estimated_token_burn || 'n/a'}
 
-**Duration:** ${req.body.duration || 'n/a'}
+**Duration:** ${application.duration || 'n/a'}
 
 ### Acknowledgments
 
-**Terms effective:** ${req.body.red_terms_effective || 'n/a'}
+**Terms effective:** ${application.red_terms_effective || 'n/a'}
 
-- Not authorization: ${req.body.red_ack_not_authorization ? 'Yes' : 'No'}
-- Sanctions / export-control: ${req.body.red_ack_sanctions ? 'Yes' : 'No'}
+- Not authorization: ${application.red_ack_not_authorization ? 'Yes' : 'No'}
+- Sanctions / export-control: ${application.red_ack_sanctions ? 'Yes' : 'No'}
 - Authorized LLM/compute accounts: ${
-          req.body.red_ack_llm_accounts ? 'Yes' : 'No'
+          application.red_ack_llm_accounts ? 'Yes' : 'No'
         }
 - Accurate info / responsible disclosure: ${
-          req.body.red_ack_accurate_responsible ? 'Yes' : 'No'
+          application.red_ack_accurate_responsible ? 'Yes' : 'No'
         }
-- Terms & privacy: ${req.body.red_ack_terms ? 'Yes' : 'No'}
+- Terms & privacy: ${application.red_ack_terms ? 'Yes' : 'No'}
 ${contactFooter}`
       : `
 ### Description
 
-${req.body.short_description}
+${application.short_description}
 
 ### Potential Impact
 
-${req.body.potential_impact}
+${application.potential_impact}
 
 ### Other Organizations Applied To
 
 ${
-  req.body.organizations
-    ? `This application was submitted to: ${req.body.organizations.join(', ')}`
+  organizations
+    ? `This application was submitted to: ${organizations}`
     : 'No organizations specified'
 }
 
 ### Timeline & Milestones
 
-${req.body.duration ? `Grant duration: ${req.body.duration}` : ''}
-${req.body.commitment ? `Time commitment: ${req.body.commitment}` : ''}
+${application.duration ? `Grant duration: ${application.duration}` : ''}
+${application.commitment ? `Time commitment: ${application.commitment}` : ''}
 
-${req.body.timelines || ''}
+${application.timelines || ''}
 
 ### Proposed Budget
 
-${req.body.proposed_budget}
+${application.proposed_budget}
 
-**Prior funding:** ${req.body.has_received_funding === 'yes' ? 'Yes' : 'No'}
+**Prior funding:** ${application.has_received_funding === 'yes' ? 'Yes' : 'No'}
 
-${req.body.what_funding ? req.body.what_funding : ''}
+${application.what_funding ? application.what_funding : ''}
 
 **Additional funding sources:** ${
-          req.body.has_additional_funding === 'yes' ? 'Yes' : 'No'
+          application.has_additional_funding === 'yes' ? 'Yes' : 'No'
         }
 
-${req.body.additional_funding ? req.body.additional_funding : ''}
+${application.additional_funding ? application.additional_funding : ''}
 
 ### References & Prior Contributions
 
-${req.body.references || ''}
+${application.references || ''}
 
-${req.body.bios ? req.body.bios : 'No prior contributions.'}
+${application.bios ? application.bios : 'No prior contributions.'}
 
 **Years of dev experience:**
-${req.body.years_experience ? `${req.body.years_experience}` : 'n/a'}
+${application.years_experience ? `${application.years_experience}` : 'n/a'}
 
 ### Project Media
 
-${req.body.screenshots_videos ? req.body.screenshots_videos : 'None provided.'}
+${
+  application.screenshots_videos
+    ? application.screenshots_videos
+    : 'None provided.'
+}
 
 ### Video Application
 
-${req.body.video_application ? req.body.video_application : 'None provided.'}
+${
+  application.video_application
+    ? application.video_application
+    : 'None provided.'
+}
 
 ### Anything Else
 
-${req.body.anything_else ? req.body.anything_else : 'No.'}
+${application.anything_else ? application.anything_else : 'No.'}
 ${contactFooter}`
 
     // Label set according to "main focus" (absent for RED applications)
-    const mainFocus = req.body.main_focus
-      ? `${req.body.main_focus}`.toLowerCase()
+    const mainFocus = application.main_focus
+      ? `${application.main_focus}`.toLowerCase()
       : ''
     const issueLabels = mainFocus ? [mainFocus] : []
     if (mainFocus === 'layer1' || mainFocus === 'layer2') {
-      issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
+      issueLabels.push('bitcoin')
     }
 
-    // Add label for applications from common grant app
-    if (req.body.source === 'common-grant-app') {
+    if (application.source === 'common-grant-app') {
       issueLabels.push('common-grant-app')
     }
 
-    // Repo set according to "main focus"
     let appRepo = GH_APP_REPO
-    if (mainFocus === 'nostr') {
-      appRepo = `${GH_APP_REPO}-nostr`
+    if (mainFocus === 'nostr') appRepo = `${GH_APP_REPO}-nostr`
+    if (mainFocus === 'layer1') appRepo = `${GH_APP_REPO}-layer1`
+    if (mainFocus === 'layer2') appRepo = `${GH_APP_REPO}-layer2`
+    if (mainFocus === 'core') appRepo = `${GH_APP_REPO}-core`
+    if (mainFocus === 'ecash') appRepo = `${GH_APP_REPO}-ecash`
+
+    if (application.LTS) issueLabels.push('LTS')
+    if (application.RED) issueLabels.push('RED')
+    if (application.has_received_funding === 'yes') {
+      issueLabels.push('prior funding')
     }
-    if (mainFocus === 'layer1') {
-      appRepo = `${GH_APP_REPO}-layer1`
-    }
-    if (mainFocus === 'layer2') {
-      appRepo = `${GH_APP_REPO}-layer2`
-    }
-    if (mainFocus === 'core') {
-      appRepo = `${GH_APP_REPO}-core`
-    }
-    if (mainFocus === 'ecash') {
-      appRepo = `${GH_APP_REPO}-ecash`
+    if (!application.RED) {
+      if (!application.free_open_source) issueLabels.push('not FLOSS')
+      if (!application.are_you_lead) issueLabels.push('surrogate')
     }
 
-    // Tag depending on request for grant and/or request for listing
-    req.body.LTS && issueLabels.push('LTS')
-    req.body.RED && issueLabels.push('RED')
+    const issue = await octokit.rest.issues.create({
+      owner: GH_ORG,
+      repo: appRepo,
+      title: issueTitle,
+      body: issueBody,
+      labels: issueLabels,
+    })
 
-    // Additional tags based on yes/no answers
-    req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
-    if (!req.body.RED) {
-      !req.body.free_open_source && issueLabels.push('not FLOSS')
-      !req.body.are_you_lead && issueLabels.push('surrogate')
-    }
-
-    try {
-      await octokit.rest.issues.create({
-        owner: GH_ORG,
-        repo: appRepo,
-        title: issueTitle,
-        body: issueBody,
-        labels: issueLabels,
-      })
-
-      res.status(200).json({ message: 'success' })
-    } catch (err) {
-      res.status(500).json({ statusCode: 500, message: (err as Error).message })
-    }
-  } else {
-    res.setHeader('Allow', 'POST')
-    res.status(405).end('Method Not Allowed')
+    return res.status(200).json({
+      message: 'success',
+      issueNumber: issue.data.number,
+      issueUrl: issue.data.html_url,
+    })
+  } catch (err) {
+    console.error('Failed to store application in GitHub', err)
+    return res.status(502).json({ message: 'Application storage failed' })
   }
 }

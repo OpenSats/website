@@ -246,31 +246,53 @@ export async function sendReportConfirmationEmail(
   return sendEmailWithRetry(msg)
 }
 
+function escapeHtml(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
-    // Silent rejection for spam submissions
-    if (isSpamSubmission(req.body)) {
-      return res.status(200).json({ message: 'success' })
-    }
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST')
+    return res.status(405).end('Method Not Allowed')
+  }
 
-    if (!SENDGRID_API_KEY || !TO_ADDRESS || !FROM_ADDRESS) {
-      throw new Error('Env misconfigured')
-    }
+  const application = req.body || {}
 
-    let body = ''
+  if (isSpamSubmission(application)) {
+    console.warn('Application rejected by spam checks')
+    return res.status(422).json({ message: 'Submission rejected' })
+  }
 
-    for (const [key, value] of Object.entries(req.body)) {
-      body += `<h3>${key}</h3><p>${value}</p>`
-    }
+  if (!SENDGRID_API_KEY || !TO_ADDRESS || !FROM_ADDRESS) {
+    console.error('SendGrid application delivery is not configured')
+    return res.status(500).json({ message: 'Application delivery unavailable' })
+  }
 
-    const thankYouMessage = req.body.RED
-      ? `
+  const privateTransportFields = new Set([
+    'company_fax',
+    'formElapsedMs',
+    'formLoadedAt',
+  ])
+  const body = Object.entries(application)
+    .filter(([key]) => !privateTransportFields.has(key))
+    .map(
+      ([key, value]) => `<h3>${escapeHtml(key)}</h3><p>${escapeHtml(value)}</p>`
+    )
+    .join('')
+
+  const thankYouMessage = application.RED
+    ? `
 Thanks for your RED application. We've received it and are fast-tracking review. We'll follow up as soon as we can. Questions: red@opensats.org
     `
-      : `
+    : `
 Thank you for applying to OpenSats! 
 
 We have received your application and will evaluate it soon.
@@ -281,47 +303,45 @@ We will reach out again once we've made a decision.
 Thank you for your patience.
     `
 
-    try {
-      // Mail 'application received' to applicant
-      const msg = {
-        to: `${req.body.email}`, // Applicant
-        from: FROM_ADDRESS, // Verified sender
-        subject: req.body.RED
-          ? `Your OpenSats RED Application`
-          : `Your Application to OpenSats`,
-        html: `${thankYouMessage}`,
-        text: thankYouMessage,
-      }
-
-      await sendEmailWithRetry(msg)
-      console.info('Application receipt sent')
-    } catch (err) {
-      console.error(err)
-    } finally {
-      // Mail application content to us
-      try {
-        const msg = {
-          to: TO_ADDRESS, // OpenSats
-          cc: CC_ADDRESS, // Processing & backup
-          from: FROM_ADDRESS, // Verified sender
-          subject: req.body.RED
-            ? `OpenSats RED: Application for ${req.body.project_name}`
-            : `OpenSats Application for ${req.body.project_name}`,
-          html: `${body}`,
-          text: body.replace(/<[^>]*>/g, ''), // Strip HTML for plain text version
-        }
-
-        await sendEmailWithRetry(msg)
-        console.info('Application copy sent to OpenSats')
-        res.status(200).json({ message: 'success' })
-      } catch (err) {
-        res
-          .status(500)
-          .json({ statusCode: 500, message: (err as Error).message })
-      }
-    }
-  } else {
-    res.setHeader('Allow', 'POST')
-    res.status(405).end('Method Not Allowed')
+  const internalMessage = {
+    to: TO_ADDRESS,
+    cc: CC_ADDRESS,
+    from: FROM_ADDRESS,
+    subject: application.RED
+      ? `OpenSats RED: Application for ${application.project_name}`
+      : `OpenSats Application for ${application.project_name}`,
+    html: body,
+    text: body.replace(/<[^>]*>/g, ''),
   }
+  const applicantMessage = {
+    to: `${application.email}`,
+    from: FROM_ADDRESS,
+    subject: application.RED
+      ? 'Your OpenSats RED Application'
+      : 'Your Application to OpenSats',
+    html: thankYouMessage,
+    text: thankYouMessage,
+  }
+
+  const [internalSent, applicantSent] = await Promise.all([
+    sendEmailWithRetry(internalMessage),
+    sendEmailWithRetry(applicantMessage),
+  ])
+
+  if (!internalSent) {
+    console.error('Application copy was not accepted by SendGrid')
+    return res
+      .status(502)
+      .json({ message: 'Application email delivery failed' })
+  }
+
+  console.info('Application copy sent to OpenSats')
+  if (!applicantSent) {
+    console.warn('Application stored, but applicant confirmation was not sent')
+  }
+
+  return res.status(200).json({
+    message: 'success',
+    applicantConfirmationSent: applicantSent,
+  })
 }

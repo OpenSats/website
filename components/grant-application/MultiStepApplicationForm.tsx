@@ -1,7 +1,7 @@
 import { ReactNode, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
-import { fetchPostJSON } from '../../utils/api-helpers'
+import { submitApplication } from '../../utils/application-submission'
 import StepIndicator from './StepIndicator'
 import StepNavigation from './StepNavigation'
 import { FormValues, StepProps } from './types'
@@ -86,34 +86,22 @@ export default function MultiStepApplicationForm({
     if (currentStep !== steps.length - 1 || loading || submitDisabled) return
 
     setLoading(true)
-    const submissionData = { ...data, formLoadedAt }
+    setFailureReason(undefined)
+    const submissionData = {
+      ...data,
+      formElapsedMs: Math.max(0, Date.now() - formLoadedAt),
+    }
 
     try {
-      const res = await fetchPostJSON('/api/github', submissionData)
-      if (res.message === 'success') {
-        console.info('Application tracked')
-      } else {
-        // Fail silently
-      }
+      const delivery = await submitApplication(submissionData)
+      console.info('Application delivery confirmed', delivery)
+      await router.push('/submitted')
     } catch (e) {
       if (e instanceof Error) {
-        // Fail silently
+        setFailureReason(e.message)
       }
     } finally {
-      try {
-        const res = await fetchPostJSON('/api/sendgrid', submissionData)
-        if (res.message === 'success') {
-          router.push('/submitted')
-        } else {
-          setFailureReason(res.message)
-        }
-      } catch (e) {
-        if (e instanceof Error) {
-          setFailureReason(e.message)
-        }
-      } finally {
-        setLoading(false)
-      }
+      setLoading(false)
     }
   }
 
