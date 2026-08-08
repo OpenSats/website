@@ -15,7 +15,7 @@ jest.mock('@sendgrid/mail', () => ({
 }))
 
 const sgMail = require('@sendgrid/mail').default
-const handler = require('./sendgrid.ts').default
+const handler = require('../../pages/api/sendgrid.ts').default
 
 function responseMock() {
   return {

@@ -17,7 +17,7 @@ jest.mock('@octokit/rest', () => ({
   })),
 }))
 
-const handler = require('./github.ts').default
+const handler = require('../../pages/api/github.ts').default
 
 function responseMock() {
   return {
