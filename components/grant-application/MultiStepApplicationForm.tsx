@@ -184,7 +184,7 @@ export default function MultiStepApplicationForm({
       {steps[currentStep].render(stepProps)}
 
       {isLastStep && (
-        <div className="my-8 flex flex-col items-center py-2">
+        <div className="my-8 py-2">
           <TurnstileWidget
             ref={turnstileRef}
             onTokenChange={(token) => setTurnstileReady(!!token)}
