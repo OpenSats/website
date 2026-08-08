@@ -28,6 +28,27 @@ interface MultiStepApplicationFormProps {
   submitRequiresChecked?: readonly string[]
 }
 
+/** Temporary: ?step=last|N on localhost and Vercel previews only. */
+function allowApplyStepShortcut() {
+  return (
+    process.env.NODE_ENV === 'development' ||
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview'
+  )
+}
+
+function stepIndexFromQuery(
+  stepParam: string | string[] | undefined,
+  stepCount: number
+): number | undefined {
+  if (typeof stepParam !== 'string' || stepCount < 1) return undefined
+  if (stepParam === 'last') return stepCount - 1
+  if (/^\d+$/.test(stepParam)) {
+    const index = Number(stepParam)
+    if (index >= 0 && index < stepCount) return index
+  }
+  return undefined
+}
+
 export default function MultiStepApplicationForm({
   steps,
   hiddenFields = {},
@@ -55,6 +76,15 @@ export default function MultiStepApplicationForm({
     // first render, before the hidden inputs register on mount.
     defaultValues: { ...hiddenFields, ...defaultValues },
   })
+
+  // Temporary preview/dev shortcut: /apply/red?step=last
+  useEffect(() => {
+    if (!router.isReady || !allowApplyStepShortcut()) return
+    const index = stepIndexFromQuery(router.query.step, steps.length)
+    if (index !== undefined) {
+      setCurrentStep(index)
+    }
+  }, [router.isReady, router.query.step, steps.length])
 
   const scrollToTop = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
