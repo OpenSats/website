@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
 import {
@@ -88,6 +88,15 @@ export default function MultiStepApplicationForm({
   }
 
   const isLastStep = currentStep === steps.length - 1
+
+  // Widget unmounts when leaving the last step; clear readiness so submit
+  // cannot stay enabled on a stale token when the user returns.
+  useEffect(() => {
+    if (!isLastStep) {
+      setTurnstileReady(false)
+    }
+  }, [isLastStep])
+
   const submitDisabled =
     !!submitRequiresChecked?.some((name) => !watch(name)) ||
     (isLastStep && !turnstileReady)
@@ -116,7 +125,7 @@ export default function MultiStepApplicationForm({
           : baseMessage
       )
       setTurnstileReady(false)
-      void turnstileRef.current?.reset()
+      turnstileRef.current?.reset()
     } finally {
       setLoading(false)
     }

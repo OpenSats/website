@@ -16,7 +16,8 @@ type PostJSON = (
 
 export interface TurnstileControls {
   waitForToken: () => Promise<string>
-  reset: () => Promise<string>
+  reset: () => void
+  resetAndWaitForToken: () => Promise<string>
 }
 
 export interface ApplicationDeliveryResult {
@@ -74,14 +75,12 @@ export async function submitApplication(
     withTurnstileToken(data, githubToken)
   )
   if (!github) {
-    if (turnstile) {
-      void turnstile.reset()
-    }
+    turnstile?.reset()
     throw new Error(SUBMISSION_ERROR)
   }
 
   const emailToken = turnstile
-    ? await turnstile.reset()
+    ? await turnstile.resetAndWaitForToken()
     : String(data[TURNSTILE_TOKEN_FIELD] || '')
 
   const email = await postSucceeded(

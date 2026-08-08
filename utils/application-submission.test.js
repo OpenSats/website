@@ -8,15 +8,17 @@ describe('submitApplication', () => {
 
   function turnstileMock(tokens) {
     let index = 0
-    return {
-      waitForToken: jest.fn(
-        async () => tokens[Math.min(index, tokens.length - 1)]
-      ),
-      reset: jest.fn(async () => {
-        index += 1
-        return tokens[Math.min(index, tokens.length - 1)]
-      }),
-    }
+    const waitForToken = jest.fn(
+      async () => tokens[Math.min(index, tokens.length - 1)]
+    )
+    const reset = jest.fn(() => {
+      index += 1
+    })
+    const resetAndWaitForToken = jest.fn(async () => {
+      reset()
+      return waitForToken()
+    })
+    return { waitForToken, reset, resetAndWaitForToken }
   }
 
   it('creates the GitHub record before sending email, with fresh tokens', async () => {
@@ -35,7 +37,7 @@ describe('submitApplication', () => {
     ])
     expect(postJSON.mock.calls[0][1]['cf-turnstile-response']).toBe('token-1')
     expect(postJSON.mock.calls[1][1]['cf-turnstile-response']).toBe('token-2')
-    expect(turnstile.reset).toHaveBeenCalledTimes(1)
+    expect(turnstile.resetAndWaitForToken).toHaveBeenCalledTimes(1)
   })
 
   it('succeeds when GitHub is confirmed even if email fails', async () => {
@@ -68,6 +70,7 @@ describe('submitApplication', () => {
       expect.objectContaining({ 'cf-turnstile-response': 'token-1' })
     )
     expect(turnstile.reset).toHaveBeenCalled()
+    expect(turnstile.resetAndWaitForToken).not.toHaveBeenCalled()
   })
 
   it('forces a retry when GitHub returns a non-success response', async () => {
@@ -87,6 +90,7 @@ describe('submitApplication', () => {
     const turnstile = {
       waitForToken: jest.fn(async () => ''),
       reset: jest.fn(),
+      resetAndWaitForToken: jest.fn(),
     }
 
     await expect(

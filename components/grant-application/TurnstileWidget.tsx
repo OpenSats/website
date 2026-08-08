@@ -33,7 +33,10 @@ declare global {
 export interface TurnstileWidgetHandle {
   getToken: () => string | undefined
   waitForToken: () => Promise<string>
-  reset: () => Promise<string>
+  /** Clear the current token and ask Turnstile for a new challenge. */
+  reset: () => void
+  /** Reset, then resolve once a fresh token is available. */
+  resetAndWaitForToken: () => Promise<string>
 }
 
 interface TurnstileWidgetProps {
@@ -73,8 +76,12 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current)
       }
+    }, [setToken])
+
+    const resetAndWaitForToken = useCallback(() => {
+      reset()
       return waitForToken()
-    }, [setToken, waitForToken])
+    }, [reset, waitForToken])
 
     useImperativeHandle(
       ref,
@@ -82,8 +89,9 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
         getToken: () => tokenRef.current,
         waitForToken,
         reset,
+        resetAndWaitForToken,
       }),
-      [reset, waitForToken]
+      [reset, resetAndWaitForToken, waitForToken]
     )
 
     useEffect(() => {
@@ -110,6 +118,7 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
           window.turnstile.remove(widgetIdRef.current)
           widgetIdRef.current = undefined
         }
+        setToken(undefined)
       }
     }, [scriptReady, setToken])
 
