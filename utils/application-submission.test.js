@@ -18,19 +18,7 @@ describe('submitApplication', () => {
     expect(postJSON).toHaveBeenCalledWith('/api/sendgrid', submission)
   })
 
-  it('succeeds when GitHub fails but the internal email is confirmed', async () => {
-    const postJSON = jest.fn(async (url) => {
-      if (url === '/api/github') throw new Error('GitHub unavailable')
-      return { message: 'success' }
-    })
-
-    await expect(submitApplication(submission, postJSON)).resolves.toEqual({
-      github: false,
-      email: true,
-    })
-  })
-
-  it('succeeds when email fails but the GitHub record is confirmed', async () => {
+  it('succeeds when GitHub is confirmed even if email fails', async () => {
     const postJSON = jest.fn(async (url) => ({
       message: url === '/api/github' ? 'success' : 'Email delivery failed',
     }))
@@ -41,17 +29,29 @@ describe('submitApplication', () => {
     })
   })
 
-  it('does not report success when neither destination confirms storage', async () => {
-    const postJSON = jest
-      .fn()
-      .mockResolvedValue({ message: 'Delivery unavailable' })
+  it('forces a retry when GitHub fails even if email succeeds', async () => {
+    const postJSON = jest.fn(async (url) => {
+      if (url === '/api/github') throw new Error('GitHub unavailable')
+      return { message: 'success' }
+    })
+
+    await expect(submitApplication(submission, postJSON)).rejects.toThrow(
+      'create your application record on GitHub'
+    )
+  })
+
+  it('forces a retry when GitHub returns a non-success response', async () => {
+    const postJSON = jest.fn(async (url) => ({
+      message:
+        url === '/api/github' ? 'Application storage failed' : 'success',
+    }))
 
     await expect(submitApplication(submission, postJSON)).rejects.toThrow(
       'It has not been marked as submitted'
     )
   })
 
-  it('does not report success when both requests fail at the transport layer', async () => {
+  it('forces a retry when both destinations fail', async () => {
     const postJSON = jest.fn().mockRejectedValue(new Error('Network error'))
 
     await expect(submitApplication(submission, postJSON)).rejects.toThrow(

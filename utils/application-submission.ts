@@ -19,7 +19,7 @@ export interface ApplicationDeliveryResult {
 }
 
 const SUBMISSION_ERROR =
-  "We couldn't confirm that your application reached OpenSats. It has not been marked as submitted. Please try again or contact applications@opensats.org."
+  "We couldn't create your application record on GitHub. It has not been marked as submitted. Please try again or contact applications@opensats.org."
 
 export async function submitApplication(
   data: ApplicationSubmissionData,
@@ -37,7 +37,8 @@ export async function submitApplication(
     (result) => result.status === 'fulfilled' && result.value
   )
 
-  if (!github && !email) {
+  // GitHub is the durable screening record. Email alone is not enough.
+  if (!github) {
     throw new Error(SUBMISSION_ERROR)
   }
 
