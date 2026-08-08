@@ -184,18 +184,11 @@ export default function MultiStepApplicationForm({
       {steps[currentStep].render(stepProps)}
 
       {isLastStep && (
-        <div className="my-8 flex flex-col items-center gap-3 py-2">
+        <div className="my-8 flex flex-col items-center py-2">
           <TurnstileWidget
             ref={turnstileRef}
             onTokenChange={(token) => setTurnstileReady(!!token)}
           />
-          {!turnstileReady && (
-            <p className="max-w-md text-center text-sm text-gray-600 dark:text-gray-300">
-              Complete the bot check above to enable submit. If nothing appears,
-              allow Cloudflare challenges or confirm this domain is listed on
-              the Turnstile widget.
-            </p>
-          )}
         </div>
       )}
 
