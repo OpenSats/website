@@ -87,7 +87,12 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
     )
 
     useEffect(() => {
-      if (!scriptReady || !SITE_KEY || !containerRef.current || !window.turnstile) {
+      if (
+        !scriptReady ||
+        !SITE_KEY ||
+        !containerRef.current ||
+        !window.turnstile
+      ) {
         return
       }
       if (widgetIdRef.current) return

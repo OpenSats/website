@@ -1,8 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
-import {
-  assertTurnstile,
-  TURNSTILE_FAILURE_MESSAGE,
-} from '@/utils/turnstile'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG

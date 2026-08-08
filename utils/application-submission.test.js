@@ -9,7 +9,9 @@ describe('submitApplication', () => {
   function turnstileMock(tokens) {
     let index = 0
     return {
-      waitForToken: jest.fn(async () => tokens[Math.min(index, tokens.length - 1)]),
+      waitForToken: jest.fn(
+        async () => tokens[Math.min(index, tokens.length - 1)]
+      ),
       reset: jest.fn(async () => {
         index += 1
         return tokens[Math.min(index, tokens.length - 1)]
@@ -70,8 +72,7 @@ describe('submitApplication', () => {
 
   it('forces a retry when GitHub returns a non-success response', async () => {
     const postJSON = jest.fn(async (url) => ({
-      message:
-        url === '/api/github' ? 'Application storage failed' : 'success',
+      message: url === '/api/github' ? 'Application storage failed' : 'success',
     }))
     const turnstile = turnstileMock(['token-1', 'token-2'])
 

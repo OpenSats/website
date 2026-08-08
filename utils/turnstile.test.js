@@ -24,9 +24,9 @@ describe('turnstile helpers', () => {
   })
 
   it('reads the token field from the request body', () => {
-    expect(
-      getTurnstileToken({ [TURNSTILE_TOKEN_FIELD]: 'token-abc' })
-    ).toBe('token-abc')
+    expect(getTurnstileToken({ [TURNSTILE_TOKEN_FIELD]: 'token-abc' })).toBe(
+      'token-abc'
+    )
     expect(getTurnstileToken({ [TURNSTILE_TOKEN_FIELD]: '' })).toBeUndefined()
     expect(getTurnstileToken({})).toBeUndefined()
   })
@@ -72,14 +72,18 @@ describe('turnstile helpers', () => {
       }),
     })
 
-    await expect(verifyTurnstileToken('token', undefined, fetchImpl)).resolves.toBe(
-      false
-    )
+    await expect(
+      verifyTurnstileToken('token', undefined, fetchImpl)
+    ).resolves.toBe(false)
   })
 
   it('fails closed on network errors and missing secret or token', async () => {
     await expect(
-      verifyTurnstileToken('token', undefined, jest.fn().mockRejectedValue(new Error('net')))
+      verifyTurnstileToken(
+        'token',
+        undefined,
+        jest.fn().mockRejectedValue(new Error('net'))
+      )
     ).resolves.toBe(false)
 
     await expect(verifyTurnstileToken(undefined)).resolves.toBe(false)
