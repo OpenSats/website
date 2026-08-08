@@ -137,4 +137,29 @@ describe('/api/sendgrid', () => {
       'Your OpenSats RED Application'
     )
   })
+
+  it('escapes applicant-controlled fields in the internal HTML email', async () => {
+    sgMail.send.mockResolvedValue([{}])
+    const response = responseMock()
+
+    await handler(
+      {
+        method: 'POST',
+        body: {
+          ...validApplication,
+          short_description: '<script>alert(1)</script>',
+        },
+      },
+      response
+    )
+
+    expect(response.statusCode).toBe(200)
+    expect(sgMail.send.mock.calls[0][0].html).toContain(
+      '&lt;script&gt;alert(1)&lt;/script&gt;'
+    )
+    expect(sgMail.send.mock.calls[0][0].html).not.toContain(
+      '<script>alert(1)</script>'
+    )
+  })
 })
+

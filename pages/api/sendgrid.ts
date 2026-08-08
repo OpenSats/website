@@ -245,6 +245,15 @@ export async function sendReportConfirmationEmail(
   return sendEmailWithRetry(msg)
 }
 
+function escapeHtml(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -258,11 +267,11 @@ export default async function handler(
     throw new Error('Env misconfigured')
   }
 
-  let body = ''
-
-  for (const [key, value] of Object.entries(req.body)) {
-    body += `<h3>${key}</h3><p>${value}</p>`
-  }
+  const body = Object.entries(req.body)
+    .map(
+      ([key, value]) => `<h3>${escapeHtml(key)}</h3><p>${escapeHtml(value)}</p>`
+    )
+    .join('')
 
   const thankYouMessage = req.body.RED
     ? `

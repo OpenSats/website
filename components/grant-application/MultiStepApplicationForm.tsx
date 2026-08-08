@@ -95,7 +95,7 @@ export default function MultiStepApplicationForm({
 
     try {
       await submitApplication(data)
-      router.push('/submitted')
+      await router.push('/submitted')
     } catch (e) {
       const nextFailures = failedAttempts + 1
       setFailedAttempts(nextFailures)
