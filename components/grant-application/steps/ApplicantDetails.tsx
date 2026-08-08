@@ -53,17 +53,6 @@ export default function ApplicantDetails({
         />
       </label>
 
-      <label className="offscreen-field block">
-        Organization Website
-        <input
-          type="text"
-          className={inputClass}
-          {...register('organization_website')}
-          tabIndex={-1}
-          autoComplete="off"
-        />
-      </label>
-
       <label className="block">
         Other Contact Details (if applicable)
         <br />
