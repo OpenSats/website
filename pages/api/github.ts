@@ -148,21 +148,19 @@ ${contactFooter}`
       issueLabels.push('common-grant-app')
     }
 
-    // Repo set according to "main focus"
+    // Repo set according to "main focus" (RED uses its own priority repo)
     let appRepo = GH_APP_REPO
-    if (mainFocus === 'nostr') {
+    if (req.body.RED) {
+      appRepo = `${GH_APP_REPO}-red`
+    } else if (mainFocus === 'nostr') {
       appRepo = `${GH_APP_REPO}-nostr`
-    }
-    if (mainFocus === 'layer1') {
+    } else if (mainFocus === 'layer1') {
       appRepo = `${GH_APP_REPO}-layer1`
-    }
-    if (mainFocus === 'layer2') {
+    } else if (mainFocus === 'layer2') {
       appRepo = `${GH_APP_REPO}-layer2`
-    }
-    if (mainFocus === 'core') {
+    } else if (mainFocus === 'core') {
       appRepo = `${GH_APP_REPO}-core`
-    }
-    if (mainFocus === 'ecash') {
+    } else if (mainFocus === 'ecash') {
       appRepo = `${GH_APP_REPO}-ecash`
     }
 
