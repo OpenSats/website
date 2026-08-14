@@ -17,6 +17,8 @@ export function getBlogLayout(post: Pick<Blog, 'layout' | 'tags'>): string {
   return DEFAULT_LAYOUT
 }
 
-export function isSpotlightLayout(post: Pick<Blog, 'layout' | 'tags'>): boolean {
+export function isSpotlightLayout(
+  post: Pick<Blog, 'layout' | 'tags'>
+): boolean {
   return getBlogLayout(post) === SPOTLIGHT_LAYOUT
 }

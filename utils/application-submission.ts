@@ -1,4 +1,5 @@
 import { fetchPostJSON } from './api-helpers'
+import { TURNSTILE_TOKEN_FIELD } from './turnstile'
 
 export interface ApplicationSubmissionData {
   [key: string]: unknown
@@ -13,9 +14,13 @@ type PostJSON = (
   data: ApplicationSubmissionData
 ) => Promise<DestinationResponse>
 
+export interface TurnstileControls {
+  waitForToken: () => Promise<string>
+  reset: () => void
+}
+
 export interface ApplicationDeliveryResult {
   github: boolean
-  email: boolean
 }
 
 export const SUBMISSION_ERROR =
@@ -40,17 +45,39 @@ async function postSucceeded(
   }
 }
 
+function withTurnstileToken(
+  data: ApplicationSubmissionData,
+  token: string
+): ApplicationSubmissionData {
+  return { ...data, [TURNSTILE_TOKEN_FIELD]: token }
+}
+
 export async function submitApplication(
   data: ApplicationSubmissionData,
-  postJSON: PostJSON = fetchPostJSON
+  postJSON: PostJSON = fetchPostJSON,
+  turnstile?: TurnstileControls
 ): Promise<ApplicationDeliveryResult> {
-  // GitHub first: only email after the issue exists, so retries do not
-  // re-send the applicant receipt or internal copy on a failed create.
-  const github = await postSucceeded(postJSON, '/api/github', data)
+  const token = turnstile
+    ? await turnstile.waitForToken()
+    : typeof data[TURNSTILE_TOKEN_FIELD] === 'string'
+    ? (data[TURNSTILE_TOKEN_FIELD] as string)
+    : ''
+
+  if (!token) {
+    throw new Error('Please complete the bot verification challenge.')
+  }
+
+  // One Turnstile token: /api/github verifies and creates the issue, then
+  // sends application emails server-side (best-effort).
+  const github = await postSucceeded(
+    postJSON,
+    '/api/github',
+    withTurnstileToken(data, token)
+  )
   if (!github) {
+    turnstile?.reset()
     throw new Error(SUBMISSION_ERROR)
   }
 
-  const email = await postSucceeded(postJSON, '/api/sendgrid', data)
-  return { github, email }
+  return { github: true }
 }

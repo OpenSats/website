@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { sendApplicationEmails } from '@/utils/application-emails'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -12,6 +14,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    if (!(await assertTurnstile(req))) {
+      return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
+    }
+
     if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
       throw new Error('Env misconfigured')
     }
@@ -148,21 +154,19 @@ ${contactFooter}`
       issueLabels.push('common-grant-app')
     }
 
-    // Repo set according to "main focus"
+    // Repo set according to "main focus" (RED uses its own priority repo)
     let appRepo = GH_APP_REPO
-    if (mainFocus === 'nostr') {
+    if (req.body.RED) {
+      appRepo = `${GH_APP_REPO}-red`
+    } else if (mainFocus === 'nostr') {
       appRepo = `${GH_APP_REPO}-nostr`
-    }
-    if (mainFocus === 'layer1') {
+    } else if (mainFocus === 'layer1') {
       appRepo = `${GH_APP_REPO}-layer1`
-    }
-    if (mainFocus === 'layer2') {
+    } else if (mainFocus === 'layer2') {
       appRepo = `${GH_APP_REPO}-layer2`
-    }
-    if (mainFocus === 'core') {
+    } else if (mainFocus === 'core') {
       appRepo = `${GH_APP_REPO}-core`
-    }
-    if (mainFocus === 'ecash') {
+    } else if (mainFocus === 'ecash') {
       appRepo = `${GH_APP_REPO}-ecash`
     }
 
@@ -185,6 +189,14 @@ ${contactFooter}`
         body: issueBody,
         labels: issueLabels,
       })
+
+      // Best-effort: GitHub record is the source of truth; email failure must
+      // not block a successful submit (avoids a second Turnstile mid-flight).
+      try {
+        await sendApplicationEmails(req.body)
+      } catch (emailErr) {
+        console.error('Application emails failed after issue create:', emailErr)
+      }
 
       res.status(200).json({ message: 'success' })
     } catch (err) {
