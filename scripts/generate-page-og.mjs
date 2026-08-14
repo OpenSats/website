@@ -155,7 +155,9 @@ function renderRedSvg(logoDataUri) {
 
       <image href="${logoDataUri}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" />
 
-      <rect x="${PADDING}" y="${urlY - 36}" width="${CONTENT_WIDTH}" height="1" fill="#44403c" />
+      <rect x="${PADDING}" y="${
+    urlY - 36
+  }" width="${CONTENT_WIDTH}" height="1" fill="#44403c" />
       <text x="${PADDING}" y="${urlY}" fill="#a8a29e" font-size="22" font-family="${INTER_FONT_FAMILY}" letter-spacing="1">${escapeXml(
     pageUrl
   )}</text>
@@ -562,7 +564,9 @@ async function writeImage(slug, svg) {
 async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
-  const redLogoDataUri = await publicAssetToDataUri('/static/brand/logo-red.png')
+  const redLogoDataUri = await publicAssetToDataUri(
+    '/static/brand/logo-red.png'
+  )
   if (!redLogoDataUri) {
     throw new Error('Missing red logo at public/static/brand/logo-red.png')
   }

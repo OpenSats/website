@@ -22,7 +22,14 @@ export const CLUSTERS: Cluster[] = [
     id: 'core',
     title: 'Protocol Maintenance & Development',
     blurb: 'Full nodes, validation, and core protocol work.',
-    slugs: ['bitcoin-core', 'libbitcoin', 'floresta', 'utreexod', 'asmap'],
+    slugs: [
+      'bitcoin-core',
+      'bips',
+      'libbitcoin',
+      'floresta',
+      'utreexod',
+      'asmap',
+    ],
   },
   {
     id: 'education',

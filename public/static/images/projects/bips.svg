@@ -1,15 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">Bitcoin Improvement Proposals</title>
-  <desc id="desc">A document mark with BIP text and a Bitcoin-orange accent.</desc>
-  <rect width="512" height="512" rx="96" fill="#f8fafc"/>
-  <path d="M160 72h144l88 88v280H160z" fill="#ffffff" stroke="#1f2937" stroke-width="18" stroke-linejoin="round"/>
-  <path d="M304 72v88h88" fill="none" stroke="#1f2937" stroke-width="18" stroke-linejoin="round"/>
-  <path d="M190 188h132M190 232h132M190 276h92" stroke="#94a3b8" stroke-width="18" stroke-linecap="round"/>
-  <rect x="120" y="318" width="272" height="82" rx="24" fill="#f7931a"/>
-  <g fill="none" stroke="#111827" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M168 344v30h25a15 15 0 0 0 0-30h-25zM168 374h29a14 14 0 0 1 0 28h-29"/>
-    <path d="M236 344h38M255 344v58M236 402h38"/>
-    <path d="M306 402v-58h27a18 18 0 0 1 0 36h-27"/>
-    <path d="M378 346h-22a15 15 0 0 0 0 30h8a13 13 0 0 1 0 26h-24"/>
-  </g>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bitcoin Improvement Proposal icon</title>
+  <desc id="desc">A clean proposal document with a folded corner, specification lines, and an orange BIP badge.</desc>
+  <path d="M66 34H145L192 81V198C192 212.36 180.36 224 166 224H90C75.64 224 64 212.36 64 198V36C64 34.895 64.895 34 66 34Z" fill="#fff" stroke="#202A36" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M145 34V75C145 78.314 147.686 81 151 81H192" stroke="#202A36" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="82" y="101" width="10" height="54" rx="5" fill="#F7931A"/>
+  <path d="M108 106H166" stroke="#7B8AA0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M108 128H157" stroke="#A1AEC0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M108 150H145" stroke="#A1AEC0" stroke-width="8" stroke-linecap="round"/>
+  <rect x="77" y="176" width="102" height="35" rx="11" fill="#F7931A"/>
+  <text x="128" y="200" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="27.5" font-weight="800" letter-spacing="1.1" fill="#151A20">BIPs</text>
 </svg>
