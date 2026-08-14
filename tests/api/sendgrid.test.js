@@ -5,6 +5,7 @@ process.env.SENDGRID_API_KEY = 'test-key'
 process.env.SENDGRID_RECIPIENT = 'applications@opensats.test'
 process.env.SENDGRID_CC = 'backup@opensats.test'
 process.env.SENDGRID_VERIFIED_SENDER = 'sender@opensats.test'
+process.env.TURNSTILE_SECRET = 'test-turnstile-secret'
 
 jest.mock('@sendgrid/mail', () => ({
   __esModule: true,
@@ -14,7 +15,16 @@ jest.mock('@sendgrid/mail', () => ({
   },
 }))
 
+jest.mock('@/utils/turnstile', () => {
+  const actual = jest.requireActual('@/utils/turnstile')
+  return {
+    ...actual,
+    assertTurnstile: jest.fn(),
+  }
+})
+
 const sgMail = require('@sendgrid/mail').default
+const { assertTurnstile } = require('@/utils/turnstile')
 const handler = require('../../pages/api/sendgrid.ts').default
 
 function responseMock() {
@@ -44,11 +54,14 @@ const validApplication = {
   project_name: 'Test project',
   email: 'applicant@example.org',
   short_description: 'Description',
+  'cf-turnstile-response': 'test-token',
 }
 
 describe('/api/sendgrid', () => {
   beforeEach(() => {
     sgMail.send.mockReset()
+    assertTurnstile.mockReset()
+    assertTurnstile.mockResolvedValue(true)
     jest.spyOn(console, 'log').mockImplementation(() => undefined)
     jest.spyOn(console, 'info').mockImplementation(() => undefined)
     jest.spyOn(console, 'warn').mockImplementation(() => undefined)
@@ -160,6 +173,21 @@ describe('/api/sendgrid', () => {
     expect(sgMail.send.mock.calls[0][0].html).not.toContain(
       '<script>alert(1)</script>'
     )
+    expect(sgMail.send.mock.calls[0][0].html).not.toContain(
+      'cf-turnstile-response'
+    )
+  })
+
+  it('rejects requests that fail Turnstile verification', async () => {
+    assertTurnstile.mockResolvedValue(false)
+    const response = responseMock()
+
+    await handler({ method: 'POST', body: validApplication }, response)
+
+    expect(response.statusCode).toBe(403)
+    expect(response.payload.message).not.toBe('success')
+    expect(sgMail.send).not.toHaveBeenCalled()
   })
 })
+
 

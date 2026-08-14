@@ -10,14 +10,20 @@ export function normalizeMainFocus(mainFocus: unknown) {
   return mainFocus ? `${mainFocus}`.toLowerCase() : ''
 }
 
-export function getApplicationRepo(baseRepo: string, mainFocus: unknown) {
+export function getApplicationRepo(
+  baseRepo: string,
+  mainFocus: unknown,
+  isRedApplication = false
+) {
+  if (isRedApplication) return `${baseRepo}-red`
+
   return `${baseRepo}${
     REPO_SUFFIX_BY_MAIN_FOCUS[normalizeMainFocus(mainFocus)] || ''
   }`
 }
 
 export function getApplicationIssueLabels(body: Record<string, unknown>) {
-  const mainFocus = normalizeMainFocus(body.main_focus)
+  const mainFocus = body.RED ? '' : normalizeMainFocus(body.main_focus)
   const issueLabels = mainFocus ? [mainFocus] : []
 
   if (mainFocus === 'layer1' || mainFocus === 'layer2') {

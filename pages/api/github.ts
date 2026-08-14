@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
+import { sendApplicationEmails } from '@/utils/application-emails'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 import {
   getApplicationIssueLabels,
   getApplicationRepo,
@@ -17,6 +19,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    if (!(await assertTurnstile(req))) {
+      return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
+    }
+
     if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_APP_REPO) {
       throw new Error('Env misconfigured')
     }
@@ -142,7 +148,7 @@ ${contactFooter}`
     // Labels and repo are set according to main focus.
     const mainFocus = normalizeMainFocus(req.body.main_focus)
     const issueLabels = getApplicationIssueLabels(req.body)
-    const appRepo = getApplicationRepo(GH_APP_REPO, mainFocus)
+    const appRepo = getApplicationRepo(GH_APP_REPO, mainFocus, req.body.RED)
 
     try {
       await octokit.rest.issues.create({
@@ -152,6 +158,14 @@ ${contactFooter}`
         body: issueBody,
         labels: issueLabels,
       })
+
+      // Best-effort: GitHub record is the source of truth; email failure must
+      // not block a successful submit (avoids a second Turnstile mid-flight).
+      try {
+        await sendApplicationEmails(req.body)
+      } catch (emailErr) {
+        console.error('Application emails failed after issue create:', emailErr)
+      }
 
       res.status(200).json({ message: 'success' })
     } catch (err) {

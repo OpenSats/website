@@ -35,4 +35,13 @@ describe('application routing', () => {
       'bitcoin'
     )
   })
+
+  it('routes RED applications to the RED repo', () => {
+    expect(getApplicationRepo('applications', 'security', true)).toBe(
+      'applications-red'
+    )
+    expect(
+      getApplicationIssueLabels({ RED: true, main_focus: 'security' })
+    ).toEqual(['RED'])
+  })
 })
