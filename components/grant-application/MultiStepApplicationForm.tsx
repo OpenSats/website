@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
 import {
@@ -9,6 +9,7 @@ import {
 } from '../../utils/application-submission'
 import StepIndicator from './StepIndicator'
 import StepNavigation from './StepNavigation'
+import TurnstileWidget, { TurnstileWidgetHandle } from './TurnstileWidget'
 import { FormValues, StepProps } from './types'
 
 export interface StepConfig {
@@ -38,7 +39,9 @@ export default function MultiStepApplicationForm({
   const [loading, setLoading] = useState(false)
   const [failureReason, setFailureReason] = useState<string>()
   const [failedAttempts, setFailedAttempts] = useState(0)
+  const [turnstileReady, setTurnstileReady] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null)
   const router = useRouter()
 
   const {
@@ -84,7 +87,19 @@ export default function MultiStepApplicationForm({
     }
   }
 
-  const submitDisabled = !!submitRequiresChecked?.some((name) => !watch(name))
+  const isLastStep = currentStep === steps.length - 1
+
+  // Widget unmounts when leaving the last step; clear readiness so submit
+  // cannot stay enabled on a stale token when the user returns.
+  useEffect(() => {
+    if (!isLastStep) {
+      setTurnstileReady(false)
+    }
+  }, [isLastStep])
+
+  const submitDisabled =
+    !!submitRequiresChecked?.some((name) => !watch(name)) ||
+    (isLastStep && !turnstileReady)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
@@ -94,7 +109,11 @@ export default function MultiStepApplicationForm({
     setFailureReason(undefined)
 
     try {
-      await submitApplication(data)
+      const turnstile = turnstileRef.current
+      if (!turnstile) {
+        throw new Error('Please complete the bot verification challenge.')
+      }
+      await submitApplication(data, undefined, turnstile)
       await router.push('/submitted')
     } catch (e) {
       const nextFailures = failedAttempts + 1
@@ -105,6 +124,8 @@ export default function MultiStepApplicationForm({
           ? `${baseMessage} ${SUBMISSION_CONTACT}`
           : baseMessage
       )
+      setTurnstileReady(false)
+      turnstileRef.current?.reset()
     } finally {
       setLoading(false)
     }
@@ -131,6 +152,15 @@ export default function MultiStepApplicationForm({
       />
 
       {steps[currentStep].render(stepProps)}
+
+      {isLastStep && (
+        <div className="my-8 flex flex-col items-center py-2">
+          <TurnstileWidget
+            ref={turnstileRef}
+            onTokenChange={(token) => setTurnstileReady(!!token)}
+          />
+        </div>
+      )}
 
       <StepNavigation
         currentStep={currentStep}
