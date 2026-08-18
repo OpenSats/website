@@ -176,6 +176,8 @@ export default function GrantReportForm({
             )}
           </div>
 
+          <h2>3 Questions</h2>
+
           {/* Project Updates */}
           <label className="block">
             How did you spend your time? *
@@ -354,6 +356,8 @@ export default function GrantReportForm({
             </small>
           )}
         </div>
+
+        <h2>3 Questions</h2>
 
         {/* Project Updates */}
         <label className="block">
