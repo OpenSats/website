@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../utils/constants'
+import CustomLink from './Link'
 
 interface GrantReportFormProps {
   grantDetails: {
@@ -17,6 +18,7 @@ interface GrantReportFormData {
   time_spent: string
   next_quarter: string
   money_usage: string
+  own_words: string
   help_needed?: string
 }
 
@@ -43,6 +45,7 @@ export default function GrantReportForm({
       time_spent: '',
       next_quarter: '',
       money_usage: '',
+      own_words: '',
       help_needed: '',
     },
     mode: 'onBlur',
@@ -112,7 +115,8 @@ export default function GrantReportForm({
       !data.project_name ||
       !data.time_spent ||
       !data.next_quarter ||
-      !data.money_usage
+      !data.money_usage ||
+      !data.own_words
     ) {
       setError('Please fill in all required fields before previewing')
       return
@@ -131,6 +135,7 @@ export default function GrantReportForm({
           time_spent: data.time_spent,
           next_quarter: data.next_quarter,
           money_usage: data.money_usage,
+          own_words: data.own_words,
           help_needed: data.help_needed || '',
         })
       )
@@ -175,6 +180,8 @@ export default function GrantReportForm({
               </small>
             )}
           </div>
+
+          <h2>3 Questions</h2>
 
           {/* Project Updates */}
           <label className="block">
@@ -247,13 +254,48 @@ export default function GrantReportForm({
             )}
           </label>
 
+          <hr />
+          <h2>tl;dr - In Your Own Words</h2>
+
+          <label className="block">
+            <small>
+              Write one paragraph about what happened this period. What was most
+              important to you, what did you accomplish? Use your own words. Do
+              not use an LLM or any other AI to write this. We want to hear from{' '}
+              <em>you</em>, not from your slop-slinging clanker. *
+            </small>
+            <textarea
+              {...register('own_words', {
+                required: 'Please write one paragraph in your own words',
+                validate: (value) => {
+                  const trimmed = value.trim()
+                  if (/\n\s*\n/.test(trimmed)) {
+                    return 'Please keep this to a single paragraph'
+                  }
+                  return true
+                },
+              })}
+              rows={4}
+              className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+            />
+            {errors.own_words && (
+              <small className="text-red-500">{errors.own_words.message}</small>
+            )}
+          </label>
+
+          <hr />
+
           {/* Support needed */}
           <label className="block">
             Is there anything we could help with?
             <br />
             <small>
-              We're here to help! Let us know if you need any technical
-              assistance, introductions, or have other questions.
+              Let us know if you need any technical assistance, introductions,
+              or have any other questions that aren't covered by the{' '}
+              <CustomLink href="/faq/grantee" className="font-bold">
+                Grantee FAQ
+              </CustomLink>
+              .
             </small>
             <textarea
               {...register('help_needed')}
@@ -355,6 +397,8 @@ export default function GrantReportForm({
           )}
         </div>
 
+        <h2>3 Questions</h2>
+
         {/* Project Updates */}
         <label className="block">
           How did you spend your time? *
@@ -422,13 +466,48 @@ export default function GrantReportForm({
           )}
         </label>
 
+        <hr />
+        <h2>tl;dr - In Your Own Words</h2>
+
+        <label className="block">
+          <small>
+            Write one paragraph about what happened this period. What was most
+            important to you, what did you accomplish? Use your own words. Do
+            not use an LLM or any other AI to write this. We want to hear from{' '}
+            <em>you</em>, not from your slop-slinging clanker. *
+          </small>
+          <textarea
+            {...register('own_words', {
+              required: 'Please write one paragraph in your own words',
+              validate: (value) => {
+                const trimmed = value.trim()
+                if (/\n\s*\n/.test(trimmed)) {
+                  return 'Please keep this to a single paragraph'
+                }
+                return true
+              },
+            })}
+            rows={4}
+            className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+          />
+          {errors.own_words && (
+            <small className="text-red-500">{errors.own_words.message}</small>
+          )}
+        </label>
+
+        <hr />
+
         {/* Support needed */}
         <label className="block">
           Is there anything we could help with?
           <br />
           <small>
-            We're here to help! Let us know if you need any technical
-            assistance, introductions, or have other questions.
+            Let us know if you need any technical assistance, introductions, or
+            have any other questions that aren't covered by the{' '}
+            <CustomLink href="/faq/grantee" className="font-bold">
+              Grantee FAQ
+            </CustomLink>
+            .
           </small>
           <textarea
             {...register('help_needed')}
