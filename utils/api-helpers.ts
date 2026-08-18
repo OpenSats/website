@@ -95,7 +95,7 @@ export function generateReportContent(reportData: {
 
   return `# ${project_name} - Progress Report
 
-## In your own words
+## tl;dr - In Your Own Words
 ${own_words}
 
 ## Time Spent
