@@ -253,7 +253,7 @@ export default function GrantReportForm({
             )}
           </label>
 
-          <h2>one paragraph, in your own words</h2>
+          <h2>One Paragraph, In Your Own Words</h2>
 
           <label className="block">
             <small>
@@ -458,7 +458,7 @@ export default function GrantReportForm({
           )}
         </label>
 
-        <h2>one paragraph, in your own words</h2>
+        <h2>One Paragraph, In Your Own Words</h2>
 
         <label className="block">
           <small>
