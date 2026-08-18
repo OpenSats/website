@@ -285,6 +285,8 @@ export default function GrantReportForm({
             )}
           </label>
 
+          <hr />
+
           {/* Support needed */}
           <label className="block">
             Is there anything we could help with?
@@ -494,6 +496,8 @@ export default function GrantReportForm({
             <small className="text-red-500">{errors.own_words.message}</small>
           )}
         </label>
+
+        <hr />
 
         {/* Support needed */}
         <label className="block">
