@@ -288,8 +288,9 @@ export default function GrantReportForm({
             Is there anything we could help with?
             <br />
             <small>
-              We're here to help! Let us know if you need any technical
-              assistance, introductions, or have other questions.
+              Let us know if you need any technical assistance, introductions,
+              or have any other questions that aren't covered by the Grantee
+              FAQ.
             </small>
             <textarea
               {...register('help_needed')}
@@ -493,8 +494,8 @@ export default function GrantReportForm({
           Is there anything we could help with?
           <br />
           <small>
-            We're here to help! Let us know if you need any technical
-            assistance, introductions, or have other questions.
+            Let us know if you need any technical assistance, introductions, or
+            have any other questions that aren't covered by the Grantee FAQ.
           </small>
           <textarea
             {...register('help_needed')}
