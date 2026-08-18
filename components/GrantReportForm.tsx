@@ -257,8 +257,10 @@ export default function GrantReportForm({
 
           <label className="block">
             <small>
-              Write one paragraph about what happened this period. Use your own
-              words. Do not use an LLM or any other AI. *
+              Write one paragraph about what happened this period. What was
+              most important to you, what did you accomplish? Use your own
+              words. Do not use an LLM or any other AI to write this. We want
+              to hear from <em>you</em>, not from your slop-slinging clanker. *
             </small>
             <textarea
               {...register('own_words', {
@@ -462,8 +464,10 @@ export default function GrantReportForm({
 
         <label className="block">
           <small>
-            Write one paragraph about what happened this period. Use your own
-            words. Do not use an LLM or any other AI. *
+            Write one paragraph about what happened this period. What was most
+            important to you, what did you accomplish? Use your own words. Do
+            not use an LLM or any other AI to write this. We want to hear from{' '}
+            <em>you</em>, not from your slop-slinging clanker. *
           </small>
           <textarea
             {...register('own_words', {
