@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../utils/constants'
+import CustomLink from './Link'
 
 interface GrantReportFormProps {
   grantDetails: {
@@ -289,8 +290,11 @@ export default function GrantReportForm({
             <br />
             <small>
               Let us know if you need any technical assistance, introductions,
-              or have any other questions that aren't covered by the Grantee
-              FAQ.
+              or have any other questions that aren't covered by the{' '}
+              <CustomLink href="/faq/grantee" className="font-bold">
+                Grantee FAQ
+              </CustomLink>
+              .
             </small>
             <textarea
               {...register('help_needed')}
@@ -495,7 +499,11 @@ export default function GrantReportForm({
           <br />
           <small>
             Let us know if you need any technical assistance, introductions, or
-            have any other questions that aren't covered by the Grantee FAQ.
+            have any other questions that aren't covered by the{' '}
+            <CustomLink href="/faq/grantee" className="font-bold">
+              Grantee FAQ
+            </CustomLink>
+            .
           </small>
           <textarea
             {...register('help_needed')}
