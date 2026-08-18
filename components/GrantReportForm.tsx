@@ -254,6 +254,7 @@ export default function GrantReportForm({
             )}
           </label>
 
+          <hr />
           <h2>tl;dr - In Your Own Words</h2>
 
           <label className="block">
@@ -465,6 +466,7 @@ export default function GrantReportForm({
           )}
         </label>
 
+        <hr />
         <h2>tl;dr - In Your Own Words</h2>
 
         <label className="block">
