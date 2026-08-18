@@ -10,6 +10,7 @@ const GH_REPORTS_REPO = process.env.GH_REPORTS_REPO
 interface ReportBotRequest extends NextApiRequest {
   body: {
     project_name: string
+    own_words: string
     time_spent: string
     next_quarter: string
     money_usage: string
@@ -72,6 +73,7 @@ export default async function handler(
   try {
     const {
       project_name: original_project_name,
+      own_words,
       time_spent,
       next_quarter,
       money_usage,
@@ -83,6 +85,7 @@ export default async function handler(
     // Input validation
     if (
       !original_project_name ||
+      !own_words ||
       !time_spent ||
       !next_quarter ||
       !money_usage ||
@@ -103,6 +106,7 @@ export default async function handler(
     // Create report content in markdown format using the shared function
     const reportContent = generateReportContent({
       project_name,
+      own_words,
       time_spent,
       next_quarter,
       money_usage,
