@@ -1,0 +1,18 @@
+---
+title: 'npub'
+summary: 'A Nostr public key encoded as a Bech32 string under NIP-19. It is the shareable identifier for a Nostr account.'
+category: 'Nostr'
+aliases: ['nostr public key', 'nostr pubkey', 'npub1']
+---
+
+`npub` is the standard human-readable encoding for a [Nostr](/topics/nostr) public key. [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md) wraps the raw 32-byte key in a [Bech32](/topics/bech32) string that starts with the `npub1` prefix.
+
+An `npub` is safe to share. It identifies the account, lets other users find the profile, and gives clients the public key they need to verify signed events. The matching private key is usually stored as an [`nsec`](/topics/nsec), which should stay secret.
+
+Users often share a [NIP-05](/topics/nip-05) identifier such as `alice@example.com` because it is easier to read than a long `npub`. The underlying Nostr identity is still the public key, and clients resolve or display the friendlier name next to that key.
+
+## References
+
+- [NIP-19](https://github.com/nostr-protocol/nips/blob/master/19.md)
+- [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md)
+- [nostr-protocol/nips](https://github.com/nostr-protocol/nips)
