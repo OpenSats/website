@@ -37,6 +37,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
 
   const [btcPayLoading, setBtcpayLoading] = useState(false)
   const [fiatLoading, setFiatLoading] = useState(false)
+  const [fiatSelected, setFiatSelected] = useState(false)
 
   const formRef = useRef<HTMLFormElement | null>(null)
 
@@ -230,7 +231,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             />
           </div>
         </div>
-        {recurringDonationUrl && (
+        {fiatSelected && recurringDonationUrl && (
           <h3>
             Want to{' '}
             <CustomLink href={recurringDonationUrl}>
@@ -243,7 +244,10 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
       <div className="flex flex-wrap items-center gap-4">
         <button
           name="btcpay"
-          onClick={handleBtcPay}
+          onClick={() => {
+            setFiatSelected(false)
+            handleBtcPay()
+          }}
           className="pay"
           disabled={!readyToPayBTC || btcPayLoading}
         >
@@ -259,9 +263,16 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
         </button>
         <button
           name="stripe"
-          onClick={handleFiat}
+          onClick={() => {
+            if (!fiatSelected) {
+              setFiatSelected(true)
+              return
+            }
+            handleFiat()
+          }}
           className="pay"
-          disabled={!readyToPayFiat || fiatLoading}
+          disabled={fiatSelected && (!readyToPayFiat || fiatLoading)}
+          aria-pressed={fiatSelected}
         >
           {fiatLoading ? (
             <Spinner />
