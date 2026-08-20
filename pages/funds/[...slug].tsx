@@ -4,7 +4,7 @@ import { InferGetStaticPropsType } from 'next'
 import { allFunds, allBlogs } from 'contentlayer/generated'
 import type { Fund, Blog } from 'contentlayer/generated'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import PaymentModal from '@/components/PaymentModal'
 import PostList from '@/components/PostList'
@@ -54,10 +54,14 @@ export default function FundPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
-  const [selectedFund, setSelectedFund] = useState<Fund>()
+  const [selectedFund, setSelectedFund] = useState<Fund>(project)
+  const openedDonateQuery = useRef(false)
 
   function closeModal() {
     setModalOpen(false)
+    if (router.query.donate != null) {
+      router.replace(`/funds/${project.slug}`, undefined, { shallow: true })
+    }
   }
 
   function openPaymentModal() {
@@ -66,10 +70,11 @@ export default function FundPage({
   }
 
   useEffect(() => {
-    if (router.isReady && router.query.donate != null) {
-      setSelectedFund(project)
-      setModalOpen(true)
-    }
+    if (!router.isReady || router.query.donate == null) return
+    if (openedDonateQuery.current) return
+    openedDonateQuery.current = true
+    setSelectedFund(project)
+    setModalOpen(true)
   }, [project, router.isReady, router.query.donate])
 
   return (

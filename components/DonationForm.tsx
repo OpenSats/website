@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
+import CustomLink from './Link'
 import Spinner from './Spinner'
 import * as EmailValidator from 'email-validator'
 
@@ -16,12 +17,14 @@ type DonationStepsProps = {
   btcpay: string
   zaprite: string
   store: string
+  recurringDonationUrl?: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   btcpay,
   zaprite,
   store,
+  recurringDonationUrl,
 }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -49,7 +52,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   useEffect(() => {
     let fiatValid = false
     let btcValid: boolean
-    if (amount && typeof parseInt(amount) === 'number') {
+    if (Number(amount) > 0) {
       fiatValid = true
     }
     if (deductible === 'no' || (name && email)) {
@@ -227,6 +230,18 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             />
           </div>
         </div>
+        {readyToPayFiat && recurringDonationUrl && (
+          <h3 className="my-4">
+            Want to{' '}
+            <CustomLink
+              href={recurringDonationUrl}
+              className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
+            >
+              make a recurring donation
+            </CustomLink>
+            ?
+          </h3>
+        )}
       </section>
       <div className="flex flex-wrap items-center gap-4">
         <button

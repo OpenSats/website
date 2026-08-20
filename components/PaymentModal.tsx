@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
 import { Fund } from 'contentlayer/generated'
+import { getFundDonationUrl } from '@/utils/funds'
 
 type ModalProps = {
   isOpen: boolean
@@ -62,6 +63,7 @@ const PaymentModal: React.FC<ModalProps> = ({
         btcpay={fund.btcpay}
         zaprite={fund.zaprite}
         store={fund.store}
+        recurringDonationUrl={getFundDonationUrl(fund.slug)}
       />
     </ReactModal>
   )
