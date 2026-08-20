@@ -52,7 +52,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   useEffect(() => {
     let fiatValid = false
     let btcValid: boolean
-    if (amount && typeof parseInt(amount) === 'number' && email) {
+    if (amount && typeof parseInt(amount) === 'number') {
       fiatValid = true
     }
     if (deductible === 'no' || (name && email)) {
