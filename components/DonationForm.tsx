@@ -230,8 +230,8 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             />
           </div>
         </div>
-        {recurringDonationUrl && (
-          <h3>
+        {readyToPayFiat && recurringDonationUrl && (
+          <h3 className="my-4">
             Want to{' '}
             <CustomLink
               href={recurringDonationUrl}
