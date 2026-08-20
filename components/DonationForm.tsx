@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { fetchPostJSON } from '../utils/api-helpers'
+import CustomLink from './Link'
 import Spinner from './Spinner'
 import * as EmailValidator from 'email-validator'
 
@@ -16,12 +17,14 @@ type DonationStepsProps = {
   btcpay: string
   zaprite: string
   store: string
+  recurringDonationUrl?: string
 }
 const DonationSteps: React.FC<DonationStepsProps> = ({
   projectNamePretty,
   btcpay,
   zaprite,
   store,
+  recurringDonationUrl,
 }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -245,22 +248,36 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           )}
           <span className="whitespace-nowrap">Donate with Bitcoin</span>
         </button>
-        <button
-          name="stripe"
-          onClick={handleFiat}
-          className="pay"
-          disabled={!readyToPayFiat || fiatLoading}
-        >
-          {fiatLoading ? (
-            <Spinner />
-          ) : (
-            <FontAwesomeIcon
-              icon={faCreditCard}
-              className="text-primary h-8 w-8"
-            />
+        <div className="flex flex-col gap-2">
+          <button
+            name="stripe"
+            onClick={handleFiat}
+            className="pay"
+            disabled={!readyToPayFiat || fiatLoading}
+          >
+            {fiatLoading ? (
+              <Spinner />
+            ) : (
+              <FontAwesomeIcon
+                icon={faCreditCard}
+                className="text-primary h-8 w-8"
+              />
+            )}
+            <span className="whitespace-nowrap">Donate with fiat</span>
+          </button>
+          {recurringDonationUrl && (
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Want to{' '}
+              <CustomLink
+                href={recurringDonationUrl}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              >
+                make it recurring
+              </CustomLink>
+              ?
+            </p>
           )}
-          <span className="whitespace-nowrap">Donate with fiat</span>
-        </button>
+        </div>
       </div>
     </form>
   )
