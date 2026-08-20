@@ -237,7 +237,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
               href={recurringDonationUrl}
               className="text-orange-600 underline hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
             >
-              make it recurring
+              make a recurring donation
             </CustomLink>
             ?
           </h3>
