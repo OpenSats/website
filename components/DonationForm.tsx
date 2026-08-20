@@ -230,6 +230,15 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             />
           </div>
         </div>
+        {recurringDonationUrl && (
+          <h3>
+            Want to{' '}
+            <CustomLink href={recurringDonationUrl}>
+              make it recurring
+            </CustomLink>
+            ?
+          </h3>
+        )}
       </section>
       <div className="flex flex-wrap items-center gap-4">
         <button
@@ -248,36 +257,22 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
           )}
           <span className="whitespace-nowrap">Donate with Bitcoin</span>
         </button>
-        <div className="flex flex-col gap-2">
-          <button
-            name="stripe"
-            onClick={handleFiat}
-            className="pay"
-            disabled={!readyToPayFiat || fiatLoading}
-          >
-            {fiatLoading ? (
-              <Spinner />
-            ) : (
-              <FontAwesomeIcon
-                icon={faCreditCard}
-                className="text-primary h-8 w-8"
-              />
-            )}
-            <span className="whitespace-nowrap">Donate with fiat</span>
-          </button>
-          {recurringDonationUrl && (
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Want to{' '}
-              <CustomLink
-                href={recurringDonationUrl}
-                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-              >
-                make it recurring
-              </CustomLink>
-              ?
-            </p>
+        <button
+          name="stripe"
+          onClick={handleFiat}
+          className="pay"
+          disabled={!readyToPayFiat || fiatLoading}
+        >
+          {fiatLoading ? (
+            <Spinner />
+          ) : (
+            <FontAwesomeIcon
+              icon={faCreditCard}
+              className="text-primary h-8 w-8"
+            />
           )}
-        </div>
+          <span className="whitespace-nowrap">Donate with fiat</span>
+        </button>
       </div>
     </form>
   )
