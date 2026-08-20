@@ -53,7 +53,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
   useEffect(() => {
     let fiatValid = false
     let btcValid: boolean
-    if (amount && typeof parseInt(amount) === 'number') {
+    if (amount && typeof parseInt(amount) === 'number' && email) {
       fiatValid = true
     }
     if (deductible === 'no' || (name && email)) {
@@ -274,7 +274,7 @@ const DonationSteps: React.FC<DonationStepsProps> = ({
             handleFiat()
           }}
           className="pay"
-          disabled={fiatSelected && (!readyToPayFiat || fiatLoading)}
+          disabled={!readyToPayFiat || fiatLoading}
           aria-pressed={fiatSelected}
         >
           {fiatLoading ? (
