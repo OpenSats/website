@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { ERROR_MESSAGES } from '../../utils/constants'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
+import { findGrantIssue } from '@/utils/grant-lookup'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -56,42 +57,12 @@ export default async function handler(
   try {
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
 
-    // Iterate through all issues using pagination and stop when we find a match
-    let matchingIssue:
-      | {
-          title: string
-          body?: string | null
-          number: number
-          state: 'open' | 'closed'
-        }
-      | undefined
-
-    for await (const { data: issues } of octokit.paginate.iterator(
-      octokit.rest.issues.listForRepo,
-      {
-        owner: GH_ORG,
-        repo: GH_REPORTS_REPO,
-        state: 'all',
-        per_page: 100,
-      }
-    )) {
-      const found = issues.find((issue) => {
-        const titleContainsGrantId = issue.title?.includes(normalizedGrantId)
-        const bodyContainsGrantId =
-          issue.body?.includes(normalizedGrantId) || false
-        return Boolean(titleContainsGrantId || bodyContainsGrantId)
-      })
-
-      if (found) {
-        matchingIssue = {
-          title: found.title,
-          body: found.body,
-          number: found.number,
-          state: found.state as 'open' | 'closed',
-        }
-        break
-      }
-    }
+    const matchingIssue = await findGrantIssue(
+      octokit,
+      GH_ORG,
+      GH_REPORTS_REPO,
+      normalizedGrantId
+    )
 
     if (!matchingIssue) {
       return res.status(404).json({
