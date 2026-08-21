@@ -4,14 +4,18 @@ import { StepProps, inputClass } from '../types'
 export default function TokenReimbursement({ register, errors }: StepProps) {
   return (
     <>
-      <h2>Budget</h2>
+      <h2>Token Reimbursement</h2>
+      <p>
+        Keep this focused on direct LLM token and related compute costs for the
+        security research described above.
+      </p>
 
       <label className="block">
-        Token Spend So Far *
+        LLM Token Spend So Far *
         <br />
         <small>
-          Prefer USD; include approximate token spend too if you can. Mention
-          tools or providers if helpful.
+          List the providers or tools, the approximate token usage if useful,
+          and the USD amount you have already spent.
         </small>
         <textarea
           rows={4}
@@ -22,10 +26,10 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Expected Ongoing Burn *<br />
+        Expected Ongoing Token Burn *<br />
         <small>
-          Rough estimate of monthly or ongoing spend while this research
-          continues.
+          Estimate the monthly or remaining spend needed to continue this
+          specific research.
         </small>
         <textarea
           rows={4}
@@ -36,9 +40,9 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       </label>
 
       <label className="block">
-        Duration *
+        Reimbursement Window *
         <br />
-        <small>How long do you need support for?</small>
+        <small>How long do you expect the reimbursement need to last?</small>
         <select
           className={inputClass}
           {...register('duration', { required: true })}

@@ -42,8 +42,8 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
             {...register('red_security_research', { required: true })}
           />
           <span>
-            I am applying for security research / red teaming support, not a
-            general project grant
+            I am applying for reimbursement of LLM token costs and related
+            compute costs tied to security research and red-teaming
           </span>
         </label>
 
