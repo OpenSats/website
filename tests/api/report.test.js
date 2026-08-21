@@ -88,4 +88,25 @@ describe('/api/report Turnstile gate', () => {
     expect(sgMail.send).toHaveBeenCalledTimes(1)
     expect(sgMail.send.mock.calls[0][0].to).toBe('grantee@example.com')
   })
+
+  test('strips unsafe markup from the confirmation email HTML', async () => {
+    assertTurnstile.mockResolvedValue(true)
+    const res = responseMock()
+    await handler(
+      {
+        method: 'POST',
+        headers: {},
+        body: {
+          ...validBody,
+          own_words: 'hi <img src=x onerror=alert(1)> <script>alert(2)</script>',
+        },
+      },
+      res
+    )
+
+    expect(res.statusCode).toBe(200)
+    const html = sgMail.send.mock.calls[0][0].html
+    expect(html).not.toMatch(/onerror/)
+    expect(html).not.toMatch(/<script/)
+  })
 })
