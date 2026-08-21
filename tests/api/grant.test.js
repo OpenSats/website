@@ -40,7 +40,7 @@ function responseMock() {
   return res
 }
 
-describe('/api/grant Turnstile gate', () => {
+describe('/api/grant', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockIssues = []
@@ -55,7 +55,27 @@ describe('/api/grant Turnstile gate', () => {
     expect(iterator).not.toHaveBeenCalled()
   })
 
-  test('proceeds for a verified request and returns the matching grant', async () => {
+  test('rejects a non-numeric grant id with 400 and queries no issues', async () => {
+    assertTurnstile.mockResolvedValue(true)
+    const res = responseMock()
+    await handler({ method: 'POST', headers: {}, body: { grant_id: 'cashu' } }, res)
+
+    expect(res.statusCode).toBe(400)
+    expect(iterator).not.toHaveBeenCalled()
+  })
+
+  test('does not match a grant id that only appears in an issue body', async () => {
+    assertTurnstile.mockResolvedValue(true)
+    mockIssues = [
+      { title: 'Some unrelated project', body: 'mentions 654321 in passing', number: 9, state: 'open' },
+    ]
+    const res = responseMock()
+    await handler({ method: 'POST', headers: {}, body: { grant_id: '654321' } }, res)
+
+    expect(res.statusCode).toBe(404)
+  })
+
+  test('resolves a grant id matched as a whole token in the issue title', async () => {
     assertTurnstile.mockResolvedValue(true)
     mockIssues = [
       { title: 'Grant #654321: Test Project by Alice', body: '', number: 42, state: 'open' },
