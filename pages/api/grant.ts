@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { ERROR_MESSAGES } from '../../utils/constants'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -19,6 +20,10 @@ export default async function handler(
 ) {
   if (req.method !== 'POST') {
     return res.status(405).json({ valid: false, error: 'Method not allowed' })
+  }
+
+  if (!(await assertTurnstile(req))) {
+    return res.status(403).json({ valid: false, error: TURNSTILE_FAILURE_MESSAGE })
   }
 
   const { grant_id } = req.body
