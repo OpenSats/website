@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import sgMail from '@sendgrid/mail'
 import { marked } from 'marked'
+import sanitizeHtml from 'sanitize-html'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
@@ -158,10 +159,14 @@ export async function sendReportConfirmationEmail(
   reportUrl: string,
   reportContent: string
 ): Promise<boolean> {
-  // Convert markdown to HTML
-  const htmlContent = marked(reportContent, {
+  // Convert markdown to HTML, then strip any unsafe markup before emailing
+  const renderedContent = marked(reportContent, {
     gfm: true,
     breaks: true,
+    async: false,
+  })
+  const htmlContent = sanitizeHtml(renderedContent, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2']),
   })
 
   const msg = {
