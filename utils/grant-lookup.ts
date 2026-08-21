@@ -7,10 +7,14 @@ export interface GrantIssue {
   state: 'open' | 'closed'
 }
 
+export const GRANT_ID_PATTERN = /^\d{6,7}$/
+
 /**
- * Find the reports-repo issue that a grant id belongs to. This is the single
- * source of truth for turning a grant id into an issue number, so callers never
- * trust a client-supplied issue number.
+ * Find the reports-repo issue for a grant id. This is the single source of
+ * truth for turning a grant id into an issue number, so callers never trust a
+ * client-supplied issue number. Only exact numeric grant ids are accepted, and
+ * they are matched as a whole token in the issue title, so the lookup cannot be
+ * used as a substring search over the repo.
  */
 export async function findGrantIssue(
   octokit: Octokit,
@@ -18,15 +22,17 @@ export async function findGrantIssue(
   repo: string,
   grantId: string
 ): Promise<GrantIssue | undefined> {
+  if (!GRANT_ID_PATTERN.test(grantId)) {
+    return undefined
+  }
+
+  const pattern = new RegExp(`\\b${grantId}\\b`)
+
   for await (const { data: issues } of octokit.paginate.iterator(
     octokit.rest.issues.listForRepo,
     { owner, repo, state: 'all', per_page: 100 }
   )) {
-    const found = issues.find((issue) => {
-      const inTitle = issue.title?.includes(grantId)
-      const inBody = issue.body?.includes(grantId) || false
-      return Boolean(inTitle || inBody)
-    })
+    const found = issues.find((issue) => pattern.test(issue.title || ''))
 
     if (found) {
       return {

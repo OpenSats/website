@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { ERROR_MESSAGES } from '../../utils/constants'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
-import { findGrantIssue } from '@/utils/grant-lookup'
+import { findGrantIssue, GRANT_ID_PATTERN } from '@/utils/grant-lookup'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -33,6 +33,12 @@ export default async function handler(
 
   if (!normalizedGrantId) {
     return res.status(400).json({ valid: false, error: 'Grant ID is required' })
+  }
+
+  if (!GRANT_ID_PATTERN.test(normalizedGrantId)) {
+    return res
+      .status(400)
+      .json({ valid: false, error: 'A valid Grant ID is required' })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
