@@ -1,0 +1,28 @@
+---
+title: 'Entropy'
+summary: 'A measure of uncertainty that, in Bitcoin security, describes how hard it is to guess a private key, seed, nonce, or other secret.'
+category: 'Bitcoin'
+aliases:
+  [
+    'randomness',
+    'wallet entropy',
+    'seed entropy',
+    'private key entropy',
+    'cryptographic entropy',
+  ]
+---
+
+Entropy is a measure of uncertainty. In cryptography, people usually use the word to describe how unpredictable a secret is to an attacker. A Bitcoin private key, seed phrase, nonce, or recovery secret needs enough entropy that guessing it remains infeasible.
+
+Good entropy does not just mean that something looks random to a person. It means the value came from a process with a large enough search space and no practical bias, reuse, or outside knowledge that narrows the attack. Human choices, timestamps, weak random number generators, and flawed hardware can all reduce effective entropy even when the final string appears random.
+
+For Bitcoin wallets, entropy is usually turned into a seed phrase, a master seed, or a private key. BIP 39 mnemonics are generated from 128 to 256 bits of initial entropy plus a checksum, and [BIP 85](/topics/bip-85) can derive independent child entropy from one master root key. If the original entropy is weak or exposed, every key derived from it can be at risk.
+
+Entropy also appears outside wallets: protocols need unpredictable nonces, test suites rely on controlled randomness, and secure systems have to gather randomness from sources an attacker cannot predict. In every case, the useful question is not whether data looks messy, but how much uncertainty remains for the person trying to guess it.
+
+## References
+
+- [Wikipedia: Entropy](https://en.wikipedia.org/wiki/Entropy)
+- [MIT Unified Engineering: Entropy on the microscopic scale](https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/node56.html)
+- [BIP 39](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki)
+- [Bitcoin Security: Entropy](https://bitcoinsecurity.org/learn/entropy/)

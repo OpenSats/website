@@ -5,7 +5,7 @@ category: 'Bitcoin'
 aliases: ['BIP85', 'deterministic entropy', 'child mnemonics', 'derived seeds']
 ---
 
-BIP 85 defines a way to derive fresh wallet entropy from one master [BIP 32](/topics/bip-32) root key. One root seed can produce separate child secrets for different devices, apps, and use cases, while still giving the user one backup to keep safe.
+BIP 85 defines a way to derive fresh wallet [entropy](/topics/entropy) from one master [BIP 32](/topics/bip-32) root key. One root seed can produce separate child secrets for different devices, apps, and use cases, while still giving the user one backup to keep safe.
 
 The standard derives a hardened child key and runs it through HMAC-SHA512 to produce application-specific entropy. Wallets can turn that entropy into a 12-word, 18-word, or 24-word BIP 39 mnemonic, an HD seed, a [WIF](/topics/wif), or other formats covered by the spec. Each child output stays isolated from the others, so one exposed child mnemonic does not expose the parent seed or sibling children.
 
