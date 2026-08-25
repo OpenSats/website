@@ -42,7 +42,7 @@ export default function TokenReimbursement({ register, errors }: StepProps) {
       <label className="block">
         Reimbursement Window *
         <br />
-        <small>How long do you expect the reimbursement need to last?</small>
+        <small>Expected duration of reimbursement</small>
         <select
           className={inputClass}
           {...register('duration', { required: true })}
