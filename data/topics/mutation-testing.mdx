@@ -1,0 +1,42 @@
+---
+title: 'Mutation testing'
+summary: 'A testing technique that deliberately changes small pieces of code to check whether the existing test suite catches the behavior change.'
+ogSummary: 'Deliberately changes code in small ways to measure whether a test suite catches real behavior changes.'
+category: 'Open Source'
+aliases:
+  [
+    'mutation analysis',
+    'mutant testing',
+    'mutation score',
+    'incremental mutation testing',
+  ]
+---
+
+Mutation testing measures the strength of a test suite by making small, deliberate
+changes to the code under test and then running the tests against each changed
+version. Each changed version is called a mutant. If the tests fail, the mutant
+is killed. If the tests still pass, the mutant survived and points to behavior
+the test suite may not actually verify.
+
+Common mutations include flipping comparison operators, changing boolean
+conditions, removing method calls, or replacing constants. These changes are
+simple on purpose: a useful mutation should be small enough that a good test
+would notice it, while still close to the kinds of mistakes developers can make
+when editing real code.
+
+Mutation testing complements ordinary unit tests and [fuzzing](/topics/fuzzing).
+Unit tests check known examples. Fuzzing explores large input spaces. Mutation
+testing asks a different question: if the implementation changed in a plausible
+way, would the current tests protect the behavior users and maintainers care
+about?
+
+For large projects, running every mutation against every test can be expensive.
+Incremental mutation testing reduces that cost by focusing on recently changed
+code, affected tests, and mutants that provide the most useful signal. That makes
+the technique more practical for security-sensitive open-source projects where
+small regressions can have outsized consequences.
+
+## References
+
+- [Wikipedia: Mutation testing](https://en.wikipedia.org/wiki/Mutation_testing)
+- [Delving Bitcoin: Incremental Mutation Testing in the Bitcoin Core](https://delvingbitcoin.org/t/incremental-mutation-testing-in-the-bitcoin-core/2197)
