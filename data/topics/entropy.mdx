@@ -18,7 +18,7 @@ Good entropy does not just mean that something looks random to a person. It mean
 
 For Bitcoin wallets, entropy is usually turned into a seed phrase, a master seed, or a private key. BIP 39 mnemonics are generated from 128 to 256 bits of initial entropy plus a checksum, and [BIP 85](/topics/bip-85) can derive independent child entropy from one master root key. If the original entropy is weak or exposed, every key derived from it can be at risk.
 
-Entropy also appears outside wallets: protocols need unpredictable nonces, test suites rely on controlled randomness, and secure systems have to gather randomness from sources an attacker cannot predict. In every case, the useful question is not whether data looks messy, but how much uncertainty remains for the person trying to guess it.
+Entropy also appears outside wallets: protocols need unpredictable nonces, test suites rely on controlled randomness, and secure systems have to gather randomness from sources an attacker cannot predict. In every case, the useful question is not whether data looks messy, but how much uncertainty remains for the attacker trying to guess it.
 
 ## References
 
