@@ -1,0 +1,12 @@
+<svg width="256" height="256" viewBox="20 20 216 216" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Bitcoin Improvement Proposal icon</title>
+  <desc id="desc">A clean proposal document with a folded corner, specification lines, and an orange BIP badge.</desc>
+  <path d="M66 34H145L192 81V198C192 212.36 180.36 224 166 224H90C75.64 224 64 212.36 64 198V36C64 34.895 64.895 34 66 34Z" fill="#fff" stroke="#202A36" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M145 34V75C145 78.314 147.686 81 151 81H192" stroke="#202A36" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="82" y="101" width="10" height="54" rx="5" fill="#F7931A"/>
+  <path d="M108 106H166" stroke="#7B8AA0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M108 128H157" stroke="#A1AEC0" stroke-width="8" stroke-linecap="round"/>
+  <path d="M108 150H145" stroke="#A1AEC0" stroke-width="8" stroke-linecap="round"/>
+  <rect x="77" y="176" width="102" height="35" rx="11" fill="#F7931A"/>
+  <text x="128" y="200" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="27.5" font-weight="800" letter-spacing="1.1" fill="#151A20">BIPs</text>
+</svg>
