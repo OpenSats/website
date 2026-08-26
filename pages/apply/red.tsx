@@ -13,30 +13,41 @@ export default function ApplyRed() {
   return (
     <>
       <PageSEO
-        title="Apply for Red Teaming Support - OpenSats"
-        description="Apply for OpenSats red teaming support, including LLM token reimbursement for security research on Bitcoin software."
+        title="Apply for RED Token Reimbursement - OpenSats"
+        description="Apply for OpenSats RED grants: reimbursement for LLM token and related compute costs used in good-faith security research on Bitcoin software."
         slug="apply-red"
       />
-      <PageSection title="Red Teaming" image="/static/brand/logo-red.png">
+      <PageSection
+        title="RED Token Reimbursement"
+        image="/static/brand/logo-red.png"
+      >
         <p>
-          Finding exploits in Bitcoin and related free and open-source software
-          takes time, skill, and often a lot of LLM tokens. This short
-          application is for researchers doing that work.
+          RED grants reimburse LLM token costs and closely related compute costs
+          for researchers actively red-teaming Bitcoin and related free and
+          open-source software. The application is short because the request
+          should be narrow: show the research context, the total spent up to the
+          date of this application, and the expected token burn.
+        </p>
+        <p>
+          OpenSats reviews RED requests as expense reimbursement tied to
+          concrete security work. RED grants are not salary support, maintenance
+          funding, or broader project budgets. Use the{' '}
+          <CustomLink href="/apply/grant">General Grant</CustomLink> path for
+          project applications and funding.
         </p>
         <p>
           While{' '}
           <CustomLink href="/blog/code-red-supporting-first-responders">
             there is urgency
-          </CustomLink>{' '}
-          and we want to fund generously, we will be forced to be selective. A
-          demonstrable trail of trust or prior work in Bitcoin security (or a
-          closely related space) is expected.
+          </CustomLink>
+          {', '}
+          we must be selective. A demonstrable trail of trust or prior work in
+          Bitcoin security (or a closely related space) is expected.
         </p>
         <p>
           In light of recent events, we are fast-tracking these red team
           applications. If approved, we will follow up with any details needed
-          for payouts. Prefer a full project grant instead? See{' '}
-          <CustomLink href="/apply/grant">General Grant</CustomLink>.
+          for reimbursement.
         </p>
         <hr />
         <RedBeforeYouApply />

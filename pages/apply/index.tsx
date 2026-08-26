@@ -117,19 +117,20 @@ export default function Apply({
           </>
         )}
         <h2 className="mb-4 mt-12 text-xl font-bold leading-normal md:text-2xl">
-          Red Teaming
+          RED Token Reimbursement
         </h2>
         <p className="mb-8">
           For security researchers red-teaming Bitcoin and related free and
-          open-source software. Short application focused on research context
-          and LLM token reimbursement. Always open. In light of recent events,
-          we are fast-tracking these applications.
+          open-source software. Short application focused on LLM token and
+          related compute reimbursement, with enough research context to assess
+          the work. Always open. In light of recent events, we are fast-tracking
+          these applications.
         </p>
         <Link
           href="/apply/red"
           className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-500 no-underline hover:text-black dark:hover:text-white"
         >
-          Apply for Red Teaming Support
+          Apply for RED Token Reimbursement
         </Link>
       </PageSection>
     </>

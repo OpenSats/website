@@ -31,11 +31,11 @@ const REVIEW_SECTIONS: ReviewSection[] = [
     ],
   },
   {
-    title: 'Budget',
+    title: 'Token Reimbursement',
     fields: [
-      ['Token Spend So Far', 'token_spend_so_far'],
-      ['Expected Ongoing Burn', 'estimated_token_burn'],
-      ['Duration', 'duration'],
+      ['LLM Token Spend So Far', 'token_spend_so_far'],
+      ['Expected Ongoing Token Burn', 'estimated_token_burn'],
+      ['Reimbursement Window', 'duration'],
     ],
   },
 ]
@@ -66,7 +66,7 @@ const STEPS: StepConfig[] = [
   },
   {
     id: 'budget',
-    title: 'Budget',
+    title: 'Token Reimbursement',
     fields: ['token_spend_so_far', 'estimated_token_burn', 'duration'],
     render: (props) => <TokenReimbursement {...props} />,
   },
@@ -92,7 +92,7 @@ export default function RedApplicationForm() {
         red_terms_effective: RED_TERMS_EFFECTIVE,
       }}
       defaultValues={{ duration: '1 month' }}
-      submitLabel="Submit Red Application"
+      submitLabel="Submit RED Reimbursement Application"
       submitRequiresChecked={RED_ACK_FIELDS}
     />
   )
