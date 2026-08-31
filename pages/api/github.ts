@@ -1,6 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
+import {
+  getApplicationIssueLabels,
+  getApplicationRepo,
+  normalizeMainFocus,
+} from '../../utils/application-routing'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -140,46 +145,10 @@ ${req.body.video_application ? req.body.video_application : 'None provided.'}
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
 ${contactFooter}`
 
-    // Label set according to "main focus" (absent for RED applications)
-    const mainFocus = req.body.main_focus
-      ? `${req.body.main_focus}`.toLowerCase()
-      : ''
-    const issueLabels = mainFocus ? [mainFocus] : []
-    if (mainFocus === 'layer1' || mainFocus === 'layer2') {
-      issueLabels.push('bitcoin') // L1 & L2 = subset of Bitcoin
-    }
-
-    // Add label for applications from common grant app
-    if (req.body.source === 'common-grant-app') {
-      issueLabels.push('common-grant-app')
-    }
-
-    // Repo set according to "main focus" (RED uses its own priority repo)
-    let appRepo = GH_APP_REPO
-    if (req.body.RED) {
-      appRepo = `${GH_APP_REPO}-red`
-    } else if (mainFocus === 'nostr') {
-      appRepo = `${GH_APP_REPO}-nostr`
-    } else if (mainFocus === 'layer1') {
-      appRepo = `${GH_APP_REPO}-layer1`
-    } else if (mainFocus === 'layer2') {
-      appRepo = `${GH_APP_REPO}-layer2`
-    } else if (mainFocus === 'core') {
-      appRepo = `${GH_APP_REPO}-core`
-    } else if (mainFocus === 'ecash') {
-      appRepo = `${GH_APP_REPO}-ecash`
-    }
-
-    // Tag depending on request for grant and/or request for listing
-    req.body.LTS && issueLabels.push('LTS')
-    req.body.RED && issueLabels.push('RED')
-
-    // Additional tags based on yes/no answers
-    req.body.has_received_funding === 'yes' && issueLabels.push('prior funding')
-    if (!req.body.RED) {
-      !req.body.free_open_source && issueLabels.push('not FLOSS')
-      !req.body.are_you_lead && issueLabels.push('surrogate')
-    }
+    // Labels and repo are set according to main focus.
+    const mainFocus = normalizeMainFocus(req.body.main_focus)
+    const issueLabels = getApplicationIssueLabels(req.body)
+    const appRepo = getApplicationRepo(GH_APP_REPO, mainFocus, req.body.RED)
 
     try {
       await octokit.rest.issues.create({

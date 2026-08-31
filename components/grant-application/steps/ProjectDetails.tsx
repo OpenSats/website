@@ -23,6 +23,7 @@ export default function ProjectDetails({ register, watch, errors }: StepProps) {
           <option value="layer2">Layer2 / Lightning</option>
           <option value="ecash">Layer3 / eCash</option>
           <option value="nostr">Nostr</option>
+          <option value="security">Security</option>
           <option value="other">Other</option>
         </select>
         <FieldError errors={errors} name="main_focus" />
