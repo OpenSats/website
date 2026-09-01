@@ -4,6 +4,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PostList from '@/components/PostList'
+import { postMatchesSearch, useSearchIndex } from '@/utils/searchIndex'
 
 interface PaginationProps {
   totalPages: number
@@ -72,10 +73,10 @@ export default function ListLayout({
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-  const filteredBlogPosts = posts.filter((post) => {
-    const searchContent = post.title + post.summary + post.tags.join(' ')
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
-  })
+  const { index, load } = useSearchIndex()
+  const filteredBlogPosts = posts.filter((post) =>
+    postMatchesSearch(post, searchValue, index)
+  )
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
   const displayPosts =
@@ -93,6 +94,7 @@ export default function ListLayout({
               <input
                 aria-label="Search posts"
                 type="text"
+                onFocus={load}
                 onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Search posts"
                 className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
