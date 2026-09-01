@@ -11,6 +11,7 @@ import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import PostList from '@/components/PostList'
 import {
+  excerptsForPosts,
   postMatchesSearch,
   searchStatusMessage,
   useSearchIndex,
@@ -225,7 +226,14 @@ export default function YearPage({
           />
         </div>
         {statusMessage}
-        <PostList posts={filteredPosts} />
+        <PostList
+          posts={filteredPosts}
+          excerpts={
+            searchValue
+              ? excerptsForPosts(filteredPosts, searchValue, index)
+              : undefined
+          }
+        />
       </div>
     </>
   )

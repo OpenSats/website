@@ -5,6 +5,7 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PostList from '@/components/PostList'
 import {
+  excerptsForPosts,
   postMatchesSearch,
   searchStatusMessage,
   useSearchIndex,
@@ -125,7 +126,14 @@ export default function ListLayout({
           </div>
         </div>
         {statusMessage}
-        <PostList posts={displayPosts} />
+        <PostList
+          posts={displayPosts}
+          excerpts={
+            searchValue
+              ? excerptsForPosts(displayPosts, searchValue, index)
+              : undefined
+          }
+        />
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
         <Pagination
