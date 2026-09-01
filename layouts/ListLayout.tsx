@@ -4,6 +4,12 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PostList from '@/components/PostList'
+import {
+  excerptsForPosts,
+  postMatchesSearch,
+  searchStatusMessage,
+  useSearchIndex,
+} from '@/utils/searchIndex'
 
 interface PaginationProps {
   totalPages: number
@@ -72,10 +78,15 @@ export default function ListLayout({
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-  const filteredBlogPosts = posts.filter((post) => {
-    const searchContent = post.title + post.summary + post.tags.join(' ')
-    return searchContent.toLowerCase().includes(searchValue.toLowerCase())
-  })
+  const { index, ready } = useSearchIndex()
+  const filteredBlogPosts = posts.filter((post) =>
+    postMatchesSearch(post, searchValue, index)
+  )
+  const statusMessage = searchStatusMessage(
+    searchValue,
+    ready,
+    filteredBlogPosts.length
+  )
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
   const displayPosts =
@@ -114,8 +125,15 @@ export default function ListLayout({
             </svg>
           </div>
         </div>
-        {!filteredBlogPosts.length && 'No posts found.'}
-        <PostList posts={displayPosts} />
+        {statusMessage}
+        <PostList
+          posts={displayPosts}
+          excerpts={
+            searchValue
+              ? excerptsForPosts(displayPosts, searchValue, index)
+              : undefined
+          }
+        />
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
         <Pagination

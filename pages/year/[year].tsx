@@ -10,6 +10,12 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import PostList from '@/components/PostList'
+import {
+  excerptsForPosts,
+  postMatchesSearch,
+  searchStatusMessage,
+  useSearchIndex,
+} from '@/utils/searchIndex'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -143,6 +149,7 @@ export default function YearPage({
     new Set(allTagsCombined)
   )
   const [searchValue, setSearchValue] = useState('')
+  const { index, ready } = useSearchIndex()
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags((prev) => {
@@ -161,12 +168,13 @@ export default function YearPage({
 
   const filteredPosts = (posts as CoreContent<Blog>[]).filter((post) => {
     const matchesTags = post.tags?.some((tag) => selectedTags.has(tag))
-    const searchContent = post.title + post.summary + post.tags?.join(' ')
-    const matchesSearch = searchContent
-      .toLowerCase()
-      .includes(searchValue.toLowerCase())
-    return matchesTags && matchesSearch
+    return matchesTags && postMatchesSearch(post, searchValue, index)
   })
+  const statusMessage = searchStatusMessage(
+    searchValue,
+    ready,
+    filteredPosts.length
+  )
 
   return (
     <>
@@ -217,8 +225,15 @@ export default function YearPage({
             onSelectNone={handleSelectNone}
           />
         </div>
-        {!filteredPosts.length && 'No posts found.'}
-        <PostList posts={filteredPosts} />
+        {statusMessage}
+        <PostList
+          posts={filteredPosts}
+          excerpts={
+            searchValue
+              ? excerptsForPosts(filteredPosts, searchValue, index)
+              : undefined
+          }
+        />
       </div>
     </>
   )

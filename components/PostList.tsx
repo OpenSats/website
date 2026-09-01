@@ -4,17 +4,34 @@ import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
+import type { SearchExcerpt } from '@/utils/searchIndex'
 
 interface PostListProps {
   posts: CoreContent<Blog>[]
   rightAlignDate?: boolean
   useProjectLayout?: boolean
+  excerpts?: Record<string, SearchExcerpt>
+}
+
+function ExcerptText({ excerpt }: { excerpt: SearchExcerpt }) {
+  return (
+    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+      {excerpt.prefix && '...'}
+      {excerpt.before}
+      <mark className="bg-yellow-200 text-gray-900 dark:bg-yellow-700 dark:text-gray-100">
+        {excerpt.match}
+      </mark>
+      {excerpt.after}
+      {excerpt.suffix && '...'}
+    </div>
+  )
 }
 
 export default function PostList({
   posts,
   rightAlignDate = false,
   useProjectLayout = false,
+  excerpts,
 }: PostListProps) {
   if (posts.length === 0) {
     return null
@@ -23,7 +40,8 @@ export default function PostList({
   return (
     <ul>
       {posts.map((post) => {
-        const { path, date, title, summary, tags } = post
+        const { path, date, title, summary, tags, slug } = post
+        const excerpt = excerpts?.[slug]
         return (
           <li key={path} className="py-4">
             <article
@@ -67,10 +85,14 @@ export default function PostList({
                     </div>
                   )}
                 </div>
-                {summary && (
-                  <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                    {summary}
-                  </div>
+                {excerpt ? (
+                  <ExcerptText excerpt={excerpt} />
+                ) : (
+                  summary && (
+                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                      {summary}
+                    </div>
+                  )
                 )}
               </div>
             </article>

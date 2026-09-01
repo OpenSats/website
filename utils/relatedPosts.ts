@@ -4,7 +4,7 @@ function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-function stripMarkdownForSearch(raw = ''): string {
+export function stripMarkdownForSearch(raw = ''): string {
   return raw
     .replace(/```[\s\S]*?```/g, ' ')
     .replace(/`[^`]*`/g, ' ')
