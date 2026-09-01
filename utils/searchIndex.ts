@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export type SearchIndex = Record<string, string>
 
@@ -10,10 +10,12 @@ export type SearchablePost = {
 }
 
 let cache: SearchIndex | null = null
+let failed = false
 let inflight: Promise<SearchIndex | null> | null = null
 
 function fetchSearchIndex(): Promise<SearchIndex | null> {
   if (cache) return Promise.resolve(cache)
+  if (failed) return Promise.resolve(null)
   if (inflight) return inflight
 
   inflight = fetch('/search.json')
@@ -25,7 +27,10 @@ function fetchSearchIndex(): Promise<SearchIndex | null> {
       cache = data
       return data
     })
-    .catch(() => null)
+    .catch(() => {
+      failed = true
+      return null
+    })
     .finally(() => {
       inflight = null
     })
@@ -35,16 +40,22 @@ function fetchSearchIndex(): Promise<SearchIndex | null> {
 
 export function useSearchIndex() {
   const [index, setIndex] = useState<SearchIndex | null>(cache)
+  const [ready, setReady] = useState(cache !== null || failed)
 
-  const load = useCallback(() => {
-    if (cache) {
+  useEffect(() => {
+    if (cache !== null || failed) {
       setIndex(cache)
+      setReady(true)
       return
     }
-    fetchSearchIndex().then(setIndex)
+
+    fetchSearchIndex().then((data) => {
+      setIndex(data)
+      setReady(true)
+    })
   }, [])
 
-  return { index, load }
+  return { index, ready }
 }
 
 export function postMatchesSearch(
@@ -65,4 +76,15 @@ export function postMatchesSearch(
     .toLowerCase()
 
   return haystack.includes(q)
+}
+
+export function searchStatusMessage(
+  query: string,
+  ready: boolean,
+  matchCount: number
+): string | null {
+  if (!query) return null
+  if (!ready) return 'Searching…'
+  if (!matchCount) return 'No posts found.'
+  return null
 }

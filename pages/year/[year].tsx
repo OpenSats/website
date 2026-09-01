@@ -10,7 +10,11 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { allBlogs } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
 import PostList from '@/components/PostList'
-import { postMatchesSearch, useSearchIndex } from '@/utils/searchIndex'
+import {
+  postMatchesSearch,
+  searchStatusMessage,
+  useSearchIndex,
+} from '@/utils/searchIndex'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faChevronLeft,
@@ -144,7 +148,7 @@ export default function YearPage({
     new Set(allTagsCombined)
   )
   const [searchValue, setSearchValue] = useState('')
-  const { index, load } = useSearchIndex()
+  const { index, ready } = useSearchIndex()
 
   const handleTagToggle = (tag: string) => {
     setSelectedTags((prev) => {
@@ -165,6 +169,11 @@ export default function YearPage({
     const matchesTags = post.tags?.some((tag) => selectedTags.has(tag))
     return matchesTags && postMatchesSearch(post, searchValue, index)
   })
+  const statusMessage = searchStatusMessage(
+    searchValue,
+    ready,
+    filteredPosts.length
+  )
 
   return (
     <>
@@ -184,11 +193,7 @@ export default function YearPage({
                 <input
                   aria-label="Search posts"
                   type="text"
-                  onFocus={load}
-                  onChange={(e) => {
-                    load()
-                    setSearchValue(e.target.value)
-                  }}
+                  onChange={(e) => setSearchValue(e.target.value)}
                   placeholder=""
                   className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
                 />
@@ -219,7 +224,7 @@ export default function YearPage({
             onSelectNone={handleSelectNone}
           />
         </div>
-        {!filteredPosts.length && 'No posts found.'}
+        {statusMessage}
         <PostList posts={filteredPosts} />
       </div>
     </>

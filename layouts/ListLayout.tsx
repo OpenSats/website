@@ -4,7 +4,11 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PostList from '@/components/PostList'
-import { postMatchesSearch, useSearchIndex } from '@/utils/searchIndex'
+import {
+  postMatchesSearch,
+  searchStatusMessage,
+  useSearchIndex,
+} from '@/utils/searchIndex'
 
 interface PaginationProps {
   totalPages: number
@@ -73,9 +77,14 @@ export default function ListLayout({
   pagination,
 }: ListLayoutProps) {
   const [searchValue, setSearchValue] = useState('')
-  const { index, load } = useSearchIndex()
+  const { index, ready } = useSearchIndex()
   const filteredBlogPosts = posts.filter((post) =>
     postMatchesSearch(post, searchValue, index)
+  )
+  const statusMessage = searchStatusMessage(
+    searchValue,
+    ready,
+    filteredBlogPosts.length
   )
 
   // If initialDisplayPosts exist, display it if no searchValue is specified
@@ -94,11 +103,7 @@ export default function ListLayout({
               <input
                 aria-label="Search posts"
                 type="text"
-                onFocus={load}
-                onChange={(e) => {
-                  load()
-                  setSearchValue(e.target.value)
-                }}
+                onChange={(e) => setSearchValue(e.target.value)}
                 placeholder="Search posts"
                 className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
               />
@@ -119,7 +124,7 @@ export default function ListLayout({
             </svg>
           </div>
         </div>
-        {!filteredBlogPosts.length && 'No posts found.'}
+        {statusMessage}
         <PostList posts={displayPosts} />
       </div>
       {pagination && pagination.totalPages > 1 && !searchValue && (
