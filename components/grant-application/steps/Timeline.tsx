@@ -11,10 +11,11 @@ export default function Timeline({ register, errors }: StepProps) {
         Duration
         <br />
         <small>
-          Duration of grant you are applying for.{' '}
+          Duration of grant you are applying for. More on grant duration in our{' '}
           <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
-            Minimum is 3 months.
+            FAQ
           </CustomLink>
+          .
         </small>
         <select
           className={inputClass}
