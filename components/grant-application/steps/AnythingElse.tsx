@@ -68,7 +68,7 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
         <small>
           {videoRequired ? '' : 'Optional. '}
           It must be exactly 2 minutes and 10 seconds (2:10). Paste a link
-          below. We do not host uploads.
+          below.
         </small>
         <input
           type="text"
