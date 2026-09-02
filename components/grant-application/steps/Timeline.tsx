@@ -8,43 +8,25 @@ export default function Timeline({ register, errors }: StepProps) {
       <h2>Project Timeline</h2>
 
       <label className="block">
-        Duration (months)
+        Duration
         <br />
         <small>
-          How many months are you applying for? General grants must be between 3
-          and 12 months. We do not accept shorter durations.{' '}
+          How long are you applying for? General grants must be between 3 and 12
+          months.{' '}
           <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
             Why?
           </CustomLink>
         </small>
-        <input
-          type="number"
-          min={3}
-          max={12}
-          step={1}
+        <select
           className={inputClass}
-          {...register('duration', {
-            required: true,
-            valueAsNumber: true,
-            min: {
-              value: 3,
-              message: 'Minimum grant duration is 3 months',
-            },
-            max: {
-              value: 12,
-              message: 'Maximum grant duration is 12 months',
-            },
-            validate: (value) => {
-              if (typeof value !== 'number' || Number.isNaN(value)) {
-                return 'This field is required'
-              }
-              if (!Number.isInteger(value)) {
-                return 'Enter a whole number of months'
-              }
-              return true
-            },
-          })}
-        />
+          {...register('duration', { required: true })}
+        >
+          {Array.from({ length: 10 }, (_, i) => i + 3).map((months) => (
+            <option key={months} value={`${months} months`}>
+              {months} months
+            </option>
+          ))}
+        </select>
         <FieldError errors={errors} name="duration" />
       </label>
 

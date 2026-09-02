@@ -151,7 +151,7 @@ export default function GrantApplicationForm() {
     <MultiStepApplicationForm
       steps={STEPS}
       hiddenFields={{ general_fund: true }}
-      defaultValues={{ duration: 6 }}
+      defaultValues={{ duration: '6 months' }}
       submitLabel="Submit Grant Application"
     />
   )

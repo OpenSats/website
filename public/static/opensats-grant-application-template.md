@@ -63,7 +63,7 @@ visual materials that showcase your project.
 
 ## Timeline
 
-**Duration:** (3-12 months)
+**Duration:** (3 months to 12 months)
 
 **Time Commitment:** (25% - Side Project / 50% - Part Time / 75% - Part Time / 100% - Full Time)
 

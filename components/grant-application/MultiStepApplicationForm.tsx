@@ -113,11 +113,7 @@ export default function MultiStepApplicationForm({
       if (!turnstile) {
         throw new Error('Please complete the bot verification challenge.')
       }
-      const payload =
-        typeof data.duration === 'number'
-          ? { ...data, duration: `${data.duration} months` }
-          : data
-      await submitApplication(payload, undefined, turnstile)
+      await submitApplication(data, undefined, turnstile)
       await router.push('/submitted')
     } catch (e) {
       const nextFailures = failedAttempts + 1
