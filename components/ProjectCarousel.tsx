@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import ShowcaseProjectEntry from '@/components/ShowcaseProjectEntry'
 import type { ShowcaseProjectEntryProps } from '@/components/ShowcaseProjectEntry'
 
@@ -6,24 +6,42 @@ type ProjectCarouselProps = {
   projects: ShowcaseProjectEntryProps[]
 }
 
+const AUTO_ADVANCE_MS = 6000
+
 const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
   const scrollerRef = useRef<HTMLUListElement>(null)
+  const indexRef = useRef(0)
   const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
 
   const scrollTo = useCallback(
     (nextIndex: number) => {
       const scroller = scrollerRef.current
       if (!scroller) return
 
-      const clamped = Math.max(0, Math.min(nextIndex, projects.length - 1))
-      setIndex(clamped)
+      const wrapped =
+        ((nextIndex % projects.length) + projects.length) % projects.length
+      setIndex(wrapped)
       scroller.scrollTo({
-        left: clamped * scroller.clientWidth,
+        left: wrapped * scroller.clientWidth,
         behavior: 'smooth',
       })
     },
     [projects.length]
   )
+
+  indexRef.current = index
+
+  useEffect(() => {
+    if (paused || projects.length < 2) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const id = window.setInterval(() => {
+      scrollTo(indexRef.current + 1)
+    }, AUTO_ADVANCE_MS)
+
+    return () => window.clearInterval(id)
+  }, [paused, projects.length, scrollTo])
 
   function handleScroll() {
     const scroller = scrollerRef.current
@@ -40,6 +58,14 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
       role="region"
       aria-roledescription="carousel"
       aria-label="Explore projects"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node)) {
+          setPaused(false)
+        }
+      }}
     >
       <ul
         ref={scrollerRef}
