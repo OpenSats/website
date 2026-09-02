@@ -28,7 +28,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
             <br />
             <small>
               LLM tokens, APIs, and similar cost items related to working with
-              coding agents. None or $0 is fine too.
+              coding agents, if applicable. None or $0 is fine too.
             </small>
             <textarea
               rows={4}
