@@ -1,7 +1,9 @@
 import Link from '@/components/Link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import ProjectList from '../components/ProjectList'
+import ShowcaseProjectEntry, {
+  toShowcaseProject,
+} from '@/components/ShowcaseProjectEntry'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -27,6 +29,8 @@ export const getStaticProps = async () => {
   const projects = allProjects
     .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
+    .slice(0, 4)
+    .map(toShowcaseProject)
 
   const generalFund = allFunds.find((f) => f.slug === 'general')
   const opsFund = allFunds.find((f) => f.slug === 'ops')
@@ -312,7 +316,11 @@ export default function Home({
           <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             Browse through a showcase of projects supported by us.
           </p>
-          <ProjectList projects={projects} />
+          <ul className="divide-y divide-gray-200 pt-4 dark:divide-gray-800">
+            {projects.map((project) => (
+              <ShowcaseProjectEntry key={project.slug} {...project} />
+            ))}
+          </ul>
           <div className="flex justify-end pt-4 text-base font-medium leading-6">
             <Link
               href="/projects"

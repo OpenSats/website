@@ -1,52 +1,22 @@
 import type { GetStaticProps, NextPage } from 'next'
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
-import ShowcaseProjectEntry from '@/components/ShowcaseProjectEntry'
-import type { FundId } from '@/components/ShowcaseProjectEntry'
+import ShowcaseProjectEntry, {
+  toShowcaseProject,
+} from '@/components/ShowcaseProjectEntry'
+import type { ShowcaseProjectEntryProps } from '@/components/ShowcaseProjectEntry'
 import { allProjects } from 'contentlayer/generated'
 import { buildClusters } from '@/utils/projectClusters'
-
-type EntryData = {
-  slug: string
-  title: string
-  summary: string
-  coverImage: string
-  darkCoverImage?: string
-  invertDarkImage?: boolean
-  containCoverImage?: boolean
-  nym: string
-  fund?: FundId
-}
 
 type RenderCluster = {
   id: string
   title: string
   blurb: string
-  projects: EntryData[]
+  projects: ShowcaseProjectEntryProps[]
 }
 
 type ShowcaseProps = {
   clusters: RenderCluster[]
-}
-
-const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops', 'red']
-
-function toEntryData(project: (typeof allProjects)[number]): EntryData {
-  const fund = (KNOWN_FUNDS as string[]).includes(project.fund || '')
-    ? (project.fund as FundId)
-    : undefined
-
-  return {
-    slug: `/projects/${project.slug}`,
-    title: project.title,
-    summary: project.summary,
-    coverImage: project.coverImage,
-    darkCoverImage: project.darkCoverImage,
-    invertDarkImage: project.invertDarkImage,
-    containCoverImage: project.containCoverImage,
-    nym: project.nym,
-    fund,
-  }
 }
 
 const ProjectShowcase: NextPage<ShowcaseProps> = ({ clusters }) => {
@@ -127,7 +97,7 @@ export const getStaticProps: GetStaticProps<ShowcaseProps> = async () => {
       id: cluster.id,
       title: cluster.title,
       blurb: cluster.blurb,
-      projects: cluster.projects.map((project) => toEntryData(project)),
+      projects: cluster.projects.map((project) => toShowcaseProject(project)),
     })
   )
 

@@ -21,6 +21,32 @@ export type ShowcaseProjectEntryProps = {
   fund?: FundId
 }
 
+const KNOWN_FUNDS: FundId[] = ['general', 'nostr', 'ops', 'red']
+
+export function toShowcaseProject(project: {
+  slug: string
+  title: string
+  summary: string
+  coverImage: string
+  darkCoverImage?: string
+  invertDarkImage?: boolean
+  nym: string
+  fund?: string
+}): ShowcaseProjectEntryProps {
+  return {
+    slug: `/projects/${project.slug}`,
+    title: project.title,
+    summary: project.summary,
+    coverImage: project.coverImage,
+    darkCoverImage: project.darkCoverImage,
+    invertDarkImage: project.invertDarkImage,
+    nym: project.nym,
+    fund: KNOWN_FUNDS.includes(project.fund as FundId)
+      ? (project.fund as FundId)
+      : undefined,
+  }
+}
+
 const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
   slug,
   title,
