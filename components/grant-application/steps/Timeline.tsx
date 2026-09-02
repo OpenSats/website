@@ -11,7 +11,7 @@ export default function Timeline({ register, errors }: StepProps) {
         Duration
         <br />
         <small>
-          How long are you applying for? General grants must be between 3 and 12
+          How long are you applying for? General grants are 3, 6, 9, or 12
           months.{' '}
           <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
             Why?
@@ -21,11 +21,10 @@ export default function Timeline({ register, errors }: StepProps) {
           className={inputClass}
           {...register('duration', { required: true })}
         >
-          {Array.from({ length: 10 }, (_, i) => i + 3).map((months) => (
-            <option key={months} value={`${months} months`}>
-              {months} months
-            </option>
-          ))}
+          <option value="12 months">12 months</option>
+          <option value="9 months">9 months</option>
+          <option value="6 months">6 months</option>
+          <option value="3 months">3 months</option>
         </select>
         <FieldError errors={errors} name="duration" />
       </label>
