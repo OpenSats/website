@@ -20,6 +20,23 @@ export default function Budget({ register, watch, errors }: StepProps) {
         <FieldError errors={errors} name="proposed_budget" />
       </label>
 
+      {!watch('LTS') && (
+        <label className="block">
+          AI / Compute Cost *
+          <br />
+          <small>
+            LLM tokens, APIs, and hardware if you want to self-host models. None
+            or $0 is fine. We are happy to fund this when it helps the work.
+          </small>
+          <textarea
+            rows={4}
+            className={inputClass}
+            {...register('ai_cost', { required: true })}
+          />
+          <FieldError errors={errors} name="ai_cost" />
+        </label>
+      )}
+
       <hr />
       <h2>Prior Funding</h2>
 

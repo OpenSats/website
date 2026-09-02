@@ -62,6 +62,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
     title: 'Budget',
     fields: [
       ['Costs & Proposed Budget', 'proposed_budget'],
+      ['AI / Compute Cost', 'ai_cost'],
       ['Prior Funding', 'has_received_funding'],
       ['Prior Funding Details', 'what_funding'],
       ['Additional Funding Sources', 'has_additional_funding'],
@@ -124,6 +125,7 @@ const STEPS: StepConfig[] = [
     title: 'Budget',
     fields: [
       'proposed_budget',
+      'ai_cost',
       'has_received_funding',
       'what_funding',
       'has_additional_funding',

@@ -80,6 +80,11 @@ This will help us evaluate overall scope and potential grant duration.
 Please submit a proposed budget in USD, including a breakdown of how the funds
 will be used and the grand total.
 
+### AI / Compute Cost
+
+LLM tokens, APIs, and hardware if you want to self-host models. None or $0 is
+fine. We are happy to fund this when it helps the work.
+
 ### Prior Funding
 
 Has this project received prior funding? (Yes / No)

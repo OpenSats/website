@@ -120,6 +120,9 @@ ${req.body.timelines || ''}
 
 ${req.body.proposed_budget}
 
+**AI / compute cost:**
+${req.body.ai_cost || 'n/a'}
+
 **Prior funding:** ${req.body.has_received_funding === 'yes' ? 'Yes' : 'No'}
 
 ${req.body.what_funding ? req.body.what_funding : ''}
