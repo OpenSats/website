@@ -28,7 +28,7 @@ export const getStaticProps = async () => {
   const projects = allProjects
     .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
-    .slice(0, 8)
+    .slice(0, 21)
     .map(toShowcaseProject)
 
   const generalFund = allFunds.find((f) => f.slug === 'general')
