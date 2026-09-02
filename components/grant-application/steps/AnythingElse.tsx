@@ -14,6 +14,7 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
   const videoRequired = isVideoRequired({
     LTS: watch('LTS'),
     RED: watch('RED'),
+    grand_total: watch('grand_total'),
   })
   return (
     <>
