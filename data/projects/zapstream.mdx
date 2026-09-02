@@ -17,17 +17,17 @@ announcementLink: '/blog/nostr-grants-october-2023#zapstream'
 [nostr] and Bitcoin. Creators can broadcast video, host a live chat, receive
 Lightning [zaps], and keep their streaming identity tied to their nostr key
 instead of a platform account. The web app is a [NIP-53] client and works with
-externally hosted HLS streams, giving streamers an open alternative to
+externally hosted [HLS] streams, giving streamers an open alternative to
 closed-platform live video.
 
 The project has grown beyond the browser client. Kieran also maintains the
 mobile [Flutter] apps for iOS and Android, which let creators go live from a
 phone camera, receive notifications, open stream links, and connect a Lightning
-wallet through Nostr Wallet Connect. The broader stack includes a self-hostable
-Rust streaming server for RTMP ingest, HLS output, recordings, and operator
+wallet through [Nostr Wallet Connect][NWC]. The broader stack includes a self-hostable
+Rust streaming server for [RTMP] ingest, HLS output, recordings, and operator
 metrics.
 
-Zap.stream also works with [Route96], a NIP-96 and Blossom media backend for
+Zap.stream also works with [Route96], a NIP-96 and [Blossom] media backend for
 large video files, clips, and replayable content. Route96 can generate
 thumbnails, optimize media, mirror uploads across servers, and enforce
 Lightning-based storage limits, giving nostr apps a reusable media layer instead
@@ -67,3 +67,7 @@ identity, audience, and payments across clients.
 [Route96]: https://github.com/v0l/route96
 [wave-3]: /blog/nostr-grants-october-2023#zapstream
 [zaps]: /topics/zaps
+[HLS]: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
+[NWC]: /topics/nostr-wallet-connect
+[RTMP]: https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
+[Blossom]: /topics/blossom
