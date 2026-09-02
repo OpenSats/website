@@ -67,8 +67,12 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
         <br />
         <small>
           {videoRequired ? '' : 'Optional. '}
-          It must be exactly 2 minutes and 10 seconds (2:10). Paste a link
-          below.
+          The video must be <strong>exactly 2 minutes</strong> long. We explain
+          why in the{' '}
+          <CustomLink href="/faq/application#why-does-the-video-have-to-be-exactly-2-minutes">
+            FAQ
+          </CustomLink>
+          .
         </small>
         <input
           type="text"
