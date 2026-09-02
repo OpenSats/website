@@ -11,7 +11,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
         Costs & Proposed Budget *<br />
         <small>
           Please submit a proposed budget in USD, including a breakdown of how
-          the funds will be used. Enter the grand total in the field below.
+          the funds will be used. 
         </small>
         <textarea
           rows={5}
