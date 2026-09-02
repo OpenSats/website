@@ -101,14 +101,6 @@ ${req.body.short_description}
 
 ${req.body.potential_impact}
 
-### Other Organizations Applied To
-
-${
-  req.body.organizations
-    ? `This application was submitted to: ${req.body.organizations.join(', ')}`
-    : 'No organizations specified'
-}
-
 ### Timeline & Milestones
 
 ${req.body.duration ? `Grant duration: ${req.body.duration}` : ''}

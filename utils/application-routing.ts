@@ -30,10 +30,6 @@ export function getApplicationIssueLabels(body: Record<string, unknown>) {
     issueLabels.push('bitcoin')
   }
 
-  if (body.source === 'common-grant-app') {
-    issueLabels.push('common-grant-app')
-  }
-
   if (body.LTS) issueLabels.push('LTS')
   if (body.RED) issueLabels.push('RED')
   if (body.has_received_funding === 'yes') issueLabels.push('prior funding')
