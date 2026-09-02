@@ -11,7 +11,6 @@ const AUTO_ADVANCE_MS = 6000
 const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
   const scrollerRef = useRef<HTMLUListElement>(null)
   const indexRef = useRef(0)
-  const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
 
   const scrollTo = useCallback(
@@ -21,7 +20,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
 
       const wrapped =
         ((nextIndex % projects.length) + projects.length) % projects.length
-      setIndex(wrapped)
+      indexRef.current = wrapped
       scroller.scrollTo({
         left: wrapped * scroller.clientWidth,
         behavior: 'smooth',
@@ -29,8 +28,6 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
     },
     [projects.length]
   )
-
-  indexRef.current = index
 
   useEffect(() => {
     if (paused || projects.length < 2) return
@@ -47,7 +44,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
     const scroller = scrollerRef.current
     if (!scroller || !scroller.clientWidth) return
 
-    setIndex(Math.round(scroller.scrollLeft / scroller.clientWidth))
+    indexRef.current = Math.round(scroller.scrollLeft / scroller.clientWidth)
   }
 
   if (!projects.length) return null
@@ -80,23 +77,6 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
           />
         ))}
       </ul>
-
-      <div className="flex flex-wrap justify-center gap-1 pt-5">
-        {projects.map((project, i) => (
-          <button
-            key={project.slug}
-            type="button"
-            aria-label={`Go to ${project.title}`}
-            aria-current={i === index ? 'true' : undefined}
-            onClick={() => scrollTo(i)}
-            className={`h-1.5 w-1.5 rounded-full p-0 ${
-              i === index
-                ? 'bg-primary-500'
-                : 'bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-500'
-            }`}
-          />
-        ))}
-      </div>
     </div>
   )
 }
