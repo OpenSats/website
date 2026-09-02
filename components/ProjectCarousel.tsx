@@ -55,43 +55,21 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
         ))}
       </ul>
 
-      <div className="flex items-center justify-between pt-5">
-        <button
-          type="button"
-          aria-label="Previous project"
-          disabled={index === 0}
-          onClick={() => scrollTo(index - 1)}
-          className="rounded border border-gray-200 px-3 py-1 text-sm text-gray-700 hover:border-gray-300 disabled:cursor-not-allowed disabled:opacity-30 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600"
-        >
-          &larr;
-        </button>
-
-        <div className="flex flex-wrap justify-center gap-1.5 px-3">
-          {projects.map((project, i) => (
-            <button
-              key={project.slug}
-              type="button"
-              aria-label={`Go to ${project.title}`}
-              aria-current={i === index ? 'true' : undefined}
-              onClick={() => scrollTo(i)}
-              className={`h-2 w-2 rounded-full ${
-                i === index
-                  ? 'bg-primary-500'
-                  : 'bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-500'
-              }`}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          aria-label="Next project"
-          disabled={index === projects.length - 1}
-          onClick={() => scrollTo(index + 1)}
-          className="rounded border border-gray-200 px-3 py-1 text-sm text-gray-700 hover:border-gray-300 disabled:cursor-not-allowed disabled:opacity-30 dark:border-gray-700 dark:text-gray-300 dark:hover:border-gray-600"
-        >
-          &rarr;
-        </button>
+      <div className="flex flex-wrap justify-center gap-1.5 pt-5">
+        {projects.map((project, i) => (
+          <button
+            key={project.slug}
+            type="button"
+            aria-label={`Go to ${project.title}`}
+            aria-current={i === index ? 'true' : undefined}
+            onClick={() => scrollTo(i)}
+            className={`h-2 w-2 rounded-full ${
+              i === index
+                ? 'bg-primary-500'
+                : 'bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-500'
+            }`}
+          />
+        ))}
       </div>
     </div>
   )
