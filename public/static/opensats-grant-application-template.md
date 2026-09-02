@@ -106,9 +106,8 @@ If yes, please describe the additional funding sources and amounts:
 
 ## Video Application
 
-A video is required if you request $21,000 or more. It must be exactly 2
-minutes long. Paste a public link. See the Application FAQ for why the length
-matters.
+A video is required. It must be exactly 2 minutes long. Paste a public link.
+See the Application FAQ for why the length matters.
 
 **Video Link:**
 

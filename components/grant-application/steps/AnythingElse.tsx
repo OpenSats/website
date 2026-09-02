@@ -11,7 +11,10 @@ const VIBE_CHECK_FIELDS = [
 ] as const
 
 export default function AnythingElse({ register, watch, errors }: StepProps) {
-  const videoRequired = !watch('LTS') && isVideoRequired(watch('grand_total'))
+  const videoRequired = isVideoRequired({
+    LTS: watch('LTS'),
+    RED: watch('RED'),
+  })
   return (
     <>
       <h2>Vibe Check</h2>
@@ -78,7 +81,12 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
           type="text"
           placeholder="https://"
           className={inputClass}
-          {...register('video_application', { required: videoRequired })}
+          {...register('video_application', {
+            validate: (value) =>
+              !videoRequired ||
+              (typeof value === 'string' && value.trim().length > 0) ||
+              'A video link is required',
+          })}
         />
         <FieldError errors={errors} name="video_application" />
       </label>

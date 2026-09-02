@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
-import { isVideoRequired, VIDEO_REQUIRED_LABEL } from '@/utils/grantRules'
+import { isVideoRequired } from '@/utils/grantRules'
 import { formatUsdDisplay } from '@/utils/usd'
 import {
   getApplicationIssueLabels,
@@ -28,18 +28,14 @@ export default async function handler(
       })
     }
 
-    if (
-      !req.body.RED &&
-      !req.body.LTS &&
-      isVideoRequired(req.body.grand_total)
-    ) {
+    if (isVideoRequired(req.body)) {
       const videoLink =
         typeof req.body.video_application === 'string'
           ? req.body.video_application.trim()
           : ''
       if (!videoLink) {
         return res.status(400).json({
-          message: `A video link is required for requests of ${VIDEO_REQUIRED_LABEL} or more.`,
+          message: 'A video link is required.',
         })
       }
     }
