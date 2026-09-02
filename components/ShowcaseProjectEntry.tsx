@@ -33,18 +33,25 @@ export function toShowcaseProject(project: {
   nym: string
   fund?: string
 }): ShowcaseProjectEntryProps {
-  return {
+  const entry: ShowcaseProjectEntryProps = {
     slug: `/projects/${project.slug}`,
     title: project.title,
     summary: project.summary,
     coverImage: project.coverImage,
-    darkCoverImage: project.darkCoverImage,
-    invertDarkImage: project.invertDarkImage,
     nym: project.nym,
-    fund: KNOWN_FUNDS.includes(project.fund as FundId)
-      ? (project.fund as FundId)
-      : undefined,
   }
+
+  if (project.darkCoverImage) {
+    entry.darkCoverImage = project.darkCoverImage
+  }
+  if (project.invertDarkImage) {
+    entry.invertDarkImage = project.invertDarkImage
+  }
+  if (KNOWN_FUNDS.includes(project.fund as FundId)) {
+    entry.fund = project.fund as FundId
+  }
+
+  return entry
 }
 
 const ShowcaseProjectEntry: React.FC<ShowcaseProjectEntryProps> = ({
