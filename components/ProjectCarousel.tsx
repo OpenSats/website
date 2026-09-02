@@ -55,7 +55,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
         ))}
       </ul>
 
-      <div className="flex flex-wrap justify-center gap-1.5 pt-5">
+      <div className="flex flex-wrap justify-center gap-1 pt-5">
         {projects.map((project, i) => (
           <button
             key={project.slug}
@@ -63,7 +63,7 @@ const ProjectCarousel: React.FC<ProjectCarouselProps> = ({ projects }) => {
             aria-label={`Go to ${project.title}`}
             aria-current={i === index ? 'true' : undefined}
             onClick={() => scrollTo(i)}
-            className={`h-2 w-2 rounded-full ${
+            className={`h-1.5 w-1.5 rounded-full p-0 ${
               i === index
                 ? 'bg-primary-500'
                 : 'bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-500'
