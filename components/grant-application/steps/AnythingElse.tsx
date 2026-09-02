@@ -1,5 +1,5 @@
 import CustomLink from '@/components/Link'
-import { isVideoRequired, VIDEO_REQUIRED_LABEL } from '@/utils/grantRules'
+import { isVideoRequired } from '@/utils/grantRules'
 import CheckboxGroupError from '../CheckboxGroupError'
 import FieldError from '../FieldError'
 import { StepProps, inputClass, checkboxClass } from '../types'
@@ -11,13 +11,7 @@ const VIBE_CHECK_FIELDS = [
 ] as const
 
 export default function AnythingElse({ register, watch, errors }: StepProps) {
-  const isLts = Boolean(watch('LTS'))
-  const videoRequired = !isLts && isVideoRequired(watch('grand_total'))
-  const videoLead = isLts
-    ? 'We strongly encourage a short video explaining your project and why it matters. '
-    : videoRequired
-    ? `A video is required for requests of ${VIDEO_REQUIRED_LABEL} or more. `
-    : `A video is optional unless you are requesting ${VIDEO_REQUIRED_LABEL} or more. `
+  const videoRequired = !watch('LTS') && isVideoRequired(watch('grand_total'))
   return (
     <>
       <h2>Vibe Check</h2>
@@ -72,7 +66,7 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
         Video Link {videoRequired ? '*' : ''}
         <br />
         <small>
-          {videoLead}
+          {videoRequired ? '' : 'Optional. '}
           It must be exactly 2 minutes and 10 seconds (2:10). Paste a link
           below. We do not host uploads.
         </small>
@@ -80,11 +74,7 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
           type="text"
           placeholder="https://"
           className={inputClass}
-          {...register('video_application', {
-            required: videoRequired
-              ? `A video link is required for requests of ${VIDEO_REQUIRED_LABEL} or more`
-              : false,
-          })}
+          {...register('video_application', { required: videoRequired })}
         />
         <FieldError errors={errors} name="video_application" />
       </label>
