@@ -63,7 +63,6 @@ const STEPS: StepConfig[] = [
     fields: [
       'read_criteria',
       'read_faq',
-      'has_references',
       'free_open_source',
       'lts_right_fit',
     ],

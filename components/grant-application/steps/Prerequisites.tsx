@@ -18,7 +18,6 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
     ? ([
         'read_criteria',
         'read_faq',
-        'has_references',
         'free_open_source',
         'lts_right_fit',
       ] as const)
@@ -122,20 +121,22 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         </span>
       </label>
 
-      <label className="inline-flex items-start gap-2">
-        <input
-          type="checkbox"
-          className={`mt-1 ${checkboxClass}`}
-          {...register('has_references', { required: true })}
-        />
-        <span>
-          I understand that at least two{' '}
-          <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
-            written reference letters
-          </CustomLink>{' '}
-          from people familiar with my work are required
-        </span>
-      </label>
+      {!isLts && (
+        <label className="inline-flex items-start gap-2">
+          <input
+            type="checkbox"
+            className={`mt-1 ${checkboxClass}`}
+            {...register('has_references', { required: true })}
+          />
+          <span>
+            I understand that at least two{' '}
+            <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
+              written reference letters
+            </CustomLink>{' '}
+            from people familiar with my work are required
+          </span>
+        </label>
+      )}
 
       <label className="inline-flex items-start gap-2">
         <input

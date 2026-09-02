@@ -3,7 +3,7 @@ import PageSection from '@/components/PageSection'
 import CustomLink from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import ClosedNotice from '@/components/ClosedNotice'
-import { areApplicationsOpen } from '@/utils/applicationWindow'
+import { showGrantApplicationForm } from '@/utils/applicationWindow'
 
 const LTSApplicationForm = dynamic(
   () => import('@/components/LTSApplicationForm'),
@@ -61,7 +61,7 @@ export default function Apply() {
           <CustomLink href="/apply/grant">General Grant</CustomLink> instead.
         </p>
         <ClosedNotice />
-        {areApplicationsOpen() && <LTSApplicationForm />}
+        {showGrantApplicationForm() && <LTSApplicationForm />}
       </PageSection>
     </>
   )

@@ -8,7 +8,8 @@ export default function ReferencesReview({
 }: StepProps) {
   const applicantName = watch?.('your_name') || '[Applicant Name]'
   const projectName = watch?.('project_name') || '[Project Name]'
-  const suggestedSubject = watch?.('LTS')
+  const isLts = watch?.('LTS')
+  const suggestedSubject = isLts
     ? `Reference Letter for ${applicantName} (LTS)`
     : `Reference Letter for ${projectName} by ${applicantName}`
 
@@ -17,18 +18,17 @@ export default function ReferencesReview({
       <h2>Written References</h2>
 
       <label className="block">
-        References *<br />
+        References{!isLts && ' *'}
+        <br />
         <small>
-          Please provide at least 2 written reference letters from people in the
-          Bitcoin community or open-source space who are familiar with you or
-          your project. Include the email address of each reference so we can
-          reach out to verify. Cryptographically signed references (e.g. using
-          PGP or Nostr) are a plus.
+          {isLts
+            ? 'Optional. If you have written reference letters from people in the Bitcoin community or open-source space who are familiar with you or your work, include them here. Include the email address of each reference so we can reach out to verify. Cryptographically signed references (e.g. using PGP or Nostr) are a plus.'
+            : 'Please provide at least 2 written reference letters from people in the Bitcoin community or open-source space who are familiar with you or your project. Include the email address of each reference so we can reach out to verify. Cryptographically signed references (e.g. using PGP or Nostr) are a plus.'}
         </small>
         <textarea
           rows={5}
           className={inputClass}
-          {...register('references', { required: true })}
+          {...register('references', { required: !isLts })}
         />
         <FieldError errors={errors} name="references" />
         <small className="mt-1 block">
