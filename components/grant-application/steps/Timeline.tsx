@@ -11,10 +11,9 @@ export default function Timeline({ register, errors }: StepProps) {
         Duration
         <br />
         <small>
-          How long are you applying for? General grants are 3, 6, 9, or 12
-          months.{' '}
+          Duration of grant you are applying for.{' '}
           <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
-            Why?
+            Minimum is 3 months.
           </CustomLink>
         </small>
         <select
