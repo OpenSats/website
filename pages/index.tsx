@@ -1,7 +1,8 @@
 import Link from '@/components/Link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import ProjectList from '../components/ProjectList'
+import ProjectCarousel from '@/components/ProjectCarousel'
+import { toShowcaseProject } from '@/components/ShowcaseProjectEntry'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -27,6 +28,7 @@ export const getStaticProps = async () => {
   const projects = allProjects
     .filter(isShowcaseProject)
     .sort(() => 0.5 - Math.random())
+    .map(toShowcaseProject)
 
   const generalFund = allFunds.find((f) => f.slug === 'general')
   const opsFund = allFunds.find((f) => f.slug === 'ops')
@@ -71,6 +73,19 @@ export default function Home({
       }
     }
   }, [opsFund, router.isReady, router.query])
+
+  useEffect(() => {
+    if (window.location.hash !== '#explore-projects') return
+
+    const scrollToHeading = () => {
+      document.getElementById('explore-projects')?.scrollIntoView()
+    }
+
+    scrollToHeading()
+    const timeout = window.setTimeout(scrollToHeading, 300)
+
+    return () => window.clearTimeout(timeout)
+  }, [])
   return (
     <>
       <PageSEO
@@ -305,14 +320,17 @@ export default function Home({
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="xl:pt-18 space-y-2 pt-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
+        <div className="xl:pt-18 min-h-screen space-y-2 pt-8 md:space-y-5">
+          <h1
+            id="explore-projects"
+            className="scroll-mt-8 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl"
+          >
             Explore Projects
           </h1>
           <p className="pt-2 text-lg leading-7 text-gray-500 dark:text-gray-400">
             Browse through a showcase of projects supported by us.
           </p>
-          <ProjectList projects={projects} />
+          <ProjectCarousel projects={projects} />
           <div className="flex justify-end pt-4 text-base font-medium leading-6">
             <Link
               href="/projects"
