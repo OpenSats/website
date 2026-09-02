@@ -118,7 +118,11 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         />
         <span>
           I have read the{' '}
-          <CustomLink href="/faq/application">Application FAQ</CustomLink>
+          <CustomLink href="/faq/application">Application FAQ</CustomLink>,
+          including the{' '}
+          <CustomLink href="/faq/application#why-do-i-have-to-submit-a-video">
+            video section
+          </CustomLink>
         </span>
       </label>
 

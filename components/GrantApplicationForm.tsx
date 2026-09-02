@@ -138,7 +138,12 @@ const STEPS: StepConfig[] = [
   {
     id: 'anything_else',
     title: 'Final',
-    fields: ['no_vibed_garbage', 'human_in_charge', 'discipline_and_agency'],
+    fields: [
+      'no_vibed_garbage',
+      'human_in_charge',
+      'discipline_and_agency',
+      'video_application',
+    ],
     render: (props) => <AnythingElse {...props} />,
   },
   {

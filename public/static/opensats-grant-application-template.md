@@ -106,8 +106,8 @@ If yes, please describe the additional funding sources and amounts:
 
 ## Video Application
 
-We strongly encourage you to record a short video, around 2 minutes, explaining
-your project and why it matters.
+A video is required. It must be exactly 2 minutes long. Paste a public link.
+See the Application FAQ for why the length matters.
 
 **Video Link:**
 

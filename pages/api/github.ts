@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
+import { isHttpUrl, isVideoRequired } from '@/utils/grantRules'
 import { formatUsdDisplay } from '@/utils/usd'
 import {
   getApplicationIssueLabels,
@@ -24,6 +25,21 @@ export default async function handler(
     if (!req.body.RED && !areApplicationsOpen()) {
       return res.status(403).json({
         message: 'Grant applications are currently closed.',
+      })
+    }
+
+    const videoLink =
+      typeof req.body.video_application === 'string'
+        ? req.body.video_application.trim()
+        : ''
+    if (isVideoRequired(req.body) && !videoLink) {
+      return res.status(400).json({
+        message: 'A video link is required.',
+      })
+    }
+    if (videoLink && !isHttpUrl(videoLink)) {
+      return res.status(400).json({
+        message: 'Enter a valid URL.',
       })
     }
 
