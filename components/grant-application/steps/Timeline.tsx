@@ -1,3 +1,4 @@
+import CustomLink from '@/components/Link'
 import FieldError from '../FieldError'
 import { StepProps, inputClass } from '../types'
 
@@ -7,19 +8,43 @@ export default function Timeline({ register, errors }: StepProps) {
       <h2>Project Timeline</h2>
 
       <label className="block">
-        Duration
+        Duration (months)
         <br />
-        <small>Duration of grant you are applying for</small>
-        <select
+        <small>
+          How many months are you applying for? General grants must be between 3
+          and 12 months. We do not accept shorter durations.{' '}
+          <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
+            Why?
+          </CustomLink>
+        </small>
+        <input
+          type="number"
+          min={3}
+          max={12}
+          step={1}
           className={inputClass}
-          {...register('duration', { required: true })}
-        >
-          <option value="12 months">12 months</option>
-          <option value="9 months">9 months</option>
-          <option value="6 months">6 months</option>
-          <option value="3 months">3 months</option>
-          <option value="Other">Other (please elaborate below)</option>
-        </select>
+          {...register('duration', {
+            required: true,
+            valueAsNumber: true,
+            min: {
+              value: 3,
+              message: 'Minimum grant duration is 3 months',
+            },
+            max: {
+              value: 12,
+              message: 'Maximum grant duration is 12 months',
+            },
+            validate: (value) => {
+              if (typeof value !== 'number' || Number.isNaN(value)) {
+                return 'This field is required'
+              }
+              if (!Number.isInteger(value)) {
+                return 'Enter a whole number of months'
+              }
+              return true
+            },
+          })}
+        />
         <FieldError errors={errors} name="duration" />
       </label>
 

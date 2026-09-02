@@ -11,8 +11,14 @@ interface ReviewProps {
   sections: readonly ReviewSection[]
 }
 
-const formatValue = (value: unknown) => {
+const formatValue = (value: unknown, name?: string) => {
   if (typeof value === 'boolean') return value ? 'Yes' : 'No'
+  if (typeof value === 'number') {
+    if (name === 'duration') {
+      return value === 1 ? '1 month' : `${value} months`
+    }
+    return String(value)
+  }
   if (typeof value === 'string') return value.trim()
   return ''
 }
@@ -34,7 +40,7 @@ export default function Review({ watch, sections }: ReviewProps) {
             <h3>{section.title}</h3>
             <dl className="space-y-3">
               {section.fields.map(([label, name]) => {
-                const value = formatValue(values[name])
+                const value = formatValue(values[name], name)
                 if (!value) return null
 
                 return (
