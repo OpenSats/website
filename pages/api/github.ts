@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next/types'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
+import { formatUsdDisplay } from '@/utils/usd'
 import {
   getApplicationIssueLabels,
   getApplicationRepo,
@@ -122,6 +123,8 @@ ${req.body.proposed_budget}
 
 **AI / compute cost:**
 ${req.body.ai_cost || 'n/a'}
+
+**Grand total:** ${formatUsdDisplay(req.body.grand_total) || 'n/a'}
 
 **Prior funding:** ${req.body.has_received_funding === 'yes' ? 'Yes' : 'No'}
 

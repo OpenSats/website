@@ -1,4 +1,5 @@
 import FieldError from '../FieldError'
+import UsdAmountInput from '../UsdAmountInput'
 import { StepProps, inputClass } from '../types'
 
 export default function Budget({ register, watch, errors }: StepProps) {
@@ -10,7 +11,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
         Costs & Proposed Budget *<br />
         <small>
           Please submit a proposed budget in USD, including a breakdown of how
-          the funds will be used and the grand total.
+          the funds will be used. Enter the grand total in the field below.
         </small>
         <textarea
           rows={5}
@@ -21,20 +22,34 @@ export default function Budget({ register, watch, errors }: StepProps) {
       </label>
 
       {!watch('LTS') && (
-        <label className="block">
-          AI / Compute Cost *
-          <br />
-          <small>
-            LLM tokens, APIs, and similar cost items related to working with
-            coding agents. None or $0 is fine too.
-          </small>
-          <textarea
-            rows={4}
-            className={inputClass}
-            {...register('ai_cost', { required: true })}
-          />
-          <FieldError errors={errors} name="ai_cost" />
-        </label>
+        <>
+          <label className="block">
+            AI / Compute Cost *
+            <br />
+            <small>
+              LLM tokens, APIs, and similar cost items related to working with
+              coding agents. None or $0 is fine too.
+            </small>
+            <textarea
+              rows={4}
+              className={inputClass}
+              {...register('ai_cost', { required: true })}
+            />
+            <FieldError errors={errors} name="ai_cost" />
+          </label>
+
+          <label className="block">
+            Grand Total *
+            <br />
+            <small>Total amount requested, in USD.</small>
+            <UsdAmountInput
+              name="grand_total"
+              register={register}
+              errors={errors}
+              defaultAmount={watch('grand_total')}
+            />
+          </label>
+        </>
       )}
 
       <hr />
