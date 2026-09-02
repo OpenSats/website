@@ -68,6 +68,7 @@ const validApplication = {
 
 describe('/api/github', () => {
   beforeEach(() => {
+    jest.useFakeTimers().setSystemTime(new Date('2026-05-15T12:00:00Z'))
     createIssue.mockReset()
     createIssue.mockResolvedValue({ data: { number: 1 } })
     assertTurnstile.mockReset()
@@ -82,6 +83,7 @@ describe('/api/github', () => {
   })
 
   afterEach(() => {
+    jest.useRealTimers()
     jest.restoreAllMocks()
   })
 
