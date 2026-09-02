@@ -25,8 +25,8 @@ export default function Budget({ register, watch, errors }: StepProps) {
           AI / Compute Cost *
           <br />
           <small>
-            LLM tokens, APIs, and hardware if you want to self-host models. None
-            or $0 is fine. We are happy to fund this when it helps the work.
+            LLM tokens, APIs, and similar cost items related to working with
+            coding agents. None or $0 is fine too.
           </small>
           <textarea
             rows={4}
