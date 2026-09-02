@@ -38,17 +38,14 @@ export default function Budget({ register, watch, errors }: StepProps) {
             <FieldError errors={errors} name="ai_cost" />
           </label>
 
-          <label className="block">
-            Grand Total *
-            <br />
-            <small>Total amount requested, in USD.</small>
-            <UsdAmountInput
-              name="grand_total"
-              register={register}
-              errors={errors}
-              defaultAmount={watch('grand_total')}
-            />
-          </label>
+          <UsdAmountInput
+            name="grand_total"
+            label="Grand Total *"
+            hint="Total amount requested, in USD."
+            register={register}
+            errors={errors}
+            defaultAmount={watch('grand_total')}
+          />
         </>
       )}
 
