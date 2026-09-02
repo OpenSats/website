@@ -1,4 +1,5 @@
 import FieldError from '../FieldError'
+import UsdAmountInput from '../UsdAmountInput'
 import { StepProps, inputClass } from '../types'
 
 export default function Budget({ register, watch, errors }: StepProps) {
@@ -10,7 +11,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
         Costs & Proposed Budget *<br />
         <small>
           Please submit a proposed budget in USD, including a breakdown of how
-          the funds will be used and the grand total.
+          the funds will be used.
         </small>
         <textarea
           rows={5}
@@ -19,6 +20,34 @@ export default function Budget({ register, watch, errors }: StepProps) {
         />
         <FieldError errors={errors} name="proposed_budget" />
       </label>
+
+      {!watch('LTS') && (
+        <>
+          <label className="block">
+            AI / Compute Cost *
+            <br />
+            <small>
+              LLM tokens, APIs, and similar cost items related to working with
+              coding agents, if applicable. None or $0 is fine too.
+            </small>
+            <textarea
+              rows={4}
+              className={inputClass}
+              {...register('ai_cost', { required: true })}
+            />
+            <FieldError errors={errors} name="ai_cost" />
+          </label>
+
+          <UsdAmountInput
+            name="grand_total"
+            label="Grand Total *"
+            hint="Total amount requested, in USD."
+            register={register}
+            errors={errors}
+            defaultAmount={watch('grand_total')}
+          />
+        </>
+      )}
 
       <hr />
       <h2>Prior Funding</h2>

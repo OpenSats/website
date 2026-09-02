@@ -1,4 +1,5 @@
 import { UseFormWatch } from 'react-hook-form'
+import { formatUsdDisplay } from '@/utils/usd'
 import { FormValues } from '../types'
 
 export interface ReviewSection {
@@ -11,8 +12,10 @@ interface ReviewProps {
   sections: readonly ReviewSection[]
 }
 
-const formatValue = (value: unknown) => {
+const formatValue = (value: unknown, name?: string) => {
   if (typeof value === 'boolean') return value ? 'Yes' : 'No'
+  if (name === 'grand_total') return formatUsdDisplay(value)
+  if (typeof value === 'number') return String(value)
   if (typeof value === 'string') return value.trim()
   return ''
 }
@@ -34,7 +37,7 @@ export default function Review({ watch, sections }: ReviewProps) {
             <h3>{section.title}</h3>
             <dl className="space-y-3">
               {section.fields.map(([label, name]) => {
-                const value = formatValue(values[name])
+                const value = formatValue(values[name], name)
                 if (!value) return null
 
                 return (

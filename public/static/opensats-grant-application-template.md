@@ -78,7 +78,16 @@ This will help us evaluate overall scope and potential grant duration.
 ### Costs & Proposed Budget
 
 Please submit a proposed budget in USD, including a breakdown of how the funds
-will be used and the grand total.
+will be used. Enter the grand total in the field below.
+
+### AI / Compute Cost
+
+LLM tokens, APIs, and similar cost items related to working with coding
+agents. None or $0 is fine too.
+
+### Grand Total
+
+Total amount requested, in USD.
 
 ### Prior Funding
 
@@ -97,8 +106,8 @@ If yes, please describe the additional funding sources and amounts:
 
 ## Video Application
 
-We strongly encourage you to record a short video, around 2 minutes, explaining
-your project and why it matters.
+A video is required. It must be exactly 2 minutes long. Paste a public link.
+See the Application FAQ for why the length matters.
 
 **Video Link:**
 
