@@ -69,7 +69,7 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
           {videoRequired ? '' : 'Optional. '}
           The video must be <strong>exactly 2 minutes</strong> long. We explain
           why in the{' '}
-          <CustomLink href="/faq/application#why-does-the-video-have-to-be-exactly-2-minutes">
+          <CustomLink href="/faq/application#why-do-i-have-to-submit-a-video">
             FAQ
           </CustomLink>
           .
