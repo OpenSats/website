@@ -1,5 +1,7 @@
 import CustomLink from '@/components/Link'
+import { isVideoRequired, VIDEO_REQUIRED_LABEL } from '@/utils/grantRules'
 import CheckboxGroupError from '../CheckboxGroupError'
+import FieldError from '../FieldError'
 import { StepProps, inputClass, checkboxClass } from '../types'
 
 const VIBE_CHECK_FIELDS = [
@@ -8,7 +10,14 @@ const VIBE_CHECK_FIELDS = [
   'discipline_and_agency',
 ] as const
 
-export default function AnythingElse({ register, errors }: StepProps) {
+export default function AnythingElse({ register, watch, errors }: StepProps) {
+  const isLts = Boolean(watch('LTS'))
+  const videoRequired = !isLts && isVideoRequired(watch('grand_total'))
+  const videoLead = isLts
+    ? 'We strongly encourage a short video explaining your project and why it matters. '
+    : videoRequired
+    ? `A video is required for requests of ${VIDEO_REQUIRED_LABEL} or more. `
+    : `A video is optional unless you are requesting ${VIDEO_REQUIRED_LABEL} or more. `
   return (
     <>
       <h2>Vibe Check</h2>
@@ -60,17 +69,24 @@ export default function AnythingElse({ register, errors }: StepProps) {
       <h2>Video Application</h2>
 
       <label className="block">
+        Video Link {videoRequired ? '*' : ''}
+        <br />
         <small>
-          We strongly encourage you to record a short video (around 2 minutes)
-          explaining your project and why it matters. This is optional but can
-          make a real difference. Please provide a link to the video below.
+          {videoLead}
+          It must be exactly 2 minutes and 10 seconds (2:10). Paste a link
+          below. We do not host uploads.
         </small>
         <input
           type="text"
           placeholder="https://"
           className={inputClass}
-          {...register('video_application')}
+          {...register('video_application', {
+            required: videoRequired
+              ? `A video link is required for requests of ${VIDEO_REQUIRED_LABEL} or more`
+              : false,
+          })}
         />
+        <FieldError errors={errors} name="video_application" />
       </label>
 
       <hr />

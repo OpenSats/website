@@ -1,3 +1,4 @@
+import { VIDEO_REQUIRED_LABEL } from '@/utils/grantRules'
 import FieldError from '../FieldError'
 import UsdAmountInput from '../UsdAmountInput'
 import { StepProps, inputClass } from '../types'
@@ -41,7 +42,7 @@ export default function Budget({ register, watch, errors }: StepProps) {
           <UsdAmountInput
             name="grand_total"
             label="Grand Total *"
-            hint="Total amount requested, in USD."
+            hint={`Total amount requested, in USD. Requests of ${VIDEO_REQUIRED_LABEL} or more require a 2:10 video.`}
             register={register}
             errors={errors}
             defaultAmount={watch('grand_total')}
