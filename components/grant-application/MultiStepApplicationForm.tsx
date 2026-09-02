@@ -26,6 +26,8 @@ interface MultiStepApplicationFormProps {
   submitLabel: string
   /** When set, submit stays disabled until every listed field is truthy. */
   submitRequiresChecked?: readonly string[]
+  /** Preview builds can show the form while applications are closed. */
+  allowSubmit?: boolean
 }
 
 export default function MultiStepApplicationForm({
@@ -34,6 +36,7 @@ export default function MultiStepApplicationForm({
   defaultValues,
   submitLabel,
   submitRequiresChecked,
+  allowSubmit = true,
 }: MultiStepApplicationFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -98,12 +101,19 @@ export default function MultiStepApplicationForm({
   }, [isLastStep])
 
   const submitDisabled =
+    !allowSubmit ||
     !!submitRequiresChecked?.some((name) => !watch(name)) ||
-    (isLastStep && !turnstileReady)
+    (isLastStep && allowSubmit && !turnstileReady)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    if (currentStep !== steps.length - 1 || loading || submitDisabled) return
+    if (
+      !allowSubmit ||
+      currentStep !== steps.length - 1 ||
+      loading ||
+      submitDisabled
+    )
+      return
 
     setLoading(true)
     setFailureReason(undefined)
@@ -153,13 +163,20 @@ export default function MultiStepApplicationForm({
 
       {steps[currentStep].render(stepProps)}
 
-      {isLastStep && (
+      {isLastStep && allowSubmit && (
         <div className="my-8 flex flex-col items-center py-2">
           <TurnstileWidget
             ref={turnstileRef}
             onTokenChange={(token) => setTurnstileReady(!!token)}
           />
         </div>
+      )}
+
+      {isLastStep && !allowSubmit && (
+        <p className="rounded bg-yellow-100 p-4 text-yellow-900">
+          This preview is for review only. Applications are closed, so
+          submissions are disabled.
+        </p>
       )}
 
       <StepNavigation

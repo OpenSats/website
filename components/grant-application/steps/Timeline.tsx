@@ -1,3 +1,4 @@
+import CustomLink from '@/components/Link'
 import FieldError from '../FieldError'
 import { StepProps, inputClass } from '../types'
 
@@ -9,16 +10,21 @@ export default function Timeline({ register, errors }: StepProps) {
       <label className="block">
         Duration
         <br />
-        <small>Duration of grant you are applying for</small>
+        <small>
+          Duration of grant you are applying for. More on grant duration in our{' '}
+          <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
+            FAQ
+          </CustomLink>
+          .
+        </small>
         <select
           className={inputClass}
           {...register('duration', { required: true })}
         >
-          <option value="12 months">12 months</option>
-          <option value="9 months">9 months</option>
-          <option value="6 months">6 months</option>
           <option value="3 months">3 months</option>
-          <option value="Other">Other (please elaborate below)</option>
+          <option value="6 months">6 months</option>
+          <option value="9 months">9 months</option>
+          <option value="12 months">12 months</option>
         </select>
         <FieldError errors={errors} name="duration" />
       </label>
