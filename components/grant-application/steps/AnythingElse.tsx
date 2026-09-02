@@ -1,5 +1,5 @@
 import CustomLink from '@/components/Link'
-import { isVideoRequired } from '@/utils/grantRules'
+import { isHttpUrl, isVideoRequired } from '@/utils/grantRules'
 import CheckboxGroupError from '../CheckboxGroupError'
 import FieldError from '../FieldError'
 import { StepProps, inputClass, checkboxClass } from '../types'
@@ -83,10 +83,13 @@ export default function AnythingElse({ register, watch, errors }: StepProps) {
           placeholder="https://"
           className={inputClass}
           {...register('video_application', {
-            validate: (value) =>
-              !videoRequired ||
-              (typeof value === 'string' && value.trim().length > 0) ||
-              'A video link is required',
+            validate: (value) => {
+              const trimmed = typeof value === 'string' ? value.trim() : ''
+              if (!trimmed) {
+                return videoRequired ? 'A video link is required' : true
+              }
+              return isHttpUrl(trimmed) || 'Enter a valid URL'
+            },
           })}
         />
         <FieldError errors={errors} name="video_application" />

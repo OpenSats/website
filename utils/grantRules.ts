@@ -12,3 +12,13 @@ export function isVideoRequired(application: {
   const amount = parseUsd(application.grand_total)
   return amount !== undefined && amount >= VIDEO_REQUIRED_USD
 }
+
+export function isHttpUrl(value: unknown): boolean {
+  if (typeof value !== 'string') return false
+  try {
+    const url = new URL(value.trim())
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
