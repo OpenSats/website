@@ -21,10 +21,10 @@ export default function Timeline({ register, errors }: StepProps) {
           className={inputClass}
           {...register('duration', { required: true })}
         >
-          <option value="12 months">12 months</option>
-          <option value="9 months">9 months</option>
-          <option value="6 months">6 months</option>
           <option value="3 months">3 months</option>
+          <option value="6 months">6 months</option>
+          <option value="9 months">9 months</option>
+          <option value="12 months">12 months</option>
         </select>
         <FieldError errors={errors} name="duration" />
       </label>
