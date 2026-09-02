@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next/types'
 import { sendApplicationEmails } from '@/utils/application-emails'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
+import { areApplicationsOpen } from '@/utils/applicationWindow'
 import {
   getApplicationIssueLabels,
   getApplicationRepo,
@@ -19,6 +20,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
+    if (!req.body.RED && !areApplicationsOpen()) {
+      return res.status(403).json({
+        message: 'Grant applications are currently closed.',
+      })
+    }
+
     if (!(await assertTurnstile(req))) {
       return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
     }

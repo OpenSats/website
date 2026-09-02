@@ -1,3 +1,4 @@
+import { areApplicationsOpen } from '@/utils/applicationWindow'
 import MultiStepApplicationForm, {
   StepConfig,
 } from './grant-application/MultiStepApplicationForm'
@@ -153,6 +154,7 @@ export default function GrantApplicationForm() {
       hiddenFields={{ general_fund: true }}
       defaultValues={{ duration: '3 months' }}
       submitLabel="Submit Grant Application"
+      allowSubmit={areApplicationsOpen()}
     />
   )
 }
