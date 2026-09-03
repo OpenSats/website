@@ -1,0 +1,351 @@
+---
+title: "nym21 Made Bitcoin's On-Chain Metrics Free, and the Pros Who Sell Them Came Running"
+date: '2026-07-03'
+tags: ['bitcoin', 'research', 'spotlight']
+authors: ['ville', 'robos']
+images: ['/static/images/spotlight/nym21/featured.jpg', '/static/images/spotlight/nym21/hero.jpg']
+draft: false
+summary: "nym21 built free Bitcoin analytics out of spite, and made them so good that the professionals who charge for the same data quietly started using his."
+pullQuotes:
+  - "Partly out of spite, I made it my quest to offer as much on-chain data as I could to as many people as possible, for free, forever."
+  - "I've always believed that if something can be free, it should be."
+  - "I was left wondering why this was not already built, and how it could be so expensive. Ended up with the conclusion that the latter was mainly due to greed."
+  - "I sincerely hope that I'll be able to gradually find and move towards other sources of funding, and eventually give back to OpenSats"
+---
+
+> Partly out of spite, I made it my quest to offer as much on-chain data as I
+> could to as many people as possible, for free, forever.
+
+That is nym21, a pseudonymous developer and OpenSats grantee describing why the
+[Bitcoin Research Kit][brk] (BRK) exists.
+
+The spite was for companies like [Glassnode][glassnode], which charges from \$99 a
+month to \$11,200 a year for institutional-grade Bitcoin data, among other things.
+Nym21 gives away as much of that data as he can, for free.
+
+He self-hosts it from two base-model Mac minis, the machine he
+calls "the best bang for your buck server," each with an external drive bolted on
+for storage. They've been answering requests, without a crash, for months. He runs
+one from a TV stand at home and the other from a relative's office rather than a
+data center on purpose: he wanted the same experience a self-hoster would have,
+the same rough edges, so the thing would actually be good to run at home.
+
+For all the internet knows, nym21 is the [tardigrade][tardigrade] he uses for an avatar, a more
+apt self-portrait than he probably intended.
+Before getting into how a cheap consumer box does the work of a data center, or why
+nobody else had bothered to do it for free, it helps to know what you're actually
+paying for when you buy on-chain data. In his words: just parsing and arithmetic.
+
+---
+
+Here's the joke at the center of the whole business: the data was never secret,
+because Bitcoin's ledger is public. Anyone can download the entire history of
+every transaction since the genesis block, and keep it on a laptop, the same copy
+everyone else has.
+
+The crux is that a raw ledger doesn't answer questions. "Are long-term holders
+selling?" has a real answer sitting in that data, but getting it means parsing the
+whole chain and doing the arithmetic each time a new block is found.
+
+<Image
+  src="/static/images/spotlight/nym21/drawing.png"
+  alt="From the public ledger to the answer: read the blocks, do the arithmetic"
+  width={2022}
+  height={390}
+  className="w-full h-auto"
+/>
+
+Glassnode, which did as much as anyone to turn on-chain analysis into a paid
+product, built that machinery once, charged for the answers, and called it "just
+good business." It's just the most visible of a crowded field, each one of them
+fencing the same public data behind a login, a subscription, or a house view on
+what's worth showing. None of it, nym21 bet, needed a data center. Only a spare
+computer.
+
+There was one piece everyone assumed had to come from outside: the price. The
+chain knows when coins move, not what they're worth, so every analytics tool needs
+to pull its prices from an exchange. Nym21 didn't want to depend on anyone.
+
+He stumbled on a thing called [Simple Steve's price oracle][steves-oracle], the proof that
+Bitcoin's dollar price could be inferred from the chain itself, then spent two
+weeks hunting for a way to compute an accurate price for every single block.
+
+He found one. The method itself is almost embarrassingly simple. People are
+forever sending round dollar amounts of bitcoin,
+and every one of those payments is written into the public ledger. Gather enough
+of them and the day's price comes into view. It only works once a lot of people
+are transacting, so it starts in January 2015, at block 340,000, and from there it
+sits within a few percent of the exchange price almost every day. (Until a few
+weeks ago it started in 2018; then he saw Steve reaching for 2016. "I had to do
+better!") Bitcoin's early years were too quiet to read this way, so those prices,
+back to 2009, he just filled in by hand.
+
+<BrowserFrame url="https://bitview.space">
+  <Image
+    src="/static/images/spotlight/nym21/genesis-light.png"
+    darkSrc="/static/images/spotlight/nym21/genesis-dark.png"
+    alt="The Bitview explorer showing Bitcoin's genesis block"
+    width={1920}
+    height={1092}
+    className="w-full h-auto"
+  />
+</BrowserFrame>
+
+Because the chain is identical for everyone, anyone can verify these prices
+independently, and since the data lives on-chain, the only external input BRK
+still requires is the blocks themselves, which he notes can even be received via a
+Blockstream satellite.
+
+> It honestly felt like a discovery.
+
+All that parsing and arithmetic produces something you can look at: thousands of
+charts, every one computed from the raw chain on a single Mac mini.
+
+<Image
+  src="/static/images/spotlight/nym21/cloud.png"
+  alt="A selection of the thousands of charts BRK computes from the raw chain"
+  width={1600}
+  height={1600}
+  className="w-full h-auto"
+/>
+
+Long before Bitcoin, nym21 developed what he calls a disdain for Windows "and its
+enshittification," and switched to Linux for everything it stood for: freedom,
+privacy, the right to own the thing you run.
+
+He went through Ubuntu, Debian, and Manjaro, the full distro-hopping tour before
+settling on Arch. He became a ricer, which is someone who rebuilds
+the look and feel of his desktop from the config files up, swapping window
+managers, theming every bar and font and keybind, writing his own bash scripts to
+do it, and open-sourcing the lot. "Probably the most fun I've had programming to
+this day," he says.
+
+<Image
+  src="/static/images/spotlight/nym21/linux-rice.png"
+  alt="nym21's riced Arch Linux desktop"
+  width={1366}
+  height={768}
+  className="w-full h-auto"
+/>
+
+He moved to macOS eventually, after one too many updates broke something he
+needed, and says he missed nothing about Linux except exactly that. The fun. (He'd
+been through the same thing with mechanical keyboards, open-sourcing the designs
+and firmware: "great experience," he says, "absolutely terrible for your wallet.")
+
+Bitcoin itself took a while to land. What finally did it was an analogy: he started
+thinking of it as "the Linux of money," and by his own cheerful admission has been
+"in the Bitcoin cult ever since."
+
+He'd earned the conversion the hard way. He came to crypto in 2020, at the bottom
+of the Covid crash, decided Bitcoin was "grandpa coin" and too expensive, and put
+\$100 into alternative coins like EOS and TRX because a subreddit told him to.
+It went so well that he got greedy, believed the \$100k meme a little too
+hard, and ended up neck-deep in leveraged BTC and ETH futures that blew up in late
+2021. The lesson arrived in the format every Bitcoiner eventually gets: stay
+humble, stack sats.
+
+What he kept from all of it was a conviction that would harden into the project:
+
+> I've always believed that if something can be free, it should be. Just as using
+> Bitcoin is a right and is free, access to its data should also be free, not gated
+> behind entities that treat it as an advanced, proprietary service. In reality,
+> it's just parsing and arithmetic.
+
+It started, like most of his projects, with an itch. He was building himself a
+portfolio tracker and wanted to add investment strategies. That work pulled him
+down into on-chain indicators, a concept he first came across watching explainer
+videos on [Glassnode][glassnode-explainer], narrated, as it happened, by an analyst named James Check.
+(Remember him.)
+
+The metrics were powerful, but the data behind them was the problem. The handful
+of free sources he tried, he says, came with at least one dealbreaker: heavy rate
+limiting, sparse or irregular updates, very limited dataset, unreliable,
+unmaintained. The few that actually worked cost a small fortune. An
+open-source alternative simply didn't exist.
+
+He could've shrugged and paid up, like everyone else with a node and a begrudging
+nod. Instead the price gnawed at him:
+
+> I was left wondering why this was not already built, and how it could be so
+> expensive. Ended up with the conclusion that the latter was mainly due to greed.
+
+---
+
+The first public version went out as satonomics, short for "satoshi economics." He
+renamed it kibō, Japanese for hope, which was the most hopeful thing about the
+project. He'd later swap it for the plainer Bitcoin Research Kit and wrote kibō off
+as "too generic."
+
+Building a thing out of irritation and giving it away for free might be the most
+honest description of open-source work anyone has offered. Nicolas Dorier's
+famous ["my trust in you is broken, I will make you obsolete"][dorier-trust] comes to mind.
+
+For a few years the project was just nym21, funding it himself, known to almost
+nobody. In 2024 he put up a Geyser crowdfunding page to buy the server that would
+run it. Then James Check found the page.
+
+Yes, the very same James Check whose Glassnode videos had taught nym21 the subject
+in the first place. Check "somehow got aware of
+it," nym21 says, "and helped get it to the finish line."
+
+By his own account, nym21 thanked Check on Nostr, and that thank-you turned into a
+running conversation. Over the next two years Check went from donor to self-hoster,
+running the entire on-chain side of CheckOnChain, his own widely read analytics
+service, from his own instance of BRK.
+
+Before long it wasn't just Check. CryptoVizArt, the lead research analyst at
+Glassnode itself, saw a dataset BRK had just released (every coin sorted by the
+price at which it last moved) and came to nym21 curious, for his own research,
+whether it could be cut finer: the same picture, broken out by how old the coins
+are, a view even Glassnode didn't offer.
+
+Nym21's first instinct was that it would be expensive to compute and store. It
+wasn't; the pieces were already there. "The computation was essentially free," he
+says, "and storing it, thanks to the age-band structure, was practically free too,
+under a gigabyte." That last part matters: everything has to fit on a consumer
+machine, so each new dataset is a running trade-off against ease of hosting, a bit
+like Bitcoin itself. Glassnode's own lead analyst had started reaching for the
+free tool when the paid one came up short.
+
+The clearest proof that BRK had become infrastructure, though, came when a paid
+analytics platform turned out to be running on it.
+
+In the spring of 2026, nym21 noticed that Newhedge, a slick paid analytics
+platform, was publishing charts that looked an awful lot like his. He could be
+certain because of the price oracle: BRK computes prices in its own way, so a chart
+built on its data carries a fingerprint. "It's not possible to have the same
+result" by accident, he said in public tagging the company.
+
+Newhedge's Alon Shvartsman replied within the half hour. "You're right, we should
+have credited BRK," he wrote. "We started using it recently and absolutely love
+it... happy to support/sponsor the project, let's talk!" Nym21 was not entirely
+mollified: he'd already spotted more charts, disappointed that the
+attribution only arrived after the issue was raised in public.
+
+Then Shvartsman put a number on it: Newhedge was using BRK as a source across
+"30–40 charts."
+
+That's thirty to forty. One pseudonymous developer's free tool, quietly powering
+that many charts on a paid product. That's the other side of an MIT license:
+anyone can use the work, build on it, even build a business on it, and most will
+never ask permission, or contribute anything back.
+
+What began as a public dispute ended somewhere better. Newhedge added attribution
+across its charts immediately, and Shvartsman followed through on the support soon
+after. The two have been on good terms since, helping each other improve their
+respective projects; a few months later, Shvartsman would even write a reference
+letter backing one of nym21's grant applications.
+
+Weeks later, the recognition climbed past the on-chain crowd. Jameson Lopp, Casa
+co-founder and one of the most influential voices in Bitcoin, stumbled upon the
+project and told his followers:
+
+<a href="https://xcancel.com/lopp/status/2056409360390041814" target="_blank" rel="noopener noreferrer">
+  <Image
+    src="/static/images/spotlight/nym21/lopp-tweet-light.png"
+    darkSrc="/static/images/spotlight/nym21/lopp-tweet-dark.png"
+    alt="Jameson Lopp's post recommending Bitview and the Bitcoin Research Kit"
+    width={1196}
+    height={420}
+    className="w-full h-auto"
+  />
+</a>
+
+There's an irony humming under all of this. As the rest of Bitcoin came to depend
+on BRK, nym21 was spending most of his energy making sure BRK depended on nothing.
+
+---
+
+"Limiting the use of dependencies has been an ongoing quest of mine," he says, and
+he means it almost literally. The hardest one to shake was the price itself: he'd
+been burned when CoinGecko changed its terms under him, and again when exchanges
+rewrote their APIs. The on-chain oracle was the finish line of that fight: once
+price could be computed from the chain itself, he never had to ask an exchange for
+anything again.
+
+The rest he removed the same way. He keeps the whole thing speaking plain HTTP, so
+it can run behind anything, on anyone's hardware, offline if it has to.
+
+He prunes the Rust crates he leans on as aggressively as he can, wary of the
+supply-chain surprises that come from trusting too much code you didn't write, a
+bet that looks smarter every time another npm package turns out to be malware or
+AI slop.
+
+He treats efficiency the same way. A full mempool.space instance, he found, can eat
+around 250% of the blockchain's own size. "I took it as a challenge," he says, and
+got BRK's equivalent down to roughly 45%.
+
+That equivalent is no toy: BRK reimplements the mempool.space APIs wholesale,
+answers millions of requests through them every month, and has made its way into
+Sparrow, one of Bitcoin's most respected wallets, with [Cove][cove-os] possibly next. He
+counts it among the highlights of the whole project.
+
+The Mac mini isn't the destination, either. The point of getting it this lean is to
+run it on something anyone could leave going in a closet: a Start9, an Umbrel box.
+Asked when that support lands, he reaches for Christine Lagarde, the ECB president
+and no friend of Bitcoin: "It will come in due course."
+
+The endpoint of all that removal is the part nym21 is most insistent about, and the
+part most people miss: you don't need him. The polished site most people land on,
+[bitview.space][bitview], is just the default showcase. "BRK the project is the
+infrastructure," he says, "bitview is just a showcase." The whole thing is
+MIT-licensed and self-contained: two commands and a Bitcoin node, and you're
+running your own copy of the entire site, charts and all, answering to no one, not
+Glassnode, not even nym21.
+
+The pattern goes beyond the code. The money that keeps him going now is OpenSats
+grants, not venture capital, which means nobody sits above the project deciding
+what it owes them. A price feed, a library, a platform, an employer, an investor:
+he's spent years removing dependencies one at a time.
+
+What keeps him going, on the hard days, is mostly that the work matters: he calls it
+a privilege only a few people get, and motivating on its own. Underneath that is
+something he'll only half-own: "There is a sense of obligation towards users and
+OpenSats I suppose," he says, "and how I don't want to let either down." Of all the
+dependencies he's spent years pruning away, this is the one he never chose, and
+can't shake.
+
+What comes after BRK is already drawn up, and has been for the better part of a
+decade. It's a game: online, competitive, something like a more hardcore TowerFall,
+running on a Bitcoin economy. He works on it a few days at a time, once or twice a
+year, on purpose, so it can't pull him off BRK.
+
+Which brings us back to the tardigrade. Nym21 built BRK the way that animal lives:
+on almost nothing, beholden to no one, and hard to kill. Cut its power, its
+internet, even its author, and a copy still boots back up on someone else's machine
+with two commands and a node.
+
+So when he talks about stepping back, it isn't fatigue. It's a plan. What he wants
+instead is simple:
+
+> I sincerely hope that I'll be able to gradually find and move towards other
+> sources of funding, donations and sponsorships, and eventually give back to
+> OpenSats and free my 'seat' to another motivated developer with great ideas but
+> no funding.
+
+---
+
+Nym21 has been an OpenSats grantee since December 2024. The grant lets him work on
+the [Bitcoin Research Kit][brk] full-time and keep it free to use, verify, and
+self-host. If you want to support nym21, tell someone the project exists. (Just
+remember to credit him for the work!)
+
+Our support for nym21's work was made possible thanks to your generous donations to
+[The General Fund][General Fund].
+
+<DonateRecurringButton />
+
+For comments, corrections, or suggestions about our [Spotlight][OpenSats spotlight]
+series, please reach out to spotlight@opensats.org.
+
+[brk]: /projects/bitcoinresearchkit
+[bitview]: https://bitview.space/
+[glassnode]: https://glassnode.com/
+[glassnode-explainer]: https://youtu.be/-xFi-VJlotM
+[tardigrade]: https://en.wikipedia.org/wiki/Tardigrade
+[steves-oracle]: https://utxo.live/oracle/explain.php
+[dorier-trust]: https://blog.btcpayserver.org/btcpay-documentary-my-trust-in-you-is-broken/
+[OpenSats spotlight]: /spotlight
+[General Fund]: /funds/general
+[cove-os]: /projects/cove
