@@ -88,6 +88,7 @@ export const Authors = defineDocumentType(() => ({
     layout: { type: 'string' },
     board: { type: 'boolean' },
     ops: { type: 'boolean' },
+    content: { type: 'boolean' },
     design: { type: 'boolean' },
     volunteer: { type: 'boolean' },
   },

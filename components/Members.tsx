@@ -18,6 +18,9 @@ export default function Members({ subset }) {
     case 'Ops':
       members = sortedMembers.filter((p) => p.ops === true)
       break
+    case 'Content':
+      members = sortedMembers.filter((p) => p.content === true)
+      break
     case 'Volunteers':
       members = sortedMembers.filter((p) => p.volunteer === true)
       break
