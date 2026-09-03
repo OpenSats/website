@@ -165,6 +165,16 @@ module.exports = () => {
           destination: '/apply/red',
           permanent: false,
         },
+        {
+          source: '/impact',
+          destination: '/tags/impact',
+          permanent: true,
+        },
+        {
+          source: '/grants',
+          destination: '/tags/grants',
+          permanent: true,
+        },
       ]
     },
     webpack: (config, options) => {
