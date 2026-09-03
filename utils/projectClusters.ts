@@ -98,6 +98,7 @@ export const CLUSTERS: Cluster[] = [
       'jumble',
       'soapbox',
       'wisp',
+      'zapstream',
     ],
   },
   {
