@@ -1,0 +1,73 @@
+---
+title: 'Zap.stream'
+dateAdded: '2023-10-18'
+summary: 'A nostr-native live-streaming client that lets creators broadcast video, chat with viewers, and receive Lightning zaps.'
+nym: 'Kieran Harkin'
+website: 'https://zap.stream/'
+coverImage: '/static/images/projects/nostr/zapstream.png'
+git: 'https://github.com/v0l/zap.stream'
+nostr: 'npub1v0lxxxxutpvrelsksy8cdhgfux9l6a42hsj2qzquu2zk7vc9qnkszrqj49'
+tags: ['Nostr', 'Streaming', 'Media']
+showcase: true
+fund: nostr
+announcementLink: '/blog/nostr-grants-october-2023#zapstream'
+---
+
+[Zap.stream](https://zap.stream/) is a live-streaming client built on
+[nostr] and Bitcoin. Creators can broadcast video, host a live chat, receive
+Lightning [zaps], and keep their streaming identity tied to their nostr key
+instead of a platform account. The web app is a [NIP-53] client and works with
+externally hosted [HLS] streams, giving streamers an open alternative to
+closed-platform live video.
+
+The project has grown beyond the browser client. Kieran also maintains the
+mobile [Flutter] apps for iOS and Android, which let creators go live from a
+phone camera, receive notifications, open stream links, and connect a Lightning
+wallet through [Nostr Wallet Connect][NWC]. The broader stack includes a self-hostable
+Rust streaming server for [RTMP] ingest, HLS output, recordings, and operator
+metrics.
+
+Zap.stream also works with [Route96], a NIP-96 and [Blossom] media backend for
+large video files, clips, and replayable content. Route96 can generate
+thumbnails, optimize media, mirror uploads across servers, and enforce
+Lightning-based storage limits, giving nostr apps a reusable media layer instead
+of forcing every client to build one from scratch.
+
+## Why fund it?
+
+Live streaming depends on bandwidth-heavy infrastructure, real-time chat,
+payments, storage, moderation tools, and discoverability. In the legacy model,
+those pieces usually come bundled inside a central platform that controls user
+accounts, monetization, and distribution. Zap.stream separates the client and
+backend pieces so streamers can publish through nostr, get paid over Lightning,
+and use infrastructure that can be run by independent operators.
+
+OpenSats first supported zap.stream in the [third wave of nostr grants][wave-3].
+Kieran later received [long-term support][lts] covering his work on zap.stream,
+snort.social, native zap.stream apps, and a new backend for a marketplace of
+streaming providers.
+
+## What's next?
+
+Ongoing work focuses on making nostr live streaming easier to use from both
+desktop and mobile. The mobile apps continue to improve the viewing and
+broadcasting experience, while the backend work makes streaming infrastructure
+more portable and self-hostable. Route96 adds durable media storage for video on
+nostr, opening the door to clips, video-on-demand, and richer media features
+across the ecosystem.
+
+Together, these pieces make zap.stream a practical test bed for
+user-controlled, open-protocol live streaming where creators can carry their
+identity, audience, and payments across clients.
+
+[Flutter]: https://github.com/nostrlabs-io/zap-stream-flutter
+[lts]: /blog/kieran-receives-lts-grant
+[NIP-53]: https://github.com/nostr-protocol/nips/blob/master/53.md
+[nostr]: /topics/nostr
+[Route96]: https://github.com/v0l/route96
+[wave-3]: /blog/nostr-grants-october-2023#zapstream
+[zaps]: /topics/zaps
+[HLS]: https://en.wikipedia.org/wiki/HTTP_Live_Streaming
+[NWC]: /topics/nostr-wallet-connect
+[RTMP]: https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol
+[Blossom]: /topics/blossom

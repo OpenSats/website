@@ -18,15 +18,18 @@ export default function Members({ subset }) {
     case 'Ops':
       members = sortedMembers.filter((p) => p.ops === true)
       break
+    case 'Content':
+      members = sortedMembers.filter((p) => p.content === true)
+      break
     case 'Volunteers':
       members = sortedMembers.filter((p) => p.volunteer === true)
       break
   }
 
   return (
-    <div className="col-span-2 col-start-2 grid grid-cols-2 space-y-2 sm:gap-x-2 md:grid-cols-3 md:gap-x-8">
+    <div className="not-prose col-span-2 col-start-2 grid grid-cols-2 gap-x-2 gap-y-8 py-8 md:grid-cols-3 md:gap-x-8">
       {members.map((member, i) => (
-        <div className="items-left flex flex-col space-x-2 pt-8" key={i}>
+        <div className="items-left flex flex-col space-x-2" key={i}>
           <Link href={`/about/${member.slug}`}>
             <Image
               src={member.avatar}
