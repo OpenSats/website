@@ -1,0 +1,34 @@
+---
+title: 'Guix'
+dateAdded: '2026-05-12'
+summary: 'A purely functional package manager and GNU/Linux distribution built around declarative systems, reproducible environments, and transactional upgrades.'
+nym: 'Steve George'
+website: 'https://guix.gnu.org/'
+donationLink: 'https://guix.gnu.org/donate/'
+coverImage: '/static/images/projects/guix.svg'
+git: 'https://codeberg.org/guix/guix'
+tags: ['Bitcoin', 'Core', 'Infrastructure']
+fund: general
+---
+
+Guix is a purely functional package manager and GNU/Linux distribution for declarative systems, transactional upgrades, rollbacks, and per-user profiles. It can run as a full operating system or on top of an existing GNU/Linux distribution, and it uses [Guile Scheme](https://www.gnu.org/software/guile/) for package definitions and system configuration. The wider project spans the main [`guix` codebase][repo], a large package collection, documentation, package discovery, and the build and substitute infrastructure that keeps the system usable at scale.
+
+Guix also matters directly to Bitcoin infrastructure. [Bitcoin Core's release process][bitcoin-core-release] uses Guix for reproducible builds, release attestations, and the surrounding builder workflow. That gives maintainers and users a stronger way to verify that published binaries match the reviewed source code.
+
+## Why fund it?
+
+Reproducible builds and declarative environments reduce operational guesswork. They make it easier to audit release pipelines, recreate old environments, and recover from mistakes with clean rollbacks. Those properties are valuable across free software, and they are especially valuable for Bitcoin projects where release integrity matters. OpenSats is supporting Steve George's work on Guix through a core grant.
+
+## What's next?
+
+Guix keeps moving on both the developer experience and the shared infrastructure behind it. Recent upstream work tightened the safety model for downloaded channel files in [`guix pull` and `guix time-machine`][secure-channels], and the project's [donation page][donate] highlights the ongoing need to fund build farms, substitute servers, development infrastructure, and community resources.
+
+If you want to dig deeper, start with the [main site][site], the [main repository][repo], the [package browser][packages], the [Bitcoin Core Guix docs][bitcoin-core-guix], or the recent post on [secure channel-file downloads][secure-channels].
+
+[bitcoin-core-guix]: https://github.com/bitcoin/bitcoin/blob/master/contrib/guix/README.md
+[bitcoin-core-release]: https://github.com/bitcoin/bitcoin/blob/master/doc/release-process.md
+[donate]: https://guix.gnu.org/donate/
+[packages]: https://packages.guix.gnu.org/
+[repo]: https://codeberg.org/guix/guix
+[secure-channels]: https://guix.gnu.org/en/blog/2026/time-travel-without-borders/
+[site]: https://guix.gnu.org/
