@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../../utils/constants'
 import { getReportPreview } from '../../utils/api-helpers'
@@ -6,10 +6,17 @@ import ReportPreview from '../../components/ReportPreview'
 import { PageSEO } from '../../components/SEO'
 import PageSection from '../../components/PageSection'
 import { fetchPostJSON } from '../../utils/api-helpers'
+import { TURNSTILE_TOKEN_FIELD } from '../../utils/turnstile'
+import TurnstileWidget, {
+  TurnstileWidgetHandle,
+} from '../../components/grant-application/TurnstileWidget'
 
 export default function Preview() {
   const router = useRouter()
   const [reportContent, setReportContent] = useState<string>('')
+  const [turnstileReady, setTurnstileReady] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null)
 
   useEffect(() => {
     const loadPreview = async () => {
@@ -42,6 +49,10 @@ export default function Preview() {
   const handleSubmit = async () => {
     if (!reportContent) return
 
+    const turnstile = turnstileRef.current
+    if (!turnstile) return
+
+    setSubmitting(true)
     try {
       const grantDetails = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}'
@@ -49,13 +60,18 @@ export default function Preview() {
       const reportData = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT) || '{}'
       )
+      const token = await turnstile.waitForToken()
       const response = await fetchPostJSON('/api/report', {
         ...grantDetails,
         ...reportData,
+        [TURNSTILE_TOKEN_FIELD]: token,
       })
 
       if (response.error) {
         console.error('Error submitting report:', response.error)
+        setTurnstileReady(false)
+        turnstile.reset()
+        setSubmitting(false)
         return
       }
 
@@ -66,6 +82,9 @@ export default function Preview() {
       router.push('/reports/success')
     } catch (e) {
       console.error('Failed to submit report. Please try again.', e)
+      setTurnstileReady(false)
+      turnstileRef.current?.reset()
+      setSubmitting(false)
     }
   }
 
@@ -109,6 +128,13 @@ export default function Preview() {
             <ReportPreview reportContent={reportContent} />
           </div>
 
+          <div className="flex flex-col items-center py-2">
+            <TurnstileWidget
+              ref={turnstileRef}
+              onTokenChange={(token) => setTurnstileReady(!!token)}
+            />
+          </div>
+
           <div className="mt-6 flex justify-between space-x-4">
             <button
               type="button"
@@ -133,9 +159,14 @@ export default function Preview() {
             </button>
             <button
               onClick={handleSubmit}
-              className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+              disabled={!turnstileReady || submitting}
+              className={`rounded px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ${
+                !turnstileReady || submitting
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-orange-500 hover:bg-orange-600'
+              }`}
             >
-              Submit Report
+              {submitting ? 'Submitting...' : 'Submit Report'}
             </button>
           </div>
         </div>

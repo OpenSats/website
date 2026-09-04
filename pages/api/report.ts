@@ -2,6 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from './sendgrid'
 import { generateReportContent } from '../../utils/api-helpers'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
+import { findGrantIssue } from '@/utils/grant-lookup'
+import { ERROR_MESSAGES } from '../../utils/constants'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -15,7 +18,7 @@ interface ReportBotRequest extends NextApiRequest {
     next_quarter: string
     money_usage: string
     help_needed?: string
-    issue_number: number
+    grant_id: string
     email: string
   }
 }
@@ -62,6 +65,13 @@ export default async function handler(
     })
   }
 
+  if (!(await assertTurnstile(req))) {
+    return res.status(403).json({
+      success: false,
+      error: TURNSTILE_FAILURE_MESSAGE,
+    })
+  }
+
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
     console.error('Missing GitHub configuration')
     return res.status(500).json({
@@ -78,7 +88,7 @@ export default async function handler(
       next_quarter,
       money_usage,
       help_needed,
-      issue_number,
+      grant_id,
       email,
     } = req.body
 
@@ -89,7 +99,7 @@ export default async function handler(
       !time_spent ||
       !next_quarter ||
       !money_usage ||
-      !issue_number ||
+      !grant_id ||
       !email
     ) {
       return res.status(400).json({
@@ -102,6 +112,31 @@ export default async function handler(
     const project_name = original_project_name.replace(/\s+by\s+.*$/, '')
 
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
+
+    // Resolve the issue from the grant id server-side so the comment target is
+    // never taken from the request body.
+    const grantIssue = await findGrantIssue(
+      octokit,
+      GH_ORG,
+      GH_REPORTS_REPO,
+      String(grant_id).trim()
+    )
+
+    if (!grantIssue) {
+      return res.status(404).json({
+        success: false,
+        error: ERROR_MESSAGES.GRANT_NOT_FOUND,
+      })
+    }
+
+    if (grantIssue.state === 'closed') {
+      return res.status(409).json({
+        success: false,
+        error: ERROR_MESSAGES.PAST_GRANT,
+      })
+    }
+
+    const issue_number = grantIssue.number
 
     // Create report content in markdown format using the shared function
     const reportContent = generateReportContent({

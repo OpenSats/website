@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import * as EmailValidator from 'email-validator'
 import { ERROR_MESSAGES } from '../utils/constants'
+import { TURNSTILE_TOKEN_FIELD } from '../utils/turnstile'
+import TurnstileWidget, {
+  TurnstileWidgetHandle,
+} from './grant-application/TurnstileWidget'
 
 interface ValidationResult {
   grant_details: {
@@ -27,6 +31,8 @@ export default function GrantValidationForm({
 }: GrantValidationFormProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string>()
+  const [turnstileReady, setTurnstileReady] = useState(false)
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null)
   const {
     register,
     handleSubmit,
@@ -40,10 +46,22 @@ export default function GrantValidationForm({
     setError(undefined)
 
     try {
-      const response = await fetchPostJSON('/api/grant', data)
+      const turnstile = turnstileRef.current
+      if (!turnstile) {
+        setError('Please complete the bot verification challenge.')
+        setLoading(false)
+        return
+      }
+      const token = await turnstile.waitForToken()
+      const response = await fetchPostJSON('/api/grant', {
+        ...data,
+        [TURNSTILE_TOKEN_FIELD]: token,
+      })
 
       if (response.error) {
         setError(response.error)
+        setTurnstileReady(false)
+        turnstile.reset()
         setLoading(false)
         return
       }
@@ -75,6 +93,8 @@ export default function GrantValidationForm({
       setLoading(false)
     } catch (e) {
       setError(ERROR_MESSAGES.GRANT_NOT_FOUND)
+      setTurnstileReady(false)
+      turnstileRef.current?.reset()
       setLoading(false)
     }
   }
@@ -129,12 +149,19 @@ export default function GrantValidationForm({
         )}
       </label>
 
+      <div className="mt-8 flex flex-col items-center py-2">
+        <TurnstileWidget
+          ref={turnstileRef}
+          onTokenChange={(token) => setTurnstileReady(!!token)}
+        />
+      </div>
+
       <div className="mt-8 flex justify-end">
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || !turnstileReady}
           className={`rounded px-4 py-2 text-sm font-medium text-white ${
-            loading
+            loading || !turnstileReady
               ? 'cursor-not-allowed bg-gray-400'
               : 'bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
           }`}
