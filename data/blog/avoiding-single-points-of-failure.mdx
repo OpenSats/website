@@ -1,0 +1,146 @@
+---
+title: 'Avoiding Single Points of Failure'
+date: '2026-09-03'
+tags: ['opensats', 'bitcoin', 'security']
+draft: false
+authors: ['dergigi', 'default']
+images: ['/static/images/blog/114-avoiding-single-points-of-failure.jpg']
+summary: 'How OpenSats is set up to be as resilient as possible.'
+---
+
+OpenSats was founded in 2020 with one goal in mind: to provide sustainable funding for those who are working on free and open-source software that makes Bitcoin flourish. From the get-go, the organizational structure was set up to avoid two failure modes that often plague non-profit organizations: waste and corruption.
+
+To achieve this impossible task, three rules were put in place:
+
+- [No benevolent dictator](#no-benevolent-dictator)
+- [No cut from donations](#no-cut-from-donations)
+- [No monetary incentives](#no-monetary-incentives)
+
+From an operational standpoint, we agreed on the following:
+
+- [No physical location](#no-physical-location)
+- [No trusted third parties](#no-trusted-third-parties)
+- [No shortcuts, no exceptions](#no-shortcuts-no-exceptions)
+
+That's an unconventional set of guidelines, so let's explain both the rules and the operational framework in more detail.
+
+## No Benevolent Dictator
+
+To ensure that OpenSats doesn't corrupt over time, an unusually large board is at the center of its governance structure. As stated in our [FAQ](/faq#how-did-you-choose-the-board) and [about page](/about#board-of-directors), we don't want a single person to be in charge of the organization. Instead of having a benevolent dictator making decisions, five of the nine board members have to agree to fund a project (majority vote). Structural and organizational changes require seven board members to be in favor (supermajority vote). The downside of this structure is that things move slowly sometimes. The upside is that OpenSats is hard to change and that the influence any single person has on decisions is minimal.
+
+<Image
+  src="/static/images/transparency/funding-decisions.jpg"
+  darkSrc="/static/images/transparency/funding-decisions.png"
+  alt="Funding Decisions"
+  width={1920}
+  height={1080}
+  className="w-full h-auto"
+/>
+
+The sheer volume of applications puts a strain on the organization, especially the board. As mentioned in our [2026-Q1 update](/newsletter/2026-Q1#running-the-numbers), we have done over 3,000 application evaluations to date. To deal with that scaling challenge we introduced volunteer committees to help with application evaluations, especially on the technical dimension.
+
+When we assembled our first technical subcommittee, the nostr subcommittee, we announced its members publicly. Shortly after, some members received blackmail and bribes, such as "if you approve my application I will split the grant money with you" or "if you don't approve my application I will make public what you told me in confidence." Consequently, we decided to be public about the structure of our committees and our [decision-making process](/selection), while protecting the identity of the individual members of said committees. That said, every committee member is free to disclose that they are part of an OpenSats committee.
+
+All committee members are volunteers. The board is in charge of the final decision, while taking the technical evaluation of each committee into account. Each application has to pass technical review (majority approval by the technical committee) and board review (majority approval by the board). The overarching goal is to set up structures and processes so that no single person has an outsized influence over funding decisions.
+
+<Image
+  src="/static/images/transparency/rejection-approval.jpg"
+  darkSrc="/static/images/transparency/rejection-approval.png"
+  alt="Rejection / Approval"
+  width={1920}
+  height={1080}
+  className="w-full h-auto"
+/>
+
+## No Cut from Donations
+
+To minimize organizational bloat as much as possible, OpenSats [doesn't take a cut](/faq#are-you-really-100-passthrough) from donations to cover administrative overhead. Our [operations budget](/funds/ops) is funded separately, meaning that we have to figure out how to keep the lights on independent of how many donations we receive for open-source funding.
+
+> Unlike most charities, OpenSats doesn't take a percentage of any donations for our operational budget. This means that our small operation budget is funded from donors like you.
+>
+> <cite>—[opensats.org/about](/about#operations)</cite>
+
+Considering the size and scope of our grant programs, OpenSats is relatively lean operationally: a team of 3 people plus one board member to oversee operations. No office, no travel expenses, no other expenses that might be "normal" for an operation of this size.
+
+<Members subset="Ops" />
+
+## No Monetary Incentives
+
+As mentioned above, our committee members are volunteers, lending their technical know-how so that grant applications are evaluated with the rigor and expertise they deserve. In addition to our technical committees we've had various groups of volunteers and [supporters](/support) that helped with our website, our blog posts, and with the initial tasks required to get OpenSats up-and-running in the early days.
+
+Board members are volunteers too, as mentioned in the board of directors section in our about page.
+
+> Board members are not compensated for their board member duties and do not benefit from donations given to our funds. Board member duties are performed on a volunteer basis.
+>
+> <cite>—[opensats.org/about](/about#board-of-directors)</cite>
+
+To hold ourselves accountable, we publish our [bylaws](/docs/bylaws.pdf), our [grant agreement](/docs/agreement.pdf), the [meeting minutes](/transparency#meeting-minutes) of our board meetings, as well as our [financial statements](/transparency#financial-statements) online. In addition to that, all of our grants are announced publicly, and we show the cumulative amount of sats sent for each project that is listed on our [projects page](/projects).
+
+We want to do what we can to encourage others to copy OpenSats, to start their own public charities, foundations, organizations, or whatever is fitting in their jurisdiction. We want to see [a thousand flowers bloom](/blog/let-a-thousand-flowers-bloom), and hope that, given enough time, a multitude of organizations will fund the open-source developers that underlie this ecosystem.
+
+## No Physical Location
+
+While OpenSats is a 501(c)(3) non-profit registered in the United States, our board as well as our operational team are distributed globally. Some of our team members are in the U.S. directly, others are in Europe, Australia, Japan, and sometimes even more exotic places. We strive to be as bitcoin-native as we can be, which implies being independent of a physical location.
+
+The same goes for our grantees: we don't require or expect anyone to be at a specific physical location. All our processes are set up to work in an asynchronous fashion. We don't discriminate by geographical location or similar traditional markers. If someone is competent, working on things that make bitcoin better, and has the receipts to prove it, we are happy to consider funding them.
+
+<StatsSentence className="text-xl leading-8 text-gray-500 dark:text-gray-400" />
+
+<GranteeMap />
+
+There is an inherent tradeoff between privacy and transparency. From the first grant wave onwards, multiple grantees have asked us to not announce grant details, specifically the [individual grant amounts](/faq#do-you-disclose-grant-amounts-publicly), since this information would endanger them or their families.
+
+Our grants are awarded worldwide, independent of the applicant's background or socioeconomic status. In some areas of the world, unfortunately, the news of someone being funded for their work immediately endangers them. We want to do what's best for our grantees, hence we made the decision to announce every grant while not disclosing [grant amounts](/faq#do-you-disclose-grant-amounts-publicly) directly. Grantees are free to disclose these details of their [grant agreement](/docs/agreement.pdf), and some of them do.
+
+## No Trusted Third Parties
+
+OpenSats operates on a bitcoin standard. Our treasury is bitcoin. Our grant payouts are done in bitcoin directly, which means that our grantees have to be set up to receive bitcoin, whether they are bitcoin developers or not.
+
+As mentioned in our last newsletter, [Territory of Freedom](/newsletter/2026-Q2), bitcoin allows us to operate in a lean and efficient manner, with very little overhead:
+
+> Bitcoin allows us to send money almost instantly, without intermediaries, without single points of failure, while being incredibly convenient and cost-efficient. It's a testament to how far we've come.
+>
+> <cite>—[opensats.org/newsletter/2026-Q2](/newsletter/2026-Q2#sats-sent)</cite>
+
+We don't rely on banks, payment processors, or any other trusted third party for the core of our operations. All of our funds are in geographically distributed multisigs at all times. It is an enormous responsibility, but it gives us the autonomy and freedom to operate independently of any third party. In addition to that, we do our best to practice what we preach and "dogfood" the software we fund, warts and all.
+
+The downside of this self-sufficiency is that we can't call someone else to fix things for us if things go wrong. We were directly affected by the [coldcard vulnerability] as well as the [BTCPay Server vulnerability], which is why, as a preventive measure, we decided to shut down parts of our donation infrastructure for a short period of time. One side-effect of having no single point of failure is that the system continues to function, even if catastrophe strikes.
+
+No funds were lost due to the aforementioned vulnerabilities. We continued to process grant payouts and applications, and receive donations as per usual.
+
+## No Shortcuts, No Exceptions
+
+All grant applications go through the same process, independent of who the applicant may be. We do not award first-time grants or grant renewals without applicants going through our [application process](/apply). The same is true for our active grantees: everyone has to follow the terms as outlined in each individual [grant agreement](/docs/agreement.pdf). Every grantee has to send in progress reports, as per the agreed upon schedule.
+
+Progress reports became a requirement due to the sheer scale of our operations. We want to make sure that we put the funds we have to good use, which means that we don't want to fund projects that have become inactive or obsolete. We ask three questions:
+
+- How did you spend your time?
+- What are your plans for next quarter?
+- How did you use the funds?
+
+We think those are fair questions to ask, and they should be easy to answer if you're actively working on your project (especially with some clanker help). In addition to the progress reports sent by our grantees, we've set up [heartbeat](/heartbeat) to keep track of what's happening in the various projects we've funded. Applications, reviews, reports, and other material we need to keep track of are in our internal version control system, which ensures that we don't have a single point of failure for these things either.
+
+<Image
+  src="/static/images/transparency/applications-grants-reports.jpg"
+  darkSrc="/static/images/transparency/applications-grants-reports.png"
+  alt="Applications, Grants, Reports"
+  width={1920}
+  height={1080}
+  className="w-full h-auto"
+/>
+
+It doesn't matter how well we know the person, it doesn't matter how highly we think of the person, and it doesn't matter how good the person or team is technically. We treat everyone the same, and for good reason. If we start to make exceptions, where does it stop? As we've mentioned in the opening paragraph, all our processes are in place to avoid two things: waste and corruption. If a process seems inefficient or wasteful, it is probably in place to prevent the greater danger of corruption.
+
+> Our operations team ensures that OpenSats remains the well-oiled sat-dispensing machine that it is today.
+>
+> <cite>—[opensats.org/about](/about#operations)</cite>
+
+That's what we're aiming for: a well-oiled sat-dispensing machine. An organization without a single point of failure, with automated and semi-automated processes in place that make everything work at scale. No benevolent dictator, no weird incentives, no short-term thinking, no trusted third parties, and no cut from donations.
+
+<DonateToOperationsButton />
+
+It's a miracle that it's working at all, and we are grateful for everyone who has supported us on this journey.
+
+[coldcard vulnerability]: /blog/code-red-supporting-first-responders
+[BTCPay Server vulnerability]: /blog/ongoing-exploits-of-bitcoin-open-source-software
+
