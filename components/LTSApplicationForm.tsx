@@ -60,13 +60,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'prerequisites',
     title: 'Prerequisites',
-    fields: [
-      'read_criteria',
-      'read_faq',
-      'has_references',
-      'free_open_source',
-      'lts_right_fit',
-    ],
+    fields: ['read_criteria', 'read_faq', 'free_open_source', 'lts_right_fit'],
     render: (props) => <Prerequisites {...props} />,
   },
   {
