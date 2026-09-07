@@ -1,0 +1,345 @@
+---
+title: "Bruno Garcia Is Making Bitcoin More Resilient Through Testing and Education"
+date: '2026-09-10'
+tags: ['bitcoin', 'research', 'spotlight']
+authors: ['tuma']
+images: ['/static/images/spotlight/bruno-garcia/featured.jpg', '/static/images/spotlight/bruno-garcia/hero.jpg']
+draft: false
+summary: "TODO"
+pullQuotes:
+  - "What makes Bitcoin really interesting is that it does not rely only on technical mechanisms to make the system work. It also relies on incentives."
+  - "What helps more is remembering that the work has a purpose."
+  - “A global decentralized protocol should also have a broad and decentralized base of people who understand it deeply enough to maintain, review, and challenge it.”
+  - "I think education is important because Bitcoin development has a very high barrier to entry."
+---
+
+Bruno Garcia was working as a software developer in the
+automotive industry when [Lucas Ferreira][lucas-ferreira],
+the Brazilian developer that would later found
+[Vinteum][vinteum], first contacted him. Bruno was active in
+the blockchain industry at the time — he had also worked for
+some exchanges back then — and was contributing to open-
+source projects, always looking at the technological side of
+things. Lucas wanted him to join a series of Socratic
+Seminars held by [Chaincode Labs][chaincode-labs]. His goal?
+Getting more Brazilian developers to contribute to the
+Bitcoin open-source ecosystem.
+
+That call was the beginning of Bruno’s career in Bitcoin-
+related [Free and Open-source Software (FOSS)][foss].
+Chaincode Labs’ program was an online cohort where several
+developers met weekly to discuss specific topics concerning
+Bitcoin development. When discussing [Taproot][taproot],
+Bruno thought the topic was really interesting, but thought
+that it would be better to actually learn from the [Bitcoin
+Core][bitcoin-core] code itself. Thus, he started looking
+directly into the code and in the attached tests. Something
+happened, though. He found a bug in the functional tests,
+[opened a Pull Request][bitcoin-core-pr-21081] (PR) on
+GitHub to solve it, and got it merged. There was a huge buzz
+around that PR, not because of technical reasons, but
+because Bruno was the first Brazilian developer to ever get
+a PR merged in Bitcoin Core. A first step towards a less
+centralized development ecosystem, which had been
+historically based in the United States.
+
+Fixing that bug in the functional test bootstrapped his
+career as an open-source developer. He started contributing
+to Bitcoin Core more and more regularly, while continuing to
+work in the automotive industry.
+
+After a part-time grant from [Brink][brink], Lucas wanted
+Bruno to become the first grantee completely funded by
+Vinteum. He went far and wide to find economic support for
+Bruno and finally got him another grant to work full-time on
+FOSS. Bruno joined Vinteum as their first grantee ever in
+the summer of 2022 and took on the role of Board Member and
+Director of Education.
+
+Bruno has been an [OpenSats LTS grantee][bruno-garcia-lts-
+grant] since 2024, following support from Brink and Vinteum.
+Thanks to this financial support, Bruno is able to focus on
+the fundamental work he is doing for Bitcoin with a long-
+term time horizon.
+
+—
+
+> I'm father, husband, perhaps an amateur athlete, a
+> musician, Brazilian, software engineer and researcher.
+> Nothing super special, just a guy trying to build a better
+> world for everyone (and strongly believe in Bitcoin and
+> open source for this) while living an ordinary beautiful
+> life.
+
+Bruno is a simple guy. When he is not looking for bugs in
+Bitcoin, he is busy taking care of his family, playing with
+his son, running and cycling — he says he is an amateur
+athlete —, or at church.
+
+<Image src="/static/images/spotlight/bruno-
+garcia/outdoor.jpg" alt="Bruno with his son, spending some
+time outdoor." width={970} height={1920} className="w-full
+h-auto" />
+
+He has always been interested in the tech world. As a
+curious high-school student, he started his programming
+journey working on robots. “I found it fascinating that you
+could write some code and immediately see it interact with
+the physical world,” he says. Programming quickly became a
+hobby and he started experimenting in different areas on his
+own.
+
+Open-source came later in his life. He was intrigued by the
+possibilities shared knowledge can bring: Learning by
+looking at what other people built and making your work
+useful for others. He sees open-source as a “very powerful
+way of learning and contributing to the world.” People with
+very different backgrounds come together to discuss ideas,
+review each other’s work, and build things in public. “That
+philosophy resonated a lot with me, and eventually it became
+a big part of how I approach software development and,
+later, Bitcoin,” he adds.
+
+> But at some point I realized that what makes Bitcoin
+> really interesting is that it does not rely only on
+> technical mechanisms to make the system work. It also
+> relies on incentives. That changed my mind.
+
+Bitcoin entered his life way before he started working on
+it. He was quite active in local groups in Brazil, but he
+was mostly looking at the technical side of it — “the
+cryptography, the networking, the distributed systems
+aspects.” However, what really made it click for him was
+diving into game theory: The idea that you don’t need any
+technical mechanism to enforce rules, but simply rely on the
+incentives to make the whole system work.
+
+—
+
+> Sometimes finding a subtle bug, improving a test
+> framework, or making it easier for future developers to
+> verify a change can have a huge impact without being very
+> glamorous.
+
+Testing software can seem like the least rewarding career
+path. Instead of working on some new cool features, new
+consensus changes, or novel research topics — the “rockstar”
+stuff —, you spend most of your time diving into other
+people’s work looking for issues. Bruno is not convinced,
+though. He doesn’t think that a contribution is more
+valuable just because it is more visible. On the contrary,
+he thinks that what he does can have a huge impact,
+especially in Bitcoin.
+
+> In many kinds of software, a bug is inconvenient. In
+> Bitcoin, a bug can have consequences for people's money,
+> network interoperability, or even consensus. And because
+> the software is highly adversarial, you have to assume
+> that every edge case will eventually be exercised.
+
+He was already focusing on testing before entering the
+Bitcoin space. His academic background and research focus
+was on testing and finding ways of exposing bugs
+automatically. “It was natural for me to look at [Bitcoin]
+through that lens,” he points out. The story about his first
+contribution to Bitcoin Core confirms it.
+
+His work on Bitcoin Core mainly focuses on strengthening how
+the codebase is tested, mainly through [fuzzing][fuzzing]
+and [mutation testing][mutation-testing]. The former is a
+testing technique that consists in feeding the software with
+random inputs or malformed data to find possible edge cases
+and bugs. The latter is a way to evaluate how good a test
+is, by making small, faulty changes in the code — called
+mutants — to see if tests fail or not.
+
+<Image src="/static/images/spotlight/bruno-
+garcia/bitcoincorespace.jpg" alt="Bitcoin Core Space
+dashboard." width={192} height={970} className="w-full
+h-auto" />
+
+He has also been working on [Bitcoinfuzz][bitcoinfuzz], an
+implementation of differential fuzzing for Bitcoin-related
+software. While simple fuzzing looks for bugs in a single
+codebase, differential fuzzing checks for discrepancies
+between different implementations of a protocol. It feeds
+the same random input to multiple codebases to verify that
+they keep the same behavior.
+
+Thanks to his work on Bitcoinfuzz, Bruno was able to find
+[more than 90 bugs, inconsistencies, and
+mismatches][bitcoinfuzz-bugs] between different
+implementations of Bitcoin, Lightning, and related software.
+A huge impact on the ecosystem.
+
+—
+
+> A global decentralized protocol should also have a broad
+> and decentralized base of people who understand it deeply
+> enough to maintain, review, and challenge it.
+
+All the work that Bruno does for Bitcoin seems to follow the
+same objective: Making Bitcoin more resilient. Developing
+testing tools is one way to do it. The other is certainly
+through education. He is convinced that for Bitcoin to
+thrive, its contributors “should be distributed not only
+geographically, but also culturally and economically.”
+
+> Bitcoin benefits from protocol developers, of course, but
+> also from people coming from software testing, formal
+> methods, distributed systems, economics, security, UX, and
+> education.
+
+Diversity also lies in the different expertise involved.
+Bruno thinks that valuable contributions can come from
+people bringing techniques and thinking outside of the usual
+schemes of Bitcoin development.
+
+He sees the need for these expertise to actually be created
+locally. “If Bitcoin is supposed to be a decentralized,
+global system, then ideally its development should not be
+concentrated in a handful of companies, cities, or
+countries.” Bruno thinks that having contributors in places
+like Brazil can make the ecosystem stronger, more diverse,
+and, as a consequence, stronger.
+
+> That is where education fits into what we do at Vinteum.
+> The goal is not just to teach people what Bitcoin is, or
+> even just how Bitcoin works. It is to develop people who
+> can eventually participate in the technical community
+> independently: reading the code, reviewing changes, doing
+> research, finding problems, and contributing upstream.
+
+As Head of Engineering, Bruno is helping Vinteum move
+forward with this vision. Together, they are trying to build
+a long-term community where every new developer can become a
+mentor, giving back to the other what he received at the
+beginning of his journey.
+
+To become a real community, though, a group of people needs
+a place to gather, at least every now and then. That’s why
+Vinteum really believes in in-person gatherings and
+exchanges, and why they decided to create a physical space
+for that: [Casa 21][casa-21], a hacker house where Bitcoin
+builders from Brazil — but also from all over the world —
+can meet, work together, and build the future. Casa 21 seems
+to have really boosted the community of Brazilian builders,
+which is now growing fast.
+
+One of the programs he has helped launch at Vinteum is the
+[Bitcoin Dev Launchpad (BDL)][bitcoin- dev-launchpad], a
+curriculum Bruno would have loved to join as a novice open-
+source contributor. Nothing similar was available at the
+time. The goal is to identify talented programmers, improve
+their bitcoin knowledge and skills, and provide the means to
+help them turn into full-time open source contributors.
+
+The protocol is complex, the codebase is large, and a lot of
+the knowledge “is accumulated through discussions, code
+review, mentorship, and years of context.” That’s where
+education fits in, helping engineers get the time,
+mentorship, funding, and connections they need to contribute
+to open-source projects, with the goal of making
+contributing to Bitcoin become a realistic career path for
+talented people in Brazil.
+
+There is still a lot of work to do, mainly on the knowledge
+transfer aspect. Most of the historical knowledge is
+scattered across several platforms, mailing-lists, IIRC
+channels, and codebases. “Making that knowledge easier to
+access, while still preserving the culture of learning by
+doing, would make it easier for new contributors to become
+effective” — That is the way forward in Bruno’s mind.
+
+—
+
+> We have reached a point where we can no longer overlook
+> these advancements.
+
+Bruno is now working with the [Red Team][red-team] — the
+group of FOSS developers that is leveraging the latest AI
+models to discover vulnerabilities before attackers do. The
+goal is always the same: making Bitcoin more resilient.
+
+That is becoming more and more difficult in the age of AI.
+Bruno thinks that developers need to stay on top of the
+latest advancements happening outside of our ecosystem,
+particularly on LLMs. “By the time we gain access to the
+[latest] models or secure the funds to use them, malicious
+actors are already using them to exploit our applications,”
+he says.
+
+He is now looking into how to leverage these new
+technologies. He noticed that Bitcoin Core sometimes
+implements some useful behavior around a [BIP][bips], but
+that is not clearly defined in the BIP itself. His idea
+would be to develop a sort of harness of differential
+fuzzing and LLMs, which would allow him and other
+maintainers to analyze and find these discrepancies to
+improve the BIPs. He says he is already working on a proof
+of concept, though it deems it too immature to be shown.
+
+—
+
+> What helps more is remembering that the work has a
+> purpose. If I improve a test, find a bug, help someone
+> understand the codebase, or help a new developer become a
+> contributor, that is a small contribution to making
+> Bitcoin more robust and more sustainable.
+
+Curiosity and purpose. These are the things that make Bruno
+go on everyday. “Bitcoin is one of those systems where the
+more you learn, the more you realize there is still a lot to
+understand,” he says. Curiosity drives him to find the next
+edge case, understand why something was built in a certain
+way, and design a new solution.
+
+On the tougher days, though, curiosity might not be enough.
+He needs to remember that there is an important purpose
+behind what he is doing. Bruno knows that reliability of
+Bitcoin software matters, that any small contribution can
+make it more robust. And by making Bitcoin more robust, he
+knows he is working to make the world a better place.
+
+He is proud of everything he has been doing for Bitcoin —
+every Bitcoin Core contribution or PR review, for example.
+However, he is particularly fond of all the work he has done
+that started as a simple research project but evolved into
+something able to find real bugs and edge cases.
+
+And even when the work seems to lead nowhere — or the
+progress seems too slow to feel useful — he tries to
+remember one of the important lessons of FOSS. The work you
+do is cumulative, and it becomes part of something that
+other people can inspect, improve, and build on.
+
+> Sometimes a small improvement, a careful review, or
+> helping someone else move forward is already meaningful.
+
+Bootstrapping and growing a Bitcoin development community in
+Brazil is another thing to be proud of — and probably as
+meaningful as the technical work.
+
+> Helping create an environment where Brazilian developers
+> can contribute upstream, interact with experienced Bitcoin
+> developers, and see Bitcoin open-source development as
+> something they can realistically pursue is very meaningful
+> to me.
+
+[lucas-ferreira]:  https://nostr.at/npub1pumdyz7qfu0suamv4nrl0vcg574dtl5mwazva6nyjxhpwc4ccxxqca3ane
+[vinteum]: https://www.vinteum.org/
+[chaincode-labs]: https://chaincode.com/
+[foss]: /topics/foss
+[taproot]: /topics/taproot
+[bitcoin-core]: /projects/bitcoin-core
+[bitcoin-core-pr-21081]: https://github.com/bitcoin/bitcoin/pull/21081
+[brink]: https://brink.dev/
+[bruno-garcia-lts-grant]: /blog/bruno-garcia-receives-lts-grant
+[fuzzing]: /topics/fuzzing
+[mutation-testing]: /topics/mutation-testing
+[bitcoinfuzz]: /projects/bitcoinfuzz
+[bitcoinfuzz-bugs]:  https://github.com/bitcoinfuzz/bitcoinfuzz#bugsinconsistencesmismatches-found-by-bitcoinfuzz
+[casa-21]: https://casa21.vinteum.org/
+[bitcoin-dev-launchpad]: /blog/let-a-thousand-flowers-bloom#bitcoin-dev-launchpad
+[red-team]: /blog/code-red-supporting-first-responders
+[bips]: /projects/bips
