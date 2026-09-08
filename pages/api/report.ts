@@ -2,6 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from './sendgrid'
 import { generateReportContent } from '../../utils/api-helpers'
+import { findGrantIssue } from '../../utils/find-grant-issue'
+import { parseGrantIdInput } from '../../utils/grant-id'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
@@ -16,7 +18,7 @@ interface ReportBotRequest extends NextApiRequest {
     next_quarter: string
     money_usage: string
     help_needed?: string
-    issue_number: number
+    grant_id: string
     email: string
   }
 }
@@ -86,9 +88,11 @@ export default async function handler(
       next_quarter,
       money_usage,
       help_needed,
-      issue_number,
+      grant_id,
       email,
     } = req.body
+
+    const parsedGrantId = parseGrantIdInput(grant_id)
 
     // Input validation
     if (
@@ -97,7 +101,6 @@ export default async function handler(
       !time_spent ||
       !next_quarter ||
       !money_usage ||
-      !issue_number ||
       !email
     ) {
       return res.status(400).json({
@@ -106,10 +109,25 @@ export default async function handler(
       })
     }
 
+    if (!parsedGrantId.ok) {
+      return res.status(400).json({
+        success: false,
+        error: parsedGrantId.error,
+      })
+    }
+
     // Clean up project name to remove the "by" part
     const project_name = original_project_name.replace(/\s+by\s+.*$/, '')
 
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
+    const grant = await findGrantIssue(octokit, parsedGrantId.grantId)
+
+    if (!grant.ok) {
+      return res.status(grant.status).json({
+        success: false,
+        error: grant.error,
+      })
+    }
 
     // Create report content in markdown format using the shared function
     const reportContent = generateReportContent({
@@ -125,7 +143,7 @@ export default async function handler(
     const response = await octokit.rest.issues.createComment({
       owner: GH_ORG,
       repo: GH_REPORTS_REPO,
-      issue_number: issue_number,
+      issue_number: grant.issue.number,
       body: reportContent,
     })
 

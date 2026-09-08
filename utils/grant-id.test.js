@@ -5,8 +5,12 @@ const {
   GRANT_ID_PATTERN,
   isNumericGrantId,
   normalizeGrantId,
+  parseGrantIdInput,
+  projectNameFromTitle,
   titleMatchesGrantId,
 } = require('./grant-id.ts')
+
+const { ERROR_MESSAGES } = require('./constants.ts')
 
 describe('grant id helpers', () => {
   it('accepts 6 or 7 digit ids', () => {
@@ -27,6 +31,28 @@ describe('grant id helpers', () => {
     expect(normalizeGrantId(' 946366 ')).toBe('946366')
     expect(normalizeGrantId(946366)).toBe('946366')
     expect(normalizeGrantId(undefined)).toBe('')
+  })
+
+  it('parses grant ids for the API', () => {
+    expect(parseGrantIdInput(' 946366 ')).toEqual({
+      ok: true,
+      grantId: '946366',
+    })
+    expect(parseGrantIdInput('')).toEqual({
+      ok: false,
+      error: ERROR_MESSAGES.GRANT_ID_REQUIRED,
+    })
+    expect(parseGrantIdInput('cashu')).toEqual({
+      ok: false,
+      error: ERROR_MESSAGES.GRANT_ID_INVALID,
+    })
+  })
+
+  it('strips grant prefixes from issue titles', () => {
+    expect(projectNameFromTitle('Grant #12: Cashu-TS by Alice')).toBe('Cashu-TS')
+    expect(projectNameFromTitle('946366 - Cashu-TS and Cashu.me')).toBe(
+      '946366 - Cashu-TS and Cashu.me'
+    )
   })
 
   it('matches a grant id as a whole number in the title', () => {

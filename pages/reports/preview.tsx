@@ -66,8 +66,9 @@ export default function Preview() {
         localStorage.getItem(STORAGE_KEYS.REPORT_DRAFT) || '{}'
       )
       const response = await fetchPostJSON('/api/report', {
-        ...grantDetails,
         ...reportData,
+        grant_id: grantDetails.grant_id,
+        email: grantDetails.email,
         [TURNSTILE_TOKEN_FIELD]: token,
       })
 
