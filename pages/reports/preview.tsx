@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { STORAGE_KEYS } from '../../utils/constants'
 import { getReportPreview } from '../../utils/api-helpers'
@@ -6,10 +6,18 @@ import ReportPreview from '../../components/ReportPreview'
 import { PageSEO } from '../../components/SEO'
 import PageSection from '../../components/PageSection'
 import { fetchPostJSON } from '../../utils/api-helpers'
+import { TURNSTILE_TOKEN_FIELD } from '../../utils/turnstile'
+import TurnstileWidget, {
+  TurnstileWidgetHandle,
+} from '../../components/grant-application/TurnstileWidget'
 
 export default function Preview() {
   const router = useRouter()
   const [reportContent, setReportContent] = useState<string>('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>()
+  const [turnstileReady, setTurnstileReady] = useState(false)
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null)
 
   useEffect(() => {
     const loadPreview = async () => {
@@ -40,9 +48,17 @@ export default function Preview() {
   }
 
   const handleSubmit = async () => {
-    if (!reportContent) return
+    if (!reportContent || loading || !turnstileReady) return
+
+    setLoading(true)
+    setError(undefined)
 
     try {
+      const token = await turnstileRef.current?.waitForToken()
+      if (!token) {
+        throw new Error('Please complete the bot verification challenge.')
+      }
+
       const grantDetails = JSON.parse(
         localStorage.getItem(STORAGE_KEYS.GRANT_DETAILS) || '{}'
       )
@@ -52,10 +68,13 @@ export default function Preview() {
       const response = await fetchPostJSON('/api/report', {
         ...grantDetails,
         ...reportData,
+        [TURNSTILE_TOKEN_FIELD]: token,
       })
 
       if (response.error) {
-        console.error('Error submitting report:', response.error)
+        setError(response.error)
+        setTurnstileReady(false)
+        turnstileRef.current?.reset()
         return
       }
 
@@ -65,7 +84,13 @@ export default function Preview() {
       })
       router.push('/reports/success')
     } catch (e) {
-      console.error('Failed to submit report. Please try again.', e)
+      setError(
+        e instanceof Error ? e.message : 'Failed to submit report. Please try again.'
+      )
+      setTurnstileReady(false)
+      turnstileRef.current?.reset()
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -109,10 +134,22 @@ export default function Preview() {
             <ReportPreview reportContent={reportContent} />
           </div>
 
+          <div className="my-8 flex flex-col items-center py-2">
+            <TurnstileWidget
+              ref={turnstileRef}
+              onTokenChange={(token) => setTurnstileReady(!!token)}
+            />
+          </div>
+
+          {error && (
+            <p className="rounded bg-red-500 p-4 text-white">{error}</p>
+          )}
+
           <div className="mt-6 flex justify-between space-x-4">
             <button
               type="button"
               onClick={handleBack}
+              disabled={loading}
               className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
             >
               <svg
@@ -133,9 +170,14 @@ export default function Preview() {
             </button>
             <button
               onClick={handleSubmit}
-              className="rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+              disabled={loading || !turnstileReady}
+              className={`rounded px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ${
+                loading || !turnstileReady
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-orange-500 hover:bg-orange-600'
+              }`}
             >
-              Submit Report
+              {loading ? 'Submitting...' : 'Submit Report'}
             </button>
           </div>
         </div>
