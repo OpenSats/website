@@ -86,7 +86,9 @@ export default function Preview() {
       router.push('/reports/success')
     } catch (e) {
       setError(
-        e instanceof Error ? e.message : 'Failed to submit report. Please try again.'
+        e instanceof Error
+          ? e.message
+          : 'Failed to submit report. Please try again.'
       )
       setTurnstileReady(false)
       turnstileRef.current?.reset()
