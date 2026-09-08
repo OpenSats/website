@@ -109,7 +109,7 @@ export default async function handler(
       })
     }
 
-    if (!parsedGrantId.ok) {
+    if (parsedGrantId.ok === false) {
       return res.status(400).json({
         success: false,
         error: parsedGrantId.error,
@@ -122,7 +122,7 @@ export default async function handler(
     const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
     const grant = await findGrantIssue(octokit, parsedGrantId.grantId)
 
-    if (!grant.ok) {
+    if (grant.ok === false) {
       return res.status(grant.status).json({
         success: false,
         error: grant.error,

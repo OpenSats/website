@@ -31,7 +31,7 @@ export default async function handler(
   }
 
   const parsedGrantId = parseGrantIdInput(req.body.grant_id)
-  if (!parsedGrantId.ok) {
+  if (parsedGrantId.ok === false) {
     return res.status(400).json({ valid: false, error: parsedGrantId.error })
   }
 
@@ -45,7 +45,7 @@ export default async function handler(
   const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
   const result = await findGrantIssue(octokit, parsedGrantId.grantId)
 
-  if (!result.ok) {
+  if (result.ok === false) {
     return res.status(result.status).json({
       valid: false,
       error: result.error,
