@@ -1,6 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { ERROR_MESSAGES } from '../../utils/constants'
+import {
+  isNumericGrantId,
+  normalizeGrantId,
+  titleMatchesGrantId,
+} from '../../utils/grant-id'
 import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
@@ -31,10 +36,20 @@ export default async function handler(
 
   const { grant_id } = req.body
 
-  const normalizedGrantId = String(grant_id || '').trim()
+  const normalizedGrantId = normalizeGrantId(grant_id)
 
   if (!normalizedGrantId) {
-    return res.status(400).json({ valid: false, error: 'Grant ID is required' })
+    return res.status(400).json({
+      valid: false,
+      error: ERROR_MESSAGES.GRANT_ID_REQUIRED,
+    })
+  }
+
+  if (!isNumericGrantId(normalizedGrantId)) {
+    return res.status(400).json({
+      valid: false,
+      error: ERROR_MESSAGES.GRANT_ID_INVALID,
+    })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
@@ -78,12 +93,9 @@ export default async function handler(
         per_page: 100,
       }
     )) {
-      const found = issues.find((issue) => {
-        const titleContainsGrantId = issue.title?.includes(normalizedGrantId)
-        const bodyContainsGrantId =
-          issue.body?.includes(normalizedGrantId) || false
-        return Boolean(titleContainsGrantId || bodyContainsGrantId)
-      })
+      const found = issues.find((issue) =>
+        titleMatchesGrantId(issue.title, normalizedGrantId)
+      )
 
       if (found) {
         matchingIssue = {

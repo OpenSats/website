@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { fetchPostJSON } from '../utils/api-helpers'
 import * as EmailValidator from 'email-validator'
 import { ERROR_MESSAGES } from '../utils/constants'
+import { GRANT_ID_PATTERN } from '../utils/grant-id'
 import { TURNSTILE_TOKEN_FIELD } from '../utils/turnstile'
 import TurnstileWidget, {
   TurnstileWidgetHandle,
@@ -118,11 +119,10 @@ export default function GrantValidationForm({
         </small>
         <input
           {...register('grant_id', {
-            required: 'Grant ID is required',
+            required: ERROR_MESSAGES.GRANT_ID_REQUIRED,
             pattern: {
-              value: /^\d{6,7}$/,
-              message:
-                'A valid Grant ID is required to start the submission process',
+              value: GRANT_ID_PATTERN,
+              message: ERROR_MESSAGES.GRANT_ID_INVALID,
             },
           })}
           type="text"
