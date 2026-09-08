@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
 import { sendReportConfirmationEmail } from './sendgrid'
 import { generateReportContent } from '../../utils/api-helpers'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -59,6 +60,13 @@ export default async function handler(
     return res.status(405).json({
       success: false,
       error: 'Method not allowed',
+    })
+  }
+
+  if (!(await assertTurnstile(req))) {
+    return res.status(403).json({
+      success: false,
+      error: TURNSTILE_FAILURE_MESSAGE,
     })
   }
 
