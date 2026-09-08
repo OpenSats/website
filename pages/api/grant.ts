@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Octokit } from '@octokit/rest'
-import { ERROR_MESSAGES } from '../../utils/constants'
+import { findGrantIssue } from '../../utils/find-grant-issue'
+import { parseGrantIdInput, projectNameFromTitle } from '../../utils/grant-id'
+import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 
 const GH_ACCESS_TOKEN = process.env.GH_ACCESS_TOKEN
 const GH_ORG = process.env.GH_ORG
@@ -21,12 +23,16 @@ export default async function handler(
     return res.status(405).json({ valid: false, error: 'Method not allowed' })
   }
 
-  const { grant_id } = req.body
+  if (!(await assertTurnstile(req))) {
+    return res.status(403).json({
+      valid: false,
+      error: TURNSTILE_FAILURE_MESSAGE,
+    })
+  }
 
-  const normalizedGrantId = String(grant_id || '').trim()
-
-  if (!normalizedGrantId) {
-    return res.status(400).json({ valid: false, error: 'Grant ID is required' })
+  const parsedGrantId = parseGrantIdInput(req.body.grant_id)
+  if (parsedGrantId.ok === false) {
+    return res.status(400).json({ valid: false, error: parsedGrantId.error })
   }
 
   if (!GH_ACCESS_TOKEN || !GH_ORG || !GH_REPORTS_REPO) {
@@ -36,86 +42,19 @@ export default async function handler(
       .json({ valid: false, error: 'Server configuration error' })
   }
 
-  // Development/testing condition
-  if (
-    process.env.NODE_ENV === 'development' &&
-    normalizedGrantId === '123456'
-  ) {
-    return res.status(200).json({
-      valid: true,
-      project_name: 'Test Grant',
-      issue_number: 123,
+  const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
+  const result = await findGrantIssue(octokit, parsedGrantId.grantId)
+
+  if (result.ok === false) {
+    return res.status(result.status).json({
+      valid: false,
+      error: result.error,
     })
   }
 
-  try {
-    const octokit = new Octokit({ auth: GH_ACCESS_TOKEN })
-
-    // Iterate through all issues using pagination and stop when we find a match
-    let matchingIssue:
-      | {
-          title: string
-          body?: string | null
-          number: number
-          state: 'open' | 'closed'
-        }
-      | undefined
-
-    for await (const { data: issues } of octokit.paginate.iterator(
-      octokit.rest.issues.listForRepo,
-      {
-        owner: GH_ORG,
-        repo: GH_REPORTS_REPO,
-        state: 'all',
-        per_page: 100,
-      }
-    )) {
-      const found = issues.find((issue) => {
-        const titleContainsGrantId = issue.title?.includes(normalizedGrantId)
-        const bodyContainsGrantId =
-          issue.body?.includes(normalizedGrantId) || false
-        return Boolean(titleContainsGrantId || bodyContainsGrantId)
-      })
-
-      if (found) {
-        matchingIssue = {
-          title: found.title,
-          body: found.body,
-          number: found.number,
-          state: found.state as 'open' | 'closed',
-        }
-        break
-      }
-    }
-
-    if (!matchingIssue) {
-      return res.status(404).json({
-        valid: false,
-        error: ERROR_MESSAGES.GRANT_NOT_FOUND,
-      })
-    }
-
-    if (matchingIssue.state === 'closed') {
-      return res.status(409).json({
-        valid: false,
-        error: ERROR_MESSAGES.PAST_GRANT,
-      })
-    }
-
-    // Extract project name from issue title
-    const project_name = matchingIssue.title
-      .replace(/^Grant #\d+:\s*/, '')
-      .replace(/\s+by\s+.*$/, '')
-
-    return res.status(200).json({
-      valid: true,
-      project_name,
-      issue_number: matchingIssue.number,
-    })
-  } catch (error) {
-    console.error('Error validating grant:', error)
-    return res
-      .status(500)
-      .json({ valid: false, error: 'Error validating grant' })
-  }
+  return res.status(200).json({
+    valid: true,
+    project_name: projectNameFromTitle(result.issue.title),
+    issue_number: result.issue.number,
+  })
 }
