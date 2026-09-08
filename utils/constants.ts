@@ -7,6 +7,9 @@ export const STORAGE_KEYS = {
 } as const
 
 export const ERROR_MESSAGES = {
+  GRANT_ID_REQUIRED: 'Grant ID is required',
+  GRANT_ID_INVALID:
+    'A valid Grant ID is required to start the submission process',
   GRANT_NOT_FOUND: 'Grant not found, contact support for assistance',
   PAST_GRANT:
     'This is a past grant that already ended. Please use your new grant number.',
