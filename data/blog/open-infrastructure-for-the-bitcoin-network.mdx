@@ -8,3 +8,314 @@ images:
 draft: false
 summary: 'An impact report from the front-lines of network infrastructure development.'
 ---
+
+Bitcoin is designed to operate without a centralized authority, but the nodes,
+miners, wallets, and services that make up its ecosystem still communicate
+across ordinary, centralized internet connections. Those connections come
+with their own security and privacy trade-offs. IP addresses can expose where
+users or infrastructure are located, remotely managed systems can reveal
+administrative access if not properly secured, and publicly accessible
+services can become targets for surveillance, censorship, or disruptive
+attacks.
+
+Some of the software addressing these risks sits at the networking layer,
+helping protect the connections between the people and machines participating
+in the Bitcoin network. Maintaining this infrastructure requires ongoing work
+as operating systems change, new security issues are discovered, and the
+platforms used to distribute software upgrade to new technical requirements.
+
+OpenSats has provided support for projects that are addressing different needs
+at this networking layer. [Tor] improves privacy by making it harder to link
+online activity to a specific IP address or location, while [Onion Services]
+allow websites, applications, and other tools to operate without publicly
+exposing where their servers are hosted. Bitcoin users and infrastructure
+operators use these privacy tools to limit information that gets exposed to
+the network. Tor has an established role in [nostr] as well, where operators
+can make their [relays] available to users as Onion Services.
+
+[WireGuard] addresses another networking need by creating encrypted
+connections between devices and systems that need to communicate securely.
+Bitcoin node operators can use these private tunnels for remote access to
+their infrastructure, while similar setups can be used to securely reach and
+manage bitcoin mining equipment. Keeping WireGuard working across Linux,
+Windows, Android, and other platforms requires continued maintenance as
+operating systems, security requirements, and development tools change.
+
+This impact report takes a close look at recent development across the
+following projects:
+
+- [The Tor Project](#the-tor-project)
+- [WireGuard](#wireguard)
+
+Let's dive deeper into how these fundamental infrastructure projects evolved
+over the past year.
+
+[Tor]: /projects/tor
+[Onion Services]: https://community.torproject.org/onion-services/
+[nostr]: /topics/nostr
+[relays]: /topics/relays
+[WireGuard]: /projects/wireguard
+
+---
+
+### The Tor Project
+
+Tor helps people use the internet with privacy. It encrypts requests and sends
+them through several independently operated relays using a technique called
+[onion routing], making it difficult for malicious actors to determine who is
+connecting to a particular website or service.
+
+Tor also supports Onion Services, which allow websites, applications, and
+other online services to operate without publicly disclosing where their
+servers are located. These privacy protections are especially important for
+people living under authoritarian regimes facing surveillance, censorship, or
+threats directed at the infrastructure they use.
+
+[The Tor Project] is rebuilding its core software in [Rust] through an
+implementation called [Arti]. Arti is intended to replace the current
+[C] version of Tor, known as C Tor, over time, although Tor continues to
+maintain and develop C Tor during the transition. With [support from
+OpenSats], the Tor team focused on making Arti more useful for people who run
+Onion Services through stronger defenses against abusive traffic, better
+tools for monitoring service health, secure handling of identity keys, and a
+simpler way for existing services to begin testing Arti.
+
+One area of work involved protecting Onion Services from
+[distributed denial-of-service] (DDoS) attacks. These attacks flood a service
+with large numbers of automated connection requests, often from many devices
+at once, consuming resources and making a service slow or unavailable to
+legitimate users. Tor’s [Onion Service Proof-of-Work] system gives operators
+a way to manage events like this.
+
+During normal use, the protection stays inactive. When a service comes under
+heavy traffic, connecting users may be asked to complete a small
+computational puzzle (a task solved automatically by the user’s Tor
+software). The service can then prioritize connection requests from users
+whose Tor software has completed the puzzle. For an attacker trying to send
+thousands or millions of requests, that added work quickly becomes costly,
+while a normal user only needs to complete it for their own connection.
+
+The Tor team developed this defense over several stages. Engineers first
+prepared and integrated the [HashX] and [Equi-X] components that power the
+puzzles. Experimental support was then added for Onion Services running
+through Arti. The team tested the system, improved how incoming requests are
+queued, tracked memory use, and added measurements that help operators
+understand what is happening when a service slows down or comes under attack.
+With the release of [Arti 1.4.5], Tor considered its Onion Service
+Proof-of-Work support complete enough to enter a stabilization phase,
+allowing users and developers to begin testing it.
+
+As the system moved through testing, researchers at the [Korea Advanced
+Institute of Science and Technology] (KAIST) identified weaknesses in Tor’s
+original Proof-of-Work control system for adjusting puzzle difficulty through
+a family of attacks they called OnionFlation. Their [findings showed] how an
+attacker could artificially raise the puzzle difficulty for legitimate users
+without creating obvious congestion at the targeted Onion Service. The Tor
+team reviewed the findings and developed a replacement control system
+designed to limit this type of manipulation while continuing to adjust puzzle
+difficulty during an attack.
+
+The resulting improvements shipped in [Arti 1.4.6] in August 2025. A
+[replacement Proof-of-Work control system], based on [Tor Proposal 362],
+improved how Arti decides how difficult these computational puzzles should
+be, while making it harder for attackers to manipulate that difficulty.
+Another change [limited the size of Onion Service descriptors], which contain
+information needed to find and connect to an Onion Service. Limiting their
+size reduces opportunities for an attacker to consume excessive network and
+server resources.
+
+The team also improved how Onion Service operators can monitor performance.
+Through Arti’s [Prometheus-style MetricsPort], they expanded the diagnostic
+metrics available to Onion Service operators, giving them better visibility
+into the health of their services, including how requests are being handled,
+when requests fail verification or expire before completion, and how much
+computational work the requests require. This can make it easier to identify
+and resolve problems affecting stability, reliability, and performance.
+
+Additional work focused on making it easier for existing Onion Services to
+begin experimenting with Arti without losing their established `.onion`
+addresses. Every Onion Service has an identity key that determines its
+permanent `.onion` address, so changing that key would also change the
+address and could break bookmarks, links, and software connections that
+depend on it. The experimental [`ctor-migrate`] command in `arti hss` allows
+operators to import an existing identity key from C Tor into Arti, giving
+them a way to test the newer software while keeping the same address. Tor
+still classifies the key migration feature as experimental.
+
+> We are grateful for the opportunity this grant provided to focus on crucial
+> Onion Services features and improvements. […] The ability to dedicate time
+> and resources to key features and improvements has been highly beneficial.
+>
+> <cite>–The Tor Project</cite>
+
+A private connection has limited value when the service on the other end
+becomes unreachable during an attack. Stronger defenses, better monitoring,
+and safer migration tools help operators keep Onion Services available while
+Tor continues the longer transition from its older C software to Arti.
+
+> The Tor Project is always interested in expanding development of its Onion
+> Services ecosystem, as many of the technical Onion Service properties are
+> desirable for a wide range of secure peer-to-peer applications. […] The
+> support and feedback we receive during these projects are highly valuable
+> for our efforts to establish a strong development community around Onion
+> Services with 3rd-party application developers.
+>
+> <cite>–The Tor Project</cite>
+
+For Bitcoin users and infrastructure operators, Tor can reduce the network
+information exposed when wallets, nodes, miners, and service providers
+communicate over the internet. Routing connections through Tor makes it
+harder for nefarious network observers to connect Bitcoin activity with a
+specific home, office, server, or person. Bitcoin services can also operate
+as Onion Services, allowing operators to provide access without publicly
+revealing where their servers are located. Together, these capabilities
+provide better privacy for both people connecting to Bitcoin infrastructure
+and the operators running it.
+
+The [nostr] ecosystem also makes use of Tor and Onion Services. Users can
+connect to [relays] over Tor without directly exposing their IP addresses,
+while relay operators can offer their relays as Onion Services to conceal
+where the servers are hosted. Nostr’s [NIP-66 relay-discovery specification]
+even recognizes `tor` as a relay network type. Improvements that make Onion
+Services more reliable and resistant to attacks therefore strengthen an
+existing privacy option for nostr users and relay operators.
+
+OpenSats’ support gave the Tor team the resources to improve Onion Services
+while continuing the long-term transition from C Tor to Arti. Funding for
+Onion Service development has historically been difficult to secure, making
+sustained support especially valuable as Tor works to strengthen this privacy
+infrastructure and expand the community of developers building with it.
+
+[onion routing]: /topics/onion-routing
+[The Tor Project]: /projects/tor
+[Rust]: https://rust-lang.org/
+[Arti]: https://gitlab.torproject.org/tpo/core/arti
+[C]: https://www.c-language.org/about
+[support from OpenSats]: /blog/tor-receives-support-grant
+[distributed denial-of-service]: https://en.wikipedia.org/wiki/Denial-of-service_attack
+[Onion Service Proof-of-Work]: https://onionservices.torproject.org/technology/security/pow/#the-technology
+[HashX]: https://tpo.pages.torproject.net/core/doc/tor/md_ext_2equix_2hashx_2README.html
+[Equi-X]: https://tpo.pages.torproject.net/core/doc/tor/md_ext_2equix_2README.html
+[Arti 1.4.5]: https://blog.torproject.org/arti_1_4_5_released/
+[Korea Advanced Institute of Science and Technology]: https://www.kaist.ac.kr/en/
+[findings showed]: https://pure.kaist.ac.kr/en/publications/onions-got-puzzled-on-the-challenges-of-mitigating-denial-of-serv/
+[Arti 1.4.6]: https://blog.torproject.org/arti_1_4_6_released/
+[replacement Proof-of-Work control system]: https://gitlab.torproject.org/tpo/core/arti/-/merge_requests/3093
+[Tor Proposal 362]: https://spec.torproject.org/proposals/362-update-pow-control-loop.html
+[limited the size of Onion Service descriptors]: https://gitlab.torproject.org/tpo/core/arti/-/merge_requests/3070
+[Prometheus-style MetricsPort]: https://blog.torproject.org/arti_1_4_3_released
+[`ctor-migrate`]: https://gitlab.torproject.org/tpo/core/arti/-/merge_requests/3102
+[NIP-66 relay-discovery specification]: https://github.com/nostr-protocol/nips/blob/master/66.md
+
+---
+
+### WireGuard
+
+[WireGuard] is a secure networking protocol that creates encrypted connections
+between devices, servers, and networks. When two devices or systems are
+configured to trust one another, traffic moving between them is encrypted and
+authenticated before crossing the internet. WireGuard is available across
+Linux, Windows, macOS, BSD, iOS, Android, and other environments, making it
+useful for everything from individual devices to servers and data centers.
+This makes WireGuard useful infrastructure for operators who need private
+connections between systems they control.
+
+Creator Jason Donenfeld specifically described the protocol as being used to
+secure links between nodes and data centers. His [long-term support grant]
+from OpenSats covers continued development and maintenance of WireGuard
+across its supported platforms, as well as other cryptographic infrastructure
+work.
+
+A large part of Jason’s grant work involves keeping WireGuard dependable as
+operating systems and development tools change. For Android, he brought the
+application back into active development after a long pause and updated it to
+meet current platform requirements. He also modernized the project’s build
+and release systems, removed outdated code, and improved update checks. The
+result is a WireGuard application that can continue to be built, published,
+installed, and maintained on current Android devices.
+
+Additional work focused on Windows. WireGuard on Windows relies on two closely
+related projects. [WireGuardNT] is the driver that allows WireGuard to
+operate directly within Windows networking, while [WireGuard for Windows] is
+the broader application that incorporates and manages that driver. Both
+required extensive modernization after years of changes to Windows,
+development tools, security requirements, and driver-distribution systems.
+
+Jason spent months removing older compatibility workarounds, updating
+development tools, carefully studying how Windows behaves internally,
+improving performance, and fixing bugs across both projects. WireGuardNT was
+updated to support modern Windows systems more directly and received a new
+driver-verification setup. WireGuard for Windows went through a similar
+modernization, including changes to its build system, installer, updater,
+certificate handling, networking logic, and other parts of the application.
+Some of this work even required Jason to [contribute a change] to the
+[Go programming language]’s own development tools, so WireGuard could work
+properly with modern Windows systems.
+
+Getting those improvements into users’ hands required work outside the
+application code itself. Windows will only accept drivers that meet specific
+security and testing requirements, so WireGuard releases must be digitally
+signed and pass Microsoft’s driver-testing process. The WireGuard project
+obtained a new Extended Validation (EV) code-signing certificate and stored
+it on dedicated security hardware. Jason also rebuilt the project’s
+[Windows Hardware Lab Kit] testing environment, which runs the compatibility
+tests needed before updated drivers can be approved and distributed to
+users.
+
+The release path then ran into an unexpected obstacle when Microsoft
+deactivated WireGuard’s hardware-development account following a new
+identity-verification requirement. Jason [publicly documented the problem]
+and the effort to restore access, which temporarily prevented the project
+from submitting updated drivers even though the engineering work was largely
+complete. After the issue was resolved, WireGuard could once again submit
+signed drivers and move the Windows releases forward.
+
+That work culminated in April 2026, when both WireGuardNT and WireGuard for
+Windows reached version 1.0. The [April 18 release announcement] followed a
+broad review and modernization of the Windows codebase. WireGuardNT included
+improvements to how quickly the driver reacts when network settings change
+and how it handles information about the Windows network connection.
+
+For Bitcoin, WireGuard can give node and mining operators a private way to
+reach systems they manage over the internet. A node operator, for example,
+can remotely access their Bitcoin node without exposing its management ports
+directly to the public internet. Mining operators can use the same kind of
+encrypted connection to securely monitor and manage miners at another
+location. In both cases, WireGuard protects the connection to the
+infrastructure.
+
+OpenSats’ long-term support gives Jason room to keep this infrastructure
+working as operating systems, security requirements, and development tools
+continue to change. Sustained maintenance helps keep WireGuard dependable and
+available as a secure networking tool for Bitcoin operators, and internet
+services more broadly.
+
+[long-term support grant]: /blog/jason-donenfeld-lts-grant
+[WireGuardNT]: https://git.zx2c4.com/wireguard-nt/about/
+[WireGuard for Windows]: https://git.zx2c4.com/wireguard-windows/about/
+[contribute a change]: https://go.googlesource.com/go/+/341b5e2c0261cc059b157f1c7a2a2c4d1f417f0d
+[Go programming language]: https://go.dev/
+[Windows Hardware Lab Kit]: https://learn.microsoft.com/en-us/windows-hardware/test/hlk/
+[publicly documented the problem]: https://news.ycombinator.com/item?id=47687884
+[April 18 release announcement]: https://lists.zx2c4.com/pipermail/wireguard/2026-April/009580.html
+
+---
+
+Keeping Tor and WireGuard up-to-date with new security research, changing
+operating systems, and evolving platform requirements means helping Bitcoin
+flourish. OpenSats’ grants free up time for experienced maintainers to
+continue working and innovating on these projects.
+
+For Tor, that has meant dedicated resources for Onion Service development
+during the transition to Arti. For WireGuard, long-term support gives Jason
+Donenfeld room to maintain and modernize software across the many platforms
+where it runs. This kind of sustained funding helps keep important
+open-source infrastructure actively maintained and available to the people
+who depend on it.
+
+To help OpenSats continue supporting projects like these, consider
+contributing to the [General Fund].
+
+<DonateToGeneralFundButton />
+
+[General Fund]: /funds/general
