@@ -8,14 +8,11 @@ const Credits = () => {
   const thebitcoincompanyLogo = '/img/supporters/tbc.png'
   const unchainedLogo = '/img/supporters/unchained.png'
   const lianaLogo = '/img/supporters/liana.png'
-  const btcPayServerLogo = '/img/supporters/btc-pay-server.png'
   const duxReserveLogoWithCastlenine =
     '/img/supporters/castlenine-dux-reserve.jpg'
-  const coinkiteLogo = '/img/supporters/coinkite.png'
   const gregFossLogo = '/img/supporters/greg-foss.jpg'
   const jeremyRubinLogo = '/img/supporters/jeremy-rubin.gif'
   const johnPfefferLogo = '/img/supporters/john-pfeffer.jpg'
-  const ledgerLogo = '/img/supporters/ledger.jpg'
   const nodlLogo = '/img/supporters/nodl.jpg'
   const swanBitcoinLogo = '/img/supporters/swan.png'
   const scarceCity = '/img/supporters/scarce-city.png'
@@ -26,20 +23,10 @@ const Credits = () => {
 
   const supporters: CreditItemProps[] = [
     {
-      link: 'https://btcpayserver.org/',
-      image: btcPayServerLogo,
-      nym: 'BTCPay Server',
-    },
-    {
       link: 'https://twitter.com/castlenine_',
       image: duxReserveLogoWithCastlenine,
       nym: 'Castlenine',
       person: true,
-    },
-    {
-      link: 'https://coinkite.com/',
-      image: coinkiteLogo,
-      nym: 'Coinkite',
     },
     {
       link: 'https://twitter.com/FossGregfoss',
@@ -58,11 +45,6 @@ const Credits = () => {
       image: johnPfefferLogo,
       nym: 'John Pfeffer',
       person: true,
-    },
-    {
-      link: 'https://www.ledger.com/',
-      image: ledgerLogo,
-      nym: 'Ledger',
     },
     {
       link: 'https://www.nodl.it/',
