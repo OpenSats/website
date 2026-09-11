@@ -10,6 +10,7 @@ const CATEGORY_ORDER = [
   'Bitcoin',
   'Lightning',
   'Privacy',
+  'Security',
   'Ecash',
   'Mining',
   'Nostr',
