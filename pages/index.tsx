@@ -210,21 +210,28 @@ export default function Home({
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags, images } = post
+            const cover = images?.[0]
             return (
               <li key={slug} className="py-12">
                 <article>
                   <div className="space-y-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-4 xl:space-y-0">
-                    <div>
-                      <Link href={`/blog/${slug}`} className="block">
-                        <Image
-                          src={images[0]}
-                          alt="blog post"
-                          width={400}
-                          height={300}
-                        />
-                      </Link>
-                    </div>
-                    <div className="space-y-2 xl:col-span-2">
+                    {cover && (
+                      <div>
+                        <Link href={`/blog/${slug}`} className="block">
+                          <Image
+                            src={cover}
+                            alt="blog post"
+                            width={400}
+                            height={300}
+                          />
+                        </Link>
+                      </div>
+                    )}
+                    <div
+                      className={`space-y-2 ${
+                        cover ? 'xl:col-span-2' : 'xl:col-span-3'
+                      }`}
+                    >
                       <div className="space-y-4">
                         <h2 className="text-2xl font-bold leading-8 tracking-tight max-[375px]:text-xl">
                           <Link
