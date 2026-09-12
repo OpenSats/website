@@ -1,0 +1,31 @@
+---
+title: 'DDoS'
+summary: 'An availability attack that floods a service, server, or network from many sources at once so legitimate users cannot reach it.'
+category: 'Security'
+aliases:
+  [
+    'DDoS',
+    'DDoS attack',
+    'Distributed Denial-of-Service',
+    'Distributed denial of service',
+    'Distributed denial-of-service attack',
+    'Denial of service',
+    'DoS',
+    'DoS attack',
+  ]
+---
+
+A Distributed Denial-of-Service attack, usually shortened to **DDoS**, tries to make a service unavailable by overwhelming it with traffic from many sources at once. Instead of breaking the target's rules or stealing keys, the attacker consumes bandwidth, connection capacity, CPU, memory, or application resources until normal users cannot get through.
+
+The "distributed" part matters. A simple denial-of-service attack can come from one source. A DDoS attack uses many sources, often compromised machines in a botnet, which makes it harder to block without also blocking legitimate traffic. Attacks can flood raw network capacity, abuse protocol behavior, or send expensive application requests that force the target to do too much work.
+
+DDoS resistance matters for freedom tech because public infrastructure is easy to find and expensive to defend. [Tor](/projects/tor) relays and onion services, [Nostr](/topics/nostr) [relays](/topics/relays), Bitcoin nodes, explorers, donation pages, and project websites all depend on availability. If an adversary can knock them offline, users may be pushed toward centralized fallbacks, custodial services, or infrastructure controlled by a smaller set of providers.
+
+Mitigation usually combines several layers: rate limits, filtering, load shedding, caching, anycast routing, upstream scrubbing, and protocol designs that make abusive requests cheap to reject. Decentralization helps too. More independently operated nodes, relays, mirrors, and service providers reduce the chance that one target becomes a single point of failure.
+
+## References
+
+- [Cloudflare: What is a DDoS attack?](https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/)
+- [IBM: What is a Distributed Denial-of-Service attack?](https://www.ibm.com/think/topics/ddos)
+- [Microsoft Security: What is a DDoS attack?](https://www.microsoft.com/en-us/security/business/security-101/what-is-a-ddos-attack)
+- [Wikipedia: Denial-of-service attack](https://en.wikipedia.org/wiki/Denial-of-service_attack)
