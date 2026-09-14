@@ -320,7 +320,7 @@ export default function Home({
         </div>
       </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="xl:pt-18 min-h-screen space-y-2 pt-8 md:space-y-5">
+        <div className="space-y-2 pt-8 md:space-y-5 xl:pt-12">
           <h1
             id="explore-projects"
             className="scroll-mt-8 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl"
