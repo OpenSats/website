@@ -183,7 +183,7 @@ You know it worked when you see: "[INFO] Installed ngit v3.0.1 to …"
 
 **2. Get your nostr remote signer.**
 
-First off, I don't know who needs to hear this but: never paste your nsec anywhere! Use [nak][nak] here as it's perfect for working on the terminal. If you use `nak key encrypt`, it will lock your key behind a password, and you save the output as `you.ncryptsec`. After that you can start a bunker, and just make sure that you leave it running, step 3 needs it:
+First off, I don't know who needs to hear this but: never paste your nsec anywhere! Use [nak][nak] here, as it's perfect for working on the terminal. If you use `nak key encrypt`, it will lock your key behind a password, and you save the output as `you.ncryptsec`. After that you can start a bunker, and just make sure that you leave it running, step 3 needs it:
 
 ```
 nak bunker --sec "$(cat you.ncryptsec)" --profile you wss://nos.lol
