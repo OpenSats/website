@@ -191,7 +191,7 @@ nak bunker --sec "$(cat you.ncryptsec)" --profile you wss://nos.lol
 
 It worked when nak prints a `bunker://` address. Make sure to check that the printed npub is yours.
 
-**3. Sign this repository in from a second terminal, again inside your project's folder.**
+**3. Sign this repository from a second terminal, again inside your project's folder.**
 
 If you're paranoid, don't ever use `--nsec`, because otherwise your private key gets written into your shell history in plain text. That's the nice thing with nak's bunker: your key never leaves that first terminal and ngit only ever receives signatures:
 
