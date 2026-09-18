@@ -1,0 +1,425 @@
+---
+title: "Good Luck Banning a Key Pair"
+date: '2026-09-18'
+tags: ['nostr', 'spotlight']
+authors: ['cfunk']
+images: ['/static/images/spotlight/dan-conway/featured.png', '/static/images/spotlight/dan-conway/hero.png']
+heroOverlay: 'light'
+draft: false
+summary: "We can bring back git's decentralised roots with nostr."
+pullQuotes:
+  - "Room for innovation is squeezed out by walled gardens, strategic locks and limited APIs."
+  - "I have a visceral and emotional attraction to P2P."
+  - "The pressing need is censorship resistant contribution."
+  - "Let's work together to loosen the chains of centralised walled gardens and embrace a permissionless world!"
+  - "The movement succeeds when individuals choose to use the tools we create."
+---
+
+> [We can bring back git's decentralised roots with nostr.][decentralised-roots]
+
+If your project lives on GitHub, now is a good time to seriously consider hosting copies of your repositories on [nostr][nostr]. And by the end of reading this, you'll know how.
+
+Using nostr-based alternatives to GitHub, such as [ngit][ngit]/[GRASP][grasp], ensures that you won't be in as much trouble the next time [GitHub goes down for hours][github-down], like it did three times in August of 2026 alone.
+
+Solely relying on GitHub is especially risky if your project is deemed problematic by certain powerful people. We've seen this play out just this past July when [the Indian government ordered GitHub to geoblock the Bitchat repository][bitchat-takedown]. And it is exactly for addressing scenarios like these that Dan Conway has spent the last few years building on nostr. Within days of the order, Bitchat copies were up on ngit, and on many more.
+
+One month before that, GitHub [banned a few rust-lightning contributors and deleted their pull requests][ldk-ban] (which can never be recovered) for no valid reasons. Sadly, whenever a project gets banned like this, it usually only starts a game of musical chairs that swaps one centralized problem for another. As Dan puts it: ["That's not freedom technology."][not-freedom]
+
+> When I embarked on this journey I would never have dreamed that GitHub would not only fail to adapt to the evolving landscape but would let their existing services degrade so much as the demand profile changed.
+
+Microsoft, which Dan calls [a behemoth][behemoth], owns GitHub and uses it to hold the open source world in its grip. But now that we have nostr, there is a real way out. One that doesn't make us fall back into the same old traps.
+
+As [Walter Wink][walter-wink], whom Dan is very much inspired by, wrote:
+
+> Evil can be opposed without being mirrored. Oppressors can be resisted without being emulated. Enemies can be neutralized without being destroyed.
+
+We don't need to stop using GitHub; we just need to use tools like ngit/GRASP that nobody owns. Dan has also built [GitWorkshop.dev][gitworkshop] to make everything more user-friendly:
+
+<div className="dark:hidden">
+  <VideoPlayer src="/static/videos/gitworkshop-tour-light.mp4" />
+</div>
+<div className="hidden dark:block">
+  <VideoPlayer src="/static/videos/gitworkshop-tour-dark.mp4" />
+</div>
+
+Change is here, now time for acceleration. The open source world was never meant to be shackled to one company's server. So how did we all end up with most of our code sitting on Microsoft servers? Well, it all began with [Git][git].
+
+## Git & GitHub 101
+
+> [Whilst a git repo can be easily pushed to a new git server, this extra social layer cannot.
+> This conversation history is usually not cached locally and can be easily lost if GitHub deletes a project.][social-layer]
+
+Git is a simple system for reviewing proposed code changes over [email][git-email].
+
+[Linus Torvalds built Git specifically for the Linux team in 2005][linus-git], after something eerily familiar had happened to him… He had made the controversial choice of [running the kernel's workflow on a closed-source tool][bitkeeper]. One day, the man who owned the license changed his mind and revoked their right to use it. The Linux team had no other choice but to write their own: Git.
+
+> [Git in itself is a state chain. Every commit id is a hash of all previous changes.][state-chain]
+
+But it just wasn't very user-friendly, or even practical for a lot of people. That's where GitHub saw an opportunity for a new way to use Git based on open collaboration.
+
+On GitHub, anyone can suggest changes to any public project and fork their own copy, and the maintainer decides whether or not to accept them. But Git's collaboration model always requires an invitation from the maintainer before you can really get involved with a project.
+
+Not only that, but reading pull requests on the terminal is not everyone's cup of tea, whereas anybody can easily read a webpage like GitHub's that shows you every code change inline, with comments, threads, review states. It's just too convenient.
+
+But convenience always comes at a price. One that the Linux team, for instance, never agreed to pay. [To this day, they still use the email model to review patches.][linux-patches] Which, by the way, is what you might have to start doing too if GitHub were to inexplicably ban your account. Unless, of course, if you've already mirrored your repository using ngit.
+
+The code has always been able to go anywhere; that's what Git is. It's everything else that's the problem: the comments, the PRs, the follows, the stars and basically every communication around the code is just a row in GitHub's database. And it's precisely those things that happen to help you gain credibility online as a developer.
+
+That's why migrating away from GitHub has always been too much of an inconvenience. So much so that for the best part of the last two decades there was not even a question about where a new project would go: it would obviously live on GitHub. Where else? That's pretty much where everyone in software development has been since 2008.
+
+This level of network effect that GitHub had was so impossible to replicate (until today) that competitors just gave up. [Google Code closed shop and told their users to migrate over to GitHub][google-code], and so did [Microsoft, as their CodePlex faced the exact same fate][codeplex]. Soon, the acquisition path became their only hope. Microsoft's offer was just too good to refuse: [an estimated 25 times GitHub's annual revenue that year.][github-acquisition] Peanuts considering how desperate Microsoft actually was to get back into developers' good graces after having [antagonized open source so long][ballmer-cancer].
+
+Undoubtedly the cringiest part about this whole ordeal is how Microsoft built their proprietary Copilot AI-assistant based on all of the code that was hosted on GitHub. The Software Freedom Conservancy [quit GitHub over Copilot and urged all free-software projects to do the same][give-up-github]. Other developers [took Copilot to court][copilot-court] for stripping their code of its licenses and selling it back at a premium, a case that's still being argued as of today.
+
+But now that we finally have pseudonymous identities that are cryptographic key pairs (a private key only you hold, and a public key everyone else knows you by) there's no reason that our social network and [street credibility][street-cred] shouldn't be controlled and owned solely by *us*: the users. That is the idea Dan has spent the last three years turning into properly working, free and open source software, one that puts social identity back in the hands of users instead of platforms. But who is Dan, really?
+
+## #danstr
+
+> [I am a cypherpunk because I believe that direct human interaction, devoid of \[mediation\] and control by a centralised authority, is fertile soil for creativity, vitality and human flourishing][cyperpunk]
+
+The first time that I got to meet Dan, he told me about his daughters learning binary and about the pride that he felt watching them spell their names in ones and zeros. It made me curious about who he was as a person, and how that reflects into how he builds what he builds.
+
+He clearly understands how technology can help put more of that power back into people's own hands, and it's perhaps because of that, that his adversarial mind cannot stop thinking:
+
+> If you're going to be using tools and working on tools that the established powers are going to see as a threat, then [it helps to] do so privately... one of the best ways that you can defend yourself against powerful actors [is] for them not to know you exist.
+
+Good people sometimes need defending against the very system that's supposed to protect them. And nowadays, digital privacy is often a matter of survival for people in those situations. Because it's never good news to rub very powerful and rich people the wrong way. Especially when you're not nearly as rich or powerful yourself. That is why Dan is so passionate about what he does; it's a real shot at turning the tables on a power asymmetry as old as time.
+
+> What excites me about cryptography is that it enables the weak to defend themselves against the powerful.
+
+Those who interpret and enforce the law are not always right, and sometimes even the law itself is wrong. But that, history only ever admits in hindsight. The reality is that we need to be humble about our present view.
+
+Let's not forget that only 30 years ago, the US government classified strong encryption as a munition, [the same munitions list as missiles][eo-13026]. They opened [a criminal investigation into Phil Zimmermann][zimmermann] just because he published encryption software. Ultimately, the case was dropped in 1996, and within a decade the same cryptography could be found in every browser on earth.
+
+Similar story in August 2022. Within hours of OFAC sanctioning Tornado Cash, [GitHub suspended the project's organization and the personal accounts of its developers][tornado-github]. None of them were even on the sanctions list. Then two years later, [a federal appeals court ruled the sanction itself unlawful][tornado-ruling].
+
+Makes sense why Satoshi would choose to remain anonymous.
+
+> [We have a duty of care to the users to keep private information private.][duty-of-care]
+
+Dan used to work as an IT management consultant and he had a long commute, a perfect time to listen to plenty of freedom tech podcasts. For years, he just watched from the sidelines, waiting for his chance to contribute. Eventually, he started picking up bounties after his kids' bedtime.
+
+He first considered making his big jump by contributing to [cross-input signature aggregation][cisa], a change that would make private bitcoin transactions cheaper. Then, in April of 2023, Jack Dorsey started rethinking the funding model for a series of bounties that he had put up for a nostr-based GitHub replacement, and that's what caught Dan's attention:
+
+> [I agree that a large bounty doesn't put the right incentives in place.
+> I'd love to work full time on this problem.
+> Would you consider sponsoring a lead developer?][jack-bounty]
+
+The technical challenge in itself appears to be some of what motivates him the most. And in a way that I did not expect:
+
+> I was skeptical about whether it would work, but I thought it was an interesting problem; I wanted to work on the problem.
+
+It takes a rare kind of person to get excited about working on a problem specifically *because* they doubt it can be solved. Dan calls it the difference between a job and a vocation:
+
+> It'd be much easier for me to go back [to working in consulting].
+>
+> I probably would be paid more and do way less hours if I did a fiat job.
+>
+> But I believe in this, I want this to succeed.
+
+He could work anywhere for better pay, with coworkers he could have lunch with in person. Instead he's wishing GM to other nostriches, alone at the computer, just working on making open source better. We're lucky to have him.
+
+And he may have lost the camaraderie of his coworkers, but he sure gained a [nostrverse][nostrverse] full of people on the same mission, contributing to each other's projects. Hopefully, that has made it worth it for him. Especially since the feedback from the nostr community appears to have always been so instrumental to Dan's software development loop: thinking out loud all together over nostr, building, shipping, and thinking out loud some more.
+
+> [Software development is fundamentally a social experience and this is where nostr shines.][social-experience]
+
+## How ngit and GRASP came to be
+
+> [launching ngit, a prototype cli built in rust for a github alternative over nostr.
+> Try it out. I'd love your feedback][ngit-launch]
+
+In April 2023, Dan was [posting about whether nostr could liberate the world's code collaboration from centralized authorities][liberate-collab]. One month later, the [first ngit commit in history][first-commit] was made:
+
+The first iteration was a full-blown nostr-maximalism edition: nostr was doing just everything. Every version of every file in the repository was stored as a nostr event, and every reader had to download every single one of them. As it turns out, it [just couldn't scale][couldnt-scale].
+
+Dan went back to the drawing board and, in September 2023, he began a ground-up redesign based off of one newly understood principle:
+
+> [Let git be git. Let nostr be nostr.][let-git]
+
+So that's why in ngit, now, you'll find that Git keeps the code, and that nostr carries all of the communication between people (i.e. the pull requests, the issues, the comments, and the signed notes from the maintainer saying which commit is the real one).
+
+In July of 2023, [OpenSats started funding Dan's work][first-grant] for ngit.
+
+Over the winter of 2023-2024, Dan helped build [NIP-34][nip-34], which is the standard for git over nostr. And then in spring:
+
+> [I feel like it's either my birthday or I'm about to wake up from a long dream where I quit my job to become a nostr dev.][birthday-dream]
+
+He got a new grant again in November 2025 for [GRASP][grasp-announcement].
+
+> [Grant funding is a nice way of speeding up failures. That enables builders to move on to the next idea.][speeding-up-failures]
+
+[In June of 2025, the first version of GRASP shipped.][grasp-shipped] Then, Dan rebuilt it from scratch over the winter, as he apparently tends to do. Fast-forward to today, and v3 of ngit and v4 of GitWorkshop.dev just launched. You can now have private repositories and moderation run by the maintainer. He recently posted on nostr about how he had spent the last [three years crafting ngit by hand, and the past eight months using AI in his workflow][ai-workflow]. When I asked him about it, he wrote:
+
+> For a while, I was pessimistic about the role of AI partly because it displaced my skills as a coder, which formed not a small part of my own personal identity, but mainly because of the prospect of the best models being controlled and permissioned by a small number of powerful institutions and the privacy nightmare of feeding all our conversations into their data lake.
+>
+> I'm heartened to see how quickly open source models are catching up. What excites me about cryptography is that it enables the weak to defend themselves against the powerful. AI may become a tool with these same properties.
+
+In late July, his AI agent's first pull request got merged. It has [a nostr keypair of its own][agent-npub]. The agent writes code and opens pull requests like any contributor. It can't merge anything; every change is still only merged under Dan's key.
+
+The bot recently did its first pull request to the CI and signed software releases, which I personally am very excited about as it's one of the last remaining pieces that still makes it hard for users to migrate completely away from GitHub.
+
+If you want your [AI assistant to use ngit][ngit-agents] too, it's easier than counting one-two-three. I asked my agent to figure it out, published my first repository, and [I had my first contributor within hours][first-contributor].
+
+GitHub's network effect is no longer irreproducible. Now it's up to us to act accordingly.
+
+<details id="ngit-to-github-mirror-walkthrough" className="group my-8 rounded-lg border border-gray-200 p-4 dark:border-gray-700 sm:p-6">
+<summary className="flex cursor-pointer list-none items-start gap-3 text-base font-bold leading-6 text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 dark:text-gray-100 sm:text-xl sm:leading-7 [&::-webkit-details-marker]:hidden">
+  <svg className="my-1 h-4 w-4 shrink-0 transition-transform group-open:rotate-90 sm:my-1.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3l6 5-6 5V3z" /></svg>
+  <span>ngit to GitHub Mirror Walkthrough</span>
+</summary>
+
+Which brings us back to the most minimal action we can do today to achieve the maximum results: let's create mirrors. When we're done, your repository will not only live on GitHub but also on two GRASP servers over nostr. So that just one `git push` updates all three.
+
+Let's first have a look at all the pieces, and then walk through each of the four commands required.
+
+Quick cheat-sheet:
+
+- [ngit][ngit-dev]: the command-line tool that connects Git to nostr
+- [Git Relays Authorized via Signed-Nostr Proofs (GRASP)][grasp-repo]: hosts the repositories
+- GitWorkshop.dev: the first web client
+- Git: stores the code, every version of it
+- nostr: carries the signatures, issues, PRs, and comments
+
+Now let's go.
+
+### Tutorial
+
+Ok, so first things first. Get git and curl on your terminal (on Windows, use WSL) and make sure you're inside the folder of the repository that you want to mirror (the mirror is public, even if the GitHub repository isn't).
+
+No nostr account yet? Create your key at [nstart.me][nstart] first.
+
+Before your first push, make a [personal access token][github-pat] for just this repository with Contents set to Read and write, and keep it in your password manager. GitHub may ask for it again on later pushes, and the push fails if the `Password:` prompt sits there too long.
+
+ngit and nak both install into `~/.local/bin`, so put that on your PATH first (on Linux or WSL, use `~/.bashrc` instead of `~/.zshrc`):
+
+```
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+```
+
+**1. Install ngit.**
+
+[The installer][ngit-install] will verify that it's downloaded properly, then once that's done, it will add `ngit` and `git-remote-nostr`, [which teaches Git to speak][how-it-works] `nostr://` URLs:
+
+```
+curl -fsSL https://ngit.dev/install.sh | bash
+```
+
+You know it worked when you see: "Installed ngit v3.0.1".
+
+<Image
+  src="/static/images/spotlight/dan-conway/step1-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step1-dark.png"
+  alt="Installing ngit"
+  width={1536}
+  height={645}
+  className="w-full h-auto"
+/>
+
+**2. Get your nostr remote signer.**
+
+First off, I don't know who needs to hear this but: never paste your nsec anywhere! Use [nak][nak] here, as it's perfect for working on the terminal. Install it with its one-liner:
+
+```
+curl -sSL https://raw.githubusercontent.com/fiatjaf/nak/master/install.sh | sh
+```
+
+<Image
+  src="/static/images/spotlight/dan-conway/step2-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step2-dark.png"
+  alt="Installing nak"
+  width={1536}
+  height={453}
+  className="w-full h-auto"
+/>
+
+Then lock your key behind a password. This asks for your nsec and a new password without showing them or saving them in your shell history, and saves the result as `you.ncryptsec` in your home folder, outside your repository:
+
+```
+printf 'your nsec: '; read -rs NSEC; echo; printf 'new password: '; read -rs PW; echo; nak key encrypt "$NSEC" "$PW" > ~/you.ncryptsec; unset NSEC PW
+```
+
+Then check that the file really holds your key. It asks for the password again and prints your npub, make sure it's yours (if you get `failed to decrypt` instead, something got mistyped, just run the lock command again):
+
+```
+printf 'password: '; read -rs PW; echo; nak key decrypt "$(cat ~/you.ncryptsec)" "$PW" | nak key public | nak encode npub; unset PW
+```
+
+<Image
+  src="/static/images/spotlight/dan-conway/step3-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step3-dark.png"
+  alt="Locking your key and checking it"
+  width={1536}
+  height={693}
+  className="w-full h-auto"
+/>
+
+After that you can start a bunker, and just make sure that you leave it running, step 3, step 4 and every `git push` after that need it (next time, just run this same command again):
+
+```
+nak bunker --sec "$(cat ~/you.ncryptsec)" --profile you wss://nos.lol
+```
+
+It worked when nak asks for your password and then prints a `bunker://` address. Make sure to check that the printed npub is yours; if it isn't, stop, run `rm ~/.config/nak/bunker/you`, and redo the lock step.
+
+<Image
+  src="/static/images/spotlight/dan-conway/step4-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step4-dark.png"
+  alt="nak bunker running"
+  width={1536}
+  height={741}
+  className="w-full h-auto"
+/>
+
+**3. Sign this repository from a second terminal, again inside your project's folder.**
+
+If you're paranoid, don't ever use `--nsec`, because otherwise your private key gets written into your shell history in plain text. That's the nice thing with nak's bunker: your key never leaves that first terminal and ngit only ever receives signatures.
+
+Paste the full address in place of `bunker://...`, keeping the single quotes:
+
+```
+ngit account login --local --bunker-url 'bunker://...'
+```
+
+Don't share that address: until ngit uses it, anyone who has it can sign as you.
+
+It worked when ngit answers: "logged in to this local repository as" followed by your name (or your npub).
+
+<Image
+  src="/static/images/spotlight/dan-conway/step5-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step5-dark.png"
+  alt="Logging in with the bunker"
+  width={1536}
+  height={501}
+  className="w-full h-auto"
+/>
+
+If it just sits at `connecting to remote signer...`, press Ctrl+C in both terminals, start the bunker again and log in with the new address it prints (the code at the end changes every restart). If `ngit init` or a `git push` ever hangs, Ctrl+C it, restart the bunker and run it again, no new login needed.
+
+**4. [Announce the repository][ngit-mirroring]**
+
+Keeping GitHub among its servers is what makes it a mirror. Swap in your GitHub URL, the `https://github.com/<user>/<repo>.git` address from GitHub's Code button, and your project's name, then run:
+
+```
+ngit init --name your-project --additional-clone https://github.com/you/your-project.git -g relay.ngit.dev -g gitnostr.com -d
+```
+
+`--additional-clone` is what keeps GitHub in the loop.
+
+`-g` adds [free community servers][gitnostr].
+
+`-d` accepts the defaults.
+
+It worked when you see "share your repository:". A couple of relays failing along the way is normal. ngit pushes your code to the new servers right away and repoints `origin` at the nostr URL (your old GitHub remote is still there, now called `github`).
+
+<Image
+  src="/static/images/spotlight/dan-conway/step6-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step6-dark.png"
+  alt="Announcing the repository"
+  width={1536}
+  height={1509}
+  className="w-full h-auto"
+/>
+
+Now, whenever you commit, one ordinary `git push` feeds both GitHub and the nostr servers. If GitHub asks for a username and password (a `failed over ssh` line just before that is fine, it tries https next), use your GitHub username and your GitHub personal access token, not your GitHub password. Careful with that token: copy it only when you're at the `Password:` prompt, and paste it right there. If the GitHub part still fails, `ngit sync` catches GitHub up.
+
+<Image
+  src="/static/images/spotlight/dan-conway/step7-light.png"
+  darkSrc="/static/images/spotlight/dan-conway/step7-dark.png"
+  alt="One git push updating GitHub and both nostr servers"
+  width={1536}
+  height={1605}
+  className="w-full h-auto"
+/>
+
+Ta-dah!
+
+<BrowserFrame url="https://gitworkshop.dev/cfunk@nostriches.net/relay.ngit.dev/ngit-2-github-mirror">
+  <a href="https://gitworkshop.dev/cfunk@nostriches.net/relay.ngit.dev/ngit-2-github-mirror" target="_blank" rel="noopener noreferrer">
+    <Image
+      src="/static/images/spotlight/dan-conway/gitworkshop-light.png"
+      darkSrc="/static/images/spotlight/dan-conway/gitworkshop-dark.png"
+      alt="The mirrored repository on GitWorkshop"
+      width={1920}
+      height={1092}
+      className="w-full h-auto"
+    />
+  </a>
+</BrowserFrame>
+
+</details>
+
+---
+
+Thank you for reading this far, please consider mirroring one of your repositories today. Found an issue in the tutorial? Contribute and fix it on [git workshop][tutorial-repo]!
+
+You can find Dan on nostr as [DanConwayDev][dan-npub] and [his repositories][dan-repos] on GitWorkshop.dev. If you want to help us support people like him please consider setting up a recurring donation:
+
+<DonateRecurringButton designation="nostr" />
+
+For comments, corrections, or suggestions about our [Spotlight][OpenSats spotlight] series, please reach out to spotlight@opensats.org.
+
+[decentralised-roots]: https://njump.me/nevent1qqsfm0j66hhe9swrvd5zuxjnd673g35x4qdw6wwng8gf9rk2sp0nq0spp4mhxue69uhkummn9ekx7mqpzemhxue69uhhyetvv9ujumn0wd68ytnzv9hxgqg5waehxw309aex2mrp0yhxgctdw4eju6t0qgs2qzx779ted7af5rt04vzw3l2hpzfgtk0a2pw6t2plaz4d2734vngcmea8y
+[ngit]: /projects/ngit
+[grasp]: https://ngit.dev/grasp/
+[github-down]: https://www.theregister.com/devops/2026/08/26/github-actions-was-down-yet-again/5292679
+[bitchat-takedown]: https://restofworld.org/2026/india-github-geoblock-jack-dorsey-bitchat/
+[ldk-ban]: https://github.com/bitcoin/bitcoin/issues/35574
+[not-freedom]: https://njump.me/nevent1qqs25vcd2g5qpd9ltj3fz98ajq8klttxucthwk9lywgkr872vk5k6dcvce4ng
+[behemoth]: https://njump.me/note1fwq4jzvnvfj34yuual4qy2c2zcap0nza3uq80ask96q0up6wle0qx4hcfy
+[walter-wink]: https://www.goodreads.com/author/quotes/34877.Walter_Wink
+[social-layer]: https://njump.me/nevent1qqsxq0lzqdgfxw28jrt4hn9wnrnzvs0zxqk262e7tcnmxmnqjtuk3vqw54t0m
+[git-email]: https://git-send-email.io/
+[linus-git]: https://www.linuxfoundation.org/blog/blog/10-years-of-git-an-interview-with-git-creator-linus-torvalds
+[bitkeeper]: https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git
+[state-chain]: https://njump.me/nevent1qqszpw8m70pgf0dnpq83tgphm8gwayz6sm0aevtmcrfnussdvrz8decypvyph
+[linux-patches]: https://docs.kernel.org/process/submitting-patches.html
+[google-code]: https://opensource.googleblog.com/2015/03/farewell-to-google-code.html
+[codeplex]: https://devblogs.microsoft.com/bharry/shutting-down-codeplex/
+[github-acquisition]: https://www.cnbc.com/2018/06/05/github-interest-from-google-and-others-revenue-about-300-million.html
+[ballmer-cancer]: https://www.theregister.com/2001/06/02/ballmer_linux_is_a_cancer/
+[give-up-github]: https://sfconservancy.org/GiveUpGitHub/
+[copilot-court]: https://www.saverilawfirm.com/our-cases/github-copilot-intellectual-property-litigation
+[street-cred]: https://njump.me/nevent1qqs85a4vj4qtdpavj03gte5zpm220dutegkxalgnl0ypt0tn6ar25ccvmceuw
+[cyperpunk]: https://njump.me/nevent1qqsx6fsxwewezg8krk25zcnyqp4zyjcah0wwr35psfjljsh3nel68mq3tlftv
+[eo-13026]: https://www.presidency.ucsb.edu/documents/executive-order-13026-administration-export-controls-encryption-products
+[zimmermann]: https://philzimmermann.com/EN/background/background.html
+[tornado-github]: https://www.theregister.com/2022/08/10/github_tornado_cookies/
+[tornado-ruling]: https://www.jonesday.com/en/insights/2024/12/fifth-circuit-reverses-tornado-cash-sanctions-ruling
+[duty-of-care]: https://njump.me/nevent1qqsqdcyk72yzal8f035xxad9aehmg64c6neywaf89kvrafktaqxrwxshmrnfa
+[cisa]: https://bitcoinops.org/en/topics/cross-input-signature-aggregation/
+[jack-bounty]: https://njump.me/nevent1qqs9qfe6se8kftq87vay06swewxuw346ynaxcej968nag68y5eznfcqjks9dz
+[nostrverse]: https://fiatjaf.com/nostr.html
+[nostr]: /topics/nostr
+[git]: /topics/git
+[social-experience]: https://njump.me/note1fwq4jzvnvfj34yuual4qy2c2zcap0nza3uq80ask96q0up6wle0qx4hcfy#social-at-its-core
+[ngit-launch]: https://njump.me/nevent1qqs89d6pf9nw69405lgs9w7qp3qzgp0ac0jpxkfr5gqhhedngc7qkdczhkpfm
+[liberate-collab]: https://njump.me/note1fwq4jzvnvfj34yuual4qy2c2zcap0nza3uq80ask96q0up6wle0qx4hcfy
+[first-commit]: https://gitworkshop.dev/danconwaydev.com/ngit
+[couldnt-scale]: https://njump.me/note1wld0a8wfzqdhrc98p3xyc9envzgx66y865wxakt0vcrjgtt40fjqaf3dpg
+[let-git]: https://njump.me/note1a50dmtp8e0vpjmtmc5he2uy9c00q69s7ge2a0w9z3jzg5jyfz0tqk58x3e
+[nip-34]: https://github.com/nostr-protocol/nips/blob/master/34.md
+[birthday-dream]: https://njump.me/nevent1qqspwlrdx2n7nt3a9g4zfx2fzwtg5l2jy8w3fmg0yddfx5we88wad9ghgvfcr
+[first-grant]: /blog/nostr-grants-july-2023
+[grasp-announcement]: /blog/thirteenth-wave-of-nostr-grants#grasp
+[speeding-up-failures]: https://njump.me/note1e3jjaekvgwcgspgq6rgs56p3nn96xkcesph3ln6ahtkq3nanh2mszz35t6
+[grasp-shipped]: https://njump.me/note1xfjzrfha92m38lmrwnrz7y20fkn4ptq5hp9wjqlprq4242780alqr2pp4q
+[ai-workflow]: https://njump.me/nevent1qqsw0gvugj8dnnyr5nhgtan7k5xs00y3jpqmvyttg0323gpw8gwvsngzyzsq3hh327t0h2dq6matqn5064cgj2zanl2stkj6s0lg4t2h5dty6jugvj2
+[agent-npub]: https://njump.me/npub1v47f74n2ycn66asev62nv8sas99akj0g0wg0fkup37u3ckwuzs4q7cwtp0
+[ngit-agents]: https://ngit.dev/agents/
+[first-contributor]: https://gitworkshop.dev/npub1cfunkt32sd6pjavpkjpyf3rrjt3f7yp34pkp2da9f002h8gc27uqfpq8v7/github-bans
+[grasp-repo]: https://gitworkshop.dev/npub15qydau2hjma6ngxkl2cyar74wzyjshvl65za5k5rl69264ar2exs5cyejr/relay.ngit.dev/grasp
+[ngit-install]: https://ngit.dev/install.sh
+[how-it-works]: https://ngit.dev/how-it-works
+[nak]: /projects/nak
+[gitnostr]: https://gitnostr.com
+[ngit-mirroring]: https://ngit.dev/repositories/mirroring
+[ngit-dev]: https://ngit.dev
+[nstart]: https://nstart.me/en
+[github-pat]: https://github.com/settings/personal-access-tokens/new
+[donate]: /donate
+[dan-npub]: https://njump.me/npub15qydau2hjma6ngxkl2cyar74wzyjshvl65za5k5rl69264ar2exs5cyejr
+[dan-repos]: https://gitworkshop.dev/danconwaydev.com
+[OpenSats spotlight]: /spotlight
+[gitworkshop]: https://gitworkshop.dev/
+
+[tutorial-repo]: https://gitworkshop.dev/cfunk@nostriches.net/relay.ngit.dev/ngit-2-github-mirror
