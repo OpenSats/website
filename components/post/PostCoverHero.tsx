@@ -11,10 +11,16 @@ interface Props {
   title: string
   date: string
   coverImage?: string
+  overlay?: 'default' | 'light'
 }
 
 // Wide cover assets (~2.3:1) work best; subject on the right leaves room for text on the left.
-export default function PostCoverHero({ title, date, coverImage }: Props) {
+export default function PostCoverHero({
+  title,
+  date,
+  coverImage,
+  overlay = 'default',
+}: Props) {
   if (!coverImage) {
     return <PostDefaultHeader date={date} title={title} />
   }
@@ -36,11 +42,19 @@ export default function PostCoverHero({ title, date, coverImage }: Props) {
           className="object-cover object-[72%_center] xl:object-[center_right]"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-transparent xl:from-black/60 xl:via-transparent"
+          className={`absolute inset-0 bg-gradient-to-b to-transparent xl:from-black/60 xl:via-transparent ${
+            overlay === 'light'
+              ? 'from-black/30 via-transparent'
+              : 'from-black/70 via-black/20'
+          }`}
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent xl:from-black/80 xl:via-black/30"
+          className={`absolute inset-0 bg-gradient-to-t to-transparent xl:from-black/80 xl:via-black/30 ${
+            overlay === 'light'
+              ? 'from-black/95 via-black/10'
+              : 'from-black/95 via-black/50'
+          }`}
           aria-hidden
         />
         <div className="absolute inset-x-0 bottom-0 pb-6 xl:pb-8">
