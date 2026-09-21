@@ -51,6 +51,7 @@ const GRANTEE_COUNTRY_CODES: string[] = [
   'AL',
   'SG',
   'CM',
+  'KE',
 ]
 
 export default function GranteeMap() {
