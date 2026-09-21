@@ -44,6 +44,14 @@ const GRANTEE_COUNTRY_CODES: string[] = [
   'GT',
   'ID',
   'AE',
+  'PY',
+  'VG',
+  'LR',
+  'MT',
+  'AL',
+  'SG',
+  'CM',
+  'KE',
 ]
 
 export default function GranteeMap() {

@@ -50,6 +50,14 @@ export const GRANTEE_COUNTRY_CODES = [
   'GT',
   'ID',
   'AE',
+  'PY',
+  'VG',
+  'LR',
+  'MT',
+  'AL',
+  'SG',
+  'CM',
+  'KE',
 ]
 
 function escapeForCss(value) {

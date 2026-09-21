@@ -49,6 +49,14 @@ const GRANTEE_COUNTRY_CODES: string[] = [
   'GT', // Guatemala
   'ID', // Indonesia
   'AE', // UAE
+  'PY', // Paraguay
+  'VG', // British Virgin Islands
+  'LR', // Liberia
+  'MT', // Malta
+  'AL', // Albania
+  'SG', // Singapore
+  'CM', // Cameroon
+  'KE', // Kenya (new in 2026)
 ]
 
 export const getStaticProps = async () => {
