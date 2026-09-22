@@ -27,7 +27,7 @@ One month before that, GitHub [banned a few rust-lightning contributors and dele
 
 > When I embarked on this journey I would never have dreamed that GitHub would not only fail to adapt to the evolving landscape but would let their existing services degrade so much as the demand profile changed.
 
-Microsoft, which Dan calls [a behemoth][behemoth], owns GitHub and uses it to hold the open source world in its grip. But now that we have nostr, there is a real way out. One that doesn't make us fall back into the same old traps.
+Microsoft, which Dan calls [a behemoth][behemoth], owns GitHub and uses it to hold the open source world in its grip. To be fair, GitHub has been amazing for open source; it became the home of FOSS because it served the community so well, so much so that people are [leaving it with tears in their eyes][ghostty]. The problem is structural: GitHub is a platform, not a protocol. A platform is a system of control that serves its own interests, whereas a protocol is a freedom-maximising foundation that can't rug you. But now that we have nostr, there is a real way out. One that doesn't make us fall back into the same old traps.
 
 As [Walter Wink][walter-wink], whom Dan is very much inspired by, wrote:
 
@@ -49,7 +49,7 @@ Change is here, now time for acceleration. The open source world was never meant
 > [Whilst a git repo can be easily pushed to a new git server, this extra social layer cannot.
 > This conversation history is usually not cached locally and can be easily lost if GitHub deletes a project.][social-layer]
 
-Git is a simple system for reviewing proposed code changes over [email][git-email].
+Git is a distributed version control system: every copy of a project carries its whole history, and any copy can sync with any other, on any server. What Git never came with is a place to discuss the work.
 
 [Linus Torvalds built Git specifically for the Linux team in 2005][linus-git], after something eerily familiar had happened to him… He had made the controversial choice of [running the kernel's workflow on a closed-source tool][bitkeeper]. One day, the man who owned the license changed his mind and revoked their right to use it. The Linux team had no other choice but to write their own: Git.
 
@@ -57,19 +57,19 @@ Git is a simple system for reviewing proposed code changes over [email][git-emai
 
 But it just wasn't very user-friendly, or even practical for a lot of people. That's where GitHub saw an opportunity for a new way to use Git based on open collaboration.
 
-On GitHub, anyone can suggest changes to any public project and fork their own copy, and the maintainer decides whether or not to accept them. But Git's collaboration model always requires an invitation from the maintainer before you can really get involved with a project.
+On GitHub, anyone can suggest changes to any public project and fork their own copy, and the maintainer decides whether or not to accept them.
 
 Not only that, but reading pull requests on the terminal is not everyone's cup of tea, whereas anybody can easily read a webpage like GitHub's that shows you every code change inline, with comments, threads, review states. It's just too convenient.
 
-But convenience always comes at a price. One that the Linux team, for instance, never agreed to pay. [To this day, they still use the email model to review patches.][linux-patches] Which, by the way, is what you might have to start doing too if GitHub were to inexplicably ban your account. Unless, of course, if you've already mirrored your repository using ngit.
+But convenience always comes at a price. One that the Linux team, for instance, never agreed to pay. [To this day, they still use the email model to review patches.][linux-patches]
 
-The code has always been able to go anywhere; that's what Git is. It's everything else that's the problem: the comments, the PRs, the follows, the stars and basically every communication around the code is just a row in GitHub's database. And it's precisely those things that happen to help you gain credibility online as a developer.
+The code has always been able to go anywhere; that's what Git is. It's everything else that's the problem: the comments, the PRs, the CI, the follows, the stars and basically every communication around the code is just a row in GitHub's database. And it's precisely those things that happen to help you gain credibility online as a developer.
 
 That's why migrating away from GitHub has always been too much of an inconvenience. So much so that for the best part of the last two decades there was not even a question about where a new project would go: it would obviously live on GitHub. Where else? That's pretty much where everyone in software development has been since 2008.
 
 This level of network effect that GitHub had was so impossible to replicate (until today) that competitors just gave up. [Google Code closed shop and told their users to migrate over to GitHub][google-code], and so did [Microsoft, as their CodePlex faced the exact same fate][codeplex]. Soon, the acquisition path became their only hope. Microsoft's offer was just too good to refuse: [an estimated 25 times GitHub's annual revenue that year.][github-acquisition] Peanuts considering how desperate Microsoft actually was to get back into developers' good graces after having [antagonized open source so long][ballmer-cancer].
 
-Undoubtedly the cringiest part about this whole ordeal is how Microsoft built their proprietary Copilot AI-assistant based on all of the code that was hosted on GitHub. The Software Freedom Conservancy [quit GitHub over Copilot and urged all free-software projects to do the same][give-up-github]. Other developers [took Copilot to court][copilot-court] for stripping their code of its licenses and selling it back at a premium, a case that's still being argued as of today.
+For Dan, the cringiest part about this whole ordeal is GitHub [restricting FOSS contributors in places like Iran, Syria and Crimea][github-iran], and blocking tools that help the powerless defend themselves against the powerful, like Bitchat in India, at the behest of governments. Others are angrier about how Microsoft built their proprietary Copilot AI-assistant based on all of the code that was hosted on GitHub. The Software Freedom Conservancy [quit GitHub over Copilot and urged all free-software projects to do the same][give-up-github]. Other developers [took Copilot to court][copilot-court] for stripping their code of its licenses and selling it back at a premium, a case that's still being argued as of today.
 
 But now that we finally have pseudonymous identities that are cryptographic key pairs (a private key only you hold, and a public key everyone else knows you by) there's no reason that our social network and [street credibility][street-cred] shouldn't be controlled and owned solely by *us*: the users. That is the idea Dan has spent the last three years turning into properly working, free and open source software, one that puts social identity back in the hands of users instead of platforms. But who is Dan, really?
 
@@ -93,31 +93,27 @@ Let's not forget that only 30 years ago, the US government classified strong enc
 
 Similar story in August 2022. Within hours of OFAC sanctioning Tornado Cash, [GitHub suspended the project's organization and the personal accounts of its developers][tornado-github]. None of them were even on the sanctions list. Then two years later, [a federal appeals court ruled the sanction itself unlawful][tornado-ruling].
 
-Satoshi chose to remain anonymous for a pretty good reason
+Satoshi chose to remain anonymous for a pretty good reason.
 
 > [We have a duty of care to the users to keep private information private.][duty-of-care]
 
 Dan used to work as an IT management consultant and he had a long commute, a perfect time to listen to plenty of freedom tech podcasts. For years, he just watched from the sidelines, waiting for his chance to contribute. Eventually, he started picking up bounties after his kids' bedtime.
 
-He first considered making his big jump by contributing to [cross-input signature aggregation][cisa], a change that would make private bitcoin transactions cheaper. Then, in April of 2023, Jack Dorsey started rethinking the funding model for a series of bounties that he had put up for a nostr-based GitHub replacement, and that's what caught Dan's attention:
+He first considered making his big jump by contributing to [cross-input signature aggregation][cisa], a change that would make private bitcoin transactions cheaper. Then, in April of 2023, Jack Dorsey started rethinking the funding model for a series of bounties that he had put up for a nostr-based GitHub replacement, a problem Dan already cared about. Back in February, he'd told fiatjaf: "The github usecase really appeals. But that's a big project with a lot of considerations and I thought I probably should [do] something small first." So he replied to Jack:
 
 > [I agree that a large bounty doesn't put the right incentives in place.
 > I'd love to work full time on this problem.
 > Would you consider sponsoring a lead developer?][jack-bounty]
 
-The technical challenge in itself appears to be some of what motivates him the most. And in a way that I did not expect:
+The technical challenge interests him, sure. But what really motivates him the most is empowering people to build and collaborate without permission, so that no third party can ever lock anyone out. And in a way that I did not expect:
 
 > I was skeptical about whether it would work, but I thought it was an interesting problem; I wanted to work on the problem.
 
 It takes a rare kind of person to get excited about working on a problem specifically *because* they doubt it can be solved. Dan calls it the difference between a job and a vocation:
 
-> It'd be much easier for me to go back [to working in consulting].
->
-> I probably would be paid more and do way less hours if I did a fiat job.
->
-> But I believe in this, I want this to succeed.
+> I feel profoundly grateful that I'm being paid well to build the future I want to live in.
 
-He could work anywhere for better pay, with coworkers he could have lunch with in person. Instead he's wishing GM to other nostriches, alone at the computer, just working on making open source better. We're lucky to have him.
+He could have stayed working in consulting, with actual coworkers that he could have lunch with in person. Instead he's talking with other online nostriches, alone at the computer, just working on making open source better. We're lucky to have him.
 
 And he may have lost the camaraderie of his coworkers, but he sure gained a [nostrverse][nostrverse] full of people on the same mission, contributing to each other's projects. Hopefully, that has made it worth it for him. Especially since the feedback from the nostr community appears to have always been so instrumental to Dan's software development loop: thinking out loud all together over nostr, building, shipping, and thinking out loud some more.
 
@@ -148,7 +144,7 @@ He got a new grant again in November 2025 for [GRASP][grasp-announcement].
 
 > [Grant funding is a nice way of speeding up failures. That enables builders to move on to the next idea.][speeding-up-failures]
 
-[In June of 2025, the first version of GRASP shipped.][grasp-shipped] Then, Dan rebuilt it from scratch over the winter, as he apparently tends to do. Fast-forward to today, and v3 of ngit and v4 of GitWorkshop.dev just launched. You can now have private repositories and moderation run by the maintainer. He recently posted on nostr about how he had spent the last [three years crafting ngit by hand, and the past eight months using AI in his workflow][ai-workflow]. When I asked him about it, he wrote:
+[In June of 2025, the first version of GRASP shipped.][grasp-shipped] Then, Dan rebuilt it from scratch over the winter, as he apparently tends to do. Fast-forward to today, and v3 of ngit and v4 of GitWorkshop.dev [just launched][ngit-v3]. You can now have private repositories and moderation run by the maintainer. He recently posted on nostr about how he had spent the last [three years crafting ngit by hand, and the past eight months using AI in his workflow][ai-workflow]. When I asked him about it, he wrote:
 
 > For a while, I was pessimistic about the role of AI partly because it displaced my skills as a coder, which formed not a small part of my own personal identity, but mainly because of the prospect of the best models being controlled and permissioned by a small number of powerful institutions and the privacy nightmare of feeding all our conversations into their data lake.
 >
@@ -186,9 +182,9 @@ Now let's go.
 
 Ok, so first things first. Get git and curl on your terminal (on Windows, use WSL) and make sure you're inside the folder of the repository that you want to mirror (the mirror is public, even if the GitHub repository isn't).
 
-No nostr account yet? Create your key at [nstart.me][nstart] first.
+No nostr account yet? Create your key at [nstart.me][nstart] first, or let ngit make one with `ngit account create --name "Alice"` (see the [quickstart][ngit-quickstart]) and skip steps 2 and 3.
 
-Before your first push, make a [personal access token][github-pat] for just this repository with Contents set to Read and write, and keep it in your password manager. GitHub may ask for it again on later pushes, and the push fails if the `Password:` prompt sits there too long.
+If you already push to GitHub over SSH, or have a personal access token you use for pushing, you're set. Otherwise, before your first push, make a [personal access token][github-pat] for just this repository with Contents set to Read and write, and keep it in your password manager. GitHub may ask for it again on later pushes, and the push fails if the `Password:` prompt sits there too long.
 
 ngit and nak both install into `~/.local/bin`, so put that on your PATH first (on Linux or WSL, use `~/.bashrc` instead of `~/.zshrc`):
 
@@ -216,6 +212,8 @@ You know it worked when you see: "Installed ngit v3.0.1".
 />
 
 **2. Get your nostr remote signer.**
+
+Already use a remote signer like [Amber][amber]? Skip to step 3 and use its `bunker://` address there.
 
 First off, I don't know who needs to hear this but: never paste your nsec anywhere! Use [nak][nak] here, as it's perfect for working on the terminal. Install it with its one-liner:
 
@@ -295,9 +293,9 @@ It worked when ngit answers: "logged in to this local repository as" followed by
 
 If it just sits at `connecting to remote signer...`, press Ctrl+C in both terminals, start the bunker again and log in with the new address it prints (the code at the end changes every restart). If `ngit init` or a `git push` ever hangs, Ctrl+C it, restart the bunker and run it again, no new login needed.
 
-**4. [Announce the repository][ngit-mirroring]**
+**4. Announce the repository**
 
-Keeping GitHub among its servers is what makes it a mirror. Swap in your GitHub URL, the `https://github.com/<user>/<repo>.git` address from GitHub's Code button, and your project's name, then run:
+There are [two ways to mirror][ngit-mirroring]. You can let GitHub update automatically every time you push, if you want it always up to date without thinking about it. Or you can update GitHub yourself whenever you choose, as many maintainers prefer, so that it can never slow down or block a nostr push. This tutorial takes the first way, by listing GitHub as one of the repository's servers. Swap in your GitHub URL, the `https://github.com/<user>/<repo>.git` address from GitHub's Code button, and your project's name, then run:
 
 ```
 ngit init --name your-project --additional-clone https://github.com/you/your-project.git -g relay.ngit.dev -g gitnostr.com -d
@@ -338,7 +336,7 @@ Ta-dah!
     <Image
       src="/static/images/spotlight/dan-conway/gitworkshop-light.png"
       darkSrc="/static/images/spotlight/dan-conway/gitworkshop-dark.png"
-      alt="The mirrored repository on GitWorkshop"
+      alt="The mirrored repository on GitWorkshop.dev"
       width={1920}
       height={1092}
       className="w-full h-auto"
@@ -346,11 +344,27 @@ Ta-dah!
   </a>
 </BrowserFrame>
 
+**5. Move the conversation, not just the code.**
+
+Mirroring backs up your code, but the issues and pull requests still happen on GitHub. The real move is inviting people over:
+
+- Put your GitWorkshop.dev link (the one after "share your repository:") at the top of your GitHub README, so people know where to file issues and pull requests.
+- Anyone signed in with nostr can open an issue there, or from the terminal: `ngit issue create --subject "…" --body "…"`
+- To send you a pull request, contributors (with ngit and a signer, steps 1–3) clone your `nostr://` address, work on a branch starting with `pr/`, and push it:
+
+```
+git clone nostr://npub1<your-npub>/relay.ngit.dev/your-project
+git checkout -b pr/my-fix
+git push -u origin pr/my-fix
+```
+
+That push becomes a pull request signed by their key, ready for you to review on GitWorkshop.dev.
+
 </details>
 
 ---
 
-Thank you for reading this far, please consider mirroring one of your repositories today. Found an issue in the tutorial? Contribute and fix it on [git workshop][tutorial-repo]!
+Thank you for reading this far, please consider mirroring one of your repositories today. Or even better, create your next project directly on ngit, free from the shackles of permissioned platforms! Found an issue in the tutorial? Contribute and fix it on [GitWorkshop.dev][tutorial-repo]!
 
 You can find Dan on nostr as [DanConwayDev][dan-npub] and [his repositories][dan-repos] on GitWorkshop.dev. If you want to help us support people like him please consider setting up a recurring donation:
 
@@ -368,7 +382,6 @@ For comments, corrections, or suggestions about our [Spotlight][OpenSats spotlig
 [behemoth]: https://njump.me/note1fwq4jzvnvfj34yuual4qy2c2zcap0nza3uq80ask96q0up6wle0qx4hcfy
 [walter-wink]: https://www.goodreads.com/author/quotes/34877.Walter_Wink
 [social-layer]: https://njump.me/nevent1qqsxq0lzqdgfxw28jrt4hn9wnrnzvs0zxqk262e7tcnmxmnqjtuk3vqw54t0m
-[git-email]: https://git-send-email.io/
 [linus-git]: https://www.linuxfoundation.org/blog/blog/10-years-of-git-an-interview-with-git-creator-linus-torvalds
 [bitkeeper]: https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git
 [state-chain]: https://njump.me/nevent1qqszpw8m70pgf0dnpq83tgphm8gwayz6sm0aevtmcrfnussdvrz8decypvyph
@@ -411,6 +424,7 @@ For comments, corrections, or suggestions about our [Spotlight][OpenSats spotlig
 [ngit-install]: https://ngit.dev/install.sh
 [how-it-works]: https://ngit.dev/how-it-works
 [nak]: /projects/nak
+[amber]: /projects/amber
 [gitnostr]: https://gitnostr.com
 [ngit-mirroring]: https://ngit.dev/repositories/mirroring
 [ngit-dev]: https://ngit.dev
@@ -423,3 +437,7 @@ For comments, corrections, or suggestions about our [Spotlight][OpenSats spotlig
 [gitworkshop]: https://gitworkshop.dev/
 
 [tutorial-repo]: https://gitworkshop.dev/cfunk@nostriches.net/relay.ngit.dev/ngit-2-github-mirror
+[ghostty]: https://mitchellh.com/writing/ghostty-leaving-github
+[github-iran]: https://techcrunch.com/2019/07/29/github-ban-sanctioned-countries/
+[ngit-v3]: https://ngit.dev/v3
+[ngit-quickstart]: https://ngit.dev/quickstart
