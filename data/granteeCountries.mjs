@@ -48,6 +48,6 @@ export const GRANTEE_COUNTRY_CODES = [
   'AL', // Albania
   'SG', // Singapore
   'CM', // Cameroon
-  'KE', // Kenya (new in 2026)
-  'BD', // Bangladesh (new in 2026)
+  'KE', // Kenya
+  'BD', // Bangladesh
 ]
