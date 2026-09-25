@@ -2,64 +2,13 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { Resvg } from '@resvg/resvg-js'
 import { ROOT } from './og-network.mjs'
+import { GRANTEE_COUNTRY_CODES } from '../../data/granteeCountries.mjs'
+
+export { GRANTEE_COUNTRY_CODES }
 
 export const WORLD_SVG_PATH = path.join(ROOT, 'public', 'maps', 'world.svg')
 
 export const WORLD_MAP_ASPECT = 1009.6727 / 665.96301
-
-// Keep in sync with pages/map.tsx and components/GranteeMap.tsx
-export const GRANTEE_COUNTRY_CODES = [
-  'US',
-  'CA',
-  'DE',
-  'GB',
-  'IT',
-  'JP',
-  'NL',
-  'CH',
-  'CN',
-  'BR',
-  'AR',
-  'IE',
-  'HK',
-  'GE',
-  'SE',
-  'ES',
-  'PT',
-  'NO',
-  'GR',
-  'AU',
-  'IN',
-  'SI',
-  'KR',
-  'FI',
-  'CZ',
-  'UG',
-  'BE',
-  'FR',
-  'VN',
-  'UA',
-  'TR',
-  'SV',
-  'NZ',
-  'HU',
-  'SK',
-  'NG',
-  'PA',
-  'RO',
-  'GT',
-  'ID',
-  'AE',
-  'PY',
-  'VG',
-  'LR',
-  'MT',
-  'AL',
-  'SG',
-  'CM',
-  'KE',
-  'BD',
-]
 
 function escapeForCss(value) {
   return value.replace(/[^a-zA-Z0-9_-]/g, '\\$&')

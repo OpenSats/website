@@ -3,62 +3,9 @@ import path from 'path'
 import { InferGetStaticPropsType } from 'next'
 import { PageSEO } from '@/components/SEO'
 import StatsSentence from '@/components/StatsSentence'
+import { GRANTEE_COUNTRY_CODES } from '@/data/granteeCountries.mjs'
 
 const OPENSATS_ORANGE = '#f97316' // tailwind orange-500
-
-// ISO 3166-1 alpha-2 codes that match the SVG's path ids (id="US", id="DE", ...)
-const GRANTEE_COUNTRY_CODES: string[] = [
-  'US', // USA
-  'CA', // Canada
-  'DE', // Germany
-  'GB', // United Kingdom
-  'IT', // Italy
-  'JP', // Japan
-  'NL', // Netherlands
-  'CH', // Switzerland
-  'CN', // China
-  'BR', // Brazil
-  'AR', // Argentina
-  'IE', // Ireland
-  'HK', // Hong Kong
-  'GE', // Georgia
-  'SE', // Sweden
-  'ES', // Spain
-  'PT', // Portugal
-  'NO', // Norway
-  'GR', // Greece
-  'AU', // Australia
-  'IN', // India
-  'SI', // Slovenia
-  'KR', // Republic of Korea
-  'FI', // Finland
-  'CZ', // Czech Republic
-  'UG', // Uganda
-  'BE', // Belgium
-  'FR', // France
-  'VN', // Vietnam
-  'UA', // Ukraine
-  'TR', // Turkey
-  'SV', // El Salvador
-  'NZ', // New Zealand
-  'HU', // Hungary
-  'SK', // Slovakia
-  'NG', // Nigeria
-  'PA', // Panama
-  'RO', // Romania
-  'GT', // Guatemala
-  'ID', // Indonesia
-  'AE', // UAE
-  'PY', // Paraguay
-  'VG', // British Virgin Islands
-  'LR', // Liberia
-  'MT', // Malta
-  'AL', // Albania
-  'SG', // Singapore
-  'CM', // Cameroon
-  'KE', // Kenya (new in 2026)
-  'BD', // Bangladesh (new in 2026)
-]
 
 export const getStaticProps = async () => {
   const svgPath = path.join(process.cwd(), 'public', 'maps', 'world.svg')
