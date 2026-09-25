@@ -124,3 +124,13 @@ See the Application FAQ for why the length matters.
 ## Anything Else
 
 Anything else we should know? Feel free to share whatever might be important.
+
+---
+
+## Acknowledgment
+
+The following acknowledgment is required before submitting:
+
+- [ ] I represent that neither my participation in this program nor any payment
+      to me is prohibited under applicable sanctions or export-control law, and
+      that I will provide compliance information reasonably requested before payment.

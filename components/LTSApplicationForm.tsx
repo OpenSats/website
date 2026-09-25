@@ -1,3 +1,4 @@
+import SanctionsAcknowledgment from './grant-application/SanctionsAcknowledgment'
 import MultiStepApplicationForm, {
   StepConfig,
 } from './grant-application/MultiStepApplicationForm'
@@ -103,9 +104,15 @@ const STEPS: StepConfig[] = [
   {
     id: 'review',
     title: 'Review',
-    fields: [],
+    fields: ['ack_sanctions'],
     render: (props) => (
-      <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+      <>
+        <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+        <hr />
+        <h2>Acknowledgment</h2>
+        <p>This acknowledgment is required before you can submit.</p>
+        <SanctionsAcknowledgment {...props} />
+      </>
     ),
   },
 ]
@@ -114,6 +121,7 @@ export default function LTSApplicationForm() {
   return (
     <MultiStepApplicationForm
       steps={STEPS}
+      submitRequiresChecked={['ack_sanctions']}
       hiddenFields={{
         project_name: 'Long-term Grant',
         timelines: 'Ongoing work (LTS Grant).',

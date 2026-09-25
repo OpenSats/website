@@ -63,6 +63,7 @@ const validApplication = {
   potential_impact: 'Impact',
   proposed_budget: '1 BTC',
   main_focus: 'nostr',
+  ack_sanctions: true,
   'cf-turnstile-response': 'test-token',
 }
 
@@ -121,6 +122,65 @@ describe('/api/github', () => {
       expect(sendApplicationEmails).toHaveBeenCalledWith(body)
     }
   )
+
+  describe.each([{}, { LTS: true }])(
+    'sanctions acknowledgment for %j',
+    (track) => {
+      it.each([undefined, false, 'true', 'false', 1])(
+        'rejects an unacknowledged or invalid value: %p',
+        async (ack_sanctions) => {
+          const response = responseMock()
+          await handler(
+            {
+              method: 'POST',
+              body: { ...validApplication, ...track, ack_sanctions },
+            },
+            response
+          )
+          expect(response.statusCode).toBe(400)
+          expect(createIssue).not.toHaveBeenCalled()
+          expect(sendApplicationEmails).not.toHaveBeenCalled()
+        }
+      )
+
+      it('records an accepted acknowledgment', async () => {
+        const response = responseMock()
+        const body = { ...validApplication, ...track }
+        await handler({ method: 'POST', body }, response)
+        expect(response.statusCode).toBe(200)
+        expect(createIssue).toHaveBeenCalledWith(
+          expect.objectContaining({
+            body: expect.stringContaining(
+              '**Sanctions / export-control:** Yes'
+            ),
+          })
+        )
+        expect(sendApplicationEmails).toHaveBeenCalledWith(body)
+      })
+    }
+  )
+
+  it('preserves the RED acknowledgment field', async () => {
+    const response = responseMock()
+    await handler(
+      {
+        method: 'POST',
+        body: {
+          ...validApplication,
+          RED: true,
+          ack_sanctions: undefined,
+          red_ack_sanctions: true,
+        },
+      },
+      response
+    )
+    expect(response.statusCode).toBe(200)
+    expect(createIssue).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: expect.stringContaining('- Sanctions / export-control: Yes'),
+      })
+    )
+  })
 
   it('still succeeds when application emails fail after issue create', async () => {
     sendApplicationEmails.mockRejectedValue(new Error('SendGrid down'))
