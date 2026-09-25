@@ -81,8 +81,6 @@ export default function ApplicantDetails({
 
       {showLeadFields && (
         <>
-          <hr />
-
           <label className="inline-flex items-center">
             <input
               type="checkbox"
