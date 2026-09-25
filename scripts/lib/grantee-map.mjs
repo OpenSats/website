@@ -58,6 +58,7 @@ export const GRANTEE_COUNTRY_CODES = [
   'SG',
   'CM',
   'KE',
+  'BD',
 ]
 
 function escapeForCss(value) {

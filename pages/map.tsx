@@ -57,6 +57,7 @@ const GRANTEE_COUNTRY_CODES: string[] = [
   'SG', // Singapore
   'CM', // Cameroon
   'KE', // Kenya (new in 2026)
+  'BD', // Bangladesh (new in 2026)
 ]
 
 export const getStaticProps = async () => {

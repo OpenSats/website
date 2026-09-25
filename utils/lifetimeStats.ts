@@ -37,8 +37,8 @@ export function formatLifetimeStatDisplay(
   return formatted
 }
 
-/** Matches the country count shown in StatsSentence (`40+ countries`). */
-export const STATS_COUNTRY_COUNT = 40
+/** Matches the country count shown in StatsSentence (`50+ countries`). */
+export const STATS_COUNTRY_COUNT = 50
 
 export function formatStatsSentenceValues(stats: LifetimeStat[]) {
   return {
