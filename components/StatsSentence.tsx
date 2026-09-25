@@ -48,7 +48,7 @@ export default function StatsSentence({
         href="/map"
         className="-mx-1 whitespace-nowrap rounded bg-primary-100/50 px-1 no-underline hover:bg-primary-100 dark:bg-primary-900/20 dark:hover:bg-primary-900/40"
       >
-        {animatedCountryCount}+ countries
+        {animatedCountryCount} countries
       </Link>
       .
     </p>
