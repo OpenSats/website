@@ -7,6 +7,13 @@ export default function Budget({ register, watch, errors }: StepProps) {
     <>
       <h2>Project Budget</h2>
 
+      <p>
+        OpenSats has a limited budget supporting many contributors. Please
+        request an amount that sustainably supports your proposed work,
+        considering your time commitment, living costs, taxes, project expenses,
+        and other funding. Explain how you arrived at the amount requested.
+      </p>
+
       <label className="block">
         Costs & Proposed Budget *<br />
         <small>

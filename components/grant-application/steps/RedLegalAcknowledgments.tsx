@@ -1,3 +1,4 @@
+import SanctionsAcknowledgment from '../SanctionsAcknowledgment'
 import CustomLink from '@/components/Link'
 import CheckboxGroupError from '../CheckboxGroupError'
 import { RED_ACK_FIELDS } from '../redTerms'
@@ -27,19 +28,11 @@ export default function RedLegalAcknowledgments({
         </span>
       </label>
 
-      <label className="inline-flex items-start gap-2">
-        <input
-          type="checkbox"
-          className={`mt-1 ${checkboxClass}`}
-          {...register('red_ack_sanctions', { required: true })}
-        />
-        <span>
-          I represent that neither my participation in this program nor any
-          payment to me is prohibited under applicable sanctions or
-          export-control law, and that I will provide compliance information
-          reasonably requested before payment.
-        </span>
-      </label>
+      <SanctionsAcknowledgment
+        register={register}
+        errors={errors}
+        name="red_ack_sanctions"
+      />
 
       <label className="inline-flex items-start gap-2">
         <input

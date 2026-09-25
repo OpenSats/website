@@ -5,6 +5,14 @@ application at https://opensats.org/apply/grant
 
 ---
 
+## Country or Countries of Work
+
+In which country or countries do you expect to carry out the funded work?
+For teams, include the countries where funded contributors will work.
+Country names are sufficient; no address is needed.
+
+---
+
 ## Project Details
 
 **Project Name:**
@@ -116,3 +124,13 @@ See the Application FAQ for why the length matters.
 ## Anything Else
 
 Anything else we should know? Feel free to share whatever might be important.
+
+---
+
+## Acknowledgment
+
+The following acknowledgment is required before submitting:
+
+- [ ] I represent that neither my participation in this program nor any payment
+      to me is prohibited under applicable sanctions or export-control law, and
+      that I will provide compliance information reasonably requested before payment.

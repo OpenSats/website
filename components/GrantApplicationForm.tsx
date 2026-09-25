@@ -1,3 +1,4 @@
+import SanctionsAcknowledgment from './grant-application/SanctionsAcknowledgment'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
 import MultiStepApplicationForm, {
   StepConfig,
@@ -20,6 +21,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
       ['Email', 'email'],
       ['Personal GitHub', 'personal_github'],
       ['Other Contact Details', 'other_contact'],
+      ['Country or Countries of Work', 'work_countries'],
       ['Lead Developer or Maintainer', 'are_you_lead'],
       ['Project Lead', 'other_lead'],
     ],
@@ -149,9 +151,15 @@ const STEPS: StepConfig[] = [
   {
     id: 'review',
     title: 'Review',
-    fields: [],
+    fields: ['ack_sanctions'],
     render: (props) => (
-      <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+      <>
+        <Review watch={props.watch} sections={REVIEW_SECTIONS} />
+        <hr />
+        <h2>Acknowledgment</h2>
+        <p>This acknowledgment is required before you can submit.</p>
+        <SanctionsAcknowledgment {...props} />
+      </>
     ),
   },
 ]
@@ -160,6 +168,7 @@ export default function GrantApplicationForm() {
   return (
     <MultiStepApplicationForm
       steps={STEPS}
+      submitRequiresChecked={['ack_sanctions']}
       hiddenFields={{ general_fund: true }}
       defaultValues={{ duration: '3 months' }}
       submitLabel="Submit Grant Application"

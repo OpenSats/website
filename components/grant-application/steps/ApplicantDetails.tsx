@@ -64,10 +64,23 @@ export default function ApplicantDetails({
         <textarea className={inputClass} {...register('other_contact')} />
       </label>
 
+      <label className="block">
+        Country or Countries of Work
+        <br />
+        <small>
+          In which country or countries do you expect to carry out the funded
+          work? For teams, include the countries where funded contributors will
+          work. Country names are sufficient; no address is needed.
+        </small>
+        <input
+          type="text"
+          className={inputClass}
+          {...register('work_countries')}
+        />
+      </label>
+
       {showLeadFields && (
         <>
-          <hr />
-
           <label className="inline-flex items-center">
             <input
               type="checkbox"

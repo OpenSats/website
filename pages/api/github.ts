@@ -28,6 +28,12 @@ export default async function handler(
       })
     }
 
+    if (!req.body.RED && req.body.ack_sanctions !== true) {
+      return res.status(400).json({
+        message: 'The sanctions acknowledgment is required.',
+      })
+    }
+
     const videoLink =
       typeof req.body.video_application === 'string'
         ? req.body.video_application.trim()
@@ -69,6 +75,11 @@ ${
 ${
   req.body.other_contact
     ? `Other contact details: ${req.body.other_contact}`
+    : ''
+}
+${
+  req.body.work_countries
+    ? `Country or countries of work: ${req.body.work_countries}`
     : ''
 }
 ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
@@ -164,6 +175,12 @@ ${req.body.video_application ? req.body.video_application : 'None provided.'}
 ### Anything Else
 
 ${req.body.anything_else ? req.body.anything_else : 'No.'}
+
+### Acknowledgment
+
+**Sanctions / export-control:** ${
+          req.body.ack_sanctions === true ? 'Yes' : 'No'
+        }
 ${contactFooter}`
 
     // Labels and repo are set according to main focus.
