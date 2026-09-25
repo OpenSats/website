@@ -98,6 +98,30 @@ describe('/api/github', () => {
     expect(sendApplicationEmails).toHaveBeenCalledWith(validApplication)
   })
 
+  it.each([{}, { LTS: true }, { RED: true }])(
+    'includes work countries in the review issue and email payload for %j',
+    async (track) => {
+      const response = responseMock()
+      const body = {
+        ...validApplication,
+        ...track,
+        work_countries: 'Portugal, Germany',
+      }
+
+      await handler({ method: 'POST', body }, response)
+
+      expect(response.statusCode).toBe(200)
+      expect(createIssue).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.stringContaining(
+            'Country or countries of work: Portugal, Germany'
+          ),
+        })
+      )
+      expect(sendApplicationEmails).toHaveBeenCalledWith(body)
+    }
+  )
+
   it('still succeeds when application emails fail after issue create', async () => {
     sendApplicationEmails.mockRejectedValue(new Error('SendGrid down'))
     const response = responseMock()

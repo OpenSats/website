@@ -71,6 +71,11 @@ ${
     ? `Other contact details: ${req.body.other_contact}`
     : ''
 }
+${
+  req.body.work_countries
+    ? `Country or countries of work: ${req.body.work_countries}`
+    : ''
+}
 ${req.body.other_lead ? `Project lead: ${req.body.other_lead}` : ''}
 `
 

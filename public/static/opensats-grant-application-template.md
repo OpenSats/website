@@ -5,6 +5,14 @@ application at https://opensats.org/apply/grant
 
 ---
 
+## Country or Countries of Work
+
+In which country or countries do you expect to carry out the funded work?
+For teams, include the countries where funded contributors will work.
+Country names are sufficient; no address is needed.
+
+---
+
 ## Project Details
 
 **Project Name:**
