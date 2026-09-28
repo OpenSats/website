@@ -1,0 +1,20 @@
+---
+title: 'MuSig'
+summary: 'A family of Schnorr multisignature protocols that let several signers produce one aggregate public key and one ordinary-looking signature.'
+category: 'Bitcoin'
+aliases:
+  ['MuSig2', 'MuSig-DN', 'BIP 327', 'Schnorr multisignature', 'key aggregation']
+---
+
+MuSig is a family of multisignature protocols for [Schnorr signatures](/topics/taproot). Several signers combine their public keys into one aggregate key, then cooperate to produce one signature for a transaction or message.
+
+In Bitcoin, that means a collaborative signing policy can spend through a single [Taproot](/topics/taproot) key path. On chain, the result looks like one public key and one signature, which improves privacy and reduces the block space cost compared with revealing a traditional multisig script.
+
+MuSig2 is the practical version standardized in BIP 327. It reduces the signing flow to two rounds while keeping protections against rogue-key attacks, a class of attacks where one participant tries to choose a malicious public key that lets them steal control of the aggregate key. Implementations still need careful nonce handling and signer coordination, because reused or biased signing nonces can leak private keys.
+
+## References
+
+- [Bitcoin Optech: MuSig/MuSig2](https://bitcoinops.org/en/topics/musig/)
+- [BIP 327: MuSig2 for BIP 340 public keys](https://github.com/bitcoin/bips/blob/master/bip-0327.mediawiki)
+- [The Bitcoin Manual: MuSig2](https://thebitcoinmanual.com/articles/musig2-explained/)
+- [Blockstream Institute: MuSig2](https://blockstreaminstitute.com/musig2/)
