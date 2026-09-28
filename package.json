@@ -5,7 +5,7 @@
   "scripts": {
     "start": "next dev",
     "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "npx contentlayer build && node ./scripts/generate-default-og.mjs && node ./scripts/generate-project-og.mjs && node ./scripts/generate-fund-og.mjs && node ./scripts/generate-newsletter-og.mjs && node ./scripts/generate-topic-og.mjs && node -r esbuild-register ./scripts/generate-page-og.mjs && node ./scripts/generate-author-og.mjs && node ./scripts/generate-heartbeat-og.mjs && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
+    "build": "npx contentlayer build && node ./scripts/generate-default-og.mjs && node ./scripts/generate-project-og.mjs && node ./scripts/generate-fund-og.mjs && node ./scripts/generate-newsletter-og.mjs && node ./scripts/generate-topic-og.mjs && node -r esbuild-register ./scripts/generate-page-og.mjs && node ./scripts/generate-author-og.mjs && node ./scripts/generate-heartbeat-og.mjs && npm run generate:blog-og && npm run check:og && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "generate:default-og": "node ./scripts/generate-default-og.mjs",
@@ -17,7 +17,9 @@
     "generate:author-og": "node ./scripts/generate-author-og.mjs",
     "generate:heartbeat-og": "node ./scripts/generate-heartbeat-og.mjs",
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
-    "test": "jest"
+    "test": "jest",
+    "generate:blog-og": "node -r esbuild-register ./scripts/generate-blog-og.mjs",
+    "check:og": "node -r esbuild-register ./scripts/check-og-images.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -98,6 +100,7 @@
     "lint-staged": "^13.0.0",
     "prettier": "^2.7.0",
     "prettier-plugin-tailwindcss": "^0.2.2",
+    "sharp": "^0.35.5",
     "typescript": "^4.8.3"
   },
   "lint-staged": {

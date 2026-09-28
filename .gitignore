@@ -28,6 +28,7 @@ public/sitemap.xml
 # og-default.png is intentionally tracked as a brand fallback so the site
 # always has a working share image even if the generation pipeline breaks
 # (font issues, resvg regression, etc.).
+/public/static/images/blog/og/
 /public/static/images/projects/og/
 /public/static/images/newsletter/og/
 /public/static/images/funds/og/

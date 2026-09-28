@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { blogOgImagePath, isLocalImage } from '@/utils/blogOgImages'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
 import { CoreContent } from 'pliny/utils/contentlayer'
@@ -39,13 +40,31 @@ const CommonSEO = ({
       <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
-      {Array.isArray(ogImage) ? (
-        ogImage.map(({ url }) => (
-          <meta property="og:image" content={url} key={url} />
-        ))
-      ) : (
-        <meta property="og:image" content={ogImage} key={ogImage} />
-      )}
+      {(Array.isArray(ogImage)
+        ? ogImage.map(({ url }) => url)
+        : [ogImage]
+      ).flatMap((url, index) => [
+        <meta property="og:image" content={url} key={`og-image-${index}`} />,
+        ...(url.startsWith(`${siteMetadata.siteUrl}/`)
+          ? [
+              <meta
+                property="og:image:width"
+                content="1200"
+                key={`og-width-${index}`}
+              />,
+              <meta
+                property="og:image:height"
+                content="630"
+                key={`og-height-${index}`}
+              />,
+              <meta
+                property="og:image:type"
+                content={url.endsWith('.jpg') ? 'image/jpeg' : 'image/png'}
+                key={`og-type-${index}`}
+              />,
+            ]
+          : []),
+      ])}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content={siteMetadata.twitter} />
       <meta name="twitter:title" content={title} />
@@ -265,6 +284,7 @@ export const BlogSEO = ({
   url,
   images = [],
   canonicalUrl,
+  slug,
 }: BlogSeoProps) => {
   const publishedAt = new Date(date).toISOString()
   const modifiedAt = new Date(lastmod || date).toISOString()
@@ -275,10 +295,16 @@ export const BlogSEO = ({
       ? [images]
       : images
 
-  const featuredImages = imagesArr.map((img) => {
+  const featuredImages = imagesArr.map((img, index) => {
+    const socialImage =
+      img !== siteMetadata.socialBanner && isLocalImage(img)
+        ? blogOgImagePath(slug, index)
+        : img
     return {
       '@type': 'ImageObject',
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
+      url: isLocalImage(socialImage)
+        ? siteMetadata.siteUrl + socialImage
+        : socialImage,
     }
   })
 
