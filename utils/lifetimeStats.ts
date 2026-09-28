@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import PublicGoogleSheetsParser from 'public-google-sheets-parser'
+import { GRANTEE_COUNTRY_CODES } from '../data/granteeCountries.mjs'
 
 export type LifetimeStat = { label: string; value: number }
 
@@ -37,8 +38,8 @@ export function formatLifetimeStatDisplay(
   return formatted
 }
 
-/** Matches the country count shown in StatsSentence (`40+ countries`). */
-export const STATS_COUNTRY_COUNT = 40
+/** Derive the displayed count from the same country list used by the maps. */
+export const STATS_COUNTRY_COUNT = GRANTEE_COUNTRY_CODES.length
 
 export function formatStatsSentenceValues(stats: LifetimeStat[]) {
   return {
@@ -67,7 +68,7 @@ export function formatMapOgSentenceSegments(
     { text: ' to ', highlight: false },
     { text: `${grantsGiven} grantees`, highlight: true },
     { text: ' in ', highlight: false },
-    { text: `${countryCount}+ countries`, highlight: true },
+    { text: `${countryCount} countries`, highlight: true },
   ]
 }
 
