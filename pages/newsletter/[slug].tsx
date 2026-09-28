@@ -10,11 +10,10 @@ export async function getStaticPaths() {
   const slugs = new Set<string>()
   for (const n of allNewsletters) {
     slugs.add(n.slug)
-    slugs.add(n.slug.toLowerCase())
   }
   return {
     paths: Array.from(slugs).map((slug) => ({ params: { slug } })),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
@@ -23,6 +22,12 @@ export const getStaticProps = async ({ params }) => {
   const issue = allNewsletters.find(
     (n) => n.slug.toLowerCase() === slug
   ) as Newsletter
+  if (!issue) return { notFound: true }
+  if (params.slug !== issue.slug) {
+    return {
+      redirect: { destination: `/newsletter/${issue.slug}`, permanent: true },
+    }
+  }
   return {
     props: {
       issue,
