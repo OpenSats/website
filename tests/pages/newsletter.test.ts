@@ -13,9 +13,9 @@ it('builds only canonical paths to avoid filename case collisions', async () => 
   })
 })
 
-it('redirects lowercase URLs to the canonical issue URL', async () => {
+it('resolves lowercase URLs to the same issue', async () => {
   expect(await getStaticProps({ params: { slug: '2026-q1' } })).toEqual({
-    redirect: { destination: '/newsletter/2026-Q1', permanent: true },
+    props: { issue: { slug: '2026-Q1', title: 'Sats Well Spent' } },
   })
 })
 

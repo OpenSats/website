@@ -13,6 +13,7 @@ export async function getStaticPaths() {
   }
   return {
     paths: Array.from(slugs).map((slug) => ({ params: { slug } })),
+    // Resolve case variants at request time instead of emitting colliding files.
     fallback: 'blocking',
   }
 }
@@ -23,11 +24,6 @@ export const getStaticProps = async ({ params }) => {
     (n) => n.slug.toLowerCase() === slug
   ) as Newsletter
   if (!issue) return { notFound: true }
-  if (params.slug !== issue.slug) {
-    return {
-      redirect: { destination: `/newsletter/${issue.slug}`, permanent: true },
-    }
-  }
   return {
     props: {
       issue,
