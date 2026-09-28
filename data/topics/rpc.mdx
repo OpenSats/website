@@ -1,0 +1,24 @@
+---
+title: 'RPC'
+summary: 'A request-response interface that lets wallets, services, and scripts ask Bitcoin software to perform actions or return node data.'
+category: 'Bitcoin'
+aliases:
+  [
+    'remote procedure call',
+    'Remote Procedure Call',
+    'Bitcoin Core RPC',
+    'JSON-RPC',
+  ]
+---
+
+RPC stands for remote procedure call. In Bitcoin software, it usually means a request-response API that lets another program ask a node, wallet, or service to perform an action and return structured data.
+
+[Bitcoin Core](/projects/bitcoin-core) exposes a JSON-RPC interface for tasks such as reading blockchain data, inspecting the [mempool](/topics/mempool), managing wallets, creating transactions, and broadcasting transactions. A wallet, dashboard, block explorer, mining tool, or automation script can use RPC calls to talk to a local node instead of relying on a third-party service.
+
+That interface is powerful, so access control matters. An RPC endpoint can reveal wallet and node information, and wallet RPCs may be able to move funds. Operators normally bind RPC to local or private networks, use authentication, and expose only the methods an application actually needs.
+
+## References
+
+- [Wikipedia: Remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call)
+- [Bitcoin Core RPC API reference](https://developer.bitcoin.org/reference/rpc/)
+- [Learning Bitcoin: Bitcoin Core RPC](https://www.learnbitcoin.com/glossary/bitcoin-core-rpc)
