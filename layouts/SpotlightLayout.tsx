@@ -24,7 +24,7 @@ export default function SpotlightLayout({
   prev,
   children,
 }: LayoutProps) {
-  const { path, date, title, images } = content
+  const { path, date, title, images, heroOverlay } = content
 
   return (
     <>
@@ -38,6 +38,7 @@ export default function SpotlightLayout({
         title={title}
         date={date}
         coverImage={getSpotlightHeroImage(images)}
+        overlay={heroOverlay}
       />
       <SectionContainer>
         <article>
