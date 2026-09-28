@@ -13,6 +13,19 @@ To run a development environment locally, run:
 
 Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
 
+## Social preview images
+
+`npm run build` generates social cards and checks that every card is exactly
+1200×630 and under 1 MB. To regenerate blog cards locally after changing artwork,
+run `npx contentlayer build` followed by `npm run generate:blog-og`.
+`npm run check:og` validates all generated card families after a full build.
+
+Blog OG and Twitter images use compressed JPEG copies; the original article
+artwork stays in place. Cards fill the frame without padding or stretching.
+Spotlight crop adjustments live in `scripts/generate-blog-og.mjs`. Review both
+the featured and alternate card individually when adding or replacing artwork,
+especially text near the edges and portrait headroom.
+
 ## Contributing to the project
 
 PRs are welcome! Fork the repository on your GitHub account, push changes to a new feature branch and then [open a new pull request](https://github.com/OpenSats/website/pulls). Feel free to look at [existing pull requests](https://github.com/OpenSats/website/pulls) if you want to help review upcoming announcements, or create new PRs in case you've spotted a typo or similar in our [past announcements](https://opensats.org/blog).
