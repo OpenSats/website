@@ -1,9 +1,9 @@
-import localFont from 'next/font/local'
+import { Lora } from 'next/font/google'
 
-const quoteFont = localFont({
-  src: '../../public/fonts/Lora/Lora-Italic.ttf',
-  weight: '400 500',
-  style: 'italic',
+const quoteFont = Lora({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  style: ['italic'],
   display: 'swap',
 })
 
