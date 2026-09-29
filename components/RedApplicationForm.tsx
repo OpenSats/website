@@ -19,6 +19,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
       ['Your Name', 'your_name'],
       ['Email', 'email'],
       ['Personal GitHub', 'personal_github'],
+      ['Nostr public key (npub)', 'npub'],
       ['Other Contact Details', 'other_contact'],
       ['Country or Countries of Work', 'work_countries'],
     ],
@@ -56,7 +57,7 @@ const STEPS: StepConfig[] = [
   {
     id: 'applicant',
     title: 'Applicant',
-    fields: ['your_name', 'email'],
+    fields: ['your_name', 'email', 'npub'],
     render: (props) => <ApplicantDetails {...props} showLeadFields={false} />,
   },
   {

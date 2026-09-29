@@ -1,5 +1,6 @@
 import * as EmailValidator from 'email-validator'
 import FieldError from '../FieldError'
+import { validateNpub } from '@/utils/npub'
 import { StepProps, inputClass, checkboxClass } from '../types'
 
 interface ApplicantDetailsProps extends StepProps {
@@ -54,12 +55,28 @@ export default function ApplicantDetails({
       </label>
 
       <label className="block">
+        Nostr public key (npub) (optional)
+        <input
+          type="text"
+          className={inputClass}
+          placeholder="npub1…"
+          autoCapitalize="none"
+          spellCheck={false}
+          {...register('npub', {
+            setValueAs: (value: string) => value.trim(),
+            validate: validateNpub,
+          })}
+        />
+        <FieldError errors={errors} name="npub" />
+      </label>
+
+      <label className="block">
         Other Contact Details (if applicable)
         <br />
         <small>
           Please list any other relevant contact details you are comfortable
           sharing in case we need to reach out with questions. These could
-          include nostr pubkeys, social media handles, etc.
+          include social media handles or other ways to reach you.
         </small>
         <textarea className={inputClass} {...register('other_contact')} />
       </label>
