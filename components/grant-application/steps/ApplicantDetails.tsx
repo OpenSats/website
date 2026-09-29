@@ -54,7 +54,7 @@ export default function ApplicantDetails({
       </label>
 
       <label className="block">
-        Nostr npub (optional)
+        Nostr npub
         <input
           type="text"
           className={inputClass}
