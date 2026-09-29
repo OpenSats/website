@@ -4,7 +4,6 @@ import { assertTurnstile, TURNSTILE_FAILURE_MESSAGE } from '@/utils/turnstile'
 import { areApplicationsOpen } from '@/utils/applicationWindow'
 import { isHttpUrl, isVideoRequired } from '@/utils/grantRules'
 import { formatUsdDisplay } from '@/utils/usd'
-import { validateNpub } from '@/utils/npub'
 import {
   getApplicationIssueLabels,
   getApplicationRepo,
@@ -50,10 +49,6 @@ export default async function handler(
       })
     }
 
-    const npubValidation = validateNpub(req.body.npub)
-    if (npubValidation !== true) {
-      return res.status(400).json({ message: npubValidation })
-    }
     const npub = typeof req.body.npub === 'string' ? req.body.npub.trim() : ''
 
     if (!(await assertTurnstile(req))) {
@@ -79,7 +74,7 @@ ${req.body.github ? `GitHub: ${req.body.github}` : ''}
 ${
   req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
 }
-${npub ? `Nostr public key (npub): ${npub}` : ''}
+${npub ? `Nostr npub: ${npub}` : ''}
 ${
   req.body.other_contact
     ? `Other contact details: ${req.body.other_contact}`

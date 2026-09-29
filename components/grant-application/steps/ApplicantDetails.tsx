@@ -1,6 +1,5 @@
 import * as EmailValidator from 'email-validator'
 import FieldError from '../FieldError'
-import { validateNpub } from '@/utils/npub'
 import { StepProps, inputClass, checkboxClass } from '../types'
 
 interface ApplicantDetailsProps extends StepProps {
@@ -55,7 +54,7 @@ export default function ApplicantDetails({
       </label>
 
       <label className="block">
-        Nostr public key (npub) (optional)
+        Nostr npub (optional)
         <input
           type="text"
           className={inputClass}
@@ -64,10 +63,8 @@ export default function ApplicantDetails({
           spellCheck={false}
           {...register('npub', {
             setValueAs: (value: string) => value.trim(),
-            validate: validateNpub,
           })}
         />
-        <FieldError errors={errors} name="npub" />
       </label>
 
       <label className="block">
