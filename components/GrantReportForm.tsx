@@ -205,17 +205,17 @@ export default function GrantReportForm({
             )}
           </label>
 
-          {/* Plans for Next Quarter */}
+          {/* Plans for Next Reporting Period */}
           <label className="block">
-            What are your plans for next quarter? *
+            What are your plans for the next reporting period? *
             <br />
             <small>
-              Outline your goals and plans for the next quarter. Be specific
-              about what you aim to accomplish.
+              Outline your goals and plans for the next reporting period. Be
+              specific about what you aim to accomplish.
             </small>
             <textarea
               {...register('next_quarter', {
-                required: 'Plans for Next Quarter are required',
+                required: 'Plans for the next reporting period are required',
               })}
               rows={6}
               className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
@@ -419,17 +419,17 @@ export default function GrantReportForm({
           )}
         </label>
 
-        {/* Plans for Next Quarter */}
+        {/* Plans for Next Reporting Period */}
         <label className="block">
-          What are your plans for next quarter? *
+          What are your plans for the next reporting period? *
           <br />
           <small>
-            Outline your goals and plans for the next quarter. Be specific about
-            what you aim to accomplish.
+            Outline your goals and plans for the next reporting period. Be
+            specific about what you aim to accomplish.
           </small>
           <textarea
             {...register('next_quarter', {
-              required: 'Plans for Next Quarter are required',
+              required: 'Plans for the next reporting period are required',
             })}
             rows={6}
             className="mt-1 block w-full rounded-md border-gray-300 font-mono text-sm text-black shadow-sm focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"

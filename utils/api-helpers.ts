@@ -100,7 +100,7 @@ export function generateReportContent(reportData: {
 ## Time Spent
 ${time_spent}
 
-## Plans for Next Quarter
+## Plans for Next Reporting Period
 ${next_quarter}
 
 ## Use of Funds
