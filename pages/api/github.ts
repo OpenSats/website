@@ -74,7 +74,7 @@ ${req.body.github ? `GitHub: ${req.body.github}` : ''}
 ${
   req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
 }
-${npub ? `Nostr npub: ${npub}` : ''}
+${npub ? `npub: ${npub}` : ''}
 ${
   req.body.other_contact
     ? `Other contact details: ${req.body.other_contact}`
