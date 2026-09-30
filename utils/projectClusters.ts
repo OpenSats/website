@@ -47,7 +47,7 @@ export const CLUSTERS: Cluster[] = [
     title: 'Privacy',
     blurb:
       'Wallet and payment tools built to make privacy best practices easier and more user-friendly.',
-    slugs: ['pdk', 'dana-wallet', 'mostro'],
+    slugs: ['pdk', 'dana-wallet', 'mostro', 'routstr'],
   },
   {
     id: 'mining',
