@@ -17,6 +17,7 @@ const REVIEW_SECTIONS: ReviewSection[] = [
       ['Your Name', 'your_name'],
       ['Email', 'email'],
       ['Personal GitHub', 'personal_github'],
+      ['npub', 'npub'],
       ['Other Contact Details', 'other_contact'],
       ['Country or Countries of Work', 'work_countries'],
       ['Lead Developer or Maintainer', 'are_you_lead'],

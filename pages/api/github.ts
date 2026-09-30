@@ -49,6 +49,8 @@ export default async function handler(
       })
     }
 
+    const npub = typeof req.body.npub === 'string' ? req.body.npub.trim() : ''
+
     if (!(await assertTurnstile(req))) {
       return res.status(403).json({ message: TURNSTILE_FAILURE_MESSAGE })
     }
@@ -72,6 +74,7 @@ ${req.body.github ? `GitHub: ${req.body.github}` : ''}
 ${
   req.body.personal_github ? `Personal GitHub: ${req.body.personal_github}` : ''
 }
+${npub ? `npub: ${npub}` : ''}
 ${
   req.body.other_contact
     ? `Other contact details: ${req.body.other_contact}`
