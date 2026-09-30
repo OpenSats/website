@@ -10,6 +10,32 @@ interface Props {
   content: Omit<Authors, '_id' | '_raw' | 'body'>
 }
 
+export const getAuthorSeoDescription = ({
+  name,
+  board,
+  ops,
+  content,
+  design,
+  volunteer,
+}: Pick<
+  Authors,
+  'name' | 'board' | 'ops' | 'content' | 'design' | 'volunteer'
+>) => {
+  if (board) {
+    return `${name} serves on the OpenSats board.`
+  }
+
+  if (ops || content || design || volunteer) {
+    return `${name} is part of the team at OpenSats.`
+  }
+
+  if (board === false) {
+    return `${name} previously served on the OpenSats board.`
+  }
+
+  return `${name} has contributed to OpenSats.`
+}
+
 export default function AuthorLayout({ children, content }: Props) {
   const {
     name,
@@ -24,7 +50,7 @@ export default function AuthorLayout({ children, content }: Props) {
     slug,
   } = content
   const seoTitle = `About ${name} - OpenSats`
-  const seoDescription = `${name} is part of the team at OpenSats.`
+  const seoDescription = getAuthorSeoDescription(content)
 
   return (
     <>
