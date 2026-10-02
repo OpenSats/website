@@ -1,0 +1,194 @@
+---
+title: "Sustaining Bitcoin Development and Review"
+date: '2026-10-02'
+tags: ['grants', 'bitcoin', 'core', 'wave']
+authors: ['arvin', 'default']
+images: []
+draft: false
+summary: "OpenSats awards four new grants and one renewal supporting Bitcoin Core’s foundational development."
+---
+
+OpenSats is pleased to announce four first-time grants and one renewal from
+our [General Fund] supporting work on [Bitcoin Core] and the open-source
+infrastructure around it. The work in this wave spans Bitcoin Core's release
+process, validation architecture, and wallet, with a shared focus on keeping
+critical software maintainable and verifiable.
+
+The first time grant recipients we cover in this wave are:
+
+- [@futurile](#futurile)
+- [@Yuvicc](#yuvicc)
+- [@polespinasa](#pol-espinasa)
+- [@pablomartin4btc](#pablo-martin)
+
+We have also awarded a grant renewal to:
+
+- @jan84 ([Mar. 2026])
+
+If you would like to help us continue supporting Bitcoin developers and the
+open-source projects they depend on, please consider making a one-time or
+recurring donation.
+
+<DonateRecurringButton designation="general" />
+
+Let's take a closer look at the respective projects and the work these grants
+will support.
+
+[General Fund]: /funds/general
+[Bitcoin Core]: /projects/bitcoin-core
+[Mar. 2026]: /blog/five-grants-to-strengthen-bitcoin-development#janb84
+
+---
+
+### Futurile
+
+[Futurile] is a Guix contributor whose work in 2025 included publishing the
+project's user and contributor [survey results] and authoring its proposal
+for regular [annual releases]. He will continue his work on [Guix], a
+universal build, configuration, and software distribution system. Bitcoin
+Core uses it to build release binaries deterministically. Independent
+builders can reproduce the same release, compare the outputs, and publish
+attestations in `guix.sigs`. Guix is also used as a per-user package manager
+and as a full GNU/Linux system.
+
+The grant will support build and distribution infrastructure, performance
+work, and security automation. Futurile plans to add mirrors and improve how
+they are selected and operated, build a framework for examining package
+evaluation and interdependencies, and automate more security updates. These
+are areas where Guix currently has limited dedicated contributor time.
+
+Repository: [guix/guix]  
+PRs: [created][futurile-created]; [reviewed][futurile-reviewed]  
+License: GPLv3 or later  
+
+[Futurile]: https://codeberg.org/futurile/
+[survey results]: https://lists.gnu.org/archive/html/help-guix/2025-01/msg00192.html
+[annual releases]: https://lists.gnu.org/r/guix-devel/2025-05/msg00081.html
+[Guix]: https://guix.gnu.org/en/about/
+[guix/guix]: https://codeberg.org/guix/guix
+[futurile-created]: https://codeberg.org/guix/guix/pulls?q=author%3Afuturile+is%3Aall
+[futurile-reviewed]: https://codeberg.org/guix/guix/pulls?q=review%3Afuturile+is%3Aall
+
+---
+
+### Yuvicc
+
+[Yuvicc] will spend his time working on [The Bitcoin Kernel Project], also
+known as `libbitcoinkernel`, to extract Bitcoin Core's validation engine into
+a reusable C library. One reason for doing so is to let other Bitcoin
+projects use validation code maintained in Core directly, avoiding the need
+to rewrite it from scratch. Having to reimplement consensus rules can
+introduce bugs that cause discrepancies about which transactions are valid,
+potentially leading to consensus splits. Yuvicc's recent work has touched
+block headers, serialization, validation-state handling, and context-free
+block checks.
+
+He also maintains `bitcoinkernel-jdk`, the [JVM] wrapper for the C API.
+Planned work includes improving the C API structure, exposing script and
+validation errors, adding more context-free consensus methods, and reviewing
+Kernel-related pull requests. Yuvicc will also continue developing
+`bitcoinkernel-jdk` as the upstream API changes. The rest of the grant covers
+Bitcoin Core testing and review, including mempool and validation tests,
+chain-reorganization tests, and regular PR review.
+
+Repositories: [bitcoin/bitcoin][yuvicc-bitcoin]; [yuvicc/bitcoinkernel-jdk]  
+PRs: [created][yuvicc-created]; [reviewed][yuvicc-reviewed]  
+Licenses: MIT  
+
+[Yuvicc]: https://github.com/yuvicc
+[The Bitcoin Kernel Project]: https://github.com/orgs/bitcoin/projects/3
+[JVM]: https://en.wikipedia.org/wiki/Java_virtual_machine
+[yuvicc-bitcoin]: https://github.com/bitcoin/bitcoin
+[yuvicc/bitcoinkernel-jdk]: https://github.com/yuvicc/bitcoinkernel-jdk
+[yuvicc-created]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Ayuvicc
+[yuvicc-reviewed]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Ayuvicc
+
+---
+
+### Pol Espinasa
+
+[Pol] is a Bitcoin Core contributor who has been focusing primarily on the
+wallet, with additional work across peer-to-peer networking, the [Qt graphical
+interface], and the functional test framework. His wallet contributions
+include improvements to fee-setting behavior and internal fee-rate handling,
+along with review and testing of other contributors' work. His
+descriptor-import interface was [merged] into Bitcoin Core in September 2026.
+The new interface gives the Qt wallet a path to work with imported
+descriptors, including setups that can be used for multisig.
+
+With support from OpenSats, Pol will continue improving the wallet's
+maintainability, interoperability, and usability. Planned work includes
+moving user-facing fee units toward sat/vB, developing support for importing
+`BIP-39` mnemonic phrases and defining how they interact with `BIP-380`
+[output descriptors], and working on further improvements around hardware
+wallets, multisig, and user safety. He will also continue reviewing wallet
+pull requests and contributing elsewhere in Bitcoin Core when useful. Outside
+the codebase, Pol organizes [BitDevs Barcelona] and has helped establish a
+[Spanish-language Bitcoin Core PR Review Club] on Discord for contributors
+learning how to review changes to the project.
+
+Repository: [bitcoin/bitcoin][pol-bitcoin]  
+PRs: [created][pol-created], [reviewed][pol-reviewed]  
+License: MIT  
+
+[Pol]: https://github.com/polespinasa
+[Qt graphical interface]: https://github.com/bitcoin-core/gui
+[merged]: https://github.com/bitcoin/bitcoin/pull/34861
+[output descriptors]: /topics/output-descriptors
+[BitDevs Barcelona]: https://bitdevsbarcelona.org/
+[Spanish-language Bitcoin Core PR Review Club]: https://discord.com/invite/XNK2hBw9vm
+[pol-bitcoin]: https://github.com/bitcoin/bitcoin
+[pol-created]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Apolespinasa
+[pol-reviewed]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Apolespinasa
+
+---
+
+### Pablo Martin
+
+[Pablo Martin] has contributed code, reviews, and tests to Bitcoin Core and
+its graphical interfaces since 2022. His recent work includes
+[command-line option handling] and [wallet recovery documentation]. Pablo has
+also reviewed [peer-to-peer networking changes] and [mining interfaces],
+including work on validating block templates from external mining software.
+
+With this grant, Pablo will continue testing and reviewing wallet,
+command-line, and GUI changes, alongside his own improvements and bug fixes.
+He plans to increase his involvement in peer-to-peer networking and expand
+his mining and [multiprocess] work, including the interfaces that let separate
+processes exchange requests and data (IPC). His priorities will follow the
+development work underway, with continued collaboration on longer-running
+changes.
+
+Repository: [bitcoin/bitcoin]  
+PRs: [created][pablo-created]; [reviewed][pablo-reviewed]  
+License: MIT  
+
+[Pablo Martin]: https://github.com/pablomartin4btc
+[command-line option handling]: https://github.com/bitcoin/bitcoin/pull/35831
+[wallet recovery documentation]: https://github.com/bitcoin/bitcoin/pull/35944
+[peer-to-peer networking changes]: https://github.com/bitcoin/bitcoin/pull/34824
+[mining interfaces]: https://github.com/bitcoin/bitcoin/pull/35671
+[multiprocess]: https://github.com/bitcoin/bitcoin/blob/master/doc/design/multiprocess.md
+[bitcoin/bitcoin]: https://github.com/bitcoin/bitcoin
+[pablo-created]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Apablomartin4btc
+[pablo-reviewed]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Apablomartin4btc
+
+---
+
+Release tooling, validation, wallet development, and network interfaces occupy
+different parts of Bitcoin Core and its supporting infrastructure. Each one
+needs sustained attention, including the testing and review that sits
+alongside new code. These grants give five contributors more time to focus on
+that work as the projects continue to develop.
+
+If you are working on Bitcoin or on free and open-source software that Bitcoin
+depends on, visit the [OpenSats application page] to learn about upcoming
+funding windows and application requirements. 
+
+This work is possible because of our donors. To help sustain Bitcoin
+development and its open-source foundations, please consider supporting the
+[General Fund] with a one-time or recurring donation.
+
+[OpenSats application page]: /apply
+
+<DonateRecurringButton designation="general" />
