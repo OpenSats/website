@@ -77,7 +77,7 @@ License: GPLv3 or later
 known as `libbitcoinkernel`, to extract Bitcoin Core's validation engine into
 a reusable C library. One reason for doing so is to let other Bitcoin
 projects use validation code maintained in Core directly, avoiding the need
-to rewrite it from scratch. Having to reimplement consensus rules can
+to maintain this critical code (or to re-implement or port it), all of which can
 introduce bugs that cause discrepancies about which transactions are valid,
 potentially leading to consensus splits. Yuvicc's recent work has touched
 block headers, serialization, validation-state handling, and context-free
@@ -88,8 +88,8 @@ Planned work includes improving the C API structure, exposing script and
 validation errors, adding more context-free consensus methods, and reviewing
 Kernel-related pull requests. Yuvicc will also continue developing
 `bitcoinkernel-jdk` as the upstream API changes. The rest of the grant covers
-Bitcoin Core testing and review, including mempool and validation tests,
-chain-reorganization tests, and regular PR review.
+Bitcoin Core testing and review, including mempool and validation,
+chain-reorganization, and regular PR review.
 
 Repositories: [bitcoin/bitcoin][yuvicc-bitcoin]; [yuvicc/bitcoinkernel-jdk]  
 PRs: [created][yuvicc-created]; [reviewed][yuvicc-reviewed]  
@@ -155,7 +155,7 @@ With this grant, Pablo will continue testing and reviewing wallet,
 command-line, and GUI changes, alongside his own improvements and bug fixes.
 He plans to increase his involvement in peer-to-peer networking and expand
 his mining and [multiprocess] work, including the interfaces that let separate
-processes exchange requests and data (IPC). His priorities will follow the
+processes exchange requests and data ([IPC]). His priorities will follow the
 development work underway, with continued collaboration on longer-running
 changes.
 
@@ -172,6 +172,7 @@ License: MIT
 [bitcoin/bitcoin]: https://github.com/bitcoin/bitcoin
 [pablo-created]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Apablomartin4btc
 [pablo-reviewed]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+reviewed-by%3Apablomartin4btc
+[IPC]: https://en.wikipedia.org/wiki/Inter-process_communication
 
 ---
 
