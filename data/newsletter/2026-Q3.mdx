@@ -149,25 +149,75 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 
 ## Software Shipped
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+This quarter, our grantees shipped new tools and worked to make existing ones
+more resilient. Alongside wallet features and communication tools came security
+updates, recovery fixes, and tests designed to catch failures before users do.
 
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Some highlights:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- **[BTCPay Server](/projects/btcpayserver):** Following August's
+  [security incident](https://blog.btcpayserver.org/security-advisory-btcpay-server-2-4-2/),
+  the team focused on protecting users and hardening the software.
+  [Version 2.4.4](https://blog.btcpayserver.org/btcpay-server-2-4-4/)
+  strengthened permissions around invoices, API keys, and administration.
+  The standard Docker deployment also restricted the application's access to
+  its host, reducing what a compromised instance could reach.
+- **[Cove](/projects/cove):**
+  [Version 1.3.0](https://github.com/bitcoinppl/cove/releases/tag/v1.3.0)
+  brought encrypted cloud backups using passkeys to the bitcoin wallet,
+  with backup, restore, and onboarding work across iOS and Android.
+  It also introduced progressive wallet scanning, helping users access their
+  wallets while discovery continues.
+- **[Amber](/projects/amber):** The nostr signer shipped
+  [v6.5.0](https://github.com/greenart7c3/Amber/releases/tag/v6.5.0)
+  with fixes for authorization and replay protection, encryption of connection
+  secrets at rest, and removal of key material from logs and crash reports.
+  These changes strengthen the boundary between the apps requesting signatures
+  and the keys Amber holds for its users.
+- **Bitchat:**
+  [Android 2.0.1](https://github.com/permissionlesstech/bitchat-android/releases/tag/v2.0.1)
+  added a standalone Wear OS client and live push-to-talk on phones and watches.
+  It was also the project's first reproducible full-app release: independent
+  builds produced matching unsigned binaries, making it possible to check
+  release artifacts against the source.
 
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-- **Lorem ipsum:** Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Releases are only part of the work. Our grantees also improve the libraries,
+node software, and testing infrastructure that other projects rely on:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- **[Bitcoinfuzz](/projects/bitcoinfuzz)** expanded its differential testing to
+  [complete MuSig2 signing sessions](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/585)
+  and [block validation across Bitcoin Kernel bindings](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/602).
+  Comparing independent implementations helps uncover disagreements that tests
+  of a single implementation can miss.
+- **[Utreexod](/projects/utreexod)** gained a
+  [separate proof store](https://github.com/utreexo/utreexod/pull/424)
+  and the ability to
+  [serve proofs while still syncing](https://github.com/utreexo/utreexod/pull/431).
+  A peer can now obtain a proof the node already holds without waiting for that
+  node to finish syncing, improving how nodes share the data needed to validate
+  blocks.
+- **Nutshell**, a [Cashu](/projects/cashu) mint implementation, added
+  [scheduled mutation testing](https://github.com/cashubtc/nutshell/pull/1094)
+  across its core, mint, wallet, Lightning, and Tor code. This deliberately
+  changes the code to check whether the tests catch the resulting defects,
+  exposing gaps that passing tests alone do not reveal.
+- **Cashu wallet recovery:** CDK
+  [removed network calls from wallet repository startup](https://github.com/cashubtc/cdk/pull/2224),
+  allowing wallets to initialize from saved mint information. The native Cashu
+  wallet also [improved partial iCloud restores](https://github.com/cashubtc/wallet/pull/368):
+  users can open a recovered wallet even if one mint is unavailable, while
+  unresolved mint information is preserved for later recovery.
+
+Have a look at the [OpenSats heartbeat](/heartbeat) to follow releases,
+commits, and pull requests across the projects we support.
 
 <ViewHeartbeatButton />
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+The same attention to reliability extends to nostr infrastructure.
+[Citrine](/projects/citrine), a local relay for Android, shipped
+[v3.2.0](https://github.com/greenart7c3/Citrine/releases/tag/v3.2.0)
+with streamed query results and bounded relay-aggregator memory, addressing
+out-of-memory crashes that could otherwise interrupt access to stored events.
 
 ---
 
