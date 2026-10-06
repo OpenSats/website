@@ -1,0 +1,237 @@
+---
+title: 'First Set of Red Team Grants'
+date: '2026-10-01'
+tags: ['grants', 'bitcoin', 'security']
+draft: false
+authors: ['tuma', 'default']
+images: ['/static/images/blog/111-code-red.jpg']
+summary: 'OpenSats is reimbursing the cost of the AI tokens used for red-teaming the Bitcoin ecosystem.'
+fundCard: red
+---
+
+Announcing OpenSats’ first round of grants supporting the
+current red-teaming efforts going on across the entire Bitcoin
+ecosystem.
+
+In the wake of the numerous security incidents that recently hit
+the Bitcoin ecosystem – such as the
+[Coldcard incident][coldcard incident], the
+[BTCPay Server exploit][btcpay exploit], Core Lightning
+vulnerabilities, and several others – OpenSats [created][code red]
+a [dedicated fund][red fund] to reimburse the cost of AI tokens
+that developers and security researchers are incurring to find
+and disclose vulnerabilities in critical Bitcoin infrastructure.
+
+The developers who were awarded the first set of grants are:
+
+- [Rob Hamilton](#rob-hamilton)
+- [L0rinc](#l0rinc)
+- [Knorrium](#knorrium)
+- [Lrifton92](#lrifton92)
+- [Kukks](#kukks)
+
+These grants are sourced from our [Red Team Fund][red fund],
+which is supported by generous donors like you. If you would
+like to support red-teaming efforts for free and open-source
+projects that help Bitcoin flourish, consider donating to the
+fund:
+
+<DonateRecurringButtonV2
+  designation="red"
+  variant="red"
+  preTagline="Help us cover"
+  tagline="ongoing LLM costs"
+/>
+
+Let's explore the work our new grantees have done to keep
+Bitcoin secure and how the grants will support their efforts in
+the future.
+
+—
+
+### Rob Hamilton
+
+Rob Hamilton is the CEO of [AnchorWatch][anchorwatch] – a cold
+storage solution for individuals and businesses. As soon as the
+consequences of the Coldcard incident were beginning to unfold,
+he was [one of the first developers in the ecosystem][first red teamers],
+together with a small group of open-source contributors, to start
+using LLMs to scan several Bitcoin-related projects looking for
+critical vulnerabilities.
+
+Rob Hamilton and the rest of the team – which was later named
+“The Red Team” – were able to find and responsibly disclose
+[around 8,000 vulnerabilities][8000 vulnerabilities] in less
+than a week, at the cost of tens of thousands of dollars in AI
+tokens, with costs growing rapidly due to the extensive use of
+those tools. They did so by leveraging the open-weight model
+[Kimi K3][kimi k3] which, [unlike its US counterparts][no guardrails],
+had no guardrails preventing its use in security-related tasks.
+
+With support from this grant, Rob Hamilton will be able to
+cover the cost of those AI tokens that were needed to red-team
+a huge part of the Bitcoin ecosystem.
+
+—
+
+### L0rinc
+
+[L0rinc][l0rinc] is a full-time [Bitcoin Core][bitcoin core]
+developer. He received a [first grant][l0rinc first grant] from
+OpenSats in December 2024, which was later
+[renewed][grant renewal] in January 2025. During his years as a
+contributor, l0rinc [authored around 150 pull requests][l0rinc prs]
+(PRs) in Bitcoin Core and
+[provided reviews to more than 400 PRs][l0rinc reviews] by other
+developers. His work focused on several topics, from testing to
+benchmarking, with a particular effort on optimizing the
+performance of Initial Block Download (IBD) and the memory
+usage across several parts of the codebase.
+
+Since May 2026, l0rinc has been scanning both Bitcoin Core and
+[libsecp256k1][libsecp256k1] using AI-assisted tools. He was
+able to discover several vulnerabilities, responsibly disclosing
+the issues to the maintainers and helping to fix them whenever
+possible.
+
+With support from this grant, l0rinc will be able to continue
+his LLM-assisted security scanning of Bitcoin Core and
+libsecp256k1, focusing on code review, [fuzzing][fuzzing], and
+scrutiny of security-critical assumptions, while also expanding
+his reach to other Bitcoin-related projects in case capacity
+allows. Funding will help l0rinc cover costs of AI APIs and
+tokens and servers to allow scanning to run continuously on the
+selected projects.
+
+—
+
+### Knorrium
+
+[Knorrium][knorrium] is a software engineer from Brazil. With
+more than 20 years spent working in software development, he
+gained expertise in testing automations for mobile and web
+development. He has been contributing to
+[mempool.space][mempool] as a quality advisor for the last five
+years, focusing mainly on building end-to-end (E2E) testing and
+creating a [continuous integration (CI) workflow][ci] – a way to
+run automatic software building and testing after each new
+development.
+
+With support from this grant, knorrium plans to improve
+[test coverage][test coverage] and build
+[test vectors][test vectors] to inspect edge cases that could
+lead to potentially critical vulnerabilities and exploitable code
+in Bitcoin wallets and infrastructure. He is also planning to
+add those testing improvements to the GitHub CI workflows.
+
+—
+
+### Lrifton92
+
+[Lrifton92][lrifton92] is a developer and open-source contributor
+who dedicated his efforts to red-teaming the Go Bitcoin
+stack, such as [btcd][btcd], [lnd][lnd], [Neutrino][neutrino],
+and the ecosystem running on this software stack. He leverages
+[differential fuzzing][fuzzing], checking the Go codebases
+against Bitcoin Core and other reference implementations for
+discrepancies between them.
+
+He has been focusing on a particular class of subtle bugs
+linked to decoding and parsing paths that silently accept
+malformed inputs. He was able to find several issues, such as a
+missing validation that led to acceptance of out-of-range
+private keys ([btcd #2545][btcd 2545]), a bug bypassing
+[BIP340][bip340] requirement for a [Schnorr signature][taproot]
+([btcd #2561][btcd 2561]), and a divergence from Bitcoin Core on
+how btcd parses and handles trailing bytes in [PSBTs][psbt] and
+in `sendrawtransaction` and `decoderawtransaction` RPC calls
+(all merged by btcd maintainers in [#2558][btcd 2558]).
+
+With support from this grant, Lrifton92 will focus on continuing
+his red-teaming efforts on all those downstream projects
+leveraging btcd, while also reviewing security relevant PRs for
+that project. Moreover, he will expand his differential testing
+suite to include validation of scripts and tapscripts and
+parsing of PSBTs and MuSig2.
+
+—
+
+### Kukks
+
+[Kukks][kukks] is CTO at [ArkLabs][arklabs] – the company behind
+the [Ark][ark] implementation [Arkade][arkade] – and is one of
+the most prolific contributors of [BTCPay Server][btcpayserver].
+He has been contributing to the [Dotnet][dotnet] (.NET) Bitcoin
+ecosystem, providing his expertise to upstream dependencies,
+such as [NBitcoin][nbitcoin]. He is currently working on
+building private, specialized [agent harnesses][agent harnesses]
+to provide regular, fine-tuned, LLM-assisted security auditing
+to the projects he is working on.
+
+With support from this grant, Kukks will work towards expanding
+his harnesses to the whole BTCPay Server stack, covering several
+libraries in the .NET Bitcoin ecosystem.
+
+—
+
+OpenSats remains committed to fostering the security of
+critical Bitcoin infrastructure. Our [Red Team Fund][red fund]
+applications are fast-tracked to enable security researchers to
+discover vulnerabilities in their projects before attackers do.
+AI token usage can rapidly soar, and this fund helps developers
+cover that cost.
+
+We thank our donors who make these grants possible and invite
+others to join us in making the Bitcoin ecosystem more
+resilient. We encourage experienced developers to
+[apply for funding][apply], and we welcome everyone to support
+our mission.
+
+<DonateRecurringButtonV2
+  designation="red"
+  variant="red"
+  preTagline="Help us cover"
+  tagline="ongoing LLM costs"
+/>
+
+[coldcard incident]: https://www.nobsbitcoin.com/coldcard-disaster-weak-entropy-bug-enables-drain-of-funds-from-cold-storage-wallets/
+[btcpay exploit]: /blog/ongoing-exploits-of-bitcoin-open-source-software
+[code red]: /blog/code-red-supporting-first-responders
+[red fund]: /funds/red
+[anchorwatch]: https://www.anchorwatch.com/
+[first red teamers]: https://x.com/Rob1Ham/status/2084140242915782743
+[8000 vulnerabilities]: https://x.com/callebtc/status/2086220411084103707
+[kimi k3]: https://www.kimi.ai/ai-models/kimi-k3
+[no guardrails]: https://x.com/Rob1Ham/status/2086464831360549034
+[l0rinc]: https://github.com/l0rinc
+[bitcoin core]: /projects/bitcoin-core
+[l0rinc first grant]: /blog/more-for-core#l0rinc
+[grant renewal]: /blog/fourteenth-wave-of-bitcoin-grants
+[l0rinc prs]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr+author%3Al0rinc+state%3Amerged
+[l0rinc reviews]: https://github.com/bitcoin/bitcoin/pulls?q=is%3Apr++state%3Amerged+reviewed-by%3Al0rinc
+[libsecp256k1]: https://github.com/bitcoin-core/secp256k1
+[fuzzing]: /topics/fuzzing
+[knorrium]: https://github.com/knorrium
+[mempool]: https://mempool.space/
+[ci]: https://en.wikipedia.org/wiki/Continuous_integration
+[test coverage]: https://en.wikipedia.org/wiki/Code_coverage
+[test vectors]: https://en.wikipedia.org/wiki/Test_vector
+[lrifton92]: https://github.com/Lrifton92
+[btcd]: https://github.com/btcsuite/btcd
+[lnd]: https://github.com/lightningnetwork/lnd
+[neutrino]: https://github.com/lightninglabs/neutrino
+[btcd 2545]: https://github.com/btcsuite/btcd/pull/2545
+[bip340]: https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki
+[taproot]: /topics/taproot
+[btcd 2561]: https://github.com/btcsuite/btcd/pull/2561
+[psbt]: /topics/psbt
+[btcd 2558]: https://github.com/btcsuite/btcd/pull/2558
+[kukks]: https://github.com/Kukks
+[arklabs]: https://arklabs.xyz/
+[ark]: /topics/ark
+[arkade]: https://arkadeos.com/
+[btcpayserver]: /projects/btcpayserver
+[dotnet]: https://en.wikipedia.org/wiki/.NET
+[nbitcoin]: https://github.com/MetacoSA/NBitcoin
+[agent harnesses]: https://en.wikipedia.org/wiki/Agent_harness
+[apply]: /apply
