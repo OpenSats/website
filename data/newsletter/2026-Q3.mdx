@@ -239,13 +239,38 @@ out-of-memory crashes that could otherwise interrupt access to stored events.
 
 ---
 
-## Dolor Sit Amet
+## Highlights from Our LTS Grantees
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Our [long-term support program](/tags/lts) supports people whose contributions
+span projects and years. Their Q3 work shows how resilience takes many forms:
+communication tools, infrastructure that stays online under pressure, independent
+network monitoring, and the patient work of finding and fixing bugs.
 
-<div className="my-8 aspect-video w-full rounded-lg bg-gray-100 dark:bg-gray-800" aria-hidden="true" />
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- **[Calle](/blog/cashu-calle-receives-lts-grant): communication on phones and watches.**
+  Alongside his Cashu work, Calle contributed to Bitchat for Android. The
+  [2.0.1 release](https://github.com/permissionlesstech/bitchat-android/releases/tag/v2.0.1)
+  brought a standalone Wear OS client, live push-to-talk, and improvements to
+  message delivery. It was also Bitchat Android's first reproducible full-app
+  release, with independent builds producing matching unsigned binaries.
+- **[Jason Donenfeld](/blog/jason-donenfeld-lts-grant): keeping source code accessible.**
+  Beyond WireGuard, Jason maintains cgit, the web interface used to browse code
+  on sites including git.kernel.org. As AI crawlers put heavy pressure on this
+  infrastructure, he worked to reduce the cost of serving it. A September
+  [change to syntax highlighting](https://git.zx2c4.com/cgit/commit/?h=jd/zx2c4-deployment&id=d4940d531ba0bdffbfb95e5c0d299956bd3e4e6c)
+  moved that work into the browser, reducing the load on the server.
+- **b10c: watching the network under stress.**
+  During August's BIP-110 fork, b10c connected more than 50 nodes to
+  [fork-observer and livestreamed what happened](https://b10c.me/projects/028-bip110-monitoring-livestream/),
+  including which chain tips mining pools were building on. He then improved
+  the tool's handling of traffic spikes. Independent monitoring gives people
+  a way to see network behavior for themselves.
+- **Marco Falke: strengthening the tools behind Bitcoin Core.**
+  Marco continued reviewing code and maintaining nightly testing, fuzzing, and
+  coverage infrastructure. AI also helped investigate obscure failures:
+  September brought a [workaround for a macOS linker bug](https://github.com/bitcoin/bitcoin/pull/36285),
+  while testing uncovered an [unsafe memory race during test shutdown](https://github.com/bitcoin/bitcoin/pull/36148)
+  that was fixed earlier that month. Resilience also depends on the reliability
+  of the tools used to build and test the software.
 
 ---
 
