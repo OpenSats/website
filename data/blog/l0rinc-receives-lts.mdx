@@ -7,3 +7,48 @@ images: []
 draft: false
 summary: "OpenSats welcomes L0rinc as an LTS grantee."
 ---
+
+OpenSats is pleased to announce long-term support for [l0rinc], a
+[Bitcoin Core] contributor focused on performance, maintenance, and review.
+
+L0rinc spends much of his time measuring what makes [initial block download]
+(IBD) slower on ordinary hardware. Recent examples include [IBD benchmarks]
+on hard drives and [profiling Bitcoin Core] on [Raspberry Pi 4] hardware.
+
+For one database change, l0rinc tested [write batches] at different sizes. The
+merged change set the default to 32 MiB, up from 16 MiB. He has also worked
+on [buffering] block and undo-data reads and writes, and [removing] an extra
+coins-cache lookup.
+
+While reviewing a [proposal] to make database file sizes configurable, l0rinc
+benchmarked several sizes and questioned whether the proposed configuration
+option was worth adding. He also keeps a [running list] of coins-cache
+refactors, fixes, and tests being handled across separate pull requests.
+
+With long-term support, l0rinc plans to continue this work.
+
+> Placeholder for a potential quote from the grantee.
+>
+> <cite>—L0rinc</cite>
+
+OpenSats funds the people who build and maintain Bitcoin’s open-source
+infrastructure. Thank you to the donors who make this possible.
+
+To support l0rinc and our [other Long-Term Support grantees], please consider
+making a one-time or recurring donation to the [General Fund].
+
+<DonateRecurringButton designation="general" />
+
+[l0rinc]: https://github.com/l0rinc
+[Bitcoin Core]: /projects/bitcoin-core
+[initial block download]: https://bitcoin.org/en/full-node#initial-block-downloadibd
+[IBD benchmarks]: https://github.com/bitcoin/bitcoin/pull/30039
+[profiling Bitcoin Core]: https://github.com/bitcoin/bitcoin/issues/32832
+[Raspberry Pi 4]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[write batches]: https://github.com/bitcoin/bitcoin/pull/31645
+[buffering]: https://github.com/bitcoin/bitcoin/pull/31551
+[removing]: https://github.com/bitcoin/bitcoin/pull/30326
+[proposal]: https://github.com/bitcoin/bitcoin/pull/30059
+[running list]: https://github.com/bitcoin/bitcoin/issues/34280
+[other Long-Term Support grantees]: /tags/lts
+[General Fund]: /funds/general
