@@ -144,7 +144,7 @@ private keys ([btcd #2545][btcd 2545]), a bug bypassing
 [BIP340][bip340] requirement for a [Schnorr signature][taproot]
 ([btcd #2561][btcd 2561]), and a divergence from Bitcoin Core on
 how btcd parses and handles trailing bytes in [PSBTs][psbt] and
-in `sendrawtransaction` and `decoderawtransaction` RPC calls
+in `sendrawtransaction` and `decoderawtransaction` [RPC][rpc] calls
 (all merged by btcd maintainers in [#2558][btcd 2558]).
 
 With support from this grant, Lrifton92 will focus on continuing
@@ -152,7 +152,7 @@ his red-teaming efforts on all those downstream projects
 leveraging btcd, while also reviewing security relevant PRs for
 that project. Moreover, he will expand his differential testing
 suite to include validation of scripts and tapscripts and
-parsing of PSBTs and MuSig2.
+parsing of PSBTs and [MuSig2][musig2].
 
 ---
 
@@ -225,7 +225,9 @@ our mission.
 [taproot]: /topics/taproot
 [btcd 2561]: https://github.com/btcsuite/btcd/pull/2561
 [psbt]: /topics/psbt
+[rpc]: /topics/rpc
 [btcd 2558]: https://github.com/btcsuite/btcd/pull/2558
+[musig2]: /topics/musig
 [kukks]: https://github.com/Kukks
 [arklabs]: https://arklabs.xyz/
 [ark]: /topics/ark
