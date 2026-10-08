@@ -16,9 +16,9 @@ In his efforts to keep Bitcoin nodes practical to run on inexpensive hardware,
 l0rinc spends much of his time measuring what slows [initial block download]
 (IBD) on ordinary hardware.
 
-He examines any bottlenecks across validation, memory use, storage, and P2P
-networking, looking for hot code paths to optimize, redundant work to remove,
-and tasks that can safely run in parallel. Recent examples include
+When examining IBD bottlenecks across validation, memory use, storage, and P2P
+networking, he looks for hot code paths to optimize, redundant work to remove,
+and tasks that can run safely in parallel. Recent examples include
 [IBD benchmarks] on hard drives and [profiling Bitcoin Core] on [Raspberry Pi
 4] hardware.
 
