@@ -1,0 +1,57 @@
+---
+title: "Long-Term Support for l0rinc"
+date: '2026-10-09'
+tags: ['grants', 'bitcoin', 'LTS']
+authors: ['arvin', 'default']
+images: ['/static/images/blog/116-l0rinc-receives-lts-grant.jpg']
+draft: false
+summary: "OpenSats welcomes L0rinc as an LTS grantee."
+---
+
+OpenSats is pleased to announce long-term support for [l0rinc]
+(pronounced Lawrence), a [Bitcoin Core] contributor and security researcher
+focused on performance, maintenance, and review.
+
+In his efforts to keep Bitcoin nodes practical to run on inexpensive hardware,
+l0rinc spends much of his time measuring what slows [initial block download]
+(IBD) on ordinary hardware.
+
+When examining IBD bottlenecks across validation, memory use, storage, and P2P
+networking, he looks for hot code paths to optimize, redundant work to remove,
+and tasks that can run safely in parallel. Recent examples include
+[IBD benchmarks] on hard drives and [profiling Bitcoin Core] on [Raspberry Pi
+4] hardware.
+
+Beyond reviewing code, l0rinc runs AI-assisted security and vulnerability
+scans of Bitcoin Core, `libsecp256k1`, and other related projects, looking
+for resource exhaustion, node crashes, and potentially unexpected edge cases.
+To keep up with the findings from AI-scans, he simplifies code, improves
+testing, and fixes any shared root causes as part of ongoing maintenance
+practices.
+
+With long-term support, l0rinc plans to continue this work. He is also
+exploring how pruning can become a more natural part of syncing and
+indexing.
+
+> I'm in Bitcoin for the long run, and OpenSats' support reflects the low time
+> preference we share. It gives me the stability to dig into hard problems
+> that take time to get right.
+>
+> <cite>—L0rinc</cite>
+
+OpenSats funds the people who build and maintain Bitcoin’s open-source
+infrastructure. Thank you to the donors who make this possible.
+
+To support l0rinc and our [other Long-Term Support grantees], please consider
+making a one-time or recurring donation to the [General Fund].
+
+<DonateRecurringButton designation="general" />
+
+[l0rinc]: https://github.com/l0rinc
+[Bitcoin Core]: /projects/bitcoin-core
+[initial block download]: https://bitcoin.org/en/full-node#initial-block-downloadibd
+[IBD benchmarks]: https://github.com/bitcoin/bitcoin/pull/30039
+[profiling Bitcoin Core]: https://github.com/bitcoin/bitcoin/issues/32832
+[Raspberry Pi 4]: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+[other Long-Term Support grantees]: https://opensats.org/tags/lts
+[General Fund]: /funds/general
