@@ -16,11 +16,11 @@ builds its local view of Bitcoin. The work is local validation, so the node
 learns the current state by checking the chain itself instead of asking another
 service what the valid chain is.
 
-During IBD, Bitcoin Core uses headers-first sync: it downloads and partially
-validates the best header chain before fetching the corresponding blocks from
-peers. A node in IBD can use significant bandwidth, CPU, and disk I/O, and it
-usually delays normal wallet and [mempool](/topics/mempool) behavior until it
-catches up.
+During IBD, [Bitcoin Core](/projects/bitcoin-core) uses headers-first sync: it
+downloads and partially validates the best header chain before fetching the
+corresponding blocks from peers. A node in IBD can use significant bandwidth,
+CPU, and disk I/O, and it usually delays normal wallet and
+[mempool](/topics/mempool) behavior until it catches up.
 
 Much OpenSats-funded Bitcoin Core work touches IBD because faster, lighter sync
 makes self-hosted validation practical on more hardware. Performance work,
