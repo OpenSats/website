@@ -5,10 +5,11 @@ category: 'Bitcoin'
 aliases: ['IBD', 'initial sync', 'initial block sync']
 ---
 
-Initial Block Download (IBD) is the sync process a [Bitcoin node](/topics/bitcoin-node)
-goes through when it is far behind the current chain tip. A fresh full node
-starts from the hardcoded genesis block, finds peers, downloads block headers
-and blocks, and validates the chain up to the best known tip.
+Initial Block Download (IBD) is the process a new [Bitcoin node](/topics/bitcoin-node)
+goes through to synchronize with the rest of the network. The same term is used
+when a node is far behind the current chain tip and needs to catch up. A fresh full
+node starts from the hardcoded genesis block, finds peers, downloads block
+headers and blocks, and validates the chain up to the best known tip.
 
 IBD is expensive because the node verifies historical proof of work, block
 structure, transactions, scripts, and [UTXO](/topics/utxo) set changes as it
