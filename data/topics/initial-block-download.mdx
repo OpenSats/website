@@ -1,0 +1,35 @@
+---
+title: 'Initial Block Download'
+summary: 'The first sync process where a Bitcoin full node downloads and validates the block chain from genesis to the current tip.'
+category: 'Bitcoin'
+aliases: ['IBD', 'initial sync', 'initial block sync']
+---
+
+Initial Block Download (IBD) is the process a new [Bitcoin node](/topics/bitcoin-node)
+goes through to synchronize with the rest of the network. The same term is used
+when a node is far behind the current chain tip and needs to catch up. A fresh full
+node starts from the hardcoded genesis block, finds peers, downloads block
+headers and blocks, and validates the chain up to the best known tip.
+
+IBD is expensive because the node verifies historical proof of work, block
+structure, transactions, scripts, and [UTXO](/topics/utxo) set changes as it
+builds its local view of Bitcoin. The work is local validation, so the node
+learns the current state by checking the chain itself instead of asking another
+service what the valid chain is.
+
+During IBD, [Bitcoin Core](/projects/bitcoin-core) uses headers-first sync: it
+downloads and partially validates the best header chain before fetching the
+corresponding blocks from peers. A node in IBD can use significant bandwidth,
+CPU, and disk I/O, and it usually delays normal wallet and
+[mempool](/topics/mempool) behavior until it catches up.
+
+Much OpenSats-funded Bitcoin Core work touches IBD because faster, lighter sync
+makes self-hosted validation practical on more hardware. Performance work,
+pruning improvements, [AssumeUTXO](/topics/assumeutxo), and accumulator-based
+approaches such as [Utreexo](/topics/utreexo) all relate to reducing the time,
+storage, or resource cost of reaching the chain tip.
+
+## References
+
+- [Initial Block Download](https://developer.bitcoin.org/devguide/p2p_network.html#initial-block-download)
+- [Running a full node](https://bitcoin.org/en/full-node#initial-block-downloadibd)

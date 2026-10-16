@@ -26,8 +26,9 @@ around the same protocol work.
 
 The main tradeoff is bandwidth. `utreexod` uses much less disk I/O and memory
 than a traditional node, but it downloads extra proof data. It can also start
-from a hardcoded UTXO state, which avoids the usual initial block download path
-and brings a validating node online much faster.
+from a hardcoded UTXO state, which avoids the usual [Initial Block
+Download](/topics/initial-block-download) path and brings a validating node
+online much faster.
 
 ## Why fund it?
 
@@ -45,7 +46,8 @@ messaging, and the BIPs needed to make multiple implementations interoperate.
 ## What's next?
 
 Recent work landed in [`utreexod` v0.5.0][v0-5-0] and [v0.5.1][v0-5-1].
-v0.5.0 added [SwiftSync-based][SwiftSync gist] proofless IBD and cut worst-case extra sync
+v0.5.0 added [SwiftSync-based][SwiftSync gist] proofless
+[IBD](/topics/initial-block-download) and cut worst-case extra sync
 bandwidth from about 1.4 TB to about 200 GB. It also pushed more of the
 protocol onto dedicated Utreexo messages and continued bridge-node and indexer
 work. v0.5.1 followed with a netsync fix.
