@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import type { Project } from 'contentlayer/generated'
-import { CoreContent } from 'pliny/utils/contentlayer'
+import type { Project } from 'content-collections'
+import { CoreContent } from 'pliny/utils/contentlayer.js'
 import ProjectLayout from './ProjectLayout'
 
 // Funds reuse the project page chrome (cover image, social links, etc.)

@@ -1,4 +1,4 @@
-import { allAuthors } from 'contentlayer/generated'
+import { allAuthors } from 'content-collections'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 import { useState, useEffect } from 'react'

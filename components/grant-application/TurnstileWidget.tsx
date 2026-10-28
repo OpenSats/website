@@ -55,8 +55,8 @@ interface TurnstileWidgetProps {
 const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
   function TurnstileWidget({ onTokenChange }, ref) {
     const containerRef = useRef<HTMLDivElement>(null)
-    const widgetIdRef = useRef<string>()
-    const tokenRef = useRef<string>()
+    const widgetIdRef = useRef<string | undefined>(undefined)
+    const tokenRef = useRef<string | undefined>(undefined)
     const waitersRef = useRef<Array<(token: string) => void>>([])
     const onTokenChangeRef = useRef(onTokenChange)
     onTokenChangeRef.current = onTokenChange

@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
-import { wrapText } from './lib/og-network.mjs'
+import { loadContentCollection, wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -15,14 +15,6 @@ const outputDir = path.join(
   'projects',
   'og'
 )
-const projectsIndexPath = path.join(
-  root,
-  '.contentlayer',
-  'generated',
-  'Project',
-  '_index.json'
-)
-
 const WIDTH = 1200
 const HEIGHT = 630
 
@@ -233,8 +225,7 @@ async function ensureOutputDir() {
 }
 
 async function loadProjects() {
-  const file = await fs.readFile(projectsIndexPath, 'utf8')
-  return JSON.parse(file)
+  return loadContentCollection('Project')
 }
 
 async function writeProjectImage(project, logomark) {

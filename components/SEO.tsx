@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { blogOgImagePath, isLocalImage } from '@/utils/blogOgImages'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Authors } from 'contentlayer/generated'
+import { CoreContent } from 'pliny/utils/contentlayer.js'
+import type { Blog, Authors } from 'content-collections'
 interface CommonSEOProps {
   title: string
   description: string

@@ -1,10 +1,10 @@
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
 import { PageSEO } from '@/components/SEO'
-import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
+import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer.js'
 import { InferGetStaticPropsType } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
+import type { Blog } from 'content-collections'
 
 export const POSTS_PER_PAGE = 12
 

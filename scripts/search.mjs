@@ -1,17 +1,9 @@
-import { writeFileSync, readFileSync } from 'fs'
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
+import { writeFileSync } from 'fs'
 import { stripMarkdownForSearch } from '../utils/relatedPosts.ts'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+import { loadContentCollection } from './lib/og-network.mjs'
 
 const search = async () => {
-  const blogDataPath = join(
-    __dirname,
-    '../.contentlayer/generated/Blog/_index.json'
-  )
-  const allBlogs = JSON.parse(readFileSync(blogDataPath, 'utf8'))
+  const allBlogs = await loadContentCollection('Blog')
 
   const index = Object.fromEntries(
     allBlogs.map((post) => [

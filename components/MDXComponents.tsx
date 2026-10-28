@@ -1,9 +1,9 @@
 /* eslint-disable react/display-name */
 import React from 'react'
-import { MDXLayout, ComponentMap } from 'pliny/mdx-components'
-import { TOCInline } from 'pliny/ui/TOCInline'
-import { Pre } from 'pliny/ui/Pre'
-import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
+import { MDXLayout, ComponentMap } from 'pliny/mdx-components.js'
+import { TOCInline } from 'pliny/ui/TOCInline.js'
+import { Pre } from 'pliny/ui/Pre.js'
+import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm.js'
 
 import Image from './Image'
 import BrowserFrame from './BrowserFrame'
@@ -28,9 +28,35 @@ import StatsSentence from './StatsSentence'
 import NewsletterSignup from './NewsletterSignup'
 import ViewHeartbeatButton from './ViewHeartbeatButton'
 import MediaKit, { MediaKitColors, MediaKitDownloadLink } from './MediaKit'
+import AuthorLayout from '@/layouts/AuthorLayout'
+import FundLayout from '@/layouts/FundLayout'
+import NewsletterLayout from '@/layouts/NewsletterLayout'
+import PageLayout from '@/layouts/PageLayout'
+import PostLayout from '@/layouts/PostLayout'
+import PostSimple from '@/layouts/PostSimple'
+import ProjectLayout from '@/layouts/ProjectLayout'
+import SpotlightLayout from '@/layouts/SpotlightLayout'
+import TopicLayout from '@/layouts/TopicLayout'
+
+const layouts = {
+  AuthorLayout,
+  FundLayout,
+  NewsletterLayout,
+  PageLayout,
+  PostLayout,
+  PostSimple,
+  ProjectLayout,
+  SpotlightLayout,
+  TopicLayout,
+}
 
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
-  const Layout = require(`../layouts/${layout}`).default
+  const Layout = layouts[
+    layout as keyof typeof layouts
+  ] as unknown as React.ComponentType<Record<string, unknown>>
+  if (!Layout) {
+    throw new Error(`Unknown MDX layout: ${layout}`)
+  }
   return <Layout content={content} {...rest} />
 }
 

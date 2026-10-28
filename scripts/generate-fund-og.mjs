@@ -10,7 +10,7 @@ import {
   ensureCleanDir,
   escapeXml,
   hashString,
-  loadContentlayerIndex,
+  loadContentCollection,
   loadFaviconDataUri,
   networkDecor,
   publicAssetToDataUri,
@@ -181,7 +181,7 @@ async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
 
-  const funds = await loadContentlayerIndex('Fund')
+  const funds = await loadContentCollection('Fund')
 
   for (const fund of funds) {
     await writeFundImage(fund)

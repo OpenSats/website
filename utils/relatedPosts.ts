@@ -1,4 +1,4 @@
-import type { Project, Blog, Fund, Topic } from 'contentlayer/generated'
+import type { Project, Blog, Fund, Topic } from 'content-collections'
 
 function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

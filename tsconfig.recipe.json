@@ -24,7 +24,7 @@
       "@/layouts/*": ["layouts/*"],
       "@/lib/*": ["lib/*"],
       "@/css/*": ["css/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "content-collections": ["./.content-collections/generated"]
     }
   },
   "include": [
@@ -32,8 +32,7 @@
     "**/*.js",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated",
-    ".contentlayer/generated/**/*.json"
+    ".content-collections/generated"
   ],
   "exclude": ["node_modules"]
 }

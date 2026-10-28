@@ -1,10 +1,10 @@
 import { TagSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
-import { kebabCase } from 'pliny/utils/kebabCase'
-import { getAllTags, allCoreContent } from 'pliny/utils/contentlayer'
+import { kebabCase } from '@/utils/kebabCase'
+import { getAllTags, allCoreContent } from 'pliny/utils/contentlayer.js'
 import { InferGetStaticPropsType } from 'next'
-import { allBlogs } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
 
 export async function getStaticPaths() {
   const tags = await getAllTags(allBlogs)

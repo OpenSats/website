@@ -17,7 +17,7 @@ Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nex
 
 `npm run build` generates social cards and checks that every card is exactly
 1200×630 and under 1 MB. To regenerate blog cards locally after changing artwork,
-run `npx contentlayer build` followed by `npm run generate:blog-og`.
+run `npm run content:build` followed by `npm run generate:blog-og`.
 `npm run check:og` validates all generated card families after a full build.
 
 Blog OG and Twitter images use compressed JPEG copies; the original article

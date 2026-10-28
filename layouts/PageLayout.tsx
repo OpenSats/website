@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
-import type { Pages } from 'contentlayer/generated'
+import type { Pages } from 'content-collections'
 import { PageSEO } from '@/components/SEO'
 import PageSection from '@/components/PageSection'
-import { CoreContent } from 'pliny/utils/contentlayer'
+import { CoreContent } from 'pliny/utils/contentlayer.js'
 
 interface Props {
   children: ReactNode

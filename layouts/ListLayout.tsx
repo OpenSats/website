@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog } from 'contentlayer/generated'
+import { CoreContent } from 'pliny/utils/contentlayer.js'
+import type { Blog } from 'content-collections'
 import Link from '@/components/Link'
 import PostList from '@/components/PostList'
 import {

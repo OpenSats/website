@@ -1,11 +1,11 @@
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/ListLayout'
-import { allCoreContent, sortedBlogPost } from 'pliny/utils/contentlayer'
+import { allCoreContent, sortedBlogPost } from 'pliny/utils/contentlayer.js'
 import { POSTS_PER_PAGE } from '../index'
 import { InferGetStaticPropsType } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
+import type { Blog } from 'content-collections'
 
 export const getStaticPaths = async () => {
   const totalPosts = allBlogs

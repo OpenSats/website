@@ -5,10 +5,10 @@ import {
   sortedBlogPost,
   allCoreContent,
   CoreContent,
-} from 'pliny/utils/contentlayer'
+} from 'pliny/utils/contentlayer.js'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allBlogs } from 'contentlayer/generated'
-import type { Blog } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
+import type { Blog } from 'content-collections'
 import PostList from '@/components/PostList'
 import {
   excerptsForPosts,

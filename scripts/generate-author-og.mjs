@@ -10,7 +10,7 @@ import {
   ensureCleanDir,
   escapeXml,
   hashString,
-  loadContentlayerIndex,
+  loadContentCollection,
   loadFaviconDataUri,
   networkDecor,
   publicAssetToDataUri,
@@ -188,7 +188,7 @@ async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
 
-  const authors = await loadContentlayerIndex('Authors')
+  const authors = await loadContentCollection('Authors')
 
   let written = 0
   for (const author of authors) {
