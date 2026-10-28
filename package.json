@@ -19,9 +19,7 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "test": "jest",
     "generate:blog-og": "node -r esbuild-register ./scripts/generate-blog-og.mjs",
-    "check:og": "node -r esbuild-register ./scripts/check-og-images.mjs",
-    "postinstall": "node scripts/inv17327.cjs",
-    "prebuild": "node scripts/inv17327.cjs"
+    "check:og": "node -r esbuild-register ./scripts/check-og-images.mjs"
   },
   "engines": {
     "node": ">=22.0.0"
