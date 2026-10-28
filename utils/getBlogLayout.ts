@@ -1,5 +1,5 @@
-import { kebabCase } from 'pliny/utils/kebabCase'
-import type { Blog } from 'contentlayer/generated'
+import { kebabCase } from '@/utils/kebabCase'
+import type { Blog } from 'content-collections'
 
 export const DEFAULT_LAYOUT = 'PostLayout'
 export const SPOTLIGHT_LAYOUT = 'SpotlightLayout'

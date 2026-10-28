@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { CURRENCY, MIN_AMOUNT } from '../../config'
 import { fetchPostJSONAuthed } from '../../utils/api-helpers'
 import { PayReq } from '../../utils/types'
-import { allFunds } from 'contentlayer/generated'
+import { allFunds } from 'content-collections'
 
 const ZAPRITE_USER_UUID = process.env.ZAPRITE_USER_UUID
 

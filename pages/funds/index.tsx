@@ -12,8 +12,8 @@ import {
   FUND_CARD_BLURBS,
 } from '@/components/FundCard'
 import type { FundCardDesignation } from '@/components/FundCard'
-import { allFunds } from 'contentlayer/generated'
-import type { Fund } from 'contentlayer/generated'
+import { allFunds } from 'content-collections'
+import type { Fund } from 'content-collections'
 import { getLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'
 
 type FundsIndexProps = {

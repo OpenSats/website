@@ -5,7 +5,7 @@ import ShowcaseProjectEntry, {
   toShowcaseProject,
 } from '@/components/ShowcaseProjectEntry'
 import type { ShowcaseProjectEntryProps } from '@/components/ShowcaseProjectEntry'
-import { allProjects } from 'contentlayer/generated'
+import { allProjects } from 'content-collections'
 import { buildClusters } from '@/utils/projectClusters'
 
 type RenderCluster = {

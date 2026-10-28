@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allPages } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { allPages } from 'content-collections'
+import { MDXLayoutRenderer } from 'pliny/mdx-components.js'
 import { MDXComponents } from '@/components/MDXComponents'
 import LifetimeStats from '@/components/LifetimeStats'
 import { resolveLifetimeStats, type LifetimeStat } from '@/utils/lifetimeStats'

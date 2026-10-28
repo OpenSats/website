@@ -2,10 +2,10 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
-import { kebabCase } from 'pliny/utils/kebabCase'
-import { getAllTags } from 'pliny/utils/contentlayer'
+import { kebabCase } from '@/utils/kebabCase'
+import { getAllTags } from 'pliny/utils/contentlayer.js'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allBlogs } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
 
 export const getStaticProps: GetStaticProps<{
   tags: Record<string, number>

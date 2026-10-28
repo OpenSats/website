@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import type { Authors } from 'contentlayer/generated'
+import type { Authors } from 'content-collections'
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 import { AuthorSEO, PageSEO } from '@/components/SEO'
@@ -10,6 +10,15 @@ interface Props {
   content: Omit<Authors, '_id' | '_raw' | 'body'>
 }
 
+type AuthorSeoDetails = {
+  name: string
+  board?: boolean
+  ops?: boolean
+  content?: boolean
+  design?: boolean
+  volunteer?: boolean
+}
+
 export const getAuthorSeoDescription = ({
   name,
   board,
@@ -17,10 +26,7 @@ export const getAuthorSeoDescription = ({
   content,
   design,
   volunteer,
-}: Pick<
-  Authors,
-  'name' | 'board' | 'ops' | 'content' | 'design' | 'volunteer'
->) => {
+}: AuthorSeoDetails) => {
   if (board) {
     return `${name} serves on the OpenSats board.`
   }

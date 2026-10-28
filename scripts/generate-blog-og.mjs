@@ -8,6 +8,7 @@ import {
   OG_HEIGHT,
   COLORS,
   ensureCleanDir,
+  loadContentCollection,
 } from './lib/og-network.mjs'
 
 // Reviewed individually: preserve headroom above these portraits when trimming
@@ -22,12 +23,7 @@ const cropPositions = {
 }
 
 async function main() {
-  const posts = JSON.parse(
-    await fs.readFile(
-      path.join(ROOT, '.contentlayer/generated/Blog/_index.json'),
-      'utf8'
-    )
-  )
+  const posts = await loadContentCollection('Blog')
   await ensureCleanDir(path.join(ROOT, 'public/static/images/blog/og'))
   let count = 0
   for (const post of posts) {

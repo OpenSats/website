@@ -50,7 +50,10 @@ npm-debug.log*
 .env.test.local
 .env.production.local
 
-# Contentlayer
+# Content Collections
+.content-collections
+
+# Legacy generated content
 .contentlayer
 
 # TypeScript

@@ -1,8 +1,8 @@
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
+import { MDXLayoutRenderer } from 'pliny/mdx-components.js'
 import { MDXComponents } from '@/components/MDXComponents'
 import { InferGetStaticPropsType } from 'next'
-import { allNewsletters } from 'contentlayer/generated'
-import type { Newsletter } from 'contentlayer/generated'
+import { allNewsletters } from 'content-collections'
+import type { Newsletter } from 'content-collections'
 
 const DEFAULT_LAYOUT = 'NewsletterLayout'
 

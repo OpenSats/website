@@ -1,4 +1,4 @@
-import { allFunds } from 'contentlayer/generated'
+import { allFunds } from 'content-collections'
 import DonationForm from './DonationForm'
 
 export default function DonateToGeneralFundButton() {

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import DonationForm from './DonationForm'
-import { Fund } from 'contentlayer/generated'
+import { Fund } from 'content-collections'
 import { getFundDonationUrl } from '@/utils/funds'
 
 type ModalProps = {

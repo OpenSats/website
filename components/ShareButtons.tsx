@@ -2,7 +2,7 @@ import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import { Project } from 'contentlayer/generated'
+import { Project } from 'content-collections'
 
 const ShareButtons: React.FC<{ project: Project }> = ({ project }) => {
   const { git, twitter, website } = project

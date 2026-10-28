@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import type { Topic } from 'contentlayer/generated'
+import type { Topic } from 'content-collections'
 import { TopicSEO } from '@/components/SEO'
-import { CoreContent } from 'pliny/utils/contentlayer'
+import { CoreContent } from 'pliny/utils/contentlayer.js'
 import { getDisplayAliases } from '@/utils/topics'
 
 interface Props {

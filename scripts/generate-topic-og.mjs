@@ -11,7 +11,7 @@ import {
   ensureCleanDir,
   escapeXml,
   hashString,
-  loadContentlayerIndex,
+  loadContentCollection,
   loadFaviconDataUri,
   renderSvgToPng,
   wrapText,
@@ -156,7 +156,7 @@ async function main() {
   await ensureCleanDir(outputDir)
   faviconDataUri = await loadFaviconDataUri()
 
-  const topics = await loadContentlayerIndex('Topic')
+  const topics = await loadContentCollection('Topic')
 
   await writeImage('index.png', renderIndexSvg())
 

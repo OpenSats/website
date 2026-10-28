@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -253,8 +253,8 @@ export function networkDecor({
 export function backgroundDecor(seed, options = {}) {
   return `
     <rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${
-    COLORS.background
-  }" />
+      COLORS.background
+    }" />
     ${networkDecor({ seed, ...options })}
   `
 }
@@ -287,8 +287,8 @@ export function measureTextBBoxWithResvg(text, fontSize) {
   const svgHeight = Math.ceil(fontSize * 2)
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="4000" height="${svgHeight}">
     <text x="0" y="${fontSize}" font-size="${fontSize}" font-family="${INTER_FONT_FAMILY}">${escapeXml(
-    text
-  )}</text>
+      text
+    )}</text>
   </svg>`
   const resvg = new Resvg(svg, {
     font: {
@@ -319,17 +319,28 @@ export async function writePng(filePath, png) {
   await fs.writeFile(filePath, png)
 }
 
-export async function loadContentlayerIndex(typeName) {
-  const indexPath = path.join(
+export async function loadContentCollection(typeName) {
+  const exportNames = {
+    Authors: 'allAuthors',
+    Blog: 'allBlogs',
+    Fund: 'allFunds',
+    Newsletter: 'allNewsletters',
+    Pages: 'allPages',
+    Project: 'allProjects',
+    Topic: 'allTopics',
+  }
+  const exportName = exportNames[typeName]
+  if (!exportName) throw new Error(`Unknown content collection: ${typeName}`)
+
+  const modulePath = path.join(
     ROOT,
-    '.contentlayer',
+    '.content-collections',
     'generated',
-    typeName,
-    '_index.json'
+    `${exportName}.js`
   )
   try {
-    const file = await fs.readFile(indexPath, 'utf8')
-    return JSON.parse(file)
+    const generatedCollection = await import(pathToFileURL(modulePath).href)
+    return generatedCollection.default
   } catch (error) {
     if (error.code === 'ENOENT') {
       return []

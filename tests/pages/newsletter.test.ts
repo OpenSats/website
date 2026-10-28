@@ -1,6 +1,6 @@
 import { getStaticPaths, getStaticProps } from '../../pages/newsletter/[slug]'
 
-jest.mock('../../.contentlayer/generated', () => ({
+jest.mock('content-collections', () => ({
   allNewsletters: [{ slug: '2026-Q1', title: 'Sats Well Spent' }],
 }))
 jest.mock('pliny/mdx-components', () => ({ MDXLayoutRenderer: () => null }))

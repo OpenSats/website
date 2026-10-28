@@ -2,7 +2,12 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import sharp from 'sharp'
 import { blogOgImagePath, isLocalImage } from '../utils/blogOgImages.ts'
-import { ROOT, OG_WIDTH, OG_HEIGHT } from './lib/og-network.mjs'
+import {
+  ROOT,
+  OG_WIDTH,
+  OG_HEIGHT,
+  loadContentCollection,
+} from './lib/og-network.mjs'
 
 // Run after all generators; reject oversized or incorrectly sized social cards.
 const root = path.join(ROOT, 'public/static/images')
@@ -25,12 +30,7 @@ async function check(file) {
 
 async function main() {
   const files = new Set(['og-default.png', 'heartbeat/og.png'])
-  const posts = JSON.parse(
-    await fs.readFile(
-      path.join(ROOT, '.contentlayer/generated/Blog/_index.json'),
-      'utf8'
-    )
-  )
+  const posts = await loadContentCollection('Blog')
   // Check expected URLs too: enumerating the output alone misses absent cards.
   for (const post of posts) {
     for (const [index, image] of (post.images || []).entries()) {

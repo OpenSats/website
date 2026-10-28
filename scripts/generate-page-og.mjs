@@ -20,7 +20,7 @@ import {
   ensureCleanDir,
   escapeXml,
   hashString,
-  loadContentlayerIndex,
+  loadContentCollection,
   loadFaviconDataUri,
   measureTextBBoxWithResvg,
   measureTextWidthWithResvg,
@@ -571,7 +571,7 @@ async function main() {
     throw new Error('Missing red logo at public/static/brand/logo-red.png')
   }
 
-  const pages = await loadContentlayerIndex('Pages')
+  const pages = await loadContentCollection('Pages')
   const transparencyStats = await resolveLifetimeStats()
   const mapDataUri = await renderGranteeMapDataUri(
     {

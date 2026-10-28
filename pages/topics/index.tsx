@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { allTopics } from 'contentlayer/generated'
-import type { Topic } from 'contentlayer/generated'
+import { allTopics } from 'content-collections'
+import type { Topic } from 'content-collections'
 import Link from '@/components/Link'
 import { TopicSEO } from '@/components/SEO'
 import ScrollToTop from '@/components/ScrollToTop'

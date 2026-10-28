@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { Resvg } from '@resvg/resvg-js'
-import { wrapText } from './lib/og-network.mjs'
+import { loadContentCollection, wrapText } from './lib/og-network.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -14,13 +14,6 @@ const outputDir = path.join(
   'images',
   'newsletter',
   'og'
-)
-const newslettersIndexPath = path.join(
-  root,
-  '.contentlayer',
-  'generated',
-  'Newsletter',
-  '_index.json'
 )
 const faviconSvgPath = path.join(
   root,
@@ -291,18 +284,7 @@ async function ensureOutputDir() {
 }
 
 async function loadNewsletters() {
-  try {
-    const file = await fs.readFile(newslettersIndexPath, 'utf8')
-    return JSON.parse(file)
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.warn(
-        'No newsletter contentlayer index found; only the index OG image will be generated.'
-      )
-      return []
-    }
-    throw error
-  }
+  return loadContentCollection('Newsletter')
 }
 
 function renderToPng(svg) {
