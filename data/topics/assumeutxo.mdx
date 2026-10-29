@@ -5,11 +5,11 @@ category: 'Bitcoin'
 aliases: ['assume UTXO', 'UTXO snapshot']
 ---
 
-AssumeUTXO lets a new Bitcoin Core node load a snapshot of the UTXO set and begin sending and receiving coins right away, instead of replaying the entire chain from the genesis block before it can be used. The snapshot is identified by a hash that is compiled into the Bitcoin Core source, so the only trust is in the software the user is already running.
+AssumeUTXO lets a new Bitcoin Core node load a snapshot of the [UTXO](/topics/utxo) set and begin sending and receiving coins right away, instead of replaying the entire chain from the genesis block before it can be used. The snapshot is identified by a hash that is compiled into the Bitcoin Core source, so the only trust is in the software the user is already running.
 
 After loading the snapshot, the node is immediately usable. In the background, it keeps verifying the full chain from genesis forward. If that background validation ever disagrees with the snapshot hash, the node shuts down and refuses to continue, so a bad snapshot cannot silently corrupt a wallet.
 
-The feature cuts initial sync for a fresh node from days on a slow machine to minutes, without introducing a new trusted party. It landed in Bitcoin Core 27.0 and works alongside pruning.
+The feature cuts [Initial Block Download](/topics/initial-block-download) for a fresh node from days on a slow machine to minutes, without introducing a new trusted party. It landed in Bitcoin Core 27.0 and works alongside pruning.
 
 ## References
 
