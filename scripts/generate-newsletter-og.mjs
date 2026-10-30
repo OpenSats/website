@@ -208,6 +208,28 @@ function branchingRootsSvg() {
   `
 }
 
+// Alternate Q3 concept: three fruiting bodies sharing one mycelium network.
+function myceliumSvg() {
+  return `
+    <g transform="translate(740, 80)" fill="none" stroke="#f97316" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 137,139 C 143,94 166,72 190,72 C 217,72 242,102 246,139 C 211,151 173,151 137,139 Z" />
+      <path d="M 181,149 L 177,208 M 201,149 L 206,208" />
+      <path d="M 42,170 C 49,141 64,127 82,127 C 103,127 119,145 123,170 C 97,179 68,179 42,170 Z" />
+      <path d="M 75,178 L 73,208 M 90,178 L 94,208" />
+      <path d="M 265,157 C 272,122 289,105 309,105 C 333,105 351,130 355,157 C 327,167 293,167 265,157 Z" />
+      <path d="M 301,166 L 296,208 M 317,166 L 322,208" />
+      <path d="M 18,208 L 370,208" stroke-width="3" />
+      <path d="M 83,210 C 83,234 66,245 52,259 L 81,291 L 42,330 M 83,222 C 105,239 119,246 141,252 L 191,228 L 240,253 L 288,231 L 310,210" />
+      <path d="M 191,210 L 191,228 L 186,278 L 141,252 L 81,291 L 128,322 L 186,278 L 242,294 L 240,253 L 298,277 L 288,231" />
+      <path d="M 298,277 L 341,260 L 360,278 M 298,277 L 325,317 L 282,341 L 242,294 L 214,343 L 128,322 L 107,366" />
+      <path d="M 52,259 L 23,251 L 12,232 M 81,291 L 38,290 L 15,305 M 128,322 L 85,339 L 65,367" />
+      <path d="M 141,252 L 127,224 M 240,253 L 258,224 M 341,260 L 361,237" />
+      <path d="M 214,343 L 187,378 M 214,343 L 238,374 M 282,341 L 292,373 M 325,317 L 357,335 L 369,359" />
+      <path d="M 186,278 L 168,303 M 298,277 L 278,299 M 128,322 L 141,357 L 160,372" stroke-width="3" />
+    </g>
+  `
+}
+
 function issueArtwork(slug) {
   if (slug === '2026-Q1') return cypherpunkLaptopSvg()
   if (slug === '2026-Q2') return territoryMapSvg()
@@ -370,6 +392,9 @@ async function main() {
 
   for (const issue of newsletters) {
     await writeImage(`${issue.slug}.png`, renderIssueSvg(issue))
+    if (issue.slug === '2026-Q3') {
+      await writeImage('2026-Q3-mycelium.png', renderIssueSvg(issue).replace(branchingRootsSvg(), myceliumSvg()))
+    }
   }
 
   console.log(
