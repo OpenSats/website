@@ -177,7 +177,7 @@ function territoryMapSvg() {
 // Orange outline artwork matching Q2's topographic illustration.
 function branchingRootsSvg() {
   return `
-    <g transform="translate(740, 110)">
+    <g transform="translate(740, 80)">
       <g fill="none" stroke="#f97316" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
         <!-- A young tree above an extensive, branching root system. -->
         <g transform="translate(38, 41.6) scale(0.8)">
@@ -187,7 +187,7 @@ function branchingRootsSvg() {
         <path d="M 190,99 C 170,86 164,63 174,39 C 199,53 206,78 190,99" />
         </g>
         <path d="M 18,208 L 362,208" stroke-width="3" />
-        <g transform="translate(-38, -145.6) scale(1.2, 1.7)" stroke-width="4">
+        <g transform="translate(-38, -41.6) scale(1.2)" stroke-width="4">
         <path d="M 190,208 C 188,239 166,253 150,277 C 135,300 133,325 112,348" />
         <path d="M 190,208 C 194,240 217,252 231,277 C 245,303 251,328 276,349" />
         <path d="M 190,221 C 163,244 128,239 103,259 C 82,276 67,287 42,291" />
