@@ -58,6 +58,7 @@ const HEIGHT = 630
 
 let faviconDataUri = ''
 let territoryMapDataUri = ''
+let resilientShipDataUri = ''
 
 async function loadFavicon() {
   const svg = await fs.readFile(faviconSvgPath, 'utf8')
@@ -174,9 +175,14 @@ function territoryMapSvg() {
   `
 }
 
+function resilientShipSvg() {
+  return `<image href="${resilientShipDataUri}" x="680" y="65" width="480" height="500" preserveAspectRatio="xMidYMid meet" />`
+}
+
 function issueArtwork(slug) {
   if (slug === '2026-Q1') return cypherpunkLaptopSvg()
   if (slug === '2026-Q2') return territoryMapSvg()
+  if (slug === '2026-Q3') return resilientShipSvg()
   return loveLetterSvg()
 }
 
@@ -328,6 +334,8 @@ async function main() {
   await ensureOutputDir()
   await loadFavicon()
   await loadTerritoryMap()
+  const ship = await fs.readFile(path.join(root, 'public', 'static', 'images', 'newsletter', 'resilient-ship.png'))
+  resilientShipDataUri = `data:image/png;base64,${ship.toString('base64')}`
 
   const newsletters = await loadNewsletters()
 
