@@ -1,0 +1,399 @@
+---
+title: 'Sats Well Spent'
+issueNumber: 3
+date: '2026-10-30'
+quarter: '2026-Q3'
+headline: 'Anti-Fragile by Design'
+summary: "What doesn't kill us makes us stronger: providing support for the Red Team, strengthening open-source software, and building resilience in the agentic age."
+---
+
+<div className="editors-note">
+
+Growing up, I had weekly or bi-weekly room checks.
+
+Why?... I couldn’t tell you.
+
+Asking a ten year old boy to keep his room clean is a futile exercise. Usually, I’d get a few minutes’ notice before the inspection… so into the closet everything went. Layer upon layer of junk, compressing like sediment, each level carbon-dated to the room check conducted days prior.
+
+About once a month, the dreaded request would come: “Clean out your closet… we’re giving away anything you don’t need.” Every purge ended the same way: the wood-paneled Chrysler Town & Country minivan sagging under a hundred pounds of clothes, toys, and other unwanted stuff.
+
+I’ve been told there are five love languages, but I’d argue there are at least six… my mom’s was cubic feet. She loved us in bulk… that’s how I thought of it, anyway. We lived in a house filled and refilled with things nobody asked for.
+
+We weren’t ungrateful, but truthfully, all I needed at the time were my Pokémon cards, my Nintendo 64, and a few Lunchables.
+
+The surplus always ended up just down the street, at the local Goodwill. After the 20th or so sacrificial closet ritual, I finally inquired about Goodwill’s business model and learned we were “donating” things to people who needed them more. We were helping a charity!
+
+I was a skeptical ten year old… so questions were asked. “If we’re donating for free, why do they sell our stuff? Who is getting the money?”
+
+Eventually, I learned the Goodwill execs running the “charity” were making hundreds of thousands of dollars a year. At the time, my entire financial world was begging for quarters to buy watermelon Airheads at the local pool. So, learning that someone was middlemanning my donated clothes for \$500,000 a year felt like a betrayal. That's two million Airheads. Every year.
+
+That broke something in me.
+
+My vocabulary wasn’t vast at the time, but I had understood “charity” to mean giving to others, out of love, for nothing in return. This particular “charity” took my stuff, took my closet labor, sold both at a markup, and paid themselves first. That ruined the giving… for me at least.
+
+I went on strike after that.
+
+That childhood memory has stuck with me. The lessons I learned from that charity’s flaws became the principles OpenSats was built on.
+
+Most FOSS projects start as passion projects. Small, niche tools built for small, niche needs. Every once in a while one of these tools is so valuable that it outgrows its humble origins and evolves into load-bearing infrastructure for entire ecosystems.
+
+Downloads are free. Development and maintenance are not. More adoption leads to more feature requests, security fixes, and upkeep. In our increasingly AI-dominated landscape, issues and pull requests arrive automated and exponential. Demand from the code rises, but the supply of developers does not.
+
+**The tragedy in FOSS isn’t that the code disappears.**
+
+**It’s that the person maintaining it does.**
+
+Many developers eventually leave their projects… not for something they love more, but for something that pays the bills. The highest bidders for their time are usually the companies that benefit most from open source and contribute the least to its survival. The worst actors acquire the people most qualified to build tools that could make them obsolete. Brain drain away from the most accessible, beneficial, and desperately needed projects.
+
+That’s why OpenSats exists: to fight that brain drain and keep the best people building in the open.
+
+When we started, we looked at the traditional charity model… the one that takes a cut, pays itself first, and forwards only what is leftover to the cause. We built something that can’t work that way.
+
+OpenSats was built as a lean, 100% passthrough non-profit. [Operations are funded separately](/funds/ops), so we never take a percentage of the donations intended for developers. Most charities skim 15-30% of donations for operations. We take nothing. Every bit of every donation to our open-source funds goes to our grantees.
+
+We also wanted [no single points of failure](/blog/avoiding-single-points-of-failure) and no concentrated power. No benevolent dictator. Every important decision is made by a nine-person board of unpaid volunteers. We structured the whole organization so no individual has undue influence, and to prevent the kind of self-dealing that once broke my trust in my local Goodwill.
+
+I’m proud of what our grantees have built, everyone who has contributed, and the organization we’ve put together.
+
+<blockquote>
+  <p>The purpose of life is to discover your gift. The work of life is to develop it. The meaning of life is to give your gift away.</p>
+  <cite className="block not-italic">— David Viscott</cite>
+</blockquote>
+
+That’s what FOSS developers do every day.
+
+Our job is to make sure they can keep doing it.
+
+<p className="editors-note__signoff">— <a href="/about/abitcoinperson">Ben Price</a><br />Founder of OpenSats</p>
+
+</div>
+
+As our founder mentioned above, every bit of every donation to our open-source funds goes to our grantees. The goal is to support our grantees for the long term in a sustainable way, which is why recurring donations are vital to what we do. If you have a minute to [set up a recurring donation](/monthly), please consider doing so.
+
+<DonateRecurringButtonV2 />
+
+Visit our [funds page](/funds) to learn more about our various funds and their respective purposes. You can [donate](/donate) directly in bitcoin, by [wire transfer](/donate#wire-transfers), or through a [donor-advised fund (DAF)](/donate#donor-advised-funds).
+
+Thank you.
+
+---
+
+## Code Red: All Hands on Deck
+
+A smooth sea never made a skilled sailor, or so the saying goes. One of the criticisms leveled at bitcoin was that it is too boring. The institutions are here. Bitcoin is gradually being adopted as an asset. Ergo, nothing exciting is happening. Calm seas. Smooth sailing.
+
+The weather changed at the end of July, and the smooth sea turned into a maelstrom in the aftermath of vulnerabilities found by `kimi-k3` and friends. OpenSats was directly affected by the [exploits of these vulnerabilities](/blog/ongoing-exploits-of-bitcoin-open-source-software), and we've been working around the clock to make sure that neither donor nor grantee funds are at risk. As people started red teaming bitcoin software and racking up costs, the OpenSats board decided to launch a new fund and grant program as a response: the [Red Team fund](/funds/red) and [token reimbursement for red-teaming](/blog/code-red-supporting-first-responders), respectively. Our job is to send sats to where they're needed most, which is why we decided to [help those that are already helping](/blog/helping-the-helpers). We announced the [first round of grants](/blog/red-team-grants-first-set) shortly after, and have been evaluating security-related grant applications ever since.
+
+While it was devastating to watch wallets of fellow bitcoiners being drained, it was at the same time inspiring to see so many people come together to fight the various fires and do everything in their power to make sure that users' funds are safe. As our founder mentioned in his letter above, OpenSats is purpose-built to weather storms like these: no benevolent dictator, [no single point of failure](/blog/avoiding-single-points-of-failure).
+
+This resilient structure is what allowed us to continue, even in the midst of rough seas, to pay our grantees on time and in full. We rely on bitcoin infrastructure to send sats directly to the people we fund, which is what makes support at the scale we operate at possible in the first place. In the last couple of months [we gave grants to people](/tags/grants) in Bangladesh, Kenya, Cameroon, Liberia, Albania, Singapore, and Paraguay, just to name a few. Bitcoin truly is a global movement, as a glance at the map of OpenSats grantees shows.
+
+<GranteeMap />
+
+<StatsSentence className="mb-6 text-lg leading-relaxed text-gray-600 dark:text-gray-400" />
+
+## Sats Sent
+
+Even with all these exploits going on, it is worth pointing out that Bitcoin
+continues to function, unbothered. Every 10 minutes a new block is found. Every
+10 minutes transactions are settled. Efficient, permissionless, without relying
+on trusted third parties.
+
+In Q3 2026, OpenSats sent over 33 BTC, equivalent to over \$2.2 million,
+to support open-source work. The transaction fees for these payouts were
+`26,599` sats, or \$19.09. We paid the equivalent of
+**0.0008% in transaction fees**. The bitcoin network is what makes our work possible.
+
+In Q3, July was our strongest month in terms of payouts, with
+`1,273,064,984` sats sent, followed by August and September with
+`1,115,030,189` sats and `937,341,097` sats respectively.
+
+In total, we sent `3,325,436,270` sats during the quarter, equivalent to
+\$2,220,911.53. The [Red Team Fund](/funds/red) awarded \$209,500 in grants and
+paid out \$10,233 in Q3. Some grants awarded in Q3 are being paid out in Q4.
+
+Have a look at our [Q3 financial statements](/docs/financials/2026-Q3.pdf) for the
+fund breakdown, visit our [transparency page](/transparency) for more reports,
+or browse our [project pages](/projects) to see how many
+sats each listed project has received in total.
+
+---
+
+## Spotlight: Stories Worth Telling
+
+Two of this quarter's spotlights highlight work directly related to the red teaming efforts mentioned above. [Bruno Garcia](/blog/developer-spotlight-bruno-garcia) uses fuzzing and AI tools to find vulnerabilities, while [Daniela Brozzoni](/blog/developer-spotlight-daniela-brozzoni-bitcoin-core) helps get vulnerability reports to the teams that can address them. Their stories show the work it takes to turn discovered weaknesses into a more resilient ecosystem.
+
+<div className="my-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+
+<a href="/blog/developer-spotlight-bruno-garcia" className="block w-full sm:w-56 flex-shrink-0">
+  <Image
+    src="/static/images/spotlight/bruno-garcia/featured.png"
+    alt="Bruno Garcia Is Making Bitcoin More Resilient Through Testing and Education"
+    width={1200}
+    height={675}
+    className="w-full h-auto rounded-lg"
+  />
+</a>
+
+<div>
+
+> What makes Bitcoin really interesting is that it does not rely only on technical mechanisms to make the system work. It also relies on incentives.
+
+[Bruno Garcia Is Making Bitcoin More Resilient Through Testing and Education](/blog/developer-spotlight-bruno-garcia)
+
+</div>
+
+</div>
+
+<div className="my-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+
+<a href="/blog/developer-spotlight-daniela-brozzoni-bitcoin-core" className="block w-full sm:w-56 flex-shrink-0">
+  <Image
+    src="/static/images/spotlight/daniela-brozzoni/featured.jpg"
+    alt="Daniela Brozzoni Turned Down a Google Internship to Work on Bitcoin"
+    width={1200}
+    height={675}
+    className="w-full h-auto rounded-lg"
+  />
+</a>
+
+<div>
+
+> So my interest in open source grew pretty naturally out of my interest in privacy
+
+[Daniela Brozzoni Turned Down a Google Internship to Work on Bitcoin](/blog/developer-spotlight-daniela-brozzoni-bitcoin-core)
+
+</div>
+
+</div>
+
+Our other two spotlights explore access to data and the tools developers use to collaborate. nym21 makes Bitcoin analytics freely available, while Dan Conway is building a way to collaborate on code over nostr without relying on centralizing platforms.
+
+<div className="my-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+
+<a href="/blog/developer-spotlight-nym21-bitcoin-research-kit" className="block w-full sm:w-56 flex-shrink-0">
+  <Image
+    src="/static/images/spotlight/nym21/featured.jpg"
+    alt="Nym21 Made Bitcoin's On-Chain Metrics Free, and the Pros Who Sell Them Came Running"
+    width={1200}
+    height={675}
+    className="w-full h-auto rounded-lg"
+  />
+</a>
+
+<div>
+
+> Partly out of spite, I made it my quest to offer as much on-chain data as I could to as many people as possible, for free, forever.
+
+[Nym21 Made Bitcoin's On-Chain Metrics Free, and the Pros Who Sell Them Came Running](/blog/developer-spotlight-nym21-bitcoin-research-kit)
+
+nym21 built free Bitcoin analytics out of spite, and made them so good that the professionals who charge for the same data quietly started using his.
+
+</div>
+
+</div>
+
+<div className="my-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+
+<a href="/blog/developer-spotlight-dan-conway-ngit" className="block w-full sm:w-56 flex-shrink-0">
+  <Image
+    src="/static/images/spotlight/dan-conway/featured.png"
+    alt="Good Luck Banning a Key Pair"
+    width={1200}
+    height={675}
+    className="w-full h-auto rounded-lg"
+  />
+</a>
+
+<div>
+
+> Room for innovation is squeezed out by walled gardens, strategic locks and limited APIs.
+
+[Good Luck Banning a Key Pair](/blog/developer-spotlight-dan-conway-ngit)
+
+We can bring back [git](/topics/git)'s decentralised roots with nostr.
+
+</div>
+
+</div>
+
+Read the full series on [our blog](/spotlight).
+
+---
+
+## Heartbeat: Proof of Work
+
+When we [announced OpenSats heartbeat](https://njump.to/note1uu9k3pmkvdjvypc4svzpgxd6p9f8vk7mp4ysle5ylysxltsjlv0s4qvk55) 6 months ago, it was mostly focused on GitHub activity. Thanks to Dan Conway's work featured above, this is not the case anymore. Heartbeat now supports [ngit/GRASP](projects/ngit) natively, in addition to other nostr activity. In addition to that, we launched the [PoW feature](https://heartbeat.opensats.org/pow), which summarizes a developer's activity across time.
+
+<a href="https://heartbeat.opensats.org/pow/danconwaydev.com?gh=danconwaydev" target="_blank" rel="noopener noreferrer">
+  <Image
+    src="https://heartbeat.opensats.org/api/pow/og?gh=danconwaydev&p=danconwaydev.com"
+    alt="Dan Conway's public activity over the last 365 days across GitHub, nostr, and ngit, from OpenSats Heartbeat POW"
+    width={1200}
+    height={630}
+    unoptimized
+    className="w-full h-auto"
+  />
+</a>
+
+As nostr-native git systems mature, we are seeing an increasing number of developers opting into this particular GitHub alternative. It is worth pointing out that ngit/GRASP isn't another platform, but a protocol-based alternative. In other words: an alternative that doesn't have a single point of failure.
+
+<a href="https://heartbeat.opensats.org/pow/fiatjaf?p=fiatjaf.com" target="_blank" rel="noopener noreferrer">
+  <Image
+    src="https://heartbeat.opensats.org/api/pow/og?gh=fiatjaf&p=fiatjaf.com"
+    alt="fiatjaf's public activity over the last 365 days across GitHub, nostr, and ngit, from OpenSats Heartbeat POW"
+    width={1200}
+    height={630}
+    unoptimized
+    className="w-full h-auto"
+  />
+</a>
+
+---
+
+## Software Shipped
+
+This quarter, our grantees shipped new tools and worked to make existing ones
+more resilient. Alongside wallet features and communication tools came security
+updates, recovery fixes, and tests designed to catch failures before users (or attackers) do.
+
+Some highlights:
+
+- **[BTCPay Server](/projects/btcpayserver):** Following August's
+  [security incident](https://blog.btcpayserver.org/security-advisory-btcpay-server-2-4-2/),
+  the team focused on protecting users and hardening the software.
+  [Version 2.4.4](https://blog.btcpayserver.org/btcpay-server-2-4-4/)
+  strengthened permissions around invoices, API keys, and administration.
+  The standard Docker deployment also restricted the application's access to
+  its host, reducing what a compromised instance could reach.
+- **[Cove](/projects/cove):**
+  [Version 1.3.0](https://github.com/bitcoinppl/cove/releases/tag/v1.3.0)
+  brought encrypted cloud backups using passkeys to the bitcoin wallet,
+  with backup, restore, and onboarding work across iOS and Android.
+  It also introduced progressive wallet scanning, helping users access their
+  wallets while discovery continues.
+- **[Amber](/projects/amber):** The nostr signer shipped
+  [v6.5.0](https://github.com/greenart7c3/Amber/releases/tag/v6.5.0)
+  with fixes for authorization and replay protection, encryption of connection
+  secrets at rest, and removal of key material from logs and crash reports.
+  These changes strengthen the boundary between the apps requesting signatures
+  and the keys Amber holds for its users.
+
+Releases are only part of the work. Our grantees also improve the libraries,
+node software, and testing infrastructure that other projects rely on:
+
+- **[Bitcoinfuzz](/projects/bitcoinfuzz)** expanded its differential testing to
+  [complete MuSig2 signing sessions](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/585)
+  and [block validation across Bitcoin Kernel bindings](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/602).
+  Comparing independent implementations helps uncover disagreements that tests
+  of a single implementation can miss.
+- **[Utreexod](/projects/utreexod)** gained a
+  [separate proof store](https://github.com/utreexo/utreexod/pull/424)
+  and the ability to
+  [serve proofs while still syncing](https://github.com/utreexo/utreexod/pull/431).
+  A peer can now obtain a proof the node already holds without waiting for that
+  node to finish syncing, improving how nodes share the data needed to validate
+  blocks.
+- **Nutshell**, a [Cashu](/projects/cashu) mint implementation, added
+  [scheduled mutation testing](https://github.com/cashubtc/nutshell/pull/1094)
+  across its core, mint, wallet, Lightning, and Tor code. This deliberately
+  changes the code to check whether the tests catch the resulting defects,
+  exposing gaps that passing tests alone do not reveal.
+- **Cashu wallet recovery:** CDK
+  [removed network calls from wallet repository startup](https://github.com/cashubtc/cdk/pull/2224),
+  allowing wallets to initialize from saved mint information. The native Cashu
+  wallet also [improved partial iCloud restores](https://github.com/cashubtc/wallet/pull/368):
+  users can open a recovered wallet even if one mint is unavailable, while
+  unresolved mint information is preserved for later recovery.
+
+The same attention to reliability extends to nostr infrastructure.
+[Citrine](/projects/citrine), a local relay for Android, shipped
+[v3.2.0](https://github.com/greenart7c3/Citrine/releases/tag/v3.2.0)
+with streamed query results and bounded relay-aggregator memory, addressing
+out-of-memory crashes that could otherwise interrupt access to stored events.
+
+Have a look at the [OpenSats heartbeat](/heartbeat) to follow releases,
+commits, and pull requests across the projects we support.
+
+<ViewHeartbeatButton />
+
+---
+
+## Highlights from Our LTS Grantees
+
+Our [long-term support program](/tags/lts) supports people whose contributions can
+span multiple projects over several years. Their Q3 work shows how resilience takes many forms:
+communication tools, infrastructure that stays online under pressure, independent
+network monitoring, and the patient work of finding and fixing bugs.
+
+- **[Calle](/blog/cashu-calle-receives-lts-grant): communication on phones and watches.**
+  Alongside his Cashu work, Calle contributed to Bitchat for Android. The
+  [2.0.1 release](https://github.com/permissionlesstech/bitchat-android/releases/tag/v2.0.1)
+  brought a standalone Wear OS client, live push-to-talk, and improvements to
+  message delivery. It was also Bitchat Android's first reproducible full-app
+  release, with independent builds producing matching unsigned binaries.
+  The momentum continued into October: Bitchat reached [#1 among social apps in the French App Store](https://njump.to/nevent1qqsz508ehkxydm6pathrhd750z7j2ujqasyurrpjugxge00cterzjksqquxz8)
+  on October 22, followed by [#1 among all free apps](https://njump.to/nevent1qqsgctxf3rn4et6zflwea0ufgypl4k74tsgpw2twukf55zsgsj0nx6ga0tkqg)
+  on October 24.
+- **[Jason Donenfeld](/blog/jason-donenfeld-lts-grant): keeping source code accessible.**
+  Beyond WireGuard, Jason maintains [cgit](https://git.zx2c4.com/cgit/about/), the web interface used to browse code
+  on sites including git.kernel.org. As AI crawlers put heavy pressure on this
+  infrastructure, he worked to reduce the cost of serving it. A September
+  [change to syntax highlighting](https://git.zx2c4.com/cgit/commit/?h=jd/zx2c4-deployment&id=d4940d531ba0bdffbfb95e5c0d299956bd3e4e6c)
+  moved that work into the browser, reducing the load on the server.
+- **[b10c](/blog/0xB10C-receives-lts-grant): watching the network under stress.**
+  During August's BIP-110 fork, b10c connected more than 50 nodes to
+  [fork-observer and livestreamed what happened](https://b10c.me/projects/028-bip110-monitoring-livestream/),
+  including which chain tips mining pools were building on. He then improved
+  the tool's handling of traffic spikes. Independent monitoring gives people
+  a way to see network behavior for themselves.
+- **[Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors): strengthening the tools behind Bitcoin Core.**
+  Marco continued reviewing code and maintaining nightly testing, fuzzing, and
+  coverage infrastructure. AI also helped investigate obscure failures:
+  September brought a [workaround for a macOS linker bug](https://github.com/bitcoin/bitcoin/pull/36285),
+  while testing uncovered an [unsafe memory race during test shutdown](https://github.com/bitcoin/bitcoin/pull/36148)
+  that was fixed earlier that month. Resilience also depends on the reliability
+  of the tools used to build and test the software.
+
+---
+
+## Built for the Long Term
+
+Operationally speaking, 2026-Q3 was one of the roughest quarters for OpenSats. Navigating a sea of vulnerabilities while running an organization that is built upon open-source software and infrastructure—infrastructure that is being attacked without pause—has been challenging.
+
+We want OpenSats to be as resilient as possible, which is why we rely on a wide array of people to make decisions, be it about funding or organizational changes.
+
+<Image
+  src="/static/images/transparency/funding-decisions.jpg"
+  darkSrc="/static/images/transparency/funding-decisions.png"
+  alt="Funding Decisions"
+  width={1920}
+  height={1080}
+  unoptimized
+  className="w-full h-auto"
+/>
+
+Speaking of changes: we believe that our grant programs must adapt to the new reality being shaped by agentic systems. Coding agents can be an accelerant if they are wielded with expertise and care. High-agency people can now do more, build more, and move the needle more than ever. We want to support those people as best as we can, and we want to make sure that highly motivated people have the means to work on freedom tech long-term. We'll share more thoughts on this topic in an upcoming blog post soon.
+
+The [mission of OpenSats](/mission) remains the same: support and maintain a sustainable ecosystem of funding for free and open-source projects and contributors, especially bitcoin-related projects and projects that help bitcoin flourish. Sustainability implies resilience; anything that isn't resilient to change (or attack, for that matter) won't be around for the long term. To make sure that we will be, one of our main focus points for the next quarter will be working towards becoming more resilient across the board: more recurring funding, more experts joining our evaluation committees, less reliance on third-party systems, as well as more redundancy and fault tolerance.
+
+We appreciate that you're on this journey with us and hope that we'll be able to support the Bitcoin ecosystem for many years to come.
+
+<DonateRecurringButtonV2 />
+
+---
+
+## Looking Ahead
+
+Since Q3 ended, we've announced new grants and recurring support for the work ahead:
+
+- [Supporting the Foundations of Bitcoin Development](/blog/supporting-the-foundations-of-bitcoin-development): Four new grants and one renewal support Bitcoin Core development, testing, and review.
+- [Finding Vulnerabilities, Funding Defenders](/blog/red-team-grants-first-set): Our first Red Team grants help five researchers cover AI token costs for Bitcoin security work.
+- [Long-Term Support for l0rinc](/blog/l0rinc-receives-lts): Sustained support for his work on Bitcoin Core performance, maintenance, and review.
+- [Recurring Donation from Strive](/blog/opensats-receives-recurring-donation-from-strive): We received the first donation under Strive's monthly commitment to the Red Team Fund.
+
+---
+
+This is the third issue of Sats Well Spent. You can read our previous issues for [2026-Q1](/newsletter/2026-Q1) and [2026-Q2](/newsletter/2026-Q2). If you'd like the next issue delivered to your inbox, subscribe below.
+
+<NewsletterSignup />
