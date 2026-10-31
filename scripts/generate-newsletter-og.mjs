@@ -174,41 +174,7 @@ function territoryMapSvg() {
   `
 }
 
-// Orange outline artwork matching Q2's topographic illustration.
-function branchingRootsSvg() {
-  return `
-    <g transform="translate(740, 80)">
-      <g fill="none" stroke="#f97316" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-        <!-- A young tree above an extensive, branching root system. -->
-        <g transform="translate(38, 41.6) scale(0.8)">
-        <path d="M 190,208 L 190,80" />
-        <path d="M 190,163 C 161,160 136,143 124,113 C 159,108 184,127 190,163" />
-        <path d="M 190,131 C 218,129 242,111 254,81 C 220,78 195,96 190,131" />
-        <path d="M 190,99 C 170,86 164,63 174,39 C 199,53 206,78 190,99" />
-        </g>
-        <path d="M 18,208 L 362,208" stroke-width="3" />
-        <g transform="translate(-38, -41.6) scale(1.2)" stroke-width="4">
-        <path d="M 190,208 C 188,239 166,253 150,277 C 135,300 133,325 112,348" />
-        <path d="M 190,208 C 194,240 217,252 231,277 C 245,303 251,328 276,349" />
-        <path d="M 190,221 C 163,244 128,239 103,259 C 82,276 67,287 42,291" />
-        <path d="M 190,225 C 219,245 255,240 282,259 C 302,273 318,285 341,289" />
-        <path d="M 155,269 C 124,271 102,293 85,319" />
-        <path d="M 130,244 L 112,226" />
-        <path d="M 105,259 L 82,252 L 64,233" />
-        <path d="M 137,315 L 159,334 L 165,356" />
-        <path d="M 190,245 L 190,297 L 178,322" />
-        <path d="M 190,282 L 207,306 L 209,335" />
-        <path d="M 227,269 C 260,271 280,292 296,319" />
-        <path d="M 253,244 L 270,226" />
-        <path d="M 282,259 L 306,249 L 321,231" />
-        <path d="M 251,317 L 234,338 L 231,357" />
-        </g>
-      </g>
-    </g>
-  `
-}
-
-// Alternate Q3 concept: three fruiting bodies sharing one mycelium network.
+// Three mushrooms sharing one mycelium network, in the newsletter outline style.
 function myceliumSvg() {
   return `
     <g transform="translate(740, 80)" fill="none" stroke="#f97316" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
@@ -257,7 +223,7 @@ function myceliumSvg() {
 function issueArtwork(slug) {
   if (slug === '2026-Q1') return cypherpunkLaptopSvg()
   if (slug === '2026-Q2') return territoryMapSvg()
-  if (slug === '2026-Q3') return branchingRootsSvg()
+  if (slug === '2026-Q3') return myceliumSvg()
   return loveLetterSvg()
 }
 
@@ -416,9 +382,6 @@ async function main() {
 
   for (const issue of newsletters) {
     await writeImage(`${issue.slug}.png`, renderIssueSvg(issue))
-    if (issue.slug === '2026-Q3') {
-      await writeImage('2026-Q3-mycelium.png', renderIssueSvg(issue).replace(branchingRootsSvg(), myceliumSvg()))
-    }
   }
 
   console.log(
