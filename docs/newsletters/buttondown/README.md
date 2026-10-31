@@ -2,6 +2,11 @@
 
 These Markdown/HTML files are the email editions of the newsletters in `data/newsletter/`. Paste the contents of an edition into Buttondown’s Markdown editor, then check the rendered email and send a test draft before sending to subscribers.
 
+## Previous editions
+
+- [2026-Q1 — Cypherpunks Write Code](2026-Q1.md): reconstructed from the published website using the email format. The original lifetime totals are unavailable because they were loaded dynamically from Google Sheets. That sentence is omitted and flagged in an HTML comment pending the original Buttondown export. The map is preserved from the Q1 publication commit, not regenerated with today's countries.
+- [2026-Q2 — Territory of Freedom](2026-Q2.md): converted from the published website in the supplied Q2 Buttondown format, retaining the supplied historical lifetime totals ($35,305,610 allocated, approximately 41.9 billion sats, 415 grantees, and 40+ countries). This is a normalized edition, not a byte-for-byte copy of the Buttondown export.
+
 ## 2026-Q3
 
 - Subject/headline: **Anti-Fragile by Design**
