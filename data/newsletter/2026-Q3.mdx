@@ -261,64 +261,44 @@ As nostr-native git systems mature, we are seeing an increasing number of develo
 
 ## Software Shipped
 
-This quarter, our grantees shipped new tools and worked to make existing ones
-more resilient. Alongside wallet features and communication tools came security
-updates, recovery fixes, and tests designed to catch failures before users (or attackers) do.
-
-Some highlights:
+This quarter brought security updates, wallet recovery improvements, and tests
+to catch failures before users or attackers do. Some highlights:
 
 - **[BTCPay Server](/projects/btcpayserver):** Following August's
   [security incident](https://blog.btcpayserver.org/security-advisory-btcpay-server-2-4-2/),
-  the team focused on protecting users and hardening the software.
   [Version 2.4.4](https://blog.btcpayserver.org/btcpay-server-2-4-4/)
   strengthened permissions around invoices, API keys, and administration.
-  The standard Docker deployment also restricted the application's access to
-  its host, reducing what a compromised instance could reach.
+  Docker deployments also restricted the application's access to its host.
 - **[Cove](/projects/cove):**
   [Version 1.3.0](https://github.com/bitcoinppl/cove/releases/tag/v1.3.0)
-  brought encrypted cloud backups using passkeys to the bitcoin wallet,
-  with backup, restore, and onboarding work across iOS and Android.
-  It also introduced progressive wallet scanning, helping users access their
-  wallets while discovery continues.
+  added encrypted cloud backups using passkeys and progressive scanning,
+  letting users access their wallets while discovery continues.
 - **[Amber](/projects/amber):** The nostr signer shipped
   [v6.5.0](https://github.com/greenart7c3/Amber/releases/tag/v6.5.0)
   with fixes for authorization and replay protection, encryption of connection
   secrets at rest, and removal of key material from logs and crash reports.
-  These changes strengthen the boundary between the apps requesting signatures
-  and the keys Amber holds for its users.
 
-Releases are only part of the work. Our grantees also improve the libraries,
-node software, and testing infrastructure that other projects rely on:
+Work on libraries, node software, and testing continued too:
 
 - **[Bitcoinfuzz](/projects/bitcoinfuzz)** expanded its differential testing to
   [complete MuSig2 signing sessions](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/585)
   and [block validation across Bitcoin Kernel bindings](https://github.com/bitcoinfuzz/bitcoinfuzz/pull/602).
-  Comparing independent implementations helps uncover disagreements that tests
-  of a single implementation can miss.
 - **[Utreexod](/projects/utreexod)** gained a
   [separate proof store](https://github.com/utreexo/utreexod/pull/424)
   and the ability to
   [serve proofs while still syncing](https://github.com/utreexo/utreexod/pull/431).
-  A peer can now obtain a proof the node already holds without waiting for that
-  node to finish syncing, improving how nodes share the data needed to validate
-  blocks.
 - **Nutshell**, a [Cashu](/projects/cashu) mint implementation, added
   [scheduled mutation testing](https://github.com/cashubtc/nutshell/pull/1094)
-  across its core, mint, wallet, Lightning, and Tor code. This deliberately
-  changes the code to check whether the tests catch the resulting defects,
-  exposing gaps that passing tests alone do not reveal.
+  to check whether its tests catch deliberately introduced defects.
 - **Cashu wallet recovery:** CDK
   [removed network calls from wallet repository startup](https://github.com/cashubtc/cdk/pull/2224),
   allowing wallets to initialize from saved mint information. The native Cashu
   wallet also [improved partial iCloud restores](https://github.com/cashubtc/wallet/pull/368):
-  users can open a recovered wallet even if one mint is unavailable, while
-  unresolved mint information is preserved for later recovery.
+  users can open a recovered wallet even if one mint is unavailable.
 
-The same attention to reliability extends to nostr infrastructure.
 [Citrine](/projects/citrine), a local relay for Android, shipped
 [v3.2.0](https://github.com/greenart7c3/Citrine/releases/tag/v3.2.0)
-with streamed query results and bounded relay-aggregator memory, addressing
-out-of-memory crashes that could otherwise interrupt access to stored events.
+with streamed query results and memory limits to address out-of-memory crashes.
 
 Have a look at the [OpenSats heartbeat](/heartbeat) to follow releases,
 commits, and pull requests across the projects we support.
@@ -329,39 +309,30 @@ commits, and pull requests across the projects we support.
 
 ## Highlights from Our LTS Grantees
 
-Our [long-term support program](/tags/lts) supports people whose contributions can
-span multiple projects over several years. Their Q3 work shows how resilience takes many forms:
-communication tools, infrastructure that stays online under pressure, independent
-network monitoring, and the patient work of finding and fixing bugs.
+Our [long-term support grantees](/tags/lts) contribute across projects.
+Here are a few highlights from their Q3 work, plus an October milestone:
 
-- **[Calle](/blog/cashu-calle-receives-lts-grant): communication on phones and watches.**
+- **[Calle](/blog/cashu-calle-receives-lts-grant):**
   Alongside his Cashu work, Calle contributed to Bitchat for Android. The
   [2.0.1 release](https://github.com/permissionlesstech/bitchat-android/releases/tag/v2.0.1)
-  brought a standalone Wear OS client, live push-to-talk, and improvements to
-  message delivery. It was also Bitchat Android's first reproducible full-app
-  release, with independent builds producing matching unsigned binaries.
-  The momentum continued into October: Bitchat reached [#1 among social apps in the French App Store](https://njump.to/nevent1qqsz508ehkxydm6pathrhd750z7j2ujqasyurrpjugxge00cterzjksqquxz8)
+  added a standalone Wear OS client and live push-to-talk, and was its first
+  reproducible full-app release. In October, Bitchat reached [#1 among social apps in the French App Store](https://njump.to/nevent1qqsz508ehkxydm6pathrhd750z7j2ujqasyurrpjugxge00cterzjksqquxz8)
   on October 22, followed by [#1 among all free apps](https://njump.to/nevent1qqsgctxf3rn4et6zflwea0ufgypl4k74tsgpw2twukf55zsgsj0nx6ga0tkqg)
   on October 24.
-- **[Jason Donenfeld](/blog/jason-donenfeld-lts-grant): keeping source code accessible.**
-  Beyond WireGuard, Jason maintains [cgit](https://git.zx2c4.com/cgit/about/), the web interface used to browse code
-  on sites including git.kernel.org. As AI crawlers put heavy pressure on this
-  infrastructure, he worked to reduce the cost of serving it. A September
+- **[Jason Donenfeld](/blog/jason-donenfeld-lts-grant):**
+  In [cgit](https://git.zx2c4.com/cgit/about/), the code browser used by
+  git.kernel.org, a September
   [change to syntax highlighting](https://git.zx2c4.com/cgit/commit/?h=jd/zx2c4-deployment&id=d4940d531ba0bdffbfb95e5c0d299956bd3e4e6c)
-  moved that work into the browser, reducing the load on the server.
-- **[b10c](/blog/0xB10C-receives-lts-grant): watching the network under stress.**
+  moved that work into the browser, reducing server load amid heavy AI crawler traffic.
+- **[b10c](/blog/0xB10C-receives-lts-grant):**
   During August's BIP-110 fork, b10c connected more than 50 nodes to
   [fork-observer and livestreamed what happened](https://b10c.me/projects/028-bip110-monitoring-livestream/),
-  including which chain tips mining pools were building on. He then improved
-  the tool's handling of traffic spikes. Independent monitoring gives people
-  a way to see network behavior for themselves.
-- **[Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors): strengthening the tools behind Bitcoin Core.**
-  Marco continued reviewing code and maintaining nightly testing, fuzzing, and
-  coverage infrastructure. AI also helped investigate obscure failures:
-  September brought a [workaround for a macOS linker bug](https://github.com/bitcoin/bitcoin/pull/36285),
+  showing which chain tips mining pools were building on. He also improved
+  the tool's handling of traffic spikes.
+- **[Marco Falke](/blog/announcing-lts-grant-program-to-support-bitcoin-core-contributors):**
+  Alongside Bitcoin Core review and testing work, September brought a [workaround for a macOS linker bug](https://github.com/bitcoin/bitcoin/pull/36285),
   while testing uncovered an [unsafe memory race during test shutdown](https://github.com/bitcoin/bitcoin/pull/36148)
-  that was fixed earlier that month. Resilience also depends on the reliability
-  of the tools used to build and test the software.
+  that was fixed earlier that month.
 
 ---
 
