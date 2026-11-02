@@ -43,7 +43,9 @@ export default function NewsletterSignup({
     }
     setError(false)
     setSubscribed(true)
-    setMessage('Successfully subscribed!')
+    setMessage(
+      'Check your inbox! Click the confirmation link to finish subscribing.'
+    )
   }
 
   return (
@@ -62,7 +64,7 @@ export default function NewsletterSignup({
             autoComplete="email"
             required
             disabled={subscribed}
-            placeholder={subscribed ? "You're subscribed!" : 'Your email'}
+            placeholder={subscribed ? 'Check your inbox!' : 'Your email'}
             className="flex-1 rounded-md border-0 bg-white px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500 sm:rounded-r-none"
           />
           <button
