@@ -6,9 +6,10 @@ This is the codebase behind [OpenSats.org](https://opensats.org).
 
 This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://github.com/timlrx/tailwind-nextjs-starter-blog).
 
+Use Node.js 22.x, as specified in `package.json` and used by CI and Vercel.
 To run a development environment locally, run:
 
-- `npm install` to install dependencies
+- `npm ci` to install the locked dependencies
 - `npm run dev` to run the local development version
 
 Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
