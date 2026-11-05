@@ -54,8 +54,9 @@ export default function ProjectPage({
     <>
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
+        code={project.body.code}
         content={project}
-        MDXComponents={MDXComponents}
+        components={MDXComponents}
       />
       <div className="mb-8 items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
         <div></div>

@@ -2,7 +2,7 @@ import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import PageTitle from '@/components/PageTitle'
 import { MDXComponents } from '@/components/MDXComponents'
 import { sortedBlogPost, coreContent } from 'pliny/utils/contentlayer'
-import { kebabCase } from 'pliny/utils/kebabCase'
+import { slug as kebabCase } from 'github-slugger'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
@@ -65,8 +65,9 @@ export default function BlogPostPage({
       ) : (
         <MDXLayoutRenderer
           layout={getBlogLayout(post)}
+          code={post.body.code}
           content={post}
-          MDXComponents={MDXComponents}
+          components={MDXComponents}
           toc={post.toc}
           authorDetails={authorDetails}
           prev={prev}

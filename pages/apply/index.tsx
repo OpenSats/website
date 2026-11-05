@@ -23,8 +23,9 @@ export default function Apply({
     <>
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
+        code={apply.body.code}
         content={apply}
-        MDXComponents={MDXComponents}
+        components={MDXComponents}
       />
       <PageSection title="Our Programs" image="/static/images/avatar.png">
         <p>

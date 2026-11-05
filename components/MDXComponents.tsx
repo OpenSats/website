@@ -1,9 +1,11 @@
 /* eslint-disable react/display-name */
 import React from 'react'
-import { MDXLayout, ComponentMap } from 'pliny/mdx-components'
-import { TOCInline } from 'pliny/ui/TOCInline'
-import { Pre } from 'pliny/ui/Pre'
-import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
+import type { MDXComponents as ComponentMap } from 'mdx/types'
+import type { ReactNode } from 'react'
+import { coreContent } from 'pliny/utils/contentlayer'
+import TOCInline from 'pliny/ui/TOCInline'
+import Pre from 'pliny/ui/Pre'
+import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
 
 import Image from './Image'
 import BrowserFrame from './BrowserFrame'
@@ -29,9 +31,15 @@ import NewsletterSignup from './NewsletterSignup'
 import ViewHeartbeatButton from './ViewHeartbeatButton'
 import MediaKit, { MediaKitColors, MediaKitDownloadLink } from './MediaKit'
 
+type MDXLayout = {
+  layout: string
+  content: Parameters<typeof coreContent>[0]
+  children?: ReactNode
+}
+
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
   const Layout = require(`../layouts/${layout}`).default
-  return <Layout content={content} {...rest} />
+  return <Layout content={coreContent(content)} {...rest} />
 }
 
 export const MDXComponents: ComponentMap = {

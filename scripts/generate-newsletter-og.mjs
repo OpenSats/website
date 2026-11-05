@@ -305,7 +305,11 @@ function renderIssueSvg(issue) {
   return `
     <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${baseDefs()}
-      ${issue.slug === '2026-Q3' ? '<rect width="1200" height="630" fill="url(#bg)" />' : backgroundDecor()}
+      ${
+        issue.slug === '2026-Q3'
+          ? '<rect width="1200" height="630" fill="url(#bg)" />'
+          : backgroundDecor()
+      }
 
       ${logoMark({ x: 84, y: logoY, size: logoSize })}
 

@@ -38,8 +38,9 @@ export default function Transparency({
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}
+      code={page.body.code}
       content={page}
-      MDXComponents={components}
+      components={components}
     />
   )
 }
