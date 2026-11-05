@@ -1,4 +1,4 @@
-import { generateRSS } from 'pliny/utils/generate-rss.js'
+import { generateRSS } from './lib/generate-rss.mjs'
 import siteMetadata from '../data/siteMetadata.js'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -15,7 +15,7 @@ const rss = async () => {
   )
   const allBlogs = JSON.parse(readFileSync(blogDataPath, 'utf8'))
 
-  generateRSS(siteMetadata, allBlogs)
+  await generateRSS(siteMetadata, allBlogs)
   console.log('RSS feed generated...')
 }
 

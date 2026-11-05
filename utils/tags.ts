@@ -1,4 +1,4 @@
-import { slug } from 'github-slugger'
+import GithubSlugger from 'github-slugger'
 import type { Blog } from 'contentlayer/generated'
 
 export function getAllTags(posts: Pick<Blog, 'tags' | 'draft'>[]) {
@@ -6,7 +6,7 @@ export function getAllTags(posts: Pick<Blog, 'tags' | 'draft'>[]) {
   for (const post of posts) {
     if (post.draft === true) continue
     for (const tag of post.tags || []) {
-      const key = slug(tag)
+      const key = GithubSlugger.slug(tag)
       counts[key] = (counts[key] || 0) + 1
     }
   }
