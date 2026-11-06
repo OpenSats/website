@@ -289,7 +289,7 @@ export default function Home({
           <NewsletterSignup />
         </div>
       )}
-      <div className="flex flex-wrap justify-end gap-x-6 gap-y-2 pb-8 text-base font-medium leading-6">
+      <div className="flex flex-wrap justify-end gap-x-6 gap-y-2 pb-8 pt-4 text-base font-medium leading-6">
         {posts.length > MAX_DISPLAY && (
           <Link
             href="/blog"
