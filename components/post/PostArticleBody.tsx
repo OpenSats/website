@@ -195,18 +195,21 @@ export default function PostArticleBody({
         }
       >
         {spotlight && (
-          <Link
-            href="https://brainmade.org/"
-            className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
-            aria-label="Brainmade: human-created writing"
-          >
-            <Image
-              src="/static/images/badges/brainmade.svg"
-              alt="Brainmade"
-              width={87}
-              height={20}
-            />
-          </Link>
+          <>
+            <Link
+              href="https://brainmade.org/"
+              className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+              aria-label="Brainmade: human-created writing"
+            >
+              <Image
+                src="/static/images/badges/brainmade.svg"
+                alt="Brainmade"
+                width={87}
+                height={20}
+              />
+            </Link>
+            <span aria-hidden="true">•</span>
+          </>
         )}
         <Link href={discussUrl()} rel="nofollow">
           Discuss on nostr
