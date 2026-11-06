@@ -8,6 +8,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
+import BrainmadeBadge from '@/components/post/BrainmadeBadge'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
 // Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
@@ -198,19 +199,7 @@ export default function PostArticleBody({
       >
         {spotlight && (
           <>
-            <Link
-              href="https://brainmade.org/"
-              className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
-              aria-label="Brainmade: human-created writing"
-            >
-              <Image
-                src="/static/images/badges/brainmade-light.svg"
-                darkSrc="/static/images/badges/brainmade.svg"
-                alt="Brainmade"
-                width={87}
-                height={20}
-              />
-            </Link>
+            <BrainmadeBadge />
             <span aria-hidden="true">•</span>
           </>
         )}
