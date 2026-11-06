@@ -29,10 +29,10 @@ const PORTRAITS = [
     height: 821,
   },
   {
-    file: 'egge/featured.jpg',
-    crop: '610 110 590 411',
-    width: 1200,
-    height: 675,
+    file: 'egge/hero.jpg',
+    crop: '1200 120 440 307',
+    width: 1916,
+    height: 821,
   },
 ]
 
@@ -100,7 +100,7 @@ export async function renderSpotlightSvg() {
     <image href="${wordmark}" x="64" y="44" width="220" height="32" />
     <text x="60" y="168" font-family="${INTER_FONT_FAMILY}" font-size="76" font-weight="800" letter-spacing="-2" fill="${
     COLORS.title
-  }">Spotlights</text>
+  }">Developer Spotlights</text>
     <text x="64" y="218" font-family="${INTER_FONT_FAMILY}" font-size="26" fill="${
     COLORS.summary
   }">The people behind the open-source work.</text>
