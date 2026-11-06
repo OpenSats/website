@@ -115,6 +115,21 @@ export default function PostArticleBody({
             </li>
           ))}
         </ul>
+        {spotlight && (
+          <Link
+            href="https://brainmade.org/"
+            className="mt-6 inline-flex flex-col items-start gap-2 rounded-sm text-gray-500 transition-colors hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500 dark:text-gray-400 dark:hover:text-gray-100"
+          >
+            <Image
+              src="/static/images/badges/brainmade.svg"
+              alt="Brainmade"
+              width={128}
+              height={40}
+              className="opacity-70 dark:invert"
+            />
+            <span className="text-xs">Written by humans</span>
+          </Link>
+        )}
       </dd>
     </dl>
   )
