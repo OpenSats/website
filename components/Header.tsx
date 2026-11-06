@@ -18,8 +18,8 @@ const Header = ({
   className,
 }: HeaderProps) => {
   const navLinkClass = overlay
-    ? 'hidden p-1 font-medium text-white md:inline-block md:px-2 md:py-4 xl:px-4'
-    : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 md:inline-block md:px-2 md:py-4 xl:px-4'
+    ? 'hidden p-1 font-medium text-white sm:p-4 md:inline-block'
+    : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
 
   const buttonClass =
     theme === 'nostr'
@@ -56,19 +56,21 @@ const Header = ({
       </div>
       <div className="flex items-center gap-3 text-base leading-5 sm:gap-4">
         <div className="block">
-          {headerNavLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className={
-                link.isButton
-                  ? `${buttonClass}${overlay ? ' hidden lg:inline-flex' : ''}`
-                  : navLinkClass
-              }
-            >
-              {link.title}
-            </Link>
-          ))}
+          {headerNavLinks
+            .filter((link) => !link.mobileOnly)
+            .map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className={
+                  link.isButton
+                    ? `${buttonClass}${overlay ? ' hidden lg:inline-flex' : ''}`
+                    : navLinkClass
+                }
+              >
+                {link.title}
+              </Link>
+            ))}
         </div>
         <ThemeSwitch />
         <MobileNav theme={theme} overlay={overlay} />

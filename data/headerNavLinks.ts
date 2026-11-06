@@ -3,8 +3,8 @@ const headerNavLinks = [
   { href: '/funds', title: 'Funds' },
   { href: '/about', title: 'About' },
   { href: '/blog', title: 'Blog' },
-  { href: '/spotlight', title: 'Spotlights' },
-  { href: '/newsletter', title: 'Newsletter' },
+  { href: '/spotlight', title: 'Spotlights', mobileOnly: true },
+  { href: '/newsletter', title: 'Newsletter', mobileOnly: true },
   { href: '/faq', title: 'FAQ' },
   { href: '/donate', title: 'Donate', isButton: true },
 ]

@@ -29,7 +29,7 @@ const PORTRAITS = [
     height: 821,
   },
   {
-    file: 'barry-deen/featured.jpg',
+    file: 'egge/featured.jpg',
     crop: '610 110 590 411',
     width: 1200,
     height: 675,
@@ -89,10 +89,10 @@ export async function renderSpotlightSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}">
     <defs>
       <linearGradient id="film-fade" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="white" stop-opacity="0" />
-        <stop offset="0.14" stop-color="white" />
-        <stop offset="0.86" stop-color="white" />
-        <stop offset="1" stop-color="white" stop-opacity="0" />
+        <stop offset="0" stop-color="white" stop-opacity="0.4" />
+        <stop offset="0.08" stop-color="white" />
+        <stop offset="0.92" stop-color="white" />
+        <stop offset="1" stop-color="white" stop-opacity="0.4" />
       </linearGradient>
       <mask id="film-mask"><rect width="1200" height="630" fill="url(#film-fade)" /></mask>
     </defs>
