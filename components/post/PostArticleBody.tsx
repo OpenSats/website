@@ -187,7 +187,13 @@ export default function PostArticleBody({
       <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
         {children}
       </div>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 py-6 text-sm text-gray-700 dark:text-gray-300">
+      <div
+        className={
+          spotlight
+            ? 'flex flex-wrap items-center gap-x-2 gap-y-2 py-6 text-xs text-gray-700 dark:text-gray-300 sm:gap-x-3 sm:text-sm'
+            : 'py-6 text-sm text-gray-700 dark:text-gray-300'
+        }
+      >
         {spotlight && (
           <Link
             href="https://brainmade.org/"
@@ -205,7 +211,7 @@ export default function PostArticleBody({
         <Link href={discussUrl()} rel="nofollow">
           Discuss on nostr
         </Link>
-        <span aria-hidden="true">•</span>
+        <span aria-hidden="true">{` • `}</span>
         <Link href={editUrl(filePath)}>View on GitHub</Link>
       </div>
       {fundCard && (
