@@ -18,8 +18,8 @@ const Header = ({
   className,
 }: HeaderProps) => {
   const navLinkClass = overlay
-    ? 'hidden p-1 font-medium text-white sm:p-4 md:inline-block'
-    : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 sm:p-4 md:inline-block'
+    ? 'hidden p-1 font-medium text-white md:inline-block md:px-2 md:py-4 xl:px-4'
+    : 'hidden p-1 font-medium text-gray-900 dark:text-gray-100 md:inline-block md:px-2 md:py-4 xl:px-4'
 
   const buttonClass =
     theme === 'nostr'
