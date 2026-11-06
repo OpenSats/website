@@ -92,7 +92,7 @@ const MobileNav = ({ theme = 'default', overlay = false }: MobileNavProps) => {
             </svg>
           </button>
         </div>
-        <nav className="fixed mt-8 h-full">
+        <nav className="absolute bottom-0 top-28 w-full overflow-y-auto pb-6">
           {headerNavLinks.map((link) => (
             <div key={link.title} className="px-12 py-4">
               <Link

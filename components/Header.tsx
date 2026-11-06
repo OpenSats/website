@@ -56,19 +56,21 @@ const Header = ({
       </div>
       <div className="flex items-center gap-3 text-base leading-5 sm:gap-4">
         <div className="block">
-          {headerNavLinks.map((link) => (
-            <Link
-              key={link.title}
-              href={link.href}
-              className={
-                link.isButton
-                  ? `${buttonClass}${overlay ? ' hidden lg:inline-flex' : ''}`
-                  : navLinkClass
-              }
-            >
-              {link.title}
-            </Link>
-          ))}
+          {headerNavLinks
+            .filter((link) => !link.mobileOnly)
+            .map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className={
+                  link.isButton
+                    ? `${buttonClass}${overlay ? ' hidden lg:inline-flex' : ''}`
+                    : navLinkClass
+                }
+              >
+                {link.title}
+              </Link>
+            ))}
         </div>
         <ThemeSwitch />
         <MobileNav theme={theme} overlay={overlay} />
