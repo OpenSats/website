@@ -80,7 +80,13 @@ export default function PostArticleBody({
   const authorBlock = (
     <dl className={classes.authorBlock}>
       <dt className="sr-only">Authors</dt>
-      <dd>
+      <dd
+        className={
+          spotlight
+            ? 'flex items-center justify-between gap-4 min-[1000px]:block'
+            : undefined
+        }
+      >
         <ul className={`flex flex-wrap gap-4 ${classes.authorList}`}>
           {authorDetails.map((author) => (
             <li className="flex items-center space-x-2" key={author.name}>
@@ -116,7 +122,7 @@ export default function PostArticleBody({
           ))}
         </ul>
         {spotlight && (
-          <p className="mt-6 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+          <p className="shrink-0 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 min-[1000px]:mt-6 min-[1000px]:text-left">
             Written by humans.
           </p>
         )}
