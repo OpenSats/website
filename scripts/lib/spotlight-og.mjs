@@ -16,6 +16,15 @@ const PORTRAITS = [
   { file: 'barry-deen/hero.jpg', crop: '1400 100 380 380' },
 ]
 
+// A shallow wave gives the strip a physical curve without warping faces.
+const waveY = (x) => 300 + 24 * Math.sin(((x - 120) * Math.PI * 2) / 1400)
+const waveAngle = (x) =>
+  (Math.atan(
+    ((24 * Math.PI * 2) / 1400) * Math.cos(((x - 120) * Math.PI * 2) / 1400)
+  ) *
+    180) /
+  Math.PI
+
 export async function renderSpotlightSvg() {
   const wordmark = await loadWordmarkDataUri()
   const portraits = await Promise.all(
@@ -24,42 +33,63 @@ export async function renderSpotlightSvg() {
         `/static/images/spotlight/${file}`
       )
       if (!image) throw new Error(`Missing spotlight portrait: ${file}`)
-      const x = 90 + index * 262
-      const y = 322
-      return `<svg x="${x}" y="${y}" width="234" height="184" viewBox="${crop}" preserveAspectRatio="xMidYMid slice" overflow="hidden">
-        <image href="${image}" width="${
+      const centerX = 150 + index * 300
+      const centerY = waveY(centerX) + 130
+      return `<g transform="rotate(${waveAngle(
+        centerX
+      )} ${centerX} ${centerY})">
+        <svg x="${centerX - 132}" y="${
+        centerY - 92
+      }" width="264" height="184" viewBox="${crop}" preserveAspectRatio="xMidYMid slice" overflow="hidden">
+          <image href="${image}" width="${
         file.startsWith('daniela') ? 1774 : 1916
       }" height="${file.startsWith('daniela') ? 887 : 821}" />
-      </svg>`
+        </svg>
+      </g>`
     })
   )
-  // Perforations suggest a photographic contact strip without distressing
-  // the portraits or adding artificial grain to the source photographs.
-  const perforations = Array.from({ length: 30 }, (_, index) => {
-    const x = 82 + index * 35
-    return [294, 522]
-      .map(
-        (y) =>
-          `<rect x="${x}" y="${y}" width="14" height="10" rx="2" fill="${COLORS.background}" />`
-      )
+  const xs = Array.from({ length: 129 }, (_, index) => -40 + index * 10)
+  const ribbon = [
+    ...xs.map((x) => `${x},${waveY(x)}`),
+    ...xs
+      .slice()
+      .reverse()
+      .map((x) => `${x},${waveY(x) + 260}`),
+  ].join(' ')
+  const perforations = Array.from({ length: 37 }, (_, index) => {
+    const x = -30 + index * 35
+    return [15, 235]
+      .map((offset) => {
+        const y = waveY(x) + offset
+        return `<rect x="${x}" y="${y}" width="14" height="10" rx="2" fill="${
+          COLORS.background
+        }" transform="rotate(${waveAngle(x)} ${x + 7} ${y + 5})" />`
+      })
       .join('')
   }).join('')
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}">
+    <defs>
+      <linearGradient id="film-fade" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="white" stop-opacity="0" />
+        <stop offset="0.14" stop-color="white" />
+        <stop offset="0.86" stop-color="white" />
+        <stop offset="1" stop-color="white" stop-opacity="0" />
+      </linearGradient>
+      <mask id="film-mask"><rect width="1200" height="630" fill="url(#film-fade)" /></mask>
+    </defs>
     <rect width="1200" height="630" fill="${COLORS.background}" />
-    <image href="${wordmark}" x="64" y="48" width="220" height="32" />
-    <text x="60" y="174" font-family="${INTER_FONT_FAMILY}" font-size="68" font-weight="800" letter-spacing="-2" fill="${
+    <image href="${wordmark}" x="64" y="44" width="220" height="32" />
+    <text x="60" y="168" font-family="${INTER_FONT_FAMILY}" font-size="76" font-weight="800" letter-spacing="-2" fill="${
     COLORS.title
-  }">OpenSats Spotlights</text>
-    <text x="64" y="224" font-family="${INTER_FONT_FAMILY}" font-size="26" fill="${
+  }">Spotlights</text>
+    <text x="64" y="218" font-family="${INTER_FONT_FAMILY}" font-size="26" fill="${
     COLORS.summary
   }">The people behind the open-source work.</text>
-    <rect x="64" y="282" width="1072" height="262" rx="3" fill="#242321" />
-    ${perforations}
-    ${portraits.join('')}
-    <rect x="64" y="582" width="32" height="3" fill="${COLORS.accent}" />
-    <text x="110" y="590" font-family="${INTER_FONT_FAMILY}" font-size="20" fill="${
-    COLORS.summary
-  }">opensats.org/spotlight</text>
+    <g mask="url(#film-mask)">
+      <polygon points="${ribbon}" fill="#242321" />
+      ${perforations}
+      ${portraits.join('')}
+    </g>
   </svg>`
 }
