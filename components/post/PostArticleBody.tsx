@@ -186,29 +186,26 @@ export default function PostArticleBody({
     <div className={classes.contentBlock}>
       <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
         {children}
-        {spotlight && (
-          <div className="not-prose mt-10">
-            <Link
-              href="https://brainmade.org/"
-              className="inline-block rounded-sm opacity-60 transition-opacity hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
-              aria-label="Brainmade: human-created writing"
-            >
-              <Image
-                src="/static/images/badges/brainmade.svg"
-                alt="Brainmade"
-                width={102}
-                height={32}
-                className="dark:invert"
-              />
-            </Link>
-          </div>
-        )}
       </div>
-      <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 py-6 text-sm text-gray-700 dark:text-gray-300">
+        {spotlight && (
+          <Link
+            href="https://brainmade.org/"
+            className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+            aria-label="Brainmade: human-created writing"
+          >
+            <Image
+              src="/static/images/badges/brainmade.svg"
+              alt="Brainmade"
+              width={87}
+              height={20}
+            />
+          </Link>
+        )}
         <Link href={discussUrl()} rel="nofollow">
           Discuss on nostr
         </Link>
-        {` • `}
+        <span aria-hidden="true">•</span>
         <Link href={editUrl(filePath)}>View on GitHub</Link>
       </div>
       {fundCard && (

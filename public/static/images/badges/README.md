@@ -1,2 +1,5 @@
-The Brainmade mark (`brainmade.svg`) is from https://brainmade.org/black-logo.svg.
-Released by its creator under CC0: https://creativecommons.org/publicdomain/zero/1.0/.
+The Brainmade shield (`brainmade.svg`) uses the dark, flat Shields.io example from
+https://github.com/NamtaoProductions/brainmade.org/issues/2, with the label shortened
+to “brainmade”. It is hosted locally.
+
+The Brainmade logo is CC0: https://brainmade.org/.
