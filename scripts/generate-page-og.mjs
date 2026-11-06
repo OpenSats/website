@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { renderSpotlightSvg } from './lib/spotlight-og.mjs'
 import {
   formatLifetimeStatDisplay,
   formatMapOgSentenceSegments,
@@ -33,8 +34,8 @@ import {
 
 // Generates per-slug OG images for MDX-driven pages (data/pages/*.mdx) and a
 // small set of TSX-only routes. Visually it's the topic OG template — same
-// light surface, network decoration, Inter type — except transparency, which
-// foregrounds the three lifetime stats shown on the live page.
+// light surface, network decoration, Inter type — with custom cards for
+// transparency, the map, Code RED, and the spotlight portrait collage.
 const outputDir = path.join(ROOT, 'public', 'static', 'images', 'pages', 'og')
 
 // Most page slugs collide 1:1 with their URL path. The exceptions all
@@ -600,6 +601,8 @@ async function main() {
   for (const page of EXTRA_PAGES) {
     if (page.slug === 'map') {
       await writeImage('map', renderMapSvg(mapDataUri, transparencyStats))
+    } else if (page.slug === 'spotlight') {
+      await writeImage('spotlight', await renderSpotlightSvg())
     } else if (page.slug === 'apply-red') {
       const redSvg = renderRedSvg(redLogoDataUri)
       // /apply/red owns the meta tags; /red redirects there. Write both
