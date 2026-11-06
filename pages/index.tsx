@@ -289,8 +289,8 @@ export default function Home({
           <NewsletterSignup />
         </div>
       )}
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end pb-8 text-base font-medium leading-6">
+      <div className="flex flex-wrap justify-end gap-x-6 gap-y-2 pb-8 text-base font-medium leading-6">
+        {posts.length > MAX_DISPLAY && (
           <Link
             href="/blog"
             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
@@ -298,8 +298,15 @@ export default function Home({
           >
             All Posts &rarr;
           </Link>
-        </div>
-      )}
+        )}
+        <Link
+          href="/newsletter"
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="All newsletters"
+        >
+          All Newsletters &rarr;
+        </Link>
+      </div>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">
         <div className="space-y-2 pb-8 pt-8 md:space-y-5 xl:pt-12">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 max-[375px]:text-2xl sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 lg:text-6xl">
