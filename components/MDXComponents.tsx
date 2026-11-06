@@ -1,9 +1,12 @@
 /* eslint-disable react/display-name */
 import React from 'react'
-import { MDXLayout, ComponentMap } from 'pliny/mdx-components'
-import { TOCInline } from 'pliny/ui/TOCInline'
-import { Pre } from 'pliny/ui/Pre'
-import { BlogNewsletterForm } from 'pliny/ui/NewsletterForm'
+import dynamic from 'next/dynamic'
+import type { MDXComponents as ComponentMap } from 'mdx/types'
+import type { ReactNode } from 'react'
+import { coreContent } from 'pliny/utils/contentlayer'
+import TOCInline from 'pliny/ui/TOCInline'
+import Pre from 'pliny/ui/Pre'
+import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
 
 import Image from './Image'
 import BrowserFrame from './BrowserFrame'
@@ -29,9 +32,28 @@ import NewsletterSignup from './NewsletterSignup'
 import ViewHeartbeatButton from './ViewHeartbeatButton'
 import MediaKit, { MediaKitColors, MediaKitDownloadLink } from './MediaKit'
 
+const layouts = {
+  AuthorLayout: dynamic(() => import('@/layouts/AuthorLayout')),
+  FundLayout: dynamic(() => import('@/layouts/FundLayout')),
+  NewsletterLayout: dynamic(() => import('@/layouts/NewsletterLayout')),
+  PageLayout: dynamic(() => import('@/layouts/PageLayout')),
+  PostLayout: dynamic(() => import('@/layouts/PostLayout')),
+  PostSimple: dynamic(() => import('@/layouts/PostSimple')),
+  ProjectLayout: dynamic(() => import('@/layouts/ProjectLayout')),
+  SpotlightLayout: dynamic(() => import('@/layouts/SpotlightLayout')),
+  TopicLayout: dynamic(() => import('@/layouts/TopicLayout')),
+}
+
+type MDXLayout = {
+  layout: string
+  content: Parameters<typeof coreContent>[0]
+  children?: ReactNode
+}
+
 export const Wrapper = ({ layout, content, ...rest }: MDXLayout) => {
-  const Layout = require(`../layouts/${layout}`).default
-  return <Layout content={content} {...rest} />
+  const Layout = layouts[layout]
+  if (!Layout) throw new Error(`Unknown MDX layout: ${layout}`)
+  return <Layout content={coreContent(content)} {...rest} />
 }
 
 export const MDXComponents: ComponentMap = {

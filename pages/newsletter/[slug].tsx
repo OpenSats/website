@@ -37,8 +37,9 @@ export default function NewsletterIssuePage({
   return (
     <MDXLayoutRenderer
       layout={issue.layout || DEFAULT_LAYOUT}
+      code={issue.body.code}
       content={issue}
-      MDXComponents={MDXComponents}
+      components={MDXComponents}
     />
   )
 }

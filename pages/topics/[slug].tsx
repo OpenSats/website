@@ -59,8 +59,9 @@ export default function TopicPage({
     <>
       <MDXLayoutRenderer
         layout={DEFAULT_LAYOUT}
+        code={topic.body.code}
         content={topic}
-        MDXComponents={MDXComponents}
+        components={MDXComponents}
       />
       <nav className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-8 pt-6 text-sm">
         <Link

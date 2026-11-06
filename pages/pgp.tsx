@@ -16,8 +16,9 @@ export default function PGP({
   return (
     <MDXLayoutRenderer
       layout={page.layout || DEFAULT_LAYOUT}
+      code={page.body.code}
       content={page}
-      MDXComponents={MDXComponents}
+      components={MDXComponents}
     />
   )
 }

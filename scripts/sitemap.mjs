@@ -1,4 +1,4 @@
-import { generateSitemap } from 'pliny/utils/generate-sitemap.js'
+import { generateSitemap } from './lib/generate-sitemap.mjs'
 import siteMetadata from '../data/siteMetadata.js'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -15,7 +15,7 @@ const sitemap = async () => {
   )
   const allBlogs = JSON.parse(readFileSync(blogDataPath, 'utf8'))
 
-  generateSitemap(siteMetadata.siteUrl, allBlogs)
+  await generateSitemap(siteMetadata.siteUrl, allBlogs)
   console.log('Sitemap generated...')
 }
 

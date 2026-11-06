@@ -24,8 +24,9 @@ export default function About({
   return (
     <MDXLayoutRenderer
       layout={DEFAULT_LAYOUT}
+      code={author.body.code}
       content={author}
-      MDXComponents={MDXComponents}
+      components={MDXComponents}
     />
   )
 }

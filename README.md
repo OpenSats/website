@@ -6,9 +6,10 @@ This is the codebase behind [OpenSats.org](https://opensats.org).
 
 This website was bootstrapped with [`tailwind-nextjs-starter-blog`](https://github.com/timlrx/tailwind-nextjs-starter-blog).
 
+Use Node.js 22.x, as specified in `package.json` and used by CI and Vercel.
 To run a development environment locally, run:
 
-- `npm install` to install dependencies
+- `npm ci` to install the locked dependencies
 - `npm run dev` to run the local development version
 
 Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nextjs-starter-blog#quick-start-guide) for further details.
@@ -17,7 +18,7 @@ Please refer to their [Quick Start Guide](https://github.com/timlrx/tailwind-nex
 
 `npm run build` generates social cards and checks that every card is exactly
 1200×630 and under 1 MB. To regenerate blog cards locally after changing artwork,
-run `npx contentlayer build` followed by `npm run generate:blog-og`.
+run `npx contentlayer2 build` followed by `npm run generate:blog-og`.
 `npm run check:og` validates all generated card families after a full build.
 
 Blog OG and Twitter images use compressed JPEG copies; the original article

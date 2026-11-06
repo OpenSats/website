@@ -17,8 +17,9 @@ export default function About({
     <>
       <MDXLayoutRenderer
         layout={openSats.layout || DEFAULT_LAYOUT}
+        code={openSats.body.code}
         content={openSats}
-        MDXComponents={MDXComponents}
+        components={MDXComponents}
       />
     </>
   )

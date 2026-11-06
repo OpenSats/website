@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { kebabCase } from 'pliny/utils/kebabCase'
+import { slug as kebabCase } from 'github-slugger'
 
 interface Props {
   text: string
