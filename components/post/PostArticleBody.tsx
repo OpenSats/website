@@ -123,7 +123,9 @@ export default function PostArticleBody({
         </ul>
         {spotlight && (
           <p className="shrink-0 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 min-[1000px]:mt-6 min-[1000px]:text-left">
-            Written by humans.
+            <Link href="/about#content" className="hover:underline">
+              Written by humans.
+            </Link>
           </p>
         )}
       </dd>
