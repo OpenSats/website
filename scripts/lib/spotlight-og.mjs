@@ -10,10 +10,30 @@ import {
 // Deliberate portrait crops from published spotlight artwork. Keep the
 // selection stable across builds and review each crop when changing photos.
 const PORTRAITS = [
-  { file: 'daniela-brozzoni/hero.jpg', crop: '870 40 560 560' },
-  { file: 'kurt-unger/hero.jpg', crop: '1170 0 650 650' },
-  { file: 'bruno-garcia/hero.png', crop: '1370 40 520 520' },
-  { file: 'barry-deen/hero.jpg', crop: '1400 100 380 380' },
+  {
+    file: 'daniela-brozzoni/hero.jpg',
+    crop: '870 40 560 560',
+    width: 1774,
+    height: 887,
+  },
+  {
+    file: 'kurt-unger/hero.jpg',
+    crop: '1170 0 650 650',
+    width: 1916,
+    height: 821,
+  },
+  {
+    file: 'bruno-garcia/hero.png',
+    crop: '1370 40 520 520',
+    width: 1916,
+    height: 821,
+  },
+  {
+    file: 'barry-deen/featured.jpg',
+    crop: '610 110 590 411',
+    width: 1200,
+    height: 675,
+  },
 ]
 
 // A shallow wave gives the strip a physical curve without warping faces.
@@ -28,7 +48,7 @@ const waveAngle = (x) =>
 export async function renderSpotlightSvg() {
   const wordmark = await loadWordmarkDataUri()
   const portraits = await Promise.all(
-    PORTRAITS.map(async ({ file, crop }, index) => {
+    PORTRAITS.map(async ({ file, crop, width, height }, index) => {
       const image = await publicAssetToDataUri(
         `/static/images/spotlight/${file}`
       )
@@ -41,9 +61,7 @@ export async function renderSpotlightSvg() {
         <svg x="${centerX - 132}" y="${
         centerY - 92
       }" width="264" height="184" viewBox="${crop}" preserveAspectRatio="xMidYMid slice" overflow="hidden">
-          <image href="${image}" width="${
-        file.startsWith('daniela') ? 1774 : 1916
-      }" height="${file.startsWith('daniela') ? 887 : 821}" />
+          <image href="${image}" width="${width}" height="${height}" />
         </svg>
       </g>`
     })
