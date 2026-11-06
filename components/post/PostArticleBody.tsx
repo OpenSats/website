@@ -204,7 +204,8 @@ export default function PostArticleBody({
               aria-label="Brainmade: human-created writing"
             >
               <Image
-                src="/static/images/badges/brainmade.svg"
+                src="/static/images/badges/brainmade-light.svg"
+                darkSrc="/static/images/badges/brainmade.svg"
                 alt="Brainmade"
                 width={87}
                 height={20}
