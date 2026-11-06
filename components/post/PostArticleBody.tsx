@@ -116,19 +116,9 @@ export default function PostArticleBody({
           ))}
         </ul>
         {spotlight && (
-          <Link
-            href="https://brainmade.org/"
-            className="mt-6 inline-flex flex-col items-start gap-2 rounded-sm text-gray-500 transition-colors hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500 dark:text-gray-400 dark:hover:text-gray-100"
-          >
-            <Image
-              src="/static/images/badges/brainmade.svg"
-              alt="Brainmade"
-              width={128}
-              height={40}
-              className="opacity-70 dark:invert"
-            />
-            <span className="text-xs">Written by humans</span>
-          </Link>
+          <p className="mt-6 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+            This spotlight was written by a human.
+          </p>
         )}
       </dd>
     </dl>
@@ -190,6 +180,23 @@ export default function PostArticleBody({
     <div className={classes.contentBlock}>
       <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
         {children}
+        {spotlight && (
+          <div className="not-prose mt-10">
+            <Link
+              href="https://brainmade.org/"
+              className="inline-block rounded-sm opacity-60 transition-opacity hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+              aria-label="Brainmade: human-created writing"
+            >
+              <Image
+                src="/static/images/badges/brainmade.svg"
+                alt="Brainmade"
+                width={102}
+                height={32}
+                className="dark:invert"
+              />
+            </Link>
+          </div>
+        )}
       </div>
       <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
         <Link href={discussUrl()} rel="nofollow">
