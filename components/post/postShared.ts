@@ -14,7 +14,7 @@ export const postDateShortTemplate: Intl.DateTimeFormatOptions = {
 }
 
 export const editUrl = (path: string) =>
-  `${siteMetadata.siteRepo}/blob/master/data/${path}`
+  `${siteMetadata.siteRepo.replace(/\/$/, '')}/blob/master/data/${path}`
 
 export const discussUrl = () =>
   `https://njump.to/npub10pensatlcfwktnvjjw2dtem38n6rvw8g6fv73h84cuacxn4c28eqyfn34f`

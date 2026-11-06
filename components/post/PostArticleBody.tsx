@@ -8,6 +8,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
+import BrainmadeBadge from '@/components/post/BrainmadeBadge'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
 // Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
@@ -80,7 +81,13 @@ export default function PostArticleBody({
   const authorBlock = (
     <dl className={classes.authorBlock}>
       <dt className="sr-only">Authors</dt>
-      <dd>
+      <dd
+        className={
+          spotlight
+            ? 'flex items-center justify-between gap-4 min-[1000px]:block'
+            : undefined
+        }
+      >
         <ul className={`flex flex-wrap gap-4 ${classes.authorList}`}>
           {authorDetails.map((author) => (
             <li className="flex items-center space-x-2" key={author.name}>
@@ -115,6 +122,13 @@ export default function PostArticleBody({
             </li>
           ))}
         </ul>
+        {spotlight && (
+          <p className="shrink-0 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 min-[1000px]:mt-6 min-[1000px]:text-left">
+            <Link href="/about#content" className="hover:underline">
+              Written by humans.
+            </Link>
+          </p>
+        )}
       </dd>
     </dl>
   )
@@ -176,11 +190,23 @@ export default function PostArticleBody({
       <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">
         {children}
       </div>
-      <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+      <div
+        className={
+          spotlight
+            ? 'flex flex-wrap items-center gap-x-2 gap-y-2 py-6 text-xs text-gray-700 dark:text-gray-300 sm:gap-x-3 sm:text-sm'
+            : 'py-6 text-sm text-gray-700 dark:text-gray-300'
+        }
+      >
+        {spotlight && (
+          <>
+            <BrainmadeBadge />
+            <span aria-hidden="true">•</span>
+          </>
+        )}
         <Link href={discussUrl()} rel="nofollow">
           Discuss on nostr
         </Link>
-        {` • `}
+        <span aria-hidden="true">{` • `}</span>
         <Link href={editUrl(filePath)}>View on GitHub</Link>
       </div>
       {fundCard && (
