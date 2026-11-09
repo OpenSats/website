@@ -31,11 +31,11 @@ export default function Tags({
             Tags
           </h1>
         </div>
-        <div className="flex max-w-lg flex-wrap">
+        <div className="inline-grid grid-cols-[repeat(2,max-content)] gap-x-3 gap-y-2 md:grid-cols-[repeat(4,max-content)]">
           {Object.keys(tags).length === 0 && 'No tags found.'}
           {sortedTags.map((t) => {
             return (
-              <div key={t} className="mb-2 mr-5 mt-2">
+              <div key={t} className="whitespace-nowrap">
                 <Tag text={t} />
                 <Link
                   href={tagLink(t)}
