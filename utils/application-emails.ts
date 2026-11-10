@@ -128,33 +128,34 @@ We will reach out again once we've made a decision.
 Thank you for your patience.
     `
 
-  const [internalSent, applicantSent] = await Promise.all([
-    sendEmailWithRetry({
-      to: TO_ADDRESS,
-      cc: CC_ADDRESS,
-      from: FROM_ADDRESS,
-      subject: body.RED
-        ? `OpenSats RED: Application for ${body.project_name}`
-        : `OpenSats Application for ${body.project_name}`,
-      html: htmlBody,
-      text: htmlBody.replace(/<[^>]*>/g, ''),
-    }),
-    sendEmailWithRetry({
-      to: `${body.email}`,
-      from: FROM_ADDRESS,
-      subject: body.RED
-        ? `Your OpenSats RED Application`
-        : `Your Application to OpenSats`,
-      html: thankYouMessage,
-      text: thankYouMessage,
-    }),
-  ])
+  const internalSent = await sendEmailWithRetry({
+    to: TO_ADDRESS,
+    cc: CC_ADDRESS,
+    from: FROM_ADDRESS,
+    subject: body.RED
+      ? `OpenSats RED: Application for ${body.project_name}`
+      : `OpenSats Application for ${body.project_name}`,
+    html: htmlBody,
+    text: htmlBody.replace(/<[^>]*>/g, ''),
+  })
 
+  // The GitHub issue is only a screening summary. Do not tell the applicant
+  // we received the application until the full internal copy is accepted.
   if (!internalSent) {
     console.error('Application copy was not accepted by SendGrid')
-  } else {
-    console.info('Application copy sent to OpenSats')
+    return { internalSent: false, applicantSent: false }
   }
+  console.info('Application copy sent to OpenSats')
+
+  const applicantSent = await sendEmailWithRetry({
+    to: `${body.email}`,
+    from: FROM_ADDRESS,
+    subject: body.RED
+      ? `Your OpenSats RED Application`
+      : `Your Application to OpenSats`,
+    html: thankYouMessage,
+    text: thankYouMessage,
+  })
 
   if (!applicantSent) {
     console.warn('Application stored, but applicant confirmation was not sent')

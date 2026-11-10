@@ -107,6 +107,40 @@ describe('/api/sendgrid', () => {
 
     expect(response.statusCode).toBe(502)
     expect(response.payload.message).not.toBe('success')
+    expect(sgMail.send).toHaveBeenCalledTimes(3)
+    expect(
+      sgMail.send.mock.calls.every(
+        ([message]) => message.to === 'applications@opensats.test'
+      )
+    ).toBe(true)
+  })
+
+  it('waits for internal acceptance before sending the applicant receipt', async () => {
+    let acceptInternal
+    sgMail.send.mockImplementation((message) => {
+      if (message.to === 'applications@opensats.test') {
+        return new Promise((resolve) => {
+          acceptInternal = resolve
+        })
+      }
+      return Promise.resolve([{}])
+    })
+    const response = responseMock()
+    const request = handler(
+      { method: 'POST', body: validApplication },
+      response
+    )
+    // Allow the Turnstile check to finish and the first send to start.
+    await Promise.resolve()
+
+    expect(sgMail.send).toHaveBeenCalledTimes(1)
+    expect(response.statusCode).toBeUndefined()
+    acceptInternal([{}])
+    await request
+
+    expect(sgMail.send).toHaveBeenCalledTimes(2)
+    expect(sgMail.send.mock.calls[1][0].to).toBe(validApplication.email)
+    expect(response.statusCode).toBe(200)
   })
 
   it('still confirms internal receipt if the applicant email fails', async () => {
@@ -189,5 +223,3 @@ describe('/api/sendgrid', () => {
     expect(sgMail.send).not.toHaveBeenCalled()
   })
 })
-
-

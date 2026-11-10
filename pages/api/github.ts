@@ -199,19 +199,28 @@ ${contactFooter}`
         body: issueBody,
         labels: issueLabels,
       })
-
-      // Best-effort: GitHub record is the source of truth; email failure must
-      // not block a successful submit (avoids a second Turnstile mid-flight).
-      try {
-        await sendApplicationEmails(req.body)
-      } catch (emailErr) {
-        console.error('Application emails failed after issue create:', emailErr)
-      }
-
-      res.status(200).json({ message: 'success' })
     } catch (err) {
-      res.status(500).json({ statusCode: 500, message: (err as Error).message })
+      return res
+        .status(500)
+        .json({ statusCode: 500, message: (err as Error).message })
     }
+
+    // The issue omits private fields (including email). The full internal
+    // copy must also be accepted before the application is complete.
+    try {
+      const { internalSent } = await sendApplicationEmails(req.body)
+      if (internalSent) {
+        return res.status(200).json({ message: 'success' })
+      }
+    } catch (err) {
+      console.error('Application emails failed after issue create:', err)
+    }
+
+    // Let the form retry email delivery without recreating the issue.
+    return res.status(502).json({
+      message: 'Application email delivery failed',
+      githubCreated: true,
+    })
   } else {
     res.setHeader('Allow', 'POST')
     res.status(405).end('Method Not Allowed')

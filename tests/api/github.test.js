@@ -182,15 +182,62 @@ describe('/api/github', () => {
     )
   })
 
-  it('still succeeds when application emails fail after issue create', async () => {
+  it.each([{}, { LTS: true }, { RED: true }])(
+    'reports partial delivery when the internal copy fails for %j',
+    async (track) => {
+      sendApplicationEmails.mockResolvedValue({
+        internalSent: false,
+        applicantSent: false,
+      })
+      const response = responseMock()
+
+      await handler(
+        { method: 'POST', body: { ...validApplication, ...track } },
+        response
+      )
+
+      expect(response.statusCode).toBe(502)
+      expect(response.payload).toEqual({
+        message: 'Application email delivery failed',
+        githubCreated: true,
+      })
+      expect(createIssue).toHaveBeenCalledTimes(1)
+    }
+  )
+
+  it('reports partial delivery when application email throws', async () => {
     sendApplicationEmails.mockRejectedValue(new Error('SendGrid down'))
+    const response = responseMock()
+
+    await handler({ method: 'POST', body: validApplication }, response)
+
+    expect(response.statusCode).toBe(502)
+    expect(response.payload.githubCreated).toBe(true)
+    expect(response.payload.message).not.toBe('success')
+  })
+
+  it('still succeeds if only the applicant receipt fails', async () => {
+    sendApplicationEmails.mockResolvedValue({
+      internalSent: true,
+      applicantSent: false,
+    })
     const response = responseMock()
 
     await handler({ method: 'POST', body: validApplication }, response)
 
     expect(response.statusCode).toBe(200)
     expect(response.payload).toEqual({ message: 'success' })
-    expect(createIssue).toHaveBeenCalled()
+  })
+
+  it('does not send email or report a created issue when GitHub fails', async () => {
+    createIssue.mockRejectedValue(new Error('GitHub unavailable'))
+    const response = responseMock()
+
+    await handler({ method: 'POST', body: validApplication }, response)
+
+    expect(response.statusCode).toBe(500)
+    expect(response.payload.githubCreated).not.toBe(true)
+    expect(sendApplicationEmails).not.toHaveBeenCalled()
   })
 
   it('rejects requests that fail Turnstile verification', async () => {
