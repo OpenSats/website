@@ -98,6 +98,17 @@ Put DNS on nostr instead, signed with your own key, and that became [NoDNS](http
 
 Now, your [npub](/topics/npub), the public half of your nostr keypair, is your domain name: just [put .nostr after it](https://gitworkshop.dev/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr/relay.ngit.dev/nodns-protocol). It's not pretty to read, but because you generated it yourself, nobody above you can change it or take it away from you. Ta-dah!
 
+<figure className="mx-auto max-w-md">
+  <Image
+    src="/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg"
+    alt="NoDNS records for an npub"
+    width={1205}
+    height={1600}
+    className="h-auto w-full"
+  />
+  <figcaption>NoDNS records for an npub.</figcaption>
+</figure>
+
 But that was only half of the battle.
 
 Your IP address is still handed down to you, and so it can still be taken away. And when Arjen and the TollGate team pictured TollGate networks growing, they just [kept running into that issue](https://njump.me/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=we%20kept%20hitting%20an%20issue).
@@ -134,12 +145,6 @@ To see just why, let's dig deeper into what TollGate _really_ is.
       width: 1482,
       height: 1286,
       alt: 'The TollGate OS installer.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg',
-      width: 1205,
-      height: 1600,
-      alt: 'NoDNS records for an npub.',
     },
   ]}
 />
@@ -283,19 +288,6 @@ When you post a note over the FIPS mesh, it first gets saved on your own phone. 
 Whatever you post over the FIPS mesh gets passed along right away from phone to phone, up to 3 phones away, but [only to paired phones that are in range at that moment](https://github.com/Origami74/myco/blob/main/docs/design/core/event-gossip.md#plane-a--push-live-fan-out), and each of them saves a copy. And when someone is looking for something, their phone asks up to 2 phones away, so it can find one of those saved copies, even later. So in the end, [your note can reach someone 5 phones away, as long as they're interested in it](https://njump.me/nevent1qqszzg6q05rlrtuuey0u8v6p03hxmk5f9ldsuuuxu58d86w857aygqgzyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wxrudxq).
 
 And because phones only find each other when they're [close by](https://github.com/Origami74/myco#know-before-you-rely-on-it), your note doesn't fly across the world, it gets [carried slowly, from one paired phone to the next as people happen to run into each other](https://github.com/Origami74/myco/blob/main/docs/design/core/event-gossip.md#why-both). It's not a bug, [it's a feature](https://njump.me/nevent1qqsflhqdkvaltxjrka3cn3lhl92kj9at7ku7a0wrkmkvynnudyx5tuczyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wym3f2n#:~:text=The%20point%20was%20to%20utilize). But for now, Myco does have to be open on screen, because a phone in your pocket won't find anyone.
-
-<figure className="mx-auto max-w-md">
-  <Image
-    src="/static/images/spotlight/arjen/myco.png"
-    alt="Doodle Duo running in Myco with two connected players"
-    width={800}
-    height={1200}
-    className="h-auto w-full"
-  />
-  <figcaption>
-    Doodle Duo in Myco: two phones, one doodler, no internet.
-  </figcaption>
-</figure>
 
 Arjen has also added [an option to mesh over the internet](https://github.com/Origami74/myco#what-you-can-do-with-it-today), but it's off by default and not yet tested between phones on different networks.
 
