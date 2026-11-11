@@ -8,7 +8,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
-import BrainmadeBadge from '@/components/post/BrainmadeBadge'
+import HumanSlopBadge from '@/components/post/HumanSlopBadge'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
 // Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
@@ -199,7 +199,7 @@ export default function PostArticleBody({
       >
         {spotlight && (
           <>
-            <BrainmadeBadge />
+            <HumanSlopBadge />
             <span aria-hidden="true">•</span>
           </>
         )}
