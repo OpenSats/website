@@ -31,25 +31,19 @@ To me, it was evident that Arjen had already somewhat succeeded in spreading his
 You see, he fell down the purple rabbit-hole and then got [nerd-sniped](https://xkcd.com/356/) into working on TollGate. But then, he in turn nerd-sniped [Johnathan Corgan](https://njump.to/npub19wavu4f7l6l43h24jyskn7fvzy37kcfp67aqjtmv2qgy4lp34nhsda8p6k) into working on FIPS to help fix TollGate. Johnathan actually came out of [retirement from open source](https://njump.to/note1rz20auslykt39dssxfzse3cuygea0epakvnn4xq7lh9s8m5q8vdqh73y3t) because of how obsessed he had become with seeing their shared vision for FIPS come to life. Well played, Arjen. Well played.
 
 <PhotoStrip
-  title="Around Madeira"
+  title="TollGate router and configuration"
   images={[
     {
-      src: '/static/images/spotlight/arjen/03-madeira-nature-walk-2024-10-26.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'A nature walk on Madeira.',
+      src: '/static/images/spotlight/arjen/router.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'A TollGate router.',
     },
     {
-      src: '/static/images/spotlight/arjen/04-madeira-oelalaaa-2024-10-26.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'Looking over Madeira’s hills and rooftops.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/05-madeira-2025-04-16.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'Madeira’s coastline.',
+      src: '/static/images/spotlight/arjen/21-openwrt-with-a-tollgate-ssid-2025-08-08.png',
+      width: 1400,
+      height: 1054,
+      alt: 'OpenWrt configured with a TollGate wireless network.',
     },
   ]}
 />
@@ -151,37 +145,19 @@ To see just why, let's dig deeper into what TollGate _really_ is.
 [TollGate](https://github.com/OpenTollGate/tollgate) is basically a protocol to add a toll booth to a router, just like the ones on the highway. When you connect to it, it tells you its price, and you pay with ecash. The router accepts your payment, and then it opens the gate for the minutes or megabytes you paid for.
 
 <PhotoStrip
-  title="TollGate and the tools behind it"
+  title="TollGate design and setup"
   images={[
     {
-      src: '/static/images/spotlight/arjen/router.jpg',
+      src: '/static/images/spotlight/arjen/02-routers-buying-from-routers-diagram-2025-02-11.png',
       width: 1400,
       height: 1054,
-      alt: 'A TollGate router.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/02-routers-buying-from-routers-diagram-2025-02-11.png',
-      width: 1600,
-      height: 886,
       alt: 'Routers buying connectivity from other routers.',
     },
     {
-      src: '/static/images/spotlight/arjen/21-openwrt-with-a-tollgate-ssid-2025-08-08.png',
-      width: 1600,
-      height: 873,
-      alt: 'OpenWrt configured with a TollGate wireless network.',
-    },
-    {
       src: '/static/images/spotlight/arjen/22-tollgate-os-installer-2025-05-08.jpg',
-      width: 1482,
-      height: 1286,
+      width: 1400,
+      height: 1054,
       alt: 'The TollGate OS installer.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/26-website-over-bluetooth-2026-04-10.png',
-      width: 1600,
-      height: 1075,
-      alt: 'A website served over Bluetooth using FIPS.',
     },
     {
       src: '/static/images/spotlight/arjen/20-tollgate-design-sessions-outdoors-zitadelle-2025-07-26.jpg',
@@ -561,6 +537,30 @@ That's where Johnathan Corgan came in. They met at a nostr conference in Costa R
 His current OpenSats grant, which started in June 2026, is for TollGate and resilient networks.
 
 > Even if the tech doesn't pan out the way I hope, I made many friends that care about other things than just the superficial. Likes, attention, superficial appearances, things that lack any meaning. I like to focus on people and creating healthy relationships to each other and our environment.
+
+<PhotoStrip
+  title="Around Madeira"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/03-madeira-nature-walk-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A nature walk on Madeira.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/04-madeira-oelalaaa-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Looking over Madeira’s hills and rooftops.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/05-madeira-2025-04-16.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Madeira’s coastline.',
+    },
+  ]}
+/>
 
 ## Conclusion
 
