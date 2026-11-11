@@ -5,7 +5,7 @@ image: /static/images/avatar.png
 layout: PageLayout
 ---
 
-<HumanSlopBadge />
+<HumanSlopBadge linked={false} />
 
 There's few things more annoying than reading an article or blog post you're interested in, and after a paragraph or two, realizing that a clanker wrote it all.
 
@@ -19,14 +19,12 @@ Want to use the badge on your content too? No problem. Just grab one of the vers
 
 <div className="not-prose grid gap-4 sm:grid-cols-2">
   <div className="rounded-lg border border-gray-200 bg-white p-6 text-gray-900">
-    <a href="/slop" aria-label="100% human slop: about our writing">
-      <Image
-        src="/static/images/badges/human-slop-light.svg"
-        alt="100% human slop, light version"
-        width={140}
-        height={22}
-      />
-    </a>
+    <Image
+      src="/static/images/badges/human-slop-light.svg"
+      alt="100% human slop, light version"
+      width={140}
+      height={22}
+    />
     <div className="mt-4 flex flex-wrap gap-4 text-sm">
       <a
         href="/static/images/badges/human-slop-light.svg"
@@ -45,14 +43,12 @@ Want to use the badge on your content too? No problem. Just grab one of the vers
     </div>
   </div>
   <div className="rounded-lg border border-gray-700 bg-gray-900 p-6 text-gray-100">
-    <a href="/slop" aria-label="100% human slop: about our writing">
-      <Image
-        src="/static/images/badges/human-slop-dark.svg"
-        alt="100% human slop, dark version"
-        width={140}
-        height={22}
-      />
-    </a>
+    <Image
+      src="/static/images/badges/human-slop-dark.svg"
+      alt="100% human slop, dark version"
+      width={140}
+      height={22}
+    />
     <div className="mt-4 flex flex-wrap gap-4 text-sm">
       <a
         href="/static/images/badges/human-slop-dark.svg"
@@ -74,7 +70,7 @@ Want to use the badge on your content too? No problem. Just grab one of the vers
 
 Or copy this snippet into your markdown files to use the [Shields.io](https://shields.io/badges/static-badge) version:
 
-[![100% human slop](https://img.shields.io/badge/100%25-human_slop-f97316?style=flat)](/slop)
+![100% human slop](https://img.shields.io/badge/100%25-human_slop-f97316?style=flat)
 
 ```md
 [![100% human slop](https://img.shields.io/badge/100%25-human_slop-f97316?style=flat)](https://opensats.org/slop)
