@@ -3,6 +3,7 @@ import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import Link from '@/components/Link'
 import SpotlightCard from '@/components/SpotlightCard'
+import HumanSlopBadge from '@/components/post/HumanSlopBadge'
 import { slug as kebabCase } from 'github-slugger'
 import { sortedBlogPost, allCoreContent } from 'pliny/utils/contentlayer'
 import { InferGetStaticPropsType } from 'next'
@@ -70,6 +71,9 @@ export default function Spotlight({
           Get to know the developers we support and the open-source projects
           they pour their days (and nights) into.
         </p>
+        <div className="pt-2">
+          <HumanSlopBadge />
+        </div>
       </div>
 
       {featured && (
