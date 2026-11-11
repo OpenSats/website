@@ -137,7 +137,7 @@ Sneaky, right?
 
 But the FIPS that [finally shipped in 2026](https://njump.me/nevent1qqstn6jp40he4yn3hdrl8a4vj96h49mt02tna3z474y54u4tytyd3pgzyq3azthcw509acn8ld35r47yrw2rfgdenp57qgfwkdx4d2akkyhg52k5dpt), built mostly by Johnathan Corgan, works a little differently. It still uses that DNS trick, but the IPv6 address it hands back isn't random anymore, it's derived from the key itself. And instead of catching the little pieces before they get wrapped up in IP packets, it just lets them become normal IPv6 packets first, and then [catches those whole packets](https://github.com/jmcorgan/fips/blob/master/docs/design/fips-ipv6-adapter.md#role) and sends them off over FIPS.
 
-So instead of typing an address like 192.0.2.53, you just use a device's own nostr key with .fips added at the end. Like this: npub1spxdug4m3y24hpx5crm0el4zhkk0wafs8kp6m0xu0wecygqej2xqq8gyhx.fips, the address of [the first nostr relay on FIPS](https://njump.me/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9#:~:text=Running%20the%20first%20nostr%20relay%20on%20FIPS) from March 13th, 2026.
+So instead of typing an address like 192.0.2.53, you just use a device's own nostr key with .fips added at the end. Like this: <span className="break-all">npub1spxdug4m3y24hpx5crm0el4zhkk0wafs8kp6m0xu0wecygqej2xqq8gyhx.fips</span>, the address of [the first nostr relay on FIPS](https://njump.me/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9#:~:text=Running%20the%20first%20nostr%20relay%20on%20FIPS) from March 13th, 2026.
 
 If you had a FIPS node, you could reach it at that address, and everyone else could get to it at [a normal clearnet address](https://njump.me/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9#:~:text=Clearnet%20address):
 
