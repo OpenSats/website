@@ -5,7 +5,7 @@ export default function HumanSlopBadge() {
   return (
     <Link
       href="/about#content"
-      className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+      className="not-prose inline-flex rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
       aria-label="100% human slop — meet our content team"
     >
       <Image

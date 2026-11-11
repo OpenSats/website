@@ -123,11 +123,9 @@ export default function PostArticleBody({
           ))}
         </ul>
         {spotlight && (
-          <p className="shrink-0 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 min-[1000px]:mt-6 min-[1000px]:text-left">
-            <Link href="/about#content" className="hover:underline">
-              Written by humans.
-            </Link>
-          </p>
+          <div className="flex shrink-0 justify-end min-[1000px]:mt-6 min-[1000px]:justify-start">
+            <HumanSlopBadge />
+          </div>
         )}
       </dd>
     </dl>
@@ -199,7 +197,9 @@ export default function PostArticleBody({
       >
         {spotlight && (
           <>
-            <HumanSlopBadge />
+            <Link href="/about#content" className="hover:underline">
+              Written by humans.
+            </Link>
             <span aria-hidden="true">•</span>
           </>
         )}
