@@ -12,5 +12,5 @@ locally to match the SVG lettering.
 A Shields.io variant is available for GitHub READMEs:
 
 ```md
-[![100% human slop](https://img.shields.io/badge/100%25-human_slop-f97316?style=flat)](https://opensats.org/slop)
+[![100% human slop](https://img.shields.io/badge/%3E__-100%25_human_slop-292524?style=flat&labelColor=f97316)](https://opensats.org/slop)
 ```
