@@ -47,4 +47,4 @@ We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe3
 
 [![opensats.org](<https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22)>)](https://opensats.org)
 
-[![100% human slop](https://img.shields.io/badge/%3E__-100%25_human_slop-292524?style=flat&labelColor=f97316)](https://opensats.org/slop)
+[![100% human slop](https://img.shields.io/badge/%3E__-100%25_human_slop-black?style=flat&labelColor=f97316)](https://opensats.org/slop)
