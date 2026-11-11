@@ -30,6 +30,30 @@ To me, it was evident that Arjen had already somewhat succeeded in spreading his
 
 You see, he fell down the purple rabbit-hole and then got [nerd-sniped](https://xkcd.com/356/) into working on TollGate. But then, he in turn nerd-sniped [Johnathan Corgan](https://njump.me/npub19wavu4f7l6l43h24jyskn7fvzy37kcfp67aqjtmv2qgy4lp34nhsda8p6k) into working on FIPS to help fix TollGate. Johnathan actually came out of [retirement from open source](https://njump.me/note1rz20auslykt39dssxfzse3cuygea0epakvnn4xq7lh9s8m5q8vdqh73y3t) because of how obsessed he had become with seeing their shared vision for FIPS come to life. Well played, Arjen. Well played.
 
+<PhotoStrip
+  title="Around Madeira"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/03-madeira-nature-walk-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A nature walk on Madeira.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/04-madeira-oelalaaa-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Looking over Madeira’s hills and rooftops.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/05-madeira-2025-04-16.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Madeira’s coastline.',
+    },
+  ]}
+/>
+
 So what exactly are FIPS and TollGate? And who is Arjen?
 
 Before we get deeper into all of that, let's first review a few technical concepts. If you are already familiar with how the internet works, feel free to skip this next section.
@@ -98,16 +122,23 @@ Put DNS on nostr instead, signed with your own key, and that became [NoDNS](http
 
 Now, your [npub](/topics/npub), the public half of your nostr keypair, is your domain name: just [put .nostr after it](https://gitworkshop.dev/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr/relay.ngit.dev/nodns-protocol). It's not pretty to read, but because you generated it yourself, nobody above you can change it or take it away from you. Ta-dah!
 
-<figure className="mx-auto max-w-md">
-  <Image
-    src="/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg"
-    alt="NoDNS records for an npub"
-    width={1205}
-    height={1600}
-    className="h-auto w-full"
-  />
-  <figcaption>NoDNS records for an npub.</figcaption>
-</figure>
+<PhotoStrip
+  title="Reimagining networks"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'NoDNS records for an npub.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/24-the-3am-drawing-2025-02-17.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A network sketch drawn at 3 AM.',
+    },
+  ]}
+/>
 
 But that was only half of the battle.
 
@@ -194,7 +225,7 @@ Then in April, Arjen invited everyone to join a deathmatch in [Quake III Arena](
 > [Join us! 🎮 FIPS Q3 Arena. Quake III Deathmatch over FIPS mesh. Retro LAN party, zero clearnet. … 8 slots, bots are warming up. gg 🤙](https://njump.me/note1xef75v6ck5y53prc6h5s7j58zyjzrj0st7j807je8p76ruvh2ljq3eg8u3)
 
 <PhotoStrip
-  title="Building and experimenting"
+  title="FIPS in action"
   images={[
     {
       src: '/static/images/spotlight/arjen/quake.jpg',
@@ -209,22 +240,10 @@ Then in April, Arjen invited everyone to join a deathmatch in [Quake III Arena](
       alt: 'The FIPS mesh on a screen at SEC-07.',
     },
     {
-      src: '/static/images/spotlight/arjen/24-the-3am-drawing-2025-02-17.jpg',
-      width: 1205,
-      height: 1600,
-      alt: 'A network sketch drawn at 3 AM.',
-    },
-    {
       src: '/static/images/spotlight/arjen/26-website-over-bluetooth-2026-04-10.png',
       width: 1600,
       height: 1075,
       alt: 'A website served over Bluetooth using FIPS.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/20-tollgate-design-sessions-outdoors-zitadelle-2025-07-26.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'An outdoor TollGate design session at Zitadelle.',
     },
     {
       src: '/static/images/spotlight/arjen/27-vibe-coding-on-the-beach-funchal-sec-05-2025-09-02.jpg',
@@ -368,6 +387,18 @@ For years, he traveled to some of the most remote places in Europe, all while wo
       height: 1020,
       alt: 'A hot drink behind the windshield on a cold morning.',
     },
+    {
+      src: '/static/images/spotlight/arjen/10-norway-campfire-jotunheimen-2025-05-31.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A campfire in Jotunheimen, Norway.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/11-norway-lake-jotunheimen-2025-05-31.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A lake in Jotunheimen, Norway.',
+    },
   ]}
 />
 
@@ -489,6 +520,36 @@ There, at one of the standing tables, [c03rad0r](https://github.com/c03rad0r) wa
 
 > [Yesterday we were at the basement bar here in Riga, and the bartender was very enthusiastic to start earning sats for their internet. She said: 'Okay, about \$6 for half an hour of internet?' And we paid for it. So we have our first market price for the internet. … Now someone has actually set the price. The market has started, and anyone can compete, undercut, extend.](https://www.youtube.com/live/807UgdeednQ?t=3786s)
 
+<PhotoStrip
+  title="Meeting the nostr community"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/17-nostriga-truth-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A presentation at Nostriga 2024.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/18-nostriga-stage-git-over-nostr-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Git over nostr on stage at Nostriga 2024.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/19-the-meme-he-posted-with-the-quit-note-2024-08-29.jpg',
+      width: 500,
+      height: 400,
+      alt: 'The “I quit” meme Arjen posted when he left his job.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/20-tollgate-design-sessions-outdoors-zitadelle-2025-07-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'An outdoor TollGate design session at Zitadelle.',
+    },
+  ]}
+/>
+
 But back in 2024, attending Nostriga had such an immense impact on him that he literally quit his job right after the conference with nothing else lined up:
 
 > [Sometimes in life you just FEEL in your core what the right thing to do is. I placed my bet on \#nostr and that means I just quit my fiat job and decided to put all my energy into growing this community and ecosystem FULL-TIME!](https://njump.me/note1c8v6xxk2m6trfeh95tn7rylfg828c80ardg9hklwvrn8suwuf3csuj2d3h)
@@ -558,59 +619,3 @@ Start with [Gigi's interactive FIPS lessons](https://learn-fips.vercel.app/lesso
 OpenSats funds the people who build and maintain Bitcoin’s open-source infrastructure. Thank you to the donors who make this possible.
 
 To support Arjen and our other grantees, please consider making a one-time or recurring donation to the [General Fund.](/funds/general)
-
-## More photos
-
-<PhotoStrip
-  title="Madeira, Norway, and the nostr community"
-  images={[
-    {
-      src: '/static/images/spotlight/arjen/03-madeira-nature-walk-2024-10-26.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'A nature walk on Madeira.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/04-madeira-oelalaaa-2024-10-26.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'Looking over Madeira’s hills and rooftops.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/05-madeira-2025-04-16.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'Madeira’s coastline.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/10-norway-campfire-jotunheimen-2025-05-31.jpg',
-      width: 1600,
-      height: 1205,
-      alt: 'A campfire in Jotunheimen, Norway.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/11-norway-lake-jotunheimen-2025-05-31.jpg',
-      width: 768,
-      height: 1020,
-      alt: 'A lake in Jotunheimen, Norway.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/17-nostriga-truth-2024-08-22.jpg',
-      width: 1205,
-      height: 1600,
-      alt: 'A presentation at Nostriga 2024.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/18-nostriga-stage-git-over-nostr-2024-08-22.jpg',
-      width: 1205,
-      height: 1600,
-      alt: 'Git over nostr on stage at Nostriga 2024.',
-    },
-    {
-      src: '/static/images/spotlight/arjen/19-the-meme-he-posted-with-the-quit-note-2024-08-29.jpg',
-      width: 500,
-      height: 400,
-      alt: 'The “I quit” meme Arjen posted when he left his job.',
-    },
-  ]}
-/>

@@ -17,16 +17,8 @@ export default function PhotoStrip({
 }) {
   return (
     <section className="not-prose my-10 min-w-0 max-w-full" aria-label={title}>
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-          {title}
-        </h3>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          {images.length} photos · Scroll to explore
-        </p>
-      </div>
       <div
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain rounded-sm pb-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+        className="flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain rounded-sm pb-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500 sm:gap-4"
         tabIndex={0}
         role="region"
         aria-label={`${title}: scroll or use arrow keys; select a photo to view it larger`}
@@ -34,7 +26,7 @@ export default function PhotoStrip({
         {images.map((photo) => (
           <figure
             key={photo.src}
-            className="m-0 w-[85%] shrink-0 snap-start sm:w-[70%]"
+            className="m-0 w-[80%] shrink-0 snap-center sm:w-[70%]"
           >
             <a
               href={photo.src}
@@ -47,7 +39,7 @@ export default function PhotoStrip({
                 width={photo.width}
                 height={photo.height}
                 loading="lazy"
-                sizes="(max-width: 640px) 85vw, 540px"
+                sizes="(max-width: 640px) 80vw, 540px"
                 className="aspect-[4/3] w-full rounded-lg bg-gray-100 object-contain dark:bg-gray-900"
               />
             </a>
