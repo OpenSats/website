@@ -11,6 +11,7 @@ import BlogNewsletterForm from 'pliny/ui/BlogNewsletterForm'
 import Image from './Image'
 import BrowserFrame from './BrowserFrame'
 import PhoneFrame from './PhoneFrame'
+import PhotoStrip from './PhotoStrip'
 import VideoPlayer from './VideoPlayer'
 import CustomLink from './Link'
 import DonateToGeneralFundForm from './DonateToGeneralFundForm'
@@ -61,6 +62,7 @@ export const MDXComponents: ComponentMap = {
   Image,
   BrowserFrame,
   PhoneFrame,
+  PhotoStrip,
   VideoPlayer,
   TOCInline,
   a: CustomLink,

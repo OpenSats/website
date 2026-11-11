@@ -108,16 +108,41 @@ To see just why, let's dig deeper into what TollGate _really_ is.
 
 [TollGate](https://github.com/OpenTollGate/tollgate) is basically a protocol to add a toll booth to a router, just like the ones on the highway. When you connect to it, it tells you its price, and you pay with ecash. The router accepts your payment, and then it opens the gate for the minutes or megabytes you paid for.
 
-<figure>
-  <Image
-    src="/static/images/spotlight/arjen/router.jpg"
-    alt="A TollGate router with its antennas raised"
-    width={1400}
-    height={1054}
-    className="h-auto w-full"
-  />
-  <figcaption>A TollGate router.</figcaption>
-</figure>
+<PhotoStrip
+  title="TollGate and the tools behind it"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/router.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'A TollGate router.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/02-routers-buying-from-routers-diagram-2025-02-11.png',
+      width: 1600,
+      height: 886,
+      alt: 'Routers buying connectivity from other routers.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/21-openwrt-with-a-tollgate-ssid-2025-08-08.png',
+      width: 1600,
+      height: 873,
+      alt: 'OpenWrt configured with a TollGate wireless network.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/22-tollgate-os-installer-2025-05-08.jpg',
+      width: 1482,
+      height: 1286,
+      alt: 'The TollGate OS installer.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'NoDNS records for an npub.',
+    },
+  ]}
+/>
 
 The router itself [has its own nostr key](https://github.com/OpenTollGate/tollgate/blob/main/TIP-01.md#tollgate-details--advertisment), and [other routers can buy internet access from it, and sell it on to the next person](https://github.com/OpenTollGate/tollgate-module-basic-go#feature-highlights). That's how the network grows, from one router to the next one nearby.
 
@@ -163,16 +188,47 @@ Then in April, Arjen invited everyone to join a deathmatch in [Quake III Arena](
 
 > [Join us! 🎮 FIPS Q3 Arena. Quake III Deathmatch over FIPS mesh. Retro LAN party, zero clearnet. … 8 slots, bots are warming up. gg 🤙](https://njump.me/note1xef75v6ck5y53prc6h5s7j58zyjzrj0st7j807je8p76ruvh2ljq3eg8u3)
 
-<figure className="mx-auto max-w-md">
-  <Image
-    src="/static/images/spotlight/arjen/quake.jpg"
-    alt="Laptops running Quake III over FIPS"
-    width={768}
-    height={1020}
-    className="h-auto w-full"
-  />
-  <figcaption>Quake III over FIPS: a mesh-network LAN party.</figcaption>
-</figure>
+<PhotoStrip
+  title="Building and experimenting"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/quake.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'Quake III over FIPS: a mesh-network LAN party.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/06-fips-mesh-on-a-screen-sec-07-2026-03-20.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'The FIPS mesh on a screen at SEC-07.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/24-the-3am-drawing-2025-02-17.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A network sketch drawn at 3 AM.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/26-website-over-bluetooth-2026-04-10.png',
+      width: 1600,
+      height: 1075,
+      alt: 'A website served over Bluetooth using FIPS.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/20-tollgate-design-sessions-outdoors-zitadelle-2025-07-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'An outdoor TollGate design session at Zitadelle.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/27-vibe-coding-on-the-beach-funchal-sec-05-2025-09-02.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'Working on the beach in Funchal.',
+    },
+  ]}
+/>
 
 And a few days after that, [he hosted a website over Bluetooth](https://njump.me/note120mp8z0pxlr307z0cl7gax8dtskekthcn2d8gvgvmvyajq5hfw4q28dgsk) at [Sovereign Engineering](https://soveng.com), using FIPS.
 
@@ -263,16 +319,65 @@ For years, he traveled to some of the most remote places in Europe, all while wo
 
 > I loved the ability to wake up in the middle of nature for weeks on end, far away from civilization, up into the far north of Europe. As far as the arctic circle. I've slept in places that felt like no human had ever been there before, with howling winds across a glacier lake, and only wavy smooth rocks from ages of erosion. I always kept my backpack packed, ready to go up a mountain whenever I found a cool trail.
 
-<figure>
-  <Image
-    src="/static/images/spotlight/arjen/van.jpg"
-    alt="The wooden interior and desk Arjen built inside his van"
-    width={1400}
-    height={1054}
-    className="h-auto w-full"
-  />
-  <figcaption>The home and workspace Arjen built inside his van.</figcaption>
-</figure>
+<PhotoStrip
+  title="Van life"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/van.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'The home and workspace Arjen built inside his van.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07-the-van-as-he-bought-it-2024-09-15.jpg',
+      width: 1024,
+      height: 768,
+      alt: 'The van before the conversion, with measurements marked out.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07c-building-the-van-the-wooden-frames.jpg',
+      width: 1200,
+      height: 1600,
+      alt: 'Building the wooden frames inside the van.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07d-building-the-van-on-his-knees.jpg',
+      width: 1200,
+      height: 1600,
+      alt: 'Arjen working on the van’s interior.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07b-the-van-in-the-snow.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'The van beneath a snowy mountain.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07e-the-van-by-a-lake.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'The van parked beside a lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07f-the-van-at-a-northern-campsite.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'The van at a northern campsite.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07g-the-van-at-dusk-by-a-misty-lake.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Evening beside a misty lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/09-coffee-behind-the-windshield-2024-10-03.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A hot drink behind the windshield on a cold morning.',
+    },
+  ]}
+/>
 
 The first time that I spoke with Arjen, I was telling him about how this girl that we both know had walked from Mexico to Canada, and how crazy that was to me.
 
@@ -288,16 +393,83 @@ I had so many questions: how did you find food? Where did you do your business? 
 
 > I think in the end that this experience is what turned me into an adult. I’ve become a very different person in the few years since I set foot there. And it’s a big reason I’ve gotten to the point where I’m at now. I can recommend everyone to fuck off in the woods for a season.
 
-<figure className="mx-auto max-w-md">
-  <Image
-    src="/static/images/spotlight/arjen/trail.jpg"
-    alt="Arjen on the snowy Pacific Crest Trail with an ice axe"
-    width={1000}
-    height={1333}
-    className="h-auto w-full"
-  />
-  <figcaption>On the Pacific Crest Trail.</figcaption>
-</figure>
+<PhotoStrip
+  title="On the trail"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/trail.jpg',
+      width: 1000,
+      height: 1333,
+      alt: 'Arjen on the snowy trail with an ice axe.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12-pacific-crest-trail-organic-tech-2025-10-14.png',
+      width: 1600,
+      height: 1122,
+      alt: 'On the Pacific Crest Trail.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12a-pct-desert-section-on-the-aqueduct.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Arjen hiking the desert section of the Pacific Crest Trail.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12b-pct-climbing-a-snow-slope.jpg',
+      width: 768,
+      height: 1024,
+      alt: 'Climbing a snow slope above the valley.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12c-pct-hitching-into-town-in-a-pickup.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Hitching into town in a pickup; faces obscured in the supplied photo.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12e-pct-backpack-by-a-mountain-lake.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Arjen’s backpack beside a mountain lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12f-pct-looking-across-a-lake.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Looking across a mountain lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/13-mount-whitney-27-june-2023.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Mount Whitney, June 2023.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/14-trail-camp-would-love-to-wake-up-here-again.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A campsite on the trail.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/15-goat-rocks-400km-second-stretch-2024-08-10.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Arjen in Goat Rocks Wilderness, Washington.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/16-the-map-with-the-fire-note-2024-08-21.png',
+      width: 819,
+      height: 1600,
+      alt: 'The wildfire map Arjen shared when his hike was cut short.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/29-sunrise-on-mount-whitney-2026-09-06.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Sunrise on Mount Whitney.',
+    },
+  ]}
+/>
 
 Now I get it. He went in as a boy and came out as a man. It kinda makes me want to take his advice about f-ing off in the woods more seriously now.
 
@@ -394,3 +566,59 @@ Start with [Gigi's interactive FIPS lessons](https://learn-fips.vercel.app/lesso
 OpenSats funds the people who build and maintain Bitcoin’s open-source infrastructure. Thank you to the donors who make this possible.
 
 To support Arjen and our other grantees, please consider making a one-time or recurring donation to the [General Fund.](/funds/general)
+
+## More photos
+
+<PhotoStrip
+  title="Madeira, Norway, and the nostr community"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/03-madeira-nature-walk-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A nature walk on Madeira.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/04-madeira-oelalaaa-2024-10-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Looking over Madeira’s hills and rooftops.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/05-madeira-2025-04-16.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Madeira’s coastline.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/10-norway-campfire-jotunheimen-2025-05-31.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A campfire in Jotunheimen, Norway.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/11-norway-lake-jotunheimen-2025-05-31.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A lake in Jotunheimen, Norway.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/17-nostriga-truth-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A presentation at Nostriga 2024.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/18-nostriga-stage-git-over-nostr-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Git over nostr on stage at Nostriga 2024.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/19-the-meme-he-posted-with-the-quit-note-2024-08-29.jpg',
+      width: 500,
+      height: 400,
+      alt: 'The “I quit” meme Arjen posted when he left his job.',
+    },
+  ]}
+/>
