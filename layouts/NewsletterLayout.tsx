@@ -5,7 +5,7 @@ import type { Newsletter } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import { NewsletterSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import BrainmadeBadge from '@/components/post/BrainmadeBadge'
+import HumanSlopBadge from '@/components/post/HumanSlopBadge'
 import { discussUrl, editUrl } from '@/components/post/postShared'
 import { formatIssueNumber } from '@/utils/newsletter'
 
@@ -54,18 +54,18 @@ export default function NewsletterLayout({ content, children }: LayoutProps) {
                 {summary}
               </p>
             )}
-            <p className="mt-6 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 sm:text-left">
-              <Link href="/about#content" className="hover:underline">
-                Written by humans.
-              </Link>
-            </p>
+            <div className="mt-6 flex justify-end sm:justify-start">
+              <HumanSlopBadge />
+            </div>
           </header>
 
           <div className="newsletter-prose prose prose-lg max-w-none pb-8 pt-10 text-justify dark:prose-dark prose-headings:text-left prose-headings:font-serif prose-headings:font-semibold prose-h2:mt-12 prose-h2:text-3xl prose-h3:text-xl prose-a:text-primary-500 hover:prose-a:text-primary-600 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300 sm:text-left">
             {children}
           </div>
           <footer className="flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-gray-200 py-6 text-xs text-gray-700 dark:border-gray-700 dark:text-gray-300 sm:gap-x-3 sm:text-sm">
-            <BrainmadeBadge />
+            <Link href="/about#content" className="hover:underline">
+              Written by humans.
+            </Link>
             <span aria-hidden="true">•</span>
             <Link href={discussUrl()} rel="nofollow">
               Discuss on nostr

@@ -8,7 +8,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
-import BrainmadeBadge from '@/components/post/BrainmadeBadge'
+import HumanSlopBadge from '@/components/post/HumanSlopBadge'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
 // Client-only to avoid hydration mismatch with next/dynamic, and to avoid a
@@ -123,11 +123,9 @@ export default function PostArticleBody({
           ))}
         </ul>
         {spotlight && (
-          <p className="shrink-0 text-right text-xs leading-relaxed text-gray-500 dark:text-gray-400 min-[1000px]:mt-6 min-[1000px]:text-left">
-            <Link href="/about#content" className="hover:underline">
-              Written by humans.
-            </Link>
-          </p>
+          <div className="flex shrink-0 justify-end min-[1000px]:mt-6 min-[1000px]:justify-start">
+            <HumanSlopBadge />
+          </div>
         )}
       </dd>
     </dl>
@@ -199,7 +197,9 @@ export default function PostArticleBody({
       >
         {spotlight && (
           <>
-            <BrainmadeBadge />
+            <Link href="/about#content" className="hover:underline">
+              Written by humans.
+            </Link>
             <span aria-hidden="true">•</span>
           </>
         )}

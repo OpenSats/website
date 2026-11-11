@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="22" viewBox="0 0 140 22" role="img" aria-label="100% human slop">
+  <title>100% human slop</title>
+  <rect x="0.5" y="0.5" width="139" height="21" rx="3" fill="#292524" stroke="#57534e" />
+  <svg x="6" y="4" width="18" height="14" viewBox="344.5639097744361 330.27819548872174 111.73684210526318 91.21804511278197">
+    <g transform="matrix(2.3991507,0,0,2.3991507,324.2199,304.88344)" fill="#f97316">
+      <path d="m 32.574123,39.318559 v 3.810103 h 16.109611 v -3.810103 z" />
+      <path d="m 14.849106,16.062097 v 4.551143 l 8.944674,5.680791 v 0.136942 l -8.944674,5.680274 V 36.66239 L 27.877769,28.107357 V 24.61713 Z" />
+    </g>
+  </svg>
+  <text x="31" y="14.5" fill="#fafaf9" font-family="Verdana, Geneva, sans-serif" font-size="11">100% human slop</text>
+</svg>

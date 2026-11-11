@@ -25,6 +25,7 @@ import DesignTeam from './DesignTeam'
 import Credits from './Supporters'
 import YouTubeEmbed from './YouTubeEmbed'
 import Members from './Members'
+import HumanSlopBadge from './post/HumanSlopBadge'
 import LifetimeStats from './LifetimeStats'
 import GranteeMap from './GranteeMap'
 import StatsSentence from './StatsSentence'
@@ -78,6 +79,7 @@ export const MDXComponents: ComponentMap = {
   YouTubeEmbed,
   Credits,
   Members,
+  HumanSlopBadge,
   LifetimeStats,
   GranteeMap,
   StatsSentence,
