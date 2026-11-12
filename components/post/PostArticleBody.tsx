@@ -8,6 +8,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { discussUrl, editUrl } from '@/components/post/postShared'
+import { qualifiesForHumanBadge } from '@/utils/humanWriting'
 import HumanSlopBadge from '@/components/post/HumanSlopBadge'
 import SpotlightPullQuotes from '@/components/post/SpotlightPullQuotes'
 
@@ -72,6 +73,7 @@ export default function PostArticleBody({
   spotlight = false,
 }: Props) {
   const { filePath, path, slug, tags, pullQuotes, fundCard } = content
+  const humanWritten = qualifiesForHumanBadge(content.humanWrittenScore)
   const basePath = path.split('/')[0]
   const [loadComments, setLoadComments] = useState(false)
   const classes = spotlight
@@ -122,8 +124,14 @@ export default function PostArticleBody({
             </li>
           ))}
         </ul>
-        {spotlight && (
-          <div className="flex shrink-0 justify-end min-[1000px]:mt-6 min-[1000px]:justify-start">
+        {humanWritten && (
+          <div
+            className={
+              spotlight
+                ? 'flex shrink-0 justify-end min-[1000px]:mt-6 min-[1000px]:justify-start'
+                : 'mt-6 flex justify-center xl:justify-start'
+            }
+          >
             <HumanSlopBadge />
           </div>
         )}
@@ -195,7 +203,7 @@ export default function PostArticleBody({
             : 'py-6 text-sm text-gray-700 dark:text-gray-300'
         }
       >
-        {spotlight && (
+        {humanWritten && (
           <>
             <Link href="/about#content" className="hover:underline">
               Written by humans.
