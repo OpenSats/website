@@ -58,3 +58,6 @@ npm-debug.log*
 
 # VSCode
 .vscode
+
+# Per-build human writing scores
+/.cache/human-writing-scores.json

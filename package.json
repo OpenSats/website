@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "next dev",
-    "dev": "cross-env INIT_CWD=$PWD next dev",
-    "build": "contentlayer2 build && node ./scripts/generate-default-og.mjs && node ./scripts/generate-project-og.mjs && node ./scripts/generate-fund-og.mjs && node ./scripts/generate-newsletter-og.mjs && node ./scripts/generate-topic-og.mjs && node -r esbuild-register ./scripts/generate-page-og.mjs && node ./scripts/generate-author-og.mjs && node ./scripts/generate-heartbeat-og.mjs && npm run generate:blog-og && npm run check:og && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
+    "start": "node -r esbuild-register ./scripts/fetch-human-writing-scores.mjs && next dev",
+    "dev": "node -r esbuild-register ./scripts/fetch-human-writing-scores.mjs && cross-env INIT_CWD=$PWD next dev",
+    "build": "node -r esbuild-register ./scripts/fetch-human-writing-scores.mjs && contentlayer2 build && node ./scripts/generate-default-og.mjs && node ./scripts/generate-project-og.mjs && node ./scripts/generate-fund-og.mjs && node ./scripts/generate-newsletter-og.mjs && node ./scripts/generate-topic-og.mjs && node -r esbuild-register ./scripts/generate-page-og.mjs && node ./scripts/generate-author-og.mjs && node ./scripts/generate-heartbeat-og.mjs && npm run generate:blog-og && npm run check:og && cross-env INIT_CWD=$PWD next build && node -r esbuild-register ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "generate:default-og": "node ./scripts/generate-default-og.mjs",
@@ -19,7 +19,8 @@
     "lint": "next lint --fix --dir pages --dir components --dir lib --dir layouts --dir scripts",
     "test": "jest",
     "generate:blog-og": "node -r esbuild-register ./scripts/generate-blog-og.mjs",
-    "check:og": "node -r esbuild-register ./scripts/check-og-images.mjs"
+    "check:og": "node -r esbuild-register ./scripts/check-og-images.mjs",
+    "fetch:human-writing-scores": "node -r esbuild-register ./scripts/fetch-human-writing-scores.mjs"
   },
   "engines": {
     "node": "22.x"

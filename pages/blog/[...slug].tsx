@@ -6,6 +6,7 @@ import { slug as kebabCase } from 'github-slugger'
 import { InferGetStaticPropsType } from 'next'
 import { allBlogs, allAuthors } from 'contentlayer/generated'
 import type { Blog } from 'contentlayer/generated'
+import { getHumanWritingScore } from '@/lib/humanWritingScores'
 import { getBlogPageTheme } from '@/utils/pageTheme'
 import { getBlogLayout, isSpotlightLayout } from '@/utils/getBlogLayout'
 
@@ -35,7 +36,10 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     props: {
-      post,
+      post: {
+        ...post,
+        humanWrittenScore: getHumanWritingScore(`blog/${post.slug}`),
+      },
       authorDetails,
       prev,
       next,

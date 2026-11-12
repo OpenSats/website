@@ -4,6 +4,8 @@ import { InferGetStaticPropsType } from 'next'
 import { allNewsletters } from 'contentlayer/generated'
 import type { Newsletter } from 'contentlayer/generated'
 
+import { getHumanWritingScore } from '@/lib/humanWritingScores'
+
 const DEFAULT_LAYOUT = 'NewsletterLayout'
 
 export async function getStaticPaths() {
@@ -26,7 +28,10 @@ export const getStaticProps = async ({ params }) => {
   if (!issue) return { notFound: true }
   return {
     props: {
-      issue,
+      issue: {
+        ...issue,
+        humanWrittenScore: getHumanWritingScore(`newsletter/${issue.slug}`),
+      },
     },
   }
 }
