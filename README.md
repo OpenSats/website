@@ -43,7 +43,7 @@ Thank you for [supporting OpenSats](https://opensats.org/donate)!
 
 ---
 
-We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31) too!
+We've got [badges](https://gist.github.com/dergigi/e76f67ce5037eb4fb861f32bbc4fb406) too!
 
 [![opensats.org](<https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22)>)](https://opensats.org)
 
