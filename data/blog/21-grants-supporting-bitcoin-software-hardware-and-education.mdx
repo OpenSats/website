@@ -7,3 +7,673 @@ images: ['/static/images/blog/121-21-grants-supporting-bitcoin-software-hardware
 draft: false
 summary: "OpenSats announces 21 grants supporting open-source Bitcoin software, hardware, and education."
 ---
+
+OpenSats is pleased to announce the latest wave of grants from its General
+Fund, supporting 21 open-source projects across the Bitcoin ecosystem.
+
+This round covers 8 new grants and 13 grant renewals, funding work on Bitcoin
+privacy, developer education, wallet infrastructure, independent node
+implementations, mining software, ecash, and network security.
+
+The eight new grants in this wave go to:
+
+- [Bdk-cli](#bdk-cli)
+- [Cashu-TS and Cashu.me](#cashu-ts-and-cashume)
+- [Code Orange Dev School](#code-orange-dev-school)
+- [Dana](#dana)
+- [Libbitcoin](#libbitcoin)
+- [OrangeCheck](#orangecheck)
+- [Stratum V2 Reference Implementation](#stratum-v2-reference-implementation)
+- [Tor Network-Combatting Malicious Relays](#tor-network-combatting-malicious-relays)
+
+Grant renewals have been awarded to:
+
+- [Dana Wallet](#dana-wallet)
+- [Braidpool](#braidpool)
+- [Orchard](#orchard)
+- [Bitcoin Research Kit](#bitcoin-research-kit)
+- [Rust-bitcoin](#rust-bitcoin)
+- [Floresta](#floresta) (to [Jaoleal](#jaoleal), and [Moises Pompilio](#moises-pompilio))
+- [BitShoka](#bitshoka)
+- [Krux-installer](#krux-installer)
+- [Krux](#krux)
+- [Fully Noded](#fully-noded)
+- [BitaxeBonanza](#bitaxebonanza)
+- [Tollgate and FIPS](#tollgate-and-fips)
+
+These grants are made possible by donations to our [General Fund]. If you'd
+like to help sustain free and open-source Bitcoin development, please
+consider [setting up a recurring donation].
+
+<DonateRecurringButton designation="general" />
+
+Let's take a closer look at the projects receiving support in this wave.
+
+[General Fund]: /funds/general
+[setting up a recurring donation]: /donate
+
+---
+
+### Bdk-cli
+
+[Bdk-cli] is a command-line Bitcoin wallet tool built using [Bitcoin Dev Kit]
+(BDK). It allows developers to create and experiment with
+[descriptor-based wallets], test spending conditions, and explore Bitcoin
+features like [Taproot] using a practical command-line interface. The project
+also provides an easy entry point for contributors learning the Rust Bitcoin
+development environment. Although this is part of the broader BDK project,
+bdk-cli is maintained by community contributors outside the BDK Foundation's
+dedicated funding scope. Developer [Vadim Anufriev] has already contributed
+features to the tool, including a change that randomizes unspendable internal
+keys in Taproot descriptors to address privacy concerns.
+
+This grant will support Vadim's continued development and maintenance of
+bdk-cli, with particular focus on reviewing contributions from other
+developers. Planned work includes a follow-up verification command for
+Taproot unspendable internal keys and review of features involving
+[BIP-329] wallet labels, [BIP-353] payment instructions, multipath
+descriptors, [Payjoin] persistence, [Silent Payments], and signing device
+integration. Compatibility will be maintained with upstream changes to BDK,
+while addressing bugs, improving tests, and keeping continuous integrations
+working. Pull request reviews will be prioritized to help newer developers
+move their contributions forward.
+
+Repository: [bitcoindevkit/bdk-cli]  
+License: MIT / Apache-2.0
+
+[Bdk-cli]: https://github.com/bitcoindevkit/bdk-cli
+[Bitcoin Dev Kit]: /projects/bdk
+[descriptor-based wallets]: /topics/output-descriptors
+[Taproot]: /topics/taproot
+[Vadim Anufriev]: https://github.com/vadim-anfv
+[BIP-329]: h/topics/bip-329
+[BIP-353]: /topics/bip-353
+[Payjoin]: /topics/payjoin
+[Silent Payments]: /topics/silent-payments
+[bitcoindevkit/bdk-cli]: https://github.com/bitcoindevkit/bdk-cli
+
+---
+
+### Cashu-TS and Cashu.me
+
+[Cashu-TS] is a TypeScript library for building Bitcoin [ecash] wallets and
+applications using the [Cashu protocol]. Cashu uses blind signatures that
+allow mints to verify ecash tokens without being able to directly trace them
+back to their original issuance. The library gives developers a common
+implementation of the protocol and its respective [NUT specifications],
+including tools for interacting with Cashu mints, handling tokens, and
+building wallet functionality. [Cashu.me] remains an actively maintained web
+wallet built with Cashu-TS, while the newer [native iOS and Android apps] use
+CDK bindings. OpenSats supported Cashu-TS development through a prior grant,
+with this grant specifically supporting Rob Woodgate's work as a maintainer
+of the library, Cashu.me, and the underlying protocol specifications.
+
+Rob has made numerous contributions to Cashu-TS, including the [v3] redesign
+and the [v4] release, which enhanced wallet operations with support for
+larger, precision-safe amounts. Development of [v5] is already underway, with
+releases including new protocol features and changes to ecash proof handling.
+Rob plans to continue developing and maintaining the library to keep it in
+line with evolving NUT specifications, making its APIs practical for
+application developers. He will also contribute to [Cashu.me]
+[Cashu.me website] as a co-maintainer, working on the wallet's implementation
+and security, while continuing his reviews and refinement of the Cashu
+protocol specifications.
+
+Repositories: [cashubtc/cashu-ts]; [cashubtc/cashu.me]  
+Licenses: MIT / Apache-2.0 (Cashu-TS); MIT (Cashu.me)
+
+[Cashu-TS]: https://github.com/cashubtc/cashu-ts
+[ecash]: /topics/ecash
+[Cashu protocol]: /projects/cashu
+[NUT specifications]: https://github.com/cashubtc/nuts
+[Cashu.me]: https://github.com/cashubtc/cashu.me
+[native iOS and Android apps]: https://github.com/cashubtc/wallet
+[v3]: https://github.com/cashubtc/cashu-ts/releases/tag/v3.0.0
+[v4]: https://github.com/cashubtc/cashu-ts/releases/tag/v4.0.0
+[v5]: https://github.com/cashubtc/cashu-ts/releases/tag/v5.0.0-rc.11
+[Cashu.me website]: https://cashu.me/
+[cashubtc/cashu-ts]: https://github.com/cashubtc/cashu-ts
+[cashubtc/cashu.me]: https://github.com/cashubtc/cashu.me
+
+---
+
+### Code Orange Dev School
+
+[Code Orange Dev School] is a Bitcoin developer education program founded by
+keypleb, based in Bali, Indonesia. Code Orange offers a structured path,
+utilizing hands-on workshops and technical study cohorts to contribute code
+for open-source Bitcoin projects. Programs such as Bitcoin Dojo, rawBit, and
+Decoding Bitcoin introduce developers to Bitcoin's technical foundations
+before helping them work on repositories including [Bitcoin Core],
+[rust-bitcoin], [BDK], and [rust-payjoin]. Code Orange also has a
+[public dashboard] tracking pull requests across Bitcoin projects.
+
+This grant will support a year-long Bitcoin Privacy Developer Track, with 24
+biweekly sessions covering chain analysis, [Silent Payments],
+[Payjoin], network privacy, and advanced techniques involving [CoinJoin],
+[Lightning], and [ecash]. The program sessions combine technical study with
+practical contributions on existing issues and pull requests to guide
+students to work on privacy-focused repositories. The grant will also support
+two different six-month fellowship cohorts, providing mentorship to four
+developer fellows working on specific open-source projects and four educator
+fellows to run workshops, lead study cohorts, and train additional
+instructors. Code Orange's goal is to train more than 40 developers and
+target the opening of at least 30 pull requests on privacy-related projects
+over the next year.
+
+Repositories: [code-orange-dev/curriculum]; [code-orange-dev/fellowships]  
+License: CC0 1.0
+
+[Code Orange Dev School]: https://codeorange.dev/
+[Bitcoin Core]: /projects/bitcoin-core
+[rust-bitcoin]: /projects/rust-bitcoin
+[BDK]: /projects/bdk
+[rust-payjoin]: /projects/pdk
+[public dashboard]: https://github.com/code-orange-dev/PR-tracking-dashboard
+[Silent Payments]: /topics/silent-payments
+[Payjoin]: /topics/payjoin
+[CoinJoin]: /topics/coinjoin
+[Lightning]: /topics/lightning
+[ecash]: /topics/ecash
+[code-orange-dev/curriculum]: https://github.com/code-orange-dev/curriculum
+[code-orange-dev/fellowships]: https://github.com/code-orange-dev/fellowships
+
+---
+
+### Dana
+
+[Dana] is an experimental mobile Bitcoin wallet designed around
+[Silent Payments], a protocol that allows users to receive payments through a
+reusable payment code without revealing a reused on-chain address. The wallet
+uses [BIP-353] to provide payment addresses in a format that looks like email
+addresses (e.g., ₿donate@danawallet.app). Dana's privacy-focused scanning
+approach aims to limit what its public backend can learn about users' payment
+activity. OpenSats has [previously supported Dana Wallet], and this grant
+will support developer [Sosthène's] continued work on the project.
+
+Project developer Sosthène will use his grant to focus on moving Dana toward a
+production-ready Android release, with additional work on scanning
+performance, deployment, and general wallet stability. The majority of
+development work will be to refine the contacts-centric interface, allowing
+users to send bitcoin to saved contacts without having to manage traditional
+bitcoin addresses. The project will also explore features designed
+specifically for donations, including the possibility of offering users an
+option to donate change left over from transactions to a cause the user
+supports.
+
+Repository: [cygnet3/dana]  
+License: MIT
+
+[Dana]: /projects/dana-wallet
+[Silent Payments]: /topics/silent-payments
+[BIP-353]: /topics/bip-353
+[previously supported Dana Wallet]: /blog/fifteenth-wave-of-bitcoin-grants
+[Sosthène's]: https://github.com/Sosthene00
+[cygnet3/dana]: https://github.com/cygnet3/dana
+
+---
+
+### Libbitcoin
+
+[Libbitcoin] is a modular C++ Bitcoin development toolkit and independent full
+node implementation. In development since 2011, the project provides reusable
+libraries for cryptography, database operations, peer-to-peer networking,
+blockchain validation, and command-line tools. The architecture prioritizes
+parallel processing and the efficient use of available hardware during
+blockchain synchronization and validation. OpenSats has[previously supported]
+development of [Libbitcoin v4], and this additional grant supports
+[Rowan's] work on the user-facing interfaces for the upcoming release.
+
+Rowan will focus on completing the embedded browser-based block explorer and
+developing an administrative dashboard for Libbitcoin Server. The explorer
+will have an interface for inspecting blockchain data, while the dashboard
+will allow node operators to manage server configuration and inspect
+diagnostic information, synchronization progress, and performance metrics.
+The dashboard is designed for displaying live information from the node
+through secure HTTP and WebSocket interfaces. Rowan will also test the node
+using different configurations and compiler flags to measure what effects
+they have on performance. He plans to publish a series of previews and
+release candidates ahead of the Libbitcoin v4.0 release.
+
+Repository: [libbitcoin][libbitcoin GitHub]  
+License: AGPL-3.0
+
+[Libbitcoin]: /projects/libbitcoin
+[previously supported]: /blog/sixteenth-wave-of-bitcoin-grants#libbitcoin
+[Libbitcoin v4]: https://github.com/libbitcoin/libbitcoin-server#readme
+[Rowan's]: https://github.com/BOB450
+[libbitcoin GitHub]: https://github.com/libbitcoin
+
+---
+
+### OrangeCheck
+
+[OrangeCheck] is a family of open protocols, developed by [Wil], used for
+creating Bitcoin-linked digital identities and verifiable claims on the web.
+There are six components, [Attest], for identity attestation, [Lock], for
+secure communication, [Stamp], for content provenance, [Vote], for community
+signaling, [Agent], for delegated authority, and [Pledge], for commitments.
+OrangeCheck's main implementation is [ochk.app], where a user signs in
+through [OAuth] (Google or GitHub), email, or a Bitcoin wallet to receive a
+Bitcoin identity in the background, signed with [BIP-322]. OrangeCheck holds
+custody while the app is in testing, with plans to move to [Fedimint] and
+then to the user's own keys. Anyone can check a signed envelope on any
+machine, using only the envelope itself and public Bitcoin data. It's also
+possible to verify if a signed envelope has been published on a
+[nostr relay].
+
+The grant will fund work on a reusable reference implementation and the
+protocol layer. Wil plans to build up to three live integrations with design
+partners, to then leverage his learnings to improve the SDKs and
+documentation. From there, integrations will expand to provenance, voting,
+agent permissions, and pledges, each with example code that other developers
+can copy and modify. The last phase will be about reaching v1. This means
+stabilizing the SDKs and getting the signing and verification code to be
+audited through independent security review. If time allows, Wil hopes to get
+OrangeCheck's nostr spec ([NIP]) accepted upstream.
+
+Repositories: [orangecheck/oc-attest-protocol]; [orangecheck/oc-packages]  
+Licenses: MIT (reference code and SDKs); CC-BY-4.0 (protocol specifications)
+
+[OrangeCheck]: https://ochk.io/
+[Wil]: https://github.com/xaxis
+[Attest]: https://github.com/orangecheck/oc-attest-protocol
+[Lock]: https://github.com/orangecheck/oc-lock-protocol
+[Stamp]: https://github.com/orangecheck/oc-stamp-protocol
+[Vote]: https://github.com/orangecheck/oc-vote-protocol
+[Agent]: https://github.com/orangecheck/oc-agent-protocol
+[Pledge]: https://github.com/orangecheck/oc-pledge-protocol
+[ochk.app]: https://ochk.app/
+[OAuth]: https://datatracker.ietf.org/wg/oauth/about/
+[BIP-322]: https://github.com/bitcoin/bips/blob/master/bip-0322.mediawiki
+[Fedimint]: /topics/fedimint
+[nostr relay]: /topics/relays
+[NIP]: /topics/nips
+[orangecheck/oc-attest-protocol]: https://github.com/orangecheck/oc-attest-protocol
+[orangecheck/oc-packages]: https://github.com/orangecheck/oc-packages
+
+---
+
+### Stratum V2 Reference Implementation
+
+The [Stratum V2 Reference Implementation] (SRI) is an open-source
+implementation of the [Stratum V2 mining protocol], providing libraries and
+applications for miners and mining pools. Stratum V2 improves communication
+between mining equipment and pools using a more efficient binary protocol and
+authenticated, encrypted connections. SRI's job negotiation capabilities
+allow participating miners to build their own block templates, reducing
+dependence on pool operators for transaction selection. OpenSats has
+supported other Stratum V2 contributors in [earlier grants], and this grant
+will specifically support [bit-aloo's] work on the reference implementation.
+
+Bit-aloo's focus area will be improving the reliability and maintainability of
+the protocol libraries as SRI sees wider adoption, including refactoring
+low-level components such as [`binary-sv2`](message encoding and decoding),
+[`noise-sv2`](encrypted communication), and [`framing-sv2`](message framing),
+addressing technical debt while simplifying future development. Another
+milestone will include a deterministic simulation testing framework to
+reproduce elusive bugs, especially concurrency issues. Bit-aloo will also
+work on performance benchmarks, integration tests under real world
+conditions, and review pull requests. These tests should help catch problems
+before updates reach mining infrastructure.
+
+Repositories: [stratum-mining/stratum]; [stratum-mining/sv2-apps]  
+License: MIT / Apache-2.0
+
+[Stratum V2 Reference Implementation]: /projects/stratumv2
+[Stratum V2 mining protocol]: /topics/stratum-v2
+[earlier grants]: /projects/stratumv2#announcements
+[bit-aloo's]: https://github.com/bit-aloo
+[`binary-sv2`]: https://github.com/stratum-mining/stratum/tree/main/sv2/binary-sv2
+[`noise-sv2`]: https://github.com/stratum-mining/stratum/tree/main/sv2/noise-sv2
+[`framing-sv2`]: https://github.com/stratum-mining/stratum/tree/main/sv2/framing-sv2
+[stratum-mining/stratum]: https://github.com/stratum-mining/stratum
+[stratum-mining/sv2-apps]: https://github.com/stratum-mining/sv2-apps
+
+---
+
+### Tor Network-Combatting Malicious Relays
+
+The [Tor Project] develops and maintains the [Tor network], a decentralized
+system routing encrypted traffic through volunteer-operated relays with the
+goal of protecting users against network surveillance and censorship. Tor is
+widely used throughout the Bitcoin ecosystem, including node operators who
+use onion services to increase the privacy and security of their network
+addresses. Tor’s distributed network reduces dependence on a single operator,
+but malicious relays can still join the network and pose a threat to user
+privacy and security. In 2020, the Tor Project [identified and removed]
+groups of exit relays that intercepted connections to cryptocurrency
+exchanges, preventing users from being redirected from unencrypted HTTP
+connections to more secure HTTPS. OpenSats has [supported Tor development]
+before, but this grant will fund a different group of developers working
+specifically on detecting and investigating malicious relays.
+
+The Tor Project has already developed a database of network status information
+that can be queried to help investigators identify and neutralize coordinated
+attacks. However, inspecting suspicious relays and determining if independent
+operators are connected to them still involves extensive analysis. This grant
+will fund work on a more proactive investigation framework using behavioral
+anomalies and correlations between relay activity to identify potential
+threats. This approach will combine indications of malicious behavior with
+less obvious signals which may reveal coordinated operators or emerging
+attacks. This enables investigators to examine suspicious activity much
+earlier and more efficiently.
+
+Over their grant period, the Tor team will establish a common data format
+across existing tools and incorporate external data sources into a
+centralized network health database. This will be followed by alerts based on
+historical patterns, a platform for investigating suspicious relay operators
+and their connections, and datasets and visualizations that can be queried to
+support further analysis as needed. The intention of these tools are to
+reduce the time required to investigate malicious relay groups and improve
+the Tor Project's ability to respond to threats. Bitcoin users and node
+operators dependent on Tor for network privacy will benefit from improved
+detection of attacks that could compromise their connections or expose
+sensitive information.
+
+Repository: [Tor Project Network Health]  
+License: BSD-3-Clause
+
+[Tor Project]: /projects/tor
+[Tor network]: /topics/onion-routing
+[identified and removed]: https://blog.torproject.org/bad-exit-relays-may-june-2020/
+[supported Tor development]: /projects/tor#announcements
+[Tor Project Network Health]: https://gitlab.torproject.org/tpo/network-health
+
+## Renewals
+
+### Dana Wallet
+
+Cygnet is returning to OpenSats for a second grant to continue his work on
+Dana Wallet, a mobile Bitcoin wallet built around [silent payments]. Cygnet
+got his first grant in [January 2026] to focus on creating a modern wallet
+with a simple UX to facilitate use of silent payments. He introduced
+[Dana Addresses] ([`username@danawallet.app`]) — human-readable, email-like
+addresses based on [BIP353] — and worked to improve the scanning phase by
+introducing a foreground service to perform that operation in the background.
+With support from this second grant, Cygnet will be focusing on building
+educational tools and improving documentation around Dana Wallet, revamping
+the current home screen to make the contact list the center of the user
+experience, adding support for [PSBTs], and migrating to the new Blindbit
+Oracle V2 backend.
+
+[Silent Payments]: /topics/silent-payments
+[January 2026]: /blog/fifteenth-wave-of-bitcoin-grants#dana-wallet
+[Dana Addresses]: https://github.com/cygnet3/dana/pull/203
+[`username@danawallet.app`]: mailto:username@danawallet.app
+[BIP353]: https://github.com/bitcoin/bips/blob/master/bip-0353.mediawiki
+[PSBTs]: /topics/psbt
+
+---
+
+### Braidpool
+
+Mohd Zaid has been an OpenSats grantee since [December 2025]. He has been
+working on Braidpool, a peer-to-peer mining pool supporting
+[hashrate futures]. His work focused on auditability and payout accounting,
+creating a cryptographically verifiable system to audit the amount of mining
+shares that miners worked on. With support from this second grant, Mohd Zaid
+will be focusing on making Braidpool communicate to an isolated[Bitcoin Core]
+process, adding [fuzzing] to find unexpected edge cases, and developing test
+harnesses to simulate worst case scenarios, benchmarking tools for mining
+critical calls, and robust debug instrumentation with the goal of getting to
+a production-ready release candidate by the end of the grant period.
+
+[December 2025]: /blog/fifteenth-wave-of-bitcoin-grants#braidpool
+[hashrate futures]: https://github.com/braidpool/braidpool/blob/main/docs/derivatives.md
+[Bitcoin Core]: /projects/bitcoin-core
+[fuzzing]: /topics/fuzzing
+
+---
+
+### Orchard
+
+Shyguy has been an OpenSats grantee since [October 2025]. He has been working
+on Orchard, a web application that allows operators to manage their
+[Cashu] mints and all the infrastructure required to make it work, such as a
+Lightning node. Shyguy worked to keep Orchard up-to-date with the
+fast-evolving Cashu ecosystem, harden security, and improve authentication.
+He also added a comprehensive analytics suite, a local, LLM-powered assistant
+to manage the mint, and an end-to-end testing framework. With support from
+this second grant, Shyguy will be focusing on improving the integration with
+the different mint implementations supported — Nutshell and the
+[Cashu Development Kit] (CDK). He will participate in specification drafting
+and review, improve management for every layer — on-chain, Lightning, Taproot
+Assets, and mint — and provide user-facing tools for increased mint
+transparency.
+
+[October 2025]: /blog/fourteenth-wave-of-bitcoin-grants#orchard
+[Cashu]: /projects/cashu
+[Cashu Development Kit]: /projects/cdk
+
+---
+
+### Bitcoin Research Kit
+
+[Nym21] has been an OpenSats grantee since [December 2024] and got his first
+renewal in [June 2025]. He has been working on the [Bitcoin Research Kit]
+(BRK), an on-chain data generator and visualizer. Nym21 has been working on
+adding new charts and metrics to BRK, improving performance — reducing the
+amount of external dependencies in his codebase —, and creating a light chain
+explorer with the same features as mempool.space, called [bitview.space]. One
+notable addition was the possibility to derive the Bitcoin exchange rate
+directly from on-chain data, without relying on external sources and with an
+astonishingly low 0.10% median error per block. With support from this third
+grant, nym21 will be focusing on polishing the existing API to make it as
+minimal and as correct as possible, and improving speed and reducing RAM and
+disk by benchmarking the libraries to find any performance blockers.
+
+[Nym21]: /blog/developer-spotlight-nym21-bitcoin-research-kit
+[December 2024]: /blog/ninth-wave-of-bitcoin-grants#kibo
+[June 2025]: /blog/twelfth-wave-of-bitcoin-grants#bitcoin-research-kit
+[Bitcoin Research Kit]: /projects/bitcoinresearchkit
+[bitview.space]: https://bitview.space/
+
+---
+
+### Rust-bitcoin
+
+Mpbagot has been an OpenSats grantee since [January 2026][January 2026
+(rust-bitcoin)]. He is part of the several grantees that are working on
+`rust-bitcoin`, the low-level Bitcoin library written in Rust that most of
+the projects built on the same language rely on. Mpbagot has been focusing on
+crate smashing — a technique whose goal is to divide bigger libraries
+(“crates”, as they are called in the Rust ecosystem) into smaller ones. In
+particular, he worked on the new `units` crate, adding new proof-of-work
+related types, on the separation of the cryptographic libraries into a
+dedicated `crypto` crate, and on the migration of PSBTs to `rust-psbt`. With
+support from this second grant, mpbagot will be focusing on stabilising
+`rust-secp256k1` — the Rust wrapper based on the [libsecp256k1] C library
+used in Bitcoin Core — with the objective of releasing a first release
+candidate for v1.0.
+
+[January 2026 (rust-bitcoin)]: /blog/sixteenth-wave-of-bitcoin-grants#rust-bitcoin
+[libsecp256k1]: /topics/secp256k1
+
+---
+
+### Floresta
+
+OpenSats has been funding several developers working on [Floresta] since
+[September 2024].
+
+#### Jaoleal
+
+Jaoleal has been a grantee since [September 2025]. He has been focusing on
+improving how the [RPC] server works in Floresta, implementing new calls
+across several modules, such as network and ban manager, fixing
+inconsistencies with respect to Bitcoin Core, and adding new functional
+tests. He has also been working on [Nix packaging for Floresta], to provide
+deterministic builds and NixOS service declarations, to make a Floresta node
+reproducible and simple to deploy. With support from this second grant,
+jaoleal will continue his work on Floresta, contributing to the project
+according to the quarterly development roadmaps laid out by the team.
+
+#### Moises Pompilio
+
+Moises Pompilio has been a grantee since [December 2025][December 2025
+(Floresta)] as part of a general Floresta grant. He has been focusing on
+improving testing and the quality of the codebase by migrating Floresta from
+a custom test runner to [PyTest] and refactoring the test framework
+architecture and functional test workflow. He also worked on improving the
+wallet architecture, identifying in the integration of the
+[Bitcoin Development Kit] (BDK) library the best way forward. With support
+from this second grant, Moises Pompilio will continue his work on the wallet
+architecture, refactoring and expanding the whole test suite, improving
+wallet modularity, internal APIs, and Bitcoin Core RPC compatibility, and,
+finally, integrating BDK.
+
+[Floresta]: /projects/floresta
+[September 2024]: /blog/bitcoin-grants-september-2024-7th-wave#floresta
+[September 2025]: /blog/fourteenth-wave-of-bitcoin-grants#floresta
+[RPC]: https://opensats.org/topics/rpc
+[Nix packaging for Floresta]: https://github.com/getfloresta/floresta-nix
+[December 2025 (Floresta)]: /blog/fourteenth-wave-of-bitcoin-grants#floresta
+[PyTest]: https://docs.pytest.org/en/stable/
+[Bitcoin Development Kit]: /projects/bdk
+
+---
+
+### BitShoka
+
+[Kurtis Unger] has been an OpenSats grantee since [April 2025]. He has been
+working on BitShoka, a made-in-Africa fork of [Bitaxe], which aims to provide
+a local, inexpensive, and accessible option to learn about and participate in
+mining. Kurtis Unger has been focusing on reverse-engineering the
+[MicroBT ASICs] with the goal of expanding the Bitaxe ecosystem to support
+the KF1950 mining chip, publishing d all the source files for the new
+project, called BitShoka Nini. With support from this second grant, Kurtis
+Unger will work on concluding the project by fixing some issues that
+prevented the hardware from mining. Once completed, he will move on to
+assemble several BitShoka Nini boards to fulfill one of the main visions of
+the project — producing mining hardware locally.
+
+[Kurtis Unger]: /blog/developer-spotlight-kurt-unger
+[April 2025]: /blog/eleventh-wave-of-bitcoin-grants#bitshoka
+[Bitaxe]: /projects/bitaxe
+[MicroBT ASICs]: https://shop.whatsminer.com/products?lang=en-US
+
+---
+
+### Krux-installer
+
+Joaozinho has been an OpenSats grantee since [February 2026]. He is one of the
+active maintainers of [Krux-installer], a desktop application that helps
+users easily flash and update the firmware of the DIY [Krux] signing device.
+Joaozinho has been focusing on improving how dependencies are handled,
+removing those unused and migrating the dependency manager from [Poetry] to
+[UV]. He also took on the role of dependencies watchdog, reviewing any new
+dependency added to the codebase. With support from this second grant,
+Joaozinho will continue his effort toward reducing the amount of dependencies
+used in the codebase, on building a new, minimal implementation of the
+installer with a minimal footprint, and on researching how to bring the
+[ESP32 microcontroller] as an air-gapped signing device to the Krux ecosystem
+through the [Kern] project.
+
+[February 2026]: /blog/sixteenth-wave-of-bitcoin-grants#krux-installer
+[Krux-installer]: https://github.com/selfcustody/krux-installer
+[Krux]: /projects/krux
+[Poetry]: https://python-poetry.org/
+[UV]: https://docs.astral.sh/uv/
+[ESP32 microcontroller]: https://en.wikipedia.org/wiki/ESP32
+[Kern]: https://github.com/odudex/Kern
+
+---
+
+### Krux
+
+Qlrd has been an OpenSats grantee since [June 2024]. Qlrd has been focusing on
+the Krux-installer, transforming it into a Python-based desktop application
+and releasing its first stable release, [v0.0.20]. His work also focused on
+developing distribution packages for different operating systems — Debian,
+Ubuntu, Fedora, MacOS, and Windows —, adding translations in twelve different
+languages, and adding support for several [Krux-compatible devices]. With
+support from this second grant, qlrd will be focusing on improving the
+quality of the code in the Krux ecosystem, improving technical documentation
+to help new developers contribute, and adding functional and integration
+tests across several modules.
+
+[June 2024]: /blog/bitcoin-grants-july-2024#krux-installer
+[v0.0.20]: https://github.com/selfcustody/krux-installer/releases/tag/v0.0.20
+[Krux-compatible devices]: https://selfcustody.github.io/krux/parts/
+
+---
+
+### Fully Noded
+
+Fontaine has been an OpenSats grantee since [December 2023]. He has been
+focusing on Fully Noded, an easy-to-use wallet application that connects
+directly to a Bitcoin Core node. Fontaine has been building an iOS Bitcoin
+wallet with all the latest functionalities, powered by PSBTs and
+[descriptors], and Bitcoin Core is used directly as the backend. Fontaine
+also worked on related applications, such as Fully Noded Server, a 1-click
+node deployer for MacOS; FN-JoinMarket, a JoinMarket-based client for
+[coinjoins]; and Unify, a [Payjoin] client working over [Nostr]. With support
+from this second grant, Fontaine will be focusing on adding support for
+silent payments in the wallet.
+
+[December 2023]: /blog/bitcoin-grants-december-2023#fully-noded
+[descriptors]: /topics/output-descriptors
+[coinjoins]: /topics/coinjoin
+[Payjoin]: /topics/payjoin
+[Nostr]: /topics/nostr
+
+---
+
+### BitaxeBonanza
+
+[Skot] has been an OpenSats grantee since [January 2024]. He has been working
+on [Bitaxe], an open-source mining hardware that works with several ASIC
+chips, with the final goal to decentralize mining by open-sourcing the
+hardware needed. During the years, Skot has released several boards
+supporting different ASICs, such as the BitaxeSupra, BitaxeUltra, and, more
+recently, the BitaxeGamma. With support from this new grant, Skot and
+Johnny9 — a first-time grantee that has been working with on Bitaxe for
+several years, developing firmware for the various open-source miners — will
+work together on [BitaxeBonanza], a new hardware based on the Intel BZM2
+ASICs. The objective is to have a fully functional, validated Bitcoin miner
+by the end of the grant period.
+
+[Skot]: https://github.com/skot
+[January 2024]: /blog/bitcoin-grants-feb-2024#the-bitaxe
+[Bitaxe]: /projects/bitaxe
+[BitaxeBonanza]: https://github.com/bitaxeorg/bitaxeBonanza/tree/1002x
+
+---
+
+### Tollgate and FIPS
+
+Arjen has been an OpenSats grantee since [January 2025]. At the time, he was
+working on Nostr Epoxy, a nostr-based WebSocket proxy that acts as a bridge
+between different networks to enable reliable connectivity. With support from
+this second grant, Arjen will be working on [TollGate], a project that turns
+WiFi routers into bitcoin-powered internet access points, and [FIPS], a way
+to get rid of IP addresses and use npubs instead to route traffic across a
+transport-agnostic mesh — Ethernet, WiFi, Bluetooth, LoRa.
+
+[January 2025]: /blog/10th-wave-of-nostr-grants#nostr-epoxy
+[TollGate]: /blog/fifteenth-wave-of-nostr-grants#tollgate
+[FIPS]: https://learn.fips.network/
+
+---
+
+Bitcoin's resilience depends in part on the security and reliability of the
+applications people use and the networks carrying their traffic.
+
+This wave provides the funding necessary for the development of tools
+identifying malicious Tor relays, privacy-focused wallets and ecash
+infrastructure, and independently developed node and mining software. They
+also provide support for the ongoing maintenance, testing, and contributor
+education needed to keep these projects updated, and accessible.
+
+Developers working on free and open-source Bitcoin software should consider
+[applying for funding]. We thank the donors who make all of our grant giving
+possible, allowing contributors to dedicate time to software that remains
+freely available to everyone. If you would like to support continued
+development across the Bitcoin ecosystem, please consider making a
+[one-time or recurring donation to our General Fund].
+
+<DonateRecurringButton designation="general" />
+
+[applying for funding]: /apply
+[one-time or recurring donation to our General Fund]: /donate
