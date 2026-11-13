@@ -1,0 +1,591 @@
+---
+title: 'The Long Road To FIPS'
+date: '2026-11-13'
+tags: ['nostr', 'spotlight']
+authors: ['cfunk']
+images:
+  [
+    '/static/images/spotlight/arjen/featured.jpg',
+    '/static/images/spotlight/arjen/hero.jpg',
+  ]
+draft: false
+summary: 'Meet Arjen, the developer connecting devices and people through TollGate, FIPS, and Myco.'
+pullQuotes:
+  - 'FIPS was the missing piece for TollGate to become a success. I see FIPS as the machinery, and TollGate as the oil that makes it run smooth.'
+  - 'I had the puzzle pieces, I knew what we needed and how the pieces would interact, but I had no clue how to build an actual routing algorithm.'
+  - "People are thinking at the wrong scale. People should be thinking at a scale we've never seen before."
+---
+
+> FIPS was the missing piece for TollGate to become a success. I see FIPS as the machinery, and TollGate as the oil that makes it run smooth.
+
+I recently walked into a room full of freedom tech contributors from all over the world where you could just feel the electricity in the air. It's always stimulating to be in an environment like that, but in that moment there was just a different type of vibe. In hindsight, a lot of it probably had to do with [Arjen](https://njump.to/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr) and his work on [TollGate](https://github.com/OpenTollGate/tollgate) & [FIPS](https://gitworkshop.dev/npub1y0gja7r4re0wyelmvdqa03qmjs62rwvcd8szzt4nf4t2hd43969qj000ly/relay.ngit.dev/fips).
+
+My first hint for figuring all that out came in the form of some really cool [hats](https://njump.to/note1q3yprhlrshsawe2snuhf5d7f3c8uyalqm4zf7h65z8plc8vuhmnsc3s05j) that a few people were wearing, which read 'FIPS' at first glance and 'F\*CK IPS' on second read. It got me even more curious.
+
+I felt that I had to write about it. When I discussed it with Arjen, he said that spreading his excitement for how [nostr](/tags/nostr) is revolutionizing the internet would be the best outcome:
+
+> A digital message, whatever it is, can now organically move across devices, like a perfect game of telephone. Where anyone interested in reading, storing or forwarding that message can do so. This ability to make information move through space (and time!) completely shatters the assumption on which the internet is built today, that you have to be ‘online’ and continuously able to reach a server far away to have a functional internetwork.
+
+To me, it was evident that Arjen had already somewhat succeeded in spreading his excitement, as it was precisely the vibe that I had picked up on, that day, in that room. He wanted that energy to grow even more. And now, so do I. Such an enthusiastically contagious fellow, this Arjen.
+
+You see, he fell down the purple rabbit-hole and then got [nerd-sniped](https://xkcd.com/356/) into working on TollGate. But then, he in turn nerd-sniped [Johnathan Corgan](https://njump.to/npub19wavu4f7l6l43h24jyskn7fvzy37kcfp67aqjtmv2qgy4lp34nhsda8p6k) into working on FIPS to help fix TollGate. Johnathan actually came out of [retirement from open source](https://njump.to/note1rz20auslykt39dssxfzse3cuygea0epakvnn4xq7lh9s8m5q8vdqh73y3t) because of how obsessed he had become with seeing their shared vision for FIPS come to life. Well played, Arjen. Well played.
+
+<PhotoStrip
+  title="TollGate router and configuration"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/router.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'A TollGate router.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/openwrt-cropped.png',
+      width: 1400,
+      height: 1054,
+      alt: 'OpenWrt configured with a TollGate wireless network.',
+    },
+  ]}
+/>
+
+So what exactly are FIPS and TollGate? And who is Arjen?
+
+Before we get deeper into all of that, let's first review a few technical concepts. If you are already familiar with how the internet works, feel free to skip this next section.
+
+## Back to basics: the internet
+
+For the sake of simplicity, let's just think of the internet as a real-world town.
+
+If you're looking for someone's house, then you'll need their address. On the internet, that address is a string of numbers called an [IP address](https://www.iana.org/numbers#:~:text=two%20types%20of%20Internet%20Protocol,192.0.2.53), and the most common kind looks something like 192.0.2.53. It's made up of [four numbers from 0 to 255 with dots in between](https://www.rfc-editor.org/rfc/rfc3986#:~:text=range%200%20to%20255%2C%20separated%20by), and it’s called IPv4. There's also a newer, much longer kind, called IPv6, with room for way more addresses. But since nobody wants to have to remember such a long string of digits, websites also get an alphabetical name, like [OpenSats.org](/), and that's what we call a domain name.
+
+You don't get to pick your IP address. It gets handed down to you, a bit like a family tree: your internet provider gets its numbers from someone above them, and right at the top, there's one single organization, [IANA](https://www.iana.org/), that hands out the addresses in big blocks to a handful of regional registries, who split them up again: one whole range of numbers to this provider, another range to that one, and so on, down the tree, until an address ends up with you.
+
+To find the IP address that goes with a domain name, you look it up in a giant internet phonebook called the [Domain Name System](https://www.rfc-editor.org/rfc/rfc1034#:~:text=Host%20name%20to%20host%20address%20translation) (DNS).
+
+On today's internet, both your IP address and your domain name belong to somebody else. Your internet provider hands you your address, and your domain name is only yours [for as long as you've registered it](https://www.icann.org/en/blogs/details/do-you-have-a-domain-name-heres-what-you-need-to-know-7-12-2018-en#:~:text=use%20it%20for%20the%20period%20of%20time%20you%20registered%20it%20for). Either way, whoever is above you can switch you off. And this isn't just theory.
+
+In February 2011, the US government [seized several domain names](https://www.icann.org/en/system/files/files/seizure-collateral-assess-24jan13-en.pdf), and one of them was mooo.com. It was a free service that let anyone get a website name under it, like yournamehere.mooo.com. By taking that one domain name, [84,000 innocent websites](https://www.nbcnews.com/id/wbna41649634#:~:text=Shuts%20Down%2084%2C000%20Innocent%20Sites) went down with it, all suddenly showing a banner accusing them of some of the worst offenses imaginable.
+
+Or take Dajaz1, a hip-hop blog that used to share new songs, a lot of them sent in by the artists and labels themselves. In 2010 the US government seized its domain name, accusing it of piracy, and then [kept it for over a year while their deadline to take the case to court got extended in secret, three times](https://www.eff.org/cases/matter-seizure-internet-domain-name-dajaz1com#:~:text=obtained%20a%20series%20of%20secret%20extensions). They eventually handed it back.
+
+And it's not just domain names; your IP address can be hijacked too.
+
+In 2008, Pakistan's telecoms regulator [ordered the country's internet providers to block YouTube](https://www.rte.ie/news/2008/0224/100005-pakistan/#:~:text=Pakistan%20has%20ordered%20all%20Internet%20Service%20Providers%20to%20block%20the%20YouTube%20website) over a [video clip it called blasphemous](https://www.cbsnews.com/news/pakistan-drops-youtube-ban/#:~:text=what%20it%20called%20a,video%20clip). One of those providers, Pakistan Telecom, [told PCCW Global](https://www.ripe.net/about-us/news/youtube-hijacking-a-ripe-ncc-ris-case-study/#:~:text=One%20of%20Pakistan%20Telecom%27s%20upstream%20providers,on%20a%20global%20scale), one of its upstream providers—meaning a company it buys its own connection from—that a block of YouTube's IP addresses could now be reached through Pakistan Telecom's network. That wasn't true, obviously. But PCCW just accepted that bogus announcement and passed it on to the rest of the internet. Which could've been prevented if the networks passing it on had been set up to check for announcements like that. And so the false route spread far beyond Pakistan, and for about two hours, YouTube was unreachable for much of the world.
+
+That is not the free internet we are all dreaming of. And there are people doing something about it. Now, let's get back to the topic of Arjen and the gang.
+
+## Epoxy and NoDNS
+
+> [What if there is no line, no boundary between Tor and clearnet (the 'normal' web)? What if a Damus user on iPhone can talk to their friend's private Tor relay? Let's find out together what can happen by using this new tool which I call nostr epoxy!](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=What%20if%20there%20is%20no%20line)
+
+Arjen [worked his last day at his fiat job to go full-time on nostr](https://njump.to/note1j0nxuf9l77vkjluj5mu2htlvpuwstv5egrayyn0aet34pp7fjnyq2prhla) on September 26 of 2024. [Less than a month later, he had a few ideas](https://njump.to/note1afn8643hefhuuhrws7ygfsqy4y7quz6x4t3k8wt9yc0f38rq000qnrmthw) about how to fix some of the very practical issues that nostr users were experiencing.
+
+> [Proxies have been around forever and can be a powerful tool in getting around network restrictions. In the context of nostr, currently everyone connects to a relay directly, which you may not always want. The relay can keep track of your IP address and build a profile, or your device might be behind a very restrictive firewall which prevents you from reaching a relay.](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=Proxies%20have%20been%20around%20forever)
+
+And some nostr relays [only live on](https://njump.to/note1afn8643hefhuuhrws7ygfsqy4y7quz6x4t3k8wt9yc0f38rq000qnrmthw) a separate network called [Tor](/projects/tor):
+
+> [We wanted to reach a Tor relay, without having to install any Tor stuff on our devices. Which on iPhones is especially challenging.](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=install%20any%20TOR%20stuff)
+
+Why not build a proxy relay that, instead of answering your requests itself like any other relay would, [passes them on to whichever relay you ask for](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=pass%20on%20the%20requests%20to%20another%20relay)? As long as the proxy can reach that relay, it should theoretically work. Your phone only has to reach the proxy the normal way, and the proxy, which can reach Tor, does the rest for you. And it helps with the IP address problem too:
+
+> [Using these proxies helps hide the requester's IP from the destination server…](https://njump.to/nevent1qqs9qfp22l2unr74n6spg8sk0z8lrlkx7ehwl0m7ec5mm0m2qcnxaggfc9yrn)
+
+On top of that, whoever runs the proxy [gets paid for it](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=If%20you%20provide%20a%20proxy), by the minute, in [cashu ecash](/projects/cashu). And that was basically nostr epoxy.
+
+And so Arjen [built it](https://github.com/Origami74/nostr-epoxy-reverse-proxy), together with [hzrd149](https://njump.me/npub1ye5ptcxfyyxl5vjvdjar2ua3f0hynkjzpx552mu5snj3qmx5pzjscpknpr). But to use it, you'd have to [tell it which relay you want to go to](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=So%20how%20do%20we%20create%20the%20proxied%20connection), and normally you'd do that with a web address, which on clearnet is basically a rented domain name.
+
+> [Well we send the following request over our websocket: \["PROXY", "wss://relay.com"\] Which asks the proxy to change the target from its own back-end to whatever we specify.](https://njump.to/note1t5uacdgld4pt05v8yt9r65lmz7ex4tld78mtvuul740dcnaaf49qxqlj9z#:~:text=Well%20we%20send%20the%20following%20request)
+
+That's a problem for two reasons. The first one we just went through: a rented domain name can be changed or taken away by whoever is above you.
+
+The second one is that the proxy has to open the connection to that relay for you, so [it can read everything you send](https://njump.to/nevent1qqswtdzr4d8cxzcc2mankrul27lf9en75duw50ffpglr68gepxvfj5cdhlhds#:~:text=the%20nightmare%20that%20is%20unencrypted%20traffic).
+
+So right from the start, Arjen and his co-conspirators figured that if you could [address the relay by its public key (or pubkey) instead of a web address](https://njump.to/note18uaqyt5024vfnyhv67nyyt53ktmnq7n3aalk6sh44dplpg8ygtusc2d82y#:~:text=addressing%20the%20relay%20to%20proxy%20to%20by%20pubkey), then your app could encrypt its requests straight to that key, and so the proxy just passes along what it can't read.
+
+> [It allows us to address the relay through whatever means they themselves have shared, which can be Tor, I2P](https://njump.to/note13vpxkvrey8qgn2e2sjd8f6387dwl2lm3l3eru5k4xzr45q9r29wszzj6rw) [or the open internet. Their address can change but you can still follow the changes and use their new endpoints.](https://njump.to/note13vpxkvrey8qgn2e2sjd8f6387dwl2lm3l3eru5k4xzr45q9r29wszzj6rw)
+
+He turned that idea into a proposal for a new nostr implementation called ["Transport method announcement"](https://github.com/nostr-protocol/nips/pull/1585). The proposal never got merged, and once Arjen got pulled into TollGate it [mostly stalled](https://njump.to/nevent1qqsv6n7nm3c8uszsyd7uq5cghwevw3gs66syk33k878julwkjl0wslgpzemhxue69uhhyetvv9ujuurjd9kkzmpwdejhgq3qhw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yars28pk4a#:~:text=prioritised%20TollGate%20over%20epoxy), apart from a crafty little [browser extension](https://github.com/Origami74/nostr-addressing-extension) that he built to [warn you when a website's domain has been rugpulled](https://njump.to/nevent1qqsxugngpy4ayslkhfpzwgah2fldzjndjnvtqrxcjukfee8rg9rhmgcpzemhxue69uhhyetvv9ujuurjd9kkzmpwdejhgqg5waehxw309aex2mrp0yhxgctdw4eju6t0qyxhwumn8ghj7mn0wvhxcmmvqyt8wumn8ghj7un9d3shjtnwdaehgu3wvfskueqpz3mhxue69uhhyetvv9ujumn8d96zuer9wcpzpwa4mkswz4t8j70s2s6q00wzqv7k7zamxrmj2y4fs88aktcfuf68qvzqqqr4guw5h5cy#:~:text=we%20consider%20this%20domain%20as%20RUGPULLED). But only if you had visited it before, back when it shared its own pubkey.
+
+Then in September 2025, someone pointed Arjen to a draft by [Amperstrand](https://github.com/Amperstrand) (a fellow TollGate contributor) for [putting DNS and certificates on nostr](https://github.com/Amperstrand/nostr-dns/blob/main/NIP-XYZ-nostr-dns-draft.md), and it immediately clicked what had been wrong with his own proposal:
+
+> [I realised I was trying to combine the protocol (http/wss/etc) and underlying network with what is effectively just a DNS A record. Once I threw out the idea of marrying the protocol and rewrote the spec to contain just DNS records it made a lot more sense.](https://njump.to/note1wj5aqajp7d305lexgtqcy0k2fj9z5mj6ccgslq8lpsxxcu2wzdeqtzty9k#:~:text=I%20realised%20I%20was%20trying%20to%20combine%20the%20protocol)
+
+He had been mixing a bit too much all at once: how you talk to a service (like [http](https://en.wikipedia.org/wiki/HTTP) or [wss](https://en.wikipedia.org/wiki/WebSocket)), which network it sits on, and simply which address its name points to. So he dropped the protocol and network bits and rewrote his spec to hold just DNS records.
+
+Put DNS on nostr instead, signed with your own key, and that became [NoDNS](https://gitworkshop.dev/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr/relay.ngit.dev/nodns-protocol).
+
+Now, your [npub](/topics/npub), the public half of your nostr keypair, is your domain name: just [put .nostr after it](https://gitworkshop.dev/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr/relay.ngit.dev/nodns-protocol). It's not pretty to read, but because you generated it yourself, nobody above you can change it or take it away from you. Ta-dah!
+
+<PhotoStrip
+  title="Reimagining networks"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/23-nodns-records-for-an-npub-2025-10-11.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'NoDNS records for an npub.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/24-the-3am-drawing-2025-02-17.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A network sketch drawn at 3 AM.',
+    },
+  ]}
+/>
+
+But that was only half of the battle.
+
+Your IP address is still handed down to you, and so it can still be taken away. And when Arjen and the TollGate team pictured TollGate networks growing, they just [kept running into that issue](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=we%20kept%20hitting%20an%20issue).
+
+To see just why, let's dig deeper into what TollGate _really_ is.
+
+## TollGate and FIPS
+
+[TollGate](https://github.com/OpenTollGate/tollgate) is basically a protocol to add a toll booth to a router, just like the ones on the highway. When you connect to it, it tells you its price, and you pay with ecash. The router accepts your payment, and then it opens the gate for the minutes or megabytes you paid for.
+
+<PhotoStrip
+  title="TollGate design and setup"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/router-diagram-framed.png',
+      width: 1400,
+      height: 1054,
+      alt: 'Routers buying connectivity from other routers.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/installer-framed.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'The TollGate OS installer.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/20-tollgate-design-sessions-outdoors-zitadelle-2025-07-26.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'An outdoor TollGate design session at Zitadelle.',
+    },
+  ]}
+/>
+
+The router itself [has its own nostr key](https://github.com/OpenTollGate/tollgate/blob/main/TIP-01.md#tollgate-details--advertisment), and [other routers can buy internet access from it, and sell it on to the next person](https://github.com/OpenTollGate/tollgate-module-basic-go#feature-highlights). That's how the network grows, from one router to the next one nearby.
+
+But every TollGate currently needs an IP address, which gets handed down from the top, like the roots of a tree. TollGate needs the network to work more like a nervous system, where [anyone can trade with anyone around them](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=trade%20data%20with%20every%20reachable%20peer%20nearby).
+
+One question just kept coming up over and over again:
+
+> [Who's going to assign the numbers?](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=going%20to%20assign%20the%20numbers)
+
+Until Arjen turned it into a much crazier one:
+
+> [Can the internet work without IP addresses...?](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=Can%20the%20internet%20work%20without%20IP%20addresses)
+
+What if your nostr key wasn't just your name, but your address too? That was the beginning of FIPS.
+
+Arjen first began building a [little proof of concept](https://gitworkshop.dev/arjen@swissdash.site/fips-poc-sec) that routed using nostr keys instead of IP addresses. It didn't work right away.
+
+[Ping](<https://en.wikipedia.org/wiki/Ping_(networking_utility)>), the tiny tool that checks if another computer is there, [would throw an error when he gave it a key](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=it%20would%20just%20throw%20an%20error%20if%20I%20called%20it%20with%20a%20pubkey), because a key isn't a valid IP address. So he had to [write his own ping](https://gitworkshop.dev/arjen@swissdash.site/fips-poc-sec/tree/main/fips-ping). But that only fixed ping, and every other app would break the same way:
+
+> [They ALL just assume IP is there. All the libraries, anything that is built on IP, BOOM! incompatible.](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=They%20ALL%20just%20assume%20IP%20is%20there)
+
+Nobody was going to rewrite all of the world's software just for that.
+
+In November 2025, he [sketched a little theoretical workaround](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=swap%20out%20IP%20addresses%20without%20affecting%20the%20whole%20stack), a way to swap out IP addresses without having to change the apps themselves.
+
+Whenever your browser asks a website for something, that request gets cut up into little pieces, and only then do those pieces get wrapped up in IP packets. So if you could just catch those pieces right before that step, you could send them off in your own kind of packets instead. But you can't just do that with all of your traffic, or your regular internet would break. You only want to catch the pieces that are meant for a nostr key. Which brings him to the big question:
+
+> [Then how do we decide which traffic goes over FIPS and how do we signal that from the application level? The hack? DNS!](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=Then%20how%20do%20we%20decide%20which%20traffic%20goes%20over%20FIPS)
+
+His idea was to put a tiny internet phonebook (DNS) of your own inside your device. Then, when an app asks for a nostr key as if it were a domain name, the phonebook [hands it a made-up IPv6 address](https://njump.to/naddr1qq2xv2nrdvkkjup8wvknyvp0xycj7v3sxg6syg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqyw05e#:~:text=gives%20back%20a%20random%20ipv6%20address), and everything the app then sends to that IP address gets caught and sent off to the nostr key behind it instead.
+
+Sneaky, right?
+
+But the FIPS that [finally shipped in 2026](https://njump.to/nevent1qqstn6jp40he4yn3hdrl8a4vj96h49mt02tna3z474y54u4tytyd3pgzyq3azthcw509acn8ld35r47yrw2rfgdenp57qgfwkdx4d2akkyhg52k5dpt), built mostly by Johnathan Corgan, works a little differently. It still uses that DNS trick, but the IPv6 address it hands back isn't random anymore, it's derived from the key itself. And instead of catching the little pieces before they get wrapped up in IP packets, it just lets them become normal IPv6 packets first, and then [catches those whole packets](https://github.com/jmcorgan/fips/blob/master/docs/design/fips-ipv6-adapter.md#role) and sends them off over FIPS.
+
+So instead of typing an address like 192.0.2.53, you just use a device's own nostr key with .fips added at the end. Like this: <span className="break-all">npub1spxdug4m3y24hpx5crm0el4zhkk0wafs8kp6m0xu0wecygqej2xqq8gyhx.fips</span>, the address of [the first nostr relay on FIPS](https://njump.to/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9#:~:text=Running%20the%20first%20nostr%20relay%20on%20FIPS) from March 13th, 2026.
+
+If you had a FIPS node, you could reach it at that address, and everyone else could get to it at [a normal clearnet address](https://njump.to/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9#:~:text=Clearnet%20address):
+
+> [GM. Running the first nostr relay on FIPS. If you have your fips node set up already you can try it out.](https://njump.to/note1t0n0yd7rg7mpce4cjmhd66gk23kan6k4vvuc8g95g9sesrv7ctesq5ejk9)
+
+Then in April, Arjen invited everyone to join a deathmatch in [Quake III Arena](https://en.wikipedia.org/wiki/Quake_III_Arena), a first-person shooter game from 1999. The deathmatch had 8 slots and no clearnet address at all, so the only way in was over FIPS.
+
+> [Join us! 🎮 FIPS Q3 Arena. Quake III Deathmatch over FIPS mesh. Retro LAN party, zero clearnet. … 8 slots, bots are warming up. gg 🤙](https://njump.to/note1xef75v6ck5y53prc6h5s7j58zyjzrj0st7j807je8p76ruvh2ljq3eg8u3)
+
+<PhotoStrip
+  title="FIPS in action"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/quake.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'Quake III over FIPS: a mesh-network LAN party.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/06-fips-mesh-on-a-screen-sec-07-2026-03-20.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'The FIPS mesh on a screen at SEC-07.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/27-vibe-coding-on-the-beach-funchal-sec-05-2025-09-02.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'Working on the beach in Funchal.',
+    },
+  ]}
+/>
+
+And a few days after that, [he hosted a website over Bluetooth](https://njump.to/note120mp8z0pxlr307z0cl7gax8dtskekthcn2d8gvgvmvyajq5hfw4q28dgsk) at [Sovereign Engineering](https://soveng.com), using FIPS.
+
+By the summer of 2026, Arjen had started [redesigning TollGate](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=quietly%20working%20on%20redesigning%20TollGate), and [his vision was for it to run fully on top of FIPS](https://njump.to/nevent1qqswvur4pw45j4qyq9glju86w6fxwux4rmul27wqrqz0fr3xlwrduyqzyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wglcaud), which will make TollGate itself a whole lot simpler, because it won't have to worry about who to connect to anymore.
+
+Then during a hike at [SEC-08](https://soveng.com/projects/SEC-08/), someone put one more brand new idea in his head: [make each TollGate its own cashu mint, with tokens that stand for bytes instead of sats](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=making%20each%20TollGate%20its%20own%20cashu%20mint). That way the router would work like the machines at an arcade. You'd feed it a token, and it'd give you bytes. Until then, a big headache was that a customer might not be able to reach the mint, somewhere out on the internet. But once the router itself is the mint:
+
+> [...it is always reachable, and it will be bloody fast as well.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=with%20the%20TollGate%20now%20being%20the%20mint)
+
+In that design, the TollGate protocol only cares about one thing:
+
+> [...it received a byte proof, so therefore it will deliver a byte. Period.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=all%20it%20now%20cares%20about%20is%20that%20it%20received%20a%20byte%20proof)
+
+Where you got those byte tokens is none of its business anymore:
+
+> [I can give away bytes, I can sell bytes, I can exchange bytes.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=I%20can%20give%20away%20bytes)
+
+And in his new design, TollGate isn't just about selling internet access anymore: [it can meter and charge for anything that streams, not just bytes](https://njump.to/nevent1qqsgx5lwyfl3sm242z5dr3drh3v26nznph7vrqltw3fe6en3yk0lqhszyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5w85539h).
+
+How would that even work? Well, it's pretty simple: the core of TollGate doesn't care what it's selling. It becomes:
+
+> [...agnostic of resource, so it can sell data, electricity, liquids (fuel, water, beer), or anything else that makes sense.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=agnostic%20of%20resource)
+
+The actual switching on and off is done by a separate little piece he calls an enforcer, and swapping that piece, and the unit the tokens count in, is what it takes to sell something new.
+
+[His design docs](https://github.com/OpenTollGate/tollgate-rs/blob/master/docs/design/core/tollgate-enforcer-protocol.md#beyond-network-traffic) even walk through two examples. For an electric car charger, the enforcer is the charger's on/off switch and its energy meter, counting in watt-hours.
+
+For a beer tap, it's a valve and a flow meter, counting in milliliters.
+
+Each one gets paid in tokens that stand for that exact thing, and the moment those tokens run out, the outlet switches off, or the valve closes.
+
+The new design now has a [Rust implementation](https://github.com/OpenTollGate/tollgate-rs), with network access as its first application.
+
+So FIPS gives every device that runs it an address that comes from its own key, so nobody can hand it out or take it back. And it can [run on top of the regular internet, or straight over a local network or Bluetooth, with no internet provider and no DNS at all](https://github.com/jmcorgan/fips#what-fips-does). Once TollGate runs on top of it, it'll let those devices [pay their peers for the data that flows between them](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=you%20pay%20for%20data%20I%20forward%20to%20you). But FIPS still had to prove itself on the one device pretty much everyone actually carries around: the phone. Which is why Arjen [built Myco](https://getmyco.app/).
+
+## Myco
+
+> [Myco is an app I built to show we can create entire functioning networks out of nothing. And use this mesh for any application, and even share the applications themselves over the mesh as well.](https://njump.to/nevent1qqsgtjrzftg6ferfgfyk2ux774nvaqamqhx2mtnwvhuxjjuvjm676hczyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wks8hzu)
+
+[Myco](https://zapstore.dev/apps/app.myco) is an Android app. Arjen built it [to bring FIPS to phones, and to show a whole new way of using nostr](https://njump.to/nevent1qqsflhqdkvaltxjrka3cn3lhl92kj9at7ku7a0wrkmkvynnudyx5tuczyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wym3f2n#:~:text=I%20started%20to%20work%20on%20Myco).
+
+Usually, your nostr app just talks to relays somewhere out on the internet. But since every nostr note is [signed with its author's key](https://github.com/nostr-protocol/nips/blob/master/01.md#events-and-signatures), you don't really need the internet, or any server, to check that it really came from them and wasn't changed along the way.
+
+> [Because the data integrity can be validated from the data itself, the data can flow freely. And since it's data, these flows can be filtered and duplicated at any point.](https://njump.to/naddr1qqshq6tvd3shyueddanz6urjdacxzempw35k7m3dxqej7vpk9uerqv3kqgsthdwa5rs42euhnuz5xsrmmssr84hshwes7uj392vpeldj7z0zw3crqsqqqa28knzc7r#:~:text=Because%20the%20data%20integrity)
+
+So what that implies is that it doesn't really matter if a note comes from one of those relays out on the internet, or from the phone of the person physically sitting right next to you. And [that's exactly what Myco does](https://github.com/Origami74/myco/blob/main/docs/design/core/security.md#1-self-authenticating-data-trust-the-artifact-not-the-channel).
+
+When you post a note over the FIPS mesh, it first gets saved on your own phone. Then, when your phone is close to the phone of someone you've [bumped phones with](https://github.com/Origami74/myco#what-you-can-do-with-it-today) to pair (over NFC, the same tap your phone uses to pay at a shop), it hands them a copy straight over the mesh, for example by Bluetooth, no internet needed, and their phone saves it too. So now your note is on 2 phones, and both of them can pass it on again.
+
+[Every copy of Myco comes with its own little nostr relay](https://njump.to/nevent1qqszzg6q05rlrtuuey0u8v6p03hxmk5f9ldsuuuxu58d86w857aygqgzyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wxrudxq) and its own [Blossom server](https://opensats.org/topics/blossom), which is basically where nostr apps keep your pictures and other files. So basically, your phone _is_ its own relay, and [every note and file you look at gets saved](https://njump.to/nevent1qqsvgthggksu7kvauamkrcnr32f48ed7ruzr5xa63xk73ej35dmslegmvgkve) right there on it, at least [for a while](https://github.com/Origami74/myco/blob/main/CHANGELOG.md#090---2026-09-30).
+
+Whatever you post over the FIPS mesh gets passed along right away from phone to phone, up to 3 phones away, but [only to paired phones that are in range at that moment](https://github.com/Origami74/myco/blob/main/docs/design/core/event-gossip.md#plane-a--push-live-fan-out), and each of them saves a copy. And when someone is looking for something, their phone asks up to 2 phones away, so it can find one of those saved copies, even later. So in the end, [your note can reach someone 5 phones away, as long as they're interested in it](https://njump.to/nevent1qqszzg6q05rlrtuuey0u8v6p03hxmk5f9ldsuuuxu58d86w857aygqgzyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wxrudxq).
+
+And because phones only find each other when they're [close by](https://github.com/Origami74/myco#know-before-you-rely-on-it), your note doesn't fly across the world, it gets [carried slowly, from one paired phone to the next as people happen to run into each other](https://github.com/Origami74/myco/blob/main/docs/design/core/event-gossip.md#why-both). It's not a bug, [it's a feature](https://njump.to/nevent1qqsflhqdkvaltxjrka3cn3lhl92kj9at7ku7a0wrkmkvynnudyx5tuczyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wym3f2n#:~:text=The%20point%20was%20to%20utilize). Myco also works in the background, including when the phone is locked.
+
+Arjen has also added [an option to mesh over the internet](https://github.com/Origami74/myco#what-you-can-do-with-it-today), but it's off by default and not yet tested between phones on different networks.
+
+Inside Myco you run little apps called [napplets](https://napplet.run/), and they're based on nostr too: their makers [publish them to nostr](https://github.com/Origami74/myco#from-a-small-example-to-two-phones), and you add one from Myco's own app store, or by pasting its nostr address. After that, you can just hand it to the person next to you, who pulls it straight from your phone and can then pass it on again.
+
+Anyone can make a napplet, and other people already have. Arjen has thanked [hzrd149](https://njump.to/nevent1qqsyjgnn693hp64qms68qw83euxagp26n7ujcwafustm3txg7afzgdcrtysxx) and [snicktoshi](https://njump.to/nevent1qqsvgthggksu7kvauamkrcnr32f48ed7ruzr5xa63xk73ej35dmslegmvgkve) for napplets he showed in Myco, and in October, he said [the number of napplet games seemed to be exploding](https://njump.to/nevent1qqsqqqrl9qwt48m86w3pfcdt3dm6ljkhmkj02gpwwnxpz0qta2trllgq2w4lc).
+
+He's also made apps for Myco himself, like a [Bitchat](https://github.com/permissionlesstech/bitchat)-style chat, [an app for disaster response](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=a%20disaster%2Dresponse%20app), and [Doodle Duo, a little two-player game he made to test napplets that use the mesh](https://njump.to/nevent1qqsyjlgk0xvjy9hsn6f8k5gedaw7cu3aptx62mrtk5wmdf0y9603p8cx7h68s).
+
+And back in July 2026, when someone asked when they could buy [a little device to take to festivals with TollGate, a cashu mint and Myco on it](https://njump.to/nevent1qqsghyh2kq0rev8vkhx9ztw5rp86j9pa4gycr4s69ah600apyppatgszyrts65qfz5ztnyk3swyz9teyt40kkwskhqkez7kt0yjvaas76jkwuhnhd78), he was very upfront that Myco was a proof of concept (POC):
+
+> [I'm very much treating Myco as a POC though. But yes this kind of system is the goal.](https://njump.to/note18dplj6z0y2sje0jkzfet7lau4f7ms80q8aeza3wz5l7q93a393jqn9upng)
+
+So for now, you still have to [download Myco itself](https://github.com/Origami74/myco/blob/v0.12.1/README.md#get-myco) from GitHub or Zapstore before any of this works. And Arjen has already built [a way to hand Myco to a phone that doesn't have it, but it isn't in a release yet](https://github.com/Origami74/myco/blob/main/CHANGELOG.md#unreleased).
+
+## About Arjen
+
+Obviously, Arjen isn't scared of hard work. And that shows up not only in how [knowledgeable](https://habla.news/p/npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr) and [technically capable](https://heartbeat.opensats.org/pow/Origami74?p=npub1hw6amg8p24ne08c9gdq8hhpqx0t0pwanpae9z25crn7m9uy7yarse465gr) he is, but also in how he chooses to live his life.
+
+For years, he traveled to some of the most remote places in Europe, all while working from his laptop and [living in his van](https://njump.to/note1dg2vw4sjyw36rhcusrpgls8xhstfqlxfkdwwchjgc9f8m0talkvslee4dq), whose inside he had [completely remodeled with his own two hands](https://njump.to/note1lz3yrquhgle766ec0t8dnjzl86dy0z6muww74rykt8j6nes3498s3t3lnv).
+
+<PhotoStrip
+  title="Building a home on the road"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/07c-building-the-van-the-wooden-frames.jpg',
+      width: 1200,
+      height: 1600,
+      alt: 'Building the wooden frames inside the van.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07d-building-the-van-on-his-knees.jpg',
+      width: 1200,
+      height: 1600,
+      alt: 'Arjen working on the van’s interior.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/09-coffee-behind-the-windshield-2024-10-03.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A hot drink behind the windshield on a cold morning.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/11-norway-lake-jotunheimen-2025-05-31.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A lake in Jotunheimen, Norway.',
+    },
+  ]}
+/>
+
+> I loved the ability to wake up in the middle of nature for weeks on end, far away from civilization, up into the far north of Europe. As far as the arctic circle. I've slept in places that felt like no human had ever been there before, with howling winds across a glacier lake, and only wavy smooth rocks from ages of erosion. I always kept my backpack packed, ready to go up a mountain whenever I found a cool trail.
+
+<PhotoStrip
+  title="Van life"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/van.jpg',
+      width: 1400,
+      height: 1054,
+      alt: 'The home and workspace Arjen built inside his van.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07-the-van-as-he-bought-it-2024-09-15.jpg',
+      width: 1024,
+      height: 768,
+      alt: 'The van before the conversion, with measurements marked out.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07b-the-van-in-the-snow.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'The van beneath a snowy mountain.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/07g-the-van-at-dusk-by-a-misty-lake.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Evening beside a misty lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/10-norway-campfire-jotunheimen-2025-05-31.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'A campfire in Jotunheimen, Norway.',
+    },
+  ]}
+/>
+
+The first time that I spoke with Arjen, I was telling him about how this girl that we both know had walked from Mexico to Canada, and how crazy that was to me.
+
+To my incredible surprise, Arjen just replied without missing a beat, in his usual calm tone:
+
+> Me too. I hiked that same trail.
+
+Why would anyone put themselves through that? I was baffled, but Arjen didn’t seem fazed. He tried to explain it to me, but I just couldn't relate.
+
+> Because I felt this inner urge to do it. There is no other justification. I was just captivated by the idea of doing nothing other than walking, eating and camping in nature for 6 months straight.
+
+I had so many questions: how did you find food? Where did you do your business? What if something went wrong? I was fascinated, but I still didn’t get it, so I asked him if he could recommend a [documentary](https://www.youtube.com/watch?v=RAMGKWI2vq0&list=PLano9gugvXe8sCVJUvLdAyU7MFfz7IA5r) that I could watch about it and he gave me a few recommendations. Usually documentaries help me broaden my perspective, but this time strangely it did not. And then recently, as we were doing the interview for this piece, it finally clicked:
+
+> I think in the end that this experience is what turned me into an adult. I’ve become a very different person in the few years since I set foot there. And it’s a big reason I’ve gotten to the point where I’m at now. I can recommend everyone to fuck off in the woods for a season.
+
+<PhotoStrip
+  title="On the trail"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/trail.jpg',
+      width: 1000,
+      height: 1333,
+      alt: 'Arjen on the snowy trail with an ice axe.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12a-pct-desert-section-on-the-aqueduct.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Arjen hiking the desert section of the Pacific Crest Trail.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12b-pct-climbing-a-snow-slope.jpg',
+      width: 768,
+      height: 1024,
+      alt: 'Climbing a snow slope above the valley.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12f-pct-looking-across-a-lake.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Looking across a mountain lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/14-trail-camp-would-love-to-wake-up-here-again.jpg',
+      width: 768,
+      height: 1020,
+      alt: 'A campsite on the trail.',
+    },
+  ]}
+/>
+
+Now I get it. He went in as a boy and came out as a man. It kinda makes me want to take his advice about f-ing off in the woods more seriously now.
+
+[About a month before](https://njump.to/note180pkqdgu8x96ps6h02zkpvznrjywjk5w0m3nnud7g2dhrvzhee9qa272fv) going back for the second stretch of the hike, he read [NIP-01](https://github.com/nostr-protocol/nips/blob/master/01.md), the core nostr protocol spec. He calls it his “oh shit” moment, and a few weeks later he posted:
+
+> [Nostr to me feels like we just detonated a NUKE of collective knowledge, let's gooo! 🚀](https://njump.to/note1dxw3az9rfj249h0mhs9q6nv8x4zqasnx86rwl2hlzq5z6teuhutsat9ch9)
+
+And that was just the tip of the iceberg.
+
+In October 2025, he'd put what the trail taught him into words:
+
+> [On the trail, flow decides everything — you camp near water, you break your path around rivers. The terrain teaches you that working with flow is survival, not ideology. Tech should learn the same lesson.](https://njump.to/note163724ch6q5yyc0qrmrcdnvvnr6u3nntq9zq3y0azvrdzxa0qp29qfk4x4v#:~:text=On%20the%20trail%2C%20flow%20decides%20everything)
+
+Back on the trail, forest fires cut his hike short in August 2024.
+
+> [I love hiking and was well on my way to finish this 800km section of the Pacific Crest Trail. Unfortunately the earth happens to be burning down, cutting my trip short.](https://njump.to/note1agycc5w9umvh964zwaghg8ycqcf29v4duscxqgtufaxzu39dv7ns7ghhzk)
+
+<PhotoStrip
+  title="Across the Pacific Crest Trail"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/pacific-crest-trail-cropped.png',
+      width: 1600,
+      height: 1205,
+      alt: 'On the Pacific Crest Trail.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12e-pct-backpack-by-a-mountain-lake.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Arjen’s backpack beside a mountain lake.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/13-mount-whitney-27-june-2023.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Mount Whitney, June 2023.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/15-goat-rocks-400km-second-stretch-2024-08-10.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Arjen in Goat Rocks Wilderness, Washington.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/12c-pct-hitching-into-town-in-a-pickup.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Hitching into town in a pickup.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/29-sunrise-on-mount-whitney-2026-09-06.jpg',
+      width: 1600,
+      height: 1205,
+      alt: 'Sunrise on Mount Whitney.',
+    },
+  ]}
+/>
+
+But where to?
+
+Only to one of the most epic nostr conferences of all time: [Nostriga 2024](https://nostr.world/)!
+
+> I arrived the day before at midnight, jetlagged, in my stinky hiking clothes with nothing else on me. In the days there, I learned so much about Nostr and I realized that it addresses Every. Single. Issue that centralized platforms create. I literally could not sleep because I'd wake up every 15 minutes thinking of another cool thing we can do now because of Nostr. Not just social media, f\*ck social media, every online service could be replaced.
+
+There, at one of the standing tables, [c03rad0r](https://github.com/c03rad0r) was showing small routers with his first TollGate prototype on them, and Arjen actually bought the very last one. Things went very fast from there. Just a year later, Arjen was back again in Riga, but this time he was promoting TollGate:
+
+> [Yesterday we were at the basement bar here in Riga, and the bartender was very enthusiastic to start earning sats for their internet. She said: 'Okay, about \$6 for half an hour of internet?' And we paid for it. So we have our first market price for the internet. … Now someone has actually set the price. The market has started, and anyone can compete, undercut, extend.](https://www.youtube.com/live/807UgdeednQ?t=3786s)
+
+<PhotoStrip
+  title="Meeting the nostr community"
+  images={[
+    {
+      src: '/static/images/spotlight/arjen/17-nostriga-truth-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'A presentation at Nostriga 2024.',
+    },
+    {
+      src: '/static/images/spotlight/arjen/18-nostriga-stage-git-over-nostr-2024-08-22.jpg',
+      width: 1205,
+      height: 1600,
+      alt: 'Git over nostr on stage at Nostriga 2024.',
+    },
+  ]}
+/>
+
+But back in 2024, attending Nostriga had such an immense impact on him that he literally quit his job right after the conference with nothing else lined up:
+
+> [Sometimes in life you just FEEL in your core what the right thing to do is. I placed my bet on \#nostr and that means I just quit my fiat job and decided to put all my energy into growing this community and ecosystem FULL-TIME!](https://njump.to/note1c8v6xxk2m6trfeh95tn7rylfg828c80ardg9hklwvrn8suwuf3csuj2d3h)
+
+His career mining fiat, which started before he had even finished his schooling, had helped him learn so much about how corporations run their IT, and now it was time to go beyond it:
+
+> I started out as a Cloud Platform engineer, mainly working on keeping up high-traffic servers, setting up CI systems and automating developer workflows. In short I worked a lot with AWS and Azure and set up stuff like Kubernetes clusters and (deployment pipelines for) microservices. I loved the technology, but the goals / practices of some of the companies I worked for did absolutely not align with my values, so I'm glad that I can work on more useful technology now.
+
+It would be easy to judge him as crazy for quitting his job that way. But in retrospect, it was a risk that paid off.
+
+His very first OpenSats grant was for [nostr epoxy](/blog/10th-wave-of-nostr-grants#:~:text=Nostr%20Epoxy%20is%20a%20nostr-based%20paid%20WebSocket%20proxy). But by the time it came through, he was already busy with TollGate, and he was [totally honest about it](https://njump.to/note1e48a8hrs0eq9qgmacpfs3wajcaz3p44qfdrrv0u09e7ad977ap7sgjxc3p#:~:text=prioritised%20TollGate%20over%20epoxy). He even [publishes his progress reports on nostr](https://njump.to/nevent1qqsxugngpy4ayslkhfpzwgah2fldzjndjnvtqrxcjukfee8rg9rhmgcpzemhxue69uhhyetvv9ujuurjd9kkzmpwdejhgqg5waehxw309aex2mrp0yhxgctdw4eju6t0qyxhwumn8ghj7mn0wvhxcmmvqyt8wumn8ghj7un9d3shjtnwdaehgu3wvfskueqpz3mhxue69uhhyetvv9ujumn8d96zuer9wcpzpwa4mkswz4t8j70s2s6q00wzqv7k7zamxrmj2y4fs88aktcfuf68qvzqqqr4guw5h5cy) for anyone to read, which I think is just beautiful.
+
+> OpenSats has allowed me to take the time to explore ideas that might appear meaningless or way too out there at first glance. I think that without this kind of support and no-strings-attached nature, that I wouldn't have been able to go so deep into topics like the fundamentals of the internet and take the time to question them. I'm very grateful for this trust.
+
+But OpenSats let him explore anyway. And that's exactly the kind of room an idea as wild as FIPS needed to grow in. But even with all that freedom, he didn't work it all out on his own. As he puts it himself:
+
+> I had the puzzle pieces, I knew what we needed and how the pieces would interact, but I had no clue how to build an actual routing algorithm.
+
+That's where Johnathan Corgan came in. They met at a nostr conference in Costa Rica and basically spent the whole two days talking in one room. It turned out that Johnathan had way more experience with networking than Arjen had even realized.
+
+His current OpenSats grant, which started in June 2026, is for TollGate and resilient networks.
+
+> Even if the tech doesn't pan out the way I hope, I made many friends that care about other things than just the superficial. Likes, attention, superficial appearances, things that lack any meaning. I like to focus on people and creating healthy relationships to each other and our environment.
+
+## Conclusion
+
+> [I'm very excited to see more people building on FIPS!](https://njump.to/nevent1qqsgkgjktt6eek5rjv9ttymc9s625cstq4aqk4xn8mam83zpk70urpszyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5w872n00)
+
+Here's one of the things that I find the most exciting about this whole story. Once FIPS was out there, other people started to see exactly what Arjen and Johnathan had seen: if your key is your address, you don't need anyone's permission anymore to connect two devices. And they just started building on it.
+
+[Martti Malmi](https://github.com/mmalmi) built [Nostr VPN](https://github.com/mmalmi/nostr-vpn), a mesh VPN that [primarily uses his own fork of FIPS](https://nostrvpn.org/#:~:text=primarily%20uses%20our%20fork%20of%20FIPS).
+
+[Logen](https://njump.to/npub1vxlhjzeqjjhmqdy4e8sndt8kzklqlnxzew2mtt8mtakvalsckp3qa0gnvx)'s [Nostr Vault](https://github.com/btcforplebs/nostr-vault) sends [every new note and photo from your Android phone to your Mac over the mesh](https://github.com/btcforplebs/nostr-vault/releases/tag/v3.0.0-b47).
+
+[fr34aky](https://github.com/fr34aky) built a whole bunch of things on FIPS, like [fips2go](https://github.com/fr34aky/fips2go), a FIPS app for Android; [a paid internet exit for the mesh](https://github.com/fr34aky/fips-exit-gate); and [a desktop version of Myco](https://github.com/fr34aky/myco-desktop).
+
+nostr.watch [added support for relays that live on FIPS](https://github.com/sandwichfarm/nostr-watch/pull/961).
+
+There are now [interactive lessons](https://learn.fips.network/) for learning how FIPS works, and [Totem](https://github.com/totemize/totem) put napplets on modular hardware devices that connect over FIPS.
+
+TollGate has company too. [net4sats](https://net4sats.cash/) sells a TollGate router package, the OG Edition. And there is [MeshLink](https://github.com/meshlinkfoundation/meshlink-wifi-gateway#meshlink-wifi-gateway), another project that lets you [sell your spare internet](https://buildwithparallel.com/blogs/news/spare-bandwidth-is-the-last-idle-asset) to people nearby. c03rad0r had his AI agent get MeshLink and TollGate to talk to each other: on his test rig, [a MeshLink node paid a TollGate router one test sat for internet access](https://github.com/OpenTollGate/physical-router-test-automation/pull/336), and as the data flowed, it topped up twice more by itself.
+
+So what's next for Arjen? First of all, TollGate. With the new design now implemented, his plans include [testing it thoroughly](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=implementing%20the%20new%20design%20and%20thoroughly%20testing%20it). And he wants actual FIPS exit nodes up and running, preferably run by other people than himself, to receive good feedback on the design. Exit nodes are basically gateways from the mesh out to the wider internet, and the idea is that whoever runs one can use TollGate to charge for the bandwidth.
+
+Then FIPS itself. His focus stays on getting it to [run well on Android and OpenWrt routers](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=Android%20and%20OpenWRT%20deployment%20targets), and that second one matters more than it sounds. [OpenWrt](https://openwrt.org/) is [the router software TollGate runs on](https://github.com/OpenTollGate/tollgate#implementations), and it's [what lets you put your own software on an ordinary home router](https://github.com/openwrt/openwrt). And Arjen already got routers running FIPS meshing with each other:
+
+> [Aside from the mobile support I worked on getting the physical auto-mesh where you can chuck a router in the corner and it just starts meshing with other routers around.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=chuck%20a%20router%20in%20the%20corner)
+
+He also added [an open “!FIPS” wireless network](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=Another%20small%20thing%20on%20the%20OpenWRT%20side) that phones can jump on as they move around, to reach the greater FIPS mesh.
+
+Meanwhile, Johnathan is writing the v2 spec, which, according to Arjen, will raise the most nodes one mesh can hold [to about 4 million](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=to%20about%204%20million).
+
+And because he sees TollGate and FIPS as the most important things he could be working on, he's [no longer actively working on three other projects, NoDNS among them](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=I%20will%20not%20actively%20work%20on%20Loom). But if you'd like to pick one of them up:
+
+> [I will happily consult with anyone that's interested in picking up those projects.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=I%20will%20happily%20consult%20with%20anyone)
+
+So what will YOU build with all of this now? When I asked Arjen what's missing in the bitcoin space, this was his answer:
+
+> People are thinking at the wrong scale. People should be thinking at a scale we've never seen before. A scale so small that it makes sense to use what you create if there's just 5-10 people around. The focus should be to create a system of a billion nostr apps with a thousand users rather than a thousand apps with a hundred million users.
+
+A billion apps won't build themselves. That's where YOU come in!
+
+Start with these [interactive FIPS lessons](https://learn.fips.network/) and pick a small problem around you. Want to build a napplet for it?
+
+> [It should be very easy to vibe-code one. Just point an agent at napplet.run and the myco code and it should be able to figure out how to use it.](https://njump.to/nevent1qqsv0vtlkhx7uceea6uupt35tkpze9s4ljuxxy0nnllevj4ja5we08czyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wt2jl02)
+
+---
+
+OpenSats funds the people who build and maintain open-source infrastructure. To support Arjen and our other grantees, please consider making a one-time or recurring donation to the [Nostr Fund](/funds/nostr).
+
+<DonateRecurringButton designation="nostr" />
+
+For comments, corrections, or suggestions about our
+[Spotlight series](/spotlight), please reach out to
+[spotlight@opensats.org](mailto:spotlight@opensats.org).
