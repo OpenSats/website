@@ -28,8 +28,8 @@ const issue = {
 } as ComponentProps<typeof NewsletterLayout>['content']
 
 it.each([
-  [true, 95, true],
-  [true, 94.999, false],
+  [true, 85, true],
+  [true, 84.999, false],
   [true, undefined, false],
   [false, 100, true],
   [false, undefined, false],
@@ -56,8 +56,8 @@ it.each([
 )
 
 it.each([
-  [95, true],
-  [94.999, false],
+  [85, true],
+  [84.999, false],
   [undefined, false],
 ])('gates newsletter badges and claims for score=%s', (score, expected) => {
   render(

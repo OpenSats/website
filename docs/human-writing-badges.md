@@ -1,7 +1,7 @@
 # Human writing badges
 
 Blog posts and newsletter issues show the human slop badge and “Written by humans”
-footer when their cached Pangram human-written percentage is at least 95.
+footer when their cached Pangram human-written percentage is at least 85.
 Scores are not rounded before comparison. AI-assisted text does not count as
 human-written. Unscored articles receive neither the badge nor the footer label.
 
