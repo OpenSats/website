@@ -3,6 +3,7 @@ import { getStaticPaths, getStaticProps } from '../../pages/newsletter/[slug]'
 jest.mock('../../.contentlayer/generated', () => ({
   allNewsletters: [{ slug: '2026-Q1', title: 'Sats Well Spent' }],
 }))
+jest.mock('@/lib/humanWritingScores', () => ({ getHumanWritingScore: () => 0 }))
 jest.mock('pliny/mdx-components', () => ({ MDXLayoutRenderer: () => null }))
 jest.mock('@/components/MDXComponents', () => ({ MDXComponents: {} }))
 
@@ -15,13 +16,25 @@ it('builds only canonical paths to avoid filename case collisions', async () => 
 
 it('resolves lowercase URLs to the same issue', async () => {
   expect(await getStaticProps({ params: { slug: '2026-q1' } })).toEqual({
-    props: { issue: { slug: '2026-Q1', title: 'Sats Well Spent' } },
+    props: {
+      issue: {
+        slug: '2026-Q1',
+        title: 'Sats Well Spent',
+        humanWrittenScore: 0,
+      },
+    },
   })
 })
 
 it('renders canonical issues and returns 404 for unknown issues', async () => {
   expect(await getStaticProps({ params: { slug: '2026-Q1' } })).toEqual({
-    props: { issue: { slug: '2026-Q1', title: 'Sats Well Spent' } },
+    props: {
+      issue: {
+        slug: '2026-Q1',
+        title: 'Sats Well Spent',
+        humanWrittenScore: 0,
+      },
+    },
   })
   expect(await getStaticProps({ params: { slug: 'missing' } })).toEqual({
     notFound: true,

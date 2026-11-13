@@ -43,13 +43,8 @@ Thank you for [supporting OpenSats](https://opensats.org/donate)!
 
 ---
 
-We've got [badges](https://gist.github.com/dskvr/e160d8d465c2e7ed9a0e437081e7fe31) too!
+We've got [badges](https://gist.github.com/dergigi/e76f67ce5037eb4fb861f32bbc4fb406) too!
 
 [![opensats.org](<https://img.shields.io/badge/%3E__-OpenSats-rgb(249,115,22)>)](https://opensats.org)
 
-<a href="https://opensats.org/about#content">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="public/static/images/badges/human-slop-dark.svg" />
-    <img src="public/static/images/badges/human-slop-light.svg" alt="100% human slop" width="140" height="22" />
-  </picture>
-</a>
+[![100% human slop](https://img.shields.io/badge/%3E__-100%25_human_slop-black?style=flat&labelColor=f97316)](https://opensats.org/slop)

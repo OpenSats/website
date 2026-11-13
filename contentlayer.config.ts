@@ -47,6 +47,7 @@ export const Blog = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    humanWrittenScore: { type: 'number' },
     date: { type: 'date', required: true },
     tags: { type: 'list', of: { type: 'string' } },
     lastmod: { type: 'date' },
@@ -147,6 +148,7 @@ export const Newsletters = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    humanWrittenScore: { type: 'number' },
     issueNumber: { type: 'number', required: true },
     date: { type: 'date', required: true },
     quarter: { type: 'string', required: true },
