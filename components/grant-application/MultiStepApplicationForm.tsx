@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DefaultValues, useForm } from 'react-hook-form'
 import {
+  ApplicationSubmissionState,
   SUBMISSION_CONTACT,
   SUBMISSION_CONTACT_AFTER_FAILURES,
   SUBMISSION_ERROR,
@@ -43,6 +44,7 @@ export default function MultiStepApplicationForm({
   const [failureReason, setFailureReason] = useState<string>()
   const [failedAttempts, setFailedAttempts] = useState(0)
   const [turnstileReady, setTurnstileReady] = useState(false)
+  const submissionState = useRef<ApplicationSubmissionState>({})
   const formRef = useRef<HTMLFormElement>(null)
   const turnstileRef = useRef<TurnstileWidgetHandle>(null)
   const router = useRouter()
@@ -123,7 +125,12 @@ export default function MultiStepApplicationForm({
       if (!turnstile) {
         throw new Error('Please complete the bot verification challenge.')
       }
-      await submitApplication(data, undefined, turnstile)
+      await submitApplication(
+        data,
+        undefined,
+        turnstile,
+        submissionState.current
+      )
       await router.push('/submitted')
     } catch (e) {
       const nextFailures = failedAttempts + 1
