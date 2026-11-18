@@ -1,0 +1,22 @@
+---
+title: 'Chain Analysis'
+summary: 'Tracing public Bitcoin transactions to infer ownership, follow payments, and connect addresses to real-world identities.'
+category: 'Privacy'
+aliases: ['Blockchain analysis', 'On-chain analysis', 'Chain surveillance']
+---
+
+Chain analysis is the study of public blockchain transactions to follow payments and infer who controls the funds. Bitcoin records transaction inputs, outputs, and amounts publicly, but it does not record the names of the people using it. Analysts combine this transaction history with information from outside the blockchain to connect addresses to people or services. Chainalysis is one company that sells tools for this work to exchanges, financial institutions, and law enforcement.
+
+A common technique is address clustering: grouping addresses that appear to belong to the same owner. The common-input ownership heuristic assumes that the [UTXOs](/topics/utxo) spent together in a transaction belong to one party. Analysts also try to identify change outputs from transaction amounts and script types. Once an address is associated with an identity, for example through an exchange's customer records, these inferred links can expose more of that person's financial activity.
+
+Those inferences can be wrong. [CoinJoin](/topics/coinjoin) transactions combine inputs from multiple participants, breaking the common-input assumption. [Payjoin](/topics/payjoin) applies this idea to a payment between a sender and receiver, while [CoinJoinXT](/topics/coinjoinxt) explores coordinated transactions spread across a larger transaction graph. An address cluster is therefore an estimate of common ownership, not proof of a person's identity.
+
+Avoiding address reuse and choosing which UTXOs to spend together can reduce unwanted links between payments. Using your own [Bitcoin node](/topics/bitcoin-node) also avoids sending wallet address queries to a third-party server. These practices limit different sources of information; they do not erase the public transaction history or guarantee anonymity.
+
+## References
+
+- [Bitcoin whitepaper: Privacy, section 10](https://bitcoin.org/bitcoin.pdf#page=6)
+- [BIP 78: A Simple Payjoin Proposal](https://github.com/bitcoin/bips/blob/master/bip-0078.mediawiki)
+- [Chainalysis](https://www.chainalysis.com/)
+- [Learn to Bitcoin: Chain Analysis](https://learntobitcoin.org/learn/chain-analysis/)
+- [Bitcoin Security: Chain Analysis](https://bitcoinsecurity.org/learn/chain-analysis/)
