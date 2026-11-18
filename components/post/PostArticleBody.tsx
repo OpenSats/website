@@ -208,7 +208,7 @@ export default function PostArticleBody({
             <Link href="/about#content" className="hover:underline">
               Written by humans
             </Link>
-            <span aria-hidden="true">•</span>
+            <span aria-hidden="true">{` • `}</span>
           </>
         )}
         <Link href={discussUrl()} rel="nofollow">
