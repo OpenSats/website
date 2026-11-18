@@ -206,7 +206,7 @@ export default function PostArticleBody({
         {humanWritten && (
           <>
             <Link href="/about#content" className="hover:underline">
-              Written by humans.
+              Written by humans
             </Link>
             <span aria-hidden="true">•</span>
           </>
