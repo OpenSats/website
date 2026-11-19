@@ -5,14 +5,12 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
+  useState,
 } from 'react'
 
 const TURNSTILE_SCRIPT =
   'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
 const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-const CALLBACK_NAME = '__opensatsTurnstileCallback'
-const EXPIRED_CALLBACK_NAME = '__opensatsTurnstileExpired'
-const ERROR_CALLBACK_NAME = '__opensatsTurnstileError'
 
 declare global {
   interface Window {
@@ -24,16 +22,16 @@ declare global {
           action?: string
           callback?: (token: string) => void
           'expired-callback'?: () => void
-          'error-callback'?: () => void
+          retry?: 'never'
+          'error-callback'?: (code: string) => void
+          'timeout-callback'?: () => void
+          'unsupported-callback'?: () => void
         }
       ) => string
       reset: (widgetId?: string) => void
       remove: (widgetId?: string) => void
       ready?: (callback: () => void) => void
     }
-    [CALLBACK_NAME]?: (token: string) => void
-    [EXPIRED_CALLBACK_NAME]?: () => void
-    [ERROR_CALLBACK_NAME]?: () => void
   }
 }
 
@@ -57,7 +55,8 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
     const containerRef = useRef<HTMLDivElement>(null)
     const widgetIdRef = useRef<string>()
     const tokenRef = useRef<string>()
-    const waitersRef = useRef<Array<(token: string) => void>>([])
+    const [failure, setFailure] = useState<string>()
+    const timerRef = useRef<ReturnType<typeof setTimeout>>()
     const onTokenChangeRef = useRef(onTokenChange)
     onTokenChangeRef.current = onTokenChange
 
@@ -65,25 +64,53 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
       tokenRef.current = token
       onTokenChangeRef.current?.(token)
       if (token) {
-        const waiters = waitersRef.current
-        waitersRef.current = []
-        waiters.forEach((resolve) => resolve(token))
+        clearTimeout(timerRef.current)
+        setFailure(undefined)
       }
     }, [])
 
+    const fail = useCallback(
+      (message: string) => {
+        clearTimeout(timerRef.current)
+        setToken(undefined)
+        setFailure(message)
+      },
+      [setToken]
+    )
+
+    const startTimer = useCallback(() => {
+      clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => {
+        fail(
+          'Verification is taking too long. Please retry or email your application.'
+        )
+      }, 60_000)
+    }, [fail])
+
     const waitForToken = useCallback(() => {
+      // Submit requires readiness. Handle expiry during validation promptly.
       if (tokenRef.current) return Promise.resolve(tokenRef.current)
-      return new Promise<string>((resolve) => {
-        waitersRef.current.push(resolve)
-      })
+      return Promise.reject(
+        new Error('Please retry the bot verification challenge.')
+      )
     }, [])
 
     const reset = useCallback(() => {
       setToken(undefined)
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current)
+      setFailure(undefined)
+      startTimer()
+      if (widgetIdRef.current !== undefined && window.turnstile) {
+        try {
+          window.turnstile.reset(widgetIdRef.current)
+        } catch {
+          fail('Verification could not restart. Please email your application.')
+        }
+      } else {
+        fail(
+          'Verification could not load. Save your application text before refreshing, or email your application.'
+        )
       }
-    }, [setToken])
+    }, [fail, setToken, startTimer])
 
     useImperativeHandle(
       ref,
@@ -95,35 +122,35 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
       [reset, waitForToken]
     )
 
-    useEffect(() => {
-      window[CALLBACK_NAME] = (token: string) => setToken(token)
-      window[EXPIRED_CALLBACK_NAME] = () => setToken(undefined)
-      window[ERROR_CALLBACK_NAME] = () => setToken(undefined)
-
-      return () => {
-        delete window[CALLBACK_NAME]
-        delete window[EXPIRED_CALLBACK_NAME]
-        delete window[ERROR_CALLBACK_NAME]
-        setToken(undefined)
-      }
-    }, [setToken])
-
     const mountWidget = useCallback(() => {
       if (!SITE_KEY || !containerRef.current || !window.turnstile) return
-      if (widgetIdRef.current) return
+      if (widgetIdRef.current !== undefined) return
 
-      widgetIdRef.current = window.turnstile.render(containerRef.current, {
-        sitekey: SITE_KEY,
-        action: 'turnstile-spin-v2',
-        callback: (token: string) => window[CALLBACK_NAME]?.(token),
-        'expired-callback': () => window[EXPIRED_CALLBACK_NAME]?.(),
-        'error-callback': () => window[ERROR_CALLBACK_NAME]?.(),
-      })
-    }, [])
+      try {
+        widgetIdRef.current = window.turnstile.render(containerRef.current, {
+          sitekey: SITE_KEY,
+          action: 'turnstile-spin-v2',
+          retry: 'never',
+          callback: setToken,
+          'expired-callback': () => fail('Verification expired. Please retry.'),
+          'error-callback': (code) =>
+            fail(`Verification failed (code: ${code}). Please retry.`),
+          'timeout-callback': () =>
+            fail('Verification timed out. Please retry.'),
+          'unsupported-callback': () =>
+            fail(
+              'This browser does not support verification. Please use another browser or email your application.'
+            ),
+        })
+      } catch {
+        fail('Verification could not start. Please email your application.')
+      }
+    }, [fail, setToken])
 
     useEffect(() => {
       if (!SITE_KEY) return
 
+      startTimer()
       let cancelled = false
 
       const tryMount = () => {
@@ -141,30 +168,57 @@ const TurnstileWidget = forwardRef<TurnstileWidgetHandle, TurnstileWidgetProps>(
 
       return () => {
         cancelled = true
-        if (widgetIdRef.current && window.turnstile?.remove) {
+        clearTimeout(timerRef.current)
+        if (widgetIdRef.current !== undefined && window.turnstile?.remove) {
           window.turnstile.remove(widgetIdRef.current)
         }
         widgetIdRef.current = undefined
         setToken(undefined)
       }
-    }, [mountWidget, setToken])
+    }, [mountWidget, setToken, startTimer])
 
-    if (!SITE_KEY) {
-      return (
-        <p className="text-sm text-red-600">
-          Turnstile is not configured (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`).
-        </p>
-      )
-    }
+    const message = SITE_KEY
+      ? failure
+      : 'Verification is currently unavailable.'
 
     return (
       <>
-        <Script
-          src={TURNSTILE_SCRIPT}
-          strategy="afterInteractive"
-          onLoad={mountWidget}
-        />
+        {SITE_KEY && (
+          <Script
+            src={TURNSTILE_SCRIPT}
+            strategy="afterInteractive"
+            onReady={mountWidget}
+            onError={() =>
+              fail(
+                'Verification could not load. Save your application text before refreshing, or email your application.'
+              )
+            }
+          />
+        )}
         <div ref={containerRef} />
+        {message && (
+          <div role="alert" className="mt-4 space-y-3 text-sm">
+            <p>{message}</p>
+            {SITE_KEY && (
+              <button
+                type="button"
+                onClick={reset}
+                className="rounded border px-4 py-2"
+              >
+                Retry verification
+              </button>
+            )}
+            <p>
+              Your entries are still in this form. If verification keeps
+              failing, email your application to{' '}
+              <a href="mailto:applications@opensats.org" className="underline">
+                applications@opensats.org
+              </a>
+              . Include the error code, if shown, and your browser name and
+              version.
+            </p>
+          </div>
+        )}
       </>
     )
   }
