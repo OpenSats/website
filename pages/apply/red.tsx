@@ -32,12 +32,24 @@ export default function ApplyRed() {
           OpenSats reviews RED requests as expense reimbursement tied to
           concrete security work. RED grants are not salary support, maintenance
           funding, or broader project budgets. Use the{' '}
-          <CustomLink href="/apply/grant">General Grant</CustomLink> path for
-          project applications and funding.
+          <CustomLink
+            href="/apply/grant"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            General Grant
+          </CustomLink>{' '}
+          path for project applications and funding.
         </p>
         <p>
           While{' '}
-          <CustomLink href="/blog/code-red-supporting-first-responders">
+          <CustomLink
+            href="/blog/code-red-supporting-first-responders"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
             there is urgency
           </CustomLink>
           {', '}

@@ -112,10 +112,26 @@ export default function RedBeforeYouApply() {
       <p>
         <em>
           Effective August 5, 2026. These requirements are in addition to the
-          OpenSats <CustomLink href="/terms">Terms of Use</CustomLink> and{' '}
-          <CustomLink href="/privacy">Privacy Policy</CustomLink> and to any
-          grant terms provided to an approved applicant. If they conflict, the
-          applicable grant terms control as to that grant.
+          OpenSats{' '}
+          <CustomLink
+            href="/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            Terms of Use
+          </CustomLink>{' '}
+          and{' '}
+          <CustomLink
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            Privacy Policy
+          </CustomLink>{' '}
+          and to any grant terms provided to an approved applicant. If they
+          conflict, the applicable grant terms control as to that grant.
         </em>
       </p>
     </div>

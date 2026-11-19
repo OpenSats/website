@@ -24,8 +24,15 @@ export default function Apply() {
         </p>
         <p>
           In addition to our general{' '}
-          <CustomLink href="/apply#criteria">application criteria</CustomLink>,
-          LTS Grant applicants must:
+          <CustomLink
+            href="/apply#criteria"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            application criteria
+          </CustomLink>
+          , LTS Grant applicants must:
         </p>
         <ul>
           <li>
@@ -58,7 +65,15 @@ export default function Apply() {
         </ul>
         <p>
           If the above does not apply to you, please consider applying for a{' '}
-          <CustomLink href="/apply/grant">General Grant</CustomLink> instead.
+          <CustomLink
+            href="/apply/grant"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            General Grant
+          </CustomLink>{' '}
+          instead.
         </p>
         <ClosedNotice />
         {showGrantApplicationForm() && <LTSApplicationForm />}
