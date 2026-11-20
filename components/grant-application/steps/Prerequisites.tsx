@@ -105,7 +105,14 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         />
         <span>
           I have read the{' '}
-          <CustomLink href="/apply#criteria">application criteria</CustomLink>
+          <CustomLink
+            href="/apply#criteria"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            application criteria
+          </CustomLink>
         </span>
       </label>
 
@@ -117,9 +124,21 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         />
         <span>
           I have read the{' '}
-          <CustomLink href="/faq/application">Application FAQ</CustomLink>,
-          including the{' '}
-          <CustomLink href="/faq/application#why-do-i-have-to-submit-a-video">
+          <CustomLink
+            href="/faq/application"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            Application FAQ
+          </CustomLink>
+          , including the{' '}
+          <CustomLink
+            href="/faq/application#why-do-i-have-to-submit-a-video"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
             video section
           </CustomLink>
         </span>
@@ -134,7 +153,12 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           />
           <span>
             I understand that at least two{' '}
-            <CustomLink href="/faq/application#what-are-you-looking-for-in-terms-of-references">
+            <CustomLink
+              href="/faq/application#what-are-you-looking-for-in-terms-of-references"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Opens in a new tab"
+            >
               written reference letters
             </CustomLink>{' '}
             from people familiar with my work are required
@@ -150,7 +174,12 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
         />
         <span>
           The project has a proper{' '}
-          <CustomLink href="/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license">
+          <CustomLink
+            href="/faq/grantee#what-does-it-mean-to-produce-work-under-a-free-and-open-source-license"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
             FOSS license
           </CustomLink>
         </span>
@@ -166,8 +195,15 @@ export default function Prerequisites({ register, watch, errors }: StepProps) {
           />
           <span>
             My track record meets the LTS criteria above, and a{' '}
-            <CustomLink href="/apply/grant">General Grant</CustomLink> would not
-            be the right fit for me
+            <CustomLink
+              href="/apply/grant"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Opens in a new tab"
+            >
+              General Grant
+            </CustomLink>{' '}
+            would not be the right fit for me
           </span>
         </label>
       )}

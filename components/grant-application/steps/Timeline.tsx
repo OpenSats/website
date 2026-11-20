@@ -12,7 +12,12 @@ export default function Timeline({ register, errors }: StepProps) {
         <br />
         <small>
           Duration of grant you are applying for. More on grant duration in our{' '}
-          <CustomLink href="/faq/application#what-is-the-minimum-grant-duration">
+          <CustomLink
+            href="/faq/application#what-is-the-minimum-grant-duration"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
             FAQ
           </CustomLink>
           .
