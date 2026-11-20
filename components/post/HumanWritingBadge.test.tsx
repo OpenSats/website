@@ -50,7 +50,7 @@ it.each([
         name: '100% human slop: about our writing',
       })
     ).toBe(expected)
-    expect(!!screen.queryByText('Written by humans.')).toBe(expected)
+    expect(!!screen.queryByText('Written by humans')).toBe(expected)
     expect(screen.getByText('Article body')).toBeInTheDocument()
   }
 )
