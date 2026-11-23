@@ -240,17 +240,9 @@ And a few days after that, [he hosted a website over Bluetooth](https://njump.to
 
 By the summer of 2026, Arjen had started [redesigning TollGate](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=quietly%20working%20on%20redesigning%20TollGate), and [his vision was for it to run fully on top of FIPS](https://njump.to/nevent1qqswvur4pw45j4qyq9glju86w6fxwux4rmul27wqrqz0fr3xlwrduyqzyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5wglcaud), which will make TollGate itself a whole lot simpler, because it won't have to worry about who to connect to anymore.
 
-Then during a hike at [SEC-08](https://soveng.com/projects/SEC-08/), someone put one more brand new idea in his head: [make each TollGate its own cashu mint, with tokens that stand for bytes instead of sats](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=making%20each%20TollGate%20its%20own%20cashu%20mint). That way the router would work like the machines at an arcade. You'd feed it a token, and it'd give you bytes. Until then, a big headache was that a customer might not be able to reach the mint, somewhere out on the internet. But once the router itself is the mint:
+Then during a hike at [SEC-08](https://soveng.com/projects/SEC-08/), someone put one more brand new idea in his head: [make each TollGate its own cashu mint, with tokens that stand for bytes instead of sats](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=making%20each%20TollGate%20its%20own%20cashu%20mint). That way the router would work like the machines at an arcade. You'd feed it a token, and it'd give you bytes. Until then, a big headache was that a customer might not be able to reach the mint, somewhere out on the internet. But once the router itself is the mint, it's always reachable, and it's super fast too.
 
-> [...it is always reachable, and it will be bloody fast as well.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=with%20the%20TollGate%20now%20being%20the%20mint)
-
-In that design, the TollGate protocol only cares about one thing:
-
-> [...it received a byte proof, so therefore it will deliver a byte. Period.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=all%20it%20now%20cares%20about%20is%20that%20it%20received%20a%20byte%20proof)
-
-Where you got those byte tokens is none of its business anymore:
-
-> [I can give away bytes, I can sell bytes, I can exchange bytes.](https://njump.to/naddr1qqvnyvpjxckhzvedwfjhqmmjwsknyve0xquj7v3sxgmqyg9mkhw6pc24v7te7p2rgpaacgpn6mcthvc0wfgj4xqulke0p838gupsgqqqw4rsqtfeaw#:~:text=I%20can%20give%20away%20bytes)
+And in that design, the TollGate protocol only cares that you hand it a byte token, so that it can give you a byte back. Where you got that token is none of its business anymore. Somebody could've given it to you, sold it to you, or swapped it with you.
 
 And in his new design, TollGate isn't just about selling internet access anymore: [it can meter and charge for anything that streams, not just bytes](https://njump.to/nevent1qqsgx5lwyfl3sm242z5dr3drh3v26nznph7vrqltw3fe6en3yk0lqhszyzamthdqu92k09ulq4p5q77uyqeadu9mkv8hy5f2nqw0mvhsncn5w85539h).
 
