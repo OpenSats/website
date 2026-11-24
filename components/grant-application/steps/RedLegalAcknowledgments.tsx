@@ -69,8 +69,24 @@ export default function RedLegalAcknowledgments({
         />
         <span>
           I have read and agree to the requirements above and to the OpenSats{' '}
-          <CustomLink href="/terms">Terms of Use</CustomLink> and{' '}
-          <CustomLink href="/privacy">Privacy Policy</CustomLink>.
+          <CustomLink
+            href="/terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            Terms of Use
+          </CustomLink>{' '}
+          and{' '}
+          <CustomLink
+            href="/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Opens in a new tab"
+          >
+            Privacy Policy
+          </CustomLink>
+          .
         </span>
       </label>
 
